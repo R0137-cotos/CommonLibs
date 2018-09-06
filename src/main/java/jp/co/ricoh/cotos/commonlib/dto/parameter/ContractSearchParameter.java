@@ -76,7 +76,7 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "契約状態", required = false)
 	private String contractCondition;
-	
+
 	/**
 	 * サービス開始日(前)
 	 */
@@ -100,13 +100,13 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "サービス終了日(後)", required = false)
 	private String serviceTermEndTo;
-	
+
 	/**
 	 * お客様企業ID
 	 */
 	@ApiParam(value = "お客様企業ID", required = false)
 	private String customerId;
-	
+
 	/**
 	 * お客様企業名
 	 */
@@ -124,25 +124,25 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "お客様部門名:部分一致", required = false)
 	private String likeSearchDepartmentName;
-	
+
 	/**
 	 * 希望納期(前)
 	 */
 	@ApiParam(value = "希望納期(前)", required = false)
 	private String desiredDeliveryDateFrom;
-	
+
 	/**
 	 * 希望納期(後)
 	 */
 	@ApiParam(value = "希望納期(後)", required = false)
 	private String desiredDeliveryDateTo;
-	
+
 	/**
 	 * 得意先コード
 	 */
 	@ApiParam(value = "得意先コード", required = false)
 	private String billingCustomerSpCode;
-	
+
 	/**
 	 * 担当支社
 	 */
@@ -166,7 +166,7 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "担当者：MoM社員IDを指定", required = false)
 	private String picEmptxId;
-	
+
 	/**
 	 * 審査／承認者
 	 */
@@ -178,7 +178,7 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "協力者：MoM社員IDを指定", required = false)
 	private String collaborationEmptxId;
-	
+
 	/**
 	 * 請求開始月
 	 */
@@ -202,7 +202,7 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "商品名称", required = false)
 	private String productName;
-	
+
 	/**
 	 * ソート項目
 	 */

@@ -62,7 +62,7 @@ public class ContractListInfo {
 	@Enumerated(EnumType.STRING)
 	@ApiModelProperty(value = "契約状態", required = false, position = 5)
 	private String contractCondition;
-	
+
 	/**
 	 * 見積番号
 	 */
@@ -87,7 +87,7 @@ public class ContractListInfo {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "請求開始月", required = false, position = 9)
 	private Date billingStartMonth;
-	
+
 	/**
 	 * お客様企業名
 	 */
@@ -105,7 +105,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "お客様部門名", required = false, position = 12, allowableValues = "range[0,255]")
 	private String departmentName;
-	
+
 	/**
 	 * サービス開始日
 	 */
@@ -119,13 +119,13 @@ public class ContractListInfo {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "サービス終了日", required = false, position = 14)
 	private Date serviceTermEnd;
-	
+
 	/**
 	 * 商品名称
 	 */
 	@ApiModelProperty(value = "商品名称", required = false, position = 15, allowableValues = "range[0,255]")
 	private String productName;
-	
+
 	/**
 	 * 担当営業氏名
 	 */
@@ -137,8 +137,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "担当支社名", required = false, position = 17, allowableValues = "range[0,255]")
 	private String picAffiliateName;
-	
-	
+
 //	/**
 //	 * 見積掲示日
 //	 */
