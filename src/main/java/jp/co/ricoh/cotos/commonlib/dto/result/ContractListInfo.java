@@ -5,10 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.Id;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractStatus;
@@ -24,36 +25,44 @@ import lombok.Data;
 @Data
 public class ContractListInfo {
 
-	@Id
-	@ApiModelProperty(value = "契約ID", required = true, position = 1)
-	private long id;
+//	@Id
+//	@ApiModelProperty(value = "契約ID", required = true, position = 1)
+//	private long id;
 
 	/**
 	 * 契約番号
 	 */
-	@ApiModelProperty(value = "契約番号", required = true, position = 2, allowableValues = "range[0,18]")
+	@Id
+	@ApiModelProperty(value = "契約番号", required = true, position = 1, allowableValues = "range[0,18]")
 	private String contractNumber;
 
 	/**
 	 * サービス識別番号
 	 */
-	@ApiModelProperty(value = "サービス識別番号", required = false, position = 3, allowableValues = "range[0,18]")
+	@ApiModelProperty(value = "サービス識別番号", required = false, position = 2, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
 	 * 契約種別
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "契約種別", required = false, position = 4)
+	@ApiModelProperty(value = "契約種別", required = false, position = 3)
 	private ContractType contractType;
 
 	/**
 	 * 契約ステータス
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "契約ステータス", required = false, position = 5)
+	@ApiModelProperty(value = "契約ステータス", required = false, position = 4)
 	private ContractStatus contractStatus;
 
+	/**
+	 * 契約状態
+	 */
+	@Enumerated(EnumType.STRING)
+	@ApiModelProperty(value = "契約状態", required = false, position = 5)
+	private String contractCondition;
+	
 	/**
 	 * 見積番号
 	 */
@@ -73,50 +82,50 @@ public class ContractListInfo {
 	private String caseNumber;
 
 	/**
+	 * 請求開始月
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "請求開始月", required = false, position = 9)
+	private Date billingStartMonth;
+	
+	/**
+	 * お客様企業名
+	 */
+	@ApiModelProperty(value = "お客様企業名", required = false, position = 10, allowableValues = "range[0,255]")
+	private String companyName;
+
+	/**
+	 * お客様事業所名
+	 */
+	@ApiModelProperty(value = "お客様事業所名", required = false, position = 11, allowableValues = "range[0,255]")
+	private String officeName;
+
+	/**
+	 * お客様部門名
+	 */
+	@ApiModelProperty(value = "お客様部門名", required = false, position = 12, allowableValues = "range[0,255]")
+	private String departmentName;
+	
+	/**
 	 * サービス開始日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "サービス開始日", required = false, position = 9)
+	@ApiModelProperty(value = "サービス開始日", required = false, position = 13)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "サービス終了日", required = false, position = 10)
+	@ApiModelProperty(value = "サービス終了日", required = false, position = 14)
 	private Date serviceTermEnd;
-
+	
 	/**
-	 * 見積掲示日
+	 * 商品名称
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "見積掲示日", required = false, position = 11)
-	private Date estimationPresentationDate;
-
-	/**
-	 * お客様企業名
-	 */
-	@ApiModelProperty(value = "お客様企業名", required = false, position = 12, allowableValues = "range[0,255]")
-	private String companyName;
-
-	/**
-	 * お客様事業所名
-	 */
-	@ApiModelProperty(value = "お客様事業所名", required = false, position = 13, allowableValues = "range[0,255]")
-	private String officeName;
-
-	/**
-	 * お客様部門名
-	 */
-	@ApiModelProperty(value = "お客様部門名", required = false, position = 14, allowableValues = "range[0,255]")
-	private String departmentName;
-
-	/**
-	 * 商品名
-	 */
-	@ApiModelProperty(value = "商品名", required = false, position = 15, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "商品名称", required = false, position = 15, allowableValues = "range[0,255]")
 	private String productName;
-
+	
 	/**
 	 * 担当営業氏名
 	 */
@@ -128,6 +137,14 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "担当支社名", required = false, position = 17, allowableValues = "range[0,255]")
 	private String picAffiliateName;
+	
+	
+//	/**
+//	 * 見積掲示日
+//	 */
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@ApiModelProperty(value = "見積掲示日", required = false, position = 11)
+//	private Date estimationPresentationDate;
 
 	@PrePersist
 	public void prePersist() {
