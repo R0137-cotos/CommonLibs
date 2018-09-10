@@ -12,8 +12,9 @@ import javax.persistence.TemporalType;
 import org.springframework.data.annotation.Id;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import lombok.Data;
 
 /**
@@ -53,15 +54,15 @@ public class ContractListInfo {
 	 * 契約ステータス
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "契約ステータス", required = false, position = 4)
-	private ContractStatus contractStatus;
+	@ApiModelProperty(value = "契約ステータス", required = false, position = 5)
+	private LifecycleStatus contractStatus;
 
 	/**
 	 * 契約状態
 	 */
 	@Enumerated(EnumType.STRING)
 	@ApiModelProperty(value = "契約状態", required = false, position = 5)
-	private String contractCondition;
+	private WorkflowStatus contractCondition;
 
 	/**
 	 * 見積番号
