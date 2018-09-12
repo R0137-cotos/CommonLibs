@@ -12,7 +12,7 @@ import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationDiv;
-import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.Status;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
 import lombok.Data;
 
 /**
@@ -56,7 +56,7 @@ public class EstimationListInfo {
 	@ApiModelProperty(value = "見積ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false, position = 5) //
-	private Status status;
+	private WorkflowStatus status;
 
 	/**
 	 * 案件番号

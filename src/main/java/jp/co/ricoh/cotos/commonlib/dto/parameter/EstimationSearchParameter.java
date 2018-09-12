@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationDiv;
-import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.Status;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
 import lombok.Data;
 
 /**
@@ -225,7 +225,7 @@ public class EstimationSearchParameter {
 	@ApiModelProperty(value = "見積ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false) //
-	private Status status;
+	private WorkflowStatus status;
 
 	/**
 	 * 見積種別
