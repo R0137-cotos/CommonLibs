@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.validation.constraints.Pattern;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
@@ -33,7 +33,9 @@ public class ContractListInfo {
 	/**
 	 * 契約番号
 	 */
-	@ApiModelProperty(value = "契約番号", required = true, position = 2, allowableValues = "range[0,18]")
+	@ApiModelProperty(value = "契約番号<br />" //
+			+ "契約番号 + \"-\" + 契約番号枝番", //
+			required = false, position = 2, allowableValues = "range[0,18]") //
 	private String contractNumber;
 
 	/**
@@ -46,27 +48,35 @@ public class ContractListInfo {
 	 * 契約種別
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "契約種別", required = false, position = 4)
+	@ApiModelProperty(value = "契約種別<br />" //
+			+ "新規, プラン変更, 解約などの契約種別を表す。", //
+			required = false, position = 4) //
 	private ContractType contractType;
 
 	/**
 	 * 契約ステータス
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "契約ステータス", required = false, position = 5)
+	@ApiModelProperty(value = "契約ステータス<br />" //
+			+ "状態遷移上のライフサイクル状態を表す。", //
+			required = false, position = 5) //
 	private LifecycleStatus contractStatus;
 
 	/**
 	 * 契約状態
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "契約状態", required = false, position = 6)
+	@ApiModelProperty(value = "契約状態<br />" //
+			+ "状態遷移上のワークフロー状態を表す。", //
+			required = false, position = 6) //
 	private WorkflowStatus contractCondition;
 
 	/**
 	 * 見積番号
 	 */
-	@ApiModelProperty(value = "見積番号", required = false, position = 7, allowableValues = "range[0,18]")
+	@ApiModelProperty(value = "見積番号<br />" //
+			+ "見積番号 + \"-\" + 見積番号枝番", //
+			required = false, position = 7, allowableValues = "range[0,18]") //
 	private String estimateNumber;
 
 	/**
@@ -84,9 +94,9 @@ public class ContractListInfo {
 	/**
 	 * 請求開始月
 	 */
-	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "請求開始月", required = false, position = 10)
-	private Date billingStartMonth;
+	@Pattern(regexp = "yyyy/MM")
+	private String billingStartMonth;
 
 	/**
 	 * お客様企業名
