@@ -34,7 +34,19 @@ public class ApprovalSearch {
 	ApprovalRouteGrpMasterRepository approvalRouteGrpMasterRepository;
 
 	/**
-	 * 承認ルート特定 ※見積承認ルート取得の場合:(estimation, null) 契約承認ルート取得の場合:(null, contract)
+	 * 承認ルート特定
+	 * 
+	 * <pre>
+	 * 【処理内容】
+	 * ・引数は以下のように設定し処理実行
+	 *　　見積：findApprovalRouteMaster(estimation, null)
+	 *　　契約：findApprovalRouteMaster(null, contract)
+	 * ・引数の見積情報または契約情報に紐づく商品マスタの承認ルートグループIDを元に承認ルートグループマスタTBL(APPROVAL_ROUTE_GRP_MASTER)から承認ルートグループマスタ情報取得
+	 *  ※見積：見積承認ルートグループID　契約：契約承認ルートグループID
+	 * ・引数の見積情報または契約情報を元にJavaScriptエンジン「Nashorn」を使用し、承認ルートマスタTBL(APPROVAL_ROUTE_MASTER)からルート条件式に一致にする承認ルートマスタ情報取得
+	 *  ※上記処理で失敗した場合は、処理結果ステータスに「警告」または「異常」を設定し戻り値返却
+	 * ・承認ルートマスタ情報に紐づく承認ルードノード情報は各ドメインの承認ルート取得APIで取得
+	 * </pre>
 	 * 
 	 * @param estimation
 	 *            見積情報
