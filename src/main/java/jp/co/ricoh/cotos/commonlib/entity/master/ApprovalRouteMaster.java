@@ -10,18 +10,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * 承認ルートマスタ
  */
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "approval_route_master")
-public class ApprovalRouteMaster extends EntityBaseMaster {
+public class ApprovalRouteMaster {
 
 	@Id
 	@ApiModelProperty(value = "承認ルートマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")

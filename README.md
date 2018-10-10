@@ -55,7 +55,6 @@
 |49|MvEmployeeMasterRepositoryを追加|
 |50|ERDに合わせてエンティティ名を修正|
 |51|ENUM定義見直し|
-|52|EntityBase,EntityBaseMaster継承関係追加|
 
 # バージョン採番方法
 
