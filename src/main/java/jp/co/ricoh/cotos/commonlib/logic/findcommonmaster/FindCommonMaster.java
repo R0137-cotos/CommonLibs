@@ -36,6 +36,25 @@ public class FindCommonMaster {
 	/**
 	 * 汎用マスタ取得
 	 * 
+	 * <pre>
+	 * 【処理内容】
+	 *　・引数の汎用マスタIDリストを元に汎用マスタTBL(COMMON_MASTER)、汎用マスタ明細TBL(COMMON_MASTER_DETAIL)から汎用マスタ情報取得
+	 *　・一度に複数の汎用マスタ情報が取得可能で、以下の条件に一致する汎用マスタ情報を取得
+	 *　　条件：
+	 *　　　汎用マスタTBL.汎用マスタコード(COMMON_MASTER.ARTICLE_CD)=引数の汎用マスタIDリスト
+	 *　　　汎用マスタTBL.削除フラグ(COMMON_MASTER.DELETE_FLG)=0
+	 *　・引数の汎用マスタIDリストに一致する汎用マスタ情報に紐づく汎用マスタ明細情報を取得　詳細は以下を参照
+	 *　　条件：
+	 *　　　汎用マスタID(COMMON_MASTER.ID)=汎用マスタID(COMMON_MASTER_DETAIL.COMMON_MASTER_ID)
+	 *　　　有効期間From(COMMON_MASTER_DETAIL.AVAILABLE_PERIOD_FROM)≦システム日付≦有効期間To(COMMON_MASTER_DETAIL.AVAILABLE_PERIOD_TO)
+	 *　　　削除フラグ(COMMON_MASTER_DETAIL.DELETE_FLG)=0
+	 *　　取得項目：
+	 *　　　コード値(CD_VAL)、表示値(DISPLAY_VAL)、データエリア1(DATA_AREA1)～データエリア5(DATA_AREA5)、表示順(SORT_NUMBER)
+	 *　　ソート順：
+	 *　　　表示順(SORT_NUMBER)の昇順
+	 *　・引数の空行追加フラグを「true」に指定すると、各汎用マスタ明細の先頭行に空行を追加した状態で取得可能
+	 * </pre>
+	 * 
 	 * @param parameter
 	 *            汎用マスタ取得パラメータ
 	 * @return 汎用マスタリスト
@@ -65,6 +84,24 @@ public class FindCommonMaster {
 
 	/**
 	 * MoM汎用マスタ取得
+	 * 
+	 * <pre>
+	 * 【処理内容】
+	 *　・引数の汎用マスタIDリストを元にMoM汎用マスタTBL(MV_TJMMB010_UTL_ITEM)、MoM汎用マスタ明細TBL(MV_TJMMB020_UTL_CD)からMoM汎用マスタ情報取得
+	 *　・一度に複数のMoM汎用マスタ情報が取得可能で、以下の条件に一致するMoM汎用マスタ情報を取得
+	 *　　条件：
+	 *　　　MoM汎用マスタTBL.汎用マスタコード(MV_TJMMB010_UTL_ITEM.ITEM_ID)=引数の汎用マスタIDリスト
+	 *　　　MoM汎用マスタTBL.削除フラグ(MV_TJMMB010_UTL_ITEM.DEL_FLG)=0
+	 *　・引数の汎用マスタIDリストに一致するMoM汎用マスタ情報に紐づくMoM汎用マスタ明細情報を取得　詳細は以下を参照
+	 *　　条件：
+	 *　　　MoM汎用マスタID(MV_TJMMB010_UTL_ITEM.ITEM_ID)=MoM汎用マスタID(MV_TJMMB020_UTL_CD.ITEM_ID)
+	 *　　　削除フラグ(MV_TJMMB020_UTL_CD.DEL_FLG)=0
+	 *　　取得項目：
+	 *　　　コード値(CD_VAL)、表示値(DECD_VAL)、データエリア1(DATA_AREA1)～データエリア5(DATA_AREA5)、表示順(SORT_NUMBER)
+	 *　　ソート順：
+	 *　　　表示順(SORT_NUMBER)の昇順
+	 *　・引数の空行追加フラグを「true」に指定すると、各MoM汎用マスタ明細の先頭行に空行を追加した状態で取得可能
+	 * </pre>
 	 * 
 	 * @param parameter
 	 *            汎用マスタ取得パラメータ
