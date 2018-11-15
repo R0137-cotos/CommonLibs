@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -20,6 +24,9 @@ import lombok.EqualsAndHashCode;
 public class Accounting extends EntityBase {
 
 	/**計上ID*/
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounting_seq")
+	@SequenceGenerator(name = "accounting_seq", sequenceName = "accounting_seq", allocationSize = 1)
 	@ApiModelProperty(value = "計上ID", required = true, position = 1)
 	private long id;
 
