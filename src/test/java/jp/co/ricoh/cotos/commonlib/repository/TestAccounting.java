@@ -31,6 +31,7 @@ public class TestAccounting {
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accounting.sql");
 	}
 
 	@AfterClass
