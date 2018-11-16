@@ -359,21 +359,21 @@ public class Contract extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "web受注注文番号", required = false, position = 36, allowableValues = "range[0,255]")
-	private String web_order_number;
+	private String webOrderNumber;
 	
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "RJ管理番号", required = false, position = 37, allowableValues = "range[0,255]")
-	private String rj_manage_number;
+	private String rjManageNumber;
 	
 	/**
 	 * 課金開始日
 	 */
 	@ApiModelProperty(value = "課金開始日", required = false, position = 38)
 	@Temporal(TemporalType.DATE)
-	private Date billing_start_date;
+	private Date billingStartDate;
 
 	/**
 	 * 契約明細
