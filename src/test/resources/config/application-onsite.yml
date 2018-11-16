@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_onsite
-    password: cotos_onsite
+    username: cotos_onsite_rsi
+    password: cotos_onsite_rsi
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -13,4 +13,4 @@ spring:
         show_sql: true
         use_sql_comments: false
         format_sql: false
-        default_schema: cotos_onsite
+        default_schema: cotos_onsite_rsi
