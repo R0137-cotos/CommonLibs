@@ -46,7 +46,7 @@ public class ProductMaster extends EntityBaseMaster {
 	 * 代表品種マスタID
 	 */
 	@ApiModelProperty(value = "代表品種マスタID", required = false, position = 3, allowableValues = "range[0,9999999999999999999]")
-	private long repItemMasterId;
+	private Long repItemMasterId;
 
 	/**
 	 * 商品構成マスタ

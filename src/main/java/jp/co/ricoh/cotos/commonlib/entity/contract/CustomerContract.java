@@ -218,33 +218,33 @@ public class CustomerContract extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "NetRicoh会員ID", required = false, position = 25, allowableValues = "range[0,255]")
-	private String netricoh_account;
+	private String netricohAccount;
 
 	/**
 	 * 設置先名
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "設置先名", required = false, position = 26, allowableValues = "range[0,255]")
-	private String setup_corp_nm;
+	private String setupCorpNm;
 
 	/**
 	 * 設置先郵便番号
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "設置先郵便番号", required = false, position = 27, allowableValues = "range[0,255]")
-	private String setup_post_cd;
+	private String setupPostCd;
 
 	/**
 	 * 設置先住所
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "設置先住所", required = false, position = 28, allowableValues = "range[0,255]")
-	private String setup_addr;
+	private String setupAddr;
 
 	/**
 	 * 設置先電話番号
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "設置先電話番号", required = false, position = 29, allowableValues = "range[0,255]")
-	private String setup_tel;
+	private String setupTel;
 }

@@ -124,34 +124,34 @@ public class DealerContract extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "販売店コード", required = false, position = 13, allowableValues = "range[0,255]")
-	private String distributor_cd;
+	private String distributorCd;
 
 	/**
 	 * OE届け先コード
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "OE届け先コード", required = false, position = 14, allowableValues = "range[0,255]")
-	private String oe_delivery_cd;
+	private String oeDeliveryCd;
 
 	/**
 	 * Rings得意先コード
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "Rings得意先コード", required = false, position = 15, allowableValues = "range[0,255]")
-	private String distributor_employee_mail_address;
+	private String distributorEmployeeMailAddress;
 
 	/**
 	 * 取引先コード（手数料用）
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "取引先コード（手数料用）", required = false, position = 16, allowableValues = "range[0,255]")
-	private String rings_customer_cd;
+	private String ringsCustomerCd;
 
 	/**
 	 * 担当営業メールアドレス
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "担当営業メールアドレス", required = false, position = 17, allowableValues = "range[0,255]")
-	private String distributor_rtc_cd;
+	private String distributorRtcCd;
 	
 }

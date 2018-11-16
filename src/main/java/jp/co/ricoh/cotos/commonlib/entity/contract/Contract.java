@@ -267,7 +267,6 @@ public class Contract extends EntityBase {
 	/**
 	 * 見積番号
 	 */
-	@NotEmpty
 	@Size(max = 255)
 	@ApiModelProperty(value = "見積番号", required = false, position = 23, allowableValues = "range[0,255]")
 	private String estimationNumber;
@@ -277,13 +276,13 @@ public class Contract extends EntityBase {
 	 */
 	@Max(99)
 	@ApiModelProperty(value = "見積番号枝番", required = false, position = 24, allowableValues = "range[0,99]")
-	private int estimationBranchNumber;
+	private Integer estimationBranchNumber;
 
 	/**
 	 * 見積ID
 	 */
 	@ApiModelProperty(value = "見積ID", required = false, position = 25, allowableValues = "range[0,99999999999999999999]")
-	private long estimationId;
+	private Long estimationId;
 
 	/**
 	 * 見積件名
