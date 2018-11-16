@@ -107,4 +107,47 @@ public class ItemContract extends EntityBase {
 	@JsonIgnore
 	@ApiModelProperty(value = "契約明細", required = true, position = 9)
 	private ContractDetail contractDetail;
+
+	/**
+	 * 仕入取引先コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入取引先コード", required = false, position = 10, allowableValues = "range[0,255]")
+	private String bp_cd;
+
+	/**
+	 * Ｒ原価
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "Ｒ原価", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal r_cost;
+
+	/**
+	 * ＲＪ仕入価格
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rj_purchase_price;
+
+	/**
+	 * ＲＪ仕切価格
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rj_dividing_price;
+
+	/**
+	 * 母店売価(接点店仕切)
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal mother_store_price;
+
+	/**
+	 * 消費税区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "消費税区分", required = false, position = 15, allowableValues = "range[0,255]")
+	private String tax_flag;
+
 }

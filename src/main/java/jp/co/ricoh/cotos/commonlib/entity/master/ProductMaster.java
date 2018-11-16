@@ -45,8 +45,7 @@ public class ProductMaster extends EntityBaseMaster {
 	/**
 	 * 代表品種マスタID
 	 */
-	@Column(nullable = false)
-	@ApiModelProperty(value = "代表品種マスタID", required = true, position = 3, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "代表品種マスタID", required = false, position = 3, allowableValues = "range[0,9999999999999999999]")
 	private long repItemMasterId;
 
 	/**
