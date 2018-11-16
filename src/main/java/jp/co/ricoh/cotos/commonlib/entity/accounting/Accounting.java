@@ -138,13 +138,13 @@ public class Accounting extends EntityBase {
 	private int cubicFlag;
 
 	/**データ作成日*/
-	@Size(max = 255)
-	@ApiModelProperty(value = "データ作成日", required = false, position = 18, allowableValues = "range[0,255]")
-	private String ffmDataCreateDate;
+	@ApiModelProperty(value = "データ作成日", required = false, position = 18)
+	@Temporal(TemporalType.DATE)
+	private Date ffmDataCreateDate;
 
 	/**データ作成時間*/
 	@ApiModelProperty(value = "データ作成時間", required = false, position = 19)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date ffmDataCreateTime;
 
 	/**FFM会社コード*/
