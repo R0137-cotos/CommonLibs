@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -70,10 +72,12 @@ public class Accounting extends EntityBase {
 
 	/**取引年月日*/
 	@ApiModelProperty(value = "取引年月日", required = false, position = 5)
+	@Temporal(TemporalType.DATE)
 	private Date transactionDate;
 
 	/**締日*/
 	@ApiModelProperty(value = "締日", required = false, position = 6)
+	@Temporal(TemporalType.DATE)
 	private Date closingDate;
 
 	/**商流区分*/
@@ -90,14 +94,17 @@ public class Accounting extends EntityBase {
 
 	/**請求年月*/
 	@ApiModelProperty(value = "請求年月", required = false, position = 10)
+	@Temporal(TemporalType.DATE)
 	private Date billingDate;
 
 	/**サービス期間開始日*/
 	@ApiModelProperty(value = "サービス期間開始日", required = false, position = 11)
+	@Temporal(TemporalType.DATE)
 	private Date srvStartDate;
 
 	/**サービス期間終了日*/
 	@ApiModelProperty(value = "サービス期間終了日", required = false, position = 12)
+	@Temporal(TemporalType.DATE)
 	private Date srvEndDate;
 
 	/**注文番号*/
@@ -126,6 +133,7 @@ public class Accounting extends EntityBase {
 
 	/**データ作成時間*/
 	@ApiModelProperty(value = "データ作成時間", required = false, position = 19)
+	@Temporal(TemporalType.DATE)
 	private Date ffmDataCreateTime;
 
 	/**FFM会社コード*/
@@ -802,6 +810,7 @@ public class Accounting extends EntityBase {
 
 	/**会計計上日*/
 	@ApiModelProperty(value = "会計計上日", required = false, position = 188)
+	@Temporal(TemporalType.DATE)
 	private Date cubicAccountingDate;
 
 	/**伝票ＮＯ*/
@@ -870,6 +879,7 @@ public class Accounting extends EntityBase {
 
 	/**通貨換算日*/
 	@ApiModelProperty(value = "通貨換算日", required = false, position = 205)
+	@Temporal(TemporalType.DATE)
 	private Date cubicCurrencyConvDate;
 
 	/**摘要*/
@@ -926,6 +936,7 @@ public class Accounting extends EntityBase {
 
 	/**取引日*/
 	@ApiModelProperty(value = "取引日", required = false, position = 219)
+	@Temporal(TemporalType.DATE)
 	private Date cubicTransactionDate;
 
 	/**請求先サイトコード*/
@@ -954,6 +965,7 @@ public class Accounting extends EntityBase {
 
 	/**回収起算日*/
 	@ApiModelProperty(value = "回収起算日", required = false, position = 226)
+	@Temporal(TemporalType.DATE)
 	private Date cubicRecoveryDate;
 
 	/**請求分類名*/
@@ -1034,6 +1046,7 @@ public class Accounting extends EntityBase {
 
 	/**元会計計上日（赤伝時）*/
 	@ApiModelProperty(value = "元会計計上日（赤伝時）", required = false, position = 246)
+	@Temporal(TemporalType.DATE)
 	private Date cubicOrgAcctDateForRed;
 
 	/**設置先サイトコード*/
