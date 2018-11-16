@@ -18,6 +18,6 @@ public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 			+ "ac.ffmFlag = 1"//
 			+ "where ac.costType = :costType "//
 			+ "and ac.ffmFlag = :ffmFlag")
-	public int updateByCostTypeAndFfmFlag(@Param("costType") String costType, @Param("ffmFlag") int ffmFlag);
+	public int updateFfmFlagByCostTypeAndFfmFlag(@Param("costType") String costType, @Param("ffmFlag") int ffmFlag);
 
 }
