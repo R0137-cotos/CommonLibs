@@ -273,7 +273,7 @@ public class TestAccounting {
 		testTarget.setFfmCommissionCnt(100000);
 		testTarget.setFfmThisBillingCnt(100000);
 		testTarget.setFfmForcedFlag(10);
-		testTarget.setCubicCount(10);
+		testTarget.setCubicCount(100000);
 
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 12);
