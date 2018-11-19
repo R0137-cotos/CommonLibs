@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -359,6 +360,7 @@ public class Accounting extends EntityBase {
 
 	/**他社商品区分*/
 	@Size(max = 255)
+	@Column(name="ffm_non_r_item_cd")
 	@ApiModelProperty(value = "他社商品区分", required = false, position = 62, allowableValues = "range[0,255]")
 	private String ffmNonRItemCd;
 
@@ -633,41 +635,49 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmShopSalesTaxPrice;
 
 	/**R原価数量*/
+	@Column(name="ffm_r_cost_cnt")
 	@Max(99999)
 	@ApiModelProperty(value = "R原価数量", required = false, position = 117, allowableValues = "range[0,99999]")
 	private int ffmRCostCnt;
 
 	/**R原価単価*/
+	@Column(name="ffm_r_cost_price")
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "R原価単価", required = false, position = 118, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal ffmRCostPrice;
 
 	/**R原価単価（税込）*/
+	@Column(name="ffm_r_cost_price_in_tax")
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "R原価単価（税込）", required = false, position = 119, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal ffmRCostPriceInTax;
 
 	/**R原価金額*/
+	@Column(name="ffm_r_cost_amt")
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "R原価金額", required = false, position = 120, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal ffmRCostAmt;
 
 	/**R原価金額（税込）*/
+	@Column(name="ffm_r_cost_amt_in_tax")
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "R原価金額（税込）", required = false, position = 121, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal ffmRCostAmtInTax;
 
 	/**R原価消費税区分*/
+	@Column(name = "ffm_r_cost_tax_type")
 	@Size(max = 255)
 	@ApiModelProperty(value = "R原価消費税区分", required = false, position = 122, allowableValues = "range[0,255]")
 	private String ffmRCostTaxType;
 
 	/**R原価消費税率区分*/
+	@Column(name = "ffm_r_cost_tax_rate")
 	@Size(max = 255)
 	@ApiModelProperty(value = "R原価消費税率区分", required = false, position = 123, allowableValues = "range[0,255]")
 	private String ffmRCostTaxRate;
 
 	/**R原価消費税額*/
+	@Column(name = "ffm_r_cost_tax_price")
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "R原価消費税額", required = false, position = 124, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal ffmRCostTaxPrice;
@@ -758,11 +768,13 @@ public class Accounting extends EntityBase {
 	private String ffmRemarkForBill;
 
 	/**請求期間（開始）*/
+	@Column(name="ffm_r_billing_period_start")
 	@Size(max = 255)
 	@ApiModelProperty(value = "請求期間（開始）", required = false, position = 142, allowableValues = "range[0,255]")
 	private String ffmRBillingPeriodStart;
 
 	/**請求期間（終了）*/
+	@Column(name="ffm_r_billing_period_end")
 	@Size(max = 255)
 	@ApiModelProperty(value = "請求期間（終了）", required = false, position = 143, allowableValues = "range[0,255]")
 	private String ffmRBillingPeriodEnd;
@@ -913,51 +925,61 @@ public class Accounting extends EntityBase {
 	private String chgBillingText;
 
 	/**一次店R会社コード*/
+	@Column(name="chg_r_company_code_1st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "一次店R会社コード", required = false, position = 173, allowableValues = "range[0,255]")
 	private String chgRCompanyCode1st;
 
 	/**一次店R会社名*/
+	@Column(name="chg_r_company_name_1st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "一次店R会社名", required = false, position = 174, allowableValues = "range[0,255]")
 	private String chgRCompanyName1st;
 
 	/**一次店販売店ID*/
+	@Column(name="chg_shop_id_1st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "一次店販売店ID", required = false, position = 175, allowableValues = "range[0,255]")
 	private String chgShopId1st;
 
 	/**一次店販売店名*/
+	@Column(name="chg_shop_name_1st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "一次店販売店名", required = false, position = 176, allowableValues = "range[0,255]")
 	private String chgShopName1st;
 
 	/**一次店販売店摘要*/
+	@Column(name="chg_shop_text_1st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "一次店販売店摘要", required = false, position = 177, allowableValues = "range[0,255]")
 	private String chgShopText1st;
 
 	/**二次店R会社コード*/
+	@Column(name="chg_r_company_code_2st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "二次店R会社コード", required = false, position = 178, allowableValues = "range[0,255]")
 	private String chgRCompanyCode2st;
 
 	/**二次店R会社名*/
+	@Column(name="chg_r_company_name_2st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "二次店R会社名", required = false, position = 179, allowableValues = "range[0,255]")
 	private String chgRCompanyName2st;
 
 	/**二次店販売店ID*/
+	@Column(name="chg_shop_id_2st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "二次店販売店ID", required = false, position = 180, allowableValues = "range[0,255]")
 	private String chgShopId2st;
 
 	/**二次店販売店名*/
+	@Column(name="chg_shop_name_2st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "二次店販売店名", required = false, position = 181, allowableValues = "range[0,255]")
 	private String chgShopName2st;
 
 	/**二次店販売店摘要*/
+	@Column(name="chg_shop_text_2st")
 	@Size(max = 255)
 	@ApiModelProperty(value = "二次店販売店摘要", required = false, position = 182, allowableValues = "range[0,255]")
 	private String chgShopText2st;

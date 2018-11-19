@@ -45,7 +45,7 @@ public class TestAccounting {
 	@Test
 	public void AccountingRepositoryのテスト() throws Exception {
 
-		Accounting found = accountingRespository.findOne(9999L);
+		Accounting found = accountingRespository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
