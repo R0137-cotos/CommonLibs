@@ -69,11 +69,11 @@ public class Accounting extends EntityBase {
 
 	/**契約ID*/
 	@ApiModelProperty(value = "契約ID", required = false, position = 3, allowableValues = "range[0,9999999999999999999]")
-	private long contractId;
+	private Long contractId;
 
 	/**契約明細ID*/
 	@ApiModelProperty(value = "契約明細ID", required = false, position = 4, allowableValues = "range[0,9999999999999999999]")
-	private long contractDetailId;
+	private Long contractDetailId;
 
 	/**取引年月日*/
 	@ApiModelProperty(value = "取引年月日", required = false, position = 5)
@@ -131,12 +131,12 @@ public class Accounting extends EntityBase {
 	/**FFM計上処理フラグ*/
 	@Max(9)
 	@ApiModelProperty(value = "FFM計上処理フラグ", required = false, position = 16, allowableValues = "range[0,9]")
-	private int ffmFlag;
+	private Integer ffmFlag;
 
 	/**CUBIC計上処理フラグ*/
 	@Max(9)
 	@ApiModelProperty(value = "CUBIC計上処理フラグ", required = false, position = 17, allowableValues = "range[0,9]")
-	private int cubicFlag;
+	private Integer cubicFlag;
 
 	/**データ作成日*/
 	@ApiModelProperty(value = "データ作成日", required = false, position = 18)
@@ -256,7 +256,7 @@ public class Accounting extends EntityBase {
 	/**請求分割回数*/
 	@Max(99)
 	@ApiModelProperty(value = "請求分割回数", required = false, position = 41, allowableValues = "range[0,99]")
-	private int ffmTotalBillingCount;
+	private Integer ffmTotalBillingCount;
 
 	/**契約締結日*/
 	@Size(max = 255)
@@ -477,7 +477,7 @@ public class Accounting extends EntityBase {
 	/**売上数量*/
 	@Max(99999)
 	@ApiModelProperty(value = "売上数量", required = false, position = 85, allowableValues = "range[0,99999]")
-	private int ffmUserSalesCnt;
+	private Integer ffmUserSalesCnt;
 
 	/**ユーザ売上単価*/
 	@DecimalMax("9999999999999999999.99")
@@ -517,7 +517,7 @@ public class Accounting extends EntityBase {
 	/**RJ売上数量*/
 	@Max(99999)
 	@ApiModelProperty(value = "RJ売上数量", required = false, position = 93, allowableValues = "range[0,99999]")
-	private int ffmRjSalesCnt;
+	private Integer ffmRjSalesCnt;
 
 	/**RJ売上単価*/
 	@DecimalMax("9999999999999999999.99")
@@ -557,7 +557,7 @@ public class Accounting extends EntityBase {
 	/**RJ仕入数量*/
 	@Max(99999)
 	@ApiModelProperty(value = "RJ仕入数量", required = false, position = 101, allowableValues = "range[0,99999]")
-	private int ffmRjPurchaseCnt;
+	private Integer ffmRjPurchaseCnt;
 
 	/**RJ仕入単価*/
 	@DecimalMax("9999999999999999999.99")
@@ -597,7 +597,7 @@ public class Accounting extends EntityBase {
 	/**販売店売上数量*/
 	@Max(99999)
 	@ApiModelProperty(value = "販売店売上数量", required = false, position = 109, allowableValues = "range[0,99999]")
-	private int ffmShopSalesCnt;
+	private Integer ffmShopSalesCnt;
 
 	/**販売店売上単価*/
 	@DecimalMax("9999999999999999999.99")
@@ -638,7 +638,7 @@ public class Accounting extends EntityBase {
 	@Column(name="ffm_r_cost_cnt")
 	@Max(99999)
 	@ApiModelProperty(value = "R原価数量", required = false, position = 117, allowableValues = "range[0,99999]")
-	private int ffmRCostCnt;
+	private Integer ffmRCostCnt;
 
 	/**R原価単価*/
 	@Column(name="ffm_r_cost_price")
@@ -685,7 +685,7 @@ public class Accounting extends EntityBase {
 	/**手数料数量*/
 	@Max(99999)
 	@ApiModelProperty(value = "手数料数量", required = false, position = 125, allowableValues = "range[0,99999]")
-	private int ffmCommissionCnt;
+	private Integer ffmCommissionCnt;
 
 	/**手数料単価*/
 	@DecimalMax("9999999999999999999.99")
@@ -787,7 +787,7 @@ public class Accounting extends EntityBase {
 	/**今回の請求回数*/
 	@Max(99999)
 	@ApiModelProperty(value = "今回の請求回数", required = false, position = 145, allowableValues = "range[0,99999]")
-	private int ffmThisBillingCnt;
+	private Integer ffmThisBillingCnt;
 
 	/**カウンター*/
 	@Size(max = 255)
@@ -807,7 +807,7 @@ public class Accounting extends EntityBase {
 	/**強制フラグ*/
 	@Max(9)
 	@ApiModelProperty(value = "強制フラグ", required = false, position = 149, allowableValues = "range[0,9]")
-	private int ffmForcedFlag;
+	private Integer ffmForcedFlag;
 
 	/**機器設置先名*/
 	@Size(max = 255)
@@ -1067,7 +1067,7 @@ public class Accounting extends EntityBase {
 	/**数量*/
 	@Max(99999)
 	@ApiModelProperty(value = "数量", required = false, position = 199, allowableValues = "range[0,99999]")
-	private int cubicCount;
+	private Integer cubicCount;
 
 	/**取引金額*/
 	@DecimalMax("9999999999999999999.99")
