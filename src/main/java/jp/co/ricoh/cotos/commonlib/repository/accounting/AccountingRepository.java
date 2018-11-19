@@ -16,10 +16,10 @@ public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 	public List<Accounting> findByCostTypeAndFfmFlag(String costType, int ffmFlag);
 
 	@Modifying
-	@Query("update Accounting ac set "//
-			+ "ac.ffmFlag = 1"//
-			+ "where ac.costType = :costType "//
-			+ "and ac.ffmFlag = :ffmFlag")
+	@Query(value = "update accounting ac set "//
+			+ "ac.ffm_flag = 1 "//
+			+ "where ac.cost_type = :costType "//
+			+ "and ac.ffm_flag = :ffmFlag", nativeQuery = true)
 	public int updateFfmFlagByCostTypeAndFfmFlag(@Param("costType") String costType, @Param("ffmFlag") int ffmFlag);
 
 }
