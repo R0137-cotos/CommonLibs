@@ -13,7 +13,10 @@ import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 @Repository
 public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 
-	public List<Accounting> findByCostTypeAndFfmFlag(String costType, int ffmFlag);
+	@Query(value = "select * from Accounting ac "//
+			+ "where ac.cost_type = :costType "//
+			+ "and ac.ffm_flag = :ffmFlag", nativeQuery = true)
+	public List<Accounting> findByCostTypeAndFfmFlag(@Param("costType") String costType, @Param("ffmFlag") int ffmFlag);
 
 	@Modifying
 	@Query(value = "update accounting ac set "//

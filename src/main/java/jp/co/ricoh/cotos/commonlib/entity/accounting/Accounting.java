@@ -76,14 +76,14 @@ public class Accounting extends EntityBase {
 	private Long contractDetailId;
 
 	/**取引年月日*/
-	@ApiModelProperty(value = "取引年月日", required = false, position = 5)
-	@Temporal(TemporalType.DATE)
-	private Date transactionDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "取引年月日", required = false, position = 5, allowableValues = "range[0,255]")
+	private String transactionDate;
 
 	/**締日*/
-	@ApiModelProperty(value = "締日", required = false, position = 6)
-	@Temporal(TemporalType.DATE)
-	private Date closingDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "締日", required = false, position = 6, allowableValues = "range[0,255]")
+	private String closingDate;
 
 	/**商流区分*/
 	@Size(max = 255)
@@ -99,19 +99,19 @@ public class Accounting extends EntityBase {
 	private ItemType itemType;
 
 	/**請求年月*/
-	@ApiModelProperty(value = "請求年月", required = false, position = 10)
-	@Temporal(TemporalType.DATE)
-	private Date billingDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "請求年月", required = false, position = 10, allowableValues = "range[0,255]")
+	private String billingDate;
 
 	/**サービス期間開始日*/
-	@ApiModelProperty(value = "サービス期間開始日", required = false, position = 11)
-	@Temporal(TemporalType.DATE)
-	private Date srvStartDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "サービス期間開始日", required = false, position = 11, allowableValues = "range[0,255]")
+	private String srvStartDate;
 
 	/**サービス期間終了日*/
-	@ApiModelProperty(value = "サービス期間終了日", required = false, position = 12)
-	@Temporal(TemporalType.DATE)
-	private Date srvEndDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "サービス期間終了日", required = false, position = 12, allowableValues = "range[0,255]")
+	private String srvEndDate;
 
 	/**注文番号*/
 	@Size(max = 255)
@@ -131,12 +131,12 @@ public class Accounting extends EntityBase {
 	/**FFM計上処理フラグ*/
 	@Max(9)
 	@ApiModelProperty(value = "FFM計上処理フラグ", required = false, position = 16, allowableValues = "range[0,9]")
-	private Integer ffmFlag;
+	private Integer ffmFlg;
 
 	/**CUBIC計上処理フラグ*/
 	@Max(9)
 	@ApiModelProperty(value = "CUBIC計上処理フラグ", required = false, position = 17, allowableValues = "range[0,9]")
-	private Integer cubicFlag;
+	private Integer cubicFlg;
 
 	/**データ作成日*/
 	@ApiModelProperty(value = "データ作成日", required = false, position = 18)
@@ -730,7 +730,7 @@ public class Accounting extends EntityBase {
 	/**納品書要否区分*/
 	@Size(max = 255)
 	@ApiModelProperty(value = "納品書要否区分", required = false, position = 134, allowableValues = "range[0,255]")
-	private String ffmBillOutputFlag;
+	private String ffmBillOutputFlg;
 
 	/**納品書出力パターン*/
 	@Size(max = 255)
@@ -807,7 +807,7 @@ public class Accounting extends EntityBase {
 	/**強制フラグ*/
 	@Max(9)
 	@ApiModelProperty(value = "強制フラグ", required = false, position = 149, allowableValues = "range[0,9]")
-	private Integer ffmForcedFlag;
+	private Integer ffmForcedFlg;
 
 	/**機器設置先名*/
 	@Size(max = 255)
