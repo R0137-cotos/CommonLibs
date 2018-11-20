@@ -25,4 +25,7 @@ public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 			+ "and ac.ffm_contract_no = :ffmContractNo", nativeQuery = true)
 	public int updateFfmFlgByFfmProdactCdAndFfmContractNo(@Param("ffmProdactCd") String ffmProdactCd, @Param("ffmContractNo") String ffmContractNo);
 
+	@Query(value = "select * from accounting WHERE rownum >= :ROW_NUM_START and rownum <= :ROW_NUM_END order by id asc", nativeQuery = true)
+    public List<Accounting> findByBetweenRowNum(@Param("ROW_NUM_START") long rowNumStart, @Param("ROW_NUM_END") long rowNumEnd);
+
 }
