@@ -21,8 +21,8 @@ public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 	@Modifying
 	@Query(value = "update accounting ac set "//
 			+ "ac.ffm_flg = 1 "//
-			+ "where ac.product_type_cd = :productTypeCd "//
+			+ "where ac.ffm_prodact_cd = :ffmProdactCd "//
 			+ "and ac.ffm_contract_no = :ffmContractNo", nativeQuery = true)
-	public int updateFfmFlgByProductTypeCdAndFfmContractNo(@Param("productTypeCd") String productTypeCd, @Param("ffmContractNo") String ffmContractNo);
+	public int updateFfmFlgByFfmProdactCdAndFfmContractNo(@Param("ffmProdactCd") String ffmProdactCd, @Param("ffmContractNo") String ffmContractNo);
 
 }
