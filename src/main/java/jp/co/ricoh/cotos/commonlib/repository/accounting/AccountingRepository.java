@@ -15,14 +15,14 @@ public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 
 	@Query(value = "select * from Accounting ac "//
 			+ "where ac.cost_type = :costType "//
-			+ "and ac.ffm_flag = :ffmFlag", nativeQuery = true)
-	public List<Accounting> findByCostTypeAndFfmFlag(@Param("costType") String costType, @Param("ffmFlag") int ffmFlag);
+			+ "and ac.ffm_flg = :ffmFlg", nativeQuery = true)
+	public List<Accounting> findByCostTypeAndFfmFlg(@Param("costType") String costType, @Param("ffmFlg") int ffmFlg);
 
 	@Modifying
 	@Query(value = "update accounting ac set "//
-			+ "ac.ffm_flag = 1 "//
+			+ "ac.ffm_flg = 1 "//
 			+ "where ac.cost_type = :costType "//
-			+ "and ac.ffm_flag = :ffmFlag", nativeQuery = true)
-	public int updateFfmFlagByCostTypeAndFfmFlag(@Param("costType") String costType, @Param("ffmFlag") int ffmFlag);
+			+ "and ac.ffm_flg = :ffmFlg", nativeQuery = true)
+	public int updateFfmFlgByCostTypeAndFfmFlg(@Param("costType") String costType, @Param("ffmFlg") int ffmFlg);
 
 }
