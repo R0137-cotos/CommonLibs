@@ -154,7 +154,7 @@ public class TestAccounting {
 		testTarget.setFfmCommissionTaxType(STR_256);
 		testTarget.setFfmCommissionTaxRate(STR_256);
 		testTarget.setFfmBillDetailCd(STR_256);
-		testTarget.setFfmBillOutputFlag(STR_256);
+		testTarget.setFfmBillOutputFlg(STR_256);
 		testTarget.setFfmBillOutputPtn(STR_256);
 		testTarget.setFfmBillOutputFmt(STR_256);
 		testTarget.setFfmBillOutputSystem(STR_256);
@@ -262,8 +262,8 @@ public class TestAccounting {
 
 		// 異常系（@Max)
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setFfmFlag(10);
-		testTarget.setCubicFlag(10);
+		testTarget.setFfmFlg(10);
+		testTarget.setCubicFlg(10);
 		testTarget.setFfmTotalBillingCount(100);
 		testTarget.setFfmUserSalesCnt(100000);
 		testTarget.setFfmRjSalesCnt(100000);
@@ -272,7 +272,7 @@ public class TestAccounting {
 		testTarget.setFfmRCostCnt(100000);
 		testTarget.setFfmCommissionCnt(100000);
 		testTarget.setFfmThisBillingCnt(100000);
-		testTarget.setFfmForcedFlag(10);
+		testTarget.setFfmForcedFlg(10);
 		testTarget.setCubicCount(100000);
 
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
