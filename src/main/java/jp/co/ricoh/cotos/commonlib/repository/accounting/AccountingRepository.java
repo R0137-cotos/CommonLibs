@@ -25,7 +25,10 @@ public interface AccountingRepository extends CrudRepository<Accounting, Long> {
 			+ "and ac.ffm_contract_no = :ffmContractNo", nativeQuery = true)
 	public int updateFfmFlgByFfmProdactCdAndFfmContractNo(@Param("ffmProdactCd") String ffmProdactCd, @Param("ffmContractNo") String ffmContractNo);
 
-	@Query(value = "select * from accounting WHERE rownum >= :ROW_NUM_START and rownum <= :ROW_NUM_END order by id asc", nativeQuery = true)
-    public List<Accounting> findByBetweenRowNum(@Param("ROW_NUM_START") long rowNumStart, @Param("ROW_NUM_END") long rowNumEnd);
+	@Query(value = "select count(ac.id) from accounting ac where product_type_cd = :PRODUCT_TYPE_CD and billing_date = :BILLING_DATE and exists ( select * from contract co where co.id = ac.contract_id and co.commercial_flow_div in ('2', '3')) order by id asc", nativeQuery = true)
+	public long countSubstituteSalesClaim(@Param("PRODUCT_TYPE_CD") String productTypeCd, @Param("BILLING_DATE") String billingDate);
+
+	@Query(value = "select ac.* from accounting ac where rownum >= :ROW_NUM_START and rownum <= :ROW_NUM_END and product_type_cd = :PRODUCT_TYPE_CD and billing_date = :BILLING_DATE and exists ( select * from contract co where co.id = ac.contract_id and co.commercial_flow_div in ('2', '3')) order by id asc", nativeQuery = true)
+	public List<Accounting> findSubstituteSalesClaim(@Param("ROW_NUM_START") long rowNumStart, @Param("ROW_NUM_END") long rowNumEnd, @Param("PRODUCT_TYPE_CD") String productTypeCd, @Param("BILLING_DATE") String billingDate);
 
 }
