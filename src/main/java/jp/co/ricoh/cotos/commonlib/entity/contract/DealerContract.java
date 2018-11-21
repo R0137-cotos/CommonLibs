@@ -117,7 +117,6 @@ public class DealerContract extends EntityBase {
 	@NotNull
 	@ApiModelProperty(value = "販売店商流順", required = true, allowableValues = "販売店(\"1\"), 母店(\"2\")", example = "1", position = 12)
 	private DealerFlowOrder dealerFlowOrder;
-	
 
 	/**
 	 * 販売店コード
@@ -153,5 +152,33 @@ public class DealerContract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "担当営業メールアドレス", required = false, position = 17, allowableValues = "range[0,255]")
 	private String distributorRtcCd;
-	
+
+	/**
+	 * MoM会社ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoM会社ID", required = false, position = 18, allowableValues = "range[0,255]")
+	private String distributorMomCmpId;
+
+	/**
+	 * MoM販売店識別コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoM販売店識別コード", required = false, position = 19, allowableValues = "range[0,255]")
+	private String distributorMomShikiCd;
+
+	/**
+	 * MoM組織ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoM組織ID", required = false, position = 20, allowableValues = "range[0,255]")
+	private String distributorMomSoshikiId;
+
+	/**
+	 * MoMデポコード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoMデポコード", required = false, position = 21, allowableValues = "range[0,255]")
+	private String distributorMomDepoCd;
+
 }
