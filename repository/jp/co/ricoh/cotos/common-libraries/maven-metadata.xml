@@ -73,6 +73,10 @@
       <version>0.0.114</version>
       <version>0.0.115</version>
     </versions>
+<<<<<<< HEAD
     <lastUpdated>20181121041408</lastUpdated>
+=======
+    <lastUpdated>20181121041201</lastUpdated>
+>>>>>>> ecf7e0fdce8b03756d5d96e75a0f7784d7b06189
   </versioning>
 </metadata>
