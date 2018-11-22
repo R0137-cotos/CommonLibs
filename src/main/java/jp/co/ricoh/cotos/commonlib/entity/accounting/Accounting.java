@@ -144,14 +144,14 @@ public class Accounting extends EntityBase {
 	private Integer cubicFlg;
 
 	/**データ作成日*/
-	@ApiModelProperty(value = "データ作成日", required = false, position = 18)
-	@Temporal(TemporalType.DATE)
-	private Date ffmDataCreateDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "データ作成日", required = false, position = 18, allowableValues = "range[0,255]")
+	private String ffmDataCreateDate;
 
 	/**データ作成時間*/
-	@ApiModelProperty(value = "データ作成時間", required = false, position = 19)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date ffmDataCreateTime;
+	@Size(max = 255)
+	@ApiModelProperty(value = "データ作成時間", required = false, position = 19, allowableValues = "range[0,255]")
+	private String ffmDataCreateTime;
 
 	/**FFM会社コード*/
 	@Size(max = 255)
@@ -1015,9 +1015,9 @@ public class Accounting extends EntityBase {
 	private String cubicCompanyCd;
 
 	/**会計計上日*/
-	@ApiModelProperty(value = "会計計上日", required = false, position = 188)
-	@Temporal(TemporalType.DATE)
-	private Date cubicAccountingDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "会計計上日", required = false, position = 188, allowableValues = "range[0,255]")
+	private String cubicAccountingDate;
 
 	/**伝票ＮＯ*/
 	@Size(max = 255)
@@ -1100,9 +1100,9 @@ public class Accounting extends EntityBase {
 	private BigDecimal cubicCurrencyConvRate;
 
 	/**通貨換算日*/
-	@ApiModelProperty(value = "通貨換算日", required = false, position = 205)
-	@Temporal(TemporalType.DATE)
-	private Date cubicCurrencyConvDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "通貨換算日", required = false, position = 205, allowableValues = "range[0,255]")
+	private String cubicCurrencyConvDate;
 
 	/**摘要*/
 	@Size(max = 255)
@@ -1170,9 +1170,9 @@ public class Accounting extends EntityBase {
 	private String cubicCoMgtSegment;
 
 	/**取引日*/
-	@ApiModelProperty(value = "取引日", required = false, position = 219)
-	@Temporal(TemporalType.DATE)
-	private Date cubicTransactionDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "取引日", required = false, position = 219, allowableValues = "range[0,255]")
+	private String cubicTransactionDate;
 
 	/**請求先サイトコード*/
 	@Size(max = 255)
@@ -1205,9 +1205,9 @@ public class Accounting extends EntityBase {
 	private String cubicRecoveryMethodName;
 
 	/**回収起算日*/
-	@ApiModelProperty(value = "回収起算日", required = false, position = 226)
-	@Temporal(TemporalType.DATE)
-	private Date cubicRecoveryDate;
+	@Size(max = 255)
+	@ApiModelProperty(value = "回収起算日", required = false, position = 226, allowableValues = "range[0,255]")
+	private String cubicRecoveryDate;
 
 	/**請求分類名*/
 	@Size(max = 255)
@@ -1305,9 +1305,9 @@ public class Accounting extends EntityBase {
 	private String cubicOrgSlipDetailNoForRed;
 
 	/**元会計計上日（赤伝時）*/
-	@ApiModelProperty(value = "元会計計上日（赤伝時）", required = false, position = 246)
-	@Temporal(TemporalType.DATE)
-	private Date cubicOrgAcctDateForRed;
+	@Size(max = 255)
+	@ApiModelProperty(value = "元会計計上日（赤伝時）", required = false, position = 246, allowableValues = "range[0,255]")
+	private String cubicOrgAcctDateForRed;
 
 	/**設置先サイトコード*/
 	@Size(max = 255)
