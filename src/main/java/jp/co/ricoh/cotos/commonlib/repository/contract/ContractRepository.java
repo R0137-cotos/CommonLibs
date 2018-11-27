@@ -13,4 +13,6 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 	public List<Contract> findByContractNumberAndContractBranchNumber(String contractNumber, int contractBranchNumber);
 
 	public List<Contract> findByOriginContractId(Long originContractId);
+
+	public List<Contract> findByRjManageNumber(String rjManageNumber);
 }
