@@ -64,7 +64,7 @@ public class ItemMaster extends EntityBaseMaster {
 
 	public enum CostType {
 
-		初期費("1"), 月額("2"), 年額("3");
+		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4");
 
 		private final String text;
 
@@ -124,7 +124,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 費用種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1", position = 6)
+	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 6)
 	private CostType costType;
 
 	/**

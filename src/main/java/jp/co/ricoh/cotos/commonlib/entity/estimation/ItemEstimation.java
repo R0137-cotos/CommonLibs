@@ -84,7 +84,7 @@ public class ItemEstimation extends EntityBase {
 	 * 費用種別
 	 */
 	@NotNull
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1", position = 7)
+	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 7)
 	private CostType costType;
 
 	/**
