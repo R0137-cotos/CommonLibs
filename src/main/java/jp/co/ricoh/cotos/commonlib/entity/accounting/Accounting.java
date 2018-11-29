@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -1306,6 +1307,15 @@ public class Accounting extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 251)
 	@Lob
 	private String extendItem;
+
+	@PrePersist
+	public void prePersist() {
+		if (StringUtils.isEmpty(super.getCreatedUserId())) {
+			CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			super.setCreatedUserId(userInfo.getMomEmployeeId());
+		}
+		super.setCreatedAt(new Date());
+	}
 
 	@PreUpdate
 	public void preUpdate() {
