@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Date;
 
 import javax.persistence.PrePersist;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,13 +25,12 @@ public class ContractListener {
 
 	/**
 	 * 契約番号・恒久契約識別番号を付与する。
-	 * 
+	 *
 	 * @param contract
 	 */
 	@PrePersist
-	@Transactional
 	public void appendsContractNumber(Contract contract) {
-		
+
 		/**
 		 * 契約番号
 		 */
