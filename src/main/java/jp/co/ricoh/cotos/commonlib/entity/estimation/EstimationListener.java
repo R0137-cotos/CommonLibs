@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 
 import javax.persistence.PrePersist;
@@ -24,8 +23,8 @@ public class EstimationListener {
 	}
 
 	/**
-	 * 見積番号を付与する。 しかしながら、同時に２回走るとおかしくなる（翌日の数字となる）ため、バッチでやったほうが安全かもしれない。
-	 * 
+	 * 見積番号を付与する。
+	 *
 	 * @param entity
 	 */
 	@PrePersist
@@ -35,16 +34,7 @@ public class EstimationListener {
 			return;
 		}
 		long sequence = dbUtil.loadSingleFromSQLFile("sql/nextEstimationNumberSequence.sql", GeneratedNumber.class).getGeneratedNumber();
-		long todayLong = Long.parseLong(new SimpleDateFormat("yyyyMMdd").format(new Date()) + "00000");
-		while (todayLong > sequence) {
-			String sql = dbUtil.loadSQLFromClasspath("sql/updateEstimationNumberVal.1.sql");
-			String replaceSQLDirectlyBecauseIncrementedValueForOracleNamedParametersFailWithORA_01722Error = sql.replace(":incrementValue", String.valueOf(todayLong - sequence));
-			dbUtil.executeWithSQLFile(replaceSQLDirectlyBecauseIncrementedValueForOracleNamedParametersFailWithORA_01722Error, Collections.emptyMap());
-			dbUtil.loadFromSQLFile("sql/updateEstimationNumberVal.2.sql", GeneratedNumber.class);
-			dbUtil.execute("sql/updateEstimationNumberVal.3.sql", Collections.emptyMap());
-			sequence = dbUtil.loadSingleFromSQLFile("sql/nextEstimationNumberSequence.sql", GeneratedNumber.class).getGeneratedNumber();
-		}
-		entity.setEstimationNumber(ID_PREFIX + sequence);
+		entity.setEstimationNumber(ID_PREFIX + new SimpleDateFormat("yyyyMMdd").format(new Date()) + String.format("%05d", sequence));
 	}
 
 }
