@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.accounting;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,22 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
-import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -1307,23 +1300,5 @@ public class Accounting extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 251)
 	@Lob
 	private String extendItem;
-
-	@PrePersist
-	public void prePersist() {
-		if (StringUtils.isEmpty(super.getCreatedUserId())) {
-			CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			super.setCreatedUserId(userInfo.getMomEmployeeId());
-		}
-		super.setCreatedAt(new Date());
-	}
-
-	@PreUpdate
-	public void preUpdate() {
-		if (StringUtils.isEmpty(super.getUpdatedUserId())) {
-			CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			super.setUpdatedUserId(userInfo.getMomEmployeeId());
-		}
-		super.setUpdatedAt(new Date());
-	}
 
 }
