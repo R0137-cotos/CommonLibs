@@ -7,4 +7,6 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 
 @Repository
 public interface OperationLogRepository extends CrudRepository<OperationLog, Long> {
+	
+	public void deleteByEstimationId(Long estimationId);
 }
