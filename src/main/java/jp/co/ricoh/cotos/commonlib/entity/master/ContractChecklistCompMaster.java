@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,28 +31,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "contract_checklist_comp_master")
 public class ContractChecklistCompMaster extends EntityBaseMaster {
-
-	public enum TargetContractType {
-
-		共通("1"), 新規("2"), プラン変更("3"), 情報変更("4");
-
-		private final String text;
-
-		private TargetContractType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static TargetContractType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	public enum TargetLifecycleStatus {
 
@@ -72,6 +52,21 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 		public static TargetLifecycleStatus fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
+
+		public static TargetLifecycleStatus fromLifeCycleStatus(LifecycleStatus lifeCycleStatus) {
+
+			// TargetLifecycleStatus と LifecycleStatus 間で区分値構造が異なることによる変換処理
+			switch (lifeCycleStatus) {
+			case 作成中:
+				return TargetLifecycleStatus.作成中;
+			case キャンセル手続き中:
+				return TargetLifecycleStatus.キャンセル手続き中;
+			case 解約手続き中:
+				return TargetLifecycleStatus.解約手続き中;
+			default:
+				throw new IllegalArgumentException(String.valueOf(lifeCycleStatus.toString()));
+			}
+		};
 	}
 
 	@Id
@@ -102,7 +97,7 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@ApiModelProperty(value = "対象ライフサイクル状態<br /> "//
-			+ "作成中/キャンセル手続き中/解約手続き中", required = true, allowableValues = "作成中(\"1\"), キャンセル手続き中(\"2\"), 解約手続き中(\"3\")", example ="1", position = 4)
+			+ "作成中/キャンセル手続き中/解約手続き中", required = true, allowableValues = "作成中(\"1\"), キャンセル手続き中(\"2\"), 解約手続き中(\"3\")", example = "1", position = 4)
 	private TargetLifecycleStatus targetLifecycleStatus;
 
 	/**

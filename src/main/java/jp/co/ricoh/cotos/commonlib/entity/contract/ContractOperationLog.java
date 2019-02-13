@@ -20,8 +20,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -40,13 +38,13 @@ import lombok.EqualsAndHashCode;
 public class ContractOperationLog extends EntityBase {
 
 	public enum OperationLogType {
-		売上開始指示, 売上計上開始, 売上計上停止, キャンセル手続き, キャンセル中止, 解約手続き, 解約確定, 解約手続き中止, 変更キャンセル, 変更確定, 新規作成, プラン変更, 確定, 情報変更, 新規作成_情報変更, 更新, 業務依頼, 業務処理完了,
+		売上開始指示, 売上計上開始, 売上計上停止, キャンセル手続き, キャンセル中止, 解約手続き, 解約確定, 解約手続き中止, 変更キャンセル, 変更確定, 新規作成, 契約書出力, プラン変更, 確定, 情報変更, 新規作成_情報変更, 更新, 業務依頼, 業務処理完了,
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_operation_log_seq")
 	@SequenceGenerator(name = "contract_operation_log_seq", sequenceName = "contract_operation_log_seq", allocationSize = 1)
-	@ApiModelProperty(value = "操作履歴ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "操作履歴ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -71,7 +69,7 @@ public class ContractOperationLog extends EntityBase {
 	 * 操作者MoM社員ID
 	 */
 	@Column(nullable = false)
-	@NotEmpty
+	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "操作者MoM社員ID", required = true, position = 4, allowableValues = "range[0,255]")
 	private String operatorEmpId;
@@ -80,7 +78,7 @@ public class ContractOperationLog extends EntityBase {
 	 * 操作者氏名
 	 */
 	@Column(nullable = false)
-	@NotEmpty
+	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "操作者氏名", required = true, position = 5, allowableValues = "range[0,255]")
 	private String operatorName;
@@ -98,7 +96,7 @@ public class ContractOperationLog extends EntityBase {
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
-	@ApiModelProperty(value = "実施日時", required = true, position = 7, readOnly = true)
+	@ApiModelProperty(value = "実施日時(作成時不要)", required = true, position = 7, readOnly = true)
 	private Date operatedAt;
 
 	@PrePersist

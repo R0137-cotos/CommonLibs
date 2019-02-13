@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+
 /**
  * 共通区分定義
  */
@@ -58,6 +60,21 @@ public class EnumType {
 		public static TargetContractType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
+
+		public static TargetContractType fromContractType(ContractType contractType) {
+
+			// TargetContractType と ContractType 間で区分値構造が異なることによる変換処理
+			switch (contractType) {
+			case 新規:
+				return TargetContractType.新規;
+			case プラン変更:
+				return TargetContractType.プラン変更;
+			case 情報変更:
+				return TargetContractType.情報変更;
+			default:
+				throw new IllegalArgumentException(String.valueOf(contractType.toString()));
+			}
+		};
 	}
 
 	/**
@@ -90,7 +107,7 @@ public class EnumType {
 	 */
 	public enum ProcessCategory {
 
-		承認依頼("1"), 承認依頼取消("2"), 承認依頼差戻("3"), 承認("4"), 作業依頼("5"), 作業完了("6"), キャンセル手続き("7"), キャンセル手続き中止("8"), 解約手続き("9"), 解約手続き中止("10");
+		承認依頼("1"), 承認依頼取消("2"), 承認依頼差戻("3"), 承認("4"), 作業依頼("5"), 作業完了("6"), キャンセル手続き("7"), キャンセル手続き中止("8"), 解約手続き("9"), 解約手続き中止("10"), 問い合わせ("11"), 売上計上停止("12"), 売上計上再開("13"), 売上開始指示("14");
 
 		private final String text;
 
@@ -140,7 +157,7 @@ public class EnumType {
 	 */
 	public enum ApprovalTargetType {
 
-		新規("1"), 情報変更("2"), プラン変更("3"), キャンセル("4"), 解約("5"), 作業完了報告("6"), 非承認("7");
+		新規("1"), 情報変更("2"), プラン変更("3"), キャンセル("4"), 解約("5"), 作業完了報告("6"), 非承認("7"), 売上指示("8"), 売上計上("9");
 
 		private final String text;
 
@@ -208,5 +225,48 @@ public class EnumType {
 		public static DealerFlowOrder fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
+	}
+
+	/**
+	 * 宛先種別
+	 */
+	public enum TargetDirectionType {
+
+		担当CE("1"), 担当SA("2"), 全担当者("98"), その他("99");
+
+		private final String text;
+
+		private TargetDirectionType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static TargetDirectionType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * 汎用マスタ明細区分
+	 */
+	public enum CommonMasterDetailType {
+
+		お客様担当者, 接点店担当者, 母店接点店担当者;
+
+	}
+
+	/**
+	 * 汎用マスタカラム名区分
+	 */
+	public enum ColumnNameType {
+
+		issue_format, commercial_flow_div, estimated_system_div, file_kind, cancel_reason, cost_type, sales_tax_rate, branch_custoemr_cd, process_category;
+
 	}
 }
