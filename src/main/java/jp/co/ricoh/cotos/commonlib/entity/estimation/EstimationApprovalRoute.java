@@ -1,99 +1,182 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   EstimationApprovalRoute.java
+
 package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-/**
- * 見積承認ルートを表すEntity
- */
-@Entity
-@EqualsAndHashCode(callSuper = true)
-@Data
-@Table(name = "estimation_approval_route")
-@ApiModel(description = "見積承認ルート(作成時不要)")
-public class EstimationApprovalRoute extends EntityBase {
+// Referenced classes of package jp.co.ricoh.cotos.commonlib.entity.estimation:
+//            Estimation
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_approval_route_seq")
-	@SequenceGenerator(name = "estimation_approval_route_seq", sequenceName = "estimation_approval_route_seq", allocationSize = 1)
-	@ApiModelProperty(value = "見積承認ルートID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]", readOnly = true)
-	private long id;
+public class EstimationApprovalRoute extends EntityBase
+{
 
-	/**
-	 * 見積
-	 */
-	@OneToOne
-	@ApiModelProperty(value = "見積", required = true, position = 2)
-	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@JsonIgnore
-	private Estimation estimation;
+    public boolean equals(Object o)
+    {
+        if(o == this)
+            return true;
+        if(!(o instanceof EstimationApprovalRoute))
+            return false;
+        EstimationApprovalRoute other = (EstimationApprovalRoute)o;
+        if(!other.canEqual(this))
+            return false;
+        if(!super.equals(o))
+            return false;
+        if(getId() != other.getId())
+            return false;
+        Object this$estimation = getEstimation();
+        Object other$estimation = other.getEstimation();
+        if(this$estimation != null ? !this$estimation.equals(other$estimation) : other$estimation != null)
+            return false;
+        Object this$approvalRequesterEmpId = getApprovalRequesterEmpId();
+        Object other$approvalRequesterEmpId = other.getApprovalRequesterEmpId();
+        if(this$approvalRequesterEmpId != null ? !this$approvalRequesterEmpId.equals(other$approvalRequesterEmpId) : other$approvalRequesterEmpId != null)
+            return false;
+        Object this$approvalRequesterName = getApprovalRequesterName();
+        Object other$approvalRequesterName = other.getApprovalRequesterName();
+        if(this$approvalRequesterName != null ? !this$approvalRequesterName.equals(other$approvalRequesterName) : other$approvalRequesterName != null)
+            return false;
+        Object this$approvalRequesterOrgName = getApprovalRequesterOrgName();
+        Object other$approvalRequesterOrgName = other.getApprovalRequesterOrgName();
+        if(this$approvalRequesterOrgName != null ? !this$approvalRequesterOrgName.equals(other$approvalRequesterOrgName) : other$approvalRequesterOrgName != null)
+            return false;
+        if(getSpecialPriceApprovalFlg() != other.getSpecialPriceApprovalFlg())
+            return false;
+        Object this$estimationApprovalResultList = getEstimationApprovalResultList();
+        Object other$estimationApprovalResultList = other.getEstimationApprovalResultList();
+        if(this$estimationApprovalResultList != null ? !this$estimationApprovalResultList.equals(other$estimationApprovalResultList) : other$estimationApprovalResultList != null)
+            return false;
+        Object this$estimationApprovalRouteNodeList = getEstimationApprovalRouteNodeList();
+        Object other$estimationApprovalRouteNodeList = other.getEstimationApprovalRouteNodeList();
+        return this$estimationApprovalRouteNodeList != null ? this$estimationApprovalRouteNodeList.equals(other$estimationApprovalRouteNodeList) : other$estimationApprovalRouteNodeList == null;
+    }
 
-	/**
-	 * 承認依頼者MoM社員ID
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "承認依頼者MoM社員ID", required = true, position = 3, allowableValues = "range[0,255]")
-	private String approvalRequesterEmpId;
+    protected boolean canEqual(Object other)
+    {
+        return other instanceof EstimationApprovalRoute;
+    }
 
-	/**
-	 * 承認依頼者氏名
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "承認依頼者氏名", required = true, position = 4, allowableValues = "range[0,255]")
-	private String approvalRequesterName;
+    public int hashCode()
+    {
+        int PRIME = 59;
+        int result = 1;
+        result = result * 59 + super.hashCode();
+        long $id = getId();
+        result = result * 59 + (int)($id ^ $id >>> 32);
+        Object $estimation = getEstimation();
+        result = result * 59 + ($estimation != null ? $estimation.hashCode() : 43);
+        Object $approvalRequesterEmpId = getApprovalRequesterEmpId();
+        result = result * 59 + ($approvalRequesterEmpId != null ? $approvalRequesterEmpId.hashCode() : 43);
+        Object $approvalRequesterName = getApprovalRequesterName();
+        result = result * 59 + ($approvalRequesterName != null ? $approvalRequesterName.hashCode() : 43);
+        Object $approvalRequesterOrgName = getApprovalRequesterOrgName();
+        result = result * 59 + ($approvalRequesterOrgName != null ? $approvalRequesterOrgName.hashCode() : 43);
+        result = result * 59 + getSpecialPriceApprovalFlg();
+        Object $estimationApprovalResultList = getEstimationApprovalResultList();
+        result = result * 59 + ($estimationApprovalResultList != null ? $estimationApprovalResultList.hashCode() : 43);
+        Object $estimationApprovalRouteNodeList = getEstimationApprovalRouteNodeList();
+        result = result * 59 + ($estimationApprovalRouteNodeList != null ? $estimationApprovalRouteNodeList.hashCode() : 43);
+        return result;
+    }
 
-	/**
-	 * 承認依頼者組織名
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "承認依頼者組織名", required = false, position = 5, allowableValues = "range[0,255]")
-	private String approvalRequesterOrgName;
+    public long getId()
+    {
+        return id;
+    }
 
-	/**
-	 * 特価承認対象フラグ
-	 */
-	@Column(nullable = false)
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "特価承認対象フラグ", required = true, position = 6, allowableValues = "range[0,9]")
-	private int specialPriceApprovalFlg;
+    public Estimation getEstimation()
+    {
+        return estimation;
+    }
 
-	/**
-	 * 見積承認実績
-	 */
-	@OneToMany(mappedBy = "estimationApprovalRoute")
-	@OrderBy("processedAt ASC")
-	@ApiModelProperty(value = "見積承認実績(作成時不要)", required = false, position = 7, readOnly = true)
-	private List<EstimationApprovalResult> estimationApprovalResultList;
+    public String getApprovalRequesterEmpId()
+    {
+        return approvalRequesterEmpId;
+    }
 
-	/**
-	 * 見積承認ルートノード
-	 */
-	@OneToMany(mappedBy = "estimationApprovalRoute")
-	@OrderBy("approvalOrder ASC")
-	@ApiModelProperty(value = "見積承認ルートノード(作成時不要)", required = true, position = 8, readOnly = true)
-	private List<EstimationApprovalRouteNode> estimationApprovalRouteNodeList;
+    public String getApprovalRequesterName()
+    {
+        return approvalRequesterName;
+    }
 
+    public String getApprovalRequesterOrgName()
+    {
+        return approvalRequesterOrgName;
+    }
+
+    public int getSpecialPriceApprovalFlg()
+    {
+        return specialPriceApprovalFlg;
+    }
+
+    public List getEstimationApprovalResultList()
+    {
+        return estimationApprovalResultList;
+    }
+
+    public List getEstimationApprovalRouteNodeList()
+    {
+        return estimationApprovalRouteNodeList;
+    }
+
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public void setEstimation(Estimation estimation)
+    {
+        this.estimation = estimation;
+    }
+
+    public void setApprovalRequesterEmpId(String approvalRequesterEmpId)
+    {
+        this.approvalRequesterEmpId = approvalRequesterEmpId;
+    }
+
+    public void setApprovalRequesterName(String approvalRequesterName)
+    {
+        this.approvalRequesterName = approvalRequesterName;
+    }
+
+    public void setApprovalRequesterOrgName(String approvalRequesterOrgName)
+    {
+        this.approvalRequesterOrgName = approvalRequesterOrgName;
+    }
+
+    public void setSpecialPriceApprovalFlg(int specialPriceApprovalFlg)
+    {
+        this.specialPriceApprovalFlg = specialPriceApprovalFlg;
+    }
+
+    public void setEstimationApprovalResultList(List estimationApprovalResultList)
+    {
+        this.estimationApprovalResultList = estimationApprovalResultList;
+    }
+
+    public void setEstimationApprovalRouteNodeList(List estimationApprovalRouteNodeList)
+    {
+        this.estimationApprovalRouteNodeList = estimationApprovalRouteNodeList;
+    }
+
+    public String toString()
+    {
+        return (new StringBuilder("EstimationApprovalRoute(id=")).append(getId()).append(", estimation=").append(getEstimation()).append(", approvalRequesterEmpId=").append(getApprovalRequesterEmpId()).append(", approvalRequesterName=").append(getApprovalRequesterName()).append(", approvalRequesterOrgName=").append(getApprovalRequesterOrgName()).append(", specialPriceApprovalFlg=").append(getSpecialPriceApprovalFlg()).append(", estimationApprovalResultList=").append(getEstimationApprovalResultList()).append(", estimationApprovalRouteNodeList=").append(getEstimationApprovalRouteNodeList()).append(")").toString();
+    }
+
+    public EstimationApprovalRoute()
+    {
+    }
+
+    private long id;
+    private Estimation estimation;
+    private String approvalRequesterEmpId;
+    private String approvalRequesterName;
+    private String approvalRequesterOrgName;
+    private int specialPriceApprovalFlg;
+    private List estimationApprovalResultList;
+    private List estimationApprovalRouteNodeList;
 }
