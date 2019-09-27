@@ -17,6 +17,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.ActionDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AuthDiv;
@@ -33,6 +35,8 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 
 	/** ロガー */
 	private static final Log log = LogFactory.getLog(CotosUserDetailsService.class);
+	
+	public static final String DUMMY_MOM_AUTH = "NO_AUTHORITIES";
 
 	@Autowired
 	JwtProperties jwtProperties;
@@ -45,6 +49,9 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 
 	@Autowired
 	MessageUtil messageUtil;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 
 	@Autowired
 	SuperUserMasterRepository superUserMasterRepository;
@@ -93,9 +100,17 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 			boolean isSuperUser = superUserMasterRepository.existsByUserId(jwt.getClaim(claimsProperties.getMomEmpId()).asString());
 
 			boolean isDummyUser = dummyUserMasterRepository.existsByUserId(jwt.getClaim(claimsProperties.getMomEmpId()).asString());
-			// シングルユーザーIDに紐づく権限情報を取得
-			Map<ActionDiv, Map<AuthDiv, AuthLevel>> momAuthorities = momAuthorityService.searchAllMomAuthorities(jwt.getClaim(claimsProperties.getSingleUserId()).asString());
-
+			
+			Map<ActionDiv, Map<AuthDiv, AuthLevel>> momAuthorities = null;
+			// 認証ドメインでMoM権限が取得できた場合(取得できないとJWTからmomAuthの項目が削除される)
+			if (!jwt.getClaim(claimsProperties.getMomAuth()).isNull() && !jwt.getClaim(claimsProperties.getMomAuth()).asString().equals(DUMMY_MOM_AUTH)) {
+				// JWTにある権限情報を取得
+				momAuthorities = objectMapper.readValue(jwt.getClaim(claimsProperties.getMomAuth()).asString(), new TypeReference<Map<ActionDiv, Map<AuthDiv, AuthLevel>>>(){});
+			} else if (jwt.getClaim(claimsProperties.getMomAuth()).isNull()) {
+				// シングルユーザーIDに紐づく権限情報を取得
+				momAuthorities = momAuthorityService.searchAllMomAuthorities(jwt.getClaim(claimsProperties.getSingleUserId()).asString());
+			}
+	
 			// 一般ユーザーで、MoM権限ユーザーが取得できない場合はエラー
 			if (!isSuperUser && momAuthorities == null) {
 				log.error(messageUtil.createMessageInfo("NoMomAuthoritiesError", Arrays.asList(jwt.getClaim(claimsProperties.getSingleUserId()).asString()).toArray(new String[0])).getMsg());

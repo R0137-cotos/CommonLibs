@@ -49,7 +49,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "契約種別<br />" //
 			+ "新規, 契約変更, 解約などの契約種別を表す。", //
-			required = false, position = 5) //
+			required = false, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\")", position = 5) //
 	private ContractType contractType;
 
 	/**
@@ -57,7 +57,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "契約ステータス<br />" //
 			+ "状態遷移上のワークフローステータスを表す。", //
-			required = false, position = 6) //
+			required = false, allowableValues = "作成中(\"1\"), 承認依頼中(\"2\"), 承認済(\"3\"), 業務依頼中(\"4\"), 業務処理完了(\"5\"), キャンセル申請中(\"6\"), 売上可能(\"7\"), 解約申請中(\"8\")", position = 6) //
 	private WorkflowStatus workflowStatus;
 
 	/**
@@ -65,7 +65,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "契約状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
-			required = false, position = 7) //
+			required = false, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\"), 締結待ち(\"11\")", position = 7) //
 	private LifecycleStatus lifecycleStatus;
 
 	/**
@@ -165,13 +165,13 @@ public class ContractListInfo {
 	/**
 	 * 導入担当SS組織
 	 */
-	@ApiModelProperty(value = "導入担当SS組織", required = false, position = 21, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当SS組織", required = false, position = 23, allowableValues = "range[0,255]")
 	private String picIntSsName;
 
 	/**
 	 * 導入担当CE氏名
 	 */
-	@ApiModelProperty(value = "導入担当CE氏名", required = false, position = 22, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当CE氏名", required = false, position = 24, allowableValues = "range[0,255]")
 	private String picIntCeName;
 
 	/**
@@ -183,20 +183,99 @@ public class ContractListInfo {
 	/**
 	 * 保守担当CE氏名
 	 */
-	@ApiModelProperty(value = "保守担当CE氏名", required = false, position = 22, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "保守担当CE氏名", required = false, position = 25, allowableValues = "range[0,255]")
 	private String picMntCeName;
+
+	/**
+	 * RJ管理番号
+	 */
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 26, allowableValues = "range[0,255]")
+	private String rjManageNumber;
+
+	/**
+	 * WEB受注番号
+	 */
+	@ApiModelProperty(value = "WEB受注番号", required = false, position = 27, allowableValues = "range[0,255]")
+	private String webOrderNumber;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 28, allowableValues = "range[0,255]")
+	private String immutableContIdentNumber;
+
+	/**
+	 * 上流システムコード
+	 */
+	@ApiModelProperty(value = "上流システムコード", required = false, position = 29, allowableValues = "range[0,255]")
+	private String billingCustomerSpCode;
+
+	/**
+	 * MoM企業ID
+	 */
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 30, allowableValues = "range[0,255]")
+	private String companyId;
+
+	/**
+	 * MoM企事部ID
+	 */
+	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 31, allowableValues = "range[0,255]")
+	private String momCustId;
+
+	/**
+	 * 商流区分
+	 */
+	@ApiModelProperty(value = "商流区分", required = false, position = 32, allowableValues = "range[0,255]")
+	private String commercialFlowDiv;
+
+	/**
+	 * 支社コード
+	 */
+	@ApiModelProperty(value = "支社コード", required = false, position = 33, allowableValues = "range[0,255]")
+	private String ringsHanshCd;
+
+	/**
+	 * CUBIC部門コード
+	 */
+	@ApiModelProperty(value = "CUBIC部門コード", required = false, position = 34, allowableValues = "range[0,255]")
+	private String cubicOrgId;
+
+	/**
+	 * 部署
+	 */
+	@ApiModelProperty(value = "部署", required = false, position = 35, allowableValues = "range[0,255]")
+	private String salesDepartmentName;
+
+	/**
+	 *  RINGS社員コード
+	 */
+	@ApiModelProperty(value = "RINGS社員コード", required = false, position = 36, allowableValues = "range[0,255]")
+	private String ringsEmpCd;
+
+	/**
+	 * 作成者
+	 */
+	@ApiModelProperty(value = "作成者", required = false, position = 37, allowableValues = "range[0,255]")
+	private String createdUser;
+
+	/**
+	 *  課金開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "課金開始日", required = false, position = 38, allowableValues = "range[0,255]")
+	private Date billingStartDate;
 
 	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 23)
+	@ApiModelProperty(value = "登録日時", required = false, position = 39)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 24)
+	@ApiModelProperty(value = "更新日時", required = false, position = 40)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 

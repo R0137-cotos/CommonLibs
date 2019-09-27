@@ -18,7 +18,11 @@ import javax.xml.rpc.ServiceException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
@@ -30,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AuthDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.repository.master.SuperUserMasterRepository;
+import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.util.DatasourceProperties;
 import jp.co.ricoh.cotos.commonlib.util.RemoteMomProperties;
 import jp.co.ricoh.jmo.cache.AuthoritySearch;
@@ -70,8 +75,14 @@ public class MomAuthorityService {
 			this.value = value;
 		}
 
+		@JsonValue
 		public String toValue() {
 			return this.value;
+		}
+
+		@JsonCreator
+		public static AuthLevel fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.value.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -98,7 +109,7 @@ public class MomAuthorityService {
 
 	/**
 	 * シングルユーザーIDに紐づく、すべてのCOTOS用MoM権限レベルを取得
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public Map<ActionDiv, Map<AuthDiv, AuthLevel>> searchAllMomAuthorities(String singleUserId) throws Exception {
@@ -137,6 +148,7 @@ public class MomAuthorityService {
 
 			allMomAuthorities.put(actionDiv, authorities);
 		});
+		allMomAuthorities.entrySet().stream().forEach(s -> log.info(s));
 
 		return allMomAuthorities;
 	}
@@ -147,7 +159,7 @@ public class MomAuthorityService {
 	public boolean hasAuthority(AuthorityJudgeParameter authParam, ActionDiv actionDiv, AuthDiv authDiv, AccessType accessType) throws Exception {
 
 		// 権限レベルを取得
-		AuthLevel authLevel = this.searchMomAuthority(authParam.getActorMvEmployeeMaster().getSingleUserId(), actionDiv, authDiv);
+		AuthLevel authLevel = ((CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMomAuthorities().get(actionDiv).get(authDiv);
 
 		// 認可判定処理開始
 		log.info(messageUtil.createMessageInfo("AuthorizeProcessJudgeStartInfo", Arrays.asList(accessType.name(), authLevel.name()).toArray(new String[0])).getMsg());
@@ -155,9 +167,33 @@ public class MomAuthorityService {
 		// 参照・編集処理、承認処理により認可処理を分岐
 		if (AccessType.参照.equals(accessType) || AccessType.編集.equals(accessType)) {
 
+			if (AccessType.参照.equals(accessType)) {
+				// 承認者に含まれる場合、参照権限を付与
+				if (authParam.getApproverMvEmployeeMasterList() != null && !authParam.getApproverMvEmployeeMasterList().isEmpty() && authParam.getApproverMvEmployeeMasterList().stream().filter(approver -> approver.getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId())).count() > 0) {
+					return true;
+				}
+			}
+
+			if (AccessType.編集.equals(accessType)) {
+				// 次回承認者の場合、編集権限を付与
+				if (authParam.getNextApproverMvEmployeeMaster() != null && authParam.getNextApproverMvEmployeeMaster().getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId())) {
+					return true;
+				}
+			}
+
 			// 参照・編集処理用の認可処理を実施
 			return this.hasEditAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getVKjbMaster(), authParam.getMvEmployeeMasterList());
 		} else if (AccessType.承認.equals(accessType)) {
+
+			// 直接指定された承認者であれば、権限あり
+			if (authParam.isManualApprover()) {
+				return true;
+			}
+
+			// 自己承認フラグであれば、権限あり
+			if (authParam.isSelfApprover()) {
+				return true;
+			}
 
 			// 承認処理用の認可処理を実施
 			return this.hasApproveAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getRequesterMvEmployeeMaster());
@@ -180,7 +216,7 @@ public class MomAuthorityService {
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getMomEmployeeId().equals(targetEmployeeMaster.getMomEmployeeId()));
 		case 配下:
 			// 担当SA、追加編集者、担当CE、担当SEの所属組織が配下であるか確認
-			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isLowerOrg(targetEmployeeMaster.getMomOrgId(), editor.getMomOrgId(), editor.getOrgHierarchyLevel()));
+			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isLowerOrg(targetEmployeeMaster.getMomOrgId(), editor.getMomOrgId()));
 		case 自社:
 			// 担当SA、追加編集者、担当CE、担当SEと販社が同一であるか確認
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getHanshCd().equals(targetEmployeeMaster.getHanshCd()));
@@ -224,11 +260,10 @@ public class MomAuthorityService {
 	/**
 	 * 対象の組織が下位組織か判定する
 	 */
-	protected boolean isLowerOrg(String targetOrgId, String rootOrgId, Integer rootOrgHierarchyLevel) {
+	protected boolean isLowerOrg(String targetOrgId, String rootOrgId) {
 
 		Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put("orgId", rootOrgId);
-		queryParams.put("hierarchyLevel", rootOrgHierarchyLevel);
 
 		List<StringResult> orgIdList = dbUtil.loadFromSQLFile("sql/security/editorAuthority/getLowerOrgs.sql", StringResult.class, queryParams);
 
@@ -236,7 +271,7 @@ public class MomAuthorityService {
 			if (orgIdList.stream().anyMatch(orgId -> targetOrgId.equals(orgId.getResult()))) {
 				return true;
 			} else {
-				return orgIdList.stream().anyMatch(orgId -> this.isLowerOrg(targetOrgId, orgId.getResult(), rootOrgHierarchyLevel));
+				return false;
 			}
 		} else {
 			return false;
@@ -284,7 +319,7 @@ public class MomAuthorityService {
 			AuthoritySearch authoritySearch = new AuthoritySearch();
 			authorityInfoActionDtos = authoritySearch.getAuthSumFromEmpId((String[]) classify.toArray(new String[0]), remoteMomProperties.getRelatedid(), connection);
 		}
-		
+
 		if (authorityInfoActionDtos == null || authorityInfoActionDtos.length == 0) {
 			return null;
 		}

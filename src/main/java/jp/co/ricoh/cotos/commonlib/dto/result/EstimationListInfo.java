@@ -41,7 +41,7 @@ public class EstimationListInfo {
 	 */
 	@ApiModelProperty(value = "見積種別<br />" //
 			+ "新規、契約変更等の見積種別を表す。", //
-			required = false, position = 4) //
+			required = false, allowableValues = "新規(\"1\"), 契約変更(\"2\")", position = 4) //
 	private EstimationType estimationtype;
 
 	/**
@@ -55,7 +55,7 @@ public class EstimationListInfo {
 	 */
 	@ApiModelProperty(value = "見積ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
-			required = false, position = 6) //
+			required = false, allowableValues = "作成中(\"1\"), 業務依頼中(\"2\"), 業務処理完了(\"3\"), 承認依頼中(\"4\"), 承認済(\"5\"), 顧客提示済(\"6\")", position = 6) //
 	private WorkflowStatus status;
 
 	/**
@@ -63,7 +63,7 @@ public class EstimationListInfo {
 	 */
 	@ApiModelProperty(value = "見積状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
-			required = false, position = 7) //
+			required = false, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), 受注(\"3\"), 失注(\"4\"), 破棄(\"5\")", position = 7) //
 	private LifecycleStatus lifecycleStatus;
 
 	/**
@@ -116,16 +116,76 @@ public class EstimationListInfo {
 	private String picAffiliateName;
 
 	/**
+	 * RJ管理番号
+	 */
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 16, allowableValues = "range[0,255]")
+	private String rjManageNumber;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 17, allowableValues = "range[0,255]")
+	private String immutableContIdentNumber;
+
+	/**
+	 * MoM企業ID
+	 */
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 18, allowableValues = "range[0,255]")
+	private String companyId;
+
+	/**
+	 * MoM企事部ID
+	 */
+	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 19, allowableValues = "range[0,255]")
+	private String momCustId;
+
+	/**
+	 * 商流区分
+	 */
+	@ApiModelProperty(value = "商流区分", required = false, position = 20, allowableValues = "range[0,255]")
+	private String commercialFlowDiv;
+
+	/**
+	 * 支社コード
+	 */
+	@ApiModelProperty(value = "支社コード", required = false, position = 21, allowableValues = "range[0,255]")
+	private String ringsHanshCd;
+
+	/**
+	 * CUBIC部門コード
+	 */
+	@ApiModelProperty(value = "CUBIC部門コード", required = false, position = 22, allowableValues = "range[0,255]")
+	private String cubicOrgId;
+
+	/**
+	 * 部署
+	 */
+	@ApiModelProperty(value = "部署", required = false, position = 23, allowableValues = "range[0,255]")
+	private String salesDepartmentName;
+
+	/**
+	 *  RINGS社員コード
+	 */
+	@ApiModelProperty(value = "RINGS社員コード", required = false, position = 24, allowableValues = "range[0,255]")
+	private String ringsEmpCd;
+
+	/**
+	 * 作成者
+	 */
+	@ApiModelProperty(value = "作成者", required = false, position = 25, allowableValues = "range[0,255]")
+	private String createdUser;
+
+	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 16)
+	@ApiModelProperty(value = "登録日時", required = false, position = 26)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 17)
+	@ApiModelProperty(value = "更新日時", required = false, position = 27)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 

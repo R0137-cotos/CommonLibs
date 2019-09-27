@@ -35,7 +35,7 @@ public class ContractPicAccCeEmp extends EmployeeAbstractEntity {
 	@SequenceGenerator(name = "contract_pic_acc_ce_emp_seq", sequenceName = "contract_pic_acc_ce_emp_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long Id;
-	
+
 	/**
 	 * 契約
 	 */

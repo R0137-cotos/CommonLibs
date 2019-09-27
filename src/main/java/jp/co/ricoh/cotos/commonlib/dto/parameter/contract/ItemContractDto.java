@@ -126,12 +126,12 @@ public class ItemContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "IFS連携フラグ", required = true, position = 16, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
-	
+
 	/**
 	 * 品種明細(契約用)
 	 */
 	@Valid
 	@OneToMany(mappedBy = "item_contract")
 	@ApiModelProperty(value = "品種明細(契約用)", required = false, position = 17)
-	private List<ItemDetailContractDto> itemDetailContractDtoList;
+	private List<ItemDetailContractDto> itemDetailContractList;
 }
