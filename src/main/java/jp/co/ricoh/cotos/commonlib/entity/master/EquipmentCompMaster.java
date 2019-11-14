@@ -101,4 +101,11 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "点検診断月(12ヶ月分)", required = false, position = 9, allowableValues = "range[0,255]")
 	private String inspectionMonthYearWorth;
+
+	/**
+	 * 振替対象品種マスタ
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "振替対象品種マスタ", required = true, position = 10, allowableValues = "range[0,255]")
+	private String trnsItemMasterId;
 }

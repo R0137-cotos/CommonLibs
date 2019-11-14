@@ -289,7 +289,7 @@ public class TestEstimation {
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元契約番号枝番は最大値（99）を超えています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号枝番は最大値（99）を超えています。"));
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
@@ -699,7 +699,7 @@ public class TestEstimation {
 		testTarget.setFaxNumber(STR_256);
 		testTarget.setMailAddress(STR_256);
 		testTarget.setMomKjbSystemId(STR_256);
-		testTarget.setMomKjbId(STR_256);
+		testTarget.setMomCustId(STR_256);
 		testTarget.setSalesCompanyNameKana(STR_256);
 		testTarget.setCompanyRepresentativeName(STR_256);
 		testTarget.setCompanyRepresentativeNameKana(STR_256);
@@ -817,7 +817,7 @@ public class TestEstimation {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setProductMasterId(INT_MINUS_1);
-		testTarget.setRepItemMasterId(INT_MINUS_1);
+		testTarget.setRepItemMasterId(new Long(INT_MINUS_1));
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));

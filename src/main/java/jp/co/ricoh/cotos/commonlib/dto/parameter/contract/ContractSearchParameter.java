@@ -69,6 +69,13 @@ public class ContractSearchParameter {
 	private String rjManageNumber;
 
 	/**
+	 * WEB受注番号
+	 */
+	@ApiParam(value = "WEB受注番号", required = false)
+	@ApiModelProperty(value = "WEB受注番号", required = false, allowableValues = "range[0,20]")
+	private String webOrderNumber;
+
+	/**
 	 * 見積書番号
 	 */
 	@ApiParam(value = "見積番号", required = false)
@@ -110,7 +117,7 @@ public class ContractSearchParameter {
 	/**
 	 * 契約状態
 	 */
-	@ApiParam(value = "契約状態", required = false)
+	@ApiParam(value = "契約状態:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "契約状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
 			required = false) //
@@ -295,7 +302,7 @@ public class ContractSearchParameter {
 	/**
 	 * 契約ステータス
 	 */
-	@ApiParam(value = "契約ステータス", required = false)
+	@ApiParam(value = "契約ステータス:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "契約ステータス<br />" //
 			+ "状態遷移上のワークフローステータスを表す。", //
 			required = false) //
@@ -316,6 +323,15 @@ public class ContractSearchParameter {
 	@ApiParam(value = "商品マスタID", required = false)
 	@ApiModelProperty(value = "商品マスタID", required = false)
 	private Long productId;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@ApiParam(value = "恒久契約識別番号:部分一致", required = false)
+	@ApiModelProperty(value = "恒久契約識別番号:部分一致<br />" //
+			+ "条件入力時、最低2文字以上の入力とする。", //
+			required = false, allowableValues = "range[2,255]") //
+	private String immutableContIdentNumber;
 
 	/**
 	 * 導入担当SS
@@ -365,8 +381,7 @@ public class ContractSearchParameter {
 			+ "2:契約種別<br />" //
 			+ "3:契約ステータス<br />" //
 			+ "4:契約状態<br />" //
-			+ "5:見積ID"
-			+ "6:見積番号<br />" //
+			+ "5:見積ID" + "6:見積番号<br />" //
 			+ "7:見積件名<br />" //
 			+ "8:案件番号<br />" //
 			+ "9:請求開始月<br />" //

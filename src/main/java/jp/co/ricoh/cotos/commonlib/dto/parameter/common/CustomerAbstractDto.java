@@ -163,4 +163,12 @@ public class CustomerAbstractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "MoM非連携_担当者メールアドレス", required = false, position = 71, allowableValues = "range[0,255]")
 	private String picMailAddress;
+
+	/**
+	 * MoM非連携_企業代表者名（カナ）
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoM非連携_企業代表者名（カナ）", required = false, position = 72, allowableValues = "range[0,255]")
+	private String companyRepresentativeNameKana;
+
 }

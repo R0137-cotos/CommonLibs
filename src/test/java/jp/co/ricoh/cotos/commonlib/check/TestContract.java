@@ -578,7 +578,7 @@ public class TestContract {
 		testTarget.setFaxNumber(STR_256);
 		testTarget.setMailAddress(STR_256);
 		testTarget.setMomKjbSystemId(STR_256);
-		testTarget.setMomKjbId(STR_256);
+		testTarget.setMomCustId(STR_256);
 		testTarget.setSalesCompanyNameKana(STR_256);
 		testTarget.setCompanyRepresentativeName(STR_256);
 		testTarget.setCompanyRepresentativeNameKana(STR_256);
@@ -630,10 +630,11 @@ public class TestContract {
 		testTarget.setAppId(STR_256);
 		testTarget.setContactNo(STR_256);
 		testTarget.setIssueTaxCodeValue(STR_256);
+		testTarget.setInstallDeliverySiteId(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 20);
+		Assert.assertTrue(result.getErrorInfoList().size() == 21);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元契約番号は最大文字数（255）を超えています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号は最大文字数（255）を超えています。"));
 
 		// 異常系（@Max ：）
 		BeanUtils.copyProperties(testTarget, entity);

@@ -36,6 +36,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterPa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostInfoDto;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
@@ -209,6 +210,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 21);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "住所は最大文字数（1000）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(CustomerEstimation.class, CustomerEstimationDto.class);
 	}
 
 	@Test
@@ -250,6 +254,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 15);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "住所は最大文字数（1000）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(DealerEstimation.class, DealerEstimationDto.class);
 	}
 
 	@Test
@@ -381,7 +388,7 @@ public class TestEstimationDto {
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元契約番号枝番は最大値（99）を超えています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号枝番は最大値（99）を超えています。"));
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
@@ -426,6 +433,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 9);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(Estimation.class, EstimationDto.class);
 	}
 
 	@Test
@@ -482,6 +492,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationAddedEditorEmp.class, EstimationAddedEditorEmpDto.class);
 	}
 
 	@Test
@@ -544,6 +557,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認者氏名は最大文字数（255）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationApprovalRoute.class, EstimationApprovalRouteDto.class);
 	}
 
 	@Test
@@ -595,6 +611,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認者組織階層レベルは最小値（0）を下回っています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationApprovalRouteNode.class, EstimationApprovalRouteNodeDto.class);
 	}
 
 	@Test
@@ -637,6 +656,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDは最大文字数（255）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationAttachedFile.class, EstimationAttachedFileDto.class);
 	}
 
 	@Test
@@ -686,6 +708,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "表示順は最小値（0）を下回っています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationCheckResult.class, EstimationCheckResultDto.class);
 	}
 
 	@Test
@@ -765,6 +790,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "リコー品種コードは最大文字数（255）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationDetail.class, EstimationDetailDto.class);
 	}
 
 	@Test
@@ -801,7 +829,7 @@ public class TestEstimationDto {
 		testTarget.setFaxNumber(STR_256);
 		testTarget.setMailAddress(STR_256);
 		testTarget.setMomKjbSystemId(STR_256);
-		testTarget.setMomKjbId(STR_256);
+		testTarget.setMomCustId(STR_256);
 		testTarget.setSalesCompanyNameKana(STR_256);
 		testTarget.setCompanyRepresentativeName(STR_256);
 		testTarget.setCompanyRepresentativeNameKana(STR_256);
@@ -825,6 +853,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(EstimationPicSaEmp.class, EstimationPicSaEmpDto.class);
 	}
 
 	@Test
@@ -883,6 +914,9 @@ public class TestEstimationDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "仕切価格は小数点以下2桁を超えています。"));
 
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(ItemEstimation.class, ItemEstimationDto.class);
+
 	}
 
 	@Test
@@ -915,11 +949,14 @@ public class TestEstimationDto {
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setProductMasterId(INT_MINUS_1);
-		testTarget.setRepItemMasterId(INT_MINUS_1);
+		testTarget.setRepItemMasterId(LONG_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "代表品種マスタIDは最小値（0）を下回っています。"));
+
+		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(ProductEstimation.class, ProductEstimationDto.class);
 	}
 
 	@Test
@@ -980,6 +1017,7 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "リコー品種コードは最大文字数（255）を超えています。"));
+
 	}
 
 	@Test
@@ -1068,37 +1106,42 @@ public class TestEstimationDto {
 	@Test
 	public void EstimationInitialCostDtoのテスト() throws Exception {
 		EstimationInitialCostDto dto = new EstimationInitialCostDto();
+		EstimationInitialCostInfoDto infoDto = new EstimationInitialCostInfoDto();
 		dto.setLoginMoMId("MoM社員Id");
 		dto.setLoginSingleUserid("ログインシングルユーザID");
 		dto.setOeProductRoot("0");
 		dto.setCustInfoCpmpanyId("お客様企事部ID");
 		dto.setEstimatedNoRts("CE2018091900401-1");
-		dto.setInitialProductCd("FB4901");
-		dto.setInitialUnitPrice(new BigDecimal(510));
-		dto.setInitialEstimatedUnitPrice(new BigDecimal(1020));
-		dto.setInitialAmt(1);
-		dto.setInitialEstimatedPrice(new BigDecimal(1020));
+		infoDto.setInitialProductCd("FB4901");
+		infoDto.setInitialUnitPrice(new BigDecimal(510));
+		infoDto.setInitialEstimatedUnitPrice(new BigDecimal(1020));
+		infoDto.setInitialAmt(1);
+		infoDto.setInitialEstimatedPrice(new BigDecimal(1020));
 		dto.setHanshCd("0");
 
 		EstimationInitialCostDto testTarget = new EstimationInitialCostDto();
+		EstimationInitialCostInfoDto testInfoTarget = new EstimationInitialCostInfoDto();
+		dto.setEstimationInitialCostInfoDtoList(Arrays.asList(testInfoTarget));
 
 		// 正常系
 		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(infoDto, testInfoTarget);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@NotNull ：）
 		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(infoDto, testInfoTarget);
 		testTarget.setLoginMoMId(null);
 		testTarget.setLoginSingleUserid(null);
 		testTarget.setOeProductRoot(null);
 		testTarget.setCustInfoCpmpanyId(null);
 		testTarget.setEstimatedNoRts(null);
-		testTarget.setInitialProductCd(null);
-		testTarget.setInitialUnitPrice(null);
-		testTarget.setInitialEstimatedUnitPrice(null);
-		testTarget.setInitialAmt(null);
-		testTarget.setInitialEstimatedPrice(null);
+		testInfoTarget.setInitialProductCd(null);
+		testInfoTarget.setInitialUnitPrice(null);
+		testInfoTarget.setInitialEstimatedUnitPrice(null);
+		testInfoTarget.setInitialAmt(null);
+		testInfoTarget.setInitialEstimatedPrice(null);
 		testTarget.setHanshCd(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 11);
@@ -1107,12 +1150,13 @@ public class TestEstimationDto {
 
 		// 異常系（@Size ：）
 		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(infoDto, testInfoTarget);
 		testTarget.setLoginMoMId("012345678");
 		testTarget.setLoginSingleUserid("01234567890123456789012345678901234567890123456789012345678901234");
 		testTarget.setOeProductRoot("012");
 		testTarget.setCustInfoCpmpanyId("0123456789012345");
 		testTarget.setEstimatedNoRts("01234567890123456789012345");
-		testTarget.setInitialProductCd("01234567890123456789012345");
+		testInfoTarget.setInitialProductCd("01234567890123456789012345");
 		testTarget.setHanshCd("0123");
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 7);
@@ -1121,7 +1165,8 @@ public class TestEstimationDto {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setInitialAmt(INT_MINUS_1);
+		BeanUtils.copyProperties(infoDto, testInfoTarget);
+		testInfoTarget.setInitialAmt(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
@@ -1129,9 +1174,10 @@ public class TestEstimationDto {
 
 		// 異常系（@DecimalMin ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setInitialUnitPrice(DECIMAL_MINUS_001);
-		testTarget.setInitialEstimatedUnitPrice(DECIMAL_MINUS_001);
-		testTarget.setInitialEstimatedPrice(DECIMAL_MINUS_001);
+		BeanUtils.copyProperties(infoDto, testInfoTarget);
+		testInfoTarget.setInitialUnitPrice(DECIMAL_MINUS_001);
+		testInfoTarget.setInitialEstimatedUnitPrice(DECIMAL_MINUS_001);
+		testInfoTarget.setInitialEstimatedPrice(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
@@ -1139,9 +1185,10 @@ public class TestEstimationDto {
 
 		// 異常系（@Digits ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setInitialUnitPrice(DECIMAL_0001);
-		testTarget.setInitialEstimatedUnitPrice(DECIMAL_0001);
-		testTarget.setInitialEstimatedPrice(DECIMAL_0001);
+		BeanUtils.copyProperties(infoDto, testInfoTarget);
+		testInfoTarget.setInitialUnitPrice(DECIMAL_0001);
+		testInfoTarget.setInitialEstimatedUnitPrice(DECIMAL_0001);
+		testInfoTarget.setInitialEstimatedPrice(DECIMAL_0001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));

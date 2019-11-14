@@ -149,5 +149,4 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約機種の機種コードが設定されていません。"));
 	}
-
 }

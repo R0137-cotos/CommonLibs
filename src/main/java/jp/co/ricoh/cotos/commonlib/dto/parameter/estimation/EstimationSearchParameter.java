@@ -223,7 +223,7 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積ステータス
 	 */
-	@ApiParam(value = "見積ステータス", required = false)
+	@ApiParam(value = "見積ステータス:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "見積ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false) //
@@ -232,7 +232,7 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積状態
 	 */
-	@ApiParam(value = "見積状態", required = false)
+	@ApiParam(value = "見積状態:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "見積状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
 			required = false) //
@@ -255,6 +255,23 @@ public class EstimationSearchParameter {
 	private Long productId;
 
 	/**
+	 * RJ管理番号
+	 */
+	@ApiParam(value = "RJ管理番号:部分一致", required = false)
+	@ApiModelProperty(value = "RJ管理番号:部分一致<br />" //
+			+ "条件入力時、最低2文字以上の入力とする。", //
+			required = false, allowableValues = "range[2,255]") //
+	private String rjManageNumber;
+	/**
+	 * 恒久契約識別番号
+	 */
+	@ApiParam(value = "恒久契約識別番号:部分一致", required = false)
+	@ApiModelProperty(value = "恒久契約識別番号:部分一致<br />" //
+			+ "条件入力時、最低2文字以上の入力とする。", //
+			required = false, allowableValues = "range[2,255]") //
+	private String immutableContIdentNumber;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
@@ -273,7 +290,9 @@ public class EstimationSearchParameter {
 			+ "9:担当営業<br />" //
 			+ "10:商品名称<br />" //
 			+ "11:提示日<br />" //
-			+ "12:担当支社", //
+			+ "12:担当支社<br />"//
+			+ "13:RJ管理番号<br />"//
+			+ "14:恒久契約識別番号", //
 			required = true, allowableValues = "range[0,12]")
 	private int sortColumn;
 

@@ -513,6 +513,13 @@ public class Estimation extends EntityBase {
 	@ApiModelProperty(value = "アプリケーションID", required = false, position = 56, allowableValues = "range[0,255]")
 	private String appId;
 
+	/**
+	 * RJ管理番号
+	 */
+	@Column
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 57, allowableValues = "range[0,255]")
+	private String rjManageNumber;
+
 	@PreUpdate
 	public void preUpdate() {
 		if (StringUtils.isEmpty(super.getUpdatedUserId())) {

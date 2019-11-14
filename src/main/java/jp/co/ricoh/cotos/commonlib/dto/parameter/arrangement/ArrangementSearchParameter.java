@@ -50,7 +50,7 @@ public class ArrangementSearchParameter {
 	/**
 	 * 手配業務ステータス
 	 */
-	@ApiParam(value = "手配業務ステータス", required = false)
+	@ApiParam(value = "手配業務ステータス:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "手配業務ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false) //
@@ -161,7 +161,7 @@ public class ArrangementSearchParameter {
 	/**
 	 * 契約状態
 	 */
-	@ApiParam(value = "契約状態", required = false)
+	@ApiParam(value = "契約状態:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "契約状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
 			required = false) //
@@ -312,7 +312,7 @@ public class ArrangementSearchParameter {
 	/**
 	 * 契約ステータス
 	 */
-	@ApiParam(value = "契約ステータス", required = false)
+	@ApiParam(value = "契約ステータス:カンマ区切りで複数指定可", required = false)
 	@ApiModelProperty(value = "契約ステータス<br />" //
 			+ "状態遷移上のワークフローステータスを表す。", //
 			required = false) //
@@ -342,6 +342,14 @@ public class ArrangementSearchParameter {
 	private Integer holdingFlg;
 
 	// ===========================
+	/**
+	 * 恒久契約識別番号
+	 */
+	@ApiParam(value = "恒久契約識別番号:部分一致", required = false)
+	@ApiModelProperty(value = "恒久契約識別番号:部分一致<br />" //
+			+ "条件入力時、最低2文字以上の入力とする。", //
+			required = false, allowableValues = "range[2,255]") //
+	private String immutableContIdentNumber;
 
 	/**
 	 * ソート項目
@@ -367,14 +375,16 @@ public class ArrangementSearchParameter {
 			+ "14:サービス開始日<br />" //
 			+ "15:サービス終了日<br />" //
 			+ "16:保留フラグ<br />" //
-			+ "17:受付担当SS組織<br />" //
-			+ "18:受付担当CE氏名<br />" //
-			+ "19:導入担当SS組織<br />" //
-			+ "20:導入担当CE氏名<br />" //
-			+ "21:保守担当SS組織<br />" //
-			+ "22:保守担当CE氏名<br />" //
-			+ "23:登録日時<br />" //
-			+ "24:更新日時<br />", //
+			+ "17:RJ管理番号<br />"//
+			+ "18:恒久契約識別番号" //
+			+ "19:受付担当SS組織<br />" //
+			+ "20:受付担当CE氏名<br />" //
+			+ "21:導入担当SS組織<br />" //
+			+ "22:導入担当CE氏名<br />" //
+			+ "23:保守担当SS組織<br />" //
+			+ "24:保守担当CE氏名<br />" //
+			+ "25:登録日時<br />" //
+			+ "26:更新日時<br />", //
 			required = true, allowableValues = "range[0,14]") //
 	private int sortColumn;
 

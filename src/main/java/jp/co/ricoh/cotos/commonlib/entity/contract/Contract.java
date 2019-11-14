@@ -162,7 +162,7 @@ public class Contract extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "契約種別", required = true, position = 2)
+	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\")", position = 2)
 	private ContractType contractType;
 
 	/**
@@ -250,23 +250,16 @@ public class Contract extends EntityBase {
 	private Long originContractId;
 
 	/**
-	 * 導入希望日
-	 */
-	@ApiModelProperty(value = "導入希望日", required = false, position = 15)
-	@Temporal(TemporalType.DATE)
-	private Date introductionPreferredDate;
-
-	/**
 	 * 変更希望日
 	 */
-	@ApiModelProperty(value = "変更希望日", required = false, position = 16)
+	@ApiModelProperty(value = "変更希望日", required = false, position = 15)
 	@Temporal(TemporalType.DATE)
 	private Date changePreferredDate;
 
 	/**
 	 * 契約日
 	 */
-	@ApiModelProperty(value = "契約日", required = false, position = 17)
+	@ApiModelProperty(value = "契約日", required = false, position = 16)
 	@Temporal(TemporalType.DATE)
 	private Date contractDate;
 
@@ -274,34 +267,34 @@ public class Contract extends EntityBase {
 	 * 売上計上フラグ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "売上計上フラグ(作成時不要)", required = true, position = 18, allowableValues = "range[0,9]", readOnly = true)
+	@ApiModelProperty(value = "売上計上フラグ(作成時不要)", required = true, position = 17, allowableValues = "range[0,9]", readOnly = true)
 	private int accountSalesFlg;
 
 	/**
 	 * 請求開始日
 	 */
-	@ApiModelProperty(value = "請求開始日", required = false, position = 19)
+	@ApiModelProperty(value = "請求開始日", required = false, position = 18)
 	@Temporal(TemporalType.DATE)
 	private Date billingDate;
 
 	/**
 	 * サービス開始日
 	 */
-	@ApiModelProperty(value = "サービス開始日", required = false, position = 20)
+	@ApiModelProperty(value = "サービス開始日", required = false, position = 19)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@ApiModelProperty(value = "サービス終了日", required = false, position = 21)
+	@ApiModelProperty(value = "サービス終了日", required = false, position = 20)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermEnd;
 
 	/**
 	 * 解約予定日
 	 */
-	@ApiModelProperty(value = "解約予定日", required = false, position = 22)
+	@ApiModelProperty(value = "解約予定日", required = false, position = 21)
 	@Temporal(TemporalType.DATE)
 	private Date cancelScheduledDate;
 
@@ -309,7 +302,7 @@ public class Contract extends EntityBase {
 	 * 見積番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "見積番号", required = false, position = 23, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "見積番号", required = false, position = 22, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
@@ -317,83 +310,83 @@ public class Contract extends EntityBase {
 	 */
 	@Max(99)
 	@Min(0)
-	@ApiModelProperty(value = "見積番号枝番", required = false, position = 24, allowableValues = "range[0,99]")
+	@ApiModelProperty(value = "見積番号枝番", required = false, position = 23, allowableValues = "range[0,99]")
 	private Integer estimationBranchNumber;
 
 	/**
 	 * 見積ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "見積ID", required = false, position = 25, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "見積ID", required = false, position = 24, allowableValues = "range[0,9223372036854775807]")
 	private Long estimationId;
 
 	/**
 	 * 見積件名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "見積件名", required = false, position = 26, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "見積件名", required = false, position = 25, allowableValues = "range[0,255]")
 	private String estimationTitle;
 
 	/**
 	 * 商流区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商流区分", required = false, position = 27, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "商流区分", required = false, position = 26, allowableValues = "range[0,255]")
 	private String commercialFlowDiv;
 
 	/**
 	 * 発行書式
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "発行書式", required = false, position = 28, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "発行書式", required = false, position = 27, allowableValues = "range[0,255]")
 	private String issueFormat;
 
 	/**
 	 * 得意先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "得意先コード<br/>※POST時「MoM請求売上先サイト情報マスタ」存在チェック実施", required = false, position = 29, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "得意先コード<br/>※POST時「MoM請求売上先サイト情報マスタ」存在チェック実施", required = false, position = 28, allowableValues = "range[0,255]")
 	private String billingCustomerSpCode;
 
 	/**
 	 * 得意先宛先名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "得意先宛先名", required = false, position = 30, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "得意先宛先名", required = false, position = 29, allowableValues = "range[0,255]")
 	private String billingCustomerSpName;
 
 	/**
 	 * 支払条件
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "支払条件", required = false, position = 31, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "支払条件", required = false, position = 30, allowableValues = "range[0,255]")
 	private String paymentTerms;
 
 	/**
 	 * 支払方法
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "支払方法", required = false, position = 32, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "支払方法", required = false, position = 31, allowableValues = "range[0,255]")
 	private String paymentMethod;
 
 	/**
 	 * 解約理由
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "解約理由", required = false, position = 33, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "解約理由", required = false, position = 32, allowableValues = "range[0,255]")
 	private String cancelReason;
 
 	/**
 	 * その他解約理由
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "その他解約理由", required = false, position = 34, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "その他解約理由", required = false, position = 33, allowableValues = "range[0,1000]")
 	private String cancelReasonEtc;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 35)
+	@ApiModelProperty(value = "拡張項目", required = false, position = 34)
 	@Lob
 	private String extendsParameter;
 
@@ -401,20 +394,20 @@ public class Contract extends EntityBase {
 	 * web受注注文番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "web受注注文番号", required = false, position = 36, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "web受注注文番号", required = false, position = 35, allowableValues = "range[0,255]")
 	private String webOrderNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 37, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 36, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
-	 * 課金開始日
+	 * 課金開始日(ランニング)
 	 */
-	@ApiModelProperty(value = "課金開始日", required = false, position = 38)
+	@ApiModelProperty(value = "課金開始日(ランニング)", required = false, position = 37)
 	@Temporal(TemporalType.DATE)
 	private Date billingStartDate;
 
@@ -422,26 +415,26 @@ public class Contract extends EntityBase {
 	 * 解約注文番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "解約注文番号", required = false, position = 39, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "解約注文番号", required = false, position = 38, allowableValues = "range[0,255]")
 	private String cancelOrderNo;
 
 	/**
-	 * 締結希望日
+	 * サービス利用希望日
 	 */
-	@ApiModelProperty(value = "締結希望日", required = false, position = 40)
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 39)
 	@Temporal(TemporalType.DATE)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * IFS連携用CSV作成状態
 	 */
-	@ApiModelProperty(value = "IFS連携用CSV作成状態", required = false, position = 41)
+	@ApiModelProperty(value = "IFS連携用CSV作成状態", required = false, position = 40, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
 	private IfsLinkageCsvCreateStatus ifsLinkageCsvCreateStatus;
 
 	/**
 	 * IFS連携用CSV作成日
 	 */
-	@ApiModelProperty(value = "IFS連携用CSV作成日", required = false, position = 42)
+	@ApiModelProperty(value = "IFS連携用CSV作成日", required = false, position = 41)
 	@Temporal(TemporalType.DATE)
 	private Date ifsLinkageCsvCreateDate;
 
@@ -449,21 +442,28 @@ public class Contract extends EntityBase {
 	 * お問い合わせ番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "お問い合わせ番号", required = false, position = 43, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "お問い合わせ番号", required = false, position = 42, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * S&S作業依頼作成状態
 	 */
-	@ApiModelProperty(value = "S&S作業依頼作成状態", required = false, position = 44, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")")
+	@ApiModelProperty(value = "S&S作業依頼作成状態", required = false, position = 43, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")")
 	private SsWorkRequestCreateStatus ssWorkRequestCreateStatus;
 
 	/**
 	 * 帳票用消費税率区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "帳票用消費税率区分", required = false, position = 45, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "帳票用消費税率区分", required = false, position = 44, allowableValues = "range[0,255]")
 	private String issueTaxCodeValue;
+
+	/**
+	 * 申込日
+	 */
+	@ApiModelProperty(value = "申込日", required = false, position = 45)
+	@Temporal(TemporalType.DATE)
+	private Date applicationDate;
 
 	/**
 	 * 契約明細
@@ -625,6 +625,42 @@ public class Contract extends EntityBase {
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アプリケーションID", required = false, position = 67, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "アプリケーションID", required = false, position = 66, allowableValues = "range[0,255]")
 	private String appId;
+
+	/**
+	 * 契約自動更新日
+	 */
+	@Column
+	@ApiModelProperty(value = "契約自動更新日", required = false, position = 67)
+	private Date contractAutoUpdateDate;
+
+	/**
+	 * 届先コード
+	 */
+	@Column
+	@ApiModelProperty(value = "届先コード", required = false, position = 68, allowableValues = "range[0,]")
+	private String deliveryCd;
+
+	/**
+	 * 届先名
+	 */
+	@Column
+	@ApiModelProperty(value = "届先名", required = false, position = 69, allowableValues = "range[0,]")
+	private String deliveryName;
+
+	/**
+	 * 検収日
+	 */
+	@Column
+	@ApiModelProperty(value = "検収日", required = false, position = 70)
+	private Date acceptanceDate;
+
+	/**
+	 * 設置届先サイトID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "設置届先サイトID", required = false, position = 71, allowableValues = "range[0,255]")
+	private String installDeliverySiteId;
+
 }
