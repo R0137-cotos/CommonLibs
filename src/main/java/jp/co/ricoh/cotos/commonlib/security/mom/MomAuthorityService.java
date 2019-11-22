@@ -142,8 +142,17 @@ public class MomAuthorityService {
 			Map<AuthDiv, AuthLevel> authorities = Arrays.asList(AuthDiv.values()).stream().filter(authDiv -> authDiv != AuthDiv.なし).collect(Collectors.toMap(authDiv -> authDiv, authDiv -> {
 
 				// 該当権限区分のMoM権限レベルを取得
-				String targetAuthLevel = authorityInfoLevelDtoList.stream().filter(authorityInfoLevelDto -> authDiv.toString().equals(authorityInfoLevelDto.getInfoId())).findFirst().get().getLevelId();
-				return Arrays.asList(AuthLevel.values()).stream().filter(authLevel -> authLevel.value.equals(targetAuthLevel)).findFirst().get();
+				if (authorityInfoLevelDtoList.stream().filter(authorityInfoLevelDto -> authDiv.toString().equals(authorityInfoLevelDto.getInfoId())).count() > 0) {
+					String targetAuthLevel = authorityInfoLevelDtoList.stream().filter(authorityInfoLevelDto -> authDiv.toString().equals(authorityInfoLevelDto.getInfoId())).findFirst().get().getLevelId();
+					if (Arrays.asList(AuthLevel.values()).stream().filter(authLevel -> authLevel.value.equals(targetAuthLevel)).count() > 0) {
+						return Arrays.asList(AuthLevel.values()).stream().filter(authLevel -> authLevel.value.equals(targetAuthLevel)).findFirst().get();
+					} else {
+						return AuthLevel.不可;
+					}
+
+				} else {
+					return AuthLevel.不可;
+				}
 			}));
 
 			allMomAuthorities.put(actionDiv, authorities);
