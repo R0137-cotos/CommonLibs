@@ -78,7 +78,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 	}
 
 	public enum AuthDiv {
-		なし("0"), 見積_契約_手配("2200"), 請求_計上_本部("2210"), システム管理("2220"), 見積_契約_業務用検索("2230");
+		なし("0"), 見積_契約_手配("2200"), 請求_計上_本部("2210"), システム管理("2220"), 見積_契約_業務用検索("2230"), 業務管理("2240");
 
 		private final String text;
 
@@ -202,7 +202,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 	 * 権限区分
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\")", example = "0", position = 10)
+	@ApiModelProperty(value = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0", position = 10)
 	private AuthDiv authDiv;
 
 	/**
