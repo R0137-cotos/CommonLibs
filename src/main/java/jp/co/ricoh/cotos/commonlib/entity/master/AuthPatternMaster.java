@@ -67,7 +67,7 @@ public class AuthPatternMaster extends EntityBaseMaster {
 	 * 権限区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\")", example = "0", position = 3)
+	@ApiModelProperty(value = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0", position = 3)
 	private AuthDiv authDiv;
 
 	/**
