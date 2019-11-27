@@ -29,6 +29,7 @@ import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkErrorLogRepository;
@@ -78,6 +79,10 @@ public class TestArrangement {
 	/** 手配業務エラー履歴 */
 	@Autowired
 	ArrangementWorkErrorLogRepository arrangementWorkErrorLogRepository;
+
+	/** 手配業務ファイル連携先 */
+	@Autowired
+	ArrangementWorkAttachedFileLinkageRepository arrangementWorkAttachedFileLinkageRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -149,6 +154,11 @@ public class TestArrangement {
 	}
 
 	@Test
+	public void 全てのカラムがNullではないことを確認_手配業務ファイル連携先() {
+		全てのカラムがNullではないことを確認_共通(arrangementWorkAttachedFileLinkageRepository, 401L, 501L);
+	}
+
+	@Test
 	public void 手配承認ルート条件取得確認() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
@@ -212,6 +222,12 @@ public class TestArrangement {
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
 
 		List<ID> idList = Arrays.asList(ids);

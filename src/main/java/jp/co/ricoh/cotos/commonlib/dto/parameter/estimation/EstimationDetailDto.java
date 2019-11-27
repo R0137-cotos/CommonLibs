@@ -82,4 +82,19 @@ public class EstimationDetailDto extends DtoBase {
 	@NotNull
 	@ApiModelProperty(value = "品種(見積用)", required = true, position = 10)
 	private ItemEstimationDto itemEstimation;
+
+	/**
+	 * 契約期間
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約期間", required = false, position = 11, allowableValues = "range[0,255]")
+	private String contractSpan;
+
+	/**
+	 * 品種追加フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	private Integer itemAddFlg;
 }

@@ -321,8 +321,108 @@ public class EnumType {
 	}
 
 	/**
-	* 各種ID値などのダミー設定値
-	*/
+	 * ファイル連携ステータス
+	 */
+	public enum FileLinkageStatus {
+
+		連携対象外("0"), 未連携("1"), 連携済("2");
+
+		private final String text;
+
+		private FileLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static FileLinkageStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * OSO処理状態
+	 */
+	public enum OsoProcessingStatus {
+
+		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
+
+		private final String text;
+
+		private OsoProcessingStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static OsoProcessingStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * OSO売上計上データID区分
+	 */
+	public enum OsoSalesDataIdDiv {
+
+		OSO申込データ("1"), OSO申込明細データ("2"), OSO実績データ("3");
+
+		private final String text;
+
+		private OsoSalesDataIdDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static OsoSalesDataIdDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * OSO商流区分
+	 */
+	public enum OsoDealerFlow {
+
+		販社売上("1"), 販売店売上("2"), リコー売上("3");
+
+		private final String text;
+
+		private OsoDealerFlow(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static OsoDealerFlow fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * 各種ID値などのダミー設定値
+	 */
 	public enum DummyCodeValue {
 
 		Dummy_Mcl_MoM_Rel_Id("999999");

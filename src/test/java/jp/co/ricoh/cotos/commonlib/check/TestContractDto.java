@@ -24,8 +24,11 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractApprovalRouteDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractApprovalRouteNodeDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAssignmentAttachedFileDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAssignmentDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileHistoryDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileLinkageDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractCheckResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;
@@ -50,14 +53,18 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCreateDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ProductContractExtCreateDto;
+import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignmentAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileHistory;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
@@ -79,7 +86,10 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRep
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentAttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileHistoryRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
@@ -206,6 +216,15 @@ public class TestContractDto {
 	ContractAttachedFileHistoryRepository contractAttachedFileHistoryRepository;
 
 	@Autowired
+	ContractAttachedFileLinkageRepository contractAttachedFileLinkageRepository;
+
+	@Autowired
+	ContractAssignmentRepository contractAssignmentRepository;
+
+	@Autowired
+	ContractAssignmentAttachedFileRepository contractAssignmentAttachedFileRepository;
+
+	@Autowired
 	TestTools testTool;
 
 	@Autowired
@@ -213,6 +232,12 @@ public class TestContractDto {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 	}
 
@@ -286,7 +311,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "住所は最大文字数（1000）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(CustomerContract.class, CustomerContractDto.class);
 
 	}
@@ -317,7 +342,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM非連携_住所(手入力)は最大文字数（1000）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractInstallationLocation.class, ContractInstallationLocationDto.class);
 
 	}
@@ -371,7 +396,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "住所は最大文字数（1000）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(DealerContract.class, DealerContractDto.class);
 	}
 
@@ -533,8 +558,9 @@ public class TestContractDto {
 		testTarget.setContactNo(STR_256);
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setInstallDeliverySiteId(STR_256);
+		testTarget.setVendorManageNumber(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 22);
+		Assert.assertTrue(result.getErrorInfoList().size() == 23);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "得意先宛先名は最大文字数（255）を超えています。"));
 
@@ -589,7 +615,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(Contract.class, ContractDto.class);
 	}
 
@@ -628,7 +654,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は小数点以下2桁を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ItemDetailContract.class, ItemDetailContractDto.class);
 	}
 
@@ -666,7 +692,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "納入機器区分は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractEquipment.class, ContractEquipmentDto.class);
 	}
 
@@ -816,7 +842,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "状態が設定されていません。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(Contract.class, ContractForFindAllDetailsDto.class);
 	}
 
@@ -839,7 +865,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "代表品種マスタIDは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ProductContract.class, ProductContractForFindAllDetailsDto.class, "extendBplatsLink");
 
 	}
@@ -899,7 +925,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractAddedEditorEmp.class, ContractAddedEditorEmpDto.class);
 	}
 
@@ -964,7 +990,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認者氏名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractApprovalRoute.class, ContractApprovalRouteDto.class);
 	}
 
@@ -1018,7 +1044,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認者組織階層レベルは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractApprovalRouteNode.class, ContractApprovalRouteNodeDto.class);
 	}
 
@@ -1029,10 +1055,10 @@ public class TestContractDto {
 		ContractAttachedFileDto dto = new ContractAttachedFileDto();
 		ContractAttachedFileDto testTarget = new ContractAttachedFileDto();
 
-		BeanUtils.copyProperties(entity, dto);
+		BeanUtils.copyProperties(entity, testTarget);
 		AttachedFileDto attachedFile = new AttachedFileDto();
 		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFile);
-		dto.setAttachedFile(attachedFile);
+		testTarget.setAttachedFile(attachedFile);
 
 		// 正常系
 		BeanUtils.copyProperties(dto, testTarget);
@@ -1063,7 +1089,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractAttachedFile.class, ContractAttachedFileDto.class);
 	}
 
@@ -1115,7 +1141,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "表示順は最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractCheckResult.class, ContractCheckResultDto.class);
 	}
 
@@ -1149,8 +1175,9 @@ public class TestContractDto {
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setDetailAbstract(STR_256);
 		testTarget.setOrderNo(STR_256);
+		testTarget.setContractSpan(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "摘要は最大文字数（255）を超えています。"));
 
@@ -1158,8 +1185,9 @@ public class TestContractDto {
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setQuantity(INT_100000);
 		testTarget.setBeforeQuantity(INT_100000);
+		testTarget.setItemAddFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
 
@@ -1167,8 +1195,9 @@ public class TestContractDto {
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setItemAddFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
@@ -1198,7 +1227,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "リコー品種コードは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractDetail.class, ContractDetailDto.class);
 	}
 
@@ -1261,7 +1290,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicSaEmp.class, ContractPicSaEmpDto.class);
 	}
 
@@ -1319,7 +1348,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicMntCeEmp.class, ContractPicMntCeEmpDto.class);
 	}
 
@@ -1351,8 +1380,9 @@ public class TestContractDto {
 		testTarget.setRicohItemCode(STR_256);
 		testTarget.setBpCd(STR_256);
 		testTarget.setTaxFlag(STR_256);
+		testTarget.setMakerItemCode(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "リコー品種コードは最大文字数（255）を超えています。"));
 
@@ -1389,7 +1419,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "仕切価格は小数点以下2桁を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ItemContract.class, ItemContractDto.class);
 	}
 
@@ -1429,7 +1459,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "代表品種マスタIDは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ProductContract.class, ProductContractDto.class);
 	}
 
@@ -1459,7 +1489,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicIntCeEmp.class, ContractPicIntCeEmpDto.class);
 
 	}
@@ -1490,7 +1520,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicAccCeEmp.class, ContractPicAccCeEmpDto.class);
 
 	}
@@ -1522,7 +1552,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "課所名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicMntSsOrg.class, ContractPicMntSsOrgDto.class);
 	}
 
@@ -1553,7 +1583,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "課所名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicAccSsOrg.class, ContractPicAccSsOrgDto.class);
 	}
 
@@ -1584,7 +1614,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "課所名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractPicIntSsOrg.class, ContractPicIntSsOrgDto.class);
 	}
 
@@ -1710,7 +1740,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(Contract.class, ContractExtCreateDto.class);
 	}
 
@@ -1831,7 +1861,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(Contract.class, ContractExtChangeDto.class);
 	}
 
@@ -1882,7 +1912,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(Contract.class, ContractExtCancelDto.class, "contractId");
 	}
 
@@ -1924,7 +1954,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "代表品種マスタIDは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ProductContract.class, ProductContractExtCreateDto.class);
 	}
 
@@ -1995,7 +2025,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積金額は小数点以下2桁を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ManagedEstimationDetail.class, ManagedEstimationDetailDto.class);
 
 	}
@@ -2041,7 +2071,100 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractAttachedFileHistory.class, ContractAttachedFileHistoryDto.class);
+	}
+
+	@Test
+	public void ContractAttachedFileLinkageDtoのテスト() throws Exception {
+		ContractAttachedFileLinkage entity = contractAttachedFileLinkageRepository.findOne(401L);
+		ContractAttachedFileLinkageDto testTarget = new ContractAttachedFileLinkageDto();
+
+		// 正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFileLinkageName(null);
+		testTarget.setLinkageStatus(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先が設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFileLinkageName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先は最大文字数（255）を超えています。"));
+
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(ContractAttachedFileLinkage.class, ContractAttachedFileLinkageDto.class);
+	}
+
+	@Test
+	public void ContractAssignmentDtoのテスト() throws Exception {
+		ContractAssignment entity = contractAssignmentRepository.findOne(401L);
+		ContractAssignmentDto testTarget = new ContractAssignmentDto();
+
+		// 正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setMemo(STR_1001);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メモは最大文字数（1000）を超えています。"));
+
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(ContractAssignment.class, ContractAssignmentDto.class);
+	}
+
+	@Test
+	public void ContractAssignmentAttachedFileDtoのテスト() throws Exception {
+		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findOne(401L);
+		ContractAssignmentAttachedFileDto testTarget = new ContractAssignmentAttachedFileDto();
+		entity.setAttachedFile(new AttachedFile());
+
+		// 正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(new AttachedFileDto());
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null チェック：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(new AttachedFileDto());
+		testTarget.setFileName(null);
+		testTarget.setAttachedEmpId(null);
+		testTarget.setAttachedEmpName(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDが設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(new AttachedFileDto());
+		testTarget.setFileName(STR_256);
+		testTarget.setFileKind(STR_256);
+		testTarget.setAttachedEmpId(STR_256);
+		testTarget.setAttachedEmpName(STR_256);
+		testTarget.setAttachedOrgName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル名は最大文字数（255）を超えています。"));
+
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(ContractAssignmentAttachedFile.class, ContractAssignmentAttachedFileDto.class);
 	}
 }

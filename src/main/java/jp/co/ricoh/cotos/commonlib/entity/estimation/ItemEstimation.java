@@ -144,6 +144,14 @@ public class ItemEstimation extends EntityBase {
 	@ApiModelProperty(value = "標準価格", required = false, position = 15)
 	private BigDecimal standardPrice;
 
+	/**
+	 * メーカー商品コード
+	 */
+	@NotNull
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 16, allowableValues = "range[0,255]")
+	private String makerItemCode;
+
 	@PrePersist
 	public void prePersist() {
 		super.setCreatedAt(new Date());

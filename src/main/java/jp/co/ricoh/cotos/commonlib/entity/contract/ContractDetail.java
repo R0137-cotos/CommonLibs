@@ -272,4 +272,19 @@ public class ContractDetail extends EntityBase {
 	 */
 	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\")", position = 20)
 	private FfmAcceptanceLinkingStatus ffmAcceptanceLinkingStatus;
+
+	/**
+	 * 契約期間
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約期間", required = false, position = 21, allowableValues = "range[0,255]")
+	private String contractSpan;
+
+	/**
+	 * 品種追加フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 22, allowableValues = "range[0,9]")
+	private Integer itemAddFlg;
 }
