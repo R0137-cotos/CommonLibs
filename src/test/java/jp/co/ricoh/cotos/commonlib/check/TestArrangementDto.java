@@ -380,21 +380,18 @@ public class TestArrangementDto {
 	public void ArrangementWorkAttachedFileDtoのテスト() throws Exception {
 
 		ArrangementWorkAttachedFile entity = arrangementWorkAttachedFileRepository.findOne(401L);
-		ArrangementWorkAttachedFileDto dto = new ArrangementWorkAttachedFileDto();
 		ArrangementWorkAttachedFileDto testTarget = new ArrangementWorkAttachedFileDto();
-
-		BeanUtils.copyProperties(entity, dto);
-		AttachedFileDto attachedFile = new AttachedFileDto();
-		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFile);
-		dto.setAttachedFile(attachedFile);
+		AttachedFileDto attachedFileDto = new AttachedFileDto();
+		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
 
 		// 正常系
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(attachedFileDto);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@NotNull
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setFileName(null);
 		testTarget.setAttachedFile(null);
 		testTarget.setAttachedEmpId(null);
@@ -405,7 +402,8 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者氏名が設定されていません。"));
 
 		// 異常系（@Size(max)
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(attachedFileDto);
 		testTarget.setFileName(STR_256);
 		testTarget.setFileKind(STR_256);
 		testTarget.setAttachedComment(STR_1001);

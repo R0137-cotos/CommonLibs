@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
-import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFileLinkage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -91,5 +90,5 @@ public class ArrangementWorkAttachedFileDto extends DtoBase {
 	@Valid
 	@OneToMany(mappedBy = "arrangementWorkAttachedFile")
 	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 11)
-	private List<ArrangementWorkAttachedFileLinkage> arrangementWorkAttachedFileLinkageList;
+	private List<ArrangementWorkAttachedFileLinkageDto> arrangementWorkAttachedFileLinkageList;
 }

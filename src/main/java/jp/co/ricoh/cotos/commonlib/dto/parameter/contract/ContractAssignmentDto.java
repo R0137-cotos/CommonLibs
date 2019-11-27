@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
-import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignmentAttachedFile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,5 +28,5 @@ public class ContractAssignmentDto extends DtoBase {
 	@Valid
 	@OneToMany(mappedBy = "contractAssignment")
 	@ApiModelProperty(value = "契約業務添付ファイル", required = false, position = 4)
-	private List<ContractAssignmentAttachedFile> contractAssignmentAttachedFileList;
+	private List<ContractAssignmentAttachedFileDto> contractAssignmentAttachedFileList;
 }

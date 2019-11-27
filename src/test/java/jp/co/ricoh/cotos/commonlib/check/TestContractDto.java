@@ -53,7 +53,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCreateDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ProductContractExtCreateDto;
-import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
@@ -1052,21 +1051,18 @@ public class TestContractDto {
 	public void ContractAttachedFileDtoのテスト() throws Exception {
 
 		ContractAttachedFile entity = contractAttachedFileRepository.findOne(401L);
-		ContractAttachedFileDto dto = new ContractAttachedFileDto();
 		ContractAttachedFileDto testTarget = new ContractAttachedFileDto();
-
-		BeanUtils.copyProperties(entity, testTarget);
-		AttachedFileDto attachedFile = new AttachedFileDto();
-		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFile);
-		testTarget.setAttachedFile(attachedFile);
+		AttachedFileDto attachedFileDto = new AttachedFileDto();
+		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
 
 		// 正常系
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(attachedFileDto);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@NotNull
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setFileName(null);
 		testTarget.setAttachedFile(null);
 		testTarget.setAttachedEmpId(null);
@@ -1077,7 +1073,8 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者氏名が設定されていません。"));
 
 		// 異常系（@Size(max)
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(attachedFileDto);
 		testTarget.setFileName(STR_256);
 		testTarget.setFileKind(STR_256);
 		testTarget.setAttachedComment(STR_1001);
@@ -2132,28 +2129,29 @@ public class TestContractDto {
 	public void ContractAssignmentAttachedFileDtoのテスト() throws Exception {
 		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findOne(401L);
 		ContractAssignmentAttachedFileDto testTarget = new ContractAssignmentAttachedFileDto();
-		entity.setAttachedFile(new AttachedFile());
+		AttachedFileDto attachedFileDto = new AttachedFileDto();
+		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
 
 		// 正常系
 		BeanUtils.copyProperties(entity, testTarget);
-		testTarget.setAttachedFile(new AttachedFileDto());
+		testTarget.setAttachedFile(attachedFileDto);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@NotNullの null チェック：）
 		BeanUtils.copyProperties(entity, testTarget);
-		testTarget.setAttachedFile(new AttachedFileDto());
+		testTarget.setAttachedFile(null);
 		testTarget.setFileName(null);
 		testTarget.setAttachedEmpId(null);
 		testTarget.setAttachedEmpName(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDが設定されていません。"));
 
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(entity, testTarget);
-		testTarget.setAttachedFile(new AttachedFileDto());
+		testTarget.setAttachedFile(attachedFileDto);
 		testTarget.setFileName(STR_256);
 		testTarget.setFileKind(STR_256);
 		testTarget.setAttachedEmpId(STR_256);

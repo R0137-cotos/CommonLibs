@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -75,6 +76,8 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	/**
 	 * 添付ファイル
 	 */
+	@Valid
+	@NotNull
 	@OneToOne(optional = false)
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
 	@ApiModelProperty(value = "添付ファイル", required = true, position = 5)

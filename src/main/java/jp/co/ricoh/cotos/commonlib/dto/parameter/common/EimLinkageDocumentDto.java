@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,5 +29,5 @@ public class EimLinkageDocumentDto extends DtoBase {
 	@Valid
 	@OneToMany(mappedBy = "eimLinkageDocument")
 	@ApiModelProperty(value = "契約添付ファイル連携先", required = false, position = 3)
-	private List<EimLinkageManagementInfo> eimLinkageManagementInfoList;
+	private List<EimLinkageManagementInfoDto> eimLinkageManagementInfoList;
 }
