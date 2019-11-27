@@ -125,4 +125,25 @@ public class ProductMaster extends EntityBaseMaster {
 	@OneToOne(mappedBy = "productMaster")
 	@ApiModelProperty(value = "IFSその他機器情報管理マスタ", required = false, position = 13)
 	private IfsCsvMaster ifsCsvMaster;
+
+	/**
+	 * 商品担当者マスタ
+	 */
+	@OneToMany(mappedBy = "productMaster")
+	@ApiModelProperty(value = "商品担当者マスタ", required = false, position = 14)
+	private List<ProductPicMaster> productPicMasterList;
+
+	/**
+	 * ファイル連携先
+	 */
+	@OneToMany(mappedBy = "productMaster")
+	@ApiModelProperty(value = "ファイル連携先", required = false, position = 15)
+	private List<AttachedFileLinkage> attachedFileLinkageList;
+
+	/**
+	 * ベンダー商品マスタ
+	 */
+	@OneToMany(mappedBy = "productMaster")
+	@ApiModelProperty(value = "ベンダー商品マスタ", required = false, position = 16)
+	private List<VendorProductMaster> vendorProductMasterList;
 }

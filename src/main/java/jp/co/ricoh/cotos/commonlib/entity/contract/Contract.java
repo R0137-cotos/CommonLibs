@@ -151,6 +151,28 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	public enum SaleDiv {
+
+		訪問販売("1"), Web販売("2");
+
+		private final String text;
+
+		private SaleDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static SaleDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -663,4 +685,23 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "設置届先サイトID", required = false, position = 71, allowableValues = "range[0,255]")
 	private String installDeliverySiteId;
 
+	/**
+	 * 販売区分
+	 */
+	@ApiModelProperty(value = "販売区分", required = false, position = 72, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	private SaleDiv saleDiv;
+
+	/**
+	 * ベンダー管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 73, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
+	 * 課金日(イニシャル)
+	 */
+	@ApiModelProperty(value = "課金日(イニシャル)", required = false, position = 74)
+	@Temporal(TemporalType.DATE)
+	private Date billingInitialDate;
 }

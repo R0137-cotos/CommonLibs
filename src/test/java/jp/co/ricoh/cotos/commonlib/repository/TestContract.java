@@ -29,7 +29,10 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRep
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentAttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileHistoryRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
@@ -129,6 +132,15 @@ public class TestContract {
 
 	@Autowired
 	ManagedEstimationDetailRepository managedEstimationDetailRepository;
+
+	@Autowired
+	ContractAssignmentRepository contractAssignmentRepository;
+
+	@Autowired
+	ContractAssignmentAttachedFileRepository contractAssignmentAttachedFileRepository;
+
+	@Autowired
+	ContractAttachedFileLinkageRepository contractAttachedFileLinkageRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -275,6 +287,21 @@ public class TestContract {
 	}
 
 	@Test
+	public void 全てのカラムがNullではないことを確認_契約業務情報() {
+		全てのカラムがNullではないことを確認_共通(contractAssignmentRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約業務添付ファイル() {
+		全てのカラムがNullではないことを確認_共通(contractAssignmentAttachedFileRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約添付ファイル連携先() {
+		全てのカラムがNullではないことを確認_共通(contractAttachedFileLinkageRepository, 401L, 501L);
+	}
+
+	@Test
 	public void 契約承認ルート条件取得確認() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
@@ -335,6 +362,12 @@ public class TestContract {
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 
 		List<ID> idList = Arrays.asList(ids);
