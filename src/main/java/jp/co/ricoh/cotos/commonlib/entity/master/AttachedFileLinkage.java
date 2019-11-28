@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,7 +25,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "attached_file_linkage")
-public class AttachedFileLinkage extends EntityBase {
+public class AttachedFileLinkage extends EntityBaseMaster {
 
 	/**
 	 * ファイル連携先ID

@@ -177,7 +177,6 @@ public class ItemContract extends EntityBase {
 	/**
 	 * メーカー商品コード
 	 */
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 17, allowableValues = "range[0,255]")
 	private String makerItemCode;

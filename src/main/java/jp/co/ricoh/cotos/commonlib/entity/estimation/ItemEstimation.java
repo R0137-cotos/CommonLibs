@@ -147,7 +147,6 @@ public class ItemEstimation extends EntityBase {
 	/**
 	 * メーカー商品コード
 	 */
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 16, allowableValues = "range[0,255]")
 	private String makerItemCode;
