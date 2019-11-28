@@ -138,7 +138,6 @@ public class ItemContractDto extends DtoBase {
 	/**
 	 * メーカー商品コード
 	 */
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 18, allowableValues = "range[0,255]")
 	private String makerItemCode;
