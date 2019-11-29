@@ -17,7 +17,7 @@ public class EnumType {
 	 */
 	public enum ApprovalProcessCategory {
 
-		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4");
+		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4"), 承認済差戻("5");
 
 		private final String text;
 
@@ -321,8 +321,8 @@ public class EnumType {
 	}
 
 	/**
-	* 各種ID値などのダミー設定値
-	*/
+	 * 各種ID値などのダミー設定値
+	 */
 	public enum DummyCodeValue {
 
 		Dummy_Mcl_MoM_Rel_Id("999999");
