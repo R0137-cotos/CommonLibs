@@ -64,7 +64,7 @@ public class ContractApprovalResult extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "承認処理カテゴリ", required = true, position = 4, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\")", example = "1")
+	@ApiModelProperty(value = "承認処理カテゴリ", required = true, position = 4, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
 	private ApprovalProcessCategory approvalProcessCategory;
 
 	/**
