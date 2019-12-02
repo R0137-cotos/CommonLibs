@@ -699,9 +699,10 @@ public class Contract extends EntityBase {
 	private String vendorManageNumber;
 
 	/**
-	 * 課金日(イニシャル)
+	 * 手動更新フラグ
 	 */
-	@ApiModelProperty(value = "課金日(イニシャル)", required = false, position = 74)
-	@Temporal(TemporalType.DATE)
-	private Date billingInitialDate;
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 74, allowableValues = "range[0,9]")
+	private Integer manualUpdateFlg;
 }
