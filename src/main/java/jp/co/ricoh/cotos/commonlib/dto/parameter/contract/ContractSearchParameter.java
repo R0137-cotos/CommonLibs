@@ -369,6 +369,8 @@ public class ContractSearchParameter {
 			required = false, allowableValues = "range[0,255]") //
 	private String picMntCeId;
 
+	private String companyId;
+
 	/**
 	 * ソート項目
 	 */
