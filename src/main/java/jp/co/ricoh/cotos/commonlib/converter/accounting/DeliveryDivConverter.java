@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.accounting;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoResultsData.DeliveryDiv;
+import jp.co.ricoh.cotos.commonlib.entity.common.OsoResultsDataAbstractEntity.DeliveryDiv;
 
 @Converter(autoApply = true)
 public class DeliveryDivConverter implements AttributeConverter<DeliveryDiv, String> {

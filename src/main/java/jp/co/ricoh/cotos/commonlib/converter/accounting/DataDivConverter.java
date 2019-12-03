@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.accounting;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestData.DataDiv;
+import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.DataDiv;
 
 @Converter(autoApply = true)
 public class DataDivConverter implements AttributeConverter<DataDiv, String> {
