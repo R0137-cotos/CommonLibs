@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.accounting;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailData.OsoCostType;
+import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.OsoCostType;
 
 @Converter(autoApply = true)
 public class OsoCostTypeConverter implements AttributeConverter<OsoCostType, String> {
