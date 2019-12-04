@@ -369,6 +369,13 @@ public class ContractSearchParameter {
 			required = false, allowableValues = "range[0,255]") //
 	private String picMntCeId;
 
+	/**
+	 * お客様企業ID
+	 */
+	@ApiParam(value = "お客様企業ID", required = false)
+	@ApiModelProperty(value = "お客様企業ID<br />" //
+			+ "企業IDにはMoM企業IDを指定する。", //
+			required = false, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
