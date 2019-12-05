@@ -14,17 +14,23 @@ import lombok.EqualsAndHashCode;
 public class ContractAttachedFileLinkageDto extends DtoBase {
 
 	/**
+	 * ファイル連携先ID
+	 */
+	@ApiModelProperty(value = "ファイル連携先ID", required = true, position = 3)
+	private long attachedFileLinkageId;
+
+	/**
 	 * ファイル連携先
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル連携先", required = true, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ファイル連携先", required = true, position = 4, allowableValues = "range[0,255]")
 	private String attachedFileLinkageName;
 
 	/**
 	 * 連携ステータス
 	 */
 	@NotNull
-	@ApiModelProperty(value = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\")", example = "0", position = 4)
+	@ApiModelProperty(value = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\")", example = "0", position = 5)
 	private FileLinkageStatus linkageStatus;
 }
