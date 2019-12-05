@@ -87,7 +87,7 @@ public class ContractDetail extends EntityBase {
 	}
 
 	public enum RunningAccountSalesStatus {
-		正常("0"), 処理エラー("1");
+		正常("0"), 処理エラー("1"), 処理不要("2");
 
 		private final String text;
 
@@ -257,7 +257,7 @@ public class ContractDetail extends EntityBase {
 	/**
 	 * ランニング売上計上処理状態
 	 */
-	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\")", position = 18)
+	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")", position = 18)
 	private RunningAccountSalesStatus runningAccountSalesStatus;
 
 	/**
