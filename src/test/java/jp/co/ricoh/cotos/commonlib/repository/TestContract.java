@@ -25,6 +25,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
@@ -356,6 +357,18 @@ public class TestContract {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTools.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ContractAssignmentRepositoryの条件テスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		ContractAssignment found = contractAssignmentRepository.findByContractId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
 	}
 
 	@Transactional
