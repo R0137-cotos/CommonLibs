@@ -34,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -519,6 +520,12 @@ public class Estimation extends EntityBase {
 	@Column
 	@ApiModelProperty(value = "RJ管理番号", required = false, position = 57, allowableValues = "range[0,255]")
 	private String rjManageNumber;
+
+	/**
+	 * 品種追加状態
+	 */
+	@ApiModelProperty(value = "品種追加状態", required = false, position = 58, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	private ItemAddStatus itemAddStatus;
 
 	@PreUpdate
 	public void preUpdate() {

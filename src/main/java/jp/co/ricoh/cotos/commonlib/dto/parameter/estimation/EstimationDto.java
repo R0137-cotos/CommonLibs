@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
@@ -419,7 +420,7 @@ public class EstimationDto extends DtoBase {
 	 */
 	@Valid
 	@Size(max = 255)
-	@ApiModelProperty(value = "アプリケーションID", required = false, position = 53, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "アプリケーションID", required = false, position = 56, allowableValues = "range[0,255]")
 	private String appId;
 
 	/**
@@ -427,6 +428,12 @@ public class EstimationDto extends DtoBase {
 	 */
 	@Valid
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 54, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 57, allowableValues = "range[0,255]")
 	private String rjManageNumber;
+
+	/**
+	 * 品種追加状態
+	 */
+	@ApiModelProperty(value = "品種追加状態", required = false, position = 58, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	private ItemAddStatus itemAddStatus;
 }

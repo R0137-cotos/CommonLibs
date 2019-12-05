@@ -420,6 +420,28 @@ public class EnumType {
 		}
 	}
 
+	public enum ItemAddStatus {
+
+		未実施("0"), 実施中("1"), 実施済み("2");
+
+		private final String text;
+
+		private ItemAddStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ItemAddStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * 各種ID値などのダミー設定値
 	 */
