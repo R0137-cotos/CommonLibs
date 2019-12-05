@@ -729,10 +729,8 @@ public class TestContractDto {
 
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setImmutableContIdentNumber(STR_256);
 		testTarget.setCaseNumber(STR_256);
 		testTarget.setCaseTitle(STR_256);
-		testTarget.setContractNumber(STR_256);
 		testTarget.setContractTitle(STR_256);
 		testTarget.setOriginContractNumber(STR_256);
 		testTarget.setEstimationNumber(STR_256);
@@ -753,7 +751,7 @@ public class TestContractDto {
 		testTarget.setInstallDeliverySiteId(STR_256);
 		testTarget.setVendorManageNumber(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 23);
+		Assert.assertTrue(result.getErrorInfoList().size() == 21);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号は最大文字数（255）を超えています。"));
 
@@ -761,25 +759,22 @@ public class TestContractDto {
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setEstimationBranchNumber(INT_100);
 		testTarget.setOriginContractBranchNumber(INT_100);
-		testTarget.setAccountSalesFlg(INT_10);
 		testTarget.setManualUpdateFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積番号枝番は最大値（99）を超えています。"));
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setProductGrpMasterId(INT_MINUS_1);
-		testTarget.setContractBranchNumber(INT_MINUS_1);
 		testTarget.setOriginContractBranchNumber(INT_MINUS_1);
 		testTarget.setOriginContractId((long) INT_MINUS_1);
-		testTarget.setAccountSalesFlg(INT_MINUS_1);
 		testTarget.setEstimationBranchNumber(INT_MINUS_1);
 		testTarget.setEstimationId(LONG_MINUS_1);
 		testTarget.setManualUpdateFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積IDは最小値（0）を下回っています。"));
 
