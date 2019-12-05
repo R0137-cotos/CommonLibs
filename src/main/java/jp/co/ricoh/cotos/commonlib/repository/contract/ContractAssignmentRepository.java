@@ -7,5 +7,5 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
 
 @Repository
 public interface ContractAssignmentRepository extends CrudRepository<ContractAssignment, Long> {
-
+	public ContractAssignment findByContractId(Long contractId);
 }
