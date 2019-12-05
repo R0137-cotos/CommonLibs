@@ -26,7 +26,6 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateS
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
-import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileHistory;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
@@ -587,12 +586,4 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 74, allowableValues = "range[0,9]")
 	private Integer manualUpdateFlg;
-
-	/**
-	 * 契約業務情報
-	 */
-	@Valid
-	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約業務情報", required = false, position = 75)
-	private ContractAssignment contractAssignment;
 }

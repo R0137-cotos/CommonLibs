@@ -615,6 +615,9 @@ public class TestContractDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 20);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
+
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(Contract.class, ContractDto.class);
 	}
 
 	@Test

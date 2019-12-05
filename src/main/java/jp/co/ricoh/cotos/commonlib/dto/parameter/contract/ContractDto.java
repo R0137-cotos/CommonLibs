@@ -561,12 +561,4 @@ public class ContractDto extends DtoBase {
 	@Min(0)
 	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 74, allowableValues = "range[0,9]")
 	private Integer manualUpdateFlg;
-
-	/**
-	 * 契約業務情報
-	 */
-	@Valid
-	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約業務情報", required = false, position = 75)
-	private ContractAssignmentDto contractAssignment;
 }
