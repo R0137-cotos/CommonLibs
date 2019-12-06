@@ -255,4 +255,11 @@ public class ItemMaster extends EntityBaseMaster {
 	@OneToMany(mappedBy = "itemMaster")
 	@ApiModelProperty(value = "品種振替構成マスタ", required = false, position = 24)
 	private List<ItemTransCompMaster> itemTransCompMasterList;
+
+	/**
+	 * V-UP連携除外フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "V-UP連携除外フラグ", required = false, position = 25, allowableValues = "range[0,9]")
+	private Integer vupLinkageExclusionFlg;
 }
