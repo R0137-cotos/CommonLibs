@@ -59,4 +59,11 @@ public class VendorProductMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ベンダ管理番号名称", required = false, position = 4, allowableValues = "range[0,255]")
 	private String vendorManageNumberName;
+
+	/**
+	 * サービス提供会社名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "サービス提供会社名", required = false, position = 5, allowableValues = "range[0,255]")
+	private String serviceProviderCompanyName;
 }
