@@ -283,4 +283,11 @@ public class ItemMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "最終連携月", required = false, position = 28)
 	@Temporal(TemporalType.DATE)
 	private Date finalLinkedMonth;
+
+	/**
+	 * 値引き下限値
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "値引き下限値", required = false, position = 29, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal lowerLimit;
 }
