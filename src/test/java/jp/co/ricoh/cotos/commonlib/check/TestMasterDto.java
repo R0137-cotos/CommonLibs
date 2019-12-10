@@ -53,6 +53,6 @@ public class TestMasterDto {
 		testTarget.setLifecycleStatus(STR_256);
 		
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 	}
 }
