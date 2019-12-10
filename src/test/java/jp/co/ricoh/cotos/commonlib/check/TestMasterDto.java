@@ -42,6 +42,7 @@ public class TestMasterDto {
 		testTarget.setProductMasterId(1L);
 		testTarget.setEstimationType("1");
 		testTarget.setContractType("2");
+		testTarget.setLifecycleStatus("1");
 		
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
@@ -49,6 +50,7 @@ public class TestMasterDto {
 		// 異常系
 		testTarget.setEstimationType(STR_256);
 		testTarget.setContractType(STR_256);
+		testTarget.setLifecycleStatus(STR_256);
 		
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
