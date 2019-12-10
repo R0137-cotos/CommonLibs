@@ -64,7 +64,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoco40EmpAllInfoCom;
 import jp.co.ricoh.cotos.commonlib.entity.master.NonBusinessDayCalendarMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductCompMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ProductExtendsParameterMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.RecordDecomposeCompMaster;
@@ -124,7 +123,6 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MvWjmoc080DealerInfoReposit
 import jp.co.ricoh.cotos.commonlib.repository.master.MvWjmoco40EmpAllInfoComRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.NonBusinessDayCalendarMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductCompMasterRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.ProductExtendsParameterMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.RecordDecomposeCompMasterRepository;
@@ -199,8 +197,6 @@ public class TestMaster {
 	private MvTjmmb020UtlCdRepository mvTjmmb020UtlCdRepository;
 	@Autowired
 	private ProductCompMasterRepository productCompMasterRepository;
-	@Autowired
-	private ProductExtendsParameterMasterRepository productExtendsParameterMasterRepository;
 	@Autowired
 	private ProductGrpMasterRepository productGrpMasterRepository;
 	@Autowired
@@ -547,7 +543,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
@@ -604,7 +599,6 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/estimationChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
@@ -631,7 +625,6 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
@@ -659,7 +652,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
@@ -772,7 +764,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
 		// エンティティの取得
@@ -825,7 +816,6 @@ public class TestMaster {
 
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/estimationChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
@@ -855,14 +845,14 @@ public class TestMaster {
 			Assert.assertTrue(false);
 		if (found.getExtendsParameterCorrelationCheckMasterList() == null || found.getExtendsParameterCorrelationCheckMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getProductExtendsParameterMasterList() == null || found.getProductExtendsParameterMasterList().size() == 0)
+		if (found.getJsonSchemaMaster() == null)
 			Assert.assertTrue(false);
 
 		id = 2L;
 		found = productMasterRepository.findOne(id);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
-		if (found.getProductExtendsParameterMasterList() == null || found.getProductExtendsParameterMasterList().size() == 0)
+		if (found.getJsonSchemaMaster() != null)
 			Assert.assertTrue(false);
 	}
 
@@ -873,7 +863,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
@@ -914,7 +903,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
@@ -944,7 +932,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
@@ -1142,7 +1129,6 @@ public class TestMaster {
 	public void ProductMasterRepositoryの条件テスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		List<String> appId = Arrays.asList("electric");
 		List<ProductMaster> list = productMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
@@ -1197,7 +1183,6 @@ public class TestMaster {
 	public void JsonSchemaMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
 		// エンティティの取得
@@ -1210,30 +1195,7 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		if (found.getProductExtendsParameterMasterList() == null || found.getProductExtendsParameterMasterList().size() == 0)
-			Assert.assertTrue(false);
-	}
-	
-	@Test
-	public void ProductExtendsParameterMasterのテスト() throws Exception {
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
-
-		// エンティティの取得
-		Long id = 1L;
-		ProductExtendsParameterMaster found = productExtendsParameterMasterRepository.findOne(id);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
-
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(found);
-
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
-		if (found.getJsonSchemaMaster() == null)
+		if (found.getProductMasterList() == null || found.getProductMasterList().size() == 0)
 			Assert.assertTrue(false);
 	}
 
@@ -1241,7 +1203,6 @@ public class TestMaster {
 	public void ExtendsParameterCorrelationCheckMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
@@ -1290,7 +1251,6 @@ public class TestMaster {
 	public void EquipmentCompMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/equipmentCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
@@ -1311,7 +1271,6 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemTransCompMaster.sql");
 
@@ -1519,7 +1478,6 @@ public class TestMaster {
 	public void IfsCsvMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 

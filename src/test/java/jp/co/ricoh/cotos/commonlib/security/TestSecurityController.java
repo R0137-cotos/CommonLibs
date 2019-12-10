@@ -93,7 +93,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterPa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementPicWorkerEmp;
@@ -884,11 +883,6 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EstimationInitialCostDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EstimationInitialCostDto dto, BindingResult result) {
-		return createParameterCheckResult(result);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/JsonSchemaMasterParameter")
-	public ParamterCheckResult callParamterCheck(@RequestBody @Validated JsonSchemaMasterParameter dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }
