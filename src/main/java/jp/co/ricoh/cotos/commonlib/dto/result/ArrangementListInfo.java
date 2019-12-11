@@ -230,6 +230,12 @@ public class ArrangementListInfo {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
+	/**
+	 * MoM企業ID
+	 */
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 32, allowableValues = "range[0,255]")
+	private String companyId;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
