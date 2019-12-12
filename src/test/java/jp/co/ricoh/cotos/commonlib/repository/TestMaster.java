@@ -2,8 +2,10 @@ package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -148,6 +150,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.VPicAffiliateMasterFullRepo
 import jp.co.ricoh.cotos.commonlib.repository.master.VPicAffiliateMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.VendorMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.VendorProductMasterRepository;
+import lombok.val;
 
 /**
  * Repository（マスタドメイン）のテストクラス
@@ -1804,4 +1807,42 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
+
+	@Test
+	public void CheckAlertMaster_findByDomainAndTargetMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkAlertMaster_findByDomainAndTargetMasterId.sql");
+
+		// エンティティの取得
+		String serviceCategory = "1"; //見積
+		Long targetMasterId = 300L; //
+		List<CheckAlertMaster> found = checkAlertMasterRepository.findByDomainAndTargetMasterId(serviceCategory, targetMasterId);
+
+		// Entity が null ではないことを確認
+		// 2件取得されることを確認
+		Assert.assertEquals(2, found.size());
+
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
+				.collect(Collectors.toList());
+
+		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
+
+		testTool.assertColumnsNotNull(common);
+		Assert.assertEquals(1L, common.getId());
+
+		CheckAlertMaster byProduct = foundSorted.get(1); //2件目：商品毎
+
+		testTool.assertColumnsNotNull(byProduct);
+		Assert.assertEquals(3L, byProduct.getId());
+
+		// 対象アラートマスタが1件取得されていることを確認
+		List<CheckAlertTargetMaster> list = byProduct.getCheckAlertTargetMasterList();
+		Assert.assertEquals(1, list.size());
+
+		val targetRecord = list.get(0);
+		testTool.assertColumnsNotNull(targetRecord);
+		// Entity の各項目の値が null ではないことを確認
+
+	}
+
 }
