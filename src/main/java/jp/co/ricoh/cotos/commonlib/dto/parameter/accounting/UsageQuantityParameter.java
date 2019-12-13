@@ -1,14 +1,17 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.accounting;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 従量超過分使用量取込パラメーター
  *
  */
+@EqualsAndHashCode(callSuper = false)
 @Data
-public class UsageQuantityParameter {
+public class UsageQuantityParameter extends DtoBase {
 	/**
 	 * エラーID
 	 * 従量超過分使用量取込パラメータ取得APIで設定
@@ -55,7 +58,7 @@ public class UsageQuantityParameter {
 	 * 品種名
 	 * 従量超過分使用量取込パラメータ取得APIで設定
 	 */
-	@ApiModelProperty(value = "品種コード", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "品種名", required = false, position = 9, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
