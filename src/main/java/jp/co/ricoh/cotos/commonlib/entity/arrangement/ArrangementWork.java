@@ -159,4 +159,11 @@ public class ArrangementWork extends EntityBase {
 	@ApiModelProperty(value = "アプリケーションID", required = false, position = 13, allowableValues = "range[0,255]")
 	private String appId;
 
+	/**
+	 * 手配業務添付ファイル連携先
+	 */
+	@OneToMany(mappedBy = "arrangementWork")
+	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 14)
+	private List<ArrangementWorkAttachedFileLinkage> workAttachedFileListLinkageList;
+
 }
