@@ -1,5 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -226,6 +229,11 @@ public class TestAccounting {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		List<UsageQuantity> founds = usageQuantityRepository.findByContractIdAndContractDetailId(1L, 1L);
+
+		// Entity が null または 空 ではないことを確認
+		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
 	}
 
 	@Test
