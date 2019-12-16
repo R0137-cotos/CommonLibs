@@ -40,7 +40,7 @@ public class UsageQuantityParameter extends DtoBase {
 	 * 従量超過分使用量取込パラメータ取得APIで設定
 	 */
 	@ApiModelProperty(value = "顧客名", required = false, position = 4, allowableValues = "range[0,255]")
-	private Long customerName;
+	private String customerName;
 
 	/**
 	 * 品種コード
