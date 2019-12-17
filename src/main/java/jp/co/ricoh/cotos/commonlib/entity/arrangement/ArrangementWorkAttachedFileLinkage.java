@@ -49,11 +49,8 @@ public class ArrangementWorkAttachedFileLinkage extends EntityBase {
 	/**
 	 * ファイル連携先ID
 	 */
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "attached_file_linkage_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "ファイル連携先ID", required = true, position = 3)
-	private long attachedFileLinkage;
+	private long attachedFileLinkageId;
 
 	/**
 	 * ファイル連携先
