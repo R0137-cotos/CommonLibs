@@ -11,6 +11,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
@@ -39,6 +41,7 @@ public class VendorProductMaster extends EntityBaseMaster {
 	 */
 	@OneToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
+	@JsonIgnore
 	@ApiModelProperty(value = "COTOS商品マスタ", required = true, position = 2)
 	private ProductMaster productMaster;
 
