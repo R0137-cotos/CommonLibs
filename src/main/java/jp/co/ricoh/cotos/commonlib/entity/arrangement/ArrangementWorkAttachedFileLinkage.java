@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.FileLinkageStatus;
-import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -50,11 +49,8 @@ public class ArrangementWorkAttachedFileLinkage extends EntityBase {
 	/**
 	 * ファイル連携先ID
 	 */
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "attached_file_linkage_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "ファイル連携先ID", required = true, position = 3)
-	private AttachedFileLinkage attachedFileLinkage;
+	private long attachedFileLinkageId;
 
 	/**
 	 * ファイル連携先
