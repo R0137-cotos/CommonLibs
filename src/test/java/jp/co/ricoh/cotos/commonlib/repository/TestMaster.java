@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
@@ -1176,9 +1177,14 @@ public class TestMaster {
 		List<String> appId = Arrays.asList("electric");
 		List<ProductMaster> list = productMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
+		List<Long> id = Arrays.asList(new Long[] { 1L, 2L });
+		list = productMasterRepository.findByIdInAndAppIdNotInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
 		appId = Arrays.asList("cotos_dev");
 		list = productMasterRepository.findByAppIdInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
+		list = productMasterRepository.findByIdInAndAppIdInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
 	}
 
 	@Test
