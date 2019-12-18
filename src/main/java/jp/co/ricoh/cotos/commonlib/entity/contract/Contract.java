@@ -663,4 +663,11 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "設置届先サイトID", required = false, position = 71, allowableValues = "range[0,255]")
 	private String installDeliverySiteId;
 
+	/**
+	 * 解約確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "解約確定日", required = false, position = 72)
+	private Date cancelDecisionDate;
+
 }
