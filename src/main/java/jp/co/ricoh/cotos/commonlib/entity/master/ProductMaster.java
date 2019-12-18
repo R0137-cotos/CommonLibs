@@ -120,9 +120,15 @@ public class ProductMaster extends EntityBaseMaster {
 	private IfsCsvMaster ifsCsvMaster;
 	
 	/**
+	 * JosnスキーママスタID
+	 */
+	@ApiModelProperty(value = "JosnスキーママスタID", required = false, position = 14, allowableValues = "range[0,9999999999999999999]")
+	private Long jsonSchemaMasterId;
+	
+	/**
 	 * 商品拡張項目マスタ
 	 */
 	@OneToMany(mappedBy = "productMaster")
-	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 14)
+	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 15)
 	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
 }
