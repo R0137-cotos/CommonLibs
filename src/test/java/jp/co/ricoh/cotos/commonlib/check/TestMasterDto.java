@@ -18,40 +18,40 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class TestMasterDto {
-	
+
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
-	
+
 	@Autowired
 	HeadersProperties headersProperties;
-	
+
 	@Autowired
 	TestSecurityController testSecurityController;
-	
+
 	@Autowired
 	TestTools testTool;
-	
+
 	@LocalServerPort
 	private int localServerPort;
 
 	@Test
 	public void JsonSchemaMasterParameterのテスト() {
-		
+
 		JsonSchemaMasterParameter testTarget = new JsonSchemaMasterParameter();
-		
+
 		// 正常系
 		testTarget.setProductMasterId(1L);
 		testTarget.setEstimationType("1");
 		testTarget.setContractType("2");
 		testTarget.setLifecycleStatus("1");
-		
+
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
-		
+
 		// 異常系
 		testTarget.setEstimationType(STR_256);
 		testTarget.setContractType(STR_256);
 		testTarget.setLifecycleStatus(STR_256);
-		
+
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 	}

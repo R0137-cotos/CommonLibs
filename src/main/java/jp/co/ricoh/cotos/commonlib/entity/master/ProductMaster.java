@@ -92,6 +92,12 @@ public class ProductMaster extends EntityBaseMaster {
 	private String appId;
 
 	/**
+	 * JSONスキーママスタID
+	 */
+	@ApiModelProperty(value = "JSONスキーママスタID", required = true, position = 9)
+	private Long jsonSchemaMasterId;
+
+	/**
 	 * 拡張項目相関チェックマスタ
 	 */
 	@OneToMany(mappedBy = "productMaster", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -112,23 +118,14 @@ public class ProductMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "商品種類区分", required = false, position = 12, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
-	/**
-	 * IFSその他機器情報管理マスタ
-	 */
 	@OneToOne(mappedBy = "productMaster")
 	@ApiModelProperty(value = "IFSその他機器情報管理マスタ", required = false, position = 13)
 	private IfsCsvMaster ifsCsvMaster;
 	
 	/**
-	 * JosnスキーママスタID
-	 */
-	@ApiModelProperty(value = "JosnスキーママスタID", required = false, position = 14, allowableValues = "range[0,9999999999999999999]")
-	private Long jsonSchemaMasterId;
-	
-	/**
 	 * 商品拡張項目マスタ
 	 */
 	@OneToMany(mappedBy = "productMaster")
-	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 15)
+	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 14)
 	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
 }

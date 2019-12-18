@@ -1,16 +1,16 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -35,9 +35,10 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	/**
 	 * 商品拡張項目マスタ
 	 */
-	@OneToMany(mappedBy = "jsonSchemaMaster")
-	@ApiModelProperty(value = "商品拡張項目マスタ", required = true, position = 2)
-	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
+	@OneToOne(mappedBy = "jsonSchemaMaster")
+	@JsonIgnore
+	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 2)
+	private ProductExtendsParameterMaster productExtendsParameterMaster;
 
 	/**
 	 * JSONスキーマ
@@ -51,7 +52,7 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	 * JSONスキーマ初期値
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "JSONスキーマ初期値", required = false, position = 4)
+	@ApiModelProperty(value = "JSONスキーマ初期値", required = true, position = 4)
 	@Lob
 	private String jsonSchemaInitial;
 
