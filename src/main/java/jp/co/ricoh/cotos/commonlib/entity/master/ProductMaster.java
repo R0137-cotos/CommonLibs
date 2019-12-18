@@ -143,7 +143,7 @@ public class ProductMaster extends EntityBaseMaster {
 	/**
 	 * ベンダー商品マスタ
 	 */
-	@OneToMany(mappedBy = "productMaster")
+	@OneToOne(mappedBy = "productMaster")
 	@ApiModelProperty(value = "ベンダー商品マスタ", required = false, position = 16)
-	private List<VendorProductMaster> vendorProductMasterList;
+	private VendorProductMaster vendorProductMaster;
 }

@@ -886,7 +886,7 @@ public class TestMaster {
 			Assert.assertTrue(false);
 		if (found.getAttachedFileLinkageList() == null || found.getAttachedFileLinkageList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getVendorProductMasterList() == null || found.getVendorProductMasterList().size() == 0)
+		if (found.getVendorProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getProductPicMasterList() == null || found.getProductPicMasterList().size() == 0)
 			Assert.assertTrue(false);

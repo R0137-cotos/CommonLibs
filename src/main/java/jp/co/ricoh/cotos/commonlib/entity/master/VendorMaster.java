@@ -1,12 +1,17 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -51,4 +56,12 @@ public class VendorMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メールアドレス", required = false, position = 4, allowableValues = "range[0,255]")
 	private String mailAddress;
+
+	/**
+	 * ベンダー商品マスタ
+	 */
+	@OneToMany(mappedBy = "vendorMaster")
+	@JsonIgnore
+	@ApiModelProperty(value = "ベンダー商品マスタ", required = true, position = 5)
+	private List<VendorProductMaster> vendorProductMasterList;
 }
