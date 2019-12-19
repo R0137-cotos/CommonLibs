@@ -46,7 +46,6 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "json_schema_master_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "JSONスキーママスタ", required = true, position = 3)
 	private JsonSchemaMaster jsonSchemaMaster;
 

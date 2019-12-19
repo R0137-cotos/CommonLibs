@@ -92,6 +92,12 @@ public class ProductMaster extends EntityBaseMaster {
 	private String appId;
 
 	/**
+	 * JSONスキーママスタID
+	 */
+	@ApiModelProperty(value = "JSONスキーママスタID", required = true, position = 9)
+	private Long jsonSchemaMasterId;
+
+	/**
 	 * 拡張項目相関チェックマスタ
 	 */
 	@OneToMany(mappedBy = "productMaster", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
