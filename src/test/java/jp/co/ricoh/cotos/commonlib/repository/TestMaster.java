@@ -1210,7 +1210,7 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		if (found.getProductExtendsParameterMaster() == null)
+		if (found.getProductExtendsParameterMasterList() == null || found.getProductExtendsParameterMasterList().size() == 0)
 			Assert.assertTrue(false);
 	}
 
