@@ -1231,8 +1231,6 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
-	
-	
 
 	@Test
 	public void ContractAutoUpdateMasterRepositoryのテスト() throws Exception {
@@ -1248,7 +1246,7 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
-	
+
 	@Test
 	public void ProductExtendsParameterMasterのテスト() throws Exception {
 		// テストデータ登録
@@ -1269,8 +1267,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
+			if (found.getProductMaster() == null)
+				Assert.assertTrue(false);
 	}
 
 	@Test
