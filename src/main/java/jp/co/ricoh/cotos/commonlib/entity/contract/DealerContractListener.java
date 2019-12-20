@@ -48,7 +48,7 @@ public class DealerContractListener {
 	@Transactional
 	public void appendsDealerContractFields(DealerContract dealerContract) {
 
-		if (null != dealerContract.getMomKjbSystemId()) {
+		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerContract.getMomKjbSystemId());
 			if (vKjbMaster == null) {
 				String[] regexList = { "販売店（契約用）" };
