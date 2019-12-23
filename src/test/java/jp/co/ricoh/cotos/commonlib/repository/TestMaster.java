@@ -1200,6 +1200,8 @@ public class TestMaster {
 		appId = Arrays.asList("cotos_dev");
 		list = arrangementWorkTypeMasterRepository.findByAppIdInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
+		list = arrangementWorkTypeMasterRepository.findByArrangementWorkTypeDiv("1");
+		Assert.assertNotEquals(0, list.size());
 	}
 
 	@Test
