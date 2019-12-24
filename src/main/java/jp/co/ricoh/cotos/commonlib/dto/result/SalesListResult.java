@@ -210,7 +210,7 @@ public class SalesListResult {
 	 * 接点店：取引先コード（手数料用）
 	 */
 	@ApiModelProperty(value = "接点店：取引先コード（手数料用）", required = false, position = 31)
-	private String dcontactStoreDistributorRtcCd;
+	private String contactStoreDistributorRtcCd;
 
 	/**
 	 * 接点店：販売店担当営業名
