@@ -14,13 +14,6 @@ import lombok.EqualsAndHashCode;
 public class ArrangementWorkAttachedFileLinkageDto extends DtoBase {
 
 	/**
-	 * 手配業務添付ファイル連携先ID
-	 */
-	@NotNull
-	@ApiModelProperty(value = "手配業務添付ファイル連携先ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
-	private long id;
-
-	/**
 	 * ファイル連携先
 	 */
 	@NotNull
