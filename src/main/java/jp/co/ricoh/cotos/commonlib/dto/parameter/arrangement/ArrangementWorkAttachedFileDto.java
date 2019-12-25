@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -88,7 +87,6 @@ public class ArrangementWorkAttachedFileDto extends DtoBase {
 	 * 手配業務添付ファイル連携先
 	 */
 	@Valid
-	@OneToMany(mappedBy = "arrangementWorkAttachedFile")
 	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 11)
 	private List<ArrangementWorkAttachedFileLinkageDto> arrangementWorkAttachedFileLinkageList;
 }
