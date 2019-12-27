@@ -51,4 +51,9 @@ public class RocProperties {
 	 * 汎用マスタ：サイボウズAPI連携品種情報 カラム名
 	 */
 	String cybozuLinkageItem;
+
+	/**
+	 * 契約添付ファイル種類
+	 */
+	String contractAttachedFileKind;
 }
