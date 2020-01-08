@@ -49,13 +49,13 @@ public class EstimationListener {
 
 		/**
 		 * RJ管理番号
-		 * 商品グループマスタ.商品グループ識別子 + 4桁の連番
+		 * 商品グループマスタ.商品グループ識別子 + 7桁の連番
 		 */
 		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findOne(entity.getProductGrpMasterId());
 		if (null == entity.getRjManageNumber() && null != productGrpMaster) {
 			String productGrpIdentifier = productGrpMaster.getProductGrpIdentifier();
 			long sequenceRjManageNumber = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class).getGeneratedNumber();
-			entity.setRjManageNumber(productGrpIdentifier + String.format("%04d", sequenceRjManageNumber));
+			entity.setRjManageNumber(productGrpIdentifier + String.format("%07d", sequenceRjManageNumber));
 		}
 	}
 }

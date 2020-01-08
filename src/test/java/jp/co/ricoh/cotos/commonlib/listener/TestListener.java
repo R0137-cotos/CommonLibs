@@ -132,6 +132,6 @@ public class TestListener {
 
 		String expectEstimationNumber = "CE" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "00001";
 		Assert.assertEquals("見積番号が正しく取得されること", expectEstimationNumber, result.getEstimationNumber());
-		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230001", result.getRjManageNumber());
+		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
 	}
 }
