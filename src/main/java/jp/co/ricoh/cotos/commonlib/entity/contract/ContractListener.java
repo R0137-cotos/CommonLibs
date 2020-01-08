@@ -65,13 +65,6 @@ public class ContractListener {
 		}
 
 		/**
-		 * RJ管理番号
-		 */
-		if (null == contract.getRjManageNumber()) {
-			contract.setRjManageNumber(contract.getImmutableContIdentNumber());
-		}
-
-		/**
 		 * 得意先コード
 		 */
 		if (null != contract.getBillingCustomerSpCode() && null == mvTJmci101MasterRepository.findByOriginalSystemCode(contract.getBillingCustomerSpCode())) {

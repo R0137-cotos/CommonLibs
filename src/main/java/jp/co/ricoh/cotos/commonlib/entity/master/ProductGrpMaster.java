@@ -122,4 +122,11 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "解約確定条件フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer cancelDefinitionConditionsFlg;
+
+	/**
+	 * 商品グループ識別子
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "商品グループ識別子", required = false, position = 13, allowableValues = "range[0,255]")
+	private String productGrpIdentifier;
 }
