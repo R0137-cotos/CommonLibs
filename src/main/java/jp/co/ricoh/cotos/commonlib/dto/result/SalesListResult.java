@@ -189,10 +189,10 @@ public class SalesListResult {
 	private String webOrderNumber;
 
 	/**
-	 * 商流区分
+	 * COTOS商流区分
 	 */
-	@ApiModelProperty(value = "商流区分", required = true, allowableValues = "販社売上(\"1\"), 販売店売上(\"2\"), リコー売上(\"3\")", example = "1", position = 28)
-	private OsoDealerFlow osoDealerFlow;
+	@ApiModelProperty(value = "COTOS商流区分", required = true, allowableValues = "1:直売  2:代売_接点店  3:代売_母店_接点店", example = "1", position = 28)
+	private String cotosDealerFlow;
 
 	/**
 	 * 接点店：企事部ID
