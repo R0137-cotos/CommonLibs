@@ -30,6 +30,7 @@ import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj301KiykSikyuCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj302SikyuMisiCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj303GnkHrkeCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.DataDiv;
+import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.ProcessingDiv;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDataRepository;
@@ -258,6 +259,17 @@ public class TestAccounting {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestData.sql");
 
 		List<OsoRequestData> list = osoRequestDataRepository.findByDataDivAndRequestManageNumberAndProcessingStatus(DataDiv.新規, "request_manage_number", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(1L, list.size());
+		Assert.assertNotNull(list.get(0));
+	}
+
+	@Test
+	public void OsoRequestDetailDataRepositoryの条件テスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestDetailData.sql");
+
+		List<OsoRequestDetailData> list = osoRequestDetailDataRepository.findByProcessingDivAndOsoManageNumberAndItemCodeAndProcessingStatus(ProcessingDiv.追加, "oso_manage_number", "item_code", OsoProcessingStatus.処理済);
 
 		// Entity が null ではないことを確認
 		Assert.assertEquals(1L, list.size());
