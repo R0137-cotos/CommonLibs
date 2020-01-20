@@ -13,7 +13,7 @@ import lombok.Data;
  */
 
 @Data
-public class ArrangementResultDto {
+public class ArrangementResultDto implements IArrangementResult {
 
 	/**
 	 * 手配結果情報
