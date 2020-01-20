@@ -22,4 +22,11 @@ public class ErrorInfoDto {
 	@ApiModelProperty(value = "エラー内容", required = false, position = 2, allowableValues = "range[0,255]")
 	private String message;
 
+	/**
+	 * APIリクエスト
+	 */
+	@Size(max = 4000)
+	@ApiModelProperty(value = "APIリクエスト", required = false, position = 3, allowableValues = "range[0,4000]")
+	private String apiRequest;
+
 }
