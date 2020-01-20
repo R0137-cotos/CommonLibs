@@ -49,6 +49,13 @@ public class EstimationSearchParameter {
 	private String estimateNumber;
 
 	/**
+	 * 見積書番号枝番
+	 */
+	@ApiParam(value = "見積書番号枝番", required = false)
+	@ApiModelProperty(value = "見積書番号枝番", required = false, allowableValues = "range[0,2]")
+	private String estimateBranchNumber;
+
+	/**
 	 * 見積件名
 	 */
 	@ApiParam(value = "見積件名:部分一致", required = false)
@@ -79,6 +86,13 @@ public class EstimationSearchParameter {
 	@ApiParam(value = "変更元契約番号", required = false)
 	@ApiModelProperty(value = "変更元契約番号", required = false, allowableValues = "range[0,15]")
 	private String originContractNumber;
+
+	/**
+	 * 変更元契約番号枝番
+	 */
+	@ApiParam(value = "変更元契約番号枝番", required = false)
+	@ApiModelProperty(value = "変更元契約番号枝番", required = false, allowableValues = "range[0,2]")
+	private String originContractBranchNumber;
 
 	/**
 	 * 変更元契約件名
