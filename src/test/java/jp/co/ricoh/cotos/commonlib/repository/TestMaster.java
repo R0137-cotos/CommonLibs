@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
@@ -1851,6 +1850,24 @@ public class TestMaster {
 		testTool.assertColumnsNotNull(targetRecord);
 		// Entity の各項目の値が null ではないことを確認
 
+	}
+
+	@Test
+	public void CommonMasterDetail_findByCommonMasterIdAndAvailablePeriodBetweenのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMasterDetail.sql");
+
+		List<CommonMasterDetail> foundList = commonMasterDetailRepository.findByCommonMasterIdAndAvailablePeriodBetween(11L, "20200101");
+		// データが取得できていることを確認
+		Assert.assertTrue(foundList.size() > 0);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
 	}
 
 }
