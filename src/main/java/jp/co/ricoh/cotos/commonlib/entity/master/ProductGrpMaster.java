@@ -116,4 +116,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "VUP連携商品フラグ", required = false, position = 11, allowableValues = "range[0,9]")
 	private Integer vupLinkageProductFlg;
+
+	/**
+	 * 解約確定条件フラグ
+	 */
+	@ApiModelProperty(value = "解約確定条件フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	private Integer cancelDefinitionConditionsFlg;
 }
