@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.5 (23/01/2020)
+- [**closed**] #4846 見積検索パラメータに項目追加 [#779](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/779)
+- [**closed**] #4482 商品拡張項目マスタ追加 [#777](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/777)
+- [**closed**] #4842 契約.解約確定日、商品グループマスタ.解約確定条件フラグ追加 [#776](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/776)
+- [**closed**] #4478 認証業務権限追加 [#770](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/770)
+
+---
+
 ## v2.0.3 (12/12/2019)
 - [**closed**] #4832 外部IF契約作成、情報変更DTOに設置届先サイトID追加 [#722](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/722)
 - [**closed**] #4351 EKX880対応 [#725](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/725)
