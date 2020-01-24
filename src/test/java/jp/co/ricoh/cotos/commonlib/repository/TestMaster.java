@@ -1272,7 +1272,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractAutoUpdateMaster.sql");
 
 		// エンティティの取得
-		ContractAutoUpdateMaster found = contractAutoUpdateMasterRepository.findByItemMasterId(1003L);
+		ContractAutoUpdateMaster found = contractAutoUpdateMasterRepository.findByItemMasterId(1004L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
