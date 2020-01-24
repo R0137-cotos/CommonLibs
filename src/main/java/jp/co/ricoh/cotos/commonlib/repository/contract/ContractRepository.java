@@ -70,7 +70,7 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 			+ "    SELECT ct.IMMUTABLE_CONT_IDENT_NUMBER"
 			+ "    FROM CONTRACT ct"
 			+ "    WHERE (ct.LIFECYCLE_STATUS = '5' OR ct.LIFECYCLE_STATUS = '11'))"
-			+ "      AND c.SERVICE_TERM_END < :preferredDate",
+			+ "  AND c.SERVICE_TERM_END < :preferredDate",
 			nativeQuery = true)
 	public List<Contract> findByAutoUpdaterecord(@Param("preferredDate") Date preferredDate);
 
