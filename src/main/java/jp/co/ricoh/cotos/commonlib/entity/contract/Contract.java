@@ -45,7 +45,7 @@ public class Contract extends EntityBase {
 
 	public enum ContractType {
 
-		新規("1"), 契約変更("2"), 情報変更("3");
+		新規("1"), 契約変更("2"), 情報変更("3"), 契約更新("4");
 
 		private final String text;
 
