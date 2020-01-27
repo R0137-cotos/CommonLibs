@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -45,7 +44,7 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	/**
 	 * JSONスキーママスタ
 	 */
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "json_schema_master_id", referencedColumnName = "id")
 	@ApiModelProperty(value = "JSONスキーママスタ", required = true, position = 3)
 	private JsonSchemaMaster jsonSchemaMaster;
