@@ -1231,6 +1231,21 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
+
+	@Test
+	public void ContractAutoUpdateMasterRepositoryのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractAutoUpdateMaster.sql");
+
+		// エンティティの取得
+		ContractAutoUpdateMaster found = contractAutoUpdateMasterRepository.findByItemMasterId(1003L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
 	
 	@Test
 	public void ProductExtendsParameterMasterのテスト() throws Exception {
@@ -1254,21 +1269,6 @@ public class TestMaster {
 		if (found.getJsonSchemaMaster() == null)
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
-	}
-
-	@Test
-	public void ContractAutoUpdateMasterRepositoryのテスト() throws Exception {
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractAutoUpdateMaster.sql");
-
-		// エンティティの取得
-		ContractAutoUpdateMaster found = contractAutoUpdateMasterRepository.findByItemMasterId(1003L);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
-
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(found);
 	}
 
 	@Test
