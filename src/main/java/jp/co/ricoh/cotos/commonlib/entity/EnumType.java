@@ -17,7 +17,7 @@ public class EnumType {
 	 */
 	public enum ApprovalProcessCategory {
 
-		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4");
+		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4"), 承認済差戻("5");
 
 		private final String text;
 
