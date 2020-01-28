@@ -266,16 +266,22 @@ public class ContractListInfo {
 	private Date billingStartDate;
 
 	/**
+	 * FFM発注問合せ番号
+	 */
+	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 39, allowableValues = "range[0,255]")
+	private String contactNo;
+
+	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 39)
+	@ApiModelProperty(value = "登録日時", required = false, position = 40)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 40)
+	@ApiModelProperty(value = "更新日時", required = false, position = 41)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
