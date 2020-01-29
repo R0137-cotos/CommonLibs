@@ -17,7 +17,7 @@ public class EnumType {
 	 */
 	public enum ApprovalProcessCategory {
 
-		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4");
+		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4"), 承認済差戻("5");
 
 		private final String text;
 
@@ -42,7 +42,7 @@ public class EnumType {
 	 */
 	public enum TargetContractType {
 
-		共通("1"), 新規("2"), 契約変更("3"), 情報変更("4");
+		共通("1"), 新規("2"), 契約変更("3"), 情報変更("4"), 契約更新("5");
 
 		private final String text;
 
@@ -71,6 +71,8 @@ public class EnumType {
 				return TargetContractType.契約変更;
 			case 情報変更:
 				return TargetContractType.情報変更;
+			case 契約更新:
+				return TargetContractType.契約更新;
 			default:
 				throw new IllegalArgumentException(String.valueOf(contractType.toString()));
 			}
