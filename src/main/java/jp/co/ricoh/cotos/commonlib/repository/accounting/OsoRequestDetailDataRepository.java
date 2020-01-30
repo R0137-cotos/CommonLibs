@@ -11,5 +11,8 @@ import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEnt
 
 @Repository
 public interface OsoRequestDetailDataRepository extends CrudRepository<OsoRequestDetailData, Long> {
+
 	public List<OsoRequestDetailData> findByProcessingDivAndOsoManageNumberAndItemCodeAndProcessingStatus(ProcessingDiv processingDiv, String osoManageNumber, String itemCode, OsoProcessingStatus processingStatus);
+
+	public List<OsoRequestDetailData> findByOsoManageNumberAndItemCodeAndProcessingStatusOrderByIdDesc(String osoManageNumber, String itemCode, OsoProcessingStatus processingStatus);
 }
