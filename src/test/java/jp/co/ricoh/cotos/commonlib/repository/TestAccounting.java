@@ -215,6 +215,18 @@ public class TestAccounting {
 	}
 
 	@Test
+	public void OsoResultsDataRepositoryの条件テスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsData.sql");
+
+		List<OsoResultsData> list = osoResultsDataRepository.findByOsoManageNumberAndItemCodeAndProcessingStatusOrderByIdDesc("oso_manage_number", "item_code", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(3L, list.size());
+		Assert.assertNotNull(list.get(0));
+		Assert.assertEquals(3L, list.get(0).getId());
+	}
+
+	@Test
 	public void OsoResultsPlanDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsPlanData.sql");
 
