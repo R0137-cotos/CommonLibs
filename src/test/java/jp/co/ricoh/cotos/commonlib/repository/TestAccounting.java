@@ -274,5 +274,12 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertEquals(1L, list.size());
 		Assert.assertNotNull(list.get(0));
+
+		list = osoRequestDetailDataRepository.findByOsoManageNumberAndItemCodeAndProcessingStatusOrderByIdDesc("oso_manage_number", "item_code", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(3L, list.size());
+		Assert.assertNotNull(list.get(0));
+		Assert.assertEquals(3L, list.get(0).getId());
 	}
 }
