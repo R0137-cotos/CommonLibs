@@ -221,6 +221,10 @@ public class OrderBasicInfo extends EntityBase {
 	private OrderDistributorInfo orderDistributorInfo;
 
 	@OneToOne(mappedBy = "orderBasicInfo")
+	@ApiModelProperty(value = "注文母店情報", required = false, position = 18)
+	private OrderParentDistributorInfo orderParentDistributorInfo;
+	
+	@OneToOne(mappedBy = "orderBasicInfo")
 	@ApiModelProperty(value = "注文セットアップ先情報", required = false, position = 19)
 	private OrderSetupInfo orderSetupInfo;
 

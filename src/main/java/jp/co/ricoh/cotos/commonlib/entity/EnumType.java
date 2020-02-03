@@ -444,6 +444,50 @@ public class EnumType {
 		}
 	}
 
+	public enum ApplicationStatus {
+		
+		作成中("1"), 承認依頼中("2"), 承認済み("3"), 承認済み_契約待ち("4"), 承認済み_確定("5"), 承認済み_解約待ち("6");
+		
+		private final String text;
+
+		private ApplicationStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ApplicationStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+	
+	public enum ApiStatus {
+		
+		手配中("1"), 手配完了("2"), エラー("9");
+		
+		private final String text;
+
+		private ApiStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ApiStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * 各種ID値などのダミー設定値
 	 */
