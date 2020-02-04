@@ -95,4 +95,11 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "置換値フィールド名", required = false, position = 6, allowableValues = "range[0,255]")
 	private String replaceFieldName;
+
+	/**
+	 * 拡張項目フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "拡張項目フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	private Integer extendsParameterFlg;
 }
