@@ -1,8 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.listener;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +22,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
-import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -41,9 +37,6 @@ public class TestListener {
 
 	@Autowired
 	DealerContractRepository dealerContractRepository;
-
-	@Autowired
-	EstimationRepository estimationRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -116,22 +109,5 @@ public class TestListener {
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerContract.getPostNumber());
 		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", dealerContract.getAddress());
 		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", dealerContract.getOrgPhoneNumber());
-	}
-
-	@Test
-	@WithMockCustomUser
-	public void EstimationListenerのテスト() throws Exception {
-		Estimation estimation = estimationRepository.findOne(1L);
-		estimation.setId(0);
-		estimation.setEstimationNumber(null);
-		estimation.setEstimationBranchNumber(2);
-		estimation.setProductGrpMasterId(1L);
-		estimation.setRjManageNumber(null);
-		estimationRepository.save(estimation);
-		Estimation result = estimationRepository.findOne(estimation.getId());
-
-		String expectEstimationNumber = "CE" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "00001";
-		Assert.assertEquals("見積番号が正しく取得されること", expectEstimationNumber, result.getEstimationNumber());
-		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
 	}
 }
