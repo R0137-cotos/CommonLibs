@@ -340,3 +340,4 @@
 |382|Messages.properties修正|
 |383|CpqPropertiesに管理者用フィールド追加|
 |384|DTOにベンダー管理番号を追加|
+|385|MultipartFile実装を手配ドメインから移動|
