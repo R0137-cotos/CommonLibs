@@ -338,3 +338,4 @@
 |380|手配操作内容追加|
 |381|注文情報商品種別にROCを追加|
 |382|Messages.properties修正|
+|383|CpqPropertiesに管理者用フィールド追加|
