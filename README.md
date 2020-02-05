@@ -339,3 +339,4 @@
 |381|注文情報商品種別にROCを追加|
 |382|Messages.properties修正|
 |383|CpqPropertiesに管理者用フィールド追加|
+|384|DTOにベンダー管理番号を追加|
