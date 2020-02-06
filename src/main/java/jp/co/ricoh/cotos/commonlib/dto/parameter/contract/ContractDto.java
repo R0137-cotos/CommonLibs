@@ -493,11 +493,25 @@ public class ContractDto extends DtoBase {
 	private String installDeliverySiteId;
 
 	/**
+	 * 解約確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "解約確定日", required = false, position = 66)
+	private Date cancelDecisionDate;
+
+	/**
+	 * 契約情報確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "契約情報確定日", required = false, position = 67)
+	private Date fixedDate;
+
+	/**
 	 * 契約機種
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種", required = false, position = 66)
+	@ApiModelProperty(value = "契約機種", required = false, position = 68)
 	private List<ContractEquipmentDto> contractEquipmentList;
 
 	/**
@@ -505,7 +519,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約受付担当SS組織", required = false, position = 67)
+	@ApiModelProperty(value = "契約受付担当SS組織", required = false, position = 69)
 	private ContractPicAccSsOrgDto contractPicAccSsOrg;
 
 	/**
@@ -513,7 +527,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約導入担当SS組織", required = false, position = 68)
+	@ApiModelProperty(value = "契約導入担当SS組織", required = false, position = 70)
 	private ContractPicIntSsOrgDto contractPicIntSsOrg;
 
 	/**
@@ -521,7 +535,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約導入担当CE社員", required = false, position = 69)
+	@ApiModelProperty(value = "契約導入担当CE社員", required = false, position = 71)
 	private ContractPicIntCeEmpDto contractPicIntCeEmp;
 
 	/**
@@ -529,7 +543,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約受付担当CE社員", required = false, position = 70)
+	@ApiModelProperty(value = "契約受付担当CE社員", required = false, position = 72)
 	private ContractPicAccCeEmpDto contractPicAccCeEmp;
 
 	/**
@@ -537,7 +551,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 71)
+	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 73)
 	private ContractInstallationLocationDto contractInstallationLocation;
 
 }

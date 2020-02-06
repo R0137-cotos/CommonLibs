@@ -670,4 +670,11 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "解約確定日", required = false, position = 72)
 	private Date cancelDecisionDate;
 
+	/**
+	 * 契約情報確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "契約情報確定日", required = false, position = 73)
+	private Date fixedDate;
+
 }
