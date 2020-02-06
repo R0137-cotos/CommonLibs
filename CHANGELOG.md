@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.3 (12/12/2019)
+- [**closed**] #4832 外部IF契約作成、情報変更DTOに設置届先サイトID追加 [#722](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/722)
+- [**closed**] #4351 EKX880対応 [#725](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/725)
+
+---
+
 ## v2.0.0 (21/11/2019)
 - [**closed**] #2854 契約操作履歴操作内容、契約エラーメッセージ追加 [#391](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/391)
 - [**closed**] #2870 商品(見積).代表品種マスタIDのNotNull外し [#390](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/390)
