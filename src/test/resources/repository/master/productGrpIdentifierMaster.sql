@@ -1,0 +1,2 @@
+INSERT INTO product_grp_identifier_master (id,created_at,created_user_id,updated_at,updated_user_id,version,product_grp_identifier,sequence_name) VALUES (1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS', 1, 'CSP', 'product_grp_identifier_seq_1');
+INSERT INTO product_grp_identifier_master (id,created_at,created_user_id,updated_at,updated_user_id,version,product_grp_identifier,sequence_name) VALUES (2,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS', 1, 'ROC', 'product_grp_identifier_seq_2');

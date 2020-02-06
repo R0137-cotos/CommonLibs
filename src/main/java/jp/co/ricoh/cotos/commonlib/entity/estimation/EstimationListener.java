@@ -2,15 +2,17 @@ package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.PrePersist;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.contract.GeneratedNumber;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 
@@ -53,9 +55,15 @@ public class EstimationListener {
 		 */
 		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findOne(entity.getProductGrpMasterId());
 		if (null == entity.getRjManageNumber() && null != productGrpMaster) {
-			String productGrpIdentifier = productGrpMaster.getProductGrpIdentifier();
-			long sequenceRjManageNumber = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class).getGeneratedNumber();
-			entity.setRjManageNumber(productGrpIdentifier + String.format("%07d", sequenceRjManageNumber));
+			ProductGrpIdentifierMaster productGrpIdentifierMaster = productGrpMaster.getProductGrpIdentifierMaster();
+			if (null == productGrpIdentifierMaster) return;
+			String productGrpIdentifier = productGrpIdentifierMaster.getProductGrpIdentifier();
+			String sequenceName = productGrpIdentifierMaster.getSequenceName();
+			Map<String, Object> param = new HashMap<>();
+			param.put("sequenceName", sequenceName);
+			long sequence = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class, param)
+					.getGeneratedNumber();
+			entity.setRjManageNumber(productGrpIdentifier + String.format("%07d", sequence));
 		}
 	}
 }

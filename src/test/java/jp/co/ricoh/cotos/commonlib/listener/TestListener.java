@@ -120,7 +120,9 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
-	public void EstimationListenerのテスト() throws Exception {
+	public void EstimationListenerのテスト_番号未付与() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("listener/sequence.sql");
+
 		Estimation estimation = estimationRepository.findOne(1L);
 		estimation.setId(0);
 		estimation.setEstimationNumber(null);
@@ -132,6 +134,25 @@ public class TestListener {
 
 		String expectEstimationNumber = "CE" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "00001";
 		Assert.assertEquals("見積番号が正しく取得されること", expectEstimationNumber, result.getEstimationNumber());
+		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
+
+		// シーケンスのDROPではIF EXISTSが使用できないため、ここで削除
+		context.getBean(DBConfig.class).initTargetTestData("listener/clearSequence.sql");
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void EstimationListenerのテスト_番号付与済() throws Exception {
+		Estimation estimation = estimationRepository.findOne(1L);
+		estimation.setId(0);
+		estimation.setEstimationNumber("CE000000000001");
+		estimation.setEstimationBranchNumber(2);
+		estimation.setProductGrpMasterId(1L);
+		estimation.setRjManageNumber("1230000001");
+		estimationRepository.save(estimation);
+		Estimation result = estimationRepository.findOne(estimation.getId());
+
+		Assert.assertEquals("見積番号が正しく取得されること", "CE000000000001", result.getEstimationNumber());
 		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
 	}
 }
