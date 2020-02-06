@@ -1,0 +1,1 @@
+DROP SEQUENCE listener_test_product_grp_identifier_seq_1
