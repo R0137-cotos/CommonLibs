@@ -56,4 +56,9 @@ public class RocProperties {
 	 * 契約添付ファイル種類
 	 */
 	String contractAttachedFileKind;
+
+	/**
+	 * 一時設定担当者MoM社員ID
+	 */
+	String temporaryWorkerMomEmpId;
 }
