@@ -1,1 +1,1 @@
-select rj_manage_number_seq.nextval generated_number from dual
+select {{sequenceName}}.nextval generated_number from dual

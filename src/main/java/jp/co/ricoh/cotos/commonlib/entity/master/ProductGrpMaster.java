@@ -124,9 +124,11 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	private Integer cancelDefinitionConditionsFlg;
 
 	/**
-	 * 商品グループ識別子
+	 * 商品グループ識別子マスタ
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "商品グループ識別子", required = false, position = 13, allowableValues = "range[0,255]")
-	private String productGrpIdentifier;
+	@ManyToOne
+	@JoinColumn(name = "product_grp_identifier_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "商品グループ識別子マスタ", required = false, position = 13)
+	private ProductGrpIdentifierMaster productGrpIdentifierMaster;
+
 }
