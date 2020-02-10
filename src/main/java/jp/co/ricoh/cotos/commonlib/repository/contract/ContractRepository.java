@@ -38,6 +38,9 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 	@Query(value = "SELECT * FROM CONTRACT WHERE (CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :preferredDate) OR ((CONTRACT_TYPE = '1' OR CONTRACT_TYPE = '2') AND LIFECYCLE_STATUS = '11' AND CONCLUSION_PREFERRED_DATE <= :preferredDate)", nativeQuery = true)
 	public List<Contract> findByContractTypeAndPreferredDate(@Param("preferredDate") Date preferredDate);
 
+	@Query(value = "SELECT * FROM CONTRACT WHERE (CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :preferredDate) OR ((CONTRACT_TYPE = '1' OR CONTRACT_TYPE = '2') AND LIFECYCLE_STATUS = '11' AND SERVICE_TERM_START <= :preferredDate)", nativeQuery = true)
+	public List<Contract> findByContractTypeAndChangePreferredDateAndServiceStartDate(@Param("preferredDate") Date preferredDate);
+
 	@Query(value = "SELECT c.* FROM CONTRACT c, "
 			+ "CONTRACT_DETAIL d, "
 			+ "ITEM_CONTRACT e, "
