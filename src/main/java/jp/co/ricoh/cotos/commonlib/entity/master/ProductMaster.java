@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
@@ -142,11 +144,19 @@ public class ProductMaster extends EntityBaseMaster {
 	@OneToOne(mappedBy = "productMaster")
 	@ApiModelProperty(value = "ベンダー商品マスタ", required = false, position = 16)
 	private VendorProductMaster vendorProductMaster;
-	
+
 	/**
 	 * 商品拡張項目マスタ
 	 */
 	@OneToMany(mappedBy = "productMaster")
-	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 14)
+	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 17)
 	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
+
+	/**
+	 * 決裁者フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "決裁者フラグ", required = false, position = 18, allowableValues = "range[0,9]")
+	private Integer approverFlg;
 }
