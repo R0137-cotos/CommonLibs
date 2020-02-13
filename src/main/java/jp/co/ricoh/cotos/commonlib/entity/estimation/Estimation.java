@@ -527,6 +527,13 @@ public class Estimation extends EntityBase {
 	@ApiModelProperty(value = "品種追加状態", required = false, position = 58, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
 
+	/**
+	 * web受注注文番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "web受注注文番号", required = false, position = 59, allowableValues = "range[0,255]")
+	private String webOrderNumber;
+	
 	@PreUpdate
 	public void preUpdate() {
 		if (StringUtils.isEmpty(super.getUpdatedUserId())) {
