@@ -534,6 +534,14 @@ public class Estimation extends EntityBase {
 	@ApiModelProperty(value = "web受注注文番号", required = false, position = 59, allowableValues = "range[0,255]")
 	private String webOrderNumber;
 	
+
+	/**
+	 * ベンダー管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 60, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+	
 	@PreUpdate
 	public void preUpdate() {
 		if (StringUtils.isEmpty(super.getUpdatedUserId())) {
