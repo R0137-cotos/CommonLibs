@@ -229,6 +229,12 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "更新日時", required = false, position = 31)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
+	
+	/**
+	 * 解約フラグ
+	 */
+	@ApiModelProperty(value = "解約フラグ", required = true, position = 32)
+	private int disengagementFlg;
 
 	@PrePersist
 	public void prePersist() {
