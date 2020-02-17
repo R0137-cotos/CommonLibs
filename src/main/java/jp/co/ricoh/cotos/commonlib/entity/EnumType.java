@@ -159,7 +159,7 @@ public class EnumType {
 	 */
 	public enum ApprovalTargetType {
 
-		新規("1"), 情報変更("2"), 契約変更("3"), キャンセル("4"), 解約("5"), 作業完了報告("6"), 非承認("7"), 売上指示("8"), 売上計上("9"), 承認済差戻("10");
+		新規("1"), 情報変更("2"), 契約変更("3"), キャンセル("4"), 解約("5"), 作業完了報告("6"), 非承認("7"), 売上指示("8"), 売上計上("9"), 承認済差戻("10"), 契約更新("11");
 
 		private final String text;
 
@@ -445,9 +445,9 @@ public class EnumType {
 	}
 
 	public enum ApplicationStatus {
-		
+
 		作成中("1"), 承認依頼中("2"), 承認済み("3"), 承認済み_契約待ち("4"), 承認済み_確定("5"), 承認済み_解約待ち("6");
-		
+
 		private final String text;
 
 		private ApplicationStatus(final String text) {
@@ -465,11 +465,11 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-	
+
 	public enum ApiStatus {
-		
+
 		手配中("1"), 手配完了("2"), エラー("9");
-		
+
 		private final String text;
 
 		private ApiStatus(final String text) {
