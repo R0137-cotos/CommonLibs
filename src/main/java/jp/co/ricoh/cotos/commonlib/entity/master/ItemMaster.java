@@ -257,9 +257,37 @@ public class ItemMaster extends EntityBaseMaster {
 	private List<ItemTransCompMaster> itemTransCompMasterList;
 
 	/**
-	 * V-UP連携除外フラグ
+	 * メーカー商品コード
 	 */
-	@Max(9)
-	@ApiModelProperty(value = "V-UP連携除外フラグ", required = false, position = 25, allowableValues = "range[0,9]")
-	private Integer vupLinkageExclusionFlg;
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 25, allowableValues = "range[0,255]")
+	private String makerItemCode;
+
+	/**
+	 * 提供終了日
+	 */
+	@ApiModelProperty(value = "提供終了日", required = false, position = 26)
+	@Temporal(TemporalType.DATE)
+	private Date offerEndDate;
+
+	/**
+	 * 新規受注停止日
+	 */
+	@ApiModelProperty(value = "新規受注停止日", required = false, position = 27)
+	@Temporal(TemporalType.DATE)
+	private Date newOrderStopDate;
+
+	/**
+	 * 最終連携月
+	 */
+	@ApiModelProperty(value = "最終連携月", required = false, position = 28)
+	@Temporal(TemporalType.DATE)
+	private Date finalLinkedMonth;
+
+	/**
+	 * 値引き下限値
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "値引き下限値", required = false, position = 29, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal lowerLimit;
 }

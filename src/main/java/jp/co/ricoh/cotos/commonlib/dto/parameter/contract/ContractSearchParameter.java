@@ -370,6 +370,15 @@ public class ContractSearchParameter {
 	private String picMntCeId;
 
 	/**
+	 * お客様企業ID
+	 */
+	@ApiParam(value = "お客様企業ID", required = false)
+	@ApiModelProperty(value = "お客様企業ID<br />" //
+			+ "企業IDにはMoM企業IDを指定する。", //
+			required = false, allowableValues = "range[0,255]")
+	private String companyId;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")

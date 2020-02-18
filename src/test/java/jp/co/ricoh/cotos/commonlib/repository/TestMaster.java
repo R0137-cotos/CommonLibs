@@ -2,8 +2,10 @@ package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -25,9 +27,12 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AuthPatternMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.BusinessCalendar;
 import jp.co.ricoh.cotos.commonlib.entity.master.CeMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.CheckAlertMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.CheckAlertTargetMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.CommonMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.CommonMasterDetail;
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractAutoUpdateMaster;
@@ -68,6 +73,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ProductExtendsParameterMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductPicMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.RecordDecomposeCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.RecordDecomposeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ReportPageMaster;
@@ -80,6 +86,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VDirectDeliveryDealerInfoMaster
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMasterFull;
+import jp.co.ricoh.cotos.commonlib.entity.master.VendorMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.VendorProductMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.AppMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterRepository;
@@ -87,9 +95,12 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepo
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AuthPatternMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.BusinessCalendarRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CeMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.CheckAlertMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.CheckAlertTargetMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ContractAutoUpdateMasterRepository;
@@ -129,6 +140,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ProductExtendsParameterMast
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpIdentifierMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ProductPicMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.RecordDecomposeCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.RecordDecomposeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ReportPageMasterRepository;
@@ -140,6 +152,9 @@ import jp.co.ricoh.cotos.commonlib.repository.master.VDirectDeliveryDealerInfoMa
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.VPicAffiliateMasterFullRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.VPicAffiliateMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.VendorMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.VendorProductMasterRepository;
+import lombok.val;
 
 /**
  * Repository（マスタドメイン）のテストクラス
@@ -276,6 +291,24 @@ public class TestMaster {
 
 	@Autowired
 	private MvVjmcb010MomKgyMasterRepository mvVjmcb010MomKgyMasterRepository;
+
+	@Autowired
+	private CheckAlertMasterRepository checkAlertMasterRepository;
+
+	@Autowired
+	private CheckAlertTargetMasterRepository checkAlertTargetMasterRepository;
+
+	@Autowired
+	private ProductPicMasterRepository productPicMasterRepository;
+
+	@Autowired
+	private VendorMasterRepository vendorMasterRepository;
+
+	@Autowired
+	private VendorProductMasterRepository vendorProductMasterRepository;
+
+	@Autowired
+	private AttachedFileLinkageRepository attachedFileLinkageRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -860,6 +893,10 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -881,6 +918,12 @@ public class TestMaster {
 		if (found.getExtendsParameterCorrelationCheckMasterList() == null || found.getExtendsParameterCorrelationCheckMasterList().size() == 0)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMasterId() == null)
+			Assert.assertTrue(false);
+		if (found.getAttachedFileLinkageList() == null || found.getAttachedFileLinkageList().size() == 0)
+			Assert.assertTrue(false);
+		if (found.getVendorProductMaster() == null)
+			Assert.assertTrue(false);
+		if (found.getProductPicMasterList() == null || found.getProductPicMasterList().size() == 0)
 			Assert.assertTrue(false);
 
 		id = 2L;
@@ -1172,9 +1215,14 @@ public class TestMaster {
 		List<String> appId = Arrays.asList("electric");
 		List<ProductMaster> list = productMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
+		List<Long> id = Arrays.asList(new Long[] { 1L, 2L });
+		list = productMasterRepository.findByIdInAndAppIdNotInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
 		appId = Arrays.asList("cotos_dev");
 		list = productMasterRepository.findByAppIdInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
+		list = productMasterRepository.findByIdInAndAppIdInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
 	}
 
 	@Test
@@ -1189,6 +1237,8 @@ public class TestMaster {
 		Assert.assertNotEquals(0, list.size());
 		appId = Arrays.asList("cotos_dev");
 		list = arrangementWorkTypeMasterRepository.findByAppIdInOrderByIdAsc(appId);
+		Assert.assertNotEquals(0, list.size());
+		list = arrangementWorkTypeMasterRepository.findByArrangementWorkTypeDiv("1");
 		Assert.assertNotEquals(0, list.size());
 	}
 
@@ -1647,6 +1697,7 @@ public class TestMaster {
 		Assert.assertNotNull(found);
 	}
 
+	@Test
 	public void NonBusinessDayCalendarMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/nonBusinessDayCalendarMaster.sql");
@@ -1716,6 +1767,174 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void AttachedFileLinkageのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		AttachedFileLinkage found = attachedFileLinkageRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void VendorProductMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		VendorProductMaster found = vendorProductMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void VendorMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		VendorMaster found = vendorMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ProductPicMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ProductPicMaster found = productPicMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void CheckAlertTargetMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkAlertMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkAlertTargetMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		CheckAlertTargetMaster found = checkAlertTargetMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void CheckAlertMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkAlertMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		CheckAlertMaster found = checkAlertMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void CheckAlertMaster_findByDomainAndTargetMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkAlertMaster_findByDomainAndTargetMasterId.sql");
+
+		// エンティティの取得
+		String serviceCategory = "1"; //見積
+		Long targetMasterId = 300L; //
+		List<CheckAlertMaster> found = checkAlertMasterRepository.findByDomainAndTargetMasterId(serviceCategory, targetMasterId);
+
+		// Entity が null ではないことを確認
+		// 2件取得されることを確認
+		Assert.assertEquals(2, found.size());
+
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
+				.collect(Collectors.toList());
+
+		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
+
+		testTool.assertColumnsNotNull(common);
+		Assert.assertEquals(1L, common.getId());
+
+		CheckAlertMaster byProduct = foundSorted.get(1); //2件目：商品毎
+
+		testTool.assertColumnsNotNull(byProduct);
+		Assert.assertEquals(3L, byProduct.getId());
+
+		// 対象アラートマスタが1件取得されていることを確認
+		List<CheckAlertTargetMaster> list = byProduct.getCheckAlertTargetMasterList();
+		Assert.assertEquals(1, list.size());
+
+		val targetRecord = list.get(0);
+		testTool.assertColumnsNotNull(targetRecord);
+		// Entity の各項目の値が null ではないことを確認
+
+	}
+
+	@Test
+	public void CommonMasterDetail_findByCommonMasterIdAndAvailablePeriodBetweenのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMasterDetail.sql");
+
+		List<CommonMasterDetail> foundList = commonMasterDetailRepository.findByCommonMasterIdAndAvailablePeriodBetween(11L, "20200101");
+		// データが取得できていることを確認
+		Assert.assertTrue(foundList.size() > 0);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
 	}
 
 }

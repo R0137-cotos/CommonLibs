@@ -47,5 +47,13 @@ public class CpqProperties {
 	 * 見積コピー時にコールするAPI情報
 	 */
 	String copyTransaction;
+	/**
+	 * CPQの管理者ログインユーザー
+	 */
+	String adminUser;
+	/**
+	 * CPQの管理者ログインパスワード
+	 */
+	String adminPassword;
 
 }

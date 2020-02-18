@@ -74,4 +74,12 @@ public class ReportPageMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = false, position = 6, allowableValues = "range[0,255]")
 	private String ricohItemCode;
+
+	/**
+	 * ページ数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "ページ数", required = false, position = 7, allowableValues = "range[0,99999]")
+	private Integer pageNumber;
 }

@@ -83,4 +83,10 @@ public class MailTemplateMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "バウンスメール戻り先", required = true, position = 8)
 	private String envelopeFrom;
 
+	/**
+	 * fromメールアドレス
+	 */
+	@Column
+	@ApiModelProperty(value = "fromメールアドレス", required = true, position = 9)
+	private String fromMailAddress;
 }
