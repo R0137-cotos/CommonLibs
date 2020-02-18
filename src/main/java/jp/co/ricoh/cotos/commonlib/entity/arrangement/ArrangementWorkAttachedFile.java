@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.arrangement;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
@@ -116,6 +118,14 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@ApiModelProperty(value = "添付日時(作成時不要)", required = true, position = 10, readOnly = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date attachedAt;
+
+	/**
+	 * 手配業務添付ファイル連携先
+	 */
+	@Valid
+	@OneToMany(mappedBy = "arrangementWorkAttachedFile")
+	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 11)
+	private List<ArrangementWorkAttachedFileLinkage> arrangementWorkAttachedFileLinkageList;
 
 	/**
 	 * ファイル情報

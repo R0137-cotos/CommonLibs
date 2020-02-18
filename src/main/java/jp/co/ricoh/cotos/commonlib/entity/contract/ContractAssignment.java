@@ -1,0 +1,58 @@
+package jp.co.ricoh.cotos.commonlib.entity.contract;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 契約業務情報
+ */
+@Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table(name = "contract_assignment")
+public class ContractAssignment extends EntityBase {
+
+	/**
+	 * 契約業務情報ID
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_assignment_seq")
+	@SequenceGenerator(name = "contract_assignment_seq", sequenceName = "contract_assignment_seq", allocationSize = 1)
+	@ApiModelProperty(value = "契約業務情報ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	private long id;
+
+	/**
+	 * 契約ID
+	 */
+	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long contractId;
+
+	/**
+	 * メモ
+	 */
+	@Size(max = 1000)
+	@ApiModelProperty(value = "メモ", required = false, position = 3, allowableValues = "range[0,1000]")
+	private String memo;
+
+	/**
+	 * 契約業務添付ファイル
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contractAssignment")
+	@ApiModelProperty(value = "契約業務添付ファイル", required = false, position = 4)
+	private List<ContractAssignmentAttachedFile> contractAssignmentAttachedFileList;
+}

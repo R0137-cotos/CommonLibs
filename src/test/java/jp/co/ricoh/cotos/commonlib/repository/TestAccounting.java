@@ -1,5 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,11 +15,32 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailPlanData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestPlanData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoResultsData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoResultsPlanData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.UsageQuantity;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.UsageQuantityRelatedManagement;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj301KiykSikyuCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj302SikyuMisiCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj303GnkHrkeCtsWk;
+import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.DataDiv;
+import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.ProcessingDiv;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDetailDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDetailPlanDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestPlanDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoResultsDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoResultsPlanDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.UsageQuantityRelatedManagementRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.UsageQuantityRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.Wjcmj301KiykSikyuCtsWkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.Wjcmj302SikyuMisiCtsWkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.Wjcmj303GnkHrkeCtsWkRepository;
@@ -41,6 +65,33 @@ public class TestAccounting {
 
 	@Autowired
 	Wjcmj303GnkHrkeCtsWkRepository wjcmj303GnkHrkeCtsWkRepository;
+
+	@Autowired
+	CommissionDataRepository commissionDataRepository;
+
+	@Autowired
+	OsoRequestDataRepository osoRequestDataRepository;
+
+	@Autowired
+	OsoRequestDetailDataRepository osoRequestDetailDataRepository;
+
+	@Autowired
+	OsoRequestDetailPlanDataRepository osoRequestDetailPlanDataRepository;
+
+	@Autowired
+	OsoRequestPlanDataRepository osoRequestPlanDataRepository;
+
+	@Autowired
+	OsoResultsDataRepository osoResultsDataRepository;
+
+	@Autowired
+	OsoResultsPlanDataRepository osoResultsPlanDataRepository;
+
+	@Autowired
+	UsageQuantityRepository usageQuantityRepository;
+
+	@Autowired
+	UsageQuantityRelatedManagementRepository usageQuantityRelatedManagementRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -103,4 +154,144 @@ public class TestAccounting {
 		Assert.assertNotNull(found);
 	}
 
+	@Test
+	public void CommissionDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/commissionData.sql");
+
+		CommissionData found = commissionDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoRequestDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestData.sql");
+
+		OsoRequestData found = osoRequestDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoRequestPlanDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestPlanData.sql");
+
+		OsoRequestPlanData found = osoRequestPlanDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoRequestDetailDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestDetailData.sql");
+
+		OsoRequestDetailData found = osoRequestDetailDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoRequestDetailPlanDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestDetailPlanData.sql");
+
+		OsoRequestDetailPlanData found = osoRequestDetailPlanDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoResultsDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsData.sql");
+
+		OsoResultsData found = osoResultsDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoResultsDataRepositoryの条件テスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsData.sql");
+
+		List<OsoResultsData> list = osoResultsDataRepository.findByOsoManageNumberAndItemCodeAndProcessingStatusOrderByIdDesc("oso_manage_number", "item_code", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(3L, list.size());
+		Assert.assertNotNull(list.get(0));
+		Assert.assertEquals(3L, list.get(0).getId());
+	}
+
+	@Test
+	public void OsoResultsPlanDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsPlanData.sql");
+
+		OsoResultsPlanData found = osoResultsPlanDataRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void UsageQuantityRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/usageQuantity.sql");
+
+		UsageQuantity found = usageQuantityRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		List<UsageQuantity> founds = usageQuantityRepository.findByContractIdAndContractDetailId(1L, 1L);
+
+		// Entity が null または 空 ではないことを確認
+		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
+
+		found = usageQuantityRepository.findByRjManageNumberAndItemCode("rj_manage_number", "item_code");
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void UsageQuantityRelatedManagementRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/usageQuantityRelatedManagement.sql");
+
+		UsageQuantityRelatedManagement found = usageQuantityRelatedManagementRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void OsoRequestDataRepositoryの条件テスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestData.sql");
+
+		List<OsoRequestData> list = osoRequestDataRepository.findByDataDivAndRequestManageNumberAndProcessingStatus(DataDiv.新規, "request_manage_number", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(1L, list.size());
+		Assert.assertNotNull(list.get(0));
+	}
+
+	@Test
+	public void OsoRequestDetailDataRepositoryの条件テスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestDetailData.sql");
+
+		List<OsoRequestDetailData> list = osoRequestDetailDataRepository.findByProcessingDivAndOsoManageNumberAndItemCodeAndProcessingStatus(ProcessingDiv.追加, "oso_manage_number", "item_code", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(1L, list.size());
+		Assert.assertNotNull(list.get(0));
+
+		list = osoRequestDetailDataRepository.findByOsoManageNumberAndItemCodeAndProcessingStatusOrderByIdDesc("oso_manage_number", "item_code", OsoProcessingStatus.処理済);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(3L, list.size());
+		Assert.assertNotNull(list.get(0));
+		Assert.assertEquals(3L, list.get(0).getId());
+	}
 }

@@ -246,7 +246,7 @@ public class CommonSendMail {
 		String[] ccEmail = (String[]) emailCcList.toArray(new String[0]);
 		String[] bccEmail = (String[]) emailBccList.toArray(new String[0]);
 		attachedHelper.setTo(toEmail);
-		attachedHelper.setFrom(appProperties.getMailProperties().getFromMailAddress());
+		attachedHelper.setFrom(Optional.ofNullable(mailTemplateMaster.getFromMailAddress()).orElse(appProperties.getMailProperties().getFromMailAddress()));
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
 		String subject = writerMailSubject.toString().replace("&#10;", "\r\n");

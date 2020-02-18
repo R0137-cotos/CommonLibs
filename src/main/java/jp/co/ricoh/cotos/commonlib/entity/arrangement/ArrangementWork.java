@@ -40,7 +40,7 @@ public class ArrangementWork extends EntityBase {
 
 	public enum WorkflowStatus {
 
-		受付待ち("1"), 作業中("2"), 作業完了報告("3"), 承認依頼中("4"), 作業完了("5"), エラー("6");
+		受付待ち("1"), 作業中("2"), 作業完了報告("3"), 承認依頼中("4"), 作業完了("5"), エラー("6"), 破棄("7");
 
 		private final String text;
 

@@ -1,2 +1,2 @@
-INSERT INTO report_page_master (id,created_at,created_user_id,updated_at,updated_user_id,version,template_id,page_name,always_output_flg,status,ricoh_item_code) VALUES (1,'2012/08/27','SIMONS','2010/06/27','SIMONS',1,1,'1',1,'1','1234');
-INSERT INTO report_page_master (id,created_at,created_user_id,updated_at,updated_user_id,version,template_id,page_name,always_output_flg,status,ricoh_item_code) VALUES (2,'1982/03/16','SIMONS','2010/06/27','SIMONS',1,2,'2',0,'2','1234');
+INSERT INTO report_page_master (id,created_at,created_user_id,updated_at,updated_user_id,version,template_id,page_name,always_output_flg,status,ricoh_item_code,page_number) VALUES (1,'2012/08/27','SIMONS','2010/06/27','SIMONS',1,1,'1',1,'1','1234',1);
+INSERT INTO report_page_master (id,created_at,created_user_id,updated_at,updated_user_id,version,template_id,page_name,always_output_flg,status,ricoh_item_code,page_number) VALUES (2,'1982/03/16','SIMONS','2010/06/27','SIMONS',1,2,'2',0,'2','1234',2);

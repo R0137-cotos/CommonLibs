@@ -22,6 +22,7 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRes
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkErrorLog;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLog;
@@ -30,6 +31,7 @@ import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkErrorLogRepository;
@@ -92,6 +94,9 @@ public class TestArrangement {
 	ArrangementWorkErrorLogRepository arrangementWorkErrorLogRepository;
 
 	@Autowired
+	ArrangementWorkAttachedFileLinkageRepository arrangementWorkAttachedFileLinkageRepository;
+
+	@Autowired
 	TestTools testTool;
 
 	@Autowired
@@ -99,6 +104,12 @@ public class TestArrangement {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
 	}
 
@@ -462,11 +473,39 @@ public class TestArrangement {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setErrorMessage(STR_256);
+		testTarget.setApiRequest(STR_4001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "エラー内容は最大文字数（255）を超えています。"));
 
 	}
 
+	@Test
+	public void ArrangementWorkAttachedFileLinkageのテスト() throws Exception {
+		ArrangementWorkAttachedFileLinkage entity = arrangementWorkAttachedFileLinkageRepository.findOne(401L);
+		ArrangementWorkAttachedFileLinkage testTarget = new ArrangementWorkAttachedFileLinkage();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedFileLinkageName(null);
+		testTarget.setLinkageStatus(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先が設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedFileLinkageName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先は最大文字数（255）を超えています。"));
+	}
 }

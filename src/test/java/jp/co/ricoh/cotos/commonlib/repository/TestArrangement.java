@@ -19,16 +19,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementPicWorkerEmp;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRouteNode;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFileLinkage;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementPicWorkerEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkErrorLogRepository;
@@ -78,6 +83,10 @@ public class TestArrangement {
 	/** 手配業務エラー履歴 */
 	@Autowired
 	ArrangementWorkErrorLogRepository arrangementWorkErrorLogRepository;
+
+	/** 手配業務ファイル連携先 */
+	@Autowired
+	ArrangementWorkAttachedFileLinkageRepository arrangementWorkAttachedFileLinkageRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -149,6 +158,11 @@ public class TestArrangement {
 	}
 
 	@Test
+	public void 全てのカラムがNullではないことを確認_手配業務ファイル連携先() {
+		全てのカラムがNullではないことを確認_共通(arrangementWorkAttachedFileLinkageRepository, 401L, 501L);
+	}
+
+	@Test
 	public void 手配承認ルート条件取得確認() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
@@ -208,10 +222,59 @@ public class TestArrangement {
 		testTools.assertColumnsNotNull(found);
 	}
 
+	@Test
+	public void ArrangementPicWorkerEmpRepositoryの条件テスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
+
+		ArrangementWork arrangementWork = arrangementWorkRepository.findOne(401L);
+		ArrangementPicWorkerEmp found = arrangementPicWorkerEmpRepository.findByArrangementWork(arrangementWork);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void 手配業務添付ファイル連携先条件取得確認() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
+
+		List<ArrangementWorkAttachedFileLinkage> found = arrangementWorkAttachedFileLinkageRepository.findByArrangementWorkAttachedFileId(401L);
+		Assert.assertEquals("手配業務添付ファイル連携先が2件であること", 2, found.size());
+	}
+
+	@Test
+	public void 手配業務チェック結果条件取得確認() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
+
+		List<ArrangementWorkCheckResult> found = arrangementWorkCheckResultRepository.findByArrangementWorkIdAndCheckMatterCode(401L, "WEB_YOSHIN");
+		Assert.assertEquals("手配業務チェック結果が1件であること", 1, found.size());
+	}
+
 	@Transactional
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
 
 		List<ID> idList = Arrays.asList(ids);

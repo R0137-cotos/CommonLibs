@@ -328,6 +328,14 @@ public class ContractExtCreateDto extends DtoBase {
 	private String installDeliverySiteId;
 
 	/**
+	 * ベンダー管理番号
+	 */
+	@Size(max = 255)
+	@Column
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+	
+	/**
 	 * 契約明細
 	 */
 	@Valid

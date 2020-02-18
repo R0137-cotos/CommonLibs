@@ -341,6 +341,15 @@ public class ArrangementSearchParameter {
 	@ApiModelProperty(value = "保留フラグ", required = false)
 	private Integer holdingFlg;
 
+	/**
+	 * お客様企業ID
+	 */
+	@ApiParam(value = "お客様企業ID", required = false)
+	@ApiModelProperty(value = "お客様企業ID<br />" //
+			+ "企業IDにはMoM企業IDを指定する。", //
+			required = false, allowableValues = "range[0,255]")
+	private String companyId;
+
 	// ===========================
 	/**
 	 * 恒久契約識別番号
