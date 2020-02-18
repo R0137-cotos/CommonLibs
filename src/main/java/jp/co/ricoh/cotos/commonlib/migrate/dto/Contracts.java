@@ -2,12 +2,12 @@ package jp.co.ricoh.cotos.commonlib.migrate.dto;
 
 import java.util.List;
 
-import jp.co.ricoh.cotos.rsicommonlib.entity.BasicContents;
-import jp.co.ricoh.cotos.rsicommonlib.entity.BranchCustomerInfo;
-import jp.co.ricoh.cotos.rsicommonlib.entity.ContractInfo;
-import jp.co.ricoh.cotos.rsicommonlib.entity.ContractorInfo;
-import jp.co.ricoh.cotos.rsicommonlib.entity.DistributorInfo;
-import jp.co.ricoh.cotos.rsicommonlib.entity.ParentDistributorInfo;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.BasicContents;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.BranchCustomerInfo;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.ContractInfo;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.ContractorInfo;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.DistributorInfo;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.ParentDistributorInfo;
 import lombok.Data;
 
 /**

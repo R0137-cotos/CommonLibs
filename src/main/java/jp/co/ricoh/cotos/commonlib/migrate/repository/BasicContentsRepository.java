@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import jp.co.ricoh.cotos.rsicommonlib.entity.BasicContents;
+import jp.co.ricoh.cotos.commonlib.migrate.entity.BasicContents;
 
 @Repository
 public interface BasicContentsRepository extends CrudRepository<BasicContents, Long> {

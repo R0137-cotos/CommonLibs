@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,9 +25,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 
+ *
  * 基本情報を表すエンティティ
- * 
+ *
  */
 
 @Entity
@@ -141,9 +140,10 @@ public class BasicContents extends EntityBase {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
 	private Date updateDateTime;
 
-	/**COTOS管理情報*/
+	/**COTOS管理情報
 	@OneToOne(mappedBy = "basicContents")
 	private CotosManagementInfo cotosManagementInfo;
+	*/
 
 	/**
 	 * 契約情報
