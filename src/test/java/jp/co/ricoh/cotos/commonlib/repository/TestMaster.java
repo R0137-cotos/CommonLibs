@@ -65,6 +65,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoco40EmpAllInfoCom;
 import jp.co.ricoh.cotos.commonlib.entity.master.NonBusinessDayCalendarMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductExtendsParameterMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.RecordDecomposeCompMaster;
@@ -125,6 +126,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MvWjmoco40EmpAllInfoComRepo
 import jp.co.ricoh.cotos.commonlib.repository.master.NonBusinessDayCalendarMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductExtendsParameterMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpIdentifierMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.RecordDecomposeCompMasterRepository;
@@ -203,6 +205,8 @@ public class TestMaster {
 	private ProductExtendsParameterMasterRepository productExtendsParameterMasterRepository;
 	@Autowired
 	private ProductGrpMasterRepository productGrpMasterRepository;
+	@Autowired
+	private ProductGrpIdentifierMasterRepository productGrpIdentifierMasterRepository;
 	@Autowired
 	private ProductMasterRepository productMasterRepository;
 	@Autowired
@@ -770,6 +774,7 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpIdentifierMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
@@ -799,6 +804,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteNodeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpIdentifierMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
@@ -818,6 +824,25 @@ public class TestMaster {
 			Assert.assertTrue(false);
 		if (found.getEstimationApprovalRouteGrpMaster() == null)
 			Assert.assertTrue(false);
+		if (found.getProductGrpIdentifierMaster() == null)
+			Assert.assertTrue(false);
+	}
+
+	@Test
+	public void ProductGrpIdentifierMasterのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpIdentifierMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ProductGrpIdentifierMaster found = productGrpIdentifierMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 
 	@Test
@@ -1497,6 +1522,7 @@ public class TestMaster {
 	@Test
 	public void ProductGrpMasterRepository_findByProductGroupCdのテスト() {
 		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpIdentifierMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		List<String> foundTestString = Arrays.asList("CPG00001");
@@ -1584,6 +1610,7 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteNodeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpIdentifierMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
