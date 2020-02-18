@@ -1,5 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.listener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,6 +25,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -37,6 +41,9 @@ public class TestListener {
 
 	@Autowired
 	DealerContractRepository dealerContractRepository;
+	
+	@Autowired
+	EstimationRepository estimationRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -57,23 +64,23 @@ public class TestListener {
 	@WithMockCustomUser
 	public void CustomerEstimationListenerのテスト() throws Exception {
 		CustomerEstimation customerEstimation = new CustomerEstimation();
-		customerEstimation.setMomKjbSystemId("000000000442415");
+		customerEstimation.setMomKjbSystemId("000000000433091");
 		Estimation estimation = new Estimation();
 		estimation.setId(1L);
 		customerEstimation.setEstimation(estimation);
 		customerEstimationRepository.save(customerEstimation);
 		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
-		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000000447380", customerEstimation.getMomCustId());
-		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000417365", customerEstimation.getCompanyId());
-		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000445220", customerEstimation.getOfficeId());
+		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000007309661", customerEstimation.getMomCustId());
+		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", customerEstimation.getCompanyId());
+		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000255394", customerEstimation.getOfficeId());
 		Assert.assertEquals("企事部設定区分が正しく取得されること", DepartmentDiv.企事部, customerEstimation.getDepartmentDiv());
-		Assert.assertEquals("顧客名が正しく取得されること", "花＊工＊株式会社＊＊＊＊＊", customerEstimation.getCustomerName());
-		Assert.assertEquals("企業名が正しく取得されること", "花＊工＊株式会社", customerEstimation.getCompanyName());
+		Assert.assertEquals("顧客名が正しく取得されること", "株式会社テ＊ー＊イア＊＊＊＊＊", customerEstimation.getCustomerName());
+		Assert.assertEquals("企業名が正しく取得されること", "株式会社テ＊ー＊イア", customerEstimation.getCompanyName());
 		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerEstimation.getOfficeName());
 		Assert.assertEquals("部門名が正しく取得されること", "＊＊", customerEstimation.getDepartmentName());
-		Assert.assertEquals("郵便番号が正しく取得されること", "1710014", customerEstimation.getPostNumber());
-		Assert.assertEquals("住所が正しく取得されること", "東京都豊島区池袋４丁目９９－９９　ＸＸＸビル", customerEstimation.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0339808999", customerEstimation.getPhoneNumber());
+		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", customerEstimation.getPostNumber());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", customerEstimation.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", customerEstimation.getPhoneNumber());
 		Assert.assertEquals("FAX番号が正しく取得されること", null, customerEstimation.getFaxNumber());
 	}
 
@@ -81,33 +88,71 @@ public class TestListener {
 	@WithMockCustomUser
 	public void DealerEstimationListenerのテスト() throws Exception {
 		DealerEstimation dealerEstimation = new DealerEstimation();
-		dealerEstimation.setMomKjbSystemId("000000000442415");
+		dealerEstimation.setMomKjbSystemId("000000000433091");
 		dealerEstimation.setDealerFlowOrder(DealerFlowOrder.販売店);
 		Estimation estimation = new Estimation();
 		estimation.setId(1L);
 		dealerEstimation.setEstimation(estimation);
 		dealerEstimationRespository.save(dealerEstimation);
 		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
-		Assert.assertEquals("販売店名が正しく取得されること", "花＊工＊株式会社", dealerEstimation.getDealerName());
-		Assert.assertEquals("郵便番号が正しく取得されること", "1710014", dealerEstimation.getPostNumber());
-		Assert.assertEquals("住所が正しく取得されること", "東京都豊島区池袋４丁目９９－９９　ＸＸＸビル", dealerEstimation.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0339808999", dealerEstimation.getOrgPhoneNumber());
+		Assert.assertEquals("販売店名が正しく取得されること", "株式会社テ＊ー＊イア", dealerEstimation.getDealerName());
+		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerEstimation.getPostNumber());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", dealerEstimation.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", dealerEstimation.getOrgPhoneNumber());
 	}
 
 	@Test
 	@WithMockCustomUser
 	public void DealerContractListenerのテスト() throws Exception {
 		DealerContract dealerContract = new DealerContract();
-		dealerContract.setMomKjbSystemId("000000000442415");
+		dealerContract.setMomKjbSystemId("000000000433091");
 		dealerContract.setDealerFlowOrder(DealerFlowOrder.販売店);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		dealerContract.setContract(contract);
 		dealerContractRepository.save(dealerContract);
 		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
-		Assert.assertEquals("販売店名が正しく取得されること", "花＊工＊株式会社", dealerContract.getDealerName());
-		Assert.assertEquals("郵便番号が正しく取得されること", "1710014", dealerContract.getPostNumber());
-		Assert.assertEquals("住所が正しく取得されること", "東京都豊島区池袋４丁目９９－９９　ＸＸＸビル", dealerContract.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0339808999", dealerContract.getOrgPhoneNumber());
+		Assert.assertEquals("販売店名が正しく取得されること", "株式会社テ＊ー＊イア", dealerContract.getDealerName());
+		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerContract.getPostNumber());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", dealerContract.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", dealerContract.getOrgPhoneNumber());
+	}
+	
+	@Test
+	@WithMockCustomUser
+	public void EstimationListenerのテスト_番号未付与() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("listener/sequence.sql");
+
+		Estimation estimation = estimationRepository.findOne(1L);
+		estimation.setId(0);
+		estimation.setEstimationNumber(null);
+		estimation.setEstimationBranchNumber(2);
+		estimation.setProductGrpMasterId(1L);
+		estimation.setRjManageNumber(null);
+		estimationRepository.save(estimation);
+		Estimation result = estimationRepository.findOne(estimation.getId());
+
+		String expectEstimationNumber = "CE" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "00001";
+		Assert.assertEquals("見積番号が正しく取得されること", expectEstimationNumber, result.getEstimationNumber());
+		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
+
+		// シーケンスのDROPではIF EXISTSが使用できないため、ここで削除
+		context.getBean(DBConfig.class).initTargetTestData("listener/clearSequence.sql");
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void EstimationListenerのテスト_番号付与済() throws Exception {
+		Estimation estimation = estimationRepository.findOne(1L);
+		estimation.setId(0);
+		estimation.setEstimationNumber("CE000000000001");
+		estimation.setEstimationBranchNumber(2);
+		estimation.setProductGrpMasterId(1L);
+		estimation.setRjManageNumber("1230000001");
+		estimationRepository.save(estimation);
+		Estimation result = estimationRepository.findOne(estimation.getId());
+
+		Assert.assertEquals("見積番号が正しく取得されること", "CE000000000001", result.getEstimationNumber());
+		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
 	}
 }
