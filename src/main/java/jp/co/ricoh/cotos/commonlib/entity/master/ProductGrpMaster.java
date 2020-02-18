@@ -122,4 +122,13 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "解約確定条件フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer cancelDefinitionConditionsFlg;
+
+	/**
+	 * 商品グループ識別子マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "product_grp_identifier_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "商品グループ識別子マスタ", required = false, position = 13)
+	private ProductGrpIdentifierMaster productGrpIdentifierMaster;
+
 }
