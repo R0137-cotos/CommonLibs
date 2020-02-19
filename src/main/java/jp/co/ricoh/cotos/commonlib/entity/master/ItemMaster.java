@@ -290,4 +290,11 @@ public class ItemMaster extends EntityBaseMaster {
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "値引き下限値", required = false, position = 29, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal lowerLimit;
+
+	/**
+	 * V-UP連携除外フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "V-UP連携除外フラグ", required = false, position = 30, allowableValues = "range[0,9]")
+	private Integer vupLinkageExclusionFlg;
 }
