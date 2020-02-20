@@ -69,6 +69,13 @@ public class ContractSearchParameter {
 	private String rjManageNumber;
 
 	/**
+	 * FFM発注問合せ番号
+	 */
+	@ApiParam(value = "FFM発注問合せ番号", required = false)
+	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, allowableValues = "range[0,255]")
+	private String contactNo;
+
+	/**
 	 * WEB受注番号
 	 */
 	@ApiParam(value = "WEB受注番号", required = false)
