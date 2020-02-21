@@ -41,7 +41,7 @@ public class BasicContents extends EntityBase {
 	 */
 	public enum ApplicationStatus {
 
-		作成("1"), 申請中("2"), 承認済み("3"), 確定("4");
+		作成("1"), 申請中("2"), 承認済み("3"), 確定("4"), 解約確定("7");
 
 		private final String text;
 
@@ -140,10 +140,11 @@ public class BasicContents extends EntityBase {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
 	private Date updateDateTime;
 
-	/**COTOS管理情報
-	@OneToOne(mappedBy = "basicContents")
-	private CotosManagementInfo cotosManagementInfo;
-	*/
+	/**API連携ステータス*/
+	private String apiOrderStatus;
+
+	/**申込ステータス*/
+	private String orderStatus;
 
 	/**
 	 * 契約情報
