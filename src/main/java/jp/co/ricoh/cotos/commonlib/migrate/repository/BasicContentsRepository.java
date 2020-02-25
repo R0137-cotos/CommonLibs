@@ -21,4 +21,6 @@ public interface BasicContentsRepository extends CrudRepository<BasicContents, L
 			+ "order by b.id ", nativeQuery = true)
 	public List<BasicContents> findByContractStartDateAndCotosProcessingFlg(@Param("contractStartDate") String contractStartDate, @Param("cotosProcessingFlg") String cotosProcessingFlg);
 
+	public List<BasicContents> findByMakerManageNo(String makerMmanageNo);
+
 }
