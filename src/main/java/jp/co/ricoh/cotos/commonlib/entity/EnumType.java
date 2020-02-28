@@ -232,7 +232,7 @@ public class EnumType {
 	 */
 	public enum TargetDirectionType {
 
-		担当CE("1"), 担当SA("2"), 全担当者("98"), その他("99");
+		担当CE("1"), 担当SA("2"), 問合せ元("96"), 全員に返信("97"), 全担当者("98"), その他("99");
 
 		private final String text;
 
