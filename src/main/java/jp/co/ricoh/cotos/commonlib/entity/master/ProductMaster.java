@@ -118,6 +118,9 @@ public class ProductMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "商品種類区分", required = false, position = 12, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
+	/**
+	 * IFSその他機器情報管理マスタ
+	 */
 	@OneToOne(mappedBy = "productMaster")
 	@ApiModelProperty(value = "IFSその他機器情報管理マスタ", required = false, position = 13)
 	private IfsCsvMaster ifsCsvMaster;
@@ -128,4 +131,11 @@ public class ProductMaster extends EntityBaseMaster {
 	@OneToMany(mappedBy = "productMaster")
 	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 14)
 	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
+	
+	/**
+	 * 固有項目区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "固有項目区分", required = false, position = 15, allowableValues = "range[0,255]")
+	private String extendsParameterDiv;
 }
