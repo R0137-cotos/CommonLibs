@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.0.9 (03/03/2020)
+- [**closed**] #5056 問い合わせ用の管理番号の採番タイミング変更 [#823](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/823)
+- [**closed**] #5749 宛先種別,問い合わせエラーメッセージ追加 [#842](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/842)
+- [**closed**] #5047 楽観ロックエラーメッセージ追加, #5249 契約リスト取得Dtoおよび契約検索パラメータへの項目追加 [#841](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/841)
+- [**closed**] 5394  サービス開始日を条件として契約を取得するメソッド追加 [#811](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/811)
+- [**closed**] #5446 顧客(見積用)リスナー修正 [#799](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/799)
+- [**closed**] SIM対応分リリース [#786](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/786)
+
+---
+
 ## v2.0.5 (23/01/2020)
 - [**closed**] #4846 見積検索パラメータに項目追加 [#779](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/779)
 - [**closed**] #4482 商品拡張項目マスタ追加 [#777](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/777)
