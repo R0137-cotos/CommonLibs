@@ -8,6 +8,6 @@ public class CustomItemDto {
 	/**
 	 * サービス内部情報
 	 */
-	private String serviceInnerInfo;
+	//	private String serviceInnerInfo;
 
 }

@@ -1,9 +1,23 @@
 package jp.co.ricoh.cotos.commonlib.migrate.dto;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
 public class ContractorInfoDto {
+
+	/**ID*/
+	private long id;
+
+	/**基本情報*/
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "basic_contents_id", referencedColumnName = "id")
+	@JsonIgnore
+	private BasicContentsDto basicContents;
 
 	/**
 	 * 企業ID

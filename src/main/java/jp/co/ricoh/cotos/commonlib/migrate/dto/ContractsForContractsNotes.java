@@ -18,40 +18,40 @@ public class ContractsForContractsNotes {
 	/**
 	 * 基本情報
 	 */
-	private BasicContentsDto basicContentsDto;
+	private BasicContentsDto basicContents;
 
 	/**
 	 * 契約情報
 	 */
-	private List<ContractInfoDto> contractInfoDtoList;
+	private List<ContractInfoDto> contractInfo;
 
 	/**
 	 * 契約者情報
 	 */
-	private List<ContractorInfoDto> contractorInfoDtoList;
+	private List<ContractorInfoDto> contractorInfo;
 
 	/**
-	 *
+	 * カスタムアイテム
 	 */
-	private List<CustomItemDto> customItemDtoList;
+	//	private List<CustomItemDto> customItem;
 
 	/**
-	 *
+	 * セットアップ情報
 	 */
-	private List<SetupInfoDto> setupInfoDtoList;
+	private List<SetupInfoDto> setupInfo;
 
 	/**
 	 * 契約担当者情報
 	 */
-	private List<BranchCustomerInfo> branchCustoemrInfoDtoList;
+	private List<BranchCustomerInfo> branchCustoemrInfo;
 
 	/**
 	 * 販売店情報
 	 */
-	private List<DistributorInfo> distributorInfoDtoList;
+	private List<DistributorInfo> distributorInfo;
 
 	/**
 	 * 母店情報
 	 */
-	private List<ParentDistributorInfo> parentDistributorInfoDtoList;
+	private List<ParentDistributorInfo> parentDistributorInfo;
 }

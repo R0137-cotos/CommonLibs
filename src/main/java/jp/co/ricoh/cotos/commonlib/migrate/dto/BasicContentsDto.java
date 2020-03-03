@@ -6,6 +6,11 @@ import lombok.Data;
 public class BasicContentsDto {
 
 	/**
+	 * 基本情報ID
+	 */
+	private long id;
+
+	/**
 	 * 対象システム
 	 */
 	private String targetSys;
@@ -93,6 +98,6 @@ public class BasicContentsDto {
 	/**
 	 * NetRicoh会員ID
 	 */
-	private String netricohAccount;
+	private String netRicohAccount;
 
 }
