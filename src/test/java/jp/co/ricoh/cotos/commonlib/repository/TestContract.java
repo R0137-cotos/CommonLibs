@@ -304,6 +304,9 @@ public class TestContract {
 		Date date = format.parse("2019/12/01 01:23:45");
 		List<Contract> list = contractRepository.findByContractTypeAndChangePreferredDate(date);
 		Assert.assertTrue(list.size() != 0);
+
+		List<Contract> listServiceStart = contractRepository.findByContractTypeAndChangePreferredDateAndServiceStartDate(date);
+		Assert.assertTrue(listServiceStart.size() != 0);
 	}
 
 	@Test

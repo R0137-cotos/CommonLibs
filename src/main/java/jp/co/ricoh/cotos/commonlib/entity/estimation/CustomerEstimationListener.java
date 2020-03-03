@@ -76,9 +76,9 @@ public class CustomerEstimationListener {
 			customerEstimation.setAddress(this.convertJoinedAddress(vKjbMaster));
 
 		if (StringUtils.isBlank(customerEstimation.getPhoneNumber()))
-			customerEstimation.setPhoneNumber(vKjbMaster.getKgyKgyTelNum());
+			customerEstimation.setPhoneNumber(vKjbMaster.getJgsJgsTelNum());
 		if (StringUtils.isBlank(customerEstimation.getFaxNumber()))
-			customerEstimation.setFaxNumber(vKjbMaster.getKgyKgyFaxNum());
+			customerEstimation.setFaxNumber(vKjbMaster.getJgsJgsFaxNum());
 
 		customerEstimation.setDepartmentDiv(vKjbMaster.getPrflKjbSetKbn());
 		customerEstimation.setCompanyId(vKjbMaster.getPrflMomKgyId());
@@ -129,9 +129,9 @@ public class CustomerEstimationListener {
 	private String convertJoinedAddress(VKjbMaster kjbMaster) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsKtdhknNmKnji(), StringUtils.EMPTY));
-		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsKskugnchosnKnji(), StringUtils.EMPTY));
-		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsKowaTusyoKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJtdhknNmKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJskugnchosnKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJowaTusyoKnji(), StringUtils.EMPTY));
 		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJkowChomeKnji(), StringUtils.EMPTY));
 		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getJgsJgsAdsAzatusyoNm(), StringUtils.EMPTY));
 		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getJgsJgsAdsBantiNm(), StringUtils.EMPTY));

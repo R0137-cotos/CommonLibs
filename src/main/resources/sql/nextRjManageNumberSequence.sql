@@ -1,0 +1,1 @@
+select {{sequenceName}}.nextval generated_number from dual
