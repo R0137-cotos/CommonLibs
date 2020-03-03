@@ -124,8 +124,17 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	private Integer cancelDefinitionConditionsFlg;
 
 	/**
+	 * 商品グループ識別子マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "product_grp_identifier_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "商品グループ識別子マスタ", required = false, position = 13)
+	private ProductGrpIdentifierMaster productGrpIdentifierMaster;
+
+	/**
 	 * EDW大塚商会専用商品フラグ
 	 */
-	@ApiModelProperty(value = "EDW大塚商会専用商品フラグ", required = false, position = 13, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "EDW大塚商会専用商品フラグ", required = false, position = 14, allowableValues = "range[0,9]")
 	private Integer edwOtsukaProductFlg;
+
 }
