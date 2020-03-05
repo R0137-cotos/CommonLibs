@@ -533,7 +533,6 @@ public class Estimation extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "web受注注文番号", required = false, position = 59, allowableValues = "range[0,255]")
 	private String webOrderNumber;
-	
 
 	/**
 	 * ベンダー管理番号
@@ -541,7 +540,14 @@ public class Estimation extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 60, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
-	
+
+	/**
+	 * 申込日
+	 */
+	@ApiModelProperty(value = "申込日", required = false, position = 61)
+	@Temporal(TemporalType.DATE)
+	private Date applicationDate;
+
 	@PreUpdate
 	public void preUpdate() {
 		if (StringUtils.isEmpty(super.getUpdatedUserId())) {
