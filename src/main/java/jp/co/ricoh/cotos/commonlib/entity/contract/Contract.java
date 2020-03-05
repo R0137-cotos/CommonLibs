@@ -719,4 +719,11 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "品種追加状態", required = false, position = 76, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
+	
+	/**
+	 * 解約申込日
+	 */
+	@ApiModelProperty(value = "解約申込日", required = false, position = 77)
+	@Temporal(TemporalType.DATE)
+	private Date cancelApplicationDate;
 }
