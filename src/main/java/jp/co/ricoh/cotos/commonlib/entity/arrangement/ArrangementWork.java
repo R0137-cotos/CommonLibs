@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.arrangement;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -158,5 +159,11 @@ public class ArrangementWork extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "アプリケーションID", required = false, position = 13, allowableValues = "range[0,255]")
 	private String appId;
+
+	/**
+	 * 作業完了日時
+	 */
+	@ApiModelProperty(value = "作業完了日時", required = false, position = 14)
+	private Date workCompletedAt;
 
 }
