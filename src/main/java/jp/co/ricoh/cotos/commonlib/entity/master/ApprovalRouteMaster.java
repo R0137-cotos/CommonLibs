@@ -113,7 +113,7 @@ public class ApprovalRouteMaster extends EntityBaseMaster {
 	/**
 	 * 契約承認依頼者区分
 	 */
-	@ApiModelProperty(value = "契約承認依頼者区分", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約承認依頼者区分", required = false, position = 9, allowableValues = "担当SA(\"1\"), 受付担当CE(\"2\"), 導入担当CE(\"3\"), 保守担当CE(\"4\")", example = "1")
 	private ContractApprovalRequesterDiv contractApprovalRequesterDiv;
 
 }
