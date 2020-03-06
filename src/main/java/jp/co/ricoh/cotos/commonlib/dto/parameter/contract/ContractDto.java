@@ -540,4 +540,11 @@ public class ContractDto extends DtoBase {
 	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 71)
 	private ContractInstallationLocationDto contractInstallationLocation;
 
+	/**
+	 * 解約確定日
+	 */
+	@ApiModelProperty(value = "解約予定日", required = false, position = 72)
+	@Temporal(TemporalType.DATE)
+	private Date cancelDecisionDate;
+
 }
