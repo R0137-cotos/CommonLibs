@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -97,5 +99,6 @@ public class ArrangementWorkDto extends DtoBase {
 	 * 作業完了日時
 	 */
 	@ApiModelProperty(value = "作業完了日時", required = false, position = 12)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date workCompletedAt;
 }
