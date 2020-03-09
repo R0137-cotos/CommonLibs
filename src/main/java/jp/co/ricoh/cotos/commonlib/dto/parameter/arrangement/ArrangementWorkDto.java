@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.JoinColumn;
@@ -91,4 +92,10 @@ public class ArrangementWorkDto extends DtoBase {
 	@OneToMany(mappedBy = "arrangementWork")
 	@ApiModelProperty(value = "手配業務チェック結果", required = false, position = 11)
 	private List<ArrangementWorkCheckResultDto> arrangementWorkCheckResultList;
+
+	/**
+	 * 作業完了日時
+	 */
+	@ApiModelProperty(value = "作業完了日時", required = false, position = 12)
+	private Date workCompletedAt;
 }

@@ -230,6 +230,13 @@ public class ArrangementListInfo {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
+	/**
+	 * 作業完了日時
+	 */
+	@ApiModelProperty(value = "作業完了日時", required = false, position = 32)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date workCompletedAt;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
