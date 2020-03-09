@@ -236,6 +236,13 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "解約フラグ", required = true, position = 32)
 	private int disengagementFlg;
 
+	/**
+	 * 作業完了日時
+	 */
+	@ApiModelProperty(value = "作業完了日時", required = false, position = 32)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date workCompletedAt;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
