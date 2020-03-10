@@ -53,9 +53,24 @@ public class RocProperties {
 	String cybozuLinkageItem;
 
 	/**
-	 * 契約添付ファイル種類
+	 * 契約添付ファイル種類_新規
 	 */
-	String contractAttachedFileKind;
+	String contractAttachedFileKindNew;
+
+	/**
+	 * 契約添付ファイル種類_契約変更
+	 */
+	String contractAttachedFileKindChange;
+
+	/**
+	 * 契約添付ファイル種類_情報変更
+	 */
+	String contractAttachedFileKindInfoChange;
+
+	/**
+	 * 契約添付ファイル種類_解約
+	 */
+	String contractAttachedFileKindCancellation;
 
 	/**
 	 * 一時設定担当者MoM社員ID
