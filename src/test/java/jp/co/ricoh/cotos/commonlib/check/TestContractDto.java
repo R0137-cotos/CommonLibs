@@ -753,8 +753,9 @@ public class TestContractDto {
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setInstallDeliverySiteId(STR_256);
 		testTarget.setVendorManageNumber(STR_256);
+		testTarget.setProductGroupCd(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 21);
+		Assert.assertTrue(result.getErrorInfoList().size() == 22);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号は最大文字数（255）を超えています。"));
 
@@ -864,18 +865,23 @@ public class TestContractDto {
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setVendorManageNumberName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ベンダー管理番号名称は最大文字数（255）を超えています。"));
+
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setProductMasterId(INT_MINUS_1);
 		testTarget.setRepItemMasterId(-1L);
+		testTarget.setVendorManageNumberName(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "代表品種マスタIDは最小値（0）を下回っています。"));
-
-		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(ProductContract.class, ProductContractForFindAllDetailsDto.class, "extendBplatsLink");
-
 	}
 
 	@Test

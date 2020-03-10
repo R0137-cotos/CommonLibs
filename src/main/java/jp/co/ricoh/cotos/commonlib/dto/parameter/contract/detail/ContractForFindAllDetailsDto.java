@@ -593,4 +593,11 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@ApiModelProperty(value = "品種追加状態", required = false, position = 75, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
+
+	/**
+	 * 商品グループコード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "商品グループコード", required = false, position = 76, allowableValues = "range[0,255]")
+	private String productGroupCd;
 }
