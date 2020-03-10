@@ -868,8 +868,9 @@ public class TestContractDto {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setVendorManageNumberName(STR_256);
+		testTarget.setServiceProviderCompanyName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ベンダー管理番号名称は最大文字数（255）を超えています。"));
 
@@ -878,6 +879,7 @@ public class TestContractDto {
 		testTarget.setProductMasterId(INT_MINUS_1);
 		testTarget.setRepItemMasterId(-1L);
 		testTarget.setVendorManageNumberName(null);
+		testTarget.setServiceProviderCompanyName(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));

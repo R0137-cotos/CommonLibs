@@ -73,4 +73,11 @@ public class ProductContractForFindAllDetailsDto extends EntityBase {
 	@ApiModelProperty(value = "ベンダー管理番号名称", required = false, position = 9, allowableValues = "range[0,255]")
 	private String vendorManageNumberName;
 
+	/**
+	 * サービス提供会社名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "サービス提供会社名", required = false, position = 10, allowableValues = "range[0,255]")
+	private String serviceProviderCompanyName;
+
 }
