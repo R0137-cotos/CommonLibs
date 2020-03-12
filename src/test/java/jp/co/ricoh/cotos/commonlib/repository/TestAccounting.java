@@ -270,7 +270,7 @@ public class TestAccounting {
 	public void OsoRequestDataRepositoryの条件テスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestData.sql");
 
-		List<OsoRequestData> list = osoRequestDataRepository.findByDataDivAndRequestManageNumberAndProcessingStatus(DataDiv.新規, "request_manage_number", OsoProcessingStatus.処理済);
+		List<OsoRequestData> list = osoRequestDataRepository.findByDataDivAndRequestManageNumberAndProcessingStatus(DataDiv.新規.toString(), "request_manage_number", OsoProcessingStatus.処理済.toString());
 
 		// Entity が null ではないことを確認
 		Assert.assertEquals(1L, list.size());
