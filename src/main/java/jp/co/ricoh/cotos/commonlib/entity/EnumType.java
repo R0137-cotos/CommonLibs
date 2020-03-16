@@ -352,7 +352,7 @@ public class EnumType {
 	 */
 	public enum OsoProcessingStatus {
 
-		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
+		未処理("0"), 処理済("1"), 実績連携済("2"), 処理対象外("9"), 処理エラー("E");
 
 		private final String text;
 
