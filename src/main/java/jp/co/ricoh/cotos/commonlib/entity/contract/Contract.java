@@ -694,16 +694,23 @@ public class Contract extends EntityBase {
 	private Date cancelDecisionDate;
 
 	/**
+	 * 契約情報確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "契約情報確定日", required = false, position = 73)
+	private Date fixedDate;
+
+	/**
 	 * 販売区分
 	 */
-	@ApiModelProperty(value = "販売区分", required = false, position = 73, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	@ApiModelProperty(value = "販売区分", required = false, position = 74, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
 	private SaleDiv saleDiv;
 
 	/**
 	 * ベンダー管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 74, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 75, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
@@ -711,19 +718,19 @@ public class Contract extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 75, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 76, allowableValues = "range[0,9]")
 	private Integer manualUpdateFlg;
 
 	/**
 	 * 品種追加状態
 	 */
-	@ApiModelProperty(value = "品種追加状態", required = false, position = 76, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	@ApiModelProperty(value = "品種追加状態", required = false, position = 77, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
-	
+
 	/**
 	 * 解約申込日
 	 */
-	@ApiModelProperty(value = "解約申込日", required = false, position = 77)
+	@ApiModelProperty(value = "解約申込日", required = false, position = 78)
 	@Temporal(TemporalType.DATE)
 	private Date cancelApplicationDate;
 }
