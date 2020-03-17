@@ -17,9 +17,11 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SaleDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import lombok.Data;
@@ -540,4 +542,30 @@ public class ContractDto extends DtoBase {
 	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 71)
 	private ContractInstallationLocationDto contractInstallationLocation;
 
+	/**
+	 * 販売区分
+	 */
+	@ApiModelProperty(value = "販売区分", required = false, position = 72, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	private SaleDiv saleDiv;
+
+	/**
+	 * ベンダー管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 73, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
+	 * 手動更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 74, allowableValues = "range[0,9]")
+	private Integer manualUpdateFlg;
+
+	/**
+	 * 品種追加状態
+	 */
+	@ApiModelProperty(value = "品種追加状態", required = false, position = 75, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	private ItemAddStatus itemAddStatus;
 }

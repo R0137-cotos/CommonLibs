@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
@@ -17,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -119,6 +122,14 @@ public class ContractAttachedFile extends EntityBase {
 	private Date attachedAt;
 
 	/**
+	 * 契約添付ファイル連携先
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contractAttachedFile")
+	@ApiModelProperty(value = "契約添付ファイル連携先", required = false, position = 11)
+	private List<ContractAttachedFileLinkage> contractAttachedFileLinkageList;
+
+	/**
 	 * ファイル情報
 	 */
 	@Transient
@@ -128,6 +139,6 @@ public class ContractAttachedFile extends EntityBase {
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();
-		this.attachedAt =  super.getCreatedAt();
+		this.attachedAt = super.getCreatedAt();
 	}
 }
