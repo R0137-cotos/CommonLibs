@@ -635,8 +635,9 @@ public class TestEstimation {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setDetailAbstract(STR_256);
+		testTarget.setContractSpan(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "摘要は最大文字数（255）を超えています。"));
 
@@ -644,8 +645,9 @@ public class TestEstimation {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setQuantity(INT_100000);
 		testTarget.setBeforeQuantity(INT_100000);
+		testTarget.setItemAddFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
 
@@ -653,8 +655,9 @@ public class TestEstimation {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setItemAddFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 

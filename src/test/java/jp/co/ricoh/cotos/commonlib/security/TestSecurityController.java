@@ -28,11 +28,14 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementPicWorke
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkApprovalRouteDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkApprovalRouteNodeDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkAttachedFileDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkAttachedFileLinkageDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkCheckResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ArrangementResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CheckResultUpdateParameter;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EimLinkageDocumentDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EimLinkageManagementInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.CommunicationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactRegisterParameter;
@@ -40,8 +43,11 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactToDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractApprovalRouteDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractApprovalRouteNodeDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAssignmentAttachedFileDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAssignmentDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileHistoryDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileLinkageDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractCheckResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;
@@ -95,6 +101,15 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailPlanData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestPlanData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoResultsData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoResultsPlanData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.UsageQuantity;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.UsageQuantityRelatedManagement;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementPicWorkerEmp;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
@@ -102,10 +117,13 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRes
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkErrorLog;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageDocument;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.CommunicationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
@@ -115,8 +133,11 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignmentAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileHistory;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
@@ -889,6 +910,111 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/JsonSchemaMasterParameter")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated JsonSchemaMasterParameter dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ArrangementWorkAttachedFileLinkage")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ArrangementWorkAttachedFileLinkage entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ArrangementWorkAttachedFileLinkageDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ArrangementWorkAttachedFileLinkageDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractAttachedFileLinkage")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractAttachedFileLinkage entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractAttachedFileLinkageDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractAttachedFileLinkageDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractAssignment")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractAssignment entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractAssignmentDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractAssignmentDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractAssignmentAttachedFile")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractAssignmentAttachedFile entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractAssignmentAttachedFileDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractAssignmentAttachedFileDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CommissionData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CommissionData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/OsoRequestData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated OsoRequestData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/OsoRequestDetailData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated OsoRequestDetailData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/OsoRequestDetailPlanData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated OsoRequestDetailPlanData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/OsoRequestPlanData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated OsoRequestPlanData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/OsoResultsData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated OsoResultsData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/OsoResultsPlanData")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated OsoResultsPlanData entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/UsageQuantity")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated UsageQuantity entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/UsageQuantityRelatedManagement")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated UsageQuantityRelatedManagement entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageDocument")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageDocument entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageDocumentDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageDocumentDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageManagementInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageManagementInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageManagementInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageManagementInfoDto dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }

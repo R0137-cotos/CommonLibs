@@ -131,4 +131,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "商品グループ識別子マスタ", required = false, position = 13)
 	private ProductGrpIdentifierMaster productGrpIdentifierMaster;
 
+	/**
+	 * EDW大塚商会専用商品フラグ
+	 */
+	@ApiModelProperty(value = "EDW大塚商会専用商品フラグ", required = false, position = 14, allowableValues = "range[0,9]")
+	private Integer edwOtsukaProductFlg;
+
 }

@@ -1,0 +1,1 @@
+INSERT INTO attached_file_linkage (id,created_at,created_user_id,updated_at,updated_user_id,version,product_master_id,attached_file_linkage_name,linkage_flg_default,code_value) VALUES(1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,1,'テスト',0,'テスト');

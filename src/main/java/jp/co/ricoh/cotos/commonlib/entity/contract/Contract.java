@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -44,7 +45,7 @@ public class Contract extends EntityBase {
 
 	public enum ContractType {
 
-		新規("1"), 契約変更("2"), 情報変更("3");
+		新規("1"), 契約変更("2"), 情報変更("3"), 契約更新("4");
 
 		private final String text;
 
@@ -147,6 +148,28 @@ public class Contract extends EntityBase {
 
 		@JsonCreator
 		public static SsWorkRequestCreateStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum SaleDiv {
+
+		訪問販売("1"), Web販売("2");
+
+		private final String text;
+
+		private SaleDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static SaleDiv fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -670,4 +693,44 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "解約確定日", required = false, position = 72)
 	private Date cancelDecisionDate;
 
+	/**
+	 * 契約情報確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "契約情報確定日", required = false, position = 73)
+	private Date fixedDate;
+
+	/**
+	 * 販売区分
+	 */
+	@ApiModelProperty(value = "販売区分", required = false, position = 74, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	private SaleDiv saleDiv;
+
+	/**
+	 * ベンダー管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 75, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
+	 * 手動更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 76, allowableValues = "range[0,9]")
+	private Integer manualUpdateFlg;
+
+	/**
+	 * 品種追加状態
+	 */
+	@ApiModelProperty(value = "品種追加状態", required = false, position = 77, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	private ItemAddStatus itemAddStatus;
+
+	/**
+	 * 解約申込日
+	 */
+	@ApiModelProperty(value = "解約申込日", required = false, position = 78)
+	@Temporal(TemporalType.DATE)
+	private Date cancelApplicationDate;
 }

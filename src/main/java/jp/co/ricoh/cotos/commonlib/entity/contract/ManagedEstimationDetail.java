@@ -120,5 +120,13 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = true, position = 11, allowableValues = "range[0,255]")
 	private String ricohItemCode;
+	
+	/**
+	 * メーカー商品コード
+	 */
+	@Column(nullable = false)
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 12, allowableValues = "range[0,255]")
+	private String makerItemCode;
 
 }

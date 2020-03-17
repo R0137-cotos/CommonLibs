@@ -17,9 +17,11 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SaleDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import lombok.Data;
@@ -493,11 +495,25 @@ public class ContractDto extends DtoBase {
 	private String installDeliverySiteId;
 
 	/**
+	 * 解約確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "解約確定日", required = false, position = 66)
+	private Date cancelDecisionDate;
+
+	/**
+	 * 契約情報確定日
+	 */
+	@Column
+	@ApiModelProperty(value = "契約情報確定日", required = false, position = 67)
+	private Date fixedDate;
+
+	/**
 	 * 契約機種
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種", required = false, position = 66)
+	@ApiModelProperty(value = "契約機種", required = false, position = 68)
 	private List<ContractEquipmentDto> contractEquipmentList;
 
 	/**
@@ -505,7 +521,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約受付担当SS組織", required = false, position = 67)
+	@ApiModelProperty(value = "契約受付担当SS組織", required = false, position = 69)
 	private ContractPicAccSsOrgDto contractPicAccSsOrg;
 
 	/**
@@ -513,7 +529,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約導入担当SS組織", required = false, position = 68)
+	@ApiModelProperty(value = "契約導入担当SS組織", required = false, position = 70)
 	private ContractPicIntSsOrgDto contractPicIntSsOrg;
 
 	/**
@@ -521,7 +537,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約導入担当CE社員", required = false, position = 69)
+	@ApiModelProperty(value = "契約導入担当CE社員", required = false, position = 71)
 	private ContractPicIntCeEmpDto contractPicIntCeEmp;
 
 	/**
@@ -529,7 +545,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約受付担当CE社員", required = false, position = 70)
+	@ApiModelProperty(value = "契約受付担当CE社員", required = false, position = 72)
 	private ContractPicAccCeEmpDto contractPicAccCeEmp;
 
 	/**
@@ -537,7 +553,33 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 71)
+	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 73)
 	private ContractInstallationLocationDto contractInstallationLocation;
 
+	/**
+	 * 販売区分
+	 */
+	@ApiModelProperty(value = "販売区分", required = false, position = 72, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	private SaleDiv saleDiv;
+
+	/**
+	 * ベンダー管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 73, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
+	 * 手動更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 74, allowableValues = "range[0,9]")
+	private Integer manualUpdateFlg;
+
+	/**
+	 * 品種追加状態
+	 */
+	@ApiModelProperty(value = "品種追加状態", required = false, position = 75, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	private ItemAddStatus itemAddStatus;
 }

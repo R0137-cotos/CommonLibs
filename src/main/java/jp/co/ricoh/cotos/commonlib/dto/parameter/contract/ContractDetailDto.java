@@ -133,7 +133,7 @@ public class ContractDetailDto extends DtoBase {
 	/**
 	 * ランニング売上計上処理状態
 	 */
-	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\")", position = 18)
+	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")", position = 18)
 	private RunningAccountSalesStatus runningAccountSalesStatus;
 
 	/**
@@ -148,4 +148,19 @@ public class ContractDetailDto extends DtoBase {
 	@OneToOne(mappedBy = "contractDetail")
 	@ApiModelProperty(value = "品種(契約用)", required = true, position = 12)
 	private ItemContractDto itemContract;
+
+	/**
+	 * 契約期間
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約期間", required = false, position = 13, allowableValues = "range[0,255]")
+	private String contractSpan;
+
+	/**
+	 * 品種追加フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 14, allowableValues = "range[0,9]")
+	private Integer itemAddFlg;
 }

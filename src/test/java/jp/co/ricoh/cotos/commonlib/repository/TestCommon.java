@@ -15,11 +15,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageDocument;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory.MailSendType;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageDocumentRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageManagementInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.MailSendHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository;
@@ -48,6 +52,18 @@ public class TestCommon {
 	@Autowired
 	MailControlMasterRepository mailControlMasterRepository;
 
+	/**
+	 * EIM連携文書
+	 */
+	@Autowired
+	EimLinkageDocumentRepository eimLinkageDocumentRepository;
+
+	/**
+	 * EIM連携管理情報
+	 */
+	@Autowired
+	EimLinkageManagementInfoRepository eimLinkageManagementInfoRepository;
+
 	@Autowired
 	TestTools testTool;
 
@@ -63,6 +79,8 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/mailSendHistory.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/estimation/estimation_all.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageDocument.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageManagementInfo.sql");
 	}
 
 	@AfterClass
@@ -95,12 +113,12 @@ public class TestCommon {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
-		
+
 		MailControlMaster mailControlMaster = mailControlMasterRepository.findOne(1L);
 		MailSendHistory found2 = mailSendHistoryRepository.findByTargetDataIdAndMailControlMasterAndMailSendType(1L, mailControlMaster, MailSendType.完了);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found2);
-		
+
 		List<MailSendHistory> found3 = mailSendHistoryRepository.findByMailControlMasterAndMailSendType(mailControlMaster, MailSendType.完了);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found3);
@@ -119,5 +137,29 @@ public class TestCommon {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(foundList);
 
+	}
+
+	@Test
+	public void EimLinkageDocumentRepositoryのテスト() throws Exception {
+
+		EimLinkageDocument found = eimLinkageDocumentRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void EimLinkageManagementInfoRepositoryのテスト() throws Exception {
+
+		EimLinkageManagementInfo found = eimLinkageManagementInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 }

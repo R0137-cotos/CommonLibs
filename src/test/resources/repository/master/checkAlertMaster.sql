@@ -1,0 +1,1 @@
+INSERT INTO check_alert_master (id,created_at,created_user_id,updated_at,updated_user_id,version,check_code,service_category,common_check_flg,message) VALUES(1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'1','1',0,'テスト');
