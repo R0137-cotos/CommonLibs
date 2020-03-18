@@ -108,7 +108,11 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 				momAuthorities = objectMapper.readValue(jwt.getClaim(claimsProperties.getMomAuth()).asString(), new TypeReference<Map<ActionDiv, Map<AuthDiv, AuthLevel>>>(){});
 			} else if (jwt.getClaim(claimsProperties.getMomAuth()).isNull()) {
 				// シングルユーザーIDに紐づく権限情報を取得
-				momAuthorities = momAuthorityService.searchAllMomAuthorities(jwt.getClaim(claimsProperties.getSingleUserId()).asString());
+				try {
+					momAuthorities = momAuthorityService.searchAllMomAuthorities(jwt.getClaim(claimsProperties.getSingleUserId()).asString());
+				} catch(Exception e) {
+					throw e;
+				}
 			}
 	
 			// 一般ユーザーで、MoM権限ユーザーが取得できない場合はエラー
