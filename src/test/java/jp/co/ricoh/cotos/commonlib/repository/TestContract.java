@@ -24,6 +24,8 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
@@ -341,6 +343,8 @@ public class TestContract {
 
 		List<Contract> listServiceStart = contractRepository.findByContractTypeAndChangePreferredDateAndServiceStartDate(date);
 		Assert.assertTrue(listServiceStart.size() != 0);
+		// ライフサイクルが締結待ちで契約種別＝契約更新のデータを取得できているか確認
+		Assert.assertTrue(listServiceStart.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新) && contract.getLifecycleStatus().equals(LifecycleStatus.締結待ち)).count() != 0);
 	}
 
 	@Test
@@ -431,6 +435,9 @@ public class TestContract {
 		Assert.assertNotNull(foundList);
 		// データが取得できていることを確認
 		Assert.assertTrue(foundList.size() > 0);
+		// 契約種別＝契約更新が取得できていることを確認
+		Assert.assertTrue(foundList.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新)).count() > 0);
+
 	}
 
 	@Test
