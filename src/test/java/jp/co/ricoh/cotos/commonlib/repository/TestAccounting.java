@@ -250,10 +250,10 @@ public class TestAccounting {
 		// Entity が null または 空 ではないことを確認
 		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
 
-		found = usageQuantityRepository.findByRjManageNumberAndItemCode("rj_manage_number", "item_code");
+		founds = usageQuantityRepository.findByRjManageNumberAndItemCode("rj_manage_number", "item_code");
 
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
+		// Entity が null または 空 ではないことを確認
+		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
 	}
 
 	@Test
