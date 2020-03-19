@@ -11,5 +11,5 @@ import jp.co.ricoh.cotos.commonlib.entity.accounting.UsageQuantity;
 public interface UsageQuantityRepository extends CrudRepository<UsageQuantity, Long> {
 	public List<UsageQuantity> findByContractIdAndContractDetailId(Long contractId, Long contractDetailId);
 
-	public UsageQuantity findByRjManageNumberAndItemCode(String rjManageNumber, String itemCode);
+	public List<UsageQuantity> findByRjManageNumberAndItemCode(String rjManageNumber, String itemCode);
 }
