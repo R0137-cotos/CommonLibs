@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.arrangement;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -158,5 +161,12 @@ public class ArrangementWork extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "アプリケーションID", required = false, position = 13, allowableValues = "range[0,255]")
 	private String appId;
+
+	/**
+	 * 作業完了日時
+	 */
+	@ApiModelProperty(value = "作業完了日時", required = false, position = 14)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date workCompletedAt;
 
 }
