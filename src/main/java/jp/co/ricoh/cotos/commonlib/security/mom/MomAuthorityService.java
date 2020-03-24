@@ -120,7 +120,7 @@ public class MomAuthorityService {
 		try {
 			authorityInfoActionDtoList = this.searchMomAuthoritiesExternal(singleUserId);
 		} catch (RemoteException | SQLException | ServiceException e) {
-			log.error(messageUtil.createMessageInfo("ExternalModuleError").getMsg());
+			log.error(messageUtil.createMessageInfo("ExternalModuleError").getMsg(), e);
 			throw e;
 		}
 
