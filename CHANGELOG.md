@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.12 (25/03/2020)
+- [**closed**] #6224 外部参照モジュールエラー時にスタックトレースを表示するように修正 [#878](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/878)
+
+---
+
 ## v2.0.9 (03/03/2020)
 - [**closed**] #5056 問い合わせ用の管理番号の採番タイミング変更 [#823](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/823)
 - [**closed**] #5749 宛先種別,問い合わせエラーメッセージ追加 [#842](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/842)
