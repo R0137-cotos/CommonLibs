@@ -51,6 +51,10 @@ public class ArrangementWorkErrorLog extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date errorOccurredAt;
 
+	@Size(max = 4000)
+	@ApiModelProperty(value = "APIリクエスト", required = false, position = 5, allowableValues = "range[0,4000]")
+	private String apiRequest;
+
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();

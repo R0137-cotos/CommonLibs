@@ -174,4 +174,10 @@ public class ItemContract extends EntityBase {
 	@ApiModelProperty(value = "品種明細(契約用)", required = false, position = 17)
 	private List<ItemDetailContract> itemDetailContractList;
 
+	/**
+	 * メーカー商品コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 17, allowableValues = "range[0,255]")
+	private String makerItemCode;
 }

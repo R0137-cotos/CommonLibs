@@ -22,8 +22,11 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignmentAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileHistory;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
@@ -46,7 +49,10 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRep
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentAttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileHistoryRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
@@ -172,6 +178,15 @@ public class TestContract {
 	ContractAttachedFileHistoryRepository contractAttachedFileHistoryRepository;
 
 	@Autowired
+	ContractAttachedFileLinkageRepository contractAttachedFileLinkageRepository;
+
+	@Autowired
+	ContractAssignmentRepository contractAssignmentRepository;
+
+	@Autowired
+	ContractAssignmentAttachedFileRepository contractAssignmentAttachedFileRepository;
+
+	@Autowired
 	TestTools testTool;
 
 	@Autowired
@@ -179,6 +194,12 @@ public class TestContract {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 	}
 
@@ -471,8 +492,9 @@ public class TestContract {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setDetailAbstract(STR_256);
 		testTarget.setOrderNo(STR_256);
+		testTarget.setContractSpan(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "摘要は最大文字数（255）を超えています。"));
 
@@ -480,8 +502,9 @@ public class TestContract {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setQuantity(INT_100000);
 		testTarget.setBeforeQuantity(INT_100000);
+		testTarget.setItemAddFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
 
@@ -489,8 +512,9 @@ public class TestContract {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setItemAddFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
@@ -631,8 +655,9 @@ public class TestContract {
 		testTarget.setContactNo(STR_256);
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setInstallDeliverySiteId(STR_256);
+		testTarget.setVendorManageNumber(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 21);
+		Assert.assertTrue(result.getErrorInfoList().size() == 22);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号は最大文字数（255）を超えています。"));
 
@@ -640,8 +665,9 @@ public class TestContract {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setOriginContractBranchNumber(INT_100);
 		testTarget.setEstimationBranchNumber(INT_100);
+		testTarget.setManualUpdateFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積番号枝番は最大値（99）を超えています。"));
 
@@ -652,8 +678,9 @@ public class TestContract {
 		testTarget.setOriginContractId((long) INT_MINUS_1);
 		testTarget.setEstimationBranchNumber(INT_MINUS_1);
 		testTarget.setEstimationId((long) INT_MINUS_1);
+		testTarget.setManualUpdateFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積IDは最小値（0）を下回っています。"));
 
@@ -925,8 +952,9 @@ public class TestContract {
 		testTarget.setRicohItemCode(STR_256);
 		testTarget.setBpCd(STR_256);
 		testTarget.setTaxFlag(STR_256);
+		testTarget.setMakerItemCode(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "消費税区分は最大文字数（255）を超えています。"));
 
@@ -1248,8 +1276,9 @@ public class TestContract {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setDetailAbstract(STR_256);
+		testTarget.setMakerItemCode(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "摘要は最大文字数（255）を超えています。"));
 
@@ -1313,4 +1342,83 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "コメントは最大文字数（1000）を超えています。"));
 	}
 
+	@Test
+	public void ContractAttachedFileLinkageのテスト() throws Exception {
+		ContractAttachedFileLinkage entity = contractAttachedFileLinkageRepository.findOne(401L);
+		ContractAttachedFileLinkage testTarget = new ContractAttachedFileLinkage();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedFileLinkageName(null);
+		testTarget.setLinkageStatus(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先が設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedFileLinkageName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先は最大文字数（255）を超えています。"));
+	}
+
+	@Test
+	public void ContractAssignmentのテスト() throws Exception {
+		ContractAssignment entity = contractAssignmentRepository.findOne(401L);
+		ContractAssignment testTarget = new ContractAssignment();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMemo(STR_1001);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メモは最大文字数（1000）を超えています。"));
+	}
+
+	@Test
+	public void ContractAssignmentAttachedFileのテスト() throws Exception {
+		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findOne(401L);
+		ContractAssignmentAttachedFile testTarget = new ContractAssignmentAttachedFile();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null チェック：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setFileName(null);
+		testTarget.setAttachedEmpId(null);
+		testTarget.setAttachedEmpName(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDが設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setFileName(STR_256);
+		testTarget.setFileKind(STR_256);
+		testTarget.setAttachedEmpId(STR_256);
+		testTarget.setAttachedEmpName(STR_256);
+		testTarget.setAttachedOrgName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル名は最大文字数（255）を超えています。"));
+	}
 }

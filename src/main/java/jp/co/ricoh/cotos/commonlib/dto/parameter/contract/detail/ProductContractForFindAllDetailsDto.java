@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail;
 import javax.persistence.Column;
 import javax.persistence.Lob;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -64,5 +65,19 @@ public class ProductContractForFindAllDetailsDto extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 8)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * ベンダー管理番号名称
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ベンダー管理番号名称", required = false, position = 9, allowableValues = "range[0,255]")
+	private String vendorManageNumberName;
+
+	/**
+	 * サービス提供会社名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "サービス提供会社名", required = false, position = 10, allowableValues = "range[0,255]")
+	private String serviceProviderCompanyName;
 
 }

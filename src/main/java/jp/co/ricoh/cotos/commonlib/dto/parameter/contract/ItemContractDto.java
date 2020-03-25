@@ -134,4 +134,11 @@ public class ItemContractDto extends DtoBase {
 	@OneToMany(mappedBy = "item_contract")
 	@ApiModelProperty(value = "品種明細(契約用)", required = false, position = 17)
 	private List<ItemDetailContractDto> itemDetailContractList;
+
+	/**
+	 * メーカー商品コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 18, allowableValues = "range[0,255]")
+	private String makerItemCode;
 }

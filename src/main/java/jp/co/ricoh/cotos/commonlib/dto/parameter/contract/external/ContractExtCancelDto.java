@@ -73,4 +73,11 @@ public class ContractExtCancelDto {
 	@ApiModelProperty(value = "解約注文番号", required = false, position = 8, allowableValues = "range[0,255]")
 	private String cancelOrderNo;
 
+	/**
+	 * 解約申込日
+	 */
+	@ApiModelProperty(value = "解約申込日", required = false, position = 9)
+	@Temporal(TemporalType.DATE)
+	private Date cancelApplicationDate;
+	
 }

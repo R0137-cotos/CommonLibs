@@ -32,7 +32,7 @@ public class EstimationDetailRegisterParameter {
 	@Size(max = 255)
 	@ApiParam(value = "品種コード", allowableValues = "range[0,255]", required = true)
 	private String ricohItemCode;
-	
+
 	/**
 	 * 品種名
 	 */
@@ -102,6 +102,12 @@ public class EstimationDetailRegisterParameter {
 	@Digits(integer = 19, fraction = 2)
 	@ApiParam(value = "母店売価(接点店仕切)", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
 	private BigDecimal motherStorePrice;
+
+	/**
+	 * 契約期間
+	 */
+	@ApiParam(value = "契約期間", required = false)
+	private String contractSpan;
 
 	/**
 	 * 拡張項目
