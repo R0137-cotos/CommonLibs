@@ -289,7 +289,7 @@ public class EstimationSearchParameter {
 	 * 回線番号・ICCID
 	 */
 	@ApiParam(value = "回線番号・ICCID", required = false)
-	@ApiModelProperty(value = "回線番号・ICCID", required = false, allowableValues = "range[2,255]")
+	@ApiModelProperty(value = "回線番号・ICCID", required = false, allowableValues = "range[0,255]")
 	private String extendsParameterIterance;
 
 	/**
