@@ -286,6 +286,13 @@ public class EstimationSearchParameter {
 	private String immutableContIdentNumber;
 
 	/**
+	 * 回線番号・ICCID
+	 */
+	@ApiParam(value = "回線番号・ICCID", required = false)
+	@ApiModelProperty(value = "回線番号・ICCID", required = false, allowableValues = "range[2,255]")
+	private String extendsParameterIterance;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
