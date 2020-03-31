@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.businessday;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -100,6 +101,76 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("年月がyyyyMM形式でも月末最終営業日が取得できること", 日付想定値取得("2019/06/28"), businessDayUtil.getLastBusinessDayOfTheMonth("201906"));
 		Assert.assertEquals("年月がyyyy-MM形式でも月末最終営業日が取得できること", 日付想定値取得("2019/06/28"), businessDayUtil.getLastBusinessDayOfTheMonth("2019-06"));
 		Assert.assertNull("業務カレンダーマスタに登録されていない年月の場合はnullが返ること", businessDayUtil.getLastBusinessDayOfTheMonth("2919/06"));
+	}
+
+	@Test
+	public void 月初からn営業日以内か() throws ParseException {
+		// 月初から3営業日以内をテスト
+		int days = 3;
+		// 2019年6月の非営業日は以下を想定
+		// 2019/06/01 
+		// 2019/06/02
+		// 2019/06/08
+		// 2019/06/09
+		// 2019/06/15
+		// 2019/06/16
+		// 2019/06/22
+		// 2019/06/23
+		// 2019/06/29
+		// 2019/06/30
+		テストデータ作成();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+		// 月末非営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/30")));
+		// 月末営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/28")));
+		// 月初から4営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/06")));
+		// 月初から3営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/05")));
+		// 月初から2営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/04")));
+		// 月初営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/03")));
+		// 月初から3営業日以内の休業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/01")));
+	}
+
+	@Test
+	public void 月末からn営業日以内か() throws ParseException {
+		// 月末から3営業日以内をテスト
+		int days = 3;
+		// 2019年6月の非営業日は以下を想定
+		// 2019/06/01 
+		// 2019/06/02
+		// 2019/06/08
+		// 2019/06/09
+		// 2019/06/15
+		// 2019/06/16
+		// 2019/06/22
+		// 2019/06/23
+		// 2019/06/29
+		// 2019/06/30
+		テストデータ作成();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+		// 月初非営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/01")));
+		// 月初営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/03")));
+		// 月末から4営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/25")));
+		// 月末から3営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/26")));
+		// 月末から2営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/27")));
+		// 月末営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/28")));
+		// 月末から3営業日以内の休業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/30")));
 	}
 
 	private Date 日付想定値取得(String expectrd) {
