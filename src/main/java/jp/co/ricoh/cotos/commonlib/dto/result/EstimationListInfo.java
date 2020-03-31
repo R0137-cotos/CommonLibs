@@ -188,6 +188,12 @@ public class EstimationListInfo {
 	@ApiModelProperty(value = "更新日時", required = false, position = 27)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
+	
+	/**
+	 * 回線番号・ICCID
+	 */
+	@ApiModelProperty(value = "回線番号・ICCID", required = false, position = 28, allowableValues = "range[0,255]")
+	private String extendsParameterIterance;
 
 	@PrePersist
 	public void prePersist() {
