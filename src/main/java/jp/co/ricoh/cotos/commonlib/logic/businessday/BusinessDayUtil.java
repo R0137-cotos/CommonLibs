@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.logic.businessday;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -129,7 +128,7 @@ public class BusinessDayUtil {
 		}
 
 		// 検査対象日付をLocalDateに変換
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
 
 		// 検査対象月の営業日リスト(降順)
 		List<LocalDate> businessList = createTargetMonthBusinessDayList(localDate, SortOrder.ASCENDING);
@@ -159,7 +158,7 @@ public class BusinessDayUtil {
 		}
 		
 		// 検査対象日付をLocalDateに変換
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
 
 		// 検査対象月の営業日リスト(降順)
 		List<LocalDate> businessList = createTargetMonthBusinessDayList(localDate, SortOrder.DESCENDING);
@@ -257,7 +256,7 @@ public class BusinessDayUtil {
 		// 非営業日セットを作成
 		Set<LocalDate> nonBusinessDaySet = new HashSet<LocalDate>();
 		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayList) {
-			nonBusinessDaySet.add(nonBusinessDay.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			nonBusinessDaySet.add(new java.sql.Date(nonBusinessDay.getNonBusinessDay().getTime()).toLocalDate());
 		}
 
 		// 検査対象年月の月初日を生成
