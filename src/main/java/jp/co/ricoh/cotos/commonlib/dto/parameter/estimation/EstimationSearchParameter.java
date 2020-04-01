@@ -286,11 +286,18 @@ public class EstimationSearchParameter {
 	private String immutableContIdentNumber;
 
 	/**
-	 * 回線番号・ICCID
+	 * 回線番号
 	 */
-	@ApiParam(value = "回線番号・ICCID", required = false)
-	@ApiModelProperty(value = "回線番号・ICCID", required = false, allowableValues = "range[0,255]")
-	private String extendsParameterIterance;
+	@ApiParam(value = "回線番号", required = false)
+	@ApiModelProperty(value = "回線番号", required = false, allowableValues = "range[0,255]")
+	private String lineNumber;
+
+	/**
+	 * ICCID
+	 */
+	@ApiParam(value = "ICCID", required = false)
+	@ApiModelProperty(value = "ICCID", required = false, allowableValues = "range[0,255]")
+	private String serialNumber;
 
 	/**
 	 * ソート項目
