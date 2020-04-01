@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -187,4 +188,9 @@ public class EstimationListInfo {
 	@ApiModelProperty(value = "更新日時", required = false, position = 27)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
+
+	@PrePersist
+	public void prePersist() {
+		throw new IllegalAccessError();
+	}
 }
