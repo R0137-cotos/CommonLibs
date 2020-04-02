@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.14 (02/04/2020)
+- [**closed**] #5224 通知メール変換値マスタに項目追加、契約エンティティに契約情報確定日追加 [#832](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/832)
+- [**closed**] #5275 大塚商材のKiZNAVi連携不要化 [#836](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/836)
+- [**closed**] #5729 承認ルートマスタに契約承認依頼者区分追加 [#859](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/859)
+
+---
+
 ## v2.0.12 (25/03/2020)
 - [**closed**] #6224 外部参照モジュールエラー時にスタックトレースを表示するように修正 [#878](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/878)
 
