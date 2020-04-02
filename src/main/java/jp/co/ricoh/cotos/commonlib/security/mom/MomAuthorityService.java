@@ -185,7 +185,7 @@ public class MomAuthorityService {
 
 			if (AccessType.編集.equals(accessType)) {
 				// 次回承認者の場合、編集権限を付与
-				if (authParam.getNextApproverMvEmployeeMaster() != null && authParam.getNextApproverMvEmployeeMaster().getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId())) {
+				if (authParam.getNextApproverMvEmployeeMaster() != null && authParam.getNextApproverMvEmployeeMaster().getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId()) && AuthDiv.見積_契約_手配.equals(authDiv)) {
 					return true;
 				}
 			}
