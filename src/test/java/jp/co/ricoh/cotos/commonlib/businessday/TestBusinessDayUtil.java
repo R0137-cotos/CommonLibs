@@ -173,6 +173,80 @@ public class TestBusinessDayUtil {
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/30")));
 	}
 
+	@Test
+	public void 日付1は日付2からn営業日以内か() throws ParseException {
+		// 2019年6月の非営業日は以下を想定
+		// 2019/06/01 
+		// 2019/06/02
+		// 2019/06/08
+		// 2019/06/09
+		// 2019/06/15
+		// 2019/06/16
+		// 2019/06/22
+		// 2019/06/23
+		// 2019/06/29
+		// 2019/06/30
+		テストデータ作成();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+		int days = 3;
+
+		// 始点が営業日 終点が営業日 非営業日を挟まない範囲 3営業日以内　6/3 - 6/6 ※始点の日付は含まない
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/03"), dateFormat.parse("2019/06/06"), days));
+		// 始点が営業日 終点が営業日  非営業日を挟まない範囲 3営業日以内でない(4営業日差)　6/3 - 6/7
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/03"), dateFormat.parse("2019/06/07"), days));
+		// 始点が営業日 終点が営業日 非営業日を挟む範囲 3営業日以内　6/6 - 6/11
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/06"), dateFormat.parse("2019/06/11"), days));
+		// 始点が営業日 終点が営業日 非営業日を挟む範囲 3営業日以内でない(4営業日差)　6/6 - 6/12
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/06"), dateFormat.parse("2019/06/12"), days));
+
+		// ↑4つ同じ範囲引数逆順
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/06"), dateFormat.parse("2019/06/03"), days));
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/07"), dateFormat.parse("2019/06/03"), days));
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/11"), dateFormat.parse("2019/06/06"), days));
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/12"), dateFormat.parse("2019/06/06"), days));
+
+		// 始点が非営業日 終点が営業日 非営業日を挟まない範囲 3営業日以内　6/2 - 6/5
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/02"), dateFormat.parse("2019/06/05"), days));
+		// 始点が非営業日 終点が営業日 非営業日を挟まない範囲 3営業日以内でない(4営業日差)　6/2 - 6/6
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/02"), dateFormat.parse("2019/06/06"), days));
+		// 始点が非営業日 終点が営業日 非営業日を挟む範囲 3営業日以内　6/1 - 6/5
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/01"), dateFormat.parse("2019/06/05"), days));
+		// 始点が非営業日 終点が営業日 非営業日を挟む範囲 3営業日以内でない(4営業日差)　6/1 - 6/6
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/01"), dateFormat.parse("2019/06/06"), days));
+
+		// ↑4つ同じ範囲引数逆順
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/05"), dateFormat.parse("2019/06/02"), days));
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/06"), dateFormat.parse("2019/06/02"), days));
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/05"), dateFormat.parse("2019/06/01"), days));
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/06"), dateFormat.parse("2019/06/01"), days));
+
+		days = 6;
+		// 始点が非営業日 終点が非営業日 非営業日を挟まない範囲 6営業日以内　6/2 - 6/8
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/02"), dateFormat.parse("2019/06/08"), days));
+		days = 5;
+		// 始点が非営業日 終点が非営業日 非営業日を挟まない範囲 5営業日以内でない(5営業日が間に入っている範囲)　6/2 - 6/8
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/02"), dateFormat.parse("2019/06/08"), days));
+		days = 11;
+		// 始点が非営業日 終点が非営業日 非営業日を挟む範囲 11営業日以内　6/1 - 6/16
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/01"), dateFormat.parse("2019/06/16"), days));
+		days = 10;
+		// 始点が非営業日 終点が非営業日 非営業日を挟む範囲 10営業日以内でない(10営業日が間に入っている範囲)　6/1 - 6/16
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/01"), dateFormat.parse("2019/06/16"), days));
+
+		// ↑4つ同じ範囲引数逆順
+		days = 6;
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/08"), dateFormat.parse("2019/06/02"), days));
+		days = 5;
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/08"), dateFormat.parse("2019/06/02"), days));
+		days = 11;
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/16"), dateFormat.parse("2019/06/01"), days));
+		days = 10;
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/16"), dateFormat.parse("2019/06/01"), days));
+
+	}
+
 	private Date 日付想定値取得(String expectrd) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Integer.parseInt(StringUtils.substring(expectrd, 0, 4)), Integer.parseInt(StringUtils.substring(expectrd, 5, 7)) - 1, Integer.parseInt(StringUtils.substring(expectrd, 8, 10)), 0, 0, 0);
