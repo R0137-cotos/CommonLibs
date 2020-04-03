@@ -222,6 +222,21 @@ public class TestBusinessDayUtil {
 		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/05"), dateFormat.parse("2019/06/01"), days));
 		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/06"), dateFormat.parse("2019/06/01"), days));
 
+		// 始点が営業日 終点が非営業日 非営業日を挟まない範囲 3営業日以内　6/5 - 6/8 (6/6,6/7,6/10が営業日なので、3営業日以内)
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/05"), dateFormat.parse("2019/06/08"), days));
+		// 始点が営業日 終点が非営業日 非営業日を挟まない範囲 3営業日以内でない　6/4 - 6/8 (6/5,6/6,6/7が営業日だが、終点が6/8なので3営業日以内とは呼ばない)
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/04"), dateFormat.parse("2019/06/08"), days));
+		// 始点が営業日 終点が非営業日 非営業日を挟む範囲 3営業日以内　6/5 - 6/9 (6/6,6/7,6/10が営業日なので、3営業日以内)
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/05"), dateFormat.parse("2019/06/09"), days));
+		// 始点が営業日 終点が非営業日 非営業日を挟む範囲 3営業日以内でない　6/4 - 6/9 (6/5,6/6,6/7が営業日だが、終点が6/9なので3営業日以内とは呼ばない)
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/04"), dateFormat.parse("2019/06/09"), days));
+
+		// ↑4つ同じ範囲引数逆順
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/08"), dateFormat.parse("2019/06/05"), days));
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/08"), dateFormat.parse("2019/06/04"), days));
+		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/09"), dateFormat.parse("2019/06/05"), days));
+		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/09"), dateFormat.parse("2019/06/04"), days));
+
 		days = 6;
 		// 始点が非営業日 終点が非営業日 非営業日を挟まない範囲 6営業日以内　6/2 - 6/8
 		Assert.assertTrue(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/02"), dateFormat.parse("2019/06/08"), days));

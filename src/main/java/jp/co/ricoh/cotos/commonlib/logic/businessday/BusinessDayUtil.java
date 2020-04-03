@@ -194,9 +194,12 @@ public class BusinessDayUtil {
 
 		LocalDate bigDate;
 		LocalDate smallDate;
+		// 後に営業日判定で利用するので終点をDate型で保存しておく
+		Date endDate = date1;
 		if (date2.after(date1)) {
 			bigDate = new java.sql.Date(date2.getTime()).toLocalDate();
 			smallDate = new java.sql.Date(date1.getTime()).toLocalDate();
+			endDate = date2;
 		} else {
 			bigDate = new java.sql.Date(date1.getTime()).toLocalDate();
 			smallDate = new java.sql.Date(date2.getTime()).toLocalDate();
@@ -209,7 +212,9 @@ public class BusinessDayUtil {
 		List<LocalDate> businessList = createBetweenBusinessDayList(smallDate, bigDate, SortOrder.ASCENDING);
 
 		// 日付1-日付2どちらも非営業日の場合
-		if (!isBusinessDay(date1) && !isBusinessDay(date2)) {
+		// if (!isBusinessDay(date1) && !isBusinessDay(date2)) {
+		// 終点が非営業日の場合
+		if (!isBusinessDay(endDate)) {
 			// 日付1-日付2間の営業日リストがn-1より大きい場合、n営業日以内ではない
 			// 例)間の営業日数=5の時、非営業日to非営業日の場合は外側に範囲日付を持っているため、5営業日以内ではなく6営業日以内となる
 			if (businessList != null && businessList.size() > num - 1) {
