@@ -130,7 +130,7 @@ public class BusinessDayUtil {
 		// 検査対象日付をLocalDateに変換
 		LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
 
-		// 検査対象月の営業日リスト(降順)
+		// 検査対象月の営業日リスト(昇順)
 		List<LocalDate> businessList = createTargetMonthBusinessDayList(localDate, SortOrder.ASCENDING);
 
 		if (businessList != null && businessList.size() >= arg) {
@@ -156,7 +156,7 @@ public class BusinessDayUtil {
 		if (arg == 0) {
 			return false;
 		}
-		
+
 		// 検査対象日付をLocalDateに変換
 		LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
 
@@ -173,6 +173,61 @@ public class BusinessDayUtil {
 		}
 
 		return false;
+	}
+
+	/**
+	 * 日付1は日付2のn営業日以内か
+	 * @param date1 日付1
+	 * @param date2 日付2
+	 * @param num n営業日以内の指定
+	 * @return　true:n営業日以内である, false:n営業日以内でない
+	 */
+	public boolean isDate1WithinNumBusinessDaysOfDate2(Date date1, Date date2, int num) {
+		// 同一日の場合、必ず0営業日以内
+		if (date1 == date2) {
+			return true;
+		}
+		// 同一日ではないので、必ず0営業日以内ではない
+		if (num == 0) {
+			return false;
+		}
+
+		LocalDate bigDate;
+		LocalDate smallDate;
+		// 後に営業日判定で利用するので終点をDate型で保存しておく
+		Date endDate = date1;
+		if (date2.after(date1)) {
+			bigDate = new java.sql.Date(date2.getTime()).toLocalDate();
+			smallDate = new java.sql.Date(date1.getTime()).toLocalDate();
+			endDate = date2;
+		} else {
+			bigDate = new java.sql.Date(date1.getTime()).toLocalDate();
+			smallDate = new java.sql.Date(date2.getTime()).toLocalDate();
+		}
+
+		// 日付1-日付2間の営業日リスト取得(昇順)
+		// isDate1WithinNumBusinessDaysOfDate2は「日付1は日付2のn営業日以内か」を調べるので、始点を営業日に含めず、終点を営業日に含めたい
+		// createBetweenBusinessDayListは始点・終点は営業日に含まずに取得するので、終点の日付を一日後ろにずらす
+		bigDate = bigDate.plusDays(1);
+		List<LocalDate> businessList = createBetweenBusinessDayList(smallDate, bigDate, SortOrder.ASCENDING);
+
+		// 日付1-日付2どちらも非営業日の場合
+		// if (!isBusinessDay(date1) && !isBusinessDay(date2)) {
+		// 終点が非営業日の場合
+		if (!isBusinessDay(endDate)) {
+			// 日付1-日付2間の営業日リストがn-1より大きい場合、n営業日以内ではない
+			// 例)間の営業日数=5の時、非営業日to非営業日の場合は外側に範囲日付を持っているため、5営業日以内ではなく6営業日以内となる
+			if (businessList != null && businessList.size() > num - 1) {
+				return false;
+			}
+		} else {
+			// 日付1-日付2間の営業日リストがnより大きい場合、n営業日以内ではない
+			if (businessList != null && businessList.size() > num) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -271,6 +326,66 @@ public class BusinessDayUtil {
 				businessDayList.add(tmpDate);
 			}
 			tmpDate = tmpDate.plusDays(1);
+		}
+
+		// 降順指定の場合ソート実施
+		if (sortOrder.equals(SortOrder.DESCENDING)) {
+			businessDayList.sort(Comparator.reverseOrder());
+		}
+
+		return businessDayList;
+	}
+
+	/**
+	 * 日付1と日付2の間の営業日リストを作成する(始点・終点は営業日に含まない)
+	 * @param date1 日付1
+	 * @param date2 日付2
+	 * @param sortOrder ソートオーダー
+	 * @return 営業日リスト
+	 */
+	private List<LocalDate> createBetweenBusinessDayList(LocalDate date1, LocalDate date2, SortOrder sortOrder) {
+		// 営業日リスト
+		List<LocalDate> businessDayList = new ArrayList<LocalDate>();
+
+		// 非営業日リストを取得
+		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayList = nonBusinessDayCalendarMasterRepository.findAll();
+		// 非営業日セットを作成
+		Set<LocalDate> nonBusinessDaySet = new HashSet<LocalDate>();
+		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayList) {
+			nonBusinessDaySet.add(new java.sql.Date(nonBusinessDay.getNonBusinessDay().getTime()).toLocalDate());
+		}
+
+		// 同一日付の場合、対象日付が営業日かだけ確認する
+		if (date1.isEqual(date2)) {
+			// 非営業日リストに入っていなければ営業日
+			if (nonBusinessDaySet.contains(date1)) {
+				businessDayList.add(date1);
+			}
+			return businessDayList;
+		}
+
+		LocalDate bigDate;
+		LocalDate smallDate;
+		if (date2.isAfter(date1)) {
+			bigDate = date2;
+			smallDate = date1;
+		} else {
+			bigDate = date1;
+			smallDate = date2;
+		}
+
+		// 終点日付をずらすことで、終点日付を営業日換算から省く
+		bigDate = bigDate.minusDays(1);
+
+		//　営業日リストに営業日を設定
+		while (!smallDate.isEqual(bigDate)) {
+			// 先に始点日付をずらすことで、始点日付を営業日換算から省く
+			smallDate = smallDate.plusDays(1);
+			// 非営業日セットに存在しない場合、営業日を設定
+			if (!nonBusinessDaySet.contains(smallDate)) {
+				businessDayList.add(smallDate);
+			}
+
 		}
 
 		// 降順指定の場合ソート実施
