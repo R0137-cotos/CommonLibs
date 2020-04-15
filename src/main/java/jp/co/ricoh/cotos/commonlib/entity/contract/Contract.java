@@ -174,6 +174,28 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	public enum IntegrationContractCsvCreateStatus {
+
+		未作成("0"), 作成済み("1"), 作成エラー("2");
+
+		private final String text;
+
+		private IntegrationContractCsvCreateStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IntegrationContractCsvCreateStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -733,4 +755,17 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "解約申込日", required = false, position = 78)
 	@Temporal(TemporalType.DATE)
 	private Date cancelApplicationDate;
+
+	/**
+	 * 統合契約連携用CSV作成状態
+	 */
+	@ApiModelProperty(value = "統合契約連携用CSV作成状態", required = false, position = 79, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
+	private IntegrationContractCsvCreateStatus integrationContractCsvCreateStatus;
+
+	/**
+	 * 統合契約連携用CSV作成日
+	 */
+	@ApiModelProperty(value = "統合契約連携用CSV作成日", required = false, position = 80)
+	@Temporal(TemporalType.DATE)
+	private Date integrationContractCsvCreateDate;
 }
