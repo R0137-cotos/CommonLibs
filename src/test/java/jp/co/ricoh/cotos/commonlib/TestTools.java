@@ -1,7 +1,9 @@
 package jp.co.ricoh.cotos.commonlib;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -78,7 +80,7 @@ public class TestTools {
 	 * @throws Exception
 	 */
 	public boolean hasNullColumn(EntityBaseMaster entity) throws Exception {
-		for (Field field : entity.getClass().getDeclaredFields()) {
+		for (Field field : getAllFieldsFromClass(entity)) {
 			field.setAccessible(true);
 			if (field.getType() == List.class)
 				continue;
@@ -91,7 +93,7 @@ public class TestTools {
 	}
 
 	public boolean hasNullColumn(EntityBase entity) throws Exception {
-		for (Field field : entity.getClass().getDeclaredFields()) {
+		for (Field field : getAllFieldsFromClass(entity)) {
 			field.setAccessible(true);
 			if (field.getType() == MultipartFile.class)
 				continue;
@@ -100,6 +102,36 @@ public class TestTools {
 		}
 		return false;
 
+	}
+
+	/**
+	 * 親クラスのフィールドを含めた全フィールドを取得する.
+	 * @param entity
+	 * @return List<Field>
+	 */
+	private List<Field> getAllFieldsFromClass(EntityBase entity) {
+		List<Field> fields = new ArrayList<Field>();
+		Class<?> clazz = entity.getClass();
+		while (clazz != null && clazz != Object.class) {
+			Collections.addAll(fields, clazz.getDeclaredFields());
+			clazz = clazz.getSuperclass();
+		}
+		return fields;
+	}
+
+	/**
+	 * 親クラスのフィールドを含めた全フィールドを取得する.
+	 * @param entity
+	 * @return List<Field>
+	 */
+	private List<Field> getAllFieldsFromClass(EntityBaseMaster entity) {
+		List<Field> fields = new ArrayList<Field>();
+		Class<?> clazz = entity.getClass();
+		while (clazz != null && clazz != Object.class) {
+			Collections.addAll(fields, clazz.getDeclaredFields());
+			clazz = clazz.getSuperclass();
+		}
+		return fields;
 	}
 
 	/**
