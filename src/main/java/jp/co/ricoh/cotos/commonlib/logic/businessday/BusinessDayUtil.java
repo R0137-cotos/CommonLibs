@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.logic.businessday;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -173,6 +174,46 @@ public class BusinessDayUtil {
 		}
 
 		return false;
+	}
+
+	/**
+	 * 引数日付間の営業日差を計算して返す
+	 * 以下の場合にエラーとし、-1を返す
+	 * １．bigDate=null または smallDate=null
+	 * ２．bigDate=非営業日 または smallDate=非営業日
+	 * ３．bigDate < smallDate
+	 * @param smallDate 日付(小)
+	 * @param bigDate 日付(大)
+	 * @return 日付(大)-日付(小)の営業日差
+	 */
+	public int calculateDifferenceBetweenBusinessDates(LocalDate smallDate, LocalDate bigDate) {
+		// １．bigDate=null または smallDate=null
+		if (smallDate == null || bigDate == null) {
+			return -1;
+		}
+		// ２．bigDate=非営業日 または smallDate=非営業日
+		if (!isBusinessDay(Date.from(bigDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())) || !isBusinessDay(Date.from(smallDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+			return -1;
+		}
+		// ３．bigDate < smallDate
+		if (bigDate.isBefore(smallDate)) {
+			return -1;
+		}
+		// 同日の場合差は0
+		if (bigDate == smallDate) {
+			return 0;
+		}
+
+		// createBetweenBusinessDayListが始点と終点を含まないリストを取得するため、日付(小)のみリストに含めるようにずらす
+		// 日付(大)を基準に差を計算するため、日付(大)はリストに含めない
+		LocalDate tmpSmallDate = smallDate.minusDays(1);
+		// 日付間の営業日リストのサイズが日付(大)-日付(小)の営業日差
+		List<LocalDate> businessDayList = createBetweenBusinessDayList(tmpSmallDate, bigDate, SortOrder.ASCENDING);
+		// 営業日リストの取得に失敗した場合エラー
+		if (businessDayList == null) {
+			return -1;
+		}
+		return businessDayList.size();
 	}
 
 	/**

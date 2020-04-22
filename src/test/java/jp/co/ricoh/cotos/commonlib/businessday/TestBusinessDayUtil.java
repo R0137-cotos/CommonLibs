@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.businessday;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -260,6 +261,45 @@ public class TestBusinessDayUtil {
 		days = 10;
 		Assert.assertFalse(businessDayUtil.isDate1WithinNumBusinessDaysOfDate2(dateFormat.parse("2019/06/16"), dateFormat.parse("2019/06/01"), days));
 
+	}
+
+	@Test
+	public void 日付間の営業日差取得() throws ParseException {
+		// 2019年6月の非営業日は以下を想定
+		// 2019/06/01 
+		// 2019/06/02
+		// 2019/06/08
+		// 2019/06/09
+		// 2019/06/15
+		// 2019/06/16
+		// 2019/06/22
+		// 2019/06/23
+		// 2019/06/29
+		// 2019/06/30
+		テストデータ作成();
+
+		// 間に非営業日を挟まない期間 2019/06/05-2019/06/07
+		Assert.assertEquals("2営業日差であること", 2, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 7)));
+		// 間に非営業日を挟む期間 2019/06/05-2019/06/10
+		Assert.assertEquals("3営業日差であること", 3, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 10)));
+		// 間に非営業日を挟む期間 2019/06/05-2019/06/18
+		Assert.assertEquals("9営業日差であること", 9, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 18)));
+		// 同日 2019/06/05-2019/06/05
+		Assert.assertEquals("0営業日差であること", 0, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 5)));
+		// smallDate = null
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(null, LocalDate.of(2019, 6, 18)));
+		// bigDate = null
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), null));
+		// smallDate = null かつ bigDate = null
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(null, null));
+		// bigDate < smallDate 
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 18), LocalDate.of(2019, 6, 5)));
+		// smallDate = 非営業日
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 2), LocalDate.of(2019, 6, 18)));
+		// bigDate = 非営業日
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 8)));
+		// smallDate = 非営業日 かつ bigDate = 非営業日
+		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 2), LocalDate.of(2019, 6, 8)));
 	}
 
 	private Date 日付想定値取得(String expectrd) {
