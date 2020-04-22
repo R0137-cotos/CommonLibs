@@ -240,6 +240,11 @@ public class BusinessDayUtil {
 		// 非営業日リストを取得
 		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayIterable = nonBusinessDayCalendarMasterRepository.findAll();
 
+		if (nonBusinessDayIterable == null) {
+			// 非営業日リストが存在しない場合、全て営業日なので単純に日数分遡れば良い
+			return baseDate.minusDays(beforeNumber);
+		}
+
 		// 非営業日リスト
 		List<Date> nonBusinessDayList = new ArrayList<>();
 
