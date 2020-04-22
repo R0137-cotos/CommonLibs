@@ -217,6 +217,55 @@ public class BusinessDayUtil {
 	}
 
 	/**
+	 * 基準日(営業日)からn営業日前の営業日を取得する
+	 * @param baseDate 基準日
+	 * @param beforeNumber n営業日前の指定
+	 * @return 基準日からn営業日前の営業日
+	 */
+	public LocalDate getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate baseDate, int beforeNumber) {
+		if (baseDate == null) {
+			return null;
+		}
+		// baseDate=非営業日の場合、nullを返す
+		if (!isBusinessDay(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+			return null;
+		}
+		if (beforeNumber < 0) {
+			return null;
+		}
+		if (beforeNumber == 0) {
+			return baseDate;
+		}
+
+		// 非営業日リストを取得
+		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayIterable = nonBusinessDayCalendarMasterRepository.findAll();
+
+		// 非営業日リスト
+		List<Date> nonBusinessDayList = new ArrayList<>();
+
+		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayIterable) {
+			nonBusinessDayList.add(nonBusinessDay.getNonBusinessDay());
+		}
+
+		boolean notTarget = true;
+		while (notTarget) {
+			// カウントが0になった時の日付が取得対象
+			if (beforeNumber == 0) {
+				notTarget = false;
+			} else {
+				baseDate = baseDate.minusDays(1);
+			}
+
+			// 非営業日リストにない場合カウントを進める
+			if (!nonBusinessDayList.contains(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+				beforeNumber--;
+			}
+		}
+
+		return baseDate;
+	}
+
+	/**
 	 * 日付1は日付2のn営業日以内か
 	 * @param date1 日付1
 	 * @param date2 日付2
