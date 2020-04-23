@@ -1,0 +1,85 @@
+package jp.co.ricoh.cotos.commonlib.entity.master;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 手配業務完了順マスタを表すEntity
+ */
+@Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "arrangement_work_order_master")
+public class ArrangementWorkOrderMaster extends EntityBaseMaster {
+
+	/**
+	 * 手配業務完了順マスタID
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_wk_mt_order_seq")
+	@SequenceGenerator(name = "arrangement_wk_mt_order_seq", sequenceName = "arrangement_wk_mt_order_seq", allocationSize = 1)
+	@ApiModelProperty(value = "手配業務完了順マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	private long id;
+
+	/**
+	 * 商品マスタ
+	 */
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "商品マスタ", required = true, position = 2)
+	private ProductMaster productMaster;
+
+	/**
+	 * 契約種別
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\")", position = 3)
+	private ContractType contractType;
+
+	/**
+	 * 解約フラグ
+	 */
+	@Column(nullable = false)
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "解約フラグ", required = true, position = 4, allowableValues = "range[0,9]")
+	private int disengagementFlg;
+
+	/**
+	 * 手配業務タイプマスタ
+	 */
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "arrangement_wk_type_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "手配業務タイプマスタ", required = true, position = 5)
+	private ArrangementWorkTypeMaster arrangementWorkTypeMaster;
+
+	/**
+	 * 先実行手配業務タイプマスタID配列
+	 */
+	@Column(nullable = true)
+	@ApiModelProperty(value = "先実行手配業務タイプマスタID配列", required = true, position = 6)
+	@Lob
+	private String befArrangementWkTypeArray;
+}
