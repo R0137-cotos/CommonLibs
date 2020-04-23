@@ -174,13 +174,13 @@ public class Contract extends EntityBase {
 		}
 	}
 
-	public enum IntegrationContractCsvCreateStatus {
+	public enum AbsConCsvCreateStatus {
 
 		未作成("0"), 作成済み("1"), 作成エラー("2");
 
 		private final String text;
 
-		private IntegrationContractCsvCreateStatus(final String text) {
+		private AbsConCsvCreateStatus(final String text) {
 			this.text = text;
 		}
 
@@ -191,7 +191,7 @@ public class Contract extends EntityBase {
 		}
 
 		@JsonCreator
-		public static IntegrationContractCsvCreateStatus fromString(String string) {
+		public static AbsConCsvCreateStatus fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -760,12 +760,25 @@ public class Contract extends EntityBase {
 	 * 統合契約連携用CSV作成状態
 	 */
 	@ApiModelProperty(value = "統合契約連携用CSV作成状態", required = false, position = 79, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
-	private IntegrationContractCsvCreateStatus integrationContractCsvCreateStatus;
+	private AbsConCsvCreateStatus absConCsvCreateStatus;
 
 	/**
 	 * 統合契約連携用CSV作成日
 	 */
 	@ApiModelProperty(value = "統合契約連携用CSV作成日", required = false, position = 80)
 	@Temporal(TemporalType.DATE)
-	private Date integrationContractCsvCreateDate;
+	private Date absConCsvCreateDate;
+
+	/**
+	 * 統合契約連携用CSV作成状態(解約)
+	 */
+	@ApiModelProperty(value = "統合契約連携用CSV作成状態(解約)", required = false, position = 81, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
+	private AbsConCsvCreateStatus absConCsvCreateStatusCancel;
+
+	/**
+	 * 統合契約連携用CSV作成日(解約)
+	 */
+	@ApiModelProperty(value = "統合契約連携用CSV作成日(解約)", required = false, position = 82)
+	@Temporal(TemporalType.DATE)
+	private Date absConCsvCreateDateCancel;
 }
