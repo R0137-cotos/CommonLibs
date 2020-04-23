@@ -302,6 +302,37 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("エラーであること", -1, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 2), LocalDate.of(2019, 6, 8)));
 	}
 
+	@Test
+	public void n営業日前の営業日を取得() throws ParseException {
+		// 2019年6月の非営業日は以下を想定
+		// 2019/06/01 
+		// 2019/06/02
+		// 2019/06/08
+		// 2019/06/09
+		// 2019/06/15
+		// 2019/06/16
+		// 2019/06/22
+		// 2019/06/23
+		// 2019/06/29
+		// 2019/06/30
+		テストデータ作成();
+
+		// 間に非営業日を挟まない期間 2019/06/05 - 2営業日 = 2019/06/03
+		Assert.assertEquals("2019/06/05の2営業日前は2019/06/03であること", LocalDate.of(2019, 6, 3), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 5), 2));
+		// 間に非営業日を挟む期間 2019/06/11 - 2営業日 = 2019/06/07
+		Assert.assertEquals("2019/06/11の2営業日前は2019/06/07であること", LocalDate.of(2019, 6, 7), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 11), 2));
+		// 間に非営業日を挟む期間 2019/06/17 - 10営業日 = 2019/06/03
+		Assert.assertEquals("2019/06/17の10営業日前は2019/06/03であること", LocalDate.of(2019, 6, 3), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 17), 10));
+		// 0営業日前 2019/06/17 - 0営業日 = 2019/06/17
+		Assert.assertEquals("2019/06/17の0営業日前は2019/06/17であること", LocalDate.of(2019, 6, 17), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 17), 0));
+		// baseDate = null
+		Assert.assertEquals("baseDateがnullの場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(null, 0));
+		// baseDate = 非営業日 2019/06/09
+		Assert.assertEquals("baseDateが非営業日の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 9), 0));
+		// beforeNumber < 0
+		Assert.assertEquals("beforeNumberが負数の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 5), -2));
+	}
+
 	private Date 日付想定値取得(String expectrd) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Integer.parseInt(StringUtils.substring(expectrd, 0, 4)), Integer.parseInt(StringUtils.substring(expectrd, 5, 7)) - 1, Integer.parseInt(StringUtils.substring(expectrd, 8, 10)), 0, 0, 0);
