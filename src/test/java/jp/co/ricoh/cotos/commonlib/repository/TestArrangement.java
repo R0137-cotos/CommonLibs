@@ -19,9 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
-import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement.WorkflowStatus;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementPicWorkerEmp;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
@@ -205,6 +205,23 @@ public class TestArrangement {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTools.assertColumnsNotNull(found);
+
+		// 追加したSelect文を使用したエンティティの取得
+		Arrangement arrangement = new Arrangement();
+		arrangement.setId(5L);
+		arrangement.setContractId(5L);
+		arrangement.setDisengagementFlg(0);
+		arrangement.setWorkflowStatus(WorkflowStatus.手配中);
+		arrangement.setArrangementWorkList(null);
+		List<ArrangementWork> founds = arrangementWorkRepository.findByArrangementAndArrangementWorkTypeMasterId(arrangement, 1L);
+		// Entity が １アイテムだけであることを確認
+		Assert.assertEquals(founds.size(), 1);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(founds.get(0));
+
+		// Entity の各項目の値が null ではないことを確認
+		testTools.assertColumnsNotNull(founds.get(0));
 	}
 
 	@Test
