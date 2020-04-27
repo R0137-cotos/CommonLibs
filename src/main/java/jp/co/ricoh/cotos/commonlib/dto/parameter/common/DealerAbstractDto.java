@@ -152,4 +152,10 @@ public class DealerAbstractDto extends DtoBase {
 	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 70, allowableValues = "range[0,255]")
 	private String momCustId;
 
+	/**
+	 * MoM企業ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 71, allowableValues = "range[0,255]")
+	private String momCompanyId;
 }
