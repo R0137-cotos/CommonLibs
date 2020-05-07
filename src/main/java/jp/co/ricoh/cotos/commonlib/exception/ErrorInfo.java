@@ -8,4 +8,8 @@ public class ErrorInfo {
 	private String errorId;
 
 	private String errorMessage;
+
+	private String errorField;
+
+	private String errorEntity;
 }
