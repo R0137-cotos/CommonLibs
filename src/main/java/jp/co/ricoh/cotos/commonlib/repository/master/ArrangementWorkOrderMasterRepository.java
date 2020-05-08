@@ -10,7 +10,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 
 @Repository
 public interface ArrangementWorkOrderMasterRepository extends CrudRepository<ArrangementWorkOrderMaster, Long> {
-
 	@Query(value = "select * from Arrangement_Work_Order_Master awo "//
 			+ "where awo.product_master_id = :productMasterId "//
 			+ "and awo.contract_type = :contractType " //
