@@ -1,15 +1,19 @@
 package jp.co.ricoh.cotos.commonlib.repository.master;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
 
 @Repository
 public interface ArrangementWorkOrderMasterRepository extends CrudRepository<ArrangementWorkOrderMaster, Long> {
 
-	public ArrangementWorkOrderMaster findByProductMasterAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMaster(ProductMaster productMaster, ContractType contractType, int disengagementFlg, ArrangementWorkTypeMaster arrangementWorkTypeMaster);
+	@Query(value = "select * from Arrangement_Work_Order_Master awo "//
+			+ "where awo.product_master_id = :productMasterId "//
+			+ "and awo.contract_type = :contractType " //
+			+ "and awo.disengagement_flg = :disengagementFlg " //
+			+ "and awo.arrangement_wk_type_master_id = :arrangementWkTypeMasterId", nativeQuery = true)
+	public ArrangementWorkOrderMaster findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterId(@Param("productMasterId") long productMasterId, @Param("contractType") String contractType, @Param("disengagementFlg") int disengagementFlg, @Param("arrangementWkTypeMasterId") long arrangementWkTypeMasterId);
 }
