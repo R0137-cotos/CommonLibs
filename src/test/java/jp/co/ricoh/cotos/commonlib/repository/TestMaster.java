@@ -1981,11 +1981,7 @@ public class TestMaster {
 
 		// 追加したSelect文を使用したエンティティの取得
 		found = null;
-		ProductMaster productMaster = new ProductMaster();
-		productMaster.setId(2L);
-		ArrangementWorkTypeMaster arrangementWorkTypeMaster = new ArrangementWorkTypeMaster();
-		arrangementWorkTypeMaster.setId(1L);
-		found = arrangementWorkOrderMasterRepository.findByProductMasterAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMaster(productMaster, ContractType.情報変更, 1, arrangementWorkTypeMaster);
+		found = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterId(2L, ContractType.情報変更.toString(), 1, 1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
