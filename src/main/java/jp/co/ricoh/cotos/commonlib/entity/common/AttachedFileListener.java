@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.entity.contract;
+package jp.co.ricoh.cotos.commonlib.entity.common;
 
 import javax.persistence.PrePersist;
 
