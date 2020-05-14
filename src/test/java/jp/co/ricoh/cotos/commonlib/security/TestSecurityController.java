@@ -34,8 +34,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ArrangementResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CheckResultUpdateParameter;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EimLinkageDocumentDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EimLinkageManagementInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.CommunicationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactRegisterParameter;
@@ -122,8 +120,6 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkErrorLog;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageDocument;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.CommunicationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
@@ -995,26 +991,6 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/UsageQuantityRelatedManagement")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated UsageQuantityRelatedManagement entity, BindingResult result) {
-		return createParameterCheckResult(result);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageDocument")
-	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageDocument entity, BindingResult result) {
-		return createParameterCheckResult(result);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageDocumentDto")
-	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageDocumentDto dto, BindingResult result) {
-		return createParameterCheckResult(result);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageManagementInfo")
-	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageManagementInfo entity, BindingResult result) {
-		return createParameterCheckResult(result);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/EimLinkageManagementInfoDto")
-	public ParamterCheckResult callParamterCheck(@RequestBody @Validated EimLinkageManagementInfoDto dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }

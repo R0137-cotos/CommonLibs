@@ -16,11 +16,9 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageDocument;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageDocumentRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageManagementInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
@@ -44,10 +42,7 @@ public class TestCommon {
 	AttachedFileRepository attachedFileRepository;
 
 	@Autowired
-	EimLinkageDocumentRepository eimLinkageDocumentRepository;
-
-	@Autowired
-	EimLinkageManagementInfoRepository eimLinkageManagementInfoRepository;
+	EimDocumentInfoRepository eimDocumentInfoRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -104,40 +99,14 @@ public class TestCommon {
 	}
 
 	@Test
-	public void EimLinkageDocumentのテスト() throws Exception {
-		EimLinkageDocument entity = eimLinkageDocumentRepository.findOne(1L);
-		EimLinkageDocument testTarget = new EimLinkageDocument();
+	public void EimDocumentInfoのテスト() throws Exception {
+		EimDocumentInfo entity =  eimDocumentInfoRepository.findOne(1L);
+		EimDocumentInfo testTarget = new EimDocumentInfo();
 		BeanUtils.copyProperties(testTarget, entity);
-
+		
 		// 正常系
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
-		// 異常系（@NotNullの null チェック）
-		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setDocumentId(null);
-		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "文書IDが設定されていません。"));
-	}
-
-	@Test
-	public void EimLinkageManagementInfoのテスト() throws Exception {
-		EimLinkageManagementInfo entity = eimLinkageManagementInfoRepository.findOne(1L);
-		EimLinkageManagementInfo testTarget = new EimLinkageManagementInfo();
-		BeanUtils.copyProperties(testTarget, entity);
-
-		// 正常系
-		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		testTool.assertValidationOk(result);
-
-		// 異常系（@NotNullの null チェック）
-		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setAttachedFile(null);
-		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付ファイルが設定されていません。"));
 	}
 }

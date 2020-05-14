@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -63,4 +64,18 @@ public class AttachedFile extends EntityBase {
 	@Size(max = 1000)
 	@ApiModelProperty(value = "サーバーパス", required = true, position = 5, allowableValues = "range[0,1000]")
 	private String savedPath;
+
+	/**
+	 * EIM連携済状態
+	 */
+	@Column(nullable = false)
+	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 6, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
+	private EimLinkedStatus eimLinkedStatus;
+
+	/**
+	 * EIMファイルID
+	 */
+	@Column(nullable = false)
+	@ApiModelProperty(value = "EIMファイルID", required = false, position = 7)
+	private String eimFileId;
 }
