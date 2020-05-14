@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.check;
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Ignore
 public class TestCommonDto {
 
 	private static final int INT_MINUS_1 = -1;

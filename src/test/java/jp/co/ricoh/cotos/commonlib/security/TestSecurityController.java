@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
@@ -180,6 +181,7 @@ import lombok.Data;
 @Data
 @RestController
 @RequestMapping("/test/api")
+@Ignore
 public class TestSecurityController {
 
 	@Autowired
