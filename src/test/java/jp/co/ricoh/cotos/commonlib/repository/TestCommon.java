@@ -29,7 +29,6 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
 public class TestCommon {
 
 	/** 添付ファイル */

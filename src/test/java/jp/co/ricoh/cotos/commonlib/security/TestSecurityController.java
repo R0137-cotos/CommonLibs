@@ -181,7 +181,6 @@ import lombok.Data;
 @Data
 @RestController
 @RequestMapping("/test/api")
-@Ignore
 public class TestSecurityController {
 
 	@Autowired

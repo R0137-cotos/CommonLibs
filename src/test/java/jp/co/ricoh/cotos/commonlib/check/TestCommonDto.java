@@ -32,7 +32,6 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
 public class TestCommonDto {
 
 	private static final int INT_MINUS_1 = -1;
