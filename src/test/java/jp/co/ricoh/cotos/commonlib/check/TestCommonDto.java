@@ -20,25 +20,18 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CheckResultUpdateParamet
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CustomerAbstractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DealerAbstractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EimLinkageDocumentDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EimLinkageManagementInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EmployeeAbstractDto;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.CustomerAbstractEntity;
 import jp.co.ricoh.cotos.commonlib.entity.common.DealerAbstractEntity;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageDocument;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.common.EmployeeAbstractEntity;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageDocumentRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageManagementInfoRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
 public class TestCommonDto {
 
 	private static final int INT_MINUS_1 = -1;
@@ -55,18 +48,11 @@ public class TestCommonDto {
 	AttachedFileRepository attachedFileRepository;
 
 	@Autowired
-	EimLinkageDocumentRepository eimLinkageDocumentRepository;
-
-	@Autowired
-	EimLinkageManagementInfoRepository eimLinkageManagementInfoRepository;
-
-	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageDocument.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageManagementInfo.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/eimDocumentInfo.sql");
 	}
 
 	@Autowired
@@ -128,47 +114,4 @@ public class TestCommonDto {
 		testTool.checkConsistency(EmployeeAbstractEntity.class, EmployeeAbstractDto.class);
 	}
 
-	@Test
-	public void EimLinkageDocumentDtoのテスト() throws Exception {
-		EimLinkageDocument entity = eimLinkageDocumentRepository.findOne(1L);
-		EimLinkageDocumentDto testTarget = new EimLinkageDocumentDto();
-		BeanUtils.copyProperties(testTarget, entity);
-
-		// 正常系
-		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		testTool.assertValidationOk(result);
-
-		// 異常系（@NotNullの null チェック）
-		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setDocumentId(null);
-		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "文書IDが設定されていません。"));
-
-		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(EimLinkageDocument.class, EimLinkageDocumentDto.class);
-	}
-
-	@Test
-	public void EimLinkageManagementInfoDtoのテスト() throws Exception {
-		EimLinkageManagementInfo entity = eimLinkageManagementInfoRepository.findOne(1L);
-		EimLinkageManagementInfoDto testTarget = new EimLinkageManagementInfoDto();
-		BeanUtils.copyProperties(testTarget, entity);
-
-		// 正常系
-		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		testTool.assertValidationOk(result);
-
-		// 異常系（@NotNullの null チェック）
-		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setAttachedFile(null);
-		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付ファイルが設定されていません。"));
-
-		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(EimLinkageManagementInfo.class, EimLinkageManagementInfoDto.class);
-	}
 }

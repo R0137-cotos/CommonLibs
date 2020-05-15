@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -195,7 +196,7 @@ public class Contract extends EntityBase {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -781,4 +782,10 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "統合契約連携用CSV作成日(解約)", required = false, position = 82)
 	@Temporal(TemporalType.DATE)
 	private Date absConCsvCreateDateCancel;
+
+	/**
+	 * EIM連携済状態
+	 */
+	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 83, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
+	private EimLinkedStatus eimLinkedStatus;
 }

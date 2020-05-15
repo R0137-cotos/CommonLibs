@@ -17,18 +17,15 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageDocument;
-import jp.co.ricoh.cotos.commonlib.entity.common.EimLinkageManagementInfo;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageDocumentRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.EimLinkageManagementInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
 public class TestCommon {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
@@ -46,18 +43,13 @@ public class TestCommon {
 	AttachedFileRepository attachedFileRepository;
 
 	@Autowired
-	EimLinkageDocumentRepository eimLinkageDocumentRepository;
-
-	@Autowired
-	EimLinkageManagementInfoRepository eimLinkageManagementInfoRepository;
+	EimDocumentInfoRepository eimDocumentInfoRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageDocument.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageManagementInfo.sql");
 	}
 
 	@Autowired
@@ -103,43 +95,5 @@ public class TestCommon {
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "サーバーパスは最大文字数（1000）を超えています。"));
-	}
-
-	@Test
-	public void EimLinkageDocumentのテスト() throws Exception {
-		EimLinkageDocument entity = eimLinkageDocumentRepository.findOne(1L);
-		EimLinkageDocument testTarget = new EimLinkageDocument();
-		BeanUtils.copyProperties(testTarget, entity);
-
-		// 正常系
-		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		testTool.assertValidationOk(result);
-
-		// 異常系（@NotNullの null チェック）
-		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setDocumentId(null);
-		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "文書IDが設定されていません。"));
-	}
-
-	@Test
-	public void EimLinkageManagementInfoのテスト() throws Exception {
-		EimLinkageManagementInfo entity = eimLinkageManagementInfoRepository.findOne(1L);
-		EimLinkageManagementInfo testTarget = new EimLinkageManagementInfo();
-		BeanUtils.copyProperties(testTarget, entity);
-
-		// 正常系
-		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		testTool.assertValidationOk(result);
-
-		// 異常系（@NotNullの null チェック）
-		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setAttachedFile(null);
-		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付ファイルが設定されていません。"));
 	}
 }
