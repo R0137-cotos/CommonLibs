@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.logic.eim;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -33,12 +34,9 @@ public class EimConnectionHelper {
 	@Autowired
 	EimConnectionProperties eimConnectionProperties;
 	
-	@Setter
-	@Autowired
-	RestTemplate restForEmi;
 
-	@Autowired
-	ApiAuthResponse apiAuthResponse;
+//	@Autowired
+//	ApiAuthResponse apiAuthResponse;
 	
 	/**
 	 * EIMシステム認証
@@ -47,6 +45,7 @@ public class EimConnectionHelper {
 	private SystemAuthResponse systemAuth() {
 		try {
 			// EIMシステム認証
+			RestTemplate restForEmi = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getSystemAuthPath();
@@ -65,6 +64,8 @@ public class EimConnectionHelper {
 	private ApiAuthResponse apiAuth(SystemAuthResponse systemAuth) {
 		try {
 			// アプリケーション認証
+			RestTemplate restForEmi = new RestTemplate();
+			
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -83,7 +84,7 @@ public class EimConnectionHelper {
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getApiAuthPath();
 			ResponseEntity<ApiAuthResponse> res = restForEmi.exchange(url, HttpMethod.POST, requestEntity, ApiAuthResponse.class);
 
-			apiAuthResponse.setAccessToken(res.getBody().getAccessToken()); // アクセストークンを保持
+//			apiAuthResponse.setAccessToken(res.getBody().getAccessToken()); // アクセストークンを保持
 			return res.getBody();
 		} catch(Exception e) {
 			log.error("【APIエラー】  ", e);
@@ -99,13 +100,14 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<FileUploadResponse> postFile(String fileName, byte[] fileBody) {
 		try {
-			//TODO 以下は必要か？　必要な場合、他のメソッドにも追加すること
+			RestTemplate restForEmi = new RestTemplate();
+			//TODO 以下は必要か？
 			SystemAuthResponse systemRes = systemAuth();
 			ApiAuthResponse apiRes = apiAuth(systemRes);
 			
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Cookie", "APISID=" + apiAuthResponse.getAccessToken());
+			headers.add("Cookie", "APISID=" + apiRes.getAccessToken());
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 			
 			// 添付ファイルのアップロードを要求(GET)
@@ -138,9 +140,14 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<DocumentUploadResponse> postDocument(DocumentUploadRequest request) {
 		try {
+			RestTemplate restForEmi = new RestTemplate();
+			//TODO 以下は必要か？
+			SystemAuthResponse systemRes = systemAuth();
+			ApiAuthResponse apiRes = apiAuth(systemRes);
+			
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Cookie", "APISID=" + apiAuthResponse.getAccessToken());
+			headers.add("Cookie", "APISID=" + apiRes.getAccessToken());
 			headers.setContentType(MediaType.APPLICATION_JSON);
 	
 			// BODY設定
@@ -167,9 +174,14 @@ public class EimConnectionHelper {
 	 */
 	public byte[] getFile(String fileId) {
 		try {
+			RestTemplate restForEmi = new RestTemplate();
+			//TODO 以下は必要か？
+			SystemAuthResponse systemRes = systemAuth();
+			ApiAuthResponse apiRes = apiAuth(systemRes);
+			
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Cookie", "APISID=" + apiAuthResponse.getAccessToken());
+			headers.add("Cookie", "APISID=" + apiRes.getAccessToken());
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 			
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getFileDownloadPath() + "/" + fileId;
@@ -188,9 +200,14 @@ public class EimConnectionHelper {
 	 */
 	public void putDocument(DocumentUploadRequest request) {
 		try {
+			RestTemplate restForEmi = new RestTemplate();
+			//TODO 以下は必要か？
+			SystemAuthResponse systemRes = systemAuth();
+			ApiAuthResponse apiRes = apiAuth(systemRes);
+			
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Cookie", "APISID=" + apiAuthResponse.getAccessToken());
+			headers.add("Cookie", "APISID=" + apiRes.getAccessToken());
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			// BODY設定
 			LinkedMultiValueMap<String, Object> params = new LinkedMultiValueMap<>();

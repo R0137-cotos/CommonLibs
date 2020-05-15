@@ -50,8 +50,6 @@ public class TestCommon {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageDocument.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimLinkageManagementInfo.sql");
 	}
 
 	@Autowired
@@ -97,17 +95,5 @@ public class TestCommon {
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "サーバーパスは最大文字数（1000）を超えています。"));
-	}
-
-	@Test
-	public void EimDocumentInfoのテスト() throws Exception {
-		EimDocumentInfo entity =  eimDocumentInfoRepository.findOne(1L);
-		EimDocumentInfo testTarget = new EimDocumentInfo();
-		BeanUtils.copyProperties(testTarget, entity);
-		
-		// 正常系
-		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		testTool.assertValidationOk(result);
-
 	}
 }

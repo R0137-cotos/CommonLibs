@@ -133,7 +133,7 @@ public class TestCommon {
 
 	@Test
 	public void EimDocumentInfoRepositoryのテスト() throws Exception {
-		EimDocumentInfo found = eimDocumentInfoRepository.findOne(1L);
+		EimDocumentInfo found = eimDocumentInfoRepository.findOne("1");
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
