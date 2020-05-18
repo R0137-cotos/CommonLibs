@@ -2119,6 +2119,22 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先は最大文字数（255）を超えています。"));
 
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setDisengagementFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "解約フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setDisengagementFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "解約フラグは最小値（0）を下回っています。"));
+
 		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractAttachedFileLinkage.class, ContractAttachedFileLinkageDto.class);
 	}

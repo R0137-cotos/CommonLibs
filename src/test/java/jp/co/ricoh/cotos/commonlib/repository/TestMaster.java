@@ -1558,6 +1558,18 @@ public class TestMaster {
 		Assert.assertTrue("Mom会社IDが一致すること", found.stream().anyMatch(f -> f.getEmpId().equals("00150194")));
 		Assert.assertTrue("SingleUserIdが一致すること", found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
 	}
+	
+	@Test
+	public void MvWjmoco40EmpAllInfoComRepository_findByEmailのテスト() {
+		final String email = "zpg_vo3is_mom_support_st@nts.ricoh.co.jp";
+		List<MvWjmoco40EmpAllInfoCom> found = mvWjmoco40EmpAllInfoComRepository.findByEmail(email);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		Assert.assertTrue("Mom会社IDが一致すること", found.stream().anyMatch(f -> f.getEmpId().equals("00150194")));
+		Assert.assertTrue("SingleUserIdが一致すること", found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
+	}
 
 	@Test
 	public void VWjmoc080DealerInfoRepositoryのテスト() {

@@ -169,4 +169,10 @@ public class ProductMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "決裁者フラグ", required = false, position = 19, allowableValues = "range[0,9]")
 	private Integer approverFlg;
+
+	/**
+	 * 統合契約用種類区分
+	 */
+	@ApiModelProperty(value = "統合契約用種類区分", required = false, position = 20, allowableValues = "range[0,255]")
+	private String integrationContractClassDiv;
 }

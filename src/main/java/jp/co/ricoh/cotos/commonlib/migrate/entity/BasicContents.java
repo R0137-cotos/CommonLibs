@@ -36,31 +36,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class BasicContents extends EntityBase {
 
-	/**
-	 * 申請ステータス
-	 */
-	public enum ApplicationStatus {
-
-		作成("1"), 申請中("2"), 承認済み("3"), 確定("4"), 解約確定("7");
-
-		private final String text;
-
-		private ApplicationStatus(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ApplicationStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
 	/**基本情報ID*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "basic_contents_seq")
@@ -97,7 +72,7 @@ public class BasicContents extends EntityBase {
 	private Date cancelExpectDate;
 
 	/**申請ステータス*/
-	private ApplicationStatus applicationStatus;
+	private String applicationStatus;
 
 	/**契約作成日*/
 	@Temporal(TemporalType.DATE)
