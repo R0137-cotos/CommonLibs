@@ -52,7 +52,6 @@ public class TestCommonDto {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimDocumentInfo.sql");
 	}
 
 	@Autowired
