@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +132,7 @@ public class TestCommon {
 
 	@Test
 	public void EimDocumentInfoRepositoryのテスト() throws Exception {
-		EimDocumentInfo found = eimDocumentInfoRepository.findOne("1");
+		EimDocumentInfo found = eimDocumentInfoRepository.findOne("RJ001");
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
