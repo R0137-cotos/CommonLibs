@@ -71,6 +71,10 @@ public class DealerEstimationListener {
 				dealerEstimation.setPostNumber(vKjbMaster.getJgsJgsPostNum());
 			if (StringUtils.isBlank(dealerEstimation.getOrgPhoneNumber()))
 				dealerEstimation.setOrgPhoneNumber(vKjbMaster.getJgsJgsTelNum());
+
+			if (StringUtils.isBlank(dealerEstimation.getDistributorMomCmpId()))
+				dealerEstimation.setDistributorMomCmpId("999999");
+
 		}
 	}
 

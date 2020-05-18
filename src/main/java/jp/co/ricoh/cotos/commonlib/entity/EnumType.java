@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.entity;
 
 import java.util.Arrays;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -484,6 +486,31 @@ public class EnumType {
 
 		@JsonCreator
 		public static ApiStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+	
+	public enum EimLinkedStatus {
+
+		未連携("0"), 連携済("1"), 対象外("9");
+
+		private final String text;
+
+		private EimLinkedStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static EimLinkedStatus fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}

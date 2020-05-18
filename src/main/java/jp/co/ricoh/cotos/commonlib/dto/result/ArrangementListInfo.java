@@ -229,7 +229,7 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "更新日時", required = false, position = 31)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
-	
+
 	/**
 	 * 解約フラグ
 	 */
@@ -242,6 +242,12 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "作業完了日時", required = false, position = 32)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date workCompletedAt;
+
+	/**
+	 * 手配業務タイプマスタID
+	 */
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 33)
+	private long arrangementWorkTypeMasterId;
 
 	@PrePersist
 	public void prePersist() {
