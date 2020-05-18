@@ -20,12 +20,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AppMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AuthPatternMaster;
@@ -94,6 +96,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterReposito
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkOrderMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AuthPatternMasterRepository;
@@ -309,6 +312,9 @@ public class TestMaster {
 
 	@Autowired
 	private AttachedFileLinkageRepository attachedFileLinkageRepository;
+
+	@Autowired
+	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -1321,7 +1327,7 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
-	
+
 	@Test
 	public void ProductExtendsParameterMasterのテスト() throws Exception {
 		// テストデータ登録
@@ -1558,7 +1564,7 @@ public class TestMaster {
 		Assert.assertTrue("Mom会社IDが一致すること", found.stream().anyMatch(f -> f.getEmpId().equals("00150194")));
 		Assert.assertTrue("SingleUserIdが一致すること", found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
 	}
-	
+
 	@Test
 	public void MvWjmoco40EmpAllInfoComRepository_findByEmailのテスト() {
 		final String email = "zpg_vo3is_mom_support_st@nts.ricoh.co.jp";
@@ -1947,6 +1953,47 @@ public class TestMaster {
 		} catch (Exception e) {
 			Assert.fail("throw Exception :" + e.getMessage());
 		}
+	}
+
+	@Test
+	public void ArrangementWorkOrderMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkOrderMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ArrangementWorkOrderMaster found = arrangementWorkOrderMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// Entity の エンティティクラスの項目の値が null ではないことを確認
+		if (found.getProductMaster() == null)
+			Assert.assertTrue(false);
+		if (found.getArrangementWorkTypeMaster() == null)
+			Assert.assertTrue(false);
+
+		// 追加したSelect文を使用したエンティティの取得
+		found = null;
+		found = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterId(2L, ContractType.情報変更.toString(), 1, 1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// Entity の エンティティクラスの項目の値が null ではないことを確認
+		if (found.getProductMaster() == null)
+			Assert.assertTrue(false);
+		if (found.getArrangementWorkTypeMaster() == null)
+			Assert.assertTrue(false);
 	}
 
 }
