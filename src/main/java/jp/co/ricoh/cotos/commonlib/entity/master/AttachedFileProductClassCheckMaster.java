@@ -1,0 +1,78 @@
+package jp.co.ricoh.cotos.commonlib.entity.master;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 添付ファイル商品種類区分毎チェックマスタ
+ */
+@Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "attached_file_product_class_check_master")
+public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
+
+	/**
+	 * 添付ファイル商品種類毎チェックマスタID
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attached_file_product_class_check_master_seq")
+	@SequenceGenerator(name = "attached_file_product_class_check_master_seq", sequenceName = "attached_file_product_class_check_master_seq", allocationSize = 1)
+	@ApiModelProperty(value = "添付ファイル商品種類毎チェックマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	private long id;
+
+	/**
+	 * 商品種類区分
+	 */
+	@Column(nullable = false)
+	@Size(max = 255)
+	@ApiModelProperty(value = "商品種類区分", required = true, position = 2, allowableValues = "range[0,255]")
+	private String productClassDiv;
+
+	/**
+	 * ドメイン
+	 */
+	@Column(nullable = false)
+	@Size(max = 255)
+	@ApiModelProperty(value = "ドメイン", required = true, position = 3, allowableValues = "range[0,255]")
+	private String domain;
+
+	/**
+	 * 見積/契約種別
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "見積/契約種別", required = false, position = 4, allowableValues = "range[0,255]")
+	private String estimationContractType;
+
+	/**
+	 * ライフサイクル状態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ライフサイクル状態", required = false, position = 5, allowableValues = "range[0,255]")
+	private String lifecycleStatus;
+
+	/**
+	 * ファイル種類
+	 */
+	@Column(nullable = false)
+	@Size(max = 255)
+	@ApiModelProperty(value = "ファイル種類", required = true, position = 6, allowableValues = "range[0,255]")
+	private String fileKind;
+
+	/**
+	 * チェック除外商品グループマスタID
+	 */
+	@ApiModelProperty(value = "チェック除外商品グループマスタID", required = false, position = 7, allowableValues = "range[0,255]")
+	private String excludeProductGrpMasterId;
+}
