@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void 添付ファイルアップロード要求_動作確認_PDF() throws Exception {
 		try {
 			byte[] fileBody = Files.readAllBytes(Paths.get("src/test/resources/emi/test01.pdf"));
@@ -63,7 +64,7 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void 添付ファイルアップロード要求_動作確認_contentTypeがnull() {
 		try {
 			byte[] fileBody = Files.readAllBytes(Paths.get("src/test/resources/emi/test01.pdf"));
@@ -75,7 +76,7 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void アプリに文書を登録_動作確認() {
 		try {
 			DocumentUploadRequest request = new DocumentUploadRequest();
@@ -98,7 +99,7 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void 添付ファイルのダウンロード要求_動作確認() {
 		try {
 			String fileId = "7e38acc2c46543c7a9393ec495f67272";
@@ -109,7 +110,7 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void 文書を文書キーで保存_動作確認() {
 		try {
 			DocumentUploadRequest request = new DocumentUploadRequest();

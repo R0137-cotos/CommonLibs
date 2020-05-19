@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +154,17 @@ public class TestFileUpDownload {
 		} catch (ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00100", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "指定されたファイルが存在しません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void EIMファイルダウンロード() throws Exception {
+		テストデータ作成();
+		try {
+			fileUpDownload.downloadFile(13L, "EIMテスト");
+		} catch (Exception e) {
+			Assert.fail("動作確認NG");
 		}
 	}
 

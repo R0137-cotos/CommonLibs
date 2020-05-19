@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.logic.fileupdownload;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,10 +19,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.logic.eim.EimConnectionHelper;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
 
@@ -36,6 +39,9 @@ public class FileUpDownload {
 
 	@Autowired
 	AppProperties appProperties;
+	
+	@Autowired
+	EimConnectionHelper eimConnectionHelper;
 
 	/**
 	 * ファイルアップロード
@@ -110,6 +116,11 @@ public class FileUpDownload {
 
 		File file = new File(appProperties.getFileProperties().getUploadFileDir() + "/" + attachedFile.getFilePhysicsName());
 		if (!file.exists()) {
+			if (EimLinkedStatus.連携済 == attachedFile.getEimLinkedStatus()) {
+				byte[] eimFile = eimConnectionHelper.getFile(attachedFile.getEimFileId());
+				InputStream eimStream = new ByteArrayInputStream(eimFile);
+				return new ResponseEntity<>(eimStream, HttpStatus.OK);
+			}
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileNotFoundError", new String[] { file.getAbsolutePath() }));
 		}
 
