@@ -118,6 +118,9 @@ public class FileUpDownload {
 		if (!file.exists()) {
 			if (EimLinkedStatus.連携済 == attachedFile.getEimLinkedStatus()) {
 				byte[] eimFile = eimConnectionHelper.getFile(attachedFile.getEimFileId());
+				if (null == eimFile || eimFile.length == 0) {
+					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileNotFoundError", new String[] { file.getAbsolutePath() }));
+				}
 				InputStream eimStream = new ByteArrayInputStream(eimFile);
 				return new ResponseEntity<>(eimStream, HttpStatus.OK);
 			}

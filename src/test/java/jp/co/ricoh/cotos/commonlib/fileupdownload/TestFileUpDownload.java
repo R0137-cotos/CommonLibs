@@ -162,7 +162,7 @@ public class TestFileUpDownload {
 	public void EIMファイルダウンロード() throws Exception {
 		テストデータ作成();
 		try {
-			fileUpDownload.downloadFile(13L, "EIMテスト");
+			fileUpDownload.downloadFile(14L, "EIMテスト");
 		} catch (Exception e) {
 			Assert.fail("動作確認NG");
 		}
