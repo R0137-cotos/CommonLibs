@@ -221,6 +221,8 @@ public class CheckUtil {
 				ErrorInfo errorInfo = new ErrorInfo();
 				errorInfo.setErrorId(messageInfo.getId());
 				errorInfo.setErrorMessage(messageInfo.getMsg());
+				errorInfo.setErrorField(fieldOrigNm);
+				errorInfo.setErrorEntity(entityOrigNm);
 				errorInfoList.add(errorInfo);
 			}
 
@@ -255,7 +257,7 @@ public class CheckUtil {
 
 	/**
 	 * 日付文字列が指定のフォーマットに変換できるか確認します
-	 * 
+	 *
 	 * @param dateString
 	 *            日付文字列
 	 * @param format
@@ -326,6 +328,26 @@ public class CheckUtil {
 	}
 
 	/**
+	 * エラー情報追加
+	 *
+	 * @param errorInfoList
+	 *            エラーリスト
+	 * @param messageKey
+	 *            メッセージキー
+	 * @param regexList
+	 *            メッセージ引数
+	 * @param filed
+	 *            フィールド
+	 * @param entity
+	 *            エンティティ
+	 * @return エラーリスト
+	 */
+	public List<ErrorInfo> addErrorInfoFiledEntity(List<ErrorInfo> errorInfoList, String messageKey, String[] regexList, String filed, String entity) {
+		errorInfoList.add(createErrorInfoFieldEntity(messageKey, regexList, filed, entity));
+		return errorInfoList;
+	}
+
+	/**
 	 * エラー情報生成
 	 *
 	 * @param messageKey
@@ -381,8 +403,33 @@ public class CheckUtil {
 	}
 
 	/**
+	 * エラー情報生成
+	 *
+	 * @param messageKey
+	 *            メッセージキー
+	 * @param regexList
+	 *            メッセージ引数
+	 * @param filed
+	 *            フィールド
+	 * @param entity
+	 *            エンティティ
+	 * @return エラーリスト
+	 */
+	private ErrorInfo createErrorInfoFieldEntity(String messageKey, String[] regexList, String filed, String entity) {
+
+		MessageInfo messageInfo = messageUtil.createMessageInfo(messageKey, regexList);
+
+		ErrorInfo errorInfo = new ErrorInfo();
+		errorInfo.setErrorId(messageInfo.getId());
+		errorInfo.setErrorMessage(messageInfo.getMsg());
+		errorInfo.setErrorField(filed);
+		errorInfo.setErrorEntity(entity);
+		return errorInfo;
+	}
+
+	/**
 	 * 契約情報確定APIのエラーチェック
-	 * 
+	 *
 	 * @param contract
 	 */
 	public void fixCheck(Contract contract) {
@@ -404,7 +451,7 @@ public class CheckUtil {
 
 	/**
 	 * 締結開始指示APIのエラーチェック
-	 * 
+	 *
 	 * @param contract
 	 */
 	public void startConclusionCheck(Contract contract) {

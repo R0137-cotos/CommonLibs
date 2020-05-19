@@ -79,6 +79,8 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約種別が設定されていません。"));
+		Assert.assertTrue(testTool.errorFiledMatchesOne(result.getErrorInfoList(), "contractType"));
+		Assert.assertNull(result.getErrorInfoList().get(0).getErrorEntity());
 
 	}
 
@@ -94,6 +96,8 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積番号枝番は最大値（99）を超えています。"));
+		Assert.assertTrue(testTool.errorFiledMatchesOne(result.getErrorInfoList(), "estimationBranchNumber"));
+		Assert.assertNull(result.getErrorInfoList().get(0).getErrorEntity());
 	}
 
 	@Test
@@ -107,6 +111,8 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約明細の状態が設定されていません。"));
+		Assert.assertTrue(testTool.errorFiledMatchesOne(result.getErrorInfoList(), "state"));
+		Assert.assertTrue(testTool.errorEntityMatchesOne(result.getErrorInfoList(), "contractDetailList"));
 	}
 
 	@Test
@@ -120,6 +126,8 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約担当SA社員のMoM社員IDが設定されていません。"));
+		Assert.assertTrue(testTool.errorFiledMatchesOne(result.getErrorInfoList(), "momEmployeeId"));
+		Assert.assertTrue(testTool.errorEntityMatchesOne(result.getErrorInfoList(), "contractPicSaEmp"));
 	}
 
 	@Test
@@ -134,6 +142,8 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "品種(契約用)の品種区分が設定されていません。"));
+		Assert.assertTrue(testTool.errorFiledMatchesOne(result.getErrorInfoList(), "itemType"));
+		Assert.assertTrue(testTool.errorEntityMatchesOne(result.getErrorInfoList(), "itemContract"));
 	}
 
 	@Test
@@ -148,5 +158,7 @@ public class TestCheckEntityWithEntityName {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約機種の機種コードが設定されていません。"));
+		Assert.assertTrue(testTool.errorFiledMatchesOne(result.getErrorInfoList(), "equipmentCode"));
+		Assert.assertTrue(testTool.errorEntityMatchesOne(result.getErrorInfoList(), "contractEquipmentList"));
 	}
 }
