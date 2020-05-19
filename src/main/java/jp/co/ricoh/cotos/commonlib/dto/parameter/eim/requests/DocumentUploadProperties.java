@@ -18,25 +18,20 @@ public class DocumentUploadProperties {
 	private String systemName;
 
 	/**
-	 * title
-	 */
-	private String title;
-
-	/**
-	 * documentUniqueID
-	 */
-	private String documentUniqueID;
-
-	/**
 	 * fileBody
 	 */
 	private List<String> fileBody;
 
 //以下EIM書誌情報※ただし、「最終連携実施時刻」およびEntityBaseのカラムは不要
 	/**
-	 * 契約No
+	 * 文書ユニークキー
 	 */
-	private String keiyakNo;
+	private String documentUniqueID;
+
+	/**
+	 * 文書ID
+	 */
+	private String documentId;
 	
 	/**
 	 * 文書キー
@@ -48,6 +43,16 @@ public class DocumentUploadProperties {
 	 */
 	private EimLinkedStatus eimLinkedStatus;
 
+	/**
+	 * 文書タイトル
+	 */
+	private String title;
+
+	/**
+	 * 契約No
+	 */
+	private String keiyakNo;
+	
 	/**
 	 * 担当販社CD
 	 */
