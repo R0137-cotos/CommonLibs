@@ -12,5 +12,5 @@ public class ApiAuthResponse {
 	/**
 	 * accessToken
 	 */
-	private String accessToken;
+	private String access_token;
 }

@@ -10,27 +10,12 @@ import lombok.Data;
 public class DocumentUploadResponseSystem {
 
 	/**
-	 * formKey
+	 * documentId
 	 */
-	private String formKey;
-
-	/**
-	 * siteId
-	 */
-	private String siteId;
-
-	/**
-	 * appId
-	 */
-	private String appId;
-
-	/**
-	 * modelId
-	 */
-	private String modelId;
+	private String documentId;
 	
 	/**
-	 * condition
+	 * documentKey
 	 */
-	private String condition;
+	private String documentKey;
 }
