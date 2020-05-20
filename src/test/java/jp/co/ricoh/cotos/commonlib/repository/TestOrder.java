@@ -23,6 +23,7 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderManagementInfo;
+import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderProductInfo;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderBasicInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderBranchCustomerInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderContractorInfoRepository;
@@ -71,7 +72,7 @@ public class TestOrder {
 
 	@Autowired
 	OrderParentDistributorInfoRepository orderParentDistributorInfoRepository;
-	
+
 	@Autowired
 	TestTools testTools;
 
@@ -104,6 +105,14 @@ public class TestOrder {
 	@Test
 	public void 全てのカラムがNullではないことを確認_注文商品情報() {
 		全てのカラムがNullではないことを確認_共通(orderProductInfoRepository, 401L, 501L);
+		// 独自のメソッド
+		// 全てのカラムがNullではないことを確認
+		try {
+			List<OrderProductInfo> found = orderProductInfoRepository.findByOrderBasicInfoIdOrderById(4L);
+			Assert.assertNotNull(found);
+		} catch (Exception e) {
+			Assert.fail("例外が発生した場合、エラー");
+		}
 	}
 
 	@Test
@@ -135,7 +144,7 @@ public class TestOrder {
 	public void 全てのカラムがNullではないことを確認_注文母店情報() {
 		全てのカラムがNullではないことを確認_共通(orderParentDistributorInfoRepository, 401L, 501L);
 	}
-	
+
 	@Test
 	public void 全てのカラムがNullではないことを確認_注文担当支社情報() {
 		全てのカラムがNullではないことを確認_共通(orderBranchCustomerInfoRepository, 401L, 501L);
@@ -145,7 +154,7 @@ public class TestOrder {
 	public void 全てのカラムがNullではないことを確認_注文基本情報() {
 		全てのカラムがNullではないことを確認_共通(orderBasicInfoRepository, 4L, 5L);
 	}
-	
+
 	@Test
 	@Transactional
 	public void 注文管理情報_契約取込状況_見取込_ID昇順のデータ取得() {
