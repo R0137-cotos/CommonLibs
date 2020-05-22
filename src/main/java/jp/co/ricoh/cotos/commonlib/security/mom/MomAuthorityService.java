@@ -178,14 +178,14 @@ public class MomAuthorityService {
 
 			if (AccessType.参照.equals(accessType)) {
 				// 承認者に含まれる場合、参照権限を付与
-				if (authParam.getApproverMvEmployeeMasterList() != null && !authParam.getApproverMvEmployeeMasterList().isEmpty() && authParam.getApproverMvEmployeeMasterList().stream().filter(approver -> approver.getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId())).count() > 0) {
+				if (authParam.getApproverMvEmployeeMasterList() != null && !authParam.getApproverMvEmployeeMasterList().isEmpty() && authParam.getApproverMvEmployeeMasterList().stream().filter(approver -> approver.getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId())).count() > 0 && AuthDiv.見積_契約_手配.equals(authDiv)) {
 					return true;
 				}
 			}
 
 			if (AccessType.編集.equals(accessType)) {
 				// 次回承認者の場合、編集権限を付与
-				if (authParam.getNextApproverMvEmployeeMaster() != null && authParam.getNextApproverMvEmployeeMaster().getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId())) {
+				if (authParam.getNextApproverMvEmployeeMaster() != null && authParam.getNextApproverMvEmployeeMaster().getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId()) && AuthDiv.見積_契約_手配.equals(authDiv)) {
 					return true;
 				}
 			}

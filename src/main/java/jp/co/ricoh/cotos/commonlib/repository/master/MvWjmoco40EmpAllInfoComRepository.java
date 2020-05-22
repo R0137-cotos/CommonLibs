@@ -11,4 +11,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoco40EmpAllInfoCom;
 public interface MvWjmoco40EmpAllInfoComRepository extends CrudRepository<MvWjmoco40EmpAllInfoCom, String> {
 
 	public List<MvWjmoco40EmpAllInfoCom> findByRingsHanshCdAndRingsEmpCd(String RingsHanshCd, String RingsEmpCd);
+
+	public List<MvWjmoco40EmpAllInfoCom> findByEmail(String email);
+
 }

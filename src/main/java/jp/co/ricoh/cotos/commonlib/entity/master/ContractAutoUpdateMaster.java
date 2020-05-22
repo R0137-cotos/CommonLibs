@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -50,8 +51,7 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ContractUpdateType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -78,8 +78,7 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ArrangementCreateType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -116,15 +115,24 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 	/**
 	 * サービス開始日更新区分
 	 */
+	@Size(max = 255)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "サービス開始日更新区分", required = true, position = 5, allowableValues = "range[0,]")
+	@ApiModelProperty(value = "サービス開始日更新区分", required = true, position = 5, allowableValues = "range[0,255]")
 	private String serviceTermStartType;
 
 	/**
 	 * サービス終了日更新区分
 	 */
+	@Size(max = 255)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "サービス終了日更新区分", required = true, position = 6, allowableValues = "range[0,]")
+	@ApiModelProperty(value = "サービス終了日更新区分", required = true, position = 6, allowableValues = "range[0,255]")
 	private String serviceTermEndType;
+
+	/**
+	 * 商品更新区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "商品更新区分", required = false, position = 7, allowableValues = "range[0,255]")
+	private String productUpdateType;
 
 }

@@ -247,7 +247,7 @@ public class ContractListInfo {
 	private String salesDepartmentName;
 
 	/**
-	 *  RINGS社員コード
+	 * RINGS社員コード
 	 */
 	@ApiModelProperty(value = "RINGS社員コード", required = false, position = 36, allowableValues = "range[0,255]")
 	private String ringsEmpCd;
@@ -259,7 +259,7 @@ public class ContractListInfo {
 	private String createdUser;
 
 	/**
-	 *  課金開始日
+	 * 課金開始日
 	 */
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "課金開始日", required = false, position = 38, allowableValues = "range[0,255]")
@@ -284,6 +284,24 @@ public class ContractListInfo {
 	@ApiModelProperty(value = "更新日時", required = false, position = 41)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
+
+	/**
+	 * ベンダ管理番号
+	 */
+	@ApiModelProperty(value = "ベンダ管理番号", required = false, position = 41, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
+	 * 解約理由
+	 */
+	@ApiModelProperty(value = "解約理由", required = false, position = 42, allowableValues = "range[0,255]")
+	private String cancelReason;
+
+	/**
+	 * その他解約理由
+	 */
+	@ApiModelProperty(value = "その他解約理由", required = false, position = 43, allowableValues = "range[0,1000]")
+	private String cancelReasonEtc;
 
 	@PrePersist
 	public void prePersist() {

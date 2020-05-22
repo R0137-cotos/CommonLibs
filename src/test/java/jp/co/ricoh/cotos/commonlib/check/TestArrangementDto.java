@@ -23,6 +23,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementPicWorke
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkApprovalRouteDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkApprovalRouteNodeDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkAttachedFileDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkAttachedFileLinkageDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkCheckResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
@@ -33,12 +34,14 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementPicWorkerEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.arrangement.ArrangementWorkOperationLogRepository;
@@ -97,13 +100,23 @@ public class TestArrangementDto {
 	ArrangementWorkRepository arrangementWorkRepository;
 
 	@Autowired
+	ArrangementWorkAttachedFileLinkageRepository arrangementWorkAttachedFileLinkageRepository;
+
+	@Autowired
 	TestTools testTool;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
 	}
 
@@ -218,7 +231,7 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認依頼者MoM社員IDは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ArrangementWork.class, ArrangementWorkDto.class);
 	}
 
@@ -256,7 +269,7 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "解約フラグは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(Arrangement.class, ArrangementDto.class);
 	}
 
@@ -305,7 +318,7 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認者氏名は最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ArrangementWorkApprovalRoute.class, ArrangementWorkApprovalRouteDto.class);
 	}
 
@@ -359,7 +372,7 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "承認者組織階層レベルは最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ArrangementWorkApprovalRouteNode.class, ArrangementWorkApprovalRouteNodeDto.class);
 	}
 
@@ -367,21 +380,18 @@ public class TestArrangementDto {
 	public void ArrangementWorkAttachedFileDtoのテスト() throws Exception {
 
 		ArrangementWorkAttachedFile entity = arrangementWorkAttachedFileRepository.findOne(401L);
-		ArrangementWorkAttachedFileDto dto = new ArrangementWorkAttachedFileDto();
 		ArrangementWorkAttachedFileDto testTarget = new ArrangementWorkAttachedFileDto();
-
-		BeanUtils.copyProperties(entity, dto);
-		AttachedFileDto attachedFile = new AttachedFileDto();
-		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFile);
-		dto.setAttachedFile(attachedFile);
+		AttachedFileDto attachedFileDto = new AttachedFileDto();
+		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
 
 		// 正常系
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(attachedFileDto);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@NotNull
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setFileName(null);
 		testTarget.setAttachedFile(null);
 		testTarget.setAttachedEmpId(null);
@@ -392,7 +402,8 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者氏名が設定されていません。"));
 
 		// 異常系（@Size(max)
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFile(attachedFileDto);
 		testTarget.setFileName(STR_256);
 		testTarget.setFileKind(STR_256);
 		testTarget.setAttachedComment(STR_1001);
@@ -404,7 +415,7 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付者MoM社員IDは最大文字数（255）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ArrangementWorkAttachedFile.class, ArrangementWorkAttachedFileDto.class);
 	}
 
@@ -455,7 +466,7 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "表示順は最小値（0）を下回っています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ArrangementWorkCheckResult.class, ArrangementWorkCheckResultDto.class);
 	}
 
@@ -513,8 +524,38 @@ public class TestArrangementDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
 
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ArrangementPicWorkerEmp.class, ArrangementPicWorkerEmpDto.class);
 	}
 
+	@Test
+	public void ArrangementWorkAttachedFileLinkageDtoのテスト() throws Exception {
+		ArrangementWorkAttachedFileLinkage entity = arrangementWorkAttachedFileLinkageRepository.findOne(401L);
+		ArrangementWorkAttachedFileLinkageDto testTarget = new ArrangementWorkAttachedFileLinkageDto();
+
+		// 正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFileLinkageName(null);
+		testTarget.setLinkageStatus(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先が設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setAttachedFileLinkageName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル連携先は最大文字数（255）を超えています。"));
+
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
+		testTool.checkConsistency(ArrangementWorkAttachedFileLinkageDto.class, ArrangementWorkAttachedFileLinkageDto.class);
+	}
 }

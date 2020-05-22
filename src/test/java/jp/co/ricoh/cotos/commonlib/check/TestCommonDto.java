@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.check;
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,25 +91,26 @@ public class TestCommonDto {
 
 	@Test
 	public void DtoBaseのテスト() {
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(EntityBase.class, DtoBase.class, "id");
 	}
 
 	@Test
 	public void CustomerAbstractDtoのテスト() {
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(CustomerAbstractEntity.class, CustomerAbstractDto.class);
 	}
 
 	@Test
 	public void DealerAbstractDtoのテスト() {
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(DealerAbstractEntity.class, DealerAbstractDto.class);
 	}
 
 	@Test
 	public void EmployeeAbstractDtoのテスト() {
-		//dto-エンティティ整合性チェック※DTOクラスでは必須
+		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(EmployeeAbstractEntity.class, EmployeeAbstractDto.class);
 	}
+
 }

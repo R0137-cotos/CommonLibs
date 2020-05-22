@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,13 +24,20 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentAttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAssignmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileHistoryRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
@@ -50,6 +58,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ProductContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.VValidContractPeriodHistoryRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -129,6 +138,18 @@ public class TestContract {
 
 	@Autowired
 	ManagedEstimationDetailRepository managedEstimationDetailRepository;
+
+	@Autowired
+	ContractAssignmentRepository contractAssignmentRepository;
+
+	@Autowired
+	ContractAssignmentAttachedFileRepository contractAssignmentAttachedFileRepository;
+
+	@Autowired
+	ContractAttachedFileLinkageRepository contractAttachedFileLinkageRepository;
+
+	@Autowired
+	VValidContractPeriodHistoryRepository vValidContractPeriodHistoryRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -275,6 +296,21 @@ public class TestContract {
 	}
 
 	@Test
+	public void 全てのカラムがNullではないことを確認_契約業務情報() {
+		全てのカラムがNullではないことを確認_共通(contractAssignmentRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約業務添付ファイル() {
+		全てのカラムがNullではないことを確認_共通(contractAssignmentAttachedFileRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約添付ファイル連携先() {
+		全てのカラムがNullではないことを確認_共通(contractAttachedFileLinkageRepository, 401L, 501L);
+	}
+
+	@Test
 	public void 契約承認ルート条件取得確認() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
@@ -307,6 +343,8 @@ public class TestContract {
 
 		List<Contract> listServiceStart = contractRepository.findByContractTypeAndChangePreferredDateAndServiceStartDate(date);
 		Assert.assertTrue(listServiceStart.size() != 0);
+		// ライフサイクルが締結待ちで契約種別＝契約更新のデータを取得できているか確認
+		Assert.assertTrue(listServiceStart.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新) && contract.getLifecycleStatus().equals(LifecycleStatus.締結待ち)).count() != 0);
 	}
 
 	@Test
@@ -334,10 +372,28 @@ public class TestContract {
 		testTools.assertColumnsNotNull(found);
 	}
 
+	@Test
+	public void ContractAssignmentRepositoryの条件テスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		ContractAssignment found = contractAssignmentRepository.findByContractId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
 	@Transactional
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 
 		List<ID> idList = Arrays.asList(ids);
@@ -379,5 +435,47 @@ public class TestContract {
 		Assert.assertNotNull(foundList);
 		// データが取得できていることを確認
 		Assert.assertTrue(foundList.size() > 0);
+		// 契約種別＝契約更新が取得できていることを確認
+		Assert.assertTrue(foundList.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新)).count() > 0);
+
+	}
+
+	@Test
+	public void VValidContractPeriodHistoryRepositoryのテスト() throws ParseException {
+
+		context.getBean(DBConfig.class).initTargetTestData("repository/vValidContractPeriodHistory.sql");
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = df.parse("2019/12/01");
+
+		//商品種類区分In指定
+		List<String> productClassDivIn = Arrays.asList("RSI", "ROC");
+		List<VValidContractPeriodHistory> foundByProductClassDivIn = vValidContractPeriodHistoryRepository.findByProductClassDivInAndDate(productClassDivIn, date);
+
+		// データが取得できていることを確認
+		Assert.assertEquals(foundByProductClassDivIn.size(), 4); //RSIが2件 ROCが2件
+		// Entity の各項目の値が null ではないことを確認
+		foundByProductClassDivIn.forEach(found -> {
+			try {
+				Assert.assertNull(testTools.findNullProperties(found));
+			} catch (Exception e) {
+				Assert.fail("例外が発生した場合、エラー");
+			}
+		});
+
+		//RJ管理番号指定
+		List<String> rjManageNumberIn = Arrays.asList("RJXXX0000000014", "RJXXX0000000015");
+		List<VValidContractPeriodHistory> foundByRjManageNumberIn = vValidContractPeriodHistoryRepository.findByRjManageNumberInAndDate(rjManageNumberIn, date);
+
+		// データが取得できていることを確認
+		Assert.assertEquals(foundByRjManageNumberIn.size(), 2);
+		// Entity の各項目の値が null ではないことを確認
+		foundByRjManageNumberIn.forEach(found -> {
+			try {
+				Assert.assertNull(testTools.findNullProperties(found));
+			} catch (Exception e) {
+				Assert.fail("例外が発生した場合、エラー");
+			}
+		});
 	}
 }

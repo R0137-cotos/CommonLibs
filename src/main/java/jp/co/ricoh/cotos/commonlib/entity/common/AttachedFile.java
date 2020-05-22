@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.entity.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +24,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "attached_file")
+@EntityListeners(AttachedFileListener .class)
 public class AttachedFile extends EntityBase {
 
 	@Id
@@ -63,4 +66,16 @@ public class AttachedFile extends EntityBase {
 	@Size(max = 1000)
 	@ApiModelProperty(value = "サーバーパス", required = true, position = 5, allowableValues = "range[0,1000]")
 	private String savedPath;
+
+	/**
+	 * EIM連携済状態
+	 */
+	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 6, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
+	private EimLinkedStatus eimLinkedStatus;
+
+	/**
+	 * EIMファイルID
+	 */
+	@ApiModelProperty(value = "EIMファイルID", required = false, position = 7)
+	private String eimFileId;
 }
