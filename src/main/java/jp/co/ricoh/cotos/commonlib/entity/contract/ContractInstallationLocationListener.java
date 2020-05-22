@@ -54,6 +54,7 @@ public class ContractInstallationLocationListener {
 
 		if (StringUtils.isBlank(contractInstallationLocation.getCustomerName()))
 			contractInstallationLocation.setCustomerName(this.convertJoinedCustomerName(vKjbMaster, contractInstallationLocation));
+
 		if (StringUtils.isBlank(contractInstallationLocation.getAddress()))
 			contractInstallationLocation.setAddress(vKjbMaster.getKgyCuicClnMaeAds());
 
@@ -70,13 +71,22 @@ public class ContractInstallationLocationListener {
 				contractInstallationLocation.setFaxNumber(vKjbMaster.getJgsJgsFaxNum());
 		}
 
-		contractInstallationLocation.setDepartmentDiv(vKjbMaster.getPrflKjbSetKbn());
-		contractInstallationLocation.setCompanyId(vKjbMaster.getPrflMomKgyId());
-		contractInstallationLocation.setOfficeId(vKjbMaster.getPrflMomJgsId());
-		contractInstallationLocation.setOfficeName(vKjbMaster.getJgsJgsNmKnji());
-		contractInstallationLocation.setMomCustId(vKjbMaster.getMclMomKjbId());
-		contractInstallationLocation.setPostNumber(vKjbMaster.getJgsJgsPostNum());
-		contractInstallationLocation.setDepartmentName(vKjbMaster.getBmnBmnNmKnji());
+		if (null == contractInstallationLocation.getDepartmentDiv())
+			contractInstallationLocation.setDepartmentDiv(vKjbMaster.getPrflKjbSetKbn());
+		if (StringUtils.isBlank(contractInstallationLocation.getCompanyId()))
+			contractInstallationLocation.setCompanyId(vKjbMaster.getPrflMomKgyId());
+		if (StringUtils.isBlank(contractInstallationLocation.getOfficeId()))
+			contractInstallationLocation.setOfficeId(vKjbMaster.getPrflMomJgsId());
+		if (StringUtils.isBlank(contractInstallationLocation.getOfficeName()))
+			contractInstallationLocation.setOfficeName(vKjbMaster.getJgsJgsNmKnji());
+		if (StringUtils.isBlank(contractInstallationLocation.getMomCustId()))
+			contractInstallationLocation.setMomCustId(vKjbMaster.getMclMomKjbId());
+		if (StringUtils.isBlank(contractInstallationLocation.getPostNumber()))
+			contractInstallationLocation.setPostNumber(vKjbMaster.getJgsJgsPostNum());
+		if (StringUtils.isBlank(contractInstallationLocation.getCompanyName()))
+			contractInstallationLocation.setCompanyName(vKjbMaster.getKgyKgyNmKnji());
+		if (StringUtils.isBlank(contractInstallationLocation.getDepartmentName()))
+			contractInstallationLocation.setDepartmentName(vKjbMaster.getBmnBmnNmKnji());
 	}
 
 	private String convertJoinedCustomerName(VKjbMaster kjbMaster, ContractInstallationLocation contractInstallationLocation) {
@@ -92,5 +102,4 @@ public class ContractInstallationLocationListener {
 
 		return sb.toString();
 	}
-
 }

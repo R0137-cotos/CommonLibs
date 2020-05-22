@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.check;
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
@@ -38,6 +41,9 @@ public class TestCommon {
 
 	@Autowired
 	AttachedFileRepository attachedFileRepository;
+
+	@Autowired
+	EimDocumentInfoRepository eimDocumentInfoRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {

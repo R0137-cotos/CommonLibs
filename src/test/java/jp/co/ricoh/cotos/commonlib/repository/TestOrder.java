@@ -23,11 +23,13 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderManagementInfo;
+import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderProductInfo;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderBasicInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderBranchCustomerInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderContractorInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderDistributorInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderManagementInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderParentDistributorInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderProductGroupInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderProductInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderServiceInnerInfoRepository;
@@ -69,6 +71,9 @@ public class TestOrder {
 	OrderBasicInfoRepository orderBasicInfoRepository;
 
 	@Autowired
+	OrderParentDistributorInfoRepository orderParentDistributorInfoRepository;
+
+	@Autowired
 	TestTools testTools;
 
 	static ConfigurableApplicationContext context;
@@ -100,6 +105,14 @@ public class TestOrder {
 	@Test
 	public void 全てのカラムがNullではないことを確認_注文商品情報() {
 		全てのカラムがNullではないことを確認_共通(orderProductInfoRepository, 401L, 501L);
+		// 独自のメソッド
+		// 全てのカラムがNullではないことを確認
+		try {
+			List<OrderProductInfo> found = orderProductInfoRepository.findByOrderBasicInfoIdOrderById(4L);
+			Assert.assertNotNull(found);
+		} catch (Exception e) {
+			Assert.fail("例外が発生した場合、エラー");
+		}
 	}
 
 	@Test
@@ -125,6 +138,11 @@ public class TestOrder {
 	@Test
 	public void 全てのカラムがNullではないことを確認_注文顧客情報() {
 		全てのカラムがNullではないことを確認_共通(orderContractorInfoRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_注文母店情報() {
+		全てのカラムがNullではないことを確認_共通(orderParentDistributorInfoRepository, 401L, 501L);
 	}
 
 	@Test

@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -81,4 +82,11 @@ public class ArrangementWorkAttachedFileDto extends DtoBase {
 	@ApiModelProperty(value = "添付日時", required = true, position = 10)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date attachedAt;
+
+	/**
+	 * 手配業務添付ファイル連携先
+	 */
+	@Valid
+	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 11)
+	private List<ArrangementWorkAttachedFileLinkageDto> arrangementWorkAttachedFileLinkageList;
 }

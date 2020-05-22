@@ -102,4 +102,10 @@ public class ItemEstimationDto extends DtoBase {
 	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14)
 	private BigDecimal motherStorePrice;
 
+	/**
+	 * メーカー商品コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 15, allowableValues = "range[0,255]")
+	private String makerItemCode;
 }

@@ -107,4 +107,11 @@ public class OrderManagementInfo extends EntityBase {
 	@ApiModelProperty(value = "契約ID", required = false, position = 6)
 	private long contractId;
 
+
+	/**
+	 * 見積ID
+	 */
+	@Column
+	@ApiModelProperty(value = "見積ID", required = false, position = 7)
+	private long estimationId;
 }
