@@ -293,5 +293,11 @@ public class TestAccounting {
 		Assert.assertEquals(3L, list.size());
 		Assert.assertNotNull(list.get(0));
 		Assert.assertEquals(3L, list.get(0).getId());
+
+		// 独自メソッド
+		list = osoRequestDetailDataRepository.findByContractDetailId(1L);
+
+		Assert.assertEquals(3L, list.size());
+		Assert.assertNotNull(list.get(0));
 	}
 }
