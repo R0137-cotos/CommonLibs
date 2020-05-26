@@ -395,7 +395,8 @@ public class BusinessDayUtil {
 	/**
 	 * 引数月の非営業日カレンダーリスト取得
 	 * 
-	 * @param targetYm 非営業日カレンダーを取得したい月
+	 * @param year 非営業日カレンダーを取得したい年
+	 * @param month 非営業日カレンダーを取得したい月
 	 * @return 非営業日カレンダーリスト（1月分）
 	 */
 	private List<NonBusinessDayCalendarMaster> findNonBusinessDayCalendarForSpecifiedMonth(int year, int month) {
