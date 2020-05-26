@@ -105,6 +105,26 @@ public class TestBusinessDayUtil {
 	}
 
 	@Test
+	public void 月末最終営業日取得_非営業日カレンダーマスタ() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/businessday/lastBusinessDayOfTheMonthTest.sql");
+		// 2019年6月 月末日が非営業日
+		// 2019年7月 月末日が非営業日ではない
+		// 2019年8月 全ての日が非営業日
+		// 2019年9月 全ての日が非営業日ではない
+		// 引数文字列
+		// 引数null
+
+		// 引数
+		List<String> argList = Arrays.asList("201906", "201907", "201908", "201909", "ああああ", null);
+		// 期待値
+		List<String> expectList = Arrays.asList("2019/06/28", "2019/07/31", null, "2019/09/30", null, null);
+		for (int index = 0; index < argList.size(); index++) {
+			Date result = businessDayUtil.getLastBusinessDayOfTheMonthFromNonBusinessCalendarMaster(argList.get(index));
+			Assert.assertEquals(argList.get(index) + "の想定通りの月末最終営業日が取得できること。", 日付想定値取得(expectList.get(index)), result);
+		}
+	}
+
+	@Test
 	public void 月初からn営業日以内か() throws ParseException {
 		// 月初から3営業日以内をテスト
 		int days = 3;
@@ -333,9 +353,12 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("beforeNumberが負数の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 5), -2));
 	}
 
-	private Date 日付想定値取得(String expectrd) {
+	private Date 日付想定値取得(String expected) {
+		if (expected == null) {
+			return null;
+		}
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Integer.parseInt(StringUtils.substring(expectrd, 0, 4)), Integer.parseInt(StringUtils.substring(expectrd, 5, 7)) - 1, Integer.parseInt(StringUtils.substring(expectrd, 8, 10)), 0, 0, 0);
+		calendar.set(Integer.parseInt(StringUtils.substring(expected, 0, 4)), Integer.parseInt(StringUtils.substring(expected, 5, 7)) - 1, Integer.parseInt(StringUtils.substring(expected, 8, 10)), 0, 0, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		return calendar.getTime();
 	}
