@@ -163,7 +163,7 @@ public class MailControlMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "追加条件式", required = false, position = 12)
 	private String extendsQuery;
-	
+
 	/**
 	 * 監査証跡送付フラグ
 	 */
