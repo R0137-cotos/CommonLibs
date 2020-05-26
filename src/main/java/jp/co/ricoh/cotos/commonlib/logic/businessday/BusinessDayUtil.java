@@ -13,6 +13,7 @@ import java.util.Set;
 
 import javax.swing.SortOrder;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -105,7 +106,7 @@ public class BusinessDayUtil {
 	}
 
 	/**
-	 * 引数月の月末最終営業日取得
+	 * 引数月の月末最終営業日取得(業務カレンダーマスタ)
 	 * 
 	 * @param targetYm
 	 *            月末最終営業日を取得したい月
@@ -114,6 +115,59 @@ public class BusinessDayUtil {
 	public Date getLastBusinessDayOfTheMonth(String targetYm) {
 		BusinessCalendar result = findBusinessCalendarForSpecifiedMonth(targetYm).stream().sorted(Comparator.comparing(BusinessCalendar::getBusinessDay).reversed()).findFirst().orElse(null);
 		return ObjectUtils.isEmpty(result) ? null : result.getBusinessDay();
+	}
+
+	/**
+	 * 引数月の月末最終営業日取得(非営業日カレンダーマスタ)
+	 * 
+	 * @param targetYm 月末最終営業日を取得したい月(yyyyMM)
+	 * @return 月末最終営業日
+	 */
+	public Date getLastBusinessDayOfTheMonthFromNonBusinessCalendarMaster(String targetYm) {
+		// 対象月特定不可能の場合は月末最終営業日を返さない
+		if (targetYm == null || targetYm.length() != 6) {
+			return null;
+		}
+		try {
+			int year = Integer.parseInt(StringUtils.substring(targetYm, 0, 4));
+			int month = Integer.parseInt(StringUtils.substring(targetYm, -2));
+
+			// 対象月月初日
+			LocalDate firstDayOfTheMonth = LocalDate.of(year, month, 1);
+			// 対象月月末日
+			LocalDate lastDayOfTheMonth = LocalDate.of(year, month, 1).plusMonths(1).minusDays(1);
+
+			// 対象月の非営業日カレンダーマスタリストを取得する
+			List<NonBusinessDayCalendarMaster> targetMonthNonBusinessDayList = findNonBusinessDayCalendarForSpecifiedMonth(year, month);
+
+			if (!CollectionUtils.isEmpty(targetMonthNonBusinessDayList)) {
+				// 非営業日リスト
+				List<LocalDate> nonBusinessDayList = new ArrayList<>();
+				for (NonBusinessDayCalendarMaster nonBusinessDay : targetMonthNonBusinessDayList) {
+					if (nonBusinessDay.getNonBusinessDay() != null) {
+						nonBusinessDayList.add(nonBusinessDay.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+					}
+				}
+				
+				if (!CollectionUtils.isEmpty(nonBusinessDayList)) {
+					// 月末日から一日ずつ減らしていき、月初日と同日になるまで回す
+					while (!firstDayOfTheMonth.isEqual(lastDayOfTheMonth)) {
+						// 非営業日リストに入っていない日付の場合、月末最終営業日である
+						if (!nonBusinessDayList.contains(lastDayOfTheMonth)) {
+							return Date.from(lastDayOfTheMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+						}
+						lastDayOfTheMonth = lastDayOfTheMonth.minusDays(1);
+					}
+					// 対象月の全てが非営業日の場合
+					return null;
+				}
+			}
+
+			// 非営業日カレンダーマスタリストが存在しない場合、対象月月末日を返す
+			return Date.from(lastDayOfTheMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 
 	/**
@@ -336,6 +390,41 @@ public class BusinessDayUtil {
 		int year = Integer.parseInt(StringUtils.substring(targetYm, 0, 4));
 		int month = Integer.parseInt(StringUtils.substring(targetYm, -2));
 		return findBusinessCalendarForSpecifiedRange(getStartOfMonth(year, month), getEndOfMonth(year, month));
+	}
+
+	/**
+	 * 引数月の非営業日カレンダーリスト取得
+	 * 
+	 * @param year 非営業日カレンダーを取得したい年
+	 * @param month 非営業日カレンダーを取得したい月
+	 * @return 非営業日カレンダーリスト（1月分）
+	 */
+	private List<NonBusinessDayCalendarMaster> findNonBusinessDayCalendarForSpecifiedMonth(int year, int month) {
+		// 対象月の非営業日リスト
+		List<NonBusinessDayCalendarMaster> targetMonthList = new ArrayList<>();
+
+		// 対象月月初日
+		LocalDate firstDayOfTheTargetMonth = LocalDate.of(year, month, 1);
+		// 対象月月末日
+		LocalDate lastDayOfTheTargetMonth = LocalDate.of(year, month, 1).plusMonths(1).minusDays(1);
+
+		// 全非営業日カレンダーマスタを取得
+		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findAll();
+
+		if (CollectionUtils.isEmpty(nonBusinessDayCalendarMasterList)) {
+			return null;
+		}
+
+		// filter: 非営業日 != null
+		// filter: 対象月月初日 <= 非営業日  
+		// filter: 非営業日 <= 対象月月末日
+		nonBusinessDayCalendarMasterList.stream().filter(e -> e.getNonBusinessDay() != null).filter(e -> e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(lastDayOfTheTargetMonth) || e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(lastDayOfTheTargetMonth)).filter(e -> e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(firstDayOfTheTargetMonth) || e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(firstDayOfTheTargetMonth)).forEach(e -> {
+			// 対象月の非営業日をリストに格納する
+			targetMonthList.add(e);
+		});
+
+		// 対象月の非営業日リストを返す
+		return targetMonthList;
 	}
 
 	/**
