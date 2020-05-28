@@ -165,16 +165,22 @@ public class MailControlMaster extends EntityBaseMaster {
 	private String extendsQuery;
 
 	/**
+	 * 監査証跡送付フラグ
+	 */
+	@ApiModelProperty(value = "監査証跡送付フラグ", required = false, position = 13, allowableValues = "range[0,9]")
+	private Long auditTrailSendingFlg;
+
+	/**
 	 * メール変換値マスタ
 	 */
 	@OneToMany(mappedBy = "mailControlMaster")
-	@ApiModelProperty(value = "メール変換値マスタ", required = false, position = 13)
+	@ApiModelProperty(value = "メール変換値マスタ", required = false, position = 14)
 	private List<MailConvertValueMaster> MailConvertValueMasterList;
 
 	/**
 	 *  通知メール対象商材マスタ
 	 */
 	@OneToMany(mappedBy = "mailControlMaster")
-	@ApiModelProperty(value = "通知メール対象商材マスタ", required = false, position = 14)
+	@ApiModelProperty(value = "通知メール対象商材マスタ", required = false, position = 15)
 	private List<MailProductMaster> mailProductMasterList;
 }

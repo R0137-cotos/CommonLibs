@@ -15,4 +15,6 @@ public interface OsoRequestDetailDataRepository extends CrudRepository<OsoReques
 	public List<OsoRequestDetailData> findByProcessingDivAndOsoManageNumberAndItemCodeAndProcessingStatus(ProcessingDiv processingDiv, String osoManageNumber, String itemCode, OsoProcessingStatus processingStatus);
 
 	public List<OsoRequestDetailData> findByOsoManageNumberAndItemCodeAndProcessingStatusOrderByIdDesc(String osoManageNumber, String itemCode, OsoProcessingStatus processingStatus);
+
+	public List<OsoRequestDetailData> findByContractDetailId(Long contractDetailId);
 }
