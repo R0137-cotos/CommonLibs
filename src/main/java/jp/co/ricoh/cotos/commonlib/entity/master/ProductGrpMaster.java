@@ -16,6 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -137,4 +138,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "EDW大塚商会専用商品フラグ", required = false, position = 14, allowableValues = "range[0,9]")
 	private Integer edwOtsukaProductFlg;
 
+	/**
+	 * 解約予定日差分
+	 */
+	@Max(99)
+	@ApiModelProperty(value = "解約予定日差分", required = false, position = 15, allowableValues = "range[0,99]")
+	private Integer cancelScheduledDateDifference;
 }
