@@ -53,8 +53,8 @@ public class VendorMaster extends EntityBaseMaster {
 	/**
 	 * メールアドレス
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 4, allowableValues = "range[0,255]")
+	@Size(max = 1000)
+	@ApiModelProperty(value = "メールアドレス", required = false, position = 4, allowableValues = "range[0,1000]")
 	private String mailAddress;
 
 	/**
