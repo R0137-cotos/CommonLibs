@@ -131,6 +131,14 @@ public class TestEstimation {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		List<EstimationAttachedFile> foundList = estimationAttachedFileRepository.findByEstimationId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity 1件以上取得できていることを確認
+		Assert.assertNotEquals(foundList.size(), 0);
 	}
 
 	@Test

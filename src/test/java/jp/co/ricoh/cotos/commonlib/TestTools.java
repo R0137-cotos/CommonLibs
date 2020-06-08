@@ -162,6 +162,32 @@ public class TestTools {
 	}
 
 	/**
+	 * ErrorInfo のエラー フィールド が指定したものと同じ物が一つだけ存在するかどうかを判定する
+	 *
+	 * @param errorInfoList
+	 *            ErrorInfo のリスト
+	 * @param paramterErrorField
+	 *            エラーフィールド
+	 * @return boolean 判定結果（true：一つ一致 false：一致無しまたは二つ以上一致）
+	 */
+	public boolean errorFiledMatchesOne(List<ErrorInfo> errorInfoList, String paramterErrorField) {
+		return (1 == (int) errorInfoList.stream().filter(info -> info != null && paramterErrorField.toString().equals(info.getErrorField())).count());
+	}
+
+	/**
+	 * ErrorInfo のエラー エンティティ が指定したものと同じ物が一つだけ存在するかどうかを判定する
+	 *
+	 * @param errorInfoList
+	 *            ErrorInfo のリスト
+	 * @param paramterErrorEntity
+	 *            エラーエンティティ
+	 * @return boolean 判定結果（true：一つ一致 false：一致無しまたは二つ以上一致）
+	 */
+	public boolean errorEntityMatchesOne(List<ErrorInfo> errorInfoList, String paramterErrorEntity) {
+		return (1 == (int) errorInfoList.stream().filter(info -> info != null && paramterErrorEntity.toString().equals(info.getErrorEntity())).count());
+	}
+
+	/**
 	 * dto-エンティティ整合性チェック
 	 *
 	 * @param entityClass エンティティクラス
