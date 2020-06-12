@@ -167,6 +167,33 @@ public class TestSendMail {
 		}
 	}
 
+	@Test
+	public void メール送信アポストロフィ() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> emailCcList = 送信先CCメールアドレスリスト作成();
+		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成_アポストロフィ();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成_アポストロフィ();
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+
+		// 複数添付あり用のメソッドを通る場合
+		List<String> uploadFileList = new ArrayList<>();
+		String path = new File(".").getAbsoluteFile().getParent();
+		uploadFileList.add(path + "/src/test/resources/dummyFile/請求書_201909.pdf");
+		uploadFileList.add(path + "/src/test/resources/dummyFile/電力使用料金明細書_201909.xlsx");
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMailAndAttachedFiles(1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/mail/testProductGrpMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/mail/testMailTemplateMasterInset.sql");
@@ -202,5 +229,13 @@ public class TestSendMail {
 		List<String> list = IntStream.rangeClosed(2, 3).mapToObj(i -> "test_text" + i).collect(Collectors.toList());
 		list.add(0, null);
 		return list;
+	}
+
+	private List<String> メール件名置換リスト作成_アポストロフィ() {
+		return IntStream.rangeClosed(1, 6).mapToObj(i -> "test_subject's" + i).collect(Collectors.toList());
+	}
+
+	private List<String> メール本文置換リスト作成_アポストロフィ() {
+		return IntStream.rangeClosed(1, 11).mapToObj(i -> "test_text's" + i).collect(Collectors.toList());
 	}
 }

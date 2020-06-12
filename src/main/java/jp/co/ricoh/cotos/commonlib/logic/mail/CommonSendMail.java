@@ -202,9 +202,9 @@ public class CommonSendMail {
 		attachedHelper.setFrom(appProperties.getMailProperties().getFromMailAddress());
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
-		String subject = writerMailSubject.toString().replace("&#10;", "\r\n");
+		String subject = writerMailSubject.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
 		attachedHelper.setSubject(subject);
-		String text = writerMailText.toString().replace("&#10;", "\r\n");
+		String text = writerMailText.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
 		attachedHelper.setText(text);
 
 		if (null != uploadFile) {
@@ -249,9 +249,9 @@ public class CommonSendMail {
 		attachedHelper.setFrom(Optional.ofNullable(mailTemplateMaster.getFromMailAddress()).orElse(appProperties.getMailProperties().getFromMailAddress()));
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
-		String subject = writerMailSubject.toString().replace("&#10;", "\r\n");
+		String subject = writerMailSubject.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
 		attachedHelper.setSubject(subject);
-		String text = writerMailText.toString().replace("&#10;", "\r\n");
+		String text = writerMailText.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
 		attachedHelper.setText(text);
 
 		if (null != uploadFileList) {
