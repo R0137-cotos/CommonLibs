@@ -14,6 +14,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
+import jp.co.ricoh.cotos.commonlib.util.LogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.LogResponseProperties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -21,6 +23,12 @@ public class TestFindProperties {
 
 	@Autowired
 	AppProperties appProperties;
+
+	@Autowired
+	LogRequestProperties logRequestProperties;
+
+	@Autowired
+	LogResponseProperties logResponseProperties;
 
 	@Autowired
 	Environment environment;
@@ -63,5 +71,10 @@ public class TestFindProperties {
 		Assert.assertEquals("外部参照:MoM承認権限用URLが正しく取得されること", "http://165.96.254.183:10110/jmo/services/KengenService", appProperties.getRemoteMomProperties().getUrl());
 		Assert.assertEquals("外部参照:MoM承認権限用リテラルIDが正しく取得されること", "CSP", appProperties.getRemoteMomProperties().getRelatedid());
 		Assert.assertEquals("filenameが取得できること", "filename", appProperties.getAuthProperties().getHeadersProperties().getFilename());
+
+		Assert.assertEquals("APIリクエストログ出力有無が取得できること", true, logRequestProperties.isOutputLog());
+		Assert.assertEquals("APIリクエストのリスト最大出力数が取得できること", 10, logRequestProperties.getMaxCount());
+		Assert.assertEquals("APIレスポンスログ出力有無が取得できること", false, logResponseProperties.isOutputLog());
+		Assert.assertEquals("APIレスポンスのリスト最大出力数が取得できること", 20, logResponseProperties.getMaxCount());
 	}
 }
