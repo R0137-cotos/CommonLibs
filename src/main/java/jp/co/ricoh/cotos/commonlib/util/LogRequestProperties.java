@@ -20,5 +20,5 @@ public class LogRequestProperties {
 	/**
 	 * APIリクエストのリスト最大出力数
 	 */
-	private long maxCount;
+	private int maxCount;
 }

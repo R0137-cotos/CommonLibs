@@ -20,5 +20,5 @@ public class LogResponseProperties {
 	/**
 	 * APIレスポンスのリスト最大出力数
 	 */
-	private long maxCount;
+	private int maxCount;
 }

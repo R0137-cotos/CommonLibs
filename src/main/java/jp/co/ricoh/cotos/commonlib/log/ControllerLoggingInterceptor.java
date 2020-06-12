@@ -29,6 +29,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
+import jp.co.ricoh.cotos.commonlib.util.LogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.LogResponseProperties;
 
 @Aspect
 @Component
@@ -42,6 +44,12 @@ public class ControllerLoggingInterceptor {
 
 	@Autowired
 	ObjectMapper mapper;
+
+	@Autowired
+	LogRequestProperties logRequestProperties;
+
+	@Autowired
+	LogResponseProperties logResponseProperties;
 
 	@Around("execution(* jp.co.ricoh.cotos.*.controller.*Controller.*(..))")
 	public Object traceController(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
@@ -78,9 +86,12 @@ public class ControllerLoggingInterceptor {
 		log.info(String.format("\tCall method(%s)", joinPoint.getSignature()));
 
 		// APIリクエスト情報(body)
-		IntStream.range(0, joinPoint.getArgs().length).forEach(i -> {
-			log.info(String.format("\tRequest Body(%d): %s", (i + 1), outputLog(joinPoint.getArgs()[i])));
-		});
+		if (logRequestProperties.isOutputLog()) {
+			int min = Math.min(joinPoint.getArgs().length, logRequestProperties.getMaxCount());
+			IntStream.range(0, min).forEach(i -> {
+				log.info(String.format("\tRequest Body(%d): %s", (i + 1), outputLog(joinPoint.getArgs()[i])));
+			});
+		}
 	}
 
 	/**
@@ -93,13 +104,16 @@ public class ControllerLoggingInterceptor {
 	public void afterReturning(Object res) throws JsonProcessingException {
 
 		// APIレスポンス情報(body)
-		if (res instanceof List) {
-			List<?> entityList = List.class.cast(res);
-			entityList.stream().forEach(s -> {
-				log.info(String.format("\tResponse Body(%d): %s", entityList.indexOf(s) + 1, outputLog(res)));
-			});
-		} else if (isOutputBody(res)) {
-			log.info(String.format("\tResponse Body: %s", outputLog(res)));
+		if (logResponseProperties.isOutputLog()) {
+			if (res instanceof List) {
+				List<?> entityList = List.class.cast(res);
+				int min = Math.min(entityList.size(), logResponseProperties.getMaxCount());
+				entityList.stream().filter(s -> entityList.indexOf(s) < min).forEach(s -> {
+					log.info(String.format("\tResponse Body(%d): %s", entityList.indexOf(s) + 1, outputLog(s)));
+				});
+			} else if (isOutputBody(res)) {
+				log.info(String.format("\tResponse Body: %s", outputLog(res)));
+			}
 		}
 	}
 
@@ -148,6 +162,5 @@ public class ControllerLoggingInterceptor {
 		}
 		return log;
 	}
-
 
 }
