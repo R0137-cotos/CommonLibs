@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.0.2 (12/06/2020)
+- [**closed**] #7180 メール送信時のHTMLエスケープ対応（「'」のみ） [#962](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/962)
+
+---
+
 ## v3.0.0 (05/06/2020)
 - [**closed**] #7015 ベンダーマスタメールアドレスサイズ拡張 [#951](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/951)
 - [**closed**] #4770 契約承認 ROC固有処理　ROCプロパティファイル追加 [#707](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/707)
