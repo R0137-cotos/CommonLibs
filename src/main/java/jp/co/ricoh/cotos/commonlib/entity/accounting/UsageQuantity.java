@@ -141,4 +141,12 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@ApiModelProperty(value = "通知メール送信状態", required = false, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0", position = 12)
 	private NotificationMailSendStatus notificationMailSendStatus;
+
+	/**
+	 * OSO連携可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "OSO連携可能フラグ", required = false,  position = 13, allowableValues = "range[0,9]")
+	private Integer osoLinkableFlg;
 }
