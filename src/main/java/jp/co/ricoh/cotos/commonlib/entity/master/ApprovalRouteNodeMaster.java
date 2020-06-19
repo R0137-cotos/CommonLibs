@@ -56,7 +56,7 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 
 	public enum ApproverDeriveMethodDiv {
 
-		直属上司指定("1"), 組織絶対階層指定("2"), 組織直接指定("3"), ユーザー直接指定("4"), 自己承認("5");
+		直属上司指定("1"), 組織絶対階層指定("2"), 組織直接指定("3"), ユーザー直接指定("4"), 自己承認("5"), 受付担当CE指定("6");
 
 		private final String text;
 

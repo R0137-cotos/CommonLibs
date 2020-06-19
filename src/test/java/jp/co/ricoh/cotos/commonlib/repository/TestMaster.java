@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
+import static org.hamcrest.CoreMatchers.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -30,6 +32,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
+import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AuthPatternMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.BusinessCalendar;
 import jp.co.ricoh.cotos.commonlib.entity.master.CeMaster;
@@ -99,6 +103,8 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRe
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkOrderMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductClassCheckMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductGrpCheckMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AuthPatternMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.BusinessCalendarRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CeMasterRepository;
@@ -285,33 +291,28 @@ public class TestMaster {
 	private IfsCsvMasterRepository ifsCsvMasterRepository;
 	@Autowired
 	private NonBusinessDayCalendarMasterRepository nonBusinessDayCalendarMasterRepository;
-
 	@Autowired
 	private MvTJmci108MasterRepository mvTJmci108MasterRepository;
-
 	@Autowired
 	private MvTjmcc020HnbitnMasterRepository mvTjmcc020HnbitnMasterRepository;
-
 	@Autowired
 	private MvVjmcb010MomKgyMasterRepository mvVjmcb010MomKgyMasterRepository;
-
 	@Autowired
 	private CheckAlertMasterRepository checkAlertMasterRepository;
-
 	@Autowired
 	private CheckAlertTargetMasterRepository checkAlertTargetMasterRepository;
-
 	@Autowired
 	private ProductPicMasterRepository productPicMasterRepository;
-
 	@Autowired
 	private VendorMasterRepository vendorMasterRepository;
-
 	@Autowired
 	private VendorProductMasterRepository vendorProductMasterRepository;
-
 	@Autowired
 	private AttachedFileLinkageRepository attachedFileLinkageRepository;
+	@Autowired
+	private AttachedFileProductClassCheckMasterRepository attachedFileProductClassCheckMasterRepository;
+	@Autowired
+	private AttachedFileProductGrpCheckMasterRepository attachedFileProductGrpCheckMasterRepository;
 
 	@Autowired
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
@@ -1994,6 +1995,46 @@ public class TestMaster {
 			Assert.assertTrue(false);
 		if (found.getArrangementWorkTypeMaster() == null)
 			Assert.assertTrue(false);
+	}
+
+	public void AttachedFileProductClassCheckMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
+
+		// エンティティの取得
+		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository.findAttachedFileProductClassCheckList("CSP", "1", "1", "7").get();
+
+		// データが4件取得できていることを確認
+		Assert.assertEquals(4, foundList.size());
+		// 取得したデータの内容が正しいことを確認
+		for (AttachedFileProductClassCheckMaster found : foundList) {
+			Assert.assertEquals("CSP", found.getProductClassDiv());
+			Assert.assertEquals("1", found.getDomain());
+			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
+			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
+			Assert.assertThat(found.getExcludeProductGrpMasterId(), anyOf(nullValue(), is("1008,1009")));
+		}
+
+	}
+
+	@Test
+	public void AttachedFileProductGrpCheckMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
+
+		// エンティティの取得
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7").get();
+
+		// データが4件取得できていることを確認
+		Assert.assertEquals(4, foundList.size());
+		// 取得したデータの内容が正しいことを確認
+		for (AttachedFileProductGrpCheckMaster found : foundList) {
+			Assert.assertEquals(Long.valueOf(200), found.getProductGrpMasterId());
+			Assert.assertEquals("2", found.getDomain());
+			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
+			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
+			Assert.assertNotNull(found.getFileKind());
+		}
 	}
 
 }
