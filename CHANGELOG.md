@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.1.0 (22/06/2020)
+- [**closed**] #7207 使用量テーブルにOSO連携可能フラグ追加 [#965](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/965)
+- [**closed**] #6245 エラー情報にフィールドとエンティティ項目追加 [#913](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/913)
+- [**closed**]  #6959 商品グループマスタに解約予定日差分追加 [#953](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/953)
+- [**closed**] #6846 承認者導出方式区分に受付担当CE指定を追加 [#938](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/938)
+
+---
+
 ## v3.0.2 (12/06/2020)
 - [**closed**] #7180 メール送信時のHTMLエスケープ対応（「'」のみ） [#962](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/962)
 
