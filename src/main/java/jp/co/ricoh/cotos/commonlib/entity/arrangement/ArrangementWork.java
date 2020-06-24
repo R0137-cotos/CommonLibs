@@ -169,4 +169,11 @@ public class ArrangementWork extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date workCompletedAt;
 
+	/**
+	 * 業務受理日時
+	 */
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 15)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date businessAcceptanceDateTime;
+
 }
