@@ -101,4 +101,11 @@ public class ArrangementWorkDto extends DtoBase {
 	@ApiModelProperty(value = "作業完了日時", required = false, position = 12)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date workCompletedAt;
+
+	/**
+	 * 業務受理日時
+	 */
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 13)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date businessAcceptanceDateTime;
 }
