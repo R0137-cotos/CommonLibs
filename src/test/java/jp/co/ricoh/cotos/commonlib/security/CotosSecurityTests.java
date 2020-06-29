@@ -603,6 +603,22 @@ public class CotosSecurityTests {
 	}
 
 	@Test
+	@WithMockCustomUser(actionDiv = ActionDiv.更新, authDiv = AuthDiv.見積_契約_手配, authLevel = AuthLevel.配下)
+	@Transactional
+	public void 正常_MoM権限_承認_受付担当CE指定() throws Exception {
+
+		Mockito.doReturn(AuthLevel.配下).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
+
+		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
+		authParam.setPicAccCeApprover(true);
+
+		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
+		Assert.assertTrue("対象の権限があること", result);
+
+		Mockito.reset(momAuthorityService);
+	}
+
+	@Test
 	@WithMockCustomUser(actionDiv = ActionDiv.更新, authDiv = AuthDiv.見積_契約_手配, authLevel = AuthLevel.自社)
 	@Transactional
 	public void 正常_MoM権限_承認_自社() throws Exception {
