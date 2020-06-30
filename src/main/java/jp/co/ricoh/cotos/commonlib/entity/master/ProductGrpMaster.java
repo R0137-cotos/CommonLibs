@@ -144,4 +144,11 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@Max(99)
 	@ApiModelProperty(value = "解約予定日差分", required = false, position = 15, allowableValues = "range[0,99]")
 	private Integer cancelScheduledDateDifference;
+
+	/**
+	 * 情報変更承認時手配チェックフラグ
+	 */
+	@ApiModelProperty(value = "情報変更承認時手配チェックフラグ", required = false, position = 16, allowableValues = "range[0,9]")
+	private Integer infoChangeApprovalCheckArrangementFlg;
+
 }
