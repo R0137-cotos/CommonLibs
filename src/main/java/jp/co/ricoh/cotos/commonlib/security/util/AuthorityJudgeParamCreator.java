@@ -220,6 +220,14 @@ public class AuthorityJudgeParamCreator {
 					}
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("自己承認フラグ", "フラグ", Boolean.toString(isSelfApprover)).toArray(new String[0])).getMsg());
 					authJudgeParam.setSelfApprover(isSelfApprover);
+
+					// 受付担当CE承認フラグ
+					boolean isPicAccCeApprover = false;
+					if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.受付担当CE指定.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+						isPicAccCeApprover = true;
+					}
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("受付担当CE指定フラグ", "フラグ", Boolean.toString(isSelfApprover)).toArray(new String[0])).getMsg());
+					authJudgeParam.setPicAccCeApprover(isPicAccCeApprover);
 				}
 			}
 		}

@@ -1,5 +1,11 @@
 INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/01/01','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
 INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/01/05','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
+INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/01','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
+INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/02','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
+INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/08','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
+INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/09','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
+INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/15','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
+INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/16','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
 INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/22','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
 INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/23','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);
 INSERT INTO non_business_day_calendar_master (non_business_day,created_at,created_user_id,updated_at,updated_user_id,version) VALUES ('2019/06/29','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1);

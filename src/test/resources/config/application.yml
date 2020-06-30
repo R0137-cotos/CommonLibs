@@ -20,6 +20,13 @@ cotos:
       dispAuthorization: X-Cotos-Disp-Authorization
       contentType: Content-type
       filename: filename
+  log:
+    request:
+      outputLog: true
+      maxCount: 10
+    response:
+      outputLog: false
+      maxCount: 20
   file:
     uploadFileDir: ./build/testTemp
     fileNmMaxSize: 14

@@ -30,6 +30,9 @@ public class AuthorityJudgeParameter {
 	/** 自己承認フラグ */
 	private boolean isSelfApprover = false;
 
+	/** 受付担当CE承認フラグ */
+	private boolean isPicAccCeApprover = false;
+
 	/** 企事部マスター */
 	private VKjbMaster vKjbMaster;
 }
