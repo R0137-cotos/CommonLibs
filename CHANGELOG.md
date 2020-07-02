@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.2.0 (02/07/2020)
+- [**closed**] #7404 承認の権限判定で受付担当CE指定の場合は判定をOKにする対応 [#972](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/972)
+- [**closed**] #6358  APIリクエスト、レスポンスログ出力yml制御追加 [#963](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/963)
+- [**closed**] #6298 営業日共通処理 日付生成処理を修正 [#883](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/883)
+- [**closed**] #7140 商品グループマスタ.情報変更承認時手配チェックフラグを追加 [#966](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/966)
+- [**closed**] #7037 VUP連携チェックエラーメッセージ追加 [#960](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/960)
+- [**closed**] #7037 VUP連携チェックエラーメッセージ追加 [#957](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/957)
+- [**closed**]  #6962 月末最終営業日取得処理(非営業日カレンダーマスタ) 実装 [#947](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/947)
+- [**closed**] #6589 基準日(営業日)からn営業日前の営業日を取得するメソッドを追加 [#903](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/903)
+- [**closed**] #6589 日付間の営業日差を取得するメソッド追加 [#902](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/902)
+- [**closed**] #6536 処理カテゴリにデバイス空欄警告追加 [#899](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/899)
+- [**closed**] #6440 契約承認エラーメッセージ追加 [#892](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/892)
+- [**closed**] #6298 日付1は日付2のn営業日以内かを判定するメソッド実装 [#889](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/889)
+
+---
+
 ## v3.1.0 (22/06/2020)
 - [**closed**] #7207 使用量テーブルにOSO連携可能フラグ追加 [#965](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/965)
 - [**closed**] #6245 エラー情報にフィールドとエンティティ項目追加 [#913](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/913)
