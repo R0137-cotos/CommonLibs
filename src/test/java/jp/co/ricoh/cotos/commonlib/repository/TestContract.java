@@ -346,6 +346,14 @@ public class TestContract {
 		Assert.assertTrue(listServiceStart.size() != 0);
 		// ライフサイクルが締結待ちで契約種別＝契約更新のデータを取得できているか確認
 		Assert.assertTrue(listServiceStart.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新) && contract.getLifecycleStatus().equals(LifecycleStatus.締結待ち)).count() != 0);
+
+		// 解約予定日<指定日付
+		List<Contract> cancelScheduledDate = contractRepository.findByLifecycleAndCancelScheduledDateOrCancelDecisionDate("2020/07/01");
+		Assert.assertTrue(cancelScheduledDate.size() > 0);
+
+		// 解約確定日<指定日付
+		List<Contract> cancelDecisionDate = contractRepository.findByLifecycleAndCancelScheduledDateOrCancelDecisionDate("2020/07/01");
+		Assert.assertTrue(cancelDecisionDate.size() > 0);
 	}
 
 	@Test
