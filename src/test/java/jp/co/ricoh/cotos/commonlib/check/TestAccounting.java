@@ -840,11 +840,10 @@ public class TestAccounting {
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setRtsManageBranchNumber(INT_MINUS_1);
-		testTarget.setQuantity(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RTS管理番号枝番は最小値（0）を下回っています。"));
 
 		// 異常系（@DecimalMin ：）
 		BeanUtils.copyProperties(testTarget, entity);
@@ -852,12 +851,8 @@ public class TestAccounting {
 		testTarget.setRicohSalesPrice(DECIMAL_MINUS_001);
 		testTarget.setSalesCompanySalesPrice(DECIMAL_MINUS_001);
 		testTarget.setDealerSalesPrice(DECIMAL_MINUS_001);
-		testTarget.setSalesCompanyPurchaseAmount(DECIMAL_MINUS_001);
-		testTarget.setSalesCompanySalesAmount(DECIMAL_MINUS_001);
-		testTarget.setContactStoreCommissionAmount(DECIMAL_MINUS_001);
-		testTarget.setMotherStoreCommissionAmount(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "リコー仕切り価格は最小値（0.00）を下回っています。"));
 
@@ -928,11 +923,10 @@ public class TestAccounting {
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setRtsManageBranchNumber(INT_MINUS_1);
-		testTarget.setQuantity(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RTS管理番号枝番は最小値（0）を下回っています。"));
 
 		// 異常系（@DecimalMin ：）
 		BeanUtils.copyProperties(testTarget, entity);
@@ -940,12 +934,8 @@ public class TestAccounting {
 		testTarget.setRicohSalesPrice(DECIMAL_MINUS_001);
 		testTarget.setSalesCompanySalesPrice(DECIMAL_MINUS_001);
 		testTarget.setDealerSalesPrice(DECIMAL_MINUS_001);
-		testTarget.setSalesCompanyPurchaseAmount(DECIMAL_MINUS_001);
-		testTarget.setSalesCompanySalesAmount(DECIMAL_MINUS_001);
-		testTarget.setContactStoreCommissionAmount(DECIMAL_MINUS_001);
-		testTarget.setMotherStoreCommissionAmount(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "リコー仕切り価格は最小値（0.00）を下回っています。"));
 
