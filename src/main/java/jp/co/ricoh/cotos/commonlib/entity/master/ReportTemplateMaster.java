@@ -110,7 +110,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	 */
 	public enum TargetType {
 
-		新規("1"), 契約変更("2"), 情報変更("3"), 解約("4");
+		新規("1"), 契約変更("2"), 情報変更("3"), 解約("4"), 契約更新("5");
 
 		private final String text;
 
