@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -1242,11 +1244,16 @@ public class TestMaster {
 		List<String> appId = Arrays.asList("electric");
 		List<ArrangementWorkTypeMaster> list = arrangementWorkTypeMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
+		List<Long> id = Arrays.asList(new Long[] { 1L, 2L });
+		list = arrangementWorkTypeMasterRepository.findByIdInAndAppIdNotInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
 		appId = Arrays.asList("cotos_dev");
 		list = arrangementWorkTypeMasterRepository.findByAppIdInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
 		list = arrangementWorkTypeMasterRepository.findByArrangementWorkTypeDiv("1");
 		Assert.assertNotEquals(0, list.size());
+		list = arrangementWorkTypeMasterRepository.findByIdInAndAppIdInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
 	}
 
 	@Test
