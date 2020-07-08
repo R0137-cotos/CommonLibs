@@ -121,7 +121,6 @@ public class TestListener {
 	@Test
 	@WithMockCustomUser
 	public void EstimationListenerのテスト_番号未付与() throws Exception {
-		context.getBean(DBConfig.class).initTargetTestData("listener/clearSequence.sql");
 		context.getBean(DBConfig.class).initTargetTestData("listener/sequence.sql");
 
 		Estimation estimation = estimationRepository.findOne(1L);
