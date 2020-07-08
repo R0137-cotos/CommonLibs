@@ -41,7 +41,7 @@ public class TestListener {
 
 	@Autowired
 	DealerContractRepository dealerContractRepository;
-	
+
 	@Autowired
 	EstimationRepository estimationRepository;
 
@@ -117,7 +117,7 @@ public class TestListener {
 		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", dealerContract.getAddress());
 		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", dealerContract.getOrgPhoneNumber());
 	}
-	
+
 	@Test
 	@WithMockCustomUser
 	public void EstimationListenerのテスト_番号未付与() throws Exception {
