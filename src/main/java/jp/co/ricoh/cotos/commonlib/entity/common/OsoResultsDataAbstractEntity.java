@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.common;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -12,8 +13,10 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;
@@ -190,7 +193,6 @@ public class OsoResultsDataAbstractEntity extends EntityBase {
 	 * 数量
 	 */
 	@Max(99999)
-	@Min(0)
 	@ApiModelProperty(value = "数量", required = false, position = 18, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
@@ -330,7 +332,6 @@ public class OsoResultsDataAbstractEntity extends EntityBase {
 	/**
 	 * 販社仕入金額
 	 */
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "販社仕入金額", required = false, position = 37, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal salesCompanyPurchaseAmount;
@@ -338,7 +339,6 @@ public class OsoResultsDataAbstractEntity extends EntityBase {
 	/**
 	 * 販社売上金額
 	 */
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "販社売上金額", required = false, position = 38, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal salesCompanySalesAmount;
@@ -346,7 +346,6 @@ public class OsoResultsDataAbstractEntity extends EntityBase {
 	/**
 	 * 接点店手数料金額
 	 */
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "接点店手数料金額", required = false, position = 39, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal contactStoreCommissionAmount;
@@ -354,7 +353,6 @@ public class OsoResultsDataAbstractEntity extends EntityBase {
 	/**
 	 * 母店手数料金額
 	 */
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "接点店手数料金額", required = false, position = 40, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal motherStoreCommissionAmount;
