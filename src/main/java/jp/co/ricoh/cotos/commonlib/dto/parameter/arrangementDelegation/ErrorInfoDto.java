@@ -18,8 +18,8 @@ public class ErrorInfoDto {
 	/**
 	 * エラー内容
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "エラー内容", required = false, position = 2, allowableValues = "range[0,255]")
+	@Size(max = 4000)
+	@ApiModelProperty(value = "エラー内容", required = false, position = 2, allowableValues = "range[0,4000]")
 	private String message;
 
 	/**
