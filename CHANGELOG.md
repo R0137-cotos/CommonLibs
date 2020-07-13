@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.2.2 (13/07/2020)
+- [**closed**] #7456 OSO実績データエンティティー共通項目の金額、数量の@Min外し [#978](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/978)
+- [**closed**] #7394 有効契約期間履歴VIEWテストコード変更 [#979](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/979)
+
+---
+
 ## v3.2.0 (02/07/2020)
 - [**closed**] #7404 承認の権限判定で受付担当CE指定の場合は判定をOKにする対応 [#972](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/972)
 - [**closed**] #6358  APIリクエスト、レスポンスログ出力yml制御追加 [#963](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/963)
