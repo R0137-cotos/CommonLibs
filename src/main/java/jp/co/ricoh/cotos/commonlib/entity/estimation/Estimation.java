@@ -553,7 +553,7 @@ public class Estimation extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "練習用カラム", required = false, position = 62, allowableValues = "range[0,255]")
-	private String satoRansyu;
+	private String satoRensyu;
 
 	@PreUpdate
 	public void preUpdate() {
