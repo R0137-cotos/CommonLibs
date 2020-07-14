@@ -154,7 +154,8 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	/**
 	 * 練習用カラム
 	 */
-	@ApiModelProperty(value = "練習用カラム", required = false, position = 17, allowableValues = "range[255]")
+	@Size(max = 255)
+	@ApiModelProperty(value = "練習用カラム", required = false, position = 17, allowableValues = "range[0,255]")
 	private String satoRensyu;
 
 }
