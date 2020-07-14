@@ -151,4 +151,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "情報変更承認時手配チェックフラグ", required = false, position = 16, allowableValues = "range[0,9]")
 	private Integer infoChangeApprovalCheckArrangementFlg;
 
+	/**
+	 * 練習用カラム
+	 */
+	@ApiModelProperty(value = "練習用カラム", required = false, position = 17, allowableValues = "range[255]")
+	private String satoRensyu;
+
 }
