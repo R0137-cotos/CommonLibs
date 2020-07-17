@@ -25,7 +25,7 @@ public class JsonSchemaMasterParameter {
 	 * 契約種別
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約種別:見積種別未設定時のみ設定可能", required = false, position = 3, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\")")
+	@ApiModelProperty(value = "契約種別:見積種別未設定時のみ設定可能", required = false, position = 3, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private String contractType;
 
 	/**
