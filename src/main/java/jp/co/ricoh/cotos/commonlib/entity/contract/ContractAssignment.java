@@ -6,11 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -44,8 +44,8 @@ public class ContractAssignment extends EntityBase {
 	/**
 	 * メモ
 	 */
-	@Size(max = 1000)
-	@ApiModelProperty(value = "メモ", required = false, position = 3, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "メモ", required = false, position = 3)
+	@Lob
 	private String memo;
 
 	/**
