@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.3.0 (21/07/2020)
+- [**closed**] #7595  手配業務情報.コメントが1001文字以上でエラーにならないよう修正 [#991](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/991)
+- [**closed**]  #7579 明細と品種マスタの価格不一致のエラーメッセージを追加 [#988](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/988)
+- [**closed**] #7441 手配業務エラー履歴修正 [#986](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/986)
+- [**closed**] #7515 契約情報確認、手配契約情報更新用のパラメータ―作成 [#983](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/983)
+- [**closed**] #7419 販売店リスナー修正 [#984](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/984)
+- [**closed**] #6291 手配業務タイプマスタリポジトリメソッド追加 [#981](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/981)
+- [**closed**] #7486_帳票出力が可能となるように契約更新を追加 [#980](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/980)
+- [**closed**] #7267 解約確定判定用リポジトリメソッド修正 [#977](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/977)
+
+---
+
 ## v3.2.2 (13/07/2020)
 - [**closed**] #7456 OSO実績データエンティティー共通項目の金額、数量の@Min外し [#978](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/978)
 - [**closed**] #7394 有効契約期間履歴VIEWテストコード変更 [#979](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/979)
