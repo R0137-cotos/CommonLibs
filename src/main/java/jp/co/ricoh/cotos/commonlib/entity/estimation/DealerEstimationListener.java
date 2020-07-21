@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -75,6 +76,20 @@ public class DealerEstimationListener {
 			if (StringUtils.isBlank(dealerEstimation.getDistributorMomCmpId()))
 				dealerEstimation.setDistributorMomCmpId("999999");
 
+		}
+	}
+
+	/**
+	 * 企事部マスタ情報を販売店（見積用）トランザクションに紐づけます。
+	 *
+	 * @param dealerEstimation
+	 */
+	@PreUpdate
+	@Transactional
+	public void updateEstimationDealerFields(DealerEstimation dealerEstimation) {
+		if (StringUtils.isNotBlank(dealerEstimation.getMomKjbSystemId())) {
+			if (StringUtils.isBlank(dealerEstimation.getDistributorMomCmpId()))
+				dealerEstimation.setDistributorMomCmpId("999999");
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -66,8 +67,20 @@ public class DealerContractListener {
 				dealerContract.setPostNumber(vKjbMaster.getJgsJgsPostNum());
 			if (StringUtils.isBlank(dealerContract.getOrgPhoneNumber()))
 				dealerContract.setOrgPhoneNumber(vKjbMaster.getJgsJgsTelNum());
+
+			if (StringUtils.isBlank(dealerContract.getDistributorMomCmpId()))
+				dealerContract.setDistributorMomCmpId("999999");
 		}
 
+	}
+
+	@PreUpdate
+	@Transactional
+	public void updateDealerContractFields(DealerContract dealerContract) {
+		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
+			if (StringUtils.isBlank(dealerContract.getDistributorMomCmpId()))
+				dealerContract.setDistributorMomCmpId("999999");
+		}
 	}
 
 	private String convertJoinedDealerName(VKjbMaster kjbMaster) {

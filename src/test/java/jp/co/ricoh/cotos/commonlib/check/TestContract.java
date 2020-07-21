@@ -1380,13 +1380,11 @@ public class TestContract {
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
-		// 異常系（@Size(max) ：）
+		// 正常系（Size 1001：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setMemo(STR_1001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メモは最大文字数（1000）を超えています。"));
+		testTool.assertValidationOk(result);
 	}
 
 	@Test

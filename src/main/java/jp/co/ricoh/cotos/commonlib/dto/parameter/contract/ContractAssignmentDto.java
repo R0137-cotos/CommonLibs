@@ -2,9 +2,9 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
 import java.util.List;
 
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
@@ -18,8 +18,8 @@ public class ContractAssignmentDto extends DtoBase {
 	/**
 	 * メモ
 	 */
-	@Size(max = 1000)
-	@ApiModelProperty(value = "メモ", required = false, position = 3, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "メモ", required = false, position = 3)
+	@Lob
 	private String memo;
 
 	/**

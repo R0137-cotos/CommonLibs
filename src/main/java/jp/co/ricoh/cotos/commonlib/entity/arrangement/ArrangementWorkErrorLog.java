@@ -43,8 +43,8 @@ public class ArrangementWorkErrorLog extends EntityBase {
 	@JsonIgnore
 	private ArrangementWork arrangementWork;
 
-	@Size(max = 255)
-	@ApiModelProperty(value = "エラー内容", required = false, position = 3, allowableValues = "range[0,255]")
+	@Size(max = 4000)
+	@ApiModelProperty(value = "エラー内容", required = false, position = 3, allowableValues = "range[0,4000]")
 	private String errorMessage;
 
 	@ApiModelProperty(value = "エラー発生日時(作成時不要)", required = false, position = 4, readOnly = true)

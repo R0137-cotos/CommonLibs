@@ -12,6 +12,10 @@ public interface ArrangementWorkTypeMasterRepository extends CrudRepository<Arra
 	public List<ArrangementWorkTypeMaster> findByAppIdInOrderByIdAsc(List<String> appId);
 
 	public List<ArrangementWorkTypeMaster> findByAppIdNotInOrderByIdAsc(List<String> appId);
-	
+
 	public List<ArrangementWorkTypeMaster> findByArrangementWorkTypeDiv(String arrangementWorkTypeDiv);
+
+	public List<ArrangementWorkTypeMaster> findByIdInAndAppIdInOrderByIdAsc(List<Long> id, List<String> appId);
+
+	public List<ArrangementWorkTypeMaster> findByIdInAndAppIdNotInOrderByIdAsc(List<Long> id, List<String> appId);
 }
