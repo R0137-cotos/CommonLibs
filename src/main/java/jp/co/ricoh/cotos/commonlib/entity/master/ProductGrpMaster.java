@@ -151,4 +151,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "情報変更承認時手配チェックフラグ", required = false, position = 16, allowableValues = "range[0,9]")
 	private Integer infoChangeApprovalCheckArrangementFlg;
 
+	/**
+	 * EDWOR年額契約商品フラグ
+	 */
+	@ApiModelProperty(value = "EDWOR年額契約商品フラグ", required = false, position = 17, allowableValues = "range[0,9]")
+	private Integer edwOrAnnualAmountProductFlg;
+
 }
