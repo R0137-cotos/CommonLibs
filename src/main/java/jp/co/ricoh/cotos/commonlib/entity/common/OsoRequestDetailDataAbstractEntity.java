@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.common;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -12,8 +13,10 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
@@ -209,4 +212,11 @@ public class OsoRequestDetailDataAbstractEntity extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "仕入先コード", required = false, position = 20, allowableValues = "range[0,255]")
 	private String vendorCode;
+
+	/**
+	 * 契約期間
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約期間", required = false, position = 21, allowableValues = "range[0,255]")
+	private String contractSpan;
 }
