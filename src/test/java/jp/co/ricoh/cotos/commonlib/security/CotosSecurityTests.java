@@ -72,6 +72,8 @@ public class CotosSecurityTests {
 
 	private static final String FALSIFICATION_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmlnaW4iOiJjb3Rvcy5yaWNvaC5jby5qcCIsInNpbmdsZVVzZXJJZCI6InNpZCIsIm1vbUVtcElkIjoibWlkIiwiZXhwIjoyNTM0MDIyNjgzOTksImFwcGxpY2F0aW9uSWQiOiJjb3Rvc19kZXYifQA.qJBFsMJFZcLdF7jWwEafZSOQfmL1EqPVDcRuz6WvsCI";
 
+	private static final String BATCH_USER_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb21BdXRoIjoiTk9fQVVUSE9SSVRJRVMiLCJvcmlnaW4iOiJodHRwczovL2Rldi5jb3Rvcy5yaWNvaC5jby5qcCIsInNpbmdsZVVzZXJJZCI6InNpZCIsIm1vbUVtcElkIjoiQ09UT1NfQkFUQ0hfVVNFUiIsImV4cCI6MTAwMTU5NTk5Nzk5NywiYXBwbGljYXRpb25JZCI6ImNvdG9zX2RldiJ9.0KxvF9xgwzB_s7TPe3RjP5TQcgWRklTprGxscbgAQ2k";
+
 	@SpyBean
 	MomAuthorityService momAuthorityService;
 
@@ -166,6 +168,15 @@ public class CotosSecurityTests {
 		ResponseEntity<String> response = rest.getForEntity(loadTopURL() + "test/api/test/1?isSuccess=true&hasBody=false", String.class);
 		Assert.assertEquals("正常終了", 200, response.getStatusCodeValue());
 		Assert.assertEquals("正常終了", "u0201125,00229746,https://dev.cotos.ricoh.co.jp,cotos_dev," + WITHIN_PERIOD_MOM_AUTH_IS_NULL_JWT + ",false,true", response.getBody());
+	}
+
+	@Test
+	@Transactional
+	public void 認証_トークンあり_正常_バッチユーザ_MoM認証スキップ() throws Exception {
+		RestTemplate rest = initRest(BATCH_USER_JWT);
+		ResponseEntity<String> response = rest.getForEntity(loadTopURL() + "test/api/test/1?isSuccess=true&hasBody=false", String.class);
+		Assert.assertEquals("正常終了", 200, response.getStatusCodeValue());
+		Assert.assertEquals("正常終了", "sid,COTOS_BATCH_USER,https://dev.cotos.ricoh.co.jp,cotos_dev," + BATCH_USER_JWT + ",true,false", response.getBody());
 	}
 
 	@Test
