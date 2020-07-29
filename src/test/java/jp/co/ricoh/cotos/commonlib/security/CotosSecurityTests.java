@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -71,6 +72,8 @@ public class CotosSecurityTests {
 	private static final String WITHOUT_PERIOD_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb21BdXRoIjoie1wiMDNcIjp7XCIyMjMwXCI6XCIxMFwiLFwiMjIwMFwiOlwiNzBcIixcIjIyMjBcIjpcIjAwXCIsXCIyMjEwXCI6XCIwMFwifSxcIjAyXCI6e1wiMjIzMFwiOlwiMTBcIixcIjIyMDBcIjpcIjcwXCIsXCIyMjIwXCI6XCIwMFwiLFwiMjIxMFwiOlwiMDBcIn0sXCIwNVwiOntcIjIyMzBcIjpcIjEwXCIsXCIyMjAwXCI6XCI3MFwiLFwiMjIyMFwiOlwiMDBcIixcIjIyMTBcIjpcIjAwXCJ9LFwiMDdcIjp7XCIyMjMwXCI6XCIxMFwiLFwiMjIwMFwiOlwiNzBcIixcIjIyMjBcIjpcIjAwXCIsXCIyMjEwXCI6XCIwMFwifSxcIjAxXCI6e1wiMjIzMFwiOlwiMTBcIixcIjIyMDBcIjpcIjcwXCIsXCIyMjIwXCI6XCIwMFwiLFwiMjIxMFwiOlwiMDBcIn0sXCIwNlwiOntcIjIyMzBcIjpcIjEwXCIsXCIyMjAwXCI6XCI3MFwiLFwiMjIyMFwiOlwiMDBcIixcIjIyMTBcIjpcIjAwXCJ9LFwiMDRcIjp7XCIyMjMwXCI6XCIxMFwiLFwiMjIwMFwiOlwiNzBcIixcIjIyMjBcIjpcIjAwXCIsXCIyMjEwXCI6XCIwMFwifX0iLCJvcmlnaW4iOiJodHRwczovL2Rldi5jb3Rvcy5yaWNvaC5jby5qcCIsInNpbmdsZVVzZXJJZCI6InUwMjkwMTE0OSIsIm1vbUVtcElkIjoiMDA1MDA3ODQiLCJleHAiOjI1MzQwMjI2OCwiYXBwbGljYXRpb25JZCI6ImNvdG9zX2RldiJ9.u2tE3LF_iaSJv5mIu870k7VKmq7hkIPMYY8oa72njOc";
 
 	private static final String FALSIFICATION_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmlnaW4iOiJjb3Rvcy5yaWNvaC5jby5qcCIsInNpbmdsZVVzZXJJZCI6InNpZCIsIm1vbUVtcElkIjoibWlkIiwiZXhwIjoyNTM0MDIyNjgzOTksImFwcGxpY2F0aW9uSWQiOiJjb3Rvc19kZXYifQA.qJBFsMJFZcLdF7jWwEafZSOQfmL1EqPVDcRuz6WvsCI";
+
+	private static final String BATCH_USER_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb21BdXRoIjoiTk9fQVVUSE9SSVRJRVMiLCJvcmlnaW4iOiJodHRwczovL2Rldi5jb3Rvcy5yaWNvaC5jby5qcCIsInNpbmdsZVVzZXJJZCI6InNpZCIsIm1vbUVtcElkIjoiQ09UT1NfQkFUQ0hfVVNFUiIsImV4cCI6MTAwMTU5NTk5Nzk5NywiYXBwbGljYXRpb25JZCI6ImNvdG9zX2RldiJ9.0KxvF9xgwzB_s7TPe3RjP5TQcgWRklTprGxscbgAQ2k";
 
 	@SpyBean
 	MomAuthorityService momAuthorityService;
@@ -170,6 +173,15 @@ public class CotosSecurityTests {
 
 	@Test
 	@Transactional
+	public void 認証_トークンあり_正常_バッチユーザ_MoM認証スキップ() throws Exception {
+		RestTemplate rest = initRest(BATCH_USER_JWT);
+		ResponseEntity<String> response = rest.getForEntity(loadTopURL() + "test/api/test/1?isSuccess=true&hasBody=false", String.class);
+		Assert.assertEquals("正常終了", 200, response.getStatusCodeValue());
+		Assert.assertEquals("正常終了", "sid,COTOS_BATCH_USER,https://dev.cotos.ricoh.co.jp,cotos_dev," + BATCH_USER_JWT + ",true,false", response.getBody());
+	}
+
+	@Test
+	@Transactional
 	public void 認証_トークンあり_異常_有効期限切れ() throws Exception {
 		RestTemplate rest = initRest(WITHOUT_PERIOD_JWT);
 		try {
@@ -204,8 +216,10 @@ public class CotosSecurityTests {
 		}
 	}
 
+	@Ignore
 	@Test
 	@Transactional
+	// バッチユーザのシングルユーザID(sid)ではMoM認証をスキップして、正常終了するためこのテストは実施しない
 	public void 認証_トークンあり_異常_MoM権限無し() throws Exception {
 		RestTemplate rest = initRest(WITHIN_PERIOD_JWT);
 		try {
