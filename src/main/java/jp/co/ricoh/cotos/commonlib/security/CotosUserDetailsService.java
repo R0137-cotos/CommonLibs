@@ -38,8 +38,8 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 
 	public static final String DUMMY_MOM_AUTH = "NO_AUTHORITIES";
 
-	// バッチユーザが使用するシングルユーザID
-	public static final String BATCH_USER_SUID = "sid";
+	// バッチユーザ、UIユーザが使用するシングルユーザID
+	public static final String BATCH_UI_USER_SUID = "sid";
 
 	@Autowired
 	JwtProperties jwtProperties;
@@ -107,7 +107,7 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 			Map<ActionDiv, Map<AuthDiv, AuthLevel>> momAuthorities = null;
 
 			// バッチユーザ以外のユーザであればMoM認証を行う
-			if (!BATCH_USER_SUID.equals(jwt.getClaim(claimsProperties.getSingleUserId()).asString())) {
+			if (!BATCH_UI_USER_SUID.equals(jwt.getClaim(claimsProperties.getSingleUserId()).asString())) {
 				// 認証ドメインでMoM権限が取得できた場合(取得できないとJWTからmomAuthの項目が削除される)
 				if (!jwt.getClaim(claimsProperties.getMomAuth()).isNull() && !jwt.getClaim(claimsProperties.getMomAuth()).asString().equals(DUMMY_MOM_AUTH)) {
 					// JWTにある権限情報を取得
@@ -128,7 +128,7 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 					throw new Exception();
 				}
 			} else {
-				log.info("バッチユーザのためMoM認証をスキップします。");
+				log.info("バッチユーザもしくはUIユーザのためMoM認証をスキップします。");
 			}
 
 			return new CotosAuthenticationDetails(jwt.getClaim(claimsProperties.getMomEmpId()).asString(), jwt.getClaim(claimsProperties.getSingleUserId()).asString(), jwt.getClaim(claimsProperties.getOrigin()).asString(), jwt.getClaim(claimsProperties.getApplicationId()).asString(), jwtString, isSuperUser, isDummyUser, momAuthorities);
