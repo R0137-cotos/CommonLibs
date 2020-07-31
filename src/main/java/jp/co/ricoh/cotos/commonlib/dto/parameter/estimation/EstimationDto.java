@@ -436,4 +436,11 @@ public class EstimationDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "品種追加状態", required = false, position = 58, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
+
+	/**
+	 * 練習用カラム
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "練習用カラム", required = false, position = 59, allowableValues = "range[0,255]")
+	private String satoRensyu;
 }
