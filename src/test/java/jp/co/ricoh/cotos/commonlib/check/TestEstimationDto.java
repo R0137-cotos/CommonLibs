@@ -377,7 +377,7 @@ public class TestEstimationDto {
 		testTarget.setEstimationWorkId(STR_256);
 		testTarget.setSatoRensyu(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 30);
+		Assert.assertTrue(result.getErrorInfoList().size() == 31);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積発行元FAX番号は最大文字数（255）を超えています。"));
 
