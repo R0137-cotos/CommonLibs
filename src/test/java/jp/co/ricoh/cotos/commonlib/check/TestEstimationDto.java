@@ -375,6 +375,7 @@ public class TestEstimationDto {
 		testTarget.setCompetitionContractDiv(STR_256);
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setEstimationWorkId(STR_256);
+		testTarget.setSatoRensyu(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 30);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
