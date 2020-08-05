@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.3.2 (05/08/2020)
+- [**closed**] #7785 契約一覧情報詳細取得BPlats対応 [#1008](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1008)
+
+---
+
 ## v3.3.0 (21/07/2020)
 - [**closed**] #7595  手配業務情報.コメントが1001文字以上でエラーにならないよう修正 [#991](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/991)
 - [**closed**]  #7579 明細と品種マスタの価格不一致のエラーメッセージを追加 [#988](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/988)
