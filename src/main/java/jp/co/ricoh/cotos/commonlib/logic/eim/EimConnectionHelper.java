@@ -47,6 +47,14 @@ public class EimConnectionHelper {
 	 * @return
 	 */
 	private SystemAuthResponse systemAuth(RestTemplate restForEmi) {
+		if (1 == 1) {
+			// システム認証を通らない検証
+			SystemAuthResponse ret = new SystemAuthResponse();
+			ret.setApplicationId("$APPMANAGER");
+			ret.setApplicationKey("901ffb61ac7f8de199ff2da621da68ed");
+			ret.setSiteId("32f312db7c6148a0945de613e4211bce");
+			return ret;
+		}
 		try {
 			// EIMシステム認証
 			HttpHeaders headers = new HttpHeaders();
@@ -248,12 +256,14 @@ public class EimConnectionHelper {
 	 * @throws Exception
 	 */
 	private RestTemplate createEimRestTemplate() throws Exception {
+		if (1 == 1) {
+			// システム認証を通らない検証
+			return new RestTemplate();
+		}
 		final String username = "z00se03039";
 		final String password = "aburibonrizaystan";
 		final String proxyUrl = "proxy.ricoh.co.jp";
 		final int port = 8080;
-		log.info("username:" + username);
-		log.info("password:" + password);
 
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		credsProvider.setCredentials(
