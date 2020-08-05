@@ -3,13 +3,16 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 import java.util.ArrayList;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
@@ -44,5 +47,25 @@ public class CustomerContractListener {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistKjbMaster", regexList));
 		}
 
+	}
+
+	@PreUpdate
+	@Transactional
+	public void updateCustomerContractFields(CustomerContract customerContract) {
+		customerContract.setCustomerName(this.convertJoinedCustomerName(customerContract));
+	}
+
+	private String convertJoinedCustomerName(CustomerContract customerContract) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(StringUtils.defaultIfEmpty(customerContract.getCompanyName(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(customerContract.getOfficeName(), StringUtils.EMPTY));
+
+		if (DepartmentDiv.企事部.equals(customerContract.getDepartmentDiv())) {
+			sb.append(StringUtils.defaultIfEmpty(customerContract.getDepartmentName(), StringUtils.EMPTY));
+		}
+
+		return sb.toString();
 	}
 }
