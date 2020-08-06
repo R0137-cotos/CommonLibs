@@ -54,4 +54,13 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 	@Query(value = "SELECT * FROM CONTRACT WHERE WORKFLOW_STATUS = '7' AND LIFECYCLE_STATUS = '2' AND CONTRACT_TYPE IN ('1', '2', '4') AND PRODUCT_GRP_MASTER_ID IN (:productGrpMasterIdList)", nativeQuery = true)
 	public List<Contract> findByProductGrpMasterId(@Param("productGrpMasterIdList") List<Long> productGrpMasterIdList);
 
+	@Query(value = "SELECT c.* FROM CONTRACT c, "
+			+ "CONTRACT_DETAIL d, "
+			+ "ITEM_CONTRACT e, "
+			+ "CONTRACT_AUTO_UPDATE_MASTER a "
+			+ "WHERE (c.LIFECYCLE_STATUS = '6') AND "
+			+ "(c.id = d.contract_id AND d.id = e.contract_detail_id AND e.item_master_id = a.item_master_id AND a.contract_update_type != '1') AND "
+			+ "(c.SERVICE_TERM_END IS NOT NULL) AND "
+			+ "c.SERVICE_TERM_END < :preferredDate", nativeQuery = true)
+	public List<Contract> findByServiceTermEndForAutoCancellation(@Param("preferredDate") Date preferredDate);
 }
