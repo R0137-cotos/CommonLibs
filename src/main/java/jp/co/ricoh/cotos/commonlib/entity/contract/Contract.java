@@ -788,4 +788,11 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 83, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
+
+	/**
+	 * 違約金用FFM発注問合せ番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 84, allowableValues = "range[0,255]")
+	private String penaltyFfmOrderContactNo;
 }
