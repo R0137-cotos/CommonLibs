@@ -32,7 +32,7 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 
 	public List<Contract> findByEstimationIdOrderByContractBranchNumberAsc(long estimationId);
 
-	@Query(value = "SELECT * FROM CONTRACT WHERE CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :changePreferredDate", nativeQuery = true)
+	@Query(value = "SELECT * FROM CONTRACT WHERE CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :changePreferredDate order by id", nativeQuery = true)
 	public List<Contract> findByContractTypeAndChangePreferredDate(@Param("changePreferredDate") Date changePreferredDate);
 
 	@Query(value = "SELECT * FROM CONTRACT WHERE (CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :preferredDate) OR ((CONTRACT_TYPE = '1' OR CONTRACT_TYPE = '2' OR CONTRACT_TYPE = '4') AND LIFECYCLE_STATUS = '11' AND CONCLUSION_PREFERRED_DATE <= :preferredDate)", nativeQuery = true)
