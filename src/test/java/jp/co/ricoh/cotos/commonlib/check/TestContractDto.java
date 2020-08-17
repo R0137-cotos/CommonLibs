@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -49,6 +50,10 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetai
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ProductContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ItemContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ProductContractForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCancelDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCreateDto;
@@ -2198,5 +2203,75 @@ public class TestContractDto {
 
 		// dto-エンティティ整合性チェック※DTOクラスでは必須
 		testTool.checkConsistency(ContractAssignmentAttachedFile.class, ContractAssignmentAttachedFileDto.class);
+	}
+
+	@Test
+	public void ContractForFindAllDetailsBplatsDtoのテスト() throws Exception {
+		Contract entity = contractRepository.findOne(4L);
+		ContractForFindAllDetailsBplatsDto testTarget = new ContractForFindAllDetailsBplatsDto();
+		ContractForFindAllDetailsBplatsDto dto = new ContractForFindAllDetailsBplatsDto();
+
+		BeanUtils.copyProperties(entity, dto, "productContractList", "contractDetailList");
+
+		// 商品（契約用）
+		ProductContractForFindAllDetailsBplatsDto product = new ProductContractForFindAllDetailsBplatsDto();
+		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
+		dto.setProductContractList(Arrays.asList(product));
+
+		// 契約明細
+		List<ContractDetailForFindAllDetailsBplatsDto> contractDetailList = new ArrayList<>();
+		entity.getContractDetailList().stream().forEach(e -> {
+			ContractDetailForFindAllDetailsBplatsDto contractDetail = new ContractDetailForFindAllDetailsBplatsDto();
+			BeanUtils.copyProperties(e, dto, "itemContract");
+			contractDetailList.add(contractDetail);
+		});
+		dto.setProductContractList(Arrays.asList(product));
+
+		// 正常系
+		BeanUtils.copyProperties(dto, testTarget);
+		testTarget.setDealerContractList(null);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+	}
+
+	@Test
+	public void ProductContractForFindAllDetailsBplatsDtoのテスト() throws Exception {
+		ProductContract entity = productContractRepository.findOne(401L);
+		ProductContractForFindAllDetailsBplatsDto testTarget = new ProductContractForFindAllDetailsBplatsDto();
+		BeanUtils.copyProperties(entity, testTarget);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+	}
+
+	@Test
+	public void ContractDetailForFindAllDetailsBplatsDtoのテスト() throws Exception {
+		ContractDetail entity = contractDetailRepository.findOne(401L);
+		ContractDetailForFindAllDetailsBplatsDto dto = new ContractDetailForFindAllDetailsBplatsDto();
+		ContractDetailForFindAllDetailsBplatsDto testTarget = new ContractDetailForFindAllDetailsBplatsDto();
+		BeanUtils.copyProperties(entity, dto);
+
+		ItemContractDetailForFindAllDetailsBplatsDto item = new ItemContractDetailForFindAllDetailsBplatsDto();
+		BeanUtils.copyProperties(entity.getItemContract(), item);
+		dto.setItemContract(item);
+
+		// 正常系
+		BeanUtils.copyProperties(dto, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+	}
+
+	@Test
+	public void ItemContractDetailForFindAllDetailsBplatsDtoのテスト() throws Exception {
+		ItemContract entity = itemContractRepository.findOne(401L);
+		ItemContractDetailForFindAllDetailsBplatsDto testTarget = new ItemContractDetailForFindAllDetailsBplatsDto();
+
+		// 正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
 	}
 }
