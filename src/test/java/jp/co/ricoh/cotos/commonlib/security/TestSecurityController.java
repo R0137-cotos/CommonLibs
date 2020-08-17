@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
-import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +66,10 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetai
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ProductContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ItemContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ProductContractForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCancelDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCreateDto;
@@ -909,7 +912,7 @@ public class TestSecurityController {
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated JsonSchemaMasterParameter dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ArrangementWorkAttachedFileLinkage")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ArrangementWorkAttachedFileLinkage entity, BindingResult result) {
 		return createParameterCheckResult(result);
@@ -992,6 +995,26 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/UsageQuantityRelatedManagement")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated UsageQuantityRelatedManagement entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractForFindAllDetailsBplatsDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ProductContractForFindAllDetailsBplatsDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ProductContractForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractDetailForFindAllDetailsBplatsDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractDetailForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ItemContractDetailForFindAllDetailsBplatsDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ItemContractDetailForFindAllDetailsBplatsDto dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }
