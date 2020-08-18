@@ -1,9 +1,20 @@
 package jp.co.ricoh.cotos.commonlib.logic.eim;
 
 import java.net.URI;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +22,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestClientException;
@@ -38,14 +50,14 @@ public class EimConnectionHelper {
 	 * EIMシステム認証
 	 * @return
 	 */
-	private SystemAuthResponse systemAuth() {
+	private SystemAuthResponse systemAuth(RestTemplate restForEmi) {
 		try {
 			// EIMシステム認証
-			RestTemplate restForEmi = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getSystemAuthPath();
 			HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(null, headers);
+			log.info("URL:" + url);
 			return restForEmi.exchange(url, HttpMethod.POST, requestEntity, SystemAuthResponse.class).getBody();
 		} catch (Exception e) {
 			log.error("【APIエラー】  ", e);
@@ -58,10 +70,9 @@ public class EimConnectionHelper {
 	 * @param systemAuth
 	 * @return
 	 */
-	private ApiAuthResponse apiAuth(SystemAuthResponse systemAuth) {
+	private ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
 		try {
 			// アプリケーション認証
-			RestTemplate restForEmi = new RestTemplate();
 
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getApiAuthPath();
 
@@ -77,6 +88,13 @@ public class EimConnectionHelper {
 			apiAuthRequest.setLoginPassword(eimConnectionProperties.getLoginPassword());
 
 			RequestEntity<ApiAuthRequest> requestEntity = new RequestEntity<ApiAuthRequest>(apiAuthRequest, headers, HttpMethod.POST, new URI(url));
+
+			//ログ出力
+			log.info("URL:" + url);
+			log.info("X-Application-Id:" + headers.get("X-Application-Id"));
+			log.info("X-Application-Key:" + headers.get("X-Application-Key"));
+			log.info("X-Site-Id:" + headers.get("X-Site-Id"));
+
 			ResponseEntity<ApiAuthResponse> res = restForEmi.exchange(requestEntity, ApiAuthResponse.class);
 			return res.getBody();
 		} catch (Exception e) {
@@ -93,11 +111,11 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<FileUploadResponse> postFile(String fileName, byte[] fileBody, MediaType contentType) {
 		try {
-			RestTemplate restForEmi = new RestTemplate();
+			RestTemplate restForEmi = this.createEimRestTemplate();
 			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth();
+			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -136,11 +154,11 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<DocumentUploadResponse> postDocument(DocumentUploadRequest request) {
 		try {
-			RestTemplate restForEmi = new RestTemplate();
+			RestTemplate restForEmi = this.createEimRestTemplate();
 			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth();
+			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -163,13 +181,21 @@ public class EimConnectionHelper {
 	 */
 	public byte[] getFile(String fileId) {
 		try {
-			RestTemplate restForEmi = new RestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth();
-			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(systemRes);
+			log.info("start -- getFile　--");
+			log.info("start -- EIM認証RestTemplate作成 --");
+			RestTemplate restForEmi = this.createEimRestTemplate();
+			log.info("end -- EIM認証RestTemplate作成 --");
 
+			// EIMシステム認証
+			log.info("start -- EIMシステム認証 --");
+			SystemAuthResponse systemRes = systemAuth(restForEmi);
+			log.info("end -- EIMシステム認証 --");
+			// アプリケーション認証
+			log.info("start -- アプリケーション認証 --");
+			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			log.info("end -- アプリケーション認証 --");
 			// HEADER設定
+			log.info("start -- ファイルダウンロード --");
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -177,10 +203,15 @@ public class EimConnectionHelper {
 			headers.add("Cookie", "X-Application-Token=" + systemRes.getApplicationKey());
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getFileDownloadPath() + "/" + fileId;
+			//ログ出力
+			log.info("URL:" + url);
+			log.info("Cookie:" + headers.get("Cookie"));
+			log.info("X-Site-Id:" + headers.get("X-Site-Id"));
 			// GET1回目
 			ResponseEntity<FileDownloadResponse> responseEntity = restForEmi.exchange(url, HttpMethod.GET, entity, FileDownloadResponse.class);
 			FileDownloadResponse res = responseEntity.getBody();
 			// GET2回目
+			log.info("URL:" + res.getUrl());
 			return restForEmi.exchange(new URI(res.getUrl()), HttpMethod.GET, entity, byte[].class).getBody();
 		} catch (Exception e) {
 			log.error("【APIエラー】  ", e);
@@ -194,11 +225,11 @@ public class EimConnectionHelper {
 	 */
 	public void putDocument(DocumentUploadRequest request) {
 		try {
-			RestTemplate restForEmi = new RestTemplate();
+			RestTemplate restForEmi = this.createEimRestTemplate();
 			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth();
+			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -211,5 +242,41 @@ public class EimConnectionHelper {
 			log.error("【APIエラー】  ", e);
 			throw new RestClientException("【APIエラー】 文書を文書キーで保存 Status Code:" + e.getMessage());
 		}
+	}
+
+	/**
+	 * EIM認証RestTemplate作成
+	 * @return
+	 * @throws Exception
+	 */
+	private RestTemplate createEimRestTemplate() throws Exception {
+		String key = "cotoscotoscotos";
+		String algorithm = "BLOWFISH";
+		SecretKeySpec sksSpec = new SecretKeySpec(key.getBytes(), algorithm);
+		Cipher cipher = Cipher.getInstance(algorithm);
+		cipher.init(Cipher.DECRYPT_MODE, sksSpec);
+		final String username = new String(cipher.doFinal(Base64.getDecoder().decode("NWkNSo0c+pUdTkJ3iwrAyw==")));
+		final String password = new String(cipher.doFinal(Base64.getDecoder().decode("9mcYkD5HEKEXVARy99kUJg==")));
+		final String proxyUrl = "proxy.ricoh.co.jp";
+		final int port = 8080;
+
+		CredentialsProvider credsProvider = new BasicCredentialsProvider();
+		credsProvider.setCredentials(
+				new AuthScope(proxyUrl, port),
+				new UsernamePasswordCredentials(username, password));
+
+		HttpHost myProxy = new HttpHost(proxyUrl, port);
+		HttpClientBuilder clientBuilder = HttpClientBuilder.create();
+
+		clientBuilder
+		.setProxy(myProxy)
+		.setDefaultCredentialsProvider(credsProvider)
+		.disableCookieManagement();
+
+		HttpClient httpClient = clientBuilder.build();
+		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+		factory.setHttpClient(httpClient);
+
+		return new RestTemplate(factory);
 	}
 }
