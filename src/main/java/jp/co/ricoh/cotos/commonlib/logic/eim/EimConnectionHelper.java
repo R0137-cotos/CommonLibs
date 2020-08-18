@@ -1,6 +1,10 @@
 package jp.co.ricoh.cotos.commonlib.logic.eim;
 
 import java.net.URI;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,14 +51,6 @@ public class EimConnectionHelper {
 	 * @return
 	 */
 	private SystemAuthResponse systemAuth(RestTemplate restForEmi) {
-		if (1 == 1) {
-			// システム認証を通らない検証
-			SystemAuthResponse ret = new SystemAuthResponse();
-			ret.setApplicationId("$APPMANAGER");
-			ret.setApplicationKey("901ffb61ac7f8de199ff2da621da68ed");
-			ret.setSiteId("32f312db7c6148a0945de613e4211bce");
-			return ret;
-		}
 		try {
 			// EIMシステム認証
 			HttpHeaders headers = new HttpHeaders();
@@ -92,7 +88,7 @@ public class EimConnectionHelper {
 			apiAuthRequest.setLoginPassword(eimConnectionProperties.getLoginPassword());
 
 			RequestEntity<ApiAuthRequest> requestEntity = new RequestEntity<ApiAuthRequest>(apiAuthRequest, headers, HttpMethod.POST, new URI(url));
-			
+
 			//ログ出力
 			log.info("URL:" + url);
 			log.info("X-Application-Id:" + headers.get("X-Application-Id"));
@@ -100,7 +96,7 @@ public class EimConnectionHelper {
 			log.info("X-Site-Id:" + headers.get("X-Site-Id"));
 			log.info("LoginUserName:" + apiAuthRequest.getLoginUserName());
 			log.info("LoginPassword:" + apiAuthRequest.getLoginPassword());
-			
+
 			ResponseEntity<ApiAuthResponse> res = restForEmi.exchange(requestEntity, ApiAuthResponse.class);
 			return res.getBody();
 		} catch (Exception e) {
@@ -191,7 +187,7 @@ public class EimConnectionHelper {
 			log.info("start -- EIM認証RestTemplate作成 --");
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			log.info("end -- EIM認証RestTemplate作成 --");
-			
+
 			// EIMシステム認証
 			log.info("start -- EIMシステム認証 --");
 			SystemAuthResponse systemRes = systemAuth(restForEmi);
@@ -256,12 +252,13 @@ public class EimConnectionHelper {
 	 * @throws Exception
 	 */
 	private RestTemplate createEimRestTemplate() throws Exception {
-		if (1 == 1) {
-			// システム認証を通らない検証
-			return new RestTemplate();
-		}
-		final String username = "z00se03039";
-		final String password = "aburibonrizaystan";
+		String key = "cotoscotoscotos";
+		String algorithm = "BLOWFISH";
+		SecretKeySpec sksSpec = new SecretKeySpec(key.getBytes(), algorithm);
+		Cipher cipher = Cipher.getInstance(algorithm);
+		cipher.init(Cipher.DECRYPT_MODE, sksSpec);
+		final String username = new String(cipher.doFinal(Base64.getDecoder().decode("NWkNSo0c+pUdTkJ3iwrAyw==")));
+		final String password = new String(cipher.doFinal(Base64.getDecoder().decode("9mcYkD5HEKEXVARy99kUJg==")));
 		final String proxyUrl = "proxy.ricoh.co.jp";
 		final int port = 8080;
 
@@ -273,7 +270,10 @@ public class EimConnectionHelper {
 		HttpHost myProxy = new HttpHost(proxyUrl, port);
 		HttpClientBuilder clientBuilder = HttpClientBuilder.create();
 
-		clientBuilder.setProxy(myProxy).setDefaultCredentialsProvider(credsProvider).disableCookieManagement();
+		clientBuilder
+		.setProxy(myProxy)
+		.setDefaultCredentialsProvider(credsProvider)
+		.disableCookieManagement();
 
 		HttpClient httpClient = clientBuilder.build();
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
