@@ -339,13 +339,16 @@ public class TestContract {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		Date date = format.parse("2019/12/01 01:23:45");
-		List<Contract> list = contractRepository.findByContractTypeAndChangePreferredDate(date);
-		Assert.assertTrue(list.size() != 0);
+		List<Contract> listChangePreferred = contractRepository.findByContractTypeAndChangePreferredDate(date);
+		Assert.assertTrue(listChangePreferred.size() != 0);
 
-		List<Contract> listServiceStart = contractRepository.findByContractTypeAndChangePreferredDateAndServiceStartDate(date);
+		List<Contract> listServiceStart = contractRepository.findByContractTypeAndServiceStartDate(date);
 		Assert.assertTrue(listServiceStart.size() != 0);
+
+		List<Contract> listChangePreferredAndServiceStart = contractRepository.findByContractTypeAndChangePreferredDateAndServiceStartDate(date);
+		Assert.assertTrue(listChangePreferredAndServiceStart.size() != 0);
 		// ライフサイクルが締結待ちで契約種別＝契約更新のデータを取得できているか確認
-		Assert.assertTrue(listServiceStart.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新) && contract.getLifecycleStatus().equals(LifecycleStatus.締結待ち)).count() != 0);
+		Assert.assertTrue(listChangePreferredAndServiceStart.stream().filter(contract -> contract.getContractType().equals(ContractType.契約更新) && contract.getLifecycleStatus().equals(LifecycleStatus.締結待ち)).count() != 0);
 
 		// 解約予定日<指定日付
 		List<Contract> cancelScheduledDate = contractRepository.findByLifecycleAndCancelScheduledDateOrCancelDecisionDate("2020/07/01");

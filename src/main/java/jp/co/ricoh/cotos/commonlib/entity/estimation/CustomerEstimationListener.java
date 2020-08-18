@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -98,6 +99,17 @@ public class CustomerEstimationListener {
 			customerEstimation.setDepartmentName(vKjbMaster.getBmnBmnNmKnji());
 	}
 
+	/**
+	 * 顧客マスタ情報を顧客(見積用)トランザクションに紐づけます。
+	 *
+	 * @param customerEstimation
+	 */
+	@PreUpdate
+	@Transactional
+	public void updateCustomerEstimationFields(CustomerEstimation customerEstimation) {
+		customerEstimation.setCustomerName(this.convertJoinedCustomerNameUpdate(customerEstimation));
+	}
+
 	private String convertJoinedCompanyName(VKjbMaster kjbMaster) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getKgyKgyNmKnji(), StringUtils.EMPTY));
@@ -133,6 +145,20 @@ public class CustomerEstimationListener {
 
 		if (DepartmentDiv.企事部.equals(kjbMaster.getPrflKjbSetKbn())) {
 			sb.append(StringUtils.defaultIfEmpty(kjbMaster.getBmnBmnNmKnji(), StringUtils.EMPTY));
+		}
+
+		return sb.toString();
+	}
+
+	private String convertJoinedCustomerNameUpdate(CustomerEstimation customerEstimation) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(StringUtils.defaultIfEmpty(customerEstimation.getCompanyName(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(customerEstimation.getOfficeName(), StringUtils.EMPTY));
+
+		if (DepartmentDiv.企事部.equals(customerEstimation.getDepartmentDiv())) {
+			sb.append(StringUtils.defaultIfEmpty(customerEstimation.getDepartmentName(), StringUtils.EMPTY));
 		}
 
 		return sb.toString();
