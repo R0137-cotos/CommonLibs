@@ -94,8 +94,6 @@ public class EimConnectionHelper {
 			log.info("X-Application-Id:" + headers.get("X-Application-Id"));
 			log.info("X-Application-Key:" + headers.get("X-Application-Key"));
 			log.info("X-Site-Id:" + headers.get("X-Site-Id"));
-			log.info("LoginUserName:" + apiAuthRequest.getLoginUserName());
-			log.info("LoginPassword:" + apiAuthRequest.getLoginPassword());
 
 			ResponseEntity<ApiAuthResponse> res = restForEmi.exchange(requestEntity, ApiAuthResponse.class);
 			return res.getBody();
