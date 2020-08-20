@@ -17,11 +17,13 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DealerFlowOrder;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.CustomerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
+import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
@@ -35,6 +37,9 @@ public class TestListener {
 
 	@Autowired
 	CustomerEstimationRepository customerEstimationRepository;
+
+	@Autowired
+	CustomerContractRepository customerContractRepository;
 
 	@Autowired
 	DealerEstimationRepository dealerEstimationRespository;
@@ -82,6 +87,54 @@ public class TestListener {
 		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", customerEstimation.getAddress());
 		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", customerEstimation.getPhoneNumber());
 		Assert.assertEquals("FAX番号が正しく取得されること", null, customerEstimation.getFaxNumber());
+
+		customerEstimation.setCompanyName("有＊ト＊タルハウジング");
+		customerEstimation.setOfficeName("＊＊＊");
+		customerEstimation.setDepartmentName("＊＊");
+		customerEstimationRepository.save(customerEstimation);
+		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
+		Assert.assertEquals("顧客名が正しく取得されること", "有＊ト＊タルハウジング＊＊＊＊＊", customerEstimation.getCustomerName());
+		Assert.assertEquals("企業名が正しく取得されること", "有＊ト＊タルハウジング", customerEstimation.getCompanyName());
+		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerEstimation.getOfficeName());
+		Assert.assertEquals("部門名が正しく取得されること", "＊＊", customerEstimation.getDepartmentName());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void CustomerContractListenerのテスト() throws Exception {
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000000433091");
+		customerContract.setMomCustId("000000007309661");
+		customerContract.setCompanyId("000000000348689");
+		customerContract.setOfficeId("000000000255394");
+		customerContract.setDepartmentDiv(DepartmentDiv.企事部);
+		customerContract.setCustomerName("株式会社テ＊ー＊イア＊＊＊＊＊");
+		customerContract.setCompanyName("株式会社テ＊ー＊イア");
+		customerContract.setOfficeName("＊＊＊");
+		customerContract.setDepartmentName("＊＊");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		customerContract.setContract(contract);
+		customerContractRepository.save(customerContract);
+		customerContract = customerContractRepository.findOne(customerContract.getId());
+		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000007309661", customerContract.getMomCustId());
+		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", customerContract.getCompanyId());
+		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000255394", customerContract.getOfficeId());
+		Assert.assertEquals("企事部設定区分が正しく取得されること", DepartmentDiv.企事部, customerContract.getDepartmentDiv());
+		Assert.assertEquals("顧客名が正しく取得されること", "株式会社テ＊ー＊イア＊＊＊＊＊", customerContract.getCustomerName());
+		Assert.assertEquals("企業名が正しく取得されること", "株式会社テ＊ー＊イア", customerContract.getCompanyName());
+		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerContract.getOfficeName());
+		Assert.assertEquals("部門名が正しく取得されること", "＊＊", customerContract.getDepartmentName());
+
+		customerContract.setCompanyName("有＊ト＊タルハウジング");
+		customerContract.setOfficeName("＊＊＊");
+		customerContract.setDepartmentName("＊＊");
+		customerContractRepository.save(customerContract);
+		customerContract = customerContractRepository.findOne(customerContract.getId());
+		Assert.assertEquals("顧客名が正しく取得されること", "有＊ト＊タルハウジング＊＊＊＊＊", customerContract.getCustomerName());
+		Assert.assertEquals("企業名が正しく取得されること", "有＊ト＊タルハウジング", customerContract.getCompanyName());
+		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerContract.getOfficeName());
+		Assert.assertEquals("部門名が正しく取得されること", "＊＊", customerContract.getDepartmentName());
 	}
 
 	@Test
