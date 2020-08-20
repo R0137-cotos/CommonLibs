@@ -1,5 +1,24 @@
 # Changelog
 
+## v3.4.0 (20/08/2020)
+- [**closed**] #7305 EIM接続検証コード修正 [#1029](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1029)
+- [**closed**] #7871 契約リポジトリメソッド修正 [#1023](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1023)
+- [**closed**] #7780 契約情報 IFS連携用解約CSV作成状態,IFS連携用解約CSV作成日 追加 [#1019](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1019)
+- [**closed**] #7780 契約情報 IFS連携用解約CSV作成状態,IFS連携用解約CSV作成日 追加 [#1018](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1018)
+- [**closed**] #7699 顧客リスナー修正 [#1015](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1015)
+- [**closed**] #7668 UIユーザでも認証スキップを通知するように追記 [#1007](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1007)
+- [**closed**] #7668 認証スキップを通知するように追記 [#1006](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1006)
+- [**closed**] #7668 バッチユーザではMoM認証をスキップするように修正 [#1004](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1004)
+- [**closed**] #6431 見積操作履歴追加 [#1003](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1003)
+- [**closed**] #5419 契約情報取得方法追加 [#999](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/999)
+
+---
+
+## v3.3.2 (05/08/2020)
+- [**closed**] #7785 契約一覧情報詳細取得BPlats対応 [#1008](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1008)
+
+---
+
 ## v3.3.0 (21/07/2020)
 - [**closed**] #7595  手配業務情報.コメントが1001文字以上でエラーにならないよう修正 [#991](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/991)
 - [**closed**]  #7579 明細と品種マスタの価格不一致のエラーメッセージを追加 [#988](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/988)

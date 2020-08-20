@@ -32,7 +32,7 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 
 	public List<Contract> findByEstimationIdOrderByContractBranchNumberAsc(long estimationId);
 
-	@Query(value = "SELECT * FROM CONTRACT WHERE CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :changePreferredDate", nativeQuery = true)
+	@Query(value = "SELECT * FROM CONTRACT WHERE CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :changePreferredDate order by id", nativeQuery = true)
 	public List<Contract> findByContractTypeAndChangePreferredDate(@Param("changePreferredDate") Date changePreferredDate);
 
 	@Query(value = "SELECT * FROM CONTRACT WHERE (CONTRACT_TYPE = '3' AND LIFECYCLE_STATUS = '5' AND CHANGE_PREFERRED_DATE <= :preferredDate) OR ((CONTRACT_TYPE = '1' OR CONTRACT_TYPE = '2' OR CONTRACT_TYPE = '4') AND LIFECYCLE_STATUS = '11' AND CONCLUSION_PREFERRED_DATE <= :preferredDate)", nativeQuery = true)
@@ -53,5 +53,8 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 
 	@Query(value = "SELECT * FROM CONTRACT WHERE WORKFLOW_STATUS = '7' AND LIFECYCLE_STATUS = '2' AND CONTRACT_TYPE IN ('1', '2', '4') AND PRODUCT_GRP_MASTER_ID IN (:productGrpMasterIdList)", nativeQuery = true)
 	public List<Contract> findByProductGrpMasterId(@Param("productGrpMasterIdList") List<Long> productGrpMasterIdList);
+
+	@Query(value = "SELECT * FROM CONTRACT WHERE (CONTRACT_TYPE = '1' OR CONTRACT_TYPE = '2' OR CONTRACT_TYPE = '4') AND LIFECYCLE_STATUS = '11' AND SERVICE_TERM_START <= :serviceStartDate", nativeQuery = true)
+	public List<Contract> findByContractTypeAndServiceStartDate(@Param("serviceStartDate") Date serviceStartDate);
 
 }
