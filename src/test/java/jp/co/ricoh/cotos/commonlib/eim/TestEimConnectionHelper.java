@@ -102,8 +102,8 @@ public class TestEimConnectionHelper {
 	@Ignore
 	public void 添付ファイルのダウンロード要求_動作確認() {
 		try {
-			String fileId = "861298391d904b0ca7376f344806a6b1";
-			byte[] file = eimConnectionHelper.getFile(fileId);
+			String fileId = "7e38acc2c46543c7a9393ec495f67272";
+			eimConnectionHelper.getFile(fileId);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
