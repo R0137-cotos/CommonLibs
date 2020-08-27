@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
@@ -83,35 +84,47 @@ public class ArrangementListInfo {
 	private String customerName;
 
 	/**
+	 * 事業所名
+	 */
+	@ApiModelProperty(value = "事業所名", required = false, position = 10, allowableValues = "range[0,255]")
+	private String officeName;
+
+	/**
 	 * 商品名
 	 */
-	@ApiModelProperty(value = "商品名称", required = false, position = 10, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "商品名称", required = false, position = 11, allowableValues = "range[0,255]")
 	private String productName;
+
+	/**
+	 * 最終依頼審査承認履歴処理名
+	 */
+	@ApiModelProperty(value = "最終依頼審査承認履歴処理名", required = false, position = 12, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
+	private ApprovalProcessCategory lastApprovalProcess;
 
 	/**
 	 * 希望納期
 	 */
-	@ApiModelProperty(value = "希望納期", required = false, position = 11)
+	@ApiModelProperty(value = "希望納期", required = false, position = 13)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date desiredDeliveryDate;
 
 	/**
 	 * 手配業務
 	 */
-	@ApiModelProperty(value = "手配業務", required = false, position = 12, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "手配業務", required = false, position = 14, allowableValues = "range[0,255]")
 	private String arrangementName;
 
 	/**
 	 * 業務受理日時
 	 */
-	@ApiModelProperty(value = "業務受理日時", required = false, position = 13)
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 15)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date businessAcceptanceDateTime;
 
 	/**
 	 * 手配業務担当者
 	 */
-	@ApiModelProperty(value = "手配業務担当者", required = false, position = 14, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "手配業務担当者", required = false, position = 16, allowableValues = "range[0,255]")
 	private String workUserName;
 
 	/**
@@ -119,45 +132,45 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "手配業務ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
-			required = false, allowableValues = "受付待ち(\"1\"), 作業中(\"2\"), 作業完了報告(\"3\"), 承認依頼中(\"4\"), 作業完了(\"5\"), エラー(\"6\")", position = 15) //
+			required = false, allowableValues = "受付待ち(\"1\"), 作業中(\"2\"), 作業完了報告(\"3\"), 承認依頼中(\"4\"), 作業完了(\"5\"), エラー(\"6\")", position = 17) //
 	private ArrangementWork.WorkflowStatus arrangementWorkStatus;
 
 	/**
 	 * 見積書番号
 	 */
-	@ApiModelProperty(value = "見積書番号", required = false, position = 16, allowableValues = "range[0,18]")
+	@ApiModelProperty(value = "見積書番号", required = false, position = 18, allowableValues = "range[0,18]")
 	private String estimateNumber;
 
 	/**
 	 * 担当営業氏名
 	 */
-	@ApiModelProperty(value = "担当営業氏名", required = false, position = 17, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当営業氏名", required = false, position = 19, allowableValues = "range[0,255]")
 	private String picEmptxName;
 
 	/**
 	 * 担当支社
 	 */
-	@ApiModelProperty(value = "担当支社", required = false, position = 18, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当支社", required = false, position = 20, allowableValues = "range[0,255]")
 	private String picAffiliateName;
 
 	/**
 	 * サービス開始日
 	 */
-	@ApiModelProperty(value = "サービス開始日", required = false, position = 19)
+	@ApiModelProperty(value = "サービス開始日", required = false, position = 21)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@ApiModelProperty(value = "サービス終了日", required = false, position = 20)
+	@ApiModelProperty(value = "サービス終了日", required = false, position = 22)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date serviceTermEnd;
 
 	/**
 	 * 保留フラグ
 	 */
-	@ApiModelProperty(value = "保留フラグ", required = true, position = 21)
+	@ApiModelProperty(value = "保留フラグ", required = true, position = 23)
 	private int holdingFlg;
 
 	/**
@@ -165,88 +178,88 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "手配ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
-			required = false, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", position = 22) //
+			required = false, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", position = 24) //
 	private Arrangement.WorkflowStatus arrangementStatus;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 22, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 25, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 23, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 26, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * 受付担当SS組織
 	 */
-	@ApiModelProperty(value = "受付担当SS組織", required = false, position = 24, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "受付担当SS組織", required = false, position = 27, allowableValues = "range[0,255]")
 	private String picAccSsName;
 
 	/**
 	 * 受付担当CE氏名
 	 */
-	@ApiModelProperty(value = "受付担当CE氏名", required = false, position = 25, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "受付担当CE氏名", required = false, position = 28, allowableValues = "range[0,255]")
 	private String picAccCeName;
 
 	/**
 	 * 導入担当SS組織
 	 */
-	@ApiModelProperty(value = "導入担当SS組織", required = false, position = 26, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当SS組織", required = false, position = 29, allowableValues = "range[0,255]")
 	private String picIntSsName;
 
 	/**
 	 * 導入担当CE氏名
 	 */
-	@ApiModelProperty(value = "導入担当CE氏名", required = false, position = 27, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当CE氏名", required = false, position = 30, allowableValues = "range[0,255]")
 	private String picIntCeName;
 
 	/**
 	 * 保守担当SS組織
 	 */
-	@ApiModelProperty(value = "保守担当SS組織", required = false, position = 28, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "保守担当SS組織", required = false, position = 31, allowableValues = "range[0,255]")
 	private String picMntSsName;
 
 	/**
 	 * 保守担当CE氏名
 	 */
-	@ApiModelProperty(value = "保守担当CE氏名", required = false, position = 29, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "保守担当CE氏名", required = false, position = 32, allowableValues = "range[0,255]")
 	private String picMntCeName;
 
 	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 30)
+	@ApiModelProperty(value = "登録日時", required = false, position = 33)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 31)
+	@ApiModelProperty(value = "更新日時", required = false, position = 34)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
 	/**
 	 * 解約フラグ
 	 */
-	@ApiModelProperty(value = "解約フラグ", required = true, position = 32)
+	@ApiModelProperty(value = "解約フラグ", required = true, position = 35)
 	private int disengagementFlg;
 
 	/**
 	 * 作業完了日時
 	 */
-	@ApiModelProperty(value = "作業完了日時", required = false, position = 32)
+	@ApiModelProperty(value = "作業完了日時", required = false, position = 36)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date workCompletedAt;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 33)
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 37)
 	private long arrangementWorkTypeMasterId;
 
 	@PrePersist
