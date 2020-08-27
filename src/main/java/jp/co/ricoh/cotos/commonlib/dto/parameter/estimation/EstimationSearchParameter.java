@@ -303,7 +303,7 @@ public class EstimationSearchParameter {
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
-	@ApiParam(value = "ソート項目", required = true)
+	@ApiParam(value = "ソート項目", required = false)
 	@ApiModelProperty(value = "ソート項目<br />" //
 			+ "ソート項目のint値は以下の通り各項目とマッピングされる。<br />" //
 			+ "0:見積番号<br />" //
@@ -321,29 +321,29 @@ public class EstimationSearchParameter {
 			+ "12:担当支社<br />"//
 			+ "13:RJ管理番号<br />"//
 			+ "14:恒久契約識別番号", //
-			required = true, allowableValues = "range[0,12]")
+			required = false, allowableValues = "range[0,12]")
 	private int sortColumn;
 
 	/**
 	 * ソート順
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiParam(value = "ソート順", required = true)
-	@ApiModelProperty(value = "ソート順", required = true)
+	@ApiParam(value = "ソート順", required = false)
+	@ApiModelProperty(value = "ソート順", required = false)
 	private SortOrder sortOrder;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
-	@ApiParam(value = "アプリケーションIDリスト", required = true)
-	@ApiModelProperty(value = "アプリケーションIDリスト", required = true)
+	@ApiParam(value = "アプリケーションIDリスト", required = false)
+	@ApiModelProperty(value = "アプリケーションIDリスト", required = false)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
-	@ApiParam(value = "他システムデータ排他フラグ", required = true)
-	@ApiModelProperty(value = "他システムデータ排他フラグ", required = true)
+	@ApiParam(value = "他システムデータ排他フラグ", required = false)
+	@ApiModelProperty(value = "他システムデータ排他フラグ", required = false)
 	private int otherSysDataExcludeFlg;
 
 	/**
