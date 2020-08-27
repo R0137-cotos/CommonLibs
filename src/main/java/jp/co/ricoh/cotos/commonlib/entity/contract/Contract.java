@@ -788,4 +788,17 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 83, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
+	
+	/**
+	 * IFS連携用解約CSV作成状態
+	 */
+	@ApiModelProperty(value = "IFS連携用解約CSV作成状態", required = false, position = 84, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
+	private IfsLinkageCsvCreateStatus ifsLinkageCancelCsvStatus;
+
+	/**
+	 * IFS連携用解約CSV作成日
+	 */
+	@ApiModelProperty(value = "IFS連携用解約CSV作成日", required = false, position = 85)
+	@Temporal(TemporalType.DATE)
+	private Date ifsLinkageCancelCsvDate;
 }
