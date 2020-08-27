@@ -390,14 +390,14 @@ public class ContractSearchParameter {
 	 */
 	@ApiParam(value = "商材固有項目 プロパティ名リスト", required = false)
 	@ApiModelProperty(value = "商材固有項目 プロパティ名リスト", required = false)
-	private List<String> propertyNameList;
+	private List<String> productUniqueItemNameList;
 
 	/**
 	 * 商材固有項目値
 	 */
 	@ApiParam(value = "商材固有項目値", required = false)
 	@ApiModelProperty(value = "商材固有項目値", required = false)
-	private String title;
+	private String productUniqueItemValue;
 
 	/**
 	 * ソート項目
