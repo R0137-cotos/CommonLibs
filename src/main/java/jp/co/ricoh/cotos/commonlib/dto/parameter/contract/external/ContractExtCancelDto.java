@@ -79,5 +79,12 @@ public class ContractExtCancelDto {
 	@ApiModelProperty(value = "解約申込日", required = false, position = 9)
 	@Temporal(TemporalType.DATE)
 	private Date cancelApplicationDate;
-	
+
+	/**
+	 * 違約金用FFM発注問合せ番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 10, allowableValues = "range[0,255]")
+	private String penaltyFfmOrderContactNo;
+
 }

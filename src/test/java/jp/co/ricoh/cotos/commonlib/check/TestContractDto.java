@@ -563,8 +563,9 @@ public class TestContractDto {
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setInstallDeliverySiteId(STR_256);
 		testTarget.setVendorManageNumber(STR_256);
+		testTarget.setPenaltyFfmOrderContactNo(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 23);
+		Assert.assertTrue(result.getErrorInfoList().size() == 24);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "得意先宛先名は最大文字数（255）を超えています。"));
 
@@ -1898,6 +1899,7 @@ public class TestContractDto {
 		entity.setCancelReason("cancel");
 		entity.setCancelReasonEtc(STR_256);
 		entity.setCancelOrderNo("cancelNo");
+		entity.setPenaltyFfmOrderContactNo("cancel");
 
 		// 正常系
 		BeanUtils.copyProperties(entity, testTarget);
@@ -1920,8 +1922,9 @@ public class TestContractDto {
 		testTarget.setCancelReason(STR_256);
 		testTarget.setCancelReasonEtc(STR_1001);
 		testTarget.setCancelOrderNo(STR_256);
+		testTarget.setPenaltyFfmOrderContactNo(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RJ管理番号は最大文字数（255）を超えています。"));
 

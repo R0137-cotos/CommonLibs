@@ -175,4 +175,20 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "統合契約用種類区分", required = false, position = 20, allowableValues = "range[0,255]")
 	private String integrationContractClassDiv;
+
+	/**
+	 * 違約金有無フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 21, allowableValues = "range[0,9]")
+	private Integer penaltyFlg;
+
+	/**
+	 * 最低契約月数
+	 */
+	@Max(999)
+	@Min(0)
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 21, allowableValues = "range[0,999]")
+	private Integer minContractMonths;
 }
