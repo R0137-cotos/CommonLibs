@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
@@ -103,89 +104,95 @@ public class EstimationListInfo {
 	private String itemName;
 
 	/**
+	 * 最終依頼審査承認履歴処理名
+	 */
+	@ApiModelProperty(value = "最終依頼審査承認履歴処理名", required = false, position = 14, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
+	private ApprovalProcessCategory lastApprovalProcess;
+
+	/**
 	 * 掲示日
 	 */
-	@ApiModelProperty(value = "掲示日", required = false, position = 14)
+	@ApiModelProperty(value = "掲示日", required = false, position = 15)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date coverPresentationDate;
 
 	/**
 	 * 担当支社名
 	 */
-	@ApiModelProperty(value = "担当支社名", required = false, position = 15, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当支社名", required = false, position = 16, allowableValues = "range[0,255]")
 	private String picAffiliateName;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 16, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 17, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 17, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 18, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * MoM企業ID
 	 */
-	@ApiModelProperty(value = "MoM企業ID", required = false, position = 18, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 19, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
 	 * MoM企事部ID
 	 */
-	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 19, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 20, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
 	 * 商流区分
 	 */
-	@ApiModelProperty(value = "商流区分", required = false, position = 20, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "商流区分", required = false, position = 21, allowableValues = "range[0,255]")
 	private String commercialFlowDiv;
 
 	/**
 	 * 支社コード
 	 */
-	@ApiModelProperty(value = "支社コード", required = false, position = 21, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "支社コード", required = false, position = 22, allowableValues = "range[0,255]")
 	private String ringsHanshCd;
 
 	/**
 	 * CUBIC部門コード
 	 */
-	@ApiModelProperty(value = "CUBIC部門コード", required = false, position = 22, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "CUBIC部門コード", required = false, position = 23, allowableValues = "range[0,255]")
 	private String cubicOrgId;
 
 	/**
 	 * 部署
 	 */
-	@ApiModelProperty(value = "部署", required = false, position = 23, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "部署", required = false, position = 24, allowableValues = "range[0,255]")
 	private String salesDepartmentName;
 
 	/**
 	 *  RINGS社員コード
 	 */
-	@ApiModelProperty(value = "RINGS社員コード", required = false, position = 24, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RINGS社員コード", required = false, position = 25, allowableValues = "range[0,255]")
 	private String ringsEmpCd;
 
 	/**
 	 * 作成者
 	 */
-	@ApiModelProperty(value = "作成者", required = false, position = 25, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "作成者", required = false, position = 26, allowableValues = "range[0,255]")
 	private String createdUser;
 
 	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 26)
+	@ApiModelProperty(value = "登録日時", required = false, position = 27)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 27)
+	@ApiModelProperty(value = "更新日時", required = false, position = 28)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
