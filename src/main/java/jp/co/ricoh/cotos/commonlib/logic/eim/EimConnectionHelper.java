@@ -269,14 +269,18 @@ public class EimConnectionHelper {
 		HttpClientBuilder clientBuilder = HttpClientBuilder.create();
 
 		clientBuilder
-		.setProxy(myProxy)
-		.setDefaultCredentialsProvider(credsProvider)
-		.disableCookieManagement();
+				.setProxy(myProxy)
+				.setDefaultCredentialsProvider(credsProvider)
+				.disableCookieManagement();
 
 		HttpClient httpClient = clientBuilder.build();
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
 		factory.setHttpClient(httpClient);
 
 		return new RestTemplate(factory);
+	}
+
+	public void setEimConnectionProperties(EimConnectionProperties eimConnectionProperties) {
+		this.eimConnectionProperties = eimConnectionProperties;
 	}
 }

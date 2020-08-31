@@ -304,3 +304,4 @@
 |347|EIM接続検証コード修正|
 |348|EIM書誌情報テーブル定義変更|
 |349|BatchLightTemplate対応|
+|350|EIMバッチBatchLightTemplate対応|
