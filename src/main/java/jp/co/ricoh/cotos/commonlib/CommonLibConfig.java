@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.provider;
+package jp.co.ricoh.cotos.commonlib;
 
 import javax.persistence.EntityManager;
 
