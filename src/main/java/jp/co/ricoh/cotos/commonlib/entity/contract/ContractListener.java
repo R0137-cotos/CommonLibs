@@ -9,14 +9,14 @@ import javax.persistence.PrePersist;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import jp.co.ricoh.cotos.commonlib.ApplicationContextProvider;
-import jp.co.ricoh.cotos.commonlib.EntityManagerProvider;
-import jp.co.ricoh.cotos.commonlib.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci101MasterRepository;
 
 @Component

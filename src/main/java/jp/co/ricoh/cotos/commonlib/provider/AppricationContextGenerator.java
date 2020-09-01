@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib;
+package jp.co.ricoh.cotos.commonlib.provider;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

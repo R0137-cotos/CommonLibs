@@ -10,13 +10,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import jp.co.ricoh.cotos.commonlib.ApplicationContextProvider;
-import jp.co.ricoh.cotos.commonlib.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
