@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import jp.co.ricoh.cotos.commonlib.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
@@ -36,10 +38,10 @@ public class ContractOperationLogListener {
 		ContractOperationLogListener.checkUtil = checkUtil;
 	}
 
-	@Autowired
-	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
-		ContractOperationLogListener.dummyUserMasterRepository = dummyUserMasterRepository;
-	}
+	//	@Autowired
+	//	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
+	//		ContractOperationLogListener.dummyUserMasterRepository = dummyUserMasterRepository;
+	//	}
 
 	/**
 	 * 社員マスタ情報を契約操作履歴トランザクションに紐づけます。
@@ -52,6 +54,9 @@ public class ContractOperationLogListener {
 	public void appendsEmployeeFields(ContractOperationLog contractOperationLog) {
 
 		CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
 
 		if (userInfo.isDummyUser()) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(userInfo.getMomEmployeeId());
