@@ -386,18 +386,18 @@ public class ContractSearchParameter {
 	private String companyId;
 
 	/**
-	 * 回線番号
+	 * 商材固有項目 プロパティ名リスト
 	 */
-	@ApiParam(value = "回線番号", required = false)
-	@ApiModelProperty(value = "回線番号", required = false, allowableValues = "range[0,255]")
-	private String lineNumber;
+	@ApiParam(value = "商材固有項目 プロパティ名リスト", required = false)
+	@ApiModelProperty(value = "商材固有項目 プロパティ名リスト", required = false)
+	private List<String> propertyNameList;
 
 	/**
-	 * ICCID
+	 * 商材固有項目値
 	 */
-	@ApiParam(value = "ICCID", required = false)
-	@ApiModelProperty(value = "ICCID", required = false, allowableValues = "range[0,255]")
-	private String serialNumber;
+	@ApiParam(value = "商材固有項目値", required = false)
+	@ApiModelProperty(value = "商材固有項目値", required = false)
+	private String title;
 
 	/**
 	 * ソート項目
