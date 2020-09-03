@@ -6,14 +6,16 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import jp.co.ricoh.cotos.commonlib.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
 @Component
@@ -21,16 +23,6 @@ public class ContractInstallationLocationListener {
 
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
-
-	@Autowired
-	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
-		ContractInstallationLocationListener.vKjbMasterRepository = vKjbMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ContractInstallationLocationListener.checkUtil = checkUtil;
-	}
 
 	/**
 	 * 顧客マスタ情報を設置先(契約用)トランザクションに紐づけます。
@@ -40,6 +32,10 @@ public class ContractInstallationLocationListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
 
 		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(contractInstallationLocation.getMomKjbSystemId());
 		if (vKjbMaster == null) {

@@ -6,14 +6,16 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import jp.co.ricoh.cotos.commonlib.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 
@@ -24,21 +26,6 @@ public class ContractAttachedFileListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
-	@Autowired
-	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
-		ContractAttachedFileListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ContractAttachedFileListener.checkUtil = checkUtil;
-	}
-
-	@Autowired
-	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
-		ContractAttachedFileListener.dummyUserMasterRepository = dummyUserMasterRepository;
-	}
-
 	/**
 	 * 社員マスタ情報を契約添付ファイルトランザクションに紐づけます。
 	 *
@@ -47,6 +34,12 @@ public class ContractAttachedFileListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractAttachedFile contractAttachedFile) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
 		if (dummyUserMasterRepository.existsByUserId(contractAttachedFile.getAttachedEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(contractAttachedFile.getAttachedEmpId());
 			contractAttachedFile.setAttachedEmpName(dummyUserMaster.getEmpName());
