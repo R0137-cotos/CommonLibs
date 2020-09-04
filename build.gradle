@@ -76,11 +76,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
-<<<<<<< HEAD
-            pom.version = '0.0.345'
-=======
-            pom.version = '0.0.351'
->>>>>>> fork_master/master
+            pom.version = '0.0.346'
             pom.groupId = 'jp.co.ricoh.cotos'
             pom.artifactId = 'common-libraries'
         }
