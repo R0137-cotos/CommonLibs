@@ -801,4 +801,11 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "IFS連携用解約CSV作成日", required = false, position = 85)
 	@Temporal(TemporalType.DATE)
 	private Date ifsLinkageCancelCsvDate;
+
+	/**
+	 * 違約金用FFM発注問合せ番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 86, allowableValues = "range[0,255]")
+	private String penaltyFfmOrderContactNo;
 }

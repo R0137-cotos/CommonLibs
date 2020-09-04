@@ -1,5 +1,15 @@
 # Changelog
 
+## v3.5.0 (03/09/2020)
+- [**closed**] #7548 商材積上登録中のため契約変更不可メッセージ修正（Messages.properties修正） [#1046](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1046)
+- [**closed**] #7548 商材積上登録中のため契約変更不可メッセージ追加（Messages.properties修正） [#1033](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1033)
+- [**closed**] #8081_見積、契約、手配検索パラメータのSwagger表記修正 [#1039](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1039)
+- [**closed**] #7848_契約情報解約用パラメータ（DTO）を修正 [#1028](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1028)
+- [**closed**] #7848_契約DTOを修正 [#1026](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1026)
+- [**closed**] #7848 テーブルのカラム追加、違約金発生時のエラーメッセージを追加 [#1017](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1017)
+
+---
+
 ## v3.4.0 (20/08/2020)
 - [**closed**] #7305 EIM接続検証コード修正 [#1029](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1029)
 - [**closed**] #7871 契約リポジトリメソッド修正 [#1023](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1023)
