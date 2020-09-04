@@ -55,7 +55,7 @@ public class TestCommon {
 	 */
 	@Autowired
 	EimDocumentInfoRepository eimDocumentInfoRepository;
-	
+
 	@Autowired
 	TestTools testTool;
 
@@ -132,7 +132,7 @@ public class TestCommon {
 
 	@Test
 	public void EimDocumentInfoRepositoryのテスト() throws Exception {
-		EimDocumentInfo found = eimDocumentInfoRepository.findOne("RJ001");
+		EimDocumentInfo found = eimDocumentInfoRepository.findOne(1L);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
