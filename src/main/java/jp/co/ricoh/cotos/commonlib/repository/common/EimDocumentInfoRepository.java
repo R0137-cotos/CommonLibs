@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
 
 @Repository
-public interface EimDocumentInfoRepository extends CrudRepository<EimDocumentInfo, String> {
+public interface EimDocumentInfoRepository extends CrudRepository<EimDocumentInfo, Long> {
 
 }
