@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -44,7 +45,33 @@ public class BusinessDayUtil {
 	 * @return
 	 */
 	public boolean isBusinessDay(Date date) {
-		NonBusinessDayCalendarMaster nonBusinessDayCalendarMaster = nonBusinessDayCalendarMasterRepository.findOne(date);
+		NonBusinessDayCalendarMaster nonBusinessDayCalendarMaster = nonBusinessDayCalendarMasterRepository.findOneByNonBusinessDayAndVendorShortNameIsNull(date);
+		return nonBusinessDayCalendarMaster == null;
+	}
+
+	/**
+	 * 営業日かどうか
+	 * @param date 調査対象日付
+	 * @param vendorShortNameList ベンダー略称リスト
+	 * @return true:営業日である false:営業日でない
+	 */
+	public boolean isBusinessDay(Date date, List<String> vendorShortNameList) {
+		// 全ベンダー共通の非営業日(vendorName == null)を非営業日カレンダーマスタから取得
+		NonBusinessDayCalendarMaster nonBusinessDayCalendarMaster = nonBusinessDayCalendarMasterRepository.findOneByNonBusinessDayAndVendorShortNameIsNull(date);
+		// 全ベンダー共通の非営業日でない場合、特定ベンダーの非営業日であるかを確認する
+		if (nonBusinessDayCalendarMaster == null && !CollectionUtils.isEmpty(vendorShortNameList)) {
+			for (String vendorShortName : vendorShortNameList) {
+				nonBusinessDayCalendarMaster = nonBusinessDayCalendarMasterRepository.findOneByNonBusinessDayAndVendorShortNameLike(date, "%" + vendorShortName + "%");
+				if (nonBusinessDayCalendarMaster != null && !StringUtils.isEmpty(nonBusinessDayCalendarMaster.getVendorShortName())) {
+					// ベンダー略称の完全一致検索を行う
+					String[] vendorShortNameArr = nonBusinessDayCalendarMaster.getVendorShortName().split(",");
+					nonBusinessDayCalendarMaster = Arrays.stream(vendorShortNameArr).filter(e -> vendorShortName.equals(e)).count() > 0 ? nonBusinessDayCalendarMaster : null;
+					if (nonBusinessDayCalendarMaster != null) {
+						break;
+					}
+				}
+			}
+		}
 		return nonBusinessDayCalendarMaster == null;
 	}
 
@@ -148,7 +175,7 @@ public class BusinessDayUtil {
 						nonBusinessDayList.add(nonBusinessDay.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 					}
 				}
-				
+
 				if (!CollectionUtils.isEmpty(nonBusinessDayList)) {
 					// 月末日から一日ずつ減らしていき、月初日と同日になるまで回す
 					while (!firstDayOfTheMonth.isEqual(lastDayOfTheMonth)) {
