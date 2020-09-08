@@ -61,7 +61,7 @@ public class TestBusinessDayUtil {
 	}
 
 	@Test
-	// @Transactional
+	@Transactional
 	public void 営業日判定_ベンダー略称指定() throws Exception {
 		テストデータ作成();
 
