@@ -104,6 +104,31 @@ public class BusinessDayUtil {
 	}
 
 	/**
+	 * 最短営業日取得
+	 * @param date 調査対象日付
+	 * @param leadTime 日数
+	 * @param isSubtract 減算するかどうか
+	 * @param vendorShortNameList ベンダー略称リスト
+	 * @return 最短営業日取得
+	 */
+	public Date findShortestBusinessDay(Date date, int leadTime, boolean isSubtract, List<String> vendorShortNameList) {
+		Date retDate = date;
+		Calendar calendar = Calendar.getInstance();
+		for (int i = 0; i < leadTime; i++) {
+			while (true) {
+				calendar.setTime(retDate);
+				calendar.add(Calendar.DATE, !isSubtract ? 1 : -1);
+				retDate = calendar.getTime();
+				if (isBusinessDay(retDate, vendorShortNameList)) {
+					break;
+				}
+			}
+		}
+
+		return retDate;
+	}
+
+	/**
 	 * 最短営業日取得_時間計算
 	 * 
 	 * @param date
