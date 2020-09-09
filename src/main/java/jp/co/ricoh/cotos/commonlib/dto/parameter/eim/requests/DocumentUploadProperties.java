@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import lombok.Data;
 
@@ -74,6 +76,11 @@ public class DocumentUploadProperties {
 	private String kssCd;
 
 	/**
+	 * 課所名
+	 */
+	private String kssName;
+	
+	/**
 	 * 販社CD（CE/SE）
 	 */
 	private String cshnsyCd;
@@ -134,6 +141,11 @@ public class DocumentUploadProperties {
 	private String ujgsId;
 
 	/**
+	 * 企業名(事業所)(売上)
+	 */
+	private String ujgsNm;
+	
+	/**
 	 * 企事部ID(売上)
 	 */
 	private String ukijibId;
@@ -161,6 +173,7 @@ public class DocumentUploadProperties {
 	/**
 	 * 機種略号・機番
 	 */
+	@JsonProperty("kisyu_kiban")
 	private String kisyuKiban;
 
 	/**
