@@ -235,7 +235,7 @@ public class EimConnectionHelper {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentUniqueID();
+			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
 			RequestEntity<?> requestEntity = new RequestEntity<>(request, headers, HttpMethod.PUT, new URI(url));
 			restForEmi.put(new URI(url), requestEntity);
 		} catch (Exception e) {
