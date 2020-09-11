@@ -297,4 +297,10 @@ public class ItemMaster extends EntityBaseMaster {
 	@Max(9)
 	@ApiModelProperty(value = "V-UP連携除外フラグ", required = false, position = 30, allowableValues = "range[0,9]")
 	private Integer vupLinkageExclusionFlg;
+
+	/**
+	 * ベンダー略称
+	 */
+	@ApiModelProperty(value = "ベンダー略称", required = false, position = 31)
+	private String vendorShortName;
 }
