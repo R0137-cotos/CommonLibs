@@ -240,9 +240,9 @@ public class BusinessDayUtil {
 		// 検査対象月の営業日リスト(昇順)
 		List<LocalDate> businessList = createTargetMonthBusinessDayList(localDate, SortOrder.ASCENDING);
 
-		if (businessList != null && businessList.size() >= arg) {
+		if (businessList != null && businessList.size() >= arg + 1) {
 			// n営業日後の日付
-			LocalDate baseDate = businessList.get(arg - 1);
+			LocalDate baseDate = businessList.get(arg);
 			// 「n営業日後の日付」以前の場合、true
 			if (localDate.isBefore(baseDate) || localDate.isEqual(baseDate)) {
 				return true;
@@ -270,9 +270,9 @@ public class BusinessDayUtil {
 		// 検査対象月の営業日リスト(降順)
 		List<LocalDate> businessList = createTargetMonthBusinessDayList(localDate, SortOrder.DESCENDING);
 
-		if (businessList != null && businessList.size() >= arg) {
+		if (businessList != null && businessList.size() >= arg + 1) {
 			// n営業日前の日付
-			LocalDate baseDate = businessList.get(arg - 1);
+			LocalDate baseDate = businessList.get(arg);
 			// 「n営業日前の日付」以降の場合、true
 			if (localDate.isAfter(baseDate) || localDate.isEqual(baseDate)) {
 				return true;
@@ -344,7 +344,7 @@ public class BusinessDayUtil {
 		}
 
 		// 非営業日リストを取得
-		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayIterable = nonBusinessDayCalendarMasterRepository.findAll();
+		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayIterable = nonBusinessDayCalendarMasterRepository.findByVendorShortNameIsNull();
 
 		if (nonBusinessDayIterable == null) {
 			// 非営業日リストが存在しない場合、全て営業日なので単純に日数分遡れば良い
@@ -461,7 +461,7 @@ public class BusinessDayUtil {
 		LocalDate lastDayOfTheTargetMonth = LocalDate.of(year, month, 1).plusMonths(1).minusDays(1);
 
 		// 全非営業日カレンダーマスタを取得
-		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findAll();
+		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findByVendorShortNameIsNull();
 
 		if (CollectionUtils.isEmpty(nonBusinessDayCalendarMasterList)) {
 			return null;
@@ -543,7 +543,7 @@ public class BusinessDayUtil {
 		List<LocalDate> businessDayList = new ArrayList<LocalDate>();
 
 		// 非営業日リストを取得
-		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayList = nonBusinessDayCalendarMasterRepository.findAll();
+		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayList = nonBusinessDayCalendarMasterRepository.findByVendorShortNameIsNull();
 		// 非営業日セットを作成
 		Set<LocalDate> nonBusinessDaySet = new HashSet<LocalDate>();
 		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayList) {
@@ -584,7 +584,7 @@ public class BusinessDayUtil {
 		List<LocalDate> businessDayList = new ArrayList<LocalDate>();
 
 		// 非営業日リストを取得
-		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayList = nonBusinessDayCalendarMasterRepository.findAll();
+		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayList = nonBusinessDayCalendarMasterRepository.findByVendorShortNameIsNull();
 		// 非営業日セットを作成
 		Set<LocalDate> nonBusinessDaySet = new HashSet<LocalDate>();
 		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayList) {
