@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import lombok.Data;
 
@@ -22,7 +24,7 @@ public class DocumentUploadProperties {
 	 */
 	private List<String> fileBody;
 
-//以下EIM書誌情報※ただし、「最終連携実施時刻」およびEntityBaseのカラムは不要
+	//以下EIM書誌情報※ただし、「最終連携実施時刻」およびEntityBaseのカラムは不要
 	/**
 	 * 文書ユニークキー
 	 */
@@ -32,7 +34,7 @@ public class DocumentUploadProperties {
 	 * 文書ID
 	 */
 	private String documentId;
-	
+
 	/**
 	 * 文書キー
 	 */
@@ -52,7 +54,7 @@ public class DocumentUploadProperties {
 	 * 契約No
 	 */
 	private String keiyakNo;
-	
+
 	/**
 	 * 担当販社CD
 	 */
@@ -72,6 +74,11 @@ public class DocumentUploadProperties {
 	 * 課所CD
 	 */
 	private String kssCd;
+
+	/**
+	 * 課所名
+	 */
+	private String kssName;
 
 	/**
 	 * 販社CD（CE/SE）
@@ -134,6 +141,11 @@ public class DocumentUploadProperties {
 	private String ujgsId;
 
 	/**
+	 * 企業名(事業所)(売上)
+	 */
+	private String ujgsNm;
+
+	/**
 	 * 企事部ID(売上)
 	 */
 	private String ukijibId;
@@ -161,6 +173,7 @@ public class DocumentUploadProperties {
 	/**
 	 * 機種略号・機番
 	 */
+	@JsonProperty("kisyu_kiban")
 	private String kisyuKiban;
 
 	/**
@@ -212,4 +225,14 @@ public class DocumentUploadProperties {
 	 * 課所名（CE/SE）導入
 	 */
 	private String csikssName;
+
+	/**
+	 * 添付ファイル数
+	 */
+	private long fileCount;
+
+	/**
+	 * 削除フラグ
+	 */
+	private int delFlg;
 }
