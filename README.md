@@ -317,3 +317,4 @@
 |360|EIMDto・リポジトリ修正|
 |361|EIMDto修正|
 |362|EIMPutメソッド修正|
+|363|BatchLightTemplate対応|

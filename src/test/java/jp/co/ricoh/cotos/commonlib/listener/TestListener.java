@@ -46,7 +46,7 @@ public class TestListener {
 
 	@Autowired
 	DealerContractRepository dealerContractRepository;
-	
+
 	@Autowired
 	EstimationRepository estimationRepository;
 
@@ -182,7 +182,7 @@ public class TestListener {
 		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
 		Assert.assertEquals("MoM会社IDが正しく取得されること", "999999", dealerContract.getDistributorMomCmpId());
 	}
-	
+
 	@Test
 	@WithMockCustomUser
 	public void EstimationListenerのテスト_番号未付与() throws Exception {
