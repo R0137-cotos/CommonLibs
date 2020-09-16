@@ -9,7 +9,7 @@ import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchParameter;
@@ -21,6 +21,8 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
 @Component
@@ -32,21 +34,6 @@ public class CustomerEstimationListener {
 	private static CheckUtil checkUtil;
 	private static FindCommonMaster findCommonMaster;
 
-	@Autowired
-	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
-		CustomerEstimationListener.vKjbMasterRepository = vKjbMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		CustomerEstimationListener.checkUtil = checkUtil;
-	}
-
-	@Autowired
-	public void setFindCommonMaster(FindCommonMaster findCommonMaster) {
-		CustomerEstimationListener.findCommonMaster = findCommonMaster;
-	}
-
 	/**
 	 * 顧客マスタ情報を顧客(見積用)トランザクションに紐づけます。
 	 *
@@ -55,6 +42,11 @@ public class CustomerEstimationListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerEstimationFields(CustomerEstimation customerEstimation) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		CustomerEstimationListener.findCommonMaster = new FindCommonMaster();
 
 		if (DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString().equals(customerEstimation.getMomKjbSystemId())) {
 			return;

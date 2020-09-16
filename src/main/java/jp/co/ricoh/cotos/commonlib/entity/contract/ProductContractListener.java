@@ -5,21 +5,16 @@ import java.util.Date;
 
 import javax.persistence.PrePersist;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
+import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
 
 @Component
 public class ProductContractListener {
 	private static final String ID_PREFIX = "CS";
 
 	private static DBUtil dbUtil;
-
-	@Autowired
-	public void setDBUtil(DBUtil dbUtil) {
-		ProductContractListener.dbUtil = dbUtil;
-	}
 
 	/**
 	 * サービス識別番号を付与する。
@@ -28,6 +23,9 @@ public class ProductContractListener {
 	 */
 	@PrePersist
 	public void appendsServiceIdentNumber(ProductContract productContract) {
+		// Beanの取得
+		dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+
 		if (null != productContract.getServiceIdentNumber()) {
 			return;
 		}

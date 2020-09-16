@@ -6,7 +6,7 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +15,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
@@ -26,21 +28,6 @@ public class OperationLogListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
-	@Autowired
-	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
-		OperationLogListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
-	}
-
-	@Autowired
-	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
-		OperationLogListener.dummyUserMasterRepository = dummyUserMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		OperationLogListener.checkUtil = checkUtil;
-	}
-
 	/**
 	 * 社員マスタ情報を見積操作履歴トランザクションに紐づけます。
 	 *
@@ -49,6 +36,11 @@ public class OperationLogListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(OperationLog operationLog) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
 		CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if (userInfo.isDummyUser()) {

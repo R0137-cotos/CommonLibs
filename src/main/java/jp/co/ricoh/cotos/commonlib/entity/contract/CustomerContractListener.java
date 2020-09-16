@@ -7,7 +7,7 @@ import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
@@ -16,6 +16,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
 @Component
@@ -23,19 +25,13 @@ public class CustomerContractListener {
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
 
-	@Autowired
-	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
-		CustomerContractListener.vKjbMasterRepository = vKjbMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		CustomerContractListener.checkUtil = checkUtil;
-	}
-
 	@PrePersist
 	@Transactional
 	public void appendsCustomerContractFields(CustomerContract customerContract) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
 
 		if (DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString().equals(customerContract.getMomKjbSystemId())) {
 			return;

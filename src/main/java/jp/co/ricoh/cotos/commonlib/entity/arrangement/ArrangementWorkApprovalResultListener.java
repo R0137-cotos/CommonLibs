@@ -6,7 +6,7 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
@@ -14,6 +14,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 
@@ -24,21 +26,6 @@ public class ArrangementWorkApprovalResultListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
-	@Autowired
-	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
-		ArrangementWorkApprovalResultListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ArrangementWorkApprovalResultListener.checkUtil = checkUtil;
-	}
-
-	@Autowired
-	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
-		ArrangementWorkApprovalResultListener.dummyUserMasterRepository = dummyUserMasterRepository;
-	}
-
 	/**
 	 * 社員マスタ情報を手配業務承認実績トランザクションに紐づけます。
 	 *
@@ -47,6 +34,12 @@ public class ArrangementWorkApprovalResultListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ArrangementWorkApprovalResult arrangementWorkApprovalResult) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
 		if (dummyUserMasterRepository.existsByUserId(arrangementWorkApprovalResult.getActualEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(arrangementWorkApprovalResult.getActualEmpId());
 			arrangementWorkApprovalResult.setActualUserName(dummyUserMaster.getEmpName());
