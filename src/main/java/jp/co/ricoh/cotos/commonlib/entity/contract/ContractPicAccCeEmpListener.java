@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
@@ -15,6 +15,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 
@@ -25,21 +27,6 @@ public class ContractPicAccCeEmpListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
-	@Autowired
-	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
-		ContractPicAccCeEmpListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ContractPicAccCeEmpListener.checkUtil = checkUtil;
-	}
-
-	@Autowired
-	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
-		ContractPicAccCeEmpListener.dummyUserMasterRepository = dummyUserMasterRepository;
-	}
-
 	/**
 	 * 社員マスタ情報を契約受付担当CE社員トランザクションに紐づけます。
 	 *
@@ -48,6 +35,12 @@ public class ContractPicAccCeEmpListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractPicAccCeEmp contractPicAccCeEmp) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
 		if (dummyUserMasterRepository.existsByUserId(contractPicAccCeEmp.getMomEmployeeId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(contractPicAccCeEmp.getMomEmployeeId());
 			contractPicAccCeEmp.setEmployeeName(dummyUserMaster.getEmpName());

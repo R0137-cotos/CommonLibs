@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.persistence.PrePersist;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
@@ -14,6 +14,9 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci101MasterRepository;
 
 @Component
@@ -27,21 +30,6 @@ public class ContractListener {
 
 	private static DBUtil dbUtil;
 
-	@Autowired
-	public void setDBUtil(DBUtil dbUtil) {
-		ContractListener.dbUtil = dbUtil;
-	}
-
-	@Autowired
-	public void setMvTJmci101MasterRepository(MvTJmci101MasterRepository mvTJmci101MasterRepository) {
-		ContractListener.mvTJmci101MasterRepository = mvTJmci101MasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ContractListener.checkUtil = checkUtil;
-	}
-	
 	@PrePersist
 	public void prePersist(Contract contract) {
 		this.appendsContractNumber(contract);
@@ -54,6 +42,12 @@ public class ContractListener {
 	 * @param contract
 	 */
 	private void appendsContractNumber(Contract contract) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		mvTJmci101MasterRepository = context.getBean(MvTJmci101MasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+
 		/**
 		 * 契約番号
 		 */

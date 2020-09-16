@@ -9,7 +9,7 @@ import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchParameter;
@@ -19,6 +19,8 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
 @Component
@@ -30,24 +32,14 @@ public class DealerContractListener {
 	private static CheckUtil checkUtil;
 	private static FindCommonMaster findCommonMaster;
 
-	@Autowired
-	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
-		DealerContractListener.vKjbMasterRepository = vKjbMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		DealerContractListener.checkUtil = checkUtil;
-	}
-
-	@Autowired
-	public void setFindCommonMaster(FindCommonMaster findCommonMaster) {
-		DealerContractListener.findCommonMaster = findCommonMaster;
-	}
-
 	@PrePersist
 	@Transactional
 	public void appendsDealerContractFields(DealerContract dealerContract) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		DealerContractListener.findCommonMaster = new FindCommonMaster();
 
 		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerContract.getMomKjbSystemId());
