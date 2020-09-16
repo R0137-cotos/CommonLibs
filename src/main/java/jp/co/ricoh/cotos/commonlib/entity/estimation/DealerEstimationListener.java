@@ -9,7 +9,7 @@ import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchParameter;
@@ -19,6 +19,8 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
 @Component
@@ -30,21 +32,6 @@ public class DealerEstimationListener {
 	private static CheckUtil checkUtil;
 	private static FindCommonMaster findCommonMaster;
 
-	@Autowired
-	public void setKjbMasterRepository(VKjbMasterRepository kjbMasterRepository) {
-		DealerEstimationListener.vKjbMasterRepository = kjbMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		DealerEstimationListener.checkUtil = checkUtil;
-	}
-
-	@Autowired
-	public void setFindCommonMaster(FindCommonMaster findCommonMaster) {
-		DealerEstimationListener.findCommonMaster = findCommonMaster;
-	}
-
 	/**
 	 * 企事部マスタ情報を販売店（見積用）トランザクションに紐づけます。
 	 *
@@ -53,6 +40,12 @@ public class DealerEstimationListener {
 	@PrePersist
 	@Transactional
 	public void appendsEstimationDealerFields(DealerEstimation dealerEstimation) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		checkUtil = UtilProvider.getCheckUtil();
+		DealerEstimationListener.findCommonMaster = new FindCommonMaster();
+
 		if (StringUtils.isNotBlank(dealerEstimation.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerEstimation.getMomKjbSystemId());
 

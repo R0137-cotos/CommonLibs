@@ -7,13 +7,15 @@ import java.util.Map;
 
 import javax.persistence.PrePersist;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.contract.GeneratedNumber;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 
 @Component
@@ -23,16 +25,6 @@ public class EstimationListener {
 	private static DBUtil dbUtil;
 	private static ProductGrpMasterRepository productGrpMasterRepository;
 
-	@Autowired
-	public void setDBUtil(DBUtil dbUtil) {
-		EstimationListener.dbUtil = dbUtil;
-	}
-
-	@Autowired
-	public void setProductMasterRepository(ProductGrpMasterRepository productGrpMasterRepository) {
-		EstimationListener.productGrpMasterRepository = productGrpMasterRepository;
-	}
-
 	/**
 	 * 見積番号、RJ管理番号を付与する。
 	 *
@@ -40,6 +32,10 @@ public class EstimationListener {
 	 */
 	@PrePersist
 	public void appendsEstimationNumber(Estimation entity) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		productGrpMasterRepository = context.getBean(ProductGrpMasterRepository.class);
+		dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
 
 		/**
 		 * 見積番号
