@@ -235,7 +235,7 @@ public class EimConnectionHelper {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentUniqueID();
+			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
 			RequestEntity<?> requestEntity = new RequestEntity<>(request, headers, HttpMethod.PUT, new URI(url));
 			restForEmi.put(new URI(url), requestEntity);
 		} catch (Exception e) {
@@ -250,33 +250,39 @@ public class EimConnectionHelper {
 	 * @throws Exception
 	 */
 	private RestTemplate createEimRestTemplate() throws Exception {
-		String key = "cotoscotoscotos";
-		String algorithm = "BLOWFISH";
-		SecretKeySpec sksSpec = new SecretKeySpec(key.getBytes(), algorithm);
-		Cipher cipher = Cipher.getInstance(algorithm);
-		cipher.init(Cipher.DECRYPT_MODE, sksSpec);
-		final String username = new String(cipher.doFinal(Base64.getDecoder().decode("NWkNSo0c+pUdTkJ3iwrAyw==")));
-		final String password = new String(cipher.doFinal(Base64.getDecoder().decode("9mcYkD5HEKEXVARy99kUJg==")));
-		final String proxyUrl = "proxy.ricoh.co.jp";
-		final int port = 8080;
 
-		CredentialsProvider credsProvider = new BasicCredentialsProvider();
-		credsProvider.setCredentials(
-				new AuthScope(proxyUrl, port),
-				new UsernamePasswordCredentials(username, password));
+		if ("rfg3".equals(eimConnectionProperties.getHostName())) {
 
-		HttpHost myProxy = new HttpHost(proxyUrl, port);
-		HttpClientBuilder clientBuilder = HttpClientBuilder.create();
+			String key = "cotoscotoscotos";
+			String algorithm = "BLOWFISH";
+			SecretKeySpec sksSpec = new SecretKeySpec(key.getBytes(), algorithm);
+			Cipher cipher = Cipher.getInstance(algorithm);
+			cipher.init(Cipher.DECRYPT_MODE, sksSpec);
+			final String username = new String(cipher.doFinal(Base64.getDecoder().decode("NWkNSo0c+pUdTkJ3iwrAyw==")));
+			final String password = new String(cipher.doFinal(Base64.getDecoder().decode("9mcYkD5HEKEXVARy99kUJg==")));
+			final String proxyUrl = "proxy.ricoh.co.jp";
+			final int port = 8080;
 
-		clientBuilder
-		.setProxy(myProxy)
-		.setDefaultCredentialsProvider(credsProvider)
-		.disableCookieManagement();
+			CredentialsProvider credsProvider = new BasicCredentialsProvider();
+			credsProvider.setCredentials(
+					new AuthScope(proxyUrl, port),
+					new UsernamePasswordCredentials(username, password));
 
-		HttpClient httpClient = clientBuilder.build();
-		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-		factory.setHttpClient(httpClient);
+			HttpHost myProxy = new HttpHost(proxyUrl, port);
+			HttpClientBuilder clientBuilder = HttpClientBuilder.create();
 
-		return new RestTemplate(factory);
+			clientBuilder
+					.setProxy(myProxy)
+					.setDefaultCredentialsProvider(credsProvider)
+					.disableCookieManagement();
+
+			HttpClient httpClient = clientBuilder.build();
+			HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+			factory.setHttpClient(httpClient);
+
+			return new RestTemplate(factory);
+		} else {
+			return new RestTemplate();
+		}
 	}
 }

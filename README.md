@@ -307,4 +307,8 @@
 |350|見積、契約、手配、コミュニケーションの検索用DTOの追加・修正|
 |351|Swagger修正 手配業務のステータスの不足部分を追記|
 |352|EIM書誌情報テーブル定義変更|
-|353|BatchLightTemplate対応(@Autowiredを使用しないよう修正)|
+|353|EIM認証修正|
+|354|EIMDto・リポジトリ修正|
+|355|EIMDto修正|
+|356|EIMPutメソッド修正|
+|357|BatchLightTemplate対応(@Autowiredを使用しないよう修正)|

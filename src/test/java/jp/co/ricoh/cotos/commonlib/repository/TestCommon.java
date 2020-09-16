@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory;
@@ -138,5 +139,10 @@ public class TestCommon {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		List<EimDocumentInfo> foundList = eimDocumentInfoRepository.findByKeiyakNoAndEimLinkedStatusAndOldDocumentFlg("3", EimLinkedStatus.連携済, false);
+		// データが取得できていることを確認
+		Assert.assertEquals(1, foundList.size());
+
 	}
 }
