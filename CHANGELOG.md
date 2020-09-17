@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.6.0 (17/09/2020)
+- [**closed**] #7720 EIM書誌情報テーブル定義変更追加 [#1056](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1056)
+- [**closed**] BatcheLight対応 [#1074](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1074)
+- [**closed**] #7981 EIM情報送信バッチ EIMPutメソッド修正 [#1068](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1068)
+- [**closed**] #7981 EIMプロパティ追加 [#1065](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1065)
+- [**closed**] #7981 EIMDTOプロパティ・リポジトリ修正 [#1063](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1063)
+- [**closed**] #7981 EIM認証proxyを本番とそれ以外で変更 [#1060](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1060)
+- [**closed**] #7720 EIM書誌情報テーブル定義変更 [#1054](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1054)
+- [**closed**] #8169 手配のワークフロー状態「破棄: 7」がSwaggerに反映されていない問題を修正 [#1049](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1049)
+- [**closed**] #7893 検索用DTOの追加・変更 [#1037](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1037)
+- [**closed**] #6906 契約情報検索条件に商材固有項目を追加 [#1036](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1036)
+- [**closed**] #6906 契約情報検索条件に商材固有項目を追加 [#1035](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1035)
+- [**closed**] #6906 JSONエラーメッセージ追加 [#1034](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1034)
+
+---
+
 ## v3.5.0 (03/09/2020)
 - [**closed**] #7548 商材積上登録中のため契約変更不可メッセージ修正（Messages.properties修正） [#1046](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1046)
 - [**closed**] #7548 商材積上登録中のため契約変更不可メッセージ追加（Messages.properties修正） [#1033](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1033)
