@@ -129,6 +129,31 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+	
+	/**
+	 * 削除シート区分
+	 */
+	public enum DeleteSheetDiv {
+
+		シート削除("1"), シート非表示("2");
+
+		private final String text;
+
+		private DeleteSheetDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static DeleteSheetDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * テンプレートID
@@ -209,11 +234,17 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "拡張子", required = false, position = 11, allowableValues = "range[0,255]")
 	private String extension;
+	
+	/**
+	 * 削除シート区分
+	 */
+	@ApiModelProperty(value = "削除シート区分", required = false, allowableValues = "シート削除(\"1\"), シート非表示(\"2\")", example = "1", position = 12)
+	private DeleteSheetDiv deleteSheetDiv;
 
 	/**
 	 * 帳票ページ管理マスタ
 	 */
 	@OneToMany(mappedBy = "reportTemplateMaster")
-	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 12)
+	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 13)
 	private List<ReportPageMaster> reportPageMasterList;
 }
