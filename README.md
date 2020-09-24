@@ -318,3 +318,4 @@
 |361|EIMDto修正|
 |362|EIMPutメソッド修正|
 |363|BatchLightTemplate対応|
+|364|商品グループマスタ.EDWOR年額契約商品フラグを追加|
