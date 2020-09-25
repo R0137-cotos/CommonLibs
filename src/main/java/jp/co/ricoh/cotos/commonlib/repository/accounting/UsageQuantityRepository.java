@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository.accounting;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -12,4 +13,6 @@ public interface UsageQuantityRepository extends CrudRepository<UsageQuantity, L
 	public List<UsageQuantity> findByContractIdAndContractDetailId(Long contractId, Long contractDetailId);
 
 	public List<UsageQuantity> findByRjManageNumberAndItemCode(String rjManageNumber, String itemCode);
+
+	public List<UsageQuantity> findByUsageDate(Date date);
 }
