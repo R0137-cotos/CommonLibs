@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -251,6 +252,12 @@ public class TestAccounting {
 		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
 
 		founds = usageQuantityRepository.findByRjManageNumberAndItemCode("rj_manage_number", "item_code");
+
+		// Entity が null または 空 ではないことを確認
+		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		founds = usageQuantityRepository.findByUsageDate(df.parse("2019/01/01"));
 
 		// Entity が null または 空 ではないことを確認
 		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
