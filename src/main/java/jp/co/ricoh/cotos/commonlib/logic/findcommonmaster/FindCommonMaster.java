@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CommonMasterSearchParameter;
@@ -61,6 +62,11 @@ public class FindCommonMaster {
 	 * @return 汎用マスタリスト
 	 */
 	public List<CommonMasterResult> findCommonMaster(CommonMasterSearchParameter parameter) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (commonMasterRepository == null) commonMasterRepository = context.getBean(CommonMasterRepository.class);
+		if (commonMasterDetailRepository == null) commonMasterDetailRepository = context.getBean(CommonMasterDetailRepository.class);
+
 		List<CommonMasterResult> list = new ArrayList<>();
 
 		if (null != parameter && null != parameter.getServiceCategory()) {
@@ -107,6 +113,11 @@ public class FindCommonMaster {
 	 * @return MoM汎用マスタリスト
 	 */
 	public List<CommonMasterResult> findMomCommonMaster(MomCommonMasterSearchParameter parameter) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (mvTjmmb010UtlItemRepository == null) mvTjmmb010UtlItemRepository = context.getBean(MvTjmmb010UtlItemRepository.class);
+		if (mvTjmmb020UtlCdRepository == null) mvTjmmb020UtlCdRepository = context.getBean(MvTjmmb020UtlCdRepository.class);
+
 		List<CommonMasterResult> list = new ArrayList<>();
 
 		if (null != parameter && null != parameter.getCommonArticleCdList()) {
