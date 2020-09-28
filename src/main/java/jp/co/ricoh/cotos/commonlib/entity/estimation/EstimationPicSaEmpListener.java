@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,21 @@ public class EstimationPicSaEmpListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
+	@Autowired
+	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
+		EstimationPicSaEmpListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		EstimationPicSaEmpListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
+		EstimationPicSaEmpListener.dummyUserMasterRepository = dummyUserMasterRepository;
+	}
+
 	/**
 	 * 社員マスタ情報を見積担当SA社員トランザクションに紐づけます。
 	 *
@@ -37,9 +53,9 @@ public class EstimationPicSaEmpListener {
 	public void appendsEmployeeFields(EstimationPicSaEmp estimationPicSaEmp) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
-		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
 
 		if (dummyUserMasterRepository.existsByUserId(estimationPicSaEmp.getMomEmployeeId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(estimationPicSaEmp.getMomEmployeeId());

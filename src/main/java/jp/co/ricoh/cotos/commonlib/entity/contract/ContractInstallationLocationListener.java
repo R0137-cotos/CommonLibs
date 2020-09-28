@@ -6,6 +6,7 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,16 @@ public class ContractInstallationLocationListener {
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
 
+	@Autowired
+	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
+		ContractInstallationLocationListener.vKjbMasterRepository = vKjbMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		ContractInstallationLocationListener.checkUtil = checkUtil;
+	}
+
 	/**
 	 * 顧客マスタ情報を設置先(契約用)トランザクションに紐づけます。
 	 *
@@ -34,8 +45,8 @@ public class ContractInstallationLocationListener {
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
+		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
 
 		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(contractInstallationLocation.getMomKjbSystemId());
 		if (vKjbMaster == null) {

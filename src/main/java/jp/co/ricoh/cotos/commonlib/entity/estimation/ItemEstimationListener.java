@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 
 import org.apache.axis.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,11 @@ public class ItemEstimationListener {
 
 	private static ItemMasterRepository itemMasterRepository;
 
+	@Autowired
+	public void setItemMasterRepository(ItemMasterRepository itemMasterRepository) {
+		ItemEstimationListener.itemMasterRepository = itemMasterRepository;
+	}
+
 	/**
 	 * 品種マスタ情報を品種（見積用）トランザクションに紐づけます。
 	 *
@@ -27,7 +33,7 @@ public class ItemEstimationListener {
 	public void appendsEstimationItemFields(ItemEstimation itemEstimation) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		itemMasterRepository = context.getBean(ItemMasterRepository.class);
+		if (itemMasterRepository == null) itemMasterRepository = context.getBean(ItemMasterRepository.class);
 
 		ItemMaster itemMaster = itemMasterRepository.findByProductMasterIdAndRicohItemCode(itemEstimation.getProductMasterId(), itemEstimation.getRicohItemCode());
 		itemEstimation.setItemMasterId(itemMaster.getId());

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -23,14 +24,29 @@ public class ContractPicSaEmpListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
+	@Autowired
+	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
+		ContractPicSaEmpListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		ContractPicSaEmpListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
+		ContractPicSaEmpListener.dummyUserMasterRepository = dummyUserMasterRepository;
+	}
+
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractPicSaEmp contractPicSaEmp) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
-		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
 
 		//ダミーユーザーであるかどうかのチェック
 		if (dummyUserMasterRepository.existsByUserId(contractPicSaEmp.getMomEmployeeId())) {

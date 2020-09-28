@@ -6,6 +6,7 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,21 @@ public class ContractApprovalResultListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
+	@Autowired
+	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
+		ContractApprovalResultListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		ContractApprovalResultListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
+		ContractApprovalResultListener.dummyUserMasterRepository = dummyUserMasterRepository;
+	}
+
 	/**
 	 * 社員マスタ情報を契約承認実績トランザクションに紐づけます。
 	 *
@@ -36,9 +52,9 @@ public class ContractApprovalResultListener {
 	public void appendsEmployeeFields(ContractApprovalResult contractApprovalResult) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
-		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
 
 		if (dummyUserMasterRepository.existsByUserId(contractApprovalResult.getActualEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(contractApprovalResult.getActualEmpId());

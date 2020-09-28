@@ -6,6 +6,7 @@ import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,21 @@ public class EstimationAttachedFileListener {
 	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
+	@Autowired
+	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
+		EstimationAttachedFileListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		EstimationAttachedFileListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setDummyUserMasterRepository(DummyUserMasterRepository dummyUserMasterRepository) {
+		EstimationAttachedFileListener.dummyUserMasterRepository = dummyUserMasterRepository;
+	}
+
 	/**
 	 * 社員マスタ情報を見積添付ファイルトランザクションに紐づけます。
 	 *
@@ -36,9 +52,9 @@ public class EstimationAttachedFileListener {
 	public void appendsEmployeeFields(EstimationAttachedFile estimationAttachedFile) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
-		dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
 
 		if (dummyUserMasterRepository.existsByUserId(estimationAttachedFile.getAttachedEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(estimationAttachedFile.getAttachedEmpId());

@@ -7,6 +7,7 @@ import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -25,13 +26,23 @@ public class CustomerContractListener {
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
 
+	@Autowired
+	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
+		CustomerContractListener.vKjbMasterRepository = vKjbMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		CustomerContractListener.checkUtil = checkUtil;
+	}
+
 	@PrePersist
 	@Transactional
 	public void appendsCustomerContractFields(CustomerContract customerContract) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
+		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
 
 		if (DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString().equals(customerContract.getMomKjbSystemId())) {
 			return;

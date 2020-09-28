@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.PrePersist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,21 @@ public class ContractListener {
 
 	private static DBUtil dbUtil;
 
+	@Autowired
+	public void setDBUtil(DBUtil dbUtil) {
+		ContractListener.dbUtil = dbUtil;
+	}
+
+	@Autowired
+	public void setMvTJmci101MasterRepository(MvTJmci101MasterRepository mvTJmci101MasterRepository) {
+		ContractListener.mvTJmci101MasterRepository = mvTJmci101MasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		ContractListener.checkUtil = checkUtil;
+	}
+
 	@PrePersist
 	public void prePersist(Contract contract) {
 		this.appendsContractNumber(contract);
@@ -44,9 +60,9 @@ public class ContractListener {
 	private void appendsContractNumber(Contract contract) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		mvTJmci101MasterRepository = context.getBean(MvTJmci101MasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
-		dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+		if (mvTJmci101MasterRepository == null) mvTJmci101MasterRepository = context.getBean(MvTJmci101MasterRepository.class);
+		if (checkUtil  == null) checkUtil = UtilProvider.getCheckUtil();
+		if (dbUtil == null) dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
 
 		/**
 		 * 契約番号

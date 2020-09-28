@@ -9,6 +9,7 @@ import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,21 @@ public class CustomerEstimationListener {
 	private static CheckUtil checkUtil;
 	private static FindCommonMaster findCommonMaster;
 
+	@Autowired
+	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
+		CustomerEstimationListener.vKjbMasterRepository = vKjbMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		CustomerEstimationListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setFindCommonMaster(FindCommonMaster findCommonMaster) {
+		CustomerEstimationListener.findCommonMaster = findCommonMaster;
+	}
+
 	/**
 	 * 顧客マスタ情報を顧客(見積用)トランザクションに紐づけます。
 	 *
@@ -44,9 +60,9 @@ public class CustomerEstimationListener {
 	public void appendsCustomerEstimationFields(CustomerEstimation customerEstimation) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		checkUtil = UtilProvider.getCheckUtil();
-		CustomerEstimationListener.findCommonMaster = new FindCommonMaster();
+		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (findCommonMaster == null) findCommonMaster = new FindCommonMaster();
 
 		if (DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString().equals(customerEstimation.getMomKjbSystemId())) {
 			return;
