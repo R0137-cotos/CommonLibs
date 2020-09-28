@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.PrePersist;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
@@ -40,6 +41,10 @@ public class EstimationListener {
 	 */
 	@PrePersist
 	public void appendsEstimationNumber(Estimation entity) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (productGrpMasterRepository == null) productGrpMasterRepository = context.getBean(ProductGrpMasterRepository.class);
+		if (dbUtil == null) dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
 
 		/**
 		 * 見積番号

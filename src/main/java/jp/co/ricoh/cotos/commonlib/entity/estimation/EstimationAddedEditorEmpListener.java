@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
@@ -48,6 +49,12 @@ public class EstimationAddedEditorEmpListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(EstimationAddedEditorEmp estimationAddedEditorEmp) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
 		if (dummyUserMasterRepository.existsByUserId(estimationAddedEditorEmp.getMomEmployeeId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(estimationAddedEditorEmp.getMomEmployeeId());
 			estimationAddedEditorEmp.setEmployeeName(dummyUserMaster.getEmpName());
