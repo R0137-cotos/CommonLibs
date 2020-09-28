@@ -28,6 +28,9 @@ public class ProductContractListener {
 	 */
 	@PrePersist
 	public void appendsServiceIdentNumber(ProductContract productContract) {
+		// Beanの取得
+		if (dbUtil == null) dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+
 		if (null != productContract.getServiceIdentNumber()) {
 			return;
 		}

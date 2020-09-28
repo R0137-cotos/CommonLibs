@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchParameter;
@@ -48,6 +49,11 @@ public class DealerContractListener {
 	@PrePersist
 	@Transactional
 	public void appendsDealerContractFields(DealerContract dealerContract) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if(vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (findCommonMaster == null) findCommonMaster = new FindCommonMaster();
 
 		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerContract.getMomKjbSystemId());
