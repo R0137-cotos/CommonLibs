@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.logic.findcommonmaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,13 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
 @Component
 public class FindCommonMaster {
 
+	@Autowired
 	CommonMasterRepository commonMasterRepository;
+	@Autowired
 	CommonMasterDetailRepository commonMasterDetailRepository;
+	@Autowired
 	MvTjmmb010UtlItemRepository mvTjmmb010UtlItemRepository;
+	@Autowired
 	MvTjmmb020UtlCdRepository mvTjmmb020UtlCdRepository;
 
 	/**
@@ -60,8 +65,8 @@ public class FindCommonMaster {
 	public List<CommonMasterResult> findCommonMaster(CommonMasterSearchParameter parameter) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		commonMasterRepository = context.getBean(CommonMasterRepository.class);
-		commonMasterDetailRepository = context.getBean(CommonMasterDetailRepository.class);
+		if (commonMasterRepository == null) commonMasterRepository = context.getBean(CommonMasterRepository.class);
+		if (commonMasterDetailRepository == null) commonMasterDetailRepository = context.getBean(CommonMasterDetailRepository.class);
 
 		List<CommonMasterResult> list = new ArrayList<>();
 		if (null != parameter && null != parameter.getServiceCategory()) {
@@ -110,8 +115,8 @@ public class FindCommonMaster {
 	public List<CommonMasterResult> findMomCommonMaster(MomCommonMasterSearchParameter parameter) {
 		// Beanの取得
 		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		mvTjmmb010UtlItemRepository = context.getBean(MvTjmmb010UtlItemRepository.class);
-		mvTjmmb020UtlCdRepository = context.getBean(MvTjmmb020UtlCdRepository.class);
+		if (mvTjmmb010UtlItemRepository == null) mvTjmmb010UtlItemRepository = context.getBean(MvTjmmb010UtlItemRepository.class);
+		if (mvTjmmb020UtlCdRepository == null) mvTjmmb020UtlCdRepository = context.getBean(MvTjmmb020UtlCdRepository.class);
 
 		List<CommonMasterResult> list = new ArrayList<>();
 		if (null != parameter && null != parameter.getCommonArticleCdList()) {
