@@ -151,4 +151,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "情報変更承認時手配チェックフラグ", required = false, position = 16, allowableValues = "range[0,9]")
 	private Integer infoChangeApprovalCheckArrangementFlg;
 
+	/**
+	 * 最長納期日数
+	 */
+	@Max(999)
+	@ApiModelProperty(value = "最長納期日数", required = false, position = 17, allowableValues = "range[0,999]")
+	private Integer longestDeliveryDate;
 }
