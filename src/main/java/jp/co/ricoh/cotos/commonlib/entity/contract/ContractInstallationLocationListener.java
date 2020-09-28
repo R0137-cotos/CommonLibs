@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
@@ -40,6 +41,10 @@ public class ContractInstallationLocationListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
 
 		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(contractInstallationLocation.getMomKjbSystemId());
 		if (vKjbMaster == null) {
