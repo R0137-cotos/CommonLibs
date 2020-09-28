@@ -318,3 +318,4 @@
 |361|月初・月末からのn営業日判定処理修正|
 |362|BatchLightTemplate対応(@Autowiredを使用しないよう修正)|
 |363|使用量リポジトリにメソッド追加、MessagePropertiesに従量データアップロード締め切り用メッセージ追加|
+|364|@Autowiredが効いていない時のみgetBean()するよう修正|
