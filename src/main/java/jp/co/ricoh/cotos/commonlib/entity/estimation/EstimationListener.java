@@ -15,6 +15,8 @@ import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.contract.GeneratedNumber;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 
 @Component
