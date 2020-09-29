@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
@@ -23,7 +24,7 @@ public class MessageUtil {
 
 	/**
 	 * 単一メッセージ項目を取得
-	 * 
+	 *
 	 * @param key
 	 *            キー
 	 * @return メッセージ
@@ -34,7 +35,7 @@ public class MessageUtil {
 
 	/**
 	 * 単一メッセージ項目を取得
-	 * 
+	 *
 	 * @param key
 	 *            キー
 	 * @param regexList
@@ -47,7 +48,7 @@ public class MessageUtil {
 
 	/**
 	 * メッセージ生成
-	 * 
+	 *
 	 * @param key
 	 *            キー
 	 * @return メッセージ情報
@@ -64,7 +65,7 @@ public class MessageUtil {
 
 	/**
 	 * メッセージ生成
-	 * 
+	 *
 	 * @param key
 	 *            キー
 	 * @param regexList
@@ -78,5 +79,20 @@ public class MessageUtil {
 		messageInfo.setMsg(messageSource.getMessage(key + "." + MessageAttribute.MSG, regexList, Locale.JAPANESE));
 
 		return messageInfo;
+	}
+
+	/**
+	 * MessageSource生成
+	 *
+	 * @param basename
+	 *            ベースネーム
+	 * @param defaultEncoding
+	 *            デフォルトエンコーディング
+	 */
+	public void setMessageSource(String basename, String defaultEncoding) {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.addBasenames(basename);
+		messageSource.setDefaultEncoding(defaultEncoding);
+		this.messageSource = messageSource;
 	}
 }
