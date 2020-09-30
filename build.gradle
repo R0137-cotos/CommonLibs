@@ -61,6 +61,8 @@ dependencies {
     testCompile group: 'com.ninja-squad', name: 'DbSetup', version: '2.1.0'
     testCompile 'org.apache.commons:commons-lang3:3.4'
     testRuntime('com.h2database:h2')
+
+    compile group: 'net.sf.barcode4j', name: 'barcode4j', version: '2.1'
 }
 
 sonarqube {
@@ -76,7 +78,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
-            pom.version = '0.0.363'
+            pom.version = '0.0.364'
             pom.groupId = 'jp.co.ricoh.cotos'
             pom.artifactId = 'common-libraries'
         }

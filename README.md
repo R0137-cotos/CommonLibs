@@ -318,3 +318,4 @@
 |361|EIMDto修正|
 |362|EIMPutメソッド修正|
 |363|BatchLightTemplate対応|
+|364|バーコード生成処理追加|
