@@ -322,3 +322,4 @@
 |365|月初・月末からのn営業日判定処理修正|
 |366|商品グループマスタエンティティ 最長納期日数項目追加|
 |367|BatchLightTemplate対応|
+|368|BusinessDayUtil BatchLightTemplate対応|
