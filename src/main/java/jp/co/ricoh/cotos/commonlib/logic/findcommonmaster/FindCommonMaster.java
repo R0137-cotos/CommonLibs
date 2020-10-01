@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CommonMasterSearchParameter;
@@ -14,10 +15,11 @@ import jp.co.ricoh.cotos.commonlib.entity.master.CommonMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.CommonMasterDetail;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmmb010UtlItem;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmmb020UtlCd;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb010UtlItemRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
 
 /**
  * 汎用マスタ取得共通クラス
@@ -36,7 +38,7 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ取得
-	 * 
+	 *
 	 * <pre>
 	 * 【処理内容】
 	 *　・引数の汎用マスタIDリストを元に汎用マスタTBL(COMMON_MASTER)、汎用マスタ明細TBL(COMMON_MASTER_DETAIL)から汎用マスタ情報取得
@@ -55,12 +57,17 @@ public class FindCommonMaster {
 	 *　　　表示順(DISPLAY_ORDER)の昇順
 	 *　・引数の空行追加フラグを「true」に指定すると、各汎用マスタ明細の先頭行に空行を追加した状態で取得可能
 	 * </pre>
-	 * 
+	 *
 	 * @param parameter
 	 *            汎用マスタ取得パラメータ
 	 * @return 汎用マスタリスト
 	 */
 	public List<CommonMasterResult> findCommonMaster(CommonMasterSearchParameter parameter) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (commonMasterRepository == null) commonMasterRepository = context.getBean(CommonMasterRepository.class);
+		if (commonMasterDetailRepository == null) commonMasterDetailRepository = context.getBean(CommonMasterDetailRepository.class);
+
 		List<CommonMasterResult> list = new ArrayList<>();
 
 		if (null != parameter && null != parameter.getServiceCategory()) {
@@ -83,7 +90,7 @@ public class FindCommonMaster {
 
 	/**
 	 * MoM汎用マスタ取得
-	 * 
+	 *
 	 * <pre>
 	 * 【処理内容】
 	 *　・引数の汎用マスタIDリストを元にMoM汎用マスタTBL(MV_TJMMB010_UTL_ITEM)、MoM汎用マスタ明細TBL(MV_TJMMB020_UTL_CD)からMoM汎用マスタ情報取得
@@ -101,12 +108,17 @@ public class FindCommonMaster {
 	 *　　　表示順(SORT_NUMBER)の昇順
 	 *　・引数の空行追加フラグを「true」に指定すると、各MoM汎用マスタ明細の先頭行に空行を追加した状態で取得可能
 	 * </pre>
-	 * 
+	 *
 	 * @param parameter
 	 *            汎用マスタ取得パラメータ
 	 * @return MoM汎用マスタリスト
 	 */
 	public List<CommonMasterResult> findMomCommonMaster(MomCommonMasterSearchParameter parameter) {
+		// Beanの取得
+		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+		if (mvTjmmb010UtlItemRepository == null) mvTjmmb010UtlItemRepository = context.getBean(MvTjmmb010UtlItemRepository.class);
+		if (mvTjmmb020UtlCdRepository == null) mvTjmmb020UtlCdRepository = context.getBean(MvTjmmb020UtlCdRepository.class);
+
 		List<CommonMasterResult> list = new ArrayList<>();
 
 		if (null != parameter && null != parameter.getCommonArticleCdList()) {
@@ -131,7 +143,7 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ明細結果リスト生成
-	 * 
+	 *
 	 * @param detailList
 	 *            COTOS汎用マスタ明細リスト
 	 * @return 汎用マスタ明細結果リスト
@@ -155,7 +167,7 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ明細結果リスト生成
-	 * 
+	 *
 	 * @param detailList
 	 *            COTOS汎用マスタ明細リスト
 	 * @return 汎用マスタ明細結果リスト
@@ -179,7 +191,7 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ明細結果空行作成
-	 * 
+	 *
 	 * @return 汎用マスタ明細結果
 	 */
 	private CommonMasterDetailResult addBlankRow() {
