@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
@@ -37,10 +36,6 @@ public class CustomerContractListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerContractFields(CustomerContract customerContract) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
 
 		if (DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString().equals(customerContract.getMomKjbSystemId())) {
 			return;

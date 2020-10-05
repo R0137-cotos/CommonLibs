@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
@@ -48,12 +47,6 @@ public class ArrangementWorkApprovalResultListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ArrangementWorkApprovalResult arrangementWorkApprovalResult) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
-
 		if (dummyUserMasterRepository.existsByUserId(arrangementWorkApprovalResult.getActualEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(arrangementWorkApprovalResult.getActualEmpId());
 			arrangementWorkApprovalResult.setActualUserName(dummyUserMaster.getEmpName());
