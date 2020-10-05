@@ -15,9 +15,6 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
-import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
-import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
-import jp.co.ricoh.cotos.commonlib.provider.UtilProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci101MasterRepository;
 
 @Component
@@ -45,7 +42,7 @@ public class ContractListener {
 	public void setCheckUtil(CheckUtil checkUtil) {
 		ContractListener.checkUtil = checkUtil;
 	}
-
+	
 	@PrePersist
 	public void prePersist(Contract contract) {
 		this.appendsContractNumber(contract);

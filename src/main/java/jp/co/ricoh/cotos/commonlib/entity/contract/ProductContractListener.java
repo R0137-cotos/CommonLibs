@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
-import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
 
 @Component
 public class ProductContractListener {

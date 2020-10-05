@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
-import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
 
 @Component

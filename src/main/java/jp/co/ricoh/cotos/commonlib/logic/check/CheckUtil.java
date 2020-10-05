@@ -470,17 +470,4 @@ public class CheckUtil {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "CannotContractActionByStatus", new String[] { "ワークフロー状態", "「売上可能」", "締結開始指示" }));
 		}
 	}
-
-	/**
-	 * MessageUtil生成
-	 *
-	 * @param basename
-	 *            ベースネーム
-	 * @param defaultEncoding
-	 *            デフォルトエンコーディング
-	 */
-	public void setMessageUtil(String basename, String defaultEncoding) {
-		this.messageUtil = new MessageUtil();
-		this.messageUtil.setMessageSource(basename, defaultEncoding);
-	}
 }
