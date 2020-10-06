@@ -23,4 +23,7 @@ public class NonBusinessDayCalendarMaster extends EntityBaseMaster {
 	@Id
 	@ApiModelProperty(value = "非営業日", required = true, position = 1)
 	private Date nonBusinessDay;
+
+	@ApiModelProperty(value = "ベンダー略称", required = false, position = 2)
+	private String vendorShortName;
 }
