@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.7.1 (05/10/2020)
+- [**closed**] BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻 [#1088](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1088)
+
+---
+
+## v3.7.0 (01/10/2020)
+- [**closed**] #8145_@Autowiredが効いていない時のみgetBean()するよう修正 [#1080](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1080)
+- [**closed**] #7955 月初・月末からn営業日判定処理修正 [#1070](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1070)
+- [**closed**] #7955 品種マスタエンティティ ベンダー略称項目を追加 [#1067](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1067)
+- [**closed**] #7955 営業日判定, 最短営業日取得 ベンダー略称指定版を実装 [#1061](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1061)
+
+---
+
 ## v3.6.0 (17/09/2020)
 - [**closed**] #7720 EIM書誌情報テーブル定義変更追加 [#1056](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1056)
 - [**closed**] BatcheLight対応 [#1074](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1074)
