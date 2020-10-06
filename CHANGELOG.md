@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.7.1 (05/10/2020)
+- [**closed**] BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻 [#1088](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1088)
+
+---
+
 ## v3.7.0 (01/10/2020)
 - [**closed**] #8145_@Autowiredが効いていない時のみgetBean()するよう修正 [#1080](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1080)
 - [**closed**] #7955 月初・月末からn営業日判定処理修正 [#1070](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1070)
