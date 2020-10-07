@@ -323,5 +323,6 @@
 |366|月初・月末からのn営業日判定処理修正|
 |367|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加)|
 |368|使用量リポジトリにメソッド追加、MessagePropertiesに従量データアップロード締め切り用メッセージ追加|
-|369|商品グループマスタエンティティ 最長納期日数項目追加|
-|370|BusinessDayUtil BatchLightTemplate対応|
+|369|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻|
+|370|商品グループマスタエンティティ 最長納期日数項目追加|
+|371|BusinessDayUtil BatchLightTemplate対応|
