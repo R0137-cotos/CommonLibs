@@ -10,4 +10,9 @@ import jp.co.ricoh.cotos.commonlib.entity.master.NonBusinessDayCalendarMaster;
 @Repository
 public interface NonBusinessDayCalendarMasterRepository extends CrudRepository<NonBusinessDayCalendarMaster, Date> {
 
+	public Iterable<NonBusinessDayCalendarMaster> findByVendorShortNameIsNull();
+
+	public NonBusinessDayCalendarMaster findOneByNonBusinessDayAndVendorShortNameIsNull(Date nonBusinessDay);
+
+	public NonBusinessDayCalendarMaster findOneByNonBusinessDayAndVendorShortNameLike(Date nonBusinessDay, String vendorShortName);
 }
