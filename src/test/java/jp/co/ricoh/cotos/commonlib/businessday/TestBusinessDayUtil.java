@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.businessday;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -61,6 +62,117 @@ public class TestBusinessDayUtil {
 
 	@Test
 	@Transactional
+	public void 営業日判定_ベンダー略称指定() throws Exception {
+		テストデータ作成();
+
+		List<String> vendor1Only = new ArrayList<String>();
+		vendor1Only.add("vendor1");
+
+		List<String> vendor2Only = new ArrayList<String>();
+		vendor2Only.add("vendor2");
+
+		List<String> vendor3Only = new ArrayList<String>();
+		vendor3Only.add("vendor3");
+
+		List<String> vendor12 = new ArrayList<String>();
+		vendor12.add("vendor1");
+		vendor12.add("vendor2");
+
+		// 2019/01/02
+		// 共通：営業日
+		// vendor1：非営業日
+		// vendor2：営業日
+		// vendor3:営業日
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = sdf.parse("2019/01/02");
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor1Only));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, vendor2Only));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, vendor3Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor12));
+
+		// 2019/01/03
+		// 共通：営業日
+		// vendor1：非営業日
+		// vendor2：営業日
+		// vendor3:営業日
+		date = sdf.parse("2019/01/03");
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor1Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor2Only));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, vendor3Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor12));
+
+		// 2019/01/04
+		// 共通：営業日
+		// vendor1：非営業日
+		// vendor2：営業日
+		// vendor3:非営業日
+		date = sdf.parse("2019/01/04");
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor1Only));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, vendor2Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor3Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor12));
+
+		// 2019/01/05
+		// 共通：非営業日
+		// vendor1：非営業日
+		// vendor2：非営業日
+		// vendor3:非営業日
+		date = sdf.parse("2019/01/05");
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor1Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor2Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor3Only));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, vendor12));
+
+		// 略称が部分一致する場合(SB,SBS,SBSB)
+		List<String> sbOnly = new ArrayList<String>();
+		sbOnly.add("SB");
+
+		List<String> sbsOnly = new ArrayList<String>();
+		sbsOnly.add("SBS");
+
+		List<String> sbsbOnly = new ArrayList<String>();
+		sbsbOnly.add("SBSB");
+
+		// 2019/01/06
+		// 共通：営業日
+		// SB:非営業日
+		// SBS:営業日
+		// SBSB:営業日
+		date = sdf.parse("2019/01/06");
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, sbOnly));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, sbsOnly));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, sbsbOnly));
+
+		// 2019/01/07
+		// 共通：営業日
+		// SB:営業日
+		// SBS:非営業日
+		// SBSB:営業日
+		date = sdf.parse("2019/01/07");
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, sbOnly));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, sbsOnly));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, sbsbOnly));
+
+		// 2019/01/08
+		// 共通：営業日
+		// SB:営業日
+		// SBS:非営業日
+		// SBSB:非営業日
+		date = sdf.parse("2019/01/08");
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, null));
+		Assert.assertEquals("営業日であること", true, businessDayUtil.isBusinessDay(date, sbOnly));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, sbsOnly));
+		Assert.assertEquals("非営業日であること", false, businessDayUtil.isBusinessDay(date, sbsbOnly));
+	}
+
+	@Test
+	@Transactional
 	public void 最短営業日取得() throws Exception {
 		テストデータ作成();
 
@@ -68,6 +180,81 @@ public class TestBusinessDayUtil {
 		Date date = sdf.parse("2019/06/27");
 		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/07/04"), businessDayUtil.findShortestBusinessDay(date, 5, false));
 		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2019/06/20"), businessDayUtil.findShortestBusinessDay(date, 5, true));
+	}
+
+	@Test
+	@Transactional
+	public void 最短営業日取得_ベンダー略称指定() throws Exception {
+		テストデータ作成();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+		// 共通のテストと同条件
+		Date date = sdf.parse("2019/06/27");
+		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/07/04"), businessDayUtil.findShortestBusinessDay(date, 5, false, null));
+		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2019/06/20"), businessDayUtil.findShortestBusinessDay(date, 5, true, null));
+
+		// 略称が部分一致する場合(SB,SBS,SBSB)
+		List<String> sbOnly = new ArrayList<String>();
+		sbOnly.add("SB");
+
+		List<String> sbsOnly = new ArrayList<String>();
+		sbsOnly.add("SBS");
+
+		List<String> sbsbOnly = new ArrayList<String>();
+		sbsbOnly.add("SBSB");
+
+		List<String> allVendor = new ArrayList<String>();
+		allVendor.add("SB");
+		allVendor.add("SBS");
+		allVendor.add("SBSB");
+
+		date = sdf.parse("2019/01/03");
+
+		// 共通
+		// 2019/01/01 非営業日
+		// 2019/01/05 非営業日
+		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/01/09"), businessDayUtil.findShortestBusinessDay(date, 5, false, null));
+		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2018/12/28"), businessDayUtil.findShortestBusinessDay(date, 5, true, null));
+
+		// SB
+		// 2018/12/31 非営業日
+		// 2019/01/01 非営業日(共通)
+		// 2019/01/05 非営業日(共通)
+		// 2019/01/06 非営業日
+		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/01/10"), businessDayUtil.findShortestBusinessDay(date, 5, false, sbOnly));
+		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2018/12/27"), businessDayUtil.findShortestBusinessDay(date, 5, true, sbOnly));
+
+		// SBS
+		// 2018/12/31 非営業日
+		// 2019/01/01 非営業日(共通)
+		// 2019/01/05 非営業日(共通)
+		// 2019/01/07 非営業日
+		// 2019/01/08 非営業日
+		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/01/11"), businessDayUtil.findShortestBusinessDay(date, 5, false, sbsOnly));
+		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2018/12/27"), businessDayUtil.findShortestBusinessDay(date, 5, true, sbsOnly));
+
+		// SBSB
+		// 2018/12/31 非営業日
+		// 2019/01/01 非営業日(共通)
+		// 2019/01/05 非営業日(共通)
+		// 2019/01/08 非営業日
+		// 2019/01/09 非営業日
+		// 2019/01/10 非営業日
+		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/01/12"), businessDayUtil.findShortestBusinessDay(date, 5, false, sbsbOnly));
+		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2018/12/27"), businessDayUtil.findShortestBusinessDay(date, 5, true, sbsbOnly));
+
+		// SB+SBS+SBSB
+		// 2018/12/31 非営業日(SB,SBS,SBSB)
+		// 2019/01/01 非営業日(共通)
+		// 2019/01/05 非営業日(共通)
+		// 2019/01/06 非営業日(SB)
+		// 2019/01/07 非営業日(SBS)
+		// 2019/01/08 非営業日(SBS,SBSB)
+		// 2019/01/09 非営業日(SBSB)
+		// 2019/01/10 非営業日(SBSB)
+		Assert.assertEquals("最短営業日_加算が正しいこと", sdf.parse("2019/01/14"), businessDayUtil.findShortestBusinessDay(date, 5, false, allVendor));
+		Assert.assertEquals("最短営業日_減算が正しいこと", sdf.parse("2018/12/27"), businessDayUtil.findShortestBusinessDay(date, 5, true, allVendor));
 	}
 
 	@Test
@@ -111,13 +298,17 @@ public class TestBusinessDayUtil {
 		// 2019年7月 月末日が非営業日ではない
 		// 2019年8月 全ての日が非営業日
 		// 2019年9月 全ての日が非営業日ではない
+		// 2019年10月 ベンダー固有の最終営業日と共通の最終営業日が違う
+		// 2019/10/29:SB固有の最終営業日(本メソッドは共通の最終営業日しか返さないため、取得されない)
+		// 2019/10/30:SB固有の非営業日,共通の最終営業日
+		// 2019/10/31:共通の非営業日
 		// 引数文字列
 		// 引数null
 
 		// 引数
-		List<String> argList = Arrays.asList("201906", "201907", "201908", "201909", "ああああ", null);
+		List<String> argList = Arrays.asList("201906", "201907", "201908", "201909", "201910", "ああああ", null);
 		// 期待値
-		List<String> expectList = Arrays.asList("2019/06/28", "2019/07/31", null, "2019/09/30", null, null);
+		List<String> expectList = Arrays.asList("2019/06/28", "2019/07/31", null, "2019/09/30", "2019/10/30", null, null);
 		for (int index = 0; index < argList.size(); index++) {
 			Date result = businessDayUtil.getLastBusinessDayOfTheMonthFromNonBusinessCalendarMaster(argList.get(index));
 			Assert.assertEquals(argList.get(index) + "の想定通りの月末最終営業日が取得できること。", 日付想定値取得(expectList.get(index)), result);
@@ -148,15 +339,37 @@ public class TestBusinessDayUtil {
 		// 月末営業日
 		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/28")));
 		// 月初から4営業日
-		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/06")));
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/07")));
 		// 月初から3営業日
-		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/05")));
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/06")));
 		// 月初から2営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/05")));
+		// 月初から1営業日
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/04")));
 		// 月初営業日
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/03")));
 		// 月初から3営業日以内の休業日
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/06/01")));
+
+		// 月初から3営業日以内にベンダー固有の非営業日を含む場合
+		// 2019/08/01:月初営業日
+		// 2019/08/02:月初 + 1営業日
+		// 2019/08/03:非営業日(共通)
+		// 2019/08/04:月初 + 2営業日(ベンダー固有の非営業日)
+		// 2019/08/05:月初 + 3営業日
+		// 2019/08/06:月初 + 4営業日
+		// 月初から4営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/08/06")));
+		// 月初から3営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/08/05")));
+		// 月初から2営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/08/04")));
+		// 月初から1営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/08/02")));
+		// 月初営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/08/01")));
+		// 月初から3営業日以内の休業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromFirstDay(days, dateFormat.parse("2019/08/03")));
 	}
 
 	@Test
@@ -183,15 +396,36 @@ public class TestBusinessDayUtil {
 		// 月初営業日
 		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/03")));
 		// 月末から4営業日
-		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/25")));
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/24")));
 		// 月末から3営業日
-		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/26")));
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/25")));
 		// 月末から2営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/26")));
+		// 月末から1営業日
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/27")));
 		// 月末営業日
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/28")));
 		// 月末から3営業日以内の休業日
 		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/06/30")));
+
+		// 月末から3営業日以内にベンダー固有の非営業日を含む場合
+		// 2019/07/25:月末 - 4営業日
+		// 2019/07/26:月末 - 3営業日
+		// 2019/07/27:非営業日(共通)
+		// 2019/07/28:月末 - 2営業日(ベンダー固有の非営業日)
+		// 2019/07/29:月末 - 1営業日
+		// 2019/07/30:月末営業日
+		// 2019/07/31:非営業日(共通)
+		// 月末から4営業日
+		Assert.assertFalse(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/07/25")));
+		// 月末から3営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/07/26")));
+		// 月末から2営業日(ベンダー固有の非営業日)
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/07/28")));
+		// 月末営業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/07/30")));
+		// 月末から3営業日以内の休業日
+		Assert.assertTrue(businessDayUtil.isWithinBusinessDaysFromLastDay(days, dateFormat.parse("2019/07/27")));
 	}
 
 	@Test
@@ -296,6 +530,9 @@ public class TestBusinessDayUtil {
 		// 2019/06/23
 		// 2019/06/29
 		// 2019/06/30
+		// 2019/07/27
+		// 2019/07/28(ベンダー固有)
+		// 2019/07/31
 		テストデータ作成();
 
 		// 間に非営業日を挟まない期間 2019/06/05-2019/06/07
@@ -304,6 +541,8 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("3営業日差であること", 3, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 10)));
 		// 間に非営業日を挟む期間 2019/06/05-2019/06/18
 		Assert.assertEquals("9営業日差であること", 9, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 18)));
+		// 間にベンダー固有の非営業日を挟む期間 2019/07/26 - 2019/08/01
+		Assert.assertEquals("4営業日差であること", 4, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 7, 26), LocalDate.of(2019, 8, 1)));
 		// 同日 2019/06/05-2019/06/05
 		Assert.assertEquals("0営業日差であること", 0, businessDayUtil.calculateDifferenceBetweenBusinessDates(LocalDate.of(2019, 6, 5), LocalDate.of(2019, 6, 5)));
 		// smallDate = null
@@ -335,7 +574,12 @@ public class TestBusinessDayUtil {
 		// 2019/06/23
 		// 2019/06/29
 		// 2019/06/30
+		// 2019/10/12
+		// 2019/10/13
+		// 2019/10/14
+		// 2019/10/17(ベンダー固有)
 		テストデータ作成();
+
 
 		// 間に非営業日を挟まない期間 2019/06/05 - 2営業日 = 2019/06/03
 		Assert.assertEquals("2019/06/05の2営業日前は2019/06/03であること", LocalDate.of(2019, 6, 3), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 5), 2));
@@ -343,6 +587,9 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("2019/06/11の2営業日前は2019/06/07であること", LocalDate.of(2019, 6, 7), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 11), 2));
 		// 間に非営業日を挟む期間 2019/06/17 - 10営業日 = 2019/06/03
 		Assert.assertEquals("2019/06/17の10営業日前は2019/06/03であること", LocalDate.of(2019, 6, 3), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 17), 10));
+		// 間に共通の非営業日とベンダ固有の非営業日を挟む期間 2019/10/18 - 4営業日 = 2019/10/11
+		// ベンダー固有の非営業日も非営業日と見做した場合、2019/10/10になってしまう
+		Assert.assertEquals("2019/10/18の4営業日前は2019/10/11であること", LocalDate.of(2019, 10, 11), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 10, 18), 4));
 		// 0営業日前 2019/06/17 - 0営業日 = 2019/06/17
 		Assert.assertEquals("2019/06/17の0営業日前は2019/06/17であること", LocalDate.of(2019, 6, 17), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 17), 0));
 		// baseDate = null
