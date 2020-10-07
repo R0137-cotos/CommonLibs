@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.findcommonmaster;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -44,6 +46,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void 汎用マスタ取得空行なし() {
 		汎用マスタデータ作成();
 
@@ -53,6 +56,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void 汎用マスタ取得空行あり() {
 		汎用マスタデータ作成();
 
@@ -62,6 +66,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void 汎用マスタ取得一致データなし() {
 		汎用マスタデータ作成共通なし();
 
@@ -71,6 +76,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void 汎用マスタ取得一致データなし削除データ指定() {
 		汎用マスタデータ作成共通なし();
 
@@ -80,6 +86,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void 汎用マスタ取得検索条件サービスカテゴリーNull() {
 		汎用マスタデータ作成();
 
@@ -89,6 +96,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void 汎用マスタ取得パラメータNull() {
 		汎用マスタデータ作成();
 
@@ -97,6 +105,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得単一空行なし() {
 		List<String> commonArticleCdList = Arrays.asList("JF-CONSUMPTION_TAX_CTGR");
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(commonArticleCdList, false);
@@ -105,6 +114,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得単一空行あり() {
 		List<String> commonArticleCdList = Arrays.asList("JF-CONSUMPTION_TAX_CTGR");
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(commonArticleCdList, true);
@@ -113,6 +123,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得複数() {
 		List<String> commonArticleCdList = Arrays.asList("JF-CONSUMPTION_TAX_CTGR", "JF-DELIVERY_PATTERN_CTGR");
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(commonArticleCdList, false);
@@ -121,6 +132,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得一致データなし削除データ指定() {
 		List<String> commonArticleCdList = Arrays.asList("JFC-PARALLEL_OPERATION_INV_GRP_CD");
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(commonArticleCdList, false);
@@ -129,6 +141,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得一致データなし() {
 		List<String> commonArticleCdList = Arrays.asList("COTOS_TEST");
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(commonArticleCdList, false);
@@ -137,6 +150,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得検索条件カラム名リストNull() {
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(null, false);
 		List<CommonMasterResult> commonList = findCommonMaster.findMomCommonMaster(parameter);
@@ -144,6 +158,7 @@ public class TestFindCommonMaster {
 	}
 
 	@Test
+	@Transactional
 	public void MoM汎用マスタ取得パラメータNull() {
 		List<CommonMasterResult> commonList = findCommonMaster.findMomCommonMaster(null);
 		Assert.assertEquals("汎用マスタ取得件数が正しいこと", 0, commonList.size());
