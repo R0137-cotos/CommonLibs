@@ -326,3 +326,4 @@
 |369|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻|
 |370|商品グループマスタエンティティ 最長納期日数項目追加|
 |371|BusinessDayUtil BatchLightTemplate対応|
+|372|BatchLightTemplate対応|
