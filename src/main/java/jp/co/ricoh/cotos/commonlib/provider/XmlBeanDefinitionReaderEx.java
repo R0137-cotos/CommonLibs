@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -17,20 +19,27 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import jp.co.ricoh.cotos.commonlib.security.AccessLogOutputFilter;
 import jp.co.ricoh.cotos.commonlib.util.DatasourceProperties;
 
 public class XmlBeanDefinitionReaderEx extends XmlBeanDefinitionReader {
 
+	private static final Log log = LogFactory.getLog(AccessLogOutputFilter.class);
+
 	public XmlBeanDefinitionReaderEx(BeanDefinitionRegistry registry) {
 		super(registry);
+		log.info("調査用：XmlBeanDefinitionReaderEx constructor start");
 	}
 
 	@Override
 	protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource) throws BeanDefinitionStoreException {
+		log.info("調査用：XmlBeanDefinitionReaderEx.doLoadBeanDefinitions() start");
+
 		try {
 			Document doc = doLoadDocument(inputSource, resource);
 			setProperties(doc);
 
+			log.info("調査用：XmlBeanDefinitionReaderEx.doLoadBeanDefinitions() end");
 			return registerBeanDefinitions(doc, resource);
 		} catch (BeanDefinitionStoreException ex) {
 			throw ex;
@@ -51,6 +60,8 @@ public class XmlBeanDefinitionReaderEx extends XmlBeanDefinitionReader {
 	 * ymlファイルの値をbean.xmlに反映
 	 */
 	private void setProperties(Document doc) {
+		log.info("調査用：XmlBeanDefinitionReaderEx.setProperties() start");
+
 		// yml読み込み
 		Map<String, String> hibernateProperties = LoadConfigulation.getHibernateProperties();
 		DatasourceProperties datasourceProperties = LoadConfigulation.getDatasourceProperties();
@@ -110,5 +121,7 @@ public class XmlBeanDefinitionReaderEx extends XmlBeanDefinitionReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		log.info("調査用：XmlBeanDefinitionReaderEx.setProperties() end");
 	}
 }
