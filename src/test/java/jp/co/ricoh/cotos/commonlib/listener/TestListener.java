@@ -55,6 +55,9 @@ public class TestListener {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("listener/listener.sql");
+
+		// シーケンスのDROPではIF EXISTSが使用できないため、ここで削除
+		context.getBean(DBConfig.class).initTargetTestData("listener/clearSequence.sql");
 	}
 
 	@AfterClass
