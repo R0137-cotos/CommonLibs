@@ -31,8 +31,11 @@ public class ProductEstimationListener {
 	@Transactional
 	public void appendsEstimationProductsFields(ProductEstimation productEstimation) {
 		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (productMasterRepository == null) productMasterRepository = context.getBean(ProductMasterRepository.class);
+		if (productMasterRepository == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (productMasterRepository == null)
+				productMasterRepository = context.getBean(ProductMasterRepository.class);
+		}
 
 		ProductMaster productMaster = productMasterRepository.findOne(productEstimation.getProductMasterId());
 		productEstimation.setProductMasterId(productMaster.getId());

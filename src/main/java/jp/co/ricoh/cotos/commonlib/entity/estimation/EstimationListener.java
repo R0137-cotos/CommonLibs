@@ -44,9 +44,13 @@ public class EstimationListener {
 	@PrePersist
 	public void appendsEstimationNumber(Estimation entity) {
 		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (productGrpMasterRepository == null) productGrpMasterRepository = context.getBean(ProductGrpMasterRepository.class);
-		if (dbUtil == null) dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+		if (productGrpMasterRepository == null || dbUtil == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (productGrpMasterRepository == null)
+				productGrpMasterRepository = context.getBean(ProductGrpMasterRepository.class);
+			if (dbUtil == null)
+				dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+		}
 
 		/**
 		 * 見積番号
@@ -63,13 +67,13 @@ public class EstimationListener {
 		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findOne(entity.getProductGrpMasterId());
 		if (null == entity.getRjManageNumber() && null != productGrpMaster) {
 			ProductGrpIdentifierMaster productGrpIdentifierMaster = productGrpMaster.getProductGrpIdentifierMaster();
-			if (null == productGrpIdentifierMaster) return;
+			if (null == productGrpIdentifierMaster)
+				return;
 			String productGrpIdentifier = productGrpIdentifierMaster.getProductGrpIdentifier();
 			String sequenceName = productGrpIdentifierMaster.getSequenceName();
 			Map<String, Object> param = new HashMap<>();
 			param.put("sequenceName", sequenceName);
-			long sequence = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class, param)
-					.getGeneratedNumber();
+			long sequence = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class, param).getGeneratedNumber();
 			entity.setRjManageNumber(productGrpIdentifier + String.format("%07d", sequence));
 		}
 	}

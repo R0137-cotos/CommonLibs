@@ -57,10 +57,15 @@ public class DealerEstimationListener {
 	@Transactional
 	public void appendsEstimationDealerFields(DealerEstimation dealerEstimation) {
 		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (findCommonMaster == null) findCommonMaster = new FindCommonMaster();
+		if (vKjbMasterRepository == null || checkUtil == null || findCommonMaster == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (vKjbMasterRepository == null)
+				vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (findCommonMaster == null)
+				findCommonMaster = new FindCommonMaster();
+		}
 
 		if (StringUtils.isNotBlank(dealerEstimation.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerEstimation.getMomKjbSystemId());
