@@ -19,6 +19,33 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util.xsd">
 
+	<!-- EntityManagerの設定 -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="false" />
+			</bean>
+		</property>
+		<property name="jpaPropertyMap">
+			<util:map>
+				<entry key="hibernate.hbm2ddl.auto" value="none" />
+				<entry key="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect" />
+				<entry key="hibernate.physical_naming_strategy"
+					value="org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy" />
+				<entry key="hibernate.implicit_naming_strategy"
+					value="org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy" />
+				<entry key="hibernate.connection.charSet" value="UTF-8" />
+				<entry key="hibernate.show_sql" value="${db.show_sql}" />
+				<entry key="hibernate.format_sql" value="${db.format_sql}" />
+				<entry key="hibernate.use_sql_comments" value="${db.use_sql_comments}" />
+				<entry key="hibernate.default_schema" value="${db.default_schema}" />
+			</util:map>
+    </property>
+		<property name="packagesToScan" value="jp.co.ricoh.cotos.commonlib.entity.*" />
+	</bean>
+
 	<!-- DB接続用の設定 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 		<property name="driverClassName" value="${db.driverClassName}" />

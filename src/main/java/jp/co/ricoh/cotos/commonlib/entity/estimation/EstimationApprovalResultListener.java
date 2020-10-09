@@ -51,10 +51,15 @@ public class EstimationApprovalResultListener {
 	@Transactional
 	public void appendsEmployeeFields(EstimationApprovalResult estimationApprovalResult) {
 		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		if (mvEmployeeMasterRepository == null || checkUtil == null || dummyUserMasterRepository == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvEmployeeMasterRepository == null)
+				mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (dummyUserMasterRepository == null)
+				dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		}
 
 		if (dummyUserMasterRepository.existsByUserId(estimationApprovalResult.getActualEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(estimationApprovalResult.getActualEmpId());
@@ -62,6 +67,7 @@ public class EstimationApprovalResultListener {
 			estimationApprovalResult.setActualOrgName(dummyUserMaster.getOrgName());
 			return;
 		}
+
 
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(estimationApprovalResult.getActualEmpId());
 

@@ -32,8 +32,11 @@ public class ItemEstimationListener {
 	@Transactional
 	public void appendsEstimationItemFields(ItemEstimation itemEstimation) {
 		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (itemMasterRepository == null) itemMasterRepository = context.getBean(ItemMasterRepository.class);
+		if (itemMasterRepository == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (itemMasterRepository == null)
+				itemMasterRepository = context.getBean(ItemMasterRepository.class);
+		}
 
 		ItemMaster itemMaster = itemMasterRepository.findByProductMasterIdAndRicohItemCode(itemEstimation.getProductMasterId(), itemEstimation.getRicohItemCode());
 		itemEstimation.setItemMasterId(itemMaster.getId());
