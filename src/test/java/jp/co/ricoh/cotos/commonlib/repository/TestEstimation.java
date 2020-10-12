@@ -29,6 +29,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
@@ -43,6 +44,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationPicSaEmpRepos
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
 
 /**
@@ -101,6 +103,9 @@ public class TestEstimation {
 
 	@Autowired
 	EstimationRepository estimationRepository;
+
+	@Autowired
+	PenaltyDetailEstimationRepository penaltyDetailEstimationRepository;
 
 	@Autowired
 	DBUtil dbutil;
@@ -333,6 +338,19 @@ public class TestEstimation {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void PenaltyDetailEstimationRepositoryのテスト() throws Exception {
+
+		PenaltyDetailEstimation found = penaltyDetailEstimationRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
 	}
 
 	@Test

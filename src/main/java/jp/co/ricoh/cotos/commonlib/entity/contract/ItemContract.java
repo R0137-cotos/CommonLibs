@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemDecomposeType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -180,4 +181,10 @@ public class ItemContract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 17, allowableValues = "range[0,255]")
 	private String makerItemCode;
+
+	/**
+	 * 分解後品種区分
+	 */
+	@ApiModelProperty(value = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")", position = 18)
+	private ItemDecomposeType itemDecomposeType;
 }

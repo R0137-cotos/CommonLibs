@@ -287,4 +287,11 @@ public class ContractDetail extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 22, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
+
+	/**
+	 * ランニング売上計上開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ランニング売上計上開始日", required = false, position = 23)
+	private Date runningAccountSalesFromDate;
 }

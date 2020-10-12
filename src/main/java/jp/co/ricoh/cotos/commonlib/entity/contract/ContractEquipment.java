@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -52,6 +53,48 @@ public class ContractEquipment extends EntityBase {
 
 		@JsonCreator
 		public static IsysoneProcStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum isysoneMaintereportProcStatus {
+		未処理("0"), CSV作成済み("1"), 連携済み("2");
+
+		private final String text;
+
+		private isysoneMaintereportProcStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static isysoneMaintereportProcStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum arcsPeriodSaleMainteProcStatus {
+		未作成("0"), 作成済み("1"), 作成不要("2"), 作成エラー("3");
+
+		private final String text;
+
+		private arcsPeriodSaleMainteProcStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static arcsPeriodSaleMainteProcStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -170,5 +213,38 @@ public class ContractEquipment extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "点検診断月(12ヶ月分)", required = false, position = 16, allowableValues = "range[0,255]")
 	private String inspectionMonthYearWorth;
+
+	/**
+	 * Isys-One保守レポート処理状態
+	 */
+	@ApiModelProperty(value = "Isys-One保守レポート処理状態", required = false, position = 17, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\")")
+	private IsysoneProcStatus isysoneMaintereportProcStatus;
+
+	/**
+	 * Isys-One保守レポート連携日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "Isys-One保守レポート連携日時", required = false, position = 18)
+	private Date isysoneMaintereportLinkageAt;
+
+	/**
+	 * ARCS期間売保守処理状態
+	 */
+	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 19, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),作成エラー(\"3\")")
+	private IsysoneProcStatus arcsPeriodSaleMainteProcStatus;
+
+	/**
+	 * ARCS期間売保守連携日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 20)
+	private Date arcsPeriodSaleMainteLinkageAt;
+
+	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 21)
+	@Lob
+	private String extendsParameter;
 
 }

@@ -42,6 +42,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinka
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentNoIsysoneRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractOperationLogRepository;
@@ -58,7 +59,12 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ProductContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressSsOrgRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingThingDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.VValidContractPeriodHistoryRepository;
 
 @RunWith(SpringRunner.class)
@@ -151,6 +157,24 @@ public class TestContract {
 
 	@Autowired
 	VValidContractPeriodHistoryRepository vValidContractPeriodHistoryRepository;
+
+	@Autowired
+	PenaltyDetailTransRepository penaltyDetailTransRepository;
+
+	@Autowired
+	ShippingAddressSsOrgRepository shippingAddressSsOrgRepository;
+
+	@Autowired
+	ShippingThingDetailRepository shippingThingDetailRepository;
+
+	@Autowired
+	ContractEquipmentNoIsysoneRepository contractEquipmentNoIsysoneRepository;
+
+	@Autowired
+	PenaltyDetailContractRepository penaltyDetailContractRepository;
+
+	@Autowired
+	ShippingAddressRepository shippingAddressRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -309,6 +333,36 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約添付ファイル連携先() {
 		全てのカラムがNullではないことを確認_共通(contractAttachedFileLinkageRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_違約金明細振替() {
+		全てのカラムがNullではないことを確認_共通(penaltyDetailTransRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_配送先SS組織() {
+		全てのカラムがNullではないことを確認_共通(shippingAddressSsOrgRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_発送物あり明細() {
+		全てのカラムがNullではないことを確認_共通(shippingThingDetailRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約機種_Isys_Oneへの連携なし() {
+		全てのカラムがNullではないことを確認_共通(contractEquipmentNoIsysoneRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_違約金明細_契約用() {
+		全てのカラムがNullではないことを確認_共通(penaltyDetailContractRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約機種_配送先() {
+		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 1L);
 	}
 
 	@Test

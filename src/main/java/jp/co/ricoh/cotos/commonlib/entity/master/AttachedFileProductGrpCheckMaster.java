@@ -68,4 +68,24 @@ public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ファイル種類", required = true, position = 6, allowableValues = "range[0,255]")
 	private String fileKind;
+
+	/**
+	 * 品種マスタID
+	 */
+	@ApiModelProperty(value = "品種マスタID", required = false, position = 7, allowableValues = "range[0,9999999999999999999]")
+	private Long itemMasterId;
+
+	/**
+	 * 手配業務タイプマスタID
+	 */
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 8, allowableValues = "range[0,9999999999999999999]")
+	private Long arrangementWorkTypeMasterId;
+
+	/**
+	 * 拡張子
+	 */
+	@Column(nullable = false)
+	@Size(max = 255)
+	@ApiModelProperty(value = "拡張子", required = false, position = 9, allowableValues = "range[0,255]")
+	private String extension;
 }

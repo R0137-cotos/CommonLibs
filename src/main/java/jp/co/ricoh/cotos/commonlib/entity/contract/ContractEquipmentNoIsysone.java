@@ -1,0 +1,101 @@
+package jp.co.ricoh.cotos.commonlib.entity.contract;
+
+import java.util.Arrays;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 契約機種(Isys-Oneへの連携なし)を表すEntity
+ */
+@Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table(name = "contract_equipment_no_isysone")
+public class ContractEquipmentNoIsysone extends EntityBase {
+
+	public enum MachineType {
+		ハードディスク("1"), 内蔵オプション("2"), 外付オプション("3"), 導入ソフトウェア("4");
+
+		private final String text;
+
+		private MachineType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MachineType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_equipment_no_isysone_seq")
+	@SequenceGenerator(name = "contract_equipment_no_isysone_seq", sequenceName = "contract_equipment_no_isysone_seq", allocationSize = 1)
+	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	private long id;
+
+	/**
+	 * 機器区分
+	 */
+	@ApiModelProperty(value = "機器区分", required = false, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "6", position = 2)
+	private MachineType machineType;
+
+	/**
+	 * 製品番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "製品番号", required = false, position = 3, allowableValues = "range[0,255]")
+	private String itemNo;
+
+	/**
+	 * 製品名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "製品名", required = false, position = 4, allowableValues = "range[0,255]")
+	private String itemName;
+
+	/**
+	 * 機番
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機番", required = false, position = 5, allowableValues = "range[0,255]")
+	private String equipmentNo;
+
+	/**
+	 * オプション名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "オプション名", required = false, position = 6, allowableValues = "range[0,255]")
+	private String optionName;
+
+	/**
+	 * 契約ID
+	 */
+	@Min(0)
+	@NotNull
+	@ApiModelProperty(value = "契約ID", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
+	private Long contractId;
+
+}

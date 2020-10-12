@@ -17,12 +17,16 @@ import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
+import jp.co.ricoh.cotos.commonlib.entity.common.FileImportErrorDetails;
+import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory.MailSendType;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.FileImportErrorDetailsRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.FileImportManagementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.MailSendHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository;
@@ -57,6 +61,18 @@ public class TestCommon {
 	@Autowired
 	EimDocumentInfoRepository eimDocumentInfoRepository;
 
+	/**
+	 * ファイル取込エラー詳細
+	 */
+	@Autowired
+	FileImportErrorDetailsRepository fileImportErrorDetailsRepository;
+
+	/**
+	 * ファイル取込管理
+	 */
+	@Autowired
+	FileImportManagementRepository fileImportManagementRepository;
+
 	@Autowired
 	TestTools testTool;
 
@@ -73,6 +89,9 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/mailSendHistory.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/estimation/estimation_all.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/eimDocumentInfo.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportErrorDetails.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportManagement.sql");
+
 	}
 
 	@AfterClass
@@ -143,6 +162,28 @@ public class TestCommon {
 		List<EimDocumentInfo> foundList = eimDocumentInfoRepository.findByKeiyakNoAndEimLinkedStatusAndOldDocumentFlg("3", EimLinkedStatus.連携済, false);
 		// データが取得できていることを確認
 		Assert.assertEquals(1, foundList.size());
+
+	}
+
+	@Test
+	public void FileImportErrorDetailsRepositoryのテスト() throws Exception {
+		FileImportErrorDetails found = fileImportErrorDetailsRepository.findOne(1L);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+	}
+
+	@Test
+	public void FileImportManagementRepositoryのテスト() throws Exception {
+		FileImportManagement found = fileImportManagementRepository.findOne(1L);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 
 	}
 }
