@@ -71,7 +71,7 @@ public class FileImportManagement extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "ファイル名", required = false, position = 3, allowableValues = "range[0,255]")
-	private String caseTitle;
+	private String fileName;
 
 	/**
 	 * 添付ファイルID
