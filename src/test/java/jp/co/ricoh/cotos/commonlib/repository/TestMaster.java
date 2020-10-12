@@ -2158,7 +2158,7 @@ public class TestMaster {
 	@Test
 	public void MenuDetailsManagementMasterのテスト() throws Exception {
 		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/MenuDetailsManagementMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailsManagementMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2174,7 +2174,7 @@ public class TestMaster {
 	@Test
 	public void MenuManagementMasterのテスト() throws Exception {
 		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/MenuManagementMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2190,7 +2190,7 @@ public class TestMaster {
 	@Test
 	public void DateCalcPatternMasterのテスト() throws Exception {
 		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/DateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2206,7 +2206,7 @@ public class TestMaster {
 	@Test
 	public void ItemDecomposeMasterのテスト() throws Exception {
 		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemDecomposeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemDecomposeMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
