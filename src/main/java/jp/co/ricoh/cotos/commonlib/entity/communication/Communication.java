@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.converter.ApprovalTargetTypeConverter;
 import jp.co.ricoh.cotos.commonlib.converter.ProcessCategoryConverter;
 import jp.co.ricoh.cotos.commonlib.converter.ServiceCategoryConverter;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -89,6 +90,7 @@ public class Communication extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
+	@Convert(converter = ApprovalTargetTypeConverter.class)
 	@ApiModelProperty(value = "承認対象種別<br />" //
 			+ "承認フロー⇒新規/情報変更/契約変更/キャンセル/解約/作業完了報告/契約更新<br />" //
 			+ "タスクフロー⇒非承認", required = true, allowableValues = "新規(\"1\"), 情報変更(\"2\"), 契約変更(\"3\"), キャンセル(\"4\"), 解約(\"5\"), 作業完了報告(\"6\"), 非承認(\"7\"), 売上指示(\"8\"), 売上計上(\"9\"), 承認済差戻(\"10\"), 契約更新(\"11\")", example = "1", position = 6) //
