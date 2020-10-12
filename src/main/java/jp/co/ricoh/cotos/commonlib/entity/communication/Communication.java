@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.communication;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.converter.ProcessCategoryConverter;
+import jp.co.ricoh.cotos.commonlib.converter.ServiceCategoryConverter;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalTargetType;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ProcessCategory;
@@ -48,6 +51,7 @@ public class Communication extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
+	@Convert(converter = ServiceCategoryConverter.class)
 	@ApiModelProperty(value = "サービスカテゴリ", required = true, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1", position = 2)
 	private ServiceCategory serviceCategory;
 
@@ -56,6 +60,7 @@ public class Communication extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
+	@Convert(converter = ProcessCategoryConverter.class)
 	@ApiModelProperty(value = "処理カテゴリー", required = true, allowableValues = "承認依頼(\"1\"), 承認依頼取消(\"2\"), 承認依頼差戻(\"3\"), 承認(\"4\"), 作業依頼(\"5\"), 作業完了(\"6\"), キャンセル手続き(\"7\"), キャンセル手続き中止(\"8\"), 解約手続き(\"9\"), 解約手続き中止(\"10\")", example = "1", position = 3)
 	private ProcessCategory processCategory;
 
