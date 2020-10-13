@@ -31,13 +31,13 @@ import lombok.EqualsAndHashCode;
 @Table(name = "date_calc_pattern_master")
 public class DateCalcPatternMaster extends EntityBaseMaster {
 
-	public enum DateCalType {
+	public enum DateCalcType {
 
 		月日加算("1");
 
 		private final String text;
 
-		private DateCalType(final String text) {
+		private DateCalcType(final String text) {
 			this.text = text;
 		}
 
@@ -48,7 +48,7 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static DateCalType fromString(String string) {
+		public static DateCalcType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -142,7 +142,7 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	@NotNull
 	@Column(nullable = false)
 	@ApiModelProperty(value = "日付計算区分", required = true, allowableValues = "月日加算(\"1\")", position = 6)
-	private DateCalType dateCalType;
+	private DateCalcType dateCalcType;
 
 	/**
 	 * 日付計算基準日区分

@@ -123,7 +123,7 @@ public class LicenseProcess extends EntityBase {
 	@Max(9)
 	@Min(0)
 	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 8, allowableValues = "range[0,9]")
-	private Integer mailArrivalCheckId;
+	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
