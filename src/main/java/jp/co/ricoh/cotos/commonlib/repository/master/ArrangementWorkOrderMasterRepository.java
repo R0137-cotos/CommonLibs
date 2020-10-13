@@ -14,6 +14,7 @@ public interface ArrangementWorkOrderMasterRepository extends CrudRepository<Arr
 			+ "where awo.product_master_id = :productMasterId "//
 			+ "and awo.contract_type = :contractType " //
 			+ "and awo.disengagement_flg = :disengagementFlg " //
-			+ "and awo.arrangement_wk_type_master_id = :arrangementWkTypeMasterId", nativeQuery = true)
-	public ArrangementWorkOrderMaster findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterId(@Param("productMasterId") long productMasterId, @Param("contractType") String contractType, @Param("disengagementFlg") int disengagementFlg, @Param("arrangementWkTypeMasterId") long arrangementWkTypeMasterId);
+			+ "and awo.arrangement_wk_type_master_id = :arrangementWkTypeMasterId " // 
+			+ "and awo.check_timing_type = :checkTimingType", nativeQuery = true)
+	public ArrangementWorkOrderMaster findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterIdAndCheckTimingType(@Param("productMasterId") long productMasterId, @Param("contractType") String contractType, @Param("disengagementFlg") int disengagementFlg, @Param("arrangementWkTypeMasterId") long arrangementWkTypeMasterId, @Param("checkTimingType") String checkTimingType);
 }
