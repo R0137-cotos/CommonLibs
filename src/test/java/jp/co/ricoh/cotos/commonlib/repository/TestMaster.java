@@ -32,6 +32,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMaster;
@@ -1989,7 +1990,7 @@ public class TestMaster {
 
 		// 追加したSelect文を使用したエンティティの取得
 		found = null;
-		found = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterId(2L, ContractType.情報変更.toString(), 1, 1L);
+		found = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterIdAndCheckTimingType(2L, ContractType.情報変更.toString(), 1, 1L, CheckTimingType.業務完了時.toString());
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
