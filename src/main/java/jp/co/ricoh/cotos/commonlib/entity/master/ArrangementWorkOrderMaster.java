@@ -113,6 +113,6 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	 * チェックタイミング区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "チェックタイミング区分", required = true, allowableValues = "新規(\"0\"), 契約変更(\"1\")", position = 7)
+	@ApiModelProperty(value = "チェックタイミング区分", required = true, allowableValues = "業務受付時(\"0\"), 業務完了時(\"1\")", position = 7)
 	private CheckTimingType checkTimingType;
 }
