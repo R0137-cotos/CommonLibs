@@ -19,6 +19,6 @@ public class CheckTimingTypeConverter implements AttributeConverter<CheckTimingT
 	public CheckTimingType convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return CheckTimingType.fromString(value); //IllegalArgumentExceptionはContractType.fromString側で投げている
+		return CheckTimingType.fromString(value);
 	}
 }
