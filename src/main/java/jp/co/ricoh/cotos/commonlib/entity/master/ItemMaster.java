@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -81,6 +82,72 @@ public class ItemMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static CostType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ContractSpanStartDateType {
+
+		契約日("1"), サービス開始日("2"), サービス開始翌月１日("3");
+
+		private final String text;
+
+		private ContractSpanStartDateType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ContractSpanStartDateType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum PenaltyStartDateType {
+
+		サービス開始日("1"), サービス開始翌月１日("2");
+
+		private final String text;
+
+		private PenaltyStartDateType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static PenaltyStartDateType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ItemDecomposeType {
+
+		通常("1"), 分解前("2"), 分解後("3");
+
+		private final String text;
+
+		private ItemDecomposeType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ItemDecomposeType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -303,4 +370,62 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "ベンダー略称", required = false, position = 31)
 	private String vendorShortName;
+
+	/**
+	 * 契約期間月数
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約期間月数", required = false, position = 32, allowableValues = "range[0,255]")
+	private String contractSpanMonth;
+
+	/**
+	 * 契約期間起算日区分
+	 */
+	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 33, allowableValues = "サービス開始日(\"1\"), サービス開始日翌日1日(\"2\")")
+	private ContractSpanStartDateType contractSpanStartDateType;
+
+	/**
+	 * 分解元品種マスタID
+	 */
+	@ApiModelProperty(value = "分解元品種マスタID", required = false, position = 34, allowableValues = "range[0,9999999999999999999]")
+	private Long originItemMasterId;
+
+	/**
+	 * 違約金有無フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 35, allowableValues = "range[0,9]")
+	private Integer penaltyFlg;
+
+	/**
+	 * 最低契約月数
+	 */
+	@Max(999)
+	@Min(0)
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 36, allowableValues = "range[0,999]")
+	private Integer minContractMonths;
+
+	/**
+	 * 違約金起算日区分
+	 */
+	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 37, allowableValues = "サービス開始日(\"1\"), サービス開始日翌日1日(\"2\")")
+	private PenaltyStartDateType penaltyStartDateType;
+
+	/**
+	 * 違約金品種マスタID
+	 */
+	@ApiModelProperty(value = "違約金品種マスタID", required = false, position = 38, allowableValues = "range[0,9999999999999999999]")
+	private Long penaltyItemMasterId;
+
+	/**
+	 * 分解後品種区分
+	 */
+	@ApiModelProperty(value = "分解後品種区分", required = false, position = 39, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
+	private ItemDecomposeType itemDecomposeType;
+
+	/**
+	 * ランニング計上開始日計算パターンID
+	 */
+	@ApiModelProperty(value = "ランニング計上開始日計算パターンID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
+	private Long runningFromCalcPatternId;
 }

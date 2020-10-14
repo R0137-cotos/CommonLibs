@@ -1,0 +1,111 @@
+package jp.co.ricoh.cotos.commonlib.entity.contract;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.master.ShippingThingMaster.ShippingType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 発送物あり明細を表すEntity
+ */
+@Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table(name = "shipping_thing_detail")
+public class ShippingThingDetail extends EntityBase {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipping_thing_detail_seq")
+	@SequenceGenerator(name = "shipping_thing_detail_seq", sequenceName = "shipping_thing_detail_seq", allocationSize = 1)
+	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	private long id;
+
+	/**
+	 * 物あり品種コード
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "物あり品種コード", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long thingItemCode;
+
+	/**
+	 * 発送機器名称
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "発送機器名称", required = false, position = 3, allowableValues = "range[0,255]")
+	private String shippingMachineName;
+
+	/**
+	 * 数量
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "数量", required = false, position = 4, allowableValues = "range[0,99999]")
+	private int defaultQuantity;
+
+	/**
+	 * 原価
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "原価", required = false, position = 5, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal price;
+
+	/**
+	 * 発送区分
+	 */
+	@ApiModelProperty(value = "発送区分", required = false, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")", position = 6)
+	private ShippingType shippingType;
+
+	/**
+	 * FFM内部振替除外フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "FFM内部振替除外フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	private Integer ffmInsideTransExclusionFlg;
+
+	/**
+	 * プロダクト確認集計表フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "プロダクト確認集計表フラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	private Integer productSpreadsheetFlg;
+
+	/**
+	 * FFM連携納期
+	 */
+	@ApiModelProperty(value = "FFM連携納期", required = false, position = 9)
+	@Temporal(TemporalType.DATE)
+	private Date ffmDeliveryDate;
+
+	/**
+	 * 契約明細ID
+	 */
+	@Min(0)
+	@NotNull
+	@ApiModelProperty(value = "契約明細ID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
+	private Long contractDetailId;
+
+}

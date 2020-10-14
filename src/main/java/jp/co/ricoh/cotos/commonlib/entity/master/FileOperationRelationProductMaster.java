@@ -1,0 +1,87 @@
+package jp.co.ricoh.cotos.commonlib.entity.master;
+
+import java.util.Arrays;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * ファイル操作関連商品マスタ
+ */
+@Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table(name = "file_operation_relation_product_master")
+public class FileOperationRelationProductMaster extends EntityBaseMaster {
+
+	public enum CategoryType {
+
+		ヤマト便管理("1"), ライセンス管理("2");
+
+		private final String text;
+
+		private CategoryType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CategoryType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+
+	/**
+	 * ファイル操作関連商品ID
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_operation_relation_product_master_seq")
+	@SequenceGenerator(name = "file_operation_relation_product_master_seq", sequenceName = "file_operation_relation_product_master_seq", allocationSize = 1)
+	@ApiModelProperty(value = "ファイル操作関連商品ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	private long id;
+
+	/**
+	 * メニュー管理ID
+	 */
+	@NotNull
+	@Column(nullable = false)
+	@Min(0)
+	@ApiModelProperty(value = "メニュー管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private Long menuManagementId;
+
+	/**
+	 * 関連商品名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "関連商品名", required = false, position = 3, allowableValues = "range[0,255]")
+	private String relationProductName;
+
+	/**
+	 * カテゴリ
+	 */
+	@ApiModelProperty(value = "カテゴリ", required = false, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\")", position = 4)
+	private CategoryType categoryType;
+
+}

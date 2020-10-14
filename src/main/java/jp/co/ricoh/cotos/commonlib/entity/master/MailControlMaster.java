@@ -81,6 +81,50 @@ public class MailControlMaster extends EntityBaseMaster {
 		}
 	}
 
+	public enum NotificatnDataDifferenceType {
+
+		日換算("1"), 月換算("2");
+
+		private final String text;
+
+		private NotificatnDataDifferenceType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static NotificatnDataDifferenceType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum BusinessDayType {
+
+		前営業日("1"), 後営業日("2");
+
+		private final String text;
+
+		private BusinessDayType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static BusinessDayType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_control_master_seq")
 	@SequenceGenerator(name = "mail_control_master_seq", sequenceName = "mail_control_master_seq", allocationSize = 1)
@@ -183,4 +227,29 @@ public class MailControlMaster extends EntityBaseMaster {
 	@OneToMany(mappedBy = "mailControlMaster")
 	@ApiModelProperty(value = "通知メール対象商材マスタ", required = false, position = 15)
 	private List<MailProductMaster> mailProductMasterList;
+
+	/**
+	 * 通知日差分区分
+	 */
+	@ApiModelProperty(value = "通知日差分区分", required = false, position = 16, allowableValues = "日換算(\"1\"), 月換算(\"2\")")
+	private NotificatnDataDifferenceType notificatnDataDifferenceType;
+
+	/**
+	 * 通知日計算日数
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "通知日計算日数", required = false, position = 17, allowableValues = "range[0,255]")
+	private String notificatnDataAddDay;
+
+	/**
+	 * 営業日フラグ
+	 */
+	@ApiModelProperty(value = "営業日フラグ", required = false, position = 18, allowableValues = "range[0,9]")
+	private Long businessDayFlg;
+
+	/**
+	 * 営業日計算区分
+	 */
+	@ApiModelProperty(value = "営業日計算区分", required = false, position = 19, allowableValues = "前営業日(\"1\"), 後営業日(\"2\")")
+	private BusinessDayType businessDayType;
 }
