@@ -304,7 +304,7 @@ public class EstimationSearchParameter {
 	 */
 	@ApiParam(value = "V-UP見積番号", required = false)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
-	private String VupEstimationNumber;
+	private String vupEstimationNumber;
 
 	/**
 	 * ソート項目
