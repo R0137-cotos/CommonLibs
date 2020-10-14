@@ -375,6 +375,13 @@ public class ArrangementSearchParameter {
 	private String serialNumber;
 
 	/**
+	 * V-UP見積番号
+	 */
+	@ApiParam(value = "V-UP見積番号", required = false)
+	@ApiModelProperty(value = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
+	private String VupEstimationNumber;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
