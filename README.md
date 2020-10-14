@@ -324,8 +324,10 @@
 |367|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加)|
 |368|使用量リポジトリにメソッド追加、MessagePropertiesに従量データアップロード締め切り用メッセージ追加|
 |369|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻|
+<<<<<<< HEAD
 |370|BusinessDayUtil BatchLightTemplate対応|
 |371|BatchLightTemplate対応|
 |372|商品グループマスタエンティティ 最長納期日数項目追加|
 |373|OR年額対応|
 |374|手配業務完了順マスタ チェックタイミング区分カラム追加|
+|375|検索パラメータにV-UP見積件名追加|
