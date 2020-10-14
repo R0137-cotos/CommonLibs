@@ -631,4 +631,20 @@ public class BusinessDayUtil {
 
 		return businessDayList;
 	}
+
+	/**
+	 * nonBusinessDayCalendarMasterRepository生成
+	 * @param nonBusinessDayCalendarMasterRepository 非営業日カレンダーマスタリポジトリ
+	 */
+	public void setNonBusinessDayCalendarMasterRepository(NonBusinessDayCalendarMasterRepository nonBusinessDayCalendarMasterRepository) {
+		this.nonBusinessDayCalendarMasterRepository = nonBusinessDayCalendarMasterRepository;
+	}
+
+	/**
+	 * businessCalendarRepository生成
+	 * @param businessCalendarRepository 業務カレンダーリポジトリ
+	 */
+	public void setBusinessCalendarRepository(BusinessCalendarRepository businessCalendarRepository) {
+		this.BusinessCalendarRepository = businessCalendarRepository;
+	}
 }
