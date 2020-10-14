@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -220,11 +219,10 @@ public class LicenseInfo extends EntityBase {
 	private Date csvOutputAt;
 
 	/**
-	 * Eメールアドレス
+	 * メールアドレス
 	 */
-	@JoinColumn(name = "e-mail_address")
 	@Size(max = 255)
-	@ApiModelProperty(value = "Eメールアドレス", required = false, position = 20, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メールアドレス", required = false, position = 20, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**

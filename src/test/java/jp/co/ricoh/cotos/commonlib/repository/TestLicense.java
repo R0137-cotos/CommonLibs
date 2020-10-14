@@ -51,13 +51,7 @@ public class TestLicense {
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
-		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/mailSendHistory.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/estimation/estimation_all.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/eimDocumentInfo.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/license.sql");
 	}
 
 	@AfterClass

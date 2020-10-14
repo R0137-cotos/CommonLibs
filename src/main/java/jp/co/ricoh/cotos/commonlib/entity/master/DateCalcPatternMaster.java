@@ -33,7 +33,7 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 
 	public enum DateCalcType {
 
-		月日加算("1");
+		月日加算("1"), その他("9");
 
 		private final String text;
 

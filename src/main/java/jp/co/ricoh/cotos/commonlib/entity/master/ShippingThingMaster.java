@@ -107,7 +107,7 @@ public class ShippingThingMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@ApiModelProperty(value = "発送区分", required = true, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")", example = "0", position = 7, readOnly = false)
-	private ShippingType shippingTyepe;
+	private ShippingType shippingType;
 
 	/**
 	 * 発注フラグ
