@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +11,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -31,28 +26,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "license_process_control_master")
 public class LicenseProcessControlMaster extends EntityBase {
-
-	public enum OperationDiv {
-
-		受付("1"), ボタン("2"), CSV出力("3"), CSV取込("4");
-
-		private final String text;
-
-		private OperationDiv(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static OperationDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * ライセンス工程制御マスタID

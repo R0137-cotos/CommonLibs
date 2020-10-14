@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.license;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,9 +17,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
@@ -36,50 +32,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "license_info")
 public class LicenseInfo extends EntityBase {
-
-	public enum InfoDiv {
-
-		新規("0"), 減数("1");
-
-		private final String text;
-
-		private InfoDiv(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static InfoDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum HardSoftDiv {
-
-		ハード("0"), ライセンス("1");
-
-		private final String text;
-
-		private HardSoftDiv(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static HardSoftDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * ライセンス情報ID

@@ -57,12 +57,12 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
-	public enum isysoneMaintereportProcStatus {
+	public enum IsysoneMaintereportProcStatus {
 		未処理("0"), CSV作成済み("1"), 連携済み("2");
 
 		private final String text;
 
-		private isysoneMaintereportProcStatus(final String text) {
+		private IsysoneMaintereportProcStatus(final String text) {
 			this.text = text;
 		}
 
@@ -73,17 +73,17 @@ public class ContractEquipment extends EntityBase {
 		}
 
 		@JsonCreator
-		public static isysoneMaintereportProcStatus fromString(final String string) {
+		public static IsysoneMaintereportProcStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
-	public enum arcsPeriodSaleMainteProcStatus {
+	public enum ArcsPeriodSaleMainteProcStatus {
 		未作成("0"), 作成済み("1"), 作成不要("2"), 作成エラー("3");
 
 		private final String text;
 
-		private arcsPeriodSaleMainteProcStatus(final String text) {
+		private ArcsPeriodSaleMainteProcStatus(final String text) {
 			this.text = text;
 		}
 
@@ -94,7 +94,7 @@ public class ContractEquipment extends EntityBase {
 		}
 
 		@JsonCreator
-		public static arcsPeriodSaleMainteProcStatus fromString(final String string) {
+		public static ArcsPeriodSaleMainteProcStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -218,7 +218,7 @@ public class ContractEquipment extends EntityBase {
 	 * Isys-One保守レポート処理状態
 	 */
 	@ApiModelProperty(value = "Isys-One保守レポート処理状態", required = false, position = 17, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\")")
-	private IsysoneProcStatus isysoneMaintereportProcStatus;
+	private IsysoneMaintereportProcStatus isysoneMaintereportProcStatus;
 
 	/**
 	 * Isys-One保守レポート連携日時
@@ -231,7 +231,7 @@ public class ContractEquipment extends EntityBase {
 	 * ARCS期間売保守処理状態
 	 */
 	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 19, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),作成エラー(\"3\")")
-	private IsysoneProcStatus arcsPeriodSaleMainteProcStatus;
+	private ArcsPeriodSaleMainteProcStatus arcsPeriodSaleMainteProcStatus;
 
 	/**
 	 * ARCS期間売保守連携日

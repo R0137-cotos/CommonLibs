@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,11 +19,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.master.ShippingThingMaster.ShippingType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -36,28 +33,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "shipping_thing_detail")
 public class ShippingThingDetail extends EntityBase {
-
-	public enum ShippingType {
-
-		NW機器経由("0"), 直送("1"), 自課所("2");
-
-		private final String text;
-
-		private ShippingType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ShippingType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipping_thing_detail_seq")
