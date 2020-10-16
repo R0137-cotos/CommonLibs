@@ -149,7 +149,7 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	private int displayOrder;
 
 	/**
-	 * 必須
+	 * チェック必須フラグ
 	 */
 	@Max(9)
 	@Min(0)
