@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.8.0 (15/10/2020)
+- [**closed**] #8469 軽量バッチテンプレート利用のため、BatchLightTemplate対応をcherr-pick [#1083](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1083)
+- [**closed**] #8469 BusinessDayUtil BatchLightTemplate対応 [#1085](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1085)
+- [**closed**] #8089 商品グループマスタに最長納期日数を追加 [#1079](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1079)
+
+---
+
 ## v3.7.1 (05/10/2020)
 - [**closed**] BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻 [#1088](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1088)
 
