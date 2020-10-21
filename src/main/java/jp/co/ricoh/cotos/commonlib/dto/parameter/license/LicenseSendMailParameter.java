@@ -11,13 +11,6 @@ public class LicenseSendMailParameter {
 	 * メール区分
 	 */
 	@ApiParam(value = "メール区分", required = true)
-	@ApiModelProperty(value = "メール区分", required = true, position = 1)
+	@ApiModelProperty(value = "メール区分", required = true, allowableValues = "事前完了メール(\"1\"), Welcameメール(\"2\")", position = 1)
 	private int mailDiv;
-
-	/**
-	 * メール再送信区分
-	 */
-	@ApiParam(value = "メール再送信区分", required = true)
-	@ApiModelProperty(value = "メール再送信区分", required = true, position = 2)
-	private int mailResendDiv;
 }
