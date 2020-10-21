@@ -552,7 +552,7 @@ public class Estimation extends EntityBase {
 	 * V-UP見積番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 62, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "V-UP見積番号(作成時不要)", required = false, position = 62, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	@PreUpdate
