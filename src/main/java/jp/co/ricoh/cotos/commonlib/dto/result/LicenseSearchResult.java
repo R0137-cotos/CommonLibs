@@ -22,7 +22,7 @@ public class LicenseSearchResult {
 	 */
 	@Id
 	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 1)
-	private long licenseId;
+	private long licenseInfoId;
 
 	/**
 	 * 契約ID
