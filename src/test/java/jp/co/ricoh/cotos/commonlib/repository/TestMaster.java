@@ -624,22 +624,11 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/estimationChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
-
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 
 		// エンティティの取得
 		String checkMatterCode = "TEST_1";
@@ -951,15 +940,10 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
 		ProductMaster found = productMasterRepository.findOne(id);
-		System.out.println("★");
-		System.out.println(found.getEstimationChecklistCompMasterList().size());
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
@@ -1405,8 +1389,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-			if (found.getProductMaster() == null)
-				Assert.assertTrue(false);
+		if (found.getProductMaster() == null)
+			Assert.assertTrue(false);
 	}
 
 	@Test
@@ -1971,7 +1955,8 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
+				.collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
