@@ -944,6 +944,7 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		ProductMaster found = productMasterRepository.findOne(id);
+		
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
