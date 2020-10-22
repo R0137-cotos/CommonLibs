@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -1357,8 +1358,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
+			if (found.getProductMaster() == null)
+				Assert.assertTrue(false);
 	}
 
 	@Test
@@ -1532,6 +1533,32 @@ public class TestMaster {
 		found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCdAndRingsTodokesakiCd("702", "10027811", "002");
 		// Entity が null であることを確認
 		Assert.assertNull(found);
+	}
+
+	@Test
+	public void MvTJmcj005Master_販社コードと得意先コードで取得するテスト() throws Exception {
+
+		// エンティティの取得
+		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCd("702", "10027811");
+
+		// Entity が 空 ではないことを確認
+		Assert.assertFalse(CollectionUtils.isEmpty(found));
+
+		found.stream().forEach(e -> {
+			// 判定に使用するカラムを確認
+			Assert.assertEquals("支社コードが一致すること", "702", e.getHanshCd());
+			Assert.assertEquals("RINGS得意先コードが一致すること", "10027811", e.getRingsTkiskCd());
+		});
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCd("702", "10027812");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCd("701", "10027811");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
 	}
 
 	@Test
@@ -1923,8 +1950,7 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
-				.collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
