@@ -589,4 +589,11 @@ public class ContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 76, allowableValues = "range[0,255]")
 	private String penaltyFfmOrderContactNo;
+
+	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 77, allowableValues = "range[0,1333]")
+	private String toVendorComment;
 }

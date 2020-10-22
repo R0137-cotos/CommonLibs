@@ -808,4 +808,11 @@ public class Contract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 86, allowableValues = "range[0,255]")
 	private String penaltyFfmOrderContactNo;
+
+	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 87, allowableValues = "range[0,1333]")
+	private String toVendorComment;
 }
