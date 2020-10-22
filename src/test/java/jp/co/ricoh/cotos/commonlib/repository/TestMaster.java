@@ -1950,7 +1950,8 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
+				.collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
