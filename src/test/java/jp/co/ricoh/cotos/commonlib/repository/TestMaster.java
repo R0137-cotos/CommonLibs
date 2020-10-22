@@ -1358,8 +1358,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-			if (found.getProductMaster() == null)
-				Assert.assertTrue(false);
+		if (found.getProductMaster() == null)
+			Assert.assertTrue(false);
 	}
 
 	@Test
