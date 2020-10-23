@@ -164,13 +164,6 @@ public class TestCasLicenseDto {
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
-		//		ret.setSubscriptionId("subscriptionId");
-		//		ret.setServicePlanId("servicePlanId");
-		//		ret.setLicenseStatus(CasLicenseStatus.未確定);
-		//		ret.setLicenseTermStart(new Date());
-		//		ret.setLicenseTermEnd(new Date());
-		//		ret.setQuantity(1);
-
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setSubscriptionId(STR_256);
