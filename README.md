@@ -327,3 +327,4 @@
 |370|BusinessDayUtil BatchLightTemplate対応|
 |371|BatchLightTemplate対応|
 |372|商品グループマスタエンティティ 最長納期日数項目追加|
+|373|ライセンスドメインCAS用DTO作成|
