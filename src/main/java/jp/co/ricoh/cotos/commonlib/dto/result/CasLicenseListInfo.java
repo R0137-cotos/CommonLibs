@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,36 +22,31 @@ public class CasLicenseListInfo {
 	/**
 	 * MVBアカウント
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 2, allowableValues = "range[0,25]")
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 2, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * 担当者氏名
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "担当者氏名", required = false, position = 3, allowableValues = "range[0,25]")
+	@ApiModelProperty(value = "担当者氏名", required = false, position = 3, allowableValues = "range[0,255]")
 	private String picName;
 
 	/**
 	 * 担当者メールアドレス
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 4, allowableValues = "range[0,25]")
+	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 4, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
 	 * TrendMicroアカウント企業名
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "企業名", required = false, position = 5, allowableValues = "range[0,25]")
+	@ApiModelProperty(value = "企業名", required = false, position = 5, allowableValues = "range[0,255]")
 	private String tmAccountCompanyName;
 
 	/**
 	 * 都道府県
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "都道府県", required = false, position = 6, allowableValues = "range[0,25]")
+	@ApiModelProperty(value = "都道府県", required = false, position = 6, allowableValues = "range[0,255]")
 	private String prefectures;
 
 }

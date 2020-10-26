@@ -3,9 +3,6 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -21,43 +18,42 @@ public class CasLicenseSearchParameter {
 	/**
 	 * MVBアカウント
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 1, allowableValues = "range[0,25]")
+	@ApiParam(value = "MVBアカウント", required = false)
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 1, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * 担当者メールアドレス
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 2, allowableValues = "range[0,25]")
+	@ApiParam(value = "担当者メールアドレス", required = false)
+	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 2, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
 	 * MoM非連携_担当者電話番号
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "MoM非連携_担当者電話番号", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiParam(value = "MoM非連携_担当者電話番号:前方一致", required = false)
+	@ApiModelProperty(value = "MoM非連携_担当者電話番号:前方一致", required = false, position = 3, allowableValues = "range[0,255]")
 	private String picPhoneNumber;
 
 	/**
 	 * 企業名（カナ）
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "企業名（カナ）)", required = false, position = 4, allowableValues = "range[0,255]")
+	@ApiParam(value = "企業名（カナ）:前方一致", required = false)
+	@ApiModelProperty(value = "企業名（カナ）:前方一致", required = false, position = 4, allowableValues = "range[0,255]")
 	private String companyNameKana;
 
 	/**
 	 * 企業名
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "企業名", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiParam(value = "企業名:前方一致", required = false)
+	@ApiModelProperty(value = "企業名:前方一致", required = false, position = 5, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * MoM企事部ID
 	 */
-	@Column(nullable = false)
-	@Size(max = 255)
+	@ApiParam(value = "MoM企事部ID", required = false)
 	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 6, allowableValues = "range[0,255]")
 	private String momCustId;
 
@@ -78,8 +74,8 @@ public class CasLicenseSearchParameter {
 	/**
 	 * MoM企業ID
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "MoM企業ID", required = false, position = 9, allowableValues = "range[0,25]")
+	@ApiParam(value = "担当者メールアドレス", required = false)
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 9, allowableValues = "range[0,255]")
 	private String momCompanyId;
 
 	/**
