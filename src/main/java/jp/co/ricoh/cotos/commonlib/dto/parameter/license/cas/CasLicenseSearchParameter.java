@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -74,8 +76,9 @@ public class CasLicenseSearchParameter {
 	/**
 	 * MoM企業ID
 	 */
-	@ApiParam(value = "担当者メールアドレス", required = false)
-	@ApiModelProperty(value = "MoM企業ID", required = false, position = 9, allowableValues = "range[0,255]")
+	@NotNull
+	@ApiParam(value = "MoM企業ID", required = true)
+	@ApiModelProperty(value = "MoM企業ID", required = true, position = 9, allowableValues = "range[0,255]")
 	private String momCompanyId;
 
 	/**
