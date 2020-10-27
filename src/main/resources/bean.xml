@@ -42,8 +42,13 @@
 				<entry key="hibernate.use_sql_comments" value="${db.use_sql_comments}" />
 				<entry key="hibernate.default_schema" value="${db.default_schema}" />
 			</util:map>
-    </property>
-		<property name="packagesToScan" value="jp.co.ricoh.cotos.commonlib.entity.*" />
+    	</property>
+		<property name="packagesToScan">
+			<array>
+				<value>jp.co.ricoh.cotos.commonlib.entity.*</value>
+				<value>jp.co.ricoh.cotos.commonlib.converter.*</value>
+			</array>
+		</property>
 	</bean>
 
 	<!-- DB接続用の設定 -->

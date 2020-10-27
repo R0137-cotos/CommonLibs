@@ -1,11 +1,10 @@
 package jp.co.ricoh.cotos.commonlib.converter;
 
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 
-@Converter(autoApply = true)
+//@Converter(autoApply = true)
 public class DepartmentDivConverter implements AttributeConverter<DepartmentDiv, String> {
 
 	@Override

@@ -115,9 +115,13 @@ public class FindCommonMaster {
 	 */
 	public List<CommonMasterResult> findMomCommonMaster(MomCommonMasterSearchParameter parameter) {
 		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvTjmmb010UtlItemRepository == null) mvTjmmb010UtlItemRepository = context.getBean(MvTjmmb010UtlItemRepository.class);
-		if (mvTjmmb020UtlCdRepository == null) mvTjmmb020UtlCdRepository = context.getBean(MvTjmmb020UtlCdRepository.class);
+		if (mvTjmmb010UtlItemRepository == null || mvTjmmb020UtlCdRepository == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvTjmmb010UtlItemRepository == null)
+				mvTjmmb010UtlItemRepository = context.getBean(MvTjmmb010UtlItemRepository.class);
+			if (mvTjmmb020UtlCdRepository == null)
+				mvTjmmb020UtlCdRepository = context.getBean(MvTjmmb020UtlCdRepository.class);
+		}
 
 		List<CommonMasterResult> list = new ArrayList<>();
 

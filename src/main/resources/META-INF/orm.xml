@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
 
-	<entity class="jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster">
-		<convert converter="jp.co.ricoh.cotos.commonlib.converter.DepartmentDivConverter" attribute-name="prflKjbSetKbn"/>
-	</entity>
+	<converter class="jp.co.ricoh.cotos.commonlib.converter.DepartmentDivConverter" auto-apply="true"/>
+	<!-- <converter class="jp.co.ricoh.cotos.commonlib.converter.estimation.LifecycleStatusConverter" auto-apply="true"/> -->
+
 </entity-mappings>

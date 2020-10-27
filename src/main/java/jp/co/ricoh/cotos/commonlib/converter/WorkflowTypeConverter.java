@@ -1,11 +1,10 @@
 package jp.co.ricoh.cotos.commonlib.converter;
 
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.WorkflowType;
 
-@Converter(autoApply = true)
+//@Converter
 public class WorkflowTypeConverter implements AttributeConverter<WorkflowType, String> {
 	@Override
 	public String convertToDatabaseColumn(WorkflowType workflowType) {
