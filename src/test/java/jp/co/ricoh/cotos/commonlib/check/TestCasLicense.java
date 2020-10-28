@@ -1,8 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.check;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,28 +15,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.CasLicenseBasicInfoDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.CasLicenseDetailInfoDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.CasLicenseManagementInfoDto;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.CasLicenseStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseBasicInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseDetailInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseManagementInfo;
+import jp.co.ricoh.cotos.commonlib.repository.lisence.cas.CasLicenseBasicInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.lisence.cas.CasLicenseDetailInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.lisence.cas.CasLicenseManagementInfoRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 
 /**
- * TestArrangementDtoのテストクラス
- *
- * @author kentaro.kakuhana
- *
+ * パラメータチェック（ライセンスドメイン:CAS）のテストクラス
+
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class TestCasLicenseDto {
+public class TestCasLicense {
 
+	private static final String STR_19 = "1234567890123456789";
+	private static final String STR_101 = "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901";
+	private static final String STR_151 = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901";
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
+	private static final String STR_301 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+	private static final String STR_754 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567891234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234";
 	private static final int INT_MINUS_1 = -1;
 	private static final int INT_100 = 100;
 	private static final int INT_100000 = 100000;
@@ -50,11 +49,29 @@ public class TestCasLicenseDto {
 	HeadersProperties headersProperties;
 
 	@Autowired
+	CasLicenseBasicInfoRepository casLicenseBasicInfoRepository;
+
+	@Autowired
+	CasLicenseManagementInfoRepository casLicenseManagementInfoRepository;
+
+	@Autowired
+	CasLicenseDetailInfoRepository casLicenseDetailInfoRepository;
+
+	@Autowired
 	TestTools testTool;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("repository/license/cas/casLicense.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		//		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 	}
 
 	@Autowired
@@ -72,69 +89,66 @@ public class TestCasLicenseDto {
 	}
 
 	@Test
-	public void CasLicenseBasicInfoDtoのテスト() throws Exception {
+	public void CasLicenseBasicInfoRepositoryのテスト() throws Exception {
 
-		CasLicenseBasicInfoDto dto = CasLicenseBasicInfoDto_full();
-		CasLicenseBasicInfoDto testTarget = new CasLicenseBasicInfoDto();
+		CasLicenseBasicInfo entity = casLicenseBasicInfoRepository.findOne(9999L);
+		CasLicenseBasicInfo testTarget = new CasLicenseBasicInfo();
 
 		// 正常系
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@Size(max) ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setCustomerId(STR_256);
 		testTarget.setTrendUserId(STR_256);
-		testTarget.setMvbAccount(STR_256);
+		testTarget.setMvbAccount(STR_19);
 		testTarget.setMomCompanyId(STR_256);
-		testTarget.setPicNameSei(STR_256);
-		testTarget.setPicNameMei(STR_256);
-		testTarget.setPicMailAddress(STR_256);
-		testTarget.setCompanyName(STR_256);
-		testTarget.setPrefectures(STR_256);
-		testTarget.setMunicipality(STR_256);
-		testTarget.setInitialPassword(STR_256);
+		testTarget.setPicNameSei(STR_301);
+		testTarget.setPicNameMei(STR_301);
+		testTarget.setPicMailAddress(STR_101);
+		testTarget.setCompanyName(STR_754);
+		testTarget.setPrefectures(STR_151);
+		testTarget.setMunicipality(STR_151);
+		testTarget.setInitialPassword(STR_151);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 11);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "カスタマーIDは最大文字数（255）を超えています。"));
 
 		// 異常系（@Valid：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.getCasLicenseManagementInfoList().get(0).setRjManageNumber(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RJ管理番号は最大文字数（255）を超えています。"));
 
-		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(CasLicenseBasicInfo.class, CasLicenseBasicInfoDto.class);
 	}
 
 	@Test
-	public void CasLicenseManagementInfoDtoのテスト() throws Exception {
+	public void CasLicenseManagementInfoのテスト() throws Exception {
 
-		CasLicenseManagementInfoDto dto = casLicenseManagementInfoDto_full();
-		CasLicenseManagementInfoDto testTarget = new CasLicenseManagementInfoDto();
+		CasLicenseManagementInfo entity = casLicenseManagementInfoRepository.findOne(9999L);
+		CasLicenseManagementInfo testTarget = new CasLicenseManagementInfo();
 
 		// 正常系
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@Size(max) ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setRjManageNumber(STR_256);
 		testTarget.setContractNumber(STR_256);
-		testTarget.setMvbAccount(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RJ管理番号は最大文字数（255）を超えています。"));
 
 		// 異常系（@Max ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setContractBranchNumber(INT_100);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
@@ -142,7 +156,7 @@ public class TestCasLicenseDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "文書番号枝番は最大値（99）を超えています。"));
 
 		// 異常系（@Min ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setContractId(INT_MINUS_1);
 		testTarget.setContractBranchNumber(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -150,33 +164,30 @@ public class TestCasLicenseDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最小値（0）を下回っています。"));
 
-		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(CasLicenseManagementInfo.class, CasLicenseManagementInfoDto.class, "mvbAccount");
 	}
 
 	@Test
-	public void CasLicenseDetailInfoDtoのテスト() throws Exception {
+	public void CasLicenseDetailInfoのテスト() throws Exception {
 
-		CasLicenseDetailInfoDto dto = casLicenseDetailInfoDto_full();
-		CasLicenseDetailInfoDto testTarget = new CasLicenseDetailInfoDto();
+		CasLicenseDetailInfo entity = casLicenseDetailInfoRepository.findOne(9999L);
+		CasLicenseDetailInfo testTarget = new CasLicenseDetailInfo();
 
 		// 正常系
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
 		// 異常系（@Size(max) ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setSubscriptionId(STR_256);
 		testTarget.setServicePlanId(STR_256);
-		testTarget.setMvbAccount(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "サブスクリプションIDは最大文字数（255）を超えています。"));
 
 		// 異常系（@Max ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setQuantity(INT_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
@@ -184,66 +195,13 @@ public class TestCasLicenseDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
 
 		// 異常系（@Min ：）
-		BeanUtils.copyProperties(dto, testTarget);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setQuantity(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
-		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(CasLicenseDetailInfo.class, CasLicenseDetailInfoDto.class, "mvbAccount");
-	}
-
-	private CasLicenseBasicInfoDto CasLicenseBasicInfoDto_full() {
-
-		CasLicenseBasicInfoDto ret = new CasLicenseBasicInfoDto();
-
-		ret.setCustomerId("customerId");
-		ret.setTrendUserId("trendUserId");
-		ret.setMvbAccount("mvbAccount");
-		ret.setLicenseStatus(CasLicenseStatus.未確定);
-		ret.setMomCompanyId("momCompanyId");
-		ret.setPicNameSei("picNameSei");
-		ret.setPicNameMei("picNameMei");
-		ret.setPicMailAddress("picMailAddress");
-		ret.setCompanyName("companyName");
-		ret.setPrefectures("prefectures");
-		ret.setMunicipality("municipality");
-		ret.setInitialPassword("initialPassword");
-		ret.setCasLicenseManagementInfoList(new ArrayList<>());
-		ret.getCasLicenseManagementInfoList().add(this.casLicenseManagementInfoDto_full());
-
-		return ret;
-	}
-
-	private CasLicenseManagementInfoDto casLicenseManagementInfoDto_full() {
-
-		CasLicenseManagementInfoDto ret = new CasLicenseManagementInfoDto();
-
-		ret.setContractId(1L);
-		ret.setRjManageNumber("rjManageNumber");
-		ret.setContractNumber("contractNumber");
-		ret.setContractBranchNumber(1);
-		ret.setLastContractSyncDate(new Date());
-		ret.setMvbAccount("mvbAccount");
-
-		return ret;
-	}
-
-	private CasLicenseDetailInfoDto casLicenseDetailInfoDto_full() {
-
-		CasLicenseDetailInfoDto ret = new CasLicenseDetailInfoDto();
-
-		ret.setSubscriptionId("subscriptionId");
-		ret.setServicePlanId("servicePlanId");
-		ret.setLicenseStatus(CasLicenseStatus.未確定);
-		ret.setLicenseTermStart(new Date());
-		ret.setLicenseTermEnd(new Date());
-		ret.setQuantity(1);
-		ret.setMvbAccount("mvbAccount");
-
-		return ret;
 	}
 
 }
