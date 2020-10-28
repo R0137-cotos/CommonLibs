@@ -173,6 +173,9 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseBasicInfo;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseDetailInfo;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseManagementInfo;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
@@ -1033,6 +1036,21 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseDetailInfoDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseDetailInfoDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseBasicInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseBasicInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseManagementInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseManagementInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseDetailInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseDetailInfo entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }
