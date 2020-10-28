@@ -820,7 +820,6 @@ public class Contract extends EntityBase {
 	/**
 	 * MVBアカウント登録区分
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 86, allowableValues = "range[0,255]")
 	private MvbAccountEntryDiv mvbAccountEntryDiv;
 }
