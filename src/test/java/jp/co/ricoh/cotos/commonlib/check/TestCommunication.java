@@ -15,10 +15,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailDestination;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.CommunicationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
 import jp.co.ricoh.cotos.commonlib.entity.communication.ContactTo;
+import jp.co.ricoh.cotos.commonlib.repository.communication.BounceMailDestinationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.communication.BounceMailRecordRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.CommunicationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.CommunicationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.ContactRepository;
@@ -41,6 +45,7 @@ public class TestCommunication {
 	private static final String STR_1001 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 	private static final int INT_MINUS_1 = -1;
 	private static final int INT_100 = 100;
+	private static final long LONG_MINUS_1 = -1L;
 
 	static ConfigurableApplicationContext context;
 
@@ -58,6 +63,12 @@ public class TestCommunication {
 
 	@Autowired
 	ContactToRepository contactToRepository;
+
+	@Autowired
+	BounceMailRecordRepository bounceMailRecordRepository;
+
+	@Autowired
+	BounceMailDestinationRepository bounceMailDestinationRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -294,6 +305,72 @@ public class TestCommunication {
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "宛先MoM社員IDは最大文字数（255）を超えています。"));
+
+	}
+
+	@Test
+	public void BounceMailRecordのテスト() throws Exception {
+		BounceMailRecord entity = bounceMailRecordRepository.findOne(1L);
+		BounceMailRecord testTarget = new BounceMailRecord();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：docNumber contractNumber nXContractId nXMailer nXNguidetargettype nXJizenflg nErrorFlg）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setDocNumber(STR_256);
+		testTarget.setContractNumber(STR_256);
+		testTarget.setNXContractId(STR_256);
+		testTarget.setNXMailer(STR_256);
+		testTarget.setNXNguidetargettype(STR_256);
+		testTarget.setNXJizenflg(STR_256);
+		testTarget.setNErrorFlg(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 7);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "N_X_JIZENFLGは最大文字数（255）を超えています。"));
+
+		// 異常系（@Min ：contractId contractBranchNumber mailTemplateMasterId nXNpserviceno nXNservicelineno nXNdomainlineno）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setContractId(LONG_MINUS_1);
+		testTarget.setContractBranchNumber(INT_MINUS_1);
+		testTarget.setMailTemplateMasterId(LONG_MINUS_1);
+		testTarget.setNXNpserviceno(LONG_MINUS_1);
+		testTarget.setNXNservicelineno(LONG_MINUS_1);
+		testTarget.setNXNdomainlineno(LONG_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最小値（0）を下回っています。"));
+
+		// 異常系（@Valid ：バウンスメール宛先）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.getBounceMailDestinationList().get(0).setMailAddress(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メールアドレスは最大文字数（255）を超えています。"));
+	}
+
+	@Test
+	public void BounceMailDestinationのテスト() throws Exception {
+		BounceMailDestination entity = bounceMailDestinationRepository.findOne(1L);
+		BounceMailDestination testTarget = new BounceMailDestination();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：mailAddress）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMailAddress(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メールアドレスは最大文字数（255）を超えています。"));
 
 	}
 
