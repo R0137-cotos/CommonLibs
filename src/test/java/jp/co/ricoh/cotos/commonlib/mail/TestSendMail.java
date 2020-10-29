@@ -1,12 +1,15 @@
 package jp.co.ricoh.cotos.commonlib.mail;
 
 import java.io.File;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
 import org.junit.AfterClass;
@@ -17,11 +20,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.sun.mail.smtp.SMTPMessage;
+
 import jp.co.ricoh.cotos.commonlib.DBConfig;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.BounceMailHeaderDto;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
+import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
 import jp.co.ricoh.cotos.commonlib.logic.mail.CommonSendMail;
 
 @RunWith(SpringRunner.class)
@@ -30,6 +39,9 @@ public class TestSendMail {
 
 	@Autowired
 	CommonSendMail commonSendMail;
+
+	@Autowired
+	JavaMailSender javaMailSender;
 
 	static ConfigurableApplicationContext context;
 
@@ -56,8 +68,9 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), null, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), null, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -72,8 +85,9 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -88,8 +102,9 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(2L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+			commonSendMail.findMailTemplateMasterAndSendMail(2L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -105,10 +120,11 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		String path = new File(".").getAbsoluteFile().getParent();
 		String uploadFile = path + "/src/test/resources/dummyFile/10130102146_201712.zip";
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(3L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFile);
+			commonSendMail.findMailTemplateMasterAndSendMail(3L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFile, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -125,11 +141,12 @@ public class TestSendMail {
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
 		List<String> uploadFileList = new ArrayList<>();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		String path = new File(".").getAbsoluteFile().getParent();
 		uploadFileList.add(path + "/src/test/resources/dummyFile/請求書_201909.pdf");
 		uploadFileList.add(path + "/src/test/resources/dummyFile/電力使用料金明細書_201909.xlsx");
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMailAndAttachedFiles(3L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList);
+			commonSendMail.findMailTemplateMasterAndSendMailAndAttachedFiles(3L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -144,8 +161,9 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成Null値あり();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成Null値あり();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 0L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 0L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -160,8 +178,9 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(10L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+			commonSendMail.findMailTemplateMasterAndSendMail(10L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -176,8 +195,9 @@ public class TestSendMail {
 		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
 		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成_アポストロフィ();
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成_アポストロフィ();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null);
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
@@ -188,10 +208,40 @@ public class TestSendMail {
 		uploadFileList.add(path + "/src/test/resources/dummyFile/請求書_201909.pdf");
 		uploadFileList.add(path + "/src/test/resources/dummyFile/電力使用料金明細書_201909.xlsx");
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMailAndAttachedFiles(1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList);
+			commonSendMail.findMailTemplateMasterAndSendMailAndAttachedFiles(1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
+	}
+
+	@Test
+	public void 独自ヘッダー付与テスト() throws Exception {
+		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
+		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
+
+		String[] toEmail = { "to" };
+		attachedHelper.setTo(toEmail);
+		attachedHelper.setFrom("from");
+		attachedHelper.setSubject("subject");
+		attachedHelper.setText("text");
+
+		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
+		//setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
+
+		MailTemplateMaster mailTemplateMaster = new MailTemplateMaster();
+		mailTemplateMaster.setId(1L);
+
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+
+		Method method = CommonSendMail.class.getDeclaredMethod("setOriginalHeader", SMTPMessage.class, MailTemplateMaster.class, BounceMailHeaderDto.class);
+		method.setAccessible(true);
+
+		SMTPMessage actual = (SMTPMessage) method.invoke(commonSendMail, SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
+
+		Assert.assertEquals("契約IDが正しく設定されていること", "100", actual.getHeader("ContractId")[0]);
+		Assert.assertEquals("文書番号が正しく設定されていること", "CC2020102800001", actual.getHeader("DocNumber")[0]);
+		Assert.assertEquals("契約番号が正しく設定されていること", "CC2020102800001", actual.getHeader("ContractNumber")[0]);
+		Assert.assertEquals("契約番号枝番が正しく設定されていること", "1", actual.getHeader("ContractBranchNumber")[0]);
 	}
 
 	private void テストデータ作成() {
@@ -237,5 +287,16 @@ public class TestSendMail {
 
 	private List<String> メール本文置換リスト作成_アポストロフィ() {
 		return IntStream.rangeClosed(1, 11).mapToObj(i -> "test_text's" + i).collect(Collectors.toList());
+	}
+
+	private BounceMailHeaderDto バウンスメールヘッダーDTO作成() {
+
+		BounceMailHeaderDto bounceMailHeaderDto = new BounceMailHeaderDto();
+		bounceMailHeaderDto.setContractId(100L);
+		bounceMailHeaderDto.setDocNumber("CC2020102800001");
+		bounceMailHeaderDto.setContractNumber("CC2020102800001");
+		bounceMailHeaderDto.setContractBranchNumber(1);
+
+		return bounceMailHeaderDto;
 	}
 }
