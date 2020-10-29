@@ -138,6 +138,7 @@ public class TestContractDto {
 	private static final int INT_100000 = 100000;
 	private static final BigDecimal DECIMAL_MINUS_001 = new BigDecimal("-0.01");
 	private static final BigDecimal DECIMAL_0001 = new BigDecimal("0.001");
+	private static final String STR_19 = "01234567890123456789";
 
 	static ConfigurableApplicationContext context;
 
@@ -564,8 +565,9 @@ public class TestContractDto {
 		testTarget.setInstallDeliverySiteId(STR_256);
 		testTarget.setVendorManageNumber(STR_256);
 		testTarget.setPenaltyFfmOrderContactNo(STR_256);
+		testTarget.setMvbAccount(STR_19);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 24);
+		Assert.assertTrue(result.getErrorInfoList().size() == 25);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "得意先宛先名は最大文字数（255）を超えています。"));
 
