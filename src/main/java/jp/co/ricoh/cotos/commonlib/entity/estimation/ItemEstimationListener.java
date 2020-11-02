@@ -6,9 +6,11 @@ import javax.transaction.Transactional;
 import org.apache.axis.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
 
 @Component
@@ -29,6 +31,13 @@ public class ItemEstimationListener {
 	@PrePersist
 	@Transactional
 	public void appendsEstimationItemFields(ItemEstimation itemEstimation) {
+		// Beanの取得
+		if (itemMasterRepository == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (itemMasterRepository == null)
+				itemMasterRepository = context.getBean(ItemMasterRepository.class);
+		}
+
 		ItemMaster itemMaster = itemMasterRepository.findByProductMasterIdAndRicohItemCode(itemEstimation.getProductMasterId(), itemEstimation.getRicohItemCode());
 		itemEstimation.setItemMasterId(itemMaster.getId());
 		// 価格等の他システムにより連携される項目は品種マスタのコピー対象外

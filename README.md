@@ -324,3 +324,4 @@
 |367|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加)|
 |368|使用量リポジトリにメソッド追加、MessagePropertiesに従量データアップロード締め切り用メッセージ追加|
 |369|BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻|
+|370|BatchLightTemplate対応 メモリーリーク問題の修正|

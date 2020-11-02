@@ -8,12 +8,15 @@ import java.util.Map;
 import javax.persistence.PrePersist;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.contract.GeneratedNumber;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
+import jp.co.ricoh.cotos.commonlib.provider.EntityManagerProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
 
 @Component
@@ -40,6 +43,14 @@ public class EstimationListener {
 	 */
 	@PrePersist
 	public void appendsEstimationNumber(Estimation entity) {
+		// Beanの取得
+		if (productGrpMasterRepository == null || dbUtil == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (productGrpMasterRepository == null)
+				productGrpMasterRepository = context.getBean(ProductGrpMasterRepository.class);
+			if (dbUtil == null)
+				dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+		}
 
 		/**
 		 * 見積番号
@@ -56,13 +67,13 @@ public class EstimationListener {
 		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findOne(entity.getProductGrpMasterId());
 		if (null == entity.getRjManageNumber() && null != productGrpMaster) {
 			ProductGrpIdentifierMaster productGrpIdentifierMaster = productGrpMaster.getProductGrpIdentifierMaster();
-			if (null == productGrpIdentifierMaster) return;
+			if (null == productGrpIdentifierMaster)
+				return;
 			String productGrpIdentifier = productGrpIdentifierMaster.getProductGrpIdentifier();
 			String sequenceName = productGrpIdentifierMaster.getSequenceName();
 			Map<String, Object> param = new HashMap<>();
 			param.put("sequenceName", sequenceName);
-			long sequence = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class, param)
-					.getGeneratedNumber();
+			long sequence = dbUtil.loadSingleFromSQLFile("sql/nextRjManageNumberSequence.sql", GeneratedNumber.class, param).getGeneratedNumber();
 			entity.setRjManageNumber(productGrpIdentifier + String.format("%07d", sequence));
 		}
 	}

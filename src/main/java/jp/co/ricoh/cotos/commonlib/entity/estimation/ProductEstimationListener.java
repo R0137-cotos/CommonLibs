@@ -5,9 +5,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
+import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterRepository;
 
 @Component
@@ -28,6 +30,13 @@ public class ProductEstimationListener {
 	@PrePersist
 	@Transactional
 	public void appendsEstimationProductsFields(ProductEstimation productEstimation) {
+		// Beanの取得
+		if (productMasterRepository == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (productMasterRepository == null)
+				productMasterRepository = context.getBean(ProductMasterRepository.class);
+		}
+
 		ProductMaster productMaster = productMasterRepository.findOne(productEstimation.getProductMasterId());
 		productEstimation.setProductMasterId(productMaster.getId());
 		BeanUtils.copyProperties(productMaster, productEstimation, "id", "updatedAt", "updatedUserId", "createdAt", "createdUserId", "version");
