@@ -1,15 +1,20 @@
 package jp.co.ricoh.cotos.commonlib.logic.mail;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.axis.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,11 +22,14 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import com.sun.mail.smtp.SMTPMessage;
 
+import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.BounceMailHeaderDto;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailTemplateMasterRepository;
@@ -59,6 +67,7 @@ public class CommonSendMail {
 	 *     【テスト1】見積承認依頼メール テスト2
 	 * ・引数のメール本文置換リストとメールテンプレートマスタTBL.メール本文(MAIL_TEMPLATE_MASTER.MAIL_BODY)を元にメール本文作成
 	 *  ※設定できる引数の数がメール件名と異なるだけで、文字列生成方法はメール件名と同一
+	 * ・引数のバウンスメールヘッダーDTOを使用し、バウンスメール処理のための独自ヘッダーを付与
 	 * ・引数のToメールアドレスリストとCCメールアドレスリストと上記で作成したメール件名やメール本文を使用してメール送信
 	 * ・送信元メールアドレスは、メールテンプレートマスタTBL.送信元メールアドレス(MAIL_TEMPLATE_MASTER.SEND_FROM_MAIL_ADDRESS)から取得
 	 * ・メールは文字コードをUTF-8で作成しており、ファイル添付も可能
@@ -78,11 +87,14 @@ public class CommonSendMail {
 	 *            メール本文置換リスト(最大10個まで)
 	 * @param uploadFile
 	 *            添付ファイル
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
 	 * @throws MessagingException
+	 * @throws IOException
 	 */
-	public void findMailTemplateMasterAndSendMail(ServiceCategory serviceCategory, String processCategory, Long productGrpMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile) throws MessagingException {
+	public void findMailTemplateMasterAndSendMail(ServiceCategory serviceCategory, String processCategory, Long productGrpMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
 		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findByServiceCategoryAndProcessCategoryAndProductGrpMasterId(serviceCategory.toString(), processCategory, productGrpMasterId != null ? productGrpMasterId : 0L);
-		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFile);
+		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFile, bounceMailHeaderDto);
 	}
 
 	/**
@@ -103,6 +115,7 @@ public class CommonSendMail {
 	 *     【テスト1】見積承認依頼メール テスト2
 	 * ・引数のメール本文置換リストとメールテンプレートマスタTBL.メール本文(MAIL_TEMPLATE_MASTER.MAIL_BODY)を元にメール本文作成
 	 *  ※設定できる引数の数がメール件名と異なるだけで、文字列生成方法はメール件名と同一
+	 * ・引数のバウンスメールヘッダーDTOを使用し、バウンスメール処理のための独自ヘッダーを付与
 	 * ・引数のToメールアドレスリストとCCメールアドレスリストと上記で作成したメール件名やメール本文を使用してメール送信
 	 * ・送信元メールアドレスは、メールテンプレートマスタTBL.送信元メールアドレス(MAIL_TEMPLATE_MASTER.SEND_FROM_MAIL_ADDRESS)から取得
 	 * ・メールは文字コードをUTF-8で作成しており、ファイル添付も可能
@@ -120,11 +133,14 @@ public class CommonSendMail {
 	 *            メール本文置換リスト(最大10個まで)
 	 * @param uploadFile
 	 *            添付ファイル
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
 	 * @throws MessagingException
+	 * @throws IOException
 	 */
-	public void findMailTemplateMasterAndSendMail(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile) throws MessagingException {
+	public void findMailTemplateMasterAndSendMail(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
 		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findOne(mailTemplateMasterId);
-		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFile);
+		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFile, bounceMailHeaderDto);
 	}
 
 	/**
@@ -145,6 +161,7 @@ public class CommonSendMail {
 	 *     【テスト1】見積承認依頼メール テスト2
 	 * ・引数のメール本文置換リストとメールテンプレートマスタTBL.メール本文(MAIL_TEMPLATE_MASTER.MAIL_BODY)を元にメール本文作成
 	 *  ※設定できる引数の数がメール件名と異なるだけで、文字列生成方法はメール件名と同一
+	 * ・引数のバウンスメールヘッダーDTOを使用し、バウンスメール処理のための独自ヘッダーを付与
 	 * ・引数のToメールアドレスリストとCCメールアドレスリストと上記で作成したメール件名やメール本文を使用してメール送信
 	 * ・送信元メールアドレスは、メールテンプレートマスタTBL.送信元メールアドレス(MAIL_TEMPLATE_MASTER.SEND_FROM_MAIL_ADDRESS)から取得
 	 * ・メールは文字コードをUTF-8で作成しており、複数のファイル添付も可能
@@ -162,11 +179,14 @@ public class CommonSendMail {
 	 *            メール本文置換リスト(最大10個まで)
 	 * @param uploadFileList
 	 *            添付ファイル(複数)
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
 	 * @throws MessagingException
+	 * @throws IOException
 	 */
-	public void findMailTemplateMasterAndSendMailAndAttachedFiles(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<String> uploadFileList) throws MessagingException {
+	public void findMailTemplateMasterAndSendMailAndAttachedFiles(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<String> uploadFileList, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
 		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findOne(mailTemplateMasterId);
-		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList);
+		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, uploadFileList, bounceMailHeaderDto);
 	}
 
 	/**
@@ -184,10 +204,13 @@ public class CommonSendMail {
 	 *            メール本文置換リスト(最大10個まで)
 	 * @param uploadFile
 	 *            添付ファイル
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
 	 * @throws MessagingException
+	 * @throws IOException
 	 */
 	@Async
-	private void sendMail(List<String> emailToList, List<String> emailCcList, List<String> emailBccList, MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile) throws MessagingException {
+	private void sendMail(List<String> emailToList, List<String> emailCcList, List<String> emailBccList, MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
 		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
 		attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
 		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
@@ -213,28 +236,32 @@ public class CommonSendMail {
 		}
 		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
 		SMTPMessage.setEnvelopeFrom(Optional.ofNullable(mailTemplateMaster.getEnvelopeFrom()).orElse(appProperties.getMailProperties().getEnvelopeFromMailAddress()));
+		setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
 		javaMailSender.send(SMTPMessage);
 	}
 
 	/**
-	* メール送信処理_複数添付ファイルあり
-	*
-	* @param emailTo
-	*            Toメールアドレス
-	* @param emailCcList
-	*            CCメールアドレスリスト
-	* @param mailTemplateMaster
-	*            メールテンプレートマスタ
-	* @param mailSubjectRepalceValueList
-	*            メール件名置換リスト(最大5個まで)
-	* @param mailTextRepalceValueList
-	*            メール本文置換リスト(最大10個まで)
-	* @param uploadFileList
-	*            添付ファイル(複数)
-	* @throws MessagingException
-	*/
+	 * メール送信処理_複数添付ファイルあり
+	 *
+	 * @param emailTo
+	 *            Toメールアドレス
+	 * @param emailCcList
+	 *            CCメールアドレスリスト
+	 * @param mailTemplateMaster
+	 *            メールテンプレートマスタ
+	 * @param mailSubjectRepalceValueList
+	 *            メール件名置換リスト(最大5個まで)
+	 * @param mailTextRepalceValueList
+	 *            メール本文置換リスト(最大10個まで)
+	 * @param uploadFileList
+	 *            添付ファイル(複数)
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
 	@Async
-	private void sendMail(List<String> emailToList, List<String> emailCcList, List<String> emailBccList, MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<String> uploadFileList) throws MessagingException {
+	private void sendMail(List<String> emailToList, List<String> emailCcList, List<String> emailBccList, MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<String> uploadFileList, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
 		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
 		attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
 		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
@@ -263,6 +290,7 @@ public class CommonSendMail {
 
 		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
 		SMTPMessage.setEnvelopeFrom(Optional.ofNullable(mailTemplateMaster.getEnvelopeFrom()).orElse(appProperties.getMailProperties().getEnvelopeFromMailAddress()));
+		setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
 		javaMailSender.send(SMTPMessage);
 	}
 
@@ -306,5 +334,40 @@ public class CommonSendMail {
 		mustacheMailText.execute(writer, mailText);
 
 		return writer;
+	}
+
+	/**
+	 * 独自ヘッダー付与
+	 *
+	 * @param SMTPMessage
+	 *            SMTPメッセージ
+	 * @param mailTemplateMaster
+	 *            メールテンプレートマスタ
+	 * @param mailTextRepalceValueList
+	 *            メール本文置換リスト(最大10個まで)
+	 * @return SMTPMessage
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
+	private SMTPMessage setOriginalHeader(SMTPMessage SMTPMessage, MailTemplateMaster mailTemplateMaster, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
+		bounceMailHeaderDto.setMailTemplateMasterId(mailTemplateMaster.getId());
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		// オブジェクト→JSON
+		String json = mapper.writeValueAsString(bounceMailHeaderDto);
+
+		// JSON→Map
+		Map<String, String> map = new HashMap<String, String>();
+		map = mapper.readValue(json, new TypeReference<Map<String, String>>() {
+		});
+
+		for (Entry<String, String> entry : map.entrySet()) {
+			if (!StringUtils.isEmpty(entry.getValue())) {
+				SMTPMessage.setHeader(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return SMTPMessage;
 	}
 }
