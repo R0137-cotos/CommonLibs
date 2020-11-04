@@ -2,12 +2,9 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@Entity
 @Data
 public class BaoLicenseInfoResult {
 
