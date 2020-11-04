@@ -1,0 +1,23 @@
+package jp.co.ricoh.cotos.commonlib.converter.lisence.cas;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.AbstractTmResponseWork.TmLicenceMappedStatus;
+
+@Converter(autoApply = true)
+public class TmLicenceMappedStatusConverter implements AttributeConverter<TmLicenceMappedStatus, String> {
+	@Override
+	public String convertToDatabaseColumn(TmLicenceMappedStatus tmLicenceMappedStatus) {
+		if (tmLicenceMappedStatus == null)
+			return null;
+		return tmLicenceMappedStatus.toString();
+	}
+
+	@Override
+	public TmLicenceMappedStatus convertToEntityAttribute(String value) {
+		if (value == null)
+			return null;
+		return TmLicenceMappedStatus.fromString(value); // IllegalArgumentExceptionはContractType.fromString側で投げている
+	}
+}

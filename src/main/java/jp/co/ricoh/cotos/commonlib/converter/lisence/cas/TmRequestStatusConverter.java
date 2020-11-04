@@ -1,0 +1,23 @@
+package jp.co.ricoh.cotos.commonlib.converter.lisence.cas;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.AbstractTmRequestWork.TmRequestStatus;
+
+@Converter(autoApply = true)
+public class TmRequestStatusConverter implements AttributeConverter<TmRequestStatus, String> {
+	@Override
+	public String convertToDatabaseColumn(TmRequestStatus tmRequestStatus) {
+		if (tmRequestStatus == null)
+			return null;
+		return tmRequestStatus.toString();
+	}
+
+	@Override
+	public TmRequestStatus convertToEntityAttribute(String value) {
+		if (value == null)
+			return null;
+		return TmRequestStatus.fromString(value); // IllegalArgumentExceptionはContractType.fromString側で投げている
+	}
+}
