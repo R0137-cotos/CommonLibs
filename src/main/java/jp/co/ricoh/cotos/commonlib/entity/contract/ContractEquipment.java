@@ -247,4 +247,32 @@ public class ContractEquipment extends EntityBase {
 	@Lob
 	private String extendsParameter;
 
+	/**
+	 * メーカーコード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカーコード", required = false, position = 22, allowableValues = "range[0,255]")
+	private String makerCode;
+
+	/**
+	 * 分類コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "分類コード", required = false, position = 23, allowableValues = "range[0,255]")
+	private String classificationCode;
+
+	/**
+	 * 機器区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機器区分", required = false, position = 24, allowableValues = "range[0,255]")
+	private String machineType;
+
+	/**
+	 * 機種名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機種名", required = false, position = 25, allowableValues = "range[0,255]")
+	private String equipmentName;
+
 }

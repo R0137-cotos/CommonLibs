@@ -78,11 +78,11 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	private Long arrangementWorkTypeMasterId;
 
 	/**
-	 * 通知メール制御マスタID
+	 * メールテンプレートID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "通知メール制御マスタID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
-	private Long mailControlMasterId;
+	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
+	private Long mailTemplateId;
 
 	/**
 	 * メール到達チェックフラグ
@@ -91,5 +91,12 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 8, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
+
+	/**
+	 * メール区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メール区分", required = true, position = 2, allowableValues = "range[0,255]")
+	private String mailDiv;
 
 }
