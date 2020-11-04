@@ -157,4 +157,11 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@Max(999)
 	@ApiModelProperty(value = "最長納期日数", required = false, position = 17, allowableValues = "range[0,999]")
 	private Integer longestDeliveryDate;
+
+	/**
+	 * EDWOR年額契約商品フラグ
+	 */
+	@ApiModelProperty(value = "EDWOR年額契約商品フラグ", required = false, position = 18, allowableValues = "range[0,9]")
+	private Integer edwOrAnnualAmountProductFlg;
+
 }

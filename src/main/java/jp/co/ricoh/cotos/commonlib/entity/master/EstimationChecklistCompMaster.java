@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -146,4 +148,11 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "表示順", required = true, position = 6, allowableValues = "range[0,999]")
 	private int displayOrder;
 
+	/**
+	 * チェック必須フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "チェック必須フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	private int checkRequiredFlg;
 }
