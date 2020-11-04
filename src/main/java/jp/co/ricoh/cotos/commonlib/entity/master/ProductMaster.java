@@ -189,6 +189,21 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "最低契約月数", required = false, position = 21, allowableValues = "range[0,999]")
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 22, allowableValues = "range[0,999]")
 	private Integer minContractMonths;
+
+	/**
+	 * 最長契約月数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 23, allowableValues = "range[0,99999]")
+	private Integer maxContractMonths;
+
+	/**
+	 * 仕入先No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入先No", required = false, position = 24, allowableValues = "range[0,255]")
+	private String siiresakiNo;
 }

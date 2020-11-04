@@ -192,4 +192,19 @@ public class LicenseInfo extends EntityBase {
 	@Lob
 	private String extendsParameter;
 
+	/**
+	 * 恒久契約識別番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 23, allowableValues = "range[0,255]")
+	private String immutableContIdentNumber;
+
+	/**
+	 * 解約フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 17, allowableValues = "range[0,9]")
+	private Integer disengagementFlg;
+
 }

@@ -106,4 +106,11 @@ public class LicenseRemainingNumber extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 7)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "恒久契約識別番号", required = true, position = 8, allowableValues = "range[0,255]", readOnly = false)
+	private String immutableContIdentNumber;
 }

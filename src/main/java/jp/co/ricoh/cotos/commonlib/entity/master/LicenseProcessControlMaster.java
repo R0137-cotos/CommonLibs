@@ -46,29 +46,20 @@ public class LicenseProcessControlMaster extends EntityBase {
 	private String licenseDiv;
 
 	/**
-	 * 対象マスタ区分
-	 */
-	@NotNull
-	@Column(nullable = false)
-	@Size(max = 255)
-	@ApiModelProperty(value = "対象マスタ区分", required = true, position = 3, allowableValues = "range[0,255]")
-	private String targetMasterType;
-
-	/**
-	 * 対象マスタID
+	 * 品種マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "対象マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Long targetMasterId;
+	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	private Long itemMasterId;
 
 	/**
 	 * 契約種別
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 5)
+	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 4)
 	private ContractType contractType;
 
 	/**
@@ -77,7 +68,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約種別詳細", required = true, position = 6, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約種別詳細", required = true, position = 5, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
@@ -85,7 +76,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 6, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
@@ -94,7 +85,16 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "工程パターンID", required = true, position = 8, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "工程パターンID", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
 	private Long processPatternId;
+
+	/**
+	 * 明細状態
+	 */
+	@NotNull
+	@Column(nullable = false)
+	@Size(max = 255)
+	@ApiModelProperty(value = "明細状態", required = true, position = 8, allowableValues = "range[0,255]")
+	private String detailStatus;
 
 }
