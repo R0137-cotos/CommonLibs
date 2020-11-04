@@ -22,26 +22,6 @@ import lombok.EqualsAndHashCode;
 public abstract class AbstractTmResponseWork extends EntityBase {
 
 	/**
-	 * HTTPステータス
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "HTTPステータス", required = false, position = 3, allowableValues = "range[0,255]")
-	private String httpStatus;
-
-	/**
-	 * エラーメッセージ
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "HTTPステータス", required = false, position = 4, allowableValues = "range[0,255]")
-	private String errorMessage;
-
-	/**
-	 * ライセンス反映状態
-	 */
-	@ApiModelProperty(value = "送信状態", required = false, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")", example = "0", position = 5)
-	private TmLicenceMappedStatus licenceMappedStatus;
-
-	/**
 	 * TMライセンス反映状態
 	 */
 	public enum TmLicenceMappedStatus {
@@ -65,4 +45,25 @@ public abstract class AbstractTmResponseWork extends EntityBase {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	/**
+	 * HTTPステータス
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "HTTPステータス", required = false, position = 3, allowableValues = "range[0,255]")
+	private String httpStatus;
+
+	/**
+	 * エラーメッセージ
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "HTTPステータス", required = false, position = 4, allowableValues = "range[0,255]")
+	private String errorMessage;
+
+	/**
+	 * ライセンス反映状態
+	 */
+	@ApiModelProperty(value = "送信状態", required = false, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")", example = "0", position = 5)
+	private TmLicenceMappedStatus licenceMappedStatus;
+
 }

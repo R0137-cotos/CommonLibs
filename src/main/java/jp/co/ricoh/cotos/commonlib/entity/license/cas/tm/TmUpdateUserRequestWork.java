@@ -41,7 +41,7 @@ public class TmUpdateUserRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK", required = false, position = 17)
+	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK", required = false, position = 8)
 	private TmUpdateUserResponseWork responseWork;
 
 }

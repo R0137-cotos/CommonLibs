@@ -25,6 +25,31 @@ import lombok.EqualsAndHashCode;
 public abstract class AbstractTmRequestWork extends EntityBase {
 
 	/**
+	 * TM送信状態
+	 */
+	public enum TmRequestStatus {
+
+		未連携("0"), 連携済("1"), 連携エラー("2"), 連携対象外("3");
+
+		private final String text;
+
+		private TmRequestStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static TmRequestStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
 	 * 送信状態
 	 */
 	@ApiModelProperty(value = "送信状態", required = false, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 連携エラー(\"2\"), 連携対象外(\"3\")", example = "0", position = 2)
@@ -57,29 +82,4 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	@Size(max = 4000)
 	@ApiModelProperty(value = "Http Body", required = false, position = 6, allowableValues = "range[0,4000]")
 	private String httpBody;
-
-	/**
-	 * TM送信状態
-	 */
-	public enum TmRequestStatus {
-
-		未連携("0"), 連携済("1"), 連携エラー("2"), 連携対象外("3");
-
-		private final String text;
-
-		private TmRequestStatus(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static TmRequestStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 }
