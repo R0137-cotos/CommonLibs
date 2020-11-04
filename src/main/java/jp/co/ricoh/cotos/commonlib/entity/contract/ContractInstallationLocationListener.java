@@ -43,10 +43,15 @@ public class ContractInstallationLocationListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+
+		if (vKjbMasterRepository == null || checkUtil == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (vKjbMasterRepository == null)
+				vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+		}
 
 		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(contractInstallationLocation.getMomKjbSystemId());
 		if (vKjbMaster == null) {

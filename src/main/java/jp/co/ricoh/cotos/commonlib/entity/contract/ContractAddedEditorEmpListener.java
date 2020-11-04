@@ -44,11 +44,17 @@ public class ContractAddedEditorEmpListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractAddedEditorEmp contractAddedEditorEmp) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
+		if (mvEmployeeMasterRepository == null || checkUtil == null || dummyUserMasterRepository == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvEmployeeMasterRepository == null)
+				mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (dummyUserMasterRepository == null)
+				dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		}
 
 		//ダミーユーザーであるかどうかのチェック
 		if (dummyUserMasterRepository.existsByUserId(contractAddedEditorEmp.getMomEmployeeId())) {

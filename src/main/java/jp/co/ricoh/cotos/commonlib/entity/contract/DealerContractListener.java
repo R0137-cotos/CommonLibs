@@ -51,11 +51,17 @@ public class DealerContractListener {
 	@PrePersist
 	@Transactional
 	public void appendsDealerContractFields(DealerContract dealerContract) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if(vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (findCommonMaster == null) findCommonMaster = new FindCommonMaster();
+
+		if (vKjbMasterRepository == null || checkUtil == null || findCommonMaster == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (vKjbMasterRepository == null)
+				vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (findCommonMaster == null)
+				findCommonMaster = new FindCommonMaster();
+		}
 
 		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerContract.getMomKjbSystemId());

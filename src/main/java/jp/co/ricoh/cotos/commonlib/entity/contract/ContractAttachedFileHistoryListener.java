@@ -49,11 +49,17 @@ public class ContractAttachedFileHistoryListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractAttachedFileHistory contractAttachedFileHistory) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
+		if (mvEmployeeMasterRepository == null || checkUtil == null || dummyUserMasterRepository == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvEmployeeMasterRepository == null)
+				mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (dummyUserMasterRepository == null)
+				dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		}
 
 		if (dummyUserMasterRepository.existsByUserId(contractAttachedFileHistory.getAttachedEmpId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(contractAttachedFileHistory.getAttachedEmpId());

@@ -39,10 +39,14 @@ public class CustomerContractListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerContractFields(CustomerContract customerContract) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (vKjbMasterRepository == null) vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
+		if (vKjbMasterRepository == null || checkUtil == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (vKjbMasterRepository == null)
+				vKjbMasterRepository = context.getBean(VKjbMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+		}
 
 		if (DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString().equals(customerContract.getMomKjbSystemId())) {
 			return;

@@ -51,11 +51,17 @@ public class ContractPicAccCeEmpListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractPicAccCeEmp contractPicAccCeEmp) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
+		if (mvEmployeeMasterRepository == null || checkUtil == null || dummyUserMasterRepository == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvEmployeeMasterRepository == null)
+				mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (dummyUserMasterRepository == null)
+				dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		}
 
 		if (dummyUserMasterRepository.existsByUserId(contractPicAccCeEmp.getMomEmployeeId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(contractPicAccCeEmp.getMomEmployeeId());

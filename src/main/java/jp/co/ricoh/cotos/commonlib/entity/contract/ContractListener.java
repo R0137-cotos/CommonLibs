@@ -58,11 +58,17 @@ public class ContractListener {
 	 * @param contract
 	 */
 	private void appendsContractNumber(Contract contract) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvTJmci101MasterRepository == null) mvTJmci101MasterRepository = context.getBean(MvTJmci101MasterRepository.class);
-		if (checkUtil  == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dbUtil == null) dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+
+		if (mvTJmci101MasterRepository == null || checkUtil == null || dbUtil == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvTJmci101MasterRepository == null)
+				mvTJmci101MasterRepository = context.getBean(MvTJmci101MasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (dbUtil == null)
+				dbUtil = new DBUtil(EntityManagerProvider.getEntityManager());
+		}
 
 		/**
 		 * 契約番号
