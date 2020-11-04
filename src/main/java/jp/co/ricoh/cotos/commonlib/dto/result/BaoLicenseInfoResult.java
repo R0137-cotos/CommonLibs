@@ -2,9 +2,13 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+@Entity
 @Data
 public class BaoLicenseInfoResult {
 
@@ -17,6 +21,7 @@ public class BaoLicenseInfoResult {
 	/**
 	 * 契約ID
 	 */
+	@Id
 	@ApiModelProperty(value = "契約ID", required = false, position = 2)
 	private String contract_id;
 
