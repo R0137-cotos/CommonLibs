@@ -248,7 +248,7 @@ public class BaoLicenseInfoResult {
 	/**
 	 * 元契約内容
 	 */
-	@ApiModelProperty(value = "元契約", required = false, position = 40)
+	@ApiModelProperty(value = "元契約内容", required = false, position = 40)
 	private String original_contract_contents;
 
 	/**
