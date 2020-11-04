@@ -294,4 +294,18 @@ public class ContractDetail extends EntityBase {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ランニング売上計上開始日", required = false, position = 23)
 	private Date runningAccountSalesFromDate;
+
+	/**
+	 * 統合契約外部請求処理状態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "統合契約外部請求処理状態", required = false, position = 24, allowableValues = "range[0,255]")
+	private String absConExternalBillingStatus;
+
+	/**
+	 * 統合契約外部請求連携日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "統合契約外部請求連携日", required = false, position = 25)
+	private Date absConExternalBillingDate;
 }

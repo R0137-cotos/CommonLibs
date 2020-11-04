@@ -816,4 +816,11 @@ public class Contract extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 87, allowableValues = "range[0,9]")
 	private Integer ssWorkRequestCreate_flg;
+
+	/**
+	 * 仕入用管理No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入用管理No", required = false, position = 88, allowableValues = "range[0,255]")
+	private String purchaseManageNumber;
 }

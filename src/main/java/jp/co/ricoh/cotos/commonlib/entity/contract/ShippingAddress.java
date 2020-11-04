@@ -106,10 +106,10 @@ public class ShippingAddress extends EntityBase {
 	private String prefectures;
 
 	/**
-	 * 住所
+	 * 市区町村番地
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "住所", required = false, position = 12, allowableValues = "range[0,1000]", readOnly = false)
+	@ApiModelProperty(value = "市区町村番地", required = false, position = 12, allowableValues = "range[0,1000]", readOnly = false)
 	private String address;
 
 	/**
@@ -133,5 +133,12 @@ public class ShippingAddress extends EntityBase {
 	@NotNull
 	@ApiModelProperty(value = "契約ID", required = true, position = 15, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
+
+	/**
+	 * 建物名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "建物名", required = false, position = 14, allowableValues = "range[0,255]", readOnly = false)
+	private String buildingName;
 
 }

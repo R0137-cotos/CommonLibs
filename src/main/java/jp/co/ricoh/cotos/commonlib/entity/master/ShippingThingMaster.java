@@ -118,23 +118,16 @@ public class ShippingThingMaster extends EntityBase {
 	private int orderFlg;
 
 	/**
-	 * 発注タイミング
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "発注タイミング", required = false, position = 9, allowableValues = "range[0,255]")
-	private String orderTiming;
-
-	/**
 	 * 有効期間(開始日)
 	 */
-	@ApiModelProperty(value = "有効期間(開始日)", required = false, position = 10)
+	@ApiModelProperty(value = "有効期間(開始日)", required = false, position = 9)
 	@Temporal(TemporalType.DATE)
 	private Date availablePeriodFrom;
 
 	/**
 	 * 有効期間(終了日)
 	 */
-	@ApiModelProperty(value = "有効期間(終了日)", required = false, position = 11)
+	@ApiModelProperty(value = "有効期間(終了日)", required = false, position = 10)
 	@Temporal(TemporalType.DATE)
 	private Date availablePeriodTo;
 
@@ -143,7 +136,7 @@ public class ShippingThingMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "FFM内部振替除外フラグ", required = true, position = 12, allowableValues = "range[0,9]", readOnly = true)
+	@ApiModelProperty(value = "FFM内部振替除外フラグ", required = true, position = 11, allowableValues = "range[0,9]", readOnly = true)
 	private int ffmInsideTransExclusionFlg;
 
 	/**
@@ -151,13 +144,13 @@ public class ShippingThingMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "プロダクト確認集計表フラグ", required = true, position = 13, allowableValues = "range[0,9]", readOnly = true)
+	@ApiModelProperty(value = "プロダクト確認集計表フラグ", required = true, position = 12, allowableValues = "range[0,9]", readOnly = true)
 	private int productSpreadsheetFlg;
 
 	/**
 	 * FFM連携納期計算パターンID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "FFM連携納期計算パターンID", required = true, position = 14, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "FFM連携納期計算パターンID", required = true, position = 13, allowableValues = "range[0,9223372036854775807]")
 	private long ffmDeliveryDateCalcPatternId;
 }

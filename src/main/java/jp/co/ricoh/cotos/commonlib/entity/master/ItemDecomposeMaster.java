@@ -89,4 +89,11 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "品種マスタID", required = true, position = 8, allowableValues = "range[0,9223372036854775807]")
 	private Long itemMasterId;
+
+	/**
+	 * 分解後HW/NOS区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "分解後HW/NOS区分", required = false, position = 9, allowableValues = "range[0,255]")
+	private String hwNosType;
 }

@@ -127,4 +127,18 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "外部機能", required = false, position = 7, allowableValues = "range[0,255]")
 	private String externalFunction;
 
+	/**
+	 * ファイル種別タイプ区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ファイル種別タイプ区分", required = false, position = 8, allowableValues = "range[0,255]")
+	private String fileKindTypeDiv;
+
+	/**
+	 * 出力ファイル名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "出力ファイル名", required = false, position = 9, allowableValues = "range[0,255]")
+	private String outputFileName;
+
 }

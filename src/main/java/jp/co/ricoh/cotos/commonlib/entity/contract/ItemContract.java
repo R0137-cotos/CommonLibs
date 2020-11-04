@@ -187,4 +187,19 @@ public class ItemContract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")", position = 18)
 	private ItemDecomposeType itemDecomposeType;
+
+	/**
+	 * 分解後品種名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "分解後品種名", required = false, position = 19, allowableValues = "range[0,255]")
+	private String itemDecomposeName;
+
+	/**
+	 * 分解後原価
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "分解後原価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal itemDecomposePrice;
 }
