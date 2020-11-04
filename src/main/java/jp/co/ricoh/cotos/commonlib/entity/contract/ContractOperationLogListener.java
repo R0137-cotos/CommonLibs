@@ -53,11 +53,17 @@ public class ContractOperationLogListener {
 	@PrePersist
 	@Transactional
 	public void appendsEmployeeFields(ContractOperationLog contractOperationLog) {
-		// Beanの取得
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (mvEmployeeMasterRepository == null) mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
-		if (checkUtil == null) checkUtil = UtilProvider.getCheckUtil();
-		if (dummyUserMasterRepository == null) dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+
+		if (mvEmployeeMasterRepository == null || checkUtil == null || dummyUserMasterRepository == null) {
+			// Beanの取得
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (mvEmployeeMasterRepository == null)
+				mvEmployeeMasterRepository = context.getBean(MvEmployeeMasterRepository.class);
+			if (checkUtil == null)
+				checkUtil = UtilProvider.getCheckUtil();
+			if (dummyUserMasterRepository == null)
+				dummyUserMasterRepository = context.getBean(DummyUserMasterRepository.class);
+		}
 
 		CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
