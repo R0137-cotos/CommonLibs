@@ -246,10 +246,10 @@ public class BaoLicenseInfoResult {
 	private String contract_contents;
 
 	/**
-	 * 元契約
+	 * 元契約内容
 	 */
 	@ApiModelProperty(value = "元契約", required = false, position = 40)
-	private String original_contract;
+	private String original_contract_contents;
 
 	/**
 	 * REQUEST_STATUS
