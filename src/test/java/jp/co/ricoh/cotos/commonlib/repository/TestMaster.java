@@ -619,6 +619,39 @@ public class TestMaster {
 	}
 
 	@Test
+	public void GpCheckMatterMasterRepository_findOneByCheckMatterCode() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/estimationChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+
+		// エンティティの取得
+		String checkMatterCode = "TEST_1";
+		GpCheckMatterMaster found = gpCheckMatterMasterRepository.findOneByCheckMatterCode(checkMatterCode);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
+		if (found.getArrangementChecklistCompMasterList() == null || found.getArrangementChecklistCompMasterList().size() == 0)
+			Assert.assertTrue(false);
+		if (found.getEstimationChecklistCompMasterList() == null || found.getEstimationChecklistCompMasterList().size() == 0)
+			Assert.assertTrue(false);
+		if (found.getContractChecklistCompMasterList() == null || found.getContractChecklistCompMasterList().size() == 0)
+			Assert.assertTrue(false);
+
+	}
+
+	@Test
 	public void ArrangementWorkTypeMasterのテスト() throws Exception {
 
 		// テストデータ登録
@@ -2071,5 +2104,4 @@ public class TestMaster {
 			Assert.assertNotNull(found.getFileKind());
 		}
 	}
-
 }
