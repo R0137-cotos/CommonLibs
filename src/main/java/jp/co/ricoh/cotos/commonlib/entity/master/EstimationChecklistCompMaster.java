@@ -155,5 +155,4 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "チェック必須フラグ", required = false, position = 7, allowableValues = "range[0,9]")
 	private Integer checkRequiredFlg;
-
 }
