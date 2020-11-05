@@ -197,7 +197,7 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "EDWOR年額契約商品フラグ", required = false, position = 22, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "訪販代売禁止フラグ", required = false, position = 22, allowableValues = "range[0,9]")
 	private Integer substituteSalesProhibitedFlg;
 
 }
