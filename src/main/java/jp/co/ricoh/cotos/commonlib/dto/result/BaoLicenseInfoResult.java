@@ -15,13 +15,13 @@ public class BaoLicenseInfoResult {
 	/**
 	 * 販売店様管理番号
 	 */
+	@Id
 	@ApiModelProperty(value = "販売店様管理番号", required = false, position = 1)
 	private String dealer_management_number;
 
 	/**
 	 * 契約ID
 	 */
-	@Id
 	@ApiModelProperty(value = "契約ID", required = false, position = 2)
 	private String contract_id;
 
