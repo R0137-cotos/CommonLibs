@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -30,6 +34,28 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "arrangement_work_order_master")
 public class ArrangementWorkOrderMaster extends EntityBaseMaster {
+	
+	public enum CheckTimingType {
+
+		業務受付時("0"), 業務完了時("1");
+
+		private final String text;
+
+		private CheckTimingType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CheckTimingType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * 手配業務完了順マスタID
@@ -82,4 +108,11 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "先実行手配業務タイプマスタID配列", required = true, position = 6)
 	@Lob
 	private String befArrangementWkTypeArray;
+	
+	/**
+	 * チェックタイミング区分
+	 */
+	@Column(nullable = false)
+	@ApiModelProperty(value = "チェックタイミング区分", required = true, allowableValues = "業務受付時(\"0\"), 業務完了時(\"1\")", position = 7)
+	private CheckTimingType checkTimingType;
 }
