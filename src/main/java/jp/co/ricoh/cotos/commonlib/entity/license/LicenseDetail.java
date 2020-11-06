@@ -37,7 +37,7 @@ public class LicenseDetail extends EntityBase {
 
 	public enum InfoDiv {
 
-		新規("0"), 減数("1");
+		新規("1"), 減数("2");
 
 		private final String text;
 
@@ -59,7 +59,7 @@ public class LicenseDetail extends EntityBase {
 
 	public enum HardSoftDiv {
 
-		ハード("0"), ライセンス("1");
+		ハード("1"), ライセンス("2");
 
 		private final String text;
 
