@@ -177,22 +177,34 @@ public class EstimationListInfo {
 	private String ringsEmpCd;
 
 	/**
+	 * 案件名
+	 */
+	@ApiModelProperty(value = "案件名", required = false, position = 26, allowableValues = "range[0,255]")
+	private String caseTitle;
+
+	/**
+	 * V-UP見積番号
+	 */
+	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 27, allowableValues = "range[0,255]")
+	private String vupEstimationNumber;
+
+	/**
 	 * 作成者
 	 */
-	@ApiModelProperty(value = "作成者", required = false, position = 26, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "作成者", required = false, position = 28, allowableValues = "range[0,255]")
 	private String createdUser;
 
 	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 27)
+	@ApiModelProperty(value = "登録日時", required = false, position = 29)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 28)
+	@ApiModelProperty(value = "更新日時", required = false, position = 30)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 

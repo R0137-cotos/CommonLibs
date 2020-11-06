@@ -1,5 +1,26 @@
 # Changelog
 
+## v3.9.0 (05/11/2020)
+- [**closed**] #8840 見積検索結果にV-UP見積番号、案件名追加 [#1120](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1120)
+- [**closed**] #8490 チェックリストエラーメッセージ追加 [#1119](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1119)
+- [**closed**] #8565_見積テーブルカラム追加(V-UP見積番号) [#1111](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1111)
+- [**closed**] #8490 見積チェックリスト構成マスタに必須追加、汎用チェック事項マスタのチェック事項コード検索追加 [#1105](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1105)
+- [**closed**] #7601 年額商品契約更新のサービス利用希望日変更時のエラーメッセージを修正 [#1010](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1010)
+- [**closed**] #7601 年額商品契約変更のサービス利用希望日変更時のエラーメッセージを追加 [#1002](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1002)
+- [**closed**] #7601 商品グループマスタ.EDWOR年額契約商品フラグを追加 [#998](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/998)
+- [**closed**] #8840 検索パラメータにV-UP見積件名追加 [#1102](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1102)
+- [**closed**] #8483 手配業務完了順マスタ チェックタイミング区分カラム追加 [#1099](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1099)
+- [**closed**] #8483 手配業務完了順マスタ チェックタイミング区分カラム追加 [#1098](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1098)
+
+---
+
+## v3.8.0 (15/10/2020)
+- [**closed**] #8469 軽量バッチテンプレート利用のため、BatchLightTemplate対応をcherr-pick [#1083](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1083)
+- [**closed**] #8469 BusinessDayUtil BatchLightTemplate対応 [#1085](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1085)
+- [**closed**] #8089 商品グループマスタに最長納期日数を追加 [#1079](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1079)
+
+---
+
 ## v3.7.1 (05/10/2020)
 - [**closed**] BatchLightTemplate対応(リスナの@Autowiredが効かない場合の処理を追加) 差戻 [#1088](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1088)
 
