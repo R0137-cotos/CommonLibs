@@ -343,3 +343,4 @@
 |386|20201105リリース分マージ|
 |387|BAO連携ライセンス情報取得API仮実装|
 |388|Messages.properties修正 ライセンス明細 ENUMの修正|
+|389|Messages.properties修正|
