@@ -1,5 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -13,24 +19,30 @@ public class FileImportManagementParameter {
 	/**
 	 * ファイル種別管理ID
 	 */
+	@Min(0)
 	@ApiModelProperty(value = "ファイル種別管理ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
 	private long fileKindManagementId;
 
 	/**
 	 * ファイル名
 	 */
+	@NotNull
+	@Size(max = 255)
 	@ApiModelProperty(value = "ファイル名", required = true, position = 2, allowableValues = "range[0,255]")
-	private String fileName;
+	private MultipartFile fileName;
 
 	/**
 	 * 添付ファイルID
 	 */
+	@Min(0)
 	@ApiModelProperty(value = "添付ファイルID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
 	private long attachmentId;
 
 	/**
 	 * 取込実施者
 	 */
+	@NotNull
+	@Size(max = 255)
 	@ApiModelProperty(value = "取込実施者", required = true, position = 4, allowableValues = "range[0,255]")
 	private String importUser;
 
