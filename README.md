@@ -345,3 +345,4 @@
 |388|Messages.properties修正 ライセンス明細 ENUMの修正|
 |389|Messages.properties修正|
 |390|ファイル取込管理登録APIのDTO修正|
+|391|ファイル取込管理登録APIのDTO修正|

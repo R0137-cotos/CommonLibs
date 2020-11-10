@@ -4,8 +4,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -29,7 +27,7 @@ public class FileImportManagementParameter {
 	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "ファイル名", required = true, position = 2, allowableValues = "range[0,255]")
-	private MultipartFile fileName;
+	private String fileName;
 
 	/**
 	 * 添付ファイルID
