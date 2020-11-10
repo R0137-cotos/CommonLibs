@@ -346,3 +346,4 @@
 |389|Messages.properties修正|
 |390|ファイル取込管理登録APIのDTO修正|
 |391|ファイル取込管理登録APIのDTO修正|
+|392|違約金計算APIのDTO修正|
