@@ -14,4 +14,6 @@ public interface MvTJmcj005MasterRepository extends JpaRepository<MvTJmcj005Mast
 	public List<MvTJmcj005Master> findByHanshCdAndRingsTkiskCd(String hanshCd, String ringsTkiskCd);
 
 	public MvTJmcj005Master findByOeTodokesakiCdAndRingsTodokesakiCdIsNotNull(String oeTodokesakiCd);
+
+	public List<MvTJmcj005Master> findByOeTodokesakiCd(String oeTodokesakiCd);
 }
