@@ -133,7 +133,6 @@ public class ManagedEstimationDetail extends EntityBase {
 	 * 変更前単価
 	 */
 	@Column(nullable = false)
-	@NotNull
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal beforeUnitPrice;
