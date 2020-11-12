@@ -2,17 +2,23 @@ package jp.co.ricoh.cotos.commonlib.entity.common;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -33,6 +39,7 @@ import lombok.EqualsAndHashCode;
 public class FileImportManagement extends EntityBase {
 
 	public enum BatchExecutionStatus {
+
 		取込待ち("1"), 取込中("2"), エラー("3"), 正常終了("4");
 
 		private final String text;
@@ -62,6 +69,8 @@ public class FileImportManagement extends EntityBase {
 	/**
 	 * ファイル種別管理ID
 	 */
+	@NotNull
+	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ファイル種別管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long fileKindManagementId;
@@ -76,16 +85,19 @@ public class FileImportManagement extends EntityBase {
 	/**
 	 * 添付ファイルID
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "添付ファイルID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private long attachmentId;
+	@NotNull
+	@OneToOne(optional = false)
+	@JoinColumn(name = "attachment_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "添付ファイル", required = true, position = 4)
+	private AttachedFile attachmentFile;
 
 	/**
 	 * エラー添付ファイルID
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "エラー添付ファイルID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private long errorAttachmentId;
+	@OneToOne(optional = true)
+	@JoinColumn(name = "error_attachment_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "エラー添付ファイル", required = false, position = 5)
+	private AttachedFile errorAttachmentFile;
 
 	/**
 	 * 取込実施者
@@ -105,7 +117,8 @@ public class FileImportManagement extends EntityBase {
 	 * バッチ実行ステータス
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\"1\"), 取込中(\"2\"), エラー(\"3\"), 正常終了(\"4\")", example = "1", position = 8, readOnly = false)
+	@ApiModelProperty(value = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\\\"1\\\"), 取込中(\\\"2\\\"), エラー(\\\"3\\\"), 正常終了(\\\"4\\\")", //
+			position = 8, readOnly = false)
 	private BatchExecutionStatus batchExecutionStatus;
 
 	/**
@@ -121,4 +134,12 @@ public class FileImportManagement extends EntityBase {
 	@ApiModelProperty(value = "取込終了日時", required = false, position = 9)
 	@Temporal(TemporalType.DATE)
 	private Date importEndDate;
+
+	/**
+	 * ファイル取込エラー詳細
+	 */
+	@OneToMany(mappedBy = "fileImportManagement")
+	@OrderBy("lineNumber ASC")
+	@ApiModelProperty(value = "ファイル取込エラー詳細", required = false, position = 10)
+	private List<FileImportErrorDetails> fileImportErrorDetailsList;
 }

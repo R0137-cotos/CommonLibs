@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -89,13 +92,14 @@ public class LicenseDetail extends EntityBase {
 	private long id;
 
 	/**
-	 * ライセンス情報ID
+	 * ライセンス情報
 	 */
 	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseInfoId;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ライセンス情報", required = true, position = 2)
+	private LicenseInfo licenseInfo;
 
 	/**
 	 * ライセンス区分
@@ -113,12 +117,12 @@ public class LicenseDetail extends EntityBase {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "シーケンスNo", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Long seqNumber;
+	private long seqNumber;
 
 	/**
 	 * 情報区分
 	 */
-	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "ハード(\"0\"), 減数(\"1\")", position = 5)
+	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "ハード(\"1\"), 減数(\"2\")", position = 5)
 	private InfoDiv infoDiv;
 
 	/**
@@ -126,19 +130,19 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "品種マスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	private long itemMasterId;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "商品マスタID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
-	private Long productMasterId;
+	private long productMasterId;
 
 	/**
 	 * ハード・ソフト区分
 	 */
-	@ApiModelProperty(value = "ハード・ソフト区分", required = false, allowableValues = "新規(\"0\"), ライセンス(\"1\")", position = 8)
+	@ApiModelProperty(value = "ハード・ソフト区分", required = false, allowableValues = "ハード(\"1\"), ライセンス(\"2\")", position = 8)
 	private HardSoftDiv hardSoftDiv;
 
 	/**

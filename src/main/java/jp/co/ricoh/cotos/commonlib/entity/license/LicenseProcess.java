@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,14 +17,15 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster.MailDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -57,6 +60,28 @@ public class LicenseProcess extends EntityBase {
 		}
 	}
 
+	public enum ProcessStatus {
+
+		未処理("0"), 完了("1"), 破棄("2");
+
+		private final String text;
+
+		private ProcessStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ProcessStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * ライセンス工程ID
 	 */
@@ -67,31 +92,33 @@ public class LicenseProcess extends EntityBase {
 	private long id;
 
 	/**
-	 * ライセンス情報ID
+	 * ライセンス情報
 	 */
 	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseInfoId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ライセンス情報", required = true, position = 2)
+	private LicenseInfo licenseInfo;
 
 	/**
 	 * 工程順
 	 */
 	@NotNull
 	@Column(nullable = false)
+	@Max(999)
+	@Min(0)
 	@ApiModelProperty(value = "工程順", required = true, position = 3, allowableValues = "range[0,999]")
 	private int processOrder;
 
 	/**
 	 * 工程ID
-	 *
 	 */
 	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "工程ID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Long processId;
+	private long processId;
 
 	/**
 	 * 手配業務ID
@@ -100,57 +127,54 @@ public class LicenseProcess extends EntityBase {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "手配業務ID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private Long arrangementWorkId;
+	private long arrangementWorkId;
 
 	/**
 	 * 操作区分
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 6)
+	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\\\"1\\\"), ボタン(\\\"2\\\"), CSV出力(\\\"3\\\"), CSV取込(\\\"4\\\")", position = 6)
 	private OperationDiv operationDiv;
 
 	/**
+	 * メール区分
+	 */
+	@ApiModelProperty(value = "メール区分", required = false, position = 7, allowableValues = "事前完了メール(\\\"1\\\"), Welcomeメール(\\\"2\\\")")
+	private MailDiv mailDiv;
+
+	/**
 	 * メールテンプレートID
-	 *
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
-	private Long mailTemplateId;
+	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
+	private long mailTemplateId;
 
 	/**
 	 * メール到達チェックフラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 8, allowableValues = "range[0,9]")
-	private Integer mailArrivalCheckFlg;
+	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 9, allowableValues = "range[0,9]")
+	private int mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "メール送信日", required = false, position = 9)
+	@ApiModelProperty(value = "メール送信日", required = false, position = 10)
 	private Date mailSendedAt;
 
 	/**
 	 * 送信結果区分
 	 */
-	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 10)
+	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\\\"0\\\"), 送信中(\\\"1\\\"), 送信済(\\\"2\\\"), 不達(\\\"3\\\"), 送信エラー(\\\"4\\\")", position = 11)
 	private MailSendedResultDiv mailSendedResultDiv;
-
-	/**
-	 * メール区分
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "メール区分", required = false, position = 11, allowableValues = "range[0,255]")
-	private String mailDiv;
 
 	/**
 	 * 工程状態
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "工程状態", required = false, position = 12, allowableValues = "range[0,255]")
-	private String processStatus;
+	@ApiModelProperty(value = "工程状態", required = false, position = 12, allowableValues = "未処理(\\\"0\\\"), 完了(\\\"1\\\"), 破棄(\\\"2\\\")")
+	private ProcessStatus processStatus;
 
 }

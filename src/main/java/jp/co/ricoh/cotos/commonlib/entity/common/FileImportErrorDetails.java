@@ -4,11 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -33,9 +38,12 @@ public class FileImportErrorDetails extends EntityBase {
 	/**
 	 * ファイル取込管理管理ID
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "ファイル取込管理管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long fileImportManagementId;
+	@NotNull
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ファイル取込管理", required = true, position = 2)
+	private FileImportManagement fileImportManagement;
 
 	/**
 	 * 行番号
