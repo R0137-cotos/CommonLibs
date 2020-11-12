@@ -7,13 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -39,13 +42,14 @@ public class LicenseInfoOperationLog extends EntityBase {
 	private long id;
 
 	/**
-	 * ライセンス情報ID
+	 * ライセンス情報
 	 */
-	@Min(0)
 	@NotNull
-	@Column(nullable = false)
-	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseInfoId;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ライセンス情報", required = true, position = 2)
+	private LicenseInfo licenseInfo;
 
 	/**
 	 * 操作内容

@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.license;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -49,41 +53,58 @@ public class LicenseInfo extends EntityBase {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
+	private long contractId;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 3, allowableValues = "range[0,255]")
+	private String immutableContIdentNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 4, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約番号", required = false, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約番号", required = false, position = 5, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "契約番号枝番", required = true, position = 5, allowableValues = "range[0,99]")
+	@Max(99)
+	@Min(0)
+	@ApiModelProperty(value = "契約番号枝番", required = true, position = 6, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
 	/**
 	 * 契約種別
 	 */
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 6)
+	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 7)
 	private ContractType contractType;
 
 	/**
 	 * 契約種別詳細
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約種別詳細", required = true, position = 7, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約種別詳細", required = true, position = 8, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
+
+	/**
+	 * 解約フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 9, allowableValues = "range[0,9]")
+	private Integer disengagementFlg;
 
 	/**
 	 * ライセンス区分
@@ -91,46 +112,50 @@ public class LicenseInfo extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンス区分", required = true, position = 8, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ライセンス区分", required = true, position = 10, allowableValues = "range[0,255]")
 	private String licenseDiv;
 
 	/**
 	 * 完了工程順
 	 */
-	@ApiModelProperty(value = "完了工程順", required = false, position = 9, allowableValues = "range[0,999]")
-	private int completeProcessOrder;
+	@Max(999)
+	@Min(0)
+	@ApiModelProperty(value = "完了工程順", required = false, position = 11, allowableValues = "range[0,999]")
+	private Integer completeProcessOrder;
 
 	/**
 	 * 完了工程ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "完了工程ID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "完了工程ID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
 	private Long completeProcessId;
 
 	/**
 	 * 完了手配業務ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "完了手配業務ID", required = false, position = 11, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "完了手配業務ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
 	private Long completeArrangementWorkId;
 
 	/**
 	 * 完了操作区分
 	 */
-	@ApiModelProperty(value = "完了操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 12)
+	@ApiModelProperty(value = "完了操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 14)
 	private OperationDiv completeOperationDiv;
 
 	/**
 	 * 作業中工程順
 	 */
-	@ApiModelProperty(value = "作業中工程順", required = false, position = 13, allowableValues = "range[0,999]")
-	private int workingProcessOrder;
+	@Max(999)
+	@Min(0)
+	@ApiModelProperty(value = "作業中工程順", required = false, position = 15, allowableValues = "range[0,999]")
+	private Integer workingProcessOrder;
 
 	/**
 	 * 作業中工程ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "作業中工程ID", required = false, position = 14, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "作業中工程ID", required = false, position = 16, allowableValues = "range[0,9223372036854775807]")
 	private Long workingProcessId;
 
 	/**
@@ -138,13 +163,13 @@ public class LicenseInfo extends EntityBase {
 	 *
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "作業中手配業務ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "作業中手配業務ID", required = false, position = 17, allowableValues = "range[0,9223372036854775807]")
 	private Long workingArrangementWorkId;
 
 	/**
 	 * 作業中操作区分
 	 */
-	@ApiModelProperty(value = "作業中操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 16)
+	@ApiModelProperty(value = "作業中操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 18)
 	private OperationDiv workingArrangementWorkOperationDiv;
 
 	/**
@@ -152,7 +177,7 @@ public class LicenseInfo extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "キャンセル状態", required = false, position = 17, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "range[0,9]")
 	private Integer cancelStatus;
 
 	/**
@@ -160,21 +185,21 @@ public class LicenseInfo extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 18, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "range[0,9]")
 	private Integer csvOutputFlg;
 
 	/**
 	 * CSV出力日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "CSV出力日時", required = false, position = 19)
+	@ApiModelProperty(value = "CSV出力日時", required = false, position = 21)
 	private Date csvOutputAt;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 20, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メールアドレス", required = false, position = 22, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**
@@ -182,29 +207,44 @@ public class LicenseInfo extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "工程ロック状態", required = false, position = 21, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "range[0,9]")
 	private Integer processLockStatus;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 22)
+	@ApiModelProperty(value = "拡張項目", required = false, position = 24)
 	@Lob
 	private String extendsParameter;
 
 	/**
-	 * 恒久契約識別番号
+	 * ライセンス明細
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 23, allowableValues = "range[0,255]")
-	private String immutableContIdentNumber;
+	@OneToMany(mappedBy = "licenseInfo")
+	@OrderBy("seqNumber ASC")
+	@ApiModelProperty(value = "ライセンス明細", required = false, position = 25)
+	private List<LicenseDetail> licenseDetailList;
 
 	/**
-	 * 解約フラグ
+	 * ライセンス工程
 	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 17, allowableValues = "range[0,9]")
-	private Integer disengagementFlg;
+	@OneToMany(mappedBy = "licenseInfo")
+	@OrderBy("processOrder ASC")
+	@ApiModelProperty(value = "ライセンス工程", required = true, position = 26)
+	private List<LicenseProcess> licenseProcessList;
+
+	/**
+	 * ライセンス残数
+	 */
+	@OneToOne(mappedBy = "licenseInfo")
+	@ApiModelProperty(value = "ライセンス残数", required = false, position = 27)
+	private LicenseRemainingNumber licenseRemainingNumber;
+
+	/**
+	 * ライセンス情報操作履歴
+	 */
+	@OneToMany(mappedBy = "licenseInfo")
+	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
+	private List<LicenseInfoOperationLog> licenseOperationLogList;
 
 }

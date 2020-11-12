@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -25,6 +30,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "license_process_pattern_master")
 public class LicenseProcessPatternMaster extends EntityBase {
+
+	public enum MailDiv {
+
+		事前完了メール("1"), Welcameメール("2");
+
+		private final String text;
+
+		private MailDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MailDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * ライセンス工程パターンマスタID
@@ -97,6 +124,6 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "メール区分", required = true, position = 2, allowableValues = "range[0,255]")
-	private String mailDiv;
+	private MailDiv mailDiv;
 
 }
