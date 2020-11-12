@@ -187,7 +187,7 @@ public class ArrangementWork extends EntityBase {
 	 * 業務受付枝番
 	 */
 	@Max(99)
-	@Min(0)
+	@Min(1)
 	@ApiModelProperty(value = "業務受付枝番", required = false, position = 17, allowableValues = "range[1,99]")
 	private Integer businessAcceptBranchNumber;
 

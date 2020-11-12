@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -14,6 +16,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -37,13 +41,14 @@ public class PenaltyDetailEstimation extends EntityBase {
 	private long id;
 
 	/**
-	 * 見積ID
+	 * 見積
 	 */
-	@Min(0)
 	@NotNull
-	@Column(nullable = false)
-	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long estimationId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "見積", required = true, position = 2)
+	@JsonIgnore
+	private Estimation estimation;
 
 	/**
 	 * 品種マスタID

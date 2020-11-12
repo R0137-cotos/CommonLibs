@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -32,13 +33,14 @@ public class ShippingPostNumberMaster extends EntityBase {
 	 * 郵便番号
 	 */
 	@Size(max = 255)
+	@NotNull
 	@ApiModelProperty(value = "郵便番号", required = true, position = 3, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 地域名
 	 */
-	@Size(max = 255)
+	@Size(max = 1000)
 	@ApiModelProperty(value = "地域名", required = false, position = 3, allowableValues = "range[0,255]")
 	private String areaName;
 
