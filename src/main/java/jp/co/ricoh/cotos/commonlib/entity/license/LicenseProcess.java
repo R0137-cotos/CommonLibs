@@ -134,13 +134,13 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\\\"1\\\"), ボタン(\\\"2\\\"), CSV出力(\\\"3\\\"), CSV取込(\\\"4\\\")", position = 6)
+	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 6)
 	private OperationDiv operationDiv;
 
 	/**
 	 * メール区分
 	 */
-	@ApiModelProperty(value = "メール区分", required = false, position = 7, allowableValues = "事前完了メール(\\\"1\\\"), Welcomeメール(\\\"2\\\")")
+	@ApiModelProperty(value = "メール区分", required = false, position = 7, allowableValues = "事前完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
@@ -148,7 +148,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
-	private long mailTemplateId;
+	private Long mailTemplateId;
 
 	/**
 	 * メール到達チェックフラグ
@@ -156,7 +156,7 @@ public class LicenseProcess extends EntityBase {
 	@Max(9)
 	@Min(0)
 	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 9, allowableValues = "range[0,9]")
-	private int mailArrivalCheckFlg;
+	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
@@ -168,13 +168,13 @@ public class LicenseProcess extends EntityBase {
 	/**
 	 * 送信結果区分
 	 */
-	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\\\"0\\\"), 送信中(\\\"1\\\"), 送信済(\\\"2\\\"), 不達(\\\"3\\\"), 送信エラー(\\\"4\\\")", position = 11)
+	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 11)
 	private MailSendedResultDiv mailSendedResultDiv;
 
 	/**
 	 * 工程状態
 	 */
-	@ApiModelProperty(value = "工程状態", required = false, position = 12, allowableValues = "未処理(\\\"0\\\"), 完了(\\\"1\\\"), 破棄(\\\"2\\\")")
+	@ApiModelProperty(value = "工程状態", required = false, position = 12, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
 	private ProcessStatus processStatus;
 
 }

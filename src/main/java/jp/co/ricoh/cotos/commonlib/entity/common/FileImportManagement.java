@@ -117,7 +117,7 @@ public class FileImportManagement extends EntityBase {
 	 * バッチ実行ステータス
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\\\"1\\\"), 取込中(\\\"2\\\"), エラー(\\\"3\\\"), 正常終了(\\\"4\\\")", //
+	@ApiModelProperty(value = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\"1\"), 取込中(\"2\"), エラー(\"3\"), 正常終了(\"4\")", //
 			position = 8, readOnly = false)
 	private BatchExecutionStatus batchExecutionStatus;
 

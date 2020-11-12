@@ -121,21 +121,21 @@ public class LicenseInfo extends EntityBase {
 	@Max(999)
 	@Min(0)
 	@ApiModelProperty(value = "完了工程順", required = false, position = 11, allowableValues = "range[0,999]")
-	private int completeProcessOrder;
+	private Integer completeProcessOrder;
 
 	/**
 	 * 完了工程ID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "完了工程ID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
-	private long completeProcessId;
+	private Long completeProcessId;
 
 	/**
 	 * 完了手配業務ID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "完了手配業務ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
-	private long completeArrangementWorkId;
+	private Long completeArrangementWorkId;
 
 	/**
 	 * 完了操作区分
@@ -149,14 +149,14 @@ public class LicenseInfo extends EntityBase {
 	@Max(999)
 	@Min(0)
 	@ApiModelProperty(value = "作業中工程順", required = false, position = 15, allowableValues = "range[0,999]")
-	private int workingProcessOrder;
+	private Integer workingProcessOrder;
 
 	/**
 	 * 作業中工程ID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "作業中工程ID", required = false, position = 16, allowableValues = "range[0,9223372036854775807]")
-	private long workingProcessId;
+	private Long workingProcessId;
 
 	/**
 	 * 作業中手配業務ID

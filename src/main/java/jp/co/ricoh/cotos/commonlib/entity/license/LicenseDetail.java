@@ -130,14 +130,14 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "品種マスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private long itemMasterId;
+	private Long itemMasterId;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "商品マスタID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
-	private long productMasterId;
+	private Long productMasterId;
 
 	/**
 	 * ハード・ソフト区分
@@ -158,7 +158,7 @@ public class LicenseDetail extends EntityBase {
 	@Max(99999)
 	@Min(0)
 	@ApiModelProperty(value = "数量", required = false, position = 10, allowableValues = "range[0,99999]")
-	private int quantity;
+	private Integer quantity;
 
 	/**
 	 * 取込フラグ

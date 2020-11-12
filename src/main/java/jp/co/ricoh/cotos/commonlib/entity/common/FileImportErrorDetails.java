@@ -51,7 +51,7 @@ public class FileImportErrorDetails extends EntityBase {
 	@Max(99999)
 	@Min(0)
 	@ApiModelProperty(value = "行番号", required = false, position = 3, allowableValues = "range[0,99999]")
-	private String lineNumber;
+	private Integer lineNumber;
 
 	/**
 	 * メッセージ
