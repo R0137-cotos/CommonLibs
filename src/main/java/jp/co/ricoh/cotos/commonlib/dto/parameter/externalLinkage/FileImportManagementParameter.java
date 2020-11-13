@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import lombok.Data;
 
 /**
@@ -30,11 +31,11 @@ public class FileImportManagementParameter {
 	private String fileName;
 
 	/**
-	 * 添付ファイルID
+	 * 添付ファイル
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "添付ファイルID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private long attachmentId;
+	@NotNull
+	@ApiModelProperty(value = "添付ファイル", required = true, position = 3)
+	private AttachedFile attachedFile;
 
 	/**
 	 * 取込実施者
