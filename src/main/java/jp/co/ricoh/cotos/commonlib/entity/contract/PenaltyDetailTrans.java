@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,9 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
@@ -28,6 +32,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "penalty_detail_trans")
 public class PenaltyDetailTrans extends EntityBase {
+
+	public enum InitialRunningDiv {
+
+		イニシャル("1"), ランニング("2"), 期間売("3");
+
+		private final String text;
+
+		private InitialRunningDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static InitialRunningDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * 品種明細ID
@@ -68,4 +94,10 @@ public class PenaltyDetailTrans extends EntityBase {
 	@Column(nullable = false)
 	@ApiModelProperty(value = "違約金明細ID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
 	private long penaltyDetailContractId;
+
+	/**
+	 * イニシャル/ランニング区分
+	 */
+	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", example = "1", position = 6)
+	private InitialRunningDiv initialRunningDiv;
 }

@@ -84,4 +84,20 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "カテゴリ", required = false, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\")", position = 4)
 	private CategoryType categoryType;
 
+	/**
+	 * メニュー明細管理マスタID
+	 */
+	@NotNull
+	@Column(nullable = false)
+	@Min(0)
+	@ApiModelProperty(value = "メニュー明細管理マスタID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
+	private long menuDetailsManagementId;
+
+	/**
+	 * ライセンス区分マスタID
+	 */
+	@Column(nullable = true)
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 6, allowableValues = "range[0,9223372036854775807]")
+	private long licenseDivMasterId;
 }
