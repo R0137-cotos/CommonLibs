@@ -202,4 +202,11 @@ public class ItemContract extends EntityBase {
 	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "分解後原価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal itemDecomposePrice;
+
+	/**
+	 * 契約機種品種紐づけ
+	 */
+	@OneToOne(mappedBy = "itemContract")
+	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 14, readOnly = true)
+	private ContractEquipmentItemLink contractEquipmentItemLink;
 }

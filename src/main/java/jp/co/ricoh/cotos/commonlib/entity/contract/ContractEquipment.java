@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -95,6 +98,27 @@ public class ContractEquipment extends EntityBase {
 
 		@JsonCreator
 		public static ArcsPeriodSaleMainteProcStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum MachineType {
+		サーバー本体("1"), HWオプション("2"), SWオプション("3");
+
+		private final String text;
+
+		private MachineType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MachineType fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -264,9 +288,8 @@ public class ContractEquipment extends EntityBase {
 	/**
 	 * 機器区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "機器区分", required = false, position = 24, allowableValues = "range[0,255]")
-	private String machineType;
+	@ApiModelProperty(value = "機器区分", required = false, position = 24, allowableValues = "サーバー本体(\"1\"),HWオプション(\"2\"),SWオプション(\"3\")")
+	private MachineType machineType;
 
 	/**
 	 * 機種名
@@ -274,5 +297,21 @@ public class ContractEquipment extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "機種名", required = false, position = 25, allowableValues = "range[0,255]")
 	private String equipmentName;
+
+	/**
+	 * 契約機種品種紐づけ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contractEquipment")
+	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 26)
+	private List<ContractEquipmentItemLink> contractEquipmentItemLink;
+
+	/**
+	 * 契約機種状態管理
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contractEquipment")
+	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 27)
+	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 
 }

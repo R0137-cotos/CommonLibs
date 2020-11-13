@@ -823,4 +823,28 @@ public class Contract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "仕入用管理No", required = false, position = 88, allowableValues = "range[0,255]")
 	private String purchaseManageNumber;
+
+	/**
+	 * 契約機種品種紐づけ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 89)
+	private List<ContractEquipmentItemLink> contractEquipmentItemLink;
+
+	/**
+	 * 契約機種(Isys-Oneへの連携なし)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 90)
+	private List<ContractEquipmentNoIsysone> contractEquipmentNoIsysone;
+
+	/**
+	 * 契約機種状態管理
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 91)
+	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 }
