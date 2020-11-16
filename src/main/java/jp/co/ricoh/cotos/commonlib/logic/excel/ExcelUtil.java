@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.jxls.common.Context;
@@ -44,7 +43,6 @@ public class ExcelUtil {
 	 * @param entity マッピング用エンティティクラス
 	 * @param outputFilePath 出力エクセル帳票ファイルパス
 	 */
-	@Deprecated
 	public <T> void outputExcelReports(String templateFilePath, T entity, String outputFilePath) throws ErrorCheckException {
 		List<ErrorInfo> errorInfoList = new ArrayList<>();
 
@@ -98,7 +96,6 @@ public class ExcelUtil {
 	 * @param filePath 入出力エクセル帳票ファイル
 	 * @param sheetNameList 削除シート名配列
 	 */
-	@Deprecated
 	public void deleteExcelSheet(String filePath, List<String> sheetNameList) throws ErrorCheckException {
 		List<ErrorInfo> errorInfoList = new ArrayList<>();
 
@@ -137,7 +134,7 @@ public class ExcelUtil {
 			}
 		} catch (FileNotFoundException e) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputFile.getAbsolutePath() }));
-		} catch (IOException | EncryptedDocumentException | InvalidFormatException e) {
+		} catch (IOException | EncryptedDocumentException e) {
 			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileOutputFailed", new String[] { inputFile.getAbsolutePath() }));
 		} finally {
 			// テンポラリファイル削除
