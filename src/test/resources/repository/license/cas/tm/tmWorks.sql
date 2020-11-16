@@ -769,6 +769,7 @@ insert into tm_update_customer_request_work (
   , state
   , country
   , city
+  , customer_id
 ) values(
   10
   , '2020/11/02 17:00:00'
@@ -785,6 +786,7 @@ insert into tm_update_customer_request_work (
   , 'state'
   , 'country'
   , 'city'
+  , 'customer_id'
 );
 insert into tm_update_customer_request_work (
   id
@@ -802,6 +804,7 @@ insert into tm_update_customer_request_work (
   , state
   , country
   , city
+  , customer_id
 ) values(
   20
   , '2020/11/02 17:00:00'
@@ -818,6 +821,7 @@ insert into tm_update_customer_request_work (
   , 'state'
   , 'country'
   , 'city'
+  , 'customer_id'
 );
 insert into tm_update_customer_request_work (
   id
@@ -835,6 +839,7 @@ insert into tm_update_customer_request_work (
   , state
   , country
   , city
+  , customer_id
 ) values(
   30
   , '2020/11/02 17:00:00'
@@ -851,6 +856,7 @@ insert into tm_update_customer_request_work (
   , 'state'
   , 'country'
   , 'city'
+  , 'customer_id'
 );
 -- TM_会社情報更新レスポンスWORK
 insert into tm_update_customer_response_work (
@@ -1077,15 +1083,20 @@ insert into tm_update_subscription_response_work (
   , error_message
   , licence_mapped_status
   , subscription_id
-  , product_name
+  , name
+  , enabled
+  , is_auto_renewal
+  , auto_renewal_month
+  , expiration_notification
   , service_url
-  , product_id
-  , versionlicence_version
   , ac_code
-  , units
+  , product_id
   , license_start_date
   , license_expiration_date
   , start_charge_date
+  , grace_period
+  , units
+  , license_enabled
 ) values(
   10
   , '2020/11/02 17:00:00'
@@ -1098,15 +1109,20 @@ insert into tm_update_subscription_response_work (
   , 'error_message'
   , '0'
   , 'subscription_id'
-  , 'product_name'
+  , 'name'
+  , 0
+  , 0
+  , 'auto_renewal_month'
+  , 'expiration_notification'
   , 'service_url'
-  , 'product_id'
-  , 'versionlicence_version'
   , 'ac_code'
-  , 'units'
-  , '2020/11/02 17:00:00'
-  , '2020/11/02 17:00:00'
-  , '2020/11/02 17:00:00'
+  , 'product_id'
+  , '2020/11/02'
+  , '2020/11/02'
+  , '2020/11/02'
+  , 10
+  , 10
+  , 0
  );
  insert into tm_update_subscription_response_work (
   id
@@ -1120,15 +1136,20 @@ insert into tm_update_subscription_response_work (
   , error_message
   , licence_mapped_status
   , subscription_id
-  , product_name
+  , name
+  , enabled
+  , is_auto_renewal
+  , auto_renewal_month
+  , expiration_notification
   , service_url
-  , product_id
-  , versionlicence_version
   , ac_code
-  , units
+  , product_id
   , license_start_date
   , license_expiration_date
   , start_charge_date
+  , grace_period
+  , units
+  , license_enabled
 ) values(
   20
   , '2020/11/02 17:00:00'
@@ -1141,15 +1162,20 @@ insert into tm_update_subscription_response_work (
   , 'error_message'
   , '0'
   , 'subscription_id'
-  , 'product_name'
+  , 'name'
+  , 0
+  , 0
+  , 'auto_renewal_month'
+  , 'expiration_notification'
   , 'service_url'
-  , 'product_id'
-  , 'versionlicence_version'
   , 'ac_code'
-  , 'units'
-  , '2020/11/02 17:00:00'
-  , '2020/11/02 17:00:00'
-  , '2020/11/02 17:00:00'
+  , 'product_id'
+  , '2020/11/02'
+  , '2020/11/02'
+  , '2020/11/02'
+  , 10
+  , 10
+  , 0
  );
  insert into tm_update_subscription_response_work (
   id
@@ -1163,15 +1189,20 @@ insert into tm_update_subscription_response_work (
   , error_message
   , licence_mapped_status
   , subscription_id
-  , product_name
+  , name
+  , enabled
+  , is_auto_renewal
+  , auto_renewal_month
+  , expiration_notification
   , service_url
-  , product_id
-  , versionlicence_version
   , ac_code
-  , units
+  , product_id
   , license_start_date
   , license_expiration_date
   , start_charge_date
+  , grace_period
+  , units
+  , license_enabled
 ) values(
   30
   , '2020/11/02 17:00:00'
@@ -1184,15 +1215,20 @@ insert into tm_update_subscription_response_work (
   , 'error_message'
   , '1'
   , 'subscription_id'
-  , 'product_name'
+  , 'name'
+  , 0
+  , 0
+  , 'auto_renewal_month'
+  , 'expiration_notification'
   , 'service_url'
-  , 'product_id'
-  , 'versionlicence_version'
   , 'ac_code'
-  , 'units'
-  , '2020/11/02 17:00:00'
-  , '2020/11/02 17:00:00'
-  , '2020/11/02 17:00:00'
+  , 'product_id'
+  , '2020/11/02'
+  , '2020/11/02'
+  , '2020/11/02'
+  , 10
+  , 10
+  , 0
  );
  -- TM_ユーザーアカウント更新リクエストWORK
 insert into tm_update_user_request_work (
@@ -1208,6 +1244,8 @@ insert into tm_update_user_request_work (
   , http_header
   , http_body
   , email
+  , customer_id
+  , user_id
 ) values(
   10
   , '2020/11/02 17:00:00'
@@ -1221,6 +1259,8 @@ insert into tm_update_user_request_work (
   , 'http_header'
   , 'http_body'
   , 'email'
+  , 'customer_id'
+  , 'user_id'
 );
 insert into tm_update_user_request_work (
   id
@@ -1235,6 +1275,8 @@ insert into tm_update_user_request_work (
   , http_header
   , http_body
   , email
+  , customer_id
+  , user_id
 ) values(
   20
   , '2020/11/02 17:00:00'
@@ -1248,6 +1290,8 @@ insert into tm_update_user_request_work (
   , 'http_header'
   , 'http_body'
   , 'email'
+  , 'customer_id'
+  , 'user_id'
 );
 insert into tm_update_user_request_work (
   id
@@ -1262,6 +1306,8 @@ insert into tm_update_user_request_work (
   , http_header
   , http_body
   , email
+  , customer_id
+  , user_id
 ) values(
   30
   , '2020/11/02 17:00:00'
@@ -1275,6 +1321,8 @@ insert into tm_update_user_request_work (
   , 'http_header'
   , 'http_body'
   , 'email'
+  , 'customer_id'
+  , 'user_id'
 );
 -- TM_ユーザーアカウント更新レスポンスWORK
 insert into tm_update_user_response_work (
