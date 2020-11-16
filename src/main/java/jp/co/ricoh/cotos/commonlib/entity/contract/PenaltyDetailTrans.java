@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialRunningDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -68,4 +69,10 @@ public class PenaltyDetailTrans extends EntityBase {
 	@Column(nullable = false)
 	@ApiModelProperty(value = "違約金明細ID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
 	private long penaltyDetailContractId;
+
+	/**
+	 * イニシャル/ランニング区分
+	 */
+	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", example = "1", position = 6)
+	private InitialRunningDiv initialRunningDiv;
 }

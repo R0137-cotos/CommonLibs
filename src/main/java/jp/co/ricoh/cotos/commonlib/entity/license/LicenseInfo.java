@@ -175,18 +175,16 @@ public class LicenseInfo extends EntityBase {
 	/**
 	 * キャンセル状態
 	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "range[0,9]")
-	private Integer cancelStatus;
+	@Size(max = 255)
+	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "range[0,255]")
+	private String cancelStatus;
 
 	/**
 	 * CSV出力フラグ
 	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "range[0,9]")
-	private Integer csvOutputFlg;
+	@Size(max = 255)
+	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "range[0,255]")
+	private String csvOutputFlg;
 
 	/**
 	 * CSV出力日時
@@ -205,10 +203,9 @@ public class LicenseInfo extends EntityBase {
 	/**
 	 * 工程ロック状態
 	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "range[0,9]")
-	private Integer processLockStatus;
+	@Size(max = 255)
+	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "range[0,255]")
+	private String processLockStatus;
 
 	/**
 	 * 拡張項目

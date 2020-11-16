@@ -29,12 +29,12 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_equipment_no_isysone")
 public class ContractEquipmentNoIsysone extends EntityBase {
 
-	public enum MachineType {
+	public enum MachineTypeNoIsysone {
 		ハードディスク("1"), 内蔵オプション("2"), 外付オプション("3"), 導入ソフトウェア("4");
 
 		private final String text;
 
-		private MachineType(final String text) {
+		private MachineTypeNoIsysone(final String text) {
 			this.text = text;
 		}
 
@@ -45,7 +45,7 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 		}
 
 		@JsonCreator
-		public static MachineType fromString(String string) {
+		public static MachineTypeNoIsysone fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -59,8 +59,8 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 	/**
 	 * 機器区分
 	 */
-	@ApiModelProperty(value = "機器区分", required = false, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "6", position = 2)
-	private MachineType machineType;
+	@ApiModelProperty(value = "機器区分（Isys-Oneへの連携なし）", required = false, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "1", position = 2)
+	private MachineTypeNoIsysone machineTypeNoIsysone;
 
 	/**
 	 * 製品番号
