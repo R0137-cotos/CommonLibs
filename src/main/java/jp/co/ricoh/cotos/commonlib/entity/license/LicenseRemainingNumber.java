@@ -7,14 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -81,11 +83,20 @@ public class LicenseRemainingNumber extends EntityBase {
 	private String licenseKey;
 
 	/**
-	 * ライセンス情報ID
+	 * ライセンス情報
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseInfoId;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ライセンス情報", required = false, position = 4)
+	private LicenseInfo licenseInfo;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "恒久契約識別番号", required = true, position = 8, allowableValues = "range[0,255]", readOnly = false)
+	private String immutableContIdentNumber;
 
 	/**
 	 * RJ管理番号
@@ -97,7 +108,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	/**
 	 * 割当区分
 	 */
-	@ApiModelProperty(value = "割当区分", required = false, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"3\")", example = "1", position = 6)
+	@ApiModelProperty(value = "割当区分", required = false, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"3\")", position = 6)
 	private AllocationDiv allocationDiv;
 
 	/**
@@ -107,10 +118,4 @@ public class LicenseRemainingNumber extends EntityBase {
 	@Lob
 	private String extendsParameter;
 
-	/**
-	 * 恒久契約識別番号
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "恒久契約識別番号", required = true, position = 8, allowableValues = "range[0,255]", readOnly = false)
-	private String immutableContIdentNumber;
 }

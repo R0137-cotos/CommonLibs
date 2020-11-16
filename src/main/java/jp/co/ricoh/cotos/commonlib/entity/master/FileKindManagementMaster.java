@@ -30,13 +30,13 @@ import lombok.EqualsAndHashCode;
 @Table(name = "file_kind_management_master")
 public class FileKindManagementMaster extends EntityBaseMaster {
 
-	public enum InportExportType {
+	public enum ImportExportType {
 
 		取込("1"), 出力("2");
 
 		private final String text;
 
-		private InportExportType(final String text) {
+		private ImportExportType(final String text) {
 			this.text = text;
 		}
 
@@ -47,7 +47,7 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static InportExportType fromString(String string) {
+		public static ImportExportType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -102,10 +102,9 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	/**
 	 * 入出力区分
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@ApiModelProperty(value = "入出力区分", required = true, allowableValues = "取込(\"1\"), 出力(\"2\")", position = 4)
-	private InportExportType inportExportType;
+	private ImportExportType importExportType;
 
 	/**
 	 * 出力条件区分

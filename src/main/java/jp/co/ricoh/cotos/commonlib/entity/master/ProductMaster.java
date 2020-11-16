@@ -206,4 +206,11 @@ public class ProductMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "仕入先No", required = false, position = 24, allowableValues = "range[0,255]")
 	private String siiresakiNo;
+
+	/**
+	 * ARCS契約種類区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ARCS契約種類区分", required = false, position = 25, allowableValues = "range[0,255]")
+	private String arcsContractClassDiv;
 }

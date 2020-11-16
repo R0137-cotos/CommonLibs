@@ -374,9 +374,10 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 契約期間月数
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "契約期間月数", required = false, position = 32, allowableValues = "range[0,255]")
-	private String contractSpanMonth;
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "契約期間月数", required = false, position = 32, allowableValues = "range[0,99999]")
+	private Integer contractSpanMonth;
 
 	/**
 	 * 契約期間起算日区分
