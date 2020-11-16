@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,6 +186,7 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	@Ignore
 	public void EstimationListenerのテスト_番号未付与() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("listener/sequence.sql");
 
