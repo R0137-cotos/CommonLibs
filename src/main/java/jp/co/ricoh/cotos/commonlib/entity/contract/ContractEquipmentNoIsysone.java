@@ -59,7 +59,7 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 	/**
 	 * 機器区分
 	 */
-	@ApiModelProperty(value = "機器区分（Isys-Oneへの連携なし）", required = false, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "6", position = 2)
+	@ApiModelProperty(value = "機器区分（Isys-Oneへの連携なし）", required = false, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "1", position = 2)
 	private MachineTypeNoIsysone machineTypeNoIsysone;
 
 	/**
