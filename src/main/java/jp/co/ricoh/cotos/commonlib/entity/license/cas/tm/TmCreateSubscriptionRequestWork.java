@@ -9,10 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -57,7 +57,7 @@ public class TmCreateSubscriptionRequestWork extends AbstractTmRequestWork {
 	/**
 	 * ライセンス開始日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 10, allowableValues = "range[0,255]")
 	private Date licenseStartDate;
 

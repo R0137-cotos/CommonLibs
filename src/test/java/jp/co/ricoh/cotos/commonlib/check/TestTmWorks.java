@@ -186,14 +186,11 @@ public class TestTmWorks {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setSubscriptionId(STR_256);
-		testTarget.setProductName(STR_256);
 		testTarget.setServiceUrl(STR_256);
 		testTarget.setProductId(STR_256);
-		testTarget.setVersionlicenceVersion(STR_256);
 		testTarget.setAcCode(STR_256);
-		testTarget.setUnits(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 7);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "サブスクリプションIDは最大文字数（255）を超えています。"));
 	}

@@ -35,13 +35,27 @@ public class TmUpdateUserRequestWork extends AbstractTmRequestWork {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メールアドレス", required = false, position = 7, allowableValues = "range[0,255]")
 	private String email;
-	
+
+	/**
+	 * 会社ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "会社ID", required = false, position = 8, allowableValues = "range[0,255]")
+	private String customerId;
+
+	/**
+	 * ユーザーID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ユーザーID", required = false, position = 9, allowableValues = "range[0,255]")
+	private String userId;
+
 	/**
 	 * ユーザーアカウント更新レスポンスWORK
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK", required = false, position = 8)
+	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK", required = false, position = 10)
 	private TmUpdateUserResponseWork responseWork;
 
 }
