@@ -10,9 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -94,21 +95,21 @@ public class TmCreateSubscriptionResponseWork extends AbstractTmResponseWork {
 	/**
 	 * ライセンス開始日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 13, allowableValues = "range[0,255]")
 	private Date licenseStartDate;
 
 	/**
 	 * ライセンス終了日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
-	@ApiModelProperty(value = "会社ID", required = false, position = 14, allowableValues = "range[0,255]")
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 14, allowableValues = "range[0,255]")
 	private Date licenseExpirationDate;
 
 	/**
 	 * 課金開始日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
-	@ApiModelProperty(value = "会社ID", required = false, position = 15, allowableValues = "range[0,255]")
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "課金開始日", required = false, position = 15, allowableValues = "range[0,255]")
 	private Date startChargeDate;
 }

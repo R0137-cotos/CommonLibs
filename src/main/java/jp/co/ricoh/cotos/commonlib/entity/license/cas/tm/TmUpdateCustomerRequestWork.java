@@ -58,11 +58,18 @@ public class TmUpdateCustomerRequestWork extends AbstractTmRequestWork {
 	private String city;
 
 	/**
+	 * 会社ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "会社ID", required = false, position = 11, allowableValues = "range[0,255]")
+	private String customerId;
+
+	/**
 	 * トレンドマイクロ会社情報更新レスポンスWORK
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "トレンドマイクロ会社情報更新レスポンスWORK", required = false, position = 11)
+	@ApiModelProperty(value = "トレンドマイクロ会社情報更新レスポンスWORK", required = false, position = 12)
 	private TmUpdateCustomerResponseWork responseWork;
 
 }

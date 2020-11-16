@@ -10,9 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -49,66 +50,98 @@ public class TmUpdateSubscriptionResponseWork extends AbstractTmResponseWork {
 	@Size(max = 255)
 	@ApiModelProperty(value = "サブスクリプションID", required = false, position = 6, allowableValues = "range[0,255]")
 	private String subscriptionId;
+
 	/**
-	 * 製品名
+	 * サービスプラン名称
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "製品名", required = false, position = 7, allowableValues = "range[0,255]")
-	private String productName;
+	@ApiModelProperty(value = "サービスプラン名称", required = false, position = 7, allowableValues = "range[0,255]")
+	private String name;
+
+	/**
+	 * サブスクリプションステータス
+	 */
+	@ApiModelProperty(value = "サブスクリプションステータス", required = false, position = 8)
+	private Boolean enabled;
+
+	/**
+	 * 自動更新有効無効設定
+	 */
+	@ApiModelProperty(value = "自動更新有効無効設定", required = false, position = 9)
+	private Boolean isAutoRenewal;
+
+	/**
+	 * 月額更新月数
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "月額更新月数", required = false, position = 10, allowableValues = "range[0,255]")
+	private String autoRenewalMonth;
+
+	/**
+	 * 有効期限通知日数
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "有効期限通知日数", required = false, position = 11, allowableValues = "range[0,255]")
+	private String expirationNotification;
 
 	/**
 	 * ログイン画面URL
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ログイン画面URL", required = false, position = 8, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ログイン画面URL", required = false, position = 12, allowableValues = "range[0,255]")
 	private String serviceUrl;
-
-	/**
-	 * 製品ID
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "製品ID", required = false, position = 9, allowableValues = "range[0,255]")
-	private String productId;
-
-	/**
-	 * 製品版/体験版
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "製品版/体験版", required = false, position = 10, allowableValues = "range[0,255]")
-	private String versionlicenceVersion;
 
 	/**
 	 * アクティベーションコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アクティベーションコード", required = false, position = 11, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "アクティベーションコード", required = false, position = 13, allowableValues = "range[0,255]")
 	private String acCode;
 
 	/**
-	 * シート数
+	 * 製品ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "シート数", required = false, position = 12, allowableValues = "range[0,255]")
-	private String units;
+	@ApiModelProperty(value = "製品ID", required = false, position = 14, allowableValues = "range[0,255]")
+	private String productId;
 
 	/**
 	 * ライセンス開始日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
-	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 13, allowableValues = "range[0,255]")
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 15, allowableValues = "range[0,255]")
 	private Date licenseStartDate;
 
 	/**
 	 * ライセンス終了日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
-	@ApiModelProperty(value = "会社ID", required = false, position = 14, allowableValues = "range[0,255]")
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 16, allowableValues = "range[0,255]")
 	private Date licenseExpirationDate;
 
 	/**
 	 * 課金開始日
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "Asia/Tokyo")
-	@ApiModelProperty(value = "会社ID", required = false, position = 15, allowableValues = "range[0,255]")
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "課金開始日", required = false, position = 17, allowableValues = "range[0,255]")
 	private Date startChargeDate;
+
+	/**
+	 * 猶予期間
+	 */
+	@ApiModelProperty(value = "猶予期間", required = false, position = 18, allowableValues = "range[0,9]")
+	private Integer gracePeriod;
+
+	/**
+	 * シート数
+	 */
+	@ApiModelProperty(value = "シート数", required = false, position = 19, allowableValues = "range[0,9]")
+	private Integer units;
+
+	/**
+	 * ライセンスステータス
+	 */
+	@ApiModelProperty(value = "ライセンスステータス", required = false, position = 20)
+	private Boolean licenseEnabled;
+
 }
