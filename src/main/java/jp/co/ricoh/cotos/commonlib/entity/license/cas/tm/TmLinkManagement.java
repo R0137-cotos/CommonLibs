@@ -86,44 +86,53 @@ public class TmLinkManagement extends EntityBase {
 	private TmUpdateUserRequestWork tmUpdateUserRequestWork;
 
 	/**
+	 * トレンドマイクロサブスクリプション解約リクエストWORK
+	 */
+	@OneToOne
+	@JoinColumn(name = "tm_suspend_subscription_request_work_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション解約リクエストWORK", required = true, position = 8)
+	private TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork;
+	
+	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 8, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 9, allowableValues = "range[0,255]")
 	private String mvbAccount;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約ID", required = false, position = 10, allowableValues = "range[0,255]")
 	private long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 10, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 11, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * MoM企業ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "MoM企業ID", required = false, position = 11, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 12, allowableValues = "range[0,255]")
 	private String momCompanyId;
 
 	/**
 	 * MoM企事部ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 12, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "MoM企事部ID", required = false, position = 13, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
 	 * 企業名（カナ）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "企業名（カナ）", required = false, position = 13, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "企業名（カナ）", required = false, position = 14, allowableValues = "range[0,255]")
 	private String companyNameKana;
 }
