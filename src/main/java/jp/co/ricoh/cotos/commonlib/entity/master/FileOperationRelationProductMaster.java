@@ -1,12 +1,14 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -100,4 +102,11 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 6, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
+
+	/**
+	 * ファイル種別管理マスタ
+	 */
+	@OneToMany(mappedBy = "fileOperationRelationProductMaster")
+	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 7)
+	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }
