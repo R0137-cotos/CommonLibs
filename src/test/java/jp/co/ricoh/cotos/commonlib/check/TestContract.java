@@ -417,6 +417,22 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "コメントは最大文字数（1000）を超えています。"));
 
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
+
 	}
 
 	@Test
@@ -493,8 +509,9 @@ public class TestContract {
 		testTarget.setDetailAbstract(STR_256);
 		testTarget.setOrderNo(STR_256);
 		testTarget.setContractSpan(STR_256);
+		testTarget.setAbsConExternalBillingStatus(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "摘要は最大文字数（255）を超えています。"));
 
@@ -656,8 +673,9 @@ public class TestContract {
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setInstallDeliverySiteId(STR_256);
 		testTarget.setVendorManageNumber(STR_256);
+		testTarget.setPurchaseManageNumber(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 22);
+		Assert.assertTrue(result.getErrorInfoList().size() == 23);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号は最大文字数（255）を超えています。"));
 
@@ -666,8 +684,9 @@ public class TestContract {
 		testTarget.setOriginContractBranchNumber(INT_100);
 		testTarget.setEstimationBranchNumber(INT_100);
 		testTarget.setManualUpdateFlg(INT_10);
+		testTarget.setSsWorkRequestCreate_flg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積番号枝番は最大値（99）を超えています。"));
 
@@ -679,8 +698,9 @@ public class TestContract {
 		testTarget.setEstimationBranchNumber(INT_MINUS_1);
 		testTarget.setEstimationId((long) INT_MINUS_1);
 		testTarget.setManualUpdateFlg(INT_MINUS_1);
+		testTarget.setSsWorkRequestCreate_flg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 7);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積IDは最小値（0）を下回っています。"));
 
@@ -953,8 +973,9 @@ public class TestContract {
 		testTarget.setBpCd(STR_256);
 		testTarget.setTaxFlag(STR_256);
 		testTarget.setMakerItemCode(STR_256);
+		testTarget.setItemDecomposeName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "消費税区分は最大文字数（255）を超えています。"));
 
@@ -974,8 +995,9 @@ public class TestContract {
 		testTarget.setRjPurchasePrice(DECIMAL_MINUS_001);
 		testTarget.setRjDividingPrice(DECIMAL_MINUS_001);
 		testTarget.setMotherStorePrice(DECIMAL_MINUS_001);
+		testTarget.setItemDecomposePrice(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "母店売価(接点店仕切)は最小値（0.00）を下回っています。"));
 
@@ -986,8 +1008,9 @@ public class TestContract {
 		testTarget.setRjPurchasePrice(DECIMAL_0001);
 		testTarget.setRjDividingPrice(DECIMAL_0001);
 		testTarget.setMotherStorePrice(DECIMAL_0001);
+		testTarget.setItemDecomposePrice(DECIMAL_0001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "Ｒ原価は小数点以下2桁を超えています。"));
 
@@ -1058,8 +1081,12 @@ public class TestContract {
 		testTarget.setMaintenanceNoteKana(STR_1001);
 		testTarget.setInspectionMonth(STR_256);
 		testTarget.setInspectionMonthYearWorth(STR_256);
+		testTarget.setMakerCode(STR_256);
+		testTarget.setClassificationCode(STR_256);
+		testTarget.setMachineType(STR_256);
+		testTarget.setEquipmentName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 9);
+		Assert.assertTrue(result.getErrorInfoList().size() == 13);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "納入機器区分は最大文字数（255）を超えています。"));
 	}
@@ -1300,11 +1327,12 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
-		// 異常系（@DecimalMax：unitPrice, amountSummary）
+		// 異常系（@DecimalMax：unitPrice, amountSummary, beforeUnitPrice）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setEstimationAmountSummary(BigDecimal.valueOf(99999999999999999999.99));
+		testTarget.setBeforeUnitPrice(BigDecimal.valueOf(99999999999999999999.99));
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 	}
 
@@ -1340,6 +1368,22 @@ public class TestContract {
 		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "コメントは最大文字数（1000）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
 	}
 
 	@Test
@@ -1418,5 +1462,21 @@ public class TestContract {
 		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ファイル名は最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
 	}
 }
