@@ -5,11 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -35,13 +40,14 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	private long id;
 
 	/**
-	 * メニュー管理ID
+	 * メニュー管理マスタ
 	 */
 	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "メニュー管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long menuManagementId;
+	@ManyToOne
+	@JoinColumn(name = "menu_management_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "メニュー管理マスタ", required = true, position = 2)
+	private MenuManagementMaster menuManagementMaster;
 
 	/**
 	 * メニュー明細名
@@ -55,12 +61,16 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	 */
 	@NotNull
 	@Column(nullable = false)
+	@Max(999)
+	@Min(0)
 	@ApiModelProperty(value = "順序", required = true, position = 4, allowableValues = "range[0,999]")
 	private int orderNumber;
 
 	/**
 	 * URL
 	 */
+	@NotNull
+	@Column(nullable = false)
 	@Size(max = 255)
 	@ApiModelProperty(value = "URL", required = false, position = 5, allowableValues = "range[0,255]")
 	private String url;
