@@ -1595,28 +1595,6 @@ public class TestMaster {
 	}
 
 	@Test
-	public void MvTJmcj005Master_OE届け先コードで取得するテスト() throws Exception {
-
-		// エンティティの取得
-		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByOeTodokesakiCd("86045030000");
-
-		// Entity が 空 ではないことを確認
-		Assert.assertFalse(CollectionUtils.isEmpty(found));
-
-		found.stream().forEach(e -> {
-			// 判定に使用するカラムを確認
-			Assert.assertEquals("支社コードが一致すること", "101", e.getHanshCd());
-			Assert.assertEquals("RINGS得意先コードが一致すること", "10005470", e.getRingsTkiskCd());
-		});
-
-		// キー不一致
-		found = mvTJmcj005MasterRepository.findByOeTodokesakiCd("86045030001");
-		// Entity が 空 であることを確認
-		Assert.assertTrue(CollectionUtils.isEmpty(found));
-
-	}
-
-	@Test
 	public void VDirectDeliveryDealerInfoMasterRepositoryのテスト() throws Exception {
 
 		// テストデータはなし
