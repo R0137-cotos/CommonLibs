@@ -72,7 +72,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "URL", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "URL", required = true, position = 5, allowableValues = "range[0,255]")
 	private String url;
 
 }

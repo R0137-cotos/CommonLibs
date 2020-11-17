@@ -113,7 +113,8 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	/**
 	 * 出力条件区分
 	 */
-	@ApiModelProperty(value = "出力条件区分", required = false, position = 5, allowableValues = "range[0,255	]")
+	@Size(max = 255)
+	@ApiModelProperty(value = "出力条件区分", required = false, position = 5, allowableValues = "range[0,255]")
 	private Long exportConditionsType;
 
 	/**
