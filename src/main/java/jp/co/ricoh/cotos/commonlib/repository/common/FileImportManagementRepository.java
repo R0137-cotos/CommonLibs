@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository.common;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -9,5 +10,5 @@ import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 
 @Repository
 public interface FileImportManagementRepository extends CrudRepository<FileImportManagement, Long> {
-	public List<FileImportManagement> findByfileKindManagementIdAndImportDateOrderByImportDateDescIdDesc();
+	public List<FileImportManagement> findByFileKindManagementIdAndImportDateOrderByImportDateDescIdDesc(long fileKindManagementId, Date importDate);
 }
