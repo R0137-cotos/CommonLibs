@@ -146,6 +146,10 @@ public class TestTmWorks {
 		found = tmLinkManagementRepository.findByIdBetween(10L, 19L);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("from~toのレコードが取得されていること to境界値 ", 1, found.size());
+		TmUpdateCustomerRequestWork tmUpdateCustomerRequestWork = tmUpdateCustomerRequestWorkRepository.findOne(10L);
+		found = tmLinkManagementRepository.findByTmUpdateCustomerRequestWork(tmUpdateCustomerRequestWork);
+		Assert.assertNotNull(found);
+		Assert.assertEquals("トレンドマイクロ会社情報更新リクエストWORKをキーにレコードが取得されること ", 1, found.size());
 	}
 
 	private void TmCreateCustomerRequestWorkRepositoryのテスト() {
