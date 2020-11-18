@@ -425,8 +425,9 @@ public class ItemMaster extends EntityBaseMaster {
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
-	 * ランニング計上開始日計算パターンID
+	 * ランニング計上開始日計算マスタID
 	 */
-	@ApiModelProperty(value = "ランニング計上開始日計算パターンID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
-	private Long runningFromCalcPatternId;
+	@Min(0)
+	@ApiModelProperty(value = "ランニング計上開始日計算マスタID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
+	private Long runningFromCalcMasterId;
 }

@@ -29,7 +29,7 @@ import lombok.EqualsAndHashCode;
 public class ContractAutoUpdateMaster extends EntityBaseMaster {
 
 	/**
-	 * 
+	 *
 	 * 契約更新方式区分
 	 *
 	 */
@@ -56,7 +56,7 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 	}
 
 	/**
-	 * 
+	 *
 	 * 手配情報作成区分
 	 *
 	 */
@@ -134,5 +134,12 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "商品更新区分", required = false, position = 7, allowableValues = "range[0,255]")
 	private String productUpdateType;
+
+	/**
+	 * 期間売対象外区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "期間売対象外区分", required = false, position = 8, allowableValues = "range[0,255]")
+	private String periodSellingNoTargetType;
 
 }

@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -119,15 +118,6 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "日付計算グループ名称", required = false, position = 3, allowableValues = "range[0,255]")
 	private String dateCalcGrpName;
-
-	/**
-	 * 日付計算パターンID
-	 */
-	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "日付計算パターンID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Long dateCalcPatternId;
 
 	/**
 	 * 日付計算パターン名称

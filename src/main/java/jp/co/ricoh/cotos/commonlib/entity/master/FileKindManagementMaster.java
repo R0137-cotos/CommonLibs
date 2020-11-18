@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -105,9 +105,7 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	/**
 	 * 入出力区分
 	 */
-	@NotNull
-	@Column(nullable = false)
-	@ApiModelProperty(value = "入出力区分", required = true, allowableValues = "取込(\"1\"), 出力(\"2\")", position = 4)
+	@ApiModelProperty(value = "入出力区分", required = false, allowableValues = "取込(\"1\"), 出力(\"2\")", position = 4)
 	private ImportExportType importExportType;
 
 	/**
@@ -124,13 +122,6 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	private ErrorProcessingType errorProcessingType;
 
 	/**
-	 * 外部機能
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "外部機能", required = false, position = 7, allowableValues = "range[0,255]")
-	private String externalFunction;
-
-	/**
 	 * ファイル種別タイプ区分
 	 */
 	@Size(max = 255)
@@ -144,4 +135,10 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "出力ファイル名", required = false, position = 9, allowableValues = "range[0,255]")
 	private String outputFileName;
 
+	/**
+	 * CSVファイル設定マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "CSVファイル設定マスタID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	private Long csvFileSettingMasterId;
 }

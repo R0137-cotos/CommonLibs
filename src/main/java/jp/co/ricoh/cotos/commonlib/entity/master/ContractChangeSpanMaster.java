@@ -163,11 +163,11 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	private CheckPatternType checkPatternType;
 
 	/**
-	 * 契約変更期間日付計算パターンID 開始
+	 * 契約変更期間日付計算マスタID 開始
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約変更期間日付計算パターンID 開始", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
-	private Long fromContractChangeSpanCalcPatternId;
+	@ApiModelProperty(value = "契約変更期間日付計算マスタID 開始", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	private Long fromContractChangeSpanCalcMasterId;
 
 	/**
 	 * 契約変更期間チェック対象日区分 開始
@@ -177,11 +177,11 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	private FromContractChangeSpanTargetDateType fromContractChangeSpanTargetDateType;
 
 	/**
-	 * 契約変更期間日付計算パターンID 終了
+	 * 契約変更期間日付計算マスタID 終了
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約変更期間日付計算パターンID 終了", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
-	private Long toContractChangeSpanCalcPatternId;
+	@ApiModelProperty(value = "契約変更期間日付計算マスタID 終了", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
+	private Long toContractChangeSpanCalcMasterId;
 
 	/**
 	 * 契約変更期間チェック対象日区分 終了
