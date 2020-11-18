@@ -15,38 +15,35 @@ import lombok.Data;
 @Data
 public class CasLicenseListInfo {
 
-	@Id
-	@ApiModelProperty(value = "連番", required = true, position = 1)
-	private long seqNo;
-
 	/**
 	 * MVBアカウント
 	 */
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 2, allowableValues = "range[0,18]")
+	@Id
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 1, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * 担当者氏名
 	 */
-	@ApiModelProperty(value = "担当者氏名", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当者氏名", required = false, position = 2, allowableValues = "range[0,255]")
 	private String picName;
 
 	/**
 	 * 担当者メールアドレス
 	 */
-	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 3, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
 	 * TrendMicroアカウント企業名
 	 */
-	@ApiModelProperty(value = "企業名", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "企業名", required = false, position = 4, allowableValues = "range[0,255]")
 	private String tmAccountCompanyName;
 
 	/**
 	 * 都道府県
 	 */
-	@ApiModelProperty(value = "都道府県", required = false, position = 6, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "都道府県", required = false, position = 5, allowableValues = "range[0,255]")
 	private String prefectures;
 
 }
