@@ -10,5 +10,7 @@ import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 
 @Repository
 public interface FileImportManagementRepository extends CrudRepository<FileImportManagement, Long> {
-	public List<FileImportManagement> findByFileKindManagementIdAndImportDateOrderByImportDateDescIdDesc(long fileKindManagementId, Date importDate);
+	public List<FileImportManagement> findByFileKindManagementIdAndImportDateOrderByIdDesc(long fileKindManagementId, Date importDate);
+
+	public List<FileImportManagement> findByFileKindManagementIdOrderByImportDateDescIdDesc(long fileKindManagementId);
 }
