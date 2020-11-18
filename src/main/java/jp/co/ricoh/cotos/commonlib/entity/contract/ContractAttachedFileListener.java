@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
-import java.util.ArrayList;
-
 import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
@@ -11,9 +9,6 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
-import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 
@@ -21,17 +16,11 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 public class ContractAttachedFileListener {
 
 	private static MvEmployeeMasterRepository mvEmployeeMasterRepository;
-	private static CheckUtil checkUtil;
 	private static DummyUserMasterRepository dummyUserMasterRepository;
 
 	@Autowired
 	public void setMvEmployeeMasterRepository(MvEmployeeMasterRepository mvEmployeeMasterRepository) {
 		ContractAttachedFileListener.mvEmployeeMasterRepository = mvEmployeeMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ContractAttachedFileListener.checkUtil = checkUtil;
 	}
 
 	@Autowired
@@ -57,8 +46,7 @@ public class ContractAttachedFileListener {
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(contractAttachedFile.getAttachedEmpId());
 
 		if (employeeMaster == null) {
-			String[] regexList = { "添付者MoM社員ID" };
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
+			return;
 		}
 
 		if (StringUtils.isBlank(contractAttachedFile.getAttachedEmpName())) {
