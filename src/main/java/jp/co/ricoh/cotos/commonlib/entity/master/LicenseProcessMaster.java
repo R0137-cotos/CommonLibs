@@ -62,35 +62,26 @@ public class LicenseProcessMaster extends EntityBase {
 	private long id;
 
 	/**
-	 * ライセンス区分
-	 */
-	@NotNull
-	@Column(nullable = false)
-	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンス区分", required = true, position = 2, allowableValues = "range[0,255]")
-	private String licenseDiv;
-
-	/**
-	 * 工程ID
+	 * ライセンス区分マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "工程ID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long processId;
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long licenseDivMasterId;
 
 	/**
 	 * 工程名称
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "工程名称", required = false, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "工程名称", required = false, position = 3, allowableValues = "range[0,255]")
 	private String processName;
 
 	/**
 	 * 工程完了名称
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "工程完了名称", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "工程完了名称", required = false, position = 4, allowableValues = "range[0,255]")
 	private String completeProcessName;
 
 	/**
@@ -98,7 +89,7 @@ public class LicenseProcessMaster extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 6)
+	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 5)
 	private OperationDiv operationDiv;
 
 	/**
@@ -106,7 +97,7 @@ public class LicenseProcessMaster extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "優先順位", required = true, position = 7, allowableValues = "range[0,999]")
+	@ApiModelProperty(value = "優先順位", required = true, position = 6, allowableValues = "range[0,999]")
 	private int priorityOrder;
 
 }
