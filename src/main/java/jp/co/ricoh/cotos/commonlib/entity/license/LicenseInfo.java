@@ -113,7 +113,7 @@ public class LicenseInfo extends EntityBase {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
-	private long licenseDivMaster;
+	private long licenseDivMasterId;
 
 	/**
 	 * 完了工程順
