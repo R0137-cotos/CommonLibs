@@ -2,11 +2,12 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -84,13 +86,14 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	private long id;
 
 	/**
-	 * ファイル操作関連商品ID
+	 * ファイル操作関連商品マスタ
 	 */
 	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "ファイル操作関連商品ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long fileOperationRelationProductId;
+	@ManyToOne
+	@JoinColumn(name = "file_operation_relation_product_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ファイル操作関連商品マスタ", required = false, position = 2)
+	private FileOperationRelationProductMaster fileOperationRelationProductMaster;
 
 	/**
 	 * ファイル種別名
@@ -102,15 +105,14 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	/**
 	 * 入出力区分
 	 */
-	@Column(nullable = false)
-	@ApiModelProperty(value = "入出力区分", required = true, allowableValues = "取込(\"1\"), 出力(\"2\")", position = 4)
+	@ApiModelProperty(value = "入出力区分", required = false, allowableValues = "取込(\"1\"), 出力(\"2\")", position = 4)
 	private ImportExportType importExportType;
 
 	/**
 	 * 出力条件区分
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "出力条件区分", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	@Size(max = 255)
+	@ApiModelProperty(value = "出力条件区分", required = false, position = 5, allowableValues = "range[0,255]")
 	private Long exportConditionsType;
 
 	/**
@@ -118,13 +120,6 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "エラー処理区分", required = false, allowableValues = "全件(\"1\"), 個別(\"2\")", position = 6)
 	private ErrorProcessingType errorProcessingType;
-
-	/**
-	 * 外部機能
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "外部機能", required = false, position = 7, allowableValues = "range[0,255]")
-	private String externalFunction;
 
 	/**
 	 * ファイル種別タイプ区分
@@ -140,4 +135,10 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "出力ファイル名", required = false, position = 9, allowableValues = "range[0,255]")
 	private String outputFileName;
 
+	/**
+	 * CSVファイル設定マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "CSVファイル設定マスタID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	private Long csvFileSettingMasterId;
 }

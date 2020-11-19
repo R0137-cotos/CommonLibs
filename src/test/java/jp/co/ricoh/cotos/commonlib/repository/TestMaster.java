@@ -60,6 +60,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemTransCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.JsonSchemaMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LedgerMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseArrangementMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster;
@@ -107,6 +109,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMasterFull;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorProductMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.licenseDivCompMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.AppMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterRepository;
@@ -143,6 +146,9 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemTransCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.JsonSchemaMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LedgerMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.LicenseArrangementMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.LicenseDivCompMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.LicenseDivMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LicenseProcessControlMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LicenseProcessMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LicenseProcessPatternMasterRepository;
@@ -366,6 +372,12 @@ public class TestMaster {
 	private LicenseProcessMasterRepository licenseProcessMasterRepository;
 	@Autowired
 	private LicenseProcessPatternMasterRepository licenseProcessPatternMasterRepository;
+	@Autowired
+	private LicenseDivMasterRepository licenseDivMasterRepository;
+	@Autowired
+	private LicenseDivCompMasterRepository licenseDivCompMasterRepository;
+	@Autowired
+	private LicenseArrangementMasterRepository licenseArrangementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2309,6 +2321,54 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		LicenseProcessPatternMaster found = licenseProcessPatternMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void LicenseDivMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseDivMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		LicenseDivMaster found = licenseDivMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void LicenseDivCompMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseDivCompMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		licenseDivCompMaster found = licenseDivCompMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void LicenseArrangementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseArrangementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		LicenseArrangementMaster found = licenseArrangementMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

@@ -1,13 +1,18 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -53,6 +58,8 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	 */
 	@NotNull
 	@Column(nullable = false)
+	@Max(999)
+	@Min(0)
 	@ApiModelProperty(value = "順序", required = true, position = 4, allowableValues = "range[0,999]")
 	private int orderNumber;
 
@@ -63,4 +70,10 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "URL", required = false, position = 5, allowableValues = "range[0,255]")
 	private String url;
 
+	/**
+	 * メニュー明細管理マスタリスト
+	 */
+	@OneToMany(mappedBy = "menuManagementMaster")
+	@ApiModelProperty(value = "メニュー明細管理マスタ", required = false, position = 6)
+	private List<MenuDetailsManagementMaster> menuDetailsManagementMasterList;
 }

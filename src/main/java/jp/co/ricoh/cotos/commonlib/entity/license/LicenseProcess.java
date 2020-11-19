@@ -112,13 +112,13 @@ public class LicenseProcess extends EntityBase {
 	private int processOrder;
 
 	/**
-	 * 工程ID
+	 * ライセンス工程マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "工程ID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private long processId;
+	@ApiModelProperty(value = "ライセンス工程マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
+	private long processMasterId;
 
 	/**
 	 * 手配業務ID

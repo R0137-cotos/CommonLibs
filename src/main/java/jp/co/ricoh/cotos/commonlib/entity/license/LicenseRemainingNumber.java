@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -65,13 +66,13 @@ public class LicenseRemainingNumber extends EntityBase {
 	private long id;
 
 	/**
-	 * ライセンス区分
+	 * ライセンス区分マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンス区分", required = true, position = 2, allowableValues = "range[0,255]", readOnly = false)
-	private String licenseDiv;
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]", readOnly = false)
+	private long licenseDivMasterId;
 
 	/**
 	 * ライセンスキー

@@ -148,9 +148,9 @@ public class ShippingThingMaster extends EntityBase {
 	private int productSpreadsheetFlg;
 
 	/**
-	 * FFM連携納期計算パターンID
+	 * FFM連携納期計算マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "FFM連携納期計算パターンID", required = true, position = 13, allowableValues = "range[0,9223372036854775807]")
-	private long ffmDeliveryDateCalcPatternId;
+	@ApiModelProperty(value = "FFM連携納期計算マスタID", required = true, position = 13, allowableValues = "range[0,9223372036854775807]")
+	private long ffmDeliveryDateCalcMasterId;
 }

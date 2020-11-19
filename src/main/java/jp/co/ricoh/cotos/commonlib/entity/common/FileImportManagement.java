@@ -67,12 +67,12 @@ public class FileImportManagement extends EntityBase {
 	private long id;
 
 	/**
-	 * ファイル種別管理ID
+	 * ファイル種別管理マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ファイル種別管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "ファイル種別管理マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long fileKindManagementId;
 
 	/**
