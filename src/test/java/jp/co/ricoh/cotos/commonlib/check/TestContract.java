@@ -1083,7 +1083,6 @@ public class TestContract {
 		testTarget.setInspectionMonthYearWorth(STR_256);
 		testTarget.setMakerCode(STR_256);
 		testTarget.setClassificationCode(STR_256);
-		testTarget.setMachineType(STR_256);
 		testTarget.setEquipmentName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 13);
