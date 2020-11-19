@@ -7,4 +7,5 @@ import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster;
 
 @Repository
 public interface LicenseProcessMasterRepository extends CrudRepository<LicenseProcessMaster, Long> {
+
 }
