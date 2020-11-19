@@ -31,29 +31,20 @@ public class ContractEquipmentItemLink extends EntityBase {
 	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
-	/**
-	 * 契約ID
-	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
-
-	/**
-	 * 契約機種ID
-	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "契約機種ID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long contractEquipmentId;
 
 	/**
 	 * 品種(契約用)ID
 	 */
 	@Min(0)
 	@NotNull
-	@ApiModelProperty(value = "契約機種ID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "品種(契約用)ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private Long itemContractId;
 
-
+	/**
+	 * 契約機種状態管理ID
+	 */
+	@Min(0)
+	@NotNull
+	@ApiModelProperty(value = "契約機種状態管理ID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	private Long managedContractEquipmentStatusId;
 }
