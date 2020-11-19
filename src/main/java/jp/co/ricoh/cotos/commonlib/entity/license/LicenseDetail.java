@@ -102,13 +102,13 @@ public class LicenseDetail extends EntityBase {
 	private LicenseInfo licenseInfo;
 
 	/**
-	 * ライセンス区分
+	 * ライセンス区分マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンス区分", required = true, position = 3, allowableValues = "range[0,255]")
-	private String licenseDiv;
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	private long licenseDivMasterId;
 
 	/**
 	 * シーケンスNo

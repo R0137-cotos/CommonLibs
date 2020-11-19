@@ -107,13 +107,13 @@ public class LicenseInfo extends EntityBase {
 	private Integer disengagementFlg;
 
 	/**
-	 * ライセンス区分
+	 * ライセンス区分マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンス区分", required = true, position = 10, allowableValues = "range[0,255]")
-	private String licenseDiv;
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
+	private long licenseDivMasterId;
 
 	/**
 	 * 完了工程順
@@ -124,11 +124,11 @@ public class LicenseInfo extends EntityBase {
 	private Integer completeProcessOrder;
 
 	/**
-	 * 完了工程ID
+	 * 完了ライセンス工程マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "完了工程ID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
-	private Long completeProcessId;
+	@ApiModelProperty(value = "完了ライセンス工程マスタID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
+	private Long completeProcessMasterId;
 
 	/**
 	 * 完了手配業務ID
@@ -152,11 +152,11 @@ public class LicenseInfo extends EntityBase {
 	private Integer workingProcessOrder;
 
 	/**
-	 * 作業中工程ID
+	 * 作業中ライセンス工程マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "作業中工程ID", required = false, position = 16, allowableValues = "range[0,9223372036854775807]")
-	private Long workingProcessId;
+	@ApiModelProperty(value = "作業中ライセンス工程マスタID", required = false, position = 16, allowableValues = "range[0,9223372036854775807]")
+	private Long workingProcessMasterId;
 
 	/**
 	 * 作業中手配業務ID
@@ -170,7 +170,7 @@ public class LicenseInfo extends EntityBase {
 	 * 作業中操作区分
 	 */
 	@ApiModelProperty(value = "作業中操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 18)
-	private OperationDiv workingArrangementWorkOperationDiv;
+	private OperationDiv workingOperationDiv;
 
 	/**
 	 * キャンセル状態

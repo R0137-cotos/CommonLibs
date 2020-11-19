@@ -37,13 +37,13 @@ public class LicenseProcessControlMaster extends EntityBase {
 	private long id;
 
 	/**
-	 * ライセンス区分
+	 * ライセンス区分マスタID
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンス区分", required = true, position = 2, allowableValues = "range[0,255]")
-	private String licenseDiv;
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long licenseDivMasterId;
 
 	/**
 	 * 品種マスタID
