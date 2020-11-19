@@ -17,6 +17,9 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CsvOutputFlg;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.ProcessLockStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
@@ -163,16 +166,14 @@ public class LicenseInfoResult {
 	/**
 	 * キャンセル状態
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "range[0,255]")
-	private String cancelStatus;
+	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "未(\"0\"), キャンセル済(\"1\")")
+	private CancelStatus cancelStatus;
 
 	/**
 	 * CSV出力フラグ
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "range[0,255]")
-	private String csvOutputFlg;
+	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "未出力(\"0\"), 出力済(\"1\")")
+	private CsvOutputFlg csvOutputFlg;
 
 	/**
 	 * CSV出力日時
@@ -191,9 +192,8 @@ public class LicenseInfoResult {
 	/**
 	 * 工程ロック状態
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "range[0,255]")
-	private String processLockStatus;
+	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "ロック解除(\"0\"), ロック状態(\"1\")")
+	private ProcessLockStatus processLockStatus;
 
 	/**
 	 * 拡張項目
