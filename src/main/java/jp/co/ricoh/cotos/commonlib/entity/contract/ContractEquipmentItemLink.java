@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 契約機種シーケンスを表すEntity
+ * 契約機種品種紐づけシーケンスを表すEntity
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
