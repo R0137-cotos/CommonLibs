@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.license;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
@@ -36,6 +40,72 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "license_info")
 public class LicenseInfo extends EntityBase {
+
+	public enum CancelStatus {
+
+		未("0"), キャンセル済("1");
+
+		private final String text;
+
+		private CancelStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CancelStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum CsvOutputFlg {
+
+		未出力("0"), 出力済("1");
+
+		private final String text;
+
+		private CsvOutputFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CsvOutputFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ProcessLockStatus {
+
+		ロック解除("0"), ロック状態("1");
+
+		private final String text;
+
+		private ProcessLockStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ProcessLockStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * ライセンス情報ID
@@ -175,16 +245,14 @@ public class LicenseInfo extends EntityBase {
 	/**
 	 * キャンセル状態
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "range[0,255]")
-	private String cancelStatus;
+	@ApiModelProperty(value = "キャンセル状態", required = false, position = 19, allowableValues = "未(\"0\"), キャンセル済(\"1\")")
+	private CancelStatus cancelStatus;
 
 	/**
 	 * CSV出力フラグ
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "range[0,255]")
-	private String csvOutputFlg;
+	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 20, allowableValues = "未出力(\"0\"), 出力済(\"1\")")
+	private CsvOutputFlg csvOutputFlg;
 
 	/**
 	 * CSV出力日時
@@ -203,9 +271,8 @@ public class LicenseInfo extends EntityBase {
 	/**
 	 * 工程ロック状態
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "range[0,255]")
-	private String processLockStatus;
+	@ApiModelProperty(value = "工程ロック状態", required = false, position = 23, allowableValues = "ロック解除(\"0\"), ロック状態(\"1\")")
+	private ProcessLockStatus processLockStatus;
 
 	/**
 	 * 拡張項目

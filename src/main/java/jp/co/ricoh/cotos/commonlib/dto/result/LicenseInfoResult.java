@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
@@ -202,24 +204,29 @@ public class LicenseInfoResult {
 	/**
 	 * ライセンス明細
 	 */
+	@OneToMany
 	@ApiModelProperty(value = "ライセンス明細", required = false, position = 25)
 	private List<LicenseDetail> licenseDetailList;
 
 	/**
 	 * ライセンス工程DTO
 	 */
+	@NotNull
+	@OneToMany
 	@ApiModelProperty(value = "ライセンス工程DTO", required = true, position = 26)
 	private List<LicenseProcessResult> licenseProcessResultList;
 
 	/**
 	 * ライセンス残数
 	 */
+	@OneToOne
 	@ApiModelProperty(value = "ライセンス残数", required = false, position = 27)
 	private LicenseRemainingNumber licenseRemainingNumber;
 
 	/**
 	 * ライセンス情報操作履歴
 	 */
+	@OneToMany
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
 }

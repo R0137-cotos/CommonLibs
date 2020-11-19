@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.MailSendedResultDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.ProcessStatus;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
@@ -32,13 +31,6 @@ public class LicenseProcessResult {
 	@Id
 	@ApiModelProperty(value = "ライセンス工程ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
 	private long id;
-
-	/**
-	 * ライセンス情報
-	 */
-	@NotNull
-	@ApiModelProperty(value = "ライセンス情報", required = true, position = 2)
-	private LicenseInfo licenseInfo;
 
 	/**
 	 * 工程順
