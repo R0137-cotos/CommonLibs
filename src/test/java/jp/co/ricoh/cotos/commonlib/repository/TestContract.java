@@ -42,6 +42,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinka
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentItemLinkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentNoIsysoneRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
@@ -175,6 +176,9 @@ public class TestContract {
 
 	@Autowired
 	ShippingAddressRepository shippingAddressRepository;
+
+	@Autowired
+	ContractEquipmentItemLinkRepository contractEquipmentItemLinkRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -363,6 +367,11 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種_配送先() {
 		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約機種品種紐づけ() {
+		全てのカラムがNullではないことを確認_共通(contractEquipmentItemLinkRepository, 1L);
 	}
 
 	@Test
