@@ -23,9 +23,9 @@ public interface AttachedFileProductGrpCheckMasterRepository extends CrudReposit
 			+ "   and domain = :DOMAIN"//
 			+ "   and (estimation_contract_type is null or estimation_contract_type = :ESTIMATION_CONTRACT_TYPE)"//
 			+ "   and (lifecycle_status is null or lifecycle_status = :LIFECYCLE_STATUS)"//
-			+ "   and (item_master_id is null or item_master_id = :ITEM_MASTER_ID)"//
+			+ "   and (item_master_id is null or item_master_id in :ITEM_MASTER_ID_LIST)"//
 			, nativeQuery = true)
-	public Optional<List<AttachedFileProductGrpCheckMaster>> findAttachedFileProductGrpCheckList(@Param("PRODUCT_GRP_MASTER_ID") @NotNull Long productGrpMasterId, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ITEM_MASTER_ID") Long itemMasterId);
+	public Optional<List<AttachedFileProductGrpCheckMaster>> findAttachedFileProductGrpCheckList(@Param("PRODUCT_GRP_MASTER_ID") @NotNull Long productGrpMasterId, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ITEM_MASTER_ID_LIST") List<Long> itemMasterIdList);
 
 	@Query(value = ""//
 			+ " select *"//
@@ -35,9 +35,9 @@ public interface AttachedFileProductGrpCheckMasterRepository extends CrudReposit
 			+ "   and domain = :DOMAIN"//
 			+ "   and (estimation_contract_type is null or estimation_contract_type = :ESTIMATION_CONTRACT_TYPE)"//
 			+ "   and (lifecycle_status is null or lifecycle_status = :LIFECYCLE_STATUS)"//
-			+ "   and (item_master_id is null or item_master_id = :ITEM_MASTER_ID)"//
+			+ "   and (item_master_id is null or item_master_id in :ITEM_MASTER_ID_LIST)"//
 			+ "   and (arrangement_work_type_master_id is null or arrangement_work_type_master_id = :ARRANGEMENT_WORK_TYPE_MASTER_ID)"//
 			, nativeQuery = true)
-	public Optional<List<AttachedFileProductGrpCheckMaster>> findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(@Param("PRODUCT_GRP_MASTER_ID") @NotNull Long productGrpMasterId, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ITEM_MASTER_ID") Long itemMasterId, @Param("ARRANGEMENT_WORK_TYPE_MASTER_ID") Long arrangementWorkTypeMasterId);
+	public Optional<List<AttachedFileProductGrpCheckMaster>> findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(@Param("PRODUCT_GRP_MASTER_ID") @NotNull Long productGrpMasterId, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ITEM_MASTER_ID_LIST") List<Long> itemMasterIdList, @Param("ARRANGEMENT_WORK_TYPE_MASTER_ID") Long arrangementWorkTypeMasterId);
 
 }
