@@ -16,17 +16,26 @@ import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMa
 public interface AttachedFileProductClassCheckMasterRepository extends CrudRepository<AttachedFileProductClassCheckMaster, Long> {
 
 	@Query(value = ""//
-			+ " select m1.*"//
-			+ " from attached_file_product_class_check_master m1"//
-			+ "   inner join ("//
-			+ "     select * from attached_file_product_class_check_master"//
-			+ "       where (estimation_contract_type = :ESTIMATION_CONTRACT_TYPE and lifecycle_status = :LIFECYCLE_STATUS)"//
-			+ "       or    (estimation_contract_type = :ESTIMATION_CONTRACT_TYPE and lifecycle_status is null)"//
-			+ "       or    (estimation_contract_type is null and lifecycle_status = :LIFECYCLE_STATUS)"//
-			+ "       or    (estimation_contract_type is null and lifecycle_status is null)) m2"//
-			+ "   on m2.id = m1.id"//
-			+ " where m1.product_class_div = :PRODUCT_CLASS_DIV"//
-			+ " and   m1.domain = :DOMAIN", nativeQuery = true)
+			+ " select *"//
+			+ " from attached_file_product_class_check_master"//
+			+ " where"//
+			+ "   product_class_div = :PRODUCT_CLASS_DIV"//
+			+ "   and domain = :DOMAIN"//
+			+ "   and (estimation_contract_type is null or estimation_contract_type = :ESTIMATION_CONTRACT_TYPE)"//
+			+ "   and (lifecycle_status is null or lifecycle_status = :LIFECYCLE_STATUS)"//
+			, nativeQuery = true)
 	public Optional<List<AttachedFileProductClassCheckMaster>> findAttachedFileProductClassCheckList(@Param("PRODUCT_CLASS_DIV") @NotNull String productClassDiv, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus);
+
+	@Query(value = ""//
+			+ " select *"//
+			+ " from attached_file_product_class_check_master"//
+			+ " where"//
+			+ "   product_class_div = :PRODUCT_CLASS_DIV"//
+			+ "   and domain = :DOMAIN"//
+			+ "   and (estimation_contract_type is null or estimation_contract_type = :ESTIMATION_CONTRACT_TYPE)"//
+			+ "   and (lifecycle_status is null or lifecycle_status = :LIFECYCLE_STATUS)"//
+			+ "   and (arrangement_work_type_master_id is null or arrangement_work_type_master_id = :ARRANGEMENT_WORK_TYPE_MASTER_ID)"//
+			, nativeQuery = true)
+	public Optional<List<AttachedFileProductClassCheckMaster>> findAttachedFileProductClassCheckListByArrangementWorkTypeMasterId(@Param("PRODUCT_CLASS_DIV") @NotNull String productClassDiv, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ARRANGEMENT_WORK_TYPE_MASTER_ID") Long arrangementWorkTypeMasterId);
 
 }
