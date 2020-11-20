@@ -299,19 +299,11 @@ public class ContractEquipment extends EntityBase {
 	private String equipmentName;
 
 	/**
-	 * 契約機種品種紐づけ
-	 */
-	@Valid
-	@OneToMany(mappedBy = "contractEquipment")
-	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 26)
-	private List<ContractEquipmentItemLink> contractEquipmentItemLink;
-
-	/**
 	 * 契約機種状態管理
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractEquipment")
-	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 27)
+	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 26)
 	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 
 }

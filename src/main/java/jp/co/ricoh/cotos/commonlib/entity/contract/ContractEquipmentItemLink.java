@@ -4,10 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -34,16 +37,18 @@ public class ContractEquipmentItemLink extends EntityBase {
 	/**
 	 * 品種(契約用)ID
 	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "品種(契約用)ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long itemContractId;
+	@OneToOne(optional = false)
+	@JoinColumn(name = "item_contract_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "品種(契約用)", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private ItemContract itemContract;
 
 	/**
-	 * 契約機種状態管理ID
+	 * 契約機種状態管理
 	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "契約機種状態管理ID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long managedContractEquipmentStatusId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "managed_contract_equipment_status_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約機種状態管理", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	private ManagedContractEquipmentStatus managedContractEquipmentStatus;
 }

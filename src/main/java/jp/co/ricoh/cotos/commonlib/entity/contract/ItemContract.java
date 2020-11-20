@@ -206,6 +206,7 @@ public class ItemContract extends EntityBase {
 	/**
 	 * 契約機種品種紐づけ
 	 */
+	@Valid
 	@OneToOne(mappedBy = "itemContract")
 	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 14, readOnly = true)
 	private ContractEquipmentItemLink contractEquipmentItemLink;

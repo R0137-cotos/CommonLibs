@@ -173,9 +173,6 @@ public class TestContract {
 	ContractEquipmentNoIsysoneRepository contractEquipmentNoIsysoneRepository;
 
 	@Autowired
-	ContractEquipmentItemLinkRepository contractEquipmentItemLinkRepository;
-
-	@Autowired
 	ManagedContractEquipmentStatusRepository managedContractEquipmentStatusRepository;
 
 	@Autowired
@@ -363,11 +360,6 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種_Isys_Oneへの連携なし() {
-		全てのカラムがNullではないことを確認_共通(contractEquipmentNoIsysoneRepository, 1L);
-	}
-
-	@Test
-	public void 全てのカラムがNullではないことを確認_契約機種品種紐づけ() {
 		全てのカラムがNullではないことを確認_共通(contractEquipmentNoIsysoneRepository, 1L);
 	}
 
