@@ -592,6 +592,13 @@ public class ContractDto extends DtoBase {
 	private String penaltyFfmOrderContactNo;
 
 	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 77, allowableValues = "range[0,1333]")
+	private String toVendorComment;
+
+	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 18)
