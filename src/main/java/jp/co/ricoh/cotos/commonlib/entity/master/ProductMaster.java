@@ -191,4 +191,13 @@ public class ProductMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "最低契約月数", required = false, position = 21, allowableValues = "range[0,999]")
 	private Integer minContractMonths;
+
+	/**
+	 * 訪販代売禁止フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "訪販代売禁止フラグ", required = false, position = 22, allowableValues = "range[0,9]")
+	private Integer substituteSalesProhibitedFlg;
+
 }
