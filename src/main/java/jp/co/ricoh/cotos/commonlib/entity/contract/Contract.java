@@ -811,6 +811,13 @@ public class Contract extends EntityBase {
 	private String penaltyFfmOrderContactNo;
 
 	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 87, allowableValues = "range[0,1333]")
+	private String toVendorComment;
+
+	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 18)
