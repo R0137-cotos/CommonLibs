@@ -32,14 +32,14 @@ public class LicenseArrangementMaster extends EntityBase {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_arrangement_master_seq")
 	@SequenceGenerator(name = "license_arrangement_master_seq", sequenceName = "license_arrangement_master_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ライセンス手配マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private Long id;
+	private long id;
 
 	/**
 	 * ライセンス区分マスタID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseDivMasterId;
+	private long licenseDivMasterId;
 
 	/**
 	 * 契約種別
