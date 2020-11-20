@@ -39,20 +39,18 @@ public class LicenseProcessControlMaster extends EntityBase {
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseDivMasterId;
+	private long licenseDivMasterId;
 
 	/**
 	 * 品種マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	private long itemMasterId;
 
 	/**
 	 * 契約種別
@@ -82,11 +80,10 @@ public class LicenseProcessControlMaster extends EntityBase {
 	/**
 	 * 工程パターンID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "工程パターンID", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
-	private Long processPatternId;
+	private long processPatternId;
 
 	/**
 	 * 明細状態

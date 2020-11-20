@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -88,7 +87,6 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	/**
 	 * ファイル操作関連商品マスタ
 	 */
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "file_operation_relation_product_id", referencedColumnName = "id")
 	@JsonIgnore

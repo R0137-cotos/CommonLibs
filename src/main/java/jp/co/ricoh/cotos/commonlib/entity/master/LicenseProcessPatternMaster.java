@@ -13,7 +13,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -68,25 +67,22 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseDivMasterId;
+	private long licenseDivMasterId;
 
 	/**
 	 * 工程パターンID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "工程パターンID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long processPatternId;
+	private long processPatternId;
 
 	/**
 	 * 工程順
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@ApiModelProperty(value = "工程順", required = true, position = 4, allowableValues = "range[0,999]")
 	private int processOrder;
@@ -94,7 +90,6 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	/**
 	 * ライセンス工程マスタ
 	 */
-	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "process_master_id", referencedColumnName = "id")
 	@JsonIgnore

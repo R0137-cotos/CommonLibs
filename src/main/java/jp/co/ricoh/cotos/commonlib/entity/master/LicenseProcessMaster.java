@@ -67,11 +67,10 @@ public class LicenseProcessMaster extends EntityBase {
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long licenseDivMasterId;
+	private long licenseDivMasterId;
 
 	/**
 	 * 工程名称
@@ -99,7 +98,6 @@ public class LicenseProcessMaster extends EntityBase {
 	/**
 	 * 優先順位
 	 */
-	@NotNull
 	@Min(0)
 	@Max(999)
 	@Column(nullable = false)
