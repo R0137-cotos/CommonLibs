@@ -1,20 +1,12 @@
-package jp.co.ricoh.cotos.commonlib.entity.license;
+package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
@@ -22,97 +14,29 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CsvOutputFlg;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.ProcessLockStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoOperationLog;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
- * ライセンス情報を表すEntity
+ * ライセンス情報を取得するためのDTOです。
  */
 @Entity
-@EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "license_info")
-public class LicenseInfo extends EntityBase {
-
-	public enum CancelStatus {
-
-		未("0"), キャンセル済("1");
-
-		private final String text;
-
-		private CancelStatus(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static CancelStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum CsvOutputFlg {
-
-		未出力("0"), 出力済("1");
-
-		private final String text;
-
-		private CsvOutputFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static CsvOutputFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum ProcessLockStatus {
-
-		ロック解除("0"), ロック状態("1");
-
-		private final String text;
-
-		private ProcessLockStatus(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ProcessLockStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
+public class LicenseInfoResult {
 
 	/**
 	 * ライセンス情報ID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_info_seq")
-	@SequenceGenerator(name = "license_info_seq", sequenceName = "license_info_seq", allocationSize = 1)
+	@Min(0)
 	@ApiModelProperty(value = "ライセンス情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
@@ -120,7 +44,6 @@ public class LicenseInfo extends EntityBase {
 	 * 契約ID
 	 */
 	@NotNull
-	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
@@ -149,7 +72,6 @@ public class LicenseInfo extends EntityBase {
 	/**
 	 * 契約番号枝番
 	 */
-	@Column(nullable = false)
 	@Max(99)
 	@Min(0)
 	@ApiModelProperty(value = "契約番号枝番", required = true, position = 6, allowableValues = "range[0,99]")
@@ -180,7 +102,6 @@ public class LicenseInfo extends EntityBase {
 	 * ライセンス区分マスタID
 	 */
 	@NotNull
-	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
@@ -278,37 +199,34 @@ public class LicenseInfo extends EntityBase {
 	 * 拡張項目
 	 */
 	@ApiModelProperty(value = "拡張項目", required = false, position = 24)
-	@Lob
 	private String extendsParameter;
 
 	/**
 	 * ライセンス明細
 	 */
-	@OneToMany(mappedBy = "licenseInfo")
-	@OrderBy("seqNumber ASC")
+	@OneToMany
 	@ApiModelProperty(value = "ライセンス明細", required = false, position = 25)
 	private List<LicenseDetail> licenseDetailList;
 
 	/**
-	 * ライセンス工程
+	 * ライセンス工程DTO
 	 */
-	@OneToMany(mappedBy = "licenseInfo")
-	@OrderBy("processOrder ASC")
-	@ApiModelProperty(value = "ライセンス工程", required = true, position = 26)
-	private List<LicenseProcess> licenseProcessList;
+	@NotNull
+	@OneToMany
+	@ApiModelProperty(value = "ライセンス工程DTO", required = true, position = 26)
+	private List<LicenseProcessResult> licenseProcessResultList;
 
 	/**
 	 * ライセンス残数
 	 */
-	@OneToOne(mappedBy = "licenseInfo")
+	@OneToOne
 	@ApiModelProperty(value = "ライセンス残数", required = false, position = 27)
 	private LicenseRemainingNumber licenseRemainingNumber;
 
 	/**
 	 * ライセンス情報操作履歴
 	 */
-	@OneToMany(mappedBy = "licenseInfo")
+	@OneToMany
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
-
 }

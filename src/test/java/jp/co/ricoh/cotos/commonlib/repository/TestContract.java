@@ -185,6 +185,9 @@ public class TestContract {
 	ShippingAddressRepository shippingAddressRepository;
 
 	@Autowired
+	ContractEquipmentItemLinkRepository contractEquipmentItemLinkRepository;
+
+	@Autowired
 	TestTools testTools;
 
 	static ConfigurableApplicationContext context;
@@ -381,6 +384,11 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種_配送先() {
 		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約機種品種紐づけ() {
+		全てのカラムがNullではないことを確認_共通(contractEquipmentItemLinkRepository, 1L);
 	}
 
 	@Test
