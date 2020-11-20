@@ -102,6 +102,8 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterPa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductClassCheckMasterSearchParameter;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductGrpCheckMasterSearchParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
@@ -928,6 +930,16 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/JsonSchemaMasterParameter")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated JsonSchemaMasterParameter dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/AttachedFileProductClassCheckMasterSearchParameter")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated AttachedFileProductClassCheckMasterSearchParameter dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/AttachedFileProductGrpCheckMasterSearchParameter")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated AttachedFileProductGrpCheckMasterSearchParameter dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
