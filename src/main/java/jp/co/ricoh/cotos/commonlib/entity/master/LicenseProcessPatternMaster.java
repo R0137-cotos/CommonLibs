@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -69,7 +72,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long licenseDivMasterId;
+	private Long licenseDivMasterId;
 
 	/**
 	 * 工程パターンID
@@ -89,13 +92,14 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	private int processOrder;
 
 	/**
-	 * ライセンス工程マスタID
+	 * ライセンス工程マスタ
 	 */
 	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "ライセンス工程マスタID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private long processMasterId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "process_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ライセンス工程マスタ", required = true, position = 5)
+	private LicenseProcessMaster licenseProcessMaster;
 
 	/**
 	 * 手配業務タイプマスタID
@@ -123,7 +127,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 * メール区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メール区分", required = true, position = 2, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メール区分", required = true, position = 9, allowableValues = "range[0,255]")
 	private MailDiv mailDiv;
 
 }

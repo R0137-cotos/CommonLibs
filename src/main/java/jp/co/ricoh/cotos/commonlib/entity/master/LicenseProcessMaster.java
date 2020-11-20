@@ -1,14 +1,17 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -68,7 +71,7 @@ public class LicenseProcessMaster extends EntityBase {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long licenseDivMasterId;
+	private Long licenseDivMasterId;
 
 	/**
 	 * 工程名称
@@ -88,6 +91,7 @@ public class LicenseProcessMaster extends EntityBase {
 	 * 操作区分
 	 */
 	@NotNull
+	@Size(max = 255)
 	@Column(nullable = false)
 	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 5)
 	private OperationDiv operationDiv;
@@ -96,8 +100,17 @@ public class LicenseProcessMaster extends EntityBase {
 	 * 優先順位
 	 */
 	@NotNull
+	@Min(0)
+	@Max(999)
 	@Column(nullable = false)
 	@ApiModelProperty(value = "優先順位", required = true, position = 6, allowableValues = "range[0,999]")
 	private int priorityOrder;
+
+	/**
+	 * ライセンス工程パターンマスタリスト
+	 */
+	@OneToMany(mappedBy = "licenseProcessMaster")
+	@ApiModelProperty(value = "ライセンス工程パターンマスタ", required = false, position = 7)
+	private List<LicenseProcessPatternMaster> licenseProcessPatternMasterList;
 
 }
