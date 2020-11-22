@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -36,7 +35,6 @@ public class licenseDivCompMaster extends EntityBase {
 	/**
 	 * 商品マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@ApiModelProperty(value = "商品マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
@@ -44,7 +42,6 @@ public class licenseDivCompMaster extends EntityBase {
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;

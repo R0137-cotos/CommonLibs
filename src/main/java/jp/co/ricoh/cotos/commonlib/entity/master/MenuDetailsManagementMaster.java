@@ -59,7 +59,6 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	/**
 	 * 順序
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
