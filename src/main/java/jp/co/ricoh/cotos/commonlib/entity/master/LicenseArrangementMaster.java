@@ -67,12 +67,13 @@ public class LicenseArrangementMaster extends EntityBase {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private long arrangementWorkTypeMasterId;
+	private Long arrangementWorkTypeMasterId;
 
 	/**
 	 * 優先順位
 	 */
 	@Min(0)
+	@Max(999)
 	@ApiModelProperty(value = "優先順位", required = false, position = 7, allowableValues = "range[0,999]")
-	private long priorityOrder;
+	private Long priorityOrder;
 }

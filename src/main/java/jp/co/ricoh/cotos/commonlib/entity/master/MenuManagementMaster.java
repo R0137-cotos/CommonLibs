@@ -13,7 +13,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -56,7 +55,6 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	/**
 	 * 順序
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)

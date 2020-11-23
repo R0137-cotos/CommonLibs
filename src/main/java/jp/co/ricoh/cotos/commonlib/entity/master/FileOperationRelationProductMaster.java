@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -67,11 +66,10 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	/**
 	 * メニュー管理ID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "メニュー管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long menuManagementId;
+	private long menuManagementId;
 
 	/**
 	 * 関連商品名
@@ -89,7 +87,6 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	/**
 	 * メニュー明細管理マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "メニュー明細管理マスタID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")

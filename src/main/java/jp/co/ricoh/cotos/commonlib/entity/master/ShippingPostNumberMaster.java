@@ -41,7 +41,7 @@ public class ShippingPostNumberMaster extends EntityBase {
 	 * 地域名
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "地域名", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "地域名", required = false, position = 3, allowableValues = "range[0,1000]")
 	private String areaName;
 
 }
