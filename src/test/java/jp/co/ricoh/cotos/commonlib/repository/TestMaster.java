@@ -2137,10 +2137,10 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7", 1L).get();
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7", Arrays.asList(1L, 2L)).get();
 
-		// データが3件取得できていることを確認
-		Assert.assertEquals(3, foundList.size());
+		// データが4件取得できていることを確認
+		Assert.assertEquals(4, foundList.size());
 		// 取得したデータの内容が正しいことを確認
 		for (AttachedFileProductGrpCheckMaster found : foundList) {
 			Assert.assertEquals(Long.valueOf(200), found.getProductGrpMasterId());
@@ -2148,7 +2148,7 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertNotNull(found.getFileKind());
-			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L)));
+			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
 			Assert.assertEquals("xlsx", found.getExtension());
 		}
@@ -2160,10 +2160,10 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(200L, "2", "1", "7", 1L, 1001L).get();
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(200L, "2", "1", "7", Arrays.asList(1L, 2L), 1001L).get();
 
-		// データが2件取得できていることを確認
-		Assert.assertEquals(2, foundList.size());
+		// データが3件取得できていることを確認
+		Assert.assertEquals(3, foundList.size());
 		// 取得したデータの内容が正しいことを確認
 		for (AttachedFileProductGrpCheckMaster found : foundList) {
 			Assert.assertEquals(Long.valueOf(200), found.getProductGrpMasterId());
@@ -2171,7 +2171,7 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertNotNull(found.getFileKind());
-			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L)));
+			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
 			Assert.assertEquals("xlsx", found.getExtension());
 		}
