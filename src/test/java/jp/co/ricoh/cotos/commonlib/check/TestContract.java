@@ -509,7 +509,6 @@ public class TestContract {
 		testTarget.setDetailAbstract(STR_256);
 		testTarget.setOrderNo(STR_256);
 		testTarget.setContractSpan(STR_256);
-		testTarget.setAbsConExternalBillingStatus(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
