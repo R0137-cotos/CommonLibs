@@ -3,15 +3,20 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -21,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -82,7 +88,7 @@ public class PenaltyDetailContract extends EntityBase {
 	}
 
 	/**
-	 * 配送先SS組織ID
+	 * 違約金明細ID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "penalty_detail_contract_seq")
@@ -91,12 +97,13 @@ public class PenaltyDetailContract extends EntityBase {
 	private long id;
 
 	/**
-	 * 契約ID
+	 * 契約
 	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
+	@ManyToOne(optional = false)
+	@JsonIgnore
+	@JoinColumn(name = "contract_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "契約", required = true, position = 2)
+	private Contract contract;
 
 	/**
 	 * 品種マスタID
@@ -180,5 +187,13 @@ public class PenaltyDetailContract extends EntityBase {
 	@ApiModelProperty(value = "違約金売上計上処理日", required = false, position = 13)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyAccountSalesDate;
+
+	/**
+	 * 違約金明細振替
+	 */
+	@Valid
+	@OneToMany(mappedBy = "penaltyDetailContract")
+	@ApiModelProperty(value = "違約金明細振替", required = false, position = 14)
+	private List<PenaltyDetailTrans> penaltyDetailTrans;
 
 }

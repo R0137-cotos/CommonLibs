@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,8 +18,9 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -74,7 +77,7 @@ public class ShippingThingDetail extends EntityBase {
 	/**
 	 * 発送区分
 	 */
-	@ApiModelProperty(value = "発送区分", required = false, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")", position = 6)
+	@ApiModelProperty(value = "発送区分", required = false, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")", example = "1", position = 6)
 	private ShippingType shippingType;
 
 	/**
@@ -101,11 +104,12 @@ public class ShippingThingDetail extends EntityBase {
 	private Date ffmDeliveryDate;
 
 	/**
-	 * 契約明細ID
+	 * 契約明細
 	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "契約明細ID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
-	private Long contractDetailId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "contract_detail_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約明細", required = true, position = 10)
+	private ContractDetail contractDetail;
 
 }

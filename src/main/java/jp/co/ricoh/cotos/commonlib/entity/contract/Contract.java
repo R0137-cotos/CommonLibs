@@ -839,4 +839,28 @@ public class Contract extends EntityBase {
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 90)
 	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
+
+	/**
+	 * 配送先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先", required = true, position = 91)
+	private ShippingAddress shippingAddress;
+
+	/**
+	 * 違約金明細(契約用)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 92)
+	private List<PenaltyDetailContract> penaltyDetailContract;
+
+	/**
+	 * 配送先SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先SS組織", required = true, position = 93)
+	private ShippingAddressSsOrg shippingAddressSsOrg;
 }

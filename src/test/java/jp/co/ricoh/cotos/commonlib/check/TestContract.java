@@ -509,9 +509,8 @@ public class TestContract {
 		testTarget.setDetailAbstract(STR_256);
 		testTarget.setOrderNo(STR_256);
 		testTarget.setContractSpan(STR_256);
-		testTarget.setAbsConExternalBillingStatus(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "摘要は最大文字数（255）を超えています。"));
 
