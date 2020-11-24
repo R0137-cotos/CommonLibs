@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -86,7 +86,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	/**
 	 * ライセンス情報
 	 */
-	@ManyToOne(optional = true)
+	@OneToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "ライセンス情報", required = false, position = 4)
