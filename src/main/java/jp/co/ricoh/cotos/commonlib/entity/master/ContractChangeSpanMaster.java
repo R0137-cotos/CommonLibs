@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -163,30 +166,32 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	private CheckPatternType checkPatternType;
 
 	/**
-	 * 契約変更期間日付計算マスタID 開始
+	 * 契約変更期間日付計算パターンマスタ 開始
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "契約変更期間日付計算マスタID 開始", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
-	private Long fromContractChangeSpanCalcMasterId;
+	@ManyToOne
+	@JoinColumn(name = "from_contract_change_span_calc_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約変更期間日付計算パターンマスタ 開始", required = false, position = 10)
+	private DateCalcPatternMaster fromContractChangeDateCalcPatternMaster;
 
 	/**
 	 * 契約変更期間チェック対象日区分 開始
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "契約変更期間チェック対象日区分 開始", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\")", position = 11)
 	private FromContractChangeSpanTargetDateType fromContractChangeSpanTargetDateType;
 
 	/**
-	 * 契約変更期間日付計算マスタID 終了
+	 * 契約変更期間日付計算パターンマスタ 終了
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "契約変更期間日付計算マスタID 終了", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
-	private Long toContractChangeSpanCalcMasterId;
+	@ManyToOne
+	@JoinColumn(name = "to_contract_change_span_calc_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約変更期間日付計算パターンマスタ 終了", required = false, position = 12)
+	private DateCalcPatternMaster toContractChangeDateCalcPatternMaster;
 
 	/**
 	 * 契約変更期間チェック対象日区分 終了
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "契約変更期間チェック対象日区分 終了", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\")", position = 13)
 	private ToContractChangeSpanTargetDateType toContractChangeSpanTargetDateType;
 }
