@@ -59,6 +59,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepositor
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedContractEquipmentStatusRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
@@ -170,6 +171,9 @@ public class TestContract {
 
 	@Autowired
 	ContractEquipmentNoIsysoneRepository contractEquipmentNoIsysoneRepository;
+
+	@Autowired
+	ManagedContractEquipmentStatusRepository managedContractEquipmentStatusRepository;
 
 	@Autowired
 	PenaltyDetailContractRepository penaltyDetailContractRepository;
@@ -341,7 +345,7 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_違約金明細振替() {
-		全てのカラムがNullではないことを確認_共通(penaltyDetailTransRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(penaltyDetailTransRepository, 4L);
 	}
 
 	@Test
@@ -351,7 +355,7 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_発送物あり明細() {
-		全てのカラムがNullではないことを確認_共通(shippingThingDetailRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(shippingThingDetailRepository, 401L);
 	}
 
 	@Test
@@ -360,13 +364,18 @@ public class TestContract {
 	}
 
 	@Test
+	public void 全てのカラムがNullではないことを確認_契約機種状態管理() {
+		全てのカラムがNullではないことを確認_共通(managedContractEquipmentStatusRepository, 1L);
+	}
+
+	@Test
 	public void 全てのカラムがNullではないことを確認_違約金明細_契約用() {
-		全てのカラムがNullではないことを確認_共通(penaltyDetailContractRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(penaltyDetailContractRepository, 4L);
 	}
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種_配送先() {
-		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 4L);
 	}
 
 	@Test

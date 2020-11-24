@@ -5,11 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -51,12 +54,12 @@ public class ShippingAddressSsOrg extends EntityBase {
 	private String serviceOrgName;
 
 	/**
-	 * 契約ID
+	 * 契約
 	 */
-	@Min(0)
-	@Column(nullable = false)
-	@NotNull
-	@ApiModelProperty(value = "契約ID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
+	@OneToOne(optional = false)
+	@JsonIgnore
+	@JoinColumn(name = "contract_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "契約", required = true, position = 4)
+	private Contract contract;
 
 }
