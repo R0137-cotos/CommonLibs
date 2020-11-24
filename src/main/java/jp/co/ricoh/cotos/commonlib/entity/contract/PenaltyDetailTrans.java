@@ -71,7 +71,7 @@ public class PenaltyDetailTrans extends EntityBase {
 	@JoinColumn(name = "penalty_detail_contract_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "違約金明細", required = true, position = 5)
-	private PenaltyDetailContract penaltyDetailContractId;
+	private PenaltyDetailContract penaltyDetailContract;
 
 	/**
 	 * イニシャル/ランニング区分
