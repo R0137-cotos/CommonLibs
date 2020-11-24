@@ -1,15 +1,16 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -35,18 +36,18 @@ public class ItemLicenseSettingMaster extends EntityBaseMaster {
 	private long id;
 
 	/**
-	 * 品種マスタID
+	 * 品種マスタ
 	 */
-	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "品種マスタ", required = true, position = 8)
+	private ItemMaster itemMaster;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = true, position = 3)
+	@ApiModelProperty(value = "拡張項目", required = false, position = 3)
 	@Lob
 	private String extendsParameter;
 
