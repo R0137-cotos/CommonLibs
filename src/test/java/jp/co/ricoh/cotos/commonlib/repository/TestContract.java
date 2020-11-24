@@ -345,7 +345,7 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_違約金明細振替() {
-		全てのカラムがNullではないことを確認_共通(penaltyDetailTransRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(penaltyDetailTransRepository, 4L);
 	}
 
 	@Test
@@ -355,7 +355,7 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_発送物あり明細() {
-		全てのカラムがNullではないことを確認_共通(shippingThingDetailRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(shippingThingDetailRepository, 401L);
 	}
 
 	@Test
@@ -370,12 +370,12 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_違約金明細_契約用() {
-		全てのカラムがNullではないことを確認_共通(penaltyDetailContractRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(penaltyDetailContractRepository, 4L);
 	}
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種_配送先() {
-		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 1L);
+		全てのカラムがNullではないことを確認_共通(shippingAddressRepository, 4L);
 	}
 
 	@Test

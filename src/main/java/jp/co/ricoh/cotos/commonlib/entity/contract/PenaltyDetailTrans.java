@@ -2,18 +2,20 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -31,7 +33,7 @@ import lombok.EqualsAndHashCode;
 public class PenaltyDetailTrans extends EntityBase {
 
 	/**
-	 * 品種明細ID
+	 * 違約金明細振替ID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "penalty_detail_trans_seq")
@@ -63,12 +65,13 @@ public class PenaltyDetailTrans extends EntityBase {
 	private String transToServiceOrgName;
 
 	/**
-	 * 違約金明細ID
+	 * 違約金明細
 	 */
-	@Min(0)
-	@Column(nullable = false)
-	@ApiModelProperty(value = "違約金明細ID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private long penaltyDetailContractId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "penalty_detail_contract_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "違約金明細", required = true, position = 5)
+	private PenaltyDetailContract penaltyDetailContract;
 
 	/**
 	 * イニシャル/ランニング区分

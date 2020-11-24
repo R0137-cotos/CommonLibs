@@ -5,11 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -37,7 +41,6 @@ public class ShippingAddress extends EntityBase {
 	/**
 	 * MoM社員ID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
 	@ApiModelProperty(value = "MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 2, allowableValues = "range[0,255]")
@@ -53,6 +56,8 @@ public class ShippingAddress extends EntityBase {
 	/**
 	 * 所属組織階層レベル
 	 */
+	@Max(9)
+	@Min(0)
 	@ApiModelProperty(value = "所属組織階層レベル", required = false, position = 4, allowableValues = "range[0,9]", readOnly = false)
 	private Integer orgHierarchyLevel;
 
@@ -73,8 +78,8 @@ public class ShippingAddress extends EntityBase {
 	/**
 	 * 会社代表電話番号
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "会社代表電話番号", required = false, position = 7, allowableValues = "range[0,255]", readOnly = false)
+	@Size(max = 1000)
+	@ApiModelProperty(value = "会社代表電話番号", required = false, position = 7, allowableValues = "range[0,1000]", readOnly = false)
 	private String orgPhoneNumber;
 
 	/**
@@ -127,18 +132,19 @@ public class ShippingAddress extends EntityBase {
 	private String yamatoSlipNumber;
 
 	/**
-	 * 契約ID
+	 * 契約
 	 */
-	@Min(0)
-	@NotNull
-	@ApiModelProperty(value = "契約ID", required = true, position = 15, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
+	@OneToOne(optional = false)
+	@JsonIgnore
+	@JoinColumn(name = "contract_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "契約", required = true, position = 15)
+	private Contract contract;
 
 	/**
 	 * 建物名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "建物名", required = false, position = 14, allowableValues = "range[0,255]", readOnly = false)
+	@ApiModelProperty(value = "建物名", required = false, position = 16, allowableValues = "range[0,255]", readOnly = false)
 	private String buildingName;
 
 }
