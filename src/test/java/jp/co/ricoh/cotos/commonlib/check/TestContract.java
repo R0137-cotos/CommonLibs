@@ -1083,10 +1083,9 @@ public class TestContract {
 		testTarget.setInspectionMonthYearWorth(STR_256);
 		testTarget.setMakerCode(STR_256);
 		testTarget.setClassificationCode(STR_256);
-		testTarget.setMachineType(STR_256);
 		testTarget.setEquipmentName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 13);
+		Assert.assertTrue(result.getErrorInfoList().size() == 12);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "納入機器区分は最大文字数（255）を超えています。"));
 	}

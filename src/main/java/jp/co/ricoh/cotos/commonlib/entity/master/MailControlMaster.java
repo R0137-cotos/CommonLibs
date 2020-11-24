@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -244,8 +245,10 @@ public class MailControlMaster extends EntityBaseMaster {
 	/**
 	 * 営業日フラグ
 	 */
+	@Max(9)
+	@Min(0)
 	@ApiModelProperty(value = "営業日フラグ", required = false, position = 18, allowableValues = "range[0,9]")
-	private Long businessDayFlg;
+	private Integer businessDayFlg;
 
 	/**
 	 * 営業日計算区分

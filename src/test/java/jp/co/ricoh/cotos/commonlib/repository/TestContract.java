@@ -59,6 +59,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepositor
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedContractEquipmentStatusRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
@@ -170,6 +171,9 @@ public class TestContract {
 
 	@Autowired
 	ContractEquipmentNoIsysoneRepository contractEquipmentNoIsysoneRepository;
+
+	@Autowired
+	ManagedContractEquipmentStatusRepository managedContractEquipmentStatusRepository;
 
 	@Autowired
 	PenaltyDetailContractRepository penaltyDetailContractRepository;
@@ -357,6 +361,11 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種_Isys_Oneへの連携なし() {
 		全てのカラムがNullではないことを確認_共通(contractEquipmentNoIsysoneRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約機種状態管理() {
+		全てのカラムがNullではないことを確認_共通(managedContractEquipmentStatusRepository, 1L);
 	}
 
 	@Test
