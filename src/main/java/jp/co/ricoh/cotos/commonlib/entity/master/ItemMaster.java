@@ -166,10 +166,10 @@ public class ItemMaster extends EntityBaseMaster {
 	private BigDecimal rCost;
 
 	/**
-	 * ＲＪ仕入価格
+	 * ＳＡ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -303,4 +303,11 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "ベンダー略称", required = false, position = 31)
 	private String vendorShortName;
+	
+	/**
+	 * ＲＪ販事本仕入価格
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 32, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rjHanjihonPurchasePrice;
 }
