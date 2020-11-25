@@ -94,7 +94,6 @@ public class LicenseProcess extends EntityBase {
 	/**
 	 * ライセンス情報
 	 */
-	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
@@ -104,7 +103,6 @@ public class LicenseProcess extends EntityBase {
 	/**
 	 * 工程順
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
@@ -114,7 +112,6 @@ public class LicenseProcess extends EntityBase {
 	/**
 	 * ライセンス工程マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス工程マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
@@ -123,7 +120,6 @@ public class LicenseProcess extends EntityBase {
 	/**
 	 * 手配業務ID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "手配業務ID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")

@@ -30,6 +30,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentNoIsysone;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicAccCeEmp;
@@ -43,8 +44,13 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.CustomerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemDetailContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedEstimationDetail;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailTrans;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddressSsOrg;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingThingDetail;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
@@ -56,6 +62,8 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinka
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentItemLinkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentNoIsysoneRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractOperationLogRepository;
@@ -71,8 +79,13 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepositor
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedContractEquipmentStatusRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ProductContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressSsOrgRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingThingDetailRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
@@ -185,6 +198,27 @@ public class TestContract {
 
 	@Autowired
 	ContractAssignmentAttachedFileRepository contractAssignmentAttachedFileRepository;
+
+	@Autowired
+	ShippingAddressRepository shippingAddressRepository;
+
+	@Autowired
+	ShippingAddressSsOrgRepository shippingAddressSsOrgRepository;
+
+	@Autowired
+	ContractEquipmentItemLinkRepository contractEquipmentItemLinkRepository;
+
+	@Autowired
+	ContractEquipmentNoIsysoneRepository contractEquipmentNoIsysoneRepository;
+
+	@Autowired
+	ShippingThingDetailRepository shippingThingDetailRepository;
+
+	@Autowired
+	ManagedContractEquipmentStatusRepository managedContractEquipmentStatusRepository;
+
+	@Autowired
+	PenaltyDetailTransRepository penaltyDetailTransRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -1476,5 +1510,227 @@ public class TestContract {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
+	}
+
+	@Test
+	public void ShippingAddressのテスト() throws Exception {
+		ShippingAddress entity = shippingAddressRepository.findOne(4L);
+		ShippingAddress testTarget = new ShippingAddress();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMomEmployeeId(STR_256);
+		testTarget.setMomOrgId(STR_256);
+		testTarget.setOrgName(STR_256);
+		testTarget.setSalesCompanyName(STR_256);
+		testTarget.setOrgPhoneNumber(STR_1001);
+		testTarget.setEmployeeName(STR_256);
+		testTarget.setSalesDepartmentName(STR_256);
+		testTarget.setPostNumber(STR_256);
+		testTarget.setPrefectures(STR_256);
+		testTarget.setAddress(STR_1001);
+		testTarget.setPhoneNumber(STR_256);
+		testTarget.setYamatoSlipNumber(STR_256);
+		testTarget.setBuildingName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 13);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDは最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setOrgHierarchyLevel(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setOrgHierarchyLevel(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最小値（0）を下回っています。"));
+	}
+
+	@Test
+	public void ShippingAddressSsOrgのテスト() throws Exception {
+		ShippingAddressSsOrg entity = shippingAddressSsOrgRepository.findOne(1L);
+		ShippingAddressSsOrg testTarget = new ShippingAddressSsOrg();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null チェック：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMomOrgId(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDが設定されていません。"));
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMomOrgId(STR_256);
+		testTarget.setServiceOrgName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDは最大文字数（255）を超えています。"));
+	}
+
+	@Test
+	public void ContractEquipmentNoIsysoneのテスト() throws Exception {
+		ContractEquipmentNoIsysone entity = contractEquipmentNoIsysoneRepository.findOne(1L);
+		ContractEquipmentNoIsysone testTarget = new ContractEquipmentNoIsysone();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setItemNo(STR_256);
+		testTarget.setItemName(STR_256);
+		testTarget.setEquipmentNo(STR_256);
+		testTarget.setOptionName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "製品番号は最大文字数（255）を超えています。"));
+	}
+
+	@Test
+	public void ShippingThingDetailのテスト() throws Exception {
+		ShippingThingDetail entity = shippingThingDetailRepository.findOne(401L);
+		ShippingThingDetail testTarget = new ShippingThingDetail();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setShippingMachineName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "発送機器名称は最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setDefaultQuantity(INT_100000);
+		testTarget.setFfmInsideTransExclusionFlg(INT_10);
+		testTarget.setProductSpreadsheetFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setThingItemCode((long)INT_MINUS_1);
+		testTarget.setDefaultQuantity(INT_MINUS_1);
+		testTarget.setFfmInsideTransExclusionFlg(INT_MINUS_1);
+		testTarget.setProductSpreadsheetFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "物あり品種コードは最小値（0）を下回っています。"));
+
+		// 異常系（@DecimalMin ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setPrice(DECIMAL_MINUS_001);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は最小値（0.00）を下回っています。"));
+
+		// 異常系（@Digits ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setPrice(DECIMAL_0001);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は小数点以下2桁を超えています。"));
+	}
+
+	@Test
+	public void ManagedContractEquipmentStatusのテスト() throws Exception {
+		ManagedContractEquipmentStatus entity = managedContractEquipmentStatusRepository.findOne(1L);
+		ManagedContractEquipmentStatus testTarget = new ManagedContractEquipmentStatus();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setContinueFlg(INT_10);
+		testTarget.setReContractNotAllowedFlg(INT_10);
+		testTarget.setDeleteFlg(INT_10);
+		testTarget.setContractYears(INT_100000);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "継続フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setContinueFlg(INT_MINUS_1);
+		testTarget.setReContractNotAllowedFlg(INT_MINUS_1);
+		testTarget.setDeleteFlg(INT_MINUS_1);
+		testTarget.setContractYears(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "継続フラグは最小値（0）を下回っています。"));
+	}
+
+	@Test
+	public void PenaltyDetailTransのテスト() throws Exception {
+		PenaltyDetailTrans entity = penaltyDetailTransRepository.findOne(4L);
+		PenaltyDetailTrans testTarget = new PenaltyDetailTrans();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setTransToServiceOrgCode(STR_256);
+		testTarget.setTransToServiceOrgName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "振替先課所コードは最大文字数（255）を超えています。"));
+
+		// 異常系（@DecimalMin ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setPrice(DECIMAL_MINUS_001);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は最小値（0.00）を下回っています。"));
+
+		// 異常系（@Digits ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setPrice(DECIMAL_0001);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は小数点以下2桁を超えています。"));
 	}
 }
