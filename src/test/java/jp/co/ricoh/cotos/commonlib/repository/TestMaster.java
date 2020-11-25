@@ -2364,6 +2364,13 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		List<LicenseProcessMaster> foundList = licenseProcessMasterRepository.findByLicenseDivMasterIdOrderById(3);
+		// Entityが指定件数取得できていることを確認する
+		Assert.assertEquals(foundList.size(), 2);
+		// OrderBy句の確認
+		Assert.assertEquals(foundList.get(0).getId(), 10);
+		Assert.assertEquals(foundList.get(1).getId(), 11);
 	}
 
 	@Test
