@@ -45,16 +45,16 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	private String lifecycleStatus;
 
 	/**
-	 * 品種マスタID
+	 * 品種マスタIDリスト
 	 */
 	@NotNull
-	@ApiModelProperty(value = "品種マスタID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	@ApiModelProperty(value = "品種マスタIDリスト", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
+	private List<Long> itemMasterIdList;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private List<Long> arrangementWorkTypeMasterId;
+	private Long arrangementWorkTypeMasterId;
 
 }
