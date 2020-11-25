@@ -122,4 +122,13 @@ public class TestLicense {
 		testTool.assertColumnsNotNull(found);
 	}
 
+	@Test
+	public void LicenseRemainingNumberのみテスト() throws Exception {
+
+		LicenseRemainingNumber found = licenseRemainingNumberRepository.findOne(2L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
 }

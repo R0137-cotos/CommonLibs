@@ -56,6 +56,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.FileOperationRelationProductMas
 import jp.co.ricoh.cotos.commonlib.entity.master.GpCheckMatterMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.IfsCsvMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemDecomposeMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemLicenseSettingMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemTransCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.JsonSchemaMaster;
@@ -142,6 +143,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.FileOperationRelationProduc
 import jp.co.ricoh.cotos.commonlib.repository.master.GpCheckMatterMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.IfsCsvMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemDecomposeMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ItemLicenseSettingMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemTransCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.JsonSchemaMasterRepository;
@@ -378,6 +380,9 @@ public class TestMaster {
 	private LicenseDivCompMasterRepository licenseDivCompMasterRepository;
 	@Autowired
 	private LicenseArrangementMasterRepository licenseArrangementMasterRepository;
+	@Autowired
+	private ItemLicenseSettingMasterRepository itemLicenseSettingMasterRepository;
+
 
 	@Autowired
 	TestTools testTool = null;
@@ -717,6 +722,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -804,6 +810,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -999,6 +1006,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1049,6 +1057,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1075,6 +1084,11 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found2);
+
+		// 結合するテーブルの外部KEYがNULLの場合、エンティティが取得されること
+		id = 3L;
+		found = itemMasterRepository.findOne(id);
+		Assert.assertNotNull(found);
 	}
 
 	@Test
@@ -1089,6 +1103,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1119,6 +1134,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1476,6 +1492,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/equipmentCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1495,6 +1512,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemTransCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1919,6 +1937,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2173,6 +2192,20 @@ public class TestMaster {
 	public void ShippingThingMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/shippingThingMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2253,6 +2286,20 @@ public class TestMaster {
 	public void ItemDecomposeMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemDecomposeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2269,6 +2316,7 @@ public class TestMaster {
 	public void ContractChangeSpanMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChangeSpanMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2279,6 +2327,11 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		// 結合するテーブルの外部KEYがNULLの場合、エンティティが取得されること
+		id = 2L;
+		found = contractChangeSpanMasterRepository.findOne(id);
+		Assert.assertNotNull(found);
 	}
 
 	@Test
@@ -2376,6 +2429,36 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		LicenseArrangementMaster found = licenseArrangementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ItemLicenseSettingMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemLicenseSettingMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ItemLicenseSettingMaster found = itemLicenseSettingMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -53,7 +52,6 @@ public class PenaltyDetailEstimation extends EntityBase {
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@NotNull
 	@Column(nullable = false)
 	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;

@@ -17,7 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -94,7 +93,6 @@ public class LicenseDetail extends EntityBase {
 	/**
 	 * ライセンス情報
 	 */
-	@NotNull
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
@@ -104,7 +102,6 @@ public class LicenseDetail extends EntityBase {
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
@@ -113,7 +110,6 @@ public class LicenseDetail extends EntityBase {
 	/**
 	 * シーケンスNo
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "シーケンスNo", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")

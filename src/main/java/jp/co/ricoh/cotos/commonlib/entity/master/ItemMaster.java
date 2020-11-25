@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -66,7 +67,7 @@ public class ItemMaster extends EntityBaseMaster {
 
 	public enum CostType {
 
-		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4");
+		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4"), 違約金("5");
 
 		private final String text;
 
@@ -192,7 +193,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 費用種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 6)
+	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1", position = 6)
 	private CostType costType;
 
 	/**
@@ -382,41 +383,48 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 契約期間起算日区分
 	 */
-	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 33, allowableValues = "サービス開始日(\"1\"), サービス開始日翌日1日(\"2\")")
+	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 33, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private ContractSpanStartDateType contractSpanStartDateType;
 
 	/**
-	 * 分解元品種マスタID
+	 * 分解元品種マスタ
 	 */
-	@ApiModelProperty(value = "分解元品種マスタID", required = false, position = 34, allowableValues = "range[0,9999999999999999999]")
-	private Long originItemMasterId;
+	@ManyToOne
+	@JoinColumn(name = "origin_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "分解元品種マスタ", required = false, position = 34)
+	private ItemMaster originItemMaster;
 
 	/**
 	 * 違約金有無フラグ
 	 */
 	@Max(9)
+	@Min(0)
 	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 35, allowableValues = "range[0,9]")
 	private Integer penaltyFlg;
 
 	/**
 	 * 最低契約月数
 	 */
-	@Max(999)
+	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "最低契約月数", required = false, position = 36, allowableValues = "range[0,999]")
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 36, allowableValues = "range[0,99999]")
 	private Integer minContractMonths;
 
 	/**
 	 * 違約金起算日区分
 	 */
-	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 37, allowableValues = "サービス開始日(\"1\"), サービス開始日翌日1日(\"2\")")
+	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 37, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private PenaltyStartDateType penaltyStartDateType;
 
 	/**
-	 * 違約金品種マスタID
+	 * 違約金品種マスタ
 	 */
-	@ApiModelProperty(value = "違約金品種マスタID", required = false, position = 38, allowableValues = "range[0,9999999999999999999]")
-	private Long penaltyItemMasterId;
+	@ManyToOne
+	@JoinColumn(name = "penalty_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "違約金品種マスタ", required = false, position = 38)
+	private ItemMaster penaltyItemMaster;
 
 	/**
 	 * 分解後品種区分
@@ -425,9 +433,36 @@ public class ItemMaster extends EntityBaseMaster {
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
-	 * ランニング計上開始日計算マスタID
+	 * ランニング計上開始日日付計算パターンマスタ
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "ランニング計上開始日計算マスタID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
-	private Long runningFromCalcMasterId;
+	@ManyToOne
+	@JoinColumn(name = "running_from_calc_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ランニング計上開始日日付計算パターンマスタ", required = false, position = 40)
+	private DateCalcPatternMaster dateCalcPatternMaster;
+
+	/**
+	 * 品種分解マスタ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "itemMaster")
+	@ApiModelProperty(value = "品種分解マスタ", required = false, position = 41)
+	private List<ItemDecomposeMaster> itemDecomposeMasterList;
+
+	/**
+	 * 発送物ありマスタ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "itemMaster")
+	@ApiModelProperty(value = "発送物ありマスタ", required = false, position = 42)
+	private List<ShippingThingMaster> shippingThingMasterList;
+
+	/**
+	 * 品種ライセンス用設定マスタ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "itemMaster")
+	@ApiModelProperty(value = "品種ライセンス用設定マスタ", required = false, position = 43)
+	private List<ItemLicenseSettingMaster> ItemLicenseSettingMasterList;
+
 }

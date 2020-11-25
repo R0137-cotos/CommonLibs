@@ -44,7 +44,6 @@ public class LicenseInfoOperationLog extends EntityBase {
 	/**
 	 * ライセンス情報
 	 */
-	@NotNull
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore

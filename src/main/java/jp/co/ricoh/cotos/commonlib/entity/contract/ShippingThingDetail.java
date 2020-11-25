@@ -13,7 +13,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -70,7 +69,6 @@ public class ShippingThingDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "原価", required = false, position = 5, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal price;
 

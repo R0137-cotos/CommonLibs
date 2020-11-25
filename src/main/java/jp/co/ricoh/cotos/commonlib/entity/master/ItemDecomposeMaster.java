@@ -1,18 +1,22 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -30,6 +34,29 @@ import lombok.EqualsAndHashCode;
 @Table(name = "item_decompose_master")
 public class ItemDecomposeMaster extends EntityBaseMaster {
 
+	public enum HwNosType {
+
+		HW("1"), NOS("2");
+
+		private final String text;
+
+		private HwNosType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static HwNosType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	
 	/**
 	 * ID
 	 */
@@ -40,13 +67,13 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	private long id;
 
 	/**
-	 * 分解後品種マスタID
+	 * 分解後品種マスタ
 	 */
-	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "分解後品種マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long itemDecomposeMasterId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "item_decompose_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "分解後品種マスタ", required = true, position = 2)
+	private ItemMaster decomposeItemMaster;
 
 	/**
 	 * 分解後品種名
@@ -71,7 +98,7 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	/**
 	 * 分解後費用種別
 	 */
-	@ApiModelProperty(value = "分解後費用種別", required = false, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", position = 6)
+	@ApiModelProperty(value = "分解後費用種別", required = false, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", position = 6)
 	private CostType costType;
 
 	/**
@@ -82,18 +109,17 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	private BigDecimal price;
 
 	/**
-	 * 品種マスタID
+	 * 品種マスタ
 	 */
-	@NotNull
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 8, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "品種マスタ", required = true, position = 8)
+	private ItemMaster itemMaster;
 
 	/**
 	 * 分解後HW/NOS区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "分解後HW/NOS区分", required = false, position = 9, allowableValues = "range[0,255]")
-	private String hwNosType;
+	@ApiModelProperty(value = "分解後HW/NOS区分", required = false, position = 9, allowableValues = "HW(\"1\"), NOS(\"2\")")
+	private HwNosType hwNosType;
 }
