@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.check;
 
+import java.util.Arrays;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -74,7 +76,7 @@ public class TestMasterDto {
 		dto.setDomain("1");
 		dto.setEstimationContractType("1");
 		dto.setLifecycleStatus("1");
-		dto.setArrangementWorkTypeMasterId(1L);
+		dto.setArrangementWorkTypeMasterId(Arrays.asList(1L, 2L));
 
 		AttachedFileProductClassCheckMasterSearchParameter testTarget = new AttachedFileProductClassCheckMasterSearchParameter();
 		BeanUtils.copyProperties(testTarget, dto);
@@ -118,7 +120,7 @@ public class TestMasterDto {
 		dto.setEstimationContractType("1");
 		dto.setLifecycleStatus("1");
 		dto.setItemMasterId(1L);
-		dto.setArrangementWorkTypeMasterId(1L);
+		dto.setArrangementWorkTypeMasterId(Arrays.asList(1L, 2L));
 
 		AttachedFileProductGrpCheckMasterSearchParameter testTarget = new AttachedFileProductGrpCheckMasterSearchParameter();
 		BeanUtils.copyProperties(testTarget, dto);
