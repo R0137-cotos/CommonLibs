@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -56,6 +54,6 @@ public class AttachedFileProductClassCheckMasterSearchParameter {
 	 * 手配業務タイプマスタID
 	 */
 	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private List<Long> arrangementWorkTypeMasterId;
+	private Long arrangementWorkTypeMasterId;
 
 }
