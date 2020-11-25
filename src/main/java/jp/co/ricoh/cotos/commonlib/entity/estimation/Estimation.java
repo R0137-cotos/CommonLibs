@@ -560,7 +560,7 @@ public class Estimation extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "estimation")
 	@ApiModelProperty(value = "違約金明細(見積用)", required = false, position = 63, readOnly = true)
-	private List<PenaltyDetailEstimation> penaltyDetailEstimation;
+	private List<PenaltyDetailEstimation> penaltyDetailEstimationList;
 
 	@PreUpdate
 	public void preUpdate() {

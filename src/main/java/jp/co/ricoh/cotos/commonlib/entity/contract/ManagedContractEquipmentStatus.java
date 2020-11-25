@@ -92,5 +92,5 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "managedContractEquipmentStatus")
 	@ApiModelProperty(value = "契約機種品種紐づけシーケンス", required = false, position = 8)
-	private List<ContractEquipmentItemLink> contractEquipmentItemLink;
+	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
 }

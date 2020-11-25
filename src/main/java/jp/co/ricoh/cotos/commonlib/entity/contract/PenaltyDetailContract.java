@@ -194,6 +194,6 @@ public class PenaltyDetailContract extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "penaltyDetailContract")
 	@ApiModelProperty(value = "違約金明細振替", required = false, position = 14)
-	private List<PenaltyDetailTrans> penaltyDetailTrans;
+	private List<PenaltyDetailTrans> penaltyDetailTransList;
 
 }

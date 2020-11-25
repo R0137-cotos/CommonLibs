@@ -830,7 +830,7 @@ public class Contract extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 89)
-	private List<ContractEquipmentNoIsysone> contractEquipmentNoIsysone;
+	private List<ContractEquipmentNoIsysone> contractEquipmentNoIsysoneList;
 
 	/**
 	 * 契約機種状態管理
@@ -838,7 +838,7 @@ public class Contract extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 90)
-	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
+	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatusList;
 
 	/**
 	 * 配送先
@@ -854,7 +854,7 @@ public class Contract extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 92)
-	private List<PenaltyDetailContract> penaltyDetailContract;
+	private List<PenaltyDetailContract> penaltyDetailContractList;
 
 	/**
 	 * 配送先SS組織
