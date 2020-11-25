@@ -69,7 +69,6 @@ public class FileImportManagement extends EntityBase {
 	/**
 	 * ファイル種別管理マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ファイル種別管理マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")

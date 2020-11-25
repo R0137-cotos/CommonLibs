@@ -10,7 +10,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +37,6 @@ public class FileImportErrorDetails extends EntityBase {
 	/**
 	 * ファイル取込管理管理ID
 	 */
-	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore

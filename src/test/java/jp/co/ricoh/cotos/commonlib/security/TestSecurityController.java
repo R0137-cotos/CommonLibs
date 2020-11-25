@@ -124,6 +124,8 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkErrorLog;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.common.FileImportErrorDetails;
+import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.CommunicationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
@@ -141,6 +143,8 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentItemLink;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentNoIsysone;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicAccCeEmp;
@@ -154,8 +158,13 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.CustomerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemDetailContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedEstimationDetail;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailTrans;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddressSsOrg;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingThingDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
@@ -169,7 +178,13 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoOperationLog;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
@@ -1015,6 +1030,81 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ItemContractDetailForFindAllDetailsBplatsDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ItemContractDetailForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ShippingAddress")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ShippingAddress entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ShippingAddressSsOrg")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ShippingAddressSsOrg entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipmentItemLink")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipmentItemLink entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipmentNoIsysone")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipmentNoIsysone entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ShippingThingDetail")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ShippingThingDetail entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ManagedContractEquipmentStatus")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ManagedContractEquipmentStatus entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailTrans")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailTrans entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseRemainingNumber")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseRemainingNumber entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseInfoOperationLog")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseInfoOperationLog entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseProcess")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseProcess entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseDetail")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseDetail entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/FileImportManagement")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated FileImportManagement entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/FileImportErrorDetails")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated FileImportErrorDetails entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailEstimation")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailEstimation entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }
