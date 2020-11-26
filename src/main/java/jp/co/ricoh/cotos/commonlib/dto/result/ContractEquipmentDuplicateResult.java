@@ -13,35 +13,29 @@ import lombok.Data;
 public class ContractEquipmentDuplicateResult {
 
 	/**
-	 * 契約ID
-	 */
-	@ApiModelProperty(value = "契約ID", required = true, position = 1)
-	private long contractId;
-
-	/**
 	 * 商品種類区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品種類区分", required = false, position = 2, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "商品種類区分", required = false, position = 1, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 2, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 機種コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "機種コード", required = true, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "機種コード", required = true, position = 3, allowableValues = "range[0,255]")
 	private String equipmentCode;
 
 	/**
 	 * 機番
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "機番", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "機番", required = false, position = 4, allowableValues = "range[0,255]")
 	private String equipmentNo;
 }
