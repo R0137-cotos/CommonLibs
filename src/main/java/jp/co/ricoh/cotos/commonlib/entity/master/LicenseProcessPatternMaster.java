@@ -125,4 +125,11 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@ApiModelProperty(value = "メール区分", required = true, position = 9, allowableValues = "range[0,255]")
 	private MailDiv mailDiv;
 
+	/**
+	 * メールタイプ区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メールタイプ区分", required = true, position = 10, allowableValues = "range[0,255]")
+	private String mailTypeDiv;
+
 }
