@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -43,11 +45,11 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	private String lifecycleStatus;
 
 	/**
-	 * 品種マスタID
+	 * 品種マスタIDリスト
 	 */
 	@NotNull
-	@ApiModelProperty(value = "品種マスタID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	@ApiModelProperty(value = "品種マスタIDリスト", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
+	private List<Long> itemMasterIdList;
 
 	/**
 	 * 手配業務タイプマスタID

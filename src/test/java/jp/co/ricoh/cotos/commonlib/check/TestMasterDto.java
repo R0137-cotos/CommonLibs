@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.check;
 
+import java.util.Arrays;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -117,7 +119,7 @@ public class TestMasterDto {
 		dto.setDomain("1");
 		dto.setEstimationContractType("1");
 		dto.setLifecycleStatus("1");
-		dto.setItemMasterId(1L);
+		dto.setItemMasterIdList(Arrays.asList(1L, 2L));
 		dto.setArrangementWorkTypeMasterId(1L);
 
 		AttachedFileProductGrpCheckMasterSearchParameter testTarget = new AttachedFileProductGrpCheckMasterSearchParameter();
@@ -133,7 +135,7 @@ public class TestMasterDto {
 		testTarget.setDomain(null);
 		testTarget.setEstimationContractType(null);
 		testTarget.setLifecycleStatus(null);
-		testTarget.setItemMasterId(null);
+		testTarget.setItemMasterIdList(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
