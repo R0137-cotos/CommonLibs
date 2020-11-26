@@ -75,7 +75,7 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "製品名", required = false, position = 4, allowableValues = "range[0,255]")
-	private String itemName;
+	private String goodsName;
 
 	/**
 	 * 機番

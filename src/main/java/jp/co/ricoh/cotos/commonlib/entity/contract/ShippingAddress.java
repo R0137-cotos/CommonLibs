@@ -115,7 +115,7 @@ public class ShippingAddress extends EntityBase {
 	 */
 	@Size(max = 1000)
 	@ApiModelProperty(value = "市区町村番地", required = false, position = 12, allowableValues = "range[0,1000]", readOnly = false)
-	private String address;
+	private String cityStreet;
 
 	/**
 	 * 電話番号

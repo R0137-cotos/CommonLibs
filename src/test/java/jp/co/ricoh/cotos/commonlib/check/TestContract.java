@@ -1533,7 +1533,7 @@ public class TestContract {
 		testTarget.setSalesDepartmentName(STR_256);
 		testTarget.setPostNumber(STR_256);
 		testTarget.setPrefectures(STR_256);
-		testTarget.setAddress(STR_1001);
+		testTarget.setCityStreet(STR_1001);
 		testTarget.setPhoneNumber(STR_256);
 		testTarget.setYamatoSlipNumber(STR_256);
 		testTarget.setBuildingName(STR_256);
@@ -1600,7 +1600,7 @@ public class TestContract {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setItemNo(STR_256);
-		testTarget.setItemName(STR_256);
+		testTarget.setGoodsName(STR_256);
 		testTarget.setEquipmentNo(STR_256);
 		testTarget.setOptionName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
