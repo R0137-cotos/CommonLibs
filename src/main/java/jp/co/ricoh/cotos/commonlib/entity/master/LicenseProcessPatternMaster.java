@@ -35,7 +35,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 
 	public enum MailDiv {
 
-		事前完了メール("1"), Welcameメール("2");
+		事前設定完了メール("1"), Welcameメール("2");
 
 		private final String text;
 
@@ -121,8 +121,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	/**
 	 * メール区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "メール区分", required = true, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メール区分", required = true, position = 9, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**

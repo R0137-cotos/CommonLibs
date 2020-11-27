@@ -137,7 +137,7 @@ public class LicenseProcess extends EntityBase {
 	/**
 	 * メール区分
 	 */
-	@ApiModelProperty(value = "メール区分", required = false, position = 7, allowableValues = "事前完了メール(\"1\"), Welcomeメール(\"2\")")
+	@ApiModelProperty(value = "メール区分", required = false, position = 7, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
