@@ -3,10 +3,9 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -191,28 +190,27 @@ public class LicenseInfoParameter extends DtoBase {
 	/**
 	 * ライセンス明細
 	 */
-	@OneToMany
+	@Valid
 	@ApiModelProperty(value = "ライセンス明細", required = false, position = 26)
 	private List<LicenseDetail> licenseDetailList;
 
 	/**
 	 * ライセンス工程
 	 */
-	@OneToMany
+	@Valid
 	@ApiModelProperty(value = "ライセンス工程", required = true, position = 27)
 	private List<LicenseProcess> licenseProcessList;
 
 	/**
 	 * ライセンス残数
 	 */
-	@OneToOne
+	@Valid
 	@ApiModelProperty(value = "ライセンス残数", required = false, position = 28)
 	private LicenseRemainingNumber licenseRemainingNumber;
 
 	/**
 	 * ライセンス情報操作履歴
 	 */
-	@OneToMany
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 29)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
 }
