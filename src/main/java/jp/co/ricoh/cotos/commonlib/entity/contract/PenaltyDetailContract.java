@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -109,9 +108,8 @@ public class PenaltyDetailContract extends EntityBase {
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@NotNull
 	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long itemMasterId;
+	private long itemMasterId;
 
 	/**
 	 * 品種名
@@ -140,7 +138,6 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "違約金単価", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
@@ -157,7 +154,6 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "違約金金額", required = false, position = 9, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 

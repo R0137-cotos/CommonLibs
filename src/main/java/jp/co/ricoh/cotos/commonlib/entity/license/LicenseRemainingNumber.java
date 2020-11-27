@@ -68,7 +68,6 @@ public class LicenseRemainingNumber extends EntityBase {
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]", readOnly = false)
