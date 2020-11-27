@@ -160,6 +160,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ItemContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedEstimationDetail;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailTrans;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
@@ -1105,6 +1106,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailEstimation")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailEstimation entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailContract")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailContract entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }
