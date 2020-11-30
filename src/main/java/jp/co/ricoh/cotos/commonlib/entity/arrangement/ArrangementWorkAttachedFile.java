@@ -137,7 +137,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	private MultipartFile multipartFile;
 
 	/**
-	 * チェック必須フラグ
+	 * 添付必須フラグ
 	 */
 	@Max(9)
 	@Min(0)
