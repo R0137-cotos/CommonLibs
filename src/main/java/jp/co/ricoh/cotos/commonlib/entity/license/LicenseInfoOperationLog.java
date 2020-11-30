@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,6 +32,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
+@EntityListeners(LicenseInfoOperationLogListener.class)
 @Data
 @Table(name = "license_info_operation_log")
 public class LicenseInfoOperationLog extends EntityBase {
@@ -92,5 +95,11 @@ public class LicenseInfoOperationLog extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "実施日時", required = false, position = 7, readOnly = false)
 	private Date operatedAt;
+
+	@PrePersist
+	public void prePersist() {
+		super.prePersist();
+		this.operatedAt = super.getCreatedAt();
+	}
 
 }
