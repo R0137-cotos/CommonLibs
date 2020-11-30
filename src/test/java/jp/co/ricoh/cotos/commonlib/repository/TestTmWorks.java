@@ -150,6 +150,18 @@ public class TestTmWorks {
 		found = tmLinkManagementRepository.findByTmUpdateCustomerRequestWork(tmUpdateCustomerRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロ会社情報更新リクエストWORKをキーにレコードが取得されること ", 1, found.size());
+		TmCreateCustomerRequestWork tmCreateCustomerRequestWork = tmCreateCustomerRequestWorkRepository.findOne(10L);
+		found = tmLinkManagementRepository.findByTmCreateCustomerRequestWork(tmCreateCustomerRequestWork);
+		Assert.assertNotNull(found);
+		Assert.assertEquals("トレンドマイクロ顧客情報作成リクエストWORKをキーにレコードが取得されること ", 1, found.size());
+		TmCreateSubscriptionRequestWork tmCreateSubscriptionRequestWork = tmCreateSubscriptionRequestWorkRepository.findOne(10L);
+		found = tmLinkManagementRepository.findByTmCreateSubscriptionRequestWork(tmCreateSubscriptionRequestWork);
+		Assert.assertNotNull(found);
+		Assert.assertEquals("トレンドマイクロサブスクリプション作成リクエストWORKをキーにレコードが取得されること ", 1, found.size());
+		TmUpdateSubscriptionRequestWork tmUpdateSubscriptionRequestWork = tmUpdateSubscriptionRequestWorkRepository.findOne(10L);
+		found = tmLinkManagementRepository.findByTmUpdateSubscriptionRequestWork(tmUpdateSubscriptionRequestWork);
+		Assert.assertNotNull(found);
+		Assert.assertEquals("トレンドマイクロサブスクリプション更新リクエストWORKをキーにレコードが取得されること ", 1, found.size());
 	}
 
 	private void TmCreateCustomerRequestWorkRepositoryのテスト() {
