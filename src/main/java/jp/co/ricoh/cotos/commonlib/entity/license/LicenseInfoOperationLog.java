@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +34,10 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_info_operation_log")
 public class LicenseInfoOperationLog extends EntityBase {
 
+	public enum Operation {
+		新規作成, 更新
+	}
+
 	/**
 	 * ライセンス情報操作履歴ID
 	 */
@@ -53,9 +59,9 @@ public class LicenseInfoOperationLog extends EntityBase {
 	/**
 	 * 操作内容
 	 */
-	@Size(max = 1000)
-	@ApiModelProperty(value = "操作内容", required = false, position = 3, allowableValues = "range[0,1000]", readOnly = false)
-	private String operation;
+	@Enumerated(EnumType.STRING)
+	@ApiModelProperty(value = "操作内容", required = false, position = 3, allowableValues = "新規作成、更新", readOnly = false)
+	private Operation operation;
 
 	/**
 	 * 操作者MoM社員ID
