@@ -111,7 +111,7 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "出力条件区分", required = false, position = 5, allowableValues = "range[0,255]")
-	private Long exportConditionsType;
+	private String exportConditionsType;
 
 	/**
 	 * エラー処理区分
