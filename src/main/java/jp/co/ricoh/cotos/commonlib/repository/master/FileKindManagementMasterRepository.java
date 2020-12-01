@@ -11,5 +11,5 @@ import jp.co.ricoh.cotos.commonlib.entity.master.FileOperationRelationProductMas
 
 @Repository
 public interface FileKindManagementMasterRepository extends CrudRepository<FileKindManagementMaster, Long> {
-	public List<FileKindManagementMaster> findByFileOperationRelationProductMasterAndImportExportTypeOrderById(FileOperationRelationProductMaster fileOperationRelationProductMaster, ImportExportType importExportType);
+	public List<FileKindManagementMaster> findByFileOperationRelationProductMasterInAndImportExportTypeOrderByIdAsc(List<FileOperationRelationProductMaster> fileOperationRelationProductMasterList, ImportExportType importExportType);
 }
