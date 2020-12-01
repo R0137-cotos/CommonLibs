@@ -194,4 +194,24 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "契約変更期間チェック対象日区分 終了", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\")", position = 13)
 	private ToContractChangeSpanTargetDateType toContractChangeSpanTargetDateType;
+
+	/**
+	 * チェック対象トランザクションテーブル名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "チェック対象トランザクションテーブル名", required = false, position = 14, allowableValues = "range[0,255]")
+	private String checkTargetTransactionTableName;
+
+	/**
+	 * 追加条件式
+	 */
+	@ApiModelProperty(value = "追加条件式", required = false, position = 15)
+	private String extendsQuery;
+
+	/**
+	 * エラーキー
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "エラーキー", required = false, position = 16, allowableValues = "range[0,255]")
+	private String errorKey;
 }
