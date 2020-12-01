@@ -179,9 +179,8 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	private Integer dateCalcBusinessDayFlg;
 
 	/**
-	 * 日付計算汎用条件
+	 * 拡張項目
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "日付計算汎用条件", required = false, position = 12, allowableValues = "range[0,255]")
-	private String dateCalcCommonTerms;
+	@ApiModelProperty(value = "拡張項目", required = false, position = 12)
+	private String extendsParameter;
 }
