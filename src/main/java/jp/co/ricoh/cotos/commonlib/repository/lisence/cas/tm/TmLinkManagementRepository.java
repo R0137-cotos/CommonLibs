@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmLinkManagement;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmSuspendSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateSubscriptionRequestWork;
 
@@ -22,5 +23,7 @@ public interface TmLinkManagementRepository extends CrudRepository<TmLinkManagem
 
 	public List<TmLinkManagement> findByTmUpdateSubscriptionRequestWork(TmUpdateSubscriptionRequestWork tmUpdateSubscriptionRequestWork);
 
+	public List<TmLinkManagement> findByTmSuspendSubscriptionRequestWork(TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork);
+	
 	public List<TmLinkManagement> findByTmUpdateCustomerRequestWork(TmUpdateCustomerRequestWork tmUpdateCustomerRequestWork);
 }
