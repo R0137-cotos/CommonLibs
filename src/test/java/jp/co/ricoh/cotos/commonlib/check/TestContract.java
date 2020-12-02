@@ -722,7 +722,7 @@ public class TestContract {
 		testTarget.setOriginContractBranchNumber(INT_100);
 		testTarget.setEstimationBranchNumber(INT_100);
 		testTarget.setManualUpdateFlg(INT_10);
-		testTarget.setSsWorkRequestCreate_flg(INT_10);
+		testTarget.setSsWorkRequestCreateFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
@@ -736,7 +736,7 @@ public class TestContract {
 		testTarget.setEstimationBranchNumber(INT_MINUS_1);
 		testTarget.setEstimationId((long) INT_MINUS_1);
 		testTarget.setManualUpdateFlg(INT_MINUS_1);
-		testTarget.setSsWorkRequestCreate_flg(INT_MINUS_1);
+		testTarget.setSsWorkRequestCreateFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 7);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
