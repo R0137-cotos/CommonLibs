@@ -24,6 +24,9 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SaleDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentNoIsysone;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -589,4 +592,36 @@ public class ContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 76, allowableValues = "range[0,255]")
 	private String penaltyFfmOrderContactNo;
+
+	/**
+	 * 契約機種(Isys-Oneへの連携なし)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 77)
+	private List<ContractEquipmentNoIsysone> contractEquipmentNoIsysoneList;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 78, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
+
+	/**
+	 * 違約金明細(契約用)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 79)
+	private List<PenaltyDetailContract> penaltyDetailContractList;
+
+	/**
+	 * 配送先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先", required = true, position = 80)
+	private ShippingAddress shippingAddress;
 }
