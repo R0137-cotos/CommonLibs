@@ -24,9 +24,6 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SaleDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
-import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentNoIsysone;
-import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract;
-import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -599,7 +596,7 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 77)
-	private List<ContractEquipmentNoIsysone> contractEquipmentNoIsysoneList;
+	private List<ContractEquipmentNoIsysoneDto> contractEquipmentNoIsysoneList;
 
 	/**
 	 * S&S作業依頼フラグ
@@ -615,7 +612,7 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 79)
-	private List<PenaltyDetailContract> penaltyDetailContractList;
+	private List<PenaltyDetailContractDto> penaltyDetailContractList;
 
 	/**
 	 * 配送先
@@ -623,5 +620,5 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "配送先", required = true, position = 80)
-	private ShippingAddress shippingAddress;
+	private ShippingAddressDto shippingAddress;
 }
