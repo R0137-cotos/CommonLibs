@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.json;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,66 +28,85 @@ public class TestJson {
 	@Test
 	public void 正常系_JSONテキストからオブジェクトに変換() {
 
-		// JSONテキストからオブジェクトに変換
-		TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT, TestJsonDto.class);
+		try {
+			// JSONテキストからオブジェクトに変換
+			TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT, TestJsonDto.class);
 
-		// チェック
-		assertNotNull(dto);
-		assertEquals("ORG0000001", dto.getOrganizationId());
-		assertEquals("2", dto.getVpn());
-		assertEquals("RMA0000001", dto.getRmaContractNumber());
-		assertEquals("2020/11/01", dto.getRmaContractStart());
-		assertEquals("2020/10/31", dto.getRmaContractEnd());
+			// チェック
+			assertNotNull(dto);
+			assertEquals("ORG0000001", dto.getOrganizationId());
+			assertEquals("2", dto.getVpn());
+			assertEquals("RMA0000001", dto.getRmaContractNumber());
+			assertEquals("2020/11/01", dto.getRmaContractStart());
+			assertEquals("2020/10/31", dto.getRmaContractEnd());
 
-		assertNotNull(dto.getTestJsonDetailDto());
-		assertEquals("testValue1", dto.getTestJsonDetailDto().getTestKey1());
-		assertEquals("testValue2", dto.getTestJsonDetailDto().getTestKey2());
+			assertNotNull(dto.getTestJsonDetailDto());
+			assertEquals("testValue1", dto.getTestJsonDetailDto().getTestKey1());
+			assertEquals("testValue2", dto.getTestJsonDetailDto().getTestKey2());
 
-		assertEquals(2, dto.getTestJsonDetailDto().getTestJsonArrayList().size());
-		assertEquals("arrayValue1", dto.getTestJsonDetailDto().getTestJsonArrayList().get(0).getArrayKey1());
-		assertEquals("arrayValue2", dto.getTestJsonDetailDto().getTestJsonArrayList().get(0).getArrayKey2());
-		assertEquals("arrayValue3", dto.getTestJsonDetailDto().getTestJsonArrayList().get(1).getArrayKey1());
-		assertEquals("arrayValue4", dto.getTestJsonDetailDto().getTestJsonArrayList().get(1).getArrayKey2());
+			assertEquals(2, dto.getTestJsonDetailDto().getTestJsonArrayList().size());
+			assertEquals("arrayValue1", dto.getTestJsonDetailDto().getTestJsonArrayList().get(0).getArrayKey1());
+			assertEquals("arrayValue2", dto.getTestJsonDetailDto().getTestJsonArrayList().get(0).getArrayKey2());
+			assertEquals("arrayValue3", dto.getTestJsonDetailDto().getTestJsonArrayList().get(1).getArrayKey1());
+			assertEquals("arrayValue4", dto.getTestJsonDetailDto().getTestJsonArrayList().get(1).getArrayKey2());
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 
 	@Test
 	public void 異常系_JSONテキストからオブジェクトに変換_JSONテキストなし() {
 
-		// JSONテキストからオブジェクトに変換
-		TestJsonDto dto = jsonUtil.convertToDto(null, TestJsonDto.class);
+		try {
+			// JSONテキストからオブジェクトに変換
+			TestJsonDto dto = jsonUtil.convertToDto(null, TestJsonDto.class);
 
-		// チェック
-		assertNull(dto);
+			// チェック
+			assertNull(dto);
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 
 	@Test
 	public void 異常系_JSONテキストからオブジェクトに変換_クラスなし() {
 
-		// JSONテキストからオブジェクトに変換
-		TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT, null);
+		try {
+			// JSONテキストからオブジェクトに変換
+			TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT, null);
 
-		// チェック
-		assertNull(dto);
+			// チェック
+			assertNull(dto);
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 
 	@Test
 	public void 異常系_JSONテキストからDTOに変換_JSONテキスト_項目不一致() {
 
-		// JSONテキストからオブジェクトに変換
-		TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT_ERROR, null);
+		try {
+			// JSONテキストからオブジェクトに変換
+			TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT_ERROR, TestJsonDto.class);
 
-		// チェック
-		assertNull(dto);
+			// チェック
+			assertNotNull(dto);
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 
 	@Test
 	public void 異常系_JSONテキストからDTOに変換_JSONテキスト_JSON以外() {
 
-		// JSONテキストからオブジェクトに変換
-		TestJsonDto dto = jsonUtil.convertToDto("no_json_text", null);
+		try {
+			// JSONテキストからオブジェクトに変換
+			jsonUtil.convertToDto("no_json_text", TestJsonDto.class);
 
-		// チェック
-		assertNull(dto);
+			fail("正常終了した");
+		} catch (IOException e) {
+			// エラーが発生したらテストOK
+		}
 	}
 
 	@Test
@@ -125,32 +145,44 @@ public class TestJson {
 
 		dto.setTestJsonDetailDto(dtoDetail);
 
-		// オブジェクトからJSONテキストに変換
-		String jsonText = jsonUtil.convertToStr(dto);
+		try {
+			// オブジェクトからJSONテキストに変換
+			String jsonText = jsonUtil.convertToStr(dto);
 
-		// チェック
-		assertNotNull(jsonText);
-		assertEquals(JSON_TEXT, jsonText);
+			// チェック
+			assertNotNull(jsonText);
+			assertEquals(JSON_TEXT, jsonText);
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 
 	@Test
 	public void 正常系_オブジェクトからJSONテキストに変換_オブジェクト以外() {
 
-		// オブジェクトからJSONテキストに変換
-		String jsonText = jsonUtil.convertToStr("text");
+		try {
+			// オブジェクトからJSONテキストに変換
+			String jsonText = jsonUtil.convertToStr("text");
 
-		// チェック
-		assertNotNull(jsonText);
-		assertEquals("\"text\"", jsonText);
+			// チェック
+			assertNotNull(jsonText);
+			assertEquals("\"text\"", jsonText);
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 
 	@Test
 	public void 異常系_オブジェクトからJSONテキストに変換_オブジェクトなし() {
 
-		// オブジェクトからJSONテキストに変換
-		String jsonText = jsonUtil.convertToStr(null);
+		try {
+			// オブジェクトからJSONテキストに変換
+			String jsonText = jsonUtil.convertToStr(null);
 
-		// チェック
-		assertNull(jsonText);
+			// チェック
+			assertNull(jsonText);
+		} catch (IOException e) {
+			fail("エラーが発生した");
+		}
 	}
 }

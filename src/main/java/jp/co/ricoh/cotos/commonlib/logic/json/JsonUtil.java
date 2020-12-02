@@ -21,16 +21,12 @@ public class JsonUtil {
 	 *
 	 * JSONテキストをオブジェクトに変換します。
 	 *
-	 * <pre>
-	 * Exceptionが発生した場合、Nullを返却します。
-	 * エラー処理をしたい場合は、呼び出し元でNull判定を行ってください。
-	 * </pre>
-	 *
 	 * @param jsonText
 	 * @param obj
 	 * @return <T> T
+	 * @throws IOException
 	 */
-	public <T> T convertToDto(String jsonText, Class<T> obj) {
+	public <T> T convertToDto(String jsonText, Class<T> obj) throws IOException {
 
 		// JSONテキストが設定されていない場合、Nullを返却
 		if (StringUtils.isBlank(jsonText)) {
@@ -42,39 +38,25 @@ public class JsonUtil {
 			return null;
 		}
 
-		try {
-			// JSONテキストをオブジェクトに変換
-			return mapper.readValue(jsonText, obj);
-		} catch (IOException ioe) {
-			// エラーの場合、Nullを返却
-			return null;
-		}
+		// JSONテキストをオブジェクトに変換
+		return mapper.readValue(jsonText, obj);
 	}
 
 	/**
 	 * オブジェクトからJSONテキストに変換します。
 	 *
-	 *<pre>
-	 * Exceptionが発生した場合、Nullを返却します。
-	 * エラー処理をしたい場合は、呼び出し元でNull判定を行ってください。
-	 * </pre>
-	 *
 	 * @param obj
 	 * @return String
+	 * @throws IOException
 	 */
-	public String convertToStr(Object obj) {
+	public String convertToStr(Object obj) throws IOException {
 
 		// オブジェクトが設定されていない場合、Nullを返却
 		if (null == obj) {
 			return null;
 		}
 
-		try {
-			// オブジェクトをJSONテキストに変換
+		// オブジェクトをJSONテキストに変換
 			return mapper.writeValueAsString(obj);
-		} catch (IOException ioe) {
-			// エラーの場合、Nullを返却
-			return null;
-		}
 	}
 }
