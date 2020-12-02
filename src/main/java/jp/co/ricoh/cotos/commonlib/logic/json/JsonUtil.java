@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.logic.json;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,11 @@ public class JsonUtil {
 	 *
 	 * JSONテキストをオブジェクトに変換します。
 	 *
+	 * <pre>
+	 * Exceptionが発生した場合、Nullを返却します。
+	 * エラー処理をしたい場合は、呼び出し元でNull判定を行ってください。
+	 * </pre>
+	 *
 	 * @param jsonText
 	 * @param obj
 	 * @return <T> T
@@ -27,7 +33,7 @@ public class JsonUtil {
 	public <T> T convertToDto(String jsonText, Class<T> obj) {
 
 		// JSONテキストが設定されていない場合、Nullを返却
-		if (null == jsonText || jsonText.isEmpty()) {
+		if (StringUtils.isBlank(jsonText)) {
 			return null;
 		}
 
@@ -47,6 +53,11 @@ public class JsonUtil {
 
 	/**
 	 * オブジェクトからJSONテキストに変換します。
+	 *
+	 *<pre>
+	 * Exceptionが発生した場合、Nullを返却します。
+	 * エラー処理をしたい場合は、呼び出し元でNull判定を行ってください。
+	 * </pre>
 	 *
 	 * @param obj
 	 * @return String
