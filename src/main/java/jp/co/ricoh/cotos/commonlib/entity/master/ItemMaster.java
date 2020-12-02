@@ -310,4 +310,20 @@ public class ItemMaster extends EntityBaseMaster {
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 32, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * 見積承認ルートグループマスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "estimation_approval_route_grp_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "承認ルートグループマスタ（見積）", required = false, position = 33)
+	private ApprovalRouteGrpMaster estimationApprovalRouteGrpMaster;
+
+	/**
+	 * 契約承認ルートグループマスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "contract_approval_route_grp_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "承認ルートグループマスタ（契約）", required = false, position = 34)
+	private ApprovalRouteGrpMaster contractApprovalRouteGrpMaster;
 }

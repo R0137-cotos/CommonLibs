@@ -941,6 +941,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1031,6 +1032,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1061,6 +1063,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/recordDecomposeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1418,6 +1421,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/equipmentCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1437,6 +1441,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemTransCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1909,6 +1914,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
