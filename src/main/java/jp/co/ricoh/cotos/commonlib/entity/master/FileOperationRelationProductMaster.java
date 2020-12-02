@@ -98,7 +98,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	@Column(nullable = true)
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private long licenseDivMasterId;
+	private Long licenseDivMasterId;
 
 	/**
 	 * ファイル種別管理マスタ
