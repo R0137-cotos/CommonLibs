@@ -60,6 +60,20 @@ public class TestJson {
 	}
 
 	@Test
+	public void 正常系_JSON文字列からDTOに変換_JSON文字列_項目不一致() {
+
+		try {
+			// JSON文字列からオブジェクトに変換
+			TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT_ERROR, TestJsonDto.class);
+
+			// チェック
+			assertNotNull(dto);
+		} catch (ErrorCheckException e) {
+			fail("エラーが発生した");
+		}
+	}
+
+	@Test
 	public void 異常系_JSON文字列からオブジェクトに変換_JSON文字列なし() {
 
 		try {
@@ -88,20 +102,6 @@ public class TestJson {
 			Assert.assertEquals(1, errorList.size());
 			Assert.assertEquals("ROT00013", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("Objectが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
-		}
-	}
-
-	@Test
-	public void 異常系_JSON文字列からDTOに変換_JSON文字列_項目不一致() {
-
-		try {
-			// JSON文字列からオブジェクトに変換
-			TestJsonDto dto = jsonUtil.convertToDto(JSON_TEXT_ERROR, TestJsonDto.class);
-
-			// チェック
-			assertNotNull(dto);
-		} catch (ErrorCheckException e) {
-			fail("エラーが発生した");
 		}
 	}
 
