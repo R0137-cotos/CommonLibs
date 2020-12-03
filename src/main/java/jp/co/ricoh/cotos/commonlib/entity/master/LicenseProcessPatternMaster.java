@@ -13,7 +13,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -104,31 +103,23 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	private Long arrangementWorkTypeMasterId;
 
 	/**
-	 * メールテンプレートID
-	 */
-	@Min(0)
-	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
-	private Long mailTemplateId;
-
-	/**
 	 * メール到達チェックフラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 7, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール区分
 	 */
-	@ApiModelProperty(value = "メール区分", required = true, position = 9, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
+	@ApiModelProperty(value = "メール区分", required = true, position = 8, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
-	 * メールタイプ区分
+	 * メールマスタID
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "メールタイプ区分", required = true, position = 10, allowableValues = "range[0,255]")
-	private String mailTypeDiv;
-
+	@Min(0)
+	@ApiModelProperty(value = "メールマスタID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
+	private Long mailMasterId;
 }

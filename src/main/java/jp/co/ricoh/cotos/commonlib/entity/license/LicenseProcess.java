@@ -17,7 +17,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -135,50 +134,42 @@ public class LicenseProcess extends EntityBase {
 	private OperationDiv operationDiv;
 
 	/**
-	 * メール区分
-	 */
-	@ApiModelProperty(value = "メール区分", required = false, position = 7, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
-	private MailDiv mailDiv;
-
-	/**
-	 * メールテンプレートID
-	 */
-	@Min(0)
-	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
-	private Long mailTemplateId;
-
-	/**
 	 * メール到達チェックフラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 9, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 7, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "メール送信日", required = false, position = 10)
+	@ApiModelProperty(value = "メール送信日", required = false, position = 8)
 	private Date mailSendedAt;
 
 	/**
 	 * 送信結果区分
 	 */
-	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 11)
+	@ApiModelProperty(value = "送信結果区分", required = false, position = 9, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
 	private MailSendedResultDiv mailSendedResultDiv;
+
+	/**
+	 * メール区分
+	 */
+	@ApiModelProperty(value = "メール区分", required = false, position = 10, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
+	private MailDiv mailDiv;
 
 	/**
 	 * 工程状態
 	 */
-	@ApiModelProperty(value = "工程状態", required = false, position = 12, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
+	@ApiModelProperty(value = "工程状態", required = false, position = 11, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
 	private ProcessStatus processStatus;
 
 	/**
-	 * メールタイプ区分
+	 * メールマスタID
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "メールタイプ区分", required = true, position = 10, allowableValues = "range[0,255]")
-	private String mailTypeDiv;
-
+	@Min(0)
+	@ApiModelProperty(value = "メールマスタID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
+	private Long mailMasterId;
 }

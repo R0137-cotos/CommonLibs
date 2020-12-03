@@ -171,3 +171,5 @@ DELETE FROM VUP_CASE_WORK;
 DELETE FROM license_arrangement_master;
 DELETE FROM license_div_master;
 DELETE FROM license_div_comp_master;
+DELETE FROM mail_master;
+DELETE FROM mail_address_master;
