@@ -394,3 +394,4 @@
 |437|JsonUtilを新規作成|
 |438|契約DTOの誤りを修正|
 |439|JsonUtilをExceptionをthrowするように修正|
+|440|DB修正に伴う全体的な修正|

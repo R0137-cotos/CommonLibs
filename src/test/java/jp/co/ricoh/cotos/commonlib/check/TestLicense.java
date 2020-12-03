@@ -239,8 +239,8 @@ public class TestLicense {
 		testTarget.setProcessOrder(INT_MINUS_1);
 		testTarget.setProcessMasterId((long) INT_MINUS_1);
 		testTarget.setArrangementWorkId((long) INT_MINUS_1);
-		testTarget.setMailTemplateId((long) INT_MINUS_1);
 		testTarget.setMailArrivalCheckFlg(INT_MINUS_1);
+		testTarget.setMailMasterId((long) INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
@@ -248,7 +248,6 @@ public class TestLicense {
 
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setMailTypeDiv(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
