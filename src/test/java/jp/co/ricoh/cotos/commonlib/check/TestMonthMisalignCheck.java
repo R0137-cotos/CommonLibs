@@ -19,6 +19,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ToleranceType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
@@ -74,7 +75,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 1), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -99,7 +100,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 1), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -124,7 +125,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 2), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量より月数大), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -149,7 +150,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 3), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量より月数小), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -174,7 +175,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 4), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -199,7 +200,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 4), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -224,7 +225,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 5), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -249,7 +250,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 5), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -274,7 +275,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 6), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数or月数プラス1), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -299,7 +300,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 6), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数or月数プラス1), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -324,7 +325,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 3), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量より月数小), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -349,7 +350,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 1), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -374,7 +375,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 1), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -399,7 +400,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 2), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量より月数大), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -424,7 +425,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 3), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量より月数小), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -449,7 +450,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 4), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -474,7 +475,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 4), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -499,7 +500,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 5), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -524,7 +525,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 5), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -549,7 +550,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 6), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数or月数プラス1), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -574,7 +575,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 6), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数or月数プラス1), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -599,7 +600,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 6), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数マイナス1or月数or月数プラス1), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -624,7 +625,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 3);
+			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -653,7 +654,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			checkUtil.monthMisalignCheck(contract, itemMasterId, null, checkDateTo, 0);
+			checkUtil.monthMisalignCheck(contract, itemMasterId, null, checkDateTo, ToleranceType.一致);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -682,7 +683,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, null, 0);
+			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, null, ToleranceType.一致);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -711,7 +712,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 0);
+			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -740,7 +741,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, 0);
+			checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.一致);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
