@@ -49,6 +49,28 @@ public class MailAddressMaster extends EntityBaseMaster {
 		}
 	}
 
+	public enum ServiceCategory {
+
+		見積("1"), 契約("2"), 手配("3"), ライセンス("4");
+
+		private final String text;
+
+		private ServiceCategory(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ServiceCategory fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_address_master_seq")
 	@SequenceGenerator(name = "mail_address_master_seq", sequenceName = "mail_address_master_seq", allocationSize = 1)
@@ -67,20 +89,26 @@ public class MailAddressMaster extends EntityBaseMaster {
 	/**
 	 * メールアドレス区分
 	 */
-	@ApiModelProperty(value = "メールアドレス区分", required = true, position = 3, allowableValues = "TO(\"1\"), CC(\"2\"), BCC(\"3\")")
+	@ApiModelProperty(value = "メールアドレス区分", required = false, position = 3, allowableValues = "TO(\"1\"), CC(\"2\"), BCC(\"3\")")
 	private MailAddressDiv mailAddressDiv;
 
 	/**
 	 * 対象エンティティ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "対象エンティティ名", required = true, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "対象エンティティ名", required = false, position = 4, allowableValues = "range[0,255]")
 	private String targetEntityName;
 
 	/**
 	 * 対象フィールド名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "対象フィールド名", required = true, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "対象フィールド名", required = false, position = 5, allowableValues = "range[0,255]")
 	private String targetFieldName;
+
+	/**
+	 * サービスカテゴリ
+	 */
+	@ApiModelProperty(value = "サービスカテゴリ", required = false, position = 6, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\"), ライセンス(\"4\")")
+	private ServiceCategory serviceCategory;
 }
