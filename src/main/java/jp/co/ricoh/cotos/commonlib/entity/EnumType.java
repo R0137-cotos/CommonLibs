@@ -489,7 +489,7 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-	
+
 	public enum EimLinkedStatus {
 
 		未連携("0"), 連携済("1"), 対象外("9");
@@ -511,6 +511,28 @@ public class EnumType {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ToleranceType {
+
+		一致("1"), 数量より月数大("2"), 数量より月数小("3"), 数量が月数or月数プラス1("4"), 数量が月数マイナス1or月数("5"), 数量が月数マイナス1or月数or月数プラス1("6");
+
+		private final String text;
+
+		private ToleranceType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ToleranceType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
