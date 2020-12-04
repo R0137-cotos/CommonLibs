@@ -85,36 +85,36 @@ public class LicenseProcessResult {
 	private MailDiv mailDiv;
 
 	/**
-	 * メールテンプレートID
-	 */
-	@Min(0)
-	@ApiModelProperty(value = "メールテンプレートID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
-	private Long mailTemplateId;
-
-	/**
 	 * メール到達チェックフラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 10, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "メール送信日", required = false, position = 12)
+	@ApiModelProperty(value = "メール送信日", required = false, position = 11)
 	private Date mailSendedAt;
 
 	/**
 	 * 送信結果区分
 	 */
-	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 13)
+	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 12)
 	private MailSendedResultDiv mailSendedResultDiv;
 
 	/**
 	 * 工程状態
 	 */
-	@ApiModelProperty(value = "工程状態", required = false, position = 14, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
+	@ApiModelProperty(value = "工程状態", required = false, position = 13, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
 	private ProcessStatus processStatus;
+
+	/**
+	 * メールマスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "メールマスタID", required = false, position = 14, allowableValues = "range[0,9223372036854775807]")
+	private Long mailMasterId;
 }

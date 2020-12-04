@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -18,8 +19,9 @@ public class LicenseInfoDto extends DtoBase {
 	/**
 	 * メールアドレス
 	 */
+	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メールアドレス", required = true, position = 3, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**
