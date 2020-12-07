@@ -173,3 +173,5 @@ DELETE FROM license_div_master;
 DELETE FROM license_div_comp_master;
 DELETE FROM mail_master;
 DELETE FROM mail_address_master;
+DELETE FROM DATE_CALC_PATTERN_MASTER;
+DELETE FROM CONTRACT_CHANGE_SPAN_MASTER;
