@@ -10,10 +10,10 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ContractChangeSpanMaster.FromCo
 public class FromContractChangeSpanTargetDateTypeConverter implements AttributeConverter<FromContractChangeSpanTargetDateType, String> {
 
 	@Override
-	public String convertToDatabaseColumn(FromContractChangeSpanTargetDateType contractChangeSpanTargetDateType) {
-		if (contractChangeSpanTargetDateType == null)
+	public String convertToDatabaseColumn(FromContractChangeSpanTargetDateType fromContractChangeSpanTargetDateType) {
+		if (fromContractChangeSpanTargetDateType == null)
 			return null;
-		return contractChangeSpanTargetDateType.toString();
+		return fromContractChangeSpanTargetDateType.toString();
 	}
 
 	@Override
