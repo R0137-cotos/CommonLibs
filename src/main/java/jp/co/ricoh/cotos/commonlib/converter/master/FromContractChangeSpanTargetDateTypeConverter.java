@@ -5,14 +5,15 @@ import javax.persistence.Converter;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractChangeSpanMaster.FromContractChangeSpanTargetDateType;
 
+
 @Converter(autoApply = true)
 public class FromContractChangeSpanTargetDateTypeConverter implements AttributeConverter<FromContractChangeSpanTargetDateType, String> {
 
 	@Override
-	public String convertToDatabaseColumn(FromContractChangeSpanTargetDateType fromContractChangeSpanTargetDateType) {
-		if (fromContractChangeSpanTargetDateType == null)
+	public String convertToDatabaseColumn(FromContractChangeSpanTargetDateType contractChangeSpanTargetDateType) {
+		if (contractChangeSpanTargetDateType == null)
 			return null;
-		return fromContractChangeSpanTargetDateType.toString();
+		return contractChangeSpanTargetDateType.toString();
 	}
 
 	@Override
