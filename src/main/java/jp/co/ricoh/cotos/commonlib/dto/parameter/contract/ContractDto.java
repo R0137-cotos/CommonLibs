@@ -634,6 +634,6 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "配送先", required = true, position = 82)
+	@ApiModelProperty(value = "配送先SS組織", required = true, position = 82)
 	private ShippingAddressSsOrgDto shippingAddressSsOrgDto;
 }
