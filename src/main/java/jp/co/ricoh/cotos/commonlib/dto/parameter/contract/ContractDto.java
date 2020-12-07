@@ -628,4 +628,12 @@ public class ContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "仕入用管理No", required = false, position = 81, allowableValues = "range[0,255]")
 	private String purchaseManageNumber;
+
+	/**
+	 * 配送先SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先", required = true, position = 82)
+	private ShippingAddressSsOrgDto shippingAddressSsOrgDto;
 }
