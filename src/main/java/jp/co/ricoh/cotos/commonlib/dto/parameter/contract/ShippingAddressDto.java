@@ -10,9 +10,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * 配送先を表すEntity
- */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ShippingAddressDto extends DtoBase {
