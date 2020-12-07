@@ -213,4 +213,12 @@ public class ProductMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ARCS契約種類区分", required = false, position = 25, allowableValues = "range[0,255]")
 	private String arcsContractClassDiv;
+
+	/**
+	 * 訪販代売禁止フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "訪販代売禁止フラグ", required = false, position = 26, allowableValues = "range[0,9]")
+	private Integer substituteSalesProhibitedFlg;
 }
