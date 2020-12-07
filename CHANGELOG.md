@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.11.0 (03/12/2020)
+- [**closed**] #8008 商品マスタ.訪販代売禁止フラグを追加 [#1149](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1149)
+
+---
+
 ## v3.10.0 (19/11/2020)
 - [**closed**] #8556 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1163)
 - [**closed**] #8556 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1118](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1118)
