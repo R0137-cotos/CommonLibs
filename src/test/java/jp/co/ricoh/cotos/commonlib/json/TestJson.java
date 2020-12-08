@@ -116,7 +116,7 @@ public class TestJson {
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> errorList = e.getErrorInfoList();
 			Assert.assertEquals(1, errorList.size());
-			Assert.assertEquals("ROT00043", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("ROT00044", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("JSON文字列からObjectの変換に失敗しました。", e.getErrorInfoList().get(0).getErrorMessage());
 		}
 	}
