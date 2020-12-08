@@ -27,7 +27,7 @@ public class CpqEstimationEquipmentPcpDto {
 	/**
 	 * 型番
 	 */
-	private String ｍodelNumber;
+	private String modelNumber;
 
 	/**
 	 * メーカー名

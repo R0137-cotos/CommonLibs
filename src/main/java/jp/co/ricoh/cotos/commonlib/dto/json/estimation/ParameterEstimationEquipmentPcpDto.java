@@ -41,7 +41,7 @@ public class ParameterEstimationEquipmentPcpDto {
 	/**
 	 * 型番
 	 */
-	private String ｍodelNumber;
+	private String modelNumber;
 
 	/**
 	 * 枝番
