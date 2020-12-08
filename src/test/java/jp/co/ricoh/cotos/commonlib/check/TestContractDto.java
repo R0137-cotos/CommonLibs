@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractCheckResultDto
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentNoIsysoneDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccCeEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccSsOrgDto;
@@ -48,6 +49,8 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ItemContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ItemDetailContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ProductContractDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ShippingAddressDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ShippingAddressSsOrgDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
@@ -72,6 +75,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentNoIsysone;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicAccCeEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicAccSsOrg;
@@ -86,6 +90,8 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ItemContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedEstimationDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddressSsOrg;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
@@ -97,6 +103,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileLinka
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractCheckResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentNoIsysoneRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractOperationLogRepository;
@@ -114,6 +121,8 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ProductContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressSsOrgRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
@@ -130,7 +139,6 @@ public class TestContractDto {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
 	private static final String STR_1001 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
-	private static final String STR_1334 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123";
 	private static final int INT_MINUS_1 = -1;
 	private static final Long LONG_MINUS_1 = -1L;
 	private static final int INT_10 = 10;
@@ -228,6 +236,15 @@ public class TestContractDto {
 
 	@Autowired
 	ContractAssignmentAttachedFileRepository contractAssignmentAttachedFileRepository;
+
+	@Autowired
+	ContractEquipmentNoIsysoneRepository contractEquipmentNoIsysoneRepository;
+
+	@Autowired
+	ShippingAddressRepository shippingAddressRepository;
+
+	@Autowired
+	ShippingAddressSsOrgRepository shippingAddressSsOrgRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -565,7 +582,7 @@ public class TestContractDto {
 		testTarget.setInstallDeliverySiteId(STR_256);
 		testTarget.setVendorManageNumber(STR_256);
 		testTarget.setPenaltyFfmOrderContactNo(STR_256);
-		testTarget.setToVendorComment(STR_1334);
+		testTarget.setPurchaseManageNumber(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 25);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
@@ -577,8 +594,9 @@ public class TestContractDto {
 		testTarget.setOriginContractBranchNumber(INT_100);
 		testTarget.setAccountSalesFlg(INT_10);
 		testTarget.setManualUpdateFlg(INT_10);
+		testTarget.setSsWorkRequestCreateFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "売上計上フラグは最大値（9）を超えています。"));
 
@@ -592,8 +610,9 @@ public class TestContractDto {
 		testTarget.setEstimationBranchNumber(INT_MINUS_1);
 		testTarget.setEstimationId(LONG_MINUS_1);
 		testTarget.setManualUpdateFlg(INT_MINUS_1);
+		testTarget.setSsWorkRequestCreateFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(result.getErrorInfoList().size() == 9);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品グループマスタIDは最小値（0）を下回っています。"));
 
@@ -2278,5 +2297,102 @@ public class TestContractDto {
 		BeanUtils.copyProperties(entity, testTarget);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
+	}
+
+	@Test
+	public void ContractEquipmentNoIsysoneDtoのテスト() throws Exception {
+		ContractEquipmentNoIsysone entity = contractEquipmentNoIsysoneRepository.findOne(1L);
+		ContractEquipmentNoIsysoneDto testTarget = new ContractEquipmentNoIsysoneDto();
+
+		//正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		//異常系(@Size(max):)
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setItemNo(STR_256);
+		testTarget.setGoodsName(STR_256);
+		testTarget.setEquipmentNo(STR_256);
+		testTarget.setOptionName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "製品番号は最大文字数（255）を超えています。"));
+	}
+
+	@Test
+	public void ShippingAddressDtoのテスト() throws Exception {
+		ShippingAddress entity = shippingAddressRepository.findOne(4L);
+		ShippingAddressDto testTarget = new ShippingAddressDto();
+
+		//正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		//異常系(@Size(max):)
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setMomEmployeeId(STR_256);
+		testTarget.setMomOrgId(STR_256);
+		testTarget.setOrgName(STR_256);
+		testTarget.setSalesCompanyName(STR_256);
+		testTarget.setOrgPhoneNumber(STR_1001);
+		testTarget.setEmployeeName(STR_256);
+		testTarget.setSalesDepartmentName(STR_256);
+		testTarget.setPostNumber(STR_256);
+		testTarget.setPrefectures(STR_256);
+		testTarget.setCityStreet(STR_1001);
+		testTarget.setPhoneNumber(STR_256);
+		testTarget.setYamatoSlipNumber(STR_256);
+		testTarget.setBuildingName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 13);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDは最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setOrgHierarchyLevel(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setOrgHierarchyLevel(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織階層レベルは最小値（0）を下回っています。"));
+	}
+
+	@Test
+	public void ShippingAddressSsOrgDtoのテスト() throws Exception {
+		ShippingAddressSsOrg entity = shippingAddressSsOrgRepository.findOne(1L);
+		ShippingAddressSsOrgDto testTarget = new ShippingAddressSsOrgDto();
+
+		//正常系
+		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNull）
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setMomOrgId(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDが設定されていません。"));
+
+		//異常系(@Size(max):)
+		BeanUtils.copyProperties(entity, testTarget);
+		testTarget.setMomOrgId(STR_256);
+		testTarget.setServiceOrgName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDは最大文字数（255）を超えています。"));
 	}
 }
