@@ -1,5 +1,33 @@
 # Changelog
 
+## v3.11.0 (03/12/2020)
+- [**closed**] #8008 商品マスタ.訪販代売禁止フラグを追加 [#1149](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1149)
+
+---
+
+## v3.10.0 (19/11/2020)
+- [**closed**] #8556 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1163)
+- [**closed**] #8556 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1118](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1118)
+- [**closed**] #8556 届先情報エラーメッセージ追加 [#1116](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1116)
+- [**closed**] #9138 操作履歴、承認実績、添付ファイルリスナー修正 [#1140](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1140)
+- [**closed**]  #7643 契約.ベンダー向けコメントを追加 [#1117](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1117)
+
+---
+
+## v3.9.0 (05/11/2020)
+- [**closed**] #8840 見積検索結果にV-UP見積番号、案件名追加 [#1120](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1120)
+- [**closed**] #8490 チェックリストエラーメッセージ追加 [#1119](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1119)
+- [**closed**] #8565_見積テーブルカラム追加(V-UP見積番号) [#1111](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1111)
+- [**closed**] #8490 見積チェックリスト構成マスタに必須追加、汎用チェック事項マスタのチェック事項コード検索追加 [#1105](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1105)
+- [**closed**] #7601 年額商品契約更新のサービス利用希望日変更時のエラーメッセージを修正 [#1010](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1010)
+- [**closed**] #7601 年額商品契約変更のサービス利用希望日変更時のエラーメッセージを追加 [#1002](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1002)
+- [**closed**] #7601 商品グループマスタ.EDWOR年額契約商品フラグを追加 [#998](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/998)
+- [**closed**] #8840 検索パラメータにV-UP見積件名追加 [#1102](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1102)
+- [**closed**] #8483 手配業務完了順マスタ チェックタイミング区分カラム追加 [#1099](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1099)
+- [**closed**] #8483 手配業務完了順マスタ チェックタイミング区分カラム追加 [#1098](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1098)
+
+---
+
 ## v3.8.0 (15/10/2020)
 - [**closed**] #8469 軽量バッチテンプレート利用のため、BatchLightTemplate対応をcherr-pick [#1083](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1083)
 - [**closed**] #8469 BusinessDayUtil BatchLightTemplate対応 [#1085](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1085)
