@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -49,6 +50,7 @@ public class MailMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "mailMaster")
+	@OrderBy("id ASC")
 	@ApiModelProperty(value = "メールアドレスマスタリスト", required = true, position = 4)
 	private List<MailAddressMaster> mailAddressMasterList;
 }
