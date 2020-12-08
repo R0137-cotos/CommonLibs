@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.converter.lisence.cas;
+package jp.co.ricoh.cotos.commonlib.converter.license.cas;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
