@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.repository.lisence.cas;
+package jp.co.ricoh.cotos.commonlib.repository.license.cas;
 
 import java.util.List;
 

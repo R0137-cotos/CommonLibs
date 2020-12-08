@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
-import jp.co.ricoh.cotos.commonlib.repository.lisence.cas.CasLicenseDetailInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.cas.CasLicenseDetailInfoRepository;
 
 /**
  * トレンドマイクロ連携WORK
