@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -71,7 +72,7 @@ public class MailAddressUtil {
 	 */
 	public MailInfoDto getMailInfo(HashMap<ServiceCategory, Long> targetIdMap, long mailMasterId) {
 		// 引数チェック
-		if (null == targetIdMap || targetIdMap.isEmpty()) {
+		if (MapUtils.isEmpty(targetIdMap)) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "各ドメインの対象テーブルIDマップ" }));
 		}
 		// メールマスタを取得

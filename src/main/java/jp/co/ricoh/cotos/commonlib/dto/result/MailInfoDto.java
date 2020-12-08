@@ -24,7 +24,7 @@ public class MailInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールテンプレートマスタID", required = true, position = 2, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メールタイプ区分", required = true, position = 2, allowableValues = "range[0,255]")
 	private String mailTypeDiv;
 
 	/**
