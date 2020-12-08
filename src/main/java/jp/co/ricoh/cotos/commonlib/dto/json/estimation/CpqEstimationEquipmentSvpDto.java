@@ -32,7 +32,7 @@ public class CpqEstimationEquipmentSvpDto {
 	/**
 	 * 型番
 	 */
-	private String ｍodelNumber;
+	private String modelNumber;
 
 	/**
 	 * 製品名

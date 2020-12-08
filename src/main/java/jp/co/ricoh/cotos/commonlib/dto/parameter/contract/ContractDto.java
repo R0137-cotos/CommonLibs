@@ -621,4 +621,26 @@ public class ContractDto extends DtoBase {
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "配送先", required = true, position = 80)
 	private ShippingAddressDto shippingAddress;
+
+	/**
+	 * 仕入用管理No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入用管理No", required = false, position = 81, allowableValues = "range[0,255]")
+	private String purchaseManageNumber;
+
+	/**
+	 * 配送先SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先SS組織", required = true, position = 82)
+	private ShippingAddressSsOrgDto shippingAddressSsOrg;
+
+	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 77, allowableValues = "range[0,1333]")
+	private String toVendorComment;
 }

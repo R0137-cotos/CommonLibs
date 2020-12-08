@@ -5,6 +5,7 @@ import javax.persistence.Converter;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractChangeSpanMaster.FromContractChangeSpanTargetDateType;
 
+
 @Converter(autoApply = true)
 public class FromContractChangeSpanTargetDateTypeConverter implements AttributeConverter<FromContractChangeSpanTargetDateType, String> {
 

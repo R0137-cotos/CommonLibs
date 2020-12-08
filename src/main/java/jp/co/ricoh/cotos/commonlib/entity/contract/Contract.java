@@ -863,4 +863,11 @@ public class Contract extends EntityBase {
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "配送先SS組織", required = true, position = 93)
 	private ShippingAddressSsOrg shippingAddressSsOrg;
+
+	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 94, allowableValues = "range[0,1333]")
+	private String toVendorComment;
 }
