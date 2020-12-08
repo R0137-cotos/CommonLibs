@@ -59,13 +59,13 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 		}
 	}
 
-	public enum FromContractChangeSpanTargetDateType {
+	public enum ContractChangeSpanTargetDateType {
 
-		契約承認依頼日("1"), サービス利用希望日("2"), 解約希望日("3");
+		契約承認依頼日("1"), サービス利用希望日("2"), 解約希望日("3"), システム日付("4");
 
 		private final String text;
 
-		private FromContractChangeSpanTargetDateType(final String text) {
+		private ContractChangeSpanTargetDateType(final String text) {
 			this.text = text;
 		}
 
@@ -76,29 +76,7 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static FromContractChangeSpanTargetDateType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum ToContractChangeSpanTargetDateType {
-
-		契約承認依頼日("1"), サービス利用希望日("2"), 解約希望日("3");
-
-		private final String text;
-
-		private ToContractChangeSpanTargetDateType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ToContractChangeSpanTargetDateType fromString(String string) {
+		public static ContractChangeSpanTargetDateType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -177,8 +155,8 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	/**
 	 * 契約変更期間チェック対象日区分 開始
 	 */
-	@ApiModelProperty(value = "契約変更期間チェック対象日区分 開始", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\")", position = 11)
-	private FromContractChangeSpanTargetDateType fromContractChangeSpanTargetDateType;
+	@ApiModelProperty(value = "契約変更期間チェック対象日区分 開始", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\"), システム日付(\"4\")", position = 11)
+	private ContractChangeSpanTargetDateType fromContractChangeSpanTargetDateType;
 
 	/**
 	 * 契約変更期間日付計算パターンマスタ 終了
@@ -192,8 +170,8 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	/**
 	 * 契約変更期間チェック対象日区分 終了
 	 */
-	@ApiModelProperty(value = "契約変更期間チェック対象日区分 終了", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\")", position = 13)
-	private ToContractChangeSpanTargetDateType toContractChangeSpanTargetDateType;
+	@ApiModelProperty(value = "契約変更期間チェック対象日区分 終了", required = false, allowableValues = "契約承認依頼日(\"1\"), サービス利用希望日(\"2\"), 解約希望日(\"3\"), システム日付(\"4\")", position = 13)
+	private ContractChangeSpanTargetDateType toContractChangeSpanTargetDateType;
 
 	/**
 	 * チェック対象トランザクションテーブル名
