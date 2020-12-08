@@ -22,7 +22,7 @@ public class YamatoSearchParameter {
 	 */
 	@ApiParam(value = "商品マスタID", required = true)
 	@ApiModelProperty(value = "商品マスタID", required = true)
-	private Long productId;
+	private Long productMasterId;
 
 	/**
 	 * お問い合わせ番号
