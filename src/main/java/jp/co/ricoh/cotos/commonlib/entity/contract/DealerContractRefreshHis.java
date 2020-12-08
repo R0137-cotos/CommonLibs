@@ -29,8 +29,8 @@ import lombok.EqualsAndHashCode;
 public class DealerContractRefreshHis extends DealerAbstractEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dealer_contract_seq")
-	@SequenceGenerator(name = "dealer_contract_seq", sequenceName = "dealer_contract_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dealer_contract_refresh_his_seq")
+	@SequenceGenerator(name = "dealer_contract_refresh_his_seq", sequenceName = "dealer_contract_refresh_his_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
