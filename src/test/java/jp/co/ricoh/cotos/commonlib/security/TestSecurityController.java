@@ -50,6 +50,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractCheckResultDto
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentNoIsysoneDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccCeEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccSsOrgDto;
@@ -64,6 +65,8 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ItemContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ItemDetailContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ProductContractDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ShippingAddressDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ShippingAddressSsOrgDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
@@ -101,6 +104,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterPa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.LicenseInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
@@ -1111,6 +1115,26 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailContract")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailContract entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipmentNoIsysoneDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipmentNoIsysoneDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ShippingAddressDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ShippingAddressDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ShippingAddressSsOrgDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ShippingAddressSsOrgDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseInfoDto dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }

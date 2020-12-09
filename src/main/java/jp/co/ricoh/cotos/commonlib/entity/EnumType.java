@@ -86,7 +86,7 @@ public class EnumType {
 	 */
 	public enum ServiceCategory {
 
-		共通("0"), 見積("1"), 契約("2"), 手配("3"), 電力_見積("101"), 電力_契約("102");
+		共通("0"), 見積("1"), 契約("2"), 手配("3"), ライセンス("4"), 電力_見積("101"), 電力_契約("102");
 
 		private final String text;
 
