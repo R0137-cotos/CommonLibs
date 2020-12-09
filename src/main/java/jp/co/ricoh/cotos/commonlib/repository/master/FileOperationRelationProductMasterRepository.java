@@ -9,5 +9,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.FileOperationRelationProductMas
 
 @Repository
 public interface FileOperationRelationProductMasterRepository extends CrudRepository<FileOperationRelationProductMaster, Long> {
+
 	public List<FileOperationRelationProductMaster> findByMenuManagementIdAndMenuDetailsManagementIdOrderById(long menuManagementId, long menuDetailsManagementId);
+
+	public List<FileOperationRelationProductMaster> findByMenuManagementIdAndMenuDetailsManagementIdAndLicenseDivMasterIdOrderById(long menuManagementId, long menuDetailsManagementId, long licenseDivMasterid);
 }
