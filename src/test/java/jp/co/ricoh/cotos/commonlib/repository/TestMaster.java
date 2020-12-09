@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -1612,6 +1614,21 @@ public class TestMaster {
 
 		// キー不一致
 		found = mvTJmcj005MasterRepository.findByOeTodokesakiCd("86045030001");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+
+	}
+
+	@Test
+	public void MvTJmcj005Master_OriginalSystemCodeで取得するテスト() throws Exception {
+
+		// エンティティの取得
+		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByOriginalSystemCode("10110005470");
+		// Entity が 空 ではないことを確認
+		Assert.assertFalse(CollectionUtils.isEmpty(found));
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByOriginalSystemCode("99999999999");
 		// Entity が 空 であることを確認
 		Assert.assertTrue(CollectionUtils.isEmpty(found));
 
