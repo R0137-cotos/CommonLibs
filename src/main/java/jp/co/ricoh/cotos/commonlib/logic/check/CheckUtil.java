@@ -510,7 +510,7 @@ public class CheckUtil {
 		}
 
 		// チェック日付Fromとチェック日付Toの月の差分を取得する。
-		Period period = Period.between(checkFromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), checkToDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		Period period = Period.between(convertToJavaUtilDate(checkFromDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), convertToJavaUtilDate(checkToDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		int diffMonth = (period.getYears() * 12) + (period.getMonths());
 
 		// 契約明細に紐づく品種（契約用）を取得し、チェック品種コードと一致する品種の数量と月の差分が一致しているかチェックする。
@@ -559,6 +559,19 @@ public class CheckUtil {
 		}
 
 		return checkFlg;
+	}
+
+	/**
+	 * JavaUtilDate型変換
+	 * java.sql.Dateとjava.sql.Timeをjava.Util.Dateへ変換する。
+	 * @param Date
+	 * @return Date
+	 */
+	private Date convertToJavaUtilDate(Date date) {
+		if (date instanceof java.sql.Date || date instanceof java.sql.Time) {
+			return new Date(date.getTime());
+		}
+		return date;
 	}
 
 	/**
