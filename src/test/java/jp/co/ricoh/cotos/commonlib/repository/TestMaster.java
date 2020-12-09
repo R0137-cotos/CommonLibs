@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -66,8 +67,10 @@ import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.MailAddressMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailConvertValueMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.MailMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailProductMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MenuDetailsManagementMaster;
@@ -154,8 +157,10 @@ import jp.co.ricoh.cotos.commonlib.repository.master.LicenseDivMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LicenseProcessControlMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LicenseProcessMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.LicenseProcessPatternMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MailAddressMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailConvertValueMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MailMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailProductMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailTemplateMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MenuDetailsManagementMasterRepository;
@@ -382,7 +387,10 @@ public class TestMaster {
 	private LicenseArrangementMasterRepository licenseArrangementMasterRepository;
 	@Autowired
 	private ItemLicenseSettingMasterRepository itemLicenseSettingMasterRepository;
-
+	@Autowired
+	private MailMasterRepository mailMasterRepository;
+	@Autowired
+	private MailAddressMasterRepository mailAddressMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -1645,6 +1653,54 @@ public class TestMaster {
 	}
 
 	@Test
+	public void MvTJmcj005Master_販社コードと得意先コードで取得するテスト() throws Exception {
+
+		// エンティティの取得
+		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCd("702", "10027811");
+
+		// Entity が 空 ではないことを確認
+		Assert.assertFalse(CollectionUtils.isEmpty(found));
+
+		found.stream().forEach(e -> {
+			// 判定に使用するカラムを確認
+			Assert.assertEquals("支社コードが一致すること", "702", e.getHanshCd());
+			Assert.assertEquals("RINGS得意先コードが一致すること", "10027811", e.getRingsTkiskCd());
+		});
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCd("702", "10027812");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCd("701", "10027811");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+	}
+
+	@Test
+	public void MvTJmcj005Master_OE届け先コードで取得するテスト() throws Exception {
+
+		// エンティティの取得
+		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByOeTodokesakiCd("86045030000");
+
+		// Entity が 空 ではないことを確認
+		Assert.assertFalse(CollectionUtils.isEmpty(found));
+
+		found.stream().forEach(e -> {
+			// 判定に使用するカラムを確認
+			Assert.assertEquals("支社コードが一致すること", "101", e.getHanshCd());
+			Assert.assertEquals("RINGS得意先コードが一致すること", "10005470", e.getRingsTkiskCd());
+		});
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByOeTodokesakiCd("86045030001");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+
+	}
+
+	@Test
 	public void VDirectDeliveryDealerInfoMasterRepositoryのテスト() throws Exception {
 
 		// テストデータはなし
@@ -2413,6 +2469,38 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		licenseDivCompMaster found = licenseDivCompMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void MailMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		MailMaster found = mailMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void MailAddressMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailAddressMaster.sql");
+
+		// エンティティの取得
+		Long id = 2L;
+		MailAddressMaster found = mailAddressMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

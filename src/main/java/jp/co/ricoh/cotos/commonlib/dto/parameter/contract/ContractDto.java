@@ -589,4 +589,58 @@ public class ContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 76, allowableValues = "range[0,255]")
 	private String penaltyFfmOrderContactNo;
+
+	/**
+	 * 契約機種(Isys-Oneへの連携なし)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 77)
+	private List<ContractEquipmentNoIsysoneDto> contractEquipmentNoIsysoneList;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 78, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
+
+	/**
+	 * 違約金明細(契約用)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 79)
+	private List<PenaltyDetailContractDto> penaltyDetailContractList;
+
+	/**
+	 * 配送先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先", required = true, position = 80)
+	private ShippingAddressDto shippingAddress;
+
+	/**
+	 * 仕入用管理No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入用管理No", required = false, position = 81, allowableValues = "range[0,255]")
+	private String purchaseManageNumber;
+
+	/**
+	 * 配送先SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先SS組織", required = true, position = 82)
+	private ShippingAddressSsOrgDto shippingAddressSsOrg;
+
+	/**
+	 * ベンダー向けコメント
+	 */
+	@Size(max = 1333)
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 77, allowableValues = "range[0,1333]")
+	private String toVendorComment;
 }

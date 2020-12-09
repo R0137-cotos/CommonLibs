@@ -1,0 +1,75 @@
+package jp.co.ricoh.cotos.commonlib.dto.json.contract;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
+
+/**
+ * 契約機種拡張項目DTO（PCP）
+ */
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ContractEquipmentExtendsParameterPcpDto {
+	/**
+	 * 枝番
+	 */
+	private String branchesNumber;
+
+	/**
+	 * メーカー名
+	 */
+	private String makerName;
+
+	/**
+	 * 型番
+	 */
+	private String ｍodelNumber;
+
+	/**
+	 * 購入日
+	 */
+	private Date purchaseDate;
+
+	/**
+	 * 保守終了日
+	 */
+	private Date maintenanceEndDate;
+
+	/**
+	 * 分類名
+	 */
+	private String classificationName;
+
+	/**
+	 * 保守可能年数
+	 */
+	private String maintenanceYears;
+
+	/**
+	 * 開梱設定フラグ
+	 */
+	private String installationFlg;
+
+	/**
+	 * ネットワーク設定フラグ
+	 */
+	private String networkFlg;
+
+	/**
+	 * ネットワーク設定品種コード
+	 */
+	private String networkItemCode;
+
+	/**
+	 * ソフトインストールフラグ
+	 */
+	private String installFlg;
+
+	/**
+	 * ソフトインストール品種コード
+	 */
+	private String installItemCode;
+}

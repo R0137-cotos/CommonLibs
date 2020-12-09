@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -17,11 +18,11 @@ import lombok.Data;
 public class YamatoSearchParameter {
 
 	/**
-	 * 商品名
+	 * 商品マスタID
 	 */
-	@ApiParam(value = "商品名", required = false)
-	@ApiModelProperty(value = "商品名", required = false, allowableValues = "range[0,255]")
-	private String productName;
+	@ApiParam(value = "商品マスタID", required = true)
+	@ApiModelProperty(value = "商品マスタID", required = true)
+	private Long productMasterId;
 
 	/**
 	 * お問い合わせ番号
@@ -34,7 +35,7 @@ public class YamatoSearchParameter {
 	 * 契約番号
 	 */
 	@ApiParam(value = "契約番号", required = false)
-	@ApiModelProperty(value = "契約番号", required = false, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約番号", required = false, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
@@ -49,9 +50,23 @@ public class YamatoSearchParameter {
 	 */
 	@ApiParam(value = "業務受付日時", required = false)
 	@ApiModelProperty(value = "業務受付日時<br />" //
-			+ "日付フォーマット:yyyy/MM/dd HH", //
+			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false) //
 	private Date businessAcceptDateTime;
+
+	/**
+	 * アプリケーションIDリスト
+	 */
+	@ApiParam(value = "アプリケーションIDリスト", required = false)
+	@ApiModelProperty(value = "アプリケーションIDリスト", required = false)
+	private List<String> appId;
+
+	/**
+	 * 他システムデータ排他フラグ
+	 */
+	@ApiParam(value = "他システムデータ排他フラグ", required = false)
+	@ApiModelProperty(value = "他システムデータ排他フラグ", required = false)
+	private int otherSysDataExcludeFlg;
 
 	/**
 	 * パラメータをMapにする。

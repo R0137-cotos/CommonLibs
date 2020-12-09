@@ -147,7 +147,7 @@ public class PenaltyDetailContract extends EntityBase {
 	@Max(99999)
 	@Min(0)
 	@ApiModelProperty(value = "数量", required = false, position = 8, allowableValues = "range[0,99999]")
-	private int quantity;
+	private Integer quantity;
 
 	/**
 	 * 違約金金額
