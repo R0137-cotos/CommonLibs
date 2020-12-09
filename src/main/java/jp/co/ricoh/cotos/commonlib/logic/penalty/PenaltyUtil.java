@@ -67,7 +67,7 @@ public class PenaltyUtil {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "品種マスタID" }));
 		}
 		// 3.取得した品種マスタの違約金有無フラグが「1：有」の場合、3以降の処理を実施。そうでない場合、処理終了。
-		if (Arrays.stream(new Boolean[] { Optional.ofNullable(itemMaster.getPenaltyFlg()).orElse(0) == 1 }).allMatch(s -> s == true)) {
+		if (Optional.ofNullable(itemMaster.getPenaltyFlg()).orElse(0) == 1) {
 			// 4.品種マスタ.契約期間起算日区分に合わせた判定方法で判定し、条件に一致した品種マスタを返却する。
 			switch (itemMaster.getPenaltyStartDateType()) {
 			case サービス開始日:
