@@ -753,4 +753,16 @@ public class TestMonthMisalignCheck {
 			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "パラメーターに不正な項目が設定されています。");
 		}
 	}
+
+	@Test
+	public void 正常系_sqlDateで月ずれチェック() {
+
+		final long contractId = 1L; // サービス開始日：2020/01/01 サービス終了日：2020/11/01 月数：10
+		final long itemMasterId = 2006L; // 数量:11
+
+		Contract contract = contractRepository.findOne(contractId);
+
+		Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, contract.getServiceTermStart(), contract.getServiceTermEnd(), ToleranceType.一致), true);
+
+	}
 }
