@@ -104,6 +104,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterPa
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.FileImportManagementParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.LicenseInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
@@ -1135,6 +1136,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/LicenseInfoDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated LicenseInfoDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/FileImportManagementParameter")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated FileImportManagementParameter dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 }
