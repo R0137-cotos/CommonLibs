@@ -55,21 +55,21 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 
 
 	/**
-	 * ファイル操作関連商品ID
+	 * ファイル操作関連商品マスタID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_operation_relation_product_master_seq")
 	@SequenceGenerator(name = "file_operation_relation_product_master_seq", sequenceName = "file_operation_relation_product_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ファイル操作関連商品ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "ファイル操作関連商品マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
-	 * メニュー管理ID
+	 * メニュー管理マスタID
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "メニュー管理ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long menuManagementId;
+	@ApiModelProperty(value = "メニュー管理マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long menuManagementMasterId;
 
 	/**
 	 * 関連商品名

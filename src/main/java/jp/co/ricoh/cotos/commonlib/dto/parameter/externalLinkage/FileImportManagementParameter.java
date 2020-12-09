@@ -16,11 +16,11 @@ import lombok.Data;
 public class FileImportManagementParameter {
 
 	/**
-	 * ファイル種別管理ID
+	 * ファイル種別管理マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ファイル種別管理ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
-	private long fileKindManagementId;
+	@ApiModelProperty(value = "ファイル種別管理マスタID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	private long fileKindManagementMasterId;
 
 	/**
 	 * ファイル名

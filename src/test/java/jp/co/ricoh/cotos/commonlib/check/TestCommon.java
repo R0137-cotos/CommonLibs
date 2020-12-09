@@ -139,7 +139,7 @@ public class TestCommon {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setFileKindManagementId((long) INT_MINUS_1);
+		testTarget.setFileKindManagementMasterId((long) INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
