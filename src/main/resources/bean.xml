@@ -61,5 +61,6 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	 <bean id="appProperties" class="jp.co.ricoh.cotos.commonlib.util.AppProperties">
+	</bean>
 </beans>
