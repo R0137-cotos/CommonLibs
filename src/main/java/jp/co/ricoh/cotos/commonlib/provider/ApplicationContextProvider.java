@@ -2,9 +2,14 @@ package jp.co.ricoh.cotos.commonlib.provider;
 
 import org.springframework.context.ApplicationContext;
 
-import jp.co.ricoh.cotos.commonlib.config.AppricationContextGenerator;
 
+/**
+ *
+ * ApplicationContextのインスタンスを生成、返却する
+ *
+ */
 public class ApplicationContextProvider {
+
 	private static ApplicationContext context;
 
 	private ApplicationContextProvider() {
@@ -27,8 +32,7 @@ public class ApplicationContextProvider {
 	 */
 	private static ApplicationContext createApplicationContext() {
 
-		ApplicationContext context = new AppricationContextGenerator("bean.xml");
+		ApplicationContext context = new jp.co.ricoh.cotos.commonlib.config.AppricationContextGenerator("bean.xml");
 		return context;
 	}
-
 }
