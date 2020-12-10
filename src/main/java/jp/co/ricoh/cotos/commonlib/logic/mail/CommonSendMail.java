@@ -51,17 +51,19 @@ public class CommonSendMail {
 	AppProperties appProperties;
 
 	public CommonSendMail() {
-		ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-		if (this.mailTemplateMasterRepository == null) {
-			MailTemplateMasterRepository mailTemplateMasterRepository = context.getBean(MailTemplateMasterRepository.class);
-			this.mailTemplateMasterRepository = mailTemplateMasterRepository;
-		}
-		if (this.javaMailSender == null) {
-			this.javaMailSender = new JavaMailSenderImpl();
-		}
-		if (this.appProperties == null) {
-			AppProperties appProperties = context.getBean(AppProperties.class);
-			this.appProperties = appProperties;
+		if (mailTemplateMasterRepository == null || javaMailSender == null || appProperties == null) {
+			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+			if (this.mailTemplateMasterRepository == null) {
+				MailTemplateMasterRepository mailTemplateMasterRepository = context.getBean(MailTemplateMasterRepository.class);
+				this.mailTemplateMasterRepository = mailTemplateMasterRepository;
+			}
+			if (this.javaMailSender == null) {
+				this.javaMailSender = new JavaMailSenderImpl();
+			}
+			if (this.appProperties == null) {
+				AppProperties appProperties = context.getBean(AppProperties.class);
+				this.appProperties = appProperties;
+			}
 		}
 	}
 
