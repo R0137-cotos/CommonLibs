@@ -76,19 +76,19 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	}
 
 	/**
-	 * ファイル種別管理ID
+	 * ファイル種別管理マスタID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_kind_management_master_seq")
 	@SequenceGenerator(name = "file_kind_management_master_seq", sequenceName = "file_kind_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ファイル種別管理ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "ファイル種別管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * ファイル操作関連商品マスタ
 	 */
 	@ManyToOne
-	@JoinColumn(name = "file_operation_relation_product_id", referencedColumnName = "id")
+	@JoinColumn(name = "file_operation_relation_product_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "ファイル操作関連商品マスタ", required = false, position = 2)
 	private FileOperationRelationProductMaster fileOperationRelationProductMaster;

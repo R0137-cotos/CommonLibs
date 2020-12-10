@@ -44,7 +44,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	 */
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "menu_management_id", referencedColumnName = "id")
+	@JoinColumn(name = "menu_management_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "メニュー管理マスタ", required = true, position = 2)
 	private MenuManagementMaster menuManagementMaster;
