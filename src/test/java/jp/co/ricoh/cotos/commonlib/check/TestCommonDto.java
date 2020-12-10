@@ -150,7 +150,7 @@ public class TestCommonDto {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, dto);
-		testTarget.setFileKindManagementId(INT_MINUS_1);
+		//		testTarget.setFileKindManagementMasterId(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
