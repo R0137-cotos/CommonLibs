@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.provider;
 
 import java.util.Map;
 
+import jp.co.ricoh.cotos.commonlib.config.LoadConfigulation;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 
