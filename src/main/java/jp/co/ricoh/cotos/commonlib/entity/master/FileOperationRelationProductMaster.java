@@ -56,12 +56,12 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 
 
 	/**
-	 * ファイル操作関連商品マスタID
+	 * ファイル操作関連商品ID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_operation_relation_product_master_seq")
 	@SequenceGenerator(name = "file_operation_relation_product_master_seq", sequenceName = "file_operation_relation_product_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ファイル操作関連商品マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "ファイル操作関連商品ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
