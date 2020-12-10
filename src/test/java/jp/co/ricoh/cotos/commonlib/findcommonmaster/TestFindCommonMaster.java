@@ -175,6 +175,7 @@ public class TestFindCommonMaster {
 			CommonMasterDetailRepository commonMasterDetailRepository = null;
 			MvTjmmb010UtlItemRepository mvTjmmb010UtlItemRepository = null;
 			MvTjmmb020UtlCdRepository mvTjmmb020UtlCdRepository = null;
+			FindCommonMaster findCommonMaster = new FindCommonMaster();
 			findCommonMaster.setRepositories(commonMasterRepository, commonMasterDetailRepository, mvTjmmb010UtlItemRepository, mvTjmmb020UtlCdRepository);
 		} catch (Exception e) {
 			Assert.fail();
