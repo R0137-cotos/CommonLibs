@@ -14,7 +14,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -89,7 +88,6 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "file_operation_relation_product_master_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "ファイル操作関連商品マスタ", required = false, position = 2)
 	private FileOperationRelationProductMaster fileOperationRelationProductMaster;
 
