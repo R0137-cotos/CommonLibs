@@ -21,10 +21,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchPar
 import jp.co.ricoh.cotos.commonlib.dto.result.CommonMasterResult;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
-import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterDetailRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb010UtlItemRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -166,20 +162,6 @@ public class TestFindCommonMaster {
 	public void MoM汎用マスタ取得パラメータNull() {
 		List<CommonMasterResult> commonList = findCommonMaster.findMomCommonMaster(null);
 		Assert.assertEquals("汎用マスタ取得件数が正しいこと", 0, commonList.size());
-	}
-
-	@Test
-	public void リポジトリ生成_エラーが発生しないこと() {
-		try {
-			CommonMasterRepository commonMasterRepository = null;
-			CommonMasterDetailRepository commonMasterDetailRepository = null;
-			MvTjmmb010UtlItemRepository mvTjmmb010UtlItemRepository = null;
-			MvTjmmb020UtlCdRepository mvTjmmb020UtlCdRepository = null;
-			FindCommonMaster findCommonMaster = new FindCommonMaster();
-			findCommonMaster.setRepositories(commonMasterRepository, commonMasterDetailRepository, mvTjmmb010UtlItemRepository, mvTjmmb020UtlCdRepository);
-		} catch (Exception e) {
-			Assert.fail();
-		}
 	}
 
 	private void 汎用マスタデータ作成() {

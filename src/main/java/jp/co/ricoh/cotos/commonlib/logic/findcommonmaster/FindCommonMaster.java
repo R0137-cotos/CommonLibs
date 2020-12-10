@@ -18,11 +18,13 @@ import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterDetailRepositor
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb010UtlItemRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
+import lombok.AllArgsConstructor;
 
 /**
  * 汎用マスタ取得共通クラス
  */
 @Component
+@AllArgsConstructor
 public class FindCommonMaster {
 
 	@Autowired
@@ -188,19 +190,5 @@ public class FindCommonMaster {
 		detailResult.setDisplayValue(null);
 		detailResult.setDisplayOrder(-1);
 		return detailResult;
-	}
-
-	/**
-	 * リポジトリ生成
-	 * @param commonMasterRepository 
-	 * @param commonMasterDetailRepository
-	 * @param mvTjmmb010UtlItemRepository
-	 * @param mvTjmmb020UtlCdRepository
-	 */
-	public void setRepositories(CommonMasterRepository commonMasterRepository, CommonMasterDetailRepository commonMasterDetailRepository, MvTjmmb010UtlItemRepository mvTjmmb010UtlItemRepository, MvTjmmb020UtlCdRepository mvTjmmb020UtlCdRepository) {
-		this.commonMasterRepository = commonMasterRepository;
-		this.commonMasterDetailRepository = commonMasterDetailRepository;
-		this.mvTjmmb010UtlItemRepository = mvTjmmb010UtlItemRepository;
-		this.mvTjmmb020UtlCdRepository = mvTjmmb020UtlCdRepository;
 	}
 }
