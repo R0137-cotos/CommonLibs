@@ -141,7 +141,7 @@ public class TestCommunication {
 	@Test
 	public void BounceMailRecordRepositoryの条件テスト() {
 		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
-		Long contractId = 1L;
+		String contractId = "E000000001";
 		String nXContractId = "1";
 		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date sentAt = null;

@@ -226,7 +226,6 @@ public class TestSendMail {
 		attachedHelper.setText("text");
 
 		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
-		//setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
 
 		MailTemplateMaster mailTemplateMaster = new MailTemplateMaster();
 		mailTemplateMaster.setId(1L);
@@ -238,9 +237,9 @@ public class TestSendMail {
 
 		SMTPMessage actual = (SMTPMessage) method.invoke(commonSendMail, SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
 
-		Assert.assertEquals("契約IDが正しく設定されていること", "100", actual.getHeader("ContractId")[0]);
+		Assert.assertEquals("契約IDが正しく設定されていること", "E000000001", actual.getHeader("ContractId")[0]);
 		Assert.assertEquals("文書番号が正しく設定されていること", "CC2020102800001", actual.getHeader("DocNumber")[0]);
-		Assert.assertEquals("契約番号が正しく設定されていること", "CC2020102800001", actual.getHeader("ContractNumber")[0]);
+		Assert.assertEquals("契約番号が正しく設定されていること", "CIC2020102800001", actual.getHeader("ContractNumber")[0]);
 		Assert.assertEquals("契約番号枝番が正しく設定されていること", "1", actual.getHeader("ContractBranchNumber")[0]);
 	}
 
@@ -292,9 +291,9 @@ public class TestSendMail {
 	private BounceMailHeaderDto バウンスメールヘッダーDTO作成() {
 
 		BounceMailHeaderDto bounceMailHeaderDto = new BounceMailHeaderDto();
-		bounceMailHeaderDto.setContractId(100L);
+		bounceMailHeaderDto.setContractId("E000000001");
 		bounceMailHeaderDto.setDocNumber("CC2020102800001");
-		bounceMailHeaderDto.setContractNumber("CC2020102800001");
+		bounceMailHeaderDto.setContractNumber("CIC2020102800001");
 		bounceMailHeaderDto.setContractBranchNumber(1);
 
 		return bounceMailHeaderDto;
