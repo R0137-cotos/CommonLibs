@@ -320,6 +320,7 @@ public class TestCommunication {
 
 		// 異常系（@Size(max) ：docNumber contractNumber nXContractId nXMailer nXNguidetargettype nXJizenflg nErrorFlg）
 		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setContractId(STR_256);
 		testTarget.setDocNumber(STR_256);
 		testTarget.setContractNumber(STR_256);
 		testTarget.setNXContractId(STR_256);
@@ -328,22 +329,21 @@ public class TestCommunication {
 		testTarget.setNXJizenflg(STR_256);
 		testTarget.setNErrorFlg(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 7);
+		Assert.assertTrue(result.getErrorInfoList().size() == 8);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "N_X_JIZENFLGは最大文字数（255）を超えています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最大文字数（255）を超えています。"));
 
 		// 異常系（@Min ：contractId contractBranchNumber mailTemplateMasterId nXNpserviceno nXNservicelineno nXNdomainlineno）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setContractId(LONG_MINUS_1);
 		testTarget.setContractBranchNumber(INT_MINUS_1);
 		testTarget.setMailTemplateMasterId(LONG_MINUS_1);
 		testTarget.setNXNpserviceno(LONG_MINUS_1);
 		testTarget.setNXNservicelineno(LONG_MINUS_1);
 		testTarget.setNXNdomainlineno(LONG_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メールテンプレートマスタIDは最小値（0）を下回っています。"));
 
 		// 異常系（@Valid ：バウンスメール宛先）
 		BeanUtils.copyProperties(testTarget, entity);
