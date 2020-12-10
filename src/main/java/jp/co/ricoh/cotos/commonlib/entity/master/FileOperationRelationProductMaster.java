@@ -15,6 +15,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -55,12 +56,12 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 
 
 	/**
-	 * ファイル操作関連商品マスタID
+	 * ファイル操作関連商品ID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_operation_relation_product_master_seq")
 	@SequenceGenerator(name = "file_operation_relation_product_master_seq", sequenceName = "file_operation_relation_product_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ファイル操作関連商品マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "ファイル操作関連商品ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -104,6 +105,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	 * ファイル種別管理マスタ
 	 */
 	@OneToMany(mappedBy = "fileOperationRelationProductMaster")
+	@JsonIgnore
 	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 7)
 	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }

@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -11,13 +13,14 @@ import lombok.Data;
 /**
  * ヤマト便作業対象一覧取得APIの検索結果用パラメーター
  */
-
+@Entity
 @Data
 public class YamatoSearchResult {
 
 	/**
 	 * 手配業務ID
 	 */
+	@Id
 	@ApiModelProperty(value = "手配業務ID", required = false, position = 1)
 	private long arrangementWorkId;
 
