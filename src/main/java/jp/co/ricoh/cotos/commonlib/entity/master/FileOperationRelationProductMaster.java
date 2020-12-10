@@ -15,6 +15,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -104,6 +105,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	 * ファイル種別管理マスタ
 	 */
 	@OneToMany(mappedBy = "fileOperationRelationProductMaster")
+	@JsonIgnore
 	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 7)
 	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }
