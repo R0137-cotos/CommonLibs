@@ -12,7 +12,7 @@ import jp.co.ricoh.cotos.commonlib.entity.common.FileImportErrorDetails;
 @Repository
 public interface FileImportErrorDetailsRepository extends CrudRepository<FileImportErrorDetails, Long> {
 	@Query(value = "select * from file_import_error_details "//
-			+ "where file_import_management_id = :fileKindManagementId "//
+			+ "where file_import_management_id = :fileKindManagementMasterId "//
 			+ "order by id", nativeQuery = true)
-	public List<FileImportErrorDetails> findByFileImportManagementOrderById(@Param("fileKindManagementId") long fileKindManagementId);
+	public List<FileImportErrorDetails> findByFileImportManagementOrderById(@Param("fileKindManagementMasterId") long fileKindManagementMasterId);
 }

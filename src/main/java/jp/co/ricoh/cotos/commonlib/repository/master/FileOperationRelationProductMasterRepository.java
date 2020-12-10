@@ -10,7 +10,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.FileOperationRelationProductMas
 @Repository
 public interface FileOperationRelationProductMasterRepository extends CrudRepository<FileOperationRelationProductMaster, Long> {
 
-	public List<FileOperationRelationProductMaster> findByMenuManagementIdAndMenuDetailsManagementIdOrderById(long menuManagementId, long menuDetailsManagementId);
+	public List<FileOperationRelationProductMaster> findByMenuManagementMasterIdAndMenuDetailsManagementIdOrderById(long menuManagementMasterId, long menuDetailsManagementId);
 
-	public List<FileOperationRelationProductMaster> findByMenuManagementIdAndMenuDetailsManagementIdAndLicenseDivMasterIdOrderById(long menuManagementId, long menuDetailsManagementId, long licenseDivMasterid);
+	public List<FileOperationRelationProductMaster> findByMenuManagementMasterIdAndMenuDetailsManagementIdAndLicenseDivMasterIdOrderById(long menuManagementMasterId, long menuDetailsManagementId, long licenseDivMasterid);
 }
