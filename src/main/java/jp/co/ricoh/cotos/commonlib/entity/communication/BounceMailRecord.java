@@ -41,9 +41,9 @@ public class BounceMailRecord extends EntityBase {
 	/**
 	 * 契約ID
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,255]")
+	private String contractId;
 
 	/**
 	 * 文書番号
