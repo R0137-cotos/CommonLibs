@@ -34,9 +34,9 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailTemplateMasterRepository;
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Component
 public class CommonSendMail {
 
