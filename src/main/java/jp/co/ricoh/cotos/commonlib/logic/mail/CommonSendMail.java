@@ -16,10 +16,8 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.axis.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -34,10 +32,11 @@ import com.sun.mail.smtp.SMTPMessage;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.BounceMailHeaderDto;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
-import jp.co.ricoh.cotos.commonlib.provider.ApplicationContextProvider;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailTemplateMasterRepository;
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Component
 public class CommonSendMail {
 
@@ -49,23 +48,6 @@ public class CommonSendMail {
 
 	@Autowired
 	AppProperties appProperties;
-
-	public CommonSendMail() {
-		if (mailTemplateMasterRepository == null || javaMailSender == null || appProperties == null) {
-			ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-			if (this.mailTemplateMasterRepository == null) {
-				MailTemplateMasterRepository mailTemplateMasterRepository = context.getBean(MailTemplateMasterRepository.class);
-				this.mailTemplateMasterRepository = mailTemplateMasterRepository;
-			}
-			if (this.javaMailSender == null) {
-				this.javaMailSender = new JavaMailSenderImpl();
-			}
-			if (this.appProperties == null) {
-				AppProperties appProperties = context.getBean(AppProperties.class);
-				this.appProperties = appProperties;
-			}
-		}
-	}
 
 	/**
 	 * メールテンプレートマスタ特定&メール送信処理
