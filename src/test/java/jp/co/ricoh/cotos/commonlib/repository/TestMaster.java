@@ -32,6 +32,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeForSearchMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMaster;
@@ -103,6 +104,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepo
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkOrderMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeForSearchMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductClassCheckMasterRepository;
@@ -315,9 +317,10 @@ public class TestMaster {
 	private AttachedFileProductClassCheckMasterRepository attachedFileProductClassCheckMasterRepository;
 	@Autowired
 	private AttachedFileProductGrpCheckMasterRepository attachedFileProductGrpCheckMasterRepository;
-
 	@Autowired
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
+	@Autowired
+	private ArrangementWorkTypeForSearchMasterRepository arrangementWorkTypeForSearchMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2175,5 +2178,21 @@ public class TestMaster {
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
 			Assert.assertEquals("xlsx", found.getExtension());
 		}
+	}
+
+	@Test
+	public void ArrangementWorkTypeForSearchMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeForSearchMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ArrangementWorkTypeForSearchMaster found = arrangementWorkTypeForSearchMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 }
