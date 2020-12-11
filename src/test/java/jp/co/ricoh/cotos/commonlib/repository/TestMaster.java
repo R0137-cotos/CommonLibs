@@ -113,7 +113,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMasterFull;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorProductMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.licenseDivCompMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivCompMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.AppMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterRepository;
@@ -2468,7 +2468,7 @@ public class TestMaster {
 
 		// エンティティの取得
 		Long id = 1L;
-		licenseDivCompMaster found = licenseDivCompMasterRepository.findOne(id);
+		LicenseDivCompMaster found = licenseDivCompMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
