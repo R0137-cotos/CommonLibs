@@ -31,12 +31,12 @@ import lombok.EqualsAndHashCode;
 public class MenuDetailsManagementMaster extends EntityBaseMaster {
 
 	/**
-	 * メニュー明細管理ID
+	 * メニュー明細管理マスタID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_details_management_master_seq")
 	@SequenceGenerator(name = "menu_details_management_master_seq", sequenceName = "menu_details_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "メニュー明細管理ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "メニュー明細管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
