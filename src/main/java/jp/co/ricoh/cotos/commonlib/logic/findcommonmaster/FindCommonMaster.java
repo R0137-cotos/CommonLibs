@@ -16,13 +16,15 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmmb010UtlItem;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmmb020UtlCd;
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb010UtlItemRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
+import lombok.AllArgsConstructor;
 
 /**
  * 汎用マスタ取得共通クラス
  */
 @Component
+@AllArgsConstructor
 public class FindCommonMaster {
 
 	@Autowired
