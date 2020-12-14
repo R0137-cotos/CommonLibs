@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * SVP共通区分定義
+ * RNS共通区分定義
  */
 public class JsonEnumTypeRns {
 
