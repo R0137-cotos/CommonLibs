@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallationFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.NetworkFlgPcp;
 import lombok.Data;
 
 /**
@@ -49,14 +52,14 @@ public class ContractEquipmentExtendsParameterPcpDto {
 	private String maintenanceYears;
 
 	/**
-	 * 開梱設定フラグ
+	 * 開梱設置フラグ
 	 */
-	private String installationFlg;
+	private InstallationFlgPcp installationFlg;
 
 	/**
 	 * ネットワーク設定フラグ
 	 */
-	private String networkFlg;
+	private NetworkFlgPcp networkFlg;
 
 	/**
 	 * ネットワーク設定品種コード
@@ -66,7 +69,7 @@ public class ContractEquipmentExtendsParameterPcpDto {
 	/**
 	 * ソフトインストールフラグ
 	 */
-	private String installFlg;
+	private InstallFlgPcp installFlg;
 
 	/**
 	 * ソフトインストール品種コード

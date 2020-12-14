@@ -2,6 +2,9 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MenuTypeSvp;
 import lombok.Data;
 
 /**
@@ -34,7 +37,7 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	/**
 	 * 請求方法区分
 	 */
-	private String billing_type;
+	private BillingTypeSvp billing_type;
 
 	/**
 	 * メーカー名
@@ -49,7 +52,7 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	/**
 	 * メニュー区分
 	 */
-	private String menuType;
+	private MenuTypeSvp menuType;
 
 	/**
 	 * メニュー名
@@ -59,7 +62,7 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	/**
 	 * 保守対応時間区分
 	 */
-	private String maintenanceTimeType;
+	private MaintenanceTimeTypeSvp maintenanceTimeType;
 
 	/**
 	 * 保証開始日

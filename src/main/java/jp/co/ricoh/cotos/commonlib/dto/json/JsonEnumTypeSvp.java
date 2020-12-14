@@ -119,4 +119,26 @@ public class JsonEnumTypeSvp {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	public enum HarddiskTypeSvp {
+
+		標準搭載("0"), 標準搭載_拡張("1"), ディスクレス("2");
+
+		private final String text;
+
+		private HarddiskTypeSvp(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static HarddiskTypeSvp fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
