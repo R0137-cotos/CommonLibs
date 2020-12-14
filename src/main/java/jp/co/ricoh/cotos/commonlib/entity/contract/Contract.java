@@ -815,4 +815,12 @@ public class Contract extends EntityBase {
 	@Size(max = 1333)
 	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 87, allowableValues = "range[0,1333]")
 	private String toVendorComment;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 88, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
 }
