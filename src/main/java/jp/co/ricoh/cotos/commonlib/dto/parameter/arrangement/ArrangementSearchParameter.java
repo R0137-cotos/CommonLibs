@@ -495,6 +495,22 @@ public class ArrangementSearchParameter {
 	private String picMntCeId;
 
 	/**
+	 * サービス利用希望日
+	 */
+	@ApiParam(value = "サービス利用希望日", required = false)
+	@ApiModelProperty(value = "サービス利用希望日<br />" //
+			+ "日付フォーマット:yyyy/MM/dd", //
+			required = false) //
+	private Date conclusionPreferredDate;
+
+	/**
+	 * 導入設置先距離
+	 */
+	@ApiParam(value = "導入設置先距離", required = false)
+	@ApiModelProperty(value = "導入設置先距離", required = false)
+	private Long introductionDistance;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
