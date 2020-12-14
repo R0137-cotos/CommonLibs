@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMss.NewExistingAccountTypeMss;
 import lombok.Data;
 
 /**
@@ -14,12 +16,12 @@ public class ProductContractExtendsParameterMssDto {
 	/**
 	 * 契約種別詳細
 	 */
-	private String contractTypeDetails;
+	private ContractTypeDetails contractTypeDetails;
 
 	/**
 	 * 新規/既存アカウント区分
 	 */
-	private String newExistingAccountType;
+	private NewExistingAccountTypeMss newExistingAccountType;
 
 	/**
 	 * オーガニゼーションID

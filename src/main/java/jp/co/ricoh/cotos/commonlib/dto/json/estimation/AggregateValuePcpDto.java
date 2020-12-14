@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.AggregateValueDeleteFlgPcp;
 import lombok.Data;
 
 /**
@@ -13,7 +14,7 @@ import lombok.Data;
 public class AggregateValuePcpDto {
 
 	/**
-	 * 新CPQマッピングキー
+	 * CPQマッピングキー
 	 */
 	private String cpqMappingKey;
 
@@ -25,5 +26,5 @@ public class AggregateValuePcpDto {
 	/**
 	 * 削除フラグ
 	 */
-	private String deleteFlg;
+	private AggregateValueDeleteFlgPcp deleteFlg;
 }

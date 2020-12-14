@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import lombok.Data;
 
 /**
@@ -14,5 +15,5 @@ public class ProductContractExtendsParameterPcpDto {
 	/**
 	 * 契約種別詳細
 	 */
-	private String contractTypeDetails;
+	private ContractTypeDetails contractTypeDetails;
 }
