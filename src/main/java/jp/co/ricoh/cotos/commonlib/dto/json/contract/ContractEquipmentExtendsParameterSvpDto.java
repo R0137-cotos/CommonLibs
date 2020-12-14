@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.HarddiskTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MenuTypeSvp;
 import lombok.Data;
@@ -72,5 +73,5 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	/**
 	 * ハードディスク
 	 */
-	private String harddiskType;
+	private HarddiskTypeSvp harddiskType;
 }
