@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqEstimationEquipmentPcpDto.MakerCodePcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.MakerCodePcp;
 
 @Converter(autoApply = true)
 public class MakerCodePcpConverter implements AttributeConverter<MakerCodePcp, String> {

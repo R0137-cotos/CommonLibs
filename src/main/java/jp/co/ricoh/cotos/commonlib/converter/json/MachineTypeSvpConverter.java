@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqEstimationEquipmentSvpDto.MachineTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MachineTypeSvp;
 
 @Converter(autoApply = true)
 public class MachineTypeSvpConverter implements AttributeConverter<MachineTypeSvp, String> {

@@ -1,11 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
-import java.util.Arrays;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonValue;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.AggregateValueDeleteFlgPcp;
 import lombok.Data;
 
 /**
@@ -15,28 +12,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AggregateValuePcpDto {
-
-	public enum AggregateValueDeleteFlgPcp {
-
-		未削除("0"), 削除済み("1");
-
-		private final String text;
-
-		private AggregateValueDeleteFlgPcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static AggregateValueDeleteFlgPcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * CPQマッピングキー

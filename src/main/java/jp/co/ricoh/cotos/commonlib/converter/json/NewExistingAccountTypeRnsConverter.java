@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqParameterRnsDto.NewExistingAccountTypeRns;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRns.NewExistingAccountTypeRns;
 
 @Converter(autoApply = true)
 public class NewExistingAccountTypeRnsConverter implements AttributeConverter<NewExistingAccountTypeRns, String> {

@@ -1,12 +1,14 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
-import java.util.Arrays;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonValue;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ClassificationCodePcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallationFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.MakerCodePcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.NetworkFlgPcp;
 import lombok.Data;
 
 /**
@@ -16,116 +18,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CpqEstimationEquipmentPcpDto {
-
-	public enum MakerCodePcp {
-
-		富士通("0"), NEC("1"), 東芝("2"), lenovo("3"), HP("4"), DELL("5");
-
-		private final String text;
-
-		private MakerCodePcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static MakerCodePcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum ClassificationCodePcp {
-
-		デスクトップ型("0"), ノート型("1"), モニター("2");
-
-		private final String text;
-
-		private ClassificationCodePcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ClassificationCodePcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum InstallationFlgPcp {
-
-		開梱設置しない("0"), 開梱設置する("1");
-
-		private final String text;
-
-		private InstallationFlgPcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static InstallationFlgPcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum NetworkFlgPcp {
-
-		設定しない("0"), 設定する("1");
-
-		private final String text;
-
-		private NetworkFlgPcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static NetworkFlgPcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum InstallFlgPcp {
-
-		設定しない("0"), 設定する("1");
-
-		private final String text;
-
-		private InstallFlgPcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static InstallFlgPcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * 機種コード

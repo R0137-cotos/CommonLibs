@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqEstimationEquipmentPcpDto.InstallFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallFlgPcp;
 
 @Converter(autoApply = true)
 public class InstallFlgPcpConverter implements AttributeConverter<InstallFlgPcp, String> {

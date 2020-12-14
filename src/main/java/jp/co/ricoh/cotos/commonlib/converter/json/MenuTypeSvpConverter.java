@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqEstimationEquipmentSvpDto.MenuTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MenuTypeSvp;
 
 @Converter(autoApply = true)
 public class MenuTypeSvpConverter implements AttributeConverter<MenuTypeSvp, String> {

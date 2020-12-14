@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqEstimationEquipmentSvpDto.MaintenanceTimeTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
 
 @Converter(autoApply = true)
 public class MaintenanceTimeTypeSvpConverter implements AttributeConverter<MaintenanceTimeTypeSvp, String> {

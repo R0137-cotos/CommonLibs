@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.ParameterEstimationEquipmentPcpDto.ParameterEstimationEquipmentDeleteFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ParameterEstimationEquipmentDeleteFlgPcp;
 
 @Converter(autoApply = true)
 public class ParameterEstimationEquipmentDeleteFlgPcpConverter implements AttributeConverter<ParameterEstimationEquipmentDeleteFlgPcp, String> {

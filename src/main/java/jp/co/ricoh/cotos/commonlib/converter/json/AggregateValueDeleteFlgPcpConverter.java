@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.AggregateValuePcpDto.AggregateValueDeleteFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.AggregateValueDeleteFlgPcp;
 
 @Converter(autoApply = true)
 public class AggregateValueDeleteFlgPcpConverter implements AttributeConverter<AggregateValueDeleteFlgPcp, String> {
