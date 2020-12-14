@@ -81,6 +81,28 @@ public class LicenseDetail extends EntityBase {
 		}
 	}
 
+	public enum ReceptionStatusFlg {
+
+		未("0"), 受理("1"), 不受理("2");
+
+		private final String text;
+
+		private ReceptionStatusFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ReceptionStatusFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * ライセンス明細ID
 	 */
