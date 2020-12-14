@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
-import jp.co.ricoh.cotos.commonlib.json.TestJsonDto.EstimationTypeDetails;
+import jp.co.ricoh.cotos.commonlib.json.TestJsonDto.TestEstimationTypeDetails;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 
 @RunWith(SpringRunner.class)
@@ -43,7 +43,7 @@ public class TestJson {
 
 		// チェック
 		assertNotNull(dto);
-		assertEquals(EstimationTypeDetails.契約更新, dto.getEstimationTypeDetails());
+		assertEquals(TestEstimationTypeDetails.契約更新, dto.getEstimationTypeDetails());
 		assertEquals("ORG0000001", dto.getOrganizationId());
 		assertEquals("2", dto.getVpn());
 		assertEquals("RMA0000001", dto.getRmaContractNumber());
@@ -129,7 +129,7 @@ public class TestJson {
 		// DTO
 		TestJsonDto dto = new TestJsonDto();
 
-		dto.setEstimationTypeDetails(EstimationTypeDetails.契約更新);
+		dto.setEstimationTypeDetails(TestEstimationTypeDetails.契約更新);
 		dto.setOrganizationId("ORG0000001");
 		dto.setVpn("2");
 		dto.setRmaContractNumber("RMA0000001");
