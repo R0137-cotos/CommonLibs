@@ -12,6 +12,7 @@ public class JsonEnumTypeSvp {
 
 	public enum MachineTypeSvp {
 
+		// SVPの移行元のRITOSと同様に0から採番
 		サーバー本体("0"), HWオプション("1"), SWオプション("2"), 監視サービスオプション("3");
 
 		private final String text;
@@ -32,6 +33,7 @@ public class JsonEnumTypeSvp {
 		}
 	}
 
+	// SVPの移行元のRITOSと同様に0から採番
 	public enum BillingTypeSvp {
 
 		一括("0"), 月額("1");
@@ -54,6 +56,7 @@ public class JsonEnumTypeSvp {
 		}
 	}
 
+	// SVPの移行元のRITOSと同様に0から採番
 	public enum MakerCodeSvp {
 
 		hp("0"), IBM("1"), 日立("2"), 富士通("3"), イメーション("4"), DELL("6");
@@ -76,6 +79,7 @@ public class JsonEnumTypeSvp {
 		}
 	}
 
+	// SVPの移行元のRITOSと同様に0から採番
 	public enum MenuTypeSvp {
 
 		導入保守ST("0"), 導入保守DX("1"), 保守ST("2"), 保守DX("3"), 保守HW("4");
@@ -98,6 +102,7 @@ public class JsonEnumTypeSvp {
 		}
 	}
 
+	// SVPの移行元のRITOSと同様に0から採番
 	public enum MaintenanceTimeTypeSvp {
 
 		月土9時_21時("0"), 月金9時_17時("1"), H24D365("2");
@@ -120,6 +125,7 @@ public class JsonEnumTypeSvp {
 		}
 	}
 
+	// SVPの移行元のRITOSと同様に0から採番
 	public enum HarddiskTypeSvp {
 
 		標準搭載("0"), 標準搭載_拡張("1"), ディスクレス("2");

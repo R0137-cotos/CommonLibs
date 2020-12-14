@@ -32,6 +32,7 @@ public class JsonEnumTypePcp {
 		}
 	}
 
+	// PCPの移行元のRITOSと同様に0から採番
 	public enum MakerCodePcp {
 
 		富士通("0"), NEC("1"), 東芝("2"), lenovo("3"), HP("4"), DELL("5");
@@ -54,6 +55,7 @@ public class JsonEnumTypePcp {
 		}
 	}
 
+	// PCPの移行元のRITOSと同様に0から採番
 	public enum ClassificationCodePcp {
 
 		デスクトップ型("0"), ノート型("1"), モニター("2");
