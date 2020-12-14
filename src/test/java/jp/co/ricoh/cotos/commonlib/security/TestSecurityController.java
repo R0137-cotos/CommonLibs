@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ArrangementResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CheckResultUpdateParameter;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.BounceMailHeaderDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.CommunicationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactRegisterParameter;
@@ -126,6 +127,8 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkErrorLog;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailDestination;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.CommunicationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
@@ -387,6 +390,16 @@ public class TestSecurityController {
 		return createParameterCheckResult(result);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/BounceMailRecord")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated BounceMailRecord entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/BounceMailDestination")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated BounceMailDestination entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContactDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContactDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
@@ -394,6 +407,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContactToDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContactToDto entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/BounceMailHeaderDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated BounceMailHeaderDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
