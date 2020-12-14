@@ -103,7 +103,7 @@ public class ContractEquipment extends EntityBase {
 	}
 
 	public enum MachineType {
-		サーバー本体("1"), HWオプション("2"), SWオプション("3");
+		サーバー本体("0"), HWオプション("1"), SWオプション("2");
 
 		private final String text;
 
