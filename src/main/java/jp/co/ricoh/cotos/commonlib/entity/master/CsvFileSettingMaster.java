@@ -1,9 +1,12 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -76,4 +79,10 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "NULL値文字", required = false, position = 7, allowableValues = "range[0,255]")
 	private String csvNullValueString;
 
+	/**
+	 * ファイル種別管理マスタ
+	 */
+	@OneToMany(mappedBy = "csvFileSettingMaster")
+	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 8)
+	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }
