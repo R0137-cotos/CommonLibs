@@ -66,11 +66,11 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	private String csvLineSeparator;
 
 	/**
-	 * 囲み文字
+	 * 囲み文字有無フラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "囲み文字", required = false, position = 6, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "囲み文字有無フラグ", required = false, position = 6, allowableValues = "range[0,9]")
 	private Integer csvQuote;
 
 	/**
