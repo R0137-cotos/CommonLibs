@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -13,18 +14,9 @@ import lombok.Data;
 public class TmSuspendSubscriptionRequestDto implements AbstractTmRequestDto {
 
 	/**
-	 * 会社ID
-	 */
-	private String customerId;
-
-	/**
-	 * サブスクリプションID
-	 */
-	private String subscriptionId;
-
-	/**
 	 * ライセンス終了日
 	 */
+	@JsonProperty("license_expiration_date")
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "Asia/Tokyo")
 	private Date licenseExpirationDate;
 
