@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "license_div_comp_master")
-public class licenseDivCompMaster extends EntityBase {
+public class LicenseDivCompMaster extends EntityBase {
 
 
 	/**

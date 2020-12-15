@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
 import lombok.Data;
 
 /**
@@ -18,7 +19,7 @@ public class CpqReturnValuePcpDto {
 	/**
 	 * 見積種別詳細
 	 */
-	private String estimationTypeDetails;
+	private EstimationTypeDetails estimationTypeDetails;
 
 	/**
 	 * 見積機種リスト

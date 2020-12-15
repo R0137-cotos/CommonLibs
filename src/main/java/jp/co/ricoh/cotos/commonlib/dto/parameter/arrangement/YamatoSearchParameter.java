@@ -20,8 +20,8 @@ public class YamatoSearchParameter {
 	/**
 	 * 商品マスタID
 	 */
-	@ApiParam(value = "商品マスタID", required = true)
-	@ApiModelProperty(value = "商品マスタID", required = true)
+	@ApiParam(value = "商品マスタID", required = false)
+	@ApiModelProperty(value = "商品マスタID", required = false)
 	private Long productMasterId;
 
 	/**

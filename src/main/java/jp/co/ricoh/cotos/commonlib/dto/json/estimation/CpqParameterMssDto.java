@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMss.NewExistingAccountTypeMss;
 import lombok.Data;
 
 /**
@@ -15,7 +16,7 @@ public class CpqParameterMssDto {
 	/**
 	 * 新規/既存アカウント区分
 	 */
-	private String newExistingAccountType;
+	private NewExistingAccountTypeMss newExistingAccountType;
 
 	/**
 	 * オーガニゼーションID

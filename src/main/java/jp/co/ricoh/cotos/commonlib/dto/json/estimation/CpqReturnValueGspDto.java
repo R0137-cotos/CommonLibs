@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
 import lombok.Data;
 
 /**
@@ -15,7 +16,7 @@ public class CpqReturnValueGspDto {
 	/**
 	 * 見積種別詳細
 	 */
-	private String estimationTypeDetails;
+	private EstimationTypeDetails estimationTypeDetails;
 
 	/**
 	 * アップグレード導入希望日

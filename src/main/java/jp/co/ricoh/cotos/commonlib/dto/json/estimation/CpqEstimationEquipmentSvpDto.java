@@ -4,6 +4,11 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MachineTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MakerCodeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MenuTypeSvp;
 import lombok.Data;
 
 /**
@@ -17,7 +22,7 @@ public class CpqEstimationEquipmentSvpDto {
 	/**
 	 * 機器区分
 	 */
-	private String machineType;
+	private MachineTypeSvp machineType;
 
 	/**
 	 * 機種コード
@@ -72,12 +77,12 @@ public class CpqEstimationEquipmentSvpDto {
 	/**
 	 * 請求方法区分
 	 */
-	private String billing_type;
+	private BillingTypeSvp billingType;
 
 	/**
 	 * メーカーコード
 	 */
-	private String makerCode;
+	private MakerCodeSvp makerCode;
 
 	/**
 	 * メーカー名
@@ -87,7 +92,7 @@ public class CpqEstimationEquipmentSvpDto {
 	/**
 	 * メニュー区分
 	 */
-	private String menuType;
+	private MenuTypeSvp menuType;
 
 	/**
 	 * メニュー名
@@ -97,5 +102,5 @@ public class CpqEstimationEquipmentSvpDto {
 	/**
 	 * 保守対応時間区分
 	 */
-	private String maintenanceTimeType;
+	private MaintenanceTimeTypeSvp maintenanceTimeType;
 }

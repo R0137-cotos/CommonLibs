@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ContinuePossibleFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ParameterEstimationEquipmentDeleteFlgPcp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ReContractNotAllowedFlgPcp;
 import lombok.Data;
 
 /**
@@ -13,15 +16,16 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParameterEstimationEquipmentPcpDto {
+
 	/**
 	 * 継続可能フラグ
 	 */
-	private String continuePossibleFlg;
+	private ContinuePossibleFlgPcp continuePossibleFlg;
 
 	/**
 	 * 再契約不可フラグ
 	 */
-	private String reContractNotAllowedFlg;
+	private ReContractNotAllowedFlgPcp reContractNotAllowedFlg;
 
 	/**
 	 * 機種コード
@@ -86,5 +90,5 @@ public class ParameterEstimationEquipmentPcpDto {
 	/**
 	 * 削除フラグ
 	 */
-	private String deleteFlg;
+	private ParameterEstimationEquipmentDeleteFlgPcp deleteFlg;
 }

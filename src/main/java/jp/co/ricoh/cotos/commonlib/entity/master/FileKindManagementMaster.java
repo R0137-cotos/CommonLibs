@@ -10,10 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -132,9 +132,11 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	private String outputFileName;
 
 	/**
-	 * CSVファイル設定マスタID
+	 * CSVファイル設定マスタ
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "CSVファイル設定マスタID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
-	private Long csvFileSettingMasterId;
+	@ManyToOne
+	@JoinColumn(name = "csv_file_setting_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "CSVファイル設定マスタ", required = false, position = 10)
+	private CsvFileSettingMaster csvFileSettingMaster;
 }

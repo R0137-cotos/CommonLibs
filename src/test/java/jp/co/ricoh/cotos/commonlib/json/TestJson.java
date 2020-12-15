@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.json.TestJsonDto.TestEstimationTypeDetails;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 
 @RunWith(SpringRunner.class)
@@ -23,9 +24,9 @@ public class TestJson {
 	@Autowired
 	JsonUtil jsonUtil;
 
-	private String JSON_TEXT = "{\"organizationId\":\"ORG0000001\",\"vpn\":\"2\",\"rmaContractNumber\":\"RMA0000001\",\"rmaContractStart\":\"2020/11/01\",\"rmaContractEnd\":\"2020/10/31\",\"testObject\":{\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\",\"testArray\":[{\"arrayKey1\":\"arrayValue1\",\"arrayKey2\":\"arrayValue2\"},{\"arrayKey1\":\"arrayValue3\",\"arrayKey2\":\"arrayValue4\"}]}}";
+	private String JSON_TEXT = "{\"estimationTypeDetails\":\"2\",\"organizationId\":\"ORG0000001\",\"vpn\":\"2\",\"rmaContractNumber\":\"RMA0000001\",\"rmaContractStart\":\"2020/11/01\",\"rmaContractEnd\":\"2020/10/31\",\"testObject\":{\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\",\"testArray\":[{\"arrayKey1\":\"arrayValue1\",\"arrayKey2\":\"arrayValue2\"},{\"arrayKey1\":\"arrayValue3\",\"arrayKey2\":\"arrayValue4\"}]}}";
 
-	private String JSON_TEXT_ERROR = "{\"organizationId1\":\"ORG0000001\",\"vpn1\":\"2\",\"rmaContractNumber1\":\"RMA0000001\",\"rmaContractStart1\":\"2020/11/01\",\"rmaContractEnd1\":\"2020/10/31\",\"testObject\":{\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\",\"testArray\":[{\"arrayKey1\":\"arrayValue1\",\"arrayKey2\":\"arrayValue2\"},{\"arrayKey1\":\"arrayValue1\",\"arrayKey2\":\"arrayValue2\"}]}}";
+	private String JSON_TEXT_ERROR = "{\"estimationTypeDetails\":\"2\",\"organizationId1\":\"ORG0000001\",\"vpn1\":\"2\",\"rmaContractNumber1\":\"RMA0000001\",\"rmaContractStart1\":\"2020/11/01\",\"rmaContractEnd1\":\"2020/10/31\",\"testObject\":{\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\",\"testArray\":[{\"arrayKey1\":\"arrayValue1\",\"arrayKey2\":\"arrayValue2\"},{\"arrayKey1\":\"arrayValue1\",\"arrayKey2\":\"arrayValue2\"}]}}";
 
 	@Test
 	public void 正常系_JSON文字列からオブジェクトに変換() {
@@ -42,6 +43,7 @@ public class TestJson {
 
 		// チェック
 		assertNotNull(dto);
+		assertEquals(TestEstimationTypeDetails.契約更新, dto.getEstimationTypeDetails());
 		assertEquals("ORG0000001", dto.getOrganizationId());
 		assertEquals("2", dto.getVpn());
 		assertEquals("RMA0000001", dto.getRmaContractNumber());
@@ -127,6 +129,7 @@ public class TestJson {
 		// DTO
 		TestJsonDto dto = new TestJsonDto();
 
+		dto.setEstimationTypeDetails(TestEstimationTypeDetails.契約更新);
 		dto.setOrganizationId("ORG0000001");
 		dto.setVpn("2");
 		dto.setRmaContractNumber("RMA0000001");
