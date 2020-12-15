@@ -3,7 +3,8 @@ package jp.co.ricoh.cotos.commonlib.converter.license;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.ReceptionStatusFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseDetailExtendsParameterGspDto.ReceptionStatusFlg;
+
 
 @Converter(autoApply = true)
 public class ReceptionStatusFlgConverter implements AttributeConverter<ReceptionStatusFlg, String> {
