@@ -46,6 +46,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.CommonMasterDetail;
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractAutoUpdateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractChangeSpanMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractChecklistCompMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DateCalcPatternMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DispUrlAuthMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
@@ -63,6 +64,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ItemTransCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.JsonSchemaMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LedgerMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseArrangementMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster;
@@ -113,7 +115,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMasterFull;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorProductMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivCompMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.AppMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterRepository;
@@ -135,6 +136,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ContractAutoUpdateMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ContractChangeSpanMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ContractChecklistCompMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.CsvFileSettingMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DateCalcPatternMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DispUrlAuthMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
@@ -391,6 +393,8 @@ public class TestMaster {
 	private MailMasterRepository mailMasterRepository;
 	@Autowired
 	private MailAddressMasterRepository mailAddressMasterRepository;
+	@Autowired
+	private CsvFileSettingMasterRepository csvFileSettingMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2547,6 +2551,22 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		ItemLicenseSettingMaster found = itemLicenseSettingMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void CsvFileSettingMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/csvFileSettingMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		CsvFileSettingMaster found = csvFileSettingMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
