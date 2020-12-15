@@ -68,9 +68,10 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	/**
 	 * 囲み文字
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "囲み文字", required = false, position = 6, allowableValues = "range[0,255]")
-	private String csvQuote;
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "囲み文字", required = false, position = 6, allowableValues = "range[0,9]")
+	private Integer csvQuote;
 
 	/**
 	 * NULL値文字
