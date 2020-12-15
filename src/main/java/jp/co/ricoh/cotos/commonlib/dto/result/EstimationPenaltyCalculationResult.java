@@ -6,21 +6,21 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import lombok.Data;
 
 /**
- * 違約金計算APIの実施結果用パラメーター
+ * 見積違約金計算APIの実施結果用パラメーター
  */
 
 @Data
-public class PenaltyCalculationResult {
+public class EstimationPenaltyCalculationResult {
 
 	/**
-	 * 違約金明細(契約用)を表すEntity
+	 * 違約金明細(見積用)を表すEntity
 	 */
-	@ApiModelProperty(value = "違約金明細(契約用)を表すEntity", required = true, position = 1)
-	private PenaltyDetailContract penaltyDetailContract;
+	@ApiModelProperty(value = "違約金明細(見積用)を表すEntity", required = true, position = 1)
+	private PenaltyDetailEstimation penaltyDetailEstimation;
 
 	/**
 	 * 違約金発生解約最終日
