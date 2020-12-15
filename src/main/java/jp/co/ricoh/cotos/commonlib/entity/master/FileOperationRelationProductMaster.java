@@ -91,7 +91,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@Min(0)
 	@ApiModelProperty(value = "メニュー明細管理マスタID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
-	private long menuDetailsManagementId;
+	private long menuDetailsManagementMasterId;
 
 	/**
 	 * ライセンス区分マスタID
