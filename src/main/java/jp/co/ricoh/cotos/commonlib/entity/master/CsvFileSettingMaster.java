@@ -13,6 +13,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
@@ -83,6 +85,7 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 * ファイル種別管理マスタ
 	 */
 	@OneToMany(mappedBy = "csvFileSettingMaster")
+	@JsonIgnore
 	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 8)
 	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }
