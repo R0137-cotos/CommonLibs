@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -136,7 +135,6 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "csv_file_setting_master_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "CSVファイル設定マスタ", required = false, position = 10)
 	private CsvFileSettingMaster csvFileSettingMaster;
 }
