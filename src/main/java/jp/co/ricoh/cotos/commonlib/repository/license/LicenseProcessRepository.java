@@ -6,10 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.ProcessStatus;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster.MailDiv;
 
 @Repository
 public interface LicenseProcessRepository extends CrudRepository<LicenseProcess, Long> {
 
 	public List<LicenseProcess> findByLicenseInfoIdAndMailDiv(long licenseInfoId, MailDiv mailDiv);
+
+	public List<LicenseProcess> findByArrangementWorkIdInAndProcessStatus(List<Long> arrangementWorkId, ProcessStatus processStatus);
 }
