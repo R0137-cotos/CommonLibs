@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CsvParameter;
+import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.logic.csv.CsvUtil;
 
@@ -185,6 +186,34 @@ public class TestCsvUtil {
 
 		try {
 			csvUtil.createCsvData(new ArrayList<TestCsvData>(), param);
+			Assert.fail("正常終了した");
+		} catch (ErrorCheckException e) {
+			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00107", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが正しく設定されること", "CSV生成時に必要なエンティティリストが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+
+	@Test
+	public void 正常系_CSVファイル設定マスタエンティティからCsvParameterにコンバートできること() throws ErrorCheckException, IOException, ParseException {
+		// 設定
+		CsvFileSettingMaster csvFileSettingMaster = new CsvFileSettingMaster();
+		csvFileSettingMaster.setCsvCharset("UTF-8");
+		csvFileSettingMaster.setCsvHeaderFlg(1);
+		csvFileSettingMaster.setCsvSeparator("1");
+		csvFileSettingMaster.setCsvLineSeparator("2");
+		csvFileSettingMaster.setCsvQuote(1);
+		csvFileSettingMaster.setCsvNullValueString("");
+		// 期待値
+		CsvParameter assertParam = CsvParameter.builder().build();
+		assertParam.setHeader(true);
+		assertParam.setSeparator(',');
+		assertParam.setCharset(Charset.forName("UTF-8"));
+		assertParam.setLineSeparator("\n");
+		assertParam.setQuote(true);
+		assertParam.setNullValueString("null");
+
+		try {
+			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.fail("正常終了した");
 		} catch (ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00107", e.getErrorInfoList().get(0).getErrorId());
