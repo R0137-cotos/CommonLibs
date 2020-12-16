@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.axis.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -102,36 +103,23 @@ public class CsvUtil {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "CSVファイル設定マスタ" }));
 		}
 		CsvParameter csvParameter = CsvParameter.builder().build();
-		csvParameter.setHeader(isCsvHeder(csvFileSettingMaster.getCsvHeaderFlg()));
+		csvParameter.setHeader(flgBooleanConverter(csvFileSettingMaster.getCsvHeaderFlg()));
 		csvParameter.setSeparator(getSeparator(csvFileSettingMaster.getCsvSeparator()));
 		csvParameter.setCharset(Charset.forName(Optional.ofNullable(csvFileSettingMaster.getCsvCharset()).orElse("UTF-8")));
 		csvParameter.setLineSeparator(Optional.ofNullable(csvFileSettingMaster.getCsvLineSeparator()).orElse("\n"));
-		csvParameter.setQuote(isCsvQuote(Integer.valueOf(csvFileSettingMaster.getCsvQuote())));
+		csvParameter.setQuote(flgBooleanConverter(csvFileSettingMaster.getCsvQuote()));
 		csvParameter.setNullValueString(Optional.ofNullable(csvFileSettingMaster.getCsvNullValueString()).orElse("null"));
 		return csvParameter;
 	}
 
 	/**
-	 * CSVファイルヘッダー有無を返却します。
+	 * フラグを真偽値にコンバートします。
 	 *
-	 * @param val
+	 * @param flg
 	 * @return boolean
 	 */
-	private boolean isCsvHeder(Integer val) {
-		if (null == val || val == 1) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * CSVファイル囲み文字有無を返却します。
-	 *
-	 * @param val
-	 * @return boolean
-	 */
-	private boolean isCsvQuote(Integer val) {
-		if (null == val || val == 1) {
+	private boolean flgBooleanConverter(Integer flg) {
+		if (null == flg || flg == 1) {
 			return true;
 		}
 		return false;
@@ -145,6 +133,9 @@ public class CsvUtil {
 	 */
 	private char getSeparator(String val) {
 		char separator = ',';
+		if (StringUtils.isEmpty(val)) {
+			return separator;
+		}
 		switch (val) {
 		case "1":
 			separator = ',';
