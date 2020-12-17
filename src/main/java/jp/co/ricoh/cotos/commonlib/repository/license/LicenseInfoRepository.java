@@ -8,4 +8,5 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo;
 @Repository
 public interface LicenseInfoRepository extends CrudRepository<LicenseInfo, Long> {
 
+	public LicenseInfo findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
 }
