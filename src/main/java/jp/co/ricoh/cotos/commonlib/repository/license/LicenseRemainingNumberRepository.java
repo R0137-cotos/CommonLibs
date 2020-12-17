@@ -11,6 +11,7 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber.Allocat
 @Repository
 public interface LicenseRemainingNumberRepository extends CrudRepository<LicenseRemainingNumber, Long> {
 
-
 	public List<LicenseRemainingNumber> findByLicenseDivMasterIdAndAllocationDiv(Long licenseDivMasterId, AllocationDiv allocationDiv);
+
+	public List<LicenseRemainingNumber> findByRjManageNumber(String rjManageNumber);
 }
