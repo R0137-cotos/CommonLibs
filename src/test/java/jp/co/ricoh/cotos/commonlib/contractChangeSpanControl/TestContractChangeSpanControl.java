@@ -16,6 +16,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
@@ -60,14 +61,14 @@ public class TestContractChangeSpanControl {
 	public void 異常系_引数チェック() {
 
 		try {
-			contractChangeSpanControl.contractChangeSpanCheck(null, 1L, null, ContractType.契約変更, "1", "1", "1", 1L);
+			contractChangeSpanControl.contractChangeSpanCheck(null, 1L, null, ContractType.契約変更, ContractTypeDetails.新規, "1", "1", 1L);
 			Assert.fail("正常終了した");
 		} catch(ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "パラメータ「対象ドメイン」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
 		}
 		try {
-			contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, null, null, ContractType.契約変更, "1", "1", "1", 1L);
+			contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, null, null, ContractType.契約変更, ContractTypeDetails.新規, "1", "1", 1L);
 			Assert.fail("正常終了した");
 		} catch(ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
@@ -113,7 +114,7 @@ public class TestContractChangeSpanControl {
 		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/testContractChangeSpanMasterInsert.sql");
 
 		try {
-			contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 7L, null, ContractType.契約更新, "1", "1", "1", 20L);
+			contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 7L, null, ContractType.契約更新, ContractTypeDetails.新規, "1", "1", 20L);
 			Assert.fail("正常終了した");
 		} catch(ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00001", e.getErrorInfoList().get(0).getErrorId());
@@ -121,7 +122,7 @@ public class TestContractChangeSpanControl {
 		}
 		// 変更元契約ID未設定
 		try {
-			contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 7L, null, ContractType.契約更新, "1", "1", "1", 6L);
+			contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 7L, null, ContractType.契約更新, ContractTypeDetails.新規, "1", "1", 6L);
 			Assert.fail("正常終了した");
 		} catch(ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00013", e.getErrorInfoList().get(0).getErrorId());
@@ -149,7 +150,7 @@ public class TestContractChangeSpanControl {
 		List<ErrorInfo> errorInfoList = contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.見積, 5L, null, ContractType.契約変更, null, "2", "3", 5L);
 		Assert.assertEquals("エラー情報リストが空であること(契約変更期間管理マスタに該当レコードなし)", 0, errorInfoList.size());
 
-		errorInfoList = contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 5L, null, ContractType.情報変更, "1", "1", "1", 5L);
+		errorInfoList = contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 5L, null, ContractType.情報変更, ContractTypeDetails.新規, "1", "1", 5L);
 		Assert.assertEquals("エラー情報リストが空であること(契約品種に紐づく契約変更期間管理マスタレコードなし)", 0, errorInfoList.size());
 
 		errorInfoList = contractChangeSpanControl.contractChangeSpanCheck(ServiceCategory.契約, 5L, 100L, ContractType.契約変更, null, "2", "3", 5L);
@@ -396,7 +397,7 @@ public class TestContractChangeSpanControl {
 		Long productMasterId = 1L;
 		Long itemMasterId = null;
 		ContractType contractType = ContractType.契約更新;
-		String contractTypeDetail = "4";
+		ContractTypeDetails contractTypeDetail = ContractTypeDetails.アップグレード;
 		String lifecycleStatus = "5";
 		String workflowStatus = "6";
 		Long transactionTableId = 4L;
@@ -419,7 +420,7 @@ public class TestContractChangeSpanControl {
 		Long productMasterId = 1L;
 		Long itemMasterId = 363L;
 		ContractType contractType = ContractType.契約更新;
-		String contractTypeDetail = "1";
+		ContractTypeDetails contractTypeDetail = ContractTypeDetails.新規;
 		String lifecycleStatus = "2";
 		String workflowStatus = "3";
 		Long transactionTableId = 4L;
@@ -442,7 +443,7 @@ public class TestContractChangeSpanControl {
 		Long productMasterId = 4L;
 		Long itemMasterId = null;
 		ContractType contractType = ContractType.契約更新;
-		String contractTypeDetail = "1";
+		ContractTypeDetails contractTypeDetail = ContractTypeDetails.新規;
 		String lifecycleStatus = "2";
 		String workflowStatus = "3";
 		Long transactionTableId = 4L;
@@ -461,7 +462,7 @@ public class TestContractChangeSpanControl {
 		Long productMasterId = 5L;
 		Long itemMasterId = null;
 		ContractType contractType = ContractType.契約更新;
-		String contractTypeDetail = "1";
+		ContractTypeDetails contractTypeDetail = ContractTypeDetails.新規;
 		String lifecycleStatus = "2";
 		String workflowStatus = "3";
 		Long transactionTableId = 5L;
@@ -484,7 +485,30 @@ public class TestContractChangeSpanControl {
 		Long productMasterId = 6L;
 		Long itemMasterId = null;
 		ContractType contractType = ContractType.契約更新;
-		String contractTypeDetail = "1";
+		ContractTypeDetails contractTypeDetail = ContractTypeDetails.新規;
+		String lifecycleStatus = "2";
+		String workflowStatus = "3";
+		Long transactionTableId = 5L;
+
+		List<ErrorInfo> errors = contractChangeSpanControl.contractChangeSpanCheck(serviceCategory, productMasterId, itemMasterId, contractType, contractTypeDetail, lifecycleStatus, workflowStatus, transactionTableId);
+		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
+		errors.stream().forEach(err -> {
+			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037",  err.getErrorId());
+			Assert.assertEquals("解約の申込はaのbからcまで可能です。",  err.getErrorMessage());
+		});
+	}
+
+	@Test
+	public void 契約変更期間判定_全解約() throws NoSuchMethodException, SecurityException {
+
+		テストデータ作成();
+		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/testContractChangeSpanMasterInsert.sql");
+
+		ServiceCategory serviceCategory = ServiceCategory.契約;
+		Long productMasterId = 10L;
+		Long itemMasterId = null;
+		ContractType contractType = null;
+		ContractTypeDetails contractTypeDetail = null;
 		String lifecycleStatus = "2";
 		String workflowStatus = "3";
 		Long transactionTableId = 5L;
