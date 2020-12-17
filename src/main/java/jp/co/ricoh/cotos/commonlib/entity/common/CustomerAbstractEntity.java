@@ -64,6 +64,7 @@ public class CustomerAbstractEntity extends EntityBase {
 	/**
 	 * 顧客名
 	 */
+	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
 	@ApiModelProperty(value = "顧客名(作成時不要)", required = true, position = 56, allowableValues = "range[0,255]", readOnly = true)
