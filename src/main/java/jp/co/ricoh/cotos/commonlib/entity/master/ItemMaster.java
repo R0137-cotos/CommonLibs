@@ -326,4 +326,12 @@ public class ItemMaster extends EntityBaseMaster {
 	@JoinColumn(name = "contract_approval_route_grp_id", referencedColumnName = "id")
 	@ApiModelProperty(value = "承認ルートグループマスタ（契約）", required = false, position = 34)
 	private ApprovalRouteGrpMaster contractApprovalRouteGrpMaster;
+	
+	/**
+	 * 品種別チェック項目マスタID
+	 */
+	@ManyToOne
+	@JoinColumn(name = "check_by_item_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "品種別チェック項目マスタID", required = false, position = 35)
+	private CheckByItemMaster checkByItemMasterId;
 }
