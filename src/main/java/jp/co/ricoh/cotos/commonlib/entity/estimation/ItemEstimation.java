@@ -117,10 +117,10 @@ public class ItemEstimation extends EntityBase {
 	private BigDecimal rCost;
 
 	/**
-	 * ＲＪ仕入価格
+	 * ＳＡ仕切価格
 	 */
 	@Column
-	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 12)
+	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12)
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -150,6 +150,13 @@ public class ItemEstimation extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 16, allowableValues = "range[0,255]")
 	private String makerItemCode;
+	
+	/**
+	 * ＲＪ販事本仕入価格
+	 */
+	@Column
+	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 17)
+	private BigDecimal rjHanjihonPurchasePrice;
 
 	@PrePersist
 	public void prePersist() {
