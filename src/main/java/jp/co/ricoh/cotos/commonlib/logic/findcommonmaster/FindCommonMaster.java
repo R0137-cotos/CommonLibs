@@ -19,12 +19,14 @@ import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb010UtlItemRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * 汎用マスタ取得共通クラス
  */
 @Component
 @AllArgsConstructor
+@NoArgsConstructor
 public class FindCommonMaster {
 
 	@Autowired
