@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
@@ -70,7 +71,7 @@ public class ContractChangeSpanControl {
 	 * @param transactionTableId	対象トランザクションテーブルID
 	 */
 	public List<ErrorInfo> contractChangeSpanCheck(ServiceCategory serviceCategory, Long productMasterId, Long itemMasterId,
-			ContractType contractType, String contractTypeDetail, String lifecycleStatus, String workflowStatus, Long transactionTableId) {
+			ContractType contractType, ContractTypeDetails contractTypeDetail, String lifecycleStatus, String workflowStatus, Long transactionTableId) {
 
 		// 引数チェック
 		List<ErrorInfo> errorInfoList = new ArrayList<ErrorInfo>();
@@ -93,10 +94,12 @@ public class ContractChangeSpanControl {
 		if(!errorInfoList.isEmpty()) {
 			throw new ErrorCheckException(errorInfoList);
 		}
+		String tmpContractType = Optional.ofNullable(contractType).map(s -> s.toString()).orElse(null);
+		String tmpContractTypeDetail = Optional.ofNullable(contractTypeDetail).map(s -> s.toString()).orElse(null);
 
 		// 引数に紐づく契約変更期間管理マスタ情報取得
 		List<ContractChangeSpanMaster> findContractChangeSpanMasterList = contractChangeSpanMasterRepository.findContractChangeSpanMasterList(
-				serviceCategory.toString(), productMasterId, contractType.toString(), contractTypeDetail, lifecycleStatus, workflowStatus);
+				serviceCategory.toString(), productMasterId, tmpContractType, tmpContractTypeDetail, lifecycleStatus, workflowStatus);
 
 		if(findContractChangeSpanMasterList == null || findContractChangeSpanMasterList.isEmpty()) {
 			return errorInfoList;
