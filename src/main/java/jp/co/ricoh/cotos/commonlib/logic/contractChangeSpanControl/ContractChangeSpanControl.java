@@ -94,8 +94,8 @@ public class ContractChangeSpanControl {
 		if(!errorInfoList.isEmpty()) {
 			throw new ErrorCheckException(errorInfoList);
 		}
-		String tmpContractType = contractType != null ? contractType.toString() : null;
-		String tmpContractTypeDetail = contractTypeDetail != null ? contractTypeDetail.toString() : null;
+		String tmpContractType = Optional.ofNullable(contractType).map(s -> s.toString()).orElse(null);
+		String tmpContractTypeDetail = Optional.ofNullable(contractTypeDetail).map(s -> s.toString()).orElse(null);
 
 		// 引数に紐づく契約変更期間管理マスタ情報取得
 		List<ContractChangeSpanMaster> findContractChangeSpanMasterList = contractChangeSpanMasterRepository.findContractChangeSpanMasterList(
