@@ -106,9 +106,9 @@ public class CsvUtil {
 		csvParameter.setHeader(flgBooleanConverter(csvFileSettingMaster.getCsvHeaderFlg()));
 		csvParameter.setSeparator(getSeparator(csvFileSettingMaster.getCsvSeparator()));
 		csvParameter.setCharset(Charset.forName(Optional.ofNullable(csvFileSettingMaster.getCsvCharset()).orElse("UTF-8")));
-		csvParameter.setLineSeparator(Optional.ofNullable(csvFileSettingMaster.getCsvLineSeparator()).orElse("\n"));
+		csvParameter.setLineSeparator(getLineSeparator(csvFileSettingMaster.getCsvLineSeparator()));
 		csvParameter.setQuote(flgBooleanConverter(csvFileSettingMaster.getCsvQuote()));
-		csvParameter.setNullValueString(Optional.ofNullable(csvFileSettingMaster.getCsvNullValueString()).orElse("null"));
+		csvParameter.setNullValueString(Optional.ofNullable(csvFileSettingMaster.getCsvNullValueString()).orElse(""));
 		return csvParameter;
 	}
 
@@ -148,5 +148,27 @@ public class CsvUtil {
 			break;
 		}
 		return separator;
+	}
+
+	/**
+	 * 改行コードを返却します。
+	 *
+	 * @param val
+	 * @return 改行コード
+	 */
+	private String getLineSeparator(String val) {
+		String lineSeparator = "\n";
+		if (StringUtils.isEmpty(val)) {
+			return lineSeparator;
+		}
+		switch (val) {
+		case "1":
+			lineSeparator = "\n";
+			break;
+		case "2":
+			lineSeparator = "\r\n";
+			break;
+		}
+		return lineSeparator;
 	}
 }
