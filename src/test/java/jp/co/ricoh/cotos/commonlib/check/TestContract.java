@@ -418,6 +418,21 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "コメントは最大文字数（1000）を超えています。"));
 
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setAttachedRequiredFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
 	}
 
 	@Test

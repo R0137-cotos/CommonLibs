@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -75,4 +76,18 @@ public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "チェック除外商品グループマスタID", required = false, position = 7, allowableValues = "range[0,255]")
 	private String excludeProductGrpMasterId;
+
+	/**
+	 * 手配業務タイプマスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
+	private Long arrangementWorkTypeMasterId;
+
+	/**
+	 * 拡張子
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "拡張子", required = false, position = 9, allowableValues = "range[0,255]")
+	private String extension;
 }

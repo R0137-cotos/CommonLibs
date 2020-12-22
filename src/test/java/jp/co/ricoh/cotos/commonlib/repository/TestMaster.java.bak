@@ -2106,7 +2106,7 @@ public class TestMaster {
 	}
 
 	@Test
-	public void AttachedFileProductClassCheckMasterのテスト() throws Exception {
+	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
 
@@ -2122,6 +2122,8 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertThat(found.getExcludeProductGrpMasterId(), anyOf(nullValue(), is("1008,1009")));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
+			Assert.assertEquals("xlsx", found.getExtension());
 		}
 
 	}
