@@ -149,19 +149,12 @@ public class LicenseSearchParameter {
 	private Integer receptionStatusFlg;
 
 	/**
-	 * SS長作業完了承認日時
-	 */
-	@ApiParam(value = "SS長作業完了承認日時", required = false)
-	@ApiModelProperty(value = "SS長作業完了承認日時", required = false, position = 18)
-	private Integer ssWorkCompletedApprovalAt;
-
-	/**
 	 * CSV出力日時
 	 */
 	@ApiParam(value = "CSV出力日時", required = false)
 	@ApiModelProperty(value = "CSV出力日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 19)
+			required = false, position = 18)
 	private Date csvOutputAt;
 
 	/**
@@ -170,7 +163,7 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "利用期間開始日", required = false)
 	@ApiModelProperty(value = "利用期間開始日<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 20)
+			required = false, position = 19)
 	private Date usePeriodStart;
 
 	/**
@@ -179,20 +172,20 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "利用期間終了日", required = false)
 	@ApiModelProperty(value = "利用期間終了日<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 21)
+			required = false, position = 20)
 	private Date usePeriodEnd;
 
 	/**
 	 * RMA契約番号
 	 */
 	@ApiParam(value = "RMA契約番号", required = false)
-	@ApiModelProperty(value = "RMA契約番号", required = false, allowableValues = "range[0,255]", position = 22)
+	@ApiModelProperty(value = "RMA契約番号", required = false, allowableValues = "range[0,255]", position = 21)
 	private String rmaContractNumber;
 
 	/**
 	 * 割当区分
 	 */
 	@ApiParam(value = "割当区分", required = false)
-	@ApiModelProperty(value = "割当区分", required = false, position = 23)
+	@ApiModelProperty(value = "割当区分", required = false, position = 22)
 	private Integer allocationDiv;
 }
