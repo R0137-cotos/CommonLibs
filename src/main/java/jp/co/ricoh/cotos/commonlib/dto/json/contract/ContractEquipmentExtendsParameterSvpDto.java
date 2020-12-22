@@ -48,7 +48,7 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	/**
 	 * 型番
 	 */
-	private String ｍodelNumber;
+	private String modelNumber;
 
 	/**
 	 * メニュー区分
