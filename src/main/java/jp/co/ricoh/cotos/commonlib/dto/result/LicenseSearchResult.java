@@ -225,5 +225,5 @@ public class LicenseSearchResult {
 	 * 解約予定日
 	 */
 	@ApiModelProperty(value = "解約予定日", required = false, position = 33)
-	private Date cancelScheduledDateTo;
+	private Date cancelScheduledDate;
 }
