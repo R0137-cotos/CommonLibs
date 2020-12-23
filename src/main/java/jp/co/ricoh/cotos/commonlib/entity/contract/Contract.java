@@ -788,7 +788,7 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 83, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
-	
+
 	/**
 	 * IFS連携用解約CSV作成状態
 	 */
@@ -815,4 +815,12 @@ public class Contract extends EntityBase {
 	@Size(max = 1333)
 	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 87, allowableValues = "range[0,1333]")
 	private String toVendorComment;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 88, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
 }
