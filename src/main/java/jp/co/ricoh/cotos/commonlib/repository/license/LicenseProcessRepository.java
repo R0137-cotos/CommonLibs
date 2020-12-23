@@ -15,4 +15,6 @@ public interface LicenseProcessRepository extends CrudRepository<LicenseProcess,
 	public List<LicenseProcess> findByLicenseInfoIdAndMailDiv(long licenseInfoId, MailDiv mailDiv);
 
 	public List<LicenseProcess> findByArrangementWorkIdInAndProcessStatus(List<Long> arrangementWorkId, ProcessStatus processStatus);
+
+	public List<LicenseProcess> findByLicenseInfoIdAndProcessMasterId(long licenseInfoId, long processMasterId);
 }
