@@ -13,11 +13,11 @@ import lombok.Data;
 public class LicenseSearchParameter {
 
 	/**
-	 * ライセンス
+	 * ライセンス区分マスタID
 	 */
-	@ApiParam(value = "ライセンス", required = false)
-	@ApiModelProperty(value = "ライセンス", required = false, allowableValues = "range[0,255]", position = 1)
-	private String license;
+	@ApiParam(value = "ライセンス区分マスタID", required = false)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = false, allowableValues = "range[0,255]", position = 1)
+	private String licenseDivMasterId;
 
 	/**
 	 * RJ管理番号
@@ -52,7 +52,7 @@ public class LicenseSearchParameter {
 	 */
 	@ApiParam(value = "ライセンスキー", required = false)
 	@ApiModelProperty(value = "ライセンスキー", required = false, allowableValues = "range[0,255]", position = 6)
-	private String licenseKsy;
+	private String licenseKey;
 
 	/**
 	 * 工程ステータス
