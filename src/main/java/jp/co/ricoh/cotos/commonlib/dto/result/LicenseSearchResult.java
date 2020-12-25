@@ -8,9 +8,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseDetailExtendsParameterGspDto.ReceptionStatusFlg;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber.AllocationDiv;
 import lombok.Data;
 
 @Entity
@@ -68,7 +72,7 @@ public class LicenseSearchResult {
 	@ApiModelProperty(value = "契約種別詳細<br />" //
 			+ "選択したライセンスに紐づく契約種別詳細を表す。", //
 			required = false, position = 8)
-	private String contractTypeDetails;
+	private ContractTypeDetails contractTypeDetails;
 
 	/**
 	 * 契約ステータス
@@ -91,14 +95,14 @@ public class LicenseSearchResult {
 	/**
 	 * キャンセル状態
 	 */
-	@ApiModelProperty(value = "キャンセル状態", required = false, allowableValues = "未(\"0\"), 済(\"1\"", position = 11)
-	private String cancelStatus;
+	@ApiModelProperty(value = "キャンセル状態", required = false, allowableValues = "未(\"0\"), 済(\"1\")", position = 11)
+	private CancelStatus cancelStatus;
 
 	/**
 	 * 受付状況フラグ
 	 */
 	@ApiModelProperty(value = "受付状況フラグ", required = false, allowableValues = "未(\"0\"), 受理(\"1\"), 未受理(\"2\")", position = 12)
-	private String receptionStatusFlg;
+	private ReceptionStatusFlg receptionStatusFlg;
 
 	/**
 	 * 不受理理由
@@ -110,7 +114,7 @@ public class LicenseSearchResult {
 	 * 割当区分
 	 */
 	@ApiModelProperty(value = "割当区分", required = false, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"2\")", position = 14)
-	private String allocationDiv;
+	private AllocationDiv allocationDiv;
 
 	/**
 	 * 顧客名
