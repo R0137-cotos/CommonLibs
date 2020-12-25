@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
 import lombok.Data;
 
 /**
@@ -16,6 +17,11 @@ public class ProductContractExtendsParameterSvpDto {
 	 * 契約種別詳細
 	 */
 	private ContractTypeDetails contractTypeDetails;
+
+	/**
+	 * 請求方法区分
+	 */
+	private BillingTypeSvp billing_type;
 
 	/**
 	 * 監視運用オプション品種コード
