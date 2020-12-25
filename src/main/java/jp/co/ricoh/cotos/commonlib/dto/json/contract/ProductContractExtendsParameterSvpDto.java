@@ -21,7 +21,7 @@ public class ProductContractExtendsParameterSvpDto {
 	/**
 	 * 請求方法区分
 	 */
-	private BillingTypeSvp billing_type;
+	private BillingTypeSvp billingType;
 
 	/**
 	 * 監視運用オプション品種コード
