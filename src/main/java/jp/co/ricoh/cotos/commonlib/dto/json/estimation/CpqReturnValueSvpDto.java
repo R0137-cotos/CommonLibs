@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
 import lombok.Data;
 
 /**
@@ -20,6 +21,11 @@ public class CpqReturnValueSvpDto {
 	 * 見積種別詳細
 	 */
 	private EstimationTypeDetails estimationTypeDetails;
+
+	/**
+	 * 請求方法区分
+	 */
+	private BillingTypeSvp billingType;
 
 	/**
 	 * 監視運用オプション品種コード
