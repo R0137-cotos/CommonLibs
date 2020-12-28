@@ -19,13 +19,8 @@ public class MailSentResultDivConverter implements AttributeConverter<MailSentRe
 	public MailSentResultDiv convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-<<<<<<< HEAD
+
 		return MailSentResultDiv.fromString(value); // IllegalArgumentExceptionはMailSentResultDiv.fromString側で投げている
 	}
+}
 
-}
-=======
-		return MailSentResultDiv.fromString(value); // IllegalArgumentExceptionはMailSendedResultDiv.fromString側で投げている
-	}
-}
->>>>>>> e58306266bbe071dbd614745e072bf5cd161a09a
