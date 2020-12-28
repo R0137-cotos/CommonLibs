@@ -91,4 +91,14 @@ public class ParameterEstimationEquipmentPcpDto {
 	 * 削除フラグ
 	 */
 	private ParameterEstimationEquipmentDeleteFlgPcp deleteFlg;
+
+	/**
+	 * 品種コード
+	 */
+	private String itemCode;
+
+	/**
+	 * 変更元契約機種ID
+	 */
+	private Long originContractEquipmentId;
 }
