@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MachineTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MakerCodeSvp;
@@ -73,11 +72,6 @@ public class CpqEstimationEquipmentSvpDto {
 	 * 品種コード
 	 */
 	private String itemCode;
-
-	/**
-	 * 請求方法区分
-	 */
-	private BillingTypeSvp billingType;
 
 	/**
 	 * メーカーコード

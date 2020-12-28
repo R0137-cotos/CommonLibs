@@ -13,7 +13,7 @@ public class JsonEnumTypeSvp {
 	public enum MachineTypeSvp {
 
 		// SVPの移行元のRITOSと同様に0から採番
-		サーバー本体("0"), HWオプション("1"), SWオプション("2"), 監視サービスオプション("3");
+		サーバー本体("0"), HWオプション("1"), SWオプション("2");
 
 		private final String text;
 
@@ -59,7 +59,7 @@ public class JsonEnumTypeSvp {
 	// SVPの移行元のRITOSと同様に0から採番
 	public enum MakerCodeSvp {
 
-		hp("0"), IBM("1"), 日立("2"), 富士通("3"), イメーション("4"), DELL("6");
+		hp("0"), Lenovo("1"), 日立("2"), 富士通("3"), イメーション("4"), NEC("5"), DELL("6");
 
 		private final String text;
 
@@ -105,7 +105,7 @@ public class JsonEnumTypeSvp {
 	// SVPの移行元のRITOSと同様に0から採番
 	public enum MaintenanceTimeTypeSvp {
 
-		月土9時_21時("0"), 月金9時_17時("1"), H24D365("2");
+		月土9時_21時("0"), H24D365("1"), 月金9時_17時("2");
 
 		private final String text;
 

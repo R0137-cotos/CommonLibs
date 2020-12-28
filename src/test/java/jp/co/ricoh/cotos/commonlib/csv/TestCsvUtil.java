@@ -206,7 +206,7 @@ public class TestCsvUtil {
 		assertParam.setCharset(Charset.forName("UTF-8"));
 		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(true);
-		assertParam.setNullValueString("null");
+		assertParam.setNullValueString("");
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -227,7 +227,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvHeaderFlg(0);
 		csvFileSettingMaster.setCsvSeparator("1");
 		csvFileSettingMaster.setCsvCharset("Shift_JIS");
-		csvFileSettingMaster.setCsvLineSeparator("\r\n");
+		csvFileSettingMaster.setCsvLineSeparator("2");
 		csvFileSettingMaster.setCsvQuote(1);
 		csvFileSettingMaster.setCsvNullValueString("");
 		// 期待値
@@ -258,7 +258,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvHeaderFlg(1);
 		csvFileSettingMaster.setCsvSeparator("2");
 		csvFileSettingMaster.setCsvCharset("Shift_JIS");
-		csvFileSettingMaster.setCsvLineSeparator("\r");
+		csvFileSettingMaster.setCsvLineSeparator("1");
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("");
 		// 期待値
@@ -266,7 +266,7 @@ public class TestCsvUtil {
 		assertParam.setHeader(true);
 		assertParam.setSeparator(':');
 		assertParam.setCharset(Charset.forName("Shift_JIS"));
-		assertParam.setLineSeparator("\r");
+		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("");
 		try {
@@ -289,7 +289,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvHeaderFlg(1);
 		csvFileSettingMaster.setCsvSeparator("3");
 		csvFileSettingMaster.setCsvCharset("UTF-8");
-		csvFileSettingMaster.setCsvLineSeparator("\n");
+		csvFileSettingMaster.setCsvLineSeparator("1");
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("null");
 		// 期待値

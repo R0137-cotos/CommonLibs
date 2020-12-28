@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.HarddiskTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MenuTypeSvp;
@@ -36,11 +35,6 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	private String hardwarePurchaseDate;
 
 	/**
-	 * 請求方法区分
-	 */
-	private BillingTypeSvp billing_type;
-
-	/**
 	 * メーカー名
 	 */
 	private String makerName;
@@ -48,7 +42,7 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	/**
 	 * 型番
 	 */
-	private String ｍodelNumber;
+	private String modelNumber;
 
 	/**
 	 * メニュー区分

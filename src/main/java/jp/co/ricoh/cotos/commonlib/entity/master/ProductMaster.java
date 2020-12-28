@@ -228,5 +228,5 @@ public class ProductMaster extends EntityBaseMaster {
 	@Max(9)
 	@Min(0)
 	@ApiModelProperty(value = "ヤマト便有無フラグ", required = false, position = 27, allowableValues = "range[0,9]")
-	private Integer yamatoFlg;
+	private int yamatoFlg;
 }
