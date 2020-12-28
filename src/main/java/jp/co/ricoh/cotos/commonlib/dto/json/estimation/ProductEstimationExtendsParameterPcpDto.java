@@ -22,8 +22,8 @@ public class ProductEstimationExtendsParameterPcpDto {
 	/**
 	 * COTOS商品固有項目
 	 */
-	@JsonProperty("cpqProductSpecificParameter")
-	private CpqParameterPcpDto cpqParameterPcpDto;
+	@JsonProperty("cotosProductSpecificParameter")
+	private CotosProductSpecificParameterDto cotosProductSpecificParameterDto;
 
 	/**
 	 * CPQ連携集計値

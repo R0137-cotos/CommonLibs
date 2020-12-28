@@ -13,11 +13,11 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CpqParameterPcpDto {
+public class CotosProductSpecificParameterDto {
 
 	/**
 	 * COTOS:見積機種リスト
 	 */
-	@JsonProperty("estimationEquipment")
+	@JsonProperty("cotosEstimationEquipment")
 	private List<ParameterEstimationEquipmentPcpDto> parameterEstimationEquipmentPcpDtoList;
 }
