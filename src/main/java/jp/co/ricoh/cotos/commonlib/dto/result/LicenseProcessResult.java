@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.MailSendedResultDiv;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.MailSentResultDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.ProcessStatus;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster.MailDiv;
@@ -103,7 +103,7 @@ public class LicenseProcessResult {
 	 * 送信結果区分
 	 */
 	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 12)
-	private MailSendedResultDiv mailSendedResultDiv;
+	private MailSentResultDiv mailSentResultDiv;
 
 	/**
 	 * 工程状態

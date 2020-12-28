@@ -38,13 +38,13 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_process")
 public class LicenseProcess extends EntityBase {
 
-	public enum MailSendedResultDiv {
+	public enum MailSentResultDiv {
 
 		未送信("0"), 送信中("1"), 送信済("2"), 不達("3"), 送信エラー("4");
 
 		private final String text;
 
-		private MailSendedResultDiv(final String text) {
+		private MailSentResultDiv(final String text) {
 			this.text = text;
 		}
 
@@ -55,7 +55,7 @@ public class LicenseProcess extends EntityBase {
 		}
 
 		@JsonCreator
-		public static MailSendedResultDiv fromString(String string) {
+		public static MailSentResultDiv fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -152,7 +152,7 @@ public class LicenseProcess extends EntityBase {
 	 * 送信結果区分
 	 */
 	@ApiModelProperty(value = "送信結果区分", required = false, position = 9, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
-	private MailSendedResultDiv mailSendedResultDiv;
+	private MailSentResultDiv mailSentResultDiv;
 
 	/**
 	 * メール区分
