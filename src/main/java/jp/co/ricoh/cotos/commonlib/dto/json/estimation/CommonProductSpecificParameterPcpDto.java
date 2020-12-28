@@ -8,16 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 商品（見積用）拡張項目COTOS商品固有項目DTO（PCP）
+ * 商品（見積用）拡張項目共通商品固有項目DTO（PCP）
  */
-
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CpqParameterPcpDto {
+public class CommonProductSpecificParameterPcpDto {
 
 	/**
-	 * COTOS:見積機種リスト
+	 * 更新対象リスト
 	 */
-	@JsonProperty("estimationEquipment")
-	private List<ParameterEstimationEquipmentPcpDto> parameterEstimationEquipmentPcpDtoList;
+	@JsonProperty("updateTarget")
+	List<UpdateTargetPcpDto> updateTargetPcpDtoList;
 }

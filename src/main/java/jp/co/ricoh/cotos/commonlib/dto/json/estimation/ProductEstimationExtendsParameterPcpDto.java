@@ -31,4 +31,9 @@ public class ProductEstimationExtendsParameterPcpDto {
 	@JsonProperty("cpqLinkageParameter")
 	private CpqLinkageParameterPcpDto cpqLinkageParameterPcpDto;
 
+	/**
+	 * 共通商品固有項目
+	 */
+	@JsonProperty("commonProductSpecificParameter")
+	private CommonProductSpecificParameterPcpDto commonProductSpecificParameterPcpDto;
 }
