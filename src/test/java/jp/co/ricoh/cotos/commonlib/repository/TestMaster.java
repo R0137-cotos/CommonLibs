@@ -1310,7 +1310,7 @@ public class TestMaster {
 		id = 2L;
 		found = mailControlMasterRepository.findOne(id);
 		// Entity が null ではないことを確認
-		Assert.assertNotNull("", found);
+		Assert.assertNotNull("Entityがnullではないことを確認", found);
 	}
 
 	@Test
@@ -1340,7 +1340,7 @@ public class TestMaster {
 		MailControlMaster found2 = mailControlMasterRepository.findOne(id);
 		List<MailConvertValueMaster> result = mailConvertValueMasterRepository.findByMailControlMaster(found2);
 		// Entity が null ではないことを確認
-		Assert.assertNotNull("Entityがnullではないこと", result);
+		Assert.assertNotNull(result);
 	}
 
 	@Test
