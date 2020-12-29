@@ -4,6 +4,8 @@ import java.util.Date;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.CsvOutputTargetType;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import lombok.Data;
 
 /**
@@ -13,11 +15,11 @@ import lombok.Data;
 public class LicenseCsvOutputParameter {
 
 	/**
-	 * 出力ファイル
+	 * ファイル種別管理マスタID
 	 */
-	@ApiParam(value = "出力ファイル", required = false)
-	@ApiModelProperty(value = "出力ファイル", required = false, position = 1)
-	private String outputFileType;
+	@ApiParam(value = "ファイル種別管理マスタID", required = false)
+	@ApiModelProperty(value = "ファイル種別管理マスタID", required = false, position = 1)
+	private long fileKindManagementMasterId;
 
 	/**
 	 * 契約状態
@@ -25,8 +27,9 @@ public class LicenseCsvOutputParameter {
 	@ApiParam(value = "契約状態", required = false)
 	@ApiModelProperty(value = "契約状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
-			required = false, position = 2)
-	private String lifecycleStatus;
+			required = false, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), " //
+					+ "破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\")", position = 2)
+	private LifecycleStatus lifecycleStatus;
 
 	/**
 	 * 基準月
@@ -39,8 +42,8 @@ public class LicenseCsvOutputParameter {
 	 * 出力対象
 	 */
 	@ApiParam(value = "出力対象", required = false)
-	@ApiModelProperty(value = "出力対象", required = false, position = 4)
-	private String outputTargetDiv;
+	@ApiModelProperty(value = "出力対象", required = false, allowableValues = "全件(\"1\"), 全件_解約を除く(\"2\"), 出力対象月のみ(\"3\")", position = 4)
+	private CsvOutputTargetType csvOutputTargetType;
 
 	/**
 	 * 出力日
