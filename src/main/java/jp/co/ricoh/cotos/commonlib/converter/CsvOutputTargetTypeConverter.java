@@ -19,6 +19,6 @@ public class CsvOutputTargetTypeConverter implements AttributeConverter<CsvOutpu
 	public CsvOutputTargetType convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return CsvOutputTargetType.fromString(value); // IllegalArgumentExceptionはInitialRunningDiv.fromString側で投げている
+		return CsvOutputTargetType.fromString(value); // IllegalArgumentExceptionはCsvOutputTargetType.fromString側で投げている
 	}
 }
