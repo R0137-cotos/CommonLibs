@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.repository.master;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +18,5 @@ public interface ProductMasterRepository extends CrudRepository<ProductMaster, L
 
 	public List<ProductMaster> findByIdInAndAppIdNotInOrderByIdAsc(List<Long> id, List<String> appId);
 
-	@Query(value = "SELECT * FROM product_master WHERE yamato_flg = 1 ORDER BY id")
-	public List<ProductMaster> findByYamatoFlgOrderByIdAsc();
+	public List<ProductMaster> findByYamatoFlgOrderByIdAsc(Integer yamatoFlg);
 }
