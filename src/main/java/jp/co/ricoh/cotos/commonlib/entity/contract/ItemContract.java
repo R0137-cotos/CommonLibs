@@ -207,7 +207,15 @@ public class ItemContract extends EntityBase {
 	 * 契約機種品種紐づけ
 	 */
 	@Valid
-	@OneToOne(mappedBy = "itemContract")
+	@OneToMany(mappedBy = "itemContract")
 	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 21, readOnly = true)
-	private ContractEquipmentItemLink contractEquipmentItemLink;
+	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
+
+	/**
+	 * 契約機種品種紐づけ_自動更新
+	 */
+	@Valid
+	@OneToMany(mappedBy = "autoUpdateItemContract")
+	@ApiModelProperty(value = "契約機種品種紐づけ_自動更新", required = false, position = 22, readOnly = true)
+	private List<ContractEquipmentItemLink> contractEquipmentItemAutoUpdateLinkList;
 }
