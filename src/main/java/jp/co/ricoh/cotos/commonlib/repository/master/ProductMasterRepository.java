@@ -17,4 +17,6 @@ public interface ProductMasterRepository extends CrudRepository<ProductMaster, L
 	public List<ProductMaster> findByIdInAndAppIdInOrderByIdAsc(List<Long> id, List<String> appId);
 
 	public List<ProductMaster> findByIdInAndAppIdNotInOrderByIdAsc(List<Long> id, List<String> appId);
+
+	public List<ProductMaster> findByYamatoFlgOrderByIdAsc(Integer yamatoFlg);
 }
