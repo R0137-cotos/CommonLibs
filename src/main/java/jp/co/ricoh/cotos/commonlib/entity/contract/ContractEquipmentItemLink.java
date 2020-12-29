@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -37,7 +36,7 @@ public class ContractEquipmentItemLink extends EntityBase {
 	/**
 	 * 品種(契約用)ID
 	 */
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_contract_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "品種(契約用)", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
@@ -51,4 +50,13 @@ public class ContractEquipmentItemLink extends EntityBase {
 	@JsonIgnore
 	@ApiModelProperty(value = "契約機種状態管理", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
 	private ManagedContractEquipmentStatus managedContractEquipmentStatus;
+
+	/**
+	 * 品種(契約用)ID_自動更新
+	 */
+	@ManyToOne
+	@JoinColumn(name = "auto_update_item_contract_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "品種(契約用)_自動更新", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
+	private ItemContract autoUpdateItemContract;
 }

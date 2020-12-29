@@ -158,4 +158,11 @@ public class ShippingThingMaster extends EntityBase {
 	@JsonIgnore
 	@ApiModelProperty(value = "FFM連携納期計算パターンマスタ", required = false, position = 13)
 	private DateCalcPatternMaster dateCalcPatternMaster;
+
+	/**
+	 * 仕入先コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入先コード", required = false, position = 14, allowableValues = "range[0,255]")
+	private String vendorCode;
 }
