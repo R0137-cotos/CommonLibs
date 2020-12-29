@@ -1320,6 +1320,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;

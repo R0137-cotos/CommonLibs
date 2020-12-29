@@ -91,7 +91,7 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/eimDocumentInfo.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportErrorDetails.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportManagement.sql");
-
+		context.getBean(DBConfig.class).initTargetTestData("repository/dateCalcPatternMaster.sql");
 	}
 
 	@AfterClass
