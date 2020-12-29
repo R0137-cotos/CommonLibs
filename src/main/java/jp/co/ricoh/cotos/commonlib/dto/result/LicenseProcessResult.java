@@ -103,7 +103,7 @@ public class LicenseProcessResult {
 	 * 送信結果区分
 	 */
 	@ApiModelProperty(value = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")", position = 12)
-	private MailSentResultDiv mailSendedResultDiv;
+	private MailSentResultDiv mailSentResultDiv;
 
 	/**
 	 * 工程状態

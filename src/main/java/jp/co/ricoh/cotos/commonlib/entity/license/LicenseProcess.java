@@ -152,7 +152,7 @@ public class LicenseProcess extends EntityBase {
 	 * 送信結果区分
 	 */
 	@ApiModelProperty(value = "送信結果区分", required = false, position = 9, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
-	private MailSentResultDiv mailSendedResultDiv;
+	private MailSentResultDiv mailSentResultDiv;
 
 	/**
 	 * メール区分
