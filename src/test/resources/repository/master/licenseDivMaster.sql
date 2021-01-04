@@ -1,1 +1,1 @@
-insert into license_div_master(ID,CREATED_AT,CREATED_USER_ID,UPDATED_AT,UPDATED_USER_ID,VERSION,LICENSE_DIV_NAME) values (1,'2020/10/12 14:00:50','test','2020/10/12 14:00:57','test',1,'test');
+insert into license_div_master(ID,CREATED_AT,CREATED_USER_ID,UPDATED_AT,UPDATED_USER_ID,VERSION,LICENSE_DIV_NAME,LICENSE_CLASS_DIV) values (1,'2020/10/12 14:00:50','test','2020/10/12 14:00:57','test',1,'test','test');
