@@ -733,11 +733,12 @@ public class TestPenaltyCheck {
 		Assert.assertEquals("数量が正しく設定されていること", 2, penaltyInfoDto.getQuantity());
 		Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyAmountSummary());
 		// 違約金発生最終解約日にはシステム日付の月の最終日23:59:59が設定されているのが正
-		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
 		cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-		String comparison = dateCalcPatternUtil.dateToStringConverter(cal.getTime(), null) + " 23:59:59";
+		cal.set(Calendar.HOUR_OF_DAY, 23);
+		cal.set(Calendar.MINUTE, 59);
+		cal.set(Calendar.SECOND, 59);
+		String comparison = dateCalcPatternUtil.dateToStringConverter(cal.getTime(), "yyyyMMdd HH:mm:ss");
 		Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", comparison, dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurLastDate(), "yyyyMMdd HH:mm:ss"));
 	}
 
