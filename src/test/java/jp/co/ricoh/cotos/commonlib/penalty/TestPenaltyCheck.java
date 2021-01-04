@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -731,7 +732,13 @@ public class TestPenaltyCheck {
 		Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(100), penaltyInfoDto.getPenaltyUnitPrice());
 		Assert.assertEquals("数量が正しく設定されていること", 2, penaltyInfoDto.getQuantity());
 		Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyAmountSummary());
-		Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20210131 23:59:59", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurLastDate(), "yyyyMMdd HH:mm:ss"));
+		// 違約金発生最終解約日にはシステム日付の月の最終日23:59:59が設定されているのが正
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		String comparison = dateCalcPatternUtil.dateToStringConverter(cal.getTime(), null) + " 23:59:59";
+		Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", comparison, dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurLastDate(), "yyyyMMdd HH:mm:ss"));
 	}
 
 	@SuppressWarnings("unchecked")
