@@ -731,7 +731,7 @@ public class TestPenaltyCheck {
 		Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(100), penaltyInfoDto.getPenaltyUnitPrice());
 		Assert.assertEquals("数量が正しく設定されていること", 2, penaltyInfoDto.getQuantity());
 		Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyAmountSummary());
-		Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20201231 23:59:59", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurLastDate(), "yyyyMMdd HH:mm:ss"));
+		Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20210131 23:59:59", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurLastDate(), "yyyyMMdd HH:mm:ss"));
 	}
 
 	@SuppressWarnings("unchecked")
