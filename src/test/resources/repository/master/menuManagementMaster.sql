@@ -1,0 +1,1 @@
+INSERT INTO menu_management_master (id,created_at,created_user_id,updated_at,updated_user_id,version,menu_name,auth,display_order,url) VALUES(1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'メニュー名','権限',1,'URL');

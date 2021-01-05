@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -60,6 +62,8 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailConvertValueMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailProductMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.MenuDetailManagementMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.MenuManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ModelAbbreviationMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTJmci101Master;
@@ -131,6 +135,8 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository
 import jp.co.ricoh.cotos.commonlib.repository.master.MailConvertValueMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailProductMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailTemplateMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MenuDetailManagementMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MenuManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ModelAbbreviationMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci101MasterRepository;
@@ -318,6 +324,10 @@ public class TestMaster {
 
 	@Autowired
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
+	@Autowired
+	private MenuManagementMasterRepository menuManagementMasterRepository;
+	@Autowired
+	private MenuDetailManagementMasterRepository menuDetailManagementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -1389,8 +1399,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
+			if (found.getProductMaster() == null)
+				Assert.assertTrue(false);
 	}
 
 	@Test
@@ -2003,8 +2013,7 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
-				.collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
@@ -2175,5 +2184,38 @@ public class TestMaster {
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
 			Assert.assertEquals("xlsx", found.getExtension());
 		}
+	}
+
+	@Test
+	public void MenuManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		MenuManagementMaster found = menuManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void MenuDetailManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		MenuDetailManagementMaster found = menuDetailManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 }
