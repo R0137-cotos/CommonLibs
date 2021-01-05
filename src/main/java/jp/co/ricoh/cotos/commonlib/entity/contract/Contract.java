@@ -870,4 +870,20 @@ public class Contract extends EntityBase {
 	@Size(max = 1333)
 	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 94, allowableValues = "range[0,1333]")
 	private String toVendorComment;
+
+	/**
+	 * 次回契約更新可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回契約更新可能フラグ", required = false, position = 95, allowableValues = "range[0,9]")
+	private Integer nextUpdatePossibleFlg;
+
+	/**
+	 * 次回自動更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 96, allowableValues = "range[0,9]")
+	private Integer nextAutoUpdateFlg;
 }

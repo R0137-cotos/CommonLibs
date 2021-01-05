@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -78,50 +77,6 @@ public class MailControlMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ContactReferenceType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum NotificatnDataDifferenceType {
-
-		日換算("1"), 月換算("2");
-
-		private final String text;
-
-		private NotificatnDataDifferenceType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static NotificatnDataDifferenceType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum BusinessDayType {
-
-		前営業日("1"), 後営業日("2");
-
-		private final String text;
-
-		private BusinessDayType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static BusinessDayType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -230,29 +185,11 @@ public class MailControlMaster extends EntityBaseMaster {
 	private List<MailProductMaster> mailProductMasterList;
 
 	/**
-	 * 通知日差分区分
+	 * 処理実行日計算パターンマスタID
 	 */
-	@ApiModelProperty(value = "通知日差分区分", required = false, position = 16, allowableValues = "日換算(\"1\"), 月換算(\"2\")")
-	private NotificatnDataDifferenceType notificatnDataDifferenceType;
-
-	/**
-	 * 通知日計算日数
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "通知日計算日数", required = false, position = 17, allowableValues = "range[0,255]")
-	private String notificatnDataAddDay;
-
-	/**
-	 * 営業日フラグ
-	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "営業日フラグ", required = false, position = 18, allowableValues = "range[0,9]")
-	private Integer businessDayFlg;
-
-	/**
-	 * 営業日計算区分
-	 */
-	@ApiModelProperty(value = "営業日計算区分", required = false, position = 19, allowableValues = "前営業日(\"1\"), 後営業日(\"2\")")
-	private BusinessDayType businessDayType;
+	@ManyToOne
+	@JoinColumn(name = "process_day_calc_pattern_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "処理実行日計算パターンマスタ", required = false, position = 16)
+	private DateCalcPatternMaster processDayCalcPatternMaster;
 }

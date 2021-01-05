@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
@@ -126,7 +124,7 @@ public class LicenseSearchResult {
 	 * サービス利用希望日
 	 */
 	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 16)
-	private Date conclusionPreferredDateFrom;
+	private Date conclusionPreferredDate;
 
 	/**
 	 * 利用期間開始日
@@ -222,8 +220,7 @@ public class LicenseSearchResult {
 	 * CE連絡日時
 	 */
 	@ApiModelProperty(value = "CE連絡日時", required = false, position = 32)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date ceContactAt;
+	private String ceContactAt;
 
 	/**
 	 * 解約予定日

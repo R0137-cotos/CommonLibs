@@ -37,4 +37,11 @@ public class LicenseDivMaster extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ライセンス区分名称", required = true, position = 2, allowableValues = "range[0,255]")
 	private String licenseDivName;
+
+	/**
+	 * ライセンス種類区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ライセンス種類区分", required = false, position = 3, allowableValues = "range[0,255]")
+	private String licenseClassDiv;
 }
