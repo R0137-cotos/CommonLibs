@@ -131,7 +131,7 @@ public class ContractDetail extends EntityBase {
 	}
 
 	public enum AbsConExternalBillingStatus {
-		未処理("0"), CSV作成済み("1"), 連携済み("2"), 連携エラー("3"), 対象外("4");
+		未処理("0"), CSV作成済み("1"), 対象外("2");
 
 		private final String text;
 
