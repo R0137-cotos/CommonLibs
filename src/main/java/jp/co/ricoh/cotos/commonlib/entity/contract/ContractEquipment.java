@@ -61,7 +61,7 @@ public class ContractEquipment extends EntityBase {
 	}
 
 	public enum IsysoneMaintereportProcStatus {
-		未処理("0"), CSV作成済み("1"), 連携済み("2"), 対象外("3");
+		未処理("0"), CSV作成済み("1"), 対象外("2");
 
 		private final String text;
 
@@ -82,7 +82,7 @@ public class ContractEquipment extends EntityBase {
 	}
 
 	public enum ArcsPeriodSaleMainteProcStatus {
-		未作成("0"), 作成済み("1"), 作成不要("2"), 作成エラー("3");
+		未作成("0"), CSV作成済み("1"), 対象外("2"), 作成エラー("3");
 
 		private final String text;
 
