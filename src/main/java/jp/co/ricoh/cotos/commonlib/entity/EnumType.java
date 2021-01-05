@@ -582,4 +582,35 @@ public class EnumType {
 		}
 
 	}
+
+	/**
+	 *
+	 * CSV項目編集パラメーター（CsvUtil）
+	 *
+	 */
+	public enum WidthForm {
+
+		// 全角
+		Full("Halfwidth-Fullwidth", "　"),
+		// 半角
+		Half("Fullwidth-Halfwidth", " "),
+		// 設定無し
+		Nothing("Fullwidth-Halfwidth", " ");
+
+		private String id;
+		private String value;
+
+		private WidthForm(final String id, final String value) {
+			this.id = id;
+			this.value = value;
+		}
+
+		public String getId() {
+			return this.id;
+		}
+
+		public String getValue() {
+			return this.value;
+		}
+	}
 }

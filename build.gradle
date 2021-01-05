@@ -63,6 +63,7 @@ dependencies {
     testRuntime('com.h2database:h2')
 
     compile group: 'net.sf.barcode4j', name: 'barcode4j', version: '2.1'
+    compile group: 'com.ibm.icu', name: 'icu4j', version: '64.2'
 }
 
 sonarqube {
@@ -78,7 +79,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
-            pom.version = '0.0.511'
+            pom.version = '0.0.512'
             pom.groupId = 'jp.co.ricoh.cotos'
             pom.artifactId = 'common-libraries'
         }
