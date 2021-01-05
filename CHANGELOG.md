@@ -1,5 +1,28 @@
 # Changelog
 
+## v3.12.0 (17/12/2020)
+- [**closed**] #8494 バウンスメール記録テーブル 契約IDのデータ型変更対応 [#1274](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1274)
+- [**closed**] #8485 ContractAttachedFileDto、ArrangementWorkAttachedFileDtoに添付必須フラグ追加 [#1222](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1222)
+- [**closed**] #8485 必須添付ファイル検索用DTO 品種マスタIDを複数指定できるよう修正 [#1210](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1210)
+- [**closed**] #9037 品種マスタ・品種(見積用)・品種(契約用)エンティティ ＲＪ販事本仕入価格追加 ＲＪ仕入価格をＳＡ仕切価格に項目名変更 [#1205](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1205)
+- [**closed**] #8485 添付ファイル商品毎チェックマスタレポジトリ 品種マスタIDを複数指定できるよう修正 [#1201](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1201)
+
+---
+
+## v3.11.0 (03/12/2020)
+- [**closed**] #8008 商品マスタ.訪販代売禁止フラグを追加 [#1149](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1149)
+
+---
+
+## v3.10.0 (19/11/2020)
+- [**closed**] #8556 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1163)
+- [**closed**] #8556 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1118](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1118)
+- [**closed**] #8556 届先情報エラーメッセージ追加 [#1116](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1116)
+- [**closed**] #9138 操作履歴、承認実績、添付ファイルリスナー修正 [#1140](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1140)
+- [**closed**]  #7643 契約.ベンダー向けコメントを追加 [#1117](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1117)
+
+---
+
 ## v3.9.0 (05/11/2020)
 - [**closed**] #8840 見積検索結果にV-UP見積番号、案件名追加 [#1120](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1120)
 - [**closed**] #8490 チェックリストエラーメッセージ追加 [#1119](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1119)

@@ -1,8 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -2120,7 +2118,8 @@ public class TestMaster {
 			Assert.assertTrue(false);
 	}
 
-	public void AttachedFileProductClassCheckMasterのテスト() throws Exception {
+	@Test
+	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
 
@@ -2136,17 +2135,42 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertThat(found.getExcludeProductGrpMasterId(), anyOf(nullValue(), is("1008,1009")));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
+			Assert.assertEquals("xlsx", found.getExtension());
 		}
 
 	}
 
 	@Test
-	public void AttachedFileProductGrpCheckMasterのテスト() throws Exception {
+	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListByArrangementWorkTypeMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
+
+		// エンティティの取得
+		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository.findAttachedFileProductClassCheckListByArrangementWorkTypeMasterId("CSP", "1", "1", "7", 1001L).get();
+
+		// データが2件取得できていることを確認
+		Assert.assertEquals(2, foundList.size());
+		// 取得したデータの内容が正しいことを確認
+		for (AttachedFileProductClassCheckMaster found : foundList) {
+			Assert.assertEquals("CSP", found.getProductClassDiv());
+			Assert.assertEquals("1", found.getDomain());
+			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
+			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
+			Assert.assertThat(found.getExcludeProductGrpMasterId(), anyOf(nullValue(), is("1008,1009")));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
+			Assert.assertEquals("xlsx", found.getExtension());
+		}
+
+	}
+
+	@Test
+	public void AttachedFileProductGrpCheckMaster_findAttachedFileProductGrpCheckListのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7").get();
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7", Arrays.asList(1L, 2L)).get();
 
 		// データが4件取得できていることを確認
 		Assert.assertEquals(4, foundList.size());
@@ -2157,6 +2181,32 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertNotNull(found.getFileKind());
+			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
+			Assert.assertEquals("xlsx", found.getExtension());
+		}
+	}
+
+	@Test
+	public void AttachedFileProductGrpCheckMaster_findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
+
+		// エンティティの取得
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(200L, "2", "1", "7", Arrays.asList(1L, 2L), 1001L).get();
+
+		// データが3件取得できていることを確認
+		Assert.assertEquals(3, foundList.size());
+		// 取得したデータの内容が正しいことを確認
+		for (AttachedFileProductGrpCheckMaster found : foundList) {
+			Assert.assertEquals(Long.valueOf(200), found.getProductGrpMasterId());
+			Assert.assertEquals("2", found.getDomain());
+			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
+			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
+			Assert.assertNotNull(found.getFileKind());
+			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
+			Assert.assertEquals("xlsx", found.getExtension());
 		}
 	}
 }

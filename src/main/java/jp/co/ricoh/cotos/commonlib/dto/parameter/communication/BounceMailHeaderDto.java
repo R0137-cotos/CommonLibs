@@ -49,9 +49,9 @@ public class BounceMailHeaderDto {
 	 * 契約ID
 	 */
 	@JsonProperty("ContractId")
-	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 4)
-	private Long contractId;
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約ID", required = false, position = 4, allowableValues = "range[0,255]")
+	private String contractId;
 
 	/**
 	 * 文書番号
