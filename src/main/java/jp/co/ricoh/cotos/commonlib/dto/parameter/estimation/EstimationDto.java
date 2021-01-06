@@ -18,11 +18,11 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.dto.result.PenaltyInfoDto;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
-import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -446,10 +446,9 @@ public class EstimationDto extends DtoBase {
 	private String vupEstimationNumber;
 
 	/**
-	 * 違約金明細（見積用）
+	 * 違約金情報
 	 */
 	@Valid
-	@OneToMany(mappedBy = "estimation")
-	@ApiModelProperty(value = "違約金明細（見積用）", required = false, position = 60)
-	private List<PenaltyDetailEstimation> penaltyDetailEstimationList;
+	@ApiModelProperty(value = "違約金情報", required = false, position = 60)
+	private List<PenaltyInfoDto> penaltyInfoList;
 }
