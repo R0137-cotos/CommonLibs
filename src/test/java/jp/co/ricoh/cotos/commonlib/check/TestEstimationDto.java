@@ -435,7 +435,7 @@ public class TestEstimationDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
 
 		// dto-エンティティ整合性チェック※DTOクラスでは必須
-		testTool.checkConsistency(Estimation.class, EstimationDto.class);
+		testTool.checkConsistency(Estimation.class, EstimationDto.class, "penaltyInfoList");
 	}
 
 	@Test
