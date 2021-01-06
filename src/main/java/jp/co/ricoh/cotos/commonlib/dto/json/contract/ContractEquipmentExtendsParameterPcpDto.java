@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallFlgPcp;
@@ -34,11 +35,13 @@ public class ContractEquipmentExtendsParameterPcpDto {
 	/**
 	 * 購入日
 	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date purchaseDate;
 
 	/**
 	 * 保守終了日
 	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date maintenanceEndDate;
 
 	/**
