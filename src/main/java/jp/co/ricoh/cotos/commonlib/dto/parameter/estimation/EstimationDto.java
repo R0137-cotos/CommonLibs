@@ -22,6 +22,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -443,4 +444,12 @@ public class EstimationDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 59, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 違約金明細（見積用）
+	 */
+	@Valid
+	@OneToMany(mappedBy = "estimation")
+	@ApiModelProperty(value = "違約金明細（見積用）", required = false, position = 60)
+	private List<PenaltyDetailEstimation> penaltyDetailEstimationList;
 }
