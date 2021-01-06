@@ -62,7 +62,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailConvertValueMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailProductMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailTemplateMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.MenuDetailManagementMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.MenuDetailsManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MenuManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ModelAbbreviationMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
@@ -135,7 +135,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository
 import jp.co.ricoh.cotos.commonlib.repository.master.MailConvertValueMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailProductMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailTemplateMasterRepository;
-import jp.co.ricoh.cotos.commonlib.repository.master.MenuDetailManagementMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MenuDetailsManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MenuManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ModelAbbreviationMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
@@ -327,7 +327,7 @@ public class TestMaster {
 	@Autowired
 	private MenuManagementMasterRepository menuManagementMasterRepository;
 	@Autowired
-	private MenuDetailManagementMasterRepository menuDetailManagementMasterRepository;
+	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2203,14 +2203,14 @@ public class TestMaster {
 	}
 
 	@Test
-	public void MenuDetailManagementMasterのテスト() throws Exception {
+	public void MenuDetailsManagementMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailManagementMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailsManagementMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
-		MenuDetailManagementMaster found = menuDetailManagementMasterRepository.findOne(id);
+		MenuDetailsManagementMaster found = menuDetailsManagementMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
