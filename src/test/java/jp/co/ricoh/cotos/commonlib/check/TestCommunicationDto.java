@@ -239,8 +239,8 @@ public class TestCommunicationDto {
 		dto.setTo("to@dummy.com");
 		dto.setCc("cc@dummy.com");
 		dto.setSentAt(new Date());
-		dto.setContractId(1L);
-		dto.setContractNumber("CC2020102800001");
+		dto.setContractId("E000000001");
+		dto.setContractNumber("CIC2020102800001");
 		dto.setContractBranchNumber(1);
 		dto.setDocNumber("CC2020102800001");
 		dto.setMailTemplateMasterId(1L);
@@ -259,8 +259,9 @@ public class TestCommunicationDto {
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
-		// 異常系（@Size(max) ：to cc docNumber contractNumber nXContractId nXMailer nXNguidetargettype nXJizenflg nErrorFlg）
+		// 異常系（@Size(max) ：ContractId to cc docNumber contractNumber nXContractId nXMailer nXNguidetargettype nXJizenflg nErrorFlg）
 		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setContractId(STR_256);
 		testTarget.setTo(STR_256);
 		testTarget.setCc(STR_256);
 		testTarget.setDocNumber(STR_256);
@@ -270,22 +271,21 @@ public class TestCommunicationDto {
 		testTarget.setNXNguidetargettype(STR_256);
 		testTarget.setNXJizenflg(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(result.getErrorInfoList().size() == 9);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "TOは最大文字数（255）を超えています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最大文字数（255）を超えています。"));
 
-		// 異常系（@Min ：contractId contractBranchNumber mailTemplateMasterId nXNpserviceno nXNservicelineno nXNdomainlineno）
+		// 異常系（@Min ：contractBranchNumber mailTemplateMasterId nXNpserviceno nXNservicelineno nXNdomainlineno）
 		BeanUtils.copyProperties(testTarget, dto);
-		testTarget.setContractId(LONG_MINUS_1);
 		testTarget.setContractBranchNumber(INT_MINUS_1);
 		testTarget.setMailTemplateMasterId(LONG_MINUS_1);
 		testTarget.setNXNpserviceno(LONG_MINUS_1);
 		testTarget.setNXNservicelineno(LONG_MINUS_1);
 		testTarget.setNXNdomainlineno(LONG_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メールテンプレートマスタIDは最小値（0）を下回っています。"));
 
 	}
 
