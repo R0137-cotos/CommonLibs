@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MachineTypeSvp;
@@ -51,6 +52,7 @@ public class CpqEstimationEquipmentSvpDto {
 	/**
 	 * ハードウェア購入日
 	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date hardwarePurchaseDate;
 
 	/**
