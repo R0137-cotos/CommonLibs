@@ -11,6 +11,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -33,44 +35,43 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_management_master_seq")
 	@SequenceGenerator(name = "menu_management_master_seq", sequenceName = "menu_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "メニュー管理マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "メニュー管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * メニュー名
 	 */
-	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "メニュー名", required = true, position = 2, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メニュー名", required = false, position = 2, allowableValues = "range[0,255]")
 	private String menuName;
 
 	/**
 	 * 権限
 	 */
-	@Column(nullable = false)
-	@ApiModelProperty(value = "権限", required = true, position = 3)
+	@ApiModelProperty(value = "権限", required = false, position = 3)
 	@Lob
 	private String auth;
 
 	/**
-	 * 表示順
+	 * 順序
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "表示順", required = true, position = 4, allowableValues = "range[0,999]")
-	private Integer displayOrder;
+	@Max(999)
+	@Min(0)
+	@ApiModelProperty(value = "順序", required = true, position = 4, allowableValues = "range[0,999]")
+	private int orderNumber;
 
 	/**
 	 * URL
 	 */
-	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "URL", required = true, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "URL", required = false, position = 5, allowableValues = "range[0,255]")
 	private String url;
 
 	/**
 	 * メニュー明細管理マスタリスト
 	 */
 	@OneToMany(mappedBy = "menuManagementMaster")
-	@ApiModelProperty(value = "メニュー明細管理マスタ", required = false, position = 5)
-	private List<MenuDetailManagementMaster> menuDetailManagementMasterList;
+	@ApiModelProperty(value = "メニュー明細管理マスタ", required = false, position = 6)
+	private List<MenuDetailsManagementMaster> menuDetailsManagementMasterList;
 }
