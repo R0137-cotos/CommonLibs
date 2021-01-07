@@ -78,9 +78,9 @@ public class PenaltyInfoDto {
 	private BigDecimal penaltyAmountSummary;
 
 	/**
-	 * 違約金発生最終解約日
+	 * 違約金発生解約最終日
 	 */
-	@ApiModelProperty(value = "違約金発生最終解約日", required = false, position = 9)
+	@ApiModelProperty(value = "違約金発生解約最終日", required = false, position = 9)
 	@Temporal(TemporalType.DATE)
-	private Date penaltyOccurLastDate;
+	private Date penaltyOccurCacnlLastDate;
 }
