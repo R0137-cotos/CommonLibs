@@ -227,4 +227,10 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "解約予定日", required = false, position = 33)
 	private Date cancelScheduledDate;
+
+	/**
+	 * 契約ID
+	 */
+	@ApiModelProperty(value = "契約ID", required = true, position = 34)
+	private long contractId;
 }
