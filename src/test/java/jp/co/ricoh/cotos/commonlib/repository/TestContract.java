@@ -30,6 +30,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
@@ -523,5 +524,20 @@ public class TestContract {
 
 		// Entity 1件以上取得できていることを確認
 		Assert.assertNotEquals(foundList.size(), 0);
+	}
+
+	@Test
+	public void ContractInstallationLocationRepositoryのテスト() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		ContractInstallationLocation found = contractInstallationLocationRepository.findByContractId(4L);
+
+		// 全てのカラムがNullではないことを確認
+		try {
+			testTools.assertColumnsNotNull(found);
+		} catch (Exception e1) {
+			Assert.fail("例外が発生した場合、エラー");
+		}
 	}
 }
