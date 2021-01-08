@@ -274,7 +274,7 @@ public class PenaltyUtil {
 					penaltyInfoDto.setPenaltyUnitPrice(penaltyItem.getStandardPrice());
 					penaltyInfoDto.setQuantity(quantity);
 					penaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(penaltyItem, quantity));
-					penaltyInfoDto.setPenaltyOccurLastDate(penaltyOccurCacnlLastDate(itemMaster, tmpContract.getServiceTermStart()));
+					penaltyInfoDto.setPenaltyOccurCacnlLastDate(penaltyOccurCacnlLastDate(itemMaster, tmpContract.getServiceTermStart()));
 					resultList.add(penaltyInfoDto);
 				}
 			});
