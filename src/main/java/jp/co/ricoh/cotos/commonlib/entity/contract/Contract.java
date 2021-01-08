@@ -788,7 +788,7 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 83, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
-	
+
 	/**
 	 * IFS連携用解約CSV作成状態
 	 */

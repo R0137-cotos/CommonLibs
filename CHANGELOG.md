@@ -1,5 +1,15 @@
 # Changelog
 
+## v3.13.0 (07/01/2021)
+- [**closed**] #9377 コミュニケーションリポジトリ修正 [#1315](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1315)
+- [**closed**] #9264 汎用マスタ取得共通クラス 引数無しコンストラクタ追加 [#1310](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1310)
+- [**closed**] #9498 帳票出力の履歴が存在しない場合のバッチ用エラーメッセージ追加 [#1299](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1299)
+- [**closed**] #9264 汎用マスタ取得共通クラス コンストラクタ追加 [#1275](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1275)
+- [**closed**] #9264 MoM販社別設置届先サイト情報マスタリポジトリメソッド追加 [#1267](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1267)
+- [**closed**] #9264 顧客(契約用)洗い替え履歴、販売店(契約用)洗い替え履歴エンティティ・リポジトリ追加 [#1262](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1262)
+
+---
+
 ## v3.12.0 (17/12/2020)
 - [**closed**] #8494 バウンスメール記録テーブル 契約IDのデータ型変更対応 [#1274](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1274)
 - [**closed**] #8485 ContractAttachedFileDto、ArrangementWorkAttachedFileDtoに添付必須フラグ追加 [#1222](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1222)
