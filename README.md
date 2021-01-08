@@ -348,3 +348,4 @@
 |391|ContractAttachedFileDto、ArrangementWorkAttachedFileDtoに添付必須フラグ追加|
 |392|バウンスメール記録、バウンスメール宛先エンティティ追加、送信メールに独自ヘッダーを付与|
 |393|バウンスメール記録 契約IDのデータ型変更|
+|394|CAS対応

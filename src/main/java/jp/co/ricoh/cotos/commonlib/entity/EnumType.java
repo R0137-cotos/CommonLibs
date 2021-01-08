@@ -489,10 +489,10 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-	
+
 	public enum EimLinkedStatus {
 
-		未連携("0"), 連携済("1"), 対象外("9");
+		未連携("0"), 連携済("1"), 対象外("2");
 
 		private final String text;
 
@@ -508,6 +508,65 @@ public class EnumType {
 
 		@JsonCreator
 		public static EimLinkedStatus fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * ライセンス状態
+	 * @author z00se03039
+	 *
+	 */
+	public enum CasLicenseStatus {
+
+		未確定("0"), 有効("1"), 解約("2");
+
+		private final String text;
+
+		private CasLicenseStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CasLicenseStatus fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * MVBアカウント登録区分
+	 *
+	 */
+	public enum MvbAccountEntryDiv {
+
+		新規登録("1"), 既存使用("2");
+
+		private final String text;
+
+		private MvbAccountEntryDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MvbAccountEntryDiv fromString(String string) {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}

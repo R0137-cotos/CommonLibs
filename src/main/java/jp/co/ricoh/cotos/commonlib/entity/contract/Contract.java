@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -788,7 +789,7 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 83, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
-	
+
 	/**
 	 * IFS連携用解約CSV作成状態
 	 */
@@ -815,4 +816,17 @@ public class Contract extends EntityBase {
 	@Size(max = 1333)
 	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 87, allowableValues = "range[0,1333]")
 	private String toVendorComment;
+
+	/**
+	 * MVBアカウント
+	 */
+	@Size(max = 18)
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 87, allowableValues = "range[0,18]")
+	private String mvbAccount;
+
+	/**
+	 * MVBアカウント登録区分
+	 */
+	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 88, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
+	private MvbAccountEntryDiv mvbAccountEntryDiv;
 }

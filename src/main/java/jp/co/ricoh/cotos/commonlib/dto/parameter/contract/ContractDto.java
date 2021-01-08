@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
@@ -596,4 +597,17 @@ public class ContractDto extends DtoBase {
 	@Size(max = 1333)
 	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 77, allowableValues = "range[0,1333]")
 	private String toVendorComment;
+
+	/**
+	 * MVBアカウント
+	 */
+	@Size(max = 18)
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 77, allowableValues = "range[0,18]")
+	private String mvbAccount;
+
+	/**
+	 * MVBアカウント登録区分
+	 */
+	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 78, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
+	private MvbAccountEntryDiv mvbAccountEntryDiv;
 }
