@@ -102,6 +102,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationPicSaEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.PenaltyDetailEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.FileImportManagementParameter;
@@ -1111,6 +1112,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailEstimation")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailEstimation entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailEstimationDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailEstimationDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
