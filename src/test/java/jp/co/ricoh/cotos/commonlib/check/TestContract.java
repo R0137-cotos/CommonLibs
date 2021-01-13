@@ -472,7 +472,6 @@ public class TestContract {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
-
 	}
 
 	@Test

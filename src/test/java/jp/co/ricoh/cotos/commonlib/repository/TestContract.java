@@ -55,7 +55,9 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntCeEmpReposi
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntSsOrgRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicSaEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRefreshHisRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRefreshHisRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
@@ -183,6 +185,12 @@ public class TestContract {
 
 	@Autowired
 	ContractEquipmentItemLinkRepository contractEquipmentItemLinkRepository;
+
+	@Autowired
+	CustomerContractRefreshHisRepository customerContractRefreshHisRepository;
+
+	@Autowired
+	DealerContractRefreshHisRepository dealerContractRefreshHisRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -381,6 +389,16 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種品種紐づけ() {
 		全てのカラムがNullではないことを確認_共通(contractEquipmentItemLinkRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_顧客_契約用_洗い替え履歴() {
+		全てのカラムがNullではないことを確認_共通(customerContractRefreshHisRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_販売店_契約用_洗い替え履歴() {
+		全てのカラムがNullではないことを確認_共通(dealerContractRefreshHisRepository, 401L, 501L);
 	}
 
 	@Test
