@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.check;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.BounceMailHeaderDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.CommunicationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactRegisterParameter;
@@ -42,6 +44,7 @@ public class TestCommunicationDto {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
 	private static final int INT_MINUS_1 = -1;
+	private static final long LONG_MINUS_1 = -1L;
 
 	static ConfigurableApplicationContext context;
 
@@ -229,4 +232,61 @@ public class TestCommunicationDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メール本文置換リストが設定されていません。"));
 
 	}
+
+	@Test
+	public void BounceMailHeaderDtoのテスト() throws Exception {
+		BounceMailHeaderDto dto = new BounceMailHeaderDto();
+		dto.setTo("to@dummy.com");
+		dto.setCc("cc@dummy.com");
+		dto.setSentAt(new Date());
+		dto.setContractId("E000000001");
+		dto.setContractNumber("CIC2020102800001");
+		dto.setContractBranchNumber(1);
+		dto.setDocNumber("CC2020102800001");
+		dto.setMailTemplateMasterId(1L);
+		dto.setNXContractId("1");
+		dto.setNXMailer("1");
+		dto.setNXNpserviceno(1L);
+		dto.setNXNservicelineno(1L);
+		dto.setNXNdomainlineno(1L);
+		dto.setNXNguidetargettype("1");
+		dto.setNXJizenflg("1");
+
+		BounceMailHeaderDto testTarget = new BounceMailHeaderDto();
+		BeanUtils.copyProperties(testTarget, dto);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：ContractId to cc docNumber contractNumber nXContractId nXMailer nXNguidetargettype nXJizenflg nErrorFlg）
+		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setContractId(STR_256);
+		testTarget.setTo(STR_256);
+		testTarget.setCc(STR_256);
+		testTarget.setDocNumber(STR_256);
+		testTarget.setContractNumber(STR_256);
+		testTarget.setNXContractId(STR_256);
+		testTarget.setNXMailer(STR_256);
+		testTarget.setNXNguidetargettype(STR_256);
+		testTarget.setNXJizenflg(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 9);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最大文字数（255）を超えています。"));
+
+		// 異常系（@Min ：contractBranchNumber mailTemplateMasterId nXNpserviceno nXNservicelineno nXNdomainlineno）
+		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setContractBranchNumber(INT_MINUS_1);
+		testTarget.setMailTemplateMasterId(LONG_MINUS_1);
+		testTarget.setNXNpserviceno(LONG_MINUS_1);
+		testTarget.setNXNservicelineno(LONG_MINUS_1);
+		testTarget.setNXNdomainlineno(LONG_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "メールテンプレートマスタIDは最小値（0）を下回っています。"));
+
+	}
+
 }
