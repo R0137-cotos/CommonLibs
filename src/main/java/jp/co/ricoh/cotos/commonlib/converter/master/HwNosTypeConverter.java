@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.master;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.master.ItemDecomposeMaster.HwNosType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.HwNosType;
 
 @Converter(autoApply = true)
 public class HwNosTypeConverter implements AttributeConverter<HwNosType, String> {
