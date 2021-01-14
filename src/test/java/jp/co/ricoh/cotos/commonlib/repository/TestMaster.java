@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -32,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeForSearchMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMaster;
@@ -103,6 +106,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepo
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkOrderMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeForSearchMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductClassCheckMasterRepository;
@@ -315,9 +319,10 @@ public class TestMaster {
 	private AttachedFileProductClassCheckMasterRepository attachedFileProductClassCheckMasterRepository;
 	@Autowired
 	private AttachedFileProductGrpCheckMasterRepository attachedFileProductGrpCheckMasterRepository;
-
 	@Autowired
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
+	@Autowired
+	private ArrangementWorkTypeForSearchMasterRepository arrangementWorkTypeForSearchMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -1615,6 +1620,21 @@ public class TestMaster {
 	}
 
 	@Test
+	public void MvTJmcj005Master_OriginalSystemCodeで取得するテスト() throws Exception {
+
+		// エンティティの取得
+		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByOriginalSystemCode("10110005470");
+		// Entity が 空 ではないことを確認
+		Assert.assertFalse(CollectionUtils.isEmpty(found));
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByOriginalSystemCode("99999999999");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+
+	}
+
+	@Test
 	public void VDirectDeliveryDealerInfoMasterRepositoryのテスト() throws Exception {
 
 		// テストデータはなし
@@ -2175,5 +2195,21 @@ public class TestMaster {
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
 			Assert.assertEquals("xlsx", found.getExtension());
 		}
+	}
+
+	@Test
+	public void ArrangementWorkTypeForSearchMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeForSearchMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ArrangementWorkTypeForSearchMaster found = arrangementWorkTypeForSearchMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 }
