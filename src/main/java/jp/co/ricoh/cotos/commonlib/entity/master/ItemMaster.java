@@ -334,4 +334,11 @@ public class ItemMaster extends EntityBaseMaster {
 	@JoinColumn(name = "check_by_item_master_id", referencedColumnName = "id")
 	@ApiModelProperty(value = "品種別チェック項目マスタ", required = false, position = 35)
 	private CheckByItemMaster checkByItemMaster;
+
+	/**
+	 * 契約自動締結除外フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "契約自動締結除外フラグ", required = false, position = 36, allowableValues = "range[0,9]")
+	private Integer contractAutoSigningExclusionFlg;
 }
