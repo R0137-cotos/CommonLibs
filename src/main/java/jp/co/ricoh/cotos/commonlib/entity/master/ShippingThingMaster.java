@@ -79,7 +79,7 @@ public class ShippingThingMaster extends EntityBase {
 	 * 物あり品種コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "物あり品種コード", required = false, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "物あり品種コード", required = false, position = 3, allowableValues = "range[0,255]")
 	private String thingItemCode;
 
 	/**
