@@ -78,9 +78,9 @@ public class ShippingThingMaster extends EntityBase {
 	/**
 	 * 物あり品種コード
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "物あり品種コード", required = false, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private long thingItemCode;
+	@Size(max = 255)
+	@ApiModelProperty(value = "物あり品種コード", required = false, position = 3, allowableValues = "range[0,255]")
+	private String thingItemCode;
 
 	/**
 	 * 発送機器名称
@@ -124,14 +124,14 @@ public class ShippingThingMaster extends EntityBase {
 	 * 有効期間(開始日)
 	 */
 	@ApiModelProperty(value = "有効期間(開始日)", required = false, position = 9)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date availablePeriodFrom;
 
 	/**
 	 * 有効期間(終了日)
 	 */
 	@ApiModelProperty(value = "有効期間(終了日)", required = false, position = 10)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date availablePeriodTo;
 
 	/**
