@@ -538,6 +538,31 @@ public class EnumType {
 	}
 
 	/**
+	 * CSV出力対象区分
+	 */
+	public enum CsvOutputTargetType {
+
+		全件("1"), 全件_解約を除く("2"), 出力対象月のみ("3");
+
+		private final String text;
+
+		private CsvOutputTargetType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CsvOutputTargetType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
 	 * 各種ID値などのダミー設定値
 	 */
 	public enum DummyCodeValue {
@@ -556,5 +581,36 @@ public class EnumType {
 			return this.text;
 		}
 
+	}
+
+	/**
+	 *
+	 * CSV項目編集パラメーター（CsvUtil）
+	 *
+	 */
+	public enum WidthForm {
+
+		// 全角
+		Full("Halfwidth-Fullwidth", "　"),
+		// 半角
+		Half("Fullwidth-Halfwidth", " "),
+		// 設定無し
+		Nothing("Fullwidth-Halfwidth", " ");
+
+		private String id;
+		private String value;
+
+		private WidthForm(final String id, final String value) {
+			this.id = id;
+			this.value = value;
+		}
+
+		public String getId() {
+			return this.id;
+		}
+
+		public String getValue() {
+			return this.value;
+		}
 	}
 }

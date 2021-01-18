@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -93,4 +96,10 @@ public class PenaltyDetailEstimation extends EntityBase {
 	@ApiModelProperty(value = "削除フラグ", required = false, position = 8, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
+	/**
+	 * 違約金発生解約最終日
+	 */
+	@ApiModelProperty(value = "違約金発生解約最終日", required = false, position = 9)
+	@Temporal(TemporalType.DATE)
+	private Date penaltyOccurCacnlLastDate;
 }

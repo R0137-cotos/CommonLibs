@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -34,29 +31,6 @@ import lombok.EqualsAndHashCode;
 @Table(name = "item_decompose_master")
 public class ItemDecomposeMaster extends EntityBaseMaster {
 
-	public enum HwNosType {
-
-		HW("1"), NOS("2");
-
-		private final String text;
-
-		private HwNosType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static HwNosType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	
 	/**
 	 * ID
 	 */
@@ -117,9 +91,4 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "品種マスタ", required = true, position = 8)
 	private ItemMaster itemMaster;
 
-	/**
-	 * 分解後HW/NOS区分
-	 */
-	@ApiModelProperty(value = "分解後HW/NOS区分", required = false, position = 9, allowableValues = "HW(\"1\"), NOS(\"2\")")
-	private HwNosType hwNosType;
 }

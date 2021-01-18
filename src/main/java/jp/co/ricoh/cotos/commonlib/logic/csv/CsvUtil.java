@@ -19,8 +19,10 @@ import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.ibm.icu.text.Transliterator;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CsvParameter;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.WidthForm;
 import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
@@ -32,6 +34,8 @@ public class CsvUtil {
 
 	@Autowired
 	CheckUtil checkUtil;
+
+	private static final String CHARSET_NAME = "MS932";
 
 	/**
 	 * CSV情報生成
@@ -170,5 +174,131 @@ public class CsvUtil {
 			break;
 		}
 		return lineSeparator;
+	}
+
+	/**
+	 * 前方から指定バイト数の文字列を取得
+	 *
+	 * @param baseStr
+	 *            文字列
+	 * @param byteCount
+	 *            バイト数
+	 * @param widthForm
+	 *            半角 or 全角
+	 * @return 文末パディング
+	 * @throws UnsupportedEncodingException
+	 */
+	public String padding(String baseStr, int byteCount, WidthForm widthForm) throws UnsupportedEncodingException {
+		if (byteCount < 1 || widthForm == null) {
+			throw new IllegalArgumentException();
+		}
+		if (baseStr == null) baseStr = "";
+		// 半角・全角変換
+		if (widthForm != WidthForm.Nothing) {
+			Transliterator transliterator = Transliterator.getInstance(widthForm.getId());
+			baseStr = transliterator.transliterate(baseStr);
+		}
+
+		if (widthForm == WidthForm.Half) {
+			// 全角が残っている場合は、除去
+			baseStr = removeDoubleByte(baseStr);
+		}
+
+		// 文字列が指定バイト数を超えている
+		int blen = baseStr.getBytes(CHARSET_NAME).length;
+		if (blen > byteCount) {
+			// 超えた文字を削除
+			baseStr = new String(baseStr.getBytes(CHARSET_NAME), 0, byteCount, CHARSET_NAME);
+		}
+
+		// パディング実施
+		StringBuilder builder = new StringBuilder();
+		builder.append(baseStr);
+		if (widthForm != WidthForm.Nothing) {
+			int slen = widthForm.getValue().getBytes(CHARSET_NAME).length;
+			for (int i = blen; i < byteCount; i += slen) {
+				builder.append(widthForm.getValue());
+			}
+		}
+		// 結果が指定バイト数かチェック
+		String result = builder.toString();
+		if (result.getBytes(CHARSET_NAME).length > byteCount) {
+			throw new IllegalStateException("Request:" + byteCount + " Response:" + result.getBytes(CHARSET_NAME).length);
+		}
+		return result;
+	}
+
+	/**
+	 * 後方から指定バイト数の文字列を取得
+	 *
+	 * @param baseStr
+	 *            文字列
+	 * @param byteCount
+	 *            バイト数
+	 * @param widthForm
+	 *            半角 or 全角 or 設定無し
+	 * @return 文末パディング
+	 * @throws UnsupportedEncodingException
+	 */
+	public String paddingBack(String baseStr, int byteCount, WidthForm widthForm) throws UnsupportedEncodingException {
+		if (byteCount < 1 || widthForm == null) {
+			throw new IllegalArgumentException();
+		}
+		if (baseStr == null) baseStr = "";
+		// 半角・全角変換
+		if (widthForm != WidthForm.Nothing) {
+			Transliterator transliterator = Transliterator.getInstance(widthForm.getId());
+			baseStr = transliterator.transliterate(baseStr);
+		}
+
+		if (widthForm == WidthForm.Half) {
+			// 全角が残っている場合は、除去
+			baseStr = removeDoubleByte(baseStr);
+		}
+
+		// 文字列が指定バイト数を超えている
+		int blen = baseStr.getBytes(CHARSET_NAME).length;
+		if (blen > byteCount) {
+			// 超えた文字を削除
+			baseStr = new String(baseStr.getBytes(CHARSET_NAME), blen - byteCount, byteCount, CHARSET_NAME);
+		}
+
+		// パディング実施
+		StringBuilder builder = new StringBuilder();
+		builder.append(baseStr);
+		if (widthForm != WidthForm.Nothing) {
+			int slen = widthForm.getValue().getBytes(CHARSET_NAME).length;
+			for (int i = blen; i < byteCount; i += slen) {
+				builder.append(widthForm.getValue());
+			}
+		}
+		// バイト数チェック
+		String result = builder.toString();
+		if (result.getBytes(CHARSET_NAME).length > byteCount) {
+			throw new IllegalStateException("Request:" + byteCount + " Response:" + result.getBytes(CHARSET_NAME).length);
+		}
+		return result;
+	}
+
+	private String removeDoubleByte(String source) {
+		String result = "";
+		for (int i = 0; i < source.length(); i++) {
+			char c = source.charAt(i);
+			if (!isDoubleByte(c)) {
+				result += String.valueOf(c);
+			}
+		}
+		return result;
+	}
+
+	private Boolean isDoubleByte(char source) {
+		if ((source <= '\u007e') || // 英数字
+				(source == '\u00a5') || // \記号
+				(source == '\u203e') || // ~記号
+				(source >= '\uff61' && source <= '\uff9f') // 半角カナ
+		) {
+			return false;
+		}
+		return true;
 	}
 }

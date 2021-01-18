@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement.ArrangementWorkDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ArrangementResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CheckResultUpdateParameter;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.BounceMailHeaderDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.CommunicationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.communication.ContactRegisterParameter;
@@ -102,10 +103,13 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationPicSaEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationRegisterParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ItemEstimationDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.PenaltyDetailEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.FileImportManagementParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.LicenseInfoDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductClassCheckMasterSearchParameter;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductGrpCheckMasterSearchParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
@@ -131,6 +135,8 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLo
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportErrorDetails;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailDestination;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.CommunicationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
@@ -406,6 +412,16 @@ public class TestSecurityController {
 		return createParameterCheckResult(result);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/BounceMailRecord")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated BounceMailRecord entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/BounceMailDestination")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated BounceMailDestination entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContactDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContactDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
@@ -413,6 +429,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContactToDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContactToDto entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/BounceMailHeaderDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated BounceMailHeaderDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
@@ -934,6 +955,16 @@ public class TestSecurityController {
 		return createParameterCheckResult(result);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/AttachedFileProductClassCheckMasterSearchParameter")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated AttachedFileProductClassCheckMasterSearchParameter dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/AttachedFileProductGrpCheckMasterSearchParameter")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated AttachedFileProductGrpCheckMasterSearchParameter dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ArrangementWorkAttachedFileLinkage")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ArrangementWorkAttachedFileLinkage entity, BindingResult result) {
 		return createParameterCheckResult(result);
@@ -1111,6 +1142,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailEstimation")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailEstimation entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailEstimationDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailEstimationDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 

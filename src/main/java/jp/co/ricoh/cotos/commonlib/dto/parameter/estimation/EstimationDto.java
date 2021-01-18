@@ -443,4 +443,11 @@ public class EstimationDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 59, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 違約金明細(見積用)
+	 */
+	@Valid
+	@ApiModelProperty(value = "違約金明細(見積用)", required = false, position = 60)
+	private List<PenaltyDetailEstimationDto> penaltyDetailEstimationList;
 }

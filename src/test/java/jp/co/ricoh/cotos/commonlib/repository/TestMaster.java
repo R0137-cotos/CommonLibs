@@ -32,6 +32,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeForSearchMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkTypeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMaster;
@@ -122,6 +123,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepo
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkOrderMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeForSearchMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductClassCheckMasterRepository;
@@ -353,9 +355,10 @@ public class TestMaster {
 	private AttachedFileProductClassCheckMasterRepository attachedFileProductClassCheckMasterRepository;
 	@Autowired
 	private AttachedFileProductGrpCheckMasterRepository attachedFileProductGrpCheckMasterRepository;
-
 	@Autowired
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
+	@Autowired
+	private ArrangementWorkTypeForSearchMasterRepository arrangementWorkTypeForSearchMasterRepository;
 
 	@Autowired
 	private FileKindManagementMasterRepository fileKindManagementMasterRepository;
@@ -504,7 +507,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
-
 		Long id = 1L;
 		MailTemplateMaster found = mailTemplateMasterRepository.findOne(id);
 
@@ -1292,10 +1294,11 @@ public class TestMaster {
 	public void MailControlMasterのテスト() throws Exception {
 
 		// テストデータ登録
-
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+
 		// エンティティの取得
 		Long id = 1L;
 		MailControlMaster found = mailControlMasterRepository.findOne(id);
@@ -1305,6 +1308,12 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		// エンティティの取得 処理実行日計算パターンマスタIDがnull
+		id = 2L;
+		found = mailControlMasterRepository.findOne(id);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull("Entityがnullではないことを確認", found);
 	}
 
 	@Test
@@ -1314,6 +1323,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1699,6 +1709,21 @@ public class TestMaster {
 
 		// キー不一致
 		found = mvTJmcj005MasterRepository.findByOeTodokesakiCd("86045030001");
+		// Entity が 空 であることを確認
+		Assert.assertTrue(CollectionUtils.isEmpty(found));
+
+	}
+
+	@Test
+	public void MvTJmcj005Master_OriginalSystemCodeで取得するテスト() throws Exception {
+
+		// エンティティの取得
+		List<MvTJmcj005Master> found = mvTJmcj005MasterRepository.findByOriginalSystemCode("10110005470");
+		// Entity が 空 ではないことを確認
+		Assert.assertFalse(CollectionUtils.isEmpty(found));
+
+		// キー不一致
+		found = mvTJmcj005MasterRepository.findByOriginalSystemCode("99999999999");
 		// Entity が 空 であることを確認
 		Assert.assertTrue(CollectionUtils.isEmpty(found));
 
@@ -2176,7 +2201,8 @@ public class TestMaster {
 			Assert.assertTrue(false);
 	}
 
-	public void AttachedFileProductClassCheckMasterのテスト() throws Exception {
+	@Test
+	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
 
@@ -2192,17 +2218,42 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertThat(found.getExcludeProductGrpMasterId(), anyOf(nullValue(), is("1008,1009")));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
+			Assert.assertEquals("xlsx", found.getExtension());
 		}
 
 	}
 
 	@Test
-	public void AttachedFileProductGrpCheckMasterのテスト() throws Exception {
+	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListByArrangementWorkTypeMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
+
+		// エンティティの取得
+		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository.findAttachedFileProductClassCheckListByArrangementWorkTypeMasterId("CSP", "1", "1", "7", 1001L).get();
+
+		// データが2件取得できていることを確認
+		Assert.assertEquals(2, foundList.size());
+		// 取得したデータの内容が正しいことを確認
+		for (AttachedFileProductClassCheckMaster found : foundList) {
+			Assert.assertEquals("CSP", found.getProductClassDiv());
+			Assert.assertEquals("1", found.getDomain());
+			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
+			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
+			Assert.assertThat(found.getExcludeProductGrpMasterId(), anyOf(nullValue(), is("1008,1009")));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
+			Assert.assertEquals("xlsx", found.getExtension());
+		}
+
+	}
+
+	@Test
+	public void AttachedFileProductGrpCheckMaster_findAttachedFileProductGrpCheckListのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7").get();
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7", Arrays.asList(1L, 2L)).get();
 
 		// データが4件取得できていることを確認
 		Assert.assertEquals(4, foundList.size());
@@ -2213,6 +2264,32 @@ public class TestMaster {
 			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
 			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
 			Assert.assertNotNull(found.getFileKind());
+			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
+			Assert.assertEquals("xlsx", found.getExtension());
+		}
+	}
+
+	@Test
+	public void AttachedFileProductGrpCheckMaster_findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
+
+		// エンティティの取得
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(200L, "2", "1", "7", Arrays.asList(1L, 2L), 1001L).get();
+
+		// データが3件取得できていることを確認
+		Assert.assertEquals(3, foundList.size());
+		// 取得したデータの内容が正しいことを確認
+		for (AttachedFileProductGrpCheckMaster found : foundList) {
+			Assert.assertEquals(Long.valueOf(200), found.getProductGrpMasterId());
+			Assert.assertEquals("2", found.getDomain());
+			Assert.assertThat(found.getEstimationContractType(), anyOf(nullValue(), is("1")));
+			Assert.assertThat(found.getLifecycleStatus(), anyOf(nullValue(), is("7")));
+			Assert.assertNotNull(found.getFileKind());
+			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
+			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
+			Assert.assertEquals("xlsx", found.getExtension());
 		}
 	}
 
@@ -2224,6 +2301,22 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		FileKindManagementMaster found = fileKindManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ArrangementWorkTypeForSearchMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeForSearchMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ArrangementWorkTypeForSearchMaster found = arrangementWorkTypeForSearchMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

@@ -8,6 +8,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -89,4 +91,12 @@ public class ArrangementWorkAttachedFileDto extends DtoBase {
 	@Valid
 	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 11)
 	private List<ArrangementWorkAttachedFileLinkageDto> arrangementWorkAttachedFileLinkageList;
+
+	/**
+	 * 添付必須フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	private Integer attachedRequiredFlg;
 }

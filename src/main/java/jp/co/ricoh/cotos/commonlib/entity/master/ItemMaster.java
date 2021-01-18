@@ -153,6 +153,28 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	public enum HwNosType {
+
+		HW("1"), NOS("2");
+
+		private final String text;
+
+		private HwNosType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static HwNosType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
@@ -234,10 +256,10 @@ public class ItemMaster extends EntityBaseMaster {
 	private BigDecimal rCost;
 
 	/**
-	 * ＲＪ仕入価格
+	 * ＳＡ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -465,4 +487,16 @@ public class ItemMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "品種ライセンス用設定マスタ", required = false, position = 43)
 	private List<ItemLicenseSettingMaster> ItemLicenseSettingMasterList;
 
+	/**
+	 * ＲＪ販事本仕入価格
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 44, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * HW/NOS区分
+	 */
+	@ApiModelProperty(value = "HW/NOS区分", required = false, position = 44, allowableValues = "HW(\"1\"), NOS(\"2\")")
+	private HwNosType hwNosType;
 }

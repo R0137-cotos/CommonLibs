@@ -1,7 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,8 +24,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalTargetType;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.WorkflowType;
+import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
+import jp.co.ricoh.cotos.commonlib.repository.communication.BounceMailDestinationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.communication.BounceMailRecordRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.CommunicationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.CommunicationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.ContactRepository;
@@ -42,6 +52,12 @@ public class TestCommunication {
 
 	@Autowired
 	ContactToRepository contactToRepository;
+
+	@Autowired
+	BounceMailRecordRepository bounceMailRecordRepository;
+
+	@Autowired
+	BounceMailDestinationRepository bounceMailDestinationRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -88,6 +104,8 @@ public class TestCommunication {
 		Assert.assertNotEquals(0, list.size());
 		list = communicationRepository.findByProcessCategoryAndLoginUserMomEmployeeId("1", "dummy_request_to_id_1");
 		Assert.assertEquals(1, list.size());
+		list = communicationRepository.findByTargetDocKeyAndWorkflowTypeAndApprovalTargetTypeAndServiceCategory("4", WorkflowType.承認フロー, ApprovalTargetType.新規, ServiceCategory.見積);
+		Assert.assertEquals(1, list.size());
 	}
 
 	@Test
@@ -113,6 +131,32 @@ public class TestCommunication {
 		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
 		Contact child = contactRepository.findOne(4L);
 		Assert.assertNull(child.getParent());
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_バウンスメール記録() {
+		全てのカラムがNullではないことを確認_共通(bounceMailRecordRepository, 1L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_バウンスメール宛先() {
+		全てのカラムがNullではないことを確認_共通(bounceMailDestinationRepository, 1L);
+	}
+
+	@Test
+	public void BounceMailRecordRepositoryの条件テスト() {
+		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
+		String contractId = "E000000001";
+		String nXContractId = "1";
+		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date sentAt = null;
+		try {
+			sentAt = formatter.parse("2020/10/28 12:09:10");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<BounceMailRecord> list1 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(contractId, nXContractId, sentAt);
+		Assert.assertNotEquals(0, list1.size());
 	}
 
 	@Transactional
