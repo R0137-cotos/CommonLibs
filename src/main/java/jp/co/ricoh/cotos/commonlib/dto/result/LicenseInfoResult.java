@@ -16,7 +16,6 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
-import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CsvOutputFlg;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.ProcessLockStatus;
@@ -206,7 +205,7 @@ public class LicenseInfoResult {
 	 */
 	@OneToMany
 	@ApiModelProperty(value = "ライセンス明細", required = false, position = 25)
-	private List<LicenseDetail> licenseDetailList;
+	private List<LicenseDetailResult> licenseDetailList;
 
 	/**
 	 * ライセンス工程DTO
