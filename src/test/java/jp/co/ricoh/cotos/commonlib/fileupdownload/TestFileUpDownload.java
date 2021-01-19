@@ -3,7 +3,6 @@ package jp.co.ricoh.cotos.commonlib.fileupdownload;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -16,9 +15,11 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -54,6 +55,9 @@ public class TestFileUpDownload {
 
 	@Autowired
 	ObjectMapper mapper;
+
+	@SpyBean
+	CreateZipParameter parameter;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -216,7 +220,7 @@ public class TestFileUpDownload {
 			Assert.assertTrue("zipファイルが存在すること", zip.exists());
 			Assert.assertEquals("ファイル名が想定通りであること（文字化けしていないこと）", "暗号化なし.zip", zip.getName());
 
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		} finally {
@@ -259,7 +263,7 @@ public class TestFileUpDownload {
 			Assert.assertTrue("zipファイルが存在すること", zip.exists());
 			Assert.assertEquals("ファイル名が想定通りであること（文字化けしていないこと）", "暗号化あり.zip", zip.getName());
 
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		} finally {
@@ -279,7 +283,7 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00013", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "Zipファイル作成パラメータが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}
@@ -297,7 +301,7 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "パラメータ「圧縮対象ファイル/ディレクトリ」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}
@@ -314,7 +318,7 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "パラメータ「圧縮先ファイル」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}
@@ -329,7 +333,7 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "パラメータ「パスワード」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}
@@ -344,7 +348,7 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "パラメータ「ファイル名文字コード」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}
@@ -359,7 +363,7 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00003", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "圧縮対象ファイル/ディレクトリが特定できません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}
@@ -376,7 +380,47 @@ public class TestFileUpDownload {
 			assertEquals("エラー件数が一致すること", 1, errorList.size());
 			assertEquals("エラーIDが一致すること", "ROT00003", e.getErrorInfoList().get(0).getErrorId());
 			assertEquals("エラーメッセージが一致すること", "圧縮先ディレクトリが特定できません。", e.getErrorInfoList().get(0).getErrorMessage());
-		} catch (ZipException | IOException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("想定外のエラーが発生");
+		}
+	}
+
+	@Test
+	public void ZIP圧縮_異常系_ZIP作成時にZipException発生() {
+		try {
+			Mockito.doAnswer(a -> {
+				throw new ZipException("test");
+			}).when(parameter).getInputPathList();
+			fileUpDownload.createZipAndDelete(parameter);
+			fail("異常系のテストで正常終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			// チェック
+			assertEquals("エラー件数が一致すること", 1, errorList.size());
+			assertEquals("エラーIDが一致すること", "ROT00117", e.getErrorInfoList().get(0).getErrorId());
+			assertEquals("エラーメッセージが一致すること", "圧縮ファイルの作成に失敗しました。", e.getErrorInfoList().get(0).getErrorMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("想定外のエラーが発生");
+		}
+	}
+
+	@Test
+	public void ZIP圧縮_異常系_ZIP作成時にIOException発生() {
+		try {
+			Mockito.doAnswer(a -> {
+				throw new ZipException("test");
+			}).when(parameter).getInputPathList();
+			fileUpDownload.createZipAndDelete(parameter);
+			fail("異常系のテストで正常終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			// チェック
+			assertEquals("エラー件数が一致すること", 1, errorList.size());
+			assertEquals("エラーIDが一致すること", "ROT00117", e.getErrorInfoList().get(0).getErrorId());
+			assertEquals("エラーメッセージが一致すること", "圧縮ファイルの作成に失敗しました。", e.getErrorInfoList().get(0).getErrorMessage());
+		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生");
 		}

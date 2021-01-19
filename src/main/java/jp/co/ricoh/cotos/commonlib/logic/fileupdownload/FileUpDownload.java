@@ -254,11 +254,17 @@ public class FileUpDownload {
 	 * @throws ZipException
 	 * @throws IOException
 	 */
-	public byte[] createZipAndDelete(CreateZipParameter parameter) throws ZipException, IOException {
-		ZipFile zip = createZip(parameter);
-
-		byte[] result = Files.readAllBytes(zip.getFile().toPath());
-		zip.getFile().delete();
+	public byte[] createZipAndDelete(CreateZipParameter parameter) {
+		ZipFile zip = null;
+		byte[] result = null;
+		try {
+			zip = createZip(parameter);
+			result = Files.readAllBytes(zip.getFile().toPath());
+		} catch (ZipException | IOException e) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ZipCreatingError", new String[] {}));
+		} finally {
+			Optional.ofNullable(zip).ifPresent(z -> z.getFile().delete());
+		}
 
 		return result;
 	}
