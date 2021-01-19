@@ -58,7 +58,7 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", position = 4)
+	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\"), 期間売_月額(\"4\")", position = 4)
 	private InitialRunningDiv initialRunningDiv;
 
 	/**
