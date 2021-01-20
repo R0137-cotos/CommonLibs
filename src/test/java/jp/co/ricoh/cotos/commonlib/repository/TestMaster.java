@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -80,6 +82,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MenuDetailsManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MenuManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ModelAbbreviationMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.MvRjShohinInfoMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTJmci101Master;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTJmci102Master;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTJmci105Master;
@@ -88,6 +91,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvTJmcj005Master;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmcc020HnbitnMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmmb010UtlItem;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmmb020UtlCd;
+import jp.co.ricoh.cotos.commonlib.entity.master.MvTjmob260OrgServiceMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvVjmcb010MomKgyMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc020OrgAllInfoCom;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo;
@@ -171,6 +175,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MenuDetailsManagementMaster
 import jp.co.ricoh.cotos.commonlib.repository.master.MenuManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ModelAbbreviationMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MvRjShohinInfoMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci101MasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci102MasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmci105Repository;
@@ -179,6 +184,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.MvTJmcj005MasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmcc020HnbitnMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb010UtlItemRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmmb020UtlCdRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.MvTjmob260OrgServiceMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvVjmcb010MomKgyMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvWjmoc020OrgAllInfoComRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvWjmoc080DealerInfoRepository;
@@ -398,6 +404,10 @@ public class TestMaster {
 	private MailAddressMasterRepository mailAddressMasterRepository;
 	@Autowired
 	private CsvFileSettingMasterRepository csvFileSettingMasterRepository;
+	@Autowired
+	private MvTjmob260OrgServiceMasterRepository mvTjmob260OrgServiceMasterRepository;
+	@Autowired
+	private MvRjShohinInfoMasterRepository mvRjShohinInfoMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2667,4 +2677,31 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
+
+	@Test
+	public void MvTjmob260OrgServiceMasterのテスト() throws Exception {
+	
+		// MoMから作成したMViewのためテストデータはなし
+	
+		// エンティティの取得
+		String id = "000258";
+		List<MvTjmob260OrgServiceMaster> found = mvTjmob260OrgServiceMasterRepository.findByOrsServiceOrgId(id);
+	
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void MvRjShohinInfoMasterのテスト() throws Exception {
+
+		// MoMから作成したMViewのためテストデータはなし
+
+		// エンティティの取得
+		String id = "312982";
+		MvRjShohinInfoMaster found = mvRjShohinInfoMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
 }
