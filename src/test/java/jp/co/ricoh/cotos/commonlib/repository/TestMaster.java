@@ -2676,13 +2676,13 @@ public class TestMaster {
 
 	@Test
 	public void MvTjmob260OrgServiceMasterのテスト() throws Exception {
-
+	
 		// MoMから作成したMViewのためテストデータはなし
-
+	
 		// エンティティの取得
 		String id = "000258";
 		List<MvTjmob260OrgServiceMaster> found = mvTjmob260OrgServiceMasterRepository.findByOrsServiceOrgId(id);
-
+	
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 	}

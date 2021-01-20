@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -17,6 +18,7 @@ public class MvTjmob260OrgServiceMaster {
 
 	private String orsCubicCorpId;
 
+	@Id
 	private String orsCubicOrgId;
 
 	private String orsServiceOrgId;
