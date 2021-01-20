@@ -1,9 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -16,10 +18,21 @@ import lombok.Data;
 @Table(name = "mv_tjmob260_org_service")
 public class MvTjmob260OrgServiceMaster {
 
-	private String orsCubicCorpId;
+	@Embeddable
+	@Data
+	public static class Id implements Serializable {
+		/**
+		 * シリアルバージョンID
+		 */
+		private static final long serialVersionUID = 1L;
 
-	@Id
-	private String orsCubicOrgId;
+		private String orsCubicCorpId;
+
+		private String orsCubicOrgId;
+	}
+
+	@EmbeddedId
+	private Id id;
 
 	private String orsServiceOrgId;
 
