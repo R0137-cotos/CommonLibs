@@ -3,10 +3,6 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
@@ -28,26 +24,17 @@ import lombok.EqualsAndHashCode;
 public class PenaltyDetailContractDto extends DtoBase {
 
 	/**
-	 * 違約金明細ID
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "penalty_detail_contract_seq")
-	@SequenceGenerator(name = "penalty_detail_contract_seq", sequenceName = "penalty_detail_contract_seq", allocationSize = 1)
-	@ApiModelProperty(value = "違約金明細ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long id;
-
-	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "品種マスタID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種名", required = false, position = 4, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "品種名", required = false, position = 2, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
@@ -55,14 +42,14 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "リコー品種コード", required = true, position = 3, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種区分", required = false, position = 6, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "品種区分", required = false, position = 4, allowableValues = "range[0,255]")
 	private String itemType;
 
 	/**
@@ -70,7 +57,7 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "違約金単価", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "違約金単価", required = false, position = 5, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
 	/**
@@ -78,7 +65,7 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "数量", required = false, position = 8, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "数量", required = false, position = 6, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
@@ -86,13 +73,13 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "違約金金額", required = false, position = 9, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "違約金金額", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 
 	/**
 	 * 計上先区分
 	 */
-	@ApiModelProperty(value = "計上先区分", required = false, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1", position = 1)
+	@ApiModelProperty(value = "計上先区分", required = false, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1", position = 8)
 	private SalesToType salesToType;
 
 	/**
@@ -100,19 +87,19 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "削除フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "削除フラグ", required = false, position = 9, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
 	 * 違約金売上計上処理状態
 	 */
-	@ApiModelProperty(value = "違約金売上計上処理状態", required = false, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1", position = 12)
+	@ApiModelProperty(value = "違約金売上計上処理状態", required = false, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1", position = 10)
 	private PenaltyAccountSalesStatus penaltyAccountSalesStatus;
 
 	/**
 	 * 違約金売上計上処理日
 	 */
-	@ApiModelProperty(value = "違約金売上計上処理日", required = false, position = 13)
+	@ApiModelProperty(value = "違約金売上計上処理日", required = false, position = 11)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyAccountSalesDate;
 

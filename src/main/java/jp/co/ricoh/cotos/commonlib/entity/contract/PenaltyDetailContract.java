@@ -123,7 +123,7 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "リコー品種コード", required = true, position = 5, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
