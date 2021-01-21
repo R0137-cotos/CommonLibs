@@ -65,6 +65,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.DealerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ItemContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ItemDetailContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetailDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.PenaltyDetailContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ProductContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ShippingAddressDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ShippingAddressSsOrgDto;
@@ -1179,4 +1180,10 @@ public class TestSecurityController {
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated FileImportManagementParameter dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PenaltyDetailContractDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PenaltyDetailContractDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
 }

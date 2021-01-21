@@ -45,6 +45,7 @@ public class TestFindProperties {
 		Assert.assertEquals("DB設定：ドライバーが正しく取得されること", "oracle.jdbc.OracleDriver", appProperties.getDatasourceProperties().getDriverClassName());
 		Assert.assertEquals("DB設定：URLが正しく取得されること", "jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1", appProperties.getDatasourceProperties().getUrl());
 		Assert.assertEquals("ファイル設定：アップロードディレクトリが正しく取得されること", "./build/testTemp", appProperties.getFileProperties().getUploadFileDir());
+		Assert.assertEquals("ファイル設定：一時ファイルディレクトリが正しく取得されること", "./build/testTemp1", appProperties.getFileProperties().getTmpFileDir());
 		List<String> extension = Arrays.asList("xlsx", "txt");
 		Assert.assertEquals("ファイル設定：設定可能拡張子が正しく取得されること", extension, appProperties.getFileProperties().getExtension());
 		Assert.assertEquals("ファイル設定：ファイル名最大サイズが正しく取得されること", (Long) 14L, appProperties.getFileProperties().getFileNmMaxSize());

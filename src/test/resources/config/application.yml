@@ -31,6 +31,7 @@ cotos:
     uploadFileDir: ./build/testTemp
     fileNmMaxSize: 14
     extension: xlsx, txt
+    tmpFileDir: ./build/testTemp1
   search:
     limitSize: 5
   mail:

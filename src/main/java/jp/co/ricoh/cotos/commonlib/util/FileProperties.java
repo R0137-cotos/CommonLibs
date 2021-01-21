@@ -30,4 +30,10 @@ public class FileProperties {
 	 * ファイル名最大サイズ
 	 */
 	Long fileNmMaxSize;
+
+	/**
+	 * 一時ファイルディレクトリ
+	 */
+	String tmpFileDir;
+
 }
