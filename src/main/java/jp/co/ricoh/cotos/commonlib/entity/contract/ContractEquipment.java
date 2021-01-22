@@ -82,7 +82,7 @@ public class ContractEquipment extends EntityBase {
 	}
 
 	public enum ArcsPeriodSaleMainteProcStatus {
-		未作成("0"), CSV作成済み("1"), 対象外("2"), 作成エラー("3");
+		未作成("0"), CSV作成済み("1"), 対象外("2");
 
 		private final String text;
 
