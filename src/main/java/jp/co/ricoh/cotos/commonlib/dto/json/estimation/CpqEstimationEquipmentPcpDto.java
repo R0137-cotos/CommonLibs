@@ -68,6 +68,11 @@ public class CpqEstimationEquipmentPcpDto {
 	private String itemCode;
 
 	/**
+	 * 自動更新品種コード
+	 */
+	private String contractAutoItemCode;
+
+	/**
 	 * メーカーコード
 	 */
 	private MakerCodePcp makerCode;
