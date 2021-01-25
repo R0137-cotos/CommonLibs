@@ -304,6 +304,7 @@ public class ContractEquipment extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractEquipment")
+	@JsonIgnore
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 26)
 	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 
