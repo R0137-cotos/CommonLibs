@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.14.0 (21/01/2021)
+- [**closed**] #9253 メニュー管理マスタエンティティ追加 [#1344](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1344)
+- [**closed**] #9429 通知メール変換値マスタに置換値マスタ名、置換値マスタ検索エンティティ名、置換値マスタ検索フィールド名を追加 [#1312](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1312)
+
+---
+
 ## v3.13.0 (07/01/2021)
 - [**closed**] #9377 コミュニケーションリポジトリ修正 [#1315](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1315)
 - [**closed**] #9264 汎用マスタ取得共通クラス 引数無しコンストラクタ追加 [#1310](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1310)
