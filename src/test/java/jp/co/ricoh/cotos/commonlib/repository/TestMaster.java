@@ -2684,8 +2684,8 @@ public class TestMaster {
 		// MoMから作成したMViewのためテストデータはなし
 	
 		// エンティティの取得
-		String id = "000258";
-		List<MvTjmob260OrgServiceMaster> found = mvTjmob260OrgServiceMasterRepository.findByOrsServiceOrgId(id);
+		String id = "4080772";
+		List<MvTjmob260OrgServiceMaster> found = mvTjmob260OrgServiceMasterRepository.findByIdOrsCubicOrgId(id);
 	
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
