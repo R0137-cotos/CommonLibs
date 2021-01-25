@@ -53,7 +53,6 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_equipment_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "契約機種", required = true, position = 3)
 	private ContractEquipment contractEquipment;
 
