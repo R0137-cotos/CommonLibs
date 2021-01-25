@@ -150,6 +150,9 @@ public class CsvUtil {
 		case "3":
 			separator = ';';
 			break;
+		case "4":
+			separator = '\t';
+			break;
 		}
 		return separator;
 	}

@@ -197,6 +197,28 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	public enum ArcsPeriodSaleMntOriginStatus {
+
+		未作成("0"), CSV作成済み("1"), 対象外("2");
+
+		private final String text;
+
+		private ArcsPeriodSaleMntOriginStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ArcsPeriodSaleMntOriginStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -886,4 +908,17 @@ public class Contract extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 96, allowableValues = "range[0,9]")
 	private Integer nextAutoUpdateFlg;
+
+	/**
+	 * ARCS期間売保守元契約処理状態
+	 */
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 97, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
+
+	/**
+	 * ARCS期間売保守元契約連携日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 98)
+	private Date arcsPeriodSaleMntOriginLinkAt;
 }
