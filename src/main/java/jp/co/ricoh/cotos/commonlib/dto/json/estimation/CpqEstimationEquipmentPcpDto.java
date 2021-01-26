@@ -48,11 +48,6 @@ public class CpqEstimationEquipmentPcpDto {
 	private Date maintenanceEndDate;
 
 	/**
-	 * CPQマッピングキー
-	 */
-	private String cpqMappingKey;
-
-	/**
 	 * 数量
 	 */
 	private Integer quantity;

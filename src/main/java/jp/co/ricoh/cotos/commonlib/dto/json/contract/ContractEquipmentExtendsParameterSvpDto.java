@@ -68,4 +68,9 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	 * ハードディスク
 	 */
 	private HarddiskTypeSvp harddiskType;
+
+	/**
+	 * CPQマッピングキー
+	 */
+	private String cpqMappingKey;
 }

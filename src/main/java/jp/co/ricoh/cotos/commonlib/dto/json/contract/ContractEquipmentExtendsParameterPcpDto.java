@@ -78,9 +78,4 @@ public class ContractEquipmentExtendsParameterPcpDto {
 	 * ソフトインストール品種コード
 	 */
 	private String installItemCode;
-
-	/**
-	 * CPQマッピングキー
-	 */
-	private String cpqMappingKey;
 }

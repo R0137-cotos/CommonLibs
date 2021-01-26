@@ -81,11 +81,6 @@ public class ParameterEstimationEquipmentPcpDto {
 	private String serviceMachineFlg;
 
 	/**
-	 * CPQマッピングキー
-	 */
-	private String cpqMappingKey;
-
-	/**
 	 * 数量
 	 */
 	private Integer quantity;
