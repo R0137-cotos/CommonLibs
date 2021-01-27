@@ -28,22 +28,17 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class CsvUtil {
 
 	@Autowired
 	CheckUtil checkUtil;
 
 	private static final String CHARSET_NAME = "MS932";
-
-	/**
-	 * checkUtil設定
-	 * @param checkUtil
-	 */
-	public void setCheckUtil(CheckUtil checkUtil) {
-		this.checkUtil = checkUtil;
-	}
 
 	/**
 	 * CSV情報生成
