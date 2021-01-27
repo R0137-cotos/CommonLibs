@@ -38,6 +38,14 @@ public class CsvUtil {
 	private static final String CHARSET_NAME = "MS932";
 
 	/**
+	 * checkUtil設定
+	 * @param checkUtil
+	 */
+	public void setCheckUtil(CheckUtil checkUtil) {
+		this.checkUtil = checkUtil;
+	}
+
+	/**
 	 * CSV情報生成
 	 *
 	 * <pre>
