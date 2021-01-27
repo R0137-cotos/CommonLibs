@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -37,6 +40,28 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product_master")
 public class ProductMaster extends EntityBaseMaster {
+
+	public enum SerialContactDiv {
+
+		新規のみ("1"), 新規と契約変更("2");
+
+		private final String text;
+
+		private SerialContactDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static SerialContactDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_master_seq")
@@ -229,4 +254,17 @@ public class ProductMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "ヤマト便有無フラグ", required = false, position = 27, allowableValues = "range[0,9]")
 	private Integer yamatoFlg;
+
+	/**
+	 * シリアル連絡URL
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "シリアル連絡URL", required = false, position = 28, allowableValues = "range[0,255]")
+	private String serialContactUrl;
+
+	/**
+	 * シリアル連絡区分
+	 */
+	@ApiModelProperty(value = "シリアル連絡区分", required = false, position = 29, allowableValues = "新規のみ(\"1\"), 新規と契約変更(\"2\")", example = "1")
+	private SerialContactDiv serialContactDiv;
 }
