@@ -28,8 +28,11 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class CsvUtil {
 
 	@Autowired
