@@ -66,20 +66,20 @@ public class CsvUtil {
 
 		CsvMapper mapper = new CsvMapper();
 		CsvParameter prm = Optional.ofNullable(param).orElse(CsvParameter.builder().build());
-		
+
 		if (prm.isQuote() && prm.isWithoutQuoteChar()) {
 			throw new IllegalArgumentException("quoteとwithoutQuoteCharの両方にtrueを設定することはできません。");
 		}
-		
+
 		// 各種パラメーター設定
 		CsvSchema schema;
-		if (prm.isWithoutQuoteChar()) { 
+		if (prm.isWithoutQuoteChar()) {
 			schema = mapper.typedSchemaFor(entityList.get(0).getClass()) //
-				.withUseHeader(prm.isHeader()) //
-				.withColumnSeparator(prm.getSeparator()) //
-				.withLineSeparator(prm.getLineSeparator()) //
-				.withNullValue(prm.getNullValueString()) //
-				.withoutQuoteChar();
+					.withUseHeader(prm.isHeader()) //
+					.withColumnSeparator(prm.getSeparator()) //
+					.withLineSeparator(prm.getLineSeparator()) //
+					.withNullValue(prm.getNullValueString()) //
+					.withoutQuoteChar();
 		} else {
 			schema = mapper.typedSchemaFor(entityList.get(0).getClass()) //
 					.withUseHeader(prm.isHeader()) //
@@ -88,12 +88,12 @@ public class CsvUtil {
 					.withNullValue(prm.getNullValueString()); //
 		}
 		mapper.configure(CsvGenerator.Feature.ALWAYS_QUOTE_STRINGS, prm.isQuote());
-		
+
 		// シリアライザーの設定
 		DefaultSerializerProvider dsp = new DefaultSerializerProvider.Impl();
 		dsp.setNullValueSerializer(new NullValueSerializer(prm.getNullValueString()));
 		mapper.setSerializerProvider(dsp);
-		
+
 		String csv = mapper.writer(schema).writeValueAsString(entityList);
 
 		return csv.getBytes(prm.getCharset());
@@ -212,7 +212,8 @@ public class CsvUtil {
 		if (byteCount < 1 || widthForm == null) {
 			throw new IllegalArgumentException();
 		}
-		if (baseStr == null) baseStr = "";
+		if (baseStr == null)
+			baseStr = "";
 		// 半角・全角変換
 		if (widthForm != WidthForm.Nothing) {
 			Transliterator transliterator = Transliterator.getInstance(widthForm.getId());
@@ -264,7 +265,8 @@ public class CsvUtil {
 		if (byteCount < 1 || widthForm == null) {
 			throw new IllegalArgumentException();
 		}
-		if (baseStr == null) baseStr = "";
+		if (baseStr == null)
+			baseStr = "";
 		// 半角・全角変換
 		if (widthForm != WidthForm.Nothing) {
 			Transliterator transliterator = Transliterator.getInstance(widthForm.getId());

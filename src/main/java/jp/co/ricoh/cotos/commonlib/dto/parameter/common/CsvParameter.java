@@ -41,7 +41,7 @@ public class CsvParameter {
 	 */
 	@Builder.Default
 	private boolean quote = true;
-	
+
 	/**
 	 * 文字列に囲み文字を付与しないフラグ。
 	 * quoteの制約にかかわらず、全ての文字列で囲み文字を付与しない。
