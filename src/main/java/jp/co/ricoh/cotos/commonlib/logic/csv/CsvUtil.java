@@ -66,20 +66,34 @@ public class CsvUtil {
 
 		CsvMapper mapper = new CsvMapper();
 		CsvParameter prm = Optional.ofNullable(param).orElse(CsvParameter.builder().build());
-
+		
+		if (prm.isQuote() && prm.isWithoutQuoteChar()) {
+			throw new IllegalArgumentException("quoteとwithoutQuoteCharの両方にtrueを設定することはできません。");
+		}
+		
 		// 各種パラメーター設定
-		CsvSchema schema = mapper.typedSchemaFor(entityList.get(0).getClass()) //
+		CsvSchema schema;
+		if (prm.isWithoutQuoteChar()) { 
+			schema = mapper.typedSchemaFor(entityList.get(0).getClass()) //
 				.withUseHeader(prm.isHeader()) //
 				.withColumnSeparator(prm.getSeparator()) //
 				.withLineSeparator(prm.getLineSeparator()) //
-				.withNullValue(prm.getNullValueString()); //
+				.withNullValue(prm.getNullValueString()) //
+				.withoutQuoteChar();
+		} else {
+			schema = mapper.typedSchemaFor(entityList.get(0).getClass()) //
+					.withUseHeader(prm.isHeader()) //
+					.withColumnSeparator(prm.getSeparator()) //
+					.withLineSeparator(prm.getLineSeparator()) //
+					.withNullValue(prm.getNullValueString()); //
+		}
 		mapper.configure(CsvGenerator.Feature.ALWAYS_QUOTE_STRINGS, prm.isQuote());
-
+		
 		// シリアライザーの設定
 		DefaultSerializerProvider dsp = new DefaultSerializerProvider.Impl();
 		dsp.setNullValueSerializer(new NullValueSerializer(prm.getNullValueString()));
 		mapper.setSerializerProvider(dsp);
-
+		
 		String csv = mapper.writer(schema).writeValueAsString(entityList);
 
 		return csv.getBytes(prm.getCharset());
