@@ -221,6 +221,7 @@ public class TestCsvUtil {
 		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(true);
 		assertParam.setNullValueString("");
+		assertParam.setWithoutQuoteChar(false);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -229,6 +230,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -244,6 +246,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvLineSeparator("2");
 		csvFileSettingMaster.setCsvQuote(1);
 		csvFileSettingMaster.setCsvNullValueString("");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(false);
@@ -252,6 +255,7 @@ public class TestCsvUtil {
 		assertParam.setLineSeparator("\r\n");
 		assertParam.setQuote(true);
 		assertParam.setNullValueString("");
+		assertParam.setWithoutQuoteChar(true);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -260,6 +264,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -275,6 +280,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvLineSeparator("1");
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(true);
@@ -283,6 +289,7 @@ public class TestCsvUtil {
 		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("");
+		assertParam.setWithoutQuoteChar(true);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -291,6 +298,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -306,6 +314,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvLineSeparator("1");
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("null");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(true);
@@ -314,6 +323,7 @@ public class TestCsvUtil {
 		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("null");
+		assertParam.setWithoutQuoteChar(true);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -322,6 +332,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -337,6 +348,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvLineSeparator("1");
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("null");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(true);
@@ -345,6 +357,7 @@ public class TestCsvUtil {
 		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("null");
+		assertParam.setWithoutQuoteChar(true);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -353,6 +366,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}

@@ -130,6 +130,7 @@ public class CsvUtil {
 		csvParameter.setLineSeparator(getLineSeparator(csvFileSettingMaster.getCsvLineSeparator()));
 		csvParameter.setQuote(flgBooleanConverter(csvFileSettingMaster.getCsvQuote()));
 		csvParameter.setNullValueString(Optional.ofNullable(csvFileSettingMaster.getCsvNullValueString()).orElse(""));
+		csvParameter.setWithoutQuoteChar(flgBooleanConverter(csvFileSettingMaster.getCsvWithoutQuoteChar()));
 		return csvParameter;
 	}
 

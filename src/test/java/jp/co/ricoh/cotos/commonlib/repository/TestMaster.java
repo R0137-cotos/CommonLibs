@@ -2317,6 +2317,15 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+		
+		// ファイル種別タイプ区分
+		found = fileKindManagementMasterRepository.findByFileKindTypeDiv("test_file_kind_type_div").get(0);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 
 	@Test
