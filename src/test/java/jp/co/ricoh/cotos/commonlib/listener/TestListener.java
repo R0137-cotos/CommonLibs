@@ -79,13 +79,13 @@ public class TestListener {
 		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", customerEstimation.getCompanyId());
 		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000255394", customerEstimation.getOfficeId());
 		Assert.assertEquals("企事部設定区分が正しく取得されること", DepartmentDiv.企事部, customerEstimation.getDepartmentDiv());
-		Assert.assertEquals("顧客名が正しく取得されること", "株式会社テ＊ー＊イア＊＊＊＊＊", customerEstimation.getCustomerName());
-		Assert.assertEquals("企業名が正しく取得されること", "株式会社テ＊ー＊イア", customerEstimation.getCompanyName());
-		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerEstimation.getOfficeName());
-		Assert.assertEquals("部門名が正しく取得されること", "＊＊", customerEstimation.getDepartmentName());
+		Assert.assertEquals("顧客名が正しく取得されること", "株式会社ティーガイア＊", customerEstimation.getCustomerName());
+		Assert.assertEquals("企業名が正しく取得されること", "株式会社ティーガイア", customerEstimation.getCompanyName());
+		Assert.assertEquals("事業所名が正しく取得されること", "＊", customerEstimation.getOfficeName());
+		Assert.assertEquals("部門名が正しく取得されること", null, customerEstimation.getDepartmentName());
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", customerEstimation.getPostNumber());
-		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", customerEstimation.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", customerEstimation.getPhoneNumber());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", customerEstimation.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273907", customerEstimation.getPhoneNumber());
 		Assert.assertEquals("FAX番号が正しく取得されること", null, customerEstimation.getFaxNumber());
 
 		customerEstimation.setCompanyName("有＊ト＊タルハウジング");
@@ -148,10 +148,10 @@ public class TestListener {
 		dealerEstimation.setEstimation(estimation);
 		dealerEstimationRespository.save(dealerEstimation);
 		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
-		Assert.assertEquals("販売店名が正しく取得されること", "株式会社テ＊ー＊イア", dealerEstimation.getDealerName());
+		Assert.assertEquals("販売店名が正しく取得されること", "株式会社ティーガイア", dealerEstimation.getDealerName());
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerEstimation.getPostNumber());
-		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", dealerEstimation.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", dealerEstimation.getOrgPhoneNumber());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", dealerEstimation.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273907", dealerEstimation.getOrgPhoneNumber());
 		Assert.assertEquals("MoM会社IDが正しく取得されること", "999999", dealerEstimation.getDistributorMomCmpId());
 
 		dealerEstimation.setDistributorMomCmpId(null);
@@ -171,10 +171,10 @@ public class TestListener {
 		dealerContract.setContract(contract);
 		dealerContractRepository.save(dealerContract);
 		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
-		Assert.assertEquals("販売店名が正しく取得されること", "株式会社テ＊ー＊イア", dealerContract.getDealerName());
+		Assert.assertEquals("販売店名が正しく取得されること", "株式会社ティーガイア", dealerContract.getDealerName());
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerContract.getPostNumber());
-		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目９９－９９　ＸＸＸビル", dealerContract.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0353273999", dealerContract.getOrgPhoneNumber());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", dealerContract.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273907", dealerContract.getOrgPhoneNumber());
 		Assert.assertEquals("MoM会社IDが正しく取得されること", "999999", dealerContract.getDistributorMomCmpId());
 
 		dealerContract.setDistributorMomCmpId(null);
