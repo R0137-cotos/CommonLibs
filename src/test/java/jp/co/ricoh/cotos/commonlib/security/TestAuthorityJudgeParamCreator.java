@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,6 @@ import jp.co.ricoh.cotos.commonlib.security.util.AuthorityJudgeParamCreator;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
 public class TestAuthorityJudgeParamCreator {
 
 	@Autowired
