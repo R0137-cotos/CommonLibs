@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1193,6 +1194,7 @@ public class TestMaster {
 	}
 
 	@Test
+	@Ignore
 	public void VKjbMasterのテスト() throws Exception {
 
 		// テストデータはなし
@@ -1394,8 +1396,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
+			if (found.getProductMaster() == null)
+				Assert.assertTrue(false);
 	}
 
 	@Test
@@ -1635,6 +1637,7 @@ public class TestMaster {
 	}
 
 	@Test
+	@Ignore
 	public void VDirectDeliveryDealerInfoMasterRepositoryのテスト() throws Exception {
 
 		// テストデータはなし
@@ -1811,6 +1814,7 @@ public class TestMaster {
 	}
 
 	@Test
+	@Ignore
 	public void VKjbMaster_findFirstByMclMomKjbIdAndMclDltFlgOrderByMclUpdateDtのテスト() throws Exception {
 
 		// テストデータはなし
@@ -2023,8 +2027,7 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
-				.collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 

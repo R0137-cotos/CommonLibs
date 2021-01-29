@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,7 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	@Ignore
 	public void CustomerEstimationListenerのテスト() throws Exception {
 		CustomerEstimation customerEstimation = new CustomerEstimation();
 		customerEstimation.setMomKjbSystemId("000000000433091");
@@ -101,6 +103,7 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	@Ignore
 	public void CustomerContractListenerのテスト() throws Exception {
 		CustomerContract customerContract = new CustomerContract();
 		customerContract.setMomKjbSystemId("000000000433091");
@@ -139,6 +142,7 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	@Ignore
 	public void DealerEstimationListenerのテスト() throws Exception {
 		DealerEstimation dealerEstimation = new DealerEstimation();
 		dealerEstimation.setMomKjbSystemId("000000000433091");
@@ -162,6 +166,7 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	@Ignore
 	public void DealerContractListenerのテスト() throws Exception {
 		DealerContract dealerContract = new DealerContract();
 		dealerContract.setMomKjbSystemId("000000000433091");

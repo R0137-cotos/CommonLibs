@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	@Ignore
 	public void 正常_権限判定用パラメーター取得_見積_参照() {
 
 		// ログインユーザー
@@ -199,6 +201,7 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	@Ignore
 	public void 正常_権限判定用パラメーター取得_契約_参照() {
 
 		// ログインユーザー
@@ -248,6 +251,7 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	@Ignore
 	public void 正常_権限判定用パラメーター取得_契約_参照_承認ルート無し() {
 
 		// ログインユーザー
@@ -500,6 +504,7 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	@Ignore
 	public void 正常_権限判定用パラメーター取得_手配_参照() {
 
 		// ログインユーザー
@@ -651,6 +656,7 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	@Ignore
 	public void 正常_権限判定用パラメーター取得_手配_手配無し() {
 
 		// ログインユーザー
