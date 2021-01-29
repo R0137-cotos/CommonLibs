@@ -37,7 +37,7 @@ public class TestDBFoundCheck {
 
 	@Test
 	public void MoM社員マスタ存在チェック() {
-		Assert.assertTrue("MoM社員情報が存在すること", dBFoundCheck.existsEmployeeMaster("00229692"));
+		Assert.assertTrue("MoM社員情報が存在すること", dBFoundCheck.existsEmployeeMaster("00231268"));
 		Assert.assertFalse("MoM社員情報が存在しないこと", dBFoundCheck.existsEmployeeMaster("test"));
 	}
 }
