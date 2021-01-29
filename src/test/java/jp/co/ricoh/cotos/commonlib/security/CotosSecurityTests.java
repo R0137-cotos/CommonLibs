@@ -55,6 +55,7 @@ import lombok.val;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Ignore
 public class CotosSecurityTests {
 
 	public String momAuth = "NO_AUTHORITIES";

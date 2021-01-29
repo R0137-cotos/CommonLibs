@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.check;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import jp.co.ricoh.cotos.commonlib.logic.check.DBFoundCheck;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Ignore
 public class TestDBFoundCheck {
 
 	@Autowired
