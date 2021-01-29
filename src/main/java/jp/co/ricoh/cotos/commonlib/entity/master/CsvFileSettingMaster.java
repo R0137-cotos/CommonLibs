@@ -76,10 +76,18 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	private Integer csvQuote;
 
 	/**
+	 * 囲み文字有無フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "囲み文字有無フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	private Integer csvWithoutQuoteChar;
+
+	/**
 	 * NULL値文字
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "NULL値文字", required = false, position = 7, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "NULL値文字", required = false, position = 8, allowableValues = "range[0,255]")
 	private String csvNullValueString;
 
 	/**
@@ -87,6 +95,6 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "csvFileSettingMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 8)
+	@ApiModelProperty(value = "ファイル種別管理マスタ", required = false, position = 9)
 	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }

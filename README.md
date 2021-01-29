@@ -492,3 +492,4 @@
 |535|商品マスタにシリアル連絡URL、シリアル連絡区分を追加|
 |536|CSVUtilにコンストラクタを追加|
 |537|CsvParameterにwithoutQuoteCharを追加 CSVUtilのダブルクォーテーション囲み文字設定にwithoutQuoteChar判定を追加|
+|538|CSVファイル設定マスタにcsvWithoutQuoteCharを追加|
