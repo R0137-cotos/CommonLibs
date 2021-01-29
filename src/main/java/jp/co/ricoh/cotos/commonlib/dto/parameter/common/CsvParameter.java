@@ -35,6 +35,8 @@ public class CsvParameter {
 
 	/**
 	 * 文字列をダブルクォートで囲むか否か 文字列項目をダブルクォートで囲んでCSV情報を生成する。
+	 * trueの場合：ダブルクォートで囲む
+	 * falseの場合：ダブルクォートで囲まない
 	 * ただし、Jacksonの仕様により下記の値ではダブルクォートが付与される。
 	 * ・ASCIIコード表の44以下の文字が含まれる場合(半角スペース、!など)
 	 * ・25文字以上の場合
@@ -44,6 +46,8 @@ public class CsvParameter {
 
 	/**
 	 * 文字列に囲み文字を付与しないフラグ。
+	 * trueの場合：ダブルクォートで囲まない
+	 * falseの場合：quoteの設定を優先する
 	 * quoteの制約にかかわらず、全ての文字列で囲み文字を付与しない。
 	 * quote = true, withoutQuoteChar = true は両立できず、IllegalArgumentExceptionが返されるので注意する
 	 */
