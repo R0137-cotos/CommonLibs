@@ -408,9 +408,9 @@ public class CotosSecurityTests {
 		Mockito.doReturn(AuthLevel.地域).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
 
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
-		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00220552"));
+		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00673662"));
 		authParam.setMvEmployeeMasterList(new ArrayList<MvEmployeeMaster>());
-		authParam.getMvEmployeeMasterList().add(mvEmployeeMasterRepository.findOne("00231268"));
+		authParam.getMvEmployeeMasterList().add(mvEmployeeMasterRepository.findOne("00469821"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.編集);
 		Assert.assertTrue("対象の権限があること", result);
@@ -525,7 +525,7 @@ public class CotosSecurityTests {
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
 		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
 		authParam.setMvEmployeeMasterList(new ArrayList<MvEmployeeMaster>());
-		authParam.getMvEmployeeMasterList().add(mvEmployeeMasterRepository.findOne("00623100"));
+		authParam.getMvEmployeeMasterList().add(mvEmployeeMasterRepository.findOne("00220552"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.編集);
 		Assert.assertFalse("対象の権限が無いこと", result);
@@ -543,7 +543,7 @@ public class CotosSecurityTests {
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
 		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
 		authParam.setMvEmployeeMasterList(new ArrayList<MvEmployeeMaster>());
-		authParam.getMvEmployeeMasterList().add(mvEmployeeMasterRepository.findOne("00623100"));
+		authParam.getMvEmployeeMasterList().add(mvEmployeeMasterRepository.findOne("00469821"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.編集);
 		Assert.assertFalse("対象の権限が無いこと", result);
@@ -657,8 +657,8 @@ public class CotosSecurityTests {
 		Mockito.doReturn(AuthLevel.地域).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
 
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
-		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00220552"));
-		authParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
+		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
+		authParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00229746"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
 		Assert.assertTrue("対象の権限があること", result);
@@ -723,7 +723,7 @@ public class CotosSecurityTests {
 		Mockito.doReturn(AuthLevel.自社).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
 
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
-		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00623100"));
+		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00220552"));
 		authParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
@@ -740,7 +740,7 @@ public class CotosSecurityTests {
 		Mockito.doReturn(AuthLevel.地域).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
 
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
-		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00623100"));
+		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00220552"));
 		authParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
