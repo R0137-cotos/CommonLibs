@@ -112,6 +112,20 @@ public class TestCsvUtil {
 		byte[] expected = Files.readAllBytes(Paths.get("src/test/resources/csv/input_default.csv"));
 		Assert.assertEquals("生成されたCSV情報が正しいこと", new String(actual, "Shift-JIS"), new String(expected, "UTF-8"));
 	}
+	
+	@Test
+	public void 正常系_CSV生成テスト_SJISのCSVファイル_半角スペースあり_withoutQuoteChar() throws ErrorCheckException, IOException, ParseException {
+		CsvParameter param = CsvParameter.builder().charset(Charset.forName("Shift-JIS")).quote(false).withoutQuoteChar(true).build();
+
+		List<TestCsvData> list = new ArrayList<>();
+		list.add(new TestCsvData(1, "testtest test", 12, new SimpleDateFormat("yyyy/MM/dd").parse("2018/12/12"), 75.4));
+		list.add(new TestCsvData(2, "東京都大田区平和島6-1-1東京流通センターB棟5F", 10, new SimpleDateFormat("yyyy/MM/dd").parse("2016/03/15"), 40.5));
+		list.add(new TestCsvData(3, null, 9, new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/02"), 100.1));
+
+		byte[] actual = csvUtil.createCsvData(list, param);
+		byte[] expected = Files.readAllBytes(Paths.get("src/test/resources/csv/input_default_space.csv"));
+		Assert.assertEquals("生成されたCSV情報が正しいこと", new String(actual, "Shift-JIS"), new String(expected, "UTF-8"));
+	}
 
 	@Test
 	public void 正常系_CSV生成テスト_改行コードCRLF() throws ErrorCheckException, IOException, ParseException {
@@ -354,6 +368,22 @@ public class TestCsvUtil {
 		} catch (ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "パラメータ「CSVファイル設定マスタ」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+	
+	@Test
+	public void 異常系_CSV生成テスト_quoteとwithoutQuoteCharの両方にtrue() throws ErrorCheckException, IOException, ParseException {
+		CsvParameter param = CsvParameter.builder().quote(true).withoutQuoteChar(true).build();
+		List<TestCsvData> list = new ArrayList<>();
+		list.add(new TestCsvData(1, "テスト１", 12, new SimpleDateFormat("yyyy/MM/dd").parse("2018/12/12"), 75.4));
+
+		try {
+			csvUtil.createCsvData(list, param);
+			Assert.fail("正常終了した");
+		} catch (IllegalArgumentException e) {
+			Assert.assertEquals("IllegalArgumentExceptionが発生していること", "quoteとwithoutQuoteCharの両方にtrueを設定することはできません。", e.getMessage());
+		} catch (Exception e) {
+			Assert.fail("想定外のエラーが発生している");
 		}
 	}
 }
