@@ -130,18 +130,25 @@ public class CsvUtil {
 		csvParameter.setLineSeparator(getLineSeparator(csvFileSettingMaster.getCsvLineSeparator()));
 		csvParameter.setQuote(flgBooleanConverter(csvFileSettingMaster.getCsvQuote()));
 		csvParameter.setNullValueString(Optional.ofNullable(csvFileSettingMaster.getCsvNullValueString()).orElse(""));
-		csvParameter.setWithoutQuoteChar(flgBooleanConverter(csvFileSettingMaster.getCsvWithoutQuoteChar()));
+		csvParameter.setWithoutQuoteChar(flgBooleanConverter(csvFileSettingMaster.getCsvWithoutQuoteChar(), false));
 		return csvParameter;
 	}
 
+	private boolean flgBooleanConverter(Integer flg) {
+		return flgBooleanConverter(flg, true);
+	}
+	
 	/**
 	 * フラグを真偽値にコンバートします。
 	 *
 	 * @param flg
 	 * @return boolean
 	 */
-	private boolean flgBooleanConverter(Integer flg) {
-		if (null == flg || flg == 1) {
+	private boolean flgBooleanConverter(Integer flg, boolean defaultValue) {
+		if (null == flg) {
+			return defaultValue;
+		}
+		if (flg == 1) {
 			return true;
 		}
 		return false;
