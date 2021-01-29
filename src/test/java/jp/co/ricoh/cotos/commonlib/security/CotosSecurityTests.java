@@ -640,7 +640,7 @@ public class CotosSecurityTests {
 		Mockito.doReturn(AuthLevel.自社).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
 
 		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
-		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00220552"));
+		authParam.setActorMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00229746"));
 		authParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findOne("00231268"));
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
