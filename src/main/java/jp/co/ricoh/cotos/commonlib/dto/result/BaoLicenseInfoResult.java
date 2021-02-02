@@ -122,10 +122,10 @@ public class BaoLicenseInfoResult {
 	private String model_name_2;
 
 	/**
-	 * OSバージョン3
+	 * OSバージョン2
 	 */
-	@ApiModelProperty(value = "OSバージョン3", required = false, position = 19)
-	private String os_version_3;
+	@ApiModelProperty(value = "OSバージョン2", required = false, position = 19)
+	private String os_version_2;
 
 	/**
 	 * 機器名
