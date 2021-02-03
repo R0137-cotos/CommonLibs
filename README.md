@@ -494,3 +494,4 @@
 |537|CsvParameterにwithoutQuoteCharを追加 CSVUtilのダブルクォーテーション囲み文字設定にwithoutQuoteChar判定を追加|
 |538|CSVファイル設定マスタにcsvWithoutQuoteCharを追加|
 |539|BAO連携ライセンス情報取得のResultの項目名を修正|
+|540|課金計上エンティティに計上日制御用商品種類区分を追加|
