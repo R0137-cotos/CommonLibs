@@ -8,4 +8,5 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 @Repository
 public interface ContractInstallationLocationRepository extends CrudRepository<ContractInstallationLocation, Long> {
 
+	public ContractInstallationLocation findByContractId(Long id);
 }

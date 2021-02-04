@@ -1,8 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -365,6 +363,10 @@ public class TestMaster {
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
 	@Autowired
 	private ArrangementWorkTypeForSearchMasterRepository arrangementWorkTypeForSearchMasterRepository;
+	@Autowired
+	private MenuManagementMasterRepository menuManagementMasterRepository;
+	@Autowired
+	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
 
 	@Autowired
 	private FileKindManagementMasterRepository fileKindManagementMasterRepository;
@@ -374,10 +376,6 @@ public class TestMaster {
 	private ShippingThingMasterRepository shippingThingMasterRepository;
 	@Autowired
 	private ShippingPostNumberMasterRepository shippingPostNumberMasterRepository;
-	@Autowired
-	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
-	@Autowired
-	private MenuManagementMasterRepository menuManagementMasterRepository;
 	@Autowired
 	private DateCalcPatternMasterRepository dateCalcPatternMasterRepository;
 	@Autowired
@@ -1497,8 +1495,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
+			if (found.getProductMaster() == null)
+				Assert.assertTrue(false);
 	}
 
 	@Test
@@ -2129,8 +2127,7 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
-				.collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
@@ -2317,7 +2314,7 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
-		
+
 		// ファイル種別タイプ区分
 		found = fileKindManagementMasterRepository.findByFileKindTypeDiv("test_file_kind_type_div").get(0);
 
@@ -2398,22 +2395,6 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		ShippingPostNumberMaster found = shippingPostNumberMasterRepository.findOne(id);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
-
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(found);
-	}
-
-	@Test
-	public void MenuDetailsManagementMasterのテスト() throws Exception {
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailsManagementMaster.sql");
-
-		// エンティティの取得
-		Long id = 1L;
-		MenuDetailsManagementMaster found = menuDetailsManagementMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -2688,14 +2669,31 @@ public class TestMaster {
 	}
 
 	@Test
+	public void MenuDetailsManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailsManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		MenuDetailsManagementMaster found = menuDetailsManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
 	public void MvTjmob260OrgServiceMasterのテスト() throws Exception {
-	
+
 		// MoMから作成したMViewのためテストデータはなし
-	
+
 		// エンティティの取得
 		String id = "4080772";
 		List<MvTjmob260OrgServiceMaster> found = mvTjmob260OrgServiceMasterRepository.findByIdOrsCubicOrgId(id);
-	
+
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 	}
