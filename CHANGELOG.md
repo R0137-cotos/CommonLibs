@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.15.0 (04/02/2021)
+- [**closed**] #8276 佐川コードDTO作成 [#1384](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1384)
+- [**closed**] #9312 計上データ作成バッチ用パラメータに従業員番号項目追加 [#1370](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1370)
+- [**closed**] #8276 エラーメッセージ修正 [#1359](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1359)
+- [**closed**] #8276 yml修正、テスト追加 [#1354](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1354)
+- [**closed**] #8276 アラートに使用するメッセージ追加、設置先情報取得リポジトリ追加 [#1352](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1352)
+
+---
+
+## v3.14.0 (21/01/2021)
+- [**closed**] #9253 メニュー管理マスタエンティティ追加 [#1344](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1344)
+- [**closed**] #9429 通知メール変換値マスタに置換値マスタ名、置換値マスタ検索エンティティ名、置換値マスタ検索フィールド名を追加 [#1312](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1312)
+
+---
+
 ## v3.13.0 (07/01/2021)
 - [**closed**] #9377 コミュニケーションリポジトリ修正 [#1315](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1315)
 - [**closed**] #9264 汎用マスタ取得共通クラス 引数無しコンストラクタ追加 [#1310](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1310)
