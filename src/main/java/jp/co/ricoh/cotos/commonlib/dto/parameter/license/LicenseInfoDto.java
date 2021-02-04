@@ -2,10 +2,10 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
@@ -34,14 +34,14 @@ public class LicenseInfoDto extends DtoBase {
 	/**
 	 * RMA契約開始日
 	 */
-	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiModelProperty(value = "RMA契約開始日", required = false, position = 5)
 	private Date rmaContractStart;
 
 	/**
 	 * RMA契約終了日
 	 */
-	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiModelProperty(value = "RMA契約終了日", required = false, position = 6)
 	private Date rmaContractEnd;
 }
