@@ -1,8 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -2317,7 +2315,7 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
-		
+
 		// ファイル種別タイプ区分
 		found = fileKindManagementMasterRepository.findByFileKindTypeDiv("test_file_kind_type_div").get(0);
 
@@ -2689,13 +2687,13 @@ public class TestMaster {
 
 	@Test
 	public void MvTjmob260OrgServiceMasterのテスト() throws Exception {
-	
+
 		// MoMから作成したMViewのためテストデータはなし
-	
+
 		// エンティティの取得
 		String id = "4080772";
 		List<MvTjmob260OrgServiceMaster> found = mvTjmob260OrgServiceMasterRepository.findByIdOrsCubicOrgId(id);
-	
+
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 	}
