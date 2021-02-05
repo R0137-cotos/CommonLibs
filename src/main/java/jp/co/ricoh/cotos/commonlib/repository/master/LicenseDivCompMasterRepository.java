@@ -9,4 +9,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivCompMaster;
 public interface LicenseDivCompMasterRepository extends CrudRepository<LicenseDivCompMaster, Long> {
 
 	public LicenseDivCompMaster findByLicenseDivMasterId(long licenseDivMasterId);
+
+	public LicenseDivCompMaster findByProductMasterId(long productMasterId);
 }
