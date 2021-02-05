@@ -192,4 +192,10 @@ public class MailControlMaster extends EntityBaseMaster {
 	@JsonIgnore
 	@ApiModelProperty(value = "処理実行日計算パターンマスタ", required = false, position = 16)
 	private DateCalcPatternMaster processDayCalcPatternMaster;
+
+	/**
+	 * エラー通知メール制御マスタID
+	 */
+	@ApiModelProperty(value = "エラー通知メール制御マスタID", required = false, position = 17)
+	private long errorMailControlMasterId;
 }
