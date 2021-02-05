@@ -196,6 +196,9 @@ public class MailControlMaster extends EntityBaseMaster {
 	/**
 	 * エラー通知メール制御マスタID
 	 */
+	@ManyToOne
+	@JoinColumn(name = "error_mail_control_master_id", referencedColumnName = "id")
+	@JsonIgnore
 	@ApiModelProperty(value = "エラー通知メール制御マスタID", required = false, position = 17)
-	private long errorMailControlMasterId;
+	private MailControlMaster errorMailControlMasterId;
 }
