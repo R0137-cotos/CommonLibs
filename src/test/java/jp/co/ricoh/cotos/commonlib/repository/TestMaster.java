@@ -363,6 +363,10 @@ public class TestMaster {
 	private ArrangementWorkOrderMasterRepository arrangementWorkOrderMasterRepository;
 	@Autowired
 	private ArrangementWorkTypeForSearchMasterRepository arrangementWorkTypeForSearchMasterRepository;
+	@Autowired
+	private MenuManagementMasterRepository menuManagementMasterRepository;
+	@Autowired
+	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
 
 	@Autowired
 	private FileKindManagementMasterRepository fileKindManagementMasterRepository;
@@ -372,10 +376,6 @@ public class TestMaster {
 	private ShippingThingMasterRepository shippingThingMasterRepository;
 	@Autowired
 	private ShippingPostNumberMasterRepository shippingPostNumberMasterRepository;
-	@Autowired
-	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
-	@Autowired
-	private MenuManagementMasterRepository menuManagementMasterRepository;
 	@Autowired
 	private DateCalcPatternMasterRepository dateCalcPatternMasterRepository;
 	@Autowired
@@ -1495,8 +1495,8 @@ public class TestMaster {
 		if (found.getProductMaster() == null)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMaster() == null)
-		if (found.getProductMaster() == null)
-			Assert.assertTrue(false);
+			if (found.getProductMaster() == null)
+				Assert.assertTrue(false);
 	}
 
 	@Test
@@ -2127,8 +2127,7 @@ public class TestMaster {
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
-				.collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
@@ -2405,22 +2404,6 @@ public class TestMaster {
 	}
 
 	@Test
-	public void MenuDetailsManagementMasterのテスト() throws Exception {
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailsManagementMaster.sql");
-
-		// エンティティの取得
-		Long id = 1L;
-		MenuDetailsManagementMaster found = menuDetailsManagementMasterRepository.findOne(id);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
-
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(found);
-	}
-
-	@Test
 	public void MenuManagementMasterのテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
@@ -2677,6 +2660,23 @@ public class TestMaster {
 		// エンティティの取得
 		Long id = 1L;
 		CsvFileSettingMaster found = csvFileSettingMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void MenuDetailsManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuManagementMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/menuDetailsManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		MenuDetailsManagementMaster found = menuDetailsManagementMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

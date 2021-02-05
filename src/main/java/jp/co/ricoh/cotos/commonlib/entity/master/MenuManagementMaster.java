@@ -24,8 +24,8 @@ import lombok.EqualsAndHashCode;
  * メニュー管理マスタ
  */
 @Entity
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "menu_management_master")
 public class MenuManagementMaster extends EntityBaseMaster {
 
