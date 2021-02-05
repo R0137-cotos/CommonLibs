@@ -122,7 +122,7 @@ public class ContractDetailDto extends DtoBase {
 	/**
 	 * 統合契約内部振替処理状態
 	 */
-	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), TSV作成済み(\"1\"), 連携済み(\"2\"), 連携エラー(\"3\"), 対象外(\"4\")", position = 15)
+	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 15)
 	private AbsConInsideTransStatus absConInsideTransStatus;
 
 	/**
@@ -175,7 +175,7 @@ public class ContractDetailDto extends DtoBase {
 	/**
 	 * 統合契約外部請求処理状態
 	 */
-	@ApiModelProperty(value = "統合契約外部請求処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 連携済み(\"2\"), 連携エラー(\"3\"), 対象外(\"4\")", position = 23)
+	@ApiModelProperty(value = "統合契約外部請求処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 対象外(\"2\")", position = 23)
 	private AbsConExternalBillingStatus absConExternalBillingStatus;
 
 	/**
