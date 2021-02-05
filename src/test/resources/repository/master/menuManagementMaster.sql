@@ -1,1 +1,1 @@
-INSERT INTO MENU_MANAGEMENT_MASTER(ID,CREATED_AT,CREATED_USER_ID,UPDATED_AT,UPDATED_USER_ID,VERSION,MENU_NAME,AUTH,ORDER_NUMBER,URL) VALUES (1,'2020/10/12 12:59:29','test','2020/10/12 12:59:41','test',1,'test','1',1,'test');
+INSERT INTO menu_management_master (id,created_at,created_user_id,updated_at,updated_user_id,version,menu_name,auth,order_number,url) VALUES(1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'メニュー名','権限',1,'URL');
