@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,12 +18,12 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -39,50 +38,6 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "item_master")
 public class ItemMasterDto extends EntityBaseMaster {
-
-	public enum ItemType {
-
-		なし("0"), 基本("1"), オプション("2");
-
-		private final String text;
-
-		private ItemType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ItemType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum CostType {
-
-		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4");
-
-		private final String text;
-
-		private CostType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static CostType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")

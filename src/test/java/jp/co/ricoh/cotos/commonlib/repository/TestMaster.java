@@ -1378,7 +1378,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
 
 		List<String> appId = Arrays.asList("electric");
-		System.out.println(appId);
 		List<ProductMaster> list = productMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
 		List<Long> id = Arrays.asList(new Long[] { 1L, 2L });
@@ -1411,7 +1410,6 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
 
 		List<String> appId = Arrays.asList("electric");
-		System.out.println(appId);
 		List<ProductMasterDto> list = productMasterDtoRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
 		List<Long> id = Arrays.asList(new Long[] { 1L, 2L });
