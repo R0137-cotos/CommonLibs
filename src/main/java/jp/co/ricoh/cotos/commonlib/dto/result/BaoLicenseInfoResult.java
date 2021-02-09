@@ -2,20 +2,15 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@Entity
 @Data
 public class BaoLicenseInfoResult {
 
 	/**
 	 * 販売店様管理番号
 	 */
-	@Id
 	@ApiModelProperty(value = "販売店様管理番号", required = false, position = 1)
 	private String dealer_management_number;
 

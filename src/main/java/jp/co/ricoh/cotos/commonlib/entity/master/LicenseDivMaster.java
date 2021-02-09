@@ -1,9 +1,12 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -44,4 +47,11 @@ public class LicenseDivMaster extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ライセンス種類区分", required = false, position = 3, allowableValues = "range[0,255]")
 	private String licenseClassDiv;
+
+	/**
+	 * ライセンス区分構成マスタ
+	 */
+	@OneToMany(mappedBy = "licenseDivMaster")
+	@ApiModelProperty(value = "ライセンス区分マスタ", required = true, position = 3)
+	private List<LicenseDivCompMaster> licenseDivCompMasterList;
 }

@@ -149,4 +149,19 @@ public class SalesCalcResultWorkForCspRunning {
 	 * 企業名（カナ）
 	 */
 	private String companyNameKana;
+
+	/**
+	 * 仕入用管理No
+	 */
+	private String purchaseManageNumber;
+
+	/**
+	 * 計上日制御用商品種類区分
+	 */
+	private String accountingProductClassDiv;
+
+	/**
+	 * 従業員番号
+	 */
+	private String empNumber;
 }
