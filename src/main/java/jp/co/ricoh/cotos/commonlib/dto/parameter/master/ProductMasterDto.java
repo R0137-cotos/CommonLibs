@@ -43,7 +43,7 @@ import lombok.ToString;
  */
 @Entity
 @Data
-@ToString(exclude = { "itemMasterListDto" })
+@ToString(exclude = { "itemMasterDtoList" })
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product_master")
 public class ProductMasterDto extends EntityBaseMaster {
@@ -80,7 +80,7 @@ public class ProductMasterDto extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "productMasterDto")
 	@ApiModelProperty(value = "品種マスタ", required = false, position = 5)
-	private List<ItemMasterDto> itemMasterListDto;
+	private List<ItemMasterDto> itemMasterDtoList;
 
 	/**
 	 * 見積チェックリスト構成マスタ
