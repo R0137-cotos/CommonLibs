@@ -1629,8 +1629,9 @@ public class TestContract {
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setShippingMachineName(STR_256);
 		testTarget.setThingItemCode(STR_256);
+		testTarget.setVendorCode(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "発送機器名称は最大文字数（255）を超えています。"));
 
