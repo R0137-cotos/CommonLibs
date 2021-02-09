@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -45,9 +42,9 @@ public class ShippingThingDetail extends EntityBase {
 	/**
 	 * 物あり品種コード
 	 */
-	@Min(0)
-	@ApiModelProperty(value = "物あり品種コード", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long thingItemCode;
+	@Size(max = 255)
+	@ApiModelProperty(value = "物あり品種コード", required = false, position = 2, allowableValues = "range[0,255]")
+	private String thingItemCode;
 
 	/**
 	 * 発送機器名称
@@ -62,7 +59,7 @@ public class ShippingThingDetail extends EntityBase {
 	@Max(99999)
 	@Min(0)
 	@ApiModelProperty(value = "数量", required = false, position = 4, allowableValues = "range[0,99999]")
-	private int defaultQuantity;
+	private int quantity;
 
 	/**
 	 * 原価
@@ -93,13 +90,6 @@ public class ShippingThingDetail extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "プロダクト確認集計表フラグ", required = false, position = 8, allowableValues = "range[0,9]")
 	private Integer productSpreadsheetFlg;
-
-	/**
-	 * FFM連携納期
-	 */
-	@ApiModelProperty(value = "FFM連携納期", required = false, position = 9)
-	@Temporal(TemporalType.DATE)
-	private Date ffmDeliveryDate;
 
 	/**
 	 * 契約明細

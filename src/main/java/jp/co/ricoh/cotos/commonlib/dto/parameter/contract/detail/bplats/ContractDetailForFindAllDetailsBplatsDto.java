@@ -148,7 +148,7 @@ public class ContractDetailForFindAllDetailsBplatsDto extends EntityBase {
 	/**
 	 * FFM検収連携状態
 	 */
-	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\")", position = 20)
+	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\"), 対象外(\"3\")", position = 20)
 	private FfmAcceptanceLinkingStatus ffmAcceptanceLinkingStatus;
 
 	/**

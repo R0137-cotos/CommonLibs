@@ -151,15 +151,6 @@ public class ShippingThingMaster extends EntityBase {
 	private int productSpreadsheetFlg;
 
 	/**
-	 * FFM連携納期計算パターンマスタ
-	 */
-	@ManyToOne
-	@JoinColumn(name = "ffm_delivery_date_calc_master_id", referencedColumnName = "id")
-	@JsonIgnore
-	@ApiModelProperty(value = "FFM連携納期計算パターンマスタ", required = false, position = 13)
-	private DateCalcPatternMaster dateCalcPatternMaster;
-
-	/**
 	 * 仕入先コード
 	 */
 	@Size(max = 255)
