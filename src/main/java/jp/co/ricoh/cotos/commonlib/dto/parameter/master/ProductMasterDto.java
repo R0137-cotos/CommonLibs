@@ -43,7 +43,7 @@ import lombok.ToString;
  */
 @Entity
 @Data
-@ToString(exclude = { "itemMasterDtoList" })
+@ToString
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product_master")
 public class ProductMasterDto extends EntityBaseMaster {
