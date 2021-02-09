@@ -25,6 +25,20 @@ public class MailText {
 	private List<String> replaceList2 = new ArrayList<String>();
 	private List<String> replaceList3 = new ArrayList<String>();
 
+	public MailText(List<String> replaceValueList) {
+		// 置換文字列
+		this.replaceValue1 = replaceValueList.size() > 0 ? replaceValueList.get(0) : "";
+		this.replaceValue2 = replaceValueList.size() > 1 ? replaceValueList.get(1) : "";
+		this.replaceValue3 = replaceValueList.size() > 2 ? replaceValueList.get(2) : "";
+		this.replaceValue4 = replaceValueList.size() > 3 ? replaceValueList.get(3) : "";
+		this.replaceValue5 = replaceValueList.size() > 4 ? replaceValueList.get(4) : "";
+		this.replaceValue6 = replaceValueList.size() > 5 ? replaceValueList.get(5) : "";
+		this.replaceValue7 = replaceValueList.size() > 6 ? replaceValueList.get(6) : "";
+		this.replaceValue8 = replaceValueList.size() > 7 ? replaceValueList.get(7) : "";
+		this.replaceValue9 = replaceValueList.size() > 8 ? replaceValueList.get(8) : "";
+		this.replaceValue10 = replaceValueList.size() > 9 ? replaceValueList.get(9) : "";
+	}
+
 	public MailText(List<String> replaceValueList, List<List<String>> replaceListValues) {
 		// 置換文字列
 		this.replaceValue1 = replaceValueList.size() > 0 ? replaceValueList.get(0) : "";
