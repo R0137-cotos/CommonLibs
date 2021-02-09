@@ -1628,14 +1628,15 @@ public class TestContract {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setShippingMachineName(STR_256);
+		testTarget.setThingItemCode(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "発送機器名称は最大文字数（255）を超えています。"));
 
 		// 異常系（@Max ：）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setDefaultQuantity(INT_100000);
+		testTarget.setQuantity(INT_100000);
 		testTarget.setFfmInsideTransExclusionFlg(INT_10);
 		testTarget.setProductSpreadsheetFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -1645,14 +1646,13 @@ public class TestContract {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setThingItemCode((long)INT_MINUS_1);
-		testTarget.setDefaultQuantity(INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setFfmInsideTransExclusionFlg(INT_MINUS_1);
 		testTarget.setProductSpreadsheetFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "物あり品種コードは最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
 		// 異常系（@DecimalMin ：）
 		BeanUtils.copyProperties(testTarget, entity);

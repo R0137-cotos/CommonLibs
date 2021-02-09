@@ -921,4 +921,12 @@ public class Contract extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 98)
 	private Date arcsPeriodSaleMntOriginLinkAt;
+
+	/**
+	 * 次回継続可能機種なしフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 99, allowableValues = "range[0,9]")
+	private Integer nextEquipmentNotContFlg;
 }
