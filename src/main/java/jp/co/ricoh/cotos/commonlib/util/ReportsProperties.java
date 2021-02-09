@@ -11,5 +11,14 @@ import lombok.Data;
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "cotos.reports")
 public class ReportsProperties {
+
+	/**
+	 * 帳票テンプレートディレクトリ
+	 */
 	private String excelTemplateDir;
+
+	/**
+	 * 帳票出力一時ディレクトリ
+	 */
+	private String temporaryDir;
 }
