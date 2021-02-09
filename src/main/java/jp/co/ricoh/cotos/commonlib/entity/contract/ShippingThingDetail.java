@@ -100,4 +100,10 @@ public class ShippingThingDetail extends EntityBase {
 	@ApiModelProperty(value = "契約明細", required = true, position = 10)
 	private ContractDetail contractDetail;
 
+	/**
+	 * 仕入先コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入先コード", required = false, position = 11, allowableValues = "range[0,255]")
+	private String vendorCode;
 }
