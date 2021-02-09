@@ -363,3 +363,4 @@
 |406|アラートに使用するメッセージ修正|
 |407|佐川コードDTO追加|
 |408|コメントが最大文字数を超えていた場合のエラーメッセージ追加|
+|409|ProductMasterDto、ItemMasterDto作成、ProductMasterDtoRepository作成|
