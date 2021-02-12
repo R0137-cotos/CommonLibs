@@ -127,6 +127,7 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkCheckResult
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkErrorLog;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.common.SearchCondition;
 import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailDestination;
 import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
@@ -740,6 +741,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/AttachedFileDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated AttachedFileDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/SearchCondition")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated SearchCondition entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
