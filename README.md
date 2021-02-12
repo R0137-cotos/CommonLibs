@@ -512,3 +512,4 @@
 |555|logic..mail.MailTextをreplaceListValuesを引数に設定しないメソットを追加|
 |556|発送物あり明細に仕入先コード追加|
 |557|BAO連携ライセンス情報取得DTO修正|
+|558|ProductMasterDto、ItemMasterDto作成、ProductMasterDtoRepository作成|
