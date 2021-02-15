@@ -513,3 +513,4 @@
 |556|発送物あり明細に仕入先コード追加|
 |557|BAO連携ライセンス情報取得DTO修正|
 |558|ProductMasterDto、ItemMasterDto作成、ProductMasterDtoRepository作成|
+|559|ライセンス情報リポジトリに契約（文書番号）検索を追加|
