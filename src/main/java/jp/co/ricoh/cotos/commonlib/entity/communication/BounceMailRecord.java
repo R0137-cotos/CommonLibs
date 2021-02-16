@@ -158,7 +158,8 @@ public class BounceMailRecord extends EntityBase {
 	/**
 	 * COTOS運用対応完了済フラグ
 	 */
-	@ApiModelProperty(value = "COTOS運用対応完了済フラグ", required = true, position = 17, allowableValues = "false:COTOS運用チームに残作業がある true:COTOS運用チームに残作業がない。")
-	private boolean cotosSupportCompleted;
+	@Max(9)
+	@ApiModelProperty(value = "COTOS運用対応完了済フラグ", required = false, position = 17, allowableValues = "1:COTOS運用チームに残作業がない。")
+	private Integer cotosSupportCompleted;
 
 }
