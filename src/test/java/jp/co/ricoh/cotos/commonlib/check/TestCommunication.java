@@ -329,12 +329,19 @@ public class TestCommunication {
 		testTarget.setNXNguidetargettype(STR_256);
 		testTarget.setNXJizenflg(STR_256);
 		testTarget.setNErrorFlg(STR_256);
-		testTarget.setCotosSupportCompleted(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 9);
+		Assert.assertTrue(result.getErrorInfoList().size() == 8);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "契約IDは最大文字数（255）を超えています。"));
 
+		// 異常系（@Max :cotosSupportCompleted
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setCotosSupportCompleted(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "COTOS運用対応完了済フラグは最大値（9）を超えています。"));
+	
 		// 異常系（@Min ：contractId contractBranchNumber mailTemplateMasterId nXNpserviceno nXNservicelineno nXNdomainlineno）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setContractBranchNumber(INT_MINUS_1);
