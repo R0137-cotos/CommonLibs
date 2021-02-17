@@ -155,4 +155,11 @@ public class BounceMailRecord extends EntityBase {
 	@ApiModelProperty(value = "バウンスメール宛先", required = false, position = 16)
 	private List<BounceMailDestination> bounceMailDestinationList;
 
+	/**
+	 * COTOS運用対応完了済フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "COTOS運用対応完了済フラグ", required = false, position = 17, allowableValues = "1:COTOS運用チームに残作業がない。")
+	private Integer cotosSupportCompleted;
+
 }
