@@ -515,3 +515,4 @@
 |558|ProductMasterDto、ItemMasterDto作成、ProductMasterDtoRepository作成|
 |559|ライセンス情報リポジトリに契約（文書番号）検索を追加|
 |600|CommonSendMailにコンストラクタ生成アノテーションを付与|
+|601|ファイル操作関連商品マスタのカテゴリEnumに項目追加|
