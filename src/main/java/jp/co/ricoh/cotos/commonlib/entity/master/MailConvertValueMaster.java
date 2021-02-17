@@ -102,4 +102,26 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	@Max(9)
 	@ApiModelProperty(value = "拡張項目フラグ", required = false, position = 7, allowableValues = "range[0,9]")
 	private Integer extendsParameterFlg;
+
+	/**
+	 * 置換値マスタ名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "置換値マスタ名", required = false, position = 8, allowableValues = "range[0,255]")
+	private String replaceMasterName;
+
+	/**
+	 * 置換値マスタ検索エンティティ名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "置換値マスタ検索エンティティ名", required = false, position = 9, allowableValues = "range[0,255]")
+	private String replaceMasterSearchEntityName;
+
+	/**
+	 * 置換値マスタ検索フィールド名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "置換値マスタ検索フィールド名", required = false, position = 10, allowableValues = "range[0,255]")
+	private String replaceMasterSearchFieldName;
+
 }
