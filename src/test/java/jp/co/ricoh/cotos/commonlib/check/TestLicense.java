@@ -40,6 +40,7 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 public class TestLicense {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
+	private static final int INT_MINUS_100000 = -100000;
 	private static final int INT_MINUS_1 = -1;
 	private static final int INT_10 = 10;
 	private static final int INT_100 = 100;
@@ -280,11 +281,19 @@ public class TestLicense {
 		testTarget.setSeqNumber((long) INT_MINUS_1);
 		testTarget.setItemMasterId((long) INT_MINUS_1);
 		testTarget.setProductMasterId((long) INT_MINUS_1);
-		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setCaptureFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ライセンス区分マスタIDは最小値（0）を下回っています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setQuantity(INT_MINUS_100000);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
+
 	}
 }

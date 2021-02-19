@@ -152,8 +152,8 @@ public class LicenseDetail extends EntityBase {
 	 * 数量
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "数量", required = false, position = 10, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "数量", required = false, position = 10, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 
 	/**
