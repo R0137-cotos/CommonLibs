@@ -55,5 +55,9 @@ public class CpqProperties {
 	 * CPQの管理者ログインパスワード
 	 */
 	String adminPassword;
+	/**
+	 * コマース遷移URL生成時にコールするAPI情報
+	 */
+	String createCommerceUrl;
 
 }

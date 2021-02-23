@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
@@ -29,6 +31,7 @@ public class ExternalCooperationCsvOutputParameterDto {
 	/**
 	 * 出力日
 	 */
+	@JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Tokyo")
 	@ApiParam(value = "出力日", required = false)
 	@ApiModelProperty(value = "出力日", required = false, position = 3)
 	private Date outputDate;
