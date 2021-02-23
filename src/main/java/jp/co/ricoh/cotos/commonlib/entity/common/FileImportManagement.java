@@ -124,14 +124,14 @@ public class FileImportManagement extends EntityBase {
 	 * 取込開始日時
 	 */
 	@ApiModelProperty(value = "取込開始日時", required = false, position = 8)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date importStartDate;
 
 	/**
 	 * 取込終了日時
 	 */
 	@ApiModelProperty(value = "取込終了日時", required = false, position = 9)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date importEndDate;
 
 	/**
