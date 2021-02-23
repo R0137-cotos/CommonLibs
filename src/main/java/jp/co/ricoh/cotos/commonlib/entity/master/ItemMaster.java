@@ -111,7 +111,7 @@ public class ItemMaster extends EntityBaseMaster {
 
 	public enum PenaltyStartDateType {
 
-		サービス開始日("1"), サービス開始翌月１日("2");
+		課金開始日("1");
 
 		private final String text;
 
