@@ -123,14 +123,14 @@ public class FileImportManagement extends EntityBase {
 	/**
 	 * 取込開始日時
 	 */
-	@ApiModelProperty(value = "取込開始日時", required = false, position = 8)
+	@ApiModelProperty(value = "取込開始日時", required = false, position = 9)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date importStartDate;
 
 	/**
 	 * 取込終了日時
 	 */
-	@ApiModelProperty(value = "取込終了日時", required = false, position = 9)
+	@ApiModelProperty(value = "取込終了日時", required = false, position = 10)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date importEndDate;
 
@@ -139,6 +139,6 @@ public class FileImportManagement extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "fileImportManagement")
 	@OrderBy("lineNumber ASC")
-	@ApiModelProperty(value = "ファイル取込エラー詳細", required = false, position = 10)
+	@ApiModelProperty(value = "ファイル取込エラー詳細", required = false, position = 11)
 	private List<FileImportErrorDetails> fileImportErrorDetailsList;
 }
