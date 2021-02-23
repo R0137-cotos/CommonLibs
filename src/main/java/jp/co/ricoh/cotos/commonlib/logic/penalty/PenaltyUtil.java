@@ -286,17 +286,8 @@ public class PenaltyUtil {
 		if(itemMaster.getPenaltyStartDateType() == null || itemMaster.getMinContractMonths() == null) {
 			return null;
 		}
-		Integer addMonth = null;
-		switch (itemMaster.getPenaltyStartDateType()) {
-		case 課金開始日:
-			addMonth = 0;
-			break;
-		}
-		if(addMonth == null) {
-			return null;
-		}
 		// 違約金起算日に最低契約月数を加算して年月を取得
-		Date lastMonth = addMonth(addMonth(addMonth(penalyStartingDate, addMonth), itemMaster.getMinContractMonths()), -1);
+		Date lastMonth = addMonth(addMonth(penalyStartingDate, itemMaster.getMinContractMonths()), -1);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(lastMonth);
 		// 計算結果同月での解約は違約金発生しないため前月の最終日を違約金発生の最終日とする。

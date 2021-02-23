@@ -146,76 +146,7 @@ public class TestPenaltyCheck {
 		Assert.assertNull("違約金チェック結果がNULLであること", actual);
 	}
 
-	@Test
-	public void 正常_違約金発生無し_契約_起算日区分2_違約金有無フラグ無しテスト() throws Exception {
-		final long contractId = 3L;
-		final long itemMasterId = 16147L; // 違約金有無フラグ=「0：無し」
-		Contract contract = contractRepository.findOne(contractId);
-		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200201", null);
-
-		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
-
-		Assert.assertNull("違約金チェック結果がNULLであること", actual);
-	}
-
 // RITOS移管Aカテゴリでは部分解約(見積での違約金表示)は対応不要となった。Bカテゴリ以降で対応する可能性あるためコメント化。以降のコメント箇所も同様。
-//	@Test
-//	public void 正常_違約金発生無し_契約_起算日区分2_違約金有無フラグ有りテスト() throws Exception {
-//		final long contractId = 3L;
-//		final long itemMasterId = 16148L; // 違約金有無フラグ=「1：有り」
-//		Contract contract = contractRepository.findOne(contractId);
-//
-//
-//		ItemMaster actual = penaltyUtil.penaltyCheck(contract, itemMasterId);
-//
-//		Assert.assertNull("違約金チェック結果がNULLであること", actual);
-//	}
-//
-//	@Test
-//	public void 正常_違約金発生無し_契約_起算日区分2_違約金有無フラグNULLテスト() throws Exception {
-//		final long contractId = 3L;
-//		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-//		Contract contract = contractRepository.findOne(contractId);
-//
-//		ItemMaster actual = penaltyUtil.penaltyCheck(contract, itemMasterId);
-//
-//		Assert.assertNull("違約金チェック結果がNULLであること", actual);
-//	}
-//
-//	@Test
-//	public void 正常_違約金発生有り_契約_起算日区分2_違約金有無フラグ無しテスト() throws Exception {
-//		final long contractId = 4L;
-//		final long itemMasterId = 16147L; // 違約金有無フラグ=「0：無し」
-//		Contract contract = contractRepository.findOne(contractId);
-//
-//		ItemMaster actual = penaltyUtil.penaltyCheck(contract, itemMasterId);
-//
-//		Assert.assertNull("違約金チェック結果がNULLであること", actual);
-//	}
-//
-//	@Test
-//	public void 正常_違約金発生有り_契約_起算日区分2_違約金有無フラグ有りテスト() throws Exception {
-//		final long contractId = 4L;
-//		final long itemMasterId = 16148L; // 違約金有無フラグ=「1：有り」
-//		Contract contract = contractRepository.findOne(contractId);
-//
-//		ItemMaster actual = penaltyUtil.penaltyCheck(contract, itemMasterId);
-//
-//		Assert.assertNotNull("違約金チェック結果がNULLでないこと", actual);
-//		Assert.assertEquals("違約金チェック結果の品種マスタIDを確認", itemMasterId, actual.getId());
-//	}
-//
-//	@Test
-//	public void 正常_違約金発生有り_契約_起算日区分2_違約金有無フラグNULLテスト() throws Exception {
-//		final long contractId = 4L;
-//		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-//		Contract contract = contractRepository.findOne(contractId);
-//
-//		ItemMaster actual = penaltyUtil.penaltyCheck(contract, itemMasterId);
-//
-//		Assert.assertNull("違約金チェック結果がNULLであること", actual);
-//	}
-//
 //	// 見積テスト
 //	@Test
 //	public void 正常_違約金発生無し_見積_起算日区分1_違約金有無フラグ無しテスト() throws Exception {
