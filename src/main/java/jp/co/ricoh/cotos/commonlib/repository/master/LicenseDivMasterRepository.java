@@ -10,4 +10,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.LicenseDivMaster;
 @Repository
 public interface LicenseDivMasterRepository extends CrudRepository<LicenseDivMaster, Long> {
 	public List<LicenseDivMaster> findAllByOrderByIdAsc ();
+
+	public LicenseDivMaster findByLicenseClassDiv(String licenseClassDiv);
 }

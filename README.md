@@ -527,3 +527,4 @@
 |610|サービスカテゴリEnum項目追加|
 |611|手配業務操作履歴.操作内容Enum項目追加|
 |612|ライセンス残数リポジトリにfindByLicenseDivMasterIdAndLicenseKeyを追加|
+|613|ライセンス区分マスタにfindByLicenseClassDivを追加|
