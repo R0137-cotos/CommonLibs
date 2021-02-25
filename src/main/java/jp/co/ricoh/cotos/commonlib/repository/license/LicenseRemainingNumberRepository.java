@@ -14,4 +14,6 @@ public interface LicenseRemainingNumberRepository extends CrudRepository<License
 	public List<LicenseRemainingNumber> findByLicenseDivMasterIdAndAllocationDiv(Long licenseDivMasterId, AllocationDiv allocationDiv);
 
 	public List<LicenseRemainingNumber> findByRjManageNumber(String rjManageNumber);
+
+	public LicenseRemainingNumber findByLicenseDivMasterIdAndLicenseKey(Long licenceDivMasterId, String licenseKey);
 }
