@@ -529,3 +529,4 @@
 |612|ライセンス残数リポジトリにfindByLicenseDivMasterIdAndLicenseKeyを追加|
 |613|ライセンス区分マスタにfindByLicenseClassDivを追加|
 |614|品種振替構成マスタにディスパッチ振替フラグ追加|
+|615|契約変更期間エラーメッセージ修正|
