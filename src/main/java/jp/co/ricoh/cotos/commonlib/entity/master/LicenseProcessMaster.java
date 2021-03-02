@@ -35,7 +35,7 @@ public class LicenseProcessMaster extends EntityBase {
 
 	public enum OperationDiv {
 
-		受付("1"), ボタン("2"), CSV出力("3"), CSV取込("4");
+		受付("1"), ボタン("2"), CSV出力("3"), CSV取込("4"), 自動("5");
 
 		private final String text;
 
@@ -92,7 +92,7 @@ public class LicenseProcessMaster extends EntityBase {
 	@NotNull
 	@Size(max = 255)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 5)
+	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\"), 自動(\"5\")", position = 5)
 	private OperationDiv operationDiv;
 
 	/**
