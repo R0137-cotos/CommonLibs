@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AccessType;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.ActionDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AuthDiv;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
@@ -62,6 +61,6 @@ public class BusinessCheck {
 		authParam.setRequesterMvEmployeeMaster(requester);
 		authParam.setActorMvEmployeeMaster(approver);
 
-		return momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
+		return momAuthorityService.hasAuthoritySubApprover(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配);
 	}
 }
