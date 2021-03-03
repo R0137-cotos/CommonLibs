@@ -534,3 +534,4 @@
 |617|機種略号マスタリポジトリにfindByNModelCodeOrderByIdAscを追加|
 |618|DateCalcPatternUtilにコンストラクタ生成アノテーションを付与|
 |619|BusinessDayUtilにコンストラクタ生成アノテーションを付与|
+|620|契約機種エンティティ修正|
