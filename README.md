@@ -532,3 +532,4 @@
 |615|契約変更期間エラーメッセージ修正|
 |616|手配業務操作履歴のenumを修正、ライセンス工程マスタのenumを修正|
 |617|機種略号マスタリポジトリにfindByNModelCodeOrderByIdAscを追加|
+|618|DateCalcPatternUtilにコンストラクタ生成アノテーションを付与|
