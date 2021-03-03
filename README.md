@@ -533,3 +533,4 @@
 |616|手配業務操作履歴のenumを修正、ライセンス工程マスタのenumを修正|
 |617|機種略号マスタリポジトリにfindByNModelCodeOrderByIdAscを追加|
 |618|DateCalcPatternUtilにコンストラクタ生成アノテーションを付与|
+|619|BusinessDayUtilにコンストラクタ生成アノテーションを付与|
