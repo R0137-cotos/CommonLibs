@@ -24,11 +24,15 @@ import jp.co.ricoh.cotos.commonlib.entity.master.DateCalcPatternMaster.DateCalcB
 import jp.co.ricoh.cotos.commonlib.entity.master.DateCalcPatternMaster.DateCalcType;
 import jp.co.ricoh.cotos.commonlib.logic.businessday.BusinessDayUtil;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * 日付計算パターン共通クラス
  */
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class DateCalcPatternUtil {
 
 	@Autowired

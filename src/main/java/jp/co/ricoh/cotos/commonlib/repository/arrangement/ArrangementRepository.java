@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository.arrangement;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +12,6 @@ public interface ArrangementRepository extends CrudRepository<Arrangement, Long>
 	public boolean existsByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
 
 	public Arrangement findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
+
+	public List<Arrangement> findByContractId(long contractId);
 }
