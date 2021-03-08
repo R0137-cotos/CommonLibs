@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.16.0 (08/03/2021)
+- [**closed**] #10070 ProductMasterDto、ItemMasterDto作成、ProductMasterDtoRepository作成 [#1415](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1415)
+- [**closed**] #9658 コメントが最大文字数を超えていた場合のエラーメッセージ追加 [#1406](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1406)
+
+---
+
+## v3.15.0 (04/02/2021)
+- [**closed**] #8276 佐川コードDTO作成 [#1384](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1384)
+- [**closed**] #9312 計上データ作成バッチ用パラメータに従業員番号項目追加 [#1370](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1370)
+- [**closed**] #8276 エラーメッセージ修正 [#1359](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1359)
+- [**closed**] #8276 yml修正、テスト追加 [#1354](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1354)
+- [**closed**] #8276 アラートに使用するメッセージ追加、設置先情報取得リポジトリ追加 [#1352](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1352)
+
+---
+
 ## v3.14.0 (21/01/2021)
 - [**closed**] #9253 メニュー管理マスタエンティティ追加 [#1344](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1344)
 - [**closed**] #9429 通知メール変換値マスタに置換値マスタ名、置換値マスタ検索エンティティ名、置換値マスタ検索フィールド名を追加 [#1312](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1312)
