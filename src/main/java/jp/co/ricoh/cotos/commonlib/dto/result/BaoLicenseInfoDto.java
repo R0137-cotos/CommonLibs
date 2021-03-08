@@ -17,7 +17,7 @@ public class BaoLicenseInfoDto {
 	 */
 	@Id
 	@ApiModelProperty(value = "ID", required = false, position = 1)
-	private String id;
+	private long id;
 
 	/**
 	 * 契約種別詳細
