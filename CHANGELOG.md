@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.16.0 (08/03/2021)
+- [**closed**] #10070 ProductMasterDto、ItemMasterDto作成、ProductMasterDtoRepository作成 [#1415](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1415)
+- [**closed**] #9658 コメントが最大文字数を超えていた場合のエラーメッセージ追加 [#1406](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1406)
+
+---
+
 ## v3.15.0 (04/02/2021)
 - [**closed**] #8276 佐川コードDTO作成 [#1384](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1384)
 - [**closed**] #9312 計上データ作成バッチ用パラメータに従業員番号項目追加 [#1370](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1370)
