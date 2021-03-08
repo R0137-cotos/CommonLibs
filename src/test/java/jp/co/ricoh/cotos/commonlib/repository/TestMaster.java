@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.master.ProductMasterDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AppMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteGrpMaster;
@@ -158,6 +159,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ProductCompMasterRepository
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductExtendsParameterMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpIdentifierMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductGrpMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterDtoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductPicMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.RecordDecomposeCompMasterRepository;
@@ -331,6 +333,8 @@ public class TestMaster {
 	private MenuManagementMasterRepository menuManagementMasterRepository;
 	@Autowired
 	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
+	@Autowired
+	private ProductMasterDtoRepository productMasterDtoRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -1266,7 +1270,20 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/estimationChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+
 		List<String> appId = Arrays.asList("electric");
 		List<ProductMaster> list = productMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
@@ -1277,6 +1294,38 @@ public class TestMaster {
 		list = productMasterRepository.findByAppIdInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
 		list = productMasterRepository.findByIdInAndAppIdInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
+	}
+
+	@Test
+	public void ProductMasterDtoRepositoryの条件テスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/estimationChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+
+		List<String> appId = Arrays.asList("electric");
+		List<ProductMasterDto> list = productMasterDtoRepository.findByAppIdNotInOrderByIdAsc(appId);
+		Assert.assertNotEquals(0, list.size());
+		List<Long> id = Arrays.asList(new Long[] { 1L, 2L });
+		list = productMasterDtoRepository.findByIdInAndAppIdNotInOrderByIdAsc(id, appId);
+		Assert.assertEquals(2, list.size());
+		appId = Arrays.asList("cotos_dev");
+		list = productMasterDtoRepository.findByAppIdInOrderByIdAsc(appId);
+		Assert.assertNotEquals(0, list.size());
+		list = productMasterDtoRepository.findByIdInAndAppIdInOrderByIdAsc(id, appId);
 		Assert.assertEquals(2, list.size());
 	}
 
