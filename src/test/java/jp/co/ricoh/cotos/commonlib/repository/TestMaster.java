@@ -39,6 +39,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductClassCheckMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.AuthPatternMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.BatchRunDateManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.BusinessCalendar;
 import jp.co.ricoh.cotos.commonlib.entity.master.CeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.CheckAlertMaster;
@@ -132,6 +133,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileLinkageReposito
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductClassCheckMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AttachedFileProductGrpCheckMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.AuthPatternMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.BatchRunDateManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.BusinessCalendarRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.CheckAlertMasterRepository;
@@ -410,6 +412,8 @@ public class TestMaster {
 	private MvTjmob260OrgServiceMasterRepository mvTjmob260OrgServiceMasterRepository;
 	@Autowired
 	private MvRjShohinInfoMasterRepository mvRjShohinInfoMasterRepository;
+	@Autowired
+	private BatchRunDateManagementMasterRepository batchRunDateManagementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2760,4 +2764,19 @@ public class TestMaster {
 		Assert.assertNotNull(found);
 	}
 
+	@Test
+	public void BatchRunDateManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/batchRunDateManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		BatchRunDateManagementMaster found = batchRunDateManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
 }
