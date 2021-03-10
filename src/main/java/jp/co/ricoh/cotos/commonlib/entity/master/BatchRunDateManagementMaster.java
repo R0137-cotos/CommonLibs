@@ -49,8 +49,8 @@ public class BatchRunDateManagementMaster extends EntityBaseMaster {
 	/**
 	 * 商品マスタID
 	 */
-	@ApiModelProperty(value = "商品マスタID", required = false, position = 4, allowableValues = "range[0,255]")
-	private String productMasterId;
+	@ApiModelProperty(value = "商品マスタID", required = false, position = 4, allowableValues = "range[0,9999999999999999999]")
+	private Long productMasterId;
 
 	/**
 	 * バッチ実行日
