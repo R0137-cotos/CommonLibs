@@ -157,6 +157,10 @@ public class TestCommunication {
 		}
 		List<BounceMailRecord> list1 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(contractId, nXContractId, sentAt);
 		Assert.assertNotEquals(0, list1.size());
+		String docNumber = "CC2020102800001";
+		Integer contractBranchNumber = 1;
+		List<BounceMailRecord> list2 = bounceMailRecordRepository.findByDocNumberAndContractBranchNumber(docNumber, contractBranchNumber);
+		Assert.assertNotEquals(0, list2.size());
 	}
 
 	@Transactional
