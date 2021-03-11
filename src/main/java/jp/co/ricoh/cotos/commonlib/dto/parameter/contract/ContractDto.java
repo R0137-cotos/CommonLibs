@@ -610,4 +610,12 @@ public class ContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 78, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
 	private MvbAccountEntryDiv mvbAccountEntryDiv;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 79, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
 }
