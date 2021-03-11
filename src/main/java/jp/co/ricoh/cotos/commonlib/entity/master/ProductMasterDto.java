@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
+package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.List;
 
@@ -24,15 +24,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileLinkage;
-import jp.co.ricoh.cotos.commonlib.entity.master.ContractChecklistCompMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.EstimationChecklistCompMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ExtendsParameterCorrelationCheckMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.IfsCsvMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ProductCompMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ProductExtendsParameterMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.ProductPicMaster;
-import jp.co.ricoh.cotos.commonlib.entity.master.VendorProductMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

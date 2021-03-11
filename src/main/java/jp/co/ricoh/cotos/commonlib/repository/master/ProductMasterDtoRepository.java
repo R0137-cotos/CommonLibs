@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import jp.co.ricoh.cotos.commonlib.dto.parameter.master.ProductMasterDto;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductMasterDto;
 
 @Repository
 public interface ProductMasterDtoRepository extends CrudRepository<ProductMasterDto, Long> {
