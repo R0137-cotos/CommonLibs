@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
+package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.math.BigDecimal;
 import java.util.Date;
