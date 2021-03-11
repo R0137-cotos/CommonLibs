@@ -19,11 +19,13 @@ import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory.MailSendType;
+import jp.co.ricoh.cotos.commonlib.entity.common.SearchCondition;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.MailSendHistoryRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.SearchConditionRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository;
 
@@ -57,6 +59,12 @@ public class TestCommon {
 	@Autowired
 	EimDocumentInfoRepository eimDocumentInfoRepository;
 
+	/**
+	 * 検索条件
+	 */
+	@Autowired
+	SearchConditionRepository searchConditionRepository;
+
 	@Autowired
 	TestTools testTool;
 
@@ -73,6 +81,7 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/mailSendHistory.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/estimation/estimation_all.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/eimDocumentInfo.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/searchCondition.sql");
 	}
 
 	@AfterClass
@@ -143,6 +152,21 @@ public class TestCommon {
 		List<EimDocumentInfo> foundList = eimDocumentInfoRepository.findByKeiyakNoAndEimLinkedStatusAndOldDocumentFlg("3", EimLinkedStatus.連携済, false);
 		// データが取得できていることを確認
 		Assert.assertEquals(1, foundList.size());
+
+	}
+
+	@Test
+	public void SearchConditionRepositoryのテスト() throws Exception {
+		SearchCondition found = searchConditionRepository.findOne(1L);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		List<SearchCondition> foundList = searchConditionRepository.findByMomEmployeeIdAndDomain("cotos", "1");
+		// データが取得できていることを確認
+		Assert.assertEquals("データ数が正しいこと", 1, foundList.size());
+		Assert.assertEquals("IDが正しいこと", 1L, foundList.get(0).getId());
 
 	}
 }

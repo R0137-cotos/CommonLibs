@@ -193,27 +193,26 @@ public class MomAuthorityService {
 			// 参照・編集処理用の認可処理を実施
 			return this.hasEditAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getVKjbMaster(), authParam.getMvEmployeeMasterList());
 		} else if (AccessType.承認.equals(accessType)) {
-
-			// 直接指定された承認者であれば、権限あり
-			if (authParam.isManualApprover()) {
-				return true;
-			}
-
-			// 自己承認フラグであれば、権限あり
-			if (authParam.isSelfApprover()) {
-				return true;
-			}
-
-			// 受付担当CE承認フラグであれば、権限あり
-			if (authParam.isPicAccCeApprover()) {
-				return true;
-			}
-
 			// 承認処理用の認可処理を実施
-			return this.hasApproveAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getRequesterMvEmployeeMaster());
+			return this.approveAuthority(authLevel, authParam);
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * 権限判定用パラメーターから対象のアクションを実施する権限があるか判定する(代理承認者用)
+	 */
+	public boolean hasAuthoritySubApprover(AuthorityJudgeParameter authParam, ActionDiv actionDiv, AuthDiv authDiv) throws Exception {
+
+		// 権限レベルを取得
+		AuthLevel authLevel = this.searchMomAuthority(authParam.getActorMvEmployeeMaster().getSingleUserId(), actionDiv, authDiv);
+
+		// 認可判定処理開始
+		log.info(messageUtil.createMessageInfo("AuthorizeProcessJudgeStartInfo", Arrays.asList(AccessType.承認.name(), authLevel.name()).toArray(new String[0])).getMsg());
+
+		// 承認処理用の認可処理を実施
+		return this.approveAuthority(authLevel, authParam);
 	}
 
 	/**
@@ -339,5 +338,31 @@ public class MomAuthorityService {
 		}
 
 		return Arrays.asList(authorityInfoActionDtos);
+	}
+
+	/**
+	 * 承認処理用認可処理
+	 * @param authLevel 権限レベル
+	 * @param authParam 権限判定用パラメータ
+	 * @return
+	 */
+	private boolean approveAuthority(AuthLevel authLevel, AuthorityJudgeParameter authParam) {
+		// 直接指定された承認者であれば、権限あり
+		if (authParam.isManualApprover()) {
+			return true;
+		}
+
+		// 自己承認フラグであれば、権限あり
+		if (authParam.isSelfApprover()) {
+			return true;
+		}
+
+		// 受付担当CE承認フラグであれば、権限あり
+		if (authParam.isPicAccCeApprover()) {
+			return true;
+		}
+
+		// 承認処理用の認可処理を実施
+		return this.hasApproveAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getRequesterMvEmployeeMaster());
 	}
 }
