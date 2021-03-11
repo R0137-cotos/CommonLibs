@@ -25,7 +25,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.master.ProductMasterDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AppMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteGrpMaster;
@@ -88,6 +87,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ProductExtendsParameterMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpIdentifierMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductMasterDto;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductPicMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.RecordDecomposeCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.RecordDecomposeMaster;
