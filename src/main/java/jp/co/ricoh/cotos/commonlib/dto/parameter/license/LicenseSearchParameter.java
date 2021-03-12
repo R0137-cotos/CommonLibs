@@ -1,10 +1,13 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
+import java.util.Arrays;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.LicenseSearchDiv;
 import lombok.Data;
 
 /**
@@ -12,6 +15,31 @@ import lombok.Data;
  */
 @Data
 public class LicenseSearchParameter {
+
+	/**
+	 * ライセンス検索区分
+	 */
+	public enum LicenseSearchDiv {
+
+		通常検索("1"), 追加検索("2"), 新規検索("3"), 保守延長検索("4"), 開通確認検索("5"), 解約検索("6");
+
+		private final String text;
+
+		private LicenseSearchDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static LicenseSearchDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * ライセンス検索区分

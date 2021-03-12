@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.license;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.LicenseSearchDiv;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.LicenseSearchParameter.LicenseSearchDiv;
 
 @Converter(autoApply = true)
 public class LicenseSearchDivConverter implements AttributeConverter<LicenseSearchDiv, String> {
