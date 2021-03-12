@@ -613,4 +613,29 @@ public class EnumType {
 			return this.value;
 		}
 	}
+
+	/**
+	 * ライセンス検索区分
+	 */
+	public enum LicenseSearchDiv {
+
+		通常検索("1"), 追加検索("2"), 新規検索("3"), 保守延長検索("4"), 開通確認検索("5"), 解約検索("6");
+
+		private final String text;
+
+		private LicenseSearchDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static LicenseSearchDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
