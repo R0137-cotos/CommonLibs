@@ -613,4 +613,5 @@ public class EnumType {
 			return this.value;
 		}
 	}
+
 }

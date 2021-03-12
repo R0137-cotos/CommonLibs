@@ -15,6 +15,9 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber.AllocationDiv;
 import lombok.Data;
 
+/**
+ * ライセンス一覧検索結果を取得する為のDTOです。
+ */
 @Entity
 @Data
 public class LicenseSearchResult {
@@ -127,110 +130,98 @@ public class LicenseSearchResult {
 	private Date conclusionPreferredDate;
 
 	/**
-	 * 利用期間開始日
-	 */
-	@ApiModelProperty(value = "利用期間開始日", required = false, position = 17)
-	private Date usePeriodStart;
-
-	/**
-	 * 利用期間終了日
-	 */
-	@ApiModelProperty(value = "利用期間終了日", required = false, position = 18)
-	private Date usePeriodEnd;
-
-	/**
 	 * 利用申込日
 	 */
-	@ApiModelProperty(value = "CSV出力日時", required = false, position = 19)
+	@ApiModelProperty(value = "CSV出力日時", required = false, position = 17)
 	private Date csvOutputAt;
 
 	/**
 	 * 商品区分
 	 */
-	@ApiModelProperty(value = "商品区分", required = false, position = 20)
+	@ApiModelProperty(value = "商品区分", required = false, position = 18)
 	private String productType;
 
 	/**
 	 * サービス種別
 	 */
-	@ApiModelProperty(value = "サービス種別", required = false, position = 21)
+	@ApiModelProperty(value = "サービス種別", required = false, position = 19)
 	private String serviceType;
 
 	/**
 	 * 受付担当SS組織
 	 */
-	@ApiModelProperty(value = "受付担当SS組織", required = false, position = 22)
+	@ApiModelProperty(value = "受付担当SS組織", required = false, position = 20)
 	private String picAccSsName;
 
 	/**
 	 * 受付担当CE氏名
 	 */
-	@ApiModelProperty(value = "受付担当CE氏名", required = false, position = 23)
+	@ApiModelProperty(value = "受付担当CE氏名", required = false, position = 21)
 	private String picAccCeName;
 
 	/**
 	 * 設置先企業名
 	 */
-	@ApiModelProperty(value = "設置先企業名", required = false, position = 24)
+	@ApiModelProperty(value = "設置先企業名", required = false, position = 22)
 	private String instrallationLocationCompanyName;
 
 	/**
 	 * 設置先住所
 	 */
-	@ApiModelProperty(value = "設置先住所", required = false, position = 25)
+	@ApiModelProperty(value = "設置先住所", required = false, position = 23)
 	private String instrallationLocationAddress;
 
 	/**
 	 * 設置先担当者名
 	 */
-	@ApiModelProperty(value = "設置先担当者名", required = false, position = 26)
+	@ApiModelProperty(value = "設置先担当者名", required = false, position = 24)
 	private String instrallationLocationPicName;
 
 	/**
 	 * 設置先担当者電話番号
 	 */
-	@ApiModelProperty(value = "設置先担当者電話番号", required = false, position = 27)
+	@ApiModelProperty(value = "設置先担当者電話番号", required = false, position = 25)
 	private String instrallationLocationPicPhoneNumber;
 
 	/**
 	 * VPN
 	 */
-	@ApiModelProperty(value = "VPN", required = false, position = 28)
+	@ApiModelProperty(value = "VPN", required = false, position = 26)
 	private String vpn;
 
 	/**
 	 * POナンバー
 	 */
-	@ApiModelProperty(value = "POナンバー", required = false, position = 29)
+	@ApiModelProperty(value = "POナンバー", required = false, position = 27)
 	private String poNumber;
 
 	/**
 	 * サービス開始日
 	 */
-	@ApiModelProperty(value = "サービス開始日", required = false, position = 30)
+	@ApiModelProperty(value = "サービス開始日", required = false, position = 28)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@ApiModelProperty(value = "サービス終了日", required = false, position = 31)
+	@ApiModelProperty(value = "サービス終了日", required = false, position = 29)
 	private Date serviceTermEnd;
 
 	/**
 	 * CE連絡日時
 	 */
-	@ApiModelProperty(value = "CE連絡日時", required = false, position = 32)
+	@ApiModelProperty(value = "CE連絡日時", required = false, position = 30)
 	private String ceContactAt;
 
 	/**
 	 * 解約予定日
 	 */
-	@ApiModelProperty(value = "解約予定日", required = false, position = 33)
+	@ApiModelProperty(value = "解約予定日", required = false, position = 31)
 	private Date cancelScheduledDate;
 
 	/**
 	 * 契約ID
 	 */
-	@ApiModelProperty(value = "契約ID", required = true, position = 34)
+	@ApiModelProperty(value = "契約ID", required = true, position = 32)
 	private long contractId;
 }
