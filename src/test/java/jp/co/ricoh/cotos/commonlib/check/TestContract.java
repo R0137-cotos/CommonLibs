@@ -738,6 +738,7 @@ public class TestContract {
 		testTarget.setEstimationId((long) INT_MINUS_1);
 		testTarget.setManualUpdateFlg(INT_MINUS_1);
 		testTarget.setSsWorkRequestCreateFlg(INT_MINUS_1);
+		testTarget.setBasicContractId((long) INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 7);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
