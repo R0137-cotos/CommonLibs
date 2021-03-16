@@ -544,3 +544,4 @@
 |627|バッチ実行日管理マスタエンティティ・リポジトリ追加|
 |628|ItemMasterDto、ProductMasterDtoをentity配下に移動|
 |629|ライセンス一覧検索DTO、ライセンス一覧検索結果DTOを修正|
+|630|契約Entityに項目を追加|

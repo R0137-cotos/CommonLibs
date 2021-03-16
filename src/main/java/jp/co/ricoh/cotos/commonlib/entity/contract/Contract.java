@@ -219,6 +219,28 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	public enum BasicContractDiv {
+
+		基本契約("1"), 基本契約_一部("2");
+
+		private final String text;
+
+		private BasicContractDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static BasicContractDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -929,4 +951,17 @@ public class Contract extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 99, allowableValues = "range[0,9]")
 	private Integer nextEquipmentNotContFlg;
+
+	/**
+	 * 基本契約区分
+	 */
+	@ApiModelProperty(value = "基本契約区分", required = false, position = 100, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
+	private BasicContractDiv basicContractDiv;
+
+	/**
+	 * 基本契約ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "基本契約ID", required = false, position = 101, allowableValues = "range[0,9223372036854775807]")
+	private Long basicContractId;
 }
