@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.ArcsPeriodSaleMainteProcStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneMaintereportProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneProcStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -122,4 +124,30 @@ public class ContractEquipmentDto extends DtoBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 17)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * Isys-One保守レポート処理状態
+	 */
+	@ApiModelProperty(value = "Isys-One保守レポート処理状態", required = false, position = 18, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\")")
+	private IsysoneMaintereportProcStatus isysoneMaintereportProcStatus;
+
+	/**
+	 * Isys-One保守レポート連携日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "Isys-One保守レポート連携日時", required = false, position = 19)
+	private Date isysoneMaintereportLinkageAt;
+
+	/**
+	 * ARCS期間売保守処理状態
+	 */
+	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 20, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),作成エラー(\"3\")")
+	private ArcsPeriodSaleMainteProcStatus arcsPeriodSaleMainteProcStatus;
+
+	/**
+	 * ARCS期間売保守連携日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 21)
+	private Date arcsPeriodSaleMainteLinkageAt;
 }
