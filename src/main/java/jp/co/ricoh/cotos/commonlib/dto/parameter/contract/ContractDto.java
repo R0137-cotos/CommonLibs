@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.AbsConCsvCreateStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ArcsPeriodSaleMntOriginStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
@@ -671,4 +672,16 @@ public class ContractDto extends DtoBase {
 	@Temporal(TemporalType.DATE)
 	private Date absConCsvCreateDateCancel;
 
+	/**
+	 * ARCS期間売保守元契約処理状態
+	 */
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 90, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
+
+	/**
+	 * ARCS期間売保守元契約連携日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 91)
+	private Date arcsPeriodSaleMntOriginLinkAt;
 }
