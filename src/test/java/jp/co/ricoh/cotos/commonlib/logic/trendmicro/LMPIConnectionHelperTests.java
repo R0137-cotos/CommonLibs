@@ -306,4 +306,21 @@ public class LMPIConnectionHelperTests {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 *  [GET] サービスプランID取得
+	 * @throws ParseException 
+	 */
+	@Test
+	@WithMockCustomUser
+	public void getServicePlanId() throws ParseException {
+
+		try {
+			getHelper().getServicePlanId();
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

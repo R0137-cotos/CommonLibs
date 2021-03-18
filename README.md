@@ -361,3 +361,4 @@
 |404|PCバックアップ対応|
 |405|2021/03/22リリース分マージ|
 |406|ItemMasterDto、ProductMasterDtoをentity配下に移動|
+|407|CASサービスプランID取得メソッド追加|

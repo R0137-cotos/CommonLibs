@@ -373,6 +373,22 @@ public class LMPIConnectionHelper {
 	}
 
 	/**
+	 * [GET] サービスプランID取得
+	 */
+	public String getServicePlanId() {
+		String url = "/me/serviceplans";
+		//パラメータ設定
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+			log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
+			return serviceResponse.getResponseEntity().getBody();
+		} catch (URISyntaxException | IOException e) {
+			log.error(e);
+		}
+		return null;
+	}
+
+	/**
 	 * HttpHeadersを返します。
 	 * @return
 	 * @throws UnsupportedEncodingException 
