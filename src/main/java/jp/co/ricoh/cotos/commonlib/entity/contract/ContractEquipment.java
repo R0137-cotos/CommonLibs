@@ -96,7 +96,7 @@ public class ContractEquipment extends EntityBase {
 	/**
 	 * 設置日
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "設置日", required = false, position = 6)
 	private Date installationDate;
 

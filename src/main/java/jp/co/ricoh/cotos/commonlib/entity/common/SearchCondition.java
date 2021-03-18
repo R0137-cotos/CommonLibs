@@ -1,0 +1,70 @@
+package jp.co.ricoh.cotos.commonlib.entity.common;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 検索条件を表すEntity
+ */
+@Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table(name = "search_condition")
+public class SearchCondition extends EntityBase {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "search_condition_seq")
+	@SequenceGenerator(name = "search_condition_seq", sequenceName = "search_condition_seq", allocationSize = 1)
+	@ApiModelProperty(value = "検索条件ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	private long id;
+
+	/**
+	 * MoM社員ID
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@Size(max = 255)
+	@ApiModelProperty(value = "MoM社員ID", required = true, position = 2, allowableValues = "range[0,255]")
+	private String momEmployeeId;
+
+	/**
+	 * ドメイン
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@Size(max = 255)
+	@ApiModelProperty(value = "ドメイン", required = true, position = 3, allowableValues = "range[0,255]")
+	private String domain;
+
+	/**
+	 * タイトル
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@Size(max = 255)
+	@ApiModelProperty(value = "タイトル", required = true, position = 4, allowableValues = "range[0,255]")
+	private String title;
+
+	/**
+	 * 検索条件
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@Lob
+	@ApiModelProperty(value = "検索条件", required = true, position = 5)
+	private String searchCondition;
+
+}
