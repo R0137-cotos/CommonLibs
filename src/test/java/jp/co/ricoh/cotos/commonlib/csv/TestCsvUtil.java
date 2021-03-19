@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CsvParameter;
 import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.csv.CsvUtil;
 
 @RunWith(SpringRunner.class)
@@ -112,7 +113,7 @@ public class TestCsvUtil {
 		byte[] expected = Files.readAllBytes(Paths.get("src/test/resources/csv/input_default.csv"));
 		Assert.assertEquals("生成されたCSV情報が正しいこと", new String(actual, "Shift-JIS"), new String(expected, "UTF-8"));
 	}
-	
+
 	@Test
 	public void 正常系_CSV生成テスト_SJISのCSVファイル_半角スペースあり_withoutQuoteChar() throws ErrorCheckException, IOException, ParseException {
 		CsvParameter param = CsvParameter.builder().charset(Charset.forName("Shift-JIS")).quote(false).withoutQuoteChar(true).build();
@@ -384,7 +385,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "パラメータ「CSVファイル設定マスタ」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
 		}
 	}
-	
+
 	@Test
 	public void 異常系_CSV生成テスト_quoteとwithoutQuoteCharの両方にtrue() throws ErrorCheckException, IOException, ParseException {
 		CsvParameter param = CsvParameter.builder().quote(true).withoutQuoteChar(true).build();
@@ -400,4 +401,122 @@ public class TestCsvUtil {
 			Assert.fail("想定外のエラーが発生している");
 		}
 	}
+
+	@Test
+	public void 正常系_文字化け対象文字の変換() throws ParseException {
+		// CSVデータリスト
+		List<TestCsvData> csvList = createCsvData();
+		// 実施
+		List<TestCsvData> resultList = csvUtil.convertGarbledCharForCsvData(csvList, TestCsvData.class);
+		// チェック
+		// 1件目
+		TestCsvData csv1 = csvList.get(0);
+		TestCsvData result1 = resultList.get(0);
+		Assert.assertEquals("【１件目】", csv1.getId(), result1.getId());
+		Assert.assertEquals("【１件目】", "１１-２２", result1.getName());
+		Assert.assertEquals("【１件目】", csv1.getAge(), result1.getAge());
+		Assert.assertEquals("【１件目】", csv1.getBirthday(), result1.getBirthday());
+		Assert.assertEquals("【１件目】", csv1.getWeight(), result1.getWeight(), 0.0);
+		// 2件目
+		TestCsvData csv2 = csvList.get(1);
+		TestCsvData result2 = resultList.get(1);
+		Assert.assertEquals("【２件目】", csv2.getId(), result2.getId());
+		Assert.assertEquals("【２件目】", "２２-３３", result2.getName());
+		Assert.assertEquals("【２件目】", csv2.getAge(), result2.getAge());
+		Assert.assertEquals("【２件目】", csv2.getBirthday(), result2.getBirthday());
+		Assert.assertEquals("【２件目】", csv2.getWeight(), result2.getWeight(), 0.0);
+		// 3件目
+		TestCsvData csv3 = csvList.get(2);
+		TestCsvData result3 = resultList.get(2);
+		Assert.assertEquals("【３件目】", csv3.getId(), result3.getId());
+		Assert.assertEquals("【３件目】", "３３-４４", result3.getName());
+		Assert.assertEquals("【３件目】", csv3.getAge(), result3.getAge());
+		Assert.assertEquals("【３件目】", csv3.getBirthday(), result3.getBirthday());
+		Assert.assertEquals("【３件目】", csv3.getWeight(), result3.getWeight(), 0.0);
+		// 4件目
+		TestCsvData csv4 = csvList.get(3);
+		TestCsvData result4 = resultList.get(3);
+		Assert.assertEquals("【４件目】", csv4.getId(), result4.getId());
+		Assert.assertEquals("【４件目】", "４４-５５", result4.getName());
+		Assert.assertEquals("【４件目】", csv4.getAge(), result4.getAge());
+		Assert.assertEquals("【４件目】", csv4.getBirthday(), result4.getBirthday());
+		Assert.assertEquals("【４件目】", csv4.getWeight(), result4.getWeight(), 0.0);
+		// 5件目
+		TestCsvData csv5 = csvList.get(4);
+		TestCsvData result5 = resultList.get(4);
+		Assert.assertEquals("【５件目】", csv5.getId(), result5.getId());
+		Assert.assertEquals("【５件目】", "５５～６６", result5.getName());
+		Assert.assertEquals("【５件目】", csv5.getAge(), result5.getAge());
+		Assert.assertEquals("【５件目】", csv5.getBirthday(), result5.getBirthday());
+		Assert.assertEquals("【５件目】", csv5.getWeight(), result5.getWeight(), 0.0);
+		// 6件目
+		TestCsvData csv6 = csvList.get(5);
+		TestCsvData result6 = resultList.get(5);
+		Assert.assertEquals("【６件目】", csv6.getId(), result6.getId());
+		Assert.assertEquals("【６件目】", "６６-７７", result6.getName());
+		Assert.assertEquals("【６件目】", csv6.getAge(), result6.getAge());
+		Assert.assertEquals("【６件目】", csv6.getBirthday(), result6.getBirthday());
+		Assert.assertEquals("【６件目】", csv6.getWeight(), result6.getWeight(), 0.0);
+	}
+
+	@Test
+	public void 正常系_文字化け対象文字の変換_CSVデータがNull() {
+		// 実施
+		List<TestCsvData> list = csvUtil.convertGarbledCharForCsvData(null, TestCsvData.class);
+		// チェック
+		Assert.assertNull("戻り値がNullであること", list);
+	}
+
+	@Test
+	public void 正常系_文字化け対象文字の変換_CSVデータ空() {
+		// 実施
+		List<TestCsvData> list = csvUtil.convertGarbledCharForCsvData(new ArrayList<TestCsvData>(), TestCsvData.class);
+		// チェック
+		Assert.assertEquals("戻り値が空であること", 0, list.size());
+	}
+
+	@Test
+	public void 異常系_文字化け対象文字の変換_クラス指定なし() throws ParseException {
+		// テストデータ取得
+		List<TestCsvData> csvList = createCsvData();
+
+		try {
+			// 実施
+			csvUtil.convertGarbledCharForCsvData(csvList, null);
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			// チェック
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00013", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "Objectが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+
+	/**
+	 * テスト用のCSVデータリストを作成します。
+	 *
+	 * @return
+	 * @throws ParseException
+	 */
+	private List<TestCsvData> createCsvData() throws ParseException {
+
+		List<TestCsvData> list = new ArrayList<>();
+		String format = "yyyy/MM/dd";
+		// リスト作成
+		TestCsvData dto1 = new TestCsvData(1L, "１１‑２２", 50, new SimpleDateFormat(format).parse("2021/01/15"), 100D);
+		list.add(dto1);
+		TestCsvData dto2 = new TestCsvData(2L, "２２–３３", 51, new SimpleDateFormat(format).parse("2021/02/15"), 110D);
+		list.add(dto2);
+		TestCsvData dto3 = new TestCsvData(3L, "３３—４４", 52, new SimpleDateFormat(format).parse("2021/03/15"), 120D);
+		list.add(dto3);
+		TestCsvData dto4 = new TestCsvData(4L, "４４−５５", 53, new SimpleDateFormat(format).parse("2021/04/15"), 130D);
+		list.add(dto4);
+		TestCsvData dto5 = new TestCsvData(5L, "５５∼６６", 54, new SimpleDateFormat(format).parse("2021/05/15"), 140D);
+		list.add(dto5);
+		TestCsvData dto6 = new TestCsvData(6L, "６６－７７", 55, new SimpleDateFormat(format).parse("2021/12/15"), 150D);
+		list.add(dto6);
+
+		return list;
+	}
+
 }
