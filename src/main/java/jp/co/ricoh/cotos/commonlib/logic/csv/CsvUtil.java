@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.axis.utils.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -37,6 +39,9 @@ public class CsvUtil {
 
 	@Autowired
 	CheckUtil checkUtil;
+
+	@Autowired
+	JsonUtil jsonUtil;
 
 	private static final String CHARSET_NAME = "MS932";
 
@@ -137,7 +142,7 @@ public class CsvUtil {
 	private boolean flgBooleanConverter(Integer flg) {
 		return flgBooleanConverter(flg, true);
 	}
-	
+
 	/**
 	 * フラグを真偽値にコンバートします。
 	 *
@@ -330,5 +335,37 @@ public class CsvUtil {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * CSVデータ内にある文字化け対象の文字を文字化けしない文字に変換します。
+	 *
+	 * @param csvList CSVデータリスト
+	 * @param obj 対応するCSVのDTOクラス
+	 * @return 文字化け対応後のCSVデータリスト
+	 */
+	public <T> List<T> convertGarbledCharForCsvData(List<T> csvList, Class<T> obj) {
+		// CSVデータリストがない場合
+		if (CollectionUtils.isEmpty(csvList)) {
+			return csvList;
+		}
+		// 対応するCSVのDTOクラスが指定されてない場合
+		if (obj == null) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "Object" }));
+		}
+		// 文字化け対応後のリスト
+		List<T> list = new ArrayList<>();
+		csvList.forEach(c -> {
+			// DTOをJSON文字列に変換
+			String json = jsonUtil.convertToStr(c);
+			// 文字化けする文字を変換
+			String convertStr = json.replace("‑", "-").replace("–", "-").replace("—", "-").replace("−", "-").replace("∼", "～").replace("－", "-");
+			// JSON文字列からDTOに変換
+			T convertDto = jsonUtil.convertToDto(convertStr, obj);
+			// リストに追加
+			list.add(convertDto);
+		});
+
+		return list;
 	}
 }
