@@ -1,7 +1,10 @@
 # Changelog
 
 ## v3.17.0 (22/03/2021)
-*No changelog for this release.*
+- [**closed**] #10340 契約機種エンティティ修正 [#1455](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1455)
+- [**closed**] #10233 代理承認者用承認権限チェック修正 [#1454](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1454)
+- [**closed**] #8491_S&S作業依頼フラグ追加 [#1407](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1407)
+- [**closed**] #7276　検索条件テーブル追加対応 [#1410](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1410)
 
 ---
 
