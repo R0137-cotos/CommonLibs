@@ -15,6 +15,6 @@ public interface ArrangementWorkAttachedFileRepository extends CrudRepository<Ar
 	public List<ArrangementWorkAttachedFile> findByArrangementWorkId(Long arrangementWorkId);
 
 	@Modifying
-	@Query(value = "update arrangement_work_attached_file set arrangement_work_id = :arrangementWorkId, updated_at = sysdate where id = :id", nativeQuery = true)
-	public Integer updateArrangementWorkAttachedFile(@Param("id") Long id, @Param("arrangementWorkId") Long arrangementWorkId);
+	@Query(value = "update arrangement_work_attached_file set arrangement_work_id = -:arrangementWorkId, updated_user_id = :updatedUserId, updated_at = sysdate where id = :id", nativeQuery = true)
+	public Integer deleteLogicalArrangementWorkAttachedFile(@Param("id") Long id, @Param("arrangementWorkId") Long arrangementWorkId, @Param("updatedUserId") String updatedUserId);
 }

@@ -12,6 +12,6 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileHistory;
 public interface ContractAttachedFileHistoryRepository extends CrudRepository<ContractAttachedFileHistory, Long> {
 
 	@Modifying
-	@Query(value = "update contract_attached_file_history set contract_id = :contractId, updated_at = sysdate where id=:id", nativeQuery = true)
-	public Integer updateContractAttachedFileHistory(@Param("id") Long id, @Param("contractId") Long contractId);
+	@Query(value = "update contract_attached_file_history set contract_id = -:contractId, updated_user_id = :updatedUserId, updated_at = sysdate where id = :id", nativeQuery = true)
+	public Integer deleteLogicalContractAttachedFileHistory(@Param("id") Long id, @Param("contractId") Long contractId, @Param("updatedUserId") String updatedUserId);
 }

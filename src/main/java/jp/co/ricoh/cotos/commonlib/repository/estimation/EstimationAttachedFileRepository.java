@@ -15,6 +15,6 @@ public interface EstimationAttachedFileRepository extends CrudRepository<Estimat
 	public List<EstimationAttachedFile> findByEstimationId(Long estimationId);
 
 	@Modifying
-	@Query(value = "update estimation_attached_file set estimation_id = :estimationId, updated_at = sysdate where id = :id", nativeQuery = true)
-	public Integer updateEstimationAttachedFile(@Param("id") Long id, @Param("estimationId") Long estimationId);
+	@Query(value = "update estimation_attached_file set estimation_id = -:estimationId, updated_user_id = :updatedUserId, updated_at = sysdate where id = :id", nativeQuery = true)
+	public Integer deleteLogicalEstimationAttachedFile(@Param("id") Long id, @Param("estimationId") Long estimationId, @Param("updatedUserId") String updatedUserId);
 }

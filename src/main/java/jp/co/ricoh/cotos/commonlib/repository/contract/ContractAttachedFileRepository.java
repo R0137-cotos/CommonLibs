@@ -15,6 +15,6 @@ public interface ContractAttachedFileRepository extends CrudRepository<ContractA
 	public List<ContractAttachedFile> findByContractId(Long contractId);
 
 	@Modifying
-	@Query(value = "update contract_attached_file set contract_id = :contractId, updated_at = sysdate where id=:id", nativeQuery = true)
-	public Integer updateContractAttachedFile(@Param("id") Long id, @Param("contractId") Long contractId);
+	@Query(value = "update contract_attached_file set contract_id = -:contractId, updated_user_id = :updatedUserId, updated_at = sysdate where id = :id", nativeQuery = true)
+	public Integer deleteLogicalContractAttachedFile(@Param("id") Long id, @Param("contractId") Long contractId, @Param("updatedUserId") String updatedUserId);
 }
