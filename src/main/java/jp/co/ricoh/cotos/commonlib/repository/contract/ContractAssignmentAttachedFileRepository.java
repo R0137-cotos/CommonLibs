@@ -12,6 +12,6 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignmentAttachedFil
 public interface ContractAssignmentAttachedFileRepository extends CrudRepository<ContractAssignmentAttachedFile, Long> {
 
 	@Modifying
-	@Query(value = "update contract_assignment_attached_file set contract_assignment_id = :contractAssignmentId, updated_at = sysdate where id=:id", nativeQuery = true)
-	public Integer updateContractAssignmentAttachedFile(@Param("id") Long id, @Param("contractAssignmentId") Long contractAssignmentId);
+	@Query(value = "update contract_assignment_attached_file set contract_assignment_id = -:contractAssignmentId, updated_user_id = :updatedUserId, updated_at = sysdate where id = :id", nativeQuery = true)
+	public Integer deleteLogicalContractAssignmentAttachedFile(@Param("id") Long id, @Param("contractAssignmentId") Long contractAssignmentId, @Param("updatedUserId") String updatedUserId);
 }
