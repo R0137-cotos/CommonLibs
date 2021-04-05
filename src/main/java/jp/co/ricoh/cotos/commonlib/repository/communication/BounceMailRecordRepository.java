@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 @Repository
 public interface BounceMailRecordRepository extends CrudRepository<BounceMailRecord, Long> {
 	public List<BounceMailRecord> findByContractIdAndNXContractIdAndSentAt(String contractId, String nXContractId, Date sentAt);
+
+	public List<BounceMailRecord> findByDocNumberAndContractBranchNumber(String docNumber, Integer contractBranchNumber);
 }
