@@ -24,11 +24,6 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	private String offeringsName;
 
 	/**
-	 * 使用OS
-	 */
-	private String useOs;
-
-	/**
 	 * ハードウェア購入日
 	 */
 	private String hardwarePurchaseDate;

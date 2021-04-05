@@ -103,4 +103,9 @@ public class ProductContractExtendsParameterSvpDto {
 	 * ハードディスク
 	 */
 	private HarddiskTypeSvp harddiskType;
+
+	/**
+	 * 使用OS
+	 */
+	private String useOs;
 }
