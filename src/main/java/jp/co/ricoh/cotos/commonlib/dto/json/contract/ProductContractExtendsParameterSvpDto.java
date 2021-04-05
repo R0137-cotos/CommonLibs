@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.HarddiskTypeSvp;
 import lombok.Data;
 
 /**
@@ -92,4 +93,14 @@ public class ProductContractExtendsParameterSvpDto {
 	 * 担当者メールアドレス（担当者3）
 	 */
 	private String picMailAddress3;
+
+	/**
+	 * 保証開始日
+	 */
+	private String maintenanceStartDate;
+
+	/**
+	 * ハードディスク
+	 */
+	private HarddiskTypeSvp harddiskType;
 }

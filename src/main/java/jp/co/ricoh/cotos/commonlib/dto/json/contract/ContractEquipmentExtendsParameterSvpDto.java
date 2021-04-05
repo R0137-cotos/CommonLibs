@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.HarddiskTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MaintenanceTimeTypeSvp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.MenuTypeSvp;
 import lombok.Data;
@@ -58,16 +57,6 @@ public class ContractEquipmentExtendsParameterSvpDto {
 	 * 保守対応時間区分
 	 */
 	private MaintenanceTimeTypeSvp maintenanceTimeType;
-
-	/**
-	 * 保証開始日
-	 */
-	private String maintenanceStartDate;
-
-	/**
-	 * ハードディスク
-	 */
-	private HarddiskTypeSvp harddiskType;
 
 	/**
 	 * CPQマッピングキー
