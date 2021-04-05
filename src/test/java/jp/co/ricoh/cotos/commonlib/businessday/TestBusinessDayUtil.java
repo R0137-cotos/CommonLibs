@@ -598,6 +598,8 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("baseDateが非営業日の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 9), 0));
 		// beforeNumber < 0
 		Assert.assertEquals("beforeNumberが負数の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 5), -2));
+		// baseDate = 非営業日 2019/06/09 判定を行う
+		Assert.assertEquals("2019/06/09の1営業日前は2019/06/07であること", LocalDate.of(2019, 6, 7), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 9), 1, true));
 	}
 
 	private Date 日付想定値取得(String expected) {
