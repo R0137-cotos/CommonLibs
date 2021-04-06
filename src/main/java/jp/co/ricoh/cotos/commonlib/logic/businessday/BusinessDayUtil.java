@@ -329,11 +329,23 @@ public class BusinessDayUtil {
 	 * @return 基準日からn営業日前の営業日
 	 */
 	public LocalDate getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate baseDate, int beforeNumber) {
+		return getBusinessDateNumberBusinessDaysBeforeBaseDate(baseDate, beforeNumber, false);
+	}
+
+	/**
+	 * 基準日(営業日)からn営業日前の営業日を取得する
+	 * @param baseDate 基準日
+	 * @param beforeNumber n営業日前の指定
+	 * @param permitBaseDateNonBusiness 基準日が非営業日でも値を取得する
+	 * @return 基準日からn営業日前の営業日
+	 */
+	public LocalDate getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate baseDate, int beforeNumber, boolean permitBaseDateNonBusiness) {
 		if (baseDate == null) {
 			return null;
 		}
 		// baseDate=非営業日の場合、nullを返す
-		if (!isBusinessDay(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+		if (!permitBaseDateNonBusiness
+				&& !isBusinessDay(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
 			return null;
 		}
 		if (beforeNumber < 0) {

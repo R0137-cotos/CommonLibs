@@ -31,6 +31,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -817,10 +818,23 @@ public class Contract extends EntityBase {
 	private String toVendorComment;
 
 	/**
+	 * MVBアカウント
+	 */
+	@Size(max = 18)
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 87, allowableValues = "range[0,18]")
+	private String mvbAccount;
+
+	/**
+	 * MVBアカウント登録区分
+	 */
+	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 88, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
+	private MvbAccountEntryDiv mvbAccountEntryDiv;
+
+	/**
 	 * S&S作業依頼フラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 88, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 89, allowableValues = "range[0,9]")
 	private Integer ssWorkRequestCreateFlg;
 }
