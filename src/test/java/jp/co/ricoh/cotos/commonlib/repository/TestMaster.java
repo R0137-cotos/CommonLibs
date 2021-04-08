@@ -1072,6 +1072,8 @@ public class TestMaster {
 		Assert.assertNotNull(found);
 		if (found.getJsonSchemaMasterId() != null)
 			Assert.assertTrue(false);
+		if (found.getCommercialFlowDivInfoChangeableFlg() != null)
+			Assert.assertTrue(false);
 	}
 
 	@Test
