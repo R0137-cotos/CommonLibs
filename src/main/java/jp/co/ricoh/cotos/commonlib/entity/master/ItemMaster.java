@@ -341,4 +341,11 @@ public class ItemMaster extends EntityBaseMaster {
 	@Max(9)
 	@ApiModelProperty(value = "契約自動締結除外フラグ", required = false, position = 36, allowableValues = "range[0,9]")
 	private Integer contractAutoSigningExclusionFlg;
+
+	/**
+	 * 小数点単価フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "小数点単価フラグ", required = false, position = 37, allowableValues = "range[0,9]")
+	private Integer decimalUnitPriceFlg;
 }
