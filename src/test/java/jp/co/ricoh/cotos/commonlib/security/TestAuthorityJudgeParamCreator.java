@@ -208,8 +208,9 @@ public class TestAuthorityJudgeParamCreator {
 		Estimation estimation = new Estimation();
 
 		// 承認ルート
-		estimation.setEstimationApprovalRoute(new EstimationApprovalRoute());
-		estimation.getEstimationApprovalRoute().setApprovalRequesterEmpId("00500784");
+		EstimationApprovalRoute estimationApprovalRoute = new EstimationApprovalRoute();
+		estimationApprovalRoute.setApprovalRequesterEmpId("00500784");
+		estimation.setEstimationApprovalRoute(estimationApprovalRoute);
 
 		// 承認ルートノード
 		List<EstimationApprovalRouteNode> estimationApprovalRouteNodeList = new ArrayList<>();
@@ -220,17 +221,21 @@ public class TestAuthorityJudgeParamCreator {
 		estimation.getEstimationApprovalRoute().setEstimationApprovalRouteNodeList(estimationApprovalRouteNodeList);
 
 		// 担当SA
-		estimation.setEstimationPicSaEmp(new EstimationPicSaEmp());
-		estimation.getEstimationPicSaEmp().setMomEmployeeId("00500784");
+		EstimationPicSaEmp estimationPicSaEmp = new EstimationPicSaEmp();
+		estimationPicSaEmp.setMomEmployeeId("00500784");
+		estimation.setEstimationPicSaEmp(estimationPicSaEmp);
 
 		// 追加編集者
-		estimation.setEstimationAddedEditorEmpList(new ArrayList<EstimationAddedEditorEmp>());
-		estimation.getEstimationAddedEditorEmpList().add(new EstimationAddedEditorEmp());
-		estimation.getEstimationAddedEditorEmpList().get(0).setMomEmployeeId("00500784");
+		List<EstimationAddedEditorEmp> estimationAddedEditorEmpList = new ArrayList<>();
+		EstimationAddedEditorEmp estimationAddedEditorEmp = new EstimationAddedEditorEmp();
+		estimationAddedEditorEmp.setMomEmployeeId("00500784");
+		estimationAddedEditorEmpList.add(estimationAddedEditorEmp);
+		estimation.setEstimationAddedEditorEmpList(estimationAddedEditorEmpList);
 
 		// 顧客
-		estimation.setCustomerEstimation(new CustomerEstimation());
-		estimation.getCustomerEstimation().setMomKjbSystemId("000000003985825");
+		CustomerEstimation customerEstimation = new CustomerEstimation();
+		customerEstimation.setMomKjbSystemId("000000003985825");
+		estimation.setCustomerEstimation(customerEstimation);
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.承認);
 
@@ -573,17 +578,21 @@ public class TestAuthorityJudgeParamCreator {
 		contract.getContractApprovalRouteList().add(contractApprovalRoute);
 
 		// 担当SA
-		contract.setContractPicSaEmp(new ContractPicSaEmp());
-		contract.getContractPicSaEmp().setMomEmployeeId("00500784");
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00500784");
+		contract.setContractPicSaEmp(contractPicSaEmp);
 
 		// 追加編集者
-		contract.setContractAddedEditorEmpList(new ArrayList<>());
-		contract.getContractAddedEditorEmpList().add(new ContractAddedEditorEmp());
-		contract.getContractAddedEditorEmpList().get(0).setMomEmployeeId("00500784");
+		List<ContractAddedEditorEmp> contractAddedEditorEmpList = new ArrayList<>();
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00500784");
+		contractAddedEditorEmpList.add(contractAddedEditorEmp);
+		contract.setContractAddedEditorEmpList(contractAddedEditorEmpList);
 
 		// 顧客
-		contract.setCustomerContract(new CustomerContract());
-		contract.getCustomerContract().setMomKjbSystemId("000000003985825");
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000003985825");
+		contract.setCustomerContract(customerContract);
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.承認);
 
@@ -761,8 +770,9 @@ public class TestAuthorityJudgeParamCreator {
 		ArrangementWork arrangementWork = new ArrangementWork();
 
 		// 承認ルート
-		arrangementWork.setArrangementWorkApprovalRoute(new ArrangementWorkApprovalRoute());
-		arrangementWork.getArrangementWorkApprovalRoute().setApprovalRequesterEmpId("00500784");
+		ArrangementWorkApprovalRoute arrangementWorkApprovalRoute = new ArrangementWorkApprovalRoute();
+		arrangementWorkApprovalRoute.setApprovalRequesterEmpId("00500784");
+		arrangementWork.setArrangementWorkApprovalRoute(arrangementWorkApprovalRoute);
 
 		// 承認ルートノード
 		List<ArrangementWorkApprovalRouteNode> arrangementWorkApprovalRouteNodeList = new ArrayList<>();
@@ -777,17 +787,21 @@ public class TestAuthorityJudgeParamCreator {
 		contract.setLifecycleStatus(LifecycleStatus.作成中);
 
 		// 担当SA
-		contract.setContractPicSaEmp(new ContractPicSaEmp());
-		contract.getContractPicSaEmp().setMomEmployeeId("00500784");
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00500784");
+		contract.setContractPicSaEmp(contractPicSaEmp);
 
 		// 追加編集者
-		contract.setContractAddedEditorEmpList(new ArrayList<>());
-		contract.getContractAddedEditorEmpList().add(new ContractAddedEditorEmp());
-		contract.getContractAddedEditorEmpList().get(0).setMomEmployeeId("00500784");
+		List<ContractAddedEditorEmp> contractAddedEditorEmpList = new ArrayList<>();
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00500784");
+		contractAddedEditorEmpList.add(contractAddedEditorEmp);
+		contract.setContractAddedEditorEmpList(contractAddedEditorEmpList);
 
 		// 顧客
-		contract.setCustomerContract(new CustomerContract());
-		contract.getCustomerContract().setMomKjbSystemId("000000003985825");
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000003985825");
+		contract.setCustomerContract(customerContract);
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.承認);
 

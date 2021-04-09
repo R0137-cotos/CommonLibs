@@ -115,7 +115,7 @@ public class AuthorityJudgeParamCreator {
 
 				// グループ承認フラグ
 				boolean isGroupApproval = false;
-				if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+				if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
 					isGroupApproval = true;
 				}
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
@@ -239,7 +239,7 @@ public class AuthorityJudgeParamCreator {
 
 					// グループ承認フラグ
 					boolean isGroupApproval = false;
-					if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+					if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
 						isGroupApproval = true;
 					}
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
@@ -341,7 +341,7 @@ public class AuthorityJudgeParamCreator {
 
 				// グループ承認フラグ
 				boolean isGroupApproval = false;
-				if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+				if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
 					isGroupApproval = true;
 				}
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
