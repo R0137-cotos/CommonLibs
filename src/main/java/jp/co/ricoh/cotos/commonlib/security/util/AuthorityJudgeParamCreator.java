@@ -112,6 +112,14 @@ public class AuthorityJudgeParamCreator {
 				}
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者直接指定フラグ", "フラグ", Boolean.toString(isManualApprover)).toArray(new String[0])).getMsg());
 				authJudgeParam.setManualApprover(isManualApprover);
+
+				// グループ承認フラグ
+				boolean isGroupApproval = false;
+				if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+					isGroupApproval = true;
+				}
+				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
+				authJudgeParam.setGroupApproval(isGroupApproval);
 			}
 		}
 
@@ -228,6 +236,14 @@ public class AuthorityJudgeParamCreator {
 					}
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("受付担当CE指定フラグ", "フラグ", Boolean.toString(isSelfApprover)).toArray(new String[0])).getMsg());
 					authJudgeParam.setPicAccCeApprover(isPicAccCeApprover);
+
+					// グループ承認フラグ
+					boolean isGroupApproval = false;
+					if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+						isGroupApproval = true;
+					}
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
+					authJudgeParam.setGroupApproval(isGroupApproval);
 				}
 			}
 		}
@@ -322,6 +338,14 @@ public class AuthorityJudgeParamCreator {
 				}
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者直接指定フラグ", "フラグ", Boolean.toString(isManualApprover)).toArray(new String[0])).getMsg());
 				authJudgeParam.setManualApprover(isManualApprover);
+
+				// グループ承認フラグ
+				boolean isGroupApproval = false;
+				if (actor.getMomEmployeeId().equals(nextApproverNode.getApproverEmpId()) && ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+					isGroupApproval = true;
+				}
+				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
+				authJudgeParam.setGroupApproval(isGroupApproval);
 			}
 		}
 
@@ -330,7 +354,7 @@ public class AuthorityJudgeParamCreator {
 
 	/**
 	 * 承認実績を元に承認ルートノード特定 最新の承認依頼以降の実績を取得し、実績のリストにまだ存在しないルートノードを返します。
-	 * 
+	 *
 	 * @param estimationApprovalRouteNodeList
 	 *            承認ルートノードリスト
 	 * @param estimationApprovalResultList

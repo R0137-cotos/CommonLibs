@@ -113,6 +113,13 @@ public class ContractApprovalRouteNode extends EntityBase {
 	/**
 	 * 承認者導出方式区分
 	 */
-	@ApiModelProperty(value = "承認者導出方式区分", required = false, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), -組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\")", example = "1", position = 11)
+	@ApiModelProperty(value = "承認者導出方式区分", required = false, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), -組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1", position = 11)
 	private ApproverDeriveMethodDiv approverDeriveMethodDiv;
+
+	/**
+	 * グループ名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "グループ名", required = false, position = 12, allowableValues = "range[0,255]")
+	private String groupName;
 }
