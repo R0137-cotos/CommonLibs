@@ -210,7 +210,6 @@ public class TestAuthorityJudgeParamCreator {
 		// 承認ルート
 		EstimationApprovalRoute estimationApprovalRoute = new EstimationApprovalRoute();
 		estimationApprovalRoute.setApprovalRequesterEmpId("00500784");
-		estimation.setEstimationApprovalRoute(estimationApprovalRoute);
 
 		// 承認ルートノード
 		List<EstimationApprovalRouteNode> estimationApprovalRouteNodeList = new ArrayList<>();
@@ -218,7 +217,8 @@ public class TestAuthorityJudgeParamCreator {
 		estimationApprovalRouteNode.setApproverEmpId("00500784");
 		estimationApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		estimationApprovalRouteNodeList.add(estimationApprovalRouteNode);
-		estimation.getEstimationApprovalRoute().setEstimationApprovalRouteNodeList(estimationApprovalRouteNodeList);
+		estimationApprovalRoute.setEstimationApprovalRouteNodeList(estimationApprovalRouteNodeList);
+		estimation.setEstimationApprovalRoute(estimationApprovalRoute);
 
 		// 担当SA
 		EstimationPicSaEmp estimationPicSaEmp = new EstimationPicSaEmp();
@@ -563,19 +563,20 @@ public class TestAuthorityJudgeParamCreator {
 		contract.setLifecycleStatus(LifecycleStatus.作成中);
 
 		// 承認ルート
-		contract.setContractApprovalRouteList(new ArrayList<>());
 		ContractApprovalRoute contractApprovalRoute = new ContractApprovalRoute();
 		contractApprovalRoute.setApprovalRequesterEmpId("00500784");
 		contractApprovalRoute.setTargetLifecycleStatus(LifecycleStatus.作成中);
 
 		// 承認ルートノード
 		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
+		List<ContractApprovalRoute> contractApprovalRouteList = new ArrayList<>();
 		ContractApprovalRouteNode contractApprovalRouteNode = new ContractApprovalRouteNode();
 		contractApprovalRouteNode.setApproverEmpId("00500784");
 		contractApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		contractApprovalRouteNodeList.add(contractApprovalRouteNode);
 		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
-		contract.getContractApprovalRouteList().add(contractApprovalRoute);
+		contractApprovalRouteList.add(contractApprovalRoute);
+		contract.setContractApprovalRouteList(contractApprovalRouteList);
 
 		// 担当SA
 		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
@@ -772,7 +773,6 @@ public class TestAuthorityJudgeParamCreator {
 		// 承認ルート
 		ArrangementWorkApprovalRoute arrangementWorkApprovalRoute = new ArrangementWorkApprovalRoute();
 		arrangementWorkApprovalRoute.setApprovalRequesterEmpId("00500784");
-		arrangementWork.setArrangementWorkApprovalRoute(arrangementWorkApprovalRoute);
 
 		// 承認ルートノード
 		List<ArrangementWorkApprovalRouteNode> arrangementWorkApprovalRouteNodeList = new ArrayList<>();
@@ -780,7 +780,8 @@ public class TestAuthorityJudgeParamCreator {
 		arrangementWorkApprovalRouteNode.setApproverEmpId("00500784");
 		arrangementWorkApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		arrangementWorkApprovalRouteNodeList.add(arrangementWorkApprovalRouteNode);
-		arrangementWork.getArrangementWorkApprovalRoute().setArrangementWorkApprovalRouteNodeList(arrangementWorkApprovalRouteNodeList);
+		arrangementWorkApprovalRoute.setArrangementWorkApprovalRouteNodeList(arrangementWorkApprovalRouteNodeList);
+		arrangementWork.setArrangementWorkApprovalRoute(arrangementWorkApprovalRoute);
 
 		// 契約
 		Contract contract = new Contract();
