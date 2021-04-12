@@ -362,6 +362,11 @@ public class MomAuthorityService {
 			return true;
 		}
 
+		// グループ承認フラグであれば、権限あり
+		if (authParam.isGroupApproval()) {
+			return true;
+		}
+
 		// 承認処理用の認可処理を実施
 		return this.hasApproveAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getRequesterMvEmployeeMaster());
 	}
