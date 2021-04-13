@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.ProcessStatus;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster.MailDiv;
 
 @Repository
@@ -21,4 +22,6 @@ public interface LicenseProcessRepository extends CrudRepository<LicenseProcess,
 	public List<LicenseProcess> findByLicenseInfoIdAndProcessStatus(long licenseInfoId, ProcessStatus processStatus);
 
 	public List<LicenseProcess> findByLicenseInfoIdAndArrangementWorkIdAndProcessStatus(long licenseInfoId, long arrangementWorkId, ProcessStatus processStatus);
+
+	public LicenseProcess findByLicenseInfoIdAndProcessOrderAndProcessMasterIdAndArrangementWorkIdAndOperationDivAndProcessStatus(long licenseInfoId, int processOrder, long processMasterId, long arrangementWorkId, OperationDiv operationDiv, ProcessStatus processStatus);
 }
