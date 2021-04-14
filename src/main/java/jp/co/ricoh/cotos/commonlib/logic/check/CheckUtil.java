@@ -538,9 +538,9 @@ public class CheckUtil {
 					checkFlg = true;
 				}
 				break;
-			case 数量が月数or月数プラス1:
-				// 積上げ数量が月数or月数+1と一致しない場合、エラーとする。
-				if (cd.get().getQuantity() != diffMonth && cd.get().getQuantity() != diffMonth + 1) {
+			case 数量が月数or数量プラス1が月数:
+				// 積上げ数量が月数or数量プラス1が月数と一致しない場合、エラーとする。
+				if (cd.get().getQuantity() != diffMonth && cd.get().getQuantity() + 1 != diffMonth) {
 					checkFlg = true;
 				}
 				break;

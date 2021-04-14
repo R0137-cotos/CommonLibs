@@ -160,7 +160,7 @@ public class TestMonthMisalignCheck {
 	}
 
 	@Test
-	public void 正常系_指定した品種の月ずれが発生_積上げ数量が月数or月数プラス1と一致しない場合1() {
+	public void 正常系_指定した品種の月ずれが発生_積上げ数量が月数or数量プラス1が月数と一致しない場合1() {
 
 		final long contractId = 1L;
 		final long itemMasterId = 2006L; // 数量:11
@@ -175,7 +175,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or数量プラス1が月数), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -185,12 +185,12 @@ public class TestMonthMisalignCheck {
 	}
 
 	@Test
-	public void 正常系_指定した品種の月ずれが発生_積上げ数量が月数or月数プラス1と一致しない場合2() {
+	public void 正常系_指定した品種の月ずれが発生_積上げ数量が月数or数量プラス1が月数と一致しない場合2() {
 
 		final long contractId = 1L;
 		final long itemMasterId = 2006L; // 数量:11
-		final String strDateFrom = "2019/12/01";
-		final String strDateTo = "2020/12/01"; // 月数:12
+		final String strDateFrom = "2019/11/01";
+		final String strDateTo = "2020/12/01"; // 月数:13
 
 		Contract contract = contractRepository.findOne(contractId);
 
@@ -200,7 +200,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), true);
+			Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or数量プラス1が月数), true);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -435,7 +435,7 @@ public class TestMonthMisalignCheck {
 	}
 
 	@Test
-	public void 正常系_指定した品種の月ずれが発生しない_差分あり_積上げ数量が月数or月数プラス1と一致しない場合1() {
+	public void 正常系_指定した品種の月ずれが発生しない_差分あり_数量が月数or数量プラス1が月数と一致しない場合1() {
 
 		final long contractId = 1L;
 		final long itemMasterId = 2006L; // 数量:11
@@ -450,7 +450,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or数量プラス1が月数), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
@@ -460,12 +460,12 @@ public class TestMonthMisalignCheck {
 	}
 
 	@Test
-	public void 正常系_指定した品種の月ずれが発生しない_差分あり_積上げ数量が月数or月数プラス1と一致しない場合2() {
+	public void 正常系_指定した品種の月ずれが発生しない_差分あり_積上げ数量が月数or数量プラス1が月数と一致しない場合2() {
 
 		final long contractId = 1L;
 		final long itemMasterId = 2006L; // 数量:11
-		final String strDateFrom = "2020/02/01";
-		final String strDateTo = "2020/12/01"; // 月数:10
+		final String strDateFrom = "2019/12/01";
+		final String strDateTo = "2020/12/01"; // 月数:12
 
 		Contract contract = contractRepository.findOne(contractId);
 
@@ -475,7 +475,7 @@ public class TestMonthMisalignCheck {
 		try {
 			checkDateFrom = sdFormat.parse(strDateFrom);
 			checkDateTo = sdFormat.parse(strDateTo);
-			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or月数プラス1), false);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量が月数or数量プラス1が月数), false);
 
 		} catch (ParseException e) {
 			fail("日付変換でエラー");
