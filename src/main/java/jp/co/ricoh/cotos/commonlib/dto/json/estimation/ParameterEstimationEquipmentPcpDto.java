@@ -5,6 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ClassificationCodePcp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ContinuePossibleFlgPcp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ParameterEstimationEquipmentDeleteFlgPcp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ReContractNotAllowedFlgPcp;
@@ -99,4 +100,19 @@ public class ParameterEstimationEquipmentPcpDto {
 	 * 変更元契約機種ID
 	 */
 	private Long originContractEquipmentId;
+
+	/**
+	 * 分類コード
+	 */
+	private ClassificationCodePcp classificationCode;
+
+	/**
+	 * 分類名
+	 */
+	private String classificationName;
+
+	/**
+	 * 保守可能年数
+	 */
+	private String maintenanceYears;
 }
