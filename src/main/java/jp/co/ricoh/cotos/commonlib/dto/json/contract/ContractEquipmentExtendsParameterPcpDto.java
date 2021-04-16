@@ -5,6 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.ClassificationCodePcp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallFlgPcp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.InstallationFlgPcp;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypePcp.NetworkFlgPcp;
@@ -78,4 +79,9 @@ public class ContractEquipmentExtendsParameterPcpDto {
 	 * ソフトインストール品種コード
 	 */
 	private String installItemCode;
+
+	/**
+	 * 分類コード
+	 */
+	private ClassificationCodePcp classificationCode;
 }
