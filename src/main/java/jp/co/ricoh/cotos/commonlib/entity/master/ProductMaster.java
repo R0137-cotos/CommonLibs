@@ -200,4 +200,11 @@ public class ProductMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "訪販代売禁止フラグ", required = false, position = 22, allowableValues = "range[0,9]")
 	private Integer substituteSalesProhibitedFlg;
 
+	/**
+	 * 契約変更時商流変更可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "契約変更時商流変更可能フラグ", required = false, position = 23, allowableValues = "range[0,9]")
+	private Integer commercialFlowDivPlanChangeableFlg;
 }
