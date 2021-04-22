@@ -20,6 +20,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.AbsConCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ArcsPeriodSaleMntOriginStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.BasicContractDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
@@ -684,4 +685,54 @@ public class ContractDto extends DtoBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 91)
 	private Date arcsPeriodSaleMntOriginLinkAt;
+
+	/**
+	 * IFS連携用解約CSV作成状態
+	 */
+	@ApiModelProperty(value = "IFS連携用解約CSV作成状態", required = false, position = 92, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
+	private IfsLinkageCsvCreateStatus ifsLinkageCancelCsvStatus;
+
+	/**
+	 * IFS連携用解約CSV作成日
+	 */
+	@ApiModelProperty(value = "IFS連携用解約CSV作成日", required = false, position = 93)
+	@Temporal(TemporalType.DATE)
+	private Date ifsLinkageCancelCsvDate;
+
+	/**
+	 * 次回契約更新可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回契約更新可能フラグ", required = false, position = 94, allowableValues = "range[0,9]")
+	private Integer nextUpdatePossibleFlg;
+
+	/**
+	 * 次回自動更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 95, allowableValues = "range[0,9]")
+	private Integer nextAutoUpdateFlg;
+
+	/**
+	 * 次回継続可能機種なしフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 96, allowableValues = "range[0,9]")
+	private Integer nextEquipmentNotContFlg;
+
+	/**
+	 * 基本契約区分
+	 */
+	@ApiModelProperty(value = "基本契約区分", required = false, position = 97, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
+	private BasicContractDiv basicContractDiv;
+
+	/**
+	 * 基本契約ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "基本契約ID", required = false, position = 98, allowableValues = "range[0,9223372036854775807]")
+	private Long basicContractId;
 }
