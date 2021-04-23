@@ -109,6 +109,9 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ProductEstimationDto
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.FileImportManagementParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.LicenseInfoDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.CasLicenseBasicInfoDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.CasLicenseDetailInfoDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.CasLicenseManagementInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductClassCheckMasterSearchParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductGrpCheckMasterSearchParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
@@ -136,6 +139,7 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkOperationLo
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportErrorDetails;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
+import jp.co.ricoh.cotos.commonlib.entity.common.SearchCondition;
 import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailDestination;
 import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
@@ -198,6 +202,22 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseBasicInfo;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseDetailInfo;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseManagementInfo;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmLinkManagement;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmSuspendSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmSuspendSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateCustomerRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateCustomerResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateUserRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateUserResponseWork;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
@@ -766,6 +786,11 @@ public class TestSecurityController {
 		return createParameterCheckResult(result);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/SearchCondition")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated SearchCondition entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/Accounting")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated Accounting entity, BindingResult result) {
 		return createParameterCheckResult(result);
@@ -1068,6 +1093,101 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ItemContractDetailForFindAllDetailsBplatsDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ItemContractDetailForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseBasicInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseBasicInfoDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseManagementInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseManagementInfoDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseDetailInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseDetailInfoDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseBasicInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseBasicInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseManagementInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseManagementInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/CasLicenseDetailInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated CasLicenseDetailInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmLinkManagement")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmLinkManagement entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmCreateCustomerRequestWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmCreateCustomerRequestWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmCreateCustomerResponseWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmCreateCustomerResponseWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmCreateSubscriptionRequestWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmCreateSubscriptionRequestWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmCreateSubscriptionResponseWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmCreateSubscriptionResponseWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmSuspendSubscriptionRequestWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmSuspendSubscriptionRequestWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmSuspendSubscriptionResponseWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmSuspendSubscriptionResponseWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmUpdateCustomerRequestWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmUpdateCustomerRequestWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmUpdateCustomerResponseWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmUpdateCustomerResponseWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmUpdateSubscriptionRequestWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmUpdateSubscriptionRequestWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmUpdateSubscriptionResponseWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmUpdateSubscriptionResponseWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmUpdateUserRequestWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmUpdateUserRequestWork entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/TmUpdateUserResponseWork")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated TmUpdateUserResponseWork entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
