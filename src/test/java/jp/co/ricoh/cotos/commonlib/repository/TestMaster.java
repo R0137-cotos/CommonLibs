@@ -2463,6 +2463,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2541,6 +2542,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2728,6 +2730,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;

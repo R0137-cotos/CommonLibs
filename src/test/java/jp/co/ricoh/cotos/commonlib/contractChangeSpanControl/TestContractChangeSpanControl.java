@@ -428,7 +428,7 @@ public class TestContractChangeSpanControl {
 		List<ErrorInfo> errors = contractChangeSpanControl.contractChangeSpanCheck(serviceCategory, productMasterId, itemMasterId, contractType, contractTypeDetail, lifecycleStatus, workflowStatus, transactionTableId);
 		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
 		errors.stream().forEach(err -> {
-			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00034",  err.getErrorId());
+			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00034", err.getErrorId());
 			Assert.assertEquals("aを経過しているためbの反映はできません。サービス利用希望日にc以降の日付を指定してください。",  err.getErrorMessage());
 		});
 	}
@@ -470,7 +470,7 @@ public class TestContractChangeSpanControl {
 		List<ErrorInfo> errors = contractChangeSpanControl.contractChangeSpanCheck(serviceCategory, productMasterId, itemMasterId, contractType, contractTypeDetail, lifecycleStatus, workflowStatus, transactionTableId);
 		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
 		errors.stream().forEach(err -> {
-			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00034",  err.getErrorId());
+			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00034", err.getErrorId());
 			Assert.assertEquals("aを経過しているためbの反映はできません。サービス利用希望日にc以降の日付を指定してください。",  err.getErrorMessage());
 		});
 	}
@@ -493,7 +493,7 @@ public class TestContractChangeSpanControl {
 		List<ErrorInfo> errors = contractChangeSpanControl.contractChangeSpanCheck(serviceCategory, productMasterId, itemMasterId, contractType, contractTypeDetail, lifecycleStatus, workflowStatus, transactionTableId);
 		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
 		errors.stream().forEach(err -> {
-			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037",  err.getErrorId());
+			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037", err.getErrorId());
 			Assert.assertEquals("解約予定日はaからbの範囲で指定してください。",  err.getErrorMessage());
 		});
 	}
@@ -516,7 +516,7 @@ public class TestContractChangeSpanControl {
 		List<ErrorInfo> errors = contractChangeSpanControl.contractChangeSpanCheck(serviceCategory, productMasterId, itemMasterId, contractType, contractTypeDetail, lifecycleStatus, workflowStatus, transactionTableId);
 		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
 		errors.stream().forEach(err -> {
-			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037",  err.getErrorId());
+			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037", err.getErrorId());
 			Assert.assertEquals("解約予定日はaからbの範囲で指定してください。",  err.getErrorMessage());
 		});
 	}
