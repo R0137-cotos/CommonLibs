@@ -395,17 +395,55 @@ public class ItemMaster extends EntityBaseMaster {
 	private String vendorShortName;
 
 	/**
+	 * ＲＪ販事本仕入価格
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 32, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * 見積承認ルートグループマスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "estimation_approval_route_grp_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "承認ルートグループマスタ（見積）", required = false, position = 33)
+	private ApprovalRouteGrpMaster estimationApprovalRouteGrpMaster;
+
+	/**
+	 * 契約承認ルートグループマスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "contract_approval_route_grp_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "承認ルートグループマスタ（契約）", required = false, position = 34)
+	private ApprovalRouteGrpMaster contractApprovalRouteGrpMaster;
+
+	/**
+	 * 品種別チェック項目マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "check_by_item_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "品種別チェック項目マスタ", required = false, position = 35)
+	private CheckByItemMaster checkByItemMaster;
+
+	/**
+	 * 契約自動締結除外フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "契約自動締結除外フラグ", required = false, position = 36, allowableValues = "range[0,9]")
+	private Integer contractAutoSigningExclusionFlg;
+
+	/**
 	 * 契約期間月数
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "契約期間月数", required = false, position = 32, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "契約期間月数", required = false, position = 37, allowableValues = "range[0,99999]")
 	private Integer contractSpanMonth;
 
 	/**
 	 * 契約期間起算日区分
 	 */
-	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 33, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 38, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private ContractSpanStartDateType contractSpanStartDateType;
 
 	/**
@@ -414,7 +452,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "origin_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "分解元品種マスタ", required = false, position = 34)
+	@ApiModelProperty(value = "分解元品種マスタ", required = false, position = 39)
 	private ItemMaster originItemMaster;
 
 	/**
@@ -422,7 +460,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 35, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 40, allowableValues = "range[0,9]")
 	private Integer penaltyFlg;
 
 	/**
@@ -430,13 +468,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "最低契約月数", required = false, position = 36, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 41, allowableValues = "range[0,99999]")
 	private Integer minContractMonths;
 
 	/**
 	 * 違約金起算日区分
 	 */
-	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 37, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 42, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private PenaltyStartDateType penaltyStartDateType;
 
 	/**
@@ -445,13 +483,13 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "penalty_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "違約金品種マスタ", required = false, position = 38)
+	@ApiModelProperty(value = "違約金品種マスタ", required = false, position = 43)
 	private ItemMaster penaltyItemMaster;
 
 	/**
 	 * 分解後品種区分
 	 */
-	@ApiModelProperty(value = "分解後品種区分", required = false, position = 39, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
+	@ApiModelProperty(value = "分解後品種区分", required = false, position = 44, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
@@ -460,7 +498,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "running_from_calc_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ランニング計上開始日日付計算パターンマスタ", required = false, position = 40)
+	@ApiModelProperty(value = "ランニング計上開始日日付計算パターンマスタ", required = false, position = 45)
 	private DateCalcPatternMaster dateCalcPatternMaster;
 
 	/**
@@ -468,7 +506,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "品種分解マスタ", required = false, position = 41)
+	@ApiModelProperty(value = "品種分解マスタ", required = false, position = 46)
 	private List<ItemDecomposeMaster> itemDecomposeMasterList;
 
 	/**
@@ -476,7 +514,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "発送物ありマスタ", required = false, position = 42)
+	@ApiModelProperty(value = "発送物ありマスタ", required = false, position = 47)
 	private List<ShippingThingMaster> shippingThingMasterList;
 
 	/**
@@ -484,19 +522,12 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "品種ライセンス用設定マスタ", required = false, position = 43)
+	@ApiModelProperty(value = "品種ライセンス用設定マスタ", required = false, position = 48)
 	private List<ItemLicenseSettingMaster> ItemLicenseSettingMasterList;
-
-	/**
-	 * ＲＪ販事本仕入価格
-	 */
-	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 44, allowableValues = "range[0.00,9999999999999999999.99]")
-	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
 	 * HW/NOS区分
 	 */
-	@ApiModelProperty(value = "HW/NOS区分", required = false, position = 44, allowableValues = "HW(\"1\"), NOS(\"2\")")
+	@ApiModelProperty(value = "HW/NOS区分", required = false, position = 49, allowableValues = "HW(\"1\"), NOS(\"2\")")
 	private HwNosType hwNosType;
 }

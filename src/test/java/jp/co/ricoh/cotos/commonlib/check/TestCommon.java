@@ -18,10 +18,12 @@ import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportErrorDetails;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
+import jp.co.ricoh.cotos.commonlib.entity.common.SearchCondition;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.FileImportErrorDetailsRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.FileImportManagementRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.SearchConditionRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
@@ -57,12 +59,16 @@ public class TestCommon {
 	EimDocumentInfoRepository eimDocumentInfoRepository;
 
 	@Autowired
+	SearchConditionRepository searchConditionRepository;
+
+	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportErrorDetails.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportManagement.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/searchCondition.sql");
 	}
 
 	@Autowired
@@ -108,6 +114,38 @@ public class TestCommon {
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "サーバーパスは最大文字数（1000）を超えています。"));
+	}
+
+	@Test
+	public void SearchConditionのテスト() throws Exception {
+		SearchCondition entity = searchConditionRepository.findOne(1L);
+		SearchCondition testTarget = new SearchCondition();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@NotNullの null チェック）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMomEmployeeId(null);
+		testTarget.setDomain(null);
+		testTarget.setTitle(null);
+		testTarget.setSearchCondition(null);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
+
+		// 異常系（@Size(max)）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setMomEmployeeId(STR_256);
+		testTarget.setDomain(STR_256);
+		testTarget.setTitle(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDは最大文字数（255）を超えています。"));
 	}
 
 	@Test

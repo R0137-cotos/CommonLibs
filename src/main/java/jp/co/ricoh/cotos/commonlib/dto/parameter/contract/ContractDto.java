@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.AbsConCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ArcsPeriodSaleMntOriginStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.BasicContractDiv;
@@ -602,19 +603,11 @@ public class ContractDto extends DtoBase {
 	private List<ContractEquipmentNoIsysoneDto> contractEquipmentNoIsysoneList;
 
 	/**
-	 * S&S作業依頼フラグ
-	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 80, allowableValues = "range[0,9]")
-	private Integer ssWorkRequestCreateFlg;
-
-	/**
 	 * 違約金明細(契約用)
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 81)
+	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 80)
 	private List<PenaltyDetailContractDto> penaltyDetailContractList;
 
 	/**
@@ -622,14 +615,14 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "配送先", required = true, position = 82)
+	@ApiModelProperty(value = "配送先", required = true, position = 81)
 	private ShippingAddressDto shippingAddress;
 
 	/**
 	 * 仕入用管理No
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "仕入用管理No", required = false, position = 83, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "仕入用管理No", required = false, position = 82, allowableValues = "range[0,255]")
 	private String purchaseManageNumber;
 
 	/**
@@ -637,65 +630,86 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "配送先SS組織", required = true, position = 84)
+	@ApiModelProperty(value = "配送先SS組織", required = true, position = 83)
 	private ShippingAddressSsOrgDto shippingAddressSsOrg;
 
 	/**
 	 * ベンダー向けコメント
 	 */
 	@Size(max = 1333)
-	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 85, allowableValues = "range[0,1333]")
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 84, allowableValues = "range[0,1333]")
 	private String toVendorComment;
+
+	/**
+	 * MVBアカウント
+	 */
+	@Size(max = 18)
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 85, allowableValues = "range[0,18]")
+	private String mvbAccount;
+
+	/**
+	 * MVBアカウント登録区分
+	 */
+	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 86, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
+	private MvbAccountEntryDiv mvbAccountEntryDiv;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 87, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
 
 	/**
 	 * 統合契約連携用CSV作成状態
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成状態", required = false, position = 86, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
+	@ApiModelProperty(value = "統合契約連携用CSV作成状態", required = false, position = 88, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
 	private AbsConCsvCreateStatus absConCsvCreateStatus;
 
 	/**
 	 * 統合契約連携用CSV作成日
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成日", required = false, position = 87)
+	@ApiModelProperty(value = "統合契約連携用CSV作成日", required = false, position = 89)
 	@Temporal(TemporalType.DATE)
 	private Date absConCsvCreateDate;
 
 	/**
 	 * 統合契約連携用CSV作成状態(解約)
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成状態(解約)", required = false, position = 88, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
+	@ApiModelProperty(value = "統合契約連携用CSV作成状態(解約)", required = false, position = 90, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
 	private AbsConCsvCreateStatus absConCsvCreateStatusCancel;
 
 	/**
 	 * 統合契約連携用CSV作成日(解約)
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成日(解約)", required = false, position = 89)
+	@ApiModelProperty(value = "統合契約連携用CSV作成日(解約)", required = false, position = 91)
 	@Temporal(TemporalType.DATE)
 	private Date absConCsvCreateDateCancel;
 
 	/**
 	 * ARCS期間売保守元契約処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 90, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 92, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
 	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
 
 	/**
 	 * ARCS期間売保守元契約連携日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 91)
+	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 93)
 	private Date arcsPeriodSaleMntOriginLinkAt;
 
 	/**
 	 * IFS連携用解約CSV作成状態
 	 */
-	@ApiModelProperty(value = "IFS連携用解約CSV作成状態", required = false, position = 92, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
+	@ApiModelProperty(value = "IFS連携用解約CSV作成状態", required = false, position = 94, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
 	private IfsLinkageCsvCreateStatus ifsLinkageCancelCsvStatus;
 
 	/**
 	 * IFS連携用解約CSV作成日
 	 */
-	@ApiModelProperty(value = "IFS連携用解約CSV作成日", required = false, position = 93)
+	@ApiModelProperty(value = "IFS連携用解約CSV作成日", required = false, position = 95)
 	@Temporal(TemporalType.DATE)
 	private Date ifsLinkageCancelCsvDate;
 
@@ -704,7 +718,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "次回契約更新可能フラグ", required = false, position = 94, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "次回契約更新可能フラグ", required = false, position = 96, allowableValues = "range[0,9]")
 	private Integer nextUpdatePossibleFlg;
 
 	/**
@@ -712,7 +726,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 95, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 97, allowableValues = "range[0,9]")
 	private Integer nextAutoUpdateFlg;
 
 	/**
@@ -720,19 +734,19 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 96, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 98, allowableValues = "range[0,9]")
 	private Integer nextEquipmentNotContFlg;
 
 	/**
 	 * 基本契約区分
 	 */
-	@ApiModelProperty(value = "基本契約区分", required = false, position = 97, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
+	@ApiModelProperty(value = "基本契約区分", required = false, position = 99, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
 	private BasicContractDiv basicContractDiv;
 
 	/**
 	 * 基本契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "基本契約ID", required = false, position = 98, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "基本契約ID", required = false, position = 100, allowableValues = "range[0,9223372036854775807]")
 	private Long basicContractId;
 }

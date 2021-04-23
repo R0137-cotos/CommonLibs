@@ -112,6 +112,7 @@ public class TestContract {
 	private static final int INT_100000 = 100000;
 	private static final BigDecimal DECIMAL_MINUS_001 = new BigDecimal("-0.01");
 	private static final BigDecimal DECIMAL_0001 = new BigDecimal("0.001");
+	private static final String STR_19 = "01234567890123456789";
 
 	static ConfigurableApplicationContext context;
 
@@ -713,6 +714,7 @@ public class TestContract {
 		testTarget.setVendorManageNumber(STR_256);
 		testTarget.setPurchaseManageNumber(STR_256);
 		testTarget.setToVendorComment(STR_1334);
+		testTarget.setMvbAccount(STR_19);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 24);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));

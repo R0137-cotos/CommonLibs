@@ -30,6 +30,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
@@ -598,6 +599,15 @@ public class TestContract {
 		Assert.assertNotEquals(foundList.size(), 0);
 	}
 
+	@Test
+	public void 契約チェック結果条件取得確認() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		List<ContractCheckResult> found = contractCheckResultRepository.findByContractIdAndCheckMatterCode(5L, "TEST_12");
+		Assert.assertEquals("契約チェック結果が1件であること", 1, found.size());
+	}
+	
 	@Test
 	public void ContractInstallationLocationRepositoryのテスト() {
 		// テストデータ登録
