@@ -267,12 +267,4 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "シリアル連絡区分", required = false, position = 29, allowableValues = "新規のみ(\"1\"), 新規と契約変更(\"2\")", example = "1")
 	private SerialContactDiv serialContactDiv;
-
-	/**
-	 * 情報変更時商流変更可能フラグ
-	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "情報変更時商流変更可能フラグ", required = false, position = 30, allowableValues = "range[0,9]")
-	private Integer commercialFlowDivInfoChangeableFlg;
 }
