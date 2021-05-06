@@ -105,10 +105,17 @@ public class LicenseProcessMaster extends EntityBase {
 	private int priorityOrder;
 
 	/**
+	 * ライセンス工程種類区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ライセンス工程種類区分", required = false, position = 7, allowableValues = "range[0,255]")
+	private String licenseProcessClassDiv;
+
+	/**
 	 * ライセンス工程パターンマスタリスト
 	 */
 	@OneToMany(mappedBy = "licenseProcessMaster")
-	@ApiModelProperty(value = "ライセンス工程パターンマスタ", required = false, position = 7)
+	@ApiModelProperty(value = "ライセンス工程パターンマスタ", required = false, position = 8)
 	private List<LicenseProcessPatternMaster> licenseProcessPatternMasterList;
 
 }
