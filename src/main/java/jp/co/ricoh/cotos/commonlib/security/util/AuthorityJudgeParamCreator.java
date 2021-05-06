@@ -211,10 +211,20 @@ public class AuthorityJudgeParamCreator {
 				List<ContractApprovalRouteNode> nodeList = targetContractApprovalRoute.get().getContractApprovalRouteNodeList();
 
 				// 承認者情報
-				List<MvEmployeeMaster> approverList = nodeList.stream().map(node -> {
-					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
-					return mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId());
-				}).collect(Collectors.toList());
+				List<MvEmployeeMaster> approverList = new ArrayList<>();
+
+				nodeList.stream().forEach(node -> {
+					if (ApproverDeriveMethodDiv.グループ承認.equals(node.getApproverDeriveMethodDiv())) {
+						List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(node.getApproverEmpId());
+						empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
+							log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
+							approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
+						});
+					} else {
+						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
+						approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
+					}
+				});
 				authJudgeParam.setApproverMvEmployeeMasterList(approverList);
 
 				// 次回承認者情報
@@ -330,11 +340,23 @@ public class AuthorityJudgeParamCreator {
 		// 承認ルートが存在する場合
 		if (arrangementWork != null && arrangementWork.getArrangementWorkApprovalRoute() != null) {
 
+			List<ArrangementWorkApprovalRouteNode> nodeList = arrangementWork.getArrangementWorkApprovalRoute().getArrangementWorkApprovalRouteNodeList();
+
 			// 承認者情報
-			List<MvEmployeeMaster> approverList = arrangementWork.getArrangementWorkApprovalRoute().getArrangementWorkApprovalRouteNodeList().stream().map(arrangementWorkApprovalRouteNode -> {
-				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", arrangementWorkApprovalRouteNode.getApproverEmpId()).toArray(new String[0])).getMsg());
-				return mvEmployeeMasterRepository.findByMomEmployeeId(arrangementWorkApprovalRouteNode.getApproverEmpId());
-			}).collect(Collectors.toList());
+			List<MvEmployeeMaster> approverList = new ArrayList<>();
+
+			nodeList.stream().forEach(node -> {
+				if (ApproverDeriveMethodDiv.グループ承認.equals(node.getApproverDeriveMethodDiv())) {
+					List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(node.getApproverEmpId());
+					empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
+						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
+						approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
+					});
+				} else {
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
+					approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
+				}
+			});
 			authJudgeParam.setApproverMvEmployeeMasterList(approverList);
 
 			// 次回承認者情報（代理編集者でない）
