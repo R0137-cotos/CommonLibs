@@ -25,9 +25,11 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalResult;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster.ApproverDeriveMethodDiv;
+import jp.co.ricoh.cotos.commonlib.entity.master.EmpGrpManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AccessType;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.repository.master.EmpGrpManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
@@ -45,6 +47,9 @@ public class AuthorityJudgeParamCreator {
 
 	@Autowired
 	VKjbMasterRepository vKjbMasterRepository;
+
+	@Autowired
+	EmpGrpManagementMasterRepository empGrpManagementMasterRepository;
 
 	public AuthorityJudgeParameter createFromEstimation(Estimation estimation, MvEmployeeMaster actor, AccessType accessType) {
 
@@ -89,10 +94,20 @@ public class AuthorityJudgeParamCreator {
 			List<EstimationApprovalRouteNode> nodeList = estimation.getEstimationApprovalRoute().getEstimationApprovalRouteNodeList();
 
 			// 承認者情報
-			List<MvEmployeeMaster> approverList = nodeList.stream().map(node -> {
-				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者（代理編集者でない）", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
-				return mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId());
-			}).collect(Collectors.toList());
+			List<MvEmployeeMaster> approverList = new ArrayList<>();
+
+			nodeList.stream().forEach(node -> {
+				if (ApproverDeriveMethodDiv.グループ承認.equals(node.getApproverDeriveMethodDiv())) {
+					List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(node.getApproverEmpId());
+					empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
+						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者（代理編集者でない）", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
+						approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
+					});
+				} else {
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者（代理編集者でない）", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
+					approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
+				}
+			});
 			authJudgeParam.setApproverMvEmployeeMasterList(approverList);
 
 			// 次回承認者情報（代理編集者でない）
