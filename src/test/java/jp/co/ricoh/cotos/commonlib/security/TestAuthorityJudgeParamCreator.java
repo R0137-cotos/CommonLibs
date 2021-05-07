@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
@@ -51,11 +52,13 @@ public class TestAuthorityJudgeParamCreator {
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
+		context.getBean(DBConfig.class).clearData();
 	}
 
 	@AfterClass
 	public static void stopAPServer() throws InterruptedException {
 		if (null != context) {
+			context.getBean(DBConfig.class).clearData();
 			context.stop();
 		}
 	}
@@ -101,6 +104,58 @@ public class TestAuthorityJudgeParamCreator {
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
 		Assert.assertNotNull("正常に次回承認者の社員情報が作成されていること", authParam.getNextApproverMvEmployeeMaster());
+		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
+		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
+	}
+
+	@Test
+	public void 正常_権限判定用パラメーター取得_見積_参照_グループ承認() {
+
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
+		// ログインユーザー
+		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
+
+		// 見積
+		Estimation estimation = new Estimation();
+
+		// 承認ルート
+		EstimationApprovalRoute estimationApprovalRoute = new EstimationApprovalRoute();
+		estimationApprovalRoute.setApprovalRequesterEmpId("00500784");
+
+		// 承認ルートノード
+		List<EstimationApprovalRouteNode> estimationApprovalRouteNodeList = new ArrayList<>();
+		EstimationApprovalRouteNode estimationApprovalRouteNode = new EstimationApprovalRouteNode();
+		estimationApprovalRouteNode.setApproverEmpId("TORUNO001");
+		estimationApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
+		estimationApprovalRouteNodeList.add(estimationApprovalRouteNode);
+		estimationApprovalRoute.setEstimationApprovalRouteNodeList(estimationApprovalRouteNodeList);
+		estimation.setEstimationApprovalRoute(estimationApprovalRoute);
+
+		// 担当SA
+		EstimationPicSaEmp estimationPicSaEmp = new EstimationPicSaEmp();
+		estimationPicSaEmp.setMomEmployeeId("00500784");
+		estimation.setEstimationPicSaEmp(estimationPicSaEmp);
+
+		// 追加編集者
+		List<EstimationAddedEditorEmp> estimationAddedEditorEmpList = new ArrayList<>();
+		EstimationAddedEditorEmp estimationAddedEditorEmp = new EstimationAddedEditorEmp();
+		estimationAddedEditorEmp.setMomEmployeeId("00500784");
+		estimationAddedEditorEmpList.add(estimationAddedEditorEmp);
+		estimation.setEstimationAddedEditorEmpList(estimationAddedEditorEmpList);
+
+		// 顧客
+		CustomerEstimation customerEstimation = new CustomerEstimation();
+		customerEstimation.setMomKjbSystemId("000000003985825");
+		estimation.setCustomerEstimation(customerEstimation);
+
+		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.参照);
+
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
+		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
+		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
 		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
 		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
 	}
@@ -298,6 +353,64 @@ public class TestAuthorityJudgeParamCreator {
 		Assert.assertNotNull("正常に次回承認者の社員情報が作成されていること", authParam.getNextApproverMvEmployeeMaster());
 		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
 		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
+	}
+
+	@Test
+	public void 正常_権限判定用パラメーター取得_契約_参照_グループ承認() {
+
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
+		// ログインユーザー
+		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
+
+		// 契約
+		Contract contract = new Contract();
+		contract.setLifecycleStatus(LifecycleStatus.作成中);
+
+		// 承認ルート
+		ContractApprovalRoute contractApprovalRoute = new ContractApprovalRoute();
+		contractApprovalRoute.setApprovalRequesterEmpId("00500784");
+		contractApprovalRoute.setTargetLifecycleStatus(LifecycleStatus.作成中);
+
+		// 承認ルートノード
+		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
+		List<ContractApprovalRoute> contractApprovalRouteList = new ArrayList<>();
+		ContractApprovalRouteNode contractApprovalRouteNode = new ContractApprovalRouteNode();
+		contractApprovalRouteNode.setApproverEmpId("TORUNO001");
+		contractApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
+		contractApprovalRouteNodeList.add(contractApprovalRouteNode);
+		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
+		contractApprovalRouteList.add(contractApprovalRoute);
+		contract.setContractApprovalRouteList(contractApprovalRouteList);
+
+		// 担当SA
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00500784");
+		contract.setContractPicSaEmp(contractPicSaEmp);
+
+		// 追加編集者
+		List<ContractAddedEditorEmp> contractAddedEditorEmpList = new ArrayList<>();
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00500784");
+		contractAddedEditorEmpList.add(contractAddedEditorEmp);
+		contract.setContractAddedEditorEmpList(contractAddedEditorEmpList);
+
+		// 顧客
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000003985825");
+		contract.setCustomerContract(customerContract);
+
+		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
+
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
+		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
+		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
+		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
+		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
+		Assert.assertFalse("自己承認でないこと", authParam.isSelfApprover());
+		Assert.assertFalse("受付担当CE指定でないこと", authParam.isPicAccCeApprover());
 	}
 
 	@Test
@@ -655,6 +768,63 @@ public class TestAuthorityJudgeParamCreator {
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
 		Assert.assertNotNull("正常に次回承認者の社員情報が作成されていること", authParam.getNextApproverMvEmployeeMaster());
+		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
+		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
+		Assert.assertFalse("自己承認でないこと", authParam.isSelfApprover());
+	}
+
+	@Test
+	public void 正常_権限判定用パラメーター取得_手配_参照_グループ承認() {
+
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
+		// ログインユーザー
+		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
+
+		// 手配業務
+		ArrangementWork arrangementWork = new ArrangementWork();
+
+		// 承認ルート
+		ArrangementWorkApprovalRoute arrangementWorkApprovalRoute = new ArrangementWorkApprovalRoute();
+		arrangementWorkApprovalRoute.setApprovalRequesterEmpId("00500784");
+
+		// 承認ルートノード
+		List<ArrangementWorkApprovalRouteNode> arrangementWorkApprovalRouteNodeList = new ArrayList<>();
+		ArrangementWorkApprovalRouteNode arrangementWorkApprovalRouteNode = new ArrangementWorkApprovalRouteNode();
+		arrangementWorkApprovalRouteNode.setApproverEmpId("TORUNO001");
+		arrangementWorkApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
+		arrangementWorkApprovalRouteNodeList.add(arrangementWorkApprovalRouteNode);
+		arrangementWorkApprovalRoute.setArrangementWorkApprovalRouteNodeList(arrangementWorkApprovalRouteNodeList);
+		arrangementWork.setArrangementWorkApprovalRoute(arrangementWorkApprovalRoute);
+
+		// 契約
+		Contract contract = new Contract();
+		contract.setLifecycleStatus(LifecycleStatus.作成中);
+
+		// 担当SA
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00500784");
+		contract.setContractPicSaEmp(contractPicSaEmp);
+
+		// 追加編集者
+		List<ContractAddedEditorEmp> contractAddedEditorEmpList = new ArrayList<>();
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00500784");
+		contractAddedEditorEmpList.add(contractAddedEditorEmp);
+		contract.setContractAddedEditorEmpList(contractAddedEditorEmpList);
+
+		// 顧客
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000003985825");
+		contract.setCustomerContract(customerContract);
+
+		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.参照);
+
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
+		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
+		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
 		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
 		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
 		Assert.assertFalse("自己承認でないこと", authParam.isSelfApprover());
