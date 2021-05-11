@@ -272,7 +272,7 @@ public class TestAuthorityJudgeParamCreator {
 		// 承認ルートノード
 		List<EstimationApprovalRouteNode> estimationApprovalRouteNodeList = new ArrayList<>();
 		EstimationApprovalRouteNode estimationApprovalRouteNode = new EstimationApprovalRouteNode();
-		estimationApprovalRouteNode.setApproverEmpId("00500784");
+		estimationApprovalRouteNode.setApproverEmpId("TORUNO001");
 		estimationApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		estimationApprovalRouteNodeList.add(estimationApprovalRouteNode);
 		estimationApprovalRoute.setEstimationApprovalRouteNodeList(estimationApprovalRouteNodeList);
@@ -690,7 +690,7 @@ public class TestAuthorityJudgeParamCreator {
 		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
 		List<ContractApprovalRoute> contractApprovalRouteList = new ArrayList<>();
 		ContractApprovalRouteNode contractApprovalRouteNode = new ContractApprovalRouteNode();
-		contractApprovalRouteNode.setApproverEmpId("00500784");
+		contractApprovalRouteNode.setApproverEmpId("TORUNO001");
 		contractApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		contractApprovalRouteNodeList.add(contractApprovalRouteNode);
 		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
@@ -956,7 +956,7 @@ public class TestAuthorityJudgeParamCreator {
 		// 承認ルートノード
 		List<ArrangementWorkApprovalRouteNode> arrangementWorkApprovalRouteNodeList = new ArrayList<>();
 		ArrangementWorkApprovalRouteNode arrangementWorkApprovalRouteNode = new ArrangementWorkApprovalRouteNode();
-		arrangementWorkApprovalRouteNode.setApproverEmpId("00500784");
+		arrangementWorkApprovalRouteNode.setApproverEmpId("TORUNO001");
 		arrangementWorkApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		arrangementWorkApprovalRouteNodeList.add(arrangementWorkApprovalRouteNode);
 		arrangementWorkApprovalRoute.setArrangementWorkApprovalRouteNodeList(arrangementWorkApprovalRouteNodeList);
