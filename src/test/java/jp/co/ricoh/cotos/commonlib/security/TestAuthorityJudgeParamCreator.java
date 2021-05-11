@@ -256,6 +256,9 @@ public class TestAuthorityJudgeParamCreator {
 	@Test
 	public void 正常_権限判定用パラメーター取得_見積_承認_グループ承認() {
 
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
 		// ログインユーザー
 		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
 
@@ -668,6 +671,9 @@ public class TestAuthorityJudgeParamCreator {
 	@Test
 	public void 正常_権限判定用パラメーター取得_契約_承認_グループ承認() {
 
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
 		// ログインユーザー
 		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
 
@@ -933,6 +939,9 @@ public class TestAuthorityJudgeParamCreator {
 
 	@Test
 	public void 正常_権限判定用パラメーター取得_手配_直接_グループ承認() {
+
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
 
 		// ログインユーザー
 		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
