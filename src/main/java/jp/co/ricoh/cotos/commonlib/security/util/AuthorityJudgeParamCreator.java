@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.security.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -287,6 +288,23 @@ public class AuthorityJudgeParamCreator {
 					// グループ承認フラグ
 					boolean isGroupApproval = false;
 					if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+						isGroupApproval = true;
+					}
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
+					authJudgeParam.setGroupApproval(isGroupApproval);
+				} else {
+					// 最終承認の場合
+					ContractApprovalRouteNode lastContractApprovalRouteNode = new ContractApprovalRouteNode();
+					// 承認順が一番最後の承認ルートノードを取得する
+					for (ContractApprovalRouteNode node : nodeList) {
+						if (Objects.equals(lastContractApprovalRouteNode.getApprovalOrder(), null) || node.getApprovalOrder() > lastContractApprovalRouteNode.getApprovalOrder()) {
+							lastContractApprovalRouteNode = node;
+						}
+					}
+
+					// グループ承認フラグ
+					boolean isGroupApproval = false;
+					if (ApproverDeriveMethodDiv.グループ承認.equals(lastContractApprovalRouteNode.getApproverDeriveMethodDiv())) {
 						isGroupApproval = true;
 					}
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("グループ承認フラグ", "フラグ", Boolean.toString(isGroupApproval)).toArray(new String[0])).getMsg());
