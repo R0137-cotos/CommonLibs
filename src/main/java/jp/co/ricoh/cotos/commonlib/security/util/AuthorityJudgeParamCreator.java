@@ -113,10 +113,19 @@ public class AuthorityJudgeParamCreator {
 			// 次回承認者情報（代理編集者でない）
 			EstimationApprovalRouteNode nextApproverNode = this.specifyEstimationApprovalRouteNode(nodeList, estimation.getEstimationApprovalRoute().getEstimationApprovalResultList());
 			if (nextApproverNode != null) {
-
-				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者（代理編集者でない）", "MoM社員ID", nextApproverNode.getApproverEmpId()).toArray(new String[0])).getMsg());
-				MvEmployeeMaster nextApprover = mvEmployeeMasterRepository.findByMomEmployeeId(nextApproverNode.getApproverEmpId());
-				authJudgeParam.setNextApproverMvEmployeeMaster(nextApprover);
+				if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+					List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(nextApproverNode.getApproverEmpId());
+					empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
+						if (actor.equals(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()))) {
+							log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者（代理編集者でない）", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
+							authJudgeParam.setNextApproverMvEmployeeMaster(actor);
+						}
+					});
+				} else {
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者（代理編集者でない）", "MoM社員ID", nextApproverNode.getApproverEmpId()).toArray(new String[0])).getMsg());
+					MvEmployeeMaster nextApprover = mvEmployeeMasterRepository.findByMomEmployeeId(nextApproverNode.getApproverEmpId());
+					authJudgeParam.setNextApproverMvEmployeeMaster(nextApprover);
+				}
 
 				// 承認者直接指定フラグ
 				boolean isManualApprover = false;
@@ -231,9 +240,19 @@ public class AuthorityJudgeParamCreator {
 				ContractApprovalRouteNode nextApproverNode = this.specifyContractApprovalRouteNode(nodeList, targetContractApprovalRoute.get().getContractApprovalResultList());
 
 				if (nextApproverNode != null) {
-					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者", "MoM社員ID", nextApproverNode.getApproverEmpId()).toArray(new String[0])).getMsg());
-					MvEmployeeMaster nextApprover = mvEmployeeMasterRepository.findByMomEmployeeId(nextApproverNode.getApproverEmpId());
-					authJudgeParam.setNextApproverMvEmployeeMaster(nextApprover);
+					if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+						List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(nextApproverNode.getApproverEmpId());
+						empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
+							if (actor.equals(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()))) {
+								log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
+								authJudgeParam.setNextApproverMvEmployeeMaster(actor);
+							}
+						});
+					} else {
+						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者", "MoM社員ID", nextApproverNode.getApproverEmpId()).toArray(new String[0])).getMsg());
+						MvEmployeeMaster nextApprover = mvEmployeeMasterRepository.findByMomEmployeeId(nextApproverNode.getApproverEmpId());
+						authJudgeParam.setNextApproverMvEmployeeMaster(nextApprover);
+					}
 
 					// 承認者直接指定フラグ
 					boolean isManualApprover = false;
@@ -362,9 +381,19 @@ public class AuthorityJudgeParamCreator {
 			// 次回承認者情報（代理編集者でない）
 			ArrangementWorkApprovalRouteNode nextApproverNode = this.specifyArrangementWorkApprovalRouteNode(arrangementWork.getArrangementWorkApprovalRoute().getArrangementWorkApprovalRouteNodeList(), arrangementWork.getArrangementWorkApprovalRoute().getArrangementWorkApprovalResultList());
 			if (nextApproverNode != null) {
-				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者（代理編集者でない）", "MoM社員ID", nextApproverNode.getApproverEmpId()).toArray(new String[0])).getMsg());
-				MvEmployeeMaster nextApprover = mvEmployeeMasterRepository.findByMomEmployeeId(nextApproverNode.getApproverEmpId());
-				authJudgeParam.setNextApproverMvEmployeeMaster(nextApprover);
+				if (ApproverDeriveMethodDiv.グループ承認.equals(nextApproverNode.getApproverDeriveMethodDiv())) {
+					List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(nextApproverNode.getApproverEmpId());
+					empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
+						if (actor.equals(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()))) {
+							log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者（代理編集者でない）", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
+							authJudgeParam.setNextApproverMvEmployeeMaster(actor);
+						}
+					});
+				} else {
+					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("次回承認者（代理編集者でない）", "MoM社員ID", nextApproverNode.getApproverEmpId()).toArray(new String[0])).getMsg());
+					MvEmployeeMaster nextApprover = mvEmployeeMasterRepository.findByMomEmployeeId(nextApproverNode.getApproverEmpId());
+					authJudgeParam.setNextApproverMvEmployeeMaster(nextApprover);
+				}
 
 				// 承認者直接指定フラグ
 				boolean isManualApprover = false;

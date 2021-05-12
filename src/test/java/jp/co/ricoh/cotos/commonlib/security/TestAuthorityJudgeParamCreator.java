@@ -256,6 +256,9 @@ public class TestAuthorityJudgeParamCreator {
 	@Test
 	public void 正常_権限判定用パラメーター取得_見積_承認_グループ承認() {
 
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
 		// ログインユーザー
 		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
 
@@ -269,7 +272,7 @@ public class TestAuthorityJudgeParamCreator {
 		// 承認ルートノード
 		List<EstimationApprovalRouteNode> estimationApprovalRouteNodeList = new ArrayList<>();
 		EstimationApprovalRouteNode estimationApprovalRouteNode = new EstimationApprovalRouteNode();
-		estimationApprovalRouteNode.setApproverEmpId("00500784");
+		estimationApprovalRouteNode.setApproverEmpId("TORUNO001");
 		estimationApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		estimationApprovalRouteNodeList.add(estimationApprovalRouteNode);
 		estimationApprovalRoute.setEstimationApprovalRouteNodeList(estimationApprovalRouteNodeList);
@@ -668,6 +671,9 @@ public class TestAuthorityJudgeParamCreator {
 	@Test
 	public void 正常_権限判定用パラメーター取得_契約_承認_グループ承認() {
 
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
 		// ログインユーザー
 		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
 
@@ -684,7 +690,7 @@ public class TestAuthorityJudgeParamCreator {
 		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
 		List<ContractApprovalRoute> contractApprovalRouteList = new ArrayList<>();
 		ContractApprovalRouteNode contractApprovalRouteNode = new ContractApprovalRouteNode();
-		contractApprovalRouteNode.setApproverEmpId("00500784");
+		contractApprovalRouteNode.setApproverEmpId("TORUNO001");
 		contractApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		contractApprovalRouteNodeList.add(contractApprovalRouteNode);
 		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
@@ -934,6 +940,9 @@ public class TestAuthorityJudgeParamCreator {
 	@Test
 	public void 正常_権限判定用パラメーター取得_手配_直接_グループ承認() {
 
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("sql/security/testAuthorityJudgeParamCreator.sql");
+
 		// ログインユーザー
 		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
 
@@ -947,7 +956,7 @@ public class TestAuthorityJudgeParamCreator {
 		// 承認ルートノード
 		List<ArrangementWorkApprovalRouteNode> arrangementWorkApprovalRouteNodeList = new ArrayList<>();
 		ArrangementWorkApprovalRouteNode arrangementWorkApprovalRouteNode = new ArrangementWorkApprovalRouteNode();
-		arrangementWorkApprovalRouteNode.setApproverEmpId("00500784");
+		arrangementWorkApprovalRouteNode.setApproverEmpId("TORUNO001");
 		arrangementWorkApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
 		arrangementWorkApprovalRouteNodeList.add(arrangementWorkApprovalRouteNode);
 		arrangementWorkApprovalRoute.setArrangementWorkApprovalRouteNodeList(arrangementWorkApprovalRouteNodeList);
