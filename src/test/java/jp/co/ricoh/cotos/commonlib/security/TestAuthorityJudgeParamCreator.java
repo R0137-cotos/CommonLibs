@@ -499,7 +499,7 @@ public class TestAuthorityJudgeParamCreator {
 		contract.setContractApprovalRouteList(new ArrayList<>());
 		ContractApprovalRoute contractApprovalRoute = new ContractApprovalRoute();
 		contractApprovalRoute.setApprovalRequesterEmpId("00500784");
-		contractApprovalRoute.setTargetLifecycleStatus(LifecycleStatus.作成中);
+		contractApprovalRoute.setTargetLifecycleStatus(LifecycleStatus.キャンセル手続き中);
 
 		// 承認ルートノード
 		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
