@@ -359,6 +359,75 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	public void 正常_権限判定用パラメーター取得_契約_参照_ライフサイクル状態_作成完了_対象ライフサイクル状態_作成中() {
+		契約ライフサイクル状態と対象ライフサイクル状態が異なる場合(LifecycleStatus.作成完了, LifecycleStatus.作成中);
+	}
+
+	@Test
+	public void 正常_権限判定用パラメーター取得_契約_参照_ライフサイクル状態_キャンセル手続き中_対象ライフサイクル状態_キャンセル手続き中() {
+		// 対象ライフサイクル状態がキャンセル手続き中になるのは契約のライクサイクル状態がキャンセル手続き中のみのため、キャンセル手続き中でテストを行う
+		契約ライフサイクル状態と対象ライフサイクル状態が異なる場合(LifecycleStatus.キャンセル手続き中, LifecycleStatus.キャンセル手続き中);
+	}
+
+	@Test
+	public void 正常_権限判定用パラメーター取得_契約_参照_ライフサイクル状態_解約予定日待ち_対象ライフサイクル状態_解約手続き中() {
+		契約ライフサイクル状態と対象ライフサイクル状態が異なる場合(LifecycleStatus.解約予定日待ち, LifecycleStatus.解約手続き中);
+	}
+
+	private void 契約ライフサイクル状態と対象ライフサイクル状態が異なる場合(LifecycleStatus contractLifecycleStatus, LifecycleStatus targetLifecycleStatus) {
+
+		// ログインユーザー
+		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
+
+		// 契約
+		Contract contract = new Contract();
+		contract.setLifecycleStatus(contractLifecycleStatus);
+
+		// 承認ルート
+		ContractApprovalRoute contractApprovalRoute = new ContractApprovalRoute();
+		contractApprovalRoute.setApprovalRequesterEmpId("00500784");
+		contractApprovalRoute.setTargetLifecycleStatus(targetLifecycleStatus);
+
+		// 承認ルートノード
+		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
+		List<ContractApprovalRoute> contractApprovalRouteList = new ArrayList<>();
+		ContractApprovalRouteNode contractApprovalRouteNode = new ContractApprovalRouteNode();
+		contractApprovalRouteNode.setApproverEmpId("00231268");
+		contractApprovalRouteNode.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.直属上司指定);
+		contractApprovalRouteNodeList.add(contractApprovalRouteNode);
+		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
+		contractApprovalRouteList.add(contractApprovalRoute);
+		contract.setContractApprovalRouteList(contractApprovalRouteList);
+
+		// 担当SA
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00500784");
+		contract.setContractPicSaEmp(contractPicSaEmp);
+
+		// 追加編集者
+		List<ContractAddedEditorEmp> contractAddedEditorEmpList = new ArrayList<>();
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00500784");
+		contractAddedEditorEmpList.add(contractAddedEditorEmp);
+		contract.setContractAddedEditorEmpList(contractAddedEditorEmpList);
+
+		// 顧客
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000003985825");
+		contract.setCustomerContract(customerContract);
+
+		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
+
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
+		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
+		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
+		Assert.assertNotNull("正常に次回承認者の社員情報が作成されていること", authParam.getNextApproverMvEmployeeMaster());
+		Assert.assertNull("承認依頼者の社員情報が作成されていないこと", authParam.getRequesterMvEmployeeMaster());
+		Assert.assertFalse("ユーザー直接指定でないこと", authParam.isManualApprover());
+	}
+
+	@Test
 	public void 正常_権限判定用パラメーター取得_契約_参照_グループ承認() {
 
 		context.getBean(DBConfig.class).clearData();
