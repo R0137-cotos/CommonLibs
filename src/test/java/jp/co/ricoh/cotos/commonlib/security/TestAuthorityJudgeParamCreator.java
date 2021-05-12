@@ -15,12 +15,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicSaEmp;
@@ -359,6 +361,77 @@ public class TestAuthorityJudgeParamCreator {
 	}
 
 	@Test
+	public void 正常_権限判定用パラメーター取得_契約_参照_グループ承認かつ最終承認() {
+
+		// ログインユーザー
+		MvEmployeeMaster actor = mvEmployeeMasterRepository.findByMomEmployeeId("00500784");
+
+		// 契約
+		Contract contract = new Contract();
+		contract.setLifecycleStatus(LifecycleStatus.作成完了);
+
+		// 担当SA
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00500784");
+		contract.setContractPicSaEmp(contractPicSaEmp);
+
+		// 顧客
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("000000003985825");
+		contract.setCustomerContract(customerContract);
+
+		// 承認ルート
+		ContractApprovalRoute contractApprovalRoute = new ContractApprovalRoute();
+		contractApprovalRoute.setApprovalRequesterEmpId("00500784");
+		contractApprovalRoute.setTargetLifecycleStatus(LifecycleStatus.作成中);
+
+		List<ContractApprovalRouteNode> contractApprovalRouteNodeList = new ArrayList<>();
+		List<ContractApprovalRoute> contractApprovalRouteList = new ArrayList<>();
+
+		// 承認ルートノード1(通常承認)
+		ContractApprovalRouteNode contractApprovalRouteNode1 = new ContractApprovalRouteNode();
+		contractApprovalRouteNode1.setId(1L);
+		contractApprovalRouteNode1.setApproverEmpId("00231268");
+		contractApprovalRouteNode1.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.直属上司指定);
+		contractApprovalRouteNode1.setApprovalOrder(1);
+		contractApprovalRouteNodeList.add(contractApprovalRouteNode1);
+		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
+
+		// 承認ルートノード2(グループ承認)
+		ContractApprovalRouteNode contractApprovalRouteNode2 = new ContractApprovalRouteNode();
+		contractApprovalRouteNode2.setId(2L);
+		contractApprovalRouteNode2.setApproverEmpId("TORUNO001");
+		contractApprovalRouteNode2.setApproverDeriveMethodDiv(ApproverDeriveMethodDiv.グループ承認);
+		contractApprovalRouteNode2.setApprovalOrder(2);
+		contractApprovalRouteNodeList.add(contractApprovalRouteNode2);
+		contractApprovalRoute.setContractApprovalRouteNodeList(contractApprovalRouteNodeList);
+
+		List<ContractApprovalResult> contractApprovalResultList = new ArrayList<>();
+
+		// 承認実績1(通常承認)
+		ContractApprovalResult contractApprovalResult1 = new ContractApprovalResult();
+		contractApprovalResult1.setApprovalProcessCategory(ApprovalProcessCategory.承認);
+		contractApprovalResult1.setContractApprovalRouteNodeId(1L);
+
+		// 承認実績2(グループ承認)
+		ContractApprovalResult contractApprovalResult2 = new ContractApprovalResult();
+		contractApprovalResult2.setApprovalProcessCategory(ApprovalProcessCategory.承認);
+		contractApprovalResult2.setContractApprovalRouteNodeId(2L);
+
+		// 承認実績は先頭にくるほど新しい実績のためグループ承認が最終の承認実績となるように設定する
+		contractApprovalResultList.add(contractApprovalResult2);
+		contractApprovalResultList.add(contractApprovalResult1);
+
+		contractApprovalRoute.setContractApprovalResultList(contractApprovalResultList);
+		contractApprovalRouteList.add(contractApprovalRoute);
+		contract.setContractApprovalRouteList(contractApprovalRouteList);
+
+		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.編集);
+
+		Assert.assertEquals("グループ承認フラグがONになっていること", true, authParam.isGroupApproval());
+	}
+
+	@Test
 	public void 正常_権限判定用パラメーター取得_契約_参照_ライフサイクル状態_作成完了_対象ライフサイクル状態_作成中() {
 		契約ライフサイクル状態と対象ライフサイクル状態が異なる場合(LifecycleStatus.作成完了, LifecycleStatus.作成中);
 	}
@@ -416,7 +489,7 @@ public class TestAuthorityJudgeParamCreator {
 		customerContract.setMomKjbSystemId("000000003985825");
 		contract.setCustomerContract(customerContract);
 
-		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
+		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.編集);
 
 		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
