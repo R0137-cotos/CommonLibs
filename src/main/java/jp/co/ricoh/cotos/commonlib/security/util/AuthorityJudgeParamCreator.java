@@ -18,6 +18,7 @@ import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalResult;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalRouteNode;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRouteNode;
@@ -213,7 +214,9 @@ public class AuthorityJudgeParamCreator {
 		if (!CollectionUtils.isEmpty(contract.getContractApprovalRouteList())) {
 
 			// 対象の契約承認ルートを特定
-			Optional<ContractApprovalRoute> targetContractApprovalRoute = contract.getContractApprovalRouteList().stream().filter(contractApprovalRoute -> contract.getLifecycleStatus().equals(contractApprovalRoute.getTargetLifecycleStatus())).findFirst();
+			final LifecycleStatus targetLifecycleStatus = findLifecycleStatusForSpecifyingApprovalRoute(contract.getLifecycleStatus());
+
+			Optional<ContractApprovalRoute> targetContractApprovalRoute = contract.getContractApprovalRouteList().stream().filter(contractApprovalRoute -> targetLifecycleStatus.equals(contractApprovalRoute.getTargetLifecycleStatus())).findFirst();
 
 			if (targetContractApprovalRoute.isPresent()) {
 
@@ -559,5 +562,40 @@ public class AuthorityJudgeParamCreator {
 		}
 
 		return null;
+	}
+
+	/**
+	 * 承認ルート特定用のライフサイクル状態を返す。
+	 *
+	 * 承認ルートを特定する際に、契約のライフサイクル状態と承認ルートの対象ライフサイクル状態が一致しない可能性があるため、
+	 * 特定用のライフサイクル状態に置き換える。
+	 *
+	 * 例：契約の最終承認時の承認ルート特定
+	 *     ・契約のライフサイクル状態：作成完了（先に承認処理が行われてしまうため、作成完了になる）
+	 *     ・承認ルートの対象ライフサイクル状態：作成中
+	 *
+	 * @param lifecycleStatus - 現在契約のライフサイクル状態
+	 * @return LifecycleStatus - 承認ルート特定用のライフサイクル状態
+	 */
+	private LifecycleStatus findLifecycleStatusForSpecifyingApprovalRoute(LifecycleStatus lifecycleStatus) {
+
+		switch (lifecycleStatus) {
+		case 作成中:
+		case 作成完了:
+		case 破棄:
+		case 予定日待ち:
+		case 締結中:
+		case 解約:
+		case 旧契約:
+		case 締結待ち:
+			return LifecycleStatus.作成中;
+		case キャンセル手続き中:
+			return LifecycleStatus.キャンセル手続き中;
+		case 解約手続き中:
+		case 解約予定日待ち:
+			return LifecycleStatus.解約手続き中;
+		default:
+			return lifecycleStatus;
+		}
 	}
 }
