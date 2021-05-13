@@ -199,4 +199,11 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "エラーメッセージ置換文字列", required = false, position = 16, allowableValues = "range[0,255]")
 	private String errorMessageReplaceString;
+
+	/**
+	 * エラーフィールド
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "エラーフィールド", required = false, position = 18, allowableValues = "range[0,255]")
+	private String errorField;
 }

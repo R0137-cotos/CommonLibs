@@ -521,6 +521,30 @@ public class TestContractChangeSpanControl {
 		});
 	}
 
+	@Test
+	public void 契約変更期間判定_契約変更_当月_エラーフィールドの追加() throws NoSuchMethodException, SecurityException {
+
+		テストデータ作成();
+		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/testContractChangeSpanMasterInsert.sql");
+
+		ServiceCategory serviceCategory = ServiceCategory.契約;
+		Long productMasterId = 11L;
+		Long itemMasterId = null;
+		ContractType contractType = ContractType.契約変更;
+		;
+		ContractTypeDetails contractTypeDetail = ContractTypeDetails.プラン_オプション_減数_削除;
+		String lifecycleStatus = "1";
+		String workflowStatus = "2";
+		Long transactionTableId = 5L;
+
+		List<ErrorInfo> errors = contractChangeSpanControl.contractChangeSpanCheck(serviceCategory, productMasterId, itemMasterId, contractType, contractTypeDetail, lifecycleStatus, workflowStatus, transactionTableId);
+		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
+		errors.stream().forEach(err -> {
+			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00048", err.getErrorId());
+			Assert.assertEquals("サービス利用希望日が当月の契約変更は行えません。", err.getErrorMessage());
+			Assert.assertEquals("conclusionPreferredDate", err.getErrorField());
+		});
+	}
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/testDateCalcPatternMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/contract.sql");

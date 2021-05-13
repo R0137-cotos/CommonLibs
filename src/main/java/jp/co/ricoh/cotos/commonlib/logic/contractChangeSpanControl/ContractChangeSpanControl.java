@@ -188,6 +188,9 @@ public class ContractChangeSpanControl {
 				ErrorInfo errorInfo = new ErrorInfo();
 				errorInfo.setErrorId(messageInfo.getId());
 				errorInfo.setErrorMessage(messageInfo.getMsg());
+				if (master.getErrorField() != null) {
+					errorInfo.setErrorField(master.getErrorField());
+				}
 				errorInfoList.add(errorInfo);
 			}
 		}
@@ -215,7 +218,7 @@ public class ContractChangeSpanControl {
 			if(toCheckDate != null && (toCheckTrgetDate == null || toCheckTrgetDate.after(toCheckDate))) {
 				return true;
 			}
-		// チェック対象日にFROM(yyyyMM)が指定されている場合、TOの期限まで申込可能
+			// チェック対象日にFROM(yyyyMM)が指定されている場合、TOの期限まで申込可能
 		} else if(CheckPatternType.期間可変 == spanMaster.getCheckPatternType()) {
 			if(dateCalcPatternUtil.dateToStringConverter(fromCheckTrgetDate, "yyyyMM").equals(dateCalcPatternUtil.dateToStringConverter(fromCheckDate, "yyyyMM"))
 					&& toCheckTrgetDate.after(toCheckDate)) {
@@ -279,20 +282,20 @@ public class ContractChangeSpanControl {
 			Contract contract = (Contract)targetEntity;
 
 			switch(dateCalcStndType) {
-				case サービス終了日:
-					// 元契約の契約情報が存在する場合、元契約よりサービス終了日を取得する。
-					if(originContract != null) {
-						referenceDate = originContract.getServiceTermEnd();
-					} else {
-						referenceDate = contract.getServiceTermEnd();
-					}
-					break;
-				case 契約開始日:
-					referenceDate = contract.getServiceTermStart();
-					break;
-				case システム日付:
-					referenceDate = new Date();
-					break;
+			case サービス終了日:
+				// 元契約の契約情報が存在する場合、元契約よりサービス終了日を取得する。
+				if (originContract != null) {
+					referenceDate = originContract.getServiceTermEnd();
+				} else {
+					referenceDate = contract.getServiceTermEnd();
+				}
+				break;
+			case 契約開始日:
+				referenceDate = contract.getServiceTermStart();
+				break;
+			case システム日付:
+				referenceDate = new Date();
+				break;
 			}
 		}
 		return referenceDate;
