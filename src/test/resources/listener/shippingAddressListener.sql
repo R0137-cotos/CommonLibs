@@ -1,0 +1,1 @@
+INSERT INTO dummy_user_master (ID,CREATED_AT,CREATED_USER_ID,UPDATED_AT,UPDATED_USER_ID,VERSION,USER_ID,EMP_NAME,ORG_NAME,ADDRESS) VALUES ('1','2018/09/19 0:00:00','COTOS','2018/09/19 0:00:00','COTOS','1','COTOS_BATCH_USER','dummy_batch_operator','dummy_batch_operator_org','dummy_batch_operator_address');
