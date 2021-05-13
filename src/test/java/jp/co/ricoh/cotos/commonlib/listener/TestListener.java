@@ -261,6 +261,11 @@ public class TestListener {
 		Assert.assertEquals("会社代表電話番号が正しく取得されること", employeeMaster.getOrgPhoneNumber(), shippingAddress.getOrgPhoneNumber());
 		Assert.assertEquals("部署名が正しく取得されること", employeeMaster.getSalesDepartmentName(), shippingAddress.getSalesDepartmentName());
 		Assert.assertEquals("社員名が正しく取得されること", employeeMaster.getJobname1() + employeeMaster.getJobname2(), shippingAddress.getEmployeeName());
+		Assert.assertNull("郵便番号がNullであること", shippingAddress.getPostNumber());
+		Assert.assertNull("電話番号がNullであること", shippingAddress.getPhoneNumber());
+		Assert.assertNull("都道府県がNullであること", shippingAddress.getPrefectures());
+		Assert.assertNull("市区町村番地がNullであること", shippingAddress.getCityStreet());
+		Assert.assertNull("建物名がNullであること", shippingAddress.getBuildingName());
 
 		// 新規登録時の対象項目を設定した場合のテスト
 		contract.setId(2L);
@@ -279,6 +284,11 @@ public class TestListener {
 		Assert.assertEquals("会社代表電話番号が正しく取得されること", "000-111-222", shippingAddress.getOrgPhoneNumber());
 		Assert.assertEquals("部署名が正しく取得されること", "テスト 部署名", shippingAddress.getSalesDepartmentName());
 		Assert.assertEquals("社員名が正しく取得されること", "テスト 社員名", shippingAddress.getEmployeeName());
+		Assert.assertNull("郵便番号がNullであること", shippingAddress.getPostNumber());
+		Assert.assertNull("電話番号がNullであること", shippingAddress.getPhoneNumber());
+		Assert.assertNull("都道府県がNullであること", shippingAddress.getPrefectures());
+		Assert.assertNull("市区町村番地がNullであること", shippingAddress.getCityStreet());
+		Assert.assertNull("建物名がNullであること", shippingAddress.getBuildingName());
 
 		context.getBean(DBConfig.class).initTargetTestData("listener/shippingAddressListener.sql");
 

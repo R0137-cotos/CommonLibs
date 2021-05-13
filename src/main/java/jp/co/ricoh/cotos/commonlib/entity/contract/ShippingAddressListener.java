@@ -61,8 +61,7 @@ public class ShippingAddressListener {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
 		}
 
-		BeanUtils.copyProperties(employeeMaster, shippingAddress, "orgName", "salesCompanyName", "orgPhoneNumber", "salesDepartmentName");
-
+		BeanUtils.copyProperties(employeeMaster, shippingAddress, "orgName", "salesCompanyName", "orgPhoneNumber", "salesDepartmentName", "employeeName", "postNumber", "phoneNumber", "prefectures", "cityStreet", "buildingName");
 		if (StringUtils.isBlank(shippingAddress.getOrgName())) {
 			shippingAddress.setOrgName(employeeMaster.getOrgName());
 		}
