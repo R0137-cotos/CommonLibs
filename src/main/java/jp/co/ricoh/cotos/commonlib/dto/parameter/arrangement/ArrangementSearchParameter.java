@@ -495,6 +495,13 @@ public class ArrangementSearchParameter {
 	private String picMntCeId;
 
 	/**
+	 * 解約フラグ
+	 */
+	@ApiParam(value = "解約フラグ", required = false)
+	@ApiModelProperty(value = "解約フラグ", required = false)
+	private Integer disengagementFlg;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {

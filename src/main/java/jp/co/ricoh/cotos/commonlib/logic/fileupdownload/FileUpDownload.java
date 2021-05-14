@@ -145,33 +145,6 @@ public class FileUpDownload {
 	}
 
 	/**
-	 * ファイル削除
-	 * 
-	 * @param attachedFileId
-	 *            添付ファイルID
-	 * @throws IOException
-	 */
-	public void deleteFile(Long attachedFileId) throws ErrorCheckException, IOException {
-		AttachedFile attachedFile = attachedFileRepository.findOne(attachedFileId);
-		if (null == attachedFile) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileAttachedFileNotFoundError", new String[] { "削除" }));
-		}
-
-		File file = new File(appProperties.getFileProperties().getUploadFileDir() + "/" + attachedFile.getFilePhysicsName());
-		if (!file.exists()) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileNotFoundError", new String[] { file.getAbsolutePath() }));
-		}
-
-		attachedFileRepository.delete(attachedFile);
-
-		try {
-			Files.delete(file.toPath());
-		} catch (IOException e) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileDeleteError", new String[] { file.getAbsolutePath() }));
-		}
-	}
-
-	/**
 	 * 拡張子が設定可能なものか確認
 	 *
 	 * @param fileName
