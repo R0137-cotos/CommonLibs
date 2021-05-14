@@ -2334,4 +2334,21 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
+
+	@Test
+	public void ItemTransCompMaster_findByItemMasterIdのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemTransCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+
+		// エンティティの取得
+		List<ItemTransCompMaster> foundList = itemTransCompMasterRepository.findByItemMasterId(1L);
+
+		// データが1件取得できていることを確認
+		Assert.assertEquals(1, foundList.size());
+	}
 }
