@@ -419,6 +419,20 @@ public class CotosSecurityTests {
 	}
 
 	@Test
+	@WithMockCustomUser(actionDiv = ActionDiv.更新, authDiv = AuthDiv.見積_契約_手配, authLevel = AuthLevel.自社)
+	public void 正常_MoM権限_編集_グループ承認() throws Exception {
+
+		Mockito.doReturn(AuthLevel.配下).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
+
+		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
+		authParam.setGroupApproval(true);
+		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.編集);
+		Assert.assertTrue("対象の権限があること", result);
+
+		Mockito.reset(momAuthorityService);
+	}
+
+	@Test
 	@WithMockCustomUser(actionDiv = ActionDiv.更新, authDiv = AuthDiv.見積_契約_手配, authLevel = AuthLevel.地域)
 	@Transactional
 	public void 正常_MoM権限_承認_直接指定() throws Exception {
@@ -745,6 +759,22 @@ public class CotosSecurityTests {
 
 		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
 		Assert.assertFalse("対象の権限がないこと", result);
+
+		Mockito.reset(momAuthorityService);
+	}
+
+	@Test
+	@WithMockCustomUser(actionDiv = ActionDiv.更新, authDiv = AuthDiv.見積_契約_手配, authLevel = AuthLevel.配下)
+	@Transactional
+	public void 正常_MoM権限_承認_グループ承認() throws Exception {
+
+		Mockito.doReturn(AuthLevel.配下).when(momAuthorityService).searchMomAuthority(Mockito.anyString(), Mockito.any(), Mockito.any());
+
+		AuthorityJudgeParameter authParam = new AuthorityJudgeParameter();
+		authParam.setGroupApproval(true);
+
+		boolean result = momAuthorityService.hasAuthority(authParam, ActionDiv.更新, AuthDiv.見積_契約_手配, AccessType.承認);
+		Assert.assertTrue("対象の権限があること", result);
 
 		Mockito.reset(momAuthorityService);
 	}

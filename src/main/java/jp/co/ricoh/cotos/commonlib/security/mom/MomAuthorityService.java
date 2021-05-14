@@ -188,6 +188,11 @@ public class MomAuthorityService {
 				if (authParam.getNextApproverMvEmployeeMaster() != null && authParam.getNextApproverMvEmployeeMaster().getMomEmployeeId().equals(authParam.getActorMvEmployeeMaster().getMomEmployeeId()) && AuthDiv.見積_契約_手配.equals(authDiv)) {
 					return true;
 				}
+
+				// グループ承認の場合、編集権限を付与
+				if (authParam.isGroupApproval()) {
+					return true;
+				}
 			}
 
 			// 参照・編集処理用の認可処理を実施
@@ -359,6 +364,11 @@ public class MomAuthorityService {
 
 		// 受付担当CE承認フラグであれば、権限あり
 		if (authParam.isPicAccCeApprover()) {
+			return true;
+		}
+
+		// グループ承認フラグであれば、権限あり
+		if (authParam.isGroupApproval()) {
 			return true;
 		}
 
