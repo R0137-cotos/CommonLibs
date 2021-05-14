@@ -14,4 +14,6 @@ public class MailProperties {
 	private String fromMailAddress;
 
 	private String envelopeFromMailAddress;
+
+	private String auditTrailMailAddress;
 }
