@@ -80,19 +80,6 @@ public class TestFileUpDownload {
 	}
 
 	@Test
-	@WithMockCustomUser
-	public void ファイル削除() throws Exception {
-
-		テストデータ作成();
-		アップロードディレクトリファイル削除();
-
-		File file = ファイルコピー("/src/test/resources/attachmentFiles/testFile1.xlsx", "1_testFile1_delete.xlsx");
-		fileUpDownload.deleteFile(11L);
-		Assert.assertTrue("添付ファイル情報が存在しないこと", !attachedFileRepository.exists(11L));
-		Assert.assertTrue("ファイルが存在しないこと", !file.exists());
-	}
-
-	@Test
 	public void ファイルアップロードエラー() throws Exception {
 		try {
 			fileUpDownload.fileUpload(null);
@@ -131,25 +118,6 @@ public class TestFileUpDownload {
 		}
 		try {
 			fileUpDownload.downloadFile(12L, "test.text");
-			Assert.fail("正常終了してしまった");
-		} catch (ErrorCheckException e) {
-			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00100", e.getErrorInfoList().get(0).getErrorId());
-			Assert.assertEquals("エラーメッセージが正しく設定されること", "指定されたファイルが存在しません。", e.getErrorInfoList().get(0).getErrorMessage());
-		}
-	}
-
-	@Test
-	public void ファイル削除エラー() throws Exception {
-		テストデータ作成();
-		try {
-			fileUpDownload.deleteFile(13L);
-			Assert.fail("正常終了してしまった");
-		} catch (ErrorCheckException e) {
-			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00108", e.getErrorInfoList().get(0).getErrorId());
-			Assert.assertEquals("エラーメッセージが正しく設定されること", "削除対象の添付ファイル情報が存在しません。", e.getErrorInfoList().get(0).getErrorMessage());
-		}
-		try {
-			fileUpDownload.deleteFile(12L);
 			Assert.fail("正常終了してしまった");
 		} catch (ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00100", e.getErrorInfoList().get(0).getErrorId());
@@ -216,29 +184,6 @@ public class TestFileUpDownload {
 		} catch (Exception e) {
 			Assert.fail("異常終了した");
 		}
-	}
-
-	/**
-	 * ファイルコピー
-	 * 
-	 * @param copyFileNm
-	 *            コピー元ファイル
-	 * @param fileNm
-	 *            ファイル名
-	 * @return ファイル
-	 * @throws Exception
-	 */
-	private File ファイルコピー(String copyFileNm, String fileNm) throws Exception {
-		String path = new File(".").getAbsoluteFile().getParent();
-		File copyFile = new File(path + copyFileNm);
-		File baseDir = new File(appProperties.getFileProperties().getUploadFileDir());
-		Files.createDirectories(baseDir.toPath());
-		File file = new File(baseDir, fileNm);
-		try (OutputStream out = Files.newOutputStream(file.toPath())) {
-			StreamUtils.copy(Files.newInputStream(copyFile.toPath()), out);
-		}
-		Assert.assertTrue("ファイルが存在すること", file.exists());
-		return file;
 	}
 
 	private void アップロードディレクトリファイル削除() {

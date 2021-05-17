@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.20.0 (10/05/2021)
+- [**closed**] #10959 手配検索パラメータに解約フラグ追加 [#1501](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1501)
+- [**closed**] #9916 品種マスタ 小数点単価フラグを追加 [#1493](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1493)
+- [**closed**] #10758  見積、契約、手配業務添付ファイルリポジトリ修正 [#1487](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1487)
+- [**closed**] #10758 添付ファイル削除処理削除 [#1485](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1485)
+- [**closed**] #10382 届先コードの妥当性チェックエラー時に表示するメッセージを追加 [#1484](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1484)
+
+---
+
 ## v3.19.0 (14/04/2021)
 - [**closed**] #9559 トレンドマイクロ連携解約リクエストDTO修正 [#1289](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1289)
 - [**closed**] #10613 CASサービスプランID取得メソッド追加 [#1480](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1480)
