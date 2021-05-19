@@ -192,4 +192,12 @@ public class ProductMasterDto extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "最低契約月数", required = false, position = 21, allowableValues = "range[0,999]")
 	private Integer minContractMonths;
+
+	/**
+	 * 契約変更時商流変更可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "契約変更時商流変更可能フラグ", required = false, position = 22, allowableValues = "range[0,9]")
+	private Integer commercialFlowDivPlanChangeableFlg;
 }
