@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster.SerialContactDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -192,4 +193,17 @@ public class ProductMasterDto extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "最低契約月数", required = false, position = 21, allowableValues = "range[0,999]")
 	private Integer minContractMonths;
+
+	/**
+	 * シリアル連絡URL
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "シリアル連絡URL", required = false, position = 22, allowableValues = "range[0,255]")
+	private String serialContactUrl;
+
+	/**
+	 * シリアル連絡区分
+	 */
+	@ApiModelProperty(value = "シリアル連絡区分", required = false, position = 23, allowableValues = "新規のみ(\"1\"), 新規と契約変更(\"2\")", example = "1")
+	private SerialContactDiv serialContactDiv;
 }
