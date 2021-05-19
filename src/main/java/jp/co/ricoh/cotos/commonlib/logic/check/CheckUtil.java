@@ -6,11 +6,13 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSourceResolvable;
@@ -509,8 +511,12 @@ public class CheckUtil {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ContractInvalidParameterError"));
 		}
 
+		// 日、時、分、秒は不要なため、フォーマットする(1日と00:00:00で固定)
+		Date formatCheckFromDate = DateUtils.truncate(checkFromDate, Calendar.MONTH);
+		Date formatCheckToDate = DateUtils.truncate(checkToDate, Calendar.MONTH);
+
 		// チェック日付Fromとチェック日付Toの月の差分を取得する。
-		Period period = Period.between(convertToJavaUtilDate(checkFromDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), convertToJavaUtilDate(checkToDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		Period period = Period.between(convertToJavaUtilDate(formatCheckFromDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), convertToJavaUtilDate(formatCheckToDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		int diffMonth = (period.getYears() * 12) + (period.getMonths());
 
 		// 契約明細に紐づく品種（契約用）を取得し、チェック品種コードと一致する品種の数量と月の差分が一致しているかチェックする。

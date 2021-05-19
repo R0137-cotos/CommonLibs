@@ -610,6 +610,32 @@ public class TestMonthMisalignCheck {
 	}
 
 	@Test
+	public void 正常系_指定した品種の月ずれが発生しない_日が計算に含まれないことの確認() {
+
+		final long contractId = 1L;
+		final long itemMasterId = 2008L; // 数量:10にする
+		final String strDateFrom = "2021/05/17";
+		final String strDateTo = "2022/03/16"; // 月数:10
+		// 日も含めて考えると2021/05/17～2022/03/16の差分は9カ月27日になり、結果がtrueとなってしまう
+
+		Contract contract = contractRepository.findOne(contractId);
+
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date checkDateFrom;
+		Date checkDateTo;
+		try {
+			checkDateFrom = sdFormat.parse(strDateFrom);
+			checkDateTo = sdFormat.parse(strDateTo);
+			Assert.assertEquals("月ずれチェック結果がFalseか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, checkDateFrom, checkDateTo, ToleranceType.数量より月数小), false);
+
+		} catch (ParseException e) {
+			fail("日付変換でエラー");
+		} catch (Exception e) {
+			fail("想定外のエラー発生");
+		}
+	}
+
+	@Test
 	public void 異常系_契約情報が存在しない() {
 
 		final long contractId = 1L;
