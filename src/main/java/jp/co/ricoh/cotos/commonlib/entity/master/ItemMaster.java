@@ -530,4 +530,12 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "HW/NOS区分", required = false, position = 49, allowableValues = "HW(\"1\"), NOS(\"2\")")
 	private HwNosType hwNosType;
+
+	/**
+	 * メール基本契約商品表示フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "メール基本契約商品表示フラグ", required = false, position = 50, allowableValues = "range[0,9]")
+	private Integer mailBasicContractProductDispFlg;
 }
