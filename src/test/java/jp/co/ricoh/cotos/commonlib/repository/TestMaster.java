@@ -2279,7 +2279,8 @@ public class TestMaster {
 
 		// 追加したSelect文を使用したエンティティの取得
 		found = null;
-		found = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterIdAndCheckTimingType(2L, ContractType.情報変更.toString(), 1, 1L, CheckTimingType.業務完了時.toString());
+		List<ArrangementWorkOrderMaster> list = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterIdAndCheckTimingType(2L, ContractType.情報変更.toString(), 1, 1L, CheckTimingType.業務完了時.toString());
+		found = list.get(0);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
