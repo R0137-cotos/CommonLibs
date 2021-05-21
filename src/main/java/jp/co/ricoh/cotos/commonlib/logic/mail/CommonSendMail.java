@@ -88,7 +88,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param uploadFile
 	 *            添付ファイル
 	 * @param bounceMailHeaderDto
@@ -134,7 +134,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param uploadFile
 	 *            添付ファイル
 	 * @param bounceMailHeaderDto
@@ -195,7 +195,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param mailTextRepalceListValues
 	 *            メール本文リスト置換リスト(最大3個まで)
 	 * @param uploadFile
@@ -243,7 +243,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param uploadFileList
 	 *            添付ファイル(複数)
 	 * @param bounceMailHeaderDto
@@ -304,7 +304,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param mailTextRepalceListValues
 	 *            メール本文リスト置換リスト(最大3個まで)
 	 * @param uploadFileList
@@ -331,7 +331,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param mailTextRepalceListValues
 	 *            メール本文リスト置換リスト(最大3個まで)
 	 * @param uploadFile
@@ -384,7 +384,7 @@ public class CommonSendMail {
 	 * @param mailSubjectRepalceValueList
 	 *            メール件名置換リスト(最大5個まで)
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @param mailTextRepalceListValues
 	 *            メール本文リスト置換リスト(最大3個まで)
 	 * @param uploadFileList
@@ -455,7 +455,7 @@ public class CommonSendMail {
 	 * @param mailTemplateMaster
 	 *            エラーテンプレートマスタ
 	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 *            メール本文置換リスト(最大15個まで)
 	 * @return Writer
 	 */
 	private Writer createMailText(MailTemplateMaster mailTemplateMaster, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues) {
@@ -477,8 +477,8 @@ public class CommonSendMail {
 	 *            SMTPメッセージ
 	 * @param mailTemplateMaster
 	 *            メールテンプレートマスタ
-	 * @param mailTextRepalceValueList
-	 *            メール本文置換リスト(最大10個まで)
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
 	 * @return SMTPMessage
 	 * @throws MessagingException
 	 * @throws IOException

@@ -20,6 +20,11 @@ public class MailText {
 	private String replaceValue8;
 	private String replaceValue9;
 	private String replaceValue10;
+	private String replaceValue11;
+	private String replaceValue12;
+	private String replaceValue13;
+	private String replaceValue14;
+	private String replaceValue15;
 	// 置換リスト
 	private List<String> replaceList1 = new ArrayList<String>();
 	private List<String> replaceList2 = new ArrayList<String>();
@@ -37,6 +42,11 @@ public class MailText {
 		this.replaceValue8 = replaceValueList.size() > 7 ? replaceValueList.get(7) : "";
 		this.replaceValue9 = replaceValueList.size() > 8 ? replaceValueList.get(8) : "";
 		this.replaceValue10 = replaceValueList.size() > 9 ? replaceValueList.get(9) : "";
+		this.replaceValue11 = replaceValueList.size() > 10 ? replaceValueList.get(10) : "";
+		this.replaceValue12 = replaceValueList.size() > 11 ? replaceValueList.get(11) : "";
+		this.replaceValue13 = replaceValueList.size() > 12 ? replaceValueList.get(12) : "";
+		this.replaceValue14 = replaceValueList.size() > 13 ? replaceValueList.get(13) : "";
+		this.replaceValue15 = replaceValueList.size() > 14 ? replaceValueList.get(14) : "";
 	}
 
 	public MailText(List<String> replaceValueList, List<List<String>> replaceListValues) {
@@ -51,6 +61,11 @@ public class MailText {
 		this.replaceValue8 = replaceValueList.size() > 7 ? replaceValueList.get(7) : "";
 		this.replaceValue9 = replaceValueList.size() > 8 ? replaceValueList.get(8) : "";
 		this.replaceValue10 = replaceValueList.size() > 9 ? replaceValueList.get(9) : "";
+		this.replaceValue11 = replaceValueList.size() > 10 ? replaceValueList.get(10) : "";
+		this.replaceValue12 = replaceValueList.size() > 11 ? replaceValueList.get(11) : "";
+		this.replaceValue13 = replaceValueList.size() > 12 ? replaceValueList.get(12) : "";
+		this.replaceValue14 = replaceValueList.size() > 13 ? replaceValueList.get(13) : "";
+		this.replaceValue15 = replaceValueList.size() > 14 ? replaceValueList.get(14) : "";
 		// 置換リスト
 		this.replaceList1 = getReplaceList(replaceListValues, 0);
 		this.replaceList2 = getReplaceList(replaceListValues, 1);
