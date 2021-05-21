@@ -546,5 +546,5 @@ public class ItemMaster extends EntityBaseMaster {
 	@JoinColumn(name = "contract_update_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "契約更新品種マスタ", required = false, position = 51)
-	private ItemMaster contractUpdateItemMasterId;
+	private ItemMaster contractUpdateItemMaster;
 }
