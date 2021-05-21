@@ -538,4 +538,13 @@ public class ItemMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "メール基本契約商品表示フラグ", required = false, position = 50, allowableValues = "range[0,9]")
 	private Integer mailBasicContractProductDispFlg;
+
+	/**
+	 * 契約更新品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "contract_update_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約更新品種マスタ", required = false, position = 51)
+	private ItemMaster contractUpdateItemMaster;
 }
