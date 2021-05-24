@@ -10,28 +10,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public class JsonEnumTypePcp {
 
-	public enum AggregateValueDeleteFlgPcp {
-
-		未削除("0"), 削除済み("1");
-
-		private final String text;
-
-		private AggregateValueDeleteFlgPcp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static AggregateValueDeleteFlgPcp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
 	// PCPの移行元のRITOSと同様に0から採番
 	public enum MakerCodePcp {
 
