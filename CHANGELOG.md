@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.21.0 (24/05/2021)
+- [**closed**] #11256 内部振替情報作成用エラーメッセージ追加 [#1530](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1530)
+- [**closed**] #11237 監査証跡用メールアドレス追加 [#1526](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1526)
+- [**closed**] #11024 商流変更チェックのエラーメッセージ追加 [#1508](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1508)
+- [**closed**] #11024 商品マスタに契約変更時商流変更可能フラグ追加 [#1507](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1507)
+
+---
+
 ## v3.20.0 (10/05/2021)
 - [**closed**] #10959 手配検索パラメータに解約フラグ追加 [#1501](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1501)
 - [**closed**] #9916 品種マスタ 小数点単価フラグを追加 [#1493](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1493)
