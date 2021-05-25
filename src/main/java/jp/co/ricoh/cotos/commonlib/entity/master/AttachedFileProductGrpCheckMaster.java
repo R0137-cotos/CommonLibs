@@ -74,14 +74,14 @@ public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "品種マスタID", required = false, position = 7, allowableValues = "range[0,9999999999999999999]")
 	private Long itemMasterId;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 8, allowableValues = "range[0,9999999999999999999]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**

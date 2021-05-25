@@ -2,12 +2,17 @@ package jp.co.ricoh.cotos.commonlib.logic.check;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSourceResolvable;
@@ -19,10 +24,12 @@ import org.springframework.validation.FieldError;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ToleranceType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
@@ -469,6 +476,108 @@ public class CheckUtil {
 		if (WorkflowStatus.売上可能 != contract.getWorkflowStatus()) {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "CannotContractActionByStatus", new String[] { "ワークフロー状態", "「売上可能」", "締結開始指示" }));
 		}
+	}
+
+	/**
+	 * 月ずれチェック
+	 * 契約月数によって数量を積上げる品種のチェック処理
+	 * チェック品種コードの積上げ数量が、チェック日付From～チェック日付Toの月数を比較する。
+	 * パラメーター.許容値区分によって比較方法を切り替える。
+	 *
+	 * @param contract 契約情報
+	 * @param checkItemMasterId チェック品種コード
+	 * @param checkFromDate チェック日付From
+	 * @param checkToDate チェック日付To
+	 * @param toleranceTyped Enum許容値区分
+	 * @return errorInfo
+	 */
+	public boolean monthMisalignCheck(Contract contract, long checkItemMasterId, Date checkFromDate, Date checkToDate, ToleranceType toleranceTyped) {
+
+		Boolean checkFlg = false;
+
+		// 契約情報チェック
+		if (contract == null) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistArrangement", new String[] { "契約" }));
+		}
+
+		// チェック日付チェック
+		if (checkFromDate == null || checkToDate == null) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ContractInvalidParameterError"));
+		}
+		;
+
+		// チェック日付のFrom～To整合性チェック
+		if (checkFromDate.after(checkToDate)) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ContractInvalidParameterError"));
+		}
+
+		// 日、時、分、秒は不要なため、フォーマットする(1日と00:00:00で固定)
+		Date formatCheckFromDate = DateUtils.truncate(checkFromDate, Calendar.MONTH);
+		Date formatCheckToDate = DateUtils.truncate(checkToDate, Calendar.MONTH);
+
+		// チェック日付Fromとチェック日付Toの月の差分を取得する。
+		Period period = Period.between(convertToJavaUtilDate(formatCheckFromDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), convertToJavaUtilDate(formatCheckToDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		int diffMonth = (period.getYears() * 12) + (period.getMonths());
+
+		// 契約明細に紐づく品種（契約用）を取得し、チェック品種コードと一致する品種の数量と月の差分が一致しているかチェックする。
+		Optional<ContractDetail> cd = contract.getContractDetailList().stream().filter(fil -> fil.getItemContract().getItemMasterId() == checkItemMasterId).findFirst();
+		if (cd.isPresent()) {
+
+			// 許容値区分によって比較分岐
+			switch (toleranceTyped) {
+			case 一致:
+				// 積上げ数量と月数が一致しない場合、エラーとする。
+				if (cd.get().getQuantity() != diffMonth) {
+					checkFlg = true;
+				}
+				break;
+			case 数量より月数大:
+				// 積上げ数量が月数より小さい場合、エラーとする。
+				if (cd.get().getQuantity() < diffMonth) {
+					// エラーメッセージは決まったら変更する
+					checkFlg = true;
+				}
+				break;
+			case 数量より月数小:
+				// 積上げ数量が月数より大きい場合、エラーとする。
+				if (cd.get().getQuantity() > diffMonth) {
+					checkFlg = true;
+				}
+				break;
+			case 数量が月数or数量プラス1が月数:
+				// 積上げ数量が月数or数量プラス1が月数と一致しない場合、エラーとする。
+				if (cd.get().getQuantity() != diffMonth && cd.get().getQuantity() + 1 != diffMonth) {
+					checkFlg = true;
+				}
+				break;
+			case 数量が月数マイナス1or月数:
+				// 積上げ数量が月数-1or月数と一致しない場合、エラーとする。
+				if (cd.get().getQuantity() != diffMonth - 1 && cd.get().getQuantity() != diffMonth) {
+					checkFlg = true;
+				}
+				break;
+			case 数量が月数マイナス1or月数or月数プラス1:
+				// 積上げ数量が月数-1or月数or月数+1と一致しない場合、エラーとする。
+				if (cd.get().getQuantity() != diffMonth - 1 && cd.get().getQuantity() != diffMonth && cd.get().getQuantity() != diffMonth + 1) {
+					checkFlg = true;
+				}
+			}
+		}
+
+		return checkFlg;
+	}
+
+	/**
+	 * JavaUtilDate型変換
+	 * java.sql.Dateとjava.sql.Timeをjava.Util.Dateへ変換する。
+	 * @param Date
+	 * @return Date
+	 */
+	private Date convertToJavaUtilDate(Date date) {
+		if (date instanceof java.sql.Date || date instanceof java.sql.Time) {
+			return new Date(date.getTime());
+		}
+		return date;
 	}
 
 	/**

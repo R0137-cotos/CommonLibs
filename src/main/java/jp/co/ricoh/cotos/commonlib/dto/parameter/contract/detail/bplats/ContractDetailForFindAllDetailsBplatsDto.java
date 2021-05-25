@@ -122,7 +122,7 @@ public class ContractDetailForFindAllDetailsBplatsDto extends EntityBase {
 	/**
 	 * 統合契約内部振替処理状態
 	 */
-	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理中(\"0\"), TSV作成済み(\"1\"), 連携済み(\"2\"), 連携エラー(\"3\"), 対象外(\"4\")", position = 16)
+	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 16)
 	private AbsConInsideTransStatus absConInsideTransStatus;
 
 	/**
@@ -148,7 +148,7 @@ public class ContractDetailForFindAllDetailsBplatsDto extends EntityBase {
 	/**
 	 * FFM検収連携状態
 	 */
-	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\")", position = 20)
+	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\"), 対象外(\"3\")", position = 20)
 	private FfmAcceptanceLinkingStatus ffmAcceptanceLinkingStatus;
 
 	/**

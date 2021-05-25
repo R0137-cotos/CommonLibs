@@ -19,7 +19,9 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialAccountSalesStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.AbsConExternalBillingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.AbsConInsideTransStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.FfmAcceptanceLinkingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.FfmInsideTransStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.RunningAccountSalesStatus;
 import lombok.Data;
@@ -101,59 +103,59 @@ public class ContractDetailDto extends DtoBase {
 	 * 注文番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "注文番号", required = false, position = 13, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "注文番号", required = false, position = 12, allowableValues = "range[0,255]")
 	private String orderNo;
 
 	/**
 	 * FFM内部振替処理状態
 	 */
-	@ApiModelProperty(value = "FFM内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 連携済み(\"2\"), 対象外(\"3\")", position = 14)
+	@ApiModelProperty(value = "FFM内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 連携済み(\"2\"), 対象外(\"3\")", position = 13)
 	private FfmInsideTransStatus ffmInsideTransStatus;
 
 	/**
 	 * FFM内部振替連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "FFM内部振替連携日", required = false, position = 15)
+	@ApiModelProperty(value = "FFM内部振替連携日", required = false, position = 14)
 	private Date ffmInsideLinkDate;
 
 	/**
 	 * 統合契約内部振替処理状態
 	 */
-	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), TSV作成済み(\"1\"), 連携済み(\"2\"), 連携エラー(\"3\"), 対象外(\"4\")", position = 16)
+	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 15)
 	private AbsConInsideTransStatus absConInsideTransStatus;
 
 	/**
 	 * 統合契約内部振替連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "統合契約内部振替連携日", required = false, position = 17)
+	@ApiModelProperty(value = "統合契約内部振替連携日", required = false, position = 16)
 	private Date absConInsideLinkDate;
 
 	/**
 	 * ランニング売上計上処理状態
 	 */
-	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")", position = 18)
+	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")", position = 17)
 	private RunningAccountSalesStatus runningAccountSalesStatus;
 
 	/**
 	 * ランニング売上計上処理日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ランニング売上計上処理日", required = false, position = 19)
+	@ApiModelProperty(value = "ランニング売上計上処理日", required = false, position = 18)
 	private Date runningAccountSalesDate;
 
 	@Valid
 	@NotNull
 	@OneToOne(mappedBy = "contractDetail")
-	@ApiModelProperty(value = "品種(契約用)", required = true, position = 12)
+	@ApiModelProperty(value = "品種(契約用)", required = true, position = 19)
 	private ItemContractDto itemContract;
 
 	/**
 	 * 契約期間
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約期間", required = false, position = 13, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約期間", required = false, position = 20, allowableValues = "range[0,255]")
 	private String contractSpan;
 
 	/**
@@ -161,6 +163,26 @@ public class ContractDetailDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 14, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 21, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
+
+	/**
+	 * FFM検収連携状態
+	 */
+	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\")", position = 22)
+	private FfmAcceptanceLinkingStatus ffmAcceptanceLinkingStatus;
+
+	/**
+	 * 統合契約外部請求処理状態
+	 */
+	@ApiModelProperty(value = "統合契約外部請求処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 対象外(\"2\")", position = 23)
+	private AbsConExternalBillingStatus absConExternalBillingStatus;
+
+	/**
+	 * 統合契約外部請求連携日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "統合契約外部請求連携日", required = false, position = 24)
+	private Date absConExternalBillingDate;
+
 }

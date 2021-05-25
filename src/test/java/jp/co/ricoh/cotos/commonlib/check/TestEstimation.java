@@ -30,6 +30,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
@@ -44,6 +45,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationPicSaEmpRepos
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
@@ -116,6 +118,9 @@ public class TestEstimation {
 
 	@Autowired
 	EstimationRepository estimationRepository;
+
+	@Autowired
+	PenaltyDetailEstimationRepository penaltyDetailEstimationRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -599,16 +604,18 @@ public class TestEstimation {
 		// 異常系（@Max ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setDisplayOrder(INT_1000);
+		testTarget.setCheckRequiredFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "表示順は最大値（999）を超えています。"));
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setDisplayOrder(INT_MINUS_1);
+		testTarget.setCheckRequiredFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "表示順は最小値（0）を下回っています。"));
 
@@ -664,9 +671,11 @@ public class TestEstimation {
 		// 異常系（@DecimalMax：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setEstimationAmountSummary(DECIMAL_10000000000000000000);
+		testTarget.setBeforeUnitPrice(DECIMAL_10000000000000000000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積金額は最大値（9999999999999999999.99）を超えています。"));
 	}
 
 	@Test
@@ -825,6 +834,53 @@ public class TestEstimation {
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品マスタIDは最小値（0）を下回っています。"));
+	}
+
+	@Test
+	public void PenaltyDetailEstimationのテスト() throws Exception {
+		PenaltyDetailEstimation entity = penaltyDetailEstimationRepository.findOne(1L);
+		PenaltyDetailEstimation testTarget = new PenaltyDetailEstimation();
+
+		// 正常系
+		BeanUtils.copyProperties(testTarget, entity);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setItemName(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "品種名は最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setQuantity(INT_100000);
+		testTarget.setDeleteFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setItemMasterId((long)INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_1);
+		testTarget.setDeleteFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "品種マスタIDは最小値（0）を下回っています。"));
+
+		// 異常系（@DecimalMax：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setPenaltyUnitPrice(DECIMAL_10000000000000000000);
+		testTarget.setPenaltyAmountSummary(DECIMAL_10000000000000000000);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "違約金単価は最大値（9999999999999999999.99）を超えています。"));
 	}
 
 }

@@ -310,6 +310,12 @@ public class ContractListInfo {
 	@ApiModelProperty(value = "その他解約理由", required = false, position = 46, allowableValues = "range[0,1000]")
 	private String cancelReasonEtc;
 
+	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 47)
+	private String extendsParameter;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();

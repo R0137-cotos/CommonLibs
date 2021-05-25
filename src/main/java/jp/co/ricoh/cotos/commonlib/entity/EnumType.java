@@ -86,7 +86,7 @@ public class EnumType {
 	 */
 	public enum ServiceCategory {
 
-		共通("0"), 見積("1"), 契約("2"), 手配("3"), 電力_見積("101"), 電力_契約("102");
+		共通("0"), 見積("1"), 契約("2"), 手配("3"), ライセンス("4"), 外部連携("5"), 電力_見積("101"), 電力_契約("102");
 
 		private final String text;
 
@@ -304,7 +304,7 @@ public class EnumType {
 	 */
 	public enum InitialRunningDiv {
 
-		イニシャル("1"), ランニング("2"), 期間売("3");
+		イニシャル("1"), ランニング("2"), 期間売("3"), 期間売_月額("4");
 
 		private final String text;
 
@@ -515,6 +515,53 @@ public class EnumType {
 		}
 	}
 
+	public enum ToleranceType {
+
+		一致("1"), 数量より月数大("2"), 数量より月数小("3"), 数量が月数or数量プラス1が月数("4"), 数量が月数マイナス1or月数("5"), 数量が月数マイナス1or月数or月数プラス1("6");
+
+		private final String text;
+
+		private ToleranceType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ToleranceType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
+	 * CSV出力対象区分
+	 */
+	public enum CsvOutputTargetType {
+
+		全件("1"), 全件_解約を除く("2"), 出力対象月のみ("3");
+
+		private final String text;
+
+		private CsvOutputTargetType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CsvOutputTargetType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * ライセンス状態
 	 * @author z00se03039
@@ -594,4 +641,36 @@ public class EnumType {
 		}
 
 	}
+
+	/**
+	 *
+	 * CSV項目編集パラメーター（CsvUtil）
+	 *
+	 */
+	public enum WidthForm {
+
+		// 全角
+		Full("Halfwidth-Fullwidth", "　"),
+		// 半角
+		Half("Fullwidth-Halfwidth", " "),
+		// 設定無し
+		Nothing("Fullwidth-Halfwidth", " ");
+
+		private String id;
+		private String value;
+
+		private WidthForm(final String id, final String value) {
+			this.id = id;
+			this.value = value;
+		}
+
+		public String getId() {
+			return this.id;
+		}
+
+		public String getValue() {
+			return this.value;
+		}
+	}
+
 }

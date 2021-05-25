@@ -24,11 +24,15 @@ import jp.co.ricoh.cotos.commonlib.entity.master.BusinessCalendar;
 import jp.co.ricoh.cotos.commonlib.entity.master.NonBusinessDayCalendarMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.BusinessCalendarRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.NonBusinessDayCalendarMasterRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * 営業日共通クラス
  */
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class BusinessDayUtil {
 
 	@Autowired
@@ -39,7 +43,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 営業日かどうか
-	 * 
+	 *
 	 * @param date
 	 *            日付
 	 * @return
@@ -77,7 +81,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 最短営業日取得
-	 * 
+	 *
 	 * @param date
 	 *            日付
 	 * @param leadTime
@@ -130,7 +134,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 最短営業日取得_時間計算
-	 * 
+	 *
 	 * @param date
 	 *            日付
 	 * @param leadTime
@@ -159,7 +163,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数月の月末最終営業日取得(業務カレンダーマスタ)
-	 * 
+	 *
 	 * @param targetYm
 	 *            月末最終営業日を取得したい月
 	 * @return 月末最終営業日
@@ -171,7 +175,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数月の月末最終営業日取得(非営業日カレンダーマスタ)
-	 * 
+	 *
 	 * @param targetYm 月末最終営業日を取得したい月(yyyyMM)
 	 * @return 月末最終営業日
 	 */
@@ -445,7 +449,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数月の業務カレンダーリスト取得
-	 * 
+	 *
 	 * @param targetYm
 	 *            業務カレンダーを取得したい月
 	 * @return 業務カレンダーリスト（1月分）
@@ -458,7 +462,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数月の非営業日カレンダーリスト取得
-	 * 
+	 *
 	 * @param year 非営業日カレンダーを取得したい年
 	 * @param month 非営業日カレンダーを取得したい月
 	 * @return 非営業日カレンダーリスト（1月分）
@@ -480,7 +484,7 @@ public class BusinessDayUtil {
 		}
 
 		// filter: 非営業日 != null
-		// filter: 対象月月初日 <= 非営業日  
+		// filter: 対象月月初日 <= 非営業日
 		// filter: 非営業日 <= 対象月月末日
 		nonBusinessDayCalendarMasterList.stream().filter(e -> e.getNonBusinessDay() != null).filter(e -> e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(lastDayOfTheTargetMonth) || e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(lastDayOfTheTargetMonth)).filter(e -> e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(firstDayOfTheTargetMonth) || e.getNonBusinessDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isEqual(firstDayOfTheTargetMonth)).forEach(e -> {
 			// 対象月の非営業日をリストに格納する
@@ -493,7 +497,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数範囲の業務カレンダーリスト取得
-	 * 
+	 *
 	 * @param targetPriodFrom
 	 *            業務カレンダー取得条件(From)
 	 * @param targetPriodTo
@@ -506,7 +510,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数年月の月初日取得
-	 * 
+	 *
 	 * @param year
 	 *            年
 	 * @param month
@@ -524,7 +528,7 @@ public class BusinessDayUtil {
 
 	/**
 	 * 引数年月の月末日取得
-	 * 
+	 *
 	 * @param year
 	 *            年
 	 * @param month

@@ -1,0 +1,28 @@
+package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+
+/**
+ * 商品（見積用）拡張項目DTO（RNS）
+ */
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ProductEstimationExtendsParameterRnsDto {
+
+	/**
+	 * CPQ商品固有戻り値
+	 */
+	@JsonProperty("cpqProductSpecificReturnValue")
+	private CpqReturnValueRnsDto cpqReturnValueRnsDto;
+
+	/**
+	 * COTOS商品固有項目
+	 */
+	@JsonProperty("cpqProductSpecificParameter")
+	private CpqParameterRnsDto cpqParameterRnsDto;
+
+}

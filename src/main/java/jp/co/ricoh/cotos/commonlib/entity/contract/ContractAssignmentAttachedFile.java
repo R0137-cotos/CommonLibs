@@ -18,6 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -116,6 +118,14 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "添付日時(作成時不要)", required = true, position = 9, readOnly = true)
 	private Date attachedAt;
+
+	/**
+	 * 添付必須フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 10, allowableValues = "range[0,9]")
+	private Integer attachedRequiredFlg;
 
 	/**
 	 * ファイル情報

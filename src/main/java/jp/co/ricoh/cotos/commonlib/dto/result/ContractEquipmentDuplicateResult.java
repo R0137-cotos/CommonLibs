@@ -1,0 +1,41 @@
+package jp.co.ricoh.cotos.commonlib.dto.result;
+
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+/**
+ * 契約機種重複一覧取得APIの検索結果用パラメーター
+ */
+
+@Data
+public class ContractEquipmentDuplicateResult {
+
+	/**
+	 * 商品種類区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "商品種類区分", required = false, position = 1, allowableValues = "range[0,255]")
+	private String productClassDiv;
+
+	/**
+	 * RJ管理番号
+	 */
+	@ApiModelProperty(value = "RJ管理番号", required = false, position = 2, allowableValues = "range[0,255]")
+	private String rjManageNumber;
+
+	/**
+	 * 機種コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機種コード", required = true, position = 3, allowableValues = "range[0,255]")
+	private String equipmentCode;
+
+	/**
+	 * 機番
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機番", required = false, position = 4, allowableValues = "range[0,255]")
+	private String equipmentNo;
+}
