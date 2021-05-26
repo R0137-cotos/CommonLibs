@@ -17,8 +17,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -65,7 +67,7 @@ public class ItemMaster extends EntityBaseMaster {
 
 	public enum CostType {
 
-		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4");
+		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4"), 違約金("5");
 
 		private final String text;
 
@@ -81,6 +83,94 @@ public class ItemMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static CostType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ContractSpanStartDateType {
+
+		契約日("1"), サービス開始日("2"), サービス開始翌月１日("3");
+
+		private final String text;
+
+		private ContractSpanStartDateType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ContractSpanStartDateType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum PenaltyStartDateType {
+
+		課金開始日("1");
+
+		private final String text;
+
+		private PenaltyStartDateType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static PenaltyStartDateType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ItemDecomposeType {
+
+		通常("1"), 分解前("2"), 分解後("3");
+
+		private final String text;
+
+		private ItemDecomposeType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ItemDecomposeType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum HwNosType {
+
+		HW("1"), NOS("2");
+
+		private final String text;
+
+		private HwNosType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static HwNosType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -125,7 +215,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 費用種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 6)
+	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1", position = 6)
 	private CostType costType;
 
 	/**
@@ -348,4 +438,120 @@ public class ItemMaster extends EntityBaseMaster {
 	@Max(9)
 	@ApiModelProperty(value = "小数点単価フラグ", required = false, position = 37, allowableValues = "range[0,9]")
 	private Integer decimalUnitPriceFlg;
+
+	/**
+	 * 契約期間月数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "契約期間月数", required = false, position = 37, allowableValues = "range[0,99999]")
+	private Integer contractSpanMonth;
+
+	/**
+	 * 契約期間起算日区分
+	 */
+	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 38, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	private ContractSpanStartDateType contractSpanStartDateType;
+
+	/**
+	 * 分解元品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "origin_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "分解元品種マスタ", required = false, position = 39)
+	private ItemMaster originItemMaster;
+
+	/**
+	 * 違約金有無フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 40, allowableValues = "range[0,9]")
+	private Integer penaltyFlg;
+
+	/**
+	 * 最低契約月数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 41, allowableValues = "range[0,99999]")
+	private Integer minContractMonths;
+
+	/**
+	 * 違約金起算日区分
+	 */
+	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 42, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	private PenaltyStartDateType penaltyStartDateType;
+
+	/**
+	 * 違約金品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "penalty_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "違約金品種マスタ", required = false, position = 43)
+	private ItemMaster penaltyItemMaster;
+
+	/**
+	 * 分解後品種区分
+	 */
+	@ApiModelProperty(value = "分解後品種区分", required = false, position = 44, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
+	private ItemDecomposeType itemDecomposeType;
+
+	/**
+	 * ランニング計上開始日日付計算パターンマスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "running_from_calc_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ランニング計上開始日日付計算パターンマスタ", required = false, position = 45)
+	private DateCalcPatternMaster dateCalcPatternMaster;
+
+	/**
+	 * 品種分解マスタ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "itemMaster")
+	@ApiModelProperty(value = "品種分解マスタ", required = false, position = 46)
+	private List<ItemDecomposeMaster> itemDecomposeMasterList;
+
+	/**
+	 * 発送物ありマスタ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "itemMaster")
+	@ApiModelProperty(value = "発送物ありマスタ", required = false, position = 47)
+	private List<ShippingThingMaster> shippingThingMasterList;
+
+	/**
+	 * 品種ライセンス用設定マスタ
+	 */
+	@Valid
+	@OneToMany(mappedBy = "itemMaster")
+	@ApiModelProperty(value = "品種ライセンス用設定マスタ", required = false, position = 48)
+	private List<ItemLicenseSettingMaster> ItemLicenseSettingMasterList;
+
+	/**
+	 * HW/NOS区分
+	 */
+	@ApiModelProperty(value = "HW/NOS区分", required = false, position = 49, allowableValues = "HW(\"1\"), NOS(\"2\")")
+	private HwNosType hwNosType;
+
+	/**
+	 * メール基本契約商品表示フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "メール基本契約商品表示フラグ", required = false, position = 50, allowableValues = "range[0,9]")
+	private Integer mailBasicContractProductDispFlg;
+
+	/**
+	 * 契約更新品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "contract_update_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約更新品種マスタ", required = false, position = 51)
+	private ItemMaster contractUpdateItemMaster;
 }

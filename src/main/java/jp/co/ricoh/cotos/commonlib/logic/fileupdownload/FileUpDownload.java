@@ -7,10 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CreateZipParameter;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
@@ -27,6 +32,10 @@ import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.eim.EimConnectionHelper;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.util.Zip4jConstants;
 
 @Component
 public class FileUpDownload {
@@ -39,13 +48,18 @@ public class FileUpDownload {
 
 	@Autowired
 	AppProperties appProperties;
-	
+
 	@Autowired
 	EimConnectionHelper eimConnectionHelper;
 
+	private int compressionMethod = Zip4jConstants.COMP_DEFLATE;
+	private int compressionLevel = Zip4jConstants.DEFLATE_LEVEL_NORMAL;
+	private int encryptionMethod = Zip4jConstants.ENC_METHOD_STANDARD;
+	private int aesKeyStrength = Zip4jConstants.AES_STRENGTH_256;
+
 	/**
 	 * ファイルアップロード
-	 * 
+	 *
 	 * @param file
 	 *            ファイル情報
 	 * @return 添付ファイル情報
@@ -96,11 +110,11 @@ public class FileUpDownload {
 
 	/**
 	 * ファイルダウンロード
-	 * 
+	 *
 	 * <pre>
 	 * ・引数のダウンロードファイル名ファイル名が指定されていない場合は、添付ファイル情報の物理ファイル名をダウンロード時のファイル名にする。
 	 * </pre>
-	 * 
+	 *
 	 * @param attachedFileId
 	 *            添付ファイルID
 	 * @param downloadFileNm
@@ -142,6 +156,33 @@ public class FileUpDownload {
 		}
 
 		return new ResponseEntity<>(stream, header, HttpStatus.OK);
+	}
+
+	/**
+	 * ファイル削除
+	 *
+	 * @param attachedFileId
+	 *            添付ファイルID
+	 * @throws IOException
+	 */
+	public void deleteFile(Long attachedFileId) throws ErrorCheckException, IOException {
+		AttachedFile attachedFile = attachedFileRepository.findOne(attachedFileId);
+		if (null == attachedFile) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileAttachedFileNotFoundError", new String[] { "削除" }));
+		}
+
+		File file = new File(appProperties.getFileProperties().getUploadFileDir() + "/" + attachedFile.getFilePhysicsName());
+		if (!file.exists()) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileNotFoundError", new String[] { file.getAbsolutePath() }));
+		}
+
+		attachedFileRepository.delete(attachedFile);
+
+		try {
+			Files.delete(file.toPath());
+		} catch (IOException e) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileDeleteError", new String[] { file.getAbsolutePath() }));
+		}
 	}
 
 	/**
@@ -204,5 +245,99 @@ public class FileUpDownload {
 		attachedFile.setContentType(multipartFile.getContentType());
 		attachedFile.setSavedPath(fileName);
 		return attachedFile;
+	}
+
+	/**
+	 * Zipファイルを作成し、バイト配列を取得後、作成したZipファイルを削除します。
+	 * @param parameter
+	 * @return
+	 * @throws ZipException
+	 * @throws IOException
+	 */
+	public byte[] createZipAndDelete(CreateZipParameter parameter) {
+		ZipFile zip = null;
+		byte[] result = null;
+		try {
+			zip = createZip(parameter);
+			result = Files.readAllBytes(zip.getFile().toPath());
+		} catch (ZipException | IOException e) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ZipCreatingError", new String[] {}));
+		} finally {
+			Optional.ofNullable(zip).ifPresent(z -> z.getFile().delete());
+		}
+
+		return result;
+	}
+
+	/**
+	 * Zipファイルを作成します。パスワードを渡された場合、暗号化Zipを作成します。
+	 *
+	 * @param parameter
+	 * @throws ZipException
+	 * @throws IOException
+	 * @see jp.co.ricoh.cotos.arrangement.util.AttachedUtil#zip
+	 */
+	private ZipFile createZip(CreateZipParameter parameter) throws ZipException, IOException {
+		// パラメータ存在チェック
+		Optional.ofNullable(parameter).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "Zipファイル作成パラメータ" })));
+
+		// パラメータ内の各Objectに関する存在チェック
+		if (CollectionUtils.isEmpty(parameter.getInputPathList())) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "圧縮対象ファイル/ディレクトリ" }));
+		}
+		Optional.ofNullable(parameter.getOutputPath()).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "圧縮先ファイル" })));
+
+		Optional.ofNullable(parameter.getPassword()).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "パスワード" })));
+
+		Optional.ofNullable(parameter.getFileNameCharset()).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "ファイル名文字コード" })));
+
+		// パラメータで指定しているパスに関する存在チェック
+		for (String path : parameter.getInputPathList()) {
+			if (!new File(path).exists()) {
+				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "CannotIdentify", new String[] { "圧縮対象ファイル/ディレクトリ" }));
+			}
+		}
+
+		if (!Paths.get(parameter.getOutputPath()).toAbsolutePath().getParent().toFile().exists()) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "CannotIdentify", new String[] { "圧縮先ディレクトリ" }));
+		}
+
+		ZipFile zipFile = new ZipFile(parameter.getOutputPath());
+
+		ZipParameters parameters = new ZipParameters();
+		parameters.setCompressionMethod(compressionMethod);
+		parameters.setCompressionLevel(compressionLevel);
+
+		if (parameter.getPassword().isEmpty()) {
+			parameters.setEncryptFiles(false);
+		} else {
+			parameters.setEncryptFiles(true);
+			parameters.setPassword(parameter.getPassword());
+			parameters.setEncryptionMethod(encryptionMethod);
+			parameters.setAesKeyStrength(aesKeyStrength);
+		}
+
+		zipFile.setFileNameCharset(parameter.getFileNameCharset());
+
+		for (String eachInput : parameter.getInputPathList()) {
+			File inputFile = new File(eachInput);
+
+			if (inputFile.isDirectory()) {
+				zipFile.addFolder(inputFile, parameters);
+				if (parameter.isInputFileDeleteFlg()) {
+					// ディレクトリの場合、ディレクトリ配下のファイルを削除する
+					List<File> fileList = Arrays.asList(inputFile.listFiles());
+					fileList.stream().forEach(file -> file.delete());
+				}
+			} else {
+				zipFile.addFile(inputFile, parameters);
+			}
+
+			// ディレクトリ、または、ファイルを削除する
+			if (parameter.isInputFileDeleteFlg()) {
+				inputFile.delete();
+			}
+		}
+		return zipFile;
 	}
 }

@@ -120,7 +120,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = true, position = 11, allowableValues = "range[0,255]")
 	private String ricohItemCode;
-	
+
 	/**
 	 * メーカー商品コード
 	 */
@@ -128,5 +128,13 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 12, allowableValues = "range[0,255]")
 	private String makerItemCode;
+
+	/**
+	 * 変更前単価
+	 */
+	@Column(nullable = true)
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal beforeUnitPrice;
 
 }

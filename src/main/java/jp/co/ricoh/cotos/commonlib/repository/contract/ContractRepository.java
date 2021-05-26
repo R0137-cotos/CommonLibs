@@ -57,4 +57,13 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 	@Query(value = "SELECT * FROM CONTRACT WHERE (CONTRACT_TYPE = '1' OR CONTRACT_TYPE = '2' OR CONTRACT_TYPE = '4') AND LIFECYCLE_STATUS = '11' AND SERVICE_TERM_START <= :serviceStartDate", nativeQuery = true)
 	public List<Contract> findByContractTypeAndServiceStartDate(@Param("serviceStartDate") Date serviceStartDate);
 
+	@Query(value = "SELECT a.* FROM "
+					+ "CONTRACT a "
+					+ ",CONTRACT_EQUIPMENT b "
+					+ "WHERE (a.id = b.contract_id) "
+					+ "AND (b.equipment_code = :equipmentCode AND b.equipment_no = :equipmentNo) "
+					, nativeQuery = true)
+	public List<Contract> findByEquipmentCodeAndEquipmentNo(@Param("equipmentCode") String equipmentCode, @Param("equipmentNo") String equipmentNo);
+
+	public List<Contract> findByEstimationNumberAndEstimationBranchNumber(String estimationNumber, Integer estimationBranchNumber);
 }

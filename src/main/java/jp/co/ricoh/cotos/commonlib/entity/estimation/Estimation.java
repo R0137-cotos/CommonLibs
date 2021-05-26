@@ -555,6 +555,14 @@ public class Estimation extends EntityBase {
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 62, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
+	/**
+	 * 違約金明細(見積用)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "estimation")
+	@ApiModelProperty(value = "違約金明細(見積用)", required = false, position = 63, readOnly = true)
+	private List<PenaltyDetailEstimation> penaltyDetailEstimationList;
+
 	@PreUpdate
 	public void preUpdate() {
 		if (StringUtils.isEmpty(super.getUpdatedUserId())) {

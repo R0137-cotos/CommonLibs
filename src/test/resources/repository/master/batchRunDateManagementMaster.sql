@@ -1,0 +1,1 @@
+INSERT INTO batch_run_date_management_master (id,created_at,created_user_id,updated_at,updated_user_id,version,target_batch_id,product_class_div,product_master_id,batch_run_date) VALUES (1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'target_batch_id_dummy','product_class_div_dummy',1,'2021/03/09');

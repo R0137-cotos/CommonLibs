@@ -126,6 +126,14 @@ public class EstimationDetail extends EntityBase {
 	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
 
+	/**
+	 * 変更前単価
+	 */
+	@Column(nullable = false)
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal beforeUnitPrice;
+
 	@PrePersist
 	public void prePersist() {
 		super.setCreatedAt(new Date());

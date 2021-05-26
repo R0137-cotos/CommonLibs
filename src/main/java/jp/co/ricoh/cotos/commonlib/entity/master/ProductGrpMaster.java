@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -164,4 +165,19 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "EDWOR年額契約商品フラグ", required = false, position = 18, allowableValues = "range[0,9]")
 	private Integer edwOrAnnualAmountProductFlg;
 
+	/**
+	 * 期間売外部請求対象フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "期間売外部請求対象フラグ", required = false, position = 19, allowableValues = "range[0,9]")
+	private Integer periodSellingExternalBillingFlg;
+
+	/**
+	 * 契約承認後キャンセルフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "契約承認後キャンセルフラグ", required = false, position = 20, allowableValues = "range[0,9]")
+	private Integer contractAfterApprovalCancelFlg;
 }

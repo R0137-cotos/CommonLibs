@@ -183,4 +183,22 @@ public class MailControlMaster extends EntityBaseMaster {
 	@OneToMany(mappedBy = "mailControlMaster")
 	@ApiModelProperty(value = "通知メール対象商材マスタ", required = false, position = 15)
 	private List<MailProductMaster> mailProductMasterList;
+
+	/**
+	 * 処理実行日計算パターンマスタID
+	 */
+	@ManyToOne
+	@JoinColumn(name = "process_day_calc_pattern_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "処理実行日計算パターンマスタ", required = false, position = 16)
+	private DateCalcPatternMaster processDayCalcPatternMaster;
+
+	/**
+	 * エラー通知メール制御マスタID
+	 */
+	@ManyToOne
+	@JoinColumn(name = "error_mail_control_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "エラー通知メール制御マスタID", required = false, position = 17)
+	private MailControlMaster errorMailControlMasterId;
 }
