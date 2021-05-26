@@ -2784,6 +2784,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemTransCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 
 		// エンティティの取得
 		List<ItemTransCompMaster> foundList = itemTransCompMasterRepository.findByItemMasterId(1L);
