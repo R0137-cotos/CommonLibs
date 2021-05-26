@@ -494,7 +494,7 @@ public class TestContractChangeSpanControl {
 		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
 		errors.stream().forEach(err -> {
 			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037", err.getErrorId());
-			Assert.assertEquals("解約予定日はaからbの範囲で指定してください。",  err.getErrorMessage());
+			Assert.assertEquals("解約可能期間外のため解約は行えません。（解約可能期間：aからbまで）", err.getErrorMessage());
 		});
 	}
 
@@ -517,7 +517,7 @@ public class TestContractChangeSpanControl {
 		Assert.assertEquals("エラーリストの件数が１件であること", 1, errors.size());
 		errors.stream().forEach(err -> {
 			Assert.assertEquals("エラーIDが正しく設定されること", "RCO00037", err.getErrorId());
-			Assert.assertEquals("解約予定日はaからbの範囲で指定してください。",  err.getErrorMessage());
+			Assert.assertEquals("解約可能期間外のため解約は行えません。（解約可能期間：aからbまで）", err.getErrorMessage());
 		});
 	}
 
