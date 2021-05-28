@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,8 +14,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchParameter;
 import jp.co.ricoh.cotos.commonlib.dto.result.CommonMasterResult;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.entity.util.VKjbMasterUtil;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
@@ -29,6 +27,9 @@ public class DealerEstimationListener {
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
 	private static FindCommonMaster findCommonMaster;
+
+	@Autowired
+	private VKjbMasterUtil vKjbMasterUtil;
 
 	@Autowired
 	public void setKjbMasterRepository(VKjbMasterRepository kjbMasterRepository) {
@@ -54,11 +55,10 @@ public class DealerEstimationListener {
 	@Transactional
 	public void appendsEstimationDealerFields(DealerEstimation dealerEstimation) {
 		if (StringUtils.isNotBlank(dealerEstimation.getMomKjbSystemId())) {
-			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerEstimation.getMomKjbSystemId());
-
-			if (vKjbMaster == null) {
-				String[] regexList = { "販売店（見積用）" };
-				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistKjbMaster", regexList));
+			VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(dealerEstimation, "販売店（見積用）");
+			// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
+			if (StringUtils.equals(dealerEstimation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+				dealerEstimation.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 			}
 
 			// 結合して表示するものを設定
