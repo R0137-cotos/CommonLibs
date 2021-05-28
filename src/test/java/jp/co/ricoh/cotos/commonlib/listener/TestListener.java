@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.listener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -17,12 +18,17 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DealerFlowOrder;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.CustomerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
@@ -49,6 +55,12 @@ public class TestListener {
 
 	@Autowired
 	EstimationRepository estimationRepository;
+
+	@Autowired
+	ContractInstallationLocationRepository contractInstallationLocationRepository;
+
+	@Autowired
+	CheckUtil checkUtil;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -101,6 +113,40 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	public void CustomerEstimationListenerのテスト_企事部IDで企事部マスタを検索する場合() {
+		CustomerEstimation customerEstimation = new CustomerEstimation();
+		customerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
+		customerEstimation.setMomCustId("000000007309661");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		customerEstimation.setEstimation(estimation);
+		customerEstimationRepository.save(customerEstimation);
+		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", customerEstimation.getMomKjbSystemId());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_CustomerEstimationListenerのテスト_企事部マスタが存在しない場合() {
+		CustomerEstimation customerEstimation = new CustomerEstimation();
+		customerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
+		customerEstimation.setMomCustId("dummyMomCustId");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		customerEstimation.setEstimation(estimation);
+		try {
+			customerEstimationRepository.save(customerEstimation);
+			Assert.fail("正常に終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00012");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "顧客（見積用）に存在しないMoM企事部システム連携IDが設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
 	public void CustomerContractListenerのテスト() throws Exception {
 		CustomerContract customerContract = new CustomerContract();
 		customerContract.setMomKjbSystemId("000000000433091");
@@ -139,6 +185,26 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	public void 異常系_CustomerContractListenerのテスト_企事部マスタが存在しない場合() {
+		CustomerContract customerContract = new CustomerContract();
+		customerContract.setMomKjbSystemId("dummyMomKjbSystemId");
+		customerContract.setMomCustId("dummyMomCustId");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		customerContract.setContract(contract);
+		try {
+			customerContractRepository.save(customerContract);
+			Assert.fail("正常に終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00012");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "顧客（契約用）に存在しないMoM企事部システム連携IDが設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
 	public void DealerEstimationListenerのテスト() throws Exception {
 		DealerEstimation dealerEstimation = new DealerEstimation();
 		dealerEstimation.setMomKjbSystemId("000000000433091");
@@ -162,6 +228,40 @@ public class TestListener {
 
 	@Test
 	@WithMockCustomUser
+	public void DealerEstimationListenerのテスト_企事部IDで企事部マスタを検索する場合() {
+		DealerEstimation dealerEstimation = new DealerEstimation();
+		dealerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
+		dealerEstimation.setMomCustId("000000007309661");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		dealerEstimation.setEstimation(estimation);
+		dealerEstimationRespository.save(dealerEstimation);
+		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", dealerEstimation.getMomKjbSystemId());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_DealerEstimationListenerのテスト_企事部マスタが存在しない場合() {
+		DealerEstimation dealerEstimation = new DealerEstimation();
+		dealerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
+		dealerEstimation.setMomCustId("dummyMomCustId");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		dealerEstimation.setEstimation(estimation);
+		try {
+			dealerEstimationRespository.save(dealerEstimation);
+			Assert.fail("正常に終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00012");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "販売店（見積用）に存在しないMoM企事部システム連携IDが設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
 	public void DealerContractListenerのテスト() throws Exception {
 		DealerContract dealerContract = new DealerContract();
 		dealerContract.setMomKjbSystemId("000000000433091");
@@ -181,6 +281,100 @@ public class TestListener {
 		dealerContractRepository.save(dealerContract);
 		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
 		Assert.assertEquals("MoM会社IDが正しく取得されること", "999999", dealerContract.getDistributorMomCmpId());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void DealerContractListenerのテスト_企事部IDで企事部マスタを検索する場合() {
+		DealerContract dealerContract = new DealerContract();
+		dealerContract.setMomKjbSystemId("dummyMomKjbSystemId");
+		dealerContract.setMomCustId("000000007309661");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		dealerContract.setContract(contract);
+		dealerContractRepository.save(dealerContract);
+		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", dealerContract.getMomKjbSystemId());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_DealerContractListenerのテスト_企事部マスタが存在しない場合() {
+		DealerContract dealerContract = new DealerContract();
+		dealerContract.setMomKjbSystemId("dummyMomKjbSystemId");
+		dealerContract.setMomCustId("dummyMomCustId");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		dealerContract.setContract(contract);
+		try {
+			dealerContractRepository.save(dealerContract);
+			Assert.fail("正常に終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00012");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "販売店（契約用）に存在しないMoM企事部システム連携IDが設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractInstallationLocationListenerのテスト() {
+		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
+		contractInstallationLocation.setMomKjbSystemId("000000000433091");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractInstallationLocation.setContract(contract);
+		contractInstallationLocationRepository.save(contractInstallationLocation);
+		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+
+		Assert.assertEquals("顧客名が正しく取得されること", "株式会社ティーガイア＊", contractInstallationLocation.getCustomerName());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", contractInstallationLocation.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", "0353273907", contractInstallationLocation.getPhoneNumber());
+		Assert.assertEquals("FAX番号が正しく取得されること", null, contractInstallationLocation.getFaxNumber());
+		Assert.assertEquals("企事部設定区分が正しく取得されること", DepartmentDiv.企事部, contractInstallationLocation.getDepartmentDiv());
+		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", contractInstallationLocation.getCompanyId());
+		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000255394", contractInstallationLocation.getOfficeId());
+		Assert.assertEquals("事業所名が正しく取得されること", "＊", contractInstallationLocation.getOfficeName());
+		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000007309661", contractInstallationLocation.getMomCustId());
+		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", contractInstallationLocation.getPostNumber());
+		Assert.assertEquals("企業名が正しく取得されること", "株式会社ティーガイア", contractInstallationLocation.getCompanyName());
+		Assert.assertEquals("部門名が正しく取得されること", null, contractInstallationLocation.getDepartmentName());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractInstallationLocationListenerのテスト_企事部IDで企事部マスタを検索する場合() {
+		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
+		contractInstallationLocation.setMomKjbSystemId("dummyMomKjbSystemId");
+		contractInstallationLocation.setMomCustId("000000007309661");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractInstallationLocation.setContract(contract);
+		contractInstallationLocationRepository.save(contractInstallationLocation);
+		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", contractInstallationLocation.getMomKjbSystemId());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_ContractInstallationLocationListenerのテスト_企事部マスタが存在しない場合() {
+		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
+		contractInstallationLocation.setMomKjbSystemId("dummyMomKjbSystemId");
+		contractInstallationLocation.setMomCustId("dummyMomCustId");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractInstallationLocation.setContract(contract);
+		contractInstallationLocationRepository.save(contractInstallationLocation);
+		try {
+			contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+			Assert.fail("正常に終了した");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00012");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "設置先(契約用)に存在しないMoM企事部システム連携IDが設定されています。");
+		}
 	}
 
 	@Test

@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,8 +14,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.MomCommonMasterSearchParameter;
 import jp.co.ricoh.cotos.commonlib.dto.result.CommonMasterResult;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.entity.util.VKjbMasterUtil;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
@@ -29,6 +27,9 @@ public class DealerContractListener {
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
 	private static FindCommonMaster findCommonMaster;
+
+	@Autowired
+	private VKjbMasterUtil vKjbMasterUtil;
 
 	@Autowired
 	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
@@ -50,10 +51,10 @@ public class DealerContractListener {
 	public void appendsDealerContractFields(DealerContract dealerContract) {
 
 		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
-			VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(dealerContract.getMomKjbSystemId());
-			if (vKjbMaster == null) {
-				String[] regexList = { "販売店（契約用）" };
-				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistKjbMaster", regexList));
+			VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(dealerContract, "販売店（契約用）");
+			// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
+			if (StringUtils.equals(dealerContract.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+				dealerContract.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 			}
 
 			// 結合して表示するものを設定
