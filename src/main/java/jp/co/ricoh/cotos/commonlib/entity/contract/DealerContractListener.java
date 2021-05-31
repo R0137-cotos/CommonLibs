@@ -24,12 +24,11 @@ public class DealerContractListener {
 
 	private static String HJN_KAKU_ITEM_CD = "JMC-HJN_KAKU_CD";
 
-	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
+	private static VKjbMasterUtil vKjbMasterUtil;
 	private static FindCommonMaster findCommonMaster;
 
-	@Autowired
-	private VKjbMasterUtil vKjbMasterUtil;
+	private static VKjbMasterRepository vKjbMasterRepository;
 
 	@Autowired
 	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
@@ -39,6 +38,11 @@ public class DealerContractListener {
 	@Autowired
 	public void setCheckUtil(CheckUtil checkUtil) {
 		DealerContractListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
+		DealerContractListener.vKjbMasterUtil = vKjbMasterUtil;
 	}
 
 	@Autowired
@@ -53,7 +57,7 @@ public class DealerContractListener {
 		if (StringUtils.isNotBlank(dealerContract.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(dealerContract, "販売店（契約用）");
 			// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
-			if (StringUtils.equals(dealerContract.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+			if (!StringUtils.equals(dealerContract.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
 				dealerContract.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 			}
 
@@ -72,7 +76,6 @@ public class DealerContractListener {
 			if (StringUtils.isBlank(dealerContract.getDistributorMomCmpId()))
 				dealerContract.setDistributorMomCmpId("999999");
 		}
-
 	}
 
 	@PreUpdate

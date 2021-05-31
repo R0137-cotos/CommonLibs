@@ -26,10 +26,8 @@ public class DealerEstimationListener {
 
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
+	private static VKjbMasterUtil vKjbMasterUtil;
 	private static FindCommonMaster findCommonMaster;
-
-	@Autowired
-	private VKjbMasterUtil vKjbMasterUtil;
 
 	@Autowired
 	public void setKjbMasterRepository(VKjbMasterRepository kjbMasterRepository) {
@@ -39,6 +37,11 @@ public class DealerEstimationListener {
 	@Autowired
 	public void setCheckUtil(CheckUtil checkUtil) {
 		DealerEstimationListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
+		DealerEstimationListener.vKjbMasterUtil = vKjbMasterUtil;
 	}
 
 	@Autowired
@@ -57,7 +60,7 @@ public class DealerEstimationListener {
 		if (StringUtils.isNotBlank(dealerEstimation.getMomKjbSystemId())) {
 			VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(dealerEstimation, "販売店（見積用）");
 			// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
-			if (StringUtils.equals(dealerEstimation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+			if (!StringUtils.equals(dealerEstimation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
 				dealerEstimation.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 			}
 
