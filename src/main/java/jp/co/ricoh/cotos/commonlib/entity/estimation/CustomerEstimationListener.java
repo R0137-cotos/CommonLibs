@@ -28,10 +28,8 @@ public class CustomerEstimationListener {
 
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
+	private static VKjbMasterUtil vKjbMasterUtil;
 	private static FindCommonMaster findCommonMaster;
-
-	@Autowired
-	private VKjbMasterUtil vKjbMasterUtil;
 
 	@Autowired
 	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
@@ -41,6 +39,11 @@ public class CustomerEstimationListener {
 	@Autowired
 	public void setCheckUtil(CheckUtil checkUtil) {
 		CustomerEstimationListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
+		CustomerEstimationListener.vKjbMasterUtil = vKjbMasterUtil;
 	}
 
 	@Autowired
@@ -63,7 +66,7 @@ public class CustomerEstimationListener {
 
 		VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(customerEstimation, "顧客（見積用）");
 		// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
-		if (StringUtils.equals(customerEstimation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+		if (!StringUtils.equals(customerEstimation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
 			customerEstimation.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 		}
 

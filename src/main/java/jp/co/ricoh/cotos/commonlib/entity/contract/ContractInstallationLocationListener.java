@@ -18,9 +18,7 @@ public class ContractInstallationLocationListener {
 
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
-
-	@Autowired
-	private VKjbMasterUtil vkjbMasterUtil;
+	private static VKjbMasterUtil vKjbMasterUtil;
 
 	@Autowired
 	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
@@ -32,6 +30,11 @@ public class ContractInstallationLocationListener {
 		ContractInstallationLocationListener.checkUtil = checkUtil;
 	}
 
+	@Autowired
+	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
+		ContractInstallationLocationListener.vKjbMasterUtil = vKjbMasterUtil;
+	}
+
 	/**
 	 * 顧客マスタ情報を設置先(契約用)トランザクションに紐づけます。
 	 *
@@ -41,9 +44,9 @@ public class ContractInstallationLocationListener {
 	@Transactional
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
 
-		VKjbMaster vKjbMaster = vkjbMasterUtil.specifyVKjbMaster(contractInstallationLocation, "設置先(契約用)");
+		VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(contractInstallationLocation, "設置先(契約用)");
 		// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
-		if (StringUtils.equals(contractInstallationLocation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+		if (!StringUtils.equals(contractInstallationLocation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
 			contractInstallationLocation.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 		}
 

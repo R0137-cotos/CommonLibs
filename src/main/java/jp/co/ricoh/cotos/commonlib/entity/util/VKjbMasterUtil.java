@@ -33,7 +33,7 @@ public class VKjbMasterUtil {
 	 * @param entityLogicalName - エンティティ論理名
 	 * @return
 	 */
-	public VKjbMaster specifyVKjbMaster(CustomerAbstractEntity customerEntity, String entityLogicalName) {
+	public VKjbMaster specifyVKjbMaster(CustomerAbstractEntity customerEntity, String entityLogicalName) throws ErrorCheckException {
 		return specifyVKjbMaster(customerEntity.getMomKjbSystemId(), customerEntity.getMomCustId(), entityLogicalName);
 	}
 
@@ -43,11 +43,11 @@ public class VKjbMasterUtil {
 	 * @param entityLogicalName - エンティティ論理名
 	 * @return
 	 */
-	public VKjbMaster specifyVKjbMaster(DealerAbstractEntity dealerEntity, String entityLogicalName) {
+	public VKjbMaster specifyVKjbMaster(DealerAbstractEntity dealerEntity, String entityLogicalName) throws ErrorCheckException {
 		return specifyVKjbMaster(dealerEntity.getMomKjbSystemId(), dealerEntity.getMomCustId(), entityLogicalName);
 	}
 
-	private VKjbMaster specifyVKjbMaster(String momKjbSystemId, String momCustId, String entityLogicalName) {
+	private VKjbMaster specifyVKjbMaster(String momKjbSystemId, String momCustId, String entityLogicalName) throws ErrorCheckException {
 		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(momKjbSystemId);
 		// MoMシステム連携IDで検索して企事部マスタが見つかった場合はそれを返却する
 		if (Objects.nonNull(vKjbMaster)) {

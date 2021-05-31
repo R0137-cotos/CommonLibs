@@ -62,6 +62,15 @@ public class TestListener {
 	@Autowired
 	CheckUtil checkUtil;
 
+	// システム連携ID
+	static final String MOM_KJB_SYSTEM_ID = "000000000433091";
+	// 企事部ID(上記、システム連携IDのレコードが持つ企事部IDと同じ)
+	static final String MOM_CUST_ID = "000000007309661";
+	// システム連携ID(ダミー)
+	static final String DUMMY_MOM_KJB_SYSTEM_ID = "dummyMomKjbSystemId";
+	// 企事部ID(ダミー)
+	static final String DUMMY_MOM_CUST_ID = "dummyMomCustId";
+
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
@@ -115,14 +124,14 @@ public class TestListener {
 	@WithMockCustomUser
 	public void CustomerEstimationListenerのテスト_企事部IDで企事部マスタを検索する場合() {
 		CustomerEstimation customerEstimation = new CustomerEstimation();
-		customerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
-		customerEstimation.setMomCustId("000000007309661");
+		customerEstimation.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		customerEstimation.setMomCustId(MOM_CUST_ID);
 		Estimation estimation = new Estimation();
 		estimation.setId(1L);
 		customerEstimation.setEstimation(estimation);
 		customerEstimationRepository.save(customerEstimation);
 		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
-		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", customerEstimation.getMomKjbSystemId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, customerEstimation.getMomKjbSystemId());
 	}
 
 	@Test
@@ -187,8 +196,8 @@ public class TestListener {
 	@WithMockCustomUser
 	public void 異常系_CustomerContractListenerのテスト_企事部マスタが存在しない場合() {
 		CustomerContract customerContract = new CustomerContract();
-		customerContract.setMomKjbSystemId("dummyMomKjbSystemId");
-		customerContract.setMomCustId("dummyMomCustId");
+		customerContract.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		customerContract.setMomCustId(DUMMY_MOM_CUST_ID);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		customerContract.setContract(contract);
@@ -230,22 +239,24 @@ public class TestListener {
 	@WithMockCustomUser
 	public void DealerEstimationListenerのテスト_企事部IDで企事部マスタを検索する場合() {
 		DealerEstimation dealerEstimation = new DealerEstimation();
-		dealerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
-		dealerEstimation.setMomCustId("000000007309661");
+		dealerEstimation.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		dealerEstimation.setMomCustId(MOM_CUST_ID);
+		dealerEstimation.setDealerFlowOrder(DealerFlowOrder.販売店);
 		Estimation estimation = new Estimation();
 		estimation.setId(1L);
 		dealerEstimation.setEstimation(estimation);
 		dealerEstimationRespository.save(dealerEstimation);
 		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
-		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", dealerEstimation.getMomKjbSystemId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, dealerEstimation.getMomKjbSystemId());
 	}
 
 	@Test
 	@WithMockCustomUser
 	public void 異常系_DealerEstimationListenerのテスト_企事部マスタが存在しない場合() {
 		DealerEstimation dealerEstimation = new DealerEstimation();
-		dealerEstimation.setMomKjbSystemId("dummyMomKjbSystemId");
-		dealerEstimation.setMomCustId("dummyMomCustId");
+		dealerEstimation.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		dealerEstimation.setMomCustId(DUMMY_MOM_CUST_ID);
+		dealerEstimation.setDealerFlowOrder(DealerFlowOrder.販売店);
 		Estimation estimation = new Estimation();
 		estimation.setId(1L);
 		dealerEstimation.setEstimation(estimation);
@@ -287,22 +298,24 @@ public class TestListener {
 	@WithMockCustomUser
 	public void DealerContractListenerのテスト_企事部IDで企事部マスタを検索する場合() {
 		DealerContract dealerContract = new DealerContract();
-		dealerContract.setMomKjbSystemId("dummyMomKjbSystemId");
-		dealerContract.setMomCustId("000000007309661");
+		dealerContract.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		dealerContract.setMomCustId(MOM_CUST_ID);
+		dealerContract.setDealerFlowOrder(DealerFlowOrder.販売店);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		dealerContract.setContract(contract);
 		dealerContractRepository.save(dealerContract);
 		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
-		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", dealerContract.getMomKjbSystemId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, dealerContract.getMomKjbSystemId());
 	}
 
 	@Test
 	@WithMockCustomUser
 	public void 異常系_DealerContractListenerのテスト_企事部マスタが存在しない場合() {
 		DealerContract dealerContract = new DealerContract();
-		dealerContract.setMomKjbSystemId("dummyMomKjbSystemId");
-		dealerContract.setMomCustId("dummyMomCustId");
+		dealerContract.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		dealerContract.setMomCustId(DUMMY_MOM_CUST_ID);
+		dealerContract.setDealerFlowOrder(DealerFlowOrder.販売店);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		dealerContract.setContract(contract);
@@ -321,16 +334,16 @@ public class TestListener {
 	@WithMockCustomUser
 	public void ContractInstallationLocationListenerのテスト() {
 		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
-		contractInstallationLocation.setMomKjbSystemId("000000000433091");
+		contractInstallationLocation.setMomKjbSystemId(MOM_KJB_SYSTEM_ID);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		contractInstallationLocation.setContract(contract);
 		contractInstallationLocationRepository.save(contractInstallationLocation);
 		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
 
-		Assert.assertEquals("顧客名が正しく取得されること", "株式会社ティーガイア＊", contractInstallationLocation.getCustomerName());
-		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", contractInstallationLocation.getAddress());
-		Assert.assertEquals("電話番号が正しく取得されること", "0353273907", contractInstallationLocation.getPhoneNumber());
+		Assert.assertEquals("顧客名が正しく取得されること", "ティーガイア＊", contractInstallationLocation.getCustomerName());
+		Assert.assertEquals("住所が正しく取得されること", "東京都渋谷区恵比寿４丁目１－１８　恵比寿ネオナート　１４Ｆ〜１８Ｆ", contractInstallationLocation.getAddress());
+		Assert.assertEquals("電話番号が正しく取得されること", null, contractInstallationLocation.getPhoneNumber());
 		Assert.assertEquals("FAX番号が正しく取得されること", null, contractInstallationLocation.getFaxNumber());
 		Assert.assertEquals("企事部設定区分が正しく取得されること", DepartmentDiv.企事部, contractInstallationLocation.getDepartmentDiv());
 		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", contractInstallationLocation.getCompanyId());
@@ -338,7 +351,7 @@ public class TestListener {
 		Assert.assertEquals("事業所名が正しく取得されること", "＊", contractInstallationLocation.getOfficeName());
 		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000007309661", contractInstallationLocation.getMomCustId());
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", contractInstallationLocation.getPostNumber());
-		Assert.assertEquals("企業名が正しく取得されること", "株式会社ティーガイア", contractInstallationLocation.getCompanyName());
+		Assert.assertEquals("企業名が正しく取得されること", "ティーガイア", contractInstallationLocation.getCompanyName());
 		Assert.assertEquals("部門名が正しく取得されること", null, contractInstallationLocation.getDepartmentName());
 	}
 
@@ -346,28 +359,27 @@ public class TestListener {
 	@WithMockCustomUser
 	public void ContractInstallationLocationListenerのテスト_企事部IDで企事部マスタを検索する場合() {
 		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
-		contractInstallationLocation.setMomKjbSystemId("dummyMomKjbSystemId");
-		contractInstallationLocation.setMomCustId("000000007309661");
+		contractInstallationLocation.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		contractInstallationLocation.setMomCustId(MOM_CUST_ID);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		contractInstallationLocation.setContract(contract);
 		contractInstallationLocationRepository.save(contractInstallationLocation);
 		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
-		Assert.assertEquals("システム連携IDが正しく取得されること", "000000000433091", contractInstallationLocation.getMomKjbSystemId());
+		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, contractInstallationLocation.getMomKjbSystemId());
 	}
 
 	@Test
 	@WithMockCustomUser
 	public void 異常系_ContractInstallationLocationListenerのテスト_企事部マスタが存在しない場合() {
 		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
-		contractInstallationLocation.setMomKjbSystemId("dummyMomKjbSystemId");
-		contractInstallationLocation.setMomCustId("dummyMomCustId");
+		contractInstallationLocation.setMomKjbSystemId(DUMMY_MOM_KJB_SYSTEM_ID);
+		contractInstallationLocation.setMomCustId(DUMMY_MOM_CUST_ID);
 		Contract contract = new Contract();
 		contract.setId(1L);
 		contractInstallationLocation.setContract(contract);
-		contractInstallationLocationRepository.save(contractInstallationLocation);
 		try {
-			contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+			contractInstallationLocationRepository.save(contractInstallationLocation);
 			Assert.fail("正常に終了した");
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
