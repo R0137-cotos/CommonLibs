@@ -575,3 +575,4 @@
 |658|CommonSendMailのメール本文置換リストの最大値を15件に修正|
 |659|PCPの拡張項目の不要項目を削除|
 |660|Messages.propertiesの修正|
+|661|ライセンス残数Repository修正|
