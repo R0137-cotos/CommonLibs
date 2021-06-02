@@ -16,6 +16,7 @@ import javax.swing.SortOrder;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -49,7 +50,9 @@ public class BusinessDayUtil {
 	 * @return
 	 */
 	public boolean isBusinessDay(Date date) {
-		NonBusinessDayCalendarMaster nonBusinessDayCalendarMaster = nonBusinessDayCalendarMasterRepository.findOneByNonBusinessDayAndVendorShortNameIsNull(date);
+		// 時、分、秒は不要なため、フォーマットする（00:00:00で固定）
+		Date formatCheckDate = DateUtils.truncate(date, Calendar.DAY_OF_MONTH);
+		NonBusinessDayCalendarMaster nonBusinessDayCalendarMaster = nonBusinessDayCalendarMasterRepository.findOneByNonBusinessDayAndVendorShortNameIsNull(formatCheckDate);
 		return nonBusinessDayCalendarMaster == null;
 	}
 
