@@ -311,6 +311,17 @@ public class TestDateCalcPatternUtil {
 		Assert.assertEquals("拡張項目のソート確認", "20200918000000", dateCalcPatternUtil.dateToStringConverter(resultDate, "yyyyMMddHHmmss"));
 	}
 
+	@Test
+	public void 契約満了月の4ヶ月前の月末から7営業日前() throws Exception {
+
+		String testDate = "20210702";
+		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
+		Long trgetId = 32L;
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
+		Assert.assertEquals("契約満了月の4ヶ月前の月末から7営業日前", "20210323", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/testDateCalcPatternMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/testNonBusinessDayCalendarMasterInsert.sql");
