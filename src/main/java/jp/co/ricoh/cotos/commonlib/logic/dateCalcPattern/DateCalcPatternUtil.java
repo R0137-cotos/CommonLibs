@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -212,7 +213,7 @@ public class DateCalcPatternUtil {
 		String addDay = prefix + 1;
 		while (true) {
 			// 計算結果が営業日になるまで繰り返す
-			if(businessDayUtil.isBusinessDay(trgetCalendar.getTime())) {
+			if (businessDayUtil.isBusinessDay(DateUtils.truncate(trgetCalendar.getTime(), Calendar.DAY_OF_MONTH))) {
 				return;
 			}
 			// 日付加減算処理
