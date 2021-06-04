@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 /**
- * 契約機種拡張項目DTO（PCP）
+ * 商品（契約用）拡張項目CPQ動的移行用DTO（SVP）
  */
 
 @Data
