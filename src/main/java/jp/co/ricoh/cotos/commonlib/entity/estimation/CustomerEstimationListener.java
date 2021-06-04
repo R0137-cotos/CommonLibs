@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,8 +16,7 @@ import jp.co.ricoh.cotos.commonlib.dto.result.CommonMasterResult;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.entity.util.VKjbMasterUtil;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.findcommonmaster.FindCommonMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
@@ -30,6 +28,7 @@ public class CustomerEstimationListener {
 
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
+	private static VKjbMasterUtil vKjbMasterUtil;
 	private static FindCommonMaster findCommonMaster;
 
 	@Autowired
@@ -40,6 +39,11 @@ public class CustomerEstimationListener {
 	@Autowired
 	public void setCheckUtil(CheckUtil checkUtil) {
 		CustomerEstimationListener.checkUtil = checkUtil;
+	}
+
+	@Autowired
+	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
+		CustomerEstimationListener.vKjbMasterUtil = vKjbMasterUtil;
 	}
 
 	@Autowired
@@ -60,10 +64,10 @@ public class CustomerEstimationListener {
 			return;
 		}
 
-		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(customerEstimation.getMomKjbSystemId());
-		if (vKjbMaster == null) {
-			String[] regexList = { "顧客（見積用）" };
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistKjbMaster", regexList));
+		VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(customerEstimation, "顧客（見積用）");
+		// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
+		if (!StringUtils.equals(customerEstimation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+			customerEstimation.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 		}
 
 		// 結合して表示するものを設定
