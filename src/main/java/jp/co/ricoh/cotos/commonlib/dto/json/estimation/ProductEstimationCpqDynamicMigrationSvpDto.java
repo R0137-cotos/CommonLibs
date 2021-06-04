@@ -57,7 +57,7 @@ public class ProductEstimationCpqDynamicMigrationSvpDto {
 	/**
 	 * 本体クラス区分
 	 */
-	private String bodyClass;
+	private String bodyClassDiv;
 
 	/**
 	 * 本体製品名
@@ -70,9 +70,9 @@ public class ProductEstimationCpqDynamicMigrationSvpDto {
 	private MaintenanceTimeTypeSvp maintenanceTimeType;
 
 	/**
-	 * 使用OS
+	 * 使用OS区分
 	 */
-	private String useOs;
+	private String useOsDiv;
 
 	/**
 	 * ソフトウェアクラス区分
