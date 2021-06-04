@@ -15,7 +15,7 @@ public class CpqHardwareInfoSvpDto {
 	/**
 	 * 分類コード
 	 */
-	private String ClassificCode;
+	private String classificCode;
 
 	/**
 	 * ハードウェアクラス区分
