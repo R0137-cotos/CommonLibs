@@ -75,4 +75,16 @@ public class CpqProperties {
 	 * SVP移行データ作成時にコールするAPI情報
 	 */
 	String migrationSvPack;
+	/**
+	 * CPQのドキュメント情報
+	 */
+	String documentId;
+	/**
+	 * PCP移行データ作成時のダミートランザクションID情報
+	 */
+	String pcpDummyTransactionId;
+	/**
+	 * SVP移行データ作成時のダミートランザクションID情報
+	 */
+	String svpDummyTransactionId;
 }
