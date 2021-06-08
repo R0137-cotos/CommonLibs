@@ -82,10 +82,9 @@ public class CpqProperties {
 	/**
 	 * PCP移行データ作成時のダミートランザクションID情報
 	 */
-	String dummyTransactionIdPcp;
+	String pcpDummyTransactionId;
 	/**
 	 * SVP移行データ作成時のダミートランザクションID情報
 	 */
-	String dummyTransactionIdSvp;
-
+	String svpDummyTransactionId;
 }
