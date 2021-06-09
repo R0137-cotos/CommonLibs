@@ -1,0 +1,1 @@
+INSERT INTO emp_grp_management_master (id,created_at,created_user_id,updated_at,updated_user_id,version,group_code,group_name,mom_emp_id) VALUES (1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'A0001','dummy_group_name','12345678');
