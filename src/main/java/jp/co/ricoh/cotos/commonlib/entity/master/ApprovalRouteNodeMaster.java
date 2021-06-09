@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -56,7 +57,7 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 
 	public enum ApproverDeriveMethodDiv {
 
-		直属上司指定("1"), 組織絶対階層指定("2"), 組織直接指定("3"), ユーザー直接指定("4"), 自己承認("5"), 受付担当CE指定("6");
+		直属上司指定("1"), 組織絶対階層指定("2"), 組織直接指定("3"), ユーザー直接指定("4"), 自己承認("5"), 受付担当CE指定("6"), グループ承認("7");
 
 		private final String text;
 
@@ -109,7 +110,7 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 	 * 承認者導出方式区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "承認者導出方式区分", required = true, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\")", example = "1", position = 5)
+	@ApiModelProperty(value = "承認者導出方式区分", required = true, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1", position = 5)
 	private ApproverDeriveMethodDiv approverDeriveMethodDiv;
 
 	/**
@@ -129,5 +130,12 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "MoM社員ID", required = false, position = 8, allowableValues = "range[0,255]")
 	private String momEmpId;
+
+	/**
+	 * グループコード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "グループコード", required = false, position = 9, allowableValues = "range[0,255]")
+	private String groupCode;
 
 }

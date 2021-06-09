@@ -1,8 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -51,6 +49,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ContractAutoUpdateMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ContractChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DispUrlAuthMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.EmpGrpManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EquipmentCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EstimationChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ExtendsParameterCorrelationCheckMaster;
@@ -127,6 +126,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ContractAutoUpdateMasterRep
 import jp.co.ricoh.cotos.commonlib.repository.master.ContractChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DispUrlAuthMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.EmpGrpManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EquipmentCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EstimationChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ExtendsParameterCorrelationCheckMasterRepository;
@@ -339,6 +339,8 @@ public class TestMaster {
 	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
 	@Autowired
 	private ProductMasterDtoRepository productMasterDtoRepository;
+	@Autowired
+	private EmpGrpManagementMasterRepository empGrpManagementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2334,7 +2336,7 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
-
+	
 	@Test
 	public void ItemTransCompMaster_findByItemMasterIdのテスト() throws Exception {
 		// テストデータ登録
@@ -2350,5 +2352,38 @@ public class TestMaster {
 
 		// データが1件取得できていることを確認
 		Assert.assertEquals(1, foundList.size());
+	}
+
+	@Test
+	public void EmpGrpManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/empGrpManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		EmpGrpManagementMaster found = empGrpManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void EmpGrpManagementMaster_findByGroupCodeのテスト() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/empGrpManagementMaster.sql");
+
+		List<EmpGrpManagementMaster> foundList = empGrpManagementMasterRepository.findByGroupCode("A0001");
+		// データが取得できていることを確認
+		Assert.assertTrue(foundList.size() > 0);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
 	}
 }
