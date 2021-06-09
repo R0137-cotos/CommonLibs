@@ -25,4 +25,8 @@ public class ProductContractCpqDynamicMigrationSvpDto {
 	 * 更新フラグ
 	 */
 	private String updateFlg;
+	/**
+	 * 使用OS区分
+	 */
+	private String useOsDiv;
 }
