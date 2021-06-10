@@ -53,6 +53,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DateCalcPatternMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DispUrlAuthMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.EmpGrpManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EquipmentCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EstimationChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ExtendsParameterCorrelationCheckMaster;
@@ -149,6 +150,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.CsvFileSettingMasterReposit
 import jp.co.ricoh.cotos.commonlib.repository.master.DateCalcPatternMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DispUrlAuthMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.EmpGrpManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EquipmentCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EstimationChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ExtendsParameterCorrelationCheckMasterRepository;
@@ -377,6 +379,8 @@ public class TestMaster {
 	private MenuDetailsManagementMasterRepository menuDetailsManagementMasterRepository;
 	@Autowired
 	private ProductMasterDtoRepository productMasterDtoRepository;
+	@Autowired
+	private EmpGrpManagementMasterRepository empGrpManagementMasterRepository;
 
 	@Autowired
 	private FileKindManagementMasterRepository fileKindManagementMasterRepository;
@@ -2833,5 +2837,38 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void EmpGrpManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/empGrpManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		EmpGrpManagementMaster found = empGrpManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void EmpGrpManagementMaster_findByGroupCodeのテスト() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/empGrpManagementMaster.sql");
+
+		List<EmpGrpManagementMaster> foundList = empGrpManagementMasterRepository.findByGroupCode("A0001");
+		// データが取得できていることを確認
+		Assert.assertTrue(foundList.size() > 0);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
 	}
 }

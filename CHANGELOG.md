@@ -1,5 +1,19 @@
 # Changelog
 
+## v3.22.0 (10/06/2021)
+- [**closed**] #11352 元契約のライフサイクルチェックのエラーメッセージID修正 [#1551](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1551)
+- [**closed**] #11278 顧客、販売店、設置先保存時に企事部マスタを企事部IDでも検索するように修正 [#1550](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1550)
+- [**closed**] #11352 元契約のライフサイクルチェックのエラーメッセージ追加 [#1549](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1549)
+- [**closed**] #11292 コミュニケーション登録パラメータ修正 [#1536](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1536)
+- [**closed**] #10821 最終承認がグループ承認の場合、編集権限を付与するよう修正 [#1525](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1525)
+- [**closed**] #10821 契約の認証認可処理用パラメータ作成の際、承認ルートを特定する処理を修正 [#1522](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1522)
+- [**closed**] #10821 グループ承認の場合の認証認可処理を追加修正 [#1521](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1521)
+- [**closed**] #10821 グループ承認の場合の認証認可処理修正 [#1517](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1517)
+- [**closed**] #10821 グループ承認の場合、代理承認者は設定できないエラーメッセージを追加 [#1515](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1515)
+- [**closed**] #10830 承認ルートノードマスタと各承認ルートノードテーブルにカラム追加、社員グループ管理マスタ追加、認証認可処理にグループ承認追加 [#1496](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1496)
+
+---
+
 ## v3.21.0 (24/05/2021)
 - [**closed**] #11256 内部振替情報作成用エラーメッセージ追加 [#1530](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1530)
 - [**closed**] #11237 監査証跡用メールアドレス追加 [#1526](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1526)
