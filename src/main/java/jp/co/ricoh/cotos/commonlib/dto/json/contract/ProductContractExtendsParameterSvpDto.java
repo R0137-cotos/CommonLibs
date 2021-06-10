@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSvp.BillingTypeSvp;
@@ -108,4 +109,10 @@ public class ProductContractExtendsParameterSvpDto {
 	 * 使用OS
 	 */
 	private String useOs;
+
+	/**
+	 * CPQ動的移行用
+	 */
+	@JsonProperty("cpqDynamicMigration")
+	private ProductContractCpqDynamicMigrationSvpDto productContractCpqDynamicMigrationDto;
 }

@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
-import java.util.ArrayList;
-
 import javax.persistence.PrePersist;
 import javax.transaction.Transactional;
 
@@ -11,8 +9,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.entity.util.VKjbMasterUtil;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
@@ -21,6 +18,7 @@ public class ContractInstallationLocationListener {
 
 	private static VKjbMasterRepository vKjbMasterRepository;
 	private static CheckUtil checkUtil;
+	private static VKjbMasterUtil vKjbMasterUtil;
 
 	@Autowired
 	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
@@ -32,6 +30,11 @@ public class ContractInstallationLocationListener {
 		ContractInstallationLocationListener.checkUtil = checkUtil;
 	}
 
+	@Autowired
+	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
+		ContractInstallationLocationListener.vKjbMasterUtil = vKjbMasterUtil;
+	}
+
 	/**
 	 * 顧客マスタ情報を設置先(契約用)トランザクションに紐づけます。
 	 *
@@ -41,10 +44,10 @@ public class ContractInstallationLocationListener {
 	@Transactional
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
 
-		VKjbMaster vKjbMaster = vKjbMasterRepository.findByMclMomRelId(contractInstallationLocation.getMomKjbSystemId());
-		if (vKjbMaster == null) {
-			String[] regexList = { "設置先(契約用)" };
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistKjbMaster", regexList));
+		VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(contractInstallationLocation, "設置先(契約用)");
+		// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
+		if (!StringUtils.equals(contractInstallationLocation.getMomKjbSystemId(), vKjbMaster.getMclMomRelId())) {
+			contractInstallationLocation.setMomKjbSystemId(vKjbMaster.getMclMomRelId());
 		}
 
 		// 結合して表示するものを設定

@@ -1074,8 +1074,9 @@ public class TestContractDto {
 		testTarget.setSubApproverEmpId(STR_256);
 		testTarget.setSubApproverName(STR_256);
 		testTarget.setSubApproverOrgName(STR_256);
+		testTarget.setGroupName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 7);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "代理承認者組織名は最大文字数（255）を超えています。"));
 

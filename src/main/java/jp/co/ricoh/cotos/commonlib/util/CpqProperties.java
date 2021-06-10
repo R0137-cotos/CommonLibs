@@ -59,5 +59,32 @@ public class CpqProperties {
 	 * コマース遷移URL生成時にコールするAPI情報
 	 */
 	String createCommerceUrl;
-
+	/**
+	 * トランザクション構成情報作成時にコールするAPI情報
+	 */
+	String createConfigure;
+	/**
+	 * 構成情報の紐づけ時にコールするAPI情報
+	 */
+	String addToTxn;
+	/**
+	 * 構成情報の紐づけ時にコールするAPI情報
+	 */
+	String cleanSaveTransaction;
+	/**
+	 * SVP移行データ作成時にコールするAPI情報
+	 */
+	String migrationSvPack;
+	/**
+	 * CPQのドキュメント情報
+	 */
+	String documentId;
+	/**
+	 * PCP移行データ作成時のダミートランザクションID情報
+	 */
+	String pcpDummyTransactionId;
+	/**
+	 * SVP移行データ作成時のダミートランザクションID情報
+	 */
+	String svpDummyTransactionId;
 }
