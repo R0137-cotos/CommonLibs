@@ -29,6 +29,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementChecklistCompMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkAuthControlMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
@@ -127,6 +128,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteGrpMasterRepos
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementChecklistCompMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkAuthControlMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkOrderMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ArrangementWorkTypeForSearchMasterRepository;
@@ -422,6 +424,8 @@ public class TestMaster {
 	private MvRjShohinInfoMasterRepository mvRjShohinInfoMasterRepository;
 	@Autowired
 	private BatchRunDateManagementMasterRepository batchRunDateManagementMasterRepository;
+	@Autowired
+	private ArrangementWorkAuthControlMasterRepository arrangementWorkAuthControlMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -670,6 +674,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -699,6 +705,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -731,6 +739,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		String checkMatterCode = "TEST_1";
@@ -761,6 +771,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -850,6 +862,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -926,6 +940,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1100,6 +1116,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1449,6 +1467,9 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkCompMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
+
 		List<String> appId = Arrays.asList("electric");
 		List<ArrangementWorkTypeMaster> list = arrangementWorkTypeMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
 		Assert.assertNotEquals(0, list.size());
@@ -2264,6 +2285,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2870,5 +2893,28 @@ public class TestMaster {
 		} catch (Exception e) {
 			Assert.fail("throw Exception :" + e.getMessage());
 		}
+	}
+
+	@Test
+	public void ArrangementWorkAuthControlMasterのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ArrangementWorkAuthControlMaster found = arrangementWorkAuthControlMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
+		if (found.getArrangementWorkTypeMasterMasterList() == null)
+			Assert.assertTrue(false);
 	}
 }

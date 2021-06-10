@@ -15,4 +15,6 @@ public interface ArrangementWorkRepository extends CrudRepository<ArrangementWor
 	public ArrangementWork findByIdAndAppIdNotIn(Long id, List<String> appId);
 
 	public List<ArrangementWork> findByArrangementAndArrangementWorkTypeMasterId(Arrangement arrangement, long arrangementWorkTypeMasterId);
+
+	public List<ArrangementWork> findByIdIn(List<Long> idList);
 }

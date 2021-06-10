@@ -98,4 +98,12 @@ public class AuthPatternMaster extends EntityBaseMaster {
 	@OneToMany(mappedBy = "authPatternMaster")
 	@ApiModelProperty(value = "画面URL権限マスタ", required = false, position = 7)
 	private List<DispUrlAuthMaster> authPatternMasterList;
+
+	/**
+	 * 手配業務権限制御マスタ
+	 */
+	@JsonIgnore
+	@OneToMany(mappedBy = "authPatternMaster")
+	@ApiModelProperty(value = "手配業務権限制御マスタ", required = false, position = 8)
+	private List<ArrangementWorkAuthControlMaster> arrangementWorkAuthControlMasterList;
 }

@@ -15,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
@@ -90,4 +92,13 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * 手配業務権限制御マスタ
+	 */
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "arrangement_work_auth_control_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "手配業務権限制御マスタ", required = false, position = 10)
+	private ArrangementWorkAuthControlMaster arrangementWorkAuthControlMaster;
 }

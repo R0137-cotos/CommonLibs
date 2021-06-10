@@ -18,4 +18,10 @@ public class ProductEstimationExtendsParameterSvpDto {
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
 	private CpqReturnValueSvpDto cpqReturnValueSvpDto;
+
+	/**
+	 * CPQ動的移行用
+	 */
+	@JsonProperty("cpqDynamicMigration")
+	private ProductEstimationCpqDynamicMigrationSvpDto cpqDynamicMigrationDto;
 }
