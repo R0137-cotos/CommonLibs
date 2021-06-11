@@ -80,7 +80,7 @@ public class MailText {
 	 */
 	private List<String> getReplaceList(List<List<String>> replaceListValues, int index) {
 		List<String> list = new ArrayList<String>();
-		if (CollectionUtils.isNotEmpty(replaceListValues) && replaceListValues.size() > index && CollectionUtils.isNotEmpty(replaceListValues.get(index)) && replaceListValues.get(index).size() > index) {
+		if (CollectionUtils.isNotEmpty(replaceListValues) && replaceListValues.size() > index && CollectionUtils.isNotEmpty(replaceListValues.get(index))) {
 			list = replaceListValues.get(index);
 			return list;
 		} else {
