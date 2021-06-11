@@ -18,4 +18,10 @@ public class ProductEstimationExtendsParameterGspDto {
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
 	private CpqReturnValueGspDto cpqReturnValueGspDto;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
 }

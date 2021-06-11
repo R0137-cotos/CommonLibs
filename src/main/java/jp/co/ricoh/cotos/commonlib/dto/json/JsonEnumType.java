@@ -74,4 +74,32 @@ public class JsonEnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	/**
+	 * 移行区分
+	 *
+	 * 標準
+	 *
+	 */
+	public enum MigrationDiv {
+
+		RITOS移行("1");
+
+		private final String text;
+
+		private MigrationDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MigrationDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }

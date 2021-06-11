@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import lombok.Data;
@@ -16,4 +17,10 @@ public class ProductContractExtendsParameterLanf2Dto {
 	 * 契約種別詳細
 	 */
 	private ContractTypeDetails contractTypeDetails;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductContractMigrationParameterDto productContractMigrationParameterDto;
 }

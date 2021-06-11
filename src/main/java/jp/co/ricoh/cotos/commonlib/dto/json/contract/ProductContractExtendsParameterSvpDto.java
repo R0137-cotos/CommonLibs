@@ -115,4 +115,10 @@ public class ProductContractExtendsParameterSvpDto {
 	 */
 	@JsonProperty("cpqDynamicMigration")
 	private ProductContractCpqDynamicMigrationSvpDto productContractCpqDynamicMigrationDto;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductContractMigrationParameterDto productContractMigrationParameterDto;
 }

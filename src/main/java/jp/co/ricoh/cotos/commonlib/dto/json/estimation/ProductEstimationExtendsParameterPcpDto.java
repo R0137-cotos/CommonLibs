@@ -30,4 +30,10 @@ public class ProductEstimationExtendsParameterPcpDto {
 	 */
 	@JsonProperty("commonProductSpecificParameter")
 	private CommonProductSpecificParameterPcpDto commonProductSpecificParameterPcpDto;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
 }
