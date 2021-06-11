@@ -24,4 +24,10 @@ public class ProductEstimationExtendsParameterSvpDto {
 	 */
 	@JsonProperty("cpqDynamicMigration")
 	private ProductEstimationCpqDynamicMigrationSvpDto cpqDynamicMigrationDto;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
 }

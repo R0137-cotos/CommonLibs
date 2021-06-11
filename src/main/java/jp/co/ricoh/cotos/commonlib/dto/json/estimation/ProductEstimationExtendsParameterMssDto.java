@@ -25,4 +25,10 @@ public class ProductEstimationExtendsParameterMssDto {
 	@JsonProperty("cpqProductSpecificParameter")
 	private CpqParameterMssDto cpqParameterMssDto;
 
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
+
 }

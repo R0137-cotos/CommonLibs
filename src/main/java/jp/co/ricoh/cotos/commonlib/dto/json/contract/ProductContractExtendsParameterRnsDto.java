@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRns.NewExistingAccountTypeRns;
@@ -27,4 +28,10 @@ public class ProductContractExtendsParameterRnsDto {
 	 * オーガニゼーションID
 	 */
 	private String organizationId;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductContractMigrationParameterDto productContractMigrationParameterDto;
 }

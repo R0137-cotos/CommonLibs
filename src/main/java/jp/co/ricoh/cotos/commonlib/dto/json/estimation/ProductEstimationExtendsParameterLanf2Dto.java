@@ -18,4 +18,10 @@ public class ProductEstimationExtendsParameterLanf2Dto {
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
 	private CpqReturnValueLanf2Dto cpqReturnValueLanf2Dto;
+
+	/**
+	 * 移行用項目
+	 */
+	@JsonProperty("migrationParameter")
+	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
 }
