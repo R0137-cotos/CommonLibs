@@ -511,6 +511,22 @@ public class ArrangementSearchParameter {
 	private Long introductionDistance;
 
 	/**
+	 * 承認手配業務
+	 */
+	@ApiParam(value = "承認手配業務タイプマスタID", required = false)
+	@ApiModelProperty(value = "承認手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	private String approvalArrangementWorkTypeId;
+
+	/**
+	 * 手配承認日時
+	 */
+	@ApiParam(value = "手配承認日時", required = false)
+	@ApiModelProperty(value = "手配承認日時<br />" //
+			+ "日付フォーマット:yyyy/MM/dd HH", //
+			required = false) //
+	private Date approvalDate;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {

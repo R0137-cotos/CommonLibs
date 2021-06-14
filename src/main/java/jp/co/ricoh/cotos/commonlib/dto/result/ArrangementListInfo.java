@@ -292,6 +292,13 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "建物名", required = false, position = 42, allowableValues = "range[0,255]")
 	private String buildingName;
 
+	/**
+	 * 手配承認日時
+	 */
+	@ApiModelProperty(value = "手配承認日時", required = false, position = 43)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date approvalDate;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
