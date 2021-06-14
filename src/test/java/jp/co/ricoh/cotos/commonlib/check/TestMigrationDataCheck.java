@@ -17,6 +17,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
@@ -49,7 +50,6 @@ public class TestMigrationDataCheck {
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
-		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
 	}
 
 	@LocalServerPort
@@ -65,42 +65,58 @@ public class TestMigrationDataCheck {
 
 	@Test
 	public void 正常系_見積_標準データ() {
-
+		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
 		Estimation estimation = estimationRepository.findOne(4L);
-		boolean result = checkUtil.migrationDataCheck(estimation);
+		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 		Assert.assertFalse(result);
 	}
 
 	@Test
 	public void 正常系_見積_RITOS移行データ() {
-
+		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
 		Estimation estimation = estimationRepository.findOne(5L);
-		boolean result = checkUtil.migrationDataCheck(estimation);
+		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 		Assert.assertTrue(result);
 	}
 
 	@Test
-	public void 正常系_契約_標準データ() {
+	public void 正常系_見積_拡張項目NULL() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
+		Estimation estimation = estimationRepository.findOne(4L);
+		estimation.getProductEstimationList().get(0).setExtendsParameter(null);
+		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
+		Assert.assertFalse(result);
+	}
 
+	@Test
+	public void 正常系_契約_標準データ() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
 		Contract contract = contractRepository.findOne(4L);
-		boolean result = checkUtil.migrationDataCheck(contract);
+		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 		Assert.assertFalse(result);
 	}
 
 	@Test
 	public void 正常系_契約_RITOS移行データ() {
-
+		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
 		Contract contract = contractRepository.findOne(5L);
-		boolean result = checkUtil.migrationDataCheck(contract);
+		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 		Assert.assertTrue(result);
 	}
 
+	@Test
+	public void 正常系_契約_拡張項目NULL() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
+		Contract contract = contractRepository.findOne(4L);
+		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
+		Assert.assertFalse(result);
+	}
 
 	@Test
 	public void 異常系_見積_見積がNULL() {
 		Estimation estimation = null;
 		try {
-			checkUtil.migrationDataCheck(estimation);
+			checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 			fail("正常終了");
 		} catch (ErrorCheckException e) {
 			// 返却されるエラーを確認
@@ -116,7 +132,7 @@ public class TestMigrationDataCheck {
 		Estimation estimation = new Estimation();
 		estimation.setProductEstimationList(new ArrayList<ProductEstimation>());
 		try {
-			checkUtil.migrationDataCheck(estimation);
+			checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 			fail("正常終了");
 		} catch (ErrorCheckException e) {
 			// 返却されるエラーを確認
@@ -131,7 +147,7 @@ public class TestMigrationDataCheck {
 	public void 異常系_契約_契約がNULL() {
 		Contract contract = null;
 		try {
-			checkUtil.migrationDataCheck(contract);
+			checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 			fail("正常終了");
 		} catch (ErrorCheckException e) {
 			// 返却されるエラーを確認
@@ -147,7 +163,7 @@ public class TestMigrationDataCheck {
 		Contract contract = new Contract();
 		contract.setProductContractList(new ArrayList<ProductContract>());
 		try {
-			checkUtil.migrationDataCheck(contract);
+			checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 			fail("正常終了");
 		} catch (ErrorCheckException e) {
 			// 返却されるエラーを確認

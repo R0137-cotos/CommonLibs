@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.logic.check;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Period;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -24,12 +26,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
-import jp.co.ricoh.cotos.commonlib.dto.json.contract.ProductContractExtendsParameterGspDto;
-import jp.co.ricoh.cotos.commonlib.dto.json.contract.ProductContractMigrationParameterDto;
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.ProductEstimationExtendsParameterGspDto;
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.ProductEstimationMigrationParameterDto;
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ToleranceType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
@@ -607,10 +607,11 @@ public class CheckUtil {
 
 	/**
 	 * 移行データ判定（見積）
+	 * @param migrationDiv
 	 * @param estimation
 	 * @return
 	 */
-	public boolean migrationDataCheck(Estimation estimation) {
+	public boolean migrationDataCheck(MigrationDiv migrationDiv, Estimation estimation) {
 		// パラメーターチェック
 		if (estimation == null) {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "見積" }));
@@ -618,28 +619,30 @@ public class CheckUtil {
 		if (CollectionUtils.isEmpty(estimation.getProductEstimationList())) {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "商品（見積用）" }));
 		}
-		// RITOS移行データか判定
-		ProductEstimationExtendsParameterGspDto productEstimationExtendsParameterDto = new ProductEstimationExtendsParameterGspDto();
-		ProductEstimationMigrationParameterDto migrationParameterDto = new ProductEstimationMigrationParameterDto();
-		String estimationExtendsParameter = estimation.getProductEstimationList().get(0).getExtendsParameter();
-		if (StringUtils.isNotBlank(estimationExtendsParameter)) {
-			productEstimationExtendsParameterDto = jsonUtil.convertToDto(estimationExtendsParameter, ProductEstimationExtendsParameterGspDto.class);
-			migrationParameterDto = Optional.ofNullable(productEstimationExtendsParameterDto.getProductEstimationMigrationParameterDto()).orElse(new ProductEstimationMigrationParameterDto());
-		}
+		// 移行データ判定情報取得
+		String productExtendsParameter = estimation.getProductEstimationList().get(0).getExtendsParameter();
+		MigrationDiv checkMigrationDiv = this.getMigrationExtendsParameter(productExtendsParameter);
+
 		// 移行データ判定結果を返却
-		if (MigrationDiv.RITOS移行.equals(Optional.ofNullable(migrationParameterDto.getMigrationDiv()).orElse(null))) {
-			return true;
-		} else {
+		switch (migrationDiv) {
+		case RITOS移行:
+			if (MigrationDiv.RITOS移行.equals(checkMigrationDiv)) {
+				return true;
+			} else {
+				return false;
+			}
+		default:
 			return false;
 		}
 	}
 
 	/**
 	 * 移行データ判定（契約）
+	 * @param migrationDiv
 	 * @param contract
-	 * @return
+	 * @return boolean
 	 */
-	public boolean migrationDataCheck(Contract contract) {
+	public boolean migrationDataCheck(MigrationDiv migrationDiv, Contract contract) {
 		// パラメーターチェック
 		if (contract == null) {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約" }));
@@ -647,19 +650,46 @@ public class CheckUtil {
 		if (CollectionUtils.isEmpty(contract.getProductContractList())) {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "商品（契約用）" }));
 		}
-		// RITOS移行データか判定
-		ProductContractExtendsParameterGspDto productContractExtendsParameterDto = new ProductContractExtendsParameterGspDto();
-		ProductContractMigrationParameterDto migrationParameterDto = new ProductContractMigrationParameterDto();
-		String contractExtendsParameter = contract.getProductContractList().get(0).getExtendsParameter();
-		if (StringUtils.isNotBlank(contractExtendsParameter)) {
-			productContractExtendsParameterDto = jsonUtil.convertToDto(contractExtendsParameter, ProductContractExtendsParameterGspDto.class);
-			migrationParameterDto = Optional.ofNullable(productContractExtendsParameterDto.getProductContractMigrationParameterDto()).orElse(new ProductContractMigrationParameterDto());
-		}
+		// 移行データ判定情報取得
+		String productExtendsParameter = contract.getProductContractList().get(0).getExtendsParameter();
+		MigrationDiv checkMigrationDiv = this.getMigrationExtendsParameter(productExtendsParameter);
+
 		// 移行データ判定結果を返却
-		if (MigrationDiv.RITOS移行.equals(Optional.ofNullable(migrationParameterDto.getMigrationDiv()).orElse(null))) {
-			return true;
-		} else {
+		switch (migrationDiv) {
+		case RITOS移行:
+			if (MigrationDiv.RITOS移行.equals(checkMigrationDiv)) {
+				return true;
+			} else {
+				return false;
+			}
+		default:
 			return false;
+		}
+	}
+
+	/**
+	 * 拡張項目から移行用DTO.移行区分を取得
+	 * @param extendsParameter
+	 * @return MigrationDiv
+	 */
+	private MigrationDiv getMigrationExtendsParameter(String extendsParameter) {
+		if (StringUtils.isBlank(extendsParameter)) {
+			return null;
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, HashMap<String, Object>> productExtendsParameterMap;
+		HashMap<String, Object> migrationMap;
+		try {
+			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Object>() {
+			});
+			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
+			MigrationDiv migrationDiv = null;
+			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {
+				migrationDiv = MigrationDiv.fromString(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString());
+			}
+			return migrationDiv;
+		} catch (IOException e) {
+			return null;
 		}
 	}
 }
