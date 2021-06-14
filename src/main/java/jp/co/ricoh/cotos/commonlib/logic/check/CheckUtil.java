@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ import org.springframework.validation.FieldError;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
+import jp.co.ricoh.cotos.commonlib.dto.json.contract.ProductContractExtendsParameterGspDto;
+import jp.co.ricoh.cotos.commonlib.dto.json.contract.ProductContractMigrationParameterDto;
+import jp.co.ricoh.cotos.commonlib.dto.json.estimation.ProductEstimationExtendsParameterGspDto;
+import jp.co.ricoh.cotos.commonlib.dto.json.estimation.ProductEstimationMigrationParameterDto;
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ToleranceType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
@@ -30,8 +37,10 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 
 /**
@@ -42,6 +51,9 @@ public class CheckUtil {
 
 	@Autowired
 	MessageUtil messageUtil;
+
+	@Autowired
+	JsonUtil jsonUtil;
 
 	/**
 	 * 社員モード(パラメータ,操作者)
@@ -591,5 +603,63 @@ public class CheckUtil {
 	public void setMessageUtil(String basename, String defaultEncoding) {
 		this.messageUtil = new MessageUtil();
 		this.messageUtil.setMessageSource(basename, defaultEncoding);
+	}
+
+	/**
+	 * 移行データ判定（見積）
+	 * @param estimation
+	 * @return
+	 */
+	public boolean migrationDataCheck(Estimation estimation) {
+		// パラメーターチェック
+		if (estimation == null) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "見積" }));
+		}
+		if (CollectionUtils.isEmpty(estimation.getProductEstimationList())) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "商品（見積用）" }));
+		}
+		// RITOS移行データか判定
+		ProductEstimationExtendsParameterGspDto productEstimationExtendsParameterDto = new ProductEstimationExtendsParameterGspDto();
+		ProductEstimationMigrationParameterDto migrationParameterDto = new ProductEstimationMigrationParameterDto();
+		String estimationExtendsParameter = estimation.getProductEstimationList().get(0).getExtendsParameter();
+		if (StringUtils.isNotBlank(estimationExtendsParameter)) {
+			productEstimationExtendsParameterDto = jsonUtil.convertToDto(estimationExtendsParameter, ProductEstimationExtendsParameterGspDto.class);
+			migrationParameterDto = Optional.ofNullable(productEstimationExtendsParameterDto.getProductEstimationMigrationParameterDto()).orElse(new ProductEstimationMigrationParameterDto());
+		}
+		// 移行データ判定結果を返却
+		if (MigrationDiv.RITOS移行.equals(Optional.ofNullable(migrationParameterDto.getMigrationDiv()).orElse(null))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 移行データ判定（契約）
+	 * @param contract
+	 * @return
+	 */
+	public boolean migrationDataCheck(Contract contract) {
+		// パラメーターチェック
+		if (contract == null) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約" }));
+		}
+		if (CollectionUtils.isEmpty(contract.getProductContractList())) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "商品（契約用）" }));
+		}
+		// RITOS移行データか判定
+		ProductContractExtendsParameterGspDto productContractExtendsParameterDto = new ProductContractExtendsParameterGspDto();
+		ProductContractMigrationParameterDto migrationParameterDto = new ProductContractMigrationParameterDto();
+		String contractExtendsParameter = contract.getProductContractList().get(0).getExtendsParameter();
+		if (StringUtils.isNotBlank(contractExtendsParameter)) {
+			productContractExtendsParameterDto = jsonUtil.convertToDto(contractExtendsParameter, ProductContractExtendsParameterGspDto.class);
+			migrationParameterDto = Optional.ofNullable(productContractExtendsParameterDto.getProductContractMigrationParameterDto()).orElse(new ProductContractMigrationParameterDto());
+		}
+		// 移行データ判定結果を返却
+		if (MigrationDiv.RITOS移行.equals(Optional.ofNullable(migrationParameterDto.getMigrationDiv()).orElse(null))) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
