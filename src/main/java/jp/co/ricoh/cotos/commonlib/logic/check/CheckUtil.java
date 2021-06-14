@@ -621,19 +621,7 @@ public class CheckUtil {
 		}
 		// 移行データ判定情報取得
 		String productExtendsParameter = estimation.getProductEstimationList().get(0).getExtendsParameter();
-		MigrationDiv checkMigrationDiv = this.getMigrationExtendsParameter(productExtendsParameter);
-
-		// 移行データ判定結果を返却
-		switch (migrationDiv) {
-		case RITOS移行:
-			if (MigrationDiv.RITOS移行.equals(checkMigrationDiv)) {
-				return true;
-			} else {
-				return false;
-			}
-		default:
-			return false;
-		}
+		return this.getMigrationExtendsParameter(migrationDiv, productExtendsParameter);
 	}
 
 	/**
@@ -652,9 +640,34 @@ public class CheckUtil {
 		}
 		// 移行データ判定情報取得
 		String productExtendsParameter = contract.getProductContractList().get(0).getExtendsParameter();
-		MigrationDiv checkMigrationDiv = this.getMigrationExtendsParameter(productExtendsParameter);
+		return this.getMigrationExtendsParameter(migrationDiv, productExtendsParameter);
+	}
 
-		// 移行データ判定結果を返却
+	/**
+	 * 拡張項目から移行用DTO.移行区分を取得し、移行データ判定を実施
+	 * @param extendsParameter
+	 * @return boolean
+	 */
+	private boolean getMigrationExtendsParameter(MigrationDiv migrationDiv, String extendsParameter) {
+		if (StringUtils.isBlank(extendsParameter)) {
+			return false;
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, HashMap<String, Object>> productExtendsParameterMap;
+		HashMap<String, Object> migrationMap;
+		MigrationDiv checkMigrationDiv = null;
+		try {
+			// 拡張項目から移行用DTO.移行区分を取得
+			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Object>() {
+			});
+			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
+			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {
+				checkMigrationDiv = MigrationDiv.fromString(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString());
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		// 移行データ判定を実施し、結果を返却
 		switch (migrationDiv) {
 		case RITOS移行:
 			if (MigrationDiv.RITOS移行.equals(checkMigrationDiv)) {
@@ -664,32 +677,6 @@ public class CheckUtil {
 			}
 		default:
 			return false;
-		}
-	}
-
-	/**
-	 * 拡張項目から移行用DTO.移行区分を取得
-	 * @param extendsParameter
-	 * @return MigrationDiv
-	 */
-	private MigrationDiv getMigrationExtendsParameter(String extendsParameter) {
-		if (StringUtils.isBlank(extendsParameter)) {
-			return null;
-		}
-		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String, HashMap<String, Object>> productExtendsParameterMap;
-		HashMap<String, Object> migrationMap;
-		try {
-			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Object>() {
-			});
-			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
-			MigrationDiv migrationDiv = null;
-			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {
-				migrationDiv = MigrationDiv.fromString(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString());
-			}
-			return migrationDiv;
-		} catch (IOException e) {
-			return null;
 		}
 	}
 }
