@@ -292,6 +292,12 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "建物名", required = false, position = 42, allowableValues = "range[0,255]")
 	private String buildingName;
 
+	/**
+	 * ベンダー管理番号
+	 */
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 43, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
