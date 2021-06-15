@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.logic.check;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Period;
@@ -8,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +26,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ToleranceType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
@@ -30,8 +37,10 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 
 /**
@@ -42,6 +51,9 @@ public class CheckUtil {
 
 	@Autowired
 	MessageUtil messageUtil;
+
+	@Autowired
+	JsonUtil jsonUtil;
 
 	/**
 	 * 社員モード(パラメータ,操作者)
@@ -591,5 +603,80 @@ public class CheckUtil {
 	public void setMessageUtil(String basename, String defaultEncoding) {
 		this.messageUtil = new MessageUtil();
 		this.messageUtil.setMessageSource(basename, defaultEncoding);
+	}
+
+	/**
+	 * 移行データ判定（見積）
+	 * @param migrationDiv
+	 * @param estimation
+	 * @return
+	 */
+	public boolean migrationDataCheck(MigrationDiv migrationDiv, Estimation estimation) {
+		// パラメーターチェック
+		if (estimation == null) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "見積" }));
+		}
+		if (CollectionUtils.isEmpty(estimation.getProductEstimationList())) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "商品（見積用）" }));
+		}
+		// 移行データ判定情報取得
+		String productExtendsParameter = estimation.getProductEstimationList().get(0).getExtendsParameter();
+		return this.getMigrationExtendsParameter(migrationDiv, productExtendsParameter);
+	}
+
+	/**
+	 * 移行データ判定（契約）
+	 * @param migrationDiv
+	 * @param contract
+	 * @return boolean
+	 */
+	public boolean migrationDataCheck(MigrationDiv migrationDiv, Contract contract) {
+		// パラメーターチェック
+		if (contract == null) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約" }));
+		}
+		if (CollectionUtils.isEmpty(contract.getProductContractList())) {
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "商品（契約用）" }));
+		}
+		// 移行データ判定情報取得
+		String productExtendsParameter = contract.getProductContractList().get(0).getExtendsParameter();
+		return this.getMigrationExtendsParameter(migrationDiv, productExtendsParameter);
+	}
+
+	/**
+	 * 拡張項目から移行用DTO.移行区分を取得し、移行データ判定を実施
+	 * @param extendsParameter
+	 * @return boolean
+	 */
+	private boolean getMigrationExtendsParameter(MigrationDiv migrationDiv, String extendsParameter) {
+		if (StringUtils.isBlank(extendsParameter)) {
+			return false;
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, HashMap<String, Object>> productExtendsParameterMap;
+		HashMap<String, Object> migrationMap;
+		MigrationDiv checkMigrationDiv = null;
+		try {
+			// 拡張項目から移行用DTO.移行区分を取得
+			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Object>() {
+			});
+			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
+			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {
+				checkMigrationDiv = MigrationDiv.fromString(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString());
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		// 移行データ判定を実施し、結果を返却
+		switch (migrationDiv) {
+		case RITOS移行:
+			if (MigrationDiv.RITOS移行.equals(checkMigrationDiv)) {
+				return true;
+			} else {
+				return false;
+			}
+		default:
+			return false;
+		}
 	}
 }
