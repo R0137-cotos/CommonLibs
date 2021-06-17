@@ -35,4 +35,9 @@ public class UpdateTargetPcpDto {
 	 * 数量
 	 */
 	private Integer quantity;
+
+	/**
+	 * 自動更新品種積上げ不可フラグ
+	 */
+	private String impFlg;
 }
