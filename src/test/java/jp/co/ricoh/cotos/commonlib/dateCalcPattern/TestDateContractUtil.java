@@ -81,6 +81,60 @@ public class TestDateContractUtil {
 		}
 	}
 
+	@Test
+	public void 次回更新時契約終了日取得_月末フラグFalse() throws Exception {
+
+		String testDate = "20200110";
+		Date resultDate = dateContractUtil.nextUpdateServiceTermEnd(dateCalcPatternUtil.stringToDateConverter(testDate, null), 12, false);
+		Assert.assertEquals("サービス終了日が正しく取得されること", "20210110", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
+	}
+
+	@Test
+	public void 次回更新時契約終了日取得_月末フラグTrue() throws Exception {
+
+		String testDate = "20200110";
+		Date resultDate = dateContractUtil.nextUpdateServiceTermEnd(dateCalcPatternUtil.stringToDateConverter(testDate, null), 12, true);
+		Assert.assertEquals("サービス終了日が正しく取得されること", "20201231", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
+	}
+
+	@Test
+	public void 最初の契約取得確認() throws Exception {
+
+		Contract contract = contractRepository.findOne(8L);
+
+		Contract resultContract = dateContractUtil.getFirstContract(contract);
+		Assert.assertEquals("最初の契約が正しく取得されること", 6, resultContract.getId());
+	}
+
+	@Test
+	public void 契約更新可能判定_最長契約月数なし() throws Exception {
+
+		Contract contract = contractRepository.findOne(9L);
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, null, false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新可能() throws Exception {
+
+		Contract contract = contractRepository.findOne(10L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新不可() throws Exception {
+
+		Contract contract = contractRepository.findOne(10L);
+		String testDate = "20231101";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertFalse("契約更新不可であること", result);
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/testDateContractUtil.sql");
 	}
