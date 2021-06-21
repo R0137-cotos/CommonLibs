@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -524,29 +525,17 @@ public class CommonSendMail {
 		// ログ出力用にToメールアドレスを取得
 		Address[] toList = smtpMessage.getRecipients(Message.RecipientType.TO);
 		if (toList != null) {
-			// forEachが使用できない為、for文を使用
-			for (int i = 0; i < toList.length; i++) {
-				int num = i + 1;
-				log.info("メールアドレスTo" + num + "：" + toList[i].toString());
-			}
+			Arrays.stream(toList).forEach(a -> log.info("メールアドレスTo ：" + a.toString()));
 		}
 		// ログ出力用にCcメールアドレスを取得
 		Address[] ccList = smtpMessage.getRecipients(Message.RecipientType.CC);
 		if (ccList != null) {
-			// forEachが使用できない為、for文を使用
-			for (int i = 0; i < ccList.length; i++) {
-				int num = i + 1;
-				log.info("メールアドレスCc" + num + "：" + ccList[i].toString());
-			}
+			Arrays.stream(ccList).forEach(a -> log.info("メールアドレスCc ：" + a.toString()));
 		}
 		// ログ出力用にBccメールアドレスを取得
 		Address[] bccList = smtpMessage.getRecipients(Message.RecipientType.BCC);
 		if (bccList != null) {
-			// forEachが使用できない為、for文を使用
-			for (int i = 0; i < bccList.length; i++) {
-				int num = i + 1;
-				log.info("メールアドレスBcc" + num + "：" + bccList[i].toString());
-			}
+			Arrays.stream(bccList).forEach(a -> log.info("メールアドレスBcc：" + a.toString()));
 		}
 	}
 }

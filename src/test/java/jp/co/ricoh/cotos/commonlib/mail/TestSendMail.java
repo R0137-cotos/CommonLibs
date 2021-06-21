@@ -309,7 +309,7 @@ public class TestSendMail {
 		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
 		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
 		try {
-			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), null, new ArrayList<String>(), new ArrayList<String>(), emailToList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), null, emailToList, new ArrayList<String>(), new ArrayList<String>(), mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
 		}
