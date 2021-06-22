@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
@@ -36,6 +42,9 @@ public class DateContractUtil {
 
 	@Autowired
 	ProductMasterRepository productMasterRepository;
+
+	@Autowired
+	protected DateCalcPatternUtil dateCalcPatternUtil;
 
 	/**
 	 * 積上がっている品種よりサービス終了日を取得する
@@ -131,8 +140,27 @@ public class DateContractUtil {
 		if (productMaster.getMaxContractMonths() != null) {
 			// 最初の契約を取得する
 			Contract firstContract = getFirstContract(contract);
+			String extendesParameter = firstContract.getProductContractList().get(0).getExtendsParameter();
+			Date billingStartDate = firstContract.getBillingStartDate();
+			if (!StringUtils.isEmpty(extendesParameter)) {
+				ObjectMapper mapper = new ObjectMapper();
+				HashMap<String, HashMap<String, Object>> extendesParamMap = new HashMap<>();
+				try {
+					extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<Object>() {
+					});
+				} catch (Exception e) {
+					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "JsonConvertFormTextToObjectError"));
+				}
+				if (extendesParamMap.containsKey("migrationParameter")) {
+					HashMap<String, Object> migrationMap = extendesParamMap.get("migrationParameter");
+					if (migrationMap != null && MigrationDiv.RITOS移行.toString().equals(String.valueOf(migrationMap.get("migrationDiv")))) {
+						// 移行データの場合、拡張項目の初回課金開始日を取得
+						billingStartDate = dateCalcPatternUtil.stringToDateConverter(String.valueOf(migrationMap.get("firstBillingStartDate")), "yyyy/MM/dd");
+					}
+				}
+			}
 			// 課金開始日(ランニング) + 最長契約月数
-			Date maxServiceEndDate = addMonthServiceTermEnd(firstContract.getBillingStartDate(), productMaster.getMaxContractMonths(), endOfMonthFlg);
+			Date maxServiceEndDate = addMonthServiceTermEnd(billingStartDate, productMaster.getMaxContractMonths(), endOfMonthFlg);
 
 			if (updateServiceEndDate.compareTo(maxServiceEndDate) > 0) {
 				updatePossible = false;
