@@ -1,6 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.dateCalcPattern;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -15,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
 import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateContractUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
@@ -104,6 +108,22 @@ public class TestDateContractUtil {
 
 		Contract resultContract = dateContractUtil.getFirstContract(contract);
 		Assert.assertEquals("最初の契約が正しく取得されること", 6, resultContract.getId());
+	}
+
+	@Test
+	public void 異常系_変更元契約なし() throws Exception {
+
+		Contract contract = contractRepository.findOne(8L);
+		contract.setOriginContractId(99L);
+		try {
+			dateContractUtil.getFirstContract(contract);
+			fail("エラーなし");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals(1, errorList.size());
+			Assert.assertEquals("RCO00001", errorList.get(0).getErrorId());
+			Assert.assertEquals("指定した変更元契約が存在しません。", errorList.get(0).getErrorMessage());
+		}
 	}
 
 	@Test

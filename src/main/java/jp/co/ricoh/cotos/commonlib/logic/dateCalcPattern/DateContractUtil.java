@@ -120,6 +120,9 @@ public class DateContractUtil {
 		Contract baseContract = contract;
 		while (baseContract.getOriginContractId() != null) {
 			baseContract = contractRepository.findOne(baseContract.getOriginContractId());
+			if (baseContract == null) {
+				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
+			}
 		}
 		return baseContract;
 	}
@@ -140,32 +143,42 @@ public class DateContractUtil {
 		if (productMaster.getMaxContractMonths() != null) {
 			// 最初の契約を取得する
 			Contract firstContract = getFirstContract(contract);
-			String extendesParameter = firstContract.getProductContractList().get(0).getExtendsParameter();
-			Date billingStartDate = firstContract.getBillingStartDate();
-			if (!StringUtils.isEmpty(extendesParameter)) {
-				ObjectMapper mapper = new ObjectMapper();
-				HashMap<String, HashMap<String, Object>> extendesParamMap = new HashMap<>();
-				try {
-					extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<Object>() {
-					});
-				} catch (Exception e) {
-					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "JsonConvertFormTextToObjectError"));
-				}
-				if (extendesParamMap.containsKey("migrationParameter")) {
-					HashMap<String, Object> migrationMap = extendesParamMap.get("migrationParameter");
-					if (migrationMap != null && MigrationDiv.RITOS移行.toString().equals(String.valueOf(migrationMap.get("migrationDiv")))) {
-						// 移行データの場合、拡張項目の初回課金開始日を取得
-						billingStartDate = dateCalcPatternUtil.stringToDateConverter(String.valueOf(migrationMap.get("firstBillingStartDate")), "yyyy/MM/dd");
-					}
-				}
-			}
 			// 課金開始日(ランニング) + 最長契約月数
-			Date maxServiceEndDate = addMonthServiceTermEnd(billingStartDate, productMaster.getMaxContractMonths(), endOfMonthFlg);
+			Date maxServiceEndDate = addMonthServiceTermEnd(getPenalyStartingDate(firstContract), productMaster.getMaxContractMonths(), endOfMonthFlg);
 
 			if (updateServiceEndDate.compareTo(maxServiceEndDate) > 0) {
 				updatePossible = false;
 			}
 		}
 		return updatePossible;
+	}
+
+	/**
+	 * 課金開始日を取得する
+	 * 引数の契約がRITOS移行の場合、拡張項目から課金開始日を取得する
+	 * @param contract
+	 * @return 課金開始日
+	 */
+	public Date getPenalyStartingDate(Contract contract) {
+		String extendesParameter = contract.getProductContractList().get(0).getExtendsParameter();
+		Date billingStartDate = contract.getBillingStartDate();
+		if (!StringUtils.isEmpty(extendesParameter)) {
+			ObjectMapper mapper = new ObjectMapper();
+			HashMap<String, HashMap<String, Object>> extendesParamMap = new HashMap<>();
+			try {
+				extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<Object>() {
+				});
+			} catch (Exception e) {
+				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "JsonConvertFormTextToObjectError"));
+			}
+			if (extendesParamMap.containsKey("migrationParameter")) {
+				HashMap<String, Object> migrationMap = extendesParamMap.get("migrationParameter");
+				if (migrationMap != null && MigrationDiv.RITOS移行.toString().equals(String.valueOf(migrationMap.get("migrationDiv")))) {
+					// 移行データの場合、拡張項目の初回課金開始日を取得
+					billingStartDate = dateCalcPatternUtil.stringToDateConverter(String.valueOf(migrationMap.get("firstBillingStartDate")), "yyyy/MM/dd");
+				}
+			}
+		}
+		return billingStartDate;
 	}
 }
