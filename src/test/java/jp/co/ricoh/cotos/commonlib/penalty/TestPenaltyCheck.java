@@ -753,23 +753,6 @@ public class TestPenaltyCheck {
 	}
 
 	@Test
-	public void 違約金起算日取得() throws Exception {
-
-		Method method = PenaltyUtil.class.getDeclaredMethod("getPenalyStartingDate", Contract.class);
-		method.setAccessible(true);
-
-		long contractId = 1L;
-		Contract contract = contractRepository.findOne(contractId);
-		Date result = (Date)method.invoke(penaltyUtil, contract);
-		Assert.assertEquals("契約が新規の場合、当契約の課金開始日が取得されること", contract.getBillingStartDate(), result);
-
-		contractId = 23L;
-		contract = contractRepository.findOne(contractId);
-		result = (Date)method.invoke(penaltyUtil, contract);
-		Assert.assertEquals("契約が変更の場合、最初の契約の課金開始日が取得されること", "20180101 00:00:00", dateCalcPatternUtil.dateToStringConverter(result, "yyyyMMdd HH:mm:ss"));
-	}
-
-	@Test
 	public void 異常系_違約金起算日取得_元契約なし() throws Exception {
 
 		long contractId = 26L;
