@@ -44,7 +44,7 @@ public class DateContractUtil {
 	ProductMasterRepository productMasterRepository;
 
 	@Autowired
-	protected DateCalcPatternUtil dateCalcPatternUtil;
+	DateCalcPatternUtil dateCalcPatternUtil;
 
 	/**
 	 * 積上がっている品種よりサービス終了日を取得する
