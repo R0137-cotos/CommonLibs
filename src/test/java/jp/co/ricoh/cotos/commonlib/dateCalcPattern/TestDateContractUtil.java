@@ -135,6 +135,60 @@ public class TestDateContractUtil {
 		Assert.assertFalse("契約更新不可であること", result);
 	}
 
+	@Test
+	public void 契約更新可能判定_更新可能_拡張項目Null() throws Exception {
+
+		Contract contract = contractRepository.findOne(11L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新可能_migrationParameter_Null() throws Exception {
+
+		Contract contract = contractRepository.findOne(12L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新可能_migrationDivがRITOS移管以外() throws Exception {
+
+		Contract contract = contractRepository.findOne(13L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新不可_正常な移行データ() throws Exception {
+
+		Contract contract = contractRepository.findOne(14L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertFalse("契約更新不可であること", result);
+	}
+
+	@Test
+	public void 異常系_契約更新可能判定_Json変換例外() throws Exception {
+
+		Contract contract = contractRepository.findOne(15L);
+		String testDate = "20231031";
+		try {
+			dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+			Assert.fail("正常終了した");
+		} catch (ErrorCheckException e) {
+			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00045", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが正しく設定されること", "JSON文字列からObjectの変換に失敗しました。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/testDateContractUtil.sql");
 	}
