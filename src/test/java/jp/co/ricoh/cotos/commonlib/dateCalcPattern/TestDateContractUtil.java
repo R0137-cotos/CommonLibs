@@ -1,6 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.dateCalcPattern;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -15,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
 import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateContractUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
@@ -107,6 +111,22 @@ public class TestDateContractUtil {
 	}
 
 	@Test
+	public void 異常系_変更元契約なし() throws Exception {
+
+		Contract contract = contractRepository.findOne(8L);
+		contract.setOriginContractId(99L);
+		try {
+			dateContractUtil.getFirstContract(contract);
+			fail("エラーなし");
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals(1, errorList.size());
+			Assert.assertEquals("RCO00001", errorList.get(0).getErrorId());
+			Assert.assertEquals("指定した変更元契約が存在しません。", errorList.get(0).getErrorMessage());
+		}
+	}
+
+	@Test
 	public void 契約更新可能判定_最長契約月数なし() throws Exception {
 
 		Contract contract = contractRepository.findOne(9L);
@@ -133,6 +153,60 @@ public class TestDateContractUtil {
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
 		Assert.assertFalse("契約更新不可であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新可能_拡張項目Null() throws Exception {
+
+		Contract contract = contractRepository.findOne(11L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新可能_migrationParameter_Null() throws Exception {
+
+		Contract contract = contractRepository.findOne(12L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新可能_migrationDivがRITOS移管以外() throws Exception {
+
+		Contract contract = contractRepository.findOne(13L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertTrue("契約更新可能であること", result);
+	}
+
+	@Test
+	public void 契約更新可能判定_更新不可_正常な移行データ() throws Exception {
+
+		Contract contract = contractRepository.findOne(14L);
+		String testDate = "20231031";
+
+		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+		Assert.assertFalse("契約更新不可であること", result);
+	}
+
+	@Test
+	public void 異常系_契約更新可能判定_Json変換例外() throws Exception {
+
+		Contract contract = contractRepository.findOne(15L);
+		String testDate = "20231031";
+		try {
+			dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
+			Assert.fail("正常終了した");
+		} catch (ErrorCheckException e) {
+			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00045", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが正しく設定されること", "JSON文字列からObjectの変換に失敗しました。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
 	}
 
 	private void テストデータ作成() {

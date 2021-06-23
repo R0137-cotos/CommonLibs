@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -2834,6 +2835,7 @@ public class TestMaster {
 	}
 
 	@Test
+	@Ignore
 	public void MvRjShohinInfoMasterのテスト() throws Exception {
 
 		// MoMから作成したMViewのためテストデータはなし

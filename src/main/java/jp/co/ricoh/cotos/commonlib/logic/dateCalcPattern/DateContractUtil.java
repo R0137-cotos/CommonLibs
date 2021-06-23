@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
@@ -36,6 +42,9 @@ public class DateContractUtil {
 
 	@Autowired
 	ProductMasterRepository productMasterRepository;
+
+	@Autowired
+	DateCalcPatternUtil dateCalcPatternUtil;
 
 	/**
 	 * 積上がっている品種よりサービス終了日を取得する
@@ -111,6 +120,9 @@ public class DateContractUtil {
 		Contract baseContract = contract;
 		while (baseContract.getOriginContractId() != null) {
 			baseContract = contractRepository.findOne(baseContract.getOriginContractId());
+			if (baseContract == null) {
+				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
+			}
 		}
 		return baseContract;
 	}
@@ -132,12 +144,41 @@ public class DateContractUtil {
 			// 最初の契約を取得する
 			Contract firstContract = getFirstContract(contract);
 			// 課金開始日(ランニング) + 最長契約月数
-			Date maxServiceEndDate = addMonthServiceTermEnd(firstContract.getBillingStartDate(), productMaster.getMaxContractMonths(), endOfMonthFlg);
+			Date maxServiceEndDate = addMonthServiceTermEnd(getPenalyStartingDate(firstContract), productMaster.getMaxContractMonths(), endOfMonthFlg);
 
 			if (updateServiceEndDate.compareTo(maxServiceEndDate) > 0) {
 				updatePossible = false;
 			}
 		}
 		return updatePossible;
+	}
+
+	/**
+	 * 課金開始日を取得する
+	 * 引数の契約がRITOS移行の場合、拡張項目から課金開始日を取得する
+	 * @param contract
+	 * @return 課金開始日
+	 */
+	public Date getPenalyStartingDate(Contract contract) {
+		String extendesParameter = contract.getProductContractList().get(0).getExtendsParameter();
+		Date billingStartDate = contract.getBillingStartDate();
+		if (!StringUtils.isEmpty(extendesParameter)) {
+			ObjectMapper mapper = new ObjectMapper();
+			HashMap<String, HashMap<String, Object>> extendesParamMap = new HashMap<>();
+			try {
+				extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<Object>() {
+				});
+			} catch (Exception e) {
+				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "JsonConvertFormTextToObjectError"));
+			}
+			if (extendesParamMap.containsKey("migrationParameter")) {
+				HashMap<String, Object> migrationMap = extendesParamMap.get("migrationParameter");
+				if (migrationMap != null && MigrationDiv.RITOS移行.toString().equals(String.valueOf(migrationMap.get("migrationDiv")))) {
+					// 移行データの場合、拡張項目の初回課金開始日を取得
+					billingStartDate = dateCalcPatternUtil.stringToDateConverter(String.valueOf(migrationMap.get("firstBillingStartDate")), "yyyy/MM/dd");
+				}
+			}
+		}
+		return billingStartDate;
 	}
 }
