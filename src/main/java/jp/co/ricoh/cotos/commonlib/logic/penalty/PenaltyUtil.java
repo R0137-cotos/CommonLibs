@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
 import jp.co.ricoh.cotos.commonlib.dto.result.PenaltyCheckResultDTO;
 import jp.co.ricoh.cotos.commonlib.dto.result.PenaltyInfoDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
-import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateContractUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
@@ -52,6 +52,9 @@ public class PenaltyUtil {
 
 	@Autowired
 	PenaltyDetailContractRepository penaltyDetailContractRepository;
+
+	@Autowired
+	DateContractUtil dateContractUtil;
 
 // RITOS移管Aカテゴリでは部分解約(見積での違約金表示)は対応不要となった。Bカテゴリ以降で対応する可能性あるためコメント化。以降のコメント箇所も同様。
 //	/**
@@ -228,8 +231,10 @@ public class PenaltyUtil {
 		List<PenaltyInfoDto> resultList = new ArrayList<PenaltyInfoDto>();
 
 		// 違約金起算日取得
-		// 新規契約の課金開始日(ランニング)を違約金計算の起算日とする
-		Date penalyStartingDate = getPenalyStartingDate(contract);
+		// 最初の契約を取得する
+		Contract firstContract = dateContractUtil.getFirstContract(contract);
+		// 最初の契約の課金開始日(ランニング)を違約金計算の起算日とする
+		Date penalyStartingDate = dateContractUtil.getPenalyStartingDate(firstContract);
 
 		Optional.ofNullable(decreaseItemMap).ifPresent(itemMap -> {
 			itemMap.forEach((itemMasterId, quantity) -> {
@@ -298,24 +303,6 @@ public class PenaltyUtil {
 		cal.set(Calendar.SECOND, 59);
 
 		return cal.getTime();
-	}
-
-	/**
-	 * 違約金起算日取得
-	 *
-	 * @contract 契約
-	 */
-	private Date getPenalyStartingDate(Contract contract) {
-
-		// 新規の契約の課金開始日（ランニング）を違約金の起算日とする。
-		Contract firstContract = contract;
-		while (firstContract.getContractType() != ContractType.新規) {
-			firstContract = contractRepository.findOne(firstContract.getOriginContractId());
-			if (firstContract == null) {
-				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
-			}
-		}
-		return firstContract.getBillingStartDate();
 	}
 
 	/**
