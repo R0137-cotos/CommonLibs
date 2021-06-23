@@ -2916,7 +2916,7 @@ public class TestMaster {
 		testTool.assertColumnsNotNull(found);
 
 		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
-		if (found.getArrangementWorkTypeMasterMasterList() == null)
+		if (found.getArrangementWorkTypeMasterList() == null)
 			Assert.assertTrue(false);
 	}
 }

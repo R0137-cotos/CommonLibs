@@ -58,5 +58,5 @@ public class ArrangementWorkAuthControlMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "arrangementWorkAuthControlMaster")
 	@ApiModelProperty(value = "手配業務タイプマスタ", required = true, position = 4)
-	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterMasterList;
+	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterList;
 }
