@@ -293,10 +293,17 @@ public class ArrangementListInfo {
 	private String buildingName;
 
 	/**
-	 * ベンダー管理番号
+	 * 手配承認日時
 	 */
-	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 43, allowableValues = "range[0,255]")
-	private String vendorManageNumber;
+	@ApiModelProperty(value = "手配承認日時", required = false, position = 43)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date approvalDate;
+
+	/**
+	* ベンダー管理番号
+	*/
+   	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
+   	private String vendorManageNumber;
 
 	@PrePersist
 	public void prePersist() {
