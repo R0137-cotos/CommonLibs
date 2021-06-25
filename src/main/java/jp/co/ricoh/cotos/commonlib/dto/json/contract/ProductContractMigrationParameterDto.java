@@ -16,4 +16,9 @@ public class ProductContractMigrationParameterDto {
 	 * 移行区分
 	 */
 	private MigrationDiv migrationDiv;
+
+	/**
+	 * 初回契約課金開始日
+	 */
+	private String firstBillingStartDate;
 }
