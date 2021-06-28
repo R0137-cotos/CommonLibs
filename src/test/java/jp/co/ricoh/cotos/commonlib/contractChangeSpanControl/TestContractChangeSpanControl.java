@@ -184,7 +184,7 @@ public class TestContractChangeSpanControl {
 			fromCheckDate = dateCalcPatternUtil.stringToDateConverter("20201207", null);
 			fromCheckTrgetDate = null;
 			result = (Boolean)method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
-			Assert.assertEquals("チェック対象日(開始)が未設定の場合、期間外と判定されること", true, result);
+			Assert.assertEquals("チェック対象日(開始)が未設定の場合、期間内と判定されること", false, result);
 
 			fromCheckDate = dateCalcPatternUtil.stringToDateConverter("20201207", null);
 			fromCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201207", null);;
@@ -234,7 +234,7 @@ public class TestContractChangeSpanControl {
 			toCheckDate = dateCalcPatternUtil.stringToDateConverter("20201207", null);
 			toCheckTrgetDate = null;
 			result = (Boolean)method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
-			Assert.assertEquals("チェック対象日(終了)が未設定の場合、期間外と判定されること", true, result);
+			Assert.assertEquals("チェック対象日(終了)が未設定の場合、期間内と判定されること", false, result);
 
 			toCheckDate = dateCalcPatternUtil.stringToDateConverter("20201207", null);
 			toCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201207", null);;
@@ -307,8 +307,56 @@ public class TestContractChangeSpanControl {
 			result = (Boolean)method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
 			Assert.assertEquals("開始不一致、チェック対象日(終了)が変更可能期限終了より後の場合、期間外と判定されること", false, result);
 
-
 		} catch(Exception e) {
+			e.printStackTrace();
+			fail("例外が発生している。");
+		}
+	}
+
+	@Test
+	public void 契約変更可能期間外判定テスト_期間可変_チェック対象日付がNULL() throws NoSuchMethodException, SecurityException {
+
+		Method method = ContractChangeSpanControl.class.getDeclaredMethod("isNotContractChangeSpan", ContractChangeSpanMaster.class, Date.class, Date.class, Date.class, Date.class);
+		method.setAccessible(true);
+		try {
+			Date fromCheckDate = null;
+			Date toCheckDate = null;
+			Date fromCheckTrgetDate = null;
+			Date toCheckTrgetDate = null;
+
+			// 契約変更期間管理マスタ
+			ContractChangeSpanMaster spanMaster = new ContractChangeSpanMaster();
+			spanMaster.setCheckPatternType(CheckPatternType.期間可変);
+
+			fromCheckDate = null;
+			toCheckDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			fromCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201210", null);
+			toCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			boolean result = (Boolean) method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
+			Assert.assertEquals("契約変更可能期間FROMがNULLの場合、期間内と判定されること", false, result);
+
+			fromCheckDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			toCheckDate = null;
+			fromCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201210", null);
+			toCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			result = (Boolean) method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
+			Assert.assertEquals("契約変更可能期間TOがNULLの場合、期間内と判定されること", false, result);
+
+			fromCheckDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			toCheckDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			fromCheckTrgetDate = null;
+			toCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			result = (Boolean) method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
+			Assert.assertEquals("契約変更可能期間FROMチェック対象日がNULLの場合、期間内と判定されること", false, result);
+
+			fromCheckDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			toCheckDate = dateCalcPatternUtil.stringToDateConverter("20210131", null);
+			fromCheckTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201210", null);
+			toCheckTrgetDate = null;
+			result = (Boolean) method.invoke(contractChangeSpanControl, spanMaster, fromCheckDate, toCheckDate, fromCheckTrgetDate, toCheckTrgetDate);
+			Assert.assertEquals("契約変更可能期間TOチェック対象日がNULLの場合、期間内と判定されること", false, result);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("例外が発生している。");
 		}
@@ -545,6 +593,7 @@ public class TestContractChangeSpanControl {
 			Assert.assertEquals("conclusionPreferredDate", err.getErrorField());
 		});
 	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/testDateCalcPatternMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/contractChangeSpanControl/contract.sql");
