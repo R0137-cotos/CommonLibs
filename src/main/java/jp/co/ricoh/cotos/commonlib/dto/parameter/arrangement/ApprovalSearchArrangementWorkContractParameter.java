@@ -8,7 +8,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import lombok.Data;
 
 /**
- * 手配契約情報更新のためのパラメータクラスを表します。
+ * ルート条件式を使用した検索のためのパラメータクラスを表します。
  */
 @Data
 public class ApprovalSearchArrangementWorkContractParameter {
