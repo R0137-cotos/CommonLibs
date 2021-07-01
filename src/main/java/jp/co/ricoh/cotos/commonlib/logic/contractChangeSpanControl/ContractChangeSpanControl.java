@@ -211,18 +211,19 @@ public class ContractChangeSpanControl {
 		// チェック対象日がFROM～TOの期間内の場合、OK
 		if(CheckPatternType.期間固定 == spanMaster.getCheckPatternType()) {
 			// 契約変更可能期限開始日チェック
-			if(fromCheckDate != null && (fromCheckTrgetDate == null || fromCheckTrgetDate.before(fromCheckDate))) {
+			if (fromCheckDate != null && (fromCheckTrgetDate != null && fromCheckTrgetDate.before(fromCheckDate))) {
 				return true;
 			}
 			// 契約変更可能期限終了日チェック
-			if(toCheckDate != null && (toCheckTrgetDate == null || toCheckTrgetDate.after(toCheckDate))) {
+			if (toCheckDate != null && (toCheckTrgetDate != null && toCheckTrgetDate.after(toCheckDate))) {
 				return true;
 			}
 			// チェック対象日にFROM(yyyyMM)が指定されている場合、TOの期限まで申込可能
 		} else if(CheckPatternType.期間可変 == spanMaster.getCheckPatternType()) {
-			if(dateCalcPatternUtil.dateToStringConverter(fromCheckTrgetDate, "yyyyMM").equals(dateCalcPatternUtil.dateToStringConverter(fromCheckDate, "yyyyMM"))
-					&& toCheckTrgetDate.after(toCheckDate)) {
-				return true;
+			if (fromCheckDate != null && fromCheckTrgetDate != null && toCheckDate != null && toCheckTrgetDate != null) {
+				if (dateCalcPatternUtil.dateToStringConverter(fromCheckTrgetDate, "yyyyMM").equals(dateCalcPatternUtil.dateToStringConverter(fromCheckDate, "yyyyMM")) && toCheckTrgetDate.after(toCheckDate)) {
+					return true;
+				}
 			}
 		}
 		return false;
