@@ -672,5 +672,32 @@ public class EnumType {
 			return this.value;
 		}
 	}
+	
+	/**
+	 * バッチ処理汎用ステータス
+	 */
+	public enum BatchCommonStatus {
+		
+		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
+		
+		private final String text;
 
+		private BatchCommonStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static BatchCommonStatus fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
