@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ServicePreferredSettingPossibleType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -236,4 +237,10 @@ public class ItemMasterDto extends EntityBaseMaster {
 	@DecimalMax("9999999999999999999.99")
 	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 32, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * サービス利用希望日設定可能区分
+	 */
+	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 33, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
+	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
 }
