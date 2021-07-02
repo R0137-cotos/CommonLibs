@@ -160,57 +160,64 @@ public class InvoiceLinkage extends EntityBase {
 	private InvoiceTaxType salesTaxType;
 
 	/**
+	 * 税率（％）
+	 */
+	@Max(99999)
+	@ApiModelProperty(value = "税率（％）", required = false, position = 15, allowableValues = "range[0.00,99999999999999999.99]")
+	private Integer salesTaxRate;
+	
+	/**
 	 * 消費税
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "消費税", required = false, position = 15, allowableValues = "range[0.00,99999999999999999.99]")
-	private BigDecimal salesTaxRate;
+	@ApiModelProperty(value = "消費税", required = false, position = 16, allowableValues = "range[0.00,99999999999999999.99]")
+	private BigDecimal salesTaxPrice;
 
 	/**
 	 * 金額
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "金額", required = false, position = 16, allowableValues = "range[0.00,99999999999999999.99]")
+	@ApiModelProperty(value = "金額", required = false, position = 17, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal remarks;
 
 	/**
 	 * 契約送信ステータス
 	 */
-	@ApiModelProperty(value = "契約送信ステータス", required = false, position = 17, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約送信ステータス", required = false, position = 18, allowableValues = "range[0,255]")
 	private BatchCommonStatus sendStatus;
 
 	/**
 	 * 契約送信日
 	 */
-	@ApiModelProperty(value = "契約送信日", required = false, position = 18)
+	@ApiModelProperty(value = "契約送信日", required = false, position = 19)
 	@Temporal(TemporalType.DATE)
 	private Date sendDate;
 
 	/**
 	 * 請求受信ステータス
 	 */
-	@ApiModelProperty(value = "請求受信ステータス", required = false, position = 19, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "請求受信ステータス", required = false, position = 20, allowableValues = "range[0,255]")
 	private BatchCommonStatus receiveStatus;
 
 	/**
 	 * 請求受信日
 	 */
-	@ApiModelProperty(value = "請求受信日", required = false, position = 20)
+	@ApiModelProperty(value = "請求受信日", required = false, position = 21)
 	@Temporal(TemporalType.DATE)
 	private Date receiveDate;
 
 	/**
 	 * 計上ステータス
 	 */
-	@ApiModelProperty(value = "計上ステータス", required = false, position = 21, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "計上ステータス", required = false, position = 22, allowableValues = "range[0,255]")
 	private BatchCommonStatus accountingStatus;
 
 	/**
 	 * 計上処理日
 	 */
-	@ApiModelProperty(value = "計上処理日", required = false, position = 22)
+	@ApiModelProperty(value = "計上処理日", required = false, position = 23)
 	@Temporal(TemporalType.DATE)
 	private Date accountingDate;
 

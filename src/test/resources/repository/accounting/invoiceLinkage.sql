@@ -19,6 +19,7 @@ insert into INVOICE_LINKAGE (
   , sales_price
   , sales_tax_type
   , sales_tax_rate
+  , sales_tax_price
   , remarks
   , send_status
   , send_date
@@ -48,6 +49,7 @@ insert into INVOICE_LINKAGE (
   , '3'
   , 1
   , 1
+  , 1
   , '1'
   , SYSDATE
   , '0'
@@ -76,6 +78,7 @@ insert into INVOICE_LINKAGE (
   , sales_price
   , sales_tax_type
   , sales_tax_rate
+  , sales_tax_price
   , remarks
   , send_status
   , send_date
@@ -105,6 +108,7 @@ insert into INVOICE_LINKAGE (
   , '2'
   , 1
   , 1
+  , 1
   , '0'
   , SYSDATE
   , '0'
@@ -133,6 +137,7 @@ insert into INVOICE_LINKAGE (
   , sales_price
   , sales_tax_type
   , sales_tax_rate
+  , sales_tax_price
   , remarks
   , send_status
   , send_date
@@ -160,6 +165,7 @@ insert into INVOICE_LINKAGE (
   , 1
   , 1
   , '1'
+  , 1
   , 1
   , 1
   , '0'
