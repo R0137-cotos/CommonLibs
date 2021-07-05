@@ -87,31 +87,31 @@ insert into INVOICE_LINKAGE (
   , accounting_status
   , accounting_date
 ) values (
-  2
+  3
   , SYSTIMESTAMP
   , 'created_user_id'
   , SYSTIMESTAMP
   , 'updated_user_id'
   , 0
-  , 2
-  , 'rj_manage_number_2'
-  , 'contract_id_2'
-  , 'ricoh_item_code_2'
-  , 'item_contract_name_2'
-  , 'line_number_2'
-  , 'serial_number_2'
+  , 3
+  , 'rj_manage_number_3'
+  , 'contract_id_3'
+  , 'ricoh_item_code_3'
+  , 'item_contract_name_3'
+  , 'line_number_3'
+  , 'serial_number_3'
   , '202107'
   , 1
-  , 'billing_date_2'
+  , 'billing_date_3'
   , 1
   , 1
-  , '2'
+  , '1'
   , 1
   , 1
   , 1
   , '0'
   , SYSDATE
-  , '0'
+  , '9'
   , SYSDATE
   , '0'
   , SYSDATE
@@ -146,31 +146,31 @@ insert into INVOICE_LINKAGE (
   , accounting_status
   , accounting_date
 ) values (
-  3
+  2
   , SYSTIMESTAMP
   , 'created_user_id'
   , SYSTIMESTAMP
   , 'updated_user_id'
   , 0
-  , 3
-  , 'rj_manage_number_3'
-  , 'contract_id_3'
-  , 'ricoh_item_code_3'
-  , 'item_contract_name_3'
-  , 'line_number_3'
-  , 'serial_number_3'
+  , 2
+  , 'rj_manage_number_2'
+  , 'contract_id_2'
+  , 'ricoh_item_code_2'
+  , 'item_contract_name_2'
+  , 'line_number_2'
+  , 'serial_number_2'
   , '202107'
   , 1
-  , 'billing_date_3'
+  , 'billing_date_2'
   , 1
   , 1
-  , '1'
+  , '2'
   , 1
   , 1
   , 1
   , '0'
   , SYSDATE
-  , '9'
+  , '0'
   , SYSDATE
   , '0'
   , SYSDATE
