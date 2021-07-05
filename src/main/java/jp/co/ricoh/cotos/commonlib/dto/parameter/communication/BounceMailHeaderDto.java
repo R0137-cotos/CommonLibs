@@ -141,4 +141,12 @@ public class BounceMailHeaderDto {
 	@Size(max = 255)
 	@ApiModelProperty(value = "N_X_JIZENFLG（メール送信時設定不要）", required = false, position = 15, allowableValues = "range[0,255]")
 	private String nXJizenflg;
+
+	/**
+	 * 通知メール制御マスタID
+	 */
+	@JsonProperty("MailControlMasterId")
+	@Min(0)
+	@ApiModelProperty(value = "通知メール制御マスタID", required = false, position = 16)
+	private Long mailControlMasterId;
 }
