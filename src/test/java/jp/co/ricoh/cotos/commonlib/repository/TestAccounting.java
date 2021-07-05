@@ -330,7 +330,7 @@ public class TestAccounting {
 	public void InvoiceLinkageRepositoryの条件テスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
 
-		List<InvoiceLinkage> list = invoiceLinkageRepository.findByBillingDateAndReceiveStatus("202107", BatchCommonStatus.未処理);
+		List<InvoiceLinkage> list = invoiceLinkageRepository.findByCreateYmAndReceiveStatus("202107", BatchCommonStatus.未処理);
 		
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
@@ -340,7 +340,7 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
 		
-		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndSerialNumberAndBillingDateAndSendStatusAndReceiveStatus("contract_id_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
+		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus("contract_id_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
 		
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
