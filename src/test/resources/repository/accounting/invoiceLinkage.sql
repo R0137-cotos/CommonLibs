@@ -41,9 +41,9 @@ insert into INVOICE_LINKAGE (
   , 'item_contract_name_1'
   , 'line_number_1'
   , 'serial_number_1'
-  , 'create_ym_1'
-  , 1
   , '202107'
+  , 1
+  , 'billing_date_1'
   , 1
   , 1
   , '3'
@@ -100,9 +100,9 @@ insert into INVOICE_LINKAGE (
   , 'item_contract_name_2'
   , 'line_number_2'
   , 'serial_number_2'
-  , 'create_ym_2'
-  , 1
   , '202107'
+  , 1
+  , 'billing_date_2'
   , 1
   , 1
   , '2'
@@ -159,9 +159,9 @@ insert into INVOICE_LINKAGE (
   , 'item_contract_name_3'
   , 'line_number_3'
   , 'serial_number_3'
-  , 'create_ym_3'
-  , 1
   , '202107'
+  , 1
+  , 'billing_date_3'
   , 1
   , 1
   , '1'
