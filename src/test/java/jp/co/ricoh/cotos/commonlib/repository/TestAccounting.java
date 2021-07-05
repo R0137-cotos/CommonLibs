@@ -335,10 +335,13 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
 		
-		list = invoiceLinkageRepository.findBySendStatus(BatchCommonStatus.未処理);
+		list = invoiceLinkageRepository.findBySendStatusOrderById(BatchCommonStatus.未処理);
 		
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
+		// ID順にソートされていることを確認
+		Assert.assertEquals(2L, list.get(0).getId());
+		Assert.assertEquals(3L, list.get(1).getId());
 		
 		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus("contract_id_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
 		

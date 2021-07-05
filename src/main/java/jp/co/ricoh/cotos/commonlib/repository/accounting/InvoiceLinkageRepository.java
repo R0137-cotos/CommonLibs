@@ -24,7 +24,7 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 * @param sendStatus 契約送信ステータス
 	 * @return
 	 */
-	public List<InvoiceLinkage> findBySendStatus(BatchCommonStatus sendStatus);
+	public List<InvoiceLinkage> findBySendStatusOrderById(BatchCommonStatus sendStatus);
 
 	/**
 	 * 契約No.、シリアル番号、連携月、契約送信ステータス、請求受信ステータスから取得
