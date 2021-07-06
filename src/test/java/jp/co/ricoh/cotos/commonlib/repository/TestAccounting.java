@@ -343,7 +343,7 @@ public class TestAccounting {
 		Assert.assertEquals(2L, list.get(0).getId());
 		Assert.assertEquals(3L, list.get(1).getId());
 
-		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus("contract_id_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
+		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndRicohItemCodeAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus("contract_id_1", "ricoh_item_code_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
