@@ -77,10 +77,16 @@ public class InvoiceFileDto {
 	private String salesTaxType;
 
 	/**
+	 * 税率（％）
+	 */
+	@JsonProperty("税率（％）")
+	private String salesTaxRate;
+
+	/**
 	 * 消費税
 	 */
 	@JsonProperty("消費税")
-	private String salesTaxRate;
+	private BigDecimal salesTaxPrice;
 
 	/**
 	 * 金額
