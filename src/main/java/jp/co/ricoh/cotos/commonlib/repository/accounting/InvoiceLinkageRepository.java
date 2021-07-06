@@ -38,4 +38,12 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 */
 	public InvoiceLinkage findByContractIdAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus(String contractId, String serialNumber, String createYm, BatchCommonStatus sendStatus, BatchCommonStatus receiveStatus);
 
+	/**
+	 * 請求受信ステータスから取得
+	 * インボイス請求データ取込バッチで未受信データを取得するために使用する。
+	 * @param receiveStatus 請求受信ステータス
+	 * @return
+	 */
+	public List<InvoiceLinkage> findByReceiveStatus(BatchCommonStatus receiveStatus);
+
 }

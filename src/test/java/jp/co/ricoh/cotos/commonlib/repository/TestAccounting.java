@@ -100,7 +100,7 @@ public class TestAccounting {
 
 	@Autowired
 	InvoiceLinkageRepository invoiceLinkageRepository;
-	
+
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
@@ -314,7 +314,7 @@ public class TestAccounting {
 		Assert.assertEquals(3L, list.size());
 		Assert.assertNotNull(list.get(0));
 	}
-	
+
 	@Test
 	public void InvoiceLinkageRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
@@ -325,28 +325,33 @@ public class TestAccounting {
 		Assert.assertNotNull(found);
 		Assert.assertEquals(InvoiceTaxType.免税, found.getSalesTaxType());
 	}
-	
+
 	@Test
 	public void InvoiceLinkageRepositoryの条件テスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
 
 		List<InvoiceLinkage> list = invoiceLinkageRepository.findByCreateYmAndReceiveStatus("202107", BatchCommonStatus.未処理);
-		
+
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
-		
+
 		list = invoiceLinkageRepository.findBySendStatusOrderById(BatchCommonStatus.未処理);
-		
+
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
 		// ID順にソートされていることを確認
 		Assert.assertEquals(2L, list.get(0).getId());
 		Assert.assertEquals(3L, list.get(1).getId());
-		
+
 		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus("contract_id_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
-		
+
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		list = invoiceLinkageRepository.findByReceiveStatus(BatchCommonStatus.処理対象外);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(1, list.size());
 
 	}
 }
