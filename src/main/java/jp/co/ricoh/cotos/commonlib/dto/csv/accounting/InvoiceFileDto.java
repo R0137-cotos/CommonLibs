@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @JsonPropertyOrder({ "契約No.", "商品コード", "商品名", "回線番号", "シリアル番号", "連携月", "契約単価", "利用月", "数量", "単価", "税区分", "税率（％）", "消費税", "金額" })
-public class InvoiceFileDTO {
+public class InvoiceFileDto {
 	/**
 	 * 契約No.
 	 */
