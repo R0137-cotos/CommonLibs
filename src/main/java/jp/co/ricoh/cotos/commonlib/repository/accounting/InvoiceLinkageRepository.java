@@ -27,16 +27,17 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	public List<InvoiceLinkage> findBySendStatusOrderById(BatchCommonStatus sendStatus);
 
 	/**
-	 * 契約No.、シリアル番号、連携月、契約送信ステータス、請求受信ステータスから取得
+	 * 契約No.、商品コード、シリアル番号、連携月、契約送信ステータス、請求受信ステータスから取得
 	 * インボイス請求データ取込バッチで対象データを取得するために使用する。
 	 * @param contractId 契約No.、
+	 * @param ricohItemCode 商品コード
 	 * @param serialNumber シリアル番号
 	 * @param createYm 連携月
 	 * @param sendStatus 契約送信ステータス
 	 * @param receiveStatus 請求受信ステータス
 	 * @return
 	 */
-	public InvoiceLinkage findByContractIdAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus(String contractId, String serialNumber, String createYm, BatchCommonStatus sendStatus, BatchCommonStatus receiveStatus);
+	public InvoiceLinkage findByContractIdAndRicohItemCodeAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus(String contractId, String ricohItemCode, String serialNumber, String createYm, BatchCommonStatus sendStatus, BatchCommonStatus receiveStatus);
 
 	/**
 	 * 請求受信ステータスから取得
