@@ -640,6 +640,7 @@ public class TestListener {
 	public void ContractPicSaEmpListenerのテスト() {
 		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
 		contractPicSaEmp.setMomEmployeeId("00445702");
+		contractPicSaEmp.setEmployeeName("テスト");
 		Contract contract = new Contract();
 		contract.setId(1L);
 		contractPicSaEmp.setContract(contract);
@@ -663,25 +664,6 @@ public class TestListener {
 			contractPicSaEmpRepository.save(contractPicSaEmp);
 		} catch (ErrorCheckException e) {
 			Assert.fail("エラー発生");
-		}
-	}
-
-	@Test
-	@WithMockCustomUser
-	public void 異常系_ContractPicSaEmpListenerのテスト_社員マスタが存在しない() {
-		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
-		contractPicSaEmp.setMomEmployeeId("00445702AA");
-		Contract contract = new Contract();
-		contract.setId(1L);
-		contractPicSaEmp.setContract(contract);
-		try {
-			contractPicSaEmpRepository.save(contractPicSaEmp);
-		} catch (ErrorCheckException e) {
-			// 返却されるエラーを確認
-			List<ErrorInfo> messageInfo = e.getErrorInfoList();
-			Assert.assertEquals(1, messageInfo.size());
-			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
-			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約担当SA社員に存在しないMoM社員が設定されています。");
 		}
 	}
 
