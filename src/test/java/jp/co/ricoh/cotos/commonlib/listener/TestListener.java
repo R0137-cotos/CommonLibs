@@ -18,25 +18,33 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DealerFlowOrder;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.CustomerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddress;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicSaEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationAddedEditorEmpRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationPicSaEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
@@ -73,6 +81,18 @@ public class TestListener {
 
 	@Autowired
 	ContractInstallationLocationRepository contractInstallationLocationRepository;
+
+	@Autowired
+	EstimationPicSaEmpRepository estimationPicSaEmpRepository;
+
+	@Autowired
+	EstimationAddedEditorEmpRepository estimationAddedEditorEmpRepository;
+
+	@Autowired
+	ContractPicSaEmpRepository contractPicSaEmpRepository;
+
+	@Autowired
+	ContractAddedEditorEmpRepository contractAddedEditorEmpRepository;
 
 	@Autowired
 	CheckUtil checkUtil;
@@ -512,6 +532,206 @@ public class TestListener {
 			Assert.assertEquals(1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
 			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "配送先に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void EstimationPicSaEmpListenerのテスト() {
+		EstimationPicSaEmp estimationPicSaEmp = new EstimationPicSaEmp();
+		estimationPicSaEmp.setMomEmployeeId("00445702");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		estimationPicSaEmp.setEstimation(estimation);
+		try {
+			estimationPicSaEmpRepository.save(estimationPicSaEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void EstimationPicSaEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		EstimationPicSaEmp estimationPicSaEmp = new EstimationPicSaEmp();
+		estimationPicSaEmp.setMomEmployeeId("00445702AA");
+		estimationPicSaEmp.setEmployeeName("テスト");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		estimationPicSaEmp.setEstimation(estimation);
+		try {
+			estimationPicSaEmpRepository.save(estimationPicSaEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_EstimationPicSaEmpListenerのテスト_社員マスタが存在しない() {
+		EstimationPicSaEmp estimationPicSaEmp = new EstimationPicSaEmp();
+		estimationPicSaEmp.setMomEmployeeId("00445702AA");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		estimationPicSaEmp.setEstimation(estimation);
+		try {
+			estimationPicSaEmpRepository.save(estimationPicSaEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "見積担当SA社員に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void EstimationAddedEditorEmpListenerのテスト() {
+		EstimationAddedEditorEmp estimationAddedEditorEmp = new EstimationAddedEditorEmp();
+		estimationAddedEditorEmp.setMomEmployeeId("00445702");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		estimationAddedEditorEmp.setEstimation(estimation);
+		try {
+			estimationAddedEditorEmpRepository.save(estimationAddedEditorEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void EstimationAddedEditorEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		EstimationAddedEditorEmp estimationAddedEditorEmp = new EstimationAddedEditorEmp();
+		estimationAddedEditorEmp.setMomEmployeeId("00445702AA");
+		estimationAddedEditorEmp.setEmployeeName("テスト");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		estimationAddedEditorEmp.setEstimation(estimation);
+		try {
+			estimationAddedEditorEmpRepository.save(estimationAddedEditorEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_EstimationAddedEditorEmpListenerのテスト_社員マスタが存在しない() {
+		EstimationAddedEditorEmp estimationAddedEditorEmp = new EstimationAddedEditorEmp();
+		estimationAddedEditorEmp.setMomEmployeeId("00445702AA");
+		Estimation estimation = new Estimation();
+		estimation.setId(1L);
+		estimationAddedEditorEmp.setEstimation(estimation);
+		try {
+			estimationAddedEditorEmpRepository.save(estimationAddedEditorEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "見積追加編集者社員に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicSaEmpListenerのテスト() {
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00445702");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicSaEmp.setContract(contract);
+		try {
+			contractPicSaEmpRepository.save(contractPicSaEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicSaEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00445702AA");
+		contractPicSaEmp.setEmployeeName("テスト");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicSaEmp.setContract(contract);
+		try {
+			contractPicSaEmpRepository.save(contractPicSaEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_ContractPicSaEmpListenerのテスト_社員マスタが存在しない() {
+		ContractPicSaEmp contractPicSaEmp = new ContractPicSaEmp();
+		contractPicSaEmp.setMomEmployeeId("00445702AA");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicSaEmp.setContract(contract);
+		try {
+			contractPicSaEmpRepository.save(contractPicSaEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約担当SA社員に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractAddedEditorEmpListenerのテスト() {
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00445702");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractAddedEditorEmp.setContract(contract);
+		try {
+			contractAddedEditorEmpRepository.save(contractAddedEditorEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractAddedEditorEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00445702AA");
+		contractAddedEditorEmp.setEmployeeName("テスト");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractAddedEditorEmp.setContract(contract);
+		try {
+			contractAddedEditorEmpRepository.save(contractAddedEditorEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_ContractAddedEditorEmpListenerのテスト_社員マスタが存在しない() {
+		ContractAddedEditorEmp contractAddedEditorEmp = new ContractAddedEditorEmp();
+		contractAddedEditorEmp.setMomEmployeeId("00445702AA");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractAddedEditorEmp.setContract(contract);
+		try {
+			contractAddedEditorEmpRepository.save(contractAddedEditorEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約追加編集者社員に存在しないMoM社員が設定されています。");
 		}
 	}
 }
