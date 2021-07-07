@@ -20,6 +20,9 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.DealerFlowOrder;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicAccCeEmp;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicIntCeEmp;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicMntCeEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.CustomerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
@@ -37,6 +40,9 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicAccCeEmpRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicIntCeEmpRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntCeEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicSaEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CustomerContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.DealerContractRepository;
@@ -93,6 +99,15 @@ public class TestListener {
 
 	@Autowired
 	ContractAddedEditorEmpRepository contractAddedEditorEmpRepository;
+
+	@Autowired
+	ContractPicAccCeEmpRepository contractPicAccCeEmpRepository;
+
+	@Autowired
+	ContractPicIntCeEmpRepository contractPicIntCeEmpRepository;
+
+	@Autowired
+	ContractPicMntCeEmpRepository contractPicMntCeEmpRepository;
 
 	@Autowired
 	CheckUtil checkUtil;
@@ -714,6 +729,156 @@ public class TestListener {
 			Assert.assertEquals(1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
 			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約追加編集者社員に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicAccCeEmpListenerのテスト() {
+		ContractPicAccCeEmp contractPicAccCeEmp = new ContractPicAccCeEmp();
+		contractPicAccCeEmp.setMomEmployeeId("00445702");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicAccCeEmp.setContract(contract);
+		try {
+			contractPicAccCeEmpRepository.save(contractPicAccCeEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicAccCeEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		ContractPicAccCeEmp contractPicAccCeEmp = new ContractPicAccCeEmp();
+		contractPicAccCeEmp.setMomEmployeeId("00445702AA");
+		contractPicAccCeEmp.setEmployeeName("テスト");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicAccCeEmp.setContract(contract);
+		try {
+			contractPicAccCeEmpRepository.save(contractPicAccCeEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_ContractPicAccCeEmpListenerのテスト_社員マスタが存在しない() {
+		ContractPicAccCeEmp contractPicAccCeEmp = new ContractPicAccCeEmp();
+		contractPicAccCeEmp.setMomEmployeeId("00445702AA");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicAccCeEmp.setContract(contract);
+		try {
+			contractPicAccCeEmpRepository.save(contractPicAccCeEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約受付担当CE社員に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicIntCeEmpListenerのテスト() {
+		ContractPicIntCeEmp contractPicIntCeEmp = new ContractPicIntCeEmp();
+		contractPicIntCeEmp.setMomEmployeeId("00445702");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicIntCeEmp.setContract(contract);
+		try {
+			contractPicIntCeEmpRepository.save(contractPicIntCeEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicIntCeEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		ContractPicIntCeEmp contractPicIntCeEmp = new ContractPicIntCeEmp();
+		contractPicIntCeEmp.setMomEmployeeId("00445702AA");
+		contractPicIntCeEmp.setEmployeeName("テスト");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicIntCeEmp.setContract(contract);
+		try {
+			contractPicIntCeEmpRepository.save(contractPicIntCeEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_ContractPicIntCeEmpListenerのテスト_社員マスタが存在しない() {
+		ContractPicIntCeEmp contractPicIntCeEmp = new ContractPicIntCeEmp();
+		contractPicIntCeEmp.setMomEmployeeId("00445702AA");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicIntCeEmp.setContract(contract);
+		try {
+			contractPicIntCeEmpRepository.save(contractPicIntCeEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約導入担当CE社員に存在しないMoM社員が設定されています。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicMntCeEmpListenerのテスト() {
+		ContractPicMntCeEmp contractPicMntCeEmp = new ContractPicMntCeEmp();
+		contractPicMntCeEmp.setMomEmployeeId("00445702");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicMntCeEmp.setContract(contract);
+		try {
+			contractPicMntCeEmpRepository.save(contractPicMntCeEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractPicMntCeEmpListenerのテスト_社員マスタが存在しない_契約変更() {
+		ContractPicMntCeEmp contractPicMntCeEmp = new ContractPicMntCeEmp();
+		contractPicMntCeEmp.setMomEmployeeId("00445702AA");
+		contractPicMntCeEmp.setEmployeeName("テスト");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicMntCeEmp.setContract(contract);
+		try {
+			contractPicMntCeEmpRepository.save(contractPicMntCeEmp);
+		} catch (ErrorCheckException e) {
+			Assert.fail("エラー発生");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 異常系_ContractPicMntCeEmpListenerのテスト_社員マスタが存在しない() {
+		ContractPicMntCeEmp contractPicMntCeEmp = new ContractPicMntCeEmp();
+		contractPicMntCeEmp.setMomEmployeeId("00445702AA");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractPicMntCeEmp.setContract(contract);
+		try {
+			contractPicMntCeEmpRepository.save(contractPicMntCeEmp);
+		} catch (ErrorCheckException e) {
+			// 返却されるエラーを確認
+			List<ErrorInfo> messageInfo = e.getErrorInfoList();
+			Assert.assertEquals(1, messageInfo.size());
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約担当CE社員に存在しないMoM社員が設定されています。");
 		}
 	}
 }

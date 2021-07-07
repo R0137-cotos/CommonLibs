@@ -55,6 +55,11 @@ public class ContractPicAccCeEmpListener {
 			return;
 		}
 
+		// RJ社員マスタから情報取得済みであれば再設定しない
+		if (contractPicAccCeEmp.isAcquiredInfo()) {
+			return;
+		}
+
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(contractPicAccCeEmp.getMomEmployeeId());
 
 		if (employeeMaster == null) {
