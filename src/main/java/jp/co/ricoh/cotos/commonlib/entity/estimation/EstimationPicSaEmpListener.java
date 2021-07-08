@@ -55,14 +55,14 @@ public class EstimationPicSaEmpListener {
 			return;
 		}
 
-		// RJ社員マスタから情報取得済みであれば再設定しない
-		if (estimationPicSaEmp.isAcquiredInfo()) {
-			return;
-		}
-
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(estimationPicSaEmp.getMomEmployeeId());
 
 		if (employeeMaster == null) {
+			// RJ社員マスタから情報取得済みであれば再設定しない
+			if (estimationPicSaEmp.isAcquiredInfo()) {
+				return;
+			}
+
 			String[] regexList = { "見積担当SA社員" };
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
 		}
