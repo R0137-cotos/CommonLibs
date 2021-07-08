@@ -44,14 +44,14 @@ public class ContractPicSaEmpListener {
 			return;
 		}
 
-		// RJ社員マスタから情報取得済みであれば再取得しない
-		if (contractPicSaEmp.isAcquiredInfo()) {
-			return;
-		}
-
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(contractPicSaEmp.getMomEmployeeId());
 
 		if (employeeMaster == null) {
+			// RJ社員マスタから情報取得済みであれば再取得しない
+			if (contractPicSaEmp.isAcquiredInfo()) {
+				return;
+			}
+
 			String[] regexList = { "契約担当SA社員" };
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
 		}

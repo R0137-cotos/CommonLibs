@@ -55,14 +55,14 @@ public class EstimationAddedEditorEmpListener {
 			return;
 		}
 
-		// RJ社員マスタから情報取得済みであれば再設定しない
-		if (estimationAddedEditorEmp.isAcquiredInfo()) {
-			return;
-		}
-
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(estimationAddedEditorEmp.getMomEmployeeId());
 
 		if (employeeMaster == null) {
+			// RJ社員マスタから情報取得済みであれば再設定しない
+			if (estimationAddedEditorEmp.isAcquiredInfo()) {
+				return;
+			}
+
 			String[] regexList = { "見積追加編集者社員" };
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
 		}
