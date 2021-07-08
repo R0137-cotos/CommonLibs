@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemDecomposeType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -141,4 +142,33 @@ public class ItemContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 18, allowableValues = "range[0,255]")
 	private String makerItemCode;
+
+	/**
+	 * 分解後品種区分
+	 */
+	@ApiModelProperty(value = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")", position = 19)
+	private ItemDecomposeType itemDecomposeType;
+
+	/**
+	 * 分解後品種名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "分解後品種名", required = false, position = 20, allowableValues = "range[0,255]")
+	private String itemDecomposeName;
+
+	/**
+	 * 分解後原価
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "分解後原価", required = false, position = 21, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal itemDecomposePrice;
+
+	/**
+	 * ＲＪ販事本仕入価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 22, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rjHanjihonPurchasePrice;
 }
