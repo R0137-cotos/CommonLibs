@@ -104,4 +104,15 @@ public class ArrangementAuthorityService_getArrangementWorkAuthTest {
 
 		Assert.assertNull("取得結果がnullであること", arrangementWorkAuthControlMasterList);
 	}
+
+	@Test
+	@WithMockCustomUser(momEmployeeId = "COTOS_BATCH_USER")
+	public void 作業不要パターン_スーパーユーザーの場合() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("sql/arrangementAuthorityService/スーパーユーザー.sql");
+
+		List<ArrangementWorkAuthControlMaster> arrangementWorkAuthControlMasterList = arrangementAuthorityService.getArrangementWorkAuth();
+
+		Assert.assertNull("取得結果がnullであること", arrangementWorkAuthControlMasterList);
+	}
 }
