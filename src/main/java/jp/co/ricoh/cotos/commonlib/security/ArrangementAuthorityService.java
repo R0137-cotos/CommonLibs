@@ -75,7 +75,7 @@ public class ArrangementAuthorityService {
 		// 権限レベルを取得
 		Map<ActionDiv, Map<AuthDiv, AuthLevel>> allMomAuthorities = userInfo.getMomAuthorities();
 
-		if (isSystemAdministrator(allMomAuthorities) || isSuperUser(userInfo)) {
+		if (isSuperUser(userInfo) || isSystemAdministrator(allMomAuthorities)) {
 			// 処理不要であるため、returnする
 			return null;
 		}
