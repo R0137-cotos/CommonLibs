@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -47,6 +48,10 @@ public class BounceMailHeaderDto {
 
 	/**
 	 * 契約ID
+	 * 【以下を設定】
+	 * 見積：見積.RJ管理番号
+	 * 契約：契約.RJ管理番号
+	 * 手配：契約.RJ管理番号
 	 */
 	@JsonProperty("ContractId")
 	@Size(max = 255)
@@ -55,6 +60,10 @@ public class BounceMailHeaderDto {
 
 	/**
 	 * 文書番号
+	 * 【以下を設定】
+	 * 見積：見積.見積番号
+	 * 契約：契約.契約番号
+	 * 手配：契約.契約番号
 	 */
 	@JsonProperty("DocNumber")
 	@Size(max = 255)
@@ -63,6 +72,10 @@ public class BounceMailHeaderDto {
 
 	/**
 	 * 契約番号
+	 *  * 【以下を設定】
+	 * 見積：見積.恒久契約識別番号
+	 * 契約：契約.恒久契約識別番号
+	 * 手配：契約.恒久契約識別番号
 	 */
 	@JsonProperty("ContractNumber")
 	@Size(max = 255)
@@ -71,6 +84,10 @@ public class BounceMailHeaderDto {
 
 	/**
 	 * 契約番号枝番
+	 *  * 【以下を設定】
+	 * 見積：見積.見積番号枝番
+	 * 契約：契約.契約番号枝番
+	 * 手配：契約.契約番号枝番
 	 */
 	@JsonProperty("ContractBranchNumber")
 	@Max(99)
@@ -149,4 +166,22 @@ public class BounceMailHeaderDto {
 	@Min(0)
 	@ApiModelProperty(value = "通知メール制御マスタID", required = false, position = 16)
 	private Long mailControlMasterId;
+
+	/**
+	 * サービスカテゴリ
+	 */
+	@JsonProperty("ServiceCategory")
+	@ApiModelProperty(value = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", position = 17)
+	private ServiceCategory serviceCategory;
+
+	/**
+	 * 対象文書キー
+	 */
+	@JsonProperty("TargetDocKey")
+	@Size(max = 255)
+	@ApiModelProperty(value = "対象文書キー<br />コミュニケーションの対象情報を一意に特定するためのキー情報を格納<br />" //
+			+ "見積⇒見積ID<br />" //
+			+ "契約⇒契約ID<br />" //
+			+ "手配⇒手配業務ID", required = false, position = 18, allowableValues = "range[0,255]") //
+	private String targetDocKey;
 }
