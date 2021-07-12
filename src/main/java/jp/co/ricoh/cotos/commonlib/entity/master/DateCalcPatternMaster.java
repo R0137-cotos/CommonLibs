@@ -107,13 +107,6 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	private long id;
 
 	/**
-	 * 日付計算グループコード
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "日付計算グループコード", required = false, position = 2, allowableValues = "range[0,255]")
-	private String dateCalcGrpCode;
-
-	/**
 	 * 日付計算グループ名称
 	 */
 	@Size(max = 255)
