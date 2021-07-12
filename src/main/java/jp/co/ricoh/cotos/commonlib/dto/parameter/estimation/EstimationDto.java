@@ -443,4 +443,11 @@ public class EstimationDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 59, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 松原テスト
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "松原テスト", required = false, position = 60, allowableValues = "range[0,255]")
+	private String matsubaraTest;
 }

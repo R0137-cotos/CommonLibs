@@ -555,6 +555,13 @@ public class Estimation extends EntityBase {
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 62, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
+	/**
+	 * 松原テスト
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "松原テスト", required = false, position = 63, allowableValues = "range[0,255]")
+	private String matsubaraTest;
+
 	@PreUpdate
 	public void preUpdate() {
 		if (StringUtils.isEmpty(super.getUpdatedUserId())) {
