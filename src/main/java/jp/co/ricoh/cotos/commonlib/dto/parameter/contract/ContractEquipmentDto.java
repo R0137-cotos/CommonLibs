@@ -14,7 +14,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.ArcsPeriodSaleMainteProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneMaintereportProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneProcStatus;
-import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.MachineType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -151,31 +150,4 @@ public class ContractEquipmentDto extends DtoBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 21)
 	private Date arcsPeriodSaleMainteLinkageAt;
-
-	/**
-	 * メーカーコード
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "メーカーコード", required = false, position = 22, allowableValues = "range[0,255]")
-	private String makerCode;
-
-	/**
-	 * 分類コード
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "分類コード", required = false, position = 23, allowableValues = "range[0,255]")
-	private String classificationCode;
-
-	/**
-	 * 機器区分
-	 */
-	@ApiModelProperty(value = "機器区分", required = false, position = 24, allowableValues = "サーバー本体(\"1\"),HWオプション(\"2\"),SWオプション(\"3\")")
-	private MachineType machineType;
-
-	/**
-	 * 機種名
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "機種名", required = false, position = 25, allowableValues = "range[0,255]")
-	private String equipmentName;
 }
