@@ -277,8 +277,9 @@ public class TestEstimation {
 		testTarget.setAppId(STR_256);
 		testTarget.setIssueTaxCodeValue(STR_256);
 		testTarget.setEstimationWorkId(STR_256);
+		testTarget.setMatsubaraTest(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 29);
+		Assert.assertTrue(result.getErrorInfoList().size() == 30);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積発行元FAX番号は最大文字数（255）を超えています。"));
 
