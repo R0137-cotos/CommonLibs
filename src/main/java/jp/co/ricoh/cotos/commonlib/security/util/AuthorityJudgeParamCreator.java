@@ -103,11 +103,11 @@ public class AuthorityJudgeParamCreator {
 					List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(node.getApproverEmpId());
 					empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
 						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者（代理編集者でない）", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
-						approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
+						CollectionUtils.addIgnoreNull(approverList, mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
 					});
 				} else {
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者（代理編集者でない）", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
-					approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
+					CollectionUtils.addIgnoreNull(approverList, mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
 				}
 			});
 			authJudgeParam.setApproverMvEmployeeMasterList(approverList);
@@ -231,11 +231,11 @@ public class AuthorityJudgeParamCreator {
 						List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(node.getApproverEmpId());
 						empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
 							log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
-							approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
+							CollectionUtils.addIgnoreNull(approverList, mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
 						});
 					} else {
 						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
-						approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
+						CollectionUtils.addIgnoreNull(approverList, mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
 					}
 				});
 				authJudgeParam.setApproverMvEmployeeMasterList(approverList);
@@ -390,11 +390,11 @@ public class AuthorityJudgeParamCreator {
 					List<EmpGrpManagementMaster> empGrpManagementMasterList = empGrpManagementMasterRepository.findByGroupCode(node.getApproverEmpId());
 					empGrpManagementMasterList.stream().forEach(empGrpManagementMaster -> {
 						log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", empGrpManagementMaster.getMomEmpId()).toArray(new String[0])).getMsg());
-						approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
+						CollectionUtils.addIgnoreNull(approverList, mvEmployeeMasterRepository.findByMomEmployeeId(empGrpManagementMaster.getMomEmpId()));
 					});
 				} else {
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認者", "MoM社員ID", node.getApproverEmpId()).toArray(new String[0])).getMsg());
-					approverList.add(mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
+					CollectionUtils.addIgnoreNull(approverList, mvEmployeeMasterRepository.findByMomEmployeeId(node.getApproverEmpId()));
 				}
 			});
 			authJudgeParam.setApproverMvEmployeeMasterList(approverList);
