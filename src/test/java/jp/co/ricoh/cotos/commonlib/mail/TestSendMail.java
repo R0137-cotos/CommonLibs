@@ -385,6 +385,7 @@ public class TestSendMail {
 		bounceMailHeaderDto.setDocNumber("CC2020102800001");
 		bounceMailHeaderDto.setContractNumber("CIC2020102800001");
 		bounceMailHeaderDto.setContractBranchNumber(1);
+		bounceMailHeaderDto.setMailControlMasterId(1L);
 
 		return bounceMailHeaderDto;
 	}
