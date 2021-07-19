@@ -48,7 +48,7 @@ public class ArrangementWorkAuthControlMaster extends EntityBaseMaster {
 	/**
 	 * 権限パターンマスタ
 	 */
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "auth_pattern_master_id", referencedColumnName = "authPatternId")
 	@ApiModelProperty(value = "権限パターンマスタ", required = false, position = 3)
 	private AuthPatternMaster authPatternMaster;
@@ -58,5 +58,5 @@ public class ArrangementWorkAuthControlMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "arrangementWorkAuthControlMaster")
 	@ApiModelProperty(value = "手配業務タイプマスタ", required = true, position = 4)
-	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterMasterList;
+	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterList;
 }
