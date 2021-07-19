@@ -175,6 +175,29 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	public enum ServicePreferredSettingPossibleType {
+
+		// null:制限なし
+		営業日のみ("1"), 営業日と土曜日("2");
+
+		private final String text;
+
+		private ServicePreferredSettingPossibleType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ServicePreferredSettingPossibleType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
@@ -554,4 +577,10 @@ public class ItemMaster extends EntityBaseMaster {
 	@JsonIgnore
 	@ApiModelProperty(value = "契約更新品種マスタ", required = false, position = 51)
 	private ItemMaster contractUpdateItemMaster;
+
+	/**
+	 * サービス利用希望日設定可能区分
+	 */
+	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 52, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
+	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
 }
