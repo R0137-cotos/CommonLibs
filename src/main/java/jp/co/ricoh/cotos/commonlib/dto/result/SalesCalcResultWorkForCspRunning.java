@@ -151,7 +151,13 @@ public class SalesCalcResultWorkForCspRunning {
 	private String companyNameKana;
 
 	/**
-	 * 仕入用管理No
+	 * 納品書・請求書印字用コメント <br>
+	 * <br>
+	 * 【仕入用管理Noの場合】 <br>
+	 * 先頭3文字：商品マスタ.仕入先No、末尾9文字：契約情報画面（請求先情報セクション）より入力 <br>
+	 * 【任意コメントの場合】 <br>
+	 * 最大20Byteのコメント 契約情報画面（請求先情報セクション）より入力
+	 * 
 	 */
 	private String purchaseManageNumber;
 
