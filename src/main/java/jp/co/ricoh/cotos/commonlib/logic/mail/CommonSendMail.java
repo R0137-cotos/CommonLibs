@@ -5,16 +5,21 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import javax.mail.Address;
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.axis.utils.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -50,6 +55,8 @@ public class CommonSendMail {
 
 	@Autowired
 	AppProperties appProperties;
+
+	private static final Log log = LogFactory.getLog(CommonSendMail.class);
 
 	/**
 	 * メールテンプレートマスタ特定&メール送信処理
@@ -369,6 +376,8 @@ public class CommonSendMail {
 		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
 		SMTPMessage.setEnvelopeFrom(Optional.ofNullable(mailTemplateMaster.getEnvelopeFrom()).orElse(appProperties.getMailProperties().getEnvelopeFromMailAddress()));
 		setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
+		// ログにTo、Cc、Bccのメールアドレスを出力
+		outputLog(SMTPMessage);
 		javaMailSender.send(SMTPMessage);
 	}
 
@@ -421,10 +430,11 @@ public class CommonSendMail {
 				attachedHelper.addAttachment(res.getFilename(), res);
 			}
 		}
-
 		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
 		SMTPMessage.setEnvelopeFrom(Optional.ofNullable(mailTemplateMaster.getEnvelopeFrom()).orElse(appProperties.getMailProperties().getEnvelopeFromMailAddress()));
 		setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
+		// ログにTo、Cc、Bccのメールアドレスを出力
+		outputLog(SMTPMessage);
 		javaMailSender.send(SMTPMessage);
 	}
 
@@ -503,5 +513,29 @@ public class CommonSendMail {
 		}
 
 		return SMTPMessage;
+	}
+
+	/**
+	 * ログにTo、Cc、Bccのメールアドレスを出力します。
+	 *
+	 * @param smtpMessage SMTPメッセージ
+	 * @throws MessagingException
+	 */
+	private void outputLog(SMTPMessage smtpMessage) throws MessagingException {
+		// ログ出力用にToメールアドレスを取得
+		Address[] toList = smtpMessage.getRecipients(Message.RecipientType.TO);
+		if (toList != null) {
+			Arrays.stream(toList).forEach(a -> log.info("メールアドレスTo ：" + a.toString()));
+		}
+		// ログ出力用にCcメールアドレスを取得
+		Address[] ccList = smtpMessage.getRecipients(Message.RecipientType.CC);
+		if (ccList != null) {
+			Arrays.stream(ccList).forEach(a -> log.info("メールアドレスCc ：" + a.toString()));
+		}
+		// ログ出力用にBccメールアドレスを取得
+		Address[] bccList = smtpMessage.getRecipients(Message.RecipientType.BCC);
+		if (bccList != null) {
+			Arrays.stream(bccList).forEach(a -> log.info("メールアドレスBcc：" + a.toString()));
+		}
 	}
 }

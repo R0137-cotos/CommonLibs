@@ -75,7 +75,7 @@ public class ArrangementAuthorityService {
 		// 権限レベルを取得
 		Map<ActionDiv, Map<AuthDiv, AuthLevel>> allMomAuthorities = userInfo.getMomAuthorities();
 
-		if (isSystemAdministrator(allMomAuthorities) || isSuperUser(userInfo)) {
+		if (isSuperUser(userInfo) || isSystemAdministrator(allMomAuthorities)) {
 			// 処理不要であるため、returnする
 			return null;
 		}
@@ -130,7 +130,7 @@ public class ArrangementAuthorityService {
 					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistArrangement", new String[] { "手配業務" }));
 				}
 
-				if (CollectionUtils.isEmpty(authControlMaster.getArrangementWorkTypeMasterMasterList())) {
+				if (CollectionUtils.isEmpty(authControlMaster.getArrangementWorkTypeMasterList())) {
 					// 2200の場合は手配業務タイプマスタと紐づく手配業務権限制御マスタの情報から判定する
 					if (arrangementWorkTypeMaster.getArrangementWorkAuthControlMaster() == null) {
 						errorFlg = false;
@@ -138,7 +138,7 @@ public class ArrangementAuthorityService {
 					}
 				}
 				// 実行権限のある手配業務権限制御マスタと紐づく手配業務タイプマスタと引数が等しいかをチェックする
-				if (authControlMaster.getArrangementWorkTypeMasterMasterList().stream().anyMatch(authWorkType -> authWorkType.getId() == work.getArrangementWorkTypeMasterId())) {
+				if (authControlMaster.getArrangementWorkTypeMasterList().stream().anyMatch(authWorkType -> authWorkType.getId() == work.getArrangementWorkTypeMasterId())) {
 					errorFlg = false;
 					break;
 				}
