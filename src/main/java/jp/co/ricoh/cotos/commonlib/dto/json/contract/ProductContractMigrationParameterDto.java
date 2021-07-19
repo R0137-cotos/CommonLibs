@@ -21,4 +21,14 @@ public class ProductContractMigrationParameterDto {
 	 * 初回契約課金開始日
 	 */
 	private String firstBillingStartDate;
+
+	/**
+	 * 基本契約課金開始日
+	 */
+	private String basicBillingStartDate;
+
+	/**
+	 * 基本契約サービス開始日
+	 */
+	private String basicServiceTermStart;
 }
