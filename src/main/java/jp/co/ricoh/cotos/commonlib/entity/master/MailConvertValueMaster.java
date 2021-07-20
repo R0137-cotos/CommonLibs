@@ -33,7 +33,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 
 	public enum SubjectVodyType {
 
-		件名("0"), 本文("1");
+		件名("0"), 本文("1"), 本文_リスト("2");
 
 		private final String text;
 
@@ -49,6 +49,29 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static SubjectVodyType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+
+	}
+
+	public enum ConvertType {
+
+		エンティティ("1"), 独自SQL("2");
+
+		private final String text;
+
+		private ConvertType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ConvertType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
@@ -72,7 +95,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	/**
 	 * 件名/本文区分
 	 */
-	@ApiModelProperty(value = "件名/本文区分", required = false, allowableValues = "件名(\"0\"), 本文(\"1\")", example = "1", position = 3)
+	@ApiModelProperty(value = "件名/本文区分", required = false, allowableValues = "件名(\"0\"), 本文(\"1\"), 本文(\"2\")", example = "1", position = 3)
 	private SubjectVodyType subjectBodyType;
 
 	/**
@@ -123,5 +146,18 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "置換値マスタ検索フィールド名", required = false, position = 10, allowableValues = "range[0,255]")
 	private String replaceMasterSearchFieldName;
+
+	/**
+	 * 置換値区分
+	 */
+	@ApiModelProperty(value = "置換値区分", required = false, allowableValues = "エンティティ(\"1\"), 独自SQL(\"2\")", example = "1", position = 11)
+	private ConvertType convertType;
+
+	/**
+	 * SQL区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "SQL区分", required = false, position = 12, allowableValues = "range[0,255]")
+	private String sqlType;
 
 }

@@ -130,19 +130,19 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	private List<ArrangementWorkAttachedFileLinkage> arrangementWorkAttachedFileLinkageList;
 
 	/**
-	 * ファイル情報
-	 */
-	@Transient
-	@ApiModelProperty(hidden = true)
-	private MultipartFile multipartFile;
-
-	/**
 	 * 添付必須フラグ
 	 */
 	@Max(9)
 	@Min(0)
 	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
+
+	/**
+	 * ファイル情報
+	 */
+	@Transient
+	@ApiModelProperty(hidden = true)
+	private MultipartFile multipartFile;
 
 	@PrePersist
 	public void prePersist() {

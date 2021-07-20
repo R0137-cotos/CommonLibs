@@ -262,6 +262,43 @@ public class ArrangementListInfo {
 	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 37)
 	private long arrangementWorkTypeMasterId;
 
+	/**
+	 * お問い合わせ番号
+	 */
+	@ApiModelProperty(value = "お問い合わせ番号", required = false, position = 38, allowableValues = "range[0,255]")
+	private String contactNo;
+
+	/**
+	 * 郵便番号
+	 */
+	@ApiModelProperty(value = "郵便番号", required = false, position = 39, allowableValues = "range[0,255]")
+	private String postNumber;
+
+	/**
+	 * 都道府県
+	 */
+	@ApiModelProperty(value = "都道府県", required = false, position = 40, allowableValues = "range[0,255]")
+	private String prefectures;
+
+	/**
+	 * 市区町村番地
+	 */
+	@ApiModelProperty(value = "市区町村番地", required = false, position = 41, allowableValues = "range[0,1000]")
+	private String cityStreet;
+
+	/**
+	 * 建物名
+	 */
+	@ApiModelProperty(value = "建物名", required = false, position = 42, allowableValues = "range[0,255]")
+	private String buildingName;
+
+	/**
+	 * 手配承認日時
+	 */
+	@ApiModelProperty(value = "手配承認日時", required = false, position = 43)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date approvalDate;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();

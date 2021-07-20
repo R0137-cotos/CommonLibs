@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -84,5 +85,13 @@ public class ArrangementWorkCompMaster extends EntityBaseMaster {
 	@Column(nullable = true)
 	@ApiModelProperty(value = "明細状態", required = false, position = 7, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus detailStatus;
+
+	/**
+	 * 対象契約種別詳細
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "対象契約種別詳細", required = false, position = 8, allowableValues = "range[0,255]")
+	private String targetContractTypeDetails;
+
 
 }

@@ -8,11 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -82,4 +85,20 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "手配業務タイプ区分", required = false, position = 8, allowableValues = "range[0,255]")
 	private String arrangementWorkTypeDiv;
+
+	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
+	@Lob
+	private String extendsParameter;
+
+	/**
+	 * 手配業務権限制御マスタ
+	 */
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "arrangement_work_auth_control_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "手配業務権限制御マスタ", required = false, position = 10)
+	private ArrangementWorkAuthControlMaster arrangementWorkAuthControlMaster;
 }

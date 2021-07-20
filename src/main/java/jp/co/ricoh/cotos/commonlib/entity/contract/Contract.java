@@ -198,6 +198,50 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	public enum ArcsPeriodSaleMntOriginStatus {
+
+		未作成("0"), CSV作成済み("1"), 対象外("2");
+
+		private final String text;
+
+		private ArcsPeriodSaleMntOriginStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ArcsPeriodSaleMntOriginStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum BasicContractDiv {
+
+		基本契約("1"), 基本契約_一部("2");
+
+		private final String text;
+
+		private BasicContractDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static BasicContractDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -811,23 +855,70 @@ public class Contract extends EntityBase {
 	private String penaltyFfmOrderContactNo;
 
 	/**
+	 * 仕入用管理No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入用管理No", required = false, position = 87, allowableValues = "range[0,255]")
+	private String purchaseManageNumber;
+
+	/**
+	 * 契約機種(Isys-Oneへの連携なし)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 88)
+	private List<ContractEquipmentNoIsysone> contractEquipmentNoIsysoneList;
+
+	/**
+	 * 契約機種状態管理
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 89)
+	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatusList;
+
+	/**
+	 * 配送先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先", required = true, position = 90)
+	private ShippingAddress shippingAddress;
+
+	/**
+	 * 違約金明細(契約用)
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 91)
+	private List<PenaltyDetailContract> penaltyDetailContractList;
+
+	/**
+	 * 配送先SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "配送先SS組織", required = true, position = 92)
+	private ShippingAddressSsOrg shippingAddressSsOrg;
+
+	/**
 	 * ベンダー向けコメント
 	 */
 	@Size(max = 1333)
-	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 87, allowableValues = "range[0,1333]")
+	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 93, allowableValues = "range[0,1333]")
 	private String toVendorComment;
 
 	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 18)
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 87, allowableValues = "range[0,18]")
+	@ApiModelProperty(value = "MVBアカウント", required = false, position = 94, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * MVBアカウント登録区分
 	 */
-	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 88, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
+	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 95, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
 	private MvbAccountEntryDiv mvbAccountEntryDiv;
 
 	/**
@@ -835,6 +926,56 @@ public class Contract extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 89, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 96, allowableValues = "range[0,9]")
 	private Integer ssWorkRequestCreateFlg;
+
+	/**
+	 * 次回契約更新可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回契約更新可能フラグ", required = false, position = 97, allowableValues = "range[0,9]")
+	private Integer nextUpdatePossibleFlg;
+
+	/**
+	 * 次回自動更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 98, allowableValues = "range[0,9]")
+	private Integer nextAutoUpdateFlg;
+
+	/**
+	 * ARCS期間売保守元契約処理状態
+	 */
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 99, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
+
+	/**
+	 * ARCS期間売保守元契約連携日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 100)
+	private Date arcsPeriodSaleMntOriginLinkAt;
+
+	/**
+	 * 次回継続可能機種なしフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 101, allowableValues = "range[0,9]")
+	private Integer nextEquipmentNotContFlg;
+
+	/**
+	 * 基本契約区分
+	 */
+	@ApiModelProperty(value = "基本契約区分", required = false, position = 102, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
+	private BasicContractDiv basicContractDiv;
+
+	/**
+	 * 基本契約ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "基本契約ID", required = false, position = 103, allowableValues = "range[0,9223372036854775807]")
+	private Long basicContractId;
 }

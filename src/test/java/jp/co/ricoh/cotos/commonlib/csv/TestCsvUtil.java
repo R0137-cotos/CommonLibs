@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.csv;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -18,7 +20,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CsvParameter;
+import jp.co.ricoh.cotos.commonlib.entity.master.CsvFileSettingMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.csv.CsvUtil;
 
 @RunWith(SpringRunner.class)
@@ -111,6 +115,20 @@ public class TestCsvUtil {
 	}
 
 	@Test
+	public void 正常系_CSV生成テスト_SJISのCSVファイル_半角スペースあり_withoutQuoteChar() throws ErrorCheckException, IOException, ParseException {
+		CsvParameter param = CsvParameter.builder().charset(Charset.forName("Shift-JIS")).quote(false).withoutQuoteChar(true).build();
+
+		List<TestCsvData> list = new ArrayList<>();
+		list.add(new TestCsvData(1, "testtest test", 12, new SimpleDateFormat("yyyy/MM/dd").parse("2018/12/12"), 75.4));
+		list.add(new TestCsvData(2, "東京都大田区平和島6-1-1東京流通センターB棟5F", 10, new SimpleDateFormat("yyyy/MM/dd").parse("2016/03/15"), 40.5));
+		list.add(new TestCsvData(3, null, 9, new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/02"), 100.1));
+
+		byte[] actual = csvUtil.createCsvData(list, param);
+		byte[] expected = Files.readAllBytes(Paths.get("src/test/resources/csv/input_default_space.csv"));
+		Assert.assertEquals("生成されたCSV情報が正しいこと", new String(actual, "Shift-JIS"), new String(expected, "UTF-8"));
+	}
+
+	@Test
 	public void 正常系_CSV生成テスト_改行コードCRLF() throws ErrorCheckException, IOException, ParseException {
 		CsvParameter param = CsvParameter.builder().lineSeparator("\r\n").build();
 
@@ -191,4 +209,314 @@ public class TestCsvUtil {
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "CSV生成時に必要なエンティティリストが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
 		}
 	}
+
+	@Test
+	public void 正常系_CSVファイル設定マスタエンティティからCsvParameterにコンバートできること_デフォルト値() {
+		// CSVマスタエンティティ
+		CsvFileSettingMaster csvFileSettingMaster = new CsvFileSettingMaster();
+		// 期待値
+		CsvParameter assertParam = CsvParameter.builder().build();
+		assertParam.setHeader(true);
+		assertParam.setSeparator(',');
+		assertParam.setCharset(Charset.forName("UTF-8"));
+		assertParam.setLineSeparator("\n");
+		assertParam.setQuote(true);
+		assertParam.setNullValueString("");
+		assertParam.setWithoutQuoteChar(false);
+		try {
+			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
+			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
+			Assert.assertEquals("セパレータ文字が一致すること", assertParam.getSeparator(), resultParam.getSeparator());
+			Assert.assertEquals("文字コードが一致すること", assertParam.getCharset(), resultParam.getCharset());
+			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
+			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
+			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+		} catch (ErrorCheckException e) {
+			fail("エラーが発生した");
+		}
+	}
+
+	@Test
+	public void 正常系_CSVファイル設定マスタエンティティからCsvParameterにコンバートできること_セパレータ文字_カンマ() {
+		// CSVマスタエンティティ
+		CsvFileSettingMaster csvFileSettingMaster = new CsvFileSettingMaster();
+		csvFileSettingMaster.setCsvHeaderFlg(0);
+		csvFileSettingMaster.setCsvSeparator("1");
+		csvFileSettingMaster.setCsvCharset("Shift_JIS");
+		csvFileSettingMaster.setCsvLineSeparator("2");
+		csvFileSettingMaster.setCsvQuote(1);
+		csvFileSettingMaster.setCsvNullValueString("");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		// 期待値
+		CsvParameter assertParam = CsvParameter.builder().build();
+		assertParam.setHeader(false);
+		assertParam.setSeparator(',');
+		assertParam.setCharset(Charset.forName("Shift_JIS"));
+		assertParam.setLineSeparator("\r\n");
+		assertParam.setQuote(true);
+		assertParam.setNullValueString("");
+		assertParam.setWithoutQuoteChar(true);
+		try {
+			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
+			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
+			Assert.assertEquals("セパレータ文字が一致すること", assertParam.getSeparator(), resultParam.getSeparator());
+			Assert.assertEquals("文字コードが一致すること", assertParam.getCharset(), resultParam.getCharset());
+			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
+			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
+			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+		} catch (ErrorCheckException e) {
+			fail("エラーが発生した");
+		}
+	}
+
+	@Test
+	public void 正常系_CSVファイル設定マスタエンティティからCsvParameterにコンバートできること_セパレータ文字_コロン() {
+		// CSVマスタエンティティ
+		CsvFileSettingMaster csvFileSettingMaster = new CsvFileSettingMaster();
+		csvFileSettingMaster.setCsvHeaderFlg(1);
+		csvFileSettingMaster.setCsvSeparator("2");
+		csvFileSettingMaster.setCsvCharset("Shift_JIS");
+		csvFileSettingMaster.setCsvLineSeparator("1");
+		csvFileSettingMaster.setCsvQuote(0);
+		csvFileSettingMaster.setCsvNullValueString("");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		// 期待値
+		CsvParameter assertParam = CsvParameter.builder().build();
+		assertParam.setHeader(true);
+		assertParam.setSeparator(':');
+		assertParam.setCharset(Charset.forName("Shift_JIS"));
+		assertParam.setLineSeparator("\n");
+		assertParam.setQuote(false);
+		assertParam.setNullValueString("");
+		assertParam.setWithoutQuoteChar(true);
+		try {
+			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
+			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
+			Assert.assertEquals("セパレータ文字が一致すること", assertParam.getSeparator(), resultParam.getSeparator());
+			Assert.assertEquals("文字コードが一致すること", assertParam.getCharset(), resultParam.getCharset());
+			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
+			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
+			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+		} catch (ErrorCheckException e) {
+			fail("エラーが発生した");
+		}
+	}
+
+	@Test
+	public void 正常系_CSVファイル設定マスタエンティティからCsvParameterにコンバートできること_セパレータ文字_セミコロン() {
+		// CSVマスタエンティティ
+		CsvFileSettingMaster csvFileSettingMaster = new CsvFileSettingMaster();
+		csvFileSettingMaster.setCsvHeaderFlg(1);
+		csvFileSettingMaster.setCsvSeparator("3");
+		csvFileSettingMaster.setCsvCharset("UTF-8");
+		csvFileSettingMaster.setCsvLineSeparator("1");
+		csvFileSettingMaster.setCsvQuote(0);
+		csvFileSettingMaster.setCsvNullValueString("null");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		// 期待値
+		CsvParameter assertParam = CsvParameter.builder().build();
+		assertParam.setHeader(true);
+		assertParam.setSeparator(';');
+		assertParam.setCharset(Charset.forName("UTF-8"));
+		assertParam.setLineSeparator("\n");
+		assertParam.setQuote(false);
+		assertParam.setNullValueString("null");
+		assertParam.setWithoutQuoteChar(true);
+		try {
+			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
+			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
+			Assert.assertEquals("セパレータ文字が一致すること", assertParam.getSeparator(), resultParam.getSeparator());
+			Assert.assertEquals("文字コードが一致すること", assertParam.getCharset(), resultParam.getCharset());
+			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
+			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
+			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+		} catch (ErrorCheckException e) {
+			fail("エラーが発生した");
+		}
+	}
+
+	@Test
+	public void 正常系_CSVファイル設定マスタエンティティからCsvParameterにコンバートできること_セパレータ文字_タブ() {
+		// CSVマスタエンティティ
+		CsvFileSettingMaster csvFileSettingMaster = new CsvFileSettingMaster();
+		csvFileSettingMaster.setCsvHeaderFlg(1);
+		csvFileSettingMaster.setCsvSeparator("4");
+		csvFileSettingMaster.setCsvCharset("UTF-8");
+		csvFileSettingMaster.setCsvLineSeparator("1");
+		csvFileSettingMaster.setCsvQuote(0);
+		csvFileSettingMaster.setCsvNullValueString("null");
+		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		// 期待値
+		CsvParameter assertParam = CsvParameter.builder().build();
+		assertParam.setHeader(true);
+		assertParam.setSeparator('\t');
+		assertParam.setCharset(Charset.forName("UTF-8"));
+		assertParam.setLineSeparator("\n");
+		assertParam.setQuote(false);
+		assertParam.setNullValueString("null");
+		assertParam.setWithoutQuoteChar(true);
+		try {
+			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
+			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
+			Assert.assertEquals("セパレータ文字が一致すること", assertParam.getSeparator(), resultParam.getSeparator());
+			Assert.assertEquals("文字コードが一致すること", assertParam.getCharset(), resultParam.getCharset());
+			Assert.assertEquals("改行コードが一致すること", assertParam.getLineSeparator(), resultParam.getLineSeparator());
+			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
+			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
+			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+		} catch (ErrorCheckException e) {
+			fail("エラーが発生した");
+		}
+	}
+
+	@Test
+	public void 異常系_CSVファイル設定マスタエンティティがNULL() {
+		// CSVマスタエンティティ
+		CsvFileSettingMaster csvFileSettingMaster = null;
+		try {
+			csvUtil.getCsvParameter(csvFileSettingMaster);
+			fail("正常終了した");
+		} catch (ErrorCheckException e) {
+			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00001", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが正しく設定されること", "パラメータ「CSVファイル設定マスタ」が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+
+	@Test
+	public void 異常系_CSV生成テスト_quoteとwithoutQuoteCharの両方にtrue() throws ErrorCheckException, IOException, ParseException {
+		CsvParameter param = CsvParameter.builder().quote(true).withoutQuoteChar(true).build();
+		List<TestCsvData> list = new ArrayList<>();
+		list.add(new TestCsvData(1, "テスト１", 12, new SimpleDateFormat("yyyy/MM/dd").parse("2018/12/12"), 75.4));
+
+		try {
+			csvUtil.createCsvData(list, param);
+			Assert.fail("正常終了した");
+		} catch (IllegalArgumentException e) {
+			Assert.assertEquals("IllegalArgumentExceptionが発生していること", "quoteとwithoutQuoteCharの両方にtrueを設定することはできません。", e.getMessage());
+		} catch (Exception e) {
+			Assert.fail("想定外のエラーが発生している");
+		}
+	}
+
+	@Test
+	public void 正常系_文字化け対象文字の変換() throws ParseException {
+		// CSVデータリスト
+		List<TestCsvData> csvList = createCsvData();
+		// 実施
+		List<TestCsvData> resultList = csvUtil.convertGarbledCharForCsvData(csvList, TestCsvData.class);
+		// チェック
+		// 1件目
+		TestCsvData csv1 = csvList.get(0);
+		TestCsvData result1 = resultList.get(0);
+		Assert.assertEquals("【１件目】", csv1.getId(), result1.getId());
+		Assert.assertEquals("【１件目】", "１１-２２", result1.getName());
+		Assert.assertEquals("【１件目】", csv1.getAge(), result1.getAge());
+		Assert.assertEquals("【１件目】", csv1.getBirthday(), result1.getBirthday());
+		Assert.assertEquals("【１件目】", csv1.getWeight(), result1.getWeight(), 0.0);
+		// 2件目
+		TestCsvData csv2 = csvList.get(1);
+		TestCsvData result2 = resultList.get(1);
+		Assert.assertEquals("【２件目】", csv2.getId(), result2.getId());
+		Assert.assertEquals("【２件目】", "２２-３３", result2.getName());
+		Assert.assertEquals("【２件目】", csv2.getAge(), result2.getAge());
+		Assert.assertEquals("【２件目】", csv2.getBirthday(), result2.getBirthday());
+		Assert.assertEquals("【２件目】", csv2.getWeight(), result2.getWeight(), 0.0);
+		// 3件目
+		TestCsvData csv3 = csvList.get(2);
+		TestCsvData result3 = resultList.get(2);
+		Assert.assertEquals("【３件目】", csv3.getId(), result3.getId());
+		Assert.assertEquals("【３件目】", "３３-４４", result3.getName());
+		Assert.assertEquals("【３件目】", csv3.getAge(), result3.getAge());
+		Assert.assertEquals("【３件目】", csv3.getBirthday(), result3.getBirthday());
+		Assert.assertEquals("【３件目】", csv3.getWeight(), result3.getWeight(), 0.0);
+		// 4件目
+		TestCsvData csv4 = csvList.get(3);
+		TestCsvData result4 = resultList.get(3);
+		Assert.assertEquals("【４件目】", csv4.getId(), result4.getId());
+		Assert.assertEquals("【４件目】", "４４-５５", result4.getName());
+		Assert.assertEquals("【４件目】", csv4.getAge(), result4.getAge());
+		Assert.assertEquals("【４件目】", csv4.getBirthday(), result4.getBirthday());
+		Assert.assertEquals("【４件目】", csv4.getWeight(), result4.getWeight(), 0.0);
+		// 5件目
+		TestCsvData csv5 = csvList.get(4);
+		TestCsvData result5 = resultList.get(4);
+		Assert.assertEquals("【５件目】", csv5.getId(), result5.getId());
+		Assert.assertEquals("【５件目】", "５５～６６", result5.getName());
+		Assert.assertEquals("【５件目】", csv5.getAge(), result5.getAge());
+		Assert.assertEquals("【５件目】", csv5.getBirthday(), result5.getBirthday());
+		Assert.assertEquals("【５件目】", csv5.getWeight(), result5.getWeight(), 0.0);
+		// 6件目
+		TestCsvData csv6 = csvList.get(5);
+		TestCsvData result6 = resultList.get(5);
+		Assert.assertEquals("【６件目】", csv6.getId(), result6.getId());
+		Assert.assertEquals("【６件目】", "６６-７７", result6.getName());
+		Assert.assertEquals("【６件目】", csv6.getAge(), result6.getAge());
+		Assert.assertEquals("【６件目】", csv6.getBirthday(), result6.getBirthday());
+		Assert.assertEquals("【６件目】", csv6.getWeight(), result6.getWeight(), 0.0);
+	}
+
+	@Test
+	public void 正常系_文字化け対象文字の変換_CSVデータがNull() {
+		// 実施
+		List<TestCsvData> list = csvUtil.convertGarbledCharForCsvData(null, TestCsvData.class);
+		// チェック
+		Assert.assertNull("戻り値がNullであること", list);
+	}
+
+	@Test
+	public void 正常系_文字化け対象文字の変換_CSVデータ空() {
+		// 実施
+		List<TestCsvData> list = csvUtil.convertGarbledCharForCsvData(new ArrayList<TestCsvData>(), TestCsvData.class);
+		// チェック
+		Assert.assertEquals("戻り値が空であること", 0, list.size());
+	}
+
+	@Test
+	public void 異常系_文字化け対象文字の変換_クラス指定なし() throws ParseException {
+		// テストデータ取得
+		List<TestCsvData> csvList = createCsvData();
+
+		try {
+			// 実施
+			csvUtil.convertGarbledCharForCsvData(csvList, null);
+		} catch (ErrorCheckException e) {
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			// チェック
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00013", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "Objectが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+
+	/**
+	 * テスト用のCSVデータリストを作成します。
+	 *
+	 * @return
+	 * @throws ParseException
+	 */
+	private List<TestCsvData> createCsvData() throws ParseException {
+
+		List<TestCsvData> list = new ArrayList<>();
+		String format = "yyyy/MM/dd";
+		// リスト作成
+		TestCsvData dto1 = new TestCsvData(1L, "１１‑２２", 50, new SimpleDateFormat(format).parse("2021/01/15"), 100D);
+		list.add(dto1);
+		TestCsvData dto2 = new TestCsvData(2L, "２２–３３", 51, new SimpleDateFormat(format).parse("2021/02/15"), 110D);
+		list.add(dto2);
+		TestCsvData dto3 = new TestCsvData(3L, "３３—４４", 52, new SimpleDateFormat(format).parse("2021/03/15"), 120D);
+		list.add(dto3);
+		TestCsvData dto4 = new TestCsvData(4L, "４４−５５", 53, new SimpleDateFormat(format).parse("2021/04/15"), 130D);
+		list.add(dto4);
+		TestCsvData dto5 = new TestCsvData(5L, "５５∼６６", 54, new SimpleDateFormat(format).parse("2021/05/15"), 140D);
+		list.add(dto5);
+		TestCsvData dto6 = new TestCsvData(6L, "６６－７７", 55, new SimpleDateFormat(format).parse("2021/12/15"), 150D);
+		list.add(dto6);
+
+		return list;
+	}
+
 }

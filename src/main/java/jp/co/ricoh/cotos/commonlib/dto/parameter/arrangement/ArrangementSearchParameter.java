@@ -502,6 +502,38 @@ public class ArrangementSearchParameter {
 	private Integer disengagementFlg;
 
 	/**
+	 * サービス利用希望日
+	 */
+	@ApiParam(value = "サービス利用希望日", required = false)
+	@ApiModelProperty(value = "サービス利用希望日<br />" //
+			+ "日付フォーマット:yyyy/MM/dd", //
+			required = false) //
+	private Date conclusionPreferredDate;
+
+	/**
+	 * 導入設置先距離
+	 */
+	@ApiParam(value = "導入設置先距離", required = false)
+	@ApiModelProperty(value = "導入設置先距離", required = false)
+	private Long introductionDistance;
+
+	/**
+	 * 承認手配業務
+	 */
+	@ApiParam(value = "承認手配業務タイプマスタID", required = false)
+	@ApiModelProperty(value = "承認手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	private String approvalArrangementWorkTypeId;
+
+	/**
+	 * 手配承認日時
+	 */
+	@ApiParam(value = "手配承認日時", required = false)
+	@ApiModelProperty(value = "手配承認日時<br />" //
+			+ "日付フォーマット:yyyy/MM/dd HH", //
+			required = false) //
+	private Date approvalDate;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {

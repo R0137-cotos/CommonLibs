@@ -243,6 +243,78 @@ public class TestSendMail {
 		Assert.assertEquals("契約番号枝番が正しく設定されていること", "1", actual.getHeader("ContractBranchNumber")[0]);
 	}
 
+	@Test
+	public void メール送信リスト置換リストあり() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> emailCcList = 送信先CCメールアドレスリスト作成();
+		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		List<List<String>> mailTextRepalceListValues = メール本文リスト置換リスト作成();
+
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(12L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	public void メール送信リスト置換リストあり_Null値あり() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> emailCcList = 送信先CCメールアドレスリスト作成();
+		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		List<List<String>> mailTextRepalceListValues = メール本文リスト置換リスト作成Null値あり();
+
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(12L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	public void メール送信リストマッピング最大件数テスト() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> emailCcList = 送信先CCメールアドレスリスト作成();
+		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト最大件数作成();
+		List<List<String>> mailTextRepalceListValues = メール本文リスト置換リスト最大件数作成();
+
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(13L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	public void メール送信_CC_BCCなし() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), null, emailToList, new ArrayList<String>(), new ArrayList<String>(), mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/mail/testProductGrpMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/mail/testMailTemplateMasterInset.sql");
@@ -288,6 +360,24 @@ public class TestSendMail {
 		return IntStream.rangeClosed(1, 11).mapToObj(i -> "test_text's" + i).collect(Collectors.toList());
 	}
 
+	private List<List<String>> メール本文リスト置換リスト作成() {
+		return IntStream.rangeClosed(1, 3).mapToObj(i -> IntStream.rangeClosed(1, 5).mapToObj(t -> "test_list" + i + "_" + t).collect(Collectors.toList())).collect(Collectors.toList());
+	}
+
+	private List<List<String>> メール本文リスト置換リスト作成Null値あり() {
+		List<List<String>> lists = IntStream.rangeClosed(2, 3).mapToObj(i -> IntStream.rangeClosed(2, 5).mapToObj(t -> "test_list" + i + "_" + t).collect(Collectors.toList())).collect(Collectors.toList());
+		lists.add(0, null);
+		return lists;
+	}
+
+	private List<String> メール本文置換リスト最大件数作成() {
+		return IntStream.rangeClosed(1, 16).mapToObj(i -> "test_text" + i).collect(Collectors.toList());
+	}
+
+	private List<List<String>> メール本文リスト置換リスト最大件数作成() {
+		return IntStream.rangeClosed(1, 3).mapToObj(i -> IntStream.rangeClosed(1, 5).mapToObj(t -> "test_list" + i + "_" + t).collect(Collectors.toList())).collect(Collectors.toList());
+	}
+
 	private BounceMailHeaderDto バウンスメールヘッダーDTO作成() {
 
 		BounceMailHeaderDto bounceMailHeaderDto = new BounceMailHeaderDto();
@@ -295,6 +385,7 @@ public class TestSendMail {
 		bounceMailHeaderDto.setDocNumber("CC2020102800001");
 		bounceMailHeaderDto.setContractNumber("CIC2020102800001");
 		bounceMailHeaderDto.setContractBranchNumber(1);
+		bounceMailHeaderDto.setMailControlMasterId(1L);
 
 		return bounceMailHeaderDto;
 	}

@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -108,7 +110,7 @@ public class ContractDetail extends EntityBase {
 	}
 
 	public enum FfmAcceptanceLinkingStatus {
-		未作成("0"), 作成済み("1"), 作成エラー("2");
+		未作成("0"), 作成済み("1"), 作成エラー("2"), 対象外("3");
 
 		private final String text;
 
@@ -124,6 +126,27 @@ public class ContractDetail extends EntityBase {
 
 		@JsonCreator
 		public static FfmAcceptanceLinkingStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum AbsConExternalBillingStatus {
+		未処理("0"), CSV作成済み("1"), 対象外("2");
+
+		private final String text;
+
+		private AbsConExternalBillingStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static AbsConExternalBillingStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -244,7 +267,7 @@ public class ContractDetail extends EntityBase {
 	/**
 	 * 統合契約内部振替処理状態
 	 */
-	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理中(\"0\"), TSV作成済み(\"1\"), 連携済み(\"2\"), 連携エラー(\"3\"), 対象外(\"4\")", position = 16)
+	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 16)
 	private AbsConInsideTransStatus absConInsideTransStatus;
 
 	/**
@@ -287,4 +310,25 @@ public class ContractDetail extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 22, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
+
+	/**
+	 * 統合契約外部請求処理状態
+	 */
+	@ApiModelProperty(value = "統合契約外部請求処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 対象外(\"2\")", position = 23)
+	private AbsConExternalBillingStatus absConExternalBillingStatus;
+
+	/**
+	 * 統合契約外部請求連携日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "統合契約外部請求連携日", required = false, position = 24)
+	private Date absConExternalBillingDate;
+
+	/**
+	 * 発送物あり明細
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contractDetail")
+	@ApiModelProperty(value = "発送物あり明細", required = false, position = 25)
+	private List<ShippingThingDetail> shippingThingDetailList;
 }

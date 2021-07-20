@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -37,6 +40,28 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product_master")
 public class ProductMaster extends EntityBaseMaster {
+
+	public enum SerialContactDiv {
+
+		新規のみ("1"), 新規と契約変更("2");
+
+		private final String text;
+
+		private SerialContactDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static SerialContactDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_master_seq")
@@ -189,15 +214,37 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "最低契約月数", required = false, position = 21, allowableValues = "range[0,999]")
+	@ApiModelProperty(value = "最低契約月数", required = false, position = 22, allowableValues = "range[0,999]")
 	private Integer minContractMonths;
+
+	/**
+	 * 最長契約月数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "最長契約月数", required = false, position = 23, allowableValues = "range[0,99999]")
+	private Integer maxContractMonths;
+
+	/**
+	 * 仕入先No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入先No", required = false, position = 24, allowableValues = "range[0,255]")
+	private String siiresakiNo;
+
+	/**
+	 * ARCS契約種類区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ARCS契約種類区分", required = false, position = 25, allowableValues = "range[0,255]")
+	private String arcsContractClassDiv;
 
 	/**
 	 * 訪販代売禁止フラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "訪販代売禁止フラグ", required = false, position = 22, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "訪販代売禁止フラグ", required = false, position = 26, allowableValues = "range[0,9]")
 	private Integer substituteSalesProhibitedFlg;
 
 	/**
@@ -207,4 +254,25 @@ public class ProductMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "契約変更時商流変更可能フラグ", required = false, position = 23, allowableValues = "range[0,9]")
 	private Integer commercialFlowDivPlanChangeableFlg;
+
+	/**
+	 * ヤマト便有無フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "ヤマト便有無フラグ", required = false, position = 27, allowableValues = "range[0,9]")
+	private Integer yamatoFlg;
+
+	/**
+	 * シリアル連絡URL
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "シリアル連絡URL", required = false, position = 28, allowableValues = "range[0,255]")
+	private String serialContactUrl;
+
+	/**
+	 * シリアル連絡区分
+	 */
+	@ApiModelProperty(value = "シリアル連絡区分", required = false, position = 29, allowableValues = "新規のみ(\"1\"), 新規と契約変更(\"2\")", example = "1")
+	private SerialContactDiv serialContactDiv;
 }

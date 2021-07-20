@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -58,7 +60,7 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", position = 4)
+	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\"), 期間売_月額(\"4\")", position = 4)
 	private InitialRunningDiv initialRunningDiv;
 
 	/**
@@ -69,4 +71,12 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	@JsonIgnore
 	@ApiModelProperty(value = "品種マスタ", required = true, position = 5)
 	private ItemMaster itemMaster;
+
+	/**
+	 * ディスパッチ振替フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "ディスパッチ振替フラグ", required = false, position = 4, allowableValues = "range[0,9]")
+	private Integer dispatchTransferFlg;
 }

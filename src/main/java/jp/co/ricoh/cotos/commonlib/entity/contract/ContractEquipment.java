@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -52,6 +56,70 @@ public class ContractEquipment extends EntityBase {
 
 		@JsonCreator
 		public static IsysoneProcStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum IsysoneMaintereportProcStatus {
+		未処理("0"), CSV作成済み("1"), 対象外("2");
+
+		private final String text;
+
+		private IsysoneMaintereportProcStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IsysoneMaintereportProcStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum ArcsPeriodSaleMainteProcStatus {
+		未作成("0"), CSV作成済み("1"), 対象外("2");
+
+		private final String text;
+
+		private ArcsPeriodSaleMainteProcStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ArcsPeriodSaleMainteProcStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	// SVPの移行元のRITOSと同様に0から採番
+	public enum MachineType {
+		サーバー本体("0"), HWオプション("1"), SWオプション("2");
+
+		private final String text;
+
+		private MachineType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MachineType fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -170,5 +238,74 @@ public class ContractEquipment extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "点検診断月(12ヶ月分)", required = false, position = 16, allowableValues = "range[0,255]")
 	private String inspectionMonthYearWorth;
+
+	/**
+	 * Isys-One保守レポート処理状態
+	 */
+	@ApiModelProperty(value = "Isys-One保守レポート処理状態", required = false, position = 17, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\")")
+	private IsysoneMaintereportProcStatus isysoneMaintereportProcStatus;
+
+	/**
+	 * Isys-One保守レポート連携日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "Isys-One保守レポート連携日時", required = false, position = 18)
+	private Date isysoneMaintereportLinkageAt;
+
+	/**
+	 * ARCS期間売保守処理状態
+	 */
+	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 19, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),作成エラー(\"3\")")
+	private ArcsPeriodSaleMainteProcStatus arcsPeriodSaleMainteProcStatus;
+
+	/**
+	 * ARCS期間売保守連携日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 20)
+	private Date arcsPeriodSaleMainteLinkageAt;
+
+	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 21)
+	@Lob
+	private String extendsParameter;
+
+	/**
+	 * メーカーコード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカーコード", required = false, position = 22, allowableValues = "range[0,255]")
+	private String makerCode;
+
+	/**
+	 * 分類コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "分類コード", required = false, position = 23, allowableValues = "range[0,255]")
+	private String classificationCode;
+
+	/**
+	 * 機器区分
+	 */
+	@ApiModelProperty(value = "機器区分", required = false, position = 24, allowableValues = "サーバー本体(\"1\"),HWオプション(\"2\"),SWオプション(\"3\")")
+	private MachineType machineType;
+
+	/**
+	 * 機種名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機種名", required = false, position = 25, allowableValues = "range[0,255]")
+	private String equipmentName;
+
+	/**
+	 * 契約機種状態管理
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contractEquipment")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 26)
+	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 
 }
