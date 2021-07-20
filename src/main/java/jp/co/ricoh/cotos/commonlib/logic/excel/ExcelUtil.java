@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.logic.excel;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -23,6 +25,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.jxls.common.Context;
 import org.jxls.util.JxlsHelper;
+import org.jxls.util.Util;
+import org.krysalis.barcode4j.impl.code39.Code39Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,13 +35,21 @@ import com.google.common.base.Strings;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorFatalException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.logic.barcode.BarcodeGenerator;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.util.ReportsProperties;
 
 @Component
 public class ExcelUtil {
 
 	@Autowired
 	CheckUtil checkUtil;
+
+	@Autowired
+	BarcodeGenerator barcodeGenerator;
+
+	@Autowired
+	ReportsProperties reportsProperties;
 
 	/**
 	 * エクセル帳票ファイルを生成する
@@ -151,12 +163,37 @@ public class ExcelUtil {
 	}
 
 	/**
-	 * jxlsコンテキストをもとにエクセル帳票を生成する
+	 * マッピングデータをもとにエクセル帳票を生成する
 	 * @param inputTemplateFile エクセル帳票テンプレートファイル
-	 * @param context jxlsコンテキスト
+	 * @param dataMapList マッピングデータ
 	 */
-	public ByteArrayOutputStream processTemplate(File inputTemplateFile, Context context) {
+	public ByteArrayOutputStream processTemplate(File inputTemplateFile, List<Map<String, List<Object>>> dataMapList) {
+		List<String> multiSheetNameList = new ArrayList<>();
+		List<String> deleteSheetNameList = new ArrayList<>();
 		List<ErrorInfo> errorInfoList = new ArrayList<>();
+
+		// エクセルコンテキストへマッピング情報を設定
+		Context context = new Context();
+		dataMapList.stream().forEach(dataMap -> {
+			dataMap.entrySet().stream().forEach(data -> {
+				if (data.getKey().equals("MULTI_SHEET_NAME_LIST")) {
+					data.getValue().stream().forEach(d -> multiSheetNameList.add(d.toString()));
+				} else if (data.getKey().equals("DELETE_SHEET_NAME_LIST")) {
+					data.getValue().stream().forEach(d -> deleteSheetNameList.add(d.toString()));
+					return;
+				}
+
+				// バーコードマッピング設定処理
+				if (data.getKey().contains("BAR_CODE_CODE39")) {
+					context.putVar(data.getKey(), this.convertStringList2ByteArrays(data.getValue()));
+					return;
+				}
+
+				context.putVar(data.getKey(), data.getValue());
+			});
+		});
+
+		// エクセル出力
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try (InputStream in = new FileInputStream(inputTemplateFile)) {
 			JxlsHelper.getInstance().setUseFastFormulaProcessor(false).setDeleteTemplateSheet(true).processTemplate(in, out, context);
@@ -168,5 +205,42 @@ public class ExcelUtil {
 		}
 
 		return out;
+	}
+
+	/**
+	 * マッピングデータをObjectリストからバイト配列リストに変換
+	 *
+	 * @param マッピングデータ値（Objectリスト）
+	 * @return マッピングデータ値（バイト配列リスト）
+	 */
+	private List<byte[]> convertStringList2ByteArrays(List<Object> valuesList) {
+		List<byte[]> retValueList = new ArrayList<>();
+		valuesList.stream().forEach(d -> {
+			Path tmpBarcodeImageFilePath = Paths.get(reportsProperties.getTemporaryDir(), String.format("%s.png", UUID.randomUUID()));
+
+			// バーコード画像を一時ディレクトリに出力
+			try (FileOutputStream fos = new FileOutputStream(tmpBarcodeImageFilePath.toString()); BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+				byte[] barcode = barcodeGenerator.generate(new Code39Bean(), 300, d.toString());
+				bos.write(barcode);
+			} catch (IOException neverOccur) {
+				throw new RuntimeException(neverOccur);
+			}
+
+			// バーコード画像ファイルを読み込んでマッピングに設定
+			try (InputStream image = new FileInputStream(tmpBarcodeImageFilePath.toFile())) {
+				retValueList.add(Util.toByteArray(image));
+			} catch (IOException neverOccur) {
+				throw new RuntimeException(neverOccur);
+			}
+
+			//バーコード画像を一時ディレクトリから削除
+			try {
+				Files.deleteIfExists(tmpBarcodeImageFilePath);
+			} catch (IOException neverOccur) {
+				throw new RuntimeException(neverOccur);
+			}
+		});
+
+		return retValueList;
 	}
 }
