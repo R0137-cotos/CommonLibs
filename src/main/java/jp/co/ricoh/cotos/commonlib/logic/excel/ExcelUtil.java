@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.logic.excel;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -147,5 +148,25 @@ public class ExcelUtil {
 				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileDeleteFailed", new String[] { tempPath.toFile().getAbsolutePath() }));
 			}
 		}
+	}
+
+	/**
+	 * jxlsコンテキストをもとにエクセル帳票を生成する
+	 * @param inputTemplateFile エクセル帳票テンプレートファイル
+	 * @param context jxlsコンテキスト
+	 */
+	public OutputStream processTemplate(File inputTemplateFile, Context context) {
+		List<ErrorInfo> errorInfoList = new ArrayList<>();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		try (InputStream in = new FileInputStream(inputTemplateFile)) {
+			JxlsHelper.getInstance().setUseFastFormulaProcessor(false).setDeleteTemplateSheet(true).processTemplate(in, out, context);
+
+		} catch (FileNotFoundException e) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError"));
+		} catch (IOException e) {
+			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileWriteError"));
+		}
+
+		return out;
 	}
 }
