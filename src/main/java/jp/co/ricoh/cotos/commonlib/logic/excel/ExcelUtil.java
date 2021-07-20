@@ -59,51 +59,51 @@ public class ExcelUtil {
 	 */
 	@Deprecated
 	public <T> void outputExcelReports(String templateFilePath, T entity, String outputFilePath) throws ErrorCheckException {
-		List<ErrorInfo> errorInfoList = new ArrayList<>();
-
-		// 引数チェック
-		if (entity == null) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "マッピング用エンティティクラス" }));
-		}
-		if (Strings.isNullOrEmpty(templateFilePath)) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "入力テンプレートエクセルファイルパス" }));
-		}
-		if (Strings.isNullOrEmpty(outputFilePath)) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "出力エクセル帳票ファイルパス" }));
-		}
-
-		// ファイルチェック
-		File inputTemplateFile = new File(templateFilePath);
-		File outputFile = new File(outputFilePath);
-		if (!inputTemplateFile.exists()) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputTemplateFile.getAbsolutePath() }));
-		}
-		if (outputFile.exists()) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileFoundError", new String[] { outputFile.getAbsolutePath() }));
-		}
-
-		// エクセルコンテキストへマッピング情報を設定
-		Context context = new Context();
-		for (Field field : entity.getClass().getDeclaredFields()) {
-			field.setAccessible(true);
-			try {
-				context.putVar(field.getName(), field.get(entity));
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileMappingFailed", new String[] { "マッピング用エンティティクラス" }));
-			}
-		}
-
-		// エクセル出力
-		try (InputStream in = new FileInputStream(inputTemplateFile)) {
-			Files.createDirectories(outputFile.toPath().getParent());
-			try (OutputStream out = new FileOutputStream(outputFile)) {
-				JxlsHelper.getInstance().setUseFastFormulaProcessor(false).setDeleteTemplateSheet(true).processTemplate(in, out, context);
-			}
-		} catch (FileNotFoundException e) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputTemplateFile.getAbsolutePath() }));
-		} catch (IOException e) {
-			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileOutputFailed", new String[] { outputFile.getAbsolutePath() }));
-		}
+//		List<ErrorInfo> errorInfoList = new ArrayList<>();
+//
+//		// 引数チェック
+//		if (entity == null) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "マッピング用エンティティクラス" }));
+//		}
+//		if (Strings.isNullOrEmpty(templateFilePath)) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "入力テンプレートエクセルファイルパス" }));
+//		}
+//		if (Strings.isNullOrEmpty(outputFilePath)) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "出力エクセル帳票ファイルパス" }));
+//		}
+//
+//		// ファイルチェック
+//		File inputTemplateFile = new File(templateFilePath);
+//		File outputFile = new File(outputFilePath);
+//		if (!inputTemplateFile.exists()) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputTemplateFile.getAbsolutePath() }));
+//		}
+//		if (outputFile.exists()) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileFoundError", new String[] { outputFile.getAbsolutePath() }));
+//		}
+//
+//		// エクセルコンテキストへマッピング情報を設定
+//		Context context = new Context();
+//		for (Field field : entity.getClass().getDeclaredFields()) {
+//			field.setAccessible(true);
+//			try {
+//				context.putVar(field.getName(), field.get(entity));
+//			} catch (IllegalArgumentException | IllegalAccessException e) {
+//				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileMappingFailed", new String[] { "マッピング用エンティティクラス" }));
+//			}
+//		}
+//
+//		// エクセル出力
+//		try (InputStream in = new FileInputStream(inputTemplateFile)) {
+//			Files.createDirectories(outputFile.toPath().getParent());
+//			try (OutputStream out = new FileOutputStream(outputFile)) {
+//				JxlsHelper.getInstance().setUseFastFormulaProcessor(false).setDeleteTemplateSheet(true).processTemplate(in, out, context);
+//			}
+//		} catch (FileNotFoundException e) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputTemplateFile.getAbsolutePath() }));
+//		} catch (IOException e) {
+//			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileOutputFailed", new String[] { outputFile.getAbsolutePath() }));
+//		}
 	}
 
 	/**
@@ -113,134 +113,134 @@ public class ExcelUtil {
 	 */
 	@Deprecated
 	public void deleteExcelSheet(String filePath, List<String> sheetNameList) throws ErrorCheckException {
-		List<ErrorInfo> errorInfoList = new ArrayList<>();
-
-		//引数チェック
-		if (Strings.isNullOrEmpty(filePath)) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "入出力エクセル帳票ファイルパス" }));
-		}
-		if (sheetNameList == null || sheetNameList.size() == 0) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "削除シート名配列" }));
-		}
-
-		// ファイルチェック
-		File inputFile = new File(filePath);
-		if (!inputFile.exists()) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputFile.getAbsolutePath() }));
-		}
-		if (!inputFile.canWrite()) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileReadOnlyError", new String[] { inputFile.getAbsolutePath() }));
-		}
-
-		Path tempPath = Paths.get(inputFile.getParent(), UUID.randomUUID().toString().replaceAll("-", "") + ".bak");
-
-		try (InputStream in = new FileInputStream(inputFile)) {
-			// シート削除エクセルファイルをテンポラリとして作成
-			try (OutputStream out = new FileOutputStream(tempPath.toFile())) {
-				Workbook wb = WorkbookFactory.create(in);
-				sheetNameList.stream().map(s -> wb.getSheetIndex(s)).filter(idx -> idx >= 0).forEach(idx -> wb.removeSheetAt(idx));
-				wb.write(out);
-			}
-
-			// シート削除後ファイルのコピー
-			try {
-				Files.copy(tempPath, inputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			} catch (IOException e) {
-				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileCopyFailed", new String[] { tempPath.toFile().getAbsolutePath() }));
-			}
-		} catch (FileNotFoundException e) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputFile.getAbsolutePath() }));
-		} catch (IOException | EncryptedDocumentException | InvalidFormatException e) {
-			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileOutputFailed", new String[] { inputFile.getAbsolutePath() }));
-		} finally {
-			// テンポラリファイル削除
-			try {
-				Files.deleteIfExists(tempPath);
-			} catch (IOException e) {
-				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileDeleteFailed", new String[] { tempPath.toFile().getAbsolutePath() }));
-			}
-		}
+//		List<ErrorInfo> errorInfoList = new ArrayList<>();
+//
+//		//引数チェック
+//		if (Strings.isNullOrEmpty(filePath)) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "入出力エクセル帳票ファイルパス" }));
+//		}
+//		if (sheetNameList == null || sheetNameList.size() == 0) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "ParameterEmptyError", new String[] { "削除シート名配列" }));
+//		}
+//
+//		// ファイルチェック
+//		File inputFile = new File(filePath);
+//		if (!inputFile.exists()) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputFile.getAbsolutePath() }));
+//		}
+//		if (!inputFile.canWrite()) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileReadOnlyError", new String[] { inputFile.getAbsolutePath() }));
+//		}
+//
+//		Path tempPath = Paths.get(inputFile.getParent(), UUID.randomUUID().toString().replaceAll("-", "") + ".bak");
+//
+//		try (InputStream in = new FileInputStream(inputFile)) {
+//			// シート削除エクセルファイルをテンポラリとして作成
+//			try (OutputStream out = new FileOutputStream(tempPath.toFile())) {
+//				Workbook wb = WorkbookFactory.create(in);
+//				sheetNameList.stream().map(s -> wb.getSheetIndex(s)).filter(idx -> idx >= 0).forEach(idx -> wb.removeSheetAt(idx));
+//				wb.write(out);
+//			}
+//
+//			// シート削除後ファイルのコピー
+//			try {
+//				Files.copy(tempPath, inputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//			} catch (IOException e) {
+//				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileCopyFailed", new String[] { tempPath.toFile().getAbsolutePath() }));
+//			}
+//		} catch (FileNotFoundException e) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputFile.getAbsolutePath() }));
+//		} catch (IOException | EncryptedDocumentException | InvalidFormatException e) {
+//			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileOutputFailed", new String[] { inputFile.getAbsolutePath() }));
+//		} finally {
+//			// テンポラリファイル削除
+//			try {
+//				Files.deleteIfExists(tempPath);
+//			} catch (IOException e) {
+//				throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileDeleteFailed", new String[] { tempPath.toFile().getAbsolutePath() }));
+//			}
+//		}
 	}
 
-	/**
-	 * マッピングデータをもとにエクセル帳票を生成する
-	 * @param inputTemplateFile エクセル帳票テンプレートファイル
-	 * @param dataMapList マッピングデータ
-	 */
-	public ByteArrayOutputStream processTemplate(File inputTemplateFile, List<Map<String, List<Object>>> dataMapList) {
-		List<String> multiSheetNameList = new ArrayList<>();
-		List<String> deleteSheetNameList = new ArrayList<>();
-		List<ErrorInfo> errorInfoList = new ArrayList<>();
-
-		// エクセルコンテキストへマッピング情報を設定
-		Context context = new Context();
-		dataMapList.stream().forEach(dataMap -> {
-			dataMap.entrySet().stream().forEach(data -> {
-				if (data.getKey().equals("MULTI_SHEET_NAME_LIST")) {
-					data.getValue().stream().forEach(d -> multiSheetNameList.add(d.toString()));
-				} else if (data.getKey().equals("DELETE_SHEET_NAME_LIST")) {
-					data.getValue().stream().forEach(d -> deleteSheetNameList.add(d.toString()));
-					return;
-				}
-
-				// バーコードマッピング設定処理
-				if (data.getKey().contains("BAR_CODE_CODE39")) {
-					context.putVar(data.getKey(), this.convertStringList2ByteArrays(data.getValue()));
-					return;
-				}
-
-				context.putVar(data.getKey(), data.getValue());
-			});
-		});
-
-		// エクセル出力
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		try (InputStream in = new FileInputStream(inputTemplateFile)) {
-			JxlsHelper.getInstance().setUseFastFormulaProcessor(false).setDeleteTemplateSheet(true).processTemplate(in, out, context);
-
-		} catch (FileNotFoundException e) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError"));
-		} catch (IOException e) {
-			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileWriteError"));
-		}
-
-		return out;
-	}
-
-	/**
-	 * マッピングデータをObjectリストからバイト配列リストに変換
-	 *
-	 * @param マッピングデータ値（Objectリスト）
-	 * @return マッピングデータ値（バイト配列リスト）
-	 */
-	private List<byte[]> convertStringList2ByteArrays(List<Object> valuesList) {
-		List<byte[]> retValueList = new ArrayList<>();
-		valuesList.stream().forEach(d -> {
-			Path tmpBarcodeImageFilePath = Paths.get(reportsProperties.getTemporaryDir(), String.format("%s.png", UUID.randomUUID()));
-
-			// バーコード画像を一時ディレクトリに出力
-			try (FileOutputStream fos = new FileOutputStream(tmpBarcodeImageFilePath.toString()); BufferedOutputStream bos = new BufferedOutputStream(fos)) {
-				byte[] barcode = barcodeGenerator.generate(new Code39Bean(), 300, d.toString());
-				bos.write(barcode);
-			} catch (IOException neverOccur) {
-				throw new RuntimeException(neverOccur);
-			}
-
-			// バーコード画像ファイルを読み込んでマッピングに設定
-			try (InputStream image = new FileInputStream(tmpBarcodeImageFilePath.toFile())) {
-				retValueList.add(Util.toByteArray(image));
-			} catch (IOException neverOccur) {
-				throw new RuntimeException(neverOccur);
-			}
-
-			//バーコード画像を一時ディレクトリから削除
-			try {
-				Files.deleteIfExists(tmpBarcodeImageFilePath);
-			} catch (IOException neverOccur) {
-				throw new RuntimeException(neverOccur);
-			}
-		});
-
-		return retValueList;
-	}
+//	/**
+//	 * マッピングデータをもとにエクセル帳票を生成する
+//	 * @param inputTemplateFile エクセル帳票テンプレートファイル
+//	 * @param dataMapList マッピングデータ
+//	 */
+//	public ByteArrayOutputStream processTemplate(File inputTemplateFile, List<Map<String, List<Object>>> dataMapList) {
+//		List<String> multiSheetNameList = new ArrayList<>();
+//		List<String> deleteSheetNameList = new ArrayList<>();
+//		List<ErrorInfo> errorInfoList = new ArrayList<>();
+//
+//		// エクセルコンテキストへマッピング情報を設定
+//		Context context = new Context();
+//		dataMapList.stream().forEach(dataMap -> {
+//			dataMap.entrySet().stream().forEach(data -> {
+//				if (data.getKey().equals("MULTI_SHEET_NAME_LIST")) {
+//					data.getValue().stream().forEach(d -> multiSheetNameList.add(d.toString()));
+//				} else if (data.getKey().equals("DELETE_SHEET_NAME_LIST")) {
+//					data.getValue().stream().forEach(d -> deleteSheetNameList.add(d.toString()));
+//					return;
+//				}
+//
+//				// バーコードマッピング設定処理
+//				if (data.getKey().contains("BAR_CODE_CODE39")) {
+//					context.putVar(data.getKey(), this.convertStringList2ByteArrays(data.getValue()));
+//					return;
+//				}
+//
+//				context.putVar(data.getKey(), data.getValue());
+//			});
+//		});
+//
+//		// エクセル出力
+//		ByteArrayOutputStream out = new ByteArrayOutputStream();
+//		try (InputStream in = new FileInputStream(inputTemplateFile)) {
+//			JxlsHelper.getInstance().setUseFastFormulaProcessor(false).setDeleteTemplateSheet(true).processTemplate(in, out, context);
+//
+//		} catch (FileNotFoundException e) {
+//			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError"));
+//		} catch (IOException e) {
+//			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileWriteError"));
+//		}
+//
+//		return out;
+//	}
+//
+//	/**
+//	 * マッピングデータをObjectリストからバイト配列リストに変換
+//	 *
+//	 * @param マッピングデータ値（Objectリスト）
+//	 * @return マッピングデータ値（バイト配列リスト）
+//	 */
+//	private List<byte[]> convertStringList2ByteArrays(List<Object> valuesList) {
+//		List<byte[]> retValueList = new ArrayList<>();
+//		valuesList.stream().forEach(d -> {
+//			Path tmpBarcodeImageFilePath = Paths.get(reportsProperties.getTemporaryDir(), String.format("%s.png", UUID.randomUUID()));
+//
+//			// バーコード画像を一時ディレクトリに出力
+//			try (FileOutputStream fos = new FileOutputStream(tmpBarcodeImageFilePath.toString()); BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+//				byte[] barcode = barcodeGenerator.generate(new Code39Bean(), 300, d.toString());
+//				bos.write(barcode);
+//			} catch (IOException neverOccur) {
+//				throw new RuntimeException(neverOccur);
+//			}
+//
+//			// バーコード画像ファイルを読み込んでマッピングに設定
+//			try (InputStream image = new FileInputStream(tmpBarcodeImageFilePath.toFile())) {
+//				retValueList.add(Util.toByteArray(image));
+//			} catch (IOException neverOccur) {
+//				throw new RuntimeException(neverOccur);
+//			}
+//
+//			//バーコード画像を一時ディレクトリから削除
+//			try {
+//				Files.deleteIfExists(tmpBarcodeImageFilePath);
+//			} catch (IOException neverOccur) {
+//				throw new RuntimeException(neverOccur);
+//			}
+//		});
+//
+//		return retValueList;
+//	}
 }
