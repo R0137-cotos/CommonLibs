@@ -155,7 +155,7 @@ public class ExcelUtil {
 	 * @param inputTemplateFile エクセル帳票テンプレートファイル
 	 * @param context jxlsコンテキスト
 	 */
-	public OutputStream processTemplate(File inputTemplateFile, Context context) {
+	public ByteArrayOutputStream processTemplate(File inputTemplateFile, Context context) {
 		List<ErrorInfo> errorInfoList = new ArrayList<>();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try (InputStream in = new FileInputStream(inputTemplateFile)) {
