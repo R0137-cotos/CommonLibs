@@ -392,7 +392,7 @@ public class TestListener {
 		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
 
 		Assert.assertEquals("顧客名が正しく取得されること", "ティーガイア＊", contractInstallationLocation.getCustomerName());
-		Assert.assertEquals("住所が正しく取得されること", "東京都渋谷区恵比寿４丁目１－１８　恵比寿ネオナート　１４Ｆ〜１８Ｆ", contractInstallationLocation.getAddress());
+		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", contractInstallationLocation.getAddress());
 		Assert.assertEquals("電話番号が正しく取得されること", null, contractInstallationLocation.getPhoneNumber());
 		Assert.assertEquals("FAX番号が正しく取得されること", null, contractInstallationLocation.getFaxNumber());
 		Assert.assertEquals("企事部設定区分が正しく取得されること", DepartmentDiv.企事部, contractInstallationLocation.getDepartmentDiv());
