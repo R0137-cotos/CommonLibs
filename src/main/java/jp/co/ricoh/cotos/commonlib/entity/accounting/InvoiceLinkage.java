@@ -18,6 +18,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -54,6 +56,9 @@ public class InvoiceLinkage extends EntityBase {
 
 		@JsonCreator
 		public static InvoiceTaxType fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -165,7 +170,7 @@ public class InvoiceLinkage extends EntityBase {
 	@Max(99999)
 	@ApiModelProperty(value = "税率（％）", required = false, position = 15, allowableValues = "range[0.00,99999999999999999.99]")
 	private Integer salesTaxRate;
-	
+
 	/**
 	 * 消費税
 	 */
