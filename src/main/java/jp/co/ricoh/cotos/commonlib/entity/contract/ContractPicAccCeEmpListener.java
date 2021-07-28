@@ -58,6 +58,11 @@ public class ContractPicAccCeEmpListener {
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(contractPicAccCeEmp.getMomEmployeeId());
 
 		if (employeeMaster == null) {
+			// RJ社員マスタから情報取得済みであれば再設定しない
+			if (contractPicAccCeEmp.isAcquiredInfo()) {
+				return;
+			}
+
 			String[] regexList = { "契約受付担当CE社員" };
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
 		}
