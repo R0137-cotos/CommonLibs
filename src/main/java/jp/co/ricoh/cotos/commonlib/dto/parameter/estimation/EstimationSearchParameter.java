@@ -307,6 +307,13 @@ public class EstimationSearchParameter {
 	private String vupEstimationNumber;
 
 	/**
+	 * ベンダー管理番号
+	 */
+	@ApiParam(value = "ベンダー管理番号", required = false)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")

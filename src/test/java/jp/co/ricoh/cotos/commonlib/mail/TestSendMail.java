@@ -300,6 +300,21 @@ public class TestSendMail {
 		}
 	}
 
+	@Test
+	public void メール送信_CC_BCCなし() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), null, emailToList, new ArrayList<String>(), new ArrayList<String>(), mailSubjectRepalceValueList, mailTextRepalceValueList, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/mail/testProductGrpMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/mail/testMailTemplateMasterInset.sql");
@@ -370,6 +385,7 @@ public class TestSendMail {
 		bounceMailHeaderDto.setDocNumber("CC2020102800001");
 		bounceMailHeaderDto.setContractNumber("CIC2020102800001");
 		bounceMailHeaderDto.setContractBranchNumber(1);
+		bounceMailHeaderDto.setMailControlMasterId(1L);
 
 		return bounceMailHeaderDto;
 	}
