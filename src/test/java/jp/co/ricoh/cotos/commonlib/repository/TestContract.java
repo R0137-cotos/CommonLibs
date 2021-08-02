@@ -32,6 +32,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAssignment;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
+import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
@@ -607,7 +608,7 @@ public class TestContract {
 		List<ContractCheckResult> found = contractCheckResultRepository.findByContractIdAndCheckMatterCode(5L, "TEST_12");
 		Assert.assertEquals("契約チェック結果が1件であること", 1, found.size());
 	}
-	
+
 	@Test
 	public void ContractInstallationLocationRepositoryのテスト() {
 		// テストデータ登録
@@ -621,5 +622,20 @@ public class TestContract {
 		} catch (Exception e1) {
 			Assert.fail("例外が発生した場合、エラー");
 		}
+	}
+
+	@Test
+	public void DealerContractRepositoryのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		List<DealerContract> foundList = dealerContractRepository.findByContractId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity 2件レコードが取得できていることを確認
+		Assert.assertEquals(foundList.size(), 2);
 	}
 }
