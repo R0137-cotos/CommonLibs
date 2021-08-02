@@ -47,4 +47,13 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 */
 	public List<InvoiceLinkage> findByReceiveStatus(BatchCommonStatus receiveStatus);
 
+	/**
+	 * RJ管理番号、連携月から取得
+	 * インボイス請求データ取込バッチで、エラー明細と同一契約の明細を全て取得してエラーとするために使用する。
+	 * @param rjManageNumber RJ管理番号
+	 * @param createYm 連携月
+	 * @return
+	 */
+	public List<InvoiceLinkage> findByRjManageNumberAndCreateYm(String rjManageNumber, String createYm);
+
 }

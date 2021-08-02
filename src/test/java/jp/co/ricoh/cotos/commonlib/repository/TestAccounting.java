@@ -353,5 +353,10 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertEquals(1, list.size());
 
+		list = invoiceLinkageRepository.findByRjManageNumberAndCreateYm("rj_manage_number_2", "202107");
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(2, list.size());
+
 	}
 }
