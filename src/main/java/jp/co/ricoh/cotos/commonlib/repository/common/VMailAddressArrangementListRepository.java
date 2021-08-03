@@ -13,7 +13,7 @@ import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressArrangementList;
 public interface VMailAddressArrangementListRepository extends CrudRepository<VMailAddressArrangementList, Long> {
 
 	@Query(value = "SELECT * FROM V_MAIL_ADDRESS_ARRANGEMENT_LIST WHERE TRANSACTION_ID = :TRANSACTIONID ", nativeQuery = true)
-	public List<VMailAddressArrangementListRepository> findByTranId(@Param("TRANSACTIONID") long tranId);
+	public List<VMailAddressArrangementList> findByTranId(@Param("TRANSACTIONID") long tranId);
 
 	@Query(value = "SELECT MAIL_ADDRESS FROM V_MAIL_ADDRESS_ARRANGEMENT_LIST WHERE TABLE_TYPE = :TABLETYPE AND TRANSACTION_ID = :TRANSACTIONID ", nativeQuery = true)
 	public List<String> findByTableAndTranId(@Param("TABLETYPE") String tableType, @Param("TRANSACTIONID") long tranId);
