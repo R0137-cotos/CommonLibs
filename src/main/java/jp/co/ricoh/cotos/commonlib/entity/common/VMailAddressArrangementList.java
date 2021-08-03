@@ -1,9 +1,7 @@
-package jp.co.ricoh.cotos.commonlib.entity.master;
+package jp.co.ricoh.cotos.commonlib.entity.common;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressListAbstractEntity;
 
 @Entity
 @Table(name = "v_mail_address_arrangement_list")
