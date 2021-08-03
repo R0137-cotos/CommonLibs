@@ -54,6 +54,13 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 * @param createYm 連携月
 	 * @return
 	 */
-	public List<InvoiceLinkage> findByRjManageNumberAndCreateYm(String rjManageNumber, String createYm);
+	/**
+	 * 契約送信ステータス、請求受信ステータスから取得
+	 * インボイス請求データ取込バッチで対象データを取得するために使用する。
+	 * @param sendStatus 契約送信ステータス
+	 * @param receiveStatus 請求受信ステータス
+	 * @return 
+	 */
+	public List<InvoiceLinkage> findBySendStatusAndReceiveStatus(BatchCommonStatus sendStatus, BatchCommonStatus receiveStatus);
 
 }
