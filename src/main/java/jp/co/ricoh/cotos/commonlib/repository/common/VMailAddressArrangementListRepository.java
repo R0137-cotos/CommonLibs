@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.repository.master;
+package jp.co.ricoh.cotos.commonlib.repository.common;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import jp.co.ricoh.cotos.commonlib.entity.master.VMailAddressArrangementList;
+import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressArrangementList;
 
 @Repository
 public interface VMailAddressArrangementListRepository extends CrudRepository<VMailAddressArrangementList, Long> {
