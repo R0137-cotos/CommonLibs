@@ -218,7 +218,7 @@ insert into INVOICE_LINKAGE (
   , 'item_contract_name_2'
   , 'line_number_2'
   , 'serial_number_22'
-  , '202107'
+  , '202108'
   , 1
   , 'billing_date_2'
   , 1
@@ -227,9 +227,9 @@ insert into INVOICE_LINKAGE (
   , 1
   , 1
   , 1
-  , '9'
+  , '1'
   , SYSDATE
-  , 'E'
+  , '0'
   , SYSDATE
   , '9'
   , SYSDATE
