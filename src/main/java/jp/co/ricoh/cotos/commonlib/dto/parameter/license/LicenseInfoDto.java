@@ -44,4 +44,11 @@ public class LicenseInfoDto extends DtoBase {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiModelProperty(value = "RMA契約終了日", required = false, position = 6)
 	private Date rmaContractEnd;
+
+	/**
+	 * オーガニゼーションID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "オーガニゼーションID", required = false, position = 7, allowableValues = "range[0,255]")
+	private String organizationId;
 }
