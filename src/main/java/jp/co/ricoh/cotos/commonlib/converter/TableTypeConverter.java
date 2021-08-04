@@ -1,9 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.converter;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList.TableType;
 
+@Converter(autoApply = true)
 public class TableTypeConverter implements AttributeConverter<TableType, String> {
 	@Override
 	public String convertToDatabaseColumn(TableType tableType) {
