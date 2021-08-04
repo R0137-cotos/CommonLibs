@@ -117,6 +117,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.master.AttachedFileProductGrpCh
 import jp.co.ricoh.cotos.commonlib.dto.parameter.master.JsonSchemaMasterParameter;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailPlanData;
@@ -1073,6 +1074,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/UsageQuantityRelatedManagement")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated UsageQuantityRelatedManagement entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/InvoiceLinkage")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated InvoiceLinkage entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
