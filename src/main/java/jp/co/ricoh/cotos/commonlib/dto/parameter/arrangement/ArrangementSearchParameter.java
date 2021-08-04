@@ -382,6 +382,13 @@ public class ArrangementSearchParameter {
 	private String vupEstimationNumber;
 
 	/**
+	 * ベンダー管理番号
+	 */
+	@ApiParam(value = "ベンダー管理番号", required = false)
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
@@ -532,6 +539,13 @@ public class ArrangementSearchParameter {
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
 	private Date approvalDate;
+
+	/**
+	 * IMEI (携帯シリアル番号)
+	 */
+	@ApiParam(value = "IMEI (携帯シリアル番号)", required = false)
+	@ApiModelProperty(value = "IMEI (携帯シリアル番号)", required = false, allowableValues = "range[0,255]")
+	private String imeiNumber;
 
 	/**
 	 * パラメータをMapにする。

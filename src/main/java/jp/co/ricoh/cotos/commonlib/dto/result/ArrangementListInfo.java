@@ -299,6 +299,12 @@ public class ArrangementListInfo {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date approvalDate;
 
+	/**
+	 * ベンダー管理番号
+	 */
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();

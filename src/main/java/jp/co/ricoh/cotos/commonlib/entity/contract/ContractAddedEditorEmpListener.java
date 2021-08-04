@@ -49,6 +49,11 @@ public class ContractAddedEditorEmpListener {
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(contractAddedEditorEmp.getMomEmployeeId());
 
 		if (employeeMaster == null) {
+			// RJ社員マスタから情報取得済みであれば再設定しない
+			if (contractAddedEditorEmp.isAcquiredInfo()) {
+				return;
+			}
+
 			String[] regexList = { "契約追加編集者社員" };
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
 		}

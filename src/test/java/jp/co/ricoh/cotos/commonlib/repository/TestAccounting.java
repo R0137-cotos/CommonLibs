@@ -16,9 +16,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.BatchCommonStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage.InvoiceTaxType;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailPlanData;
@@ -34,6 +37,7 @@ import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.Da
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.ProcessingDiv;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.InvoiceLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDetailDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDetailPlanDataRepository;
@@ -93,6 +97,9 @@ public class TestAccounting {
 
 	@Autowired
 	UsageQuantityRelatedManagementRepository usageQuantityRelatedManagementRepository;
+
+	@Autowired
+	InvoiceLinkageRepository invoiceLinkageRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -306,5 +313,50 @@ public class TestAccounting {
 
 		Assert.assertEquals(3L, list.size());
 		Assert.assertNotNull(list.get(0));
+	}
+
+	@Test
+	public void InvoiceLinkageRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
+
+		InvoiceLinkage found = invoiceLinkageRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+		Assert.assertEquals(InvoiceTaxType.免税, found.getSalesTaxType());
+	}
+
+	@Test
+	public void InvoiceLinkageRepositoryの条件テスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
+
+		List<InvoiceLinkage> list = invoiceLinkageRepository.findByCreateYmAndReceiveStatus("202107", BatchCommonStatus.未処理);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(2, list.size());
+
+		list = invoiceLinkageRepository.findBySendStatusOrderById(BatchCommonStatus.未処理);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(2, list.size());
+		// ID順にソートされていることを確認
+		Assert.assertEquals(2L, list.get(0).getId());
+		Assert.assertEquals(3L, list.get(1).getId());
+
+		InvoiceLinkage found = invoiceLinkageRepository.findByContractIdAndRicohItemCodeAndSerialNumberAndCreateYmAndSendStatusAndReceiveStatus("contract_id_1", "ricoh_item_code_1", "serial_number_1", "202107", BatchCommonStatus.処理済, BatchCommonStatus.未処理);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		list = invoiceLinkageRepository.findByReceiveStatus(BatchCommonStatus.処理対象外);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(1, list.size());
+
+		list = invoiceLinkageRepository.findBySendStatusAndReceiveStatus(BatchCommonStatus.処理済, BatchCommonStatus.未処理);
+
+		// Entity が null ではないことを確認
+		Assert.assertEquals(2, list.size());
+
 	}
 }
