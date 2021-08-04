@@ -22,6 +22,9 @@ import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory.MailSendType;
 import jp.co.ricoh.cotos.commonlib.entity.common.SearchCondition;
+import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressArrangementList;
+import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressContractList;
+import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressEstimationList;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
@@ -30,6 +33,9 @@ import jp.co.ricoh.cotos.commonlib.repository.common.FileImportErrorDetailsRepos
 import jp.co.ricoh.cotos.commonlib.repository.common.FileImportManagementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.MailSendHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.SearchConditionRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressArrangementListRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressContractListRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressEstimationListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository;
 
@@ -76,6 +82,24 @@ public class TestCommon {
 	FileImportManagementRepository fileImportManagementRepository;
 
 	/**
+	 * メールアドレス一覧(見積)
+	 */
+	@Autowired
+	VMailAddressEstimationListRepository vMailAddressEstimationListRepository;
+
+	/**
+	 * メールアドレス一覧(契約)
+	 */
+	@Autowired
+	VMailAddressContractListRepository vMailAddressContractListRepository;
+
+	/**
+	 * メールアドレス一覧(手配)
+	 */
+	@Autowired
+	VMailAddressArrangementListRepository vMailAddressArrangementListRepository;
+
+	/**
 	 * 検索条件
 	 */
 	@Autowired
@@ -101,7 +125,8 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/fileImportManagement.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/searchCondition.sql");
-
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
 	}
 
 	@AfterClass
@@ -215,6 +240,51 @@ public class TestCommon {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+	}
+
+	@Test
+	public void VMailAddressListEstimationRepositoryのテスト() throws Exception {
+
+		VMailAddressEstimationList found = vMailAddressEstimationListRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		List<VMailAddressEstimationList> foundList = vMailAddressEstimationListRepository.findByTranId(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+	}
+
+	@Test
+	public void VMailAddressListContractRepositoryのテスト() throws Exception {
+
+		VMailAddressContractList found = vMailAddressContractListRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		List<VMailAddressContractList> foundList = vMailAddressContractListRepository.findByTranId(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+	}
+
+	@Test
+	public void VMailAddressListArrangementRepositoryのテスト() throws Exception {
+
+		VMailAddressArrangementList found = vMailAddressArrangementListRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		List<VMailAddressArrangementList> foundList = vMailAddressArrangementListRepository.findByTranId(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
 
 	}
 }
