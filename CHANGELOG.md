@@ -1,6 +1,6 @@
 # Changelog
 
-## v4.0.0 (30/07/2021)
+## v4.0.0 (01/01/1970)
 - [**closed**] #8584_@JsonIgnoreの付与項目を修正 [#1298](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1298)
 - [**closed**] #8716_@JsonIgnoreを付与する項目を修正 [#1269](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1269)
 - [**closed**] #11145_月づれチェックのエラーメッセージを修正 [#1624](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1624)
