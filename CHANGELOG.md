@@ -1,6 +1,6 @@
 # Changelog
 
-## v4.0.0 (01/01/1970)
+## v4.0.0 (06/08/2021)
 - [**closed**] #11417_手配業務権限制御マスタ、及び、処理に関して追加 [#1560](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1560)
 - [**closed**] #11433 CpqPropertiesに動的移行用項目追加 [#1559](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1559)
 - [**closed**] #11433 CpqPropertiesに動的移行用項目追加 [#1557](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1557)
