@@ -20,4 +20,9 @@ public class ContractDetailsRitosExitMigrationDto {
 	 * 基本契約通し番号
 	 */
 	private Integer basicContractSerialNumber;
+
+	/**
+	 * RITOS提供サービス番号
+	 */
+	private String npServiceNo;
 }
