@@ -10,25 +10,11 @@ import org.springframework.stereotype.Component;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.entity.util.VKjbMasterUtil;
-import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
-import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 
 @Component
 public class ContractInstallationLocationListener {
 
-	private static VKjbMasterRepository vKjbMasterRepository;
-	private static CheckUtil checkUtil;
 	private static VKjbMasterUtil vKjbMasterUtil;
-
-	@Autowired
-	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
-		ContractInstallationLocationListener.vKjbMasterRepository = vKjbMasterRepository;
-	}
-
-	@Autowired
-	public void setCheckUtil(CheckUtil checkUtil) {
-		ContractInstallationLocationListener.checkUtil = checkUtil;
-	}
 
 	@Autowired
 	public void setVKjbMasterUtil(VKjbMasterUtil vKjbMasterUtil) {
@@ -59,7 +45,7 @@ public class ContractInstallationLocationListener {
 			contractInstallationLocation.setCustomerName(this.convertJoinedCustomerName(vKjbMaster, contractInstallationLocation));
 
 		if (StringUtils.isBlank(contractInstallationLocation.getAddress()))
-			contractInstallationLocation.setAddress(vKjbMaster.getKgyCuicClnMaeAds());
+			contractInstallationLocation.setAddress(this.convertJoinedAddress(vKjbMaster));
 
 		// 企事部設定区分により設定値を振り分け
 		if (DepartmentDiv.企事部.equals(vKjbMaster.getPrflKjbSetKbn())) {
@@ -101,6 +87,28 @@ public class ContractInstallationLocationListener {
 
 		if (DepartmentDiv.企事部.equals(kjbMaster.getPrflKjbSetKbn())) {
 			sb.append(StringUtils.defaultIfEmpty(kjbMaster.getBmnBmnNmKnji(), StringUtils.EMPTY));
+		}
+
+		return sb.toString();
+	}
+
+	private String convertJoinedAddress(VKjbMaster kjbMaster) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJtdhknNmKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJskugnchosnKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJowaTusyoKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getAdsJkowChomeKnji(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getJgsJgsAdsAzatusyoNm(), StringUtils.EMPTY));
+		sb.append(StringUtils.defaultIfEmpty(kjbMaster.getJgsJgsAdsBantiNm(), StringUtils.EMPTY));
+		if (!StringUtils.isEmpty(kjbMaster.getJgsJgsAdsGoNm())) {
+			sb.append("－" + kjbMaster.getJgsJgsAdsGoNm());
+		}
+		if (!StringUtils.isEmpty(kjbMaster.getJgsJgsAdsBldgNm())) {
+			sb.append("　" + kjbMaster.getJgsJgsAdsBldgNm());
+		}
+		if (!StringUtils.isEmpty(kjbMaster.getJgsJgsAdsFlorNm())) {
+			sb.append("　" + kjbMaster.getJgsJgsAdsFlorNm());
 		}
 
 		return sb.toString();
