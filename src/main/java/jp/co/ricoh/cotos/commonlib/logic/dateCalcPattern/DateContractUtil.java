@@ -47,15 +47,11 @@ public class DateContractUtil {
 	DateCalcPatternUtil dateCalcPatternUtil;
 
 	/**
-	 * 積上がっている品種よりサービス終了日を取得する
-	 *
-	 * @param contract 			契約
-	 * @param serviceTermStartDate サービス開始日
-	 * @param endOfMonthFlg 		契約終了日月末フラグ
-	 * @return サービス終了日
+	 * 積上がっている品種より最大の契約期間月数を取得する
+	 * @param contract 契約
+	 * @return
 	 */
-	public Date getServiceTermEndFromItem(Contract contract, Date serviceTermStartDate, boolean endOfMonthFlg) {
-
+	public Integer getMaxContractSpanMonthFromItem(Contract contract) {
 		// 品種マスタ取得
 		List<ItemMaster> itemMasterList = new ArrayList<>();
 		contract.getContractDetailList().stream().forEach(contractDetail -> {
@@ -66,7 +62,20 @@ public class DateContractUtil {
 		if(itemMaster == null) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "契約期間月数" }));
 		}
-		return addMonthServiceTermEnd(serviceTermStartDate, itemMaster.getContractSpanMonth(), endOfMonthFlg);
+
+		return itemMaster.getContractSpanMonth();
+	}
+
+	/**
+	 * 積上がっている品種よりサービス終了日を取得する
+	 *
+	 * @param contract 			契約
+	 * @param serviceTermStartDate サービス開始日
+	 * @param endOfMonthFlg 		契約終了日月末フラグ
+	 * @return サービス終了日
+	 */
+	public Date getServiceTermEndFromItem(Contract contract, Date serviceTermStartDate, boolean endOfMonthFlg) {
+		return addMonthServiceTermEnd(serviceTermStartDate, getMaxContractSpanMonthFromItem(contract), endOfMonthFlg);
 	}
 
 	/**
