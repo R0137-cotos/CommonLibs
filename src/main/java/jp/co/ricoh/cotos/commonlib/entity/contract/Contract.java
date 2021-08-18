@@ -242,6 +242,28 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	public enum ContractStatusControlType {
+
+		手配の作業完了をもって契約状態を進める("0"), 手配の作業完了を待たずに契約状態を進める("1");
+
+		private final String text;
+
+		private ContractStatusControlType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ContractStatusControlType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -978,4 +1000,10 @@ public class Contract extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "基本契約ID", required = false, position = 103, allowableValues = "range[0,9223372036854775807]")
 	private Long basicContractId;
+
+	/**
+	 * 契約状態遷移制御区分
+	 */
+	@ApiModelProperty(value = "契約状態遷移制御区分", required = false, position = 104, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
+	private ContractStatusControlType contractStatusControlType;
 }
