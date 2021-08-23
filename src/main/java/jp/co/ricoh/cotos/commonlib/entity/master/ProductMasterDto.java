@@ -214,4 +214,11 @@ public class ProductMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "シリアル連絡区分", required = false, position = 23, allowableValues = "新規のみ(\"1\"), 新規と契約変更(\"2\")", example = "1")
 	private SerialContactDiv serialContactDiv;
+
+	/**
+	 * 仕入先No
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "仕入先No", required = false, position = 24, allowableValues = "range[0,255]")
+	private String siiresakiNo;
 }

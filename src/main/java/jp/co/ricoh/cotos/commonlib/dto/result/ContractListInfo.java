@@ -293,9 +293,9 @@ public class ContractListInfo {
 	private Date updatedAt;
 
 	/**
-	 * ベンダ管理番号
+	 * ベンダー管理番号
 	 */
-	@ApiModelProperty(value = "ベンダ管理番号", required = false, position = 44, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
