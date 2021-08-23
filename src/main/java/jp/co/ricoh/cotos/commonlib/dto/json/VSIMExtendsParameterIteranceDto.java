@@ -63,4 +63,13 @@ public class VSIMExtendsParameterIteranceDto {
 	 */
 	private String mnpNumber;
 
+	/**
+	 * 承諾番号 発行日
+	 */
+	private String mnpIssueDate;
+
+	/**
+	 * 承諾番号 有効期限
+	 */
+	private String mnpExpirationDate;
 }
