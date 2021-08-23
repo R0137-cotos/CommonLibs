@@ -208,6 +208,12 @@ public class EstimationListInfo {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
+	/**
+	 * ベンダー管理番号
+	 */
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 31, allowableValues = "range[0,255]")
+	private String vendorManageNumber;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
