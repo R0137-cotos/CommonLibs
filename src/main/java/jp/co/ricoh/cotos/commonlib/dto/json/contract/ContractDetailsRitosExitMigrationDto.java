@@ -30,4 +30,14 @@ public class ContractDetailsRitosExitMigrationDto {
 	 * RITOS検収日
 	 */
 	private String ritosAcceptanceDate;
+
+	/**
+	 * RITOS契約開始日
+	 */
+	private String ritosFromDate;
+
+	/**
+	 * RITOS確定納期
+	 */
+	private String ritosFixDueDate;
 }
