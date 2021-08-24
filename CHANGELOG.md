@@ -1,6 +1,20 @@
 # Changelog
 
-## v4.0.0 (06/08/2021)
+## v4.1.0 (24/08/2021)
+- [**closed**] #12029 メールアドレスVIEW(見積、契約、手配)用エンティティ追加 [#1649](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1649)
+- [**closed**] #7974 商品マスタDTO項目追加 [#1641](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1641)
+- [**closed**] #11445 設置先ファイルリスナー修正 [#1638](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1638)
+- [**closed**] #7974 契約.仕入用管理Noの論理名を納品書・請求書印字用コメントへ変更 [#1628](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1628)
+- [**closed**] #11583 権限判定用パラメーター取得処理修正 [#1623](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1623)
+- [**closed**] #11584 担当SA(見積・契約)、追加編集者(見積・契約)、契約CE(受付・導入・保守)社員リスナー再修正 [#1609](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1609)
+- [**closed**] #11584 社員共通エンティティー修正 [#1607](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1607)
+- [**closed**] #11584 担当SA(見積・契約)、追加編集者(見積・契約)、契約CE(受付・導入・保守)社員リスナー修正 [#1606](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1606)
+- [**closed**] #11453 契約のエラーメッセージにサービス利用希望日の最短納期チェック時エラーを追加 [#1602](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1602)
+- [**closed**] #8997 検索項目と検索結果項目にベンダー管理番号を追加 [#1571](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1571)
+
+---
+
+## v4.0.0 (01/01/1970)
 - [**closed**] #11417_手配業務権限制御マスタ、及び、処理に関して追加 [#1560](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1560)
 - [**closed**] #11433 CpqPropertiesに動的移行用項目追加 [#1559](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1559)
 - [**closed**] #11433 CpqPropertiesに動的移行用項目追加 [#1557](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1557)
