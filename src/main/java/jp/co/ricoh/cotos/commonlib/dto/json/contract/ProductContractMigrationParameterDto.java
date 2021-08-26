@@ -31,4 +31,9 @@ public class ProductContractMigrationParameterDto {
 	 * 基本契約サービス開始日
 	 */
 	private String basicServiceTermStart;
+
+	/**
+	 * 業務受付日
+	 */
+	private String operationAcceptanceDate;
 }
