@@ -723,6 +723,7 @@ public class Contract extends EntityBase {
 	 * 契約自動更新日
 	 */
 	@Column
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "契約自動更新日", required = false, position = 67)
 	private Date contractAutoUpdateDate;
 
@@ -744,6 +745,7 @@ public class Contract extends EntityBase {
 	 * 検収日
 	 */
 	@Column
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "検収日", required = false, position = 70)
 	private Date acceptanceDate;
 
@@ -758,6 +760,7 @@ public class Contract extends EntityBase {
 	 * 解約確定日
 	 */
 	@Column
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "解約確定日", required = false, position = 72)
 	private Date cancelDecisionDate;
 
@@ -765,6 +768,7 @@ public class Contract extends EntityBase {
 	 * 契約情報確定日
 	 */
 	@Column
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "契約情報確定日", required = false, position = 73)
 	private Date fixedDate;
 
