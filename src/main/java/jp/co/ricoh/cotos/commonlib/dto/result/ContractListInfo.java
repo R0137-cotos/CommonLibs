@@ -316,6 +316,48 @@ public class ContractListInfo {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 47)
 	private String extendsParameter;
 
+	/**
+	 * 設置先企業ID
+	 */
+	@ApiModelProperty(value = "設置先企業ID", required = false, position = 48, allowableValues = "range[0,1000]")
+	private String installationCompanyId;
+
+	/**
+	 * 設置先企業名
+	 */
+	@ApiModelProperty(value = "設置先企業名", required = false, position = 49, allowableValues = "range[0,1000]")
+	private String installationCompanyName;
+
+	/**
+	 * 設置先事業所ID
+	 */
+	@ApiModelProperty(value = "設置先事業所ID", required = false, position = 50, allowableValues = "range[0,1000]")
+	private String installationOfficeId;
+
+	/**
+	 * 設置先事業所名
+	 */
+	@ApiModelProperty(value = "設置先事業所名", required = false, position = 51, allowableValues = "range[0,1000]")
+	private String installationOfficeName;
+
+	/**
+	 * 設置先住所
+	 */
+	@ApiModelProperty(value = "設置先住所", required = false, position = 52, allowableValues = "range[0,1000]")
+	private String installationAddress;
+
+	/**
+	 * 設置先部門名
+	 */
+	@ApiModelProperty(value = "設置先部門名", required = false, position = 53, allowableValues = "range[0,1000]")
+	private String installationDepartmentName;
+
+	/**
+	 * 設置先企事部ID
+	 */
+	@ApiModelProperty(value = "設置先企事部ID", required = false, position = 54, allowableValues = "range[0,1000]")
+	private String installationMomCustId;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
