@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -141,6 +143,7 @@ private String authorityForNetricoh;
  */
 @Column
 @ApiModelProperty(value = "サービス開始希望日", required = false, position = 15)
+@Temporal(TemporalType.DATE)
 private Date desiredServiceStartDate;
 
 }
