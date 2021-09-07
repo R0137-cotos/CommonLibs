@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.2.0 (07/09/2021)
+- [**closed**] #11345_契約、手配エンティティに契約状態遷移制御区分を追加 [#1661](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1661)
+
+---
+
 ## v4.1.0 (24/08/2021)
 - [**closed**] #12029 メールアドレスVIEW(見積、契約、手配)用エンティティ追加 [#1649](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1649)
 - [**closed**] #7974 商品マスタDTO項目追加 [#1641](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1641)
