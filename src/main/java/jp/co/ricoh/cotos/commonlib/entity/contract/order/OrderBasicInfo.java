@@ -164,6 +164,7 @@ public class OrderBasicInfo extends EntityBase {
 	 */
 	@Column
 	@ApiModelProperty(value = "解約予定日", required = false, position = 9)
+	@Temporal(TemporalType.DATE)
 	private Date cancelScheduledDate;
 
 	/**
