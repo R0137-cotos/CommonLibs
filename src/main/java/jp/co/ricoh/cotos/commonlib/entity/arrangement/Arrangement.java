@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractStatusControlType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -93,4 +94,9 @@ public class Arrangement extends EntityBase {
 	@JsonIgnore
 	private List<ArrangementWork> arrangementWorkList;
 
+	/**
+	 * 契約状態遷移制御区分
+	 */
+	@ApiModelProperty(value = "契約状態遷移制御区分", required = false, position = 6, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
+	private ContractStatusControlType contractStatusControlType;
 }
