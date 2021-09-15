@@ -180,4 +180,12 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "契約承認後キャンセルフラグ", required = false, position = 20, allowableValues = "range[0,9]")
 	private Integer contractAfterApprovalCancelFlg;
+
+	/**
+	 * 満了解約後手配作成フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "満了解約後手配作成フラグ", required = false, position = 21, allowableValues = "range[0,9]")
+	private Integer createArrangementForExpirationCancellationFlg;
 }
