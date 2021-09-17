@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.logic.contractChangeSpanControl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -207,6 +209,11 @@ public class ContractChangeSpanControl {
 	 * @return true：契約変更可能期間外 false：契約変更可能期間内
 	 */
 	private boolean isNotContractChangeSpan(ContractChangeSpanMaster spanMaster, Date fromCheckDate, Date toCheckDate, Date fromCheckTrgetDate, Date toCheckTrgetDate) {
+
+		fromCheckDate = Optional.ofNullable(DateUtils.truncate(fromCheckDate, Calendar.DAY_OF_MONTH)).orElse(null);
+		toCheckDate = Optional.ofNullable(DateUtils.truncate(toCheckDate, Calendar.DAY_OF_MONTH)).orElse(null);
+		fromCheckTrgetDate = Optional.ofNullable(DateUtils.truncate(fromCheckTrgetDate, Calendar.DAY_OF_MONTH)).orElse(null);
+		toCheckTrgetDate = Optional.ofNullable(DateUtils.truncate(toCheckTrgetDate, Calendar.DAY_OF_MONTH)).orElse(null);
 
 		// チェック対象日がFROM～TOの期間内の場合、OK
 		if(CheckPatternType.期間固定 == spanMaster.getCheckPatternType()) {

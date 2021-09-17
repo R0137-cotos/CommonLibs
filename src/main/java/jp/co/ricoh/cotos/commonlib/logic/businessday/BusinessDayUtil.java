@@ -10,12 +10,14 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.swing.SortOrder;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -104,7 +106,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return retDate;
+		return DateUtils.truncate(retDate, Calendar.DAY_OF_MONTH);
 	}
 
 	/**
@@ -129,7 +131,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return retDate;
+		return DateUtils.truncate(retDate, Calendar.DAY_OF_MONTH);
 	}
 
 	/**
@@ -158,7 +160,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return retDate;
+		return DateUtils.truncate(retDate, Calendar.DAY_OF_MONTH);
 	}
 
 	/**
@@ -408,6 +410,9 @@ public class BusinessDayUtil {
 		if (num == 0) {
 			return false;
 		}
+		
+		date1 = Optional.ofNullable(DateUtils.truncate(date1, Calendar.DAY_OF_MONTH)).orElse(null);
+		date2 = Optional.ofNullable(DateUtils.truncate(date2, Calendar.DAY_OF_MONTH)).orElse(null);
 
 		LocalDate bigDate;
 		LocalDate smallDate;
