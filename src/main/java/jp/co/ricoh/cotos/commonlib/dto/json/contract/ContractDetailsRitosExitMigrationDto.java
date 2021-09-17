@@ -25,4 +25,21 @@ public class ContractDetailsRitosExitMigrationDto {
 	 * RITOS提供サービス番号
 	 */
 	private String npServiceNo;
+
+	/**
+	
+	 * RITOS契約開始日
+	 */
+	private String ritosFromDate;
+
+	/**
+	 * RITOS確定納期
+	 */
+	private String ritosFixDueDate;
+
+	/*
+	 * RITOS検収日
+	 */
+	private String ritosAcceptanceDate;
+
 }

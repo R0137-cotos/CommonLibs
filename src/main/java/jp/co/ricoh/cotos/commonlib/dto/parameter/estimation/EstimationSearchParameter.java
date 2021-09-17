@@ -361,6 +361,13 @@ public class EstimationSearchParameter {
 	private int otherSysDataExcludeFlg;
 
 	/**
+	 * IMEI (携帯シリアル番号)
+	 */
+	@ApiParam(value = "IMEI (携帯シリアル番号)", required = false)
+	@ApiModelProperty(value = "IMEI (携帯シリアル番号)", required = false, allowableValues = "range[0,255]")
+	private String imeiNumber;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {

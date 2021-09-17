@@ -19,6 +19,7 @@ import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoRequestDetailPlanData;
@@ -28,6 +29,7 @@ import jp.co.ricoh.cotos.commonlib.entity.accounting.OsoResultsPlanData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.UsageQuantity;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.InvoiceLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDetailDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDetailPlanDataRepository;
@@ -92,6 +94,9 @@ public class TestAccounting {
 	UsageQuantityRepository usageQuantityRepository;
 
 	@Autowired
+	InvoiceLinkageRepository invoiceLinkageRepository;
+
+	@Autowired
 	TestTools testTool;
 
 	@Autowired
@@ -108,6 +113,7 @@ public class TestAccounting {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsPlanData.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/usageQuantity.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/usageQuantityRelatedManagement.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
 	}
 
 	@Autowired
@@ -1005,5 +1011,41 @@ public class TestAccounting {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "超過使用量は最小値（0）を下回っています。"));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "OSO連携可能フラグは最小値（0）を下回っています。"));
+	}
+
+	@Test
+	public void InvoiceLinkageのテスト() throws Exception {
+
+		InvoiceLinkage entity = invoiceLinkageRepository.findOne(1L);
+		InvoiceLinkage testTarget = new InvoiceLinkage();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setRjManageNumber(STR_256);
+		testTarget.setContractId(STR_256);
+		testTarget.setRicohItemCode(STR_256);
+		testTarget.setItemContractName(STR_256);
+		testTarget.setLineNumber(STR_256);
+		testTarget.setSerialNumber(STR_256);
+		testTarget.setCreateYm(STR_256);
+		testTarget.setBillingDate(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RJ管理番号は最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setSalesCnt(INT_100000);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
+
 	}
 }
