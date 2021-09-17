@@ -210,10 +210,10 @@ public class ContractChangeSpanControl {
 	 */
 	private boolean isNotContractChangeSpan(ContractChangeSpanMaster spanMaster, Date fromCheckDate, Date toCheckDate, Date fromCheckTrgetDate, Date toCheckTrgetDate) {
 
-		fromCheckDate = Optional.ofNullable(DateUtils.truncate(fromCheckDate, Calendar.DAY_OF_MONTH)).orElse(null);
-		toCheckDate = Optional.ofNullable(DateUtils.truncate(toCheckDate, Calendar.DAY_OF_MONTH)).orElse(null);
-		fromCheckTrgetDate = Optional.ofNullable(DateUtils.truncate(fromCheckTrgetDate, Calendar.DAY_OF_MONTH)).orElse(null);
-		toCheckTrgetDate = Optional.ofNullable(DateUtils.truncate(toCheckTrgetDate, Calendar.DAY_OF_MONTH)).orElse(null);
+		fromCheckDate = truncateDate(fromCheckDate);
+		toCheckDate = truncateDate(toCheckDate);
+		fromCheckTrgetDate = truncateDate(fromCheckTrgetDate);
+		toCheckTrgetDate = truncateDate(toCheckTrgetDate);
 
 		// チェック対象日がFROM～TOの期間内の場合、OK
 		if(CheckPatternType.期間固定 == spanMaster.getCheckPatternType()) {
@@ -324,5 +324,17 @@ public class ContractChangeSpanControl {
 		sb.append(contractChangeSpanMaster.getExtendsQuery());
 
 		return sb.toString();
+	}
+
+	/**
+	 * 日付切り捨て
+	 * @param date
+	 * @return
+	 */
+	private Date truncateDate(Date date) {
+		if (date != null) {
+			date = DateUtils.truncate(date, Calendar.DAY_OF_MONTH);
+		}
+		return date;
 	}
 }

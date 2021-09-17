@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.swing.SortOrder;
@@ -411,8 +410,8 @@ public class BusinessDayUtil {
 			return false;
 		}
 		
-		date1 = Optional.ofNullable(DateUtils.truncate(date1, Calendar.DAY_OF_MONTH)).orElse(null);
-		date2 = Optional.ofNullable(DateUtils.truncate(date2, Calendar.DAY_OF_MONTH)).orElse(null);
+		date1 = truncateDate(date1);
+		date2 = truncateDate(date2);
 
 		LocalDate bigDate;
 		LocalDate smallDate;
@@ -667,5 +666,17 @@ public class BusinessDayUtil {
 	 */
 	public void setBusinessCalendarRepository(BusinessCalendarRepository businessCalendarRepository) {
 		this.BusinessCalendarRepository = businessCalendarRepository;
+	}
+	
+	/**
+	 * 日付切り捨て
+	 * @param date
+	 * @return
+	 */
+	private Date truncateDate(Date date) {
+		if (date != null) {
+			date = DateUtils.truncate(date, Calendar.DAY_OF_MONTH);
+		}
+		return date;
 	}
 }
