@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -161,5 +162,28 @@ public class BounceMailRecord extends EntityBase {
 	@Max(9)
 	@ApiModelProperty(value = "COTOS運用対応完了済フラグ", required = false, position = 17, allowableValues = "1:COTOS運用チームに残作業がない。")
 	private Integer cotosSupportCompleted;
+
+	/**
+	 * 通知メール制御マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "通知メール制御マスタID", required = false, position = 18)
+	private Long mailControlMasterId;
+
+	/**
+	 * サービスカテゴリ
+	 */
+	@ApiModelProperty(value = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", position = 19)
+	private ServiceCategory serviceCategory;
+
+	/**
+	 * 対象文書キー
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "対象文書キー<br />コミュニケーションの対象情報を一意に特定するためのキー情報を格納<br />" //
+			+ "見積⇒見積ID<br />" //
+			+ "契約⇒契約ID<br />" //
+			+ "手配⇒手配業務ID", required = false, position = 20, allowableValues = "range[0,255]") //
+	private String targetDocKey;
 
 }
