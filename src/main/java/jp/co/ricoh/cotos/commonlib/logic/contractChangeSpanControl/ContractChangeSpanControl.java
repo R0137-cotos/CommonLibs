@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.logic.contractChangeSpanControl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -210,11 +208,6 @@ public class ContractChangeSpanControl {
 	 */
 	private boolean isNotContractChangeSpan(ContractChangeSpanMaster spanMaster, Date fromCheckDate, Date toCheckDate, Date fromCheckTrgetDate, Date toCheckTrgetDate) {
 
-		fromCheckDate = truncateDate(fromCheckDate);
-		toCheckDate = truncateDate(toCheckDate);
-		fromCheckTrgetDate = truncateDate(fromCheckTrgetDate);
-		toCheckTrgetDate = truncateDate(toCheckTrgetDate);
-
 		// チェック対象日がFROM～TOの期間内の場合、OK
 		if(CheckPatternType.期間固定 == spanMaster.getCheckPatternType()) {
 			// 契約変更可能期限開始日チェック
@@ -324,17 +317,5 @@ public class ContractChangeSpanControl {
 		sb.append(contractChangeSpanMaster.getExtendsQuery());
 
 		return sb.toString();
-	}
-
-	/**
-	 * 日付切り捨て
-	 * @param date
-	 * @return
-	 */
-	private Date truncateDate(Date date) {
-		if (date != null) {
-			date = DateUtils.truncate(date, Calendar.DAY_OF_MONTH);
-		}
-		return date;
 	}
 }
