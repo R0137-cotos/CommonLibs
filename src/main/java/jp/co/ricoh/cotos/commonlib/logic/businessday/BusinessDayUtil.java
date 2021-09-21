@@ -16,6 +16,7 @@ import javax.swing.SortOrder;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -104,7 +105,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return retDate;
+		return truncateDate(retDate);
 	}
 
 	/**
@@ -129,7 +130,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return retDate;
+		return truncateDate(retDate);
 	}
 
 	/**
@@ -158,7 +159,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return retDate;
+		return truncateDate(retDate);
 	}
 
 	/**
@@ -400,6 +401,9 @@ public class BusinessDayUtil {
 	 * @return　true:n営業日以内である, false:n営業日以内でない
 	 */
 	public boolean isDate1WithinNumBusinessDaysOfDate2(Date date1, Date date2, int num) {
+		date1 = truncateDate(date1);
+		date2 = truncateDate(date2);
+		
 		// 同一日の場合、必ず0営業日以内
 		if (date1 == date2) {
 			return true;
@@ -662,5 +666,17 @@ public class BusinessDayUtil {
 	 */
 	public void setBusinessCalendarRepository(BusinessCalendarRepository businessCalendarRepository) {
 		this.BusinessCalendarRepository = businessCalendarRepository;
+	}
+	
+	/**
+	 * 日付切り捨て
+	 * @param date
+	 * @return
+	 */
+	private Date truncateDate(Date date) {
+		if (date != null) {
+			date = DateUtils.truncate(date, Calendar.DAY_OF_MONTH);
+		}
+		return date;
 	}
 }
