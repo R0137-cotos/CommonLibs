@@ -401,6 +401,9 @@ public class BusinessDayUtil {
 	 * @return　true:n営業日以内である, false:n営業日以内でない
 	 */
 	public boolean isDate1WithinNumBusinessDaysOfDate2(Date date1, Date date2, int num) {
+		date1 = truncateDate(date1);
+		date2 = truncateDate(date2);
+		
 		// 同一日の場合、必ず0営業日以内
 		if (date1 == date2) {
 			return true;
@@ -409,9 +412,6 @@ public class BusinessDayUtil {
 		if (num == 0) {
 			return false;
 		}
-		
-		date1 = truncateDate(date1);
-		date2 = truncateDate(date2);
 
 		LocalDate bigDate;
 		LocalDate smallDate;
