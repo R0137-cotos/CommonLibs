@@ -105,7 +105,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return DateUtils.truncate(retDate, Calendar.DAY_OF_MONTH);
+		return truncateDate(retDate);
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return DateUtils.truncate(retDate, Calendar.DAY_OF_MONTH);
+		return truncateDate(retDate);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class BusinessDayUtil {
 			}
 		}
 
-		return DateUtils.truncate(retDate, Calendar.DAY_OF_MONTH);
+		return truncateDate(retDate);
 	}
 
 	/**
