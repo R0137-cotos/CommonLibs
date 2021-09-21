@@ -1,5 +1,26 @@
 # Changelog
 
+## v4.3.0 (21/09/2021)
+- [**closed**] #12428 契約明細拡張項目DTOに移行用項目のRITOS検収日を追加 [#1660](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1660)
+- [**closed**] #12109_品種からサービス終了日を取得する処理を最大の契約期間月数を取得する処理とサービス終了日を算出する処理に分けた [#1662](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1662)
+- [**closed**] #12245_業務受付日を追加 [#1669](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1669)
+- [**closed**] #12102_契約一覧取得ResultDtoに設置先を追加 [#1674](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1674)
+- [**closed**] #12097_手配業務操作履歴の操作内容のenumを修正 [#1675](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1675)
+- [**closed**] #12133 音声SIM回線番号重複エラーメッセージを追加 [#1656](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1656)
+- [**closed**] #12041 インボイス連携メソッド修正 [#1646](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1646)
+- [**closed**] #12041 インボイス連携データリポジトリのメソッド追加 [#1644](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1644)
+- [**closed**] #11952 税区分のEnumでNullを許容 [#1637](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1637)
+- [**closed**] #11890 見積・手配の検索パラメータにIMEIを追加 [#1636](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1636)
+- [**closed**] #11740 音声SIM拡張項目繰返DTO作成 [#1610](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1610)
+- [**closed**] #11713 インボイス連携DTO消費税・税率列を修正 [#1605](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1605)
+- [**closed**] #11713 インボイス連携データリポジトリのメソッド条件修正・商品コード追加 [#1604](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1604)
+- [**closed**] #11713 インボイス連携データリポジトリのメソッド追加・DTO共通化 [#1603](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1603)
+- [**closed**] #11666 インボイス契約情報データ取得ソート条件追加 [#1600](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1600)
+- [**closed**] #11666 インボイス連携データリポジトリの条件を修正 [#1598](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1598)
+- [**closed**] #11666 インボイス連携データ消費税修正 [#1597](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1597)
+
+---
+
 ## v4.2.0 (07/09/2021)
 - [**closed**] #11345_契約、手配エンティティに契約状態遷移制御区分を追加 [#1661](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1661)
 
