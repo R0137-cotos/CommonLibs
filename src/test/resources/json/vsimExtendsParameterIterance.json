@@ -1,0 +1,30 @@
+{
+  "extendsParameterList": [
+    {
+      "id": 1,
+      "contractType": "contractType_1",
+      "productCode": "productCode_1",
+      "productName": "productName_1",
+      "mnpType": "mnpType_1",
+      "lineNumber": "lineNumber_1",
+      "serialNumber": "serialNumber_1",
+      "imeiNumber": "imeiNumber_1",
+      "invoiceNumber": "invoiceNumber_1",
+      "cancelDate": "cancelDate_1",
+      "mnpNumber": "mnpNumber_1"
+    },
+    {
+      "id": 2,
+      "contractType": "contractType_2",
+      "productCode": "productCode_2",
+      "productName": "productName_2",
+      "mnpType": "mnpType_2",
+      "lineNumber": "lineNumber_2",
+      "serialNumber": "serialNumber_2",
+      "imeiNumber": "imeiNumber_2",
+      "invoiceNumber": "invoiceNumber_2",
+      "cancelDate": "cancelDate_2",
+      "mnpNumber": "mnpNumber_2"
+    }
+  ]
+}

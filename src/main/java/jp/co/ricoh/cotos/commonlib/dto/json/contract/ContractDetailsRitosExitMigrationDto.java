@@ -27,11 +27,7 @@ public class ContractDetailsRitosExitMigrationDto {
 	private String npServiceNo;
 
 	/**
-	 * RITOS検収日
-	 */
-	private String ritosAcceptanceDate;
 
-	/**
 	 * RITOS契約開始日
 	 */
 	private String ritosFromDate;
@@ -40,4 +36,9 @@ public class ContractDetailsRitosExitMigrationDto {
 	 * RITOS確定納期
 	 */
 	private String ritosFixDueDate;
+
+	/*
+	 * RITOS検収日
+	 */
+	private String ritosAcceptanceDate;
 }
