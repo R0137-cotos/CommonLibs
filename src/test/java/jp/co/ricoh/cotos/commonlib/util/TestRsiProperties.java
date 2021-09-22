@@ -14,7 +14,7 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class TestRsiPropertie {
+public class TestRsiProperties {
 
 	static ConfigurableApplicationContext context;
 
