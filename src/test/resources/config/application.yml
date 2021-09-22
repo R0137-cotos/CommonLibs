@@ -57,11 +57,13 @@ cotos:
     fileDownloadPath: services/v1/files/download
     modelId: DetailForm^CotosContractModel
     systemName: CTSCont02
+  rsi:
+    contractUrl: dummy_rsi_contract_url
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_vsim
-    password: cotos_ci_common_vsim
+    username: cotos_ci_common_release_1021
+    password: cotos_ci_common_release_1021
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -72,7 +74,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_common_vsim
+        default_schema: cotos_ci_common_release_1021
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
