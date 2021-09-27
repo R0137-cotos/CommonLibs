@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * RSI 契約管理APIのお客様テナント情報一覧取得API レスポンスの契約一覧のDTO
+ * RSI 契約管理APIのお客様テナント情報一覧取得API レスポンスのDTO
  */
 
 @Data
@@ -31,9 +31,9 @@ public class RsiCustomersDto {
 	private Integer totalResults;
 
 	/**
-	 * お客様テナント情報
+	 * お客様テナント情報一覧
 	 */
-	@ApiModelProperty(value = "お客様テナント情報", required = false, position = 4)
+	@ApiModelProperty(value = "お客様テナント情報一覧", required = false, position = 4)
 	private List<RsiCustomerAndContractorsDto> results;
 
 }
