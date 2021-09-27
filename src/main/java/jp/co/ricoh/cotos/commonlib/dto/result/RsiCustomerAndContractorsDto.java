@@ -19,7 +19,7 @@ public class RsiCustomerAndContractorsDto {
 	/**
 	 * 企業名
 	 */
-	@ApiModelProperty(value = "企業", required = false, position = 2)
+	@ApiModelProperty(value = "企業名", required = false, position = 2)
 	private String customerName;
 
 	/**
