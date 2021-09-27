@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * RSI 契約管理APIのお客様テナント情報一覧取得API レスポンスの契約単体のDTO
+ * RSI 契約管理APIのお客様テナント情報一覧取得API レスポンスのお客様テナント情報のDTO
  */
 
 @Data
