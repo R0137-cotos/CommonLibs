@@ -26,7 +26,7 @@ public class RsiFindCustomerResult {
 	 * 企業名
 	 */
 	@ApiModelProperty(value = "企業名", required = false, position = 3)
-	private String customerName;
+	private String customerCompanyName;
 
 	/**
 	 * お客様管理者名
