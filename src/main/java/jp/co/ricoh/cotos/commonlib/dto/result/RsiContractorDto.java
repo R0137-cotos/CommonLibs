@@ -11,9 +11,21 @@ import lombok.Data;
 public class RsiContractorDto {
 
 	/**
+	 * 姓
+	 */
+	@ApiModelProperty(value = "姓", required = false, position = 1)
+	private String familyName;
+
+	/**
+	 * 名
+	 */
+	@ApiModelProperty(value = "名", required = false, position = 2)
+	private String givenName;
+
+	/**
 	 * メールアドレス
 	 */
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 1)
+	@ApiModelProperty(value = "メールアドレス", required = false, position = 3)
 	private String mailAddress;
 
 }
