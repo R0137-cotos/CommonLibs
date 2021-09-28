@@ -4,11 +4,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * RSI 契約管理APIのお客様テナント情報一覧取得API レスポンスのお客様テナント情報のDTO
+ * COTOS お客様テナント情報一覧取得API レスポンスのDTO
  */
 
 @Data
-public class RsiCustomerAndContractorsDto {
+public class RsiFindCustomerResult {
 
 	/**
 	 * ID
@@ -26,12 +26,18 @@ public class RsiCustomerAndContractorsDto {
 	 * 企業名
 	 */
 	@ApiModelProperty(value = "企業名", required = false, position = 3)
-	private String customerName;
+	private String customerCompanyName;
+
+	/**
+	 * お客様管理者名
+	 */
+	@ApiModelProperty(value = "お客様管理者名", required = false, position = 4)
+	private String customerAdminName;
 
 	/**
 	 * メールアドレス
 	 */
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 4)
-	private String mailAddress;
+	@ApiModelProperty(value = "お客様管理者メールアドレス", required = false, position = 5)
+	private String customerAdminMailAddress;
 
 }
