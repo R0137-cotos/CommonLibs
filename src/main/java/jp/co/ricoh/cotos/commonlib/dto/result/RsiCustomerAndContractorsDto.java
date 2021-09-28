@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
+import java.util.List;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -33,5 +35,11 @@ public class RsiCustomerAndContractorsDto {
 	 */
 	@ApiModelProperty(value = "メールアドレス", required = false, position = 4)
 	private String mailAddress;
+
+	/**
+	 * お客様テナント契約者情報一覧
+	 */
+	@ApiModelProperty(value = "お客様テナント契約者情報一覧", required = false, position = 5)
+	private List<RsiContractorDto> contractors;
 
 }
