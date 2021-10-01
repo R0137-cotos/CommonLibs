@@ -31,6 +31,10 @@ public class CpqProperties {
 	 * CPQのコマース(プロセス）情報
 	 */
 	String resoure;
+	 /**
+	 * 再積上げ時にコールするAPI情報
+	 */
+	String createCpqDestinationUrl;
 	/**
 	 * 再積上げ時にコールするAPI情報
 	 */

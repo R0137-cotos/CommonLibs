@@ -349,8 +349,7 @@ public class BusinessDayUtil {
 			return null;
 		}
 		// baseDate=非営業日の場合、nullを返す
-		if (!permitBaseDateNonBusiness
-				&& !isBusinessDay(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+		if (!permitBaseDateNonBusiness && !isBusinessDay(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
 			return null;
 		}
 		if (beforeNumber < 0) {
