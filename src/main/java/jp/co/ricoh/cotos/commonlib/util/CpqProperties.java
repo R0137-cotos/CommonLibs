@@ -32,6 +32,10 @@ public class CpqProperties {
 	 */
 	String resoure;
 	/**
+	 * 再積上げ時にコールするAPI情報
+	 */
+	String createCpqDestinationUrl;
+	/**
 	 * 契約更新時にコールするAPI情報
 	 */
 	String updateAssets;
