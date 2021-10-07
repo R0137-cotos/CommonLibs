@@ -21,7 +21,7 @@ public class ContractSearchParameterForDetail {
 	 */
 	@ApiParam(value = "商品種別", required = false)
 	@ApiModelProperty(value = "商品種別", required = false, allowableValues = "range[0,15]")
-	private String productType;
+	private List<String> productType;
 
 	/**
 	 * COTOS契約ライフサイクル状態
