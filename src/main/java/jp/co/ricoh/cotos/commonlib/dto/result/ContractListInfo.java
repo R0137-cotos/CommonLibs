@@ -358,6 +358,20 @@ public class ContractListInfo {
 	@ApiModelProperty(value = "設置先企事部ID", required = false, position = 54, allowableValues = "range[0,1000]")
 	private String installationMomCustId;
 
+	/**
+	 * サービス利用希望日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 55)
+	private Date conclusionPreferredDate;
+
+	/**
+	 * 解約予定日
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "解約予定日", required = false, position = 56)
+	private Date cancelScheduledDate;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
