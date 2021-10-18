@@ -414,6 +414,42 @@ public class ContractSearchParameter {
 	private String vendorManageNumber;
 
 	/**
+	 * サービス利用希望日(前)
+	 */
+	@ApiParam(value = "サービス利用希望日(前)", required = false)
+	@ApiModelProperty(value = "サービス利用希望日(前)<br />" //
+			+ "日付フォーマット:yyyy/MM/dd", //
+			required = false) //
+	private Date conclusionPreferredDateFrom;
+
+	/**
+	 * サービス利用希望日(後)
+	 */
+	@ApiParam(value = "サービス利用希望日(後)", required = false)
+	@ApiModelProperty(value = "サービス利用希望日(後)<br />" //
+			+ "日付フォーマット:yyyy/MM/dd", //
+			required = false) //
+	private Date conclusionPreferredDateTo;
+
+	/**
+	 * 解約予定日(前)
+	 */
+	@ApiParam(value = "解約予定日(前)", required = false)
+	@ApiModelProperty(value = "解約予定日(前)<br />" //
+			+ "日付フォーマット:yyyy/MM/dd", //
+			required = false) //
+	private Date cancelScheduledDateFrom;
+
+	/**
+	 * 解約予定日(後)
+	 */
+	@ApiParam(value = "解約予定日(後)", required = false)
+	@ApiModelProperty(value = "解約予定日(後)<br />" //
+			+ "日付フォーマット:yyyy/MM/dd", //
+			required = false) //
+	private Date cancelScheduledDateTo;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
