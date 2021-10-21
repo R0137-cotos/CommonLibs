@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -31,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "mail_convert_value_master")
 public class MailConvertValueMaster extends EntityBaseMaster {
 
+	@Description(value = "件名/本文区分")
 	public enum SubjectVodyType {
 
 		件名("0"), 本文("1"), 本文_リスト("2");
@@ -49,11 +52,13 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static SubjectVodyType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 	}
 
+	@Description(value = "置換値区分")
 	public enum ConvertType {
 
 		エンティティ("1"), 独自SQL("2");
@@ -72,7 +77,8 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ConvertType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 	}

@@ -14,6 +14,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -31,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "date_calc_pattern_master")
 public class DateCalcPatternMaster extends EntityBaseMaster {
 
+	@Description(value = "日付計算区分")
 	public enum DateCalcType {
 
 		月日加算("1"), その他("9");
@@ -49,10 +52,12 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static DateCalcType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "日付計算基準日区分")
 	public enum DateCalcStndType {
 
 		サービス終了日("1"), 契約開始日("2"), システム日付("3");
@@ -71,10 +76,12 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static DateCalcStndType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "日付計算営業日計算区分")
 	public enum DateCalcBusinessDayType {
 
 		前営業日("1"), 後営業日("2");
@@ -93,7 +100,8 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static DateCalcBusinessDayType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

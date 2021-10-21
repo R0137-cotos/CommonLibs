@@ -56,6 +56,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.DateCalcPatternMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DispUrlAuthMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EmpGrpManagementMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.EnumDefinitionMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EquipmentCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EstimationChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ExtendsParameterCorrelationCheckMaster;
@@ -154,6 +155,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.DateCalcPatternMasterReposi
 import jp.co.ricoh.cotos.commonlib.repository.master.DispUrlAuthMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EmpGrpManagementMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.EnumDefinitionMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EquipmentCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EstimationChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ExtendsParameterCorrelationCheckMasterRepository;
@@ -427,6 +429,8 @@ public class TestMaster {
 	private BatchRunDateManagementMasterRepository batchRunDateManagementMasterRepository;
 	@Autowired
 	private ArrangementWorkAuthControlMasterRepository arrangementWorkAuthControlMasterRepository;
+	@Autowired
+	private EnumDefinitionMasterRepository enumDefinitionMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -525,7 +529,8 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMasterDetail.sql");
-		CommonMasterDetail found = commonMasterDetailRepository.findByCommonMasterColumnNameAndAvailablePeriodBetween("sales_tax_rate", "20190101");
+		CommonMasterDetail found = commonMasterDetailRepository
+				.findByCommonMasterColumnNameAndAvailablePeriodBetween("sales_tax_rate", "20190101");
 		Assert.assertEquals("取得データの税率が8(%)であること", found.getCodeValue(), "8");
 	}
 
@@ -545,13 +550,15 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		MailTemplateMaster foundByServiceCategoryAndProcessCategoryAndProductGrpMasterId = mailTemplateMasterRepository.findByServiceCategoryAndProcessCategoryAndProductGrpMasterId("1", "3", 10L);
+		MailTemplateMaster foundByServiceCategoryAndProcessCategoryAndProductGrpMasterId = mailTemplateMasterRepository
+				.findByServiceCategoryAndProcessCategoryAndProductGrpMasterId("1", "3", 10L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(foundByServiceCategoryAndProcessCategoryAndProductGrpMasterId);
 
 		// 狙ったマスタが取得できていること
-		Assert.assertEquals("メールテンプレートマスタが取得できていること", 3, foundByServiceCategoryAndProcessCategoryAndProductGrpMasterId.getId());
+		Assert.assertEquals("メールテンプレートマスタが取得できていること", 3,
+				foundByServiceCategoryAndProcessCategoryAndProductGrpMasterId.getId());
 
 	}
 
@@ -720,11 +727,14 @@ public class TestMaster {
 		testTool.assertColumnsNotNull(found);
 
 		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
-		if (found.getArrangementChecklistCompMasterList() == null || found.getArrangementChecklistCompMasterList().size() == 0)
+		if (found.getArrangementChecklistCompMasterList() == null
+				|| found.getArrangementChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getEstimationChecklistCompMasterList() == null || found.getEstimationChecklistCompMasterList().size() == 0)
+		if (found.getEstimationChecklistCompMasterList() == null
+				|| found.getEstimationChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getContractChecklistCompMasterList() == null || found.getContractChecklistCompMasterList().size() == 0)
+		if (found.getContractChecklistCompMasterList() == null
+				|| found.getContractChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
 	}
 
@@ -754,11 +764,14 @@ public class TestMaster {
 		testTool.assertColumnsNotNull(found);
 
 		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
-		if (found.getArrangementChecklistCompMasterList() == null || found.getArrangementChecklistCompMasterList().size() == 0)
+		if (found.getArrangementChecklistCompMasterList() == null
+				|| found.getArrangementChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getEstimationChecklistCompMasterList() == null || found.getEstimationChecklistCompMasterList().size() == 0)
+		if (found.getEstimationChecklistCompMasterList() == null
+				|| found.getEstimationChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getContractChecklistCompMasterList() == null || found.getContractChecklistCompMasterList().size() == 0)
+		if (found.getContractChecklistCompMasterList() == null
+				|| found.getContractChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
 
 	}
@@ -790,7 +803,8 @@ public class TestMaster {
 			Assert.assertTrue(false);
 		if (found.getArrangementWorkCompMasterList() == null || found.getArrangementWorkCompMasterList() == null)
 			Assert.assertTrue(false);
-		if (found.getArrangementChecklistCompMasterList() == null || found.getArrangementChecklistCompMasterList() == null)
+		if (found.getArrangementChecklistCompMasterList() == null
+				|| found.getArrangementChecklistCompMasterList() == null)
 			Assert.assertTrue(false);
 	}
 
@@ -962,7 +976,8 @@ public class TestMaster {
 
 		// 承認ルートマスタが条件判定順の昇順で取得できていること
 		for (int i = 0; i < found.getApprovalRouteMasterList().size() - 1; i = i + 1) {
-			Assert.assertTrue(found.getApprovalRouteMasterList().get(i).getCondDetermineOrder() < found.getApprovalRouteMasterList().get(i + 1).getCondDetermineOrder());
+			Assert.assertTrue(found.getApprovalRouteMasterList().get(i).getCondDetermineOrder() < found
+					.getApprovalRouteMasterList().get(i + 1).getCondDetermineOrder());
 		}
 	}
 
@@ -1056,7 +1071,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
+		context.getBean(DBConfig.class)
+				.initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
@@ -1077,13 +1093,16 @@ public class TestMaster {
 		testTool.assertColumnsNotNull(found);
 
 		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
-		if (found.getContractChecklistCompMasterList() == null || found.getContractChecklistCompMasterList().size() == 0)
+		if (found.getContractChecklistCompMasterList() == null
+				|| found.getContractChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getEstimationChecklistCompMasterList() == null || found.getEstimationChecklistCompMasterList().size() == 0)
+		if (found.getEstimationChecklistCompMasterList() == null
+				|| found.getEstimationChecklistCompMasterList().size() == 0)
 			Assert.assertTrue(false);
 		if (found.getItemMasterList() == null || found.getItemMasterList().size() == 0)
 			Assert.assertTrue(false);
-		if (found.getExtendsParameterCorrelationCheckMasterList() == null || found.getExtendsParameterCorrelationCheckMasterList().size() == 0)
+		if (found.getExtendsParameterCorrelationCheckMasterList() == null
+				|| found.getExtendsParameterCorrelationCheckMasterList().size() == 0)
 			Assert.assertTrue(false);
 		if (found.getJsonSchemaMasterId() == null)
 			Assert.assertTrue(false);
@@ -1409,7 +1428,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
+		context.getBean(DBConfig.class)
+				.initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
@@ -1441,7 +1461,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
+		context.getBean(DBConfig.class)
+				.initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/ifsCsvMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileLinkage.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
@@ -1529,7 +1550,8 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		if (found.getProductExtendsParameterMasterList() == null || found.getProductExtendsParameterMasterList().size() == 0)
+		if (found.getProductExtendsParameterMasterList() == null
+				|| found.getProductExtendsParameterMasterList().size() == 0)
 			Assert.assertTrue(false);
 	}
 
@@ -1538,11 +1560,13 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
+		context.getBean(DBConfig.class)
+				.initTargetTestData("repository/master/extendsParameterCorrelationCheckMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 
 		// エンティティの取得
-		ExtendsParameterCorrelationCheckMaster found = extendsParameterCorrelationCheckMasterRepository.findByProductMasterIdAndDomain(1L, "1");
+		ExtendsParameterCorrelationCheckMaster found = extendsParameterCorrelationCheckMasterRepository
+				.findByProductMasterIdAndDomain(1L, "1");
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -1703,7 +1727,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMasterDetail.sql");
 
-		List<CommonMaster> foundList = commonMasterRepository.findByColumnNameAndServiceCategoryAndDetailCodeValues("issue_format", "1", Arrays.asList("1"));
+		List<CommonMaster> foundList = commonMasterRepository
+				.findByColumnNameAndServiceCategoryAndDetailCodeValues("issue_format", "1", Arrays.asList("1"));
 		// データが取得できていることを確認
 		Assert.assertTrue(foundList.size() > 0);
 
@@ -1719,7 +1744,8 @@ public class TestMaster {
 	public void ReportTemplateMasterRepository_findByReportListParameterのテスト() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/reportTemplateMaster.sql");
-		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", "1", 1L, "1", "2");
+		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1",
+				"1", 1L, "1", "2");
 		// データが取得できていることを確認
 		Assert.assertTrue(foundList.size() > 0);
 
@@ -1754,7 +1780,8 @@ public class TestMaster {
 		// テストデータはなし
 
 		// エンティティの取得
-		MvTJmcj005Master found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCdAndRingsTodokesakiCd("702", "10027811", "001");
+		MvTJmcj005Master found = mvTJmcj005MasterRepository.findByHanshCdAndRingsTkiskCdAndRingsTodokesakiCd("702",
+				"10027811", "001");
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -1863,13 +1890,15 @@ public class TestMaster {
 	public void MvWjmoco40EmpAllInfoComRepository_findByRingsHanshCdAndRingsEmpCdのテスト() {
 		final String ringsHanshCd = "601";
 		final String ringsEmpCd = "24396";
-		List<MvWjmoco40EmpAllInfoCom> found = mvWjmoco40EmpAllInfoComRepository.findByRingsHanshCdAndRingsEmpCd(ringsHanshCd, ringsEmpCd);
+		List<MvWjmoco40EmpAllInfoCom> found = mvWjmoco40EmpAllInfoComRepository
+				.findByRingsHanshCdAndRingsEmpCd(ringsHanshCd, ringsEmpCd);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
 		// Entity の各項目の値が null ではないことを確認
 		Assert.assertTrue("Mom会社IDが一致すること", found.stream().anyMatch(f -> f.getEmpId().equals("00150194")));
-		Assert.assertTrue("SingleUserIdが一致すること", found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
+		Assert.assertTrue("SingleUserIdが一致すること",
+				found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
 	}
 
 	@Test
@@ -1881,7 +1910,8 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		Assert.assertTrue("Mom会社IDが一致すること", found.stream().anyMatch(f -> f.getEmpId().equals("00150194")));
-		Assert.assertTrue("SingleUserIdが一致すること", found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
+		Assert.assertTrue("SingleUserIdが一致すること",
+				found.stream().anyMatch(f -> f.getSingleuserId().equals("u033014739")));
 	}
 
 	@Test
@@ -1955,7 +1985,8 @@ public class TestMaster {
 		String momKgyId = "000000000012704";
 		String hanshCd = "408";
 		String nendo = "2011";
-		MvTjmcc020HnbitnMaster found = mvTjmcc020HnbitnMasterRepository.findByMomKgyIdAndHanshCdAndNendo(momKgyId, hanshCd, nendo);
+		MvTjmcc020HnbitnMaster found = mvTjmcc020HnbitnMasterRepository.findByMomKgyIdAndHanshCdAndNendo(momKgyId,
+				hanshCd, nendo);
 
 		// Entity が null ではないことを確認(実装時に販社別届先情報.RINGS届先コードがnullでないデータが存在しなかったため)
 		Assert.assertNotNull(found);
@@ -2016,7 +2047,8 @@ public class TestMaster {
 		// エンティティの取得
 		String mclMomKjbId = "000000002773772";
 		String mclDltFlg = "0";
-		List<VKjbMaster> found = vKjbMasterRepository.findByMclMomKjbIdAndMclDltFlgAndMaxMclUpdateDt(mclMomKjbId, mclDltFlg);
+		List<VKjbMaster> found = vKjbMasterRepository.findByMclMomKjbIdAndMclDltFlgAndMaxMclUpdateDt(mclMomKjbId,
+				mclDltFlg);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -2212,18 +2244,21 @@ public class TestMaster {
 	@Test
 	public void CheckAlertMaster_findByDomainAndTargetMasterIdのテスト() throws Exception {
 		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkAlertMaster_findByDomainAndTargetMasterId.sql");
+		context.getBean(DBConfig.class)
+				.initTargetTestData("repository/master/checkAlertMaster_findByDomainAndTargetMasterId.sql");
 
 		// エンティティの取得
 		String serviceCategory = "1"; //見積
 		Long targetMasterId = 300L; //
-		List<CheckAlertMaster> found = checkAlertMasterRepository.findByDomainAndTargetMasterId(serviceCategory, targetMasterId);
+		List<CheckAlertMaster> found = checkAlertMasterRepository.findByDomainAndTargetMasterId(serviceCategory,
+				targetMasterId);
 
 		// Entity が null ではないことを確認
 		// 2件取得されることを確認
 		Assert.assertEquals(2, found.size());
 
-		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId)).collect(Collectors.toList());
+		List<CheckAlertMaster> foundSorted = found.stream().sorted(Comparator.comparing(CheckAlertMaster::getId))
+				.collect(Collectors.toList());
 
 		CheckAlertMaster common = foundSorted.get(0); //1件目：共通
 
@@ -2267,7 +2302,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMasterDetail.sql");
 
-		List<CommonMasterDetail> foundList = commonMasterDetailRepository.findByCommonMasterIdAndAvailablePeriodBetween(11L, "20200101");
+		List<CommonMasterDetail> foundList = commonMasterDetailRepository
+				.findByCommonMasterIdAndAvailablePeriodBetween(11L, "20200101");
 		// データが取得できていることを確認
 		Assert.assertTrue(foundList.size() > 0);
 
@@ -2307,7 +2343,9 @@ public class TestMaster {
 
 		// 追加したSelect文を使用したエンティティの取得
 		found = null;
-		List<ArrangementWorkOrderMaster> list = arrangementWorkOrderMasterRepository.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterIdAndCheckTimingType(2L, ContractType.情報変更.toString(), 1, 1L, CheckTimingType.業務完了時.toString());
+		List<ArrangementWorkOrderMaster> list = arrangementWorkOrderMasterRepository
+				.findByProductMasterIdAndContractTypeAndDisengagementFlgAndArrangementWorkTypeMasterIdAndCheckTimingType(
+						2L, ContractType.情報変更.toString(), 1, 1L, CheckTimingType.業務完了時.toString());
 		found = list.get(0);
 
 		// Entity が null ではないことを確認
@@ -2329,7 +2367,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository.findAttachedFileProductClassCheckList("CSP", "1", "1", "7").get();
+		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository
+				.findAttachedFileProductClassCheckList("CSP", "1", "1", "7").get();
 
 		// データが4件取得できていることを確認
 		Assert.assertEquals(4, foundList.size());
@@ -2347,12 +2386,14 @@ public class TestMaster {
 	}
 
 	@Test
-	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListByArrangementWorkTypeMasterIdのテスト() throws Exception {
+	public void AttachedFileProductClassCheckMaster_findAttachedFileProductClassCheckListByArrangementWorkTypeMasterIdのテスト()
+			throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductClassCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository.findAttachedFileProductClassCheckListByArrangementWorkTypeMasterId("CSP", "1", "1", "7", 1001L).get();
+		List<AttachedFileProductClassCheckMaster> foundList = attachedFileProductClassCheckMasterRepository
+				.findAttachedFileProductClassCheckListByArrangementWorkTypeMasterId("CSP", "1", "1", "7", 1001L).get();
 
 		// データが2件取得できていることを確認
 		Assert.assertEquals(2, foundList.size());
@@ -2375,7 +2416,8 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckList(200L, "2", "1", "7", Arrays.asList(1L, 2L)).get();
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository
+				.findAttachedFileProductGrpCheckList(200L, "2", "1", "7", Arrays.asList(1L, 2L)).get();
 
 		// データが4件取得できていることを確認
 		Assert.assertEquals(4, foundList.size());
@@ -2393,12 +2435,16 @@ public class TestMaster {
 	}
 
 	@Test
-	public void AttachedFileProductGrpCheckMaster_findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterIdのテスト() throws Exception {
+	public void AttachedFileProductGrpCheckMaster_findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterIdのテスト()
+			throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/attachedFileProductGrpCheckMaster.sql");
 
 		// エンティティの取得
-		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(200L, "2", "1", "7", Arrays.asList(1L, 2L), 1001L).get();
+		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository
+				.findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(200L, "2", "1", "7",
+						Arrays.asList(1L, 2L), 1001L)
+				.get();
 
 		// データが3件取得できていることを確認
 		Assert.assertEquals(3, foundList.size());
@@ -2918,5 +2964,32 @@ public class TestMaster {
 		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
 		if (found.getArrangementWorkTypeMasterList() == null)
 			Assert.assertTrue(false);
+	}
+
+	@Test
+	public void EnumDefinitionMasterRepositoryのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/enumDefinitionMaster.sql");
+
+		//エンティティの取得
+		Long id = 1L;
+		EnumDefinitionMaster found = enumDefinitionMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// 取得したデータの内容が正しいことを確認
+		Assert.assertEquals("Contract", found.getClassName());
+		Assert.assertEquals("text", found.getFieldName());
+		Assert.assertEquals("contract", found.getTableName());
+		Assert.assertEquals("text", found.getColumnName());
+		Assert.assertEquals("契約種別", found.getEnumName());
+		Assert.assertEquals("新規", found.getEnumValueName());
+		Assert.assertEquals("1", found.getEnumValueCode());
+		Assert.assertEquals("ContractType", found.getEnumClassName());
 	}
 }

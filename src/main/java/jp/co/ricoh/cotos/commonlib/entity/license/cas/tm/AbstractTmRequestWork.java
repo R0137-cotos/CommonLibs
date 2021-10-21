@@ -8,6 +8,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -27,6 +29,8 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	/**
 	 * TM送信状態
 	 */
+
+	@Description(value = "送信状態(トレンドマイクロリクエストWORK)")
 	public enum TmRequestStatus {
 
 		未連携("0"), 連携済("1"), 連携エラー("2"), 連携対象外("3");
@@ -45,7 +49,8 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 
 		@JsonCreator
 		public static TmRequestStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

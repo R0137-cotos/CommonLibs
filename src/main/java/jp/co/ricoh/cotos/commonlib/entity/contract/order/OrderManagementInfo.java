@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -32,6 +34,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "order_management_info")
 public class OrderManagementInfo extends EntityBase {
+
+	@Description(value = "契約取込状況")
 	public enum CaptureStatus {
 
 		未取込("0"), 取込済("1"), 取込対象外("9"), 処理不可("E");
@@ -50,7 +54,8 @@ public class OrderManagementInfo extends EntityBase {
 
 		@JsonCreator
 		public static CaptureStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -106,7 +111,6 @@ public class OrderManagementInfo extends EntityBase {
 	@Column
 	@ApiModelProperty(value = "契約ID", required = false, position = 6)
 	private long contractId;
-
 
 	/**
 	 * 見積ID

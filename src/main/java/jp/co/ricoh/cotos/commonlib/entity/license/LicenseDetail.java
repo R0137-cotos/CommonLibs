@@ -19,6 +19,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -37,6 +39,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_detail")
 public class LicenseDetail extends EntityBase {
 
+	@Description(value = "情報区分")
 	public enum InfoDiv {
 
 		新規("1"), 減数("2");
@@ -55,10 +58,12 @@ public class LicenseDetail extends EntityBase {
 
 		@JsonCreator
 		public static InfoDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "ハード・ソフト区分")
 	public enum HardSoftDiv {
 
 		ハード("1"), ライセンス("2");
@@ -77,7 +82,8 @@ public class LicenseDetail extends EntityBase {
 
 		@JsonCreator
 		public static HardSoftDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

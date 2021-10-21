@@ -21,6 +21,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -40,6 +42,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_info")
 public class LicenseInfo extends EntityBase {
 
+	@Description(value = "キャンセル状態")
 	public enum CancelStatus {
 
 		未("0"), キャンセル済("1");
@@ -58,10 +61,12 @@ public class LicenseInfo extends EntityBase {
 
 		@JsonCreator
 		public static CancelStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "CSV出力フラグ")
 	public enum CsvOutputFlg {
 
 		未出力("0"), 出力済("1");
@@ -80,10 +85,12 @@ public class LicenseInfo extends EntityBase {
 
 		@JsonCreator
 		public static CsvOutputFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "工程ロック状態")
 	public enum ProcessLockStatus {
 
 		ロック解除("0"), ロック状態("1");
@@ -102,7 +109,8 @@ public class LicenseInfo extends EntityBase {
 
 		@JsonCreator
 		public static ProcessLockStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

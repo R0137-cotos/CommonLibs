@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -33,6 +35,7 @@ import lombok.ToString;
 @Table(name = "approval_route_node_master")
 public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 
+	@Description(value = "承認者種別")
 	public enum ApproverClass {
 
 		メイン承認者("1"), 代理承認者("2");
@@ -51,10 +54,12 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ApproverClass fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "承認者導出方式区分")
 	public enum ApproverDeriveMethodDiv {
 
 		直属上司指定("1"), 組織絶対階層指定("2"), 組織直接指定("3"), ユーザー直接指定("4"), 自己承認("5"), 受付担当CE指定("6"), グループ承認("7");
@@ -73,7 +78,8 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ApproverDeriveMethodDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

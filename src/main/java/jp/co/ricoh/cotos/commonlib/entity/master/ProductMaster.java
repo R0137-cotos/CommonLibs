@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,6 +42,7 @@ import lombok.ToString;
 @Table(name = "product_master")
 public class ProductMaster extends EntityBaseMaster {
 
+	@Description(value = "シリアル連絡区分")
 	public enum SerialContactDiv {
 
 		新規のみ("1"), 新規と契約変更("2");
@@ -59,7 +61,8 @@ public class ProductMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static SerialContactDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

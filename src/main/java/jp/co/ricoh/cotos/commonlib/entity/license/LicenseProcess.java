@@ -18,6 +18,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -38,6 +40,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_process")
 public class LicenseProcess extends EntityBase {
 
+	@Description(value = "送信結果区分")
 	public enum MailSendResultDiv {
 
 		未送信("0"), 送信中("1"), 送信済("2"), 不達("3"), 送信エラー("4");
@@ -56,10 +59,12 @@ public class LicenseProcess extends EntityBase {
 
 		@JsonCreator
 		public static MailSendResultDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "工程状態")
 	public enum ProcessStatus {
 
 		未処理("0"), 完了("1"), 破棄("2");
@@ -78,7 +83,8 @@ public class LicenseProcess extends EntityBase {
 
 		@JsonCreator
 		public static ProcessStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

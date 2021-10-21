@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -30,6 +32,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "order_product_info")
 public class OrderProductInfo extends EntityBase {
+
+	@Description(value = "課金制約ルール")
 	public enum ChargeRule {
 
 		有料("0"), 初月無料("1"), 無料期間指定("2");
@@ -48,10 +52,12 @@ public class OrderProductInfo extends EntityBase {
 
 		@JsonCreator
 		public static ChargeRule fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "提供方法")
 	public enum ProvideMethod {
 		初期("1"), 月額("2"), 年額("3");
 
@@ -69,7 +75,8 @@ public class OrderProductInfo extends EntityBase {
 
 		@JsonCreator
 		public static ProvideMethod fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

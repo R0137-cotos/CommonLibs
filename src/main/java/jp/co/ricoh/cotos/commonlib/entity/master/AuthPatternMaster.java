@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -31,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "auth_pattern_master")
 public class AuthPatternMaster extends EntityBaseMaster {
 
+	@Description(value = "権限判定方式区分")
 	public enum AuthJudgeDiv {
 		COTOS認可("01"), MoM権限("02");
 
@@ -48,7 +51,8 @@ public class AuthPatternMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static AuthJudgeDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

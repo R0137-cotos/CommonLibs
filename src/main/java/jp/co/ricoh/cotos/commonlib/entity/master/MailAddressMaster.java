@@ -12,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -27,6 +29,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "mail_address_master")
 public class MailAddressMaster extends EntityBaseMaster {
 
+	@Description(value = "メールアドレス区分")
 	public enum MailAddressDiv {
 
 		TO("1"), CC("2"), BCC("3");
@@ -45,10 +48,12 @@ public class MailAddressMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static MailAddressDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "サービスカテゴリ")
 	public enum ServiceCategory {
 
 		見積("1"), 契約("2"), 手配("3"), ライセンス("4");
@@ -67,7 +72,8 @@ public class MailAddressMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ServiceCategory fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

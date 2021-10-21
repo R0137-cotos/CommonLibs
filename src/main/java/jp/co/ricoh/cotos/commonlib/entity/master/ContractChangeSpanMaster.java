@@ -15,6 +15,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -37,6 +39,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_change_span_master")
 public class ContractChangeSpanMaster extends EntityBaseMaster {
 
+	@Description(value = "チェックパターン区分")
 	public enum CheckPatternType {
 
 		期間固定("1"), 期間可変("2");
@@ -55,10 +58,12 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static CheckPatternType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "契約変更期間チェック対象日区分 開始、終了")
 	public enum ContractChangeSpanTargetDateType {
 
 		契約承認依頼日("1"), サービス利用希望日("2"), 解約希望日("3"), システム日付("4");
@@ -77,7 +82,8 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ContractChangeSpanTargetDateType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

@@ -19,6 +19,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -38,6 +39,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "invoice_linkage")
 public class InvoiceLinkage extends EntityBase {
 
+	@Description(value = "税区分")
 	public enum InvoiceTaxType {
 
 		対象外("0"), 外税("1"), 内税("2"), 免税("3"), 非課税("4");
@@ -59,7 +61,8 @@ public class InvoiceLinkage extends EntityBase {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
