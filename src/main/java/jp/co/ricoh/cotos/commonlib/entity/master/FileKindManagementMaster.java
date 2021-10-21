@@ -12,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -29,6 +31,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "file_kind_management_master")
 public class FileKindManagementMaster extends EntityBaseMaster {
 
+	@Description(value = "入出力区分")
 	public enum ImportExportType {
 
 		取込("1"), 出力("2");
@@ -47,10 +50,12 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ImportExportType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "エラー処理区分")
 	public enum ErrorProcessingType {
 
 		全件("1"), 個別("2");
@@ -69,7 +74,8 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ErrorProcessingType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -34,6 +36,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "order_basic_info")
 public class OrderBasicInfo extends EntityBase {
 
+	@Description(value = "注文タイプ")
 	public enum OrdererType {
 
 		新規("1"), 変更("2"), 解約("3");
@@ -52,10 +55,12 @@ public class OrderBasicInfo extends EntityBase {
 
 		@JsonCreator
 		public static OrdererType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "商品種別")
 	public enum ProductType {
 
 		RSI("1"), ROC("2");
@@ -74,10 +79,12 @@ public class OrderBasicInfo extends EntityBase {
 
 		@JsonCreator
 		public static ProductType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "商流区分（代直区分）")
 	public enum CommercialFlowDiv {
 
 		代売("1"), 直売("2");
@@ -96,7 +103,8 @@ public class OrderBasicInfo extends EntityBase {
 
 		@JsonCreator
 		public static CommercialFlowDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

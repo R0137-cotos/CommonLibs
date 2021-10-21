@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -32,6 +34,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_checklist_comp_master")
 public class ContractChecklistCompMaster extends EntityBaseMaster {
 
+	@Description(value = "対象ライフサイクル状態")
 	public enum TargetLifecycleStatus {
 
 		作成中("1"), キャンセル手続き中("2"), 解約手続き中("3");
@@ -50,7 +53,8 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static TargetLifecycleStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 		public static TargetLifecycleStatus fromLifeCycleStatus(LifecycleStatus lifeCycleStatus) {

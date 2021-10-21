@@ -5,6 +5,8 @@ import java.util.Arrays;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -24,6 +26,8 @@ public abstract class AbstractTmResponseWork extends EntityBase {
 	/**
 	 * TMライセンス反映状態
 	 */
+
+	@Description(value = "送信状態(トレンドマイクロレスポンスWORK)")
 	public enum TmLicenceMappedStatus {
 
 		未反映("0"), 反映済("1"), 反映不要("2");
@@ -42,7 +46,8 @@ public abstract class AbstractTmResponseWork extends EntityBase {
 
 		@JsonCreator
 		public static TmLicenceMappedStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

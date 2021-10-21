@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpMethod;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,10 +32,12 @@ import lombok.EqualsAndHashCode;
 @Table(name = "url_auth_master")
 public class UrlAuthMaster extends EntityBaseMaster {
 
+	@Description(value = "システムドメイン、外部参照ドメイン")
 	public enum Domain {
 		estimation, contract, arrangement, communication, master, arrangementDelegation;
 	}
 
+	@Description(value = "パラメータータイプ")
 	public enum ParameterType {
 		none("0"), path("1"), query("2"), json("3");
 
@@ -52,10 +55,12 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ParameterType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "アクション区分")
 	public enum ActionDiv {
 		なし("00"), 照会("01"), 登録("02"), 更新("03"), 削除("04"), 印刷("05"), ダウンロード("06"), 集計("07");
 
@@ -73,12 +78,15 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ActionDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "権限区分")
 	public enum AuthDiv {
-		なし("0"), 見積_契約_手配("2200"), 請求_計上_本部("2210"), システム管理("2220"), 見積_契約_業務用検索("2230"), 業務管理("2240"), マネージド("2250"), リペア("2260");
+		なし("0"), 見積_契約_手配("2200"), 請求_計上_本部("2210"), システム管理("2220"), 見積_契約_業務用検索("2230"), 業務管理("2240"), マネージド(
+				"2250"), リペア("2260");
 
 		private final String text;
 
@@ -94,10 +102,12 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static AuthDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "参照種別")
 	public enum AccessType {
 		なし("0"), 参照("1"), 編集("2"), 承認("3");
 
@@ -115,7 +125,8 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static AccessType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

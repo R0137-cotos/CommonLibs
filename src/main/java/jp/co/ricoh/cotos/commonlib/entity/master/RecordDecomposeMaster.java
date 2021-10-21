@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -31,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "record_decompose_master")
 public class RecordDecomposeMaster extends EntityBaseMaster {
 
+	@Description(value = "計上種別")
 	public enum RecordType {
 
 		原価振替("1"), 割戻("2");
@@ -49,7 +52,8 @@ public class RecordDecomposeMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static RecordType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

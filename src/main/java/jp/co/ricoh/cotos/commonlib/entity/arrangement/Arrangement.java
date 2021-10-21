@@ -15,6 +15,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -33,6 +35,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "arrangement")
 public class Arrangement extends EntityBase {
+
+	@Description(value = "ワークフロー状態(手配)")
 	public enum WorkflowStatus {
 
 		手配中("1"), 手配完了("2");
@@ -51,7 +55,8 @@ public class Arrangement extends EntityBase {
 
 		@JsonCreator
 		public static WorkflowStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

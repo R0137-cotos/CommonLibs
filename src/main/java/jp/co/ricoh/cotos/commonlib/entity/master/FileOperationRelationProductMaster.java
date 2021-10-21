@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -32,6 +34,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "file_operation_relation_product_master")
 public class FileOperationRelationProductMaster extends EntityBaseMaster {
 
+	@Description(value = "カテゴリ")
 	public enum CategoryType {
 
 		ヤマト便管理("1"), ライセンス管理("2"), 外部連携("3"), マスタ管理("4");
@@ -50,10 +53,10 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static CategoryType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-
 
 	/**
 	 * ファイル操作関連商品マスタID

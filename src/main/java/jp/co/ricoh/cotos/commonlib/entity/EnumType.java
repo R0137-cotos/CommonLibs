@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -17,6 +18,7 @@ public class EnumType {
 	/**
 	 * 承認処理カテゴリ
 	 */
+	@Description(value = "最終依頼審査承認履歴処理名、承認処理カテゴリ")
 	public enum ApprovalProcessCategory {
 
 		承認依頼("1"), 承認依頼差戻("2"), 承認("3"), 承認依頼取消("4"), 承認済差戻("5");
@@ -35,13 +37,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static ApprovalProcessCategory fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * 対象契約種別
 	 */
+	@Description(value = "対象契約種別")
 	public enum TargetContractType {
 
 		共通("1"), 新規("2"), 契約変更("3"), 情報変更("4"), 契約更新("5");
@@ -60,7 +64,8 @@ public class EnumType {
 
 		@JsonCreator
 		public static TargetContractType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 		public static TargetContractType fromContractType(ContractType contractType) {
@@ -84,6 +89,7 @@ public class EnumType {
 	/**
 	 * サービスカテゴリ
 	 */
+	@Description(value = "サービスカテゴリ、ドメイン区分、対象ドメイン")
 	public enum ServiceCategory {
 
 		共通("0"), 見積("1"), 契約("2"), 手配("3"), ライセンス("4"), 外部連携("5"), 電力_見積("101"), 電力_契約("102");
@@ -102,16 +108,20 @@ public class EnumType {
 
 		@JsonCreator
 		public static ServiceCategory fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * 処理カテゴリ
 	 */
+	@Description(value = "処理カテゴリー")
 	public enum ProcessCategory {
 
-		承認依頼("1"), 承認依頼取消("2"), 承認依頼差戻("3"), 承認("4"), 作業依頼("5"), 作業完了("6"), キャンセル手続き("7"), キャンセル手続き中止("8"), 解約手続き("9"), 解約手続き中止("10"), 問い合わせ("11"), 売上計上停止("12"), 売上計上再開("13"), 売上開始指示("14"), 問い合わせ返信("15"), 承認済差戻("16"), デバイス空欄警告("17");
+		承認依頼("1"), 承認依頼取消("2"), 承認依頼差戻("3"), 承認("4"), 作業依頼("5"), 作業完了("6"), キャンセル手続き("7"), キャンセル手続き中止("8"), 解約手続き(
+				"9"), 解約手続き中止("10"), 問い合わせ(
+						"11"), 売上計上停止("12"), 売上計上再開("13"), 売上開始指示("14"), 問い合わせ返信("15"), 承認済差戻("16"), デバイス空欄警告("17");
 
 		private final String text;
 
@@ -127,13 +137,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static ProcessCategory fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * ワークフロー種別
 	 */
+	@Description(value = "ワークフロー種別")
 	public enum WorkflowType {
 
 		承認フロー("1"), タスクフロー("2");
@@ -152,16 +164,19 @@ public class EnumType {
 
 		@JsonCreator
 		public static WorkflowType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * 承認対象種別
 	 */
+	@Description(value = "承認対象種別")
 	public enum ApprovalTargetType {
 
-		新規("1"), 情報変更("2"), 契約変更("3"), キャンセル("4"), 解約("5"), 作業完了報告("6"), 非承認("7"), 売上指示("8"), 売上計上("9"), 承認済差戻("10"), 契約更新("11");
+		新規("1"), 情報変更("2"), 契約変更("3"), キャンセル("4"), 解約("5"), 作業完了報告("6"), 非承認("7"), 売上指示("8"), 売上計上("9"), 承認済差戻(
+				"10"), 契約更新("11");
 
 		private final String text;
 
@@ -177,13 +192,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static ApprovalTargetType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * 状態
 	 */
+	@Description(value = "状態、明細状態")
 	public enum DetailStatus {
 
 		NOUPDATE("1"), ADD("2"), DELETE("3"), UPDATE("4");
@@ -202,13 +219,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static DetailStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * 販売店商流順
 	 */
+	@Description(value = "販売店商流順")
 	public enum DealerFlowOrder {
 
 		販売店("1"), 母店("2");
@@ -227,13 +246,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static DealerFlowOrder fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * 宛先種別
 	 */
+	@Description(value = "宛先種別")
 	public enum TargetDirectionType {
 
 		担当CE("1"), 担当SA("2"), 問合せ元("96"), 全員に返信("97"), 全担当者("98"), その他("99");
@@ -252,7 +273,8 @@ public class EnumType {
 
 		@JsonCreator
 		public static TargetDirectionType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -277,6 +299,7 @@ public class EnumType {
 	/**
 	 * イニシャル売上計上処理状態
 	 */
+	@Description(value = "イニシャル売上計上処理状態")
 	public enum InitialAccountSalesStatus {
 
 		未計上("0"), 計上済み("1"), 処理不要("2"), 処理不可("3");
@@ -295,13 +318,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static InitialAccountSalesStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * イニシャル/ランニング区分
 	 */
+	@Description(value = "イニシャル/ランニング区分")
 	public enum InitialRunningDiv {
 
 		イニシャル("1"), ランニング("2"), 期間売("3"), 期間売_月額("4");
@@ -320,13 +345,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static InitialRunningDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * ファイル連携ステータス
 	 */
+	@Description(value = "連携ステータス")
 	public enum FileLinkageStatus {
 
 		連携対象外("0"), 未連携("1"), 連携済("2");
@@ -345,13 +372,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static FileLinkageStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * OSO処理状態
 	 */
+	@Description(value = "売上計上データID区分、処理状態")
 	public enum OsoProcessingStatus {
 
 		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
@@ -370,13 +399,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static OsoProcessingStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * OSO売上計上データID区分
 	 */
+	@Description(value = "売上計上データID区分")
 	public enum OsoSalesDataIdDiv {
 
 		OSO申込データ("1"), OSO申込明細データ("2"), OSO実績データ("3");
@@ -395,13 +426,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static OsoSalesDataIdDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * OSO商流区分
 	 */
+	@Description(value = "OSO商流区分")
 	public enum OsoDealerFlow {
 
 		販社売上("1"), 販売店売上("2"), リコー売上("3");
@@ -420,10 +453,12 @@ public class EnumType {
 
 		@JsonCreator
 		public static OsoDealerFlow fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "品種追加状態")
 	public enum ItemAddStatus {
 
 		未実施("0"), 実施中("1"), 実施済み("2");
@@ -442,7 +477,8 @@ public class EnumType {
 
 		@JsonCreator
 		public static ItemAddStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -464,7 +500,8 @@ public class EnumType {
 
 		@JsonCreator
 		public static ApplicationStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -486,10 +523,12 @@ public class EnumType {
 
 		@JsonCreator
 		public static ApiStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "EIM連携済状態")
 	public enum EimLinkedStatus {
 
 		未連携("0"), 連携済("1"), 対象外("2");
@@ -511,7 +550,8 @@ public class EnumType {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -533,13 +573,15 @@ public class EnumType {
 
 		@JsonCreator
 		public static ToleranceType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	/**
 	 * CSV出力対象区分
 	 */
+	@Description(value = "出力対象")
 	public enum CsvOutputTargetType {
 
 		全件("1"), 全件_解約を除く("2"), 出力対象月のみ("3");
@@ -558,7 +600,8 @@ public class EnumType {
 
 		@JsonCreator
 		public static CsvOutputTargetType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -567,6 +610,7 @@ public class EnumType {
 	 * @author z00se03039
 	 *
 	 */
+	@Description(value = "ライセンス状態")
 	public enum CasLicenseStatus {
 
 		未確定("0"), 有効("1"), 解約("2");
@@ -588,7 +632,8 @@ public class EnumType {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -596,6 +641,7 @@ public class EnumType {
 	 * MVBアカウント登録区分
 	 *
 	 */
+	@Description(value = "MVBアカウント登録区分")
 	public enum MvbAccountEntryDiv {
 
 		新規登録("1"), 既存使用("2");
@@ -617,7 +663,8 @@ public class EnumType {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -672,14 +719,15 @@ public class EnumType {
 			return this.value;
 		}
 	}
-	
+
 	/**
 	 * バッチ処理汎用ステータス
 	 */
+	@Description(value = "契約送信ステータス、請求受信ステータス、計上ステータス")
 	public enum BatchCommonStatus {
-		
+
 		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
-		
+
 		private final String text;
 
 		private BatchCommonStatus(final String text) {
@@ -697,7 +745,8 @@ public class EnumType {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 }

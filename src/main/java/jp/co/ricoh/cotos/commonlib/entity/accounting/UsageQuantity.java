@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -32,6 +34,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "usage_quantity")
 public class UsageQuantity extends EntityBase {
 
+	@Description(value = "通知メール送信状態")
 	public enum NotificationMailSendStatus {
 
 		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
@@ -50,7 +53,8 @@ public class UsageQuantity extends EntityBase {
 
 		@JsonCreator
 		public static NotificationMailSendStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -147,6 +151,6 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "OSO連携可能フラグ", required = false,  position = 13, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "OSO連携可能フラグ", required = false, position = 13, allowableValues = "range[0,9]")
 	private Integer osoLinkableFlg;
 }

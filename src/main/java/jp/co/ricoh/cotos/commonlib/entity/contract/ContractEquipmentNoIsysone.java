@@ -12,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -30,6 +32,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_equipment_no_isysone")
 public class ContractEquipmentNoIsysone extends EntityBase {
 
+	@Description(value = "機器区分（Isys-Oneへの連携なし）")
 	public enum MachineTypeNoIsysone {
 		ハードディスク("1"), 内蔵オプション("2"), 外付オプション("3"), 導入ソフトウェア("4");
 
@@ -47,7 +50,8 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 
 		@JsonCreator
 		public static MachineTypeNoIsysone fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

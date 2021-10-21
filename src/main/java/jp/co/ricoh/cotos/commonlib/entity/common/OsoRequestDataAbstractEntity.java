@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.entity.common;
 
 import java.util.Arrays;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -9,8 +10,12 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;
@@ -25,6 +30,8 @@ import lombok.EqualsAndHashCode;
 @MappedSuperclass
 @Data
 public class OsoRequestDataAbstractEntity extends EntityBase {
+
+	@Description(value = "OSO管理番号採番状態")
 	public enum OsoManageNumberStatus {
 
 		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
@@ -43,10 +50,12 @@ public class OsoRequestDataAbstractEntity extends EntityBase {
 
 		@JsonCreator
 		public static OsoManageNumberStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
+	@Description(value = "データ区分")
 	public enum DataDiv {
 
 		新規("1"), 変更("2");
@@ -65,7 +74,8 @@ public class OsoRequestDataAbstractEntity extends EntityBase {
 
 		@JsonCreator
 		public static DataDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -89,7 +99,7 @@ public class OsoRequestDataAbstractEntity extends EntityBase {
 	@Column(nullable = false)
 	@ApiModelProperty(value = "契約明細ID", required = true, position = 4, allowableValues = "range[0,9999999999999999999]")
 	private long contractDetailId;
-	
+
 	/**
 	 * 処理状態
 	 */
