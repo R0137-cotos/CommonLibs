@@ -24,6 +24,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -42,6 +44,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "penalty_detail_contract")
 public class PenaltyDetailContract extends EntityBase {
 
+	@Description(value = "計上先区分")
 	public enum SalesToType {
 
 		エンドユーザ("1"), 課所止め("2");
@@ -64,6 +67,7 @@ public class PenaltyDetailContract extends EntityBase {
 		}
 	}
 
+	@Description(value = "違約金売上計上処理状態")
 	public enum PenaltyAccountSalesStatus {
 
 		未計上("0"), 計上済み("1"), 処理不要("2"), 処理不可("3");

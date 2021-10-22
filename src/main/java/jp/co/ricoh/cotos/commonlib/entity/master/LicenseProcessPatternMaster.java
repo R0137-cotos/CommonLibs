@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -32,6 +34,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_process_pattern_master")
 public class LicenseProcessPatternMaster extends EntityBase {
 
+	@Description(value = "メール区分")
 	public enum MailDiv {
 
 		事前設定完了メール("1"), Welcameメール("2");

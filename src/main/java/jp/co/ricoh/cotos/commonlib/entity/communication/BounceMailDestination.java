@@ -12,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -30,6 +32,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "boumce_mail_destination")
 public class BounceMailDestination extends EntityBase {
 
+	@Description(value = "宛先区分")
 	public enum DestinationDiv {
 
 		TO("1"), CC("2");

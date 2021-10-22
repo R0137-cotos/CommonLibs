@@ -17,6 +17,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -36,6 +38,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "mail_control_master")
 public class MailControlMaster extends EntityBaseMaster {
 
+	@Description(value = "通知日タイミング区分")
 	public enum NotificationTimingType {
 
 		対象日イコール("0"), 対象日以降("1");
