@@ -50,8 +50,7 @@ public class OsoRequestDataAbstractEntity extends EntityBase {
 
 		@JsonCreator
 		public static OsoManageNumberStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -74,8 +73,7 @@ public class OsoRequestDataAbstractEntity extends EntityBase {
 
 		@JsonCreator
 		public static DataDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

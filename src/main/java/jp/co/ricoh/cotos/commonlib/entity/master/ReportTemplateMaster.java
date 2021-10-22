@@ -38,8 +38,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	@Description(value = "ライフサイクル状態(帳票テンプレート)")
 	public enum LifecycleStatus {
 
-		共通("0"), 作成中("1"), 作成完了("2"), 受注("3"), 失注("4"), 破棄("5"), キャンセル手続き中("6"), 予定日待ち("7"), 締結中("8"), 解約手続き中(
-				"9"), 解約予定日待ち("10"), 解約("11"), 旧契約("12"), 締結待ち("13");
+		共通("0"), 作成中("1"), 作成完了("2"), 受注("3"), 失注("4"), 破棄("5"), キャンセル手続き中("6"), 予定日待ち("7"), 締結中("8"), 解約手続き中("9"), 解約予定日待ち("10"), 解約("11"), 旧契約("12"), 締結待ち("13");
 
 		private final String text;
 
@@ -55,8 +54,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static LifecycleStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -66,8 +64,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	@Description(value = "ワークフロー状態(帳票テンプレート)")
 	public enum WorkflowStatus {
 
-		共通("0"), 作成中("1"), 業務依頼中("2"), 業務処理完了("3"), 承認依頼中("4"), 承認済("5"), 顧客提示済("6"), キャンセル申請中("7"), 売上可能("8"), 解約申請中(
-				"9"), 手配中("10"), 手配完了("11"), 受付待ち("12"), 作業中("13"), 作業完了報告("14"), 作業完了("15"), エラー("16");
+		共通("0"), 作成中("1"), 業務依頼中("2"), 業務処理完了("3"), 承認依頼中("4"), 承認済("5"), 顧客提示済("6"), キャンセル申請中("7"), 売上可能("8"), 解約申請中("9"), 手配中("10"), 手配完了("11"), 受付待ち("12"), 作業中("13"), 作業完了報告("14"), 作業完了("15"), エラー("16");
 
 		private final String text;
 
@@ -83,8 +80,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static WorkflowStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -110,8 +106,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static OutputType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -137,8 +132,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static TargetType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

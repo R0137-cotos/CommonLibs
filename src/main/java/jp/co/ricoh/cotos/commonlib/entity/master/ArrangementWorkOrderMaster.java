@@ -57,8 +57,7 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static CheckTimingType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

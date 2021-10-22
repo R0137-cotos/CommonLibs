@@ -55,8 +55,7 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static TargetEstimationType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 		public static TargetEstimationType fromEstimationType(EstimationType estimationType) {
@@ -92,8 +91,7 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static TargetLifecycleStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 		public static TargetLifecycleStatus fromLifeCycleStatus(LifecycleStatus lifeCycleStatus) {

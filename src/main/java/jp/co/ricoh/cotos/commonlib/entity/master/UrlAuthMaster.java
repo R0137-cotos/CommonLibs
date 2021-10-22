@@ -55,8 +55,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ParameterType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -78,15 +77,13 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static ActionDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	@Description(value = "権限区分")
 	public enum AuthDiv {
-		なし("0"), 見積_契約_手配("2200"), 請求_計上_本部("2210"), システム管理("2220"), 見積_契約_業務用検索("2230"), 業務管理("2240"), マネージド(
-				"2250"), リペア("2260");
+		なし("0"), 見積_契約_手配("2200"), 請求_計上_本部("2210"), システム管理("2220"), 見積_契約_業務用検索("2230"), 業務管理("2240"), マネージド("2250"), リペア("2260");
 
 		private final String text;
 
@@ -102,8 +99,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static AuthDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -125,8 +121,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static AccessType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 

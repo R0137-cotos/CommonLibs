@@ -26,8 +26,7 @@ public class VMailAddressList {
 	@Description(value = "テーブル区分")
 	public enum TableType {
 
-		担当SA("1"), 担当編集者("2"), 担当CE("3"), 販売店("4"), 顧客("5"), 担当作業者("6"), 導入CE("7"), 保守CE("8"), 大塚商会連絡用アドレス(
-				"101"), OR年額_大塚商会連絡用アドレス("102"), OR年額_OR営本グループアドレス("103"), SIM用固定メールアドレス("300"), 担当SA_追加編集者("1002");
+		担当SA("1"), 担当編集者("2"), 担当CE("3"), 販売店("4"), 顧客("5"), 担当作業者("6"), 導入CE("7"), 保守CE("8"), 大塚商会連絡用アドレス("101"), OR年額_大塚商会連絡用アドレス("102"), OR年額_OR営本グループアドレス("103"), SIM用固定メールアドレス("300"), 担当SA_追加編集者("1002");
 
 		private final String text;
 
@@ -43,8 +42,7 @@ public class VMailAddressList {
 
 		@JsonCreator
 		public static TableType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
 	}
