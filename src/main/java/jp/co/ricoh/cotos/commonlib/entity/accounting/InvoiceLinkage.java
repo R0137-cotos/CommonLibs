@@ -61,8 +61,7 @@ public class InvoiceLinkage extends EntityBase {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
