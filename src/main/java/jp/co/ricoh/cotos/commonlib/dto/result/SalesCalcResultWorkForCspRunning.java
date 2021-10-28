@@ -170,4 +170,9 @@ public class SalesCalcResultWorkForCspRunning {
 	 * 従業員番号
 	 */
 	private String empNumber;
+
+	/**
+	 * 届先コード
+	 */
+	private String deliveryCd;
 }
