@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.5.1 (29/10/2021)
+- [**closed**] #12001 月額計上データ格納エンティティに届先CD追加 [#1643](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1643)
+
+---
+
 ## v4.3.0 (21/09/2021)
 - [**closed**] #12428 契約明細拡張項目DTOに移行用項目のRITOS検収日を追加 [#1660](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1660)
 - [**closed**] #12109_品種からサービス終了日を取得する処理を最大の契約期間月数を取得する処理とサービス終了日を算出する処理に分けた [#1662](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1662)
