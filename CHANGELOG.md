@@ -1,5 +1,18 @@
 # Changelog
 
+## v4.5.0 (04/11/2021)
+- [**closed**] #11117_バウンスメール記録リポジトリに検索メソッド追加 [#1699](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1699)
+- [**closed**] #11117_バウンスメール記録に項目追加 [#1690](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1690)
+- [**closed**] #11864 RSI契約管理API用エラーメッセージを追加 [#1715](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1715)
+- [**closed**] #12032_EDW年額更新時期案内不着連絡用メールアドレスをアドレス格納用ビューに追加 [#1713](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1713)
+- [**closed**] #11864 RSI契約管理API用DTOを追加&一部DTOをExternalLinkage側で持つため削除 [#1701](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1701)
+- [**closed**] #11864 RSI契約管理APIの各認証情報をプロパティに追加&エラーメッセージ追加&RSI契約管理API用DTOを追加 [#1700](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1700)
+- [**closed**] #12267 RSI契約管理APIのURLをプロパティに追加&エラーメッセージ追加 [#1695](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1695)
+- [**closed**] #12200 承諾番号取得手配業務タイプ区分追加 [#1667](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1667)
+- [**closed**] #12200 音声SIM商品固有項目承諾番号発行日・有効期限追加 [#1665](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1665)
+
+---
+
 ## v4.4.0 (04/11/2021)
 - [**closed**] #10673 商品グループマスタに満了解約後手配作成フラグを追加 [#1687](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1687)
 - [**closed**] #10721CPQ再積み上げ用API情報追加 [#1697](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1697)
