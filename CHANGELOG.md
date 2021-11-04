@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.4.0 (04/11/2021)
+- [**closed**] #10673 商品グループマスタに満了解約後手配作成フラグを追加 [#1687](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1687)
+- [**closed**] #10721CPQ再積み上げ用API情報追加 [#1697](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1697)
+- [**closed**] #10721 CPQ再積み上げ用API情報追加 [#1693](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1693)
+- [**closed**] #11488 システム日付取得処理切り捨て対応 [#1691](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1691)
+- [**closed**] #11432 契約と一部注文情報関連項目にアノテーションを付与 [#1692](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1692)
+
+---
+
 ## v4.5.1 (29/10/2021)
 - [**closed**] #12001 月額計上データ格納エンティティに届先CD追加 [#1643](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1643)
 
