@@ -124,6 +124,26 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	public enum IsysoneReLinkageStatus {
+		再連携不要_初期値("0"), 再連携必要("1"), 再連携済("2");
+
+		private final String text;
+
+		private IsysoneReLinkageStatus(final String text) {
+			this.text = text;
+		}
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IsysoneReLinkageStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * ID
 	 */
