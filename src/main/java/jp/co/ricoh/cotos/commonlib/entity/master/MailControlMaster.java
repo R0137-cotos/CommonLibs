@@ -59,28 +59,6 @@ public class MailControlMaster extends EntityBaseMaster {
 
 	}
 
-	public enum ContactReferenceType {
-
-		直接アドレス("0"), MoM社員ID("1");
-
-		private final String text;
-
-		private ContactReferenceType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ContactReferenceType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_control_master_seq")
 	@SequenceGenerator(name = "mail_control_master_seq", sequenceName = "mail_control_master_seq", allocationSize = 1)
@@ -119,7 +97,7 @@ public class MailControlMaster extends EntityBaseMaster {
 	/**
 	 * 通知日タイミング区分
 	 */
-	@ApiModelProperty(value = "通知日タイミング区分", required = false, allowableValues = "直接アドレス(\"0\"), MoM社員ID(\"1\")", example = "1", position = 6)
+	@ApiModelProperty(value = "通知日タイミング区分", required = false, allowableValues = "対象日イコール(\"0\"), 対象日以降(\"1\")", example = "1", position = 6)
 	private NotificationTimingType notificationTimingType;
 
 	/**
