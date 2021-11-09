@@ -155,6 +155,6 @@ public class ContractEquipmentDto extends DtoBase {
 	/**
 	 * Isys-One再連携ステータス
 	 */
-	@ApiModelProperty(value = "Isys-One再連携ステータス", required = false, position = 22, allowableValues = "再連携不要_初期値(\"0\"),再連携必要(\"1\"),再連携済(\"2\")")
-	private IsysoneReLinkageStatus IsysoneReLinkageStatus;
+	@ApiModelProperty(value = "Isys-One再連携ステータス", required = false, position = 22, allowableValues = "再連携不要(\"0\"),再連携必要(\"1\"),再連携済(\"2\")")
+	private IsysoneReLinkageStatus isysoneReLinkageStatus;
 }
