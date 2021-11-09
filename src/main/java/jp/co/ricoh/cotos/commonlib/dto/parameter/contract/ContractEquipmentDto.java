@@ -14,6 +14,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.ArcsPeriodSaleMainteProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneMaintereportProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneProcStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneReLinkageStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -150,4 +151,10 @@ public class ContractEquipmentDto extends DtoBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 21)
 	private Date arcsPeriodSaleMainteLinkageAt;
+
+	/**
+	 * Isys-One再連携ステータス
+	 */
+	@ApiModelProperty(value = "Isys-One再連携ステータス", required = false, position = 22, allowableValues = "再連携不要(\"0\"),再連携必要(\"1\"),再連携済(\"2\")")
+	private IsysoneReLinkageStatus isysoneReLinkageStatus;
 }

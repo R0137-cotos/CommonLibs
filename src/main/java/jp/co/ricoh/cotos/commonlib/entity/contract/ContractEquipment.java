@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneReLinkageStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -120,6 +121,27 @@ public class ContractEquipment extends EntityBase {
 
 		@JsonCreator
 		public static MachineType fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum IsysoneReLinkageStatus {
+		再連携不要("0"), 再連携必要("1"), 再連携済("2");
+
+		private final String text;
+
+		private IsysoneReLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IsysoneReLinkageStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -307,5 +329,11 @@ public class ContractEquipment extends EntityBase {
 	@JsonIgnore
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 26)
 	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
+
+	/**
+	 * Isys-One再連携ステータス
+	 */
+	@ApiModelProperty(value = "Isys-One再連携ステータス", required = false, position = 27, allowableValues = "再連携不要(\"0\"),再連携必要(\"1\"),再連携済(\"2\")")
+	private IsysoneReLinkageStatus isysoneReLinkageStatus;
 
 }
