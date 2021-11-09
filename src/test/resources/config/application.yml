@@ -57,6 +57,14 @@ cotos:
     fileDownloadPath: services/v1/files/download
     modelId: DetailForm^CotosContractModel
     systemName: CTSCont02
+  rsi:
+    contractUrl: dummy_rsi_contract_url
+    authUrl: dummy_rsi_auth_url
+    userId: dummy_rsi_user_id
+    userPassword: dummy_rsi_user_password
+    userTenantId: dummy_rsi_user_tenantId
+    appUserId: dummy_rsi_app_user_id
+    appUserPassword: dummy_rsi_app_user_password
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
