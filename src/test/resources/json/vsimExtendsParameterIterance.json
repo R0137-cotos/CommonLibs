@@ -11,7 +11,9 @@
       "imeiNumber": "imeiNumber_1",
       "invoiceNumber": "invoiceNumber_1",
       "cancelDate": "cancelDate_1",
-      "mnpNumber": "mnpNumber_1"
+      "mnpNumber": "mnpNumber_1",
+      "mnpIssueDate": "mnpIssueDate_1",
+      "mnpExpirationDate": "mnpExpirationDate_1"
     },
     {
       "id": 2,
@@ -24,7 +26,9 @@
       "imeiNumber": "imeiNumber_2",
       "invoiceNumber": "invoiceNumber_2",
       "cancelDate": "cancelDate_2",
-      "mnpNumber": "mnpNumber_2"
+      "mnpNumber": "mnpNumber_2",
+      "mnpIssueDate": "mnpIssueDate_2",
+      "mnpExpirationDate": "mnpExpirationDate_2"
     }
   ]
 }

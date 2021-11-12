@@ -55,6 +55,8 @@ public class TestVSIMExtendsParameterIteranceDto {
 			Assert.assertEquals("送り状番号コンバートされること", "invoiceNumber_" + e.getId(), e.getInvoiceNumber());
 			Assert.assertEquals("解約日コンバートされること", "cancelDate_" + e.getId(), e.getCancelDate());
 			Assert.assertEquals("承諾番号コンバートされること", "mnpNumber_" + e.getId(), e.getMnpNumber());
+			Assert.assertEquals("承諾番号 発行日がコンバートされること", "mnpIssueDate_" + e.getId(), e.getMnpIssueDate());
+			Assert.assertEquals("承諾番号 有効期限がコンバートされること", "mnpExpirationDate_" + e.getId(), e.getMnpExpirationDate());
 		});
 	}
 
