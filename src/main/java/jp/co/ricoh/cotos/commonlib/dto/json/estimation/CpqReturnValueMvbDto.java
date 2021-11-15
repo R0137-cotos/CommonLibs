@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnSiteOnlyFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnsiteOnlyFlg;
 import lombok.Data;
 
 /**
@@ -16,5 +16,5 @@ public class CpqReturnValueMvbDto {
 	/**
 	 * オンサイトのみフラグ
 	 */
-	private OnSiteOnlyFlg onSiteOnlyFlg;
+	private OnsiteOnlyFlg onSiteOnlyFlg;
 }

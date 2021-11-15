@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnSiteFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnsiteFlg;
 import lombok.Data;
 
 /**
@@ -22,7 +22,7 @@ public class ProductContractExtendsParameterMvbDto {
 	/**
 	 * オンサイト有無フラグ
 	 */
-	private OnSiteFlg onSiteFlg;
+	private OnsiteFlg onSiteFlg;
 
 	/**
 	 * 新規/既存アカウント区分

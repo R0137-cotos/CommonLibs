@@ -3,21 +3,21 @@ package jp.co.ricoh.cotos.commonlib.converter.json;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnSiteFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnsiteFlg;
 
 @Converter(autoApply = true)
-public class OnSiteFlgConverter implements AttributeConverter<OnSiteFlg, String> {
+public class OnsiteFlgConverter implements AttributeConverter<OnsiteFlg, String> {
 	@Override
-	public String convertToDatabaseColumn(OnSiteFlg newExistingAccountTypeMss) {
+	public String convertToDatabaseColumn(OnsiteFlg newExistingAccountTypeMss) {
 		if (newExistingAccountTypeMss == null)
 			return null;
 		return newExistingAccountTypeMss.toString();
 	}
 
 	@Override
-	public OnSiteFlg convertToEntityAttribute(String value) {
+	public OnsiteFlg convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return OnSiteFlg.fromString(value);
+		return OnsiteFlg.fromString(value);
 	}
 }
