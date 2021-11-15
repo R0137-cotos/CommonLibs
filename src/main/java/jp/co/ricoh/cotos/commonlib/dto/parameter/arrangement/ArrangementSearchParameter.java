@@ -548,6 +548,15 @@ public class ArrangementSearchParameter {
 	private String imeiNumber;
 
 	/**
+	 * 手配業務ステータス(手配承認日時検索条件)
+	 */
+	@ApiParam(value = "手配業務ステータス:カンマ区切りで複数指定可", required = false)
+	@ApiModelProperty(value = "手配業務ステータス(手配承認日時検索条件)<br />" //
+			+ "状態遷移上のワークフロー状態を表す。", //
+			required = false) //
+	private String approvalArrangementWorkStatus;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
