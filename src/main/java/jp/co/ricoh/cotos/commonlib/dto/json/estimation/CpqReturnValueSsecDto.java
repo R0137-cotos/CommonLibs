@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnsiteOnlyFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnSiteOnlyFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSsec.IntActingDivSsec;
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class CpqReturnValueSsecDto {
 	/**
 	 * オンサイトのみフラグ
 	 */
-	private OnsiteOnlyFlg onSiteOnlyFlg;
+	private OnSiteOnlyFlg onSiteOnlyFlg;
 
 	/**
 	 * 導入代行区分

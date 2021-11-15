@@ -129,13 +129,13 @@ public class JsonEnumType {
 		}
 	}
 
-	public enum OnsiteOnlyFlg {
+	public enum OnSiteOnlyFlg {
 
 		オンサイトのみ以外("0"), オンサイトのみ("1");
 
 		private final String text;
 
-		private OnsiteOnlyFlg(final String text) {
+		private OnSiteOnlyFlg(final String text) {
 			this.text = text;
 		}
 
@@ -146,18 +146,18 @@ public class JsonEnumType {
 		}
 
 		@JsonCreator
-		public static OnsiteOnlyFlg fromString(String string) {
+		public static OnSiteOnlyFlg fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
-	public enum OnsiteFlg {
+	public enum OnSiteFlg {
 
 		オンサイト無し("0"), オンサイト有り("1");
 
 		private final String text;
 
-		private OnsiteFlg(final String text) {
+		private OnSiteFlg(final String text) {
 			this.text = text;
 		}
 
@@ -168,7 +168,7 @@ public class JsonEnumType {
 		}
 
 		@JsonCreator
-		public static OnsiteFlg fromString(String string) {
+		public static OnSiteFlg fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
