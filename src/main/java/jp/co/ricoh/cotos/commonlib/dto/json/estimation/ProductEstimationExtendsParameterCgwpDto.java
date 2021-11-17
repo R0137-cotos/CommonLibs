@@ -23,5 +23,5 @@ public class ProductEstimationExtendsParameterCgwpDto {
 	 * COTOS商品固有項目
 	 */
 	@JsonProperty("cotosProductSpecificParameter")
-	private CotosParameterCgwpDto cpqParameterCgwpDto;
+	private CotosParameterCgwpDto cotosParameterCgwpDto;
 }
