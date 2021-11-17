@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CpqParameterCgwpDto {
+public class CotosParameterCgwpDto {
 
 	/**
 	 * Merakiルータ連携契約ID
