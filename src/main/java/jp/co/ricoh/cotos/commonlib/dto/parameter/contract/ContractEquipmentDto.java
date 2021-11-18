@@ -172,4 +172,11 @@ public class ContractEquipmentDto extends DtoBase {
 	@ApiModelProperty(value = "Isys-One連携済機種コード", required = false, position = 24, allowableValues = "range[0,255]")
 	private String isysoneLinkagedEquipmentCode;
 
+	/**
+	 * 機種名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "機種名", required = false, position = 25, allowableValues = "range[0,255]")
+	private String equipmentName;
+
 }
