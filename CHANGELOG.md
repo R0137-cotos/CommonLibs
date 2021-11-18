@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.7.0 (18/11/2021)
+- [**closed**] #12973 承認日時検索の条件に業務ステータスを追加 [#1734](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1734)
+- [**closed**] #12776 通知メール制御マスタ.通知日タイミング区分アノテーション修正 [#1729](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1729)
+- [**closed**] #12757 契約検索パラメータにサービス利用希望日、解約予定日追加 [#1720](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1720)
+
+---
+
 ## v4.6.0 (04/11/2021)
 - [**closed**] #12723 グループ承認時のエラーメッセージを追加 [#1723](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1723)
 
