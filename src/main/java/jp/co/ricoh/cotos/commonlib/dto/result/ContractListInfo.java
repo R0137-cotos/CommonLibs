@@ -122,14 +122,14 @@ public class ContractListInfo {
 	/**
 	 * サービス開始日
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "サービス開始日", required = false, position = 16)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "サービス終了日", required = false, position = 17)
 	private Date serviceTermEnd;
 
@@ -357,6 +357,20 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "設置先企事部ID", required = false, position = 54, allowableValues = "range[0,1000]")
 	private String installationMomCustId;
+
+	/**
+	 * サービス利用希望日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 55)
+	private Date conclusionPreferredDate;
+
+	/**
+	 * 解約予定日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "解約予定日", required = false, position = 56)
+	private Date cancelScheduledDate;
 
 	@PrePersist
 	public void prePersist() {
