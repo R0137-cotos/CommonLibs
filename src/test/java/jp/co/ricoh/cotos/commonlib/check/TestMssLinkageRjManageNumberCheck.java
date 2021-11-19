@@ -63,7 +63,7 @@ public class TestMssLinkageRjManageNumberCheck {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
 			Assert.assertEquals("エラーが発生すること", 1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00050");
-			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "Merakiルータ連携契約IDに入力された契約IDに該当する契約が存在しない、または該当契約が条件(締結中,企業IDが一致,ルーター/UTMプランあり)を満たしていません。");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "MSS連携契約IDに入力された契約IDに該当する契約が存在しない、または該当契約が条件(締結中,企業IDが一致,ルーター/UTMプランあり)を満たしていません。");
 		}
 	}
 
@@ -76,7 +76,7 @@ public class TestMssLinkageRjManageNumberCheck {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
 			Assert.assertEquals("エラーが発生すること", 1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00050");
-			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "Merakiルータ連携契約IDに入力された契約IDに該当する契約が存在しない、または該当契約が条件(締結中,企業IDが一致,ルーター/UTMプランあり)を満たしていません。");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "MSS連携契約IDに入力された契約IDに該当する契約が存在しない、または該当契約が条件(締結中,企業IDが一致,ルーター/UTMプランあり)を満たしていません。");
 		}
 	}
 
@@ -92,7 +92,7 @@ public class TestMssLinkageRjManageNumberCheck {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
 			Assert.assertEquals("エラーが発生すること", 1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00050");
-			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "Merakiルータ連携契約IDに入力された契約IDに該当する契約が存在しない、または該当契約が条件(締結中,企業IDが一致,ルーター/UTMプランあり)を満たしていません。");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "MSS連携契約IDに入力された契約IDに該当する契約が存在しない、または該当契約が条件(締結中,企業IDが一致,ルーター/UTMプランあり)を満たしていません。");
 		}
 	}
 }
