@@ -41,10 +41,10 @@ public class LicenseInfoResult {
 	private long id;
 
 	/**
-	 * version
+	 * ライセンス情報version
 	 */
 	@Version
-	@ApiModelProperty(value = "version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "ライセンス情報version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long version;
 
 	/**
