@@ -17,8 +17,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.ActionDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AuthDiv;
@@ -81,7 +81,10 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 		// リクエスト元のOriginと、JWTのオリジンを比較
 		String requestOrigin = token.getCredentials().toString();
 
-		if (!StringUtils.isBlank(requestOrigin) && !requestOrigin.equals(cotosAuthenticationDetails.getOrigin())) {
+		// リクエスト元のOriginに、比較をスキップするOrigin名が含まれていた場合、比較処理を行わない
+		boolean skipCheckOriginFlg = jwtProperties.getSkipCheckOriginName().stream().anyMatch(skipCheckOriginName -> requestOrigin.contains(skipCheckOriginName));
+
+		if (!StringUtils.isBlank(requestOrigin) && !requestOrigin.equals(cotosAuthenticationDetails.getOrigin()) && !skipCheckOriginFlg) {
 			throw new UsernameNotFoundException("Origin Not Allowed");
 		}
 
