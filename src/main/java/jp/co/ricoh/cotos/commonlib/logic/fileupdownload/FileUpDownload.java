@@ -128,7 +128,7 @@ public class FileUpDownload {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "FileAttachedFileNotFoundError", new String[] { "ダウンロード" }));
 		}
 
-		File file = new File(appProperties.getFileProperties().getUploadFileDir() + "/" + attachedFile.getFilePhysicsName());
+		File file = new File(attachedFile.getSavedPath());
 		if (!file.exists()) {
 			if (EimLinkedStatus.連携済 == attachedFile.getEimLinkedStatus()) {
 				byte[] eimFile = eimConnectionHelper.getFile(attachedFile.getEimFileId());
