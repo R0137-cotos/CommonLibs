@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.security;
 import java.util.Arrays;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,8 +83,10 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 		String requestOrigin = token.getCredentials().toString();
 
 		// リクエスト元のOriginに、比較をスキップするOrigin名が含まれていた場合、比較処理を行わない
-		boolean skipCheckOriginFlg = jwtProperties.getSkipCheckOriginName().stream().anyMatch(skipCheckOriginName -> requestOrigin.contains(skipCheckOriginName));
-
+		boolean skipCheckOriginFlg = false;
+		if (!CollectionUtils.isEmpty(jwtProperties.getSkipCheckOriginName())) {
+			skipCheckOriginFlg = jwtProperties.getSkipCheckOriginName().stream().anyMatch(skipCheckOriginName -> requestOrigin.contains(skipCheckOriginName));
+		}
 		if (!StringUtils.isBlank(requestOrigin) && !requestOrigin.equals(cotosAuthenticationDetails.getOrigin()) && !skipCheckOriginFlg) {
 			throw new UsernameNotFoundException("Origin Not Allowed");
 		}
