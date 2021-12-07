@@ -206,4 +206,11 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "割当区分", required = false)
 	@ApiModelProperty(value = "割当区分", required = false, position = 21)
 	private Integer allocationDiv;
+
+	/**
+	 * 送信結果区分
+	 */
+	@ApiParam(value = "送信結果区分", required = false)
+	@ApiModelProperty(value = "送信結果区分", required = false, position = 22)
+	private Integer mailSendResultDiv;
 }
