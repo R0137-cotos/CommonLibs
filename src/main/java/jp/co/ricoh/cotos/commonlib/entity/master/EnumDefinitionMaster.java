@@ -26,7 +26,7 @@ public class EnumDefinitionMaster extends EntityBaseMaster {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "enum_definition_master_seq")
-	@SequenceGenerator(name = "enum_definition_master_seq", sequenceName = "enum_definition_master.seq", allocationSize = 1)
+	@SequenceGenerator(name = "enum_definition_master_seq", sequenceName = "enum_definition_master_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ENUM定義マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
