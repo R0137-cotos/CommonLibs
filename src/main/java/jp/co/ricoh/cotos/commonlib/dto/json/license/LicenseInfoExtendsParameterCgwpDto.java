@@ -12,12 +12,12 @@ import lombok.Data;
 public class LicenseInfoExtendsParameterCgwpDto {
 
 	/**
-	 * Merakiルータ連携契約ID
+	 * MerakiスマートサービスUTM/ルータプラン契約ID
 	 */
 	private String mssLinkageRjManageNumber;
 
 	/**
-	 * Merakiルータ連携オーガニゼーションID
+	 * MerakiスマートサービスオーガニゼーションID
 	 */
 	private String mssLinkageOrganizationId;
 }
