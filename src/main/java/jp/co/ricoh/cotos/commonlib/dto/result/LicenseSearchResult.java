@@ -247,5 +247,5 @@ public class LicenseSearchResult {
 	 * MerakiスマートサービスオーガニゼーションID
 	 */
 	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 36)
-	private String MssOrganizationId;
+	private String mssLinkageOrganizationId;
 }
