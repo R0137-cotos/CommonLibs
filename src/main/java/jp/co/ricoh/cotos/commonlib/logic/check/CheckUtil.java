@@ -697,7 +697,7 @@ public class CheckUtil {
 	/**
 	 * MerakiスマートサービスUTM/ルータプラン契約ID関連チェックを行う
 	 * 締結中であること
-	 * 顧客（見積用）.MoM企業IDが一致すること
+	 * 顧客（契約用）.MoM企業IDが一致すること
 	 * MSSのルーター/UTMプランの月額品種が積み上がっていること
 	 * @param mssLinkageRjManageNumber
 	 * @param companyId
@@ -711,9 +711,8 @@ public class CheckUtil {
 			// 締結中データなし
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
 		}
-		Estimation mssEstimation = estimationRepository.findOne(mssContract.getEstimationId());
-		if (!companyId.equals(mssEstimation.getCustomerEstimation().getCompanyId())) {
-			//顧客（見積用）.MoM企業IDが一致しない
+		if (!companyId.equals(mssContract.getCustomerContract().getCompanyId())) {
+			//顧客（契約用）.MoM企業IDが一致しない
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
 		}
 		List<CommonMasterDetail> detailList = commonMasterRepository.findByColumnName("cgwp_monthly_item_cd").stream().findFirst().get().getCommonMasterDetailList();
