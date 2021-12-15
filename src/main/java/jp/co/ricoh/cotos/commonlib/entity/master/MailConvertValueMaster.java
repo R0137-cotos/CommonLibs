@@ -31,13 +31,13 @@ import lombok.EqualsAndHashCode;
 @Table(name = "mail_convert_value_master")
 public class MailConvertValueMaster extends EntityBaseMaster {
 
-	public enum SubjectVodyType {
+	public enum SubjectBodyType {
 
 		件名("0"), 本文("1"), 本文_リスト("2");
 
 		private final String text;
 
-		private SubjectVodyType(final String text) {
+		private SubjectBodyType(final String text) {
 			this.text = text;
 		}
 
@@ -48,7 +48,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static SubjectVodyType fromString(String string) {
+		public static SubjectBodyType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
@@ -96,7 +96,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	 * 件名/本文区分
 	 */
 	@ApiModelProperty(value = "件名/本文区分", required = false, allowableValues = "件名(\"0\"), 本文(\"1\"), 本文(\"2\")", example = "1", position = 3)
-	private SubjectVodyType subjectBodyType;
+	private SubjectBodyType subjectBodyType;
 
 	/**
 	 * 置換変数番号
