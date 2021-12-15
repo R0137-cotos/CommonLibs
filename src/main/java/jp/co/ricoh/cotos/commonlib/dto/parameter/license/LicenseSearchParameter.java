@@ -213,4 +213,11 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "送信結果区分", required = false)
 	@ApiModelProperty(value = "送信結果区分", required = false, position = 22)
 	private Integer mailSendResultDiv;
+
+	/**
+	 * MerakiスマートサービスオーガニゼーションID
+	 */
+	@ApiParam(value = "MerakiスマートサービスオーガニゼーションID", required = false)
+	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 23)
+	private String mssLinkageOrganizationId;
 }
