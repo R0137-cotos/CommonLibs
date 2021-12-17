@@ -75,26 +75,4 @@ public class JsonEnumTypeCgwp {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-
-	public enum MssLinkageTakeoverFlgCgwp {
-
-		引継ぎなし("0"), 引継ぎあり("1");
-
-		private final String text;
-
-		private MssLinkageTakeoverFlgCgwp(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static MssLinkageTakeoverFlgCgwp fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 }
