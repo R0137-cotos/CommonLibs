@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,10 +39,14 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
+import jp.co.ricoh.cotos.commonlib.entity.master.CommonMasterDetail;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.CommonMasterRepository;
 
 /**
  * チェック共通クラス
@@ -54,6 +59,15 @@ public class CheckUtil {
 
 	@Autowired
 	JsonUtil jsonUtil;
+
+	@Autowired
+	ContractRepository contractRepository;
+
+	@Autowired
+	EstimationRepository estimationRepository;
+
+	@Autowired
+	CommonMasterRepository commonMasterRepository;
 
 	/**
 	 * 社員モード(パラメータ,操作者)
@@ -678,5 +692,42 @@ public class CheckUtil {
 		default:
 			return false;
 		}
+	}
+
+	/**
+	 * MerakiスマートサービスUTM/ルータプラン契約ID関連チェックを行う
+	 * 締結中であること
+	 * 顧客（契約用）.MoM企業IDが一致すること
+	 * MSSのルーター/UTMプランの月額品種が積み上がっていること
+	 * @param mssLinkageRjManageNumber
+	 * @param companyId
+	 * @return List<ErrorInfo>
+	 */
+	public List<ErrorInfo> mssLinkageRjManageNumberCheck(String mssLinkageRjManageNumber, String companyId) {
+		List<ErrorInfo> errorInfo = new ArrayList<ErrorInfo>();
+		List<Contract> contractList = contractRepository.findByRjManageNumber(mssLinkageRjManageNumber);
+		Contract mssContract = contractList.stream().filter(e -> e.getLifecycleStatus() == LifecycleStatus.締結中).findFirst().orElse(null);
+		if (mssContract == null) {
+			// 締結中データなし
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
+		}
+		if (!companyId.equals(mssContract.getCustomerContract().getCompanyId())) {
+			//顧客（契約用）.MoM企業IDが一致しない
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
+		}
+		List<CommonMasterDetail> detailList = commonMasterRepository.findByColumnName("cgwp_monthly_item_cd").stream().findFirst().get().getCommonMasterDetailList();
+
+		boolean stackFlg = false;
+		for (ContractDetail contractDetail : mssContract.getContractDetailList()) {
+			List<CommonMasterDetail> detail = detailList.stream().filter(e -> e.getCodeValue().equals(contractDetail.getItemContract().getRicohItemCode())).collect(Collectors.toList());
+			if (!CollectionUtils.isEmpty(detail)) {
+				stackFlg = true;
+			}
+		}
+		if (stackFlg == false) {
+			// MSSのルーター/UTMプラン月額品種が積み上がっていない
+			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
+		}
+		return errorInfo;
 	}
 }
