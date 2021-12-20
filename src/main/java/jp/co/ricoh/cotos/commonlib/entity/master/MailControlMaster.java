@@ -56,6 +56,28 @@ public class MailControlMaster extends EntityBaseMaster {
 		public static NotificationTimingType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
+	}
+
+	public enum NotificationDateType {
+
+		トランザクションの日付カラム("0"), 最終承認依頼日("1");
+
+		private final String text;
+
+		private NotificationDateType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static NotificationDateType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
 
 	}
 
@@ -179,4 +201,10 @@ public class MailControlMaster extends EntityBaseMaster {
 	@JsonIgnore
 	@ApiModelProperty(value = "エラー通知メール制御マスタID", required = false, position = 17)
 	private MailControlMaster errorMailControlMasterId;
+
+	/**
+	 * 通知日タイミング区分
+	 */
+	@ApiModelProperty(value = "通知日タイミング区分", required = false, allowableValues = "トランザクションの日付カラム(\"0\"), 最終承認依頼日(\"1\")", example = "1", position = 18)
+	private NotificationDateType notificationDateType;
 }
