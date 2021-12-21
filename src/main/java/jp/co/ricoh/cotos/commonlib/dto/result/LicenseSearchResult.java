@@ -238,10 +238,10 @@ public class LicenseSearchResult {
 	private String mailSendResultDiv;
 
 	/**
-	 * 登録日時
+	 * 業務受理日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 35)
-	private String createdAt;
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 35)
+	private String businessAcceptanceDateTime;
 
 	/**
 	 * MerakiスマートサービスオーガニゼーションID
