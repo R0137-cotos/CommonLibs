@@ -1367,7 +1367,6 @@ public class TestMaster {
 		found = mailControlMasterRepository.findOne(id);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull("Entityがnullではないことを確認", found);
-		Assert.assertNull("Entityがnullではないことを確認", found.getNotificationDateType());
 	}
 
 	@Test
