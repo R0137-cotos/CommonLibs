@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.util;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,4 +21,6 @@ public class JwtProperties {
 
 	@Autowired
 	private ClaimsProperties claimsProperties;
+
+	private List<String> skipCheckOriginName;
 }
