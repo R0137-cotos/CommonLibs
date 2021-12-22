@@ -49,8 +49,12 @@ public class TestMssLinkageRjManageNumberCheck {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/commonMasterDetail.sql");
 		context.getBean(DBConfig.class).initTargetTestData("check/testMssLinkageRjManageNumberCheck_エラーなし.sql");
-		List<ErrorInfo> errorInfo = checkUtil.mssLinkageRjManageNumberCheck("1234567890", "000000002033411");
-		Assert.assertEquals("エラーが発生しないこと", 0, errorInfo.size());
+		try {
+			checkUtil.mssLinkageRjManageNumberCheck("1234567890", "000000002033411");
+			Assert.assertTrue(true);
+		}  catch (ErrorCheckException e) {
+			Assert.fail("エラーが発生した");
+		}
 	}
 
 	@Test
