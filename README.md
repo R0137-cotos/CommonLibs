@@ -427,3 +427,4 @@
 |470|リクエスト元のOriginとJWTのOriginを比較する処理の条件を追加|
 |471|リクエスト元のOriginとJWTのOriginを比較する処理を修正|
 |472|2021/12/16のUmbrella対応分を追加|
+|473|VMailAddressListのテーブル区分にCGWP不達案内用を追加|
