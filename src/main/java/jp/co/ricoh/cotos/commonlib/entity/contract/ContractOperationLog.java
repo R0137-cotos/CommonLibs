@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +39,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_operation_log")
 public class ContractOperationLog extends EntityBase {
 
+	@Description(value = "操作内容")
 	public enum OperationLogType {
 		売上開始指示, 売上計上開始, 売上計上停止, キャンセル手続き, キャンセル中止, 解約手続き, 解約確定, 解約取込, 解約手続き中止, 変更キャンセル, 変更確定, 新規作成, 帳票出力, 契約変更, 確定, 情報変更, 新規作成_情報変更, 更新, 業務依頼, 業務処理完了, 締結開始指示, 新規作成_契約変更, 自動更新, 移行データ_新規作成, 移行データ_更新, 承認済差戻, 明細追加, 手動更新
 	}
