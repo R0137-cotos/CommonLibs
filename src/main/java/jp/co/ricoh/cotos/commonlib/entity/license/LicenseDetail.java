@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.RequestCreateStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -77,6 +78,28 @@ public class LicenseDetail extends EntityBase {
 
 		@JsonCreator
 		public static HardSoftDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum RequestProcessDiv {
+
+		即時("1"), 月次("2");
+
+		private final String text;
+
+		private RequestProcessDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static RequestProcessDiv fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -177,4 +200,46 @@ public class LicenseDetail extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 13)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * ライセンスサービスID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ライセンスサービスID", required = true, position = 14, allowableValues = "range[0,255]")
+	private String licenseServiceId;
+
+	/**
+	 * ライセンスサービス名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ライセンスサービス名", required = true, position = 15, allowableValues = "range[0,255]")
+	private String licenseServiceName;
+
+	/**
+	 * 増減数量
+	 */
+	@Max(99999)
+	@Min(-99999)
+	@ApiModelProperty(value = "増減数量", required = false, position = 16, allowableValues = "range[-99999,99999]")
+	private Integer changeQuantity;
+
+	/**
+	 * リクエスト処理区分
+	 */
+	@ApiModelProperty(value = "リクエスト処理区分", required = false, allowableValues = "即時(\"1\"), 月次(\"2\")", position = 17)
+	private RequestProcessDiv requestProcessDiv;
+
+	/**
+	 * リクエスト作成状態
+	 */
+	@ApiModelProperty(value = "リクエスト作成状態", required = false, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")", position = 18)
+	private RequestCreateStatus requestCreateStatus;
+
+	/**
+	 * リクエスト作成日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "リクエスト作成日時", required = false, position = 19)
+	private Date requestCreateDate;
+
 }
