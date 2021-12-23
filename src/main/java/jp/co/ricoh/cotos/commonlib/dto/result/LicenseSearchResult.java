@@ -229,7 +229,7 @@ public class LicenseSearchResult {
 	 * メール送信日
 	 */
 	@ApiModelProperty(value = "メール送信日", required = false, position = 33)
-	private String mailSendAt;
+	private Date mailSendAt;
 
 	/**
 	 * 送信結果区分
@@ -238,10 +238,10 @@ public class LicenseSearchResult {
 	private String mailSendResultDiv;
 
 	/**
-	 * 登録日時
+	 * 業務受理日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 35)
-	private String createdAt;
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 35)
+	private Date businessAcceptanceDateTime;
 
 	/**
 	 * MerakiスマートサービスオーガニゼーションID
