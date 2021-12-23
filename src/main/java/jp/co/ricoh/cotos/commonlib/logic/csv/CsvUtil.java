@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.axis.utils.StringUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +44,8 @@ public class CsvUtil {
 	JsonUtil jsonUtil;
 
 	private static final String CHARSET_NAME = "MS932";
+
+	private static final Charset BOM_SETTING_POSSIBLE_ENCODE = Charset.forName("UTF-8");
 
 	/**
 	 * CSV情報生成
@@ -101,7 +103,7 @@ public class CsvUtil {
 
 		String csv = mapper.writer(schema).writeValueAsString(entityList);
 
-		return csv.getBytes(prm.getCharset());
+		return convertStrToByteArray(csv, prm);
 	}
 
 	/**
@@ -136,6 +138,7 @@ public class CsvUtil {
 		csvParameter.setQuote(flgBooleanConverter(csvFileSettingMaster.getCsvQuote()));
 		csvParameter.setNullValueString(Optional.ofNullable(csvFileSettingMaster.getCsvNullValueString()).orElse(""));
 		csvParameter.setWithoutQuoteChar(flgBooleanConverter(csvFileSettingMaster.getCsvWithoutQuoteChar(), false));
+		csvParameter.setBomSettingFlg(flgBooleanConverter(csvFileSettingMaster.getBomSettingFlg(), false));
 		return csvParameter;
 	}
 
@@ -367,5 +370,36 @@ public class CsvUtil {
 		});
 
 		return list;
+	}
+
+	/**
+	 * 文字列をバイナリデータに変換します。その際、UTF-8でBOM設定フラグがtrueならBOM付きにします。
+	 *
+	 * @param str
+	 * @param csvParameter
+	 * @return
+	 */
+	private byte[] convertStrToByteArray(String str, CsvParameter csvParameter) {
+		if (StringUtils.isBlank(str)) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "RequiredConvertDataNothing"));
+		}
+		if (csvParameter == null) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "CSVパラメータ" }));
+		}
+		// バイナリデータに変換
+		byte[] csv = str.getBytes(csvParameter.getCharset());
+		// エンコードがBOM設定対象エンコード以外またはBOM設定フラグがfalseの場合
+		if (csvParameter.getCharset() != BOM_SETTING_POSSIBLE_ENCODE || !csvParameter.isBomSettingFlg()) {
+			return csv;
+		}
+		// BOM設定用
+		byte[] bom = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
+		// BOM設定後バイナリデータ
+		byte[] bomSetData = new byte[bom.length + csv.length];
+		// CSVデータにBOM設定
+		System.arraycopy(bom, 0, bomSetData, 0, bom.length);
+		System.arraycopy(csv, 0, bomSetData, bom.length, csv.length);
+
+		return bomSetData;
 	}
 }
