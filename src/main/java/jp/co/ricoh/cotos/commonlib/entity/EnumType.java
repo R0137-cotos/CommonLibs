@@ -593,6 +593,57 @@ public class EnumType {
 	}
 
 	/**
+	 * ライセンス状態
+	 *
+	 */
+	public enum LicenseStatus {
+
+		未確定("0"), 有効("1"), 解約("2");
+
+		private final String text;
+
+		private LicenseStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static LicenseStatus fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	public enum RequestCreateStatus {
+
+		未作成("0"), 作成済("1"), 対象外("2");
+
+		private final String text;
+
+		private RequestCreateStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static RequestCreateStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
 	 * MVBアカウント登録区分
 	 *
 	 */
@@ -672,14 +723,14 @@ public class EnumType {
 			return this.value;
 		}
 	}
-	
+
 	/**
 	 * バッチ処理汎用ステータス
 	 */
 	public enum BatchCommonStatus {
-		
+
 		未処理("0"), 処理済("1"), 処理対象外("9"), 処理エラー("E");
-		
+
 		private final String text;
 
 		private BatchCommonStatus(final String text) {

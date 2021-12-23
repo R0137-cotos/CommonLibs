@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -22,6 +24,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -307,5 +310,14 @@ public class LicenseInfo extends EntityBase {
 	@OneToMany(mappedBy = "licenseInfo")
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
+
+	/**
+	 * ライセンスアカウント
+	 */
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "license_account_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "ライセンスアカウント", required = true, position = 29)
+	private LicenseAccount licenseAccount;
 
 }

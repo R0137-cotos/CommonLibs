@@ -12,14 +12,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseAccount;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoOperationLog;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseKeyInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
+import jp.co.ricoh.cotos.commonlib.repository.license.LicenseAccountRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseInfoOperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.LicenseKeyInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseProcessRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseRemainingNumberRepository;
 
@@ -41,6 +45,12 @@ public class TestLicense {
 
 	@Autowired
 	LicenseRemainingNumberRepository licenseRemainingNumberRepository;
+
+	@Autowired
+	LicenseAccountRepository licenseAccountRepository;
+
+	@Autowired
+	LicenseKeyInfoRepository licenseKeyInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -131,4 +141,27 @@ public class TestLicense {
 		Assert.assertNotNull(found);
 	}
 
+	@Test
+	public void LicenseAccountRepositoryのテスト() throws Exception {
+
+		LicenseAccount found = licenseAccountRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void LicenseKeyInfoRepositoryのテスト() throws Exception {
+
+		LicenseKeyInfo found = licenseKeyInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
 }
