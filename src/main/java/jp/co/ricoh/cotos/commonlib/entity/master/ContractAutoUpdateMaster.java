@@ -63,6 +63,7 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 	 * 手配情報作成区分
 	 *
 	 */
+	@Description(value = "手配情報作成区分")
 	public enum ArrangementCreateType {
 
 		作成しない("0"), 作成する("1");
