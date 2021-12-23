@@ -701,10 +701,9 @@ public class CheckUtil {
 	 * MSSのルーター/UTMプランの月額品種が積み上がっていること
 	 * @param mssLinkageRjManageNumber
 	 * @param companyId
-	 * @return List<ErrorInfo>
 	 */
-	public List<ErrorInfo> mssLinkageRjManageNumberCheck(String mssLinkageRjManageNumber, String companyId) {
-		List<ErrorInfo> errorInfo = new ArrayList<ErrorInfo>();
+	public void mssLinkageRjManageNumberCheck(String mssLinkageRjManageNumber, String companyId) {
+
 		List<Contract> contractList = contractRepository.findByRjManageNumber(mssLinkageRjManageNumber);
 		Contract mssContract = contractList.stream().filter(e -> e.getLifecycleStatus() == LifecycleStatus.締結中).findFirst().orElse(null);
 		if (mssContract == null) {
@@ -728,6 +727,5 @@ public class CheckUtil {
 			// MSSのルーター/UTMプラン月額品種が積み上がっていない
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
 		}
-		return errorInfo;
 	}
 }
