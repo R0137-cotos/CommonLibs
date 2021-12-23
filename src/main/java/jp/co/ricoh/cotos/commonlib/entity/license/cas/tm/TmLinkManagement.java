@@ -93,7 +93,7 @@ public class TmLinkManagement extends EntityBase {
 	@JsonIgnore
 	@ApiModelProperty(value = "トレンドマイクロサブスクリプション解約リクエストWORK", required = true, position = 8)
 	private TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork;
-	
+
 	/**
 	 * MVBアカウント
 	 */
@@ -135,4 +135,11 @@ public class TmLinkManagement extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "企業名（カナ）", required = false, position = 14, allowableValues = "range[0,255]")
 	private String companyNameKana;
+
+	/**
+	 * ライセンス情報ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
+	private long licenseInfoId;
 }
