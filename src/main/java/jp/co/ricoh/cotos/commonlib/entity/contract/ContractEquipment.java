@@ -130,6 +130,28 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	@Description(value = "Isys-One再連携ステータス")
+	public enum IsysoneReLinkageStatus {
+		再連携不要("0"), 再連携必要("1"), 再連携済("2");
+
+		private final String text;
+
+		private IsysoneReLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IsysoneReLinkageStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * ID
 	 */
@@ -314,4 +336,23 @@ public class ContractEquipment extends EntityBase {
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 26)
 	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 
+	/**
+	 * Isys-One再連携ステータス
+	 */
+	@ApiModelProperty(value = "Isys-One再連携ステータス", required = false, position = 27, allowableValues = "再連携不要(\"0\"),再連携必要(\"1\"),再連携済(\"2\")")
+	private IsysoneReLinkageStatus isysoneReLinkageStatus;
+
+	/**
+	 * Isys-One連携済機番
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "Isys-One連携済機番", required = false, position = 28, allowableValues = "range[0,255]")
+	private String isysoneLinkagedEquipmentNo;
+
+	/**
+	 * Isys-One連携済機種コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "Isys-One連携済機種コード", required = false, position = 29, allowableValues = "range[0,255]")
+	private String isysoneLinkagedEquipmentCode;
 }
