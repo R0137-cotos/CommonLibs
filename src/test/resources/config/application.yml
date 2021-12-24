@@ -10,6 +10,7 @@ cotos:
         origin: origin
         applicationId: applicationId
         momAuth: momAuth
+      skipCheckOriginName: cforce
     headers:
       momEmpId: headers_mom_emp_id
       singleUserId: headers_single_user_id
