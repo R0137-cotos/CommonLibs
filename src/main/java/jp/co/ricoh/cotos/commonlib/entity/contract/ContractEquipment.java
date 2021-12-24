@@ -21,6 +21,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -40,6 +42,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_equipment")
 public class ContractEquipment extends EntityBase {
 
+	@Description(value = "Isys-One 処理状態")
 	public enum IsysoneProcStatus {
 		未処理("0"), CSV作成済み("1"), 連携済み("2"), 連携エラー("3");
 
@@ -61,6 +64,7 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	@Description(value = "Isys-One保守レポート処理状態")
 	public enum IsysoneMaintereportProcStatus {
 		未処理("0"), CSV作成済み("1"), 対象外("2");
 
@@ -82,6 +86,7 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	@Description(value = "ARCS期間売保守処理状態")
 	public enum ArcsPeriodSaleMainteProcStatus {
 		未作成("0"), CSV作成済み("1"), 対象外("2");
 
@@ -104,6 +109,7 @@ public class ContractEquipment extends EntityBase {
 	}
 
 	// SVPの移行元のRITOSと同様に0から採番
+	@Description(value = "機器区分")
 	public enum MachineType {
 		サーバー本体("0"), HWオプション("1"), SWオプション("2");
 

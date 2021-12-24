@@ -16,6 +16,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -33,6 +35,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_process_master")
 public class LicenseProcessMaster extends EntityBase {
 
+	@Description(value = "操作区分")
 	public enum OperationDiv {
 
 		受付("1"), ボタン("2"), CSV出力("3"), CSV取込("4"), 自動("5");

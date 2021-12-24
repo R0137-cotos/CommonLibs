@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -35,6 +37,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "mail_send_history")
 public class MailSendHistory extends EntityBase {
 
+	@Description(value = "メール送信区分")
 	public enum MailSendType {
 
 		未送信("0"), 完了("1"), エラー("2");

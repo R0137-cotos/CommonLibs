@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -32,6 +34,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contact_to")
 public class ContactTo extends EntityBase {
 
+	@Description(value = "送信タイプ")
 	public enum SendType {
 
 		TO("1"), CC("2");

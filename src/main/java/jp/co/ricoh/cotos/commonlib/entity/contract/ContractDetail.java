@@ -26,6 +26,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -46,6 +48,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_detail")
 public class ContractDetail extends EntityBase {
 
+	@Description(value = "FFM内部振替処理状態")
 	public enum FfmInsideTransStatus {
 		未処理("0"), CSV作成済み("1"), 連携済み("2"), 対象外("3");
 
@@ -67,6 +70,7 @@ public class ContractDetail extends EntityBase {
 		}
 	}
 
+	@Description(value = "統合契約内部振替処理状態")
 	public enum AbsConInsideTransStatus {
 		未処理("0"), 連携済み("1"), 対象外("4");
 
@@ -88,6 +92,7 @@ public class ContractDetail extends EntityBase {
 		}
 	}
 
+	@Description(value = "ランニング売上計上処理状態")
 	public enum RunningAccountSalesStatus {
 		正常("0"), 処理エラー("1"), 処理不要("2");
 
@@ -109,6 +114,7 @@ public class ContractDetail extends EntityBase {
 		}
 	}
 
+	@Description(value = "FFM検収連携状態")
 	public enum FfmAcceptanceLinkingStatus {
 		未作成("0"), 作成済み("1"), 作成エラー("2"), 対象外("3");
 
@@ -130,6 +136,7 @@ public class ContractDetail extends EntityBase {
 		}
 	}
 
+	@Description(value = "統合契約外部請求処理状態")
 	public enum AbsConExternalBillingStatus {
 		未処理("0"), CSV作成済み("1"), 対象外("2");
 
