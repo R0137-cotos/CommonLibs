@@ -131,6 +131,7 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	@Description(value = "Isys-One再連携ステータス")
 	public enum IsysoneReLinkageStatus {
 		再連携不要("0"), 再連携必要("1"), 再連携済("2");
 

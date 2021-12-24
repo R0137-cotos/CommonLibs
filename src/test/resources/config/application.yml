@@ -71,6 +71,7 @@ spring:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
     username: cotos_ci_common_enum
     password: cotos_ci_common_enum
+
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
