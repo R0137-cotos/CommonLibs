@@ -12,11 +12,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * JSON共通クラス
  */
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class JsonUtil {
 
 	@Autowired
