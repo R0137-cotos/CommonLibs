@@ -29,7 +29,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
-import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneReLinkageStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
