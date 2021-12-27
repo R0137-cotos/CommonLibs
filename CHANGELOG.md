@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.9.0 (16/12/2021)
+- [**closed**] #12764 リクエスト元のOriginとJWTのOriginを比較する処理の条件を追加 [#1755](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1755)
+- [**closed**] #12764 リクエスト元のOriginとJWTのOriginを比較する処理を修正 [#1759](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1759)
+- [**closed**] #13227 SSサービス課所チェック用エラーメッセージ追加 [#1758](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1758)
+- [**closed**] #12916 契約機種DTOに機種名を追加 [#1743](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1743)
+- [**closed**] #12916 契約機種エンティティと契約機種DTOにカラム追加（topic/backlog47マージ） [#1742](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1742)
+
+---
+
 ## v4.8.0 (02/12/2021)
 - [**closed**] #13122 ライセンス情報取得DTO修正 [#1749](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1749)
 - [**closed**] #13106 ファイルダウンロード処理修正 [#1748](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1748)
