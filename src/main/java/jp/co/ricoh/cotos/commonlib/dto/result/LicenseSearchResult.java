@@ -248,4 +248,10 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 36)
 	private String mssLinkageOrganizationId;
+
+	/**
+	 * 解約フラグ
+	 */
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 37)
+	private Integer disengagementFlg;
 }
