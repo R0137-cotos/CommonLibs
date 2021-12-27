@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.entity.license.cas;
+package jp.co.ricoh.cotos.commonlib.entity.license;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,21 +8,21 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 有効ライセンスVIEW
+ * 有効ライセンスアカウント情報VIEW
  */
 @Entity
 @Data
-@Table(name = "v_valid_license_info")
-public class VValidLicenseInfo {
+@Table(name = "v_valid_license_account_info")
+public class VValidLicenseAccountInfo {
 
 	@Id
 	private long id;
 
 	/**
-	 * MVBアカウント
+	 * アカウント
 	 */
-	@ApiModelProperty(value = "MVBアカウント")
-	private String mvbAccount;
+	@ApiModelProperty(value = "アカウント")
+	private String account;
 
 	/**
 	 * 担当者氏名
@@ -34,7 +34,7 @@ public class VValidLicenseInfo {
 	 * 担当者メールアドレス
 	 */
 	@ApiModelProperty(value = "担当者メールアドレス")
-	private String picMailAddress;
+	private String tmPicMailAddress;
 
 	/**
 	 * TrendMicroアカウント企業名
@@ -73,6 +73,12 @@ public class VValidLicenseInfo {
 	private String momCustId;
 
 	/**
+	 * 担当者メールアドレス
+	 */
+	@ApiModelProperty(value = "メールアドレス")
+	private String picMailAddress;
+
+	/**
 	 * 文書番号
 	 */
 	@ApiModelProperty(value = "文書番号")
@@ -89,4 +95,34 @@ public class VValidLicenseInfo {
 	 */
 	@ApiModelProperty(value = "企業ID")
 	private String momCompanyId;
+
+	/**
+	 * 費用種別
+	 */
+	@ApiModelProperty(value = "費用種別")
+	private String costType;
+
+	/**
+	 * 数量
+	 */
+	@ApiModelProperty(value = "数量")
+	private Integer licenseQuantity;
+
+	/**
+	 * 商品名
+	 */
+	@ApiModelProperty(value = "商品名")
+	private String productName;
+
+	/**
+	 * インストールURL
+	 */
+	@ApiModelProperty(value = "インストールURL")
+	private String installUrl;
+
+	/**
+	 * ライセンスアカウント区分名称
+	 */
+	@ApiModelProperty(value = "ライセンスアカウント区分名称")
+	private String licenseAccountDivName;
 }
