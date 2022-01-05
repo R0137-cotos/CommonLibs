@@ -103,4 +103,10 @@ public class LicenseKeyInfo extends EntityBase {
 	@Lob
 	private String extendsParameter;
 
+	/**
+	 * ライセンス区分マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "ライセンス区分マスタID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	private long licenseDivMasterId;
 }
