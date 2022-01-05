@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnSiteFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeSsec.IntActingDivSsec;
 import lombok.Data;
 
 /**
@@ -19,16 +17,6 @@ public class ProductContractExtendsParameterSsecDto {
 	 * 契約種別詳細
 	 */
 	private ContractTypeDetails contractTypeDetails;
-
-	/**
-	 * オンサイト有無フラグ
-	 */
-	private OnSiteFlg onSiteFlg;
-
-	/**
-	 * 導入代行区分
-	 */
-	private IntActingDivSsec intActingDiv;
 
 	/**
 	 * 新規/既存アカウント区分
