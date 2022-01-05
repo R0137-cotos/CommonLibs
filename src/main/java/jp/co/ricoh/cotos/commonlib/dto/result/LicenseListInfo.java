@@ -45,4 +45,28 @@ public class LicenseListInfo {
 	 */
 	@ApiModelProperty(value = "都道府県", required = false, position = 5, allowableValues = "range[0,255]")
 	private String prefectures;
+
+	/**
+	 * インストールURL
+	 */
+	@ApiModelProperty(value = "インストールURL", required = false, position = 6, allowableValues = "range[0,255]")
+	private String installUrl;
+
+	/**
+	 * 費用種別
+	 */
+	@ApiModelProperty(value = "費用種別", required = false, position = 7, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")")
+	private String costType;
+
+	/**
+	 * 数量
+	 */
+	@ApiModelProperty(value = "数量", required = false, position = 8, allowableValues = "range[-99999,99999]")
+	private Integer licenseQuantity;
+
+	/**
+	 * 商品名
+	 */
+	@ApiModelProperty(value = "商品名", required = false, position = 9, allowableValues = "range[0,255]")
+	private String productName;
 }
