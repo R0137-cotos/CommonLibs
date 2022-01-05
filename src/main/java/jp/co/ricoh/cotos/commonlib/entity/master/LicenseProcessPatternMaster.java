@@ -134,6 +134,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	/**
 	 * 到着チェックメール制御マスタID
 	 */
+	@Min(0)
 	@ApiModelProperty(value = "到着チェックメール制御マスタID", required = false, position = 11, allowableValues = "range[0,9223372036854775807]")
 	private Long arrivalCheckMailControlMasterId;
 }
