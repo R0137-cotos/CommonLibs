@@ -122,4 +122,18 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "メールマスタID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
+
+	/**
+	 * メール到達チェック時間
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "メール到達チェック時間", required = false, position = 10, allowableValues = "range[0,99999]")
+	private Integer mailArrivalCheckHour;
+
+	/**
+	 * 到着チェックメール制御マスタID
+	 */
+	@ApiModelProperty(value = "到着チェックメール制御マスタID", required = false, position = 11, allowableValues = "range[0,9223372036854775807]")
+	private Long arrivalCheckMailControlMasterId;
 }

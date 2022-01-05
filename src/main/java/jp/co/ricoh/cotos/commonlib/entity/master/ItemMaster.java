@@ -583,4 +583,12 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 52, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
+
+	/**
+	 * オンサイトweb申込フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "オンサイトweb申込フラグ", required = false, position = 53, allowableValues = "range[0,9]")
+	private Integer onsiteWebApplicationFlg;
 }
