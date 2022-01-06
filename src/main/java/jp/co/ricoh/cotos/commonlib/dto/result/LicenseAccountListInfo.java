@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-public class LicenseListInfo {
+public class LicenseAccountListInfo {
 
 	/**
 	 * アカウント
@@ -29,16 +29,16 @@ public class LicenseListInfo {
 	private String picName;
 
 	/**
-	 * 担当者メールアドレス
+	 * アカウント担当者メールアドレス
 	 */
-	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 3, allowableValues = "range[0,255]")
-	private String picMailAddress;
+	@ApiModelProperty(value = "アカウント担当者メールアドレス", required = false, position = 3, allowableValues = "range[0,255]")
+	private String accountPicMailAddress;
 
 	/**
-	 * TrendMicroアカウント企業名
+	 * アカウント企業名
 	 */
-	@ApiModelProperty(value = "企業名", required = false, position = 4, allowableValues = "range[0,255]")
-	private String tmAccountCompanyName;
+	@ApiModelProperty(value = "アカウント企業名", required = false, position = 4, allowableValues = "range[0,255]")
+	private String accountCompanyName;
 
 	/**
 	 * 都道府県
