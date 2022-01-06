@@ -51,15 +51,15 @@ public class JsonEnumType {
 	 * MSS/RNS：新規/メニュー変更/プラン・オプション（減数・削除）
 	 * PCパック：新規/再契約/基本プラン減数
 	 * SVP：新規/契約更新/オプション（追加・増数）
-	 * CAS：新規/オプション_追加_増数/ライセンス増数/ライセンス減数
-	 * MVB：新規/オプション_追加_増数/ライセンス増数/ライセンス減数
-	 * SSec：新規/オプション_追加_増数/ライセンス増数/ライセンス減数
+	 * CAS：新規/オプション_追加_増数/基本プラン増数/基本プラン減数
+	 * MVB：新規/オプション_追加_増数/基本プラン増数/基本プラン減数
+	 * SSec：新規/オプション_追加_増数/基本プラン増数/基本プラン減数
 	 * O365：新規//メニュー変更/転入
 	 *
 	 */
 	public enum ContractTypeDetails {
 
-		新規("1"), 契約更新("2"), 再契約("3"), アップグレード("4"), メニュー変更("5"), 基本プラン減数("6"), プラン_オプション_減数_削除("7"), オプション_追加_増数("8"), オプション_追加_減数("9"), 自動更新("10"), ライセンス増数("11"), ライセンス減数("12"), 転入("13");
+		新規("1"), 契約更新("2"), 再契約("3"), アップグレード("4"), メニュー変更("5"), 基本プラン減数("6"), プラン_オプション_減数_削除("7"), オプション_追加_増数("8"), オプション_追加_減数("9"), 自動更新("10"), 基本プラン増数("11"), 転入("12");
 
 		private final String text;
 
@@ -125,50 +125,6 @@ public class JsonEnumType {
 
 		@JsonCreator
 		public static NewExistingAccountType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum OnSiteOnlyFlg {
-
-		オンサイトのみ以外("0"), オンサイトのみ("1");
-
-		private final String text;
-
-		private OnSiteOnlyFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static OnSiteOnlyFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum OnSiteFlg {
-
-		オンサイト無し("0"), オンサイト有り("1");
-
-		private final String text;
-
-		private OnSiteFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static OnSiteFlg fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
