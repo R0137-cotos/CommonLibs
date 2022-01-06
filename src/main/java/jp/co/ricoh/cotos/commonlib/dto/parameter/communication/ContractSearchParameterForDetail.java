@@ -66,6 +66,20 @@ public class ContractSearchParameterForDetail {
 	private int otherSysDataExcludeFlg;
 
 	/**
+	 * 取得開始行
+	 */
+	@ApiParam(value = "取得開始行", required = false)
+	@ApiModelProperty(value = "取得開始行", required = false)
+	private String startLine;
+
+	/**
+	 * 取得行
+	 */
+	@ApiParam(value = "取得行", required = false)
+	@ApiModelProperty(value = "取得行", required = false)
+	private String offset;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
