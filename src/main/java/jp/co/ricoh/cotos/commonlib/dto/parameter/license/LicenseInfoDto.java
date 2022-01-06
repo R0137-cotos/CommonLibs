@@ -51,4 +51,25 @@ public class LicenseInfoDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "オーガニゼーションID", required = false, position = 7, allowableValues = "range[0,255]")
 	private String organizationId;
+
+	/**
+	 * ユーザーID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ユーザーID", required = false, position = 8, allowableValues = "range[0,255]")
+	private String userId;
+
+	/**
+	 * 初期パスワード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "初期パスワード", required = false, position = 9, allowableValues = "range[0,255]")
+	private String initialPassword;
+
+	/**
+	 * インストールURL
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "インストールURL", required = false, position = 10, allowableValues = "range[0,255]")
+	private String installUrl;
 }
