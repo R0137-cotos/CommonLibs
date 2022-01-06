@@ -34,13 +34,13 @@ public class VValidLicenseAccountInfo {
 	 * 担当者メールアドレス
 	 */
 	@ApiModelProperty(value = "担当者メールアドレス")
-	private String tmPicMailAddress;
+	private String accountPicMailAddress;
 
 	/**
-	 * TrendMicroアカウント企業名
+	 * アカウント企業名
 	 */
-	@ApiModelProperty(value = "TrendMicroアカウント企業名")
-	private String tmAccountCompanyName;
+	@ApiModelProperty(value = "アカウント企業名")
+	private String accountCompanyName;
 
 	/**
 	 * お客様住所都道府県
