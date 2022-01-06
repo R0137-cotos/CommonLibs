@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -71,5 +72,5 @@ public class LicenseInfoDto extends DtoBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "インストールURL", required = false, position = 10, allowableValues = "range[0,255]")
-	private String installUrl;
+	private List<String> installUrl;
 }
