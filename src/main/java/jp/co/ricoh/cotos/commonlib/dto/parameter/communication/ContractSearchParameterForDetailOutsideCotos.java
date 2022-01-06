@@ -14,7 +14,7 @@ import lombok.Data;
  * 契約詳細を検索するためのキー項目クラスを表します。
  */
 @Data
-public class ContractSearchParameterForDetail {
+public class ContractSearchParameterForDetailOutsideCotos {
 
 	/**
 	 * 商品種別
@@ -64,6 +64,20 @@ public class ContractSearchParameterForDetail {
 	@ApiParam(value = "他システムデータ排他フラグ", required = true)
 	@ApiModelProperty(value = "他システムデータ排他フラグ", required = true)
 	private int otherSysDataExcludeFlg;
+
+	/**
+	 * 取得開始行
+	 */
+	@ApiParam(value = "取得開始行", required = false)
+	@ApiModelProperty(value = "取得開始行", required = false)
+	private String startLine;
+
+	/**
+	 * 取得行
+	 */
+	@ApiParam(value = "取得行", required = false)
+	@ApiModelProperty(value = "取得行", required = false)
+	private String offset;
 
 	/**
 	 * パラメータをMapにする。
