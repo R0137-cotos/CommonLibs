@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseKeyInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -68,9 +69,9 @@ public class LicenseInfoDto extends DtoBase {
 	private String initialPassword;
 
 	/**
-	 * インストールURL
+	 * ライセンスキー情報リスト
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "インストールURL", required = false, position = 10, allowableValues = "range[0,255]")
-	private List<String> installUrl;
+	@ApiModelProperty(value = "ライセンスキー情報リスト", required = false, position = 10)
+	private List<LicenseKeyInfo> licenseKeyInfoList;
 }

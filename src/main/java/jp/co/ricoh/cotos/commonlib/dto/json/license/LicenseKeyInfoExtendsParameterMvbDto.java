@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 /**
- * ライセンス情報拡張項目DTO（MVB）
+ * ライセンスキー情報拡張項目DTO（MVB）
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LicenseInfoExtendsParameterMvbDto {
+public class LicenseKeyInfoExtendsParameterMvbDto {
 
 	/**
 	 * インストールURL
