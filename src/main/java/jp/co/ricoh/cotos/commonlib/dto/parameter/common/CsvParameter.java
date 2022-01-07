@@ -59,4 +59,12 @@ public class CsvParameter {
 	 */
 	@Builder.Default
 	private String nullValueString = "null";
+
+	/**
+	 * BOM付き設定をするか判定するフラグ
+	 * trueの場合：BOM付き
+	 * falseの場合：BOMなし
+	 */
+	@Builder.Default
+	private boolean bomSettingFlg = false;
 }
