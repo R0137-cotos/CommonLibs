@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
-import jp.co.ricoh.cotos.commonlib.entity.license.LicenseKeyInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -55,23 +55,15 @@ public class LicenseInfoDto extends DtoBase {
 	private String organizationId;
 
 	/**
-	 * ユーザーID
+	 * ライセンスアカウント
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "ユーザーID", required = false, position = 8, allowableValues = "range[0,255]")
-	private String userId;
+	@ApiModelProperty(value = "ライセンスアカウント", required = false, position = 8)
+	private LicenseAccountDto licenseAccount;
 
 	/**
-	 * 初期パスワード
+	 * ライセンスキー情報
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "初期パスワード", required = false, position = 9, allowableValues = "range[0,255]")
-	private String initialPassword;
-
-	/**
-	 * ライセンスキー情報リスト
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスキー情報リスト", required = false, position = 10)
-	private List<LicenseKeyInfo> licenseKeyInfoList;
+	@OneToMany(mappedBy = "license_info")
+	@ApiModelProperty(value = "ライセンスキー情報", required = false, position = 9)
+	private List<LicenseKeyInfoDto> licenseKeyInfoList;
 }
