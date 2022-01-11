@@ -16,7 +16,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class LicenseInfoDto extends DtoBase {
-	@Valid
 	/**
 	 * メールアドレス
 	 */
@@ -57,6 +56,7 @@ public class LicenseInfoDto extends DtoBase {
 	 * ライセンスアカウント
 	 */
 	@ApiModelProperty(value = "ライセンスアカウント", required = false, position = 8)
+	@Valid
 	private LicenseAccountDto licenseAccount;
 
 }
