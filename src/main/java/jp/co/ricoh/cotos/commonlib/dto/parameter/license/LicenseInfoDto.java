@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
 import java.util.Date;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +16,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class LicenseInfoDto extends DtoBase {
-
 	/**
 	 * メールアドレス
 	 */
@@ -51,4 +51,12 @@ public class LicenseInfoDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "オーガニゼーションID", required = false, position = 7, allowableValues = "range[0,255]")
 	private String organizationId;
+
+	/**
+	 * ライセンスアカウント
+	 */
+	@ApiModelProperty(value = "ライセンスアカウント", required = false, position = 8)
+	@Valid
+	private LicenseAccountDto licenseAccount;
+
 }
