@@ -1,9 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -60,10 +58,4 @@ public class LicenseInfoDto extends DtoBase {
 	@ApiModelProperty(value = "ライセンスアカウント", required = false, position = 8)
 	private LicenseAccountDto licenseAccount;
 
-	/**
-	 * ライセンスキー情報
-	 */
-	@OneToMany(mappedBy = "license_info")
-	@ApiModelProperty(value = "ライセンスキー情報", required = false, position = 9)
-	private List<LicenseKeyInfoDto> licenseKeyInfoList;
 }
