@@ -3,8 +3,6 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
-
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -73,9 +71,8 @@ public class LicenseAccountSearchParameter {
 	/**
 	 * MoM企業ID
 	 */
-	@NotNull
-	@ApiParam(value = "MoM企業ID", required = true)
-	@ApiModelProperty(value = "MoM企業ID", required = true, position = 9, allowableValues = "range[0,255]")
+	@ApiParam(value = "MoM企業ID", required = false)
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 9, allowableValues = "range[0,255]")
 	private String momCompanyId;
 
 	/**
