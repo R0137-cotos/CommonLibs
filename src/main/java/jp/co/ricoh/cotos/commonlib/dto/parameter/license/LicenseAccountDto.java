@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
 import java.util.List;
 
-import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class LicenseAccountDto extends DtoBase {
-
+	@Valid
 	/**
 	 * ユーザーID
 	 */
@@ -31,7 +31,6 @@ public class LicenseAccountDto extends DtoBase {
 	/**
 	 * ライセンスキー情報
 	 */
-	@OneToMany(mappedBy = "license_Account")
 	@ApiModelProperty(value = "ライセンスキー情報", required = false, position = 3)
 	private List<LicenseKeyInfoDto> licenseKeyInfoList;
 }
