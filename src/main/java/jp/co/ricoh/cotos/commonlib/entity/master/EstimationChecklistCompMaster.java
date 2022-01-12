@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -34,6 +36,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "estimation_checklist_comp_master")
 public class EstimationChecklistCompMaster extends EntityBaseMaster {
 
+	@Description(value = "対象見積種別")
 	public enum TargetEstimationType {
 
 		共通("1"), 新規("2"), 契約変更("3");
@@ -69,6 +72,7 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 		};
 	}
 
+	@Description(value = "対象ライフサイクル状態")
 	public enum TargetLifecycleStatus {
 
 		作成中("1");

@@ -56,6 +56,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.DateCalcPatternMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DispUrlAuthMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EmpGrpManagementMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.EnumDefinitionMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EquipmentCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.EstimationChecklistCompMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ExtendsParameterCorrelationCheckMaster;
@@ -154,6 +155,7 @@ import jp.co.ricoh.cotos.commonlib.repository.master.DateCalcPatternMasterReposi
 import jp.co.ricoh.cotos.commonlib.repository.master.DispUrlAuthMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EmpGrpManagementMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.EnumDefinitionMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EquipmentCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.EstimationChecklistCompMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ExtendsParameterCorrelationCheckMasterRepository;
@@ -427,6 +429,8 @@ public class TestMaster {
 	private BatchRunDateManagementMasterRepository batchRunDateManagementMasterRepository;
 	@Autowired
 	private ArrangementWorkAuthControlMasterRepository arrangementWorkAuthControlMasterRepository;
+	@Autowired
+	private EnumDefinitionMasterRepository enumDefinitionMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2918,5 +2922,32 @@ public class TestMaster {
 		// Entity の リストとエンティティクラスの項目の値が null ではないことを確認
 		if (found.getArrangementWorkTypeMasterList() == null)
 			Assert.assertTrue(false);
+	}
+
+	@Test
+	public void EnumDefinitionMasterRepositoryのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/enumDefinitionMaster.sql");
+
+		//エンティティの取得
+		Long id = 1L;
+		EnumDefinitionMaster found = enumDefinitionMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// 取得したデータの内容が正しいことを確認
+		Assert.assertEquals("Contract", found.getClassName());
+		Assert.assertEquals("text", found.getFieldName());
+		Assert.assertEquals("contract", found.getTableName());
+		Assert.assertEquals("text", found.getColumnName());
+		Assert.assertEquals("契約種別", found.getEnumName());
+		Assert.assertEquals("新規", found.getEnumValueName());
+		Assert.assertEquals("1", found.getEnumValueCode());
+		Assert.assertEquals("ContractType", found.getEnumClassName());
 	}
 }
