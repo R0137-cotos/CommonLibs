@@ -69,8 +69,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_enum
-    password: cotos_ci_common_enum
+    username: cotos_local_common_umbrella
+    password: cotos_local_common_umbrella
 
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
@@ -82,7 +82,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_common_enum
+        default_schema: cotos_local_common_umbrella
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
