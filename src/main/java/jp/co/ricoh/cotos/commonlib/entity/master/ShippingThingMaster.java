@@ -21,6 +21,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -39,6 +41,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "shipping_thing_master")
 public class ShippingThingMaster extends EntityBase {
 
+	@Description(value = "発送区分")
 	public enum ShippingType {
 		NW機器経由("0"), 直送("1"), 自課所("2");
 
@@ -147,7 +150,7 @@ public class ShippingThingMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "プロダクト確認集計表フラグ", required =  false, position = 12, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "プロダクト確認集計表フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private int productSpreadsheetFlg;
 
 	/**

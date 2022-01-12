@@ -69,8 +69,9 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_local_common_umbrella
-    password: cotos_local_common_umbrella
+    username: cotos_local_release_0124
+    password: cotos_local_release_0124
+
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -81,7 +82,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_local_common_umbrella
+        default_schema: cotos_local_release_0124
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true

@@ -24,6 +24,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -45,6 +47,7 @@ import lombok.EqualsAndHashCode;
 @EntityListeners(ContractListener.class)
 public class Contract extends EntityBase {
 
+	@Description(value = "契約種別")
 	public enum ContractType {
 
 		新規("1"), 契約変更("2"), 情報変更("3"), 契約更新("4");
@@ -67,6 +70,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "ライフサイクル状態（契約）")
 	public enum LifecycleStatus {
 
 		作成中("1"), 作成完了("2"), キャンセル手続き中("3"), 破棄("4"), 予定日待ち("5"), 締結中("6"), 解約手続き中("7"), 解約予定日待ち("8"), 解約("9"), 旧契約("10"), 締結待ち("11");
@@ -89,6 +93,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "ワークフロー状態（契約）")
 	public enum WorkflowStatus {
 
 		作成中("1"), 承認依頼中("2"), 承認済("3"), 業務依頼中("4"), 業務処理完了("5"), キャンセル申請中("6"), 売上可能("7"), 解約申請中("8");
@@ -111,6 +116,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "IFS連携用CSV作成状態、IFS連携用解約CSV作成状態")
 	public enum IfsLinkageCsvCreateStatus {
 
 		未作成("0"), 作成済み("1"), 作成対象外("2"), 作成エラー("3");
@@ -133,6 +139,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "S&S作業依頼作成状態")
 	public enum SsWorkRequestCreateStatus {
 		未作成("0"), 作成済み("1"), 作成エラー("2");
 
@@ -154,6 +161,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "販売区分")
 	public enum SaleDiv {
 
 		訪問販売("1"), Web販売("2");
@@ -176,6 +184,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "統合契約連携用CSV作成状態、統合契約連携用CSV作成状態（解約）")
 	public enum AbsConCsvCreateStatus {
 
 		未作成("0"), 作成済み("1"), 作成エラー("2");
@@ -198,6 +207,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "ARCS期間売保守元契約処理状態")
 	public enum ArcsPeriodSaleMntOriginStatus {
 
 		未作成("0"), CSV作成済み("1"), 対象外("2");
@@ -220,6 +230,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "基本契約区分")
 	public enum BasicContractDiv {
 
 		基本契約("1"), 基本契約_一部("2");
@@ -242,6 +253,7 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "契約状態遷移制御区分")
 	public enum ContractStatusControlType {
 
 		手配の作業完了をもって契約状態を進める("0"), 手配の作業完了を待たずに契約状態を進める("1");
@@ -887,7 +899,7 @@ public class Contract extends EntityBase {
 	 * 先頭3文字：商品マスタ.仕入先No、末尾9文字：契約情報画面（請求先情報セクション）より入力 <br>
 	 * 【任意コメントの場合】 <br>
 	 * 最大20Byteのコメント 契約情報画面（請求先情報セクション）より入力
-	 * 
+	 *
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "納品書・請求書印字用コメント", required = false, position = 87, allowableValues = "range[0,255]")

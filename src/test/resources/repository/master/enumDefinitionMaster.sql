@@ -1,0 +1,1 @@
+INSERT INTO enum_definition_master (id,created_at,created_user_id,updated_at,updated_user_id,version,class_name,field_name,table_name,column_name,enum_name,enum_value_name,enum_value_code,enum_class_name)VALUES (1,'2021/10/21 10:40:10','COTOS','2021/10/21 10:40:10','COTOS',1,'Contract','text','contract','text','契約種別','新規','1','ContractType');

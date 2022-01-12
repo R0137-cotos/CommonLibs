@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +39,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "operation_log")
 public class OperationLog extends EntityBase {
 
+	@Description(value = "操作内容(見積操作履歴)")
 	public enum Operation {
 		キャンセル, 新規作成, 帳票出力, 新規作成_再見積, 新規作成_コピー, 新規作成_契約変更, 受注, 失注, 更新, 業務依頼, 業務処理完了, 破棄, 初期費情報更新, 移行データ_新規作成, 移行データ_更新, 新規作成_明細追加, 契約作成失敗_状態更新
 	}
