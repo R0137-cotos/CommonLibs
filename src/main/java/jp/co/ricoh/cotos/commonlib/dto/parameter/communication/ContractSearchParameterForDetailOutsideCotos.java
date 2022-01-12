@@ -73,10 +73,10 @@ public class ContractSearchParameterForDetailOutsideCotos {
 	private String startLine;
 
 	/**
-	 * 取得行
+	 * 取得行数
 	 */
-	@ApiParam(value = "取得行", required = false)
-	@ApiModelProperty(value = "取得行", required = false)
+	@ApiParam(value = "取得行数", required = false)
+	@ApiModelProperty(value = "取得行数", required = false)
 	private String offset;
 
 	/**

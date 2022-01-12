@@ -148,7 +148,7 @@ public class LicenseAccount extends EntityBase {
 	 * ライセンス情報
 	 */
 	@OneToMany(mappedBy = "licenseAccount")
-	@OrderBy("seqNumber ASC")
+	@OrderBy("id ASC")
 	@ApiModelProperty(value = "ライセンス情報", required = false, position = 17)
 	private List<LicenseInfo> licenseInfoList;
 
@@ -156,7 +156,7 @@ public class LicenseAccount extends EntityBase {
 	 * ライセンスキー情報
 	 */
 	@OneToMany(mappedBy = "licenseAccount")
-	@OrderBy("seqNumber ASC")
+	@OrderBy("id ASC")
 	@ApiModelProperty(value = "ライセンスキー情報", required = false, position = 18)
 	private List<LicenseKeyInfo> licenseKeyInfoList;
 
