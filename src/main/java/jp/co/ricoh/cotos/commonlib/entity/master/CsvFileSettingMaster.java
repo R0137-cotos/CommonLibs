@@ -91,6 +91,14 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	private String csvNullValueString;
 
 	/**
+	 * BOM設定フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "BOM設定フラグ", required = false, position = 9, allowableValues = "range[0,9]")
+	private Integer bomSettingFlg;
+
+	/**
 	 * ファイル種別管理マスタ
 	 */
 	@OneToMany(mappedBy = "csvFileSettingMaster")

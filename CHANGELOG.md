@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.10.0 (11/01/2022)
+- [**closed**] #13233 CSV出力でBOM設定できるよう対応 [#1781](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1781)
+
+---
+
 ## v4.9.0 (16/12/2021)
 - [**closed**] #12764 リクエスト元のOriginとJWTのOriginを比較する処理の条件を追加 [#1755](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1755)
 - [**closed**] #12764 リクエスト元のOriginとJWTのOriginを比較する処理を修正 [#1759](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1759)
