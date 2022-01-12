@@ -6,23 +6,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 商品（見積用）拡張項目DTO（O365）
+ * 商品（見積用）拡張項目DTO（SSec）
  */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductEstimationExtendsParameterO365Dto {
-
-	/**
-	 * 希望サブドメイン名
-	 */
-	private String desiredSubDomainName;
+public class ProductEstimationExtendsParameterSsecDto {
 
 	/**
 	 * CPQ商品固有戻り値
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
-	private CpqReturnValueO365Dto cpqReturnValueO365Dto;
+	private CpqReturnValueSsecDto cpqReturnValueSsecDto;
 
 	/**
 	 * 移行用項目
