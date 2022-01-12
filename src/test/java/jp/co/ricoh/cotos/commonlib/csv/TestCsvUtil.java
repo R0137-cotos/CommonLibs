@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.csv;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -223,6 +225,7 @@ public class TestCsvUtil {
 		assertParam.setQuote(true);
 		assertParam.setNullValueString("");
 		assertParam.setWithoutQuoteChar(false);
+		assertParam.setBomSettingFlg(false);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -232,6 +235,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
 			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+			Assert.assertEquals("BOM設定フラグが一致すること", assertParam.isBomSettingFlg(), resultParam.isBomSettingFlg());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -248,6 +252,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvQuote(1);
 		csvFileSettingMaster.setCsvNullValueString("");
 		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		csvFileSettingMaster.setBomSettingFlg(1);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(false);
@@ -257,6 +262,7 @@ public class TestCsvUtil {
 		assertParam.setQuote(true);
 		assertParam.setNullValueString("");
 		assertParam.setWithoutQuoteChar(true);
+		assertParam.setBomSettingFlg(true);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -266,6 +272,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
 			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+			Assert.assertEquals("BOM設定フラグが一致すること", assertParam.isBomSettingFlg(), resultParam.isBomSettingFlg());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -281,7 +288,8 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvLineSeparator("1");
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("");
-		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		csvFileSettingMaster.setCsvWithoutQuoteChar(0);
+		csvFileSettingMaster.setBomSettingFlg(null);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(true);
@@ -290,7 +298,8 @@ public class TestCsvUtil {
 		assertParam.setLineSeparator("\n");
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("");
-		assertParam.setWithoutQuoteChar(true);
+		assertParam.setWithoutQuoteChar(false);
+		assertParam.setBomSettingFlg(false);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -300,6 +309,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
 			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+			Assert.assertEquals("BOM設定フラグが一致すること", assertParam.isBomSettingFlg(), resultParam.isBomSettingFlg());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -316,6 +326,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("null");
 		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		csvFileSettingMaster.setBomSettingFlg(1);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(true);
@@ -325,6 +336,7 @@ public class TestCsvUtil {
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("null");
 		assertParam.setWithoutQuoteChar(true);
+		assertParam.setBomSettingFlg(true);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -334,6 +346,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
 			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+			Assert.assertEquals("BOM設定フラグが一致すること", assertParam.isBomSettingFlg(), resultParam.isBomSettingFlg());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -350,6 +363,7 @@ public class TestCsvUtil {
 		csvFileSettingMaster.setCsvQuote(0);
 		csvFileSettingMaster.setCsvNullValueString("null");
 		csvFileSettingMaster.setCsvWithoutQuoteChar(1);
+		csvFileSettingMaster.setBomSettingFlg(0);
 		// 期待値
 		CsvParameter assertParam = CsvParameter.builder().build();
 		assertParam.setHeader(true);
@@ -359,6 +373,7 @@ public class TestCsvUtil {
 		assertParam.setQuote(false);
 		assertParam.setNullValueString("null");
 		assertParam.setWithoutQuoteChar(true);
+		assertParam.setBomSettingFlg(false);
 		try {
 			CsvParameter resultParam = csvUtil.getCsvParameter(csvFileSettingMaster);
 			Assert.assertEquals("ヘッダー行の有無が一致すること", assertParam.isHeader(), resultParam.isHeader());
@@ -368,6 +383,7 @@ public class TestCsvUtil {
 			Assert.assertEquals("文字のダブルクォート有無が一致すること", assertParam.isQuote(), resultParam.isQuote());
 			Assert.assertEquals("Null項目の文字列が一致すること", assertParam.getNullValueString(), resultParam.getNullValueString());
 			Assert.assertEquals("文字列に囲み文字を付与しないフラグが一致すること", assertParam.isWithoutQuoteChar(), resultParam.isWithoutQuoteChar());
+			Assert.assertEquals("BOM設定フラグが一致すること", assertParam.isBomSettingFlg(), resultParam.isBomSettingFlg());
 		} catch (ErrorCheckException e) {
 			fail("エラーが発生した");
 		}
@@ -489,6 +505,61 @@ public class TestCsvUtil {
 			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
 			Assert.assertEquals("エラーIDが一致すること", "ROT00013", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("エラーメッセージが一致すること", "Objectが設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
+		}
+	}
+
+	@Test
+	public void 正常系_BOM設定できること() throws ParseException, ErrorCheckException, IOException {
+		CsvParameter param = CsvParameter.builder().bomSettingFlg(true).build();
+
+		List<TestCsvData> list = new ArrayList<>();
+		list.add(new TestCsvData(1, "テスト１", 12, new SimpleDateFormat("yyyy/MM/dd").parse("2018/12/12"), 75.4));
+		list.add(new TestCsvData(2, "テスト２", 10, new SimpleDateFormat("yyyy/MM/dd").parse("2016/03/15"), 40.5));
+		list.add(new TestCsvData(3, null, 9, new SimpleDateFormat("yyyy/MM/dd").parse("2015/01/02"), 100.1));
+
+		byte[] actual = csvUtil.createCsvData(list, param);
+		byte[] expected = Files.readAllBytes(Paths.get("src/test/resources/csv/input_bom_data.csv"));
+		Assert.assertEquals("生成されたCSV情報が正しいこと", new String(actual, "UTF-8"), new String(expected, "UTF-8"));
+	}
+
+	@Test
+	public void 異常系_BOM設定_データなし() throws NoSuchMethodException, SecurityException {
+		// メソッド
+		Method method = CsvUtil.class.getDeclaredMethod("convertStrToByteArray", String.class, CsvParameter.class);
+		method.setAccessible(true);
+		CsvParameter param = CsvParameter.builder().bomSettingFlg(true).build();
+		try {
+			// 実行
+			method.invoke(csvUtil, null, param);
+		} catch (InvocationTargetException e) {
+			ErrorCheckException error = (ErrorCheckException) e.getTargetException();
+			List<ErrorInfo> errorList = error.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00050", errorList.get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "変換に必要なデータが設定されていません。", errorList.get(0).getErrorMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("例外が発生している。");
+		}
+	}
+
+	@Test
+	public void 異常系_BOM設定_CSVパラメータなし() throws NoSuchMethodException, SecurityException {
+		// メソッド
+		Method method = CsvUtil.class.getDeclaredMethod("convertStrToByteArray", String.class, CsvParameter.class);
+		method.setAccessible(true);
+		try {
+			// 実行
+			method.invoke(csvUtil, "test", null);
+		} catch (InvocationTargetException e) {
+			ErrorCheckException error = (ErrorCheckException) e.getTargetException();
+			List<ErrorInfo> errorList = error.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00001", errorList.get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "パラメータ「CSVパラメータ」が設定されていません。", errorList.get(0).getErrorMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("例外が発生している。");
 		}
 	}
 
