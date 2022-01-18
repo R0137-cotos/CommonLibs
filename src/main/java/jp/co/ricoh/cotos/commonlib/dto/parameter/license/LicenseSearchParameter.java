@@ -101,7 +101,9 @@ public class LicenseSearchParameter {
 	 * 工程ステータス
 	 */
 	@ApiParam(value = "工程ステータス", required = false)
-	@ApiModelProperty(value = "工程ステータス", required = false, allowableValues = "range[0,255]", position = 9)
+	@ApiModelProperty(value = "工程ステータス<br />"//
+			+ "ライセンス検索条件の「工程ステータス」の検索に使用するカラム", //
+			required = false, allowableValues = "range[0,255]", position = 9)
 	private String licenseProcessStatus;
 
 	/**
@@ -184,10 +186,12 @@ public class LicenseSearchParameter {
 	private Date cancelScheduledDateTo;
 
 	/**
-	 * 工程ステータス（工程実施日時）
+	 * 工程ステータス
 	 */
-	@ApiParam(value = "工程ステータス（工程実施日時）", required = false)
-	@ApiModelProperty(value = "工程ステータス（工程実施日時）", required = false, allowableValues = "range[0,255]", position = 19)
+	@ApiParam(value = "工程ステータス", required = false)
+	@ApiModelProperty(value = "工程ステータス<br />" //
+			+ "ライセンス検索条件の「工程実施日時」の検索に使用するカラム", //
+			required = false, allowableValues = "range[0,255]", position = 19) //
 	private String licenseProcessStatusForOperatedDateTime;
 
 	/**
