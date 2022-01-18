@@ -101,7 +101,7 @@ public class LicenseSearchParameter {
 	 * 工程ステータス
 	 */
 	@ApiParam(value = "工程ステータス", required = false)
-	@ApiModelProperty(value = "工程ステータス<br />"//
+	@ApiModelProperty(value = "工程ステータス<br />" //
 			+ "ライセンス検索条件の「工程ステータス」の検索に使用するカラム", //
 			required = false, allowableValues = "range[0,255]", position = 9)
 	private String licenseProcessStatus;
@@ -191,7 +191,7 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "工程ステータス", required = false)
 	@ApiModelProperty(value = "工程ステータス<br />" //
 			+ "ライセンス検索条件の「工程実施日時」の検索に使用するカラム", //
-			required = false, allowableValues = "range[0,255]", position = 19) //
+			required = false, allowableValues = "range[0,255]", position = 19)
 	private String licenseProcessStatusForOperatedDateTime;
 
 	/**
@@ -200,7 +200,7 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "工程実施日時", required = false)
 	@ApiModelProperty(value = "工程実施日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
-			required = false, position = 20) //
+			required = false, position = 20)
 	private Date processOperatedDateTime;
 
 	// =========================== 以下、ライセンス詳細検索条件
