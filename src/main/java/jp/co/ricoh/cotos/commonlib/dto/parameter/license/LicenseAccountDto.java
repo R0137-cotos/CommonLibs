@@ -39,27 +39,27 @@ public class LicenseAccountDto extends DtoBase {
 	 * アカウント
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アカウント", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "アカウント", required = false, position = 4, allowableValues = "range[0,255]")
 	private String account;
 
 	/**
 	 * ライセンス状態
 	 */
-	@ApiModelProperty(value = "ライセンス状態", required = false, position = 6, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
+	@ApiModelProperty(value = "ライセンス状態", required = false, position = 5, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
 	private LicenseStatus licenseStatus;
 
 	/**
 	 * 担当者氏名_姓
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当者氏名_姓", required = false, position = 8, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当者氏名_姓", required = false, position = 6, allowableValues = "range[0,255]")
 	private String picNameSei;
 
 	/**
 	 * 担当者氏名_名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当者氏名_名", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "担当者氏名_名", required = false, position = 7, allowableValues = "range[0,255]")
 	private String picNameMei;
 
 }
