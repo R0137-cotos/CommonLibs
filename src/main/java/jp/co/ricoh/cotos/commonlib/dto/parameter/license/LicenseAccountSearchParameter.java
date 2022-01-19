@@ -76,6 +76,13 @@ public class LicenseAccountSearchParameter {
 	private String momCompanyId;
 
 	/**
+	 * ライセンスアカウント区分名称
+	 */
+	@ApiParam(value = "ライセンスアカウント区分名称", required = false)
+	@ApiModelProperty(value = "ライセンスアカウント区分名称", required = false, position = 10, allowableValues = "range[0,255]")
+	private String licenseAccountDivName;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
