@@ -76,10 +76,10 @@ public class LicenseAccountSearchParameter {
 	private String momCompanyId;
 
 	/**
-	 * ライセンスアカウント区分名称
+	 * ライセンスアカウント区分名
 	 */
-	@ApiParam(value = "ライセンスアカウント区分名称", required = false)
-	@ApiModelProperty(value = "ライセンスアカウント区分名称", required = false, position = 10, allowableValues = "range[0,255]")
+	@ApiParam(value = "ライセンスアカウント区分名", required = false)
+	@ApiModelProperty(value = "ライセンスアカウント区分名", required = false, position = 10, allowableValues = "range[0,255]")
 	private String licenseAccountDivName;
 
 	/**
