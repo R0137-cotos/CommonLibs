@@ -285,4 +285,10 @@ public class LicenseSearchResult {
 	@ApiModelProperty(value = "登録日時", required = false, position = 42)
 	private String createdAt;
 
+	/**
+	 * 企業名
+	 */
+	@ApiModelProperty(value = "企業名", required = false, position = 43)
+	private String licenseAccountCompanyName;
+
 }
