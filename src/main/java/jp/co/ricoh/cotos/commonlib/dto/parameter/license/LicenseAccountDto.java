@@ -63,16 +63,9 @@ public class LicenseAccountDto extends DtoBase {
 	private String picNameMei;
 
 	/**
-	 * カスタマーID
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "カスタマーID", required = false, position = 8, allowableValues = "range[0,255]")
-	private String customerId;
-
-	/**
 	 * 市区町村
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "市区町村", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "市区町村", required = false, position = 8, allowableValues = "range[0,255]")
 	private String municipality;
 }
