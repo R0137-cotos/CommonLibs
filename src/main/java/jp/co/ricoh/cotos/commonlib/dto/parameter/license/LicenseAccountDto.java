@@ -62,4 +62,10 @@ public class LicenseAccountDto extends DtoBase {
 	@ApiModelProperty(value = "担当者氏名_名", required = false, position = 7, allowableValues = "range[0,255]")
 	private String picNameMei;
 
+	/**
+	 * 市区町村
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "市区町村", required = false, position = 8, allowableValues = "range[0,255]")
+	private String municipality;
 }
