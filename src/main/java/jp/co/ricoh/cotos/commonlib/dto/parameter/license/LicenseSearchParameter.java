@@ -91,11 +91,11 @@ public class LicenseSearchParameter {
 	private String licenseKey;
 
 	/**
-	 * MVBアカウント
+	 * アカウント
 	 */
-	@ApiParam(value = "MVBアカウント", required = false)
-	@ApiModelProperty(value = "MVBアカウント", required = false, allowableValues = "range[0,255]", position = 8)
-	private String mvbAccount;
+	@ApiParam(value = "アカウント", required = false)
+	@ApiModelProperty(value = "アカウント", required = false, allowableValues = "range[0,255]", position = 8)
+	private String account;
 
 	/**
 	 * 工程ステータス
@@ -256,5 +256,12 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "Welcomeメール送信状況", required = false)
 	@ApiModelProperty(value = "Welcomeメール送信状況", required = false, position = 27)
 	private Integer wellcomeMailSendResultDiv;
+
+	/**
+	 * 導入代行
+	 */
+	@ApiParam(value = "導入代行", required = false)
+	@ApiModelProperty(value = "導入代行", required = false, position = 28)
+	private Integer intActingDiv;
 
 }
