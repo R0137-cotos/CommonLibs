@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseDetailExtendsParameterGspDto.ReceptionStatusFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseInfoExtendsParameterSsecDto.IntActingDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
@@ -60,10 +61,10 @@ public class LicenseSearchResult {
 	private String licenseKey;
 
 	/**
-	 * MVBアカウント
+	 * アカウント
 	 */
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 7)
-	private String mvbAccount;
+	@ApiModelProperty(value = "アカウント", required = false, position = 7)
+	private String account;
 
 	/**
 	 * 工程実施日時
@@ -291,4 +292,9 @@ public class LicenseSearchResult {
 	@ApiModelProperty(value = "企業名", required = false, position = 43)
 	private String licenseAccountCompanyName;
 
+	/**
+	 * 導入代行
+	 */
+	@ApiModelProperty(value = "導入代行", required = false, allowableValues = "未(\"0\"), 受理(\"1\"), 未受理(\"2\")", position = 14)
+	private IntActingDiv intActingDiv;
 }
