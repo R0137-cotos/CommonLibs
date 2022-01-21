@@ -226,7 +226,7 @@ public class TestMaster {
 	@Autowired
 	private LicenseServiceMasterRepository licenseServiceMasterRepository;
 	@Autowired
-	private LicenseKeyCompMasterRepository licenseKeyCompMasterRepository;
+	private LicenseServiceCompMasterRepository licenseServiceCompMasterRepository;
 	@Autowired
 	private LicenseArrangementMasterRepository licenseArrangementMasterRepository;
 	@Autowired
@@ -2558,13 +2558,13 @@ public class TestMaster {
 	}
 
 	@Test
-	public void LicenseKeyCompMasterのテスト() throws Exception {
+	public void LicenseServiceCompMasterのテスト() throws Exception {
 		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseKeyCompMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseServiceCompMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
-		LicenseKeyCompMaster found = licenseKeyCompMasterRepository.findOne(id);
+		LicenseServiceCompMaster found = licenseServiceCompMasterRepository.findOne(id);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
