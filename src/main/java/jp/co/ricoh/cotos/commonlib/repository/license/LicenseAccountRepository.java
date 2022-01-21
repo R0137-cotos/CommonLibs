@@ -12,4 +12,5 @@ public interface LicenseAccountRepository extends CrudRepository<LicenseAccount,
 
 	public List<LicenseAccount> findByCustomerId(String customerId);
 
+	public List<LicenseAccount> findByAccount(String account);
 }
