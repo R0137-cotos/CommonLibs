@@ -60,5 +60,5 @@ public class LicenseServiceMaster extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "licenseServiceMaster")
 	@ApiModelProperty(value = "ライセンス区分構成マスタ", required = true, position = 5)
-	private List<LicenseKeyCompMaster> licenseKeyCompMasterList;
+	private List<LicenseServiceCompMaster> licenseServiceCompMasterList;
 }

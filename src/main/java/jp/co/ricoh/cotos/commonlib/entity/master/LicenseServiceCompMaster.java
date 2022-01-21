@@ -24,23 +24,23 @@ import lombok.EqualsAndHashCode;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "license_key_comp_master")
-public class LicenseKeyCompMaster extends EntityBase {
+@Table(name = "license_service_comp_master")
+public class LicenseServiceCompMaster extends EntityBase {
 
 	/**
 	 * ライセンスサービス構成マスタID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_key_comp_master_seq")
-	@SequenceGenerator(name = "license_key_comp_master_seq", sequenceName = "license_key_comp_master_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_service_comp_master_seq")
+	@SequenceGenerator(name = "license_service_comp_master_seq", sequenceName = "license_service_comp_master_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ライセンスサービス構成マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
-	 * 品種コードマスタID
+	 * 品種マスタID
 	 */
-	@ApiModelProperty(value = "品種コードマスタID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long itemCodeMasterId;
+	@ApiModelProperty(value = "品種マスタID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long itemMasterId;
 
 	/**
 	 * ライセンスサービスマスタ
