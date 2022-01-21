@@ -1300,7 +1300,7 @@ public class Accounting extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 251)
 	@Lob
 	private String extendItem;
-	
+
 	/** 計上日制御用商品種類区分 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "計上日制御用商品種類区分", required = false, position = 252)

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -44,7 +46,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	@JoinColumn(name = "mail_control_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	private MailControlMaster mailControlMaster;
-	
+
 	/**
 	 * 対象マスタ区分
 	 */
@@ -59,12 +61,13 @@ public class MailProductMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@ApiModelProperty(value = "対象マスタID", required = true, position = 2)
 	private long targetMasterId;
-	
+
 	/**
 	 * 対象マスタ区分
 	 * @author z00se03039
 	 *
 	 */
+	@Description(value = "対象マスタ区分")
 	public enum TargetMasterType {
 		GROUP, PRODUCT, ITEM
 	}

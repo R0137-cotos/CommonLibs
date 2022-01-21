@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -14,16 +16,17 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
 
 /**
- * 添付ファイル情報を表すEntity
+ * メールアドレス情報を表すEntity
  */
 @Entity
 @Data
 @Table(name = "v_mail_address_list")
 public class VMailAddressList {
 
+	@Description(value = "テーブル区分")
 	public enum TableType {
 
-		担当SA("1"), 担当編集者("2"), 担当CE("3"), 販売店("4"), 顧客("5"), 担当作業者("6"), 導入CE("7"), 保守CE("8"), 大塚商会連絡用アドレス("101"), OR年額_大塚商会連絡用アドレス("102"), OR年額_OR営本グループアドレス("103"), EDW_年額更新時期案内_不着連絡用メールアドレス("104"), SIM用固定メールアドレス("300"), 担当SA_追加編集者("1002");
+		担当SA("1"), 担当編集者("2"), 担当CE("3"), 販売店("4"), 顧客("5"), 担当作業者("6"), 導入CE("7"), 保守CE("8"), 大塚商会連絡用アドレス("101"), OR年額_大塚商会連絡用アドレス("102"), OR年額_OR営本グループアドレス("103"), EDW_年額更新時期案内_不着連絡用メールアドレス("104"), SIM用固定メールアドレス("300"), 担当SA_追加編集者("1002"), 担当SA_導入担当CE_追加編集者("9"), 商品担当区グループアドレス("10"), 担当SA上長("1003"), 承認者_代理承認者("APPROVER");
 
 		private final String text;
 
@@ -56,7 +59,7 @@ public class VMailAddressList {
 	/**
 	 * テーブル区分
 	 */
-	@ApiModelProperty(value = "テーブル区分", required = true, position = 3, allowableValues = "担当SA(\"1\"), 担当編集者(\"2\"), 担当CE(\"3\"), 販売店(\"4\"), 顧客(\"5\"), 担当作業者(\"6\")", example = "1")
+	@ApiModelProperty(value = "テーブル区分", required = true, position = 3, allowableValues = "担当SA(\"1\"), 担当編集者(\"2\"), 担当CE(\"3\"), 販売店(\"4\"), 顧客(\"5\"), 担当作業者(\"6\"), 導入CE(\"7\"), 保守CE(\"8\"), 大塚商会連絡用アドレス(\"101\"), OR年額_大塚商会連絡用アドレス(\"102\"), OR年額_OR営本グループアドレス(\"103\"), EDW_年額更新時期案内_不着連絡用メールアドレス(\"104\"), SIM用固定メールアドレス(\"300\"), 担当SA_追加編集者(\"1002\"), 担当SA_導入担当CE_追加編集者(\"9\"), 商品担当区グループアドレス(\"10\"), 担当SA上長(\"1003\"), 承認者_代理承認者(\"APPROVER\")", example = "1")
 	private TableType tableType;
 
 	/**

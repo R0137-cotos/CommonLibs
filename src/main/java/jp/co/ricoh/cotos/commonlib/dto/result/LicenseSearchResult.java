@@ -224,4 +224,34 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "契約ID", required = true, position = 32)
 	private long contractId;
+
+	/**
+	 * メール送信日
+	 */
+	@ApiModelProperty(value = "メール送信日", required = false, position = 33)
+	private Date mailSendAt;
+
+	/**
+	 * 送信結果区分
+	 */
+	@ApiModelProperty(value = "送信結果区分", required = false, position = 34)
+	private String mailSendResultDiv;
+
+	/**
+	 * 業務受理日時
+	 */
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 35)
+	private Date businessAcceptanceDateTime;
+
+	/**
+	 * MerakiスマートサービスオーガニゼーションID
+	 */
+	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 36)
+	private String mssLinkageOrganizationId;
+
+	/**
+	 * 解約フラグ
+	 */
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 37)
+	private Integer disengagementFlg;
 }

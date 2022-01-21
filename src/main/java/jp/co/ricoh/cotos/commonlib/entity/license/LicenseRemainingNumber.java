@@ -16,6 +16,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -34,6 +36,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_remaining_number")
 public class LicenseRemainingNumber extends EntityBase {
 
+	@Description(value = "割当区分")
 	public enum AllocationDiv {
 
 		未("0"), 済("1"), 破棄("2");
