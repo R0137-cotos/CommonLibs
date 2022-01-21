@@ -295,6 +295,6 @@ public class LicenseSearchResult {
 	/**
 	 * 導入代行
 	 */
-	@ApiModelProperty(value = "導入代行", required = false, allowableValues = "未(\"0\"), 受理(\"1\"), 未受理(\"2\")", position = 14)
+	@ApiModelProperty(value = "導入代行", required = false, allowableValues = "導入代行なし(\"1\"), リモート導入(\"2\"), オンサイト導入(\"3\")", position = 14)
 	private IntActingDiv intActingDiv;
 }
