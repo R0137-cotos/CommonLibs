@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.rest;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -21,15 +23,19 @@ public class ExternalRestTemplate {
 		return createRestTemplate();
 	}
 
+	public RestTemplate loadRestTemplate(ClientHttpRequestInterceptor interceptor) {
+		return createRestTemplate(interceptor);
+	}
+
 	private RestTemplate createRestTemplate() {
 		RestTemplate rest = restTemplateBuilder.build();
-		List<ClientHttpRequestInterceptor> interceptors = rest.getInterceptors();
-		addInterceptor(interceptors, externalClientHttpRequestInterceptor);
+		rest.setInterceptors(Stream.concat(rest.getInterceptors().stream(), Arrays.asList(externalClientHttpRequestInterceptor).stream()).collect(Collectors.toList()));
 		return rest;
 	}
 
-	private List<ClientHttpRequestInterceptor> addInterceptor(List<ClientHttpRequestInterceptor> interceptors, ClientHttpRequestInterceptor interceptor) {
-		interceptors.add(interceptor);
-		return interceptors;
+	private RestTemplate createRestTemplate(ClientHttpRequestInterceptor interceptor) {
+		RestTemplate rest = restTemplateBuilder.build();
+		rest.setInterceptors(Stream.concat(rest.getInterceptors().stream(), Arrays.asList(interceptor, externalClientHttpRequestInterceptor).stream()).collect(Collectors.toList()));
+		return rest;
 	}
 }
