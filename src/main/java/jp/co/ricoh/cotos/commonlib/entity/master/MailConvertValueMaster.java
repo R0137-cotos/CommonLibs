@@ -40,7 +40,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 
 		private final String text;
 
-		private SubjectBodyType(final String text) {
+		private SubjectVodyType(final String text) {
 			this.text = text;
 		}
 
@@ -51,7 +51,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static SubjectBodyType fromString(String string) {
+		public static SubjectVodyType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
@@ -100,7 +100,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	 * 件名/本文区分
 	 */
 	@ApiModelProperty(value = "件名/本文区分", required = false, allowableValues = "件名(\"0\"), 本文(\"1\"), 本文(\"2\")", example = "1", position = 3)
-	private SubjectBodyType subjectBodyType;
+	private SubjectVodyType subjectBodyType;
 
 	/**
 	 * 置換変数番号
