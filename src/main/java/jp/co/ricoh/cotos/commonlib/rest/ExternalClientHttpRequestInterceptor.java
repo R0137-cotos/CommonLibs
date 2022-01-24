@@ -20,7 +20,10 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
+import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.util.LogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.LogResponseProperties;
 
 @Component
 public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
@@ -30,13 +33,26 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 	@Autowired
 	MessageUtil messageUtil;
 
+	@Autowired
+	LogUtil logUtil;
+
+	@Autowired
+	LogRequestProperties logRequestProperties;
+
+	@Autowired
+	LogResponseProperties logResponseProperties;
+
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-		logRequest(request, body);
+		if (logRequestProperties.isOutputLog()) {
+			logRequest(request, body);
+		}
 		ClientHttpResponse response = new BufferingClientHttpResponseWrapper(execution.execute(request, body));
-		logResponse(response);
+		if (logResponseProperties.isOutputLog()) {
+			logResponse(response);
+		}
 		return response;
 	}
 
@@ -45,7 +61,11 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 	}
 
 	private void logResponse(ClientHttpResponse response) throws IOException {
-		log.info(messageUtil.createMessageInfo("ExternalApiResponseLogInfo", Arrays.asList(response.getStatusCode().value(), response.getHeaders(), StreamUtils.copyToString(response.getBody(), Charset.defaultCharset())).toArray(new String[0])).getMsg());
+		String body = "";
+		if (logUtil.isOutputBody(response)) {
+			body = logUtil.outputLog(StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
+		}
+		log.info(messageUtil.createMessageInfo("ExternalApiResponseLogInfo", Arrays.asList(response.getStatusCode().value(), response.getHeaders(), body).toArray(new String[0])).getMsg());
 	}
 
 	private static class BufferingClientHttpResponseWrapper implements ClientHttpResponse {

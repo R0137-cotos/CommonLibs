@@ -28,6 +28,11 @@ cotos:
     response:
       outputLog: false
       maxCount: 20
+  externallog:
+    request:
+      outputLog: false
+    response:
+      outputLog: true
   file:
     uploadFileDir: ./build/testTemp
     fileNmMaxSize: 14
