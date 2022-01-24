@@ -17,10 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 
+@Component
 public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
 
 	private static final Log log = LogFactory.getLog(ExternalClientHttpRequestInterceptor.class);
