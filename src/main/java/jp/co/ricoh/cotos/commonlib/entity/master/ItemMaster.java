@@ -23,6 +23,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -43,6 +45,7 @@ import lombok.ToString;
 @Table(name = "item_master")
 public class ItemMaster extends EntityBaseMaster {
 
+	@Description(value = "品種区分")
 	public enum ItemType {
 
 		なし("0"), 基本("1"), オプション("2");
@@ -65,6 +68,7 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "費用種別")
 	public enum CostType {
 
 		初期費("1"), 月額_定額("2"), 年額("3"), 月額_従量("4"), 違約金("5");
@@ -87,6 +91,7 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "契約期間起算日区分")
 	public enum ContractSpanStartDateType {
 
 		契約日("1"), サービス開始日("2"), サービス開始翌月１日("3");
@@ -109,6 +114,7 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "違約金起算日区分")
 	public enum PenaltyStartDateType {
 
 		課金開始日("1");
@@ -131,6 +137,7 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "分解後品種区分")
 	public enum ItemDecomposeType {
 
 		通常("1"), 分解前("2"), 分解後("3");
@@ -153,6 +160,7 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "HW/NOS区分")
 	public enum HwNosType {
 
 		HW("1"), NOS("2");
@@ -175,6 +183,7 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "サービス利用希望日設定可能区分")
 	public enum ServicePreferredSettingPossibleType {
 
 		// null:制限なし

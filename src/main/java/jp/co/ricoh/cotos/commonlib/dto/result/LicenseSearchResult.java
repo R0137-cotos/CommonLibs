@@ -272,7 +272,7 @@ public class LicenseSearchResult {
 	 * メール送信日
 	 */
 	@ApiModelProperty(value = "メール送信日", required = false, position = 40)
-	private String mailSendAt;
+	private Date mailSendAt;
 
 	/**
 	 * 送信結果区分
@@ -281,20 +281,32 @@ public class LicenseSearchResult {
 	private String mailSendResultDiv;
 
 	/**
-	 * 登録日時
+	 * 業務受理日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 42)
-	private String createdAt;
+	@ApiModelProperty(value = "業務受理日時", required = false, position = 42)
+	private Date businessAcceptanceDateTime;
+
+	/**
+	 * MerakiスマートサービスオーガニゼーションID
+	 */
+	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 43)
+	private String mssLinkageOrganizationId;
+
+	/**
+	 * 解約フラグ
+	 */
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 44)
+	private Integer disengagementFlg;
 
 	/**
 	 * 企業名
 	 */
-	@ApiModelProperty(value = "企業名", required = false, position = 43)
+	@ApiModelProperty(value = "企業名", required = false, position = 45)
 	private String licenseAccountCompanyName;
 
 	/**
 	 * 導入代行
 	 */
-	@ApiModelProperty(value = "導入代行", required = false, allowableValues = "導入代行なし(\"1\"), リモート導入(\"2\"), オンサイト導入(\"3\")", position = 14)
+	@ApiModelProperty(value = "導入代行", required = false, allowableValues = "導入代行なし(\"1\"), リモート導入(\"2\"), オンサイト導入(\"3\")", position = 46)
 	private IntActingDiv intActingDiv;
 }

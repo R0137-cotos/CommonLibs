@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeCgwp.MssLinkageTakeoverFlgCgwp;
 import lombok.Data;
 
 /**
@@ -14,17 +13,12 @@ import lombok.Data;
 public class CotosParameterCgwpDto {
 
 	/**
-	 * Merakiルータ連携契約ID
+	 * MerakiスマートサービスUTM/ルータプラン契約ID
 	 */
 	private String mssLinkageRjManageNumber;
 
 	/**
-	 * Merakiルータ連携オーガニゼーションID
+	 * MerakiスマートサービスオーガニゼーションID
 	 */
 	private String mssLinkageOrganizationId;
-
-	/**
-	 * Merakiルータ連携引継ぎフラグ
-	 */
-	private MssLinkageTakeoverFlgCgwp mssLinkageTakeoverFlg;
 }

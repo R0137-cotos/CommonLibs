@@ -26,6 +26,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
@@ -49,6 +50,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "estimation")
 public class Estimation extends EntityBase {
 
+	@Description(value = "ライフサイクル状態")
 	public enum LifecycleStatus {
 
 		作成中("1"), 作成完了("2"), 受注("3"), 失注("4"), 破棄("5");
@@ -71,6 +73,7 @@ public class Estimation extends EntityBase {
 		}
 	}
 
+	@Description(value = "ワークフロー状態")
 	public enum WorkflowStatus {
 
 		作成中("1"), 業務依頼中("2"), 業務処理完了("3"), 承認依頼中("4"), 承認済("5"), 顧客提示済("6");
@@ -93,6 +96,7 @@ public class Estimation extends EntityBase {
 		}
 	}
 
+	@Description(value = "見積種別")
 	public enum EstimationType {
 
 		新規("1"), 契約変更("2");

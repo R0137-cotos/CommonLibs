@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +39,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "license_info_operation_log")
 public class LicenseInfoOperationLog extends EntityBase {
 
+	@Description(value = "操作内容")
 	public enum Operation {
 		新規作成, 更新
 	}
