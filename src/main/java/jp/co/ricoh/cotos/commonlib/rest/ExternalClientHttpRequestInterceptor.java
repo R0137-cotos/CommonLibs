@@ -40,15 +40,15 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 		return response;
 	}
 
-	public void logRequest(HttpRequest request, byte[] body) {
+	private void logRequest(HttpRequest request, byte[] body) {
 		log.info(messageUtil.createMessageInfo("ExternalApiRequestLogInfo", Arrays.asList(request.getMethod(), request.getURI(), request.getHeaders(), new String(body), formatter.format(LocalDateTime.now())).toArray(new String[0])).getMsg());
 	}
 
-	public void logResponse(ClientHttpResponse response) throws IOException {
+	private void logResponse(ClientHttpResponse response) throws IOException {
 		log.info(messageUtil.createMessageInfo("ExternalApiResponseLogInfo", Arrays.asList(response.getStatusCode().value(), response.getHeaders(), StreamUtils.copyToString(response.getBody(), Charset.defaultCharset())).toArray(new String[0])).getMsg());
 	}
 
-	public static class BufferingClientHttpResponseWrapper implements ClientHttpResponse {
+	private static class BufferingClientHttpResponseWrapper implements ClientHttpResponse {
 
 		private final ClientHttpResponse response;
 
