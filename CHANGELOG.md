@@ -1,5 +1,43 @@
 # Changelog
 
+## v4.11.0 (24/01/2022)
+- [**closed**] #13460 Umbrella対応のライセンス関連DTOの修正 [#1784](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1784)
+- [**closed**] #13510_JsonUtilにアノテーションを追加 [#1791](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1791)
+- [**closed**] #13553_ライセンス一覧検索結果Dtoに解約フラグを追加 [#1794](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1794)
+- [**closed**] #13368_VMailAddressListのテーブル区分にCGWP不達案内用を追加 [#1777](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1777)
+- [**closed**] #13174　[API・ライセンス]ライセンス一覧情報取得 [#1772](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1772)
+- [**closed**] #13460 Umbrella対応のライセンス関連DTOの修正 [#1780](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1780)
+- [**closed**] #13411_Merakiルータ連携引継ぎフラグの削除 [#1774](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1774)
+- [**closed**] #13131_不要な戻り値をvoidへ修正 [#1782](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1782)
+- [**closed**] #13174　[API・ライセンス]ライセンス一覧情報取得 [#1765](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1765)
+- [**closed**] #13036　[API・見積]見積情報確認　チェック処理修正 [#1767](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1767)
+- [**closed**] #13372_手配業務履歴にenum追加 [#1770](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1770)
+- [**closed**] #13174　[API・ライセンス]ライセンス一覧情報取得　Dto修正 [#1754](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1754)
+- [**closed**] #13036　[API・見積]見積情報確認　画面文言変更対応 [#1763](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1763)
+- [**closed**] #13165_Umbrella対応のライセンス関連拡張項目の追加 [#1752](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1752)
+- [**closed**] #13036　[API・見積]見積情報確認　チェック処理追加 [#1745](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1745)
+- [**closed**] #13031_拡張項目のCOTOS商品固有項目の名称を修正 [#1740](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1740)
+- [**closed**] #13031_umbrella対応の拡張項目を追加 [#1738](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1738)
+- [**closed**] #8083 enum定義マスタエンティティ・リポジトリ追加 [#1808](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1808)
+- [**closed**] #13565 エラーID重複対応 [#1809](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1809)
+- [**closed**] 10135 通知メール制御マスタ.通知日種別を追加 [#1779](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1779)
+
+---
+
+## v4.10.0 (11/01/2022)
+- [**closed**] #13233 CSV出力でBOM設定できるよう対応 [#1781](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1781)
+
+---
+
+## v4.9.0 (16/12/2021)
+- [**closed**] #12764 リクエスト元のOriginとJWTのOriginを比較する処理の条件を追加 [#1755](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1755)
+- [**closed**] #12764 リクエスト元のOriginとJWTのOriginを比較する処理を修正 [#1759](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1759)
+- [**closed**] #13227 SSサービス課所チェック用エラーメッセージ追加 [#1758](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1758)
+- [**closed**] #12916 契約機種DTOに機種名を追加 [#1743](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1743)
+- [**closed**] #12916 契約機種エンティティと契約機種DTOにカラム追加（topic/backlog47マージ） [#1742](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1742)
+
+---
+
 ## v4.8.0 (02/12/2021)
 - [**closed**] #13122 ライセンス情報取得DTO修正 [#1749](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1749)
 - [**closed**] #13106 ファイルダウンロード処理修正 [#1748](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1748)

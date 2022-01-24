@@ -264,4 +264,11 @@ public class LicenseSearchParameter {
 	@ApiModelProperty(value = "導入代行", required = false, position = 28)
 	private Integer intActingDiv;
 
+	/**
+	 * MerakiスマートサービスオーガニゼーションID
+	 */
+	@ApiParam(value = "MerakiスマートサービスオーガニゼーションID", required = false)
+	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 29)
+	private String mssLinkageOrganizationId;
+
 }

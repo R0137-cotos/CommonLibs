@@ -21,6 +21,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -39,6 +41,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "contract_equipment")
 public class ContractEquipment extends EntityBase {
 
+	@Description(value = "Isys-One 処理状態")
 	public enum IsysoneProcStatus {
 		未処理("0"), CSV作成済み("1"), 連携済み("2"), 連携エラー("3");
 
@@ -60,6 +63,7 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	@Description(value = "Isys-One保守レポート処理状態")
 	public enum IsysoneMaintereportProcStatus {
 		未処理("0"), CSV作成済み("1"), 対象外("2");
 
@@ -81,6 +85,7 @@ public class ContractEquipment extends EntityBase {
 		}
 	}
 
+	@Description(value = "ARCS期間売保守処理状態")
 	public enum ArcsPeriodSaleMainteProcStatus {
 		未作成("0"), CSV作成済み("1"), 対象外("2");
 
@@ -103,6 +108,7 @@ public class ContractEquipment extends EntityBase {
 	}
 
 	// SVPの移行元のRITOSと同様に0から採番
+	@Description(value = "機器区分")
 	public enum MachineType {
 		サーバー本体("0"), HWオプション("1"), SWオプション("2");
 
@@ -120,6 +126,28 @@ public class ContractEquipment extends EntityBase {
 
 		@JsonCreator
 		public static MachineType fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "Isys-One再連携ステータス")
+	public enum IsysoneReLinkageStatus {
+		再連携不要("0"), 再連携必要("1"), 再連携済("2");
+
+		private final String text;
+
+		private IsysoneReLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IsysoneReLinkageStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -308,4 +336,23 @@ public class ContractEquipment extends EntityBase {
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 26)
 	private List<ManagedContractEquipmentStatus> managedContractEquipmentStatus;
 
+	/**
+	 * Isys-One再連携ステータス
+	 */
+	@ApiModelProperty(value = "Isys-One再連携ステータス", required = false, position = 27, allowableValues = "再連携不要(\"0\"),再連携必要(\"1\"),再連携済(\"2\")")
+	private IsysoneReLinkageStatus isysoneReLinkageStatus;
+
+	/**
+	 * Isys-One連携済機番
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "Isys-One連携済機番", required = false, position = 28, allowableValues = "range[0,255]")
+	private String isysoneLinkagedEquipmentNo;
+
+	/**
+	 * Isys-One連携済機種コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "Isys-One連携済機種コード", required = false, position = 29, allowableValues = "range[0,255]")
+	private String isysoneLinkagedEquipmentCode;
 }

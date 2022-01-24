@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -37,8 +39,9 @@ import lombok.EqualsAndHashCode;
 @Table(name = "arrangement_work_operation_log")
 public class ArrangementWorkOperationLog extends EntityBase {
 
+	@Description(value = "操作内容(手配業務操作履歴)")
 	public enum Operation {
-		業務受付, 業務受付取消, 作業完了報告, 新規作成, 担当作業者設定, 更新, 作業完了, 業務完了取消, 保留更新, エラー発生, エラー解消, 業務指定作成, 帳票出力, 手配実施, 手配破棄, マネージド作業受付, ライセンス管理受付, CSV出力, CSV取込, 当日設定, 減数作業受付, 事前設定, 詳細設定, ライセンス割当受付, ライセンス割当, 同梱品確認書出力, お問合せ伝票番号設定
+		業務受付, 業務受付取消, 作業完了報告, 新規作成, 担当作業者設定, 更新, 作業完了, 業務完了取消, 保留更新, エラー発生, エラー解消, 業務指定作成, 帳票出力, 手配実施, 手配破棄, マネージド作業受付, ライセンス管理受付, CSV出力, CSV取込, 当日設定, 減数作業受付, 事前設定, 詳細設定, ライセンス割当受付, ライセンス割当, 同梱品確認書出力, お問合せ伝票番号設定,マネージド作業,Welcomeメール受付,Welcomeメール送信,Welcomeメール完了
 	}
 
 	@Id

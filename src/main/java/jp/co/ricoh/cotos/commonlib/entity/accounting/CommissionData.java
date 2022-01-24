@@ -19,6 +19,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -38,6 +40,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "commission_data")
 public class CommissionData extends EntityBase {
 
+	@Description(value = "商流区分")
 	public enum NspCommercialFlowDiv {
 
 		リコーなし代売売上１手数料_通常("N"), リコーなし代売売上１手数料_北海道("P"), リコーなし代売売上２手数料_通常("T"), リコーなし代売売上２手数料_北海道("U");
@@ -60,6 +63,7 @@ public class CommissionData extends EntityBase {
 		}
 	}
 
+	@Description(value = "消費税区分")
 	public enum TaxRateDiv {
 
 		非課税("4"), 外税_5("C"), 外税_8("E"), 外税_10("G");

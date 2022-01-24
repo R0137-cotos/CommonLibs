@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -34,6 +36,7 @@ import lombok.ToString;
 @Table(name = "approval_route_master")
 public class ApprovalRouteMaster extends EntityBaseMaster {
 
+	@Description(value = "契約承認依頼者区分")
 	public enum ContractApprovalRequesterDiv {
 		担当SA("1"), 受付担当CE("2"), 導入担当CE("3"), 保守担当CE("4");
 

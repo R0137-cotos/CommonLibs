@@ -8,3 +8,4 @@
  - [ ] ソースコードフォーマットはEclipseでバッチリです。
  - [ ] Date型の比較で時分秒の考慮が不要な場合は、切り捨てた上で比較しています。
  - [ ] テーブルとマッピングするEntityまたはDTOのDate型項目に@Temporalを付与しています。
+ - [ ] enum追加時にConverterと@Descriptionを追加しています。
