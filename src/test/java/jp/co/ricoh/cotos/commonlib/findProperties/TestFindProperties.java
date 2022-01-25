@@ -14,6 +14,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 import jp.co.ricoh.cotos.commonlib.util.LogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.LogResponseProperties;
 
@@ -29,6 +31,12 @@ public class TestFindProperties {
 
 	@Autowired
 	LogResponseProperties logResponseProperties;
+
+	@Autowired
+	ExternalLogRequestProperties externalLogRequestProperties;
+
+	@Autowired
+	ExternalLogResponseProperties externalLogResponseProperties;
 
 	@Autowired
 	Environment environment;
@@ -75,5 +83,8 @@ public class TestFindProperties {
 		Assert.assertEquals("APIリクエストのリスト最大出力数が取得できること", 10, logRequestProperties.getMaxCount());
 		Assert.assertEquals("APIレスポンスログ出力有無が取得できること", false, logResponseProperties.isOutputLog());
 		Assert.assertEquals("APIレスポンスのリスト最大出力数が取得できること", 20, logResponseProperties.getMaxCount());
+
+		Assert.assertEquals("APIリクエストログ出力有無が取得できること", false, externalLogRequestProperties.isOutputLog());
+		Assert.assertEquals("APIレスポンスログ出力有無が取得できること", true, externalLogResponseProperties.isOutputLog());
 	}
 }
