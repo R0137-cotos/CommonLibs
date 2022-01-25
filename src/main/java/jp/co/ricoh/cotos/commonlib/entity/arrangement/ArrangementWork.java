@@ -24,6 +24,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -41,6 +43,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "arrangement_work")
 public class ArrangementWork extends EntityBase {
 
+	@Description(value = "ワークフロー状態(手配業務)")
 	public enum WorkflowStatus {
 
 		受付待ち("1"), 作業中("2"), 作業完了報告("3"), 承認依頼中("4"), 作業完了("5"), エラー("6"), 破棄("7");
