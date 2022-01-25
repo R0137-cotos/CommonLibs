@@ -11,6 +11,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -33,6 +35,7 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 	 * 契約更新方式区分
 	 *
 	 */
+	@Description(value = "契約更新方式区分")
 	public enum ContractUpdateType {
 
 		自動更新("1"), 手動更新("2");
@@ -60,6 +63,7 @@ public class ContractAutoUpdateMaster extends EntityBaseMaster {
 	 * 手配情報作成区分
 	 *
 	 */
+	@Description(value = "手配情報作成区分")
 	public enum ArrangementCreateType {
 
 		作成しない("0"), 作成する("1");

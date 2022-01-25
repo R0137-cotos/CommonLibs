@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.common;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -12,8 +13,12 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
@@ -28,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class OsoRequestDetailDataAbstractEntity extends EntityBase {
 
+	@Description(value = "処理区分")
 	public enum ProcessingDiv {
 
 		追加("1"), 変更("2");
@@ -50,6 +56,7 @@ public class OsoRequestDetailDataAbstractEntity extends EntityBase {
 		}
 	}
 
+	@Description(value = "種別")
 	public enum OsoCostType {
 
 		初期費用("1"), 月額("2");

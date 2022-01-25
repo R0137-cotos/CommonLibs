@@ -16,6 +16,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -36,6 +38,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "arrangement_work_order_master")
 public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 
+	@Description(value = "チェックタイミング区分")
 	public enum CheckTimingType {
 
 		業務受付時("0"), 業務完了時("1");

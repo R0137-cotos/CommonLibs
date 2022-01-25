@@ -14,6 +14,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -34,6 +36,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class OsoResultsDataAbstractEntity extends EntityBase {
 
+	@Description(value = "手数料データ作成状態")
 	public enum CommissionDataCreateStatus {
 
 		未作成("0"), 作成済("1"), 作成対象外("9"), 処理エラー("E");
@@ -56,6 +59,7 @@ public class OsoResultsDataAbstractEntity extends EntityBase {
 		}
 	}
 
+	@Description(value = "納品場所識別")
 	public enum DeliveryDiv {
 
 		届け先マスタの住所情報を利用("0"), 納品場所を指定("1");

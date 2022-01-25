@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -24,6 +26,7 @@ import lombok.Data;
 @Table(name = "v_kjb_master")
 public class VKjbMaster {
 
+	@Description(value = "企事部設定区分")
 	public enum DepartmentDiv {
 
 		企事("1"), 企事部("2");

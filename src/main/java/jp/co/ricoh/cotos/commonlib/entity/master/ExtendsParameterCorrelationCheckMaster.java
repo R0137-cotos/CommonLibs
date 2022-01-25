@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -31,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "extends_parameter_correlation_check_master")
 public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 
+	@Description(value = "システムドメイン")
 	public enum Domain {
 		estimation("1"), contract("2");
 
