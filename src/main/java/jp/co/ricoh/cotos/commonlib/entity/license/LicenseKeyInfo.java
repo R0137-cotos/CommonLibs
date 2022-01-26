@@ -58,7 +58,7 @@ public class LicenseKeyInfo extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "ライセンスサービスID", required = true, position = 3, allowableValues = "range[0,255]")
-	private String license_service_id;
+	private String licenseServiceId;
 
 	/**
 	 * ライセンスキー
@@ -66,27 +66,27 @@ public class LicenseKeyInfo extends EntityBase {
 	@Column(nullable = false)
 	@Size(max = 255)
 	@ApiModelProperty(value = "ライセンスキー", required = false, position = 4, allowableValues = "range[0,255]")
-	private String license_key;
+	private String licenseKey;
 
 	/**
 	 * ライセンス状態
 	 */
 	@ApiModelProperty(value = "ライセンス状態", required = false, position = 5, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
-	private LicenseStatus license_status;
+	private LicenseStatus licenseStatus;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 6)
-	private Date license_term_start;
+	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 7)
-	private Date license_term_end;
+	private Date licenseTermEnd;
 
 	/**
 	 * 数量
