@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.entity.license.cas.tm;
+package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

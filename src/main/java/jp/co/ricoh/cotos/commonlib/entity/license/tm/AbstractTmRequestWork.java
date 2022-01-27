@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.entity.license.cas.tm;
+package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 
 import java.util.Arrays;
 import java.util.Date;

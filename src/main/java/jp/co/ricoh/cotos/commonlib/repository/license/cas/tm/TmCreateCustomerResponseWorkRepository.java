@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.AbstractTmResponseWork.TmLicenceMappedStatus;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmResponseWork.TmLicenceMappedStatus;
 
 @Repository
 public interface TmCreateCustomerResponseWorkRepository extends CrudRepository<TmCreateCustomerResponseWork, Long> {
