@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,8 +23,8 @@ import org.springframework.util.StreamUtils;
 
 import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
-import jp.co.ricoh.cotos.commonlib.util.LogRequestProperties;
-import jp.co.ricoh.cotos.commonlib.util.LogResponseProperties;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 
 @Component
 public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
@@ -37,27 +38,32 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 	LogUtil logUtil;
 
 	@Autowired
-	LogRequestProperties logRequestProperties;
+	ExternalLogRequestProperties externalLogRequestProperties;
 
 	@Autowired
-	LogResponseProperties logResponseProperties;
+	ExternalLogResponseProperties externalLogResponseProperties;
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-		if (logRequestProperties.isOutputLog()) {
+		if (externalLogRequestProperties.isOutputLog()) {
 			logRequest(request, body);
 		}
 		ClientHttpResponse response = new BufferingClientHttpResponseWrapper(execution.execute(request, body));
-		if (logResponseProperties.isOutputLog()) {
+		if (externalLogResponseProperties.isOutputLog()) {
 			logResponse(response);
 		}
 		return response;
 	}
 
 	private void logRequest(HttpRequest request, byte[] body) {
-		log.info(messageUtil.createMessageInfo("ExternalApiRequestLogInfo", Arrays.asList(request.getMethod(), request.getURI(), request.getHeaders(), new String(body), formatter.format(LocalDateTime.now())).toArray(new String[0])).getMsg());
+		String bodyStr = "";
+		if (body.length > 0) {
+			bodyStr = new String(body);
+		}
+		List<Object> regexList = Arrays.asList(request.getMethod().toString(), request.getURI().toString(), request.getHeaders().toString(), bodyStr, formatter.format(LocalDateTime.now()));
+		log.info(messageUtil.createMessageInfo("ExternalApiRequestLogInfo", regexList.toArray(new String[0])).getMsg());
 	}
 
 	private void logResponse(ClientHttpResponse response) throws IOException {
@@ -65,7 +71,8 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 		if (logUtil.isOutputBody(response)) {
 			body = logUtil.outputLog(StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
 		}
-		log.info(messageUtil.createMessageInfo("ExternalApiResponseLogInfo", Arrays.asList(response.getStatusCode().value(), response.getHeaders(), body).toArray(new String[0])).getMsg());
+		List<Object> regexList = Arrays.asList(String.valueOf(response.getStatusCode().value()), response.getHeaders().toString(), body, formatter.format(LocalDateTime.now()));
+		log.info(messageUtil.createMessageInfo("ExternalApiResponseLogInfo", regexList.toArray(new String[0])).getMsg());
 	}
 
 	private static class BufferingClientHttpResponseWrapper implements ClientHttpResponse {
