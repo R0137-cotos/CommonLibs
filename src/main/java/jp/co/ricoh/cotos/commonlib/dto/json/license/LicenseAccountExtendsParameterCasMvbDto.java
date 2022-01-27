@@ -3,10 +3,10 @@ package jp.co.ricoh.cotos.commonlib.dto.json.license;
 import lombok.Data;
 
 /**
- * ライセンスキー情報拡張項目DTO（MVB）
+ * ライセンスアカウント拡張項目DTO（CAS、MVB）
  */
 @Data
-public class LicenseKeyInfoExtendsParameterMvbDto {
+public class LicenseAccountExtendsParameterCasMvbDto {
 
 	/**
 	 * インストールURL
