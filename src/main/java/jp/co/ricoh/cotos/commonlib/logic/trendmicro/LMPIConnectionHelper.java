@@ -125,7 +125,7 @@ public class LMPIConnectionHelper {
 	private TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository;
 
 	private TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository;
-	
+
 	private LMPIConnectionHelper() {
 		// シングルトン
 	}
