@@ -19,6 +19,14 @@ public class ExternalRestTemplate {
 	@Autowired
 	ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor;
 
+	public void setRestTemplateBuilder(RestTemplateBuilder restTemplateBuilder) {
+		this.restTemplateBuilder = restTemplateBuilder;
+	}
+
+	public void setExternalClientHttpRequestInterceptor(ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor) {
+		this.externalClientHttpRequestInterceptor = externalClientHttpRequestInterceptor;
+	}
+
 	public RestTemplate loadRestTemplate() {
 		return createRestTemplate();
 	}
