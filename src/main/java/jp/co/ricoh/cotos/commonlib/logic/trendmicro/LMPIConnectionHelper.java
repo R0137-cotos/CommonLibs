@@ -130,7 +130,7 @@ public class LMPIConnectionHelper {
 		// シングルトン
 	}
 
-	public static void init(ApplicationContext context) {
+	public static void init(ApplicationContext context, ExternalRestTemplate externalRestTemplate) {
 		init(//
 				context.getBean(LMPIProperties.class), //
 				context.getBean(TmCreateCustomerRequestWorkRepository.class), //
@@ -145,7 +145,7 @@ public class LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
-				context.getBean(ExternalRestTemplate.class)); //
+				externalRestTemplate); //
 	}
 
 	private static void init( //
