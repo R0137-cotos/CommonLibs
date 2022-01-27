@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -96,22 +97,29 @@ public class LicenseAccountDto extends DtoBase {
 	private String municipality;
 
 	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 14)
+	@Lob
+	private String extendsParameter;
+
+	/**
 	 * リクエスト作成状態
 	 */
-	@ApiModelProperty(value = "リクエスト作成状態", required = false, position = 14, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")")
+	@ApiModelProperty(value = "リクエスト作成状態", required = false, position = 15, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")")
 	private RequestCreateStatus requestCreateStatus;
 
 	/**
 	 * リクエスト作成日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "リクエスト作成日時", required = false, position = 15)
+	@ApiModelProperty(value = "リクエスト作成日時", required = false, position = 16)
 	private Date requestCreateDate;
 
 	/**
 	 * ライセンスキー情報
 	 */
-	@ApiModelProperty(value = "ライセンスキー情報", required = false, position = 16)
+	@ApiModelProperty(value = "ライセンスキー情報", required = false, position = 17)
 	@Valid
 	private List<LicenseKeyInfoDto> licenseKeyInfoList;
 }

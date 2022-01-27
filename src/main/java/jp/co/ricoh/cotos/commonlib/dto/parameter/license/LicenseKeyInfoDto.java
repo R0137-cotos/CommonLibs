@@ -75,10 +75,4 @@ public class LicenseKeyInfoDto extends DtoBase {
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
-	/**
-	 * インストールURL
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "インストールURL", required = false, position = 11, allowableValues = "range[0,255]")
-	private String installUrl;
 }
