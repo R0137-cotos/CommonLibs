@@ -45,6 +45,22 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
+	public void setMessageUtil(MessageUtil messageUtil) {
+		this.messageUtil = messageUtil;
+	}
+
+	public void setLogUtil(LogUtil logUtil) {
+		this.logUtil = logUtil;
+	}
+
+	public void setExternalLogRequestProperties(ExternalLogRequestProperties externalLogRequestProperties) {
+		this.externalLogRequestProperties = externalLogRequestProperties;
+	}
+
+	public void setExternalLogResponseProperties(ExternalLogResponseProperties externalLogResponseProperties) {
+		this.externalLogResponseProperties = externalLogResponseProperties;
+	}
+
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
 		if (externalLogRequestProperties.isOutputLog()) {
