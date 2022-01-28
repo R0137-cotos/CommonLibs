@@ -25,8 +25,12 @@ import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
 
 	private static final Log log = LogFactory.getLog(ExternalClientHttpRequestInterceptor.class);

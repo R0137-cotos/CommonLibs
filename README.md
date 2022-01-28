@@ -435,3 +435,4 @@
 |478|外部API呼び出し用RestTemplate作成|
 |479|20220124リリース分マージ|
 |480|TrendMicro連携処理修正|
+|481|TrendMicro連携処理修正|
