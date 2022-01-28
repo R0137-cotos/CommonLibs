@@ -12,18 +12,15 @@ import org.springframework.web.client.RestTemplate;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExternalRestTemplate {
 
-	@Setter
 	@Autowired
 	RestTemplateBuilder restTemplateBuilder;
 
-	@Setter
 	@Autowired
 	ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor;
 
