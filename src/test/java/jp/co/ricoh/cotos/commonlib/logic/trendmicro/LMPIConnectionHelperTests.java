@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.junit.AfterClass;
@@ -56,14 +57,9 @@ public class LMPIConnectionHelperTests {
 
 	private LMPIConnectionHelper getHelper() {
 		// ヘルパー初期化
-		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate();
-		externalRestTemplate.setRestTemplateBuilder(new RestTemplateBuilder());
-		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor();
-		externalClientHttpRequestInterceptor.setMessageUtil(new MessageUtil());
-		externalClientHttpRequestInterceptor.setLogUtil(new LogUtil());
-		externalClientHttpRequestInterceptor.setExternalLogRequestProperties(new ExternalLogRequestProperties());
-		externalClientHttpRequestInterceptor.setExternalLogResponseProperties(new ExternalLogResponseProperties());
-		externalRestTemplate.setExternalClientHttpRequestInterceptor(externalClientHttpRequestInterceptor);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor(new MessageUtil(), new LogUtil(), new ExternalLogRequestProperties(), new ExternalLogResponseProperties(), formatter);
+		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate(new RestTemplateBuilder(), externalClientHttpRequestInterceptor);
 		LMPIConnectionHelper.init(context, externalRestTemplate);
 		return LMPIConnectionHelper.getInstance();
 	}
