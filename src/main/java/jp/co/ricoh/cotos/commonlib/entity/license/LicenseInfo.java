@@ -26,7 +26,6 @@ import javax.validation.constraints.Size;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -321,7 +320,6 @@ public class LicenseInfo extends EntityBase {
 	 */
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_account_id", referencedColumnName = "id")
-	@JsonIgnore
 	@ApiModelProperty(value = "ライセンスアカウント", required = true, position = 29)
 	private LicenseAccount licenseAccount;
 

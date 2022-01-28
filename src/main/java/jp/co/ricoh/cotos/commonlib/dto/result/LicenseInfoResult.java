@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -236,4 +237,11 @@ public class LicenseInfoResult {
 	@OneToMany
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
+
+	/**
+	 * ライセンスアカウント
+	 */
+	@ManyToOne(optional = true)
+	@ApiModelProperty(value = "ライセンスアカウント", required = false, position = 29)
+	private LicenseAccountResult licenseAccountResult;
 }
