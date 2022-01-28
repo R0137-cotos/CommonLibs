@@ -56,9 +56,9 @@ public class LMPIConnectionHelperTests {
 
 	private LMPIConnectionHelper getHelper() {
 		// ヘルパー初期化
-		ExternalRestTemplate externalRestTemplate = context.getBean(ExternalRestTemplate.class);
+		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate();
 		externalRestTemplate.setRestTemplateBuilder(new RestTemplateBuilder());
-		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = context.getBean(ExternalClientHttpRequestInterceptor.class);
+		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor();
 		externalClientHttpRequestInterceptor.setMessageUtil(new MessageUtil());
 		externalClientHttpRequestInterceptor.setLogUtil(new LogUtil());
 		externalClientHttpRequestInterceptor.setExternalLogRequestProperties(new ExternalLogRequestProperties());
