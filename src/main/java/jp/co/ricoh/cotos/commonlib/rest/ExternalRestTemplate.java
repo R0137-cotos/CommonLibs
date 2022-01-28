@@ -10,7 +10,12 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExternalRestTemplate {
 
 	@Autowired
