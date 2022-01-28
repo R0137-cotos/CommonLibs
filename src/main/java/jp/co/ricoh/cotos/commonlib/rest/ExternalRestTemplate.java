@@ -12,25 +12,20 @@ import org.springframework.web.client.RestTemplate;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExternalRestTemplate {
 
+	@Setter
 	@Autowired
 	RestTemplateBuilder restTemplateBuilder;
 
+	@Setter
 	@Autowired
 	ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor;
-
-	public void setRestTemplateBuilder(RestTemplateBuilder restTemplateBuilder) {
-		this.restTemplateBuilder = restTemplateBuilder;
-	}
-
-	public void setExternalClientHttpRequestInterceptor(ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor) {
-		this.externalClientHttpRequestInterceptor = externalClientHttpRequestInterceptor;
-	}
 
 	public RestTemplate loadRestTemplate() {
 		return createRestTemplate();
