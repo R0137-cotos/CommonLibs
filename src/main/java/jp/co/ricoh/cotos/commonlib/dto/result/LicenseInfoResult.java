@@ -5,19 +5,13 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseAccount;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CsvOutputFlg;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.ProcessLockStatus;
@@ -37,7 +31,6 @@ public class LicenseInfoResult {
 	 * ライセンス情報ID
 	 */
 	@Id
-	@Min(0)
 	@ApiModelProperty(value = "ライセンス情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
@@ -51,37 +44,30 @@ public class LicenseInfoResult {
 	/**
 	 * 契約ID
 	 */
-	@NotNull
-	@Min(0)
 	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 3, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * RJ管理番号
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "RJ管理番号", required = false, position = 4, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "契約番号", required = false, position = 5, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
-	@Max(99)
-	@Min(0)
 	@ApiModelProperty(value = "契約番号枝番", required = true, position = 6, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
@@ -94,45 +80,36 @@ public class LicenseInfoResult {
 	/**
 	 * 契約種別詳細
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "契約種別詳細", required = true, position = 8, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
 	 * 解約フラグ
 	 */
-	@Max(9)
-	@Min(0)
 	@ApiModelProperty(value = "解約フラグ", required = false, position = 9, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@NotNull
-	@Min(0)
 	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
 	 * 完了工程順
 	 */
-	@Max(999)
-	@Min(0)
 	@ApiModelProperty(value = "完了工程順", required = false, position = 11, allowableValues = "range[0,999]")
 	private Integer completeProcessOrder;
 
 	/**
 	 * 完了ライセンス工程マスタID
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "完了ライセンス工程マスタID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
 	private Long completeProcessMasterId;
 
 	/**
 	 * 完了手配業務ID
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "完了手配業務ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
 	private Long completeArrangementWorkId;
 
@@ -145,15 +122,12 @@ public class LicenseInfoResult {
 	/**
 	 * 作業中工程順
 	 */
-	@Max(999)
-	@Min(0)
 	@ApiModelProperty(value = "作業中工程順", required = false, position = 15, allowableValues = "range[0,999]")
 	private Integer workingProcessOrder;
 
 	/**
 	 * 作業中ライセンス工程マスタID
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "作業中ライセンス工程マスタID", required = false, position = 16, allowableValues = "range[0,9223372036854775807]")
 	private Long workingProcessMasterId;
 
@@ -161,7 +135,6 @@ public class LicenseInfoResult {
 	 * 作業中手配業務ID
 	 *
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "作業中手配業務ID", required = false, position = 17, allowableValues = "range[0,9223372036854775807]")
 	private Long workingArrangementWorkId;
 
@@ -193,7 +166,6 @@ public class LicenseInfoResult {
 	/**
 	 * メールアドレス
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "メールアドレス", required = false, position = 22, allowableValues = "range[0,255]")
 	private String mailAddress;
 
@@ -212,36 +184,30 @@ public class LicenseInfoResult {
 	/**
 	 * ライセンス明細
 	 */
-	@OneToMany
 	@ApiModelProperty(value = "ライセンス明細", required = false, position = 25)
 	private List<LicenseDetailResult> licenseDetailList;
 
 	/**
 	 * ライセンス工程DTO
 	 */
-	@NotNull
-	@OneToMany
 	@ApiModelProperty(value = "ライセンス工程DTO", required = true, position = 26)
 	private List<LicenseProcessResult> licenseProcessResultList;
 
 	/**
 	 * ライセンス残数
 	 */
-	@OneToOne
 	@ApiModelProperty(value = "ライセンス残数", required = false, position = 27)
 	private LicenseRemainingNumber licenseRemainingNumber;
 
 	/**
 	 * ライセンス情報操作履歴
 	 */
-	@OneToMany
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
 
 	/**
 	 * ライセンスアカウント
 	 */
-	@ManyToOne(optional = true)
 	@ApiModelProperty(value = "ライセンスアカウント", required = false, position = 29)
-	private LicenseAccountResult licenseAccountResult;
+	private LicenseAccount licenseAccount;
 }
