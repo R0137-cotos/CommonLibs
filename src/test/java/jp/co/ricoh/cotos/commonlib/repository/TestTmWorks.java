@@ -33,19 +33,19 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmResponseWork.TmLicenceMappedStatus;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmCreateCustomerRequestWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmCreateCustomerResponseWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmCreateSubscriptionRequestWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmCreateSubscriptionResponseWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmLinkManagementRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmSuspendSubscriptionRequestWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmSuspendSubscriptionResponseWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmUpdateCustomerRequestWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmUpdateCustomerResponseWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmUpdateSubscriptionRequestWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmUpdateSubscriptionResponseWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmUpdateUserRequestWorkRepository;
-import jp.co.ricoh.cotos.commonlib.repository.license.cas.tm.TmUpdateUserResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateCustomerRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateCustomerResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmLinkManagementRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWorkRepository;
 
 /**
  * トレンドマイクロ連携WORK

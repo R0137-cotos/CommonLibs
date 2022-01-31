@@ -447,3 +447,4 @@
 |490|ライセンス更新APIで使用するDTO修正とライセンスアカウントのCAS、MVB用拡張項目DTO作成とライセンスキー情報のMVB用拡張項目DTO削除とTremdMicro関連Workテーブル格納先変更|
 |491|ライセンス明細DTOに項目追加|
 |492|ライセンス情報詳細取得API ライセンスアカウントDTOを追加|
+|493|TremdMicro関連WorkテーブルRepository格納先変更|
