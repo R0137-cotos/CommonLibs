@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.LicenseStatus;
@@ -171,6 +173,7 @@ public class LicenseAccount extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "licenseAccount")
 	@OrderBy("id ASC")
+	@JsonIgnore
 	@ApiModelProperty(value = "ライセンス情報", required = false, position = 20)
 	private List<LicenseInfo> licenseInfoList;
 
