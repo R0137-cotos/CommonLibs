@@ -43,7 +43,7 @@ public class LicenseDetail extends EntityBase {
 	@Description(value = "情報区分")
 	public enum InfoDiv {
 
-		新規("1"), 減数("2");
+		新規("1"), 減数("2"), 増数("3"), 情報変更("4"), 解約("5"), 乗換("6"), 乗換え増数("7");
 
 		private final String text;
 
@@ -145,7 +145,7 @@ public class LicenseDetail extends EntityBase {
 	/**
 	 * 情報区分
 	 */
-	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "ハード(\"1\"), 減数(\"2\")", position = 5)
+	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 5)
 	private InfoDiv infoDiv;
 
 	/**
