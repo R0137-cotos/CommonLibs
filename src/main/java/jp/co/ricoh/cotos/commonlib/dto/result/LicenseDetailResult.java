@@ -95,4 +95,18 @@ public class LicenseDetailResult {
 	 */
 	@ApiModelProperty(value = "品種名", required = false, position = 13, allowableValues = "range[0,255]")
 	private String itemName;
+
+	/**
+	 * ライセンス開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 14)
+	private Date licenseTermStart;
+
+	/**
+	 * ライセンス終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 15)
+	private Date licenseTermEnd;
 }
