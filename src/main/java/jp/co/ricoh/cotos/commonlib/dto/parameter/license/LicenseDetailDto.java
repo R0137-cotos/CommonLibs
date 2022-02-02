@@ -45,4 +45,18 @@ public class LicenseDetailDto extends DtoBase {
 	@ApiModelProperty(value = "リクエスト作成日時", required = false, position = 6)
 	private Date requestCreateDate;
 
+	/**
+	 * ライセンス開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 7)
+	private Date licenseTermStart;
+
+	/**
+	 * ライセンス終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 8)
+	private Date licenseTermEnd;
+
 }

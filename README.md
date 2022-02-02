@@ -450,3 +450,4 @@
 |493|TremdMicro関連WorkテーブルRepository格納先変更|
 |494|カテゴリC対応　手配業務操作履歴のenum追加|
 |495|カテゴリC対応　ライセンス明細.情報区分のenum追加|
+|496|カテゴリC対応　ライセンス明細のentity・parameter・resultとライセンス工程のresultに項目追加|
