@@ -448,4 +448,5 @@
 |491|通知メール制御マスタ.通知日種別を追加|
 |492|エラーID重複対応|
 |493|外部API呼び出し用RestTemplate作成|
-|484|TrendMicro連携処理修正|
+|494|TrendMicro連携処理修正|
+|495|外部API呼び出し用Interceptor修正|
