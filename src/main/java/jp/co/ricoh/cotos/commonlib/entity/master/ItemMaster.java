@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -592,4 +593,11 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 52, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
+
+	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 53)
+	@Lob
+	private String extendsParameter;
 }
