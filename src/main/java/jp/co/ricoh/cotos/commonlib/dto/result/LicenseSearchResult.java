@@ -12,6 +12,7 @@ import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseInfoExtendsParameterS
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.InfoDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber.AllocationDiv;
 import lombok.Data;
@@ -309,4 +310,10 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "導入代行", required = false, allowableValues = "導入代行なし(\"1\"), リモート導入(\"2\"), オンサイト導入(\"3\")", position = 46)
 	private IntActingDiv intActingDiv;
+
+	/**
+	 * 情報区分
+	 */
+	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 47)
+	private InfoDiv infoDiv;
 }

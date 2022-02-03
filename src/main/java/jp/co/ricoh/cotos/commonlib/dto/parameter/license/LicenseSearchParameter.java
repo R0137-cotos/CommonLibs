@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.InfoDiv;
 import lombok.Data;
 
 /**
@@ -203,12 +204,18 @@ public class LicenseSearchParameter {
 			required = false, position = 20)
 	private Date processOperatedDateTime;
 
+	/**
+	 * 情報区分
+	 */
+	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 21)
+	private InfoDiv infoDiv;
+
 	// =========================== 以下、ライセンス詳細検索条件
 	/**
 	 * 受付状況フラグ
 	 */
 	@ApiParam(value = "受付状況フラグ", required = false)
-	@ApiModelProperty(value = "受付状況フラグ", required = false, position = 21)
+	@ApiModelProperty(value = "受付状況フラグ", required = false, position = 22)
 	private Integer receptionStatusFlg;
 
 	/**
@@ -217,28 +224,28 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "CSV出力日時", required = false)
 	@ApiModelProperty(value = "CSV出力日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 22)
+			required = false, position = 23)
 	private Date csvOutputAt;
 
 	/**
 	 * RMA契約番号
 	 */
 	@ApiParam(value = "RMA契約番号", required = false)
-	@ApiModelProperty(value = "RMA契約番号", required = false, allowableValues = "range[0,255]", position = 23)
+	@ApiModelProperty(value = "RMA契約番号", required = false, allowableValues = "range[0,255]", position = 24)
 	private String rmaContractNumber;
 
 	/**
 	 * 割当区分
 	 */
 	@ApiParam(value = "割当区分", required = false)
-	@ApiModelProperty(value = "割当区分", required = false, position = 24)
+	@ApiModelProperty(value = "割当区分", required = false, position = 25)
 	private Integer allocationDiv;
 
 	/**
 	 * 送信結果区分
 	 */
 	@ApiParam(value = "送信結果区分", required = false)
-	@ApiModelProperty(value = "送信結果区分", required = false, position = 25)
+	@ApiModelProperty(value = "送信結果区分", required = false, position = 26)
 	private Integer mailSendResultDiv;
 
 	/**
@@ -247,28 +254,28 @@ public class LicenseSearchParameter {
 	@ApiParam(value = "申込日", required = false)
 	@ApiModelProperty(value = "申込日<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 26)
+			required = false, position = 27)
 	private Date applicationDateAt;
 
 	/**
 	 * Welcomeメール送信状況
 	 */
 	@ApiParam(value = "Welcomeメール送信状況", required = false)
-	@ApiModelProperty(value = "Welcomeメール送信状況", required = false, position = 27)
+	@ApiModelProperty(value = "Welcomeメール送信状況", required = false, position = 28)
 	private Integer wellcomeMailSendResultDiv;
 
 	/**
 	 * 導入代行
 	 */
 	@ApiParam(value = "導入代行", required = false)
-	@ApiModelProperty(value = "導入代行", required = false, position = 28)
+	@ApiModelProperty(value = "導入代行", required = false, position = 29)
 	private Integer intActingDiv;
 
 	/**
 	 * MerakiスマートサービスオーガニゼーションID
 	 */
 	@ApiParam(value = "MerakiスマートサービスオーガニゼーションID", required = false)
-	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 29)
+	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 30)
 	private String mssLinkageOrganizationId;
 
 }
