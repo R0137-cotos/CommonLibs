@@ -453,3 +453,4 @@
 |496|カテゴリC対応　ライセンス明細のentity・parameter・resultとライセンス工程のresultに項目追加|
 |497|カテゴリC対応　Message.propertiesを修正|
 |498|カテゴリC対応　ライセンスアカウント.担当者メールアドレス削除・dtoにライセンス明細の情報区分追加|
+|499|カテゴリC対応　LicenseAccountListInfoの項目を修正|
