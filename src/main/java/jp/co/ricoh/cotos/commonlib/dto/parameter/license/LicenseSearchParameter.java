@@ -207,6 +207,7 @@ public class LicenseSearchParameter {
 	/**
 	 * 情報区分
 	 */
+	@ApiParam(value = "情報区分", required = false)
 	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 21)
 	private InfoDiv infoDiv;
 
