@@ -64,7 +64,7 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 	private void logRequest(HttpRequest request, byte[] body) {
 		String bodyStr = "";
 		if (body.length > 0) {
-			bodyStr = new String(body);
+			bodyStr = logUtil.outputLog(body);
 		}
 		List<Object> regexList = Arrays.asList(request.getMethod().toString(), request.getURI().toString(), request.getHeaders().toString(), bodyStr, formatter.format(LocalDateTime.now()));
 		log.info(messageUtil.createMessageInfo("ExternalApiRequestLogInfo", regexList.toArray(new String[0])).getMsg());
