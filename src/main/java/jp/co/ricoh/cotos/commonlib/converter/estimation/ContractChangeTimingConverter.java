@@ -18,7 +18,7 @@ public class ContractChangeTimingConverter implements AttributeConverter<Contrac
 	@Override
 	public ContractChangeTiming convertToEntityAttribute(String value) {
 		if (value == null)
-			value = "0";
+			return null;
 		return ContractChangeTiming.fromString(value); // IllegalArgumentExceptionはContractType.fromString側で投げている
 	}
 
