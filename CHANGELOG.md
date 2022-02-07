@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.12.0 (07/02/2022)
+- [**closed**] #12964 外部API呼び出し用Interceptor修正 [#1845](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1845)
+- [**closed**] #12964 TrendMicro連携処理修正 [#1837](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1837)
+- [**closed**] #12964 TrendMicro連携処理修正 [#1833](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1833)
+- [**closed**] #12964 外部API呼び出し用RestTemplate作成 [#1826](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1826)
+
+---
+
 ## v4.11.0 (24/01/2022)
 - [**closed**] #13460 Umbrella対応のライセンス関連DTOの修正 [#1784](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1784)
 - [**closed**] #13510_JsonUtilにアノテーションを追加 [#1791](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1791)
