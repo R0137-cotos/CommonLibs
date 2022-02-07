@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.estimation;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Lob;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiParam;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.ContractChangeTiming;
 import lombok.Data;
 
 @Data
@@ -52,4 +54,15 @@ public class EstimationRegisterParameter {
 	@ApiParam(value = "見積明細", required = true)
 	private List<EstimationDetailRegisterParameter> estimationDetailRegisterParameterList;
 
+	/**
+	 * サービス利用希望日
+	 */
+	@ApiParam(value = "サービス利用希望日", required = true)
+	private Date conclusionPrefferedDate;
+
+	/**
+	 * 契約変更タイミング
+	 */
+	@ApiParam(value = "契約変更タイミング", required = true)
+	private ContractChangeTiming contractChangeTiming;
 }
