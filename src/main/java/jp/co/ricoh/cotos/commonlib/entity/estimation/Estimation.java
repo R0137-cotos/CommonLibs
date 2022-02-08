@@ -595,7 +595,7 @@ public class Estimation extends EntityBase {
 	 */
 	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 64)
 	@Temporal(TemporalType.DATE)
-	private Date conclusionPrefferedDate;
+	private Date conclusionPreferredDate;
 
 	/**
 	 * 契約変更タイミング

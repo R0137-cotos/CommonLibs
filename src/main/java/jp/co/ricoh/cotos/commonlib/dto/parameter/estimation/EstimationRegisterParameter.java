@@ -58,7 +58,7 @@ public class EstimationRegisterParameter {
 	 * サービス利用希望日
 	 */
 	@ApiParam(value = "サービス利用希望日", required = true)
-	private Date conclusionPrefferedDate;
+	private Date conclusionPreferredDate;
 
 	/**
 	 * 契約変更タイミング

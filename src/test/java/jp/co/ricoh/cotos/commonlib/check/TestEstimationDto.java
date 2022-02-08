@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.check;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -1000,6 +1001,8 @@ public class TestEstimationDto {
 		dto.setExtendsParameter("dummy_extends_param");
 		dto.setCreatedUser("dummy_user");
 		dto.setEstimationDetailRegisterParameterList(new ArrayList<EstimationDetailRegisterParameter>());
+		dto.setConclusionPreferredDate(new Date());
+		dto.setContractChangeTiming(null);
 
 		EstimationDetailRegisterParameter detailParam = new EstimationDetailRegisterParameter();
 		detailParam.setStatus("dummy_status");
