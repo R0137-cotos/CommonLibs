@@ -72,4 +72,10 @@ public class LicenseAccountListInfo {
 	 */
 	@ApiModelProperty(value = "商品名", required = false, position = 10, allowableValues = "range[0,255]")
 	private String productName;
+
+	/**
+	 * MoM企業ID
+	 */
+	@ApiModelProperty(value = "MoM企業ID", required = false, position = 11, allowableValues = "range[0,255]")
+	private String momCompanyId;
 }
