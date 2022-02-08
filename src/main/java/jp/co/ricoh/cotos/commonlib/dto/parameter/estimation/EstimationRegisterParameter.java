@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -57,6 +59,7 @@ public class EstimationRegisterParameter {
 	/**
 	 * サービス利用希望日
 	 */
+	@Temporal(TemporalType.DATE)
 	@ApiParam(value = "サービス利用希望日", required = true)
 	private Date conclusionPreferredDate;
 
