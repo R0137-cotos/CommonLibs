@@ -60,12 +60,12 @@ public class EstimationRegisterParameter {
 	 * サービス利用希望日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiParam(value = "サービス利用希望日", required = true)
+	@ApiParam(value = "サービス利用希望日", required = false)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * 契約変更タイミング
 	 */
-	@ApiParam(value = "契約変更タイミング", required = true)
+	@ApiParam(value = "契約変更タイミング", required = false)
 	private ContractChangeTiming contractChangeTiming;
 }
