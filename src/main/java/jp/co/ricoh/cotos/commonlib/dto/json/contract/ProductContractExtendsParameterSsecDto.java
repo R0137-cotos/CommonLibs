@@ -25,7 +25,7 @@ public class ProductContractExtendsParameterSsecDto {
 	private NewExistingAccountType newExistingAccountType;
 
 	/**
-	 * DSaaSアカウント
+	 * DSAASアカウント
 	 */
 	private String dsaasAccount;
 
