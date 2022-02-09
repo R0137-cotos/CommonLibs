@@ -10,6 +10,7 @@ import javax.validation.constraints.Min;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.RequestCreateStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.InfoDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -58,5 +59,11 @@ public class LicenseDetailDto extends DtoBase {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 8)
 	private Date licenseTermEnd;
+
+	/**
+	 * 情報区分
+	 */
+	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 9)
+	private InfoDiv infoDiv;
 
 }
