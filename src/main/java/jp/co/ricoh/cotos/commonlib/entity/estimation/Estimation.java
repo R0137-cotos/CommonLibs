@@ -119,6 +119,29 @@ public class Estimation extends EntityBase {
 		}
 	}
 
+	@Description(value = "契約変更タイミング")
+	public enum ContractChangeTiming {
+
+		自動更新時("0"), 契約期間途中("1");
+
+		private final String text;
+
+		private ContractChangeTiming(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonValue
+		public static ContractChangeTiming fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_seq")
 	@SequenceGenerator(name = "estimation_seq", sequenceName = "estimation_seq", allocationSize = 1)
@@ -566,6 +589,19 @@ public class Estimation extends EntityBase {
 	@OneToMany(mappedBy = "estimation")
 	@ApiModelProperty(value = "違約金明細(見積用)", required = false, position = 63, readOnly = true)
 	private List<PenaltyDetailEstimation> penaltyDetailEstimationList;
+
+	/**
+	 * サービス利用希望日
+	 */
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 64)
+	@Temporal(TemporalType.DATE)
+	private Date conclusionPreferredDate;
+
+	/**
+	 * 契約変更タイミング
+	 */
+	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 105, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
+	private ContractChangeTiming contractChangeTiming;
 
 	@PreUpdate
 	public void preUpdate() {
