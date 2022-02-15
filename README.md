@@ -426,8 +426,6 @@
 |469|SSサービス課所チェック用エラーメッセージ追加|
 |470|リクエスト元のOriginとJWTのOriginを比較する処理の条件を追加|
 |471|リクエスト元のOriginとJWTのOriginを比較する処理を修正|
-<<<<<<< HEAD
-<<<<<<< HEAD
 |472|Umbrella対応分追加|
 |473|VMailAddressListのテーブル区分にCGWP不達案内用を追加|
 |474|Umbrella対応　不要な戻り値を返しているメソッドの戻り値をvoidへ修正|
