@@ -564,10 +564,10 @@ public class ArrangementSearchParameter {
 	private String relatedArrangementWorkTypeId;
 
 	/**
-	 * 関連手配業務ステータス(関連手配業務状況条件)
+	 * 関連手配業務ステータス(関連手配業務状況検索条件)
 	 */
 	@ApiParam(value = "関連手配業務ステータス", required = false)
-	@ApiModelProperty(value = "関連手配業務ステータス(関連手配業務状況条件)<br />" //
+	@ApiModelProperty(value = "関連手配業務ステータス(関連手配業務状況検索条件)<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false) //
 	private String relatedArrangementWorkStatus;
