@@ -17,4 +17,8 @@ public class ProductContractExtendsParameterJsdDto {
 	 */
 	private ContractTypeDetails contractTypeDetails;
 
+	/**
+	 * PCP/BBPの契約ID
+	 */
+	private String PcpBbpContractId;
 }
