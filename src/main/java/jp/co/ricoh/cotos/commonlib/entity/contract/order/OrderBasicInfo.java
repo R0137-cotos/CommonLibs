@@ -132,7 +132,7 @@ public class OrderBasicInfo extends EntityBase {
 	 * 商品種別
 	 */
 	@Column
-	@ApiModelProperty(value = "商品種別", required = false, position = 4, allowableValues = "RSI(\"1\"), ROC(\"2\"), MVB(\"3\")")
+	@ApiModelProperty(value = "商品種別", required = false, position = 4, allowableValues = "RSI(\"1\"), ROC(\"2\"), MVB(\"4\")")
 	private ProductType productType;
 
 	/**
