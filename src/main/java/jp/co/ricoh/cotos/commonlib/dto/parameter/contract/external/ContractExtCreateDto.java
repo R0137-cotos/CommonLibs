@@ -24,6 +24,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicSaEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.CustomerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.DealerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetailDto;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.BasicContractDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
@@ -408,4 +409,17 @@ public class ContractExtCreateDto extends DtoBase {
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 53)
 	private ContractInstallationLocationDto contractInstallationLocation;
+
+	/**
+	 * 基本契約区分
+	 */
+	@ApiModelProperty(value = "基本契約区分", required = false, position = 54, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
+	private BasicContractDiv basicContractDiv;
+
+	/**
+	 * 基本契約ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "基本契約ID", required = false, position = 55, allowableValues = "range[0,9223372036854775807]")
+	private Long basicContractId;
 }
