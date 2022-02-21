@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicSaEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.CustomerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.DealerContractDto;
@@ -320,7 +321,7 @@ public class ContractExtChangeDto extends DtoBase {
 	@Column
 	@ApiModelProperty(value = "届先名", required = false, position = 43, allowableValues = "range[0,255]")
 	private String deliveryName;
-	
+
 	/**
 	 * 設置届先サイトID
 	 */
@@ -335,14 +336,14 @@ public class ContractExtChangeDto extends DtoBase {
 	@Column
 	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
-	
+
 	/**
 	 * 申込日
 	 */
 	@ApiModelProperty(value = "申込日", required = false, position = 45)
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
-	
+
 	/**
 	 * 契約明細
 	 */
@@ -400,4 +401,12 @@ public class ContractExtChangeDto extends DtoBase {
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "追加編集者", required = false, position = 52)
 	private List<ContractAddedEditorEmpDto> contractAddedEditorEmpList;
+
+	/**
+	 * 設置先(契約用)
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 53)
+	private ContractInstallationLocationDto contractInstallationLocation;
 }
