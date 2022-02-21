@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.13.0 (21/02/2022)
+- [**closed**] #13346 商品種類区分による検索を追加 [#1769](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1769)
+- [**closed**] メールアドレス情報.テーブル区分を追加 [#1863](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1863)
+- [**closed**] #13376_更新案内メール送信フラグを販売店に追加 [#1854](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1854)
+- [**closed**] #13882 バッチ用メール送信エラーメッセージ追加 [#1849](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1849)
+- [**closed**] #13505 品種マスタ.拡張項目を追加 [#1848](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1848)
+
+---
+
 ## v4.12.0 (07/02/2022)
 - [**closed**] #12964 外部API呼び出し用Interceptor修正 [#1845](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1845)
 - [**closed**] #12964 TrendMicro連携処理修正 [#1837](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1837)
