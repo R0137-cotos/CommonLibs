@@ -81,6 +81,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionReq
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
 import lombok.extern.log4j.Log4j;
 
@@ -131,7 +132,7 @@ public class LMPIConnectionHelper {
 		// シングルトン
 	}
 
-	public static void init(ApplicationContext context) {
+	public static void init(ApplicationContext context, ExternalRestTemplate externalRestTemplate) {
 		init(//
 				context.getBean(LMPIProperties.class), //
 				context.getBean(TmCreateCustomerRequestWorkRepository.class), //
@@ -145,7 +146,8 @@ public class LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
-				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class)); //
+				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
+				externalRestTemplate); //
 	}
 
 	private static void init( //
@@ -161,9 +163,10 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionRequestWorkRepository tmUpdateSubscriptionRequestWorkRepository, //
 			TmUpdateSubscriptionResponseWorkRepository tmUpdateSubscriptionResponseWorkRepository, //
 			TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository, //
-			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository) {
+			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository, //
+			ExternalRestTemplate externalRestTemplate) {
 
-		RestTemplate rest = new RestTemplate();
+		RestTemplate rest = externalRestTemplate.loadRestTemplate();
 		rest.setErrorHandler(new DefaultResponseErrorHandler() {
 			@Override
 			public void handleError(ClientHttpResponse response) throws IOException {
@@ -450,17 +453,14 @@ public class LMPIConnectionHelper {
 	 * @throws UnsupportedEncodingException 
 	 */
 	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
-		log.info("LMPI call : " + url);
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);
 		}
-		log.info("LMPI requestBody : " + body);
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
-		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
 		// リクエスト情報の保持

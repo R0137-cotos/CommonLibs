@@ -17,15 +17,12 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamSource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
@@ -43,7 +40,7 @@ public class ControllerLoggingInterceptor {
 	MessageUtil messageUtil;
 
 	@Autowired
-	ObjectMapper mapper;
+	LogUtil logUtil;
 
 	@Autowired
 	LogRequestProperties logRequestProperties;
@@ -89,7 +86,7 @@ public class ControllerLoggingInterceptor {
 		if (logRequestProperties.isOutputLog()) {
 			int min = Math.min(joinPoint.getArgs().length, logRequestProperties.getMaxCount());
 			IntStream.range(0, min).forEach(i -> {
-				log.info(String.format("\tRequest Body(%d): %s", (i + 1), outputLog(joinPoint.getArgs()[i])));
+				log.info(String.format("\tRequest Body(%d): %s", (i + 1), logUtil.outputLog(joinPoint.getArgs()[i])));
 			});
 		}
 	}
@@ -109,58 +106,11 @@ public class ControllerLoggingInterceptor {
 				List<?> entityList = List.class.cast(res);
 				int min = Math.min(entityList.size(), logResponseProperties.getMaxCount());
 				entityList.stream().filter(s -> entityList.indexOf(s) < min).forEach(s -> {
-					log.info(String.format("\tResponse Body(%d): %s", entityList.indexOf(s) + 1, outputLog(s)));
+					log.info(String.format("\tResponse Body(%d): %s", entityList.indexOf(s) + 1, logUtil.outputLog(s)));
 				});
-			} else if (isOutputBody(res)) {
-				log.info(String.format("\tResponse Body: %s", outputLog(res)));
+			} else if (logUtil.isOutputBody(res)) {
+				log.info(String.format("\tResponse Body: %s", logUtil.outputLog(res)));
 			}
 		}
 	}
-
-	/**
-	 * リクエストボディーをログ出力か否か
-	 * @param obj
-	 * @return
-	 */
-	private boolean isOutputBody(Object obj) {
-		if (obj instanceof ResponseEntity) {
-			ResponseEntity<?> entity = ResponseEntity.class.cast(obj);
-			Object bodyObject = entity.getBody();
-
-			// ResponseEntity<InputStreamResource>の場合は以下例外対策のためヘッダー情報のみログ出力する
-			// 例外：java.lang.IllegalStateException: InputStream has already been read - do not use InputStreamResource if a stream needs to be read multiple times
-			if (bodyObject instanceof InputStreamSource) {
-				return false;
-			}
-
-			// 帳票はバイト配列であり、ログが大量に出力されるためヘッダー情報のみログ出力する
-			if (bodyObject instanceof byte[]) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * ログ出力
-	 * ※JSON変換できる場合はJSONで出力、変換不可の場合はtoStringで出力
-	 *
-	 * @param obj
-	 * @throws JsonProcessingException
-	 */
-	private String outputLog(Object obj) {
-		if (null == obj) {
-			return null;
-		}
-
-		String log = null;
-		try {
-			log = String.format("[JSON] %s", mapper.writeValueAsString(obj));
-		} catch (Exception e) {
-			log = String.format("[TEXT] %s", obj.toString());
-		}
-		return log;
-	}
-
 }

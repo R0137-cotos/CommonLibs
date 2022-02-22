@@ -1247,6 +1247,8 @@ public class TestMaster {
 		Assert.assertNotEquals(0, list.size());
 		list = productMasterRepository.findByIdInAndAppIdInOrderByIdAsc(id, appId);
 		Assert.assertEquals(2, list.size());
+		list = productMasterRepository.findByProductClassDiv("RSI");
+		Assert.assertEquals(2, list.size());
 	}
 
 	@Test
