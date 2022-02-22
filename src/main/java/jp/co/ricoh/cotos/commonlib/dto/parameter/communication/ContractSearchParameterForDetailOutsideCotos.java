@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -20,12 +21,10 @@ import lombok.Data;
 @Data
 public class ContractSearchParameterForDetailOutsideCotos {
 
-	/**
-	 * 外部システム区分
-	 */
+	@Description(value = " 外部システム区分")
 	public enum OutsideSystemDiv {
 
-	Bplats("1");
+		Bplats("1");
 
 		private final String text;
 
