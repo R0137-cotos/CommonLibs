@@ -73,7 +73,9 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFind
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractListDetailInfoGetBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ItemContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.PagingDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ProductContractForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCancelDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
@@ -1099,6 +1101,16 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ItemContractDetailForFindAllDetailsBplatsDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ItemContractDetailForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PagingDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PagingDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractListDetailInfoGetBplatsDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractListDetailInfoGetBplatsDto dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
