@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.junit.AfterClass;
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
@@ -24,6 +26,12 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionReques
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
+import jp.co.ricoh.cotos.commonlib.log.LogUtil;
+import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 
 /**
  * TrendMicro LMPI連携 ヘルパーテストクラス。
@@ -35,6 +43,12 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Ignore
 public class LMPIConnectionHelperTests {
+
+	@Autowired
+	ExternalLogRequestProperties externalLogRequestProperties;
+
+	@Autowired
+	ExternalLogResponseProperties externalLogResponseProperties;
 
 	static ConfigurableApplicationContext context;
 
@@ -50,7 +64,10 @@ public class LMPIConnectionHelperTests {
 
 	private LMPIConnectionHelper getHelper() {
 		// ヘルパー初期化
-		LMPIConnectionHelper.init(context);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor(new MessageUtil(), new LogUtil(), new ExternalLogRequestProperties(), new ExternalLogResponseProperties(), formatter);
+		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate(new RestTemplateBuilder(), externalClientHttpRequestInterceptor);
+		LMPIConnectionHelper.init(context, externalRestTemplate);
 		return LMPIConnectionHelper.getInstance();
 	}
 

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -594,10 +595,17 @@ public class ItemMaster extends EntityBaseMaster {
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
 
 	/**
+	 * 拡張項目
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 53)
+	@Lob
+	private String extendsParameter;
+
+	/**
 	 * オンサイトweb申込フラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "オンサイトweb申込フラグ", required = false, position = 53, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "オンサイトweb申込フラグ", required = false, position = 54, allowableValues = "range[0,9]")
 	private Integer onsiteWebApplicationFlg;
 }
