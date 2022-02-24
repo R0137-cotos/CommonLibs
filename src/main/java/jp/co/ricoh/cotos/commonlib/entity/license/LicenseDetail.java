@@ -86,6 +86,7 @@ public class LicenseDetail extends EntityBase {
 		}
 	}
 
+	@Description(value = "リクエスト処理区分")
 	public enum RequestProcessDiv {
 
 		即時("1"), 月次("2");

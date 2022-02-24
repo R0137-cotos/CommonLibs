@@ -216,10 +216,17 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	private String extendsParameter;
 
 	/**
+	 * ライセンスアカウントID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "ライセンスアカウントID", required = false, position = 26, allowableValues = "range[0,9223372036854775807]")
+	private Long licenseAccountId;
+
+	/**
 	 * 洗替日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日", required = false, position = 26)
+	@ApiModelProperty(value = "洗替日", required = false, position = 27)
 	private Date refreshedAt;
 
 }

@@ -1,9 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.converter.license;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.RequestProcessDiv;
 
+@Converter(autoApply = true)
 public class RequestProcessDivConverter implements AttributeConverter<RequestProcessDiv, String> {
 
 	@Override

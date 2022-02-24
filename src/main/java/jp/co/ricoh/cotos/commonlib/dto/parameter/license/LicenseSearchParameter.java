@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
-import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.InfoDiv;
 import lombok.Data;
 
 /**
@@ -208,8 +207,10 @@ public class LicenseSearchParameter {
 	 * 情報区分
 	 */
 	@ApiParam(value = "情報区分", required = false)
-	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 21)
-	private InfoDiv infoDiv;
+	@ApiModelProperty(value = "情報区分<br />" //
+			+ "アカウント単位での情報を表す。", //
+			required = false, position = 21)
+	private String infoDiv;
 
 	// =========================== 以下、ライセンス詳細検索条件
 	/**

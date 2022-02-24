@@ -616,6 +616,7 @@ public class EnumType {
 	 * ライセンス状態
 	 *
 	 */
+	@Description(value = "ライセンス状態")
 	public enum LicenseStatus {
 
 		未確定("0"), 有効("1"), 解約("2");
@@ -641,6 +642,7 @@ public class EnumType {
 		}
 	}
 
+	@Description(value = "リクエスト作成状態")
 	public enum RequestCreateStatus {
 
 		未作成("0"), 作成済("1"), 対象外("2");
