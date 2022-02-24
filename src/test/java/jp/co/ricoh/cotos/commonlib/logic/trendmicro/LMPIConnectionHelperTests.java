@@ -44,12 +44,6 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 @Ignore
 public class LMPIConnectionHelperTests {
 
-	@Autowired
-	ExternalLogRequestProperties externalLogRequestProperties;
-
-	@Autowired
-	ExternalLogResponseProperties externalLogResponseProperties;
-
 	static ConfigurableApplicationContext context;
 
 	@Autowired
@@ -70,6 +64,13 @@ public class LMPIConnectionHelperTests {
 		LMPIConnectionHelper.init(context, externalRestTemplate);
 		return LMPIConnectionHelper.getInstance();
 	}
+
+	// ローカルでのテスト時にURL、requestBody、responseをログに出力したい場合は、
+	// LMPIConnectionHelper.javaのcallServiceメソッドに以下を記述すること
+	// コミット時は削除すること
+	// log.info("LMPI call : " + url);
+	// log.info("LMPI requestBody : " + body);
+	// log.info("LMPI response : " + responseEntity.getBody());
 
 	/**
 	 *  [POST] 顧客作成API
