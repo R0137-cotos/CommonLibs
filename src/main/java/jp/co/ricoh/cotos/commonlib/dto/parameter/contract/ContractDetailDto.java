@@ -185,4 +185,12 @@ public class ContractDetailDto extends DtoBase {
 	@ApiModelProperty(value = "統合契約外部請求連携日", required = false, position = 24)
 	private Date absConExternalBillingDate;
 
+	/**
+	 * 契約数
+	 */
+	@Min(0)
+	@Max(99999)
+	@ApiModelProperty(value = "契約数", required = false, position = 25, allowableValues = "range[0,99999]")
+	private Integer contractAmount;
+
 }
