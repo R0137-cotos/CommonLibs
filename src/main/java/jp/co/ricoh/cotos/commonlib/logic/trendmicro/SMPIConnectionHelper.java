@@ -38,6 +38,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetWfbssDomain
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPostWfbssReportRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPostWfbssReportResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.SMPIProperties;
 import lombok.extern.log4j.Log4j;
 
@@ -61,13 +62,13 @@ public class SMPIConnectionHelper {
 		// シングルトン
 	}
 
-	public static void init(ApplicationContext context) {
-		init(context.getBean(SMPIProperties.class)); //
+	public static void init(ApplicationContext context, ExternalRestTemplate externalRestTemplate) {
+		init(context.getBean(SMPIProperties.class), externalRestTemplate);
 	}
 
-	private static void init(SMPIProperties properties) {
+	private static void init(SMPIProperties properties, ExternalRestTemplate externalRestTemplate) {
 
-		RestTemplate rest = new RestTemplate();
+		RestTemplate rest = externalRestTemplate.loadRestTemplate();
 		rest.setErrorHandler(new DefaultResponseErrorHandler() {
 			@Override
 			public void handleError(ClientHttpResponse response) throws IOException {
@@ -211,17 +212,14 @@ public class SMPIConnectionHelper {
 	 * @throws UnsupportedEncodingException 
 	 */
 	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
-		log.info("LMPI call : " + url);
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);
 		}
-		log.info("LMPI requestBody : " + body);
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
-		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
 		// リクエスト情報の保持
