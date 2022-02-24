@@ -97,4 +97,12 @@ public class EstimationDetailDto extends DtoBase {
 	@Min(0)
 	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
+
+	/**
+	 * 契約数
+	 */
+	@Min(0)
+	@Max(99999)
+	@ApiModelProperty(value = "契約数", required = false, position = 13, allowableValues = "range[0,99999]")
+	private Integer contractAmount;
 }

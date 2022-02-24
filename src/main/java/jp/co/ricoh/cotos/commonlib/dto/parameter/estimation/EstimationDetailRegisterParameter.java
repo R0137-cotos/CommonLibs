@@ -116,4 +116,12 @@ public class EstimationDetailRegisterParameter {
 	@Lob
 	private String extendsParameter;
 
+	/**
+	 * 契約数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "契約数", allowableValues = "range[0,99999]", required = false)
+	private Integer contractAmount;
+
 }
