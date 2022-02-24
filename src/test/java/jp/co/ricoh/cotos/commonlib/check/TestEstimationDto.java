@@ -767,8 +767,9 @@ public class TestEstimationDto {
 		testTarget.setQuantity(INT_100000);
 		testTarget.setBeforeQuantity(INT_100000);
 		testTarget.setItemAddFlg(INT_10);
+		testTarget.setContractAmount(INT_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
 
@@ -777,8 +778,9 @@ public class TestEstimationDto {
 		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setBeforeQuantity(INT_MINUS_1);
 		testTarget.setItemAddFlg(INT_MINUS_1);
+		testTarget.setContractAmount(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
@@ -994,6 +996,7 @@ public class TestEstimationDto {
 		detailParam.setQuantity(11);
 		detailParam.setAmountSummary(new BigDecimal("11.11"));
 		detailParam.setExtendsParameter("dummy_extends_param");
+		detailParam.setContractAmount(11);
 		dto.getEstimationDetailRegisterParameterList().add(detailParam);
 
 		EstimationRegisterParameter testTarget = new EstimationRegisterParameter();
@@ -1048,6 +1051,7 @@ public class TestEstimationDto {
 		dto.setQuantity(11);
 		dto.setAmountSummary(new BigDecimal("11.11"));
 		dto.setExtendsParameter("dummy_extends_param");
+		dto.setContractAmount(11);
 
 		EstimationDetailRegisterParameter testTarget = new EstimationDetailRegisterParameter();
 
@@ -1078,8 +1082,9 @@ public class TestEstimationDto {
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setQuantity(INT_MINUS_1);
+		testTarget.setContractAmount(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
 
