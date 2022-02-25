@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -77,5 +79,13 @@ public class DealerContract extends DealerAbstractEntity {
 	@Size(max = 255)
 	@ApiModelProperty(value = "取引先コード（手数料用）", required = false, position = 7, allowableValues = "range[0,255]")
 	private String distributorRtcCd;
+
+	/**
+	 * 更新案内メール送信フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "更新案内メール送信フラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	private Integer sendUpdateMailFlg;
 
 }

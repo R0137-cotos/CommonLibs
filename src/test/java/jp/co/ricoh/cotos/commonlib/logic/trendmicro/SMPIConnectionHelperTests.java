@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
@@ -43,6 +45,12 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifS
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto.TmPutWfbssNotifSettingsRequestDtoNotifSetting.TmPutWfbssNotifSettingsRequestDtoWtp;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto.TmPutWfbssNotifSettingsRequestDtoNotifSetting.TmPutWfbssNotifSettingsRequestDtoWtp.TmPutWfbssNotifSettingsRequestDtoWtpThreshold;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDtoThreshold0;
+import jp.co.ricoh.cotos.commonlib.log.LogUtil;
+import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 
 /**
  * TrendMicro SMPI連携 ヘルパーテストクラス。
@@ -68,10 +76,19 @@ public class SMPIConnectionHelperTests {
 
 	private SMPIConnectionHelper getHelper() {
 		// ヘルパー初期化
-		SMPIConnectionHelper.init(context);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor(new MessageUtil(), new LogUtil(), new ExternalLogRequestProperties(), new ExternalLogResponseProperties(), formatter);
+		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate(new RestTemplateBuilder(), externalClientHttpRequestInterceptor);
+		SMPIConnectionHelper.init(context, externalRestTemplate);
 		return SMPIConnectionHelper.getInstance();
 	}
 
+	// ローカルでのテスト時にURL、requestBody、responseをログに出力したい場合は、
+	// SMPIConnectionHelper.javaのcallServiceメソッドに以下を記述すること
+	// コミット時は削除すること
+	// log.info("SMPI call : " + url);
+	// log.info("SMPI requestBody : " + body);
+	// log.info("SMPI response : " + responseEntity.getBody());
 
 	/**
 	 *  [GET] サブスクリプション取得API
