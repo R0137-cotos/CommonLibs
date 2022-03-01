@@ -282,4 +282,10 @@ public class BaoLicenseInfoResult {
 	 */
 	@ApiModelProperty(value = "SCSK_REGISTERED_FLG", required = false, position = 45)
 	private String scskRegisteredFlg;
+
+	/**
+	 * サイバー脅威レポートサービス内包フラグ
+	 */
+	@ApiModelProperty(value = "CYBER_THREAT_REPORTING_SERVICE", required = false, position = 46)
+	private boolean cyberThreatReportingService;
 }
