@@ -73,7 +73,9 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFind
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractListDetailInfoGetBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ItemContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.PagingDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ProductContractForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCancelDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
@@ -206,19 +208,19 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseBasicInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseDetailInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.cas.CasLicenseManagementInfo;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerResponseWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateSubscriptionResponseWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmLinkManagement;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmSuspendSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmSuspendSubscriptionResponseWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateCustomerRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateCustomerResponseWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateSubscriptionResponseWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateUserRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateUserResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmLinkManagement;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserResponseWork;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
@@ -1099,6 +1101,16 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ItemContractDetailForFindAllDetailsBplatsDto")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ItemContractDetailForFindAllDetailsBplatsDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/PagingDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated PagingDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractListDetailInfoGetBplatsDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractListDetailInfoGetBplatsDto dto, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 

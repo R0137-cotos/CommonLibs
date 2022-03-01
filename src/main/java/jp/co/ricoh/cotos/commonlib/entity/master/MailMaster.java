@@ -53,4 +53,11 @@ public class MailMaster extends EntityBaseMaster {
 	@OrderBy("id ASC")
 	@ApiModelProperty(value = "メールアドレスマスタリスト", required = true, position = 4)
 	private List<MailAddressMaster> mailAddressMasterList;
+
+	/**
+	 * サブメールマスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "サブメールマスタID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	private Long subMailMasterId;
 }

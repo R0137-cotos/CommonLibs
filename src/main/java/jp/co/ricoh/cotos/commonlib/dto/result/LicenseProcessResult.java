@@ -6,10 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.MailSendResultDiv;
@@ -35,46 +31,36 @@ public class LicenseProcessResult {
 	/**
 	 * 工程順
 	 */
-	@NotNull
-	@Max(999)
-	@Min(0)
 	@ApiModelProperty(value = "工程順", required = true, position = 3, allowableValues = "range[0,999]")
 	private int processOrder;
 
 	/**
 	 * ライセンス工程マスタID
 	 */
-	@NotNull
-	@Min(0)
 	@ApiModelProperty(value = "ライセンス工程マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
 	private long processMasterId;
 
 	/**
 	 * 工程名称
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "工程名称", required = false, position = 5, allowableValues = "range[0,255]")
 	private String processName;
 
 	/**
 	 * 工程完了名称
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "工程完了名称", required = false, position = 6, allowableValues = "range[0,255]")
 	private String completeProcessName;
 
 	/**
 	 * 手配業務ID
 	 */
-	@NotNull
-	@Min(0)
 	@ApiModelProperty(value = "手配業務ID", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
 	private long arrangementWorkId;
 
 	/**
 	 * 操作区分
 	 */
-	@NotNull
 	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 8)
 	private OperationDiv operationDiv;
 
@@ -87,8 +73,6 @@ public class LicenseProcessResult {
 	/**
 	 * メール到達チェックフラグ
 	 */
-	@Max(9)
-	@Min(0)
 	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 10, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
@@ -114,7 +98,25 @@ public class LicenseProcessResult {
 	/**
 	 * メールマスタID
 	 */
-	@Min(0)
 	@ApiModelProperty(value = "メールマスタID", required = false, position = 14, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
+
+	/**
+	 * メール到着チェック時間
+	 */
+	@ApiModelProperty(value = "メール到着チェック時間", required = false, position = 15, allowableValues = "range[-99999,99999]")
+	private Integer mailArrivalCheckHour;
+
+	/**
+	 * 到着チェックメール制御マスタID
+	 */
+	@ApiModelProperty(value = "到着チェックメール制御マスタID", required = false, position = 16, allowableValues = "range[0,9223372036854775807]")
+	private Long arrivalCheckMailControlMasterId;
+
+	/**
+	 * 実施日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "実施日時", required = false, position = 17)
+	private Date operatedAt;
 }

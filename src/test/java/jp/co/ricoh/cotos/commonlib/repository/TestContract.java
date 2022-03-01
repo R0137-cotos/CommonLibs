@@ -450,6 +450,11 @@ public class TestContract {
 		// 解約確定日<指定日付
 		List<Contract> cancelDecisionDate = contractRepository.findByLifecycleAndCancelScheduledDateOrCancelDecisionDate("2020/07/01");
 		Assert.assertTrue(cancelDecisionDate.size() > 0);
+
+		// 契約IDリスト指定
+		List<Long> contractIdList = Arrays.asList(8L, 10L,12L);
+		List<Contract> contractList = contractRepository.findByIdIn(contractIdList);
+		Assert.assertTrue(contractList.size() == 3);
 	}
 
 	@Test

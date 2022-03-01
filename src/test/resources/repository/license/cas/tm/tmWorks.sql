@@ -14,11 +14,12 @@ insert into tm_link_management (
   , tm_update_user_request_work_id
   , tm_suspend_subscription_request_work_id
   , mvb_account
-  , contract_id 
+  , contract_id
   , rj_manage_number
   , mom_company_id
   , mom_cust_id
   , company_name_kana
+  , license_info_id
 ) values (
   10
   , '2020/11/02 17:00:00'
@@ -39,7 +40,8 @@ insert into tm_link_management (
   , 'mom_company_id'
   , 'mom_cust_id'
   , 'company_name_kana'
-); 
+  , 1
+);
 insert into tm_link_management (
   id
   , created_at
@@ -55,11 +57,12 @@ insert into tm_link_management (
   , tm_update_user_request_work_id
   , tm_suspend_subscription_request_work_id
   , mvb_account
-  , contract_id 
+  , contract_id
   , rj_manage_number
   , mom_company_id
   , mom_cust_id
   , company_name_kana
+  , license_info_id
 ) values (
   20
   , '2020/11/02 17:00:00'
@@ -80,7 +83,8 @@ insert into tm_link_management (
   , 'mom_company_id'
   , 'mom_cust_id'
   , 'company_name_kana'
-); 
+  , 1
+);
 insert into tm_link_management (
   id
   , created_at
@@ -96,11 +100,12 @@ insert into tm_link_management (
   , tm_update_user_request_work_id
   , tm_suspend_subscription_request_work_id
   , mvb_account
-  , contract_id 
+  , contract_id
   , rj_manage_number
   , mom_company_id
   , mom_cust_id
   , company_name_kana
+  , license_info_id
 ) values (
   30
   , '2020/11/02 17:00:00'
@@ -121,7 +126,8 @@ insert into tm_link_management (
   , 'mom_company_id'
   , 'mom_cust_id'
   , 'company_name_kana'
-); 
+  , 1
+);
 -- TM_顧客情報作成リクエストWORK
 insert into tm_create_customer_request_work (
   id

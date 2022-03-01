@@ -18,13 +18,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.AbstractTmRequestWork.TmRequestStatus;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateCustomerRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmCreateSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmSuspendSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateCustomerRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.TmUpdateUserRequestWork;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
 import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
@@ -63,6 +64,13 @@ public class LMPIConnectionHelperTests {
 		LMPIConnectionHelper.init(context, externalRestTemplate);
 		return LMPIConnectionHelper.getInstance();
 	}
+
+	// ローカルでのテスト時にURL、requestBody、responseをログに出力したい場合は、
+	// LMPIConnectionHelper.javaのcallServiceメソッドに以下を記述すること
+	// コミット時は削除すること
+	// log.info("LMPI call : " + url);
+	// log.info("LMPI requestBody : " + body);
+	// log.info("LMPI response : " + responseEntity.getBody());
 
 	/**
 	 *  [POST] 顧客作成API
@@ -184,14 +192,14 @@ public class LMPIConnectionHelperTests {
 
 	/**
 	 * [POST] サブスクリプション作成API
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
 	public void postSubscriptionsTest() throws ParseException {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		Date date = df.parse("20201114");
+		Date date = df.parse("20220216");
 
 		TmCreateSubscriptionRequestWork requestWork = new TmCreateSubscriptionRequestWork();
 		// abstractWork
@@ -208,8 +216,8 @@ public class LMPIConnectionHelperTests {
 		requestWork.setVersion(0);
 		// requestWork
 		requestWork.setId(0);
-		requestWork.setCustomerId("9842f3d0-0993-4eea-a61f-0ca33b3f7c3e");
-		requestWork.setServicePlanId("8a09303b-8187-45a6-aeba-13707a3ae37a");
+		requestWork.setCustomerId("5118f657-9f7d-407d-97ab-ca434c6dc936");
+		requestWork.setServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
 		requestWork.setUnitsPerLicense("10");
 		requestWork.setLicenseStartDate(date);
 
@@ -224,7 +232,7 @@ public class LMPIConnectionHelperTests {
 
 	/**
 	 *  [PUT] サブスクリプション更新API
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
@@ -259,8 +267,31 @@ public class LMPIConnectionHelperTests {
 	}
 
 	/**
+	 *  [GET] サブスクリプション取得API
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void getSubscriptionsTest() throws ParseException {
+
+		TmGetSubscriptionRequestDto requestDto = new TmGetSubscriptionRequestDto();
+
+		// requestDto
+		requestDto.setCustomerId("5118f657-9f7d-407d-97ab-ca434c6dc936");
+		requestDto.setSubscriptionId("8cf1739a-b7f6-49f3-9bea-2c1ea0a7c05a");
+
+		try {
+			getHelper().getSubscriptions(requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 *  [PUT] サブスクリプション解約API
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
@@ -299,7 +330,7 @@ public class LMPIConnectionHelperTests {
 
 	/**
 	 *  [GET] 更新ユーザー取得API
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
@@ -320,7 +351,7 @@ public class LMPIConnectionHelperTests {
 
 	/**
 	 *  [GET] サービスプランID取得
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser

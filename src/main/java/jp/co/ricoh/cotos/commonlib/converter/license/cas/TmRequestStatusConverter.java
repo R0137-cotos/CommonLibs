@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.license.cas;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.license.cas.tm.AbstractTmRequestWork.TmRequestStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
 
 @Converter(autoApply = true)
 public class TmRequestStatusConverter implements AttributeConverter<TmRequestStatus, String> {

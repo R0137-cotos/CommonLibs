@@ -507,6 +507,13 @@ public class ContractSearchParameter {
 	private int otherSysDataExcludeFlg;
 
 	/**
+	 * ディスパッチ対応
+	 */
+	@ApiParam(value = "ディスパッチ対応", required = false)
+	@ApiModelProperty(value = "ディスパッチ対応", required = false)
+	private Integer dispatchFlg;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {

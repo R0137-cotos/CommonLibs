@@ -600,4 +600,12 @@ public class ItemMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 53)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * オンサイトweb申込フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "オンサイトweb申込フラグ", required = false, position = 54, allowableValues = "range[0,9]")
+	private Integer onsiteWebApplicationFlg;
 }
