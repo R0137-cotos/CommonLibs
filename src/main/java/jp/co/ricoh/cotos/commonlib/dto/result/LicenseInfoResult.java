@@ -4,15 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseAccount;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
@@ -22,27 +21,15 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoOperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * ライセンス情報を取得するためのDTOです。
  */
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Data
-public class LicenseInfoResult {
-
-	/**
-	 * ライセンス情報ID
-	 */
-	@Id
-	@ApiModelProperty(value = "ライセンス情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long id;
-
-	/**
-	 * ライセンス情報version
-	 */
-	@Version
-	@ApiModelProperty(value = "ライセンス情報version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long version;
+public class LicenseInfoResult extends DtoBase {
 
 	/**
 	 * 契約ID
