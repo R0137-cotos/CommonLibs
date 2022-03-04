@@ -3,25 +3,38 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.MailSendResultDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.ProcessStatus;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster.MailDiv;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * ライセンス工程を取得するためのDTOです。
  */
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Data
-public class LicenseProcessResult extends DtoBase {
+public class LicenseProcessResult {
+
+	/**
+	 * ライセンス工程ID
+	 */
+	@Id
+	@ApiModelProperty(value = "ライセンス工程ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	private long id;
+
+	/**
+	 * ライセンス工程version
+	 */
+	@Version
+	@ApiModelProperty(value = "ライセンス工程version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	private long version;
 
 	/**
 	 * 工程順
