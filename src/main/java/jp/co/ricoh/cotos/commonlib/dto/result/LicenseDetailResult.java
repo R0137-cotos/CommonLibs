@@ -3,35 +3,22 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.RequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.HardSoftDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.InfoDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.RequestProcessDiv;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Data
-public class LicenseDetailResult {
-
-	/**
-	 * ライセンス明細ID
-	 */
-	@Id
-	@ApiModelProperty(value = "ライセンス明細ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long id;
-
-	/**
-	 * ライセンス明細version
-	 */
-	@Version
-	@ApiModelProperty(value = "ライセンス明細version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long version;
+public class LicenseDetailResult extends DtoBase {
 
 	/**
 	 * ライセンス区分マスタID
