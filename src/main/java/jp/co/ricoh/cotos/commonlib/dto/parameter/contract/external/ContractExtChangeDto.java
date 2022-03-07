@@ -20,6 +20,12 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccCeEmpDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccSsOrgDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicIntCeEmpDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicIntSsOrgDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicMntCeEmpDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicMntSsOrgDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicSaEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.CustomerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.DealerContractDto;
@@ -423,4 +429,65 @@ public class ContractExtChangeDto extends DtoBase {
 	@Min(0)
 	@ApiModelProperty(value = "基本契約ID", required = false, position = 55, allowableValues = "range[0,9223372036854775807]")
 	private Long basicContractId;
+
+	/**
+	 * 納品書・請求書印字用コメント <br>
+	 * <br>
+	 * 【仕入用管理Noの場合】 <br>
+	 * 先頭3文字：商品マスタ.仕入先No、末尾9文字：契約情報画面（請求先情報セクション）より入力 <br>
+	 * 【任意コメントの場合】 <br>
+	 * 最大20Byteのコメント 契約情報画面（請求先情報セクション）より入力
+	 *
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "納品書・請求書印字用コメント", required = false, position = 56, allowableValues = "range[0,255]")
+	private String purchaseManageNumber;
+
+	/**
+	 * 契約受付担当SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "契約受付担当SS組織", required = false, position = 57)
+	private ContractPicAccSsOrgDto contractPicAccSsOrg;
+
+	/**
+	 * 契約受付担当CE社員
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "契約受付担当CE社員", required = false, position = 58)
+	private ContractPicAccCeEmpDto contractPicAccCeEmp;
+
+	/**
+	 * 契約導入担当SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "契約導入担当SS組織", required = false, position = 59)
+	private ContractPicIntSsOrgDto contractPicIntSsOrg;
+
+	/**
+	 * 契約導入担当CE社員
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "契約導入担当CE社員", required = false, position = 60)
+	private ContractPicIntCeEmpDto contractPicIntCeEmp;
+
+	/**
+	 * 契約保守担当SS組織
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "契約保守担当SS組織", required = false, position = 61)
+	private ContractPicMntSsOrgDto contractPicMntSsOrg;
+
+	/**
+	 * 契約保守担当CE社員
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "契約保守担当CE社員", required = false, position = 62)
+	private ContractPicMntCeEmpDto contractPicMntCeEmp;
 }
