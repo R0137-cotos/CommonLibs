@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.entity.util.VKjbMasterUtil;
@@ -29,6 +30,10 @@ public class ContractInstallationLocationListener {
 	@PrePersist
 	@Transactional
 	public void appendsCustomerEstimationFields(ContractInstallationLocation contractInstallationLocation) {
+
+		if (StringUtils.equals(DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString(), contractInstallationLocation.getMomKjbSystemId())) {
+			return;
+		}
 
 		VKjbMaster vKjbMaster = vKjbMasterUtil.specifyVKjbMaster(contractInstallationLocation, "設置先(契約用)");
 		// 企業IDで企事部マスタが特定された場合、システム連携IDを企事部マスタに合わせて変更する
