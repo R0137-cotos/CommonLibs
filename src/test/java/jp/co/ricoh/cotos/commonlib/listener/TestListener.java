@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DealerFlowOrder;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
@@ -417,6 +418,37 @@ public class TestListener {
 		contractInstallationLocationRepository.save(contractInstallationLocation);
 		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
 		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, contractInstallationLocation.getMomKjbSystemId());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void ContractInstallationLocationListenerのMoM企事部システム連携IDがDummyIDのテスト() {
+		ContractInstallationLocation contractInstallationLocation = new ContractInstallationLocation();
+		contractInstallationLocation.setMomKjbSystemId(DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString());
+		contractInstallationLocation.setMomCustId(DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString());
+		contractInstallationLocation.setCompanyId(DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString());
+		contractInstallationLocation.setOfficeId(DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString());
+		contractInstallationLocation.setDepartmentDiv(DepartmentDiv.企事部);
+		contractInstallationLocation.setCustomerName("DummyCompanyName");
+		Contract contract = new Contract();
+		contract.setId(1L);
+		contractInstallationLocation.setContract(contract);
+		contractInstallationLocationRepository.save(contractInstallationLocation);
+		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+
+		Assert.assertEquals("MoM企事部システム連携IDが設定されること", DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString(), contractInstallationLocation.getMomKjbSystemId());
+		Assert.assertEquals("企事部設定区分が設定されること", DepartmentDiv.企事部, contractInstallationLocation.getDepartmentDiv());
+		Assert.assertEquals("MoM企業IDがく設定されること", DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString(), contractInstallationLocation.getCompanyId());
+		Assert.assertEquals("MoM事業所IDが設定されること", DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString(), contractInstallationLocation.getOfficeId());
+		Assert.assertEquals("MoM企事部IDが設定されること", DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString(), contractInstallationLocation.getMomCustId());
+		Assert.assertEquals("顧客名が設定されること", "DummyCompanyName", contractInstallationLocation.getCustomerName());
+		Assert.assertNull("事業所名が取得されないこと", contractInstallationLocation.getOfficeName());
+		Assert.assertNull("住所が取得されないこと", contractInstallationLocation.getAddress());
+		Assert.assertNull("電話番号が取得されないこと", contractInstallationLocation.getPhoneNumber());
+		Assert.assertNull("FAX番号が取得されないこと", contractInstallationLocation.getFaxNumber());
+		Assert.assertNull("郵便番号が取得されないこと", contractInstallationLocation.getPostNumber());
+		Assert.assertNull("企業名が取得されないこと", contractInstallationLocation.getCompanyName());
+		Assert.assertNull("部門名が取得されないこと", contractInstallationLocation.getDepartmentName());
 	}
 
 	@Test
