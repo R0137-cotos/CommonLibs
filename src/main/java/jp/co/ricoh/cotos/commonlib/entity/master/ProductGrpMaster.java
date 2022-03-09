@@ -188,12 +188,4 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "満了解約後手配作成フラグ", required = false, position = 21, allowableValues = "range[0,9]")
 	private Integer createArrangementForExpirationCancellationFlg;
-
-	/**
-	 * FFM年額計上フラグ
-	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "FFM年額計上フラグ", required = false, position = 22, allowableValues = "range[0,9]")
-	private Integer ffmAnnualAmountSalesFlg;
 }
