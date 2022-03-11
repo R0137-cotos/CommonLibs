@@ -2963,8 +2963,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalAlertManagementMaster.sql");
 
 		// エンティティの取得
-		Long id = 1L;
-		ApprovalAlertManagementMaster found = approvalAlertManagementMasterRepository.findOne(id);
+		ApprovalAlertManagementMaster found = approvalAlertManagementMasterRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
