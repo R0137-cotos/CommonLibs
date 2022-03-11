@@ -55,7 +55,7 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	 * 承認アラート管理マスタID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_alert_management_master")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_alert_management_master_seq")
 	@SequenceGenerator(name = "approval_alert_management_master_seq", sequenceName = "approval_alert_management_master_seq", allocationSize = 1)
 	@ApiModelProperty(value = "承認アラート管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
