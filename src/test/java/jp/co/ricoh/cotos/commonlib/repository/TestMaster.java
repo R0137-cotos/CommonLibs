@@ -2864,6 +2864,5 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
-
 	}
 }
