@@ -88,7 +88,6 @@ public class SMPIConnectionHelperTests {
 	// コミット時は削除すること
 	// log.info("SMPI call : " + url);
 	// log.info("SMPI requestBody : " + body);
-	// log.info("SMPI response : " + responseEntity.getBody());
 
 	/**
 	 *  [GET] サブスクリプション取得API
