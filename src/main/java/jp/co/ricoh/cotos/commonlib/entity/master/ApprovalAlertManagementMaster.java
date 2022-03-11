@@ -6,10 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 
 import org.springframework.context.annotation.Description;
 
@@ -62,23 +60,21 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "承認アラート管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
-
 	/**
 	 * アラート対象日区分
 	 */
-	@ApiModelProperty(value = "アラート対象日区分",  position = 2, required = false, allowableValues = "サービス利用希望日(\"1\"), 解約希望日(\"2\")")
+	@ApiModelProperty(value = "アラート対象日区分",  position = 2, required = true, allowableValues = "サービス利用希望日(\"1\"), 解約希望日(\"2\")")
 	private AlertTargetDateType alertTargetDateType;
-
 
 	/**
 	 * アラート基準日
 	 */
-	@ApiModelProperty(value = "アラート基準日", required = false, position = 3, allowableValues = "range[0,99]")
+	@ApiModelProperty(value = "アラート基準日", required = true, position = 3, allowableValues = "range[0,99]")
 	private int alertTargetDate;
 
 	/**
 	 * アラートメッセージ
 	 */
-	@ApiModelProperty(value = "アラートメッセージ", required = false, position = 4)
+	@ApiModelProperty(value = "アラートメッセージ", required = true, position = 4)
 	private String alertMessage;
 }
