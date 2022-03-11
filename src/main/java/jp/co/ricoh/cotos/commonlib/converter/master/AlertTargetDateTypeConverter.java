@@ -19,6 +19,7 @@ public class AlertTargetDateTypeConverter implements AttributeConverter<AlertTar
 	public AlertTargetDateType convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return AlertTargetDateType.fromString(value); //IllegalArgumentExceptionはContractChangeSpanTargetDateType.fromString側で投げている
+		// IllegalArgumentExceptionはAlertTargetDateType.fromString側で投げている
+		return AlertTargetDateType.fromString(value);
 	}
 }

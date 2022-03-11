@@ -26,6 +26,7 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AppMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalAlertManagementMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteGrpMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster;
@@ -126,6 +127,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.VPicAffiliateMasterFull;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VendorProductMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.AppMasterRepository;
+import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalAlertManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteGrpMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ApprovalRouteNodeMasterRepository;
@@ -431,6 +433,8 @@ public class TestMaster {
 	private ArrangementWorkAuthControlMasterRepository arrangementWorkAuthControlMasterRepository;
 	@Autowired
 	private EnumDefinitionMasterRepository enumDefinitionMasterRepository;
+	@Autowired
+	private ApprovalAlertManagementMasterRepository approvalAlertManagementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2951,5 +2955,22 @@ public class TestMaster {
 		Assert.assertEquals("新規", found.getEnumValueName());
 		Assert.assertEquals("1", found.getEnumValueCode());
 		Assert.assertEquals("ContractType", found.getEnumClassName());
+	}
+
+	@Test
+	public void ApprovalAlertManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalAlertManagementMaster.sql");
+
+		// エンティティの取得
+		Long id = 1L;
+		ApprovalAlertManagementMaster found = approvalAlertManagementMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
 	}
 }

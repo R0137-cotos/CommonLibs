@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 契約変更期間管理マスタ
+ * 承認アラート管理マスタ
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
@@ -52,7 +52,7 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	}
 
 	/**
-	 * 契約変更期間管理マスタID
+	 * 承認アラート管理マスタID
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_alert_management_master")
