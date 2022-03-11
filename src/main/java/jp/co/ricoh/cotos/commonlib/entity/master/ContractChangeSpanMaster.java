@@ -216,6 +216,6 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "承認アラート管理マスタID", required = false, position = 19, allowableValues = "range[0,9223372036854775807]")
-	private Long approvalAlertManagementMasterId;
+	private long approvalAlertManagementMasterId;
 
 }
