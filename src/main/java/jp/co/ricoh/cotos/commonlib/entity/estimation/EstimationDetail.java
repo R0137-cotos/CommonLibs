@@ -62,8 +62,8 @@ public class EstimationDetail extends EntityBase {
 	 * 変更前数量
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
@@ -71,8 +71,8 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -138,8 +138,8 @@ public class EstimationDetail extends EntityBase {
 	 * 契約数
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "契約数", required = false, position = 14, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "契約数", required = false, position = 14, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
 
 	@PrePersist

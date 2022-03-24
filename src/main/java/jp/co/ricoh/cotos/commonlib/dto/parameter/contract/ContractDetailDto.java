@@ -42,16 +42,16 @@ public class ContractDetailDto extends DtoBase {
 	 * 変更前数量
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
 	 * 数量
 	 */
-	@Min(0)
+	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -67,9 +67,8 @@ public class ContractDetailDto extends DtoBase {
 	 * 金額
 	 */
 	@NotNull
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "金額", required = true, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "金額", required = true, position = 7, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
 	/**
@@ -188,9 +187,9 @@ public class ContractDetailDto extends DtoBase {
 	/**
 	 * 契約数
 	 */
-	@Min(0)
+	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "契約数", required = false, position = 25, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "契約数", required = false, position = 25, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
 
 }

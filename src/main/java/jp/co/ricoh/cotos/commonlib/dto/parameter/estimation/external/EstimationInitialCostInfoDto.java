@@ -45,9 +45,9 @@ public class EstimationInitialCostInfoDto {
 	 * 初期費 数量
 	 */
 	@NotNull
-	@Min(0)
+	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "初期費 数量", required = true, position = 4, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "初期費 数量", required = true, position = 4, allowableValues = "range[-99999,99999]")
 	private Integer initialAmt;
 
 	/**

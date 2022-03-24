@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
 import javax.persistence.Lob;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -31,16 +30,16 @@ public class ManagedEstimationDetailDto extends DtoBase {
 	 * 変更前数量
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
 	 * 数量
 	 */
-	@Min(0)
+	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -89,7 +88,7 @@ public class ManagedEstimationDetailDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = true, position = 11, allowableValues = "range[0,255]")
 	private String ricohItemCode;
-	
+
 	/**
 	 * メーカー商品コード
 	 */
