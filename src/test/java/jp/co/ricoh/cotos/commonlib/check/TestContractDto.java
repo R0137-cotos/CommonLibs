@@ -146,12 +146,14 @@ public class TestContractDto {
 	private static final String STR_1001 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 	private static final String STR_1334 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123";
 	private static final int INT_MINUS_1 = -1;
+	private static final int INT_MINUS_100000 = -100000;
 	private static final Long LONG_MINUS_1 = -1L;
 	private static final int INT_10 = 10;
 	private static final int INT_100 = 100;
 	private static final int INT_1000 = 1000;
 	private static final int INT_100000 = 100000;
 	private static final BigDecimal DECIMAL_MINUS_001 = new BigDecimal("-0.01");
+	private static final BigDecimal DECIMAL_MINUS_10000000000000000000 = new BigDecimal("-10000000000000000000");
 	private static final BigDecimal DECIMAL_0001 = new BigDecimal("0.001");
 	private static final String STR_19 = "01234567890123456789";
 
@@ -1281,23 +1283,23 @@ public class TestContractDto {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setQuantity(INT_MINUS_1);
-		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_100000);
+		testTarget.setBeforeQuantity(INT_MINUS_100000);
 		testTarget.setItemAddFlg(INT_MINUS_1);
-		testTarget.setContractAmount(INT_MINUS_1);
+		testTarget.setContractAmount(INT_MINUS_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@DecimalMin：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setAmountSummary(DECIMAL_MINUS_001);
+		testTarget.setAmountSummary(DECIMAL_MINUS_10000000000000000000);
 		testTarget.setUnitPrice(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "金額は最小値（0.00）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "金額は最小値（-9999999999999999999.99）を下回っています。"));
 
 		// 異常系（@Digits：）
 		BeanUtils.copyProperties(dto, testTarget);
@@ -2094,21 +2096,21 @@ public class TestContractDto {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setQuantity(INT_MINUS_1);
-		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_100000);
+		testTarget.setBeforeQuantity(INT_MINUS_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@DecimalMin：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setEstimationAmountSummary(DECIMAL_MINUS_001);
+		testTarget.setEstimationAmountSummary(DECIMAL_MINUS_10000000000000000000);
 		testTarget.setEstimationUnitPrice(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積金額は最小値（0.00）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積金額は最小値（-9999999999999999999.99）を下回っています。"));
 
 		// 異常系（@Digits：）
 		BeanUtils.copyProperties(dto, testTarget);
