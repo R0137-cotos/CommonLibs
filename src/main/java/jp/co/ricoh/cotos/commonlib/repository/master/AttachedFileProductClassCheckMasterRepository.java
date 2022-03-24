@@ -38,4 +38,5 @@ public interface AttachedFileProductClassCheckMasterRepository extends CrudRepos
 			, nativeQuery = true)
 	public Optional<List<AttachedFileProductClassCheckMaster>> findAttachedFileProductClassCheckListByArrangementWorkTypeMasterId(@Param("PRODUCT_CLASS_DIV") @NotNull String productClassDiv, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ARRANGEMENT_WORK_TYPE_MASTER_ID") Long arrangementWorkTypeMasterId);
 
+	public List<AttachedFileProductClassCheckMaster> findByProductClassDivAndDomain(String productClassDiv, String domain);
 }
