@@ -247,6 +247,8 @@ public class TestMaster {
 	private ArrangementWorkAuthControlMasterRepository arrangementWorkAuthControlMasterRepository;
 	@Autowired
 	private EnumDefinitionMasterRepository enumDefinitionMasterRepository;
+	@Autowired
+	private MvTjmoc290SsMasterRepository mvTjmoc290SsMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2831,5 +2833,18 @@ public class TestMaster {
 		Assert.assertEquals("新規", found.getEnumValueName());
 		Assert.assertEquals("1", found.getEnumValueCode());
 		Assert.assertEquals("ContractType", found.getEnumClassName());
+	}
+
+	@Test
+	public void MvTjmoc290SsMasterのテスト() throws Exception {
+
+		// テストデータはなし
+
+		// エンティティの取得
+		long id = 1L;
+		MvTjmoc290SsMaster found = mvTjmoc290SsMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
 	}
 }

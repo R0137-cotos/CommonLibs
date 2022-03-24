@@ -195,13 +195,22 @@ public class LicenseSearchParameter {
 	private String licenseProcessStatusForOperatedDateTime;
 
 	/**
-	 * 工程実施日時
+	 * 工程実施日時(年月日)
 	 */
 	@ApiParam(value = "工程実施日時", required = false)
 	@ApiModelProperty(value = "工程実施日時<br />" //
-			+ "日付フォーマット:yyyy/MM/dd HH", //
+			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false, position = 20)
 	private Date processOperatedDateTime;
+
+	/**
+	 * 工程実施日時(時)
+	 */
+	@ApiParam(value = "工程実施日時", required = false)
+	@ApiModelProperty(value = "工程実施日時<br />" //
+			+ "日付フォーマット:HH:00", //
+			required = false, position = 20)
+	private String processOperatedTime;
 
 	/**
 	 * 情報区分

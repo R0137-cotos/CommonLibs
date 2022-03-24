@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.14.0 (10/03/2022)
+- [**closed**] #13376_販売店用宛先を追加 [#1893](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1893)
+
+---
+
 ## v4.13.0 (21/02/2022)
 - [**closed**] #13346 商品種類区分による検索を追加 [#1769](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1769)
 - [**closed**] メールアドレス情報.テーブル区分を追加 [#1863](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1863)
