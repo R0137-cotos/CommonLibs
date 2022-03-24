@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess.MailSendResultDiv;
@@ -27,6 +28,13 @@ public class LicenseProcessResult {
 	@Id
 	@ApiModelProperty(value = "ライセンス工程ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
 	private long id;
+
+	/**
+	 * ライセンス工程version
+	 */
+	@Version
+	@ApiModelProperty(value = "ライセンス工程version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	private long version;
 
 	/**
 	 * 工程順

@@ -70,7 +70,6 @@ public class LMPIConnectionHelperTests {
 	// コミット時は削除すること
 	// log.info("LMPI call : " + url);
 	// log.info("LMPI requestBody : " + body);
-	// log.info("LMPI response : " + responseEntity.getBody());
 
 	/**
 	 *  [POST] 顧客作成API
