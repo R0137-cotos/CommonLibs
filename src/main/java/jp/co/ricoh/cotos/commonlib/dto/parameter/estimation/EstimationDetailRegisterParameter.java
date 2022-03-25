@@ -44,16 +44,16 @@ public class EstimationDetailRegisterParameter {
 	 * 変更前数量
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "変更前数量", allowableValues = "range[0,99999]", required = false)
+	@Min(-99999)
+	@ApiModelProperty(value = "変更前数量", allowableValues = "range[-99999,99999]", required = false)
 	private Integer beforeQuantity;
 
 	/**
 	 * 数量
 	 */
-	@Min(0)
+	@Min(-99999)
 	@Max(99999)
-	@ApiParam(value = "数量", allowableValues = "range[0,99999]", required = true)
+	@ApiParam(value = "数量", allowableValues = "range[-99999,99999]", required = true)
 	private int quantity;
 
 	/**
@@ -66,9 +66,8 @@ public class EstimationDetailRegisterParameter {
 	 * 見積金額
 	 */
 	@NotNull
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiParam(value = "見積金額", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@ApiParam(value = "見積金額", allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]", required = true)
 	private BigDecimal amountSummary;
 
 	/**
@@ -120,8 +119,8 @@ public class EstimationDetailRegisterParameter {
 	 * 契約数
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "契約数", allowableValues = "range[0,99999]", required = false)
+	@Min(-99999)
+	@ApiModelProperty(value = "契約数", allowableValues = "range[-99999,99999]", required = false)
 	private Integer contractAmount;
 
 }

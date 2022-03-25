@@ -84,6 +84,7 @@ public class TestEstimationDto {
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
 	private static final String STR_1001 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 	private static final int INT_MINUS_1 = -1;
+	private static final int INT_MINUS_100000 = -100000;
 	private static final Long LONG_MINUS_1 = -1L;
 	private static final int INT_10 = 10;
 	private static final int INT_100 = 100;
@@ -791,23 +792,22 @@ public class TestEstimationDto {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setQuantity(INT_MINUS_1);
-		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_100000);
+		testTarget.setBeforeQuantity(INT_MINUS_100000);
 		testTarget.setItemAddFlg(INT_MINUS_1);
-		testTarget.setContractAmount(INT_MINUS_1);
+		testTarget.setContractAmount(INT_MINUS_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@DecimalMin：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setEstimationAmountSummary(DECIMAL_MINUS_001);
 		testTarget.setEstimationUnitPrice(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積金額は最小値（0.00）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積単価は最小値（0.00）を下回っています。"));
 
 		// 異常系（@Digits：）
 		BeanUtils.copyProperties(dto, testTarget);
@@ -1097,20 +1097,21 @@ public class TestEstimationDto {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setQuantity(INT_MINUS_1);
-		testTarget.setContractAmount(INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_100000);
+		testTarget.setBeforeQuantity(INT_MINUS_100000);
+		testTarget.setContractAmount(INT_MINUS_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@DecimalMin：）
 		BeanUtils.copyProperties(dto, testTarget);
-		testTarget.setAmountSummary(DECIMAL_MINUS_001);
+		testTarget.setRCost(DECIMAL_MINUS_001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "金額は最小値（0.00）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "Ｒ原価は最小値（0.00）を下回っています。"));
 
 		// 異常系（@Digits：）
 		BeanUtils.copyProperties(dto, testTarget);
@@ -1207,11 +1208,11 @@ public class TestEstimationDto {
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(dto, testTarget);
 		BeanUtils.copyProperties(infoDto, testInfoTarget);
-		testInfoTarget.setInitialAmt(INT_MINUS_1);
+		testInfoTarget.setInitialAmt(INT_MINUS_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "初期費　数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "初期費　数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@DecimalMin ：）
 		BeanUtils.copyProperties(dto, testTarget);
