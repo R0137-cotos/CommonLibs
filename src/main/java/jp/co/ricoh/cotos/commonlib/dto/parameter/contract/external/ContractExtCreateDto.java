@@ -489,4 +489,12 @@ public class ContractExtCreateDto extends DtoBase {
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "契約保守担当CE社員", required = false, position = 62)
 	private ContractPicMntCeEmpDto contractPicMntCeEmp;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 63, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
 }
