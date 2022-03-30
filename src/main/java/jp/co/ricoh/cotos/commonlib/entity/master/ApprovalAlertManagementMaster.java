@@ -31,7 +31,7 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	@Description(value = "アラート対象日区分")
 	public enum AlertTargetDateType {
 
-		サービス利用希望日("1"), 解約希望日("2");
+		サービス利用希望日("1"), 解約予定日("2");
 
 		private final String text;
 
@@ -51,6 +51,29 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "アラート基準日区分")
+	public enum AlertBaseDateType {
+
+		当月("0"), 前月("1");
+
+		private final String text;
+
+		private AlertBaseDateType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static AlertBaseDateType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * 承認アラート管理マスタID
 	 */
@@ -63,18 +86,24 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	/**
 	 * アラート対象日区分
 	 */
-	@ApiModelProperty(value = "アラート対象日区分",  position = 2, required = true, allowableValues = "サービス利用希望日(\"1\"), 解約希望日(\"2\")")
+	@ApiModelProperty(value = "アラート対象日区分",  position = 2, required = true, allowableValues = "サービス利用希望日(\"1\"), 解約予定日(\"2\")")
 	private AlertTargetDateType alertTargetDateType;
 
 	/**
 	 * アラート基準日
 	 */
 	@ApiModelProperty(value = "アラート基準日", required = true, position = 3, allowableValues = "range[0,99]")
-	private int alertTargetDate;
+	private int alertBaseDate;
 
 	/**
 	 * アラートメッセージ
 	 */
 	@ApiModelProperty(value = "アラートメッセージ", required = true, position = 4)
 	private String alertMessage;
+
+	/**
+	 * アラート基準日区分
+	 */
+	@ApiModelProperty(value = "アラート基準日区分",  position = 2, required = true, allowableValues = "当月(\"0\"), 前月(\"1\")")
+	private AlertTargetDateType alertBaseDateType;
 }
