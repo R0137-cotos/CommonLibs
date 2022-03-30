@@ -105,5 +105,5 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	 * アラート基準日区分
 	 */
 	@ApiModelProperty(value = "アラート基準日区分",  position = 2, required = true, allowableValues = "当月(\"0\"), 前月(\"1\")")
-	private AlertTargetDateType alertBaseDateType;
+	private AlertBaseDateType alertBaseDateType;
 }
