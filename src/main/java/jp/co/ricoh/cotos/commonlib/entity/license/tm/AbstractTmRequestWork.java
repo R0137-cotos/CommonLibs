@@ -33,7 +33,7 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	@Description(value = "送信状態(トレンドマイクロリクエストWORK)")
 	public enum TmRequestStatus {
 
-		未連携("0"), 連携済("1"), 連携エラー("2"), 連携対象外("3");
+		未連携("0"), 連携済("1"), 連携エラー("2"), 連携対象外("3"), 作成済("4");
 
 		private final String text;
 
