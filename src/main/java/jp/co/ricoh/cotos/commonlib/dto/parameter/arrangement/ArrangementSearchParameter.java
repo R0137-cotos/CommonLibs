@@ -557,6 +557,22 @@ public class ArrangementSearchParameter {
 	private String approvalArrangementWorkStatus;
 
 	/**
+	 * 関連手配業務
+	 */
+	@ApiParam(value = "関連手配業務タイプマスタID", required = false)
+	@ApiModelProperty(value = "関連手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	private String relatedArrangementWorkTypeId;
+
+	/**
+	 * 関連手配業務ステータス(関連手配業務状況検索条件)
+	 */
+	@ApiParam(value = "関連手配業務ステータス", required = false)
+	@ApiModelProperty(value = "関連手配業務ステータス(関連手配業務状況検索条件)<br />" //
+			+ "状態遷移上のワークフロー状態を表す。", //
+			required = false) //
+	private String relatedArrangementWorkStatus;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
