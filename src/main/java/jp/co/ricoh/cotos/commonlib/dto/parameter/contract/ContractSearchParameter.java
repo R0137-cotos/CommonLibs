@@ -507,6 +507,13 @@ public class ContractSearchParameter {
 	private int otherSysDataExcludeFlg;
 
 	/**
+	 * 破棄ステータスを除外
+	 */
+	@ApiParam(value = "破棄ステータスを除外", required = false)
+	@ApiModelProperty(value = "破棄ステータスを除外", required = false)
+	private boolean excludesDiscarded;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
