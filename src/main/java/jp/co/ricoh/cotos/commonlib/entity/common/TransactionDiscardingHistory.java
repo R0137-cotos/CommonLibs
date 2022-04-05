@@ -22,7 +22,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * EIM書誌情報
+ * 案件破棄履歴
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
