@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.AccountFixFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class ProductContractExtendsParameterMvbDto {
 	/**
 	 * アカウント確定フラグ
 	 */
-	private String accountFixFlg;
+	private AccountFixFlg accountFixFlg;
 
 	/**
 	 * 移行用項目
