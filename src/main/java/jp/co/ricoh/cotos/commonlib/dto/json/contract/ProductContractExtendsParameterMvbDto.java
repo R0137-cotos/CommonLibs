@@ -36,6 +36,11 @@ public class ProductContractExtendsParameterMvbDto {
 	private String installUrl;
 
 	/**
+	 * アカウント確定フラグ
+	 */
+	private String accountFixFlg;
+
+	/**
 	 * 移行用項目
 	 */
 	@JsonProperty("migrationParameter")

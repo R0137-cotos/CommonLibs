@@ -30,6 +30,11 @@ public class ProductContractExtendsParameterSsecDto {
 	private String dsaasAccount;
 
 	/**
+	 * アカウント確定フラグ
+	 */
+	private String accountFixFlg;
+
+	/**
 	 * 移行用項目
 	 */
 	@JsonProperty("migrationParameter")
