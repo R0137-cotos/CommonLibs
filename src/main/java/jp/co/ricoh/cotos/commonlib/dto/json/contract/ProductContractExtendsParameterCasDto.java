@@ -27,4 +27,9 @@ public class ProductContractExtendsParameterCasDto {
 	 * MVBアカウント
 	 */
 	private String mvbAccount;
+
+	/**
+	 * アカウント確定フラグ
+	 */
+	private String accountFixFlg;
 }
