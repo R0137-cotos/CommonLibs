@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.json;
 
 import java.util.Arrays;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -127,6 +129,29 @@ public class JsonEnumType {
 
 		@JsonCreator
 		public static NewExistingAccountType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = " アカウント確定フラグ")
+	public enum AccountFixFlg {
+
+		未確定("0"), 確定("1");
+
+		private final String text;
+
+		private AccountFixFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static AccountFixFlg fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
