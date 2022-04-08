@@ -600,4 +600,17 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "商品グループコード", required = false, position = 76, allowableValues = "range[0,255]")
 	private String productGroupCd;
+
+	/**
+	 * 納品書・請求書印字用コメント <br>
+	 * <br>
+	 * 【仕入用管理Noの場合】 <br>
+	 * 先頭3文字：商品マスタ.仕入先No、末尾9文字：契約情報画面（請求先情報セクション）より入力 <br>
+	 * 【任意コメントの場合】 <br>
+	 * 最大20Byteのコメント 契約情報画面（請求先情報セクション）より入力
+	 *
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "納品書・請求書印字用コメント", required = false, position = 77, allowableValues = "range[0,255]")
+	private String purchaseManageNumber;
 }
