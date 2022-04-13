@@ -38,7 +38,7 @@ public class OrderManagementInfo extends EntityBase {
 	@Description(value = "契約取込状況")
 	public enum CaptureStatus {
 
-		未取込("0"), 取込済("1"), 取込対象外("9"), 処理不可("E"), 異常取込("W");
+		未取込("0"), 取込済("1"), 取込対象外("9"), 処理不可("E"), 異常取込("W"), 取込情報("I");
 
 		private final String text;
 
@@ -79,7 +79,7 @@ public class OrderManagementInfo extends EntityBase {
 	 * 契約取込状況
 	 */
 	@Column
-	@ApiModelProperty(value = "契約取込状況", required = true, position = 2, allowableValues = "未取込(\"0\"), 取込済(\"1\"), 取込対象外(\"9\"), 処理不可(\"E\"), 異常取込(\"W\")")
+	@ApiModelProperty(value = "契約取込状況", required = true, position = 2, allowableValues = "未取込(\"0\"), 取込済(\"1\"), 取込対象外(\"9\"), 処理不可(\"E\"), 異常取込(\"W\"), 取込情報(\"I\")")
 	private CaptureStatus contractCaptureStatus;
 
 	/**
