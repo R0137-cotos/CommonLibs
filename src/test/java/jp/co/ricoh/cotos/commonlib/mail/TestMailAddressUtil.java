@@ -55,6 +55,8 @@ public class TestMailAddressUtil {
 	@Autowired
 	LicenseInfoRepository licenseInfoRepository;
 
+	public final static String AUDIT_TRAIL_MAIL_ADDRESS = "customer_send_history@cotos.ricoh.co.jp";
+
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
@@ -104,7 +106,8 @@ public class TestMailAddressUtil {
 		Assert.assertEquals("TOメールアドレスが一致すること", estimation.getCustomerEstimation().getPicMailAddress(), mailInfoDto.getToMailAddressList().get(0));
 		Assert.assertEquals("CCメールアドレスの１件目が一致すること", contract.getContractPicSaEmp().getMailAddress(), mailInfoDto.getCcMailAddressList().get(0));
 		Assert.assertEquals("CCメールアドレスの２件目が一致すること", arrangementWork.getArrangementPicWorkerEmp().getMailAddress(), mailInfoDto.getCcMailAddressList().get(1));
-		Assert.assertEquals("BCCメールアドレスが一致すること", licenseInfo.getMailAddress(), mailInfoDto.getBccMailAddressList().get(0));
+		Assert.assertEquals("BCCメールアドレスの１件目が一致すること", licenseInfo.getMailAddress(), mailInfoDto.getBccMailAddressList().get(0));
+		Assert.assertEquals("BCCメールアドレスの２件目が一致すること", AUDIT_TRAIL_MAIL_ADDRESS, mailInfoDto.getBccMailAddressList().get(1));
 	}
 
 	@Test

@@ -52,6 +52,8 @@ public class MailAddressUtil {
 	@Autowired
 	LicenseInfoRepository licenseInfoRepository;
 
+	public final static String AUDIT_TRAIL_MAIL_ADDRESS = "customer_send_history@cotos.ricoh.co.jp";
+
 	/**
 	 * メール情報DTOを取得します。
 	 *
@@ -163,6 +165,7 @@ public class MailAddressUtil {
 				}
 			}
 		});
+		bccList.add(AUDIT_TRAIL_MAIL_ADDRESS);
 		// 値を設定
 		mailInfoDto.setMailTemplateMasterId(mailMaster.getMailTemplateMasterId());
 		mailInfoDto.setMailTypeDiv(mailMaster.getMailTypeDiv());
