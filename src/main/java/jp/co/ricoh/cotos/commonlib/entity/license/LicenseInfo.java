@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -312,5 +314,13 @@ public class LicenseInfo extends EntityBase {
 	@OneToMany(mappedBy = "licenseInfo")
 	@ApiModelProperty(value = "ライセンス情報操作履歴", required = false, position = 28)
 	private List<LicenseInfoOperationLog> licenseOperationLogList;
+
+	/**
+	 * ライセンスアカウント
+	 */
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "license_account_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "ライセンスアカウント", required = true, position = 29)
+	private LicenseAccount licenseAccount;
 
 }

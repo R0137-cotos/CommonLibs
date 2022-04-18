@@ -56,7 +56,9 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ContractForFind
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.ProductContractForFindAllDetailsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractDetailForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ContractListDetailInfoGetBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ItemContractDetailForFindAllDetailsBplatsDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.PagingDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats.ProductContractForFindAllDetailsBplatsDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtCancelDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.external.ContractExtChangeDto;
@@ -2339,6 +2341,32 @@ public class TestContractDto {
 
 		// 正常系
 		BeanUtils.copyProperties(entity, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+	}
+
+	@Test
+	public void PagingDtoのテスト() throws Exception {
+
+		PagingDto testTarget = new PagingDto();
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+	}
+
+	@Test
+	public void ContractListDetailInfoGetBplatsDtoのテスト() throws Exception {
+
+		ContractListDetailInfoGetBplatsDto testTarget = new ContractListDetailInfoGetBplatsDto();
+
+		PagingDto pagingDto = new PagingDto();
+		pagingDto.setTotalNum(0);
+		pagingDto.setStartLine(0);
+		pagingDto.setOffset(0);
+		testTarget.setPagingDto(pagingDto);
+
+		// 正常系
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 	}
