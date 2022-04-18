@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -45,4 +46,11 @@ public class ItemDetailContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, position = 6, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")")
 	private InitialRunningDiv initialRunningDiv;
+	
+	/**
+	 * 品種振替構成マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "品種振替構成マスタID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
+	private Long itemTransCompMasterId;
 }
