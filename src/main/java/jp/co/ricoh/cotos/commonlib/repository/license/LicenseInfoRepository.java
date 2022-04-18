@@ -16,4 +16,6 @@ public interface LicenseInfoRepository extends CrudRepository<LicenseInfo, Long>
 
 	public List<LicenseInfo> findByContractNumber(String contractNumber);
 
+	public List<LicenseInfo> findByRjManageNumberAndContractNumberAndDisengagementFlg(String rjManageNumber, String contractNumber, int disengagementFlg);
+
 }

@@ -66,4 +66,6 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 	public List<Contract> findByEquipmentCodeAndEquipmentNo(@Param("equipmentCode") String equipmentCode, @Param("equipmentNo") String equipmentNo);
 
 	public List<Contract> findByEstimationNumberAndEstimationBranchNumber(String estimationNumber, Integer estimationBranchNumber);
+
+	public List<Contract> findByIdIn(List<Long> contractIdList);
 }

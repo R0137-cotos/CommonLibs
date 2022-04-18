@@ -40,4 +40,5 @@ public interface AttachedFileProductGrpCheckMasterRepository extends CrudReposit
 			, nativeQuery = true)
 	public Optional<List<AttachedFileProductGrpCheckMaster>> findAttachedFileProductGrpCheckListByArrangementWorkTypeMasterId(@Param("PRODUCT_GRP_MASTER_ID") @NotNull Long productGrpMasterId, @Param("DOMAIN") @NotNull String domain, @Param("ESTIMATION_CONTRACT_TYPE") String estimationContractType, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("ITEM_MASTER_ID_LIST") List<Long> itemMasterIdList, @Param("ARRANGEMENT_WORK_TYPE_MASTER_ID") Long arrangementWorkTypeMasterId);
 
+	public List<AttachedFileProductGrpCheckMaster> findByProductGrpMasterIdAndDomain(Long productGrpMasterId, String domain);
 }
