@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.AccountFixFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
 import lombok.Data;
@@ -27,4 +28,9 @@ public class ProductContractExtendsParameterCasDto {
 	 * MVBアカウント
 	 */
 	private String mvbAccount;
+
+	/**
+	 * アカウント確定フラグ
+	 */
+	private AccountFixFlg accountFixFlg;
 }

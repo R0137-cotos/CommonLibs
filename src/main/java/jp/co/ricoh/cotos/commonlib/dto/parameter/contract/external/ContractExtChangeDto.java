@@ -33,6 +33,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetai
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.BasicContractDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -490,4 +491,18 @@ public class ContractExtChangeDto extends DtoBase {
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "契約保守担当CE社員", required = false, position = 62)
 	private ContractPicMntCeEmpDto contractPicMntCeEmp;
+
+	/**
+	 * S&S作業依頼作成状態
+	 */
+	@ApiModelProperty(value = "S&S作業依頼作成状態", required = false, position = 63, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")")
+	private SsWorkRequestCreateStatus ssWorkRequestCreateStatus;
+
+	/**
+	 * S&S作業依頼フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 64, allowableValues = "range[0,9]")
+	private Integer ssWorkRequestCreateFlg;
 }
