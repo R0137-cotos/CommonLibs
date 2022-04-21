@@ -1,0 +1,1 @@
+INSERT INTO transaction_discarding_history (id, created_at, created_user_id, updated_at, updated_user_id, version, transaction_id, transaction_type, last_lifecycle_status, last_workflow_status) VALUES (1, '2022/04/05', 'COTOS', '2022/04/05', 'COTOS', 1, 1, '1', '1', '1');
