@@ -289,4 +289,11 @@ public class LicenseSearchParameter {
 	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 30)
 	private String mssLinkageOrganizationId;
 
+	/**
+	 * FFM発注問合せ番号
+	 */
+	@ApiParam(value = "FFM発注問合せ番号", required = false)
+	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 31)
+	private String contactNo;
+
 }
