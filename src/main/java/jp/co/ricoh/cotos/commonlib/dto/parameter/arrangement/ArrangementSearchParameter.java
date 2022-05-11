@@ -84,9 +84,18 @@ public class ArrangementSearchParameter {
 	private Date desiredDeliveryDateTo;
 
 	/**
-	 * 業務受理日時
+	 * 業務受理日時(前)
 	 */
-	@ApiParam(value = "業務受理日時", required = false)
+	@ApiParam(value = "業務受理日時(前)", required = false)
+	@ApiModelProperty(value = "業務受理日時<br />" //
+			+ "日付フォーマット:yyyy/MM/dd HH", //
+			required = false) //
+	private Date businessAcceptanceDateTimeFrom;
+
+	/**
+	 * 業務受理日時(後)
+	 */
+	@ApiParam(value = "業務受理日時（後）", required = false)
 	@ApiModelProperty(value = "業務受理日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
@@ -532,9 +541,18 @@ public class ArrangementSearchParameter {
 	private String approvalArrangementWorkTypeId;
 
 	/**
-	 * 手配承認日時
+	 * 手配承認日時（前）
 	 */
-	@ApiParam(value = "手配承認日時", required = false)
+	@ApiParam(value = "手配承認日時（前）", required = false)
+	@ApiModelProperty(value = "手配承認日時<br />" //
+			+ "日付フォーマット:yyyy/MM/dd HH", //
+			required = false) //
+	private Date approvalDateFrom;
+
+	/**
+	 * 手配承認日時（後）
+	 */
+	@ApiParam(value = "手配承認日時（後）", required = false)
 	@ApiModelProperty(value = "手配承認日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
