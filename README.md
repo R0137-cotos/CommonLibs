@@ -462,3 +462,4 @@
 |505|脱RITOSカテゴリC対応取り込み|
 |506|MoM権限サービスRIZM対応（テストのみ）|
 |507|手配検索Param手配日時をtoのみ→From,toに変更|
+|508|VMailAddressListに脱RITOS更新案内 BBC宛先用メールアドレスを追加|
