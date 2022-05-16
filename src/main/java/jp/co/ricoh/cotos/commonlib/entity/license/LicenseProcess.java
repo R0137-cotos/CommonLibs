@@ -176,4 +176,26 @@ public class LicenseProcess extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "メールマスタID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
+
+	/**
+	 * メール到着チェック時間
+	 */
+	@Max(99999)
+	@Min(-99999)
+	@ApiModelProperty(value = "メール到着チェック時間", required = false, position = 13, allowableValues = "range[-99999,99999]")
+	private Integer mailArrivalCheckHour;
+
+	/**
+	 * 到着チェックメール制御マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "到着チェックメール制御マスタID", required = false, position = 14, allowableValues = "range[0,9223372036854775807]")
+	private Long arrivalCheckMailControlMasterId;
+
+	/**
+	 * 実施日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "実施日時", required = false, position = 15)
+	private Date operatedAt;
 }

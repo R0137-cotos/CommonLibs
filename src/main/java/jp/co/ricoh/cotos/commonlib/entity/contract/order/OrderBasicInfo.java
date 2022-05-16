@@ -62,7 +62,7 @@ public class OrderBasicInfo extends EntityBase {
 	@Description(value = "商品種別")
 	public enum ProductType {
 
-		RSI("1"), ROC("2");
+		RSI("1"), ROC("2"), MVB("4");
 
 		private final String text;
 
@@ -132,7 +132,7 @@ public class OrderBasicInfo extends EntityBase {
 	 * 商品種別
 	 */
 	@Column
-	@ApiModelProperty(value = "商品種別", required = false, position = 4, allowableValues = "RSI(\"1\")")
+	@ApiModelProperty(value = "商品種別", required = false, position = 4, allowableValues = "RSI(\"1\"), ROC(\"2\"), MVB(\"4\")")
 	private ProductType productType;
 
 	/**

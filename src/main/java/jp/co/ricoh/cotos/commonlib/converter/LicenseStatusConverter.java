@@ -3,21 +3,21 @@ package jp.co.ricoh.cotos.commonlib.converter;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.CasLicenseStatus;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.LicenseStatus;
 
 @Converter(autoApply = true)
-public class LicenseStatusConverter implements AttributeConverter<CasLicenseStatus, String> {
+public class LicenseStatusConverter implements AttributeConverter<LicenseStatus, String> {
 	@Override
-	public String convertToDatabaseColumn(CasLicenseStatus workflowType) {
+	public String convertToDatabaseColumn(LicenseStatus workflowType) {
 		if (workflowType == null)
 			return null;
 		return workflowType.toString();
 	}
 
 	@Override
-	public CasLicenseStatus convertToEntityAttribute(String value) {
+	public LicenseStatus convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return CasLicenseStatus.fromString(value); // IllegalArgumentExceptionはContractType.fromString側で投げている
+		return LicenseStatus.fromString(value); // IllegalArgumentExceptionはLicenseStatus.fromString側で投げている
 	}
 }
