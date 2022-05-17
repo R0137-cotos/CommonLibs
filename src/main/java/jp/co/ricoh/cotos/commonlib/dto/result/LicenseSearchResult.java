@@ -316,4 +316,11 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\")", position = 47)
 	private InfoDiv infoDiv;
+
+	/**
+	 * FFM発注問合せ番号
+	 */
+	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 48)
+	private String contactNo;
+
 }
