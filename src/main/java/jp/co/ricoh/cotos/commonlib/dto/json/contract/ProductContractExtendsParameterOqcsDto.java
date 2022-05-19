@@ -10,7 +10,6 @@ import lombok.Data;
 /**
  * 商品（契約用）拡張項目DTO（OQCS）
  */
-
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductContractExtendsParameterOqcsDto {
@@ -28,12 +27,12 @@ public class ProductContractExtendsParameterOqcsDto {
 	/**
 	 * 設置（予定）日
 	 */
-	private String installationScheduleDate;
+	private String installationScheduledDate;
 	
 	/**
 	 * 設置（予定）日：時間
 	 */
-	private String installationScheduleTime;
+	private String installationScheduledTime;
 	
 	/**
 	 * オン資 専用ソフト：問合先
