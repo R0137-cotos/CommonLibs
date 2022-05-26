@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.AccountFixFlg;
@@ -17,7 +19,7 @@ public class ProductContractExtendsParameterOqcsDto {
 	/**
 	 * 現地確認日
 	 */
-	private String onsiteConfirmationDate;
+	private Date onsiteConfirmationDate;
 	
 	/**
 	 * 現地確認日：時間
@@ -27,7 +29,7 @@ public class ProductContractExtendsParameterOqcsDto {
 	/**
 	 * 設置（予定）日
 	 */
-	private String installationScheduledDate;
+	private Date installationScheduledDate;
 	
 	/**
 	 * 設置（予定）日：時間
