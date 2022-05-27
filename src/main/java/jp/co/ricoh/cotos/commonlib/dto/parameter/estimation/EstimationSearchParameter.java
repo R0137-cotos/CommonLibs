@@ -375,6 +375,13 @@ public class EstimationSearchParameter {
 	private boolean excludesDiscarded;
 
 	/**
+	 * MNPタイプ
+	 */
+	@ApiParam(value = "MNPタイプ", required = false)
+	@ApiModelProperty(value = "MNPタイプ", required = false, allowableValues = "range[0,255]")
+	private String mnpType;
+	
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
