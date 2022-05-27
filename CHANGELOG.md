@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.1.1 (27/05/2022)
+- [**closed**] #15258_メール文字列置換追加 [#1970](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1970)
+
+---
+
 ## v5.0.0 (20/05/2022)
 - [**closed**] #14854 ライセンス一覧画面の検索用パラメータと検索結果にJSD用のカラムを追加 [#1953](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1953)
 - [**closed**] #13792 商品（契約用）拡張項目DTO（JSD）とサービス利用希望日チェック用エラーメッセージ追加 [#1861](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1861)
