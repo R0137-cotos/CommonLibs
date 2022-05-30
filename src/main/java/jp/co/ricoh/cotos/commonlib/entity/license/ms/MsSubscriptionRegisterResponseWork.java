@@ -14,8 +14,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
-import jp.co.ricoh.cotos.commonlib.entity.license.ms.AbstractMsResponseWork.MsResponseMappedStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,7 +24,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "ms_subscription_register_response_work")
-public class MsSubscriptionRegisterResponseWork extends EntityBase {
+public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_subscription_register_response_work_seq")
