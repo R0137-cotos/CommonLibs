@@ -1,0 +1,1 @@
+INSERT INTO accounting_term_detail (id,created_at,created_user_id,updated_at,updated_user_id,version,contract_detail_id,accounting_term_start,accounting_term_end,quantity,unit_price,amount_summary) values (1,'2018/11/16 12:09:10','COTOS','2018/11/16 12:09:10','COTOS',1,1,current_timestamp,current_timestamp,1,1,1);
