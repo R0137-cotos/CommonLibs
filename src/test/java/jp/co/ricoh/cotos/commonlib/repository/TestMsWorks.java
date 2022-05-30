@@ -1,0 +1,119 @@
+package jp.co.ricoh.cotos.commonlib.repository;
+
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import jp.co.ricoh.cotos.commonlib.DBConfig;
+import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsSubscriptionRegisterRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsSubscriptionRegisterResponseWorkRepository;
+
+/**
+ * MS連携WORK
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class TestMsWorks {
+
+	static ConfigurableApplicationContext context;
+
+	@Autowired
+	TestTools testTool;
+
+	@Autowired
+	MsCustomerRegisterRequestWorkRepository msCustomerRegisterRequestWorkRepository;
+
+	@Autowired
+	MsCustomerRegisterResponseWorkRepository msCustomerRegisterResponseWorkRepository;
+
+	@Autowired
+	MsSubscriptionRegisterRequestWorkRepository msSubscriptionRegisterRequestWorkRepository;
+
+	@Autowired
+	MsSubscriptionRegisterResponseWorkRepository msSubscriptionRegisterResponseWorkRepository;
+
+	@Autowired
+	public void injectContext(ConfigurableApplicationContext injectContext) {
+		context = injectContext;
+		context.getBean(DBConfig.class).clearData();
+		context.getBean(DBConfig.class).initTargetTestData("repository/license/ms/msWorks.sql");
+	}
+
+	@AfterClass
+	public static void stopAPServer() throws InterruptedException {
+		if (null != context) {
+			context.getBean(DBConfig.class).clearData();
+			context.stop();
+		}
+	}
+
+	/**
+	 * 個別にテストを流すとデータのInsert/Deleteに時間がかかるので、
+	 * 一つのテストメソッドで実施する。
+	 */
+	@Test
+	public void 各Repositoryのテスト() {
+		MsCustomerRegisterRequestWorkRepositoryのテスト();
+		MsCustomerRegisterResponseWorkRepositoryのテスト();
+		MsSubscriptionRegisterRequestWorkRepositoryのテスト();
+		MsSubscriptionRegisterResponseWorkRepositoryのテスト();
+	}
+
+	private void MsCustomerRegisterRequestWorkRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(msCustomerRegisterRequestWorkRepository, 10L);
+	}
+
+	private void MsCustomerRegisterResponseWorkRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(msCustomerRegisterResponseWorkRepository, 10L);
+	}
+
+	private void MsSubscriptionRegisterRequestWorkRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(msSubscriptionRegisterRequestWorkRepository, 10L);
+	}
+
+	private void MsSubscriptionRegisterResponseWorkRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(msSubscriptionRegisterResponseWorkRepository, 10L);
+	}
+
+	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
+		// テストデータ登録
+
+		List<ID> idList = Arrays.asList(ids);
+
+		idList.stream().forEach(id -> {
+			// データが取得できることを確認
+			T found = repository.findOne(id);
+			Assert.assertNotNull(found);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(found);
+		});
+	}
+
+	/**
+	 * 全てのカラムがNullではないことを確認
+	 * @param <T>
+	 * @param entity
+	 */
+	private <T extends EntityBase> void assertColumnsNotNull(T entity) {
+		try {
+			testTool.assertColumnsNotNull(entity);
+		} catch (Exception e1) {
+			Assert.fail("例外が発生した場合、エラー");
+		}
+	}
+}
