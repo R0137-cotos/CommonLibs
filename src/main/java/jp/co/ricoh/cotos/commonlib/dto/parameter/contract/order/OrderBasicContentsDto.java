@@ -36,13 +36,13 @@ public class OrderBasicContentsDto {
 	/**
 	 * 注文タイプ
 	 */
-	@ApiModelProperty(value = "注文タイプ", required = true, allowableValues = "新規(\"1\"), 変更(\"2\"), 解約(\"3\")", position = 3)
+	@ApiModelProperty(value = "注文タイプ", required = true, allowableValues = "新規(\"1\"), 変更(\"2\"), 解約(\"3\"), キャンセル(\"4\")", position = 3)
 	private OrdererType ordererType;
 
 	/**
 	 * 商品種別
 	 */
-	@ApiModelProperty(value = "商品種別", required = true, allowableValues = "RSI(\"1\")", position = 4)
+	@ApiModelProperty(value = "商品種別", required = true, allowableValues = "RSI(\"1\"), ROC(\"2\"), O365(\"3\"), MVB(\"4\")", position = 4)
 	private ProductType productType;
 
 	/**
