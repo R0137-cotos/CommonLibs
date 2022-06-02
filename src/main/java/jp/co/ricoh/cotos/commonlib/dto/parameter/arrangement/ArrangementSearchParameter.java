@@ -541,7 +541,7 @@ public class ArrangementSearchParameter {
 	private String approvalArrangementWorkTypeId;
 
 	/**
-	 * 手配承認日時（前）
+	 * 手配承認日時(前)
 	 */
 	@ApiParam(value = "手配承認日時（前）", required = false)
 	@ApiModelProperty(value = "手配承認日時<br />" //
@@ -550,7 +550,7 @@ public class ArrangementSearchParameter {
 	private Date approvalDateFrom;
 
 	/**
-	 * 手配承認日時（後）
+	 * 手配承認日時(後)
 	 */
 	@ApiParam(value = "手配承認日時（後）", required = false)
 	@ApiModelProperty(value = "手配承認日時<br />" //
