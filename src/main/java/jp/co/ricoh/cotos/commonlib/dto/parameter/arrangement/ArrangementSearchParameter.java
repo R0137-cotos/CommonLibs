@@ -95,7 +95,7 @@ public class ArrangementSearchParameter {
 	/**
 	 * 業務受理日時(後)
 	 */
-	@ApiParam(value = "業務受理日時（後）", required = false)
+	@ApiParam(value = "業務受理日時(後)", required = false)
 	@ApiModelProperty(value = "業務受理日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
@@ -543,7 +543,7 @@ public class ArrangementSearchParameter {
 	/**
 	 * 手配承認日時(前)
 	 */
-	@ApiParam(value = "手配承認日時（前）", required = false)
+	@ApiParam(value = "手配承認日時(前)", required = false)
 	@ApiModelProperty(value = "手配承認日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
@@ -552,7 +552,7 @@ public class ArrangementSearchParameter {
 	/**
 	 * 手配承認日時(後)
 	 */
-	@ApiParam(value = "手配承認日時（後）", required = false)
+	@ApiParam(value = "手配承認日時(後)", required = false)
 	@ApiModelProperty(value = "手配承認日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
