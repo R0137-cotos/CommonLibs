@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -23,7 +22,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
-import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderBasicInfo;
 import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderManagementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.contract.order.OrderProductInfo;
 import jp.co.ricoh.cotos.commonlib.repository.contract.order.OrderBasicInfoRepository;
@@ -186,39 +184,6 @@ public class TestOrder {
 				Assert.fail("例外が発生した場合、エラー");
 			}
 		});
-	}
-
-	@Test
-	public void OrderBasicInfoRepository_findByNoErrorAndOrderNumberのテスト() {
-		context.getBean(DBConfig.class).initTargetTestData("repository/order/orderBasicInfo.sql");
-
-		List<OrderBasicInfo> actualList = orderBasicInfoRepository.findByNoErrorAndOrderNumber("orderer_number-1");
-
-		assertEquals("注文番号が一致して取込ステータスがエラーでない注文基本情報が1件取得されること", 1, actualList.size());
-		assertEquals("注文番号が一致して取込ステータスがエラーでない注文基本情報が1件取得されること", 10, actualList.get(0).getId());
-	}
-
-	@Test
-	public void OrderBasicInfoRepository_findByNoErrorAndSubDomainForO365のテスト() {
-		context.getBean(DBConfig.class).initTargetTestData("repository/order/orderBasicInfo.sql");
-
-		List<OrderBasicInfo> actualList = orderBasicInfoRepository.findByNoErrorAndSubDomainForO365("subDomain-1");
-
-		assertEquals("希望サブドメインをキーにエラー終了、契約破棄していない新規注文基本情報が2件取得されること", 2, actualList.size());
-
-		actualList.sort(Comparator.comparingLong(OrderBasicInfo::getId));
-		assertEquals("希望サブドメインをキーにエラー終了、契約破棄していない新規注文基本情報が2件取得されること", 20, actualList.get(0).getId());
-		assertEquals("希望サブドメインをキーにエラー終了、契約破棄していない新規注文基本情報が2件取得されること", 21, actualList.get(1).getId());
-	}
-
-	@Test
-	public void OrderBasicInfoRepository_findByCancelContractIdForO365のテスト() {
-		context.getBean(DBConfig.class).initTargetTestData("repository/order/orderBasicInfo.sql");
-
-		List<OrderBasicInfo> actualList = orderBasicInfoRepository.findByCancelContractIdForO365("cancelId-1");
-
-		assertEquals("キャンセル用IDをキーにキャンセル注文基本情報が1件取得されること", 1, actualList.size());
-		assertEquals("キャンセル用IDをキーにキャンセル注文基本情報が1件取得されること", 30, actualList.get(0).getId());
 	}
 
 }
