@@ -251,6 +251,8 @@ public class TestMaster {
 	private EnumDefinitionMasterRepository enumDefinitionMasterRepository;
 	@Autowired
 	private MvTjmoc290SsMasterRepository mvTjmoc290SsMasterRepository;
+	@Autowired
+	private ApprovalAlertManagementMasterRepository approvalAlertManagementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2895,5 +2897,20 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+	}
+	
+	@Test
+	public void ApprovalAlertManagementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalAlertManagementMaster.sql");
+
+		// エンティティの取得
+		ApprovalAlertManagementMaster found = approvalAlertManagementMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 }

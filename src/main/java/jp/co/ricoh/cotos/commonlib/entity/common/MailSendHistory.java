@@ -85,22 +85,22 @@ public class MailSendHistory extends EntityBase {
 	/**
 	 * 宛先To
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "宛先To", required = false, position = 4, allowableValues = "range[0,255]")
+	@Size(max = 1000)
+	@ApiModelProperty(value = "宛先To", required = false, position = 4, allowableValues = "range[0,1000]")
 	private String contactMailTo;
 
 	/**
 	 * 宛先Cc
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "宛先Cc", required = false, position = 5, allowableValues = "range[0,255]")
+	@Size(max = 1000)
+	@ApiModelProperty(value = "宛先Cc", required = false, position = 5, allowableValues = "range[0,1000]")
 	private String contactMailCc;
 
 	/**
 	 * 宛先Bcc
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "宛先Bcc", required = false, position = 6, allowableValues = "range[0,255]")
+	@Size(max = 1000)
+	@ApiModelProperty(value = "宛先Bcc", required = false, position = 6, allowableValues = "range[0,1000]")
 	private String contactMailBcc;
 
 	/**
