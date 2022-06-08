@@ -1,0 +1,7 @@
+SELECT 
+  rownum
+  , LAST_ANALYZED
+FROM 
+  USER_TABLES
+WHERE 
+  TABLE_NAME = :tableName

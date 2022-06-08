@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.db.RefreshMaterializedViewUtil;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
@@ -22,6 +23,7 @@ import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.MailSendHistory.MailSendType;
 import jp.co.ricoh.cotos.commonlib.entity.common.SearchCondition;
+import jp.co.ricoh.cotos.commonlib.entity.common.TransactionDiscardingHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressArrangementList;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressContractList;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressEstimationList;
@@ -33,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.repository.common.FileImportErrorDetailsRepos
 import jp.co.ricoh.cotos.commonlib.repository.common.FileImportManagementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.MailSendHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.SearchConditionRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.TransactionDiscardingHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressArrangementListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressContractListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressEstimationListRepository;
@@ -105,15 +108,27 @@ public class TestCommon {
 	@Autowired
 	SearchConditionRepository searchConditionRepository;
 
+	/**
+	 * 案件破棄履歴
+	 */
+	@Autowired
+	TransactionDiscardingHistoryRepository transactionDiscardingHistoryRepository;
+
 	@Autowired
 	TestTools testTool;
 
+	@Autowired
+	RefreshMaterializedViewUtil refreshMaterializedViewUtil;
+
 	static ConfigurableApplicationContext context;
+
+	private static final String SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
+		refreshMaterializedViewUtil.initStoredProcedure(context);
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
@@ -127,6 +142,7 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/searchCondition.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/transactionDiscardingHistory.sql");
 	}
 
 	@AfterClass
@@ -261,6 +277,9 @@ public class TestCommon {
 	@Test
 	public void VMailAddressListContractRepositoryのテスト() throws Exception {
 
+		// マテビューリフレッシュ
+		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(SYNONYM_NAME);
+
 		VMailAddressContractList found = vMailAddressContractListRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
@@ -286,5 +305,14 @@ public class TestCommon {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(foundList);
 
+	}
+
+	@Test
+	public void TransactionDiscardingHistoryRepositoryのテスト() throws Exception {
+
+		TransactionDiscardingHistory found = transactionDiscardingHistoryRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
 	}
 }
