@@ -35,7 +35,7 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	/**
 	 * 処理状態
 	 */
-	@ApiModelProperty(value = "処理状態", required = false, position = 2, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
+	@ApiModelProperty(value = "処理状態", required = false, position = 2, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")")
 	private MsResponseMappedStatus processStatus;
 
 	/**
