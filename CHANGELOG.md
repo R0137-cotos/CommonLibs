@@ -1,5 +1,48 @@
 # Changelog
 
+## v5.1.1 (27/05/2022)
+- [**closed**] #15258_メール文字列置換追加 [#1970](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1970)
+
+---
+
+## v5.0.0 (20/05/2022)
+- [**closed**] #14854 ライセンス一覧画面の検索用パラメータと検索結果にJSD用のカラムを追加 [#1953](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1953)
+- [**closed**] #13792 商品（契約用）拡張項目DTO（JSD）とサービス利用希望日チェック用エラーメッセージ追加 [#1861](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1861)
+- [**closed**] #13979 商品（見積用）、商品（契約用）拡張項目DTO（JSD）にPCP/BBPの契約IDを追加 [#1873](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1873)
+- [**closed**] #14805 情シス対応 ライセンス作成に必要なDTO追加 [#1949](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1949)
+- [**closed**] #14491 商品（見積用）拡張項目CPQ商品固有戻り値DTO（JSD）を作成 [#1935](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1935)
+- [**closed**] #14901 MoM権限サービスRIZM対応 [#1955](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1955)
+- [**closed**] #14901 MoM権限サービスRIZM対応 [#1950](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1950)
+- [**closed**] #14690 契約取込状況Enumに取込情報を追加 [#1939](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1939)
+- [**closed**] #14040 契約鑑を表す契約一覧情報詳細取得API用DTOに納品書・請求書印字用コメントを追加 [#1936](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1936)
+- [**closed**] #14228 品種明細(契約用)項目追加 [#1928](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1928)
+- [**closed**] #14606_CAS、MVB、SSECの商品（契約用）.拡張項目にアカウント確定フラグを追加 [#1934](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1934)
+- [**closed**] #14040 契約外部取込の登録用DTOと更新用DTOにS&S作業依頼作成状態、S&S作業依頼フラグを追加 [#1923](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1923)
+- [**closed**] #14366 添付ファイル商品毎チェックマスタ、添付ファイル商品種類区分毎チェックマスタリポジトリ修正 [#1922](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1922)
+- [**closed**] #14040 契約取込状況Enum修正 [#1915](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1915)
+- [**closed**] #14345_SSテリトリマスタリポジトリを追加 [#1913](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1913)
+- [**closed**] #14202 メールアドレスリストテーブル区分追加 [#1912](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1912)
+- [**closed**] #14200 サブメール送信条件追加 [#1910](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1910)
+- [**closed**] #14262_LMPI_SMPIのログ出力修正 [#1905](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1905)
+- [**closed**] #14244 設置先（契約用）のListner修正 [#1903](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1903)
+- [**closed**] #14040 カテゴリC対応　契約外部取込の登録用DTOと更新用DTOに納品書・納品書・請求書印字用コメントと受付担当情報、受付担当情報、… [#1901](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1901)
+- [**closed**] #14122 ライセンス一覧画面の検索パラメータ 工程実施日時分割 [#1900](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1900)
+- [**closed**] #14227_トレンドマイクロ送信状態区分追加_ライセンス明細・ライセンス工程resultDtoに項目追加 [#1898](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1898)
+- [**closed**] #14202_メールアドレスリストテーブル区分追加 [#1895](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1895)
+- [**closed**] #13989_契約ID配列指定で契約を取得するメソッド追加 [#1891](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1891)
+- [**closed**] #14018_LMPI連携のログ修正をSMPI連携にも展開 [#1887](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1887)
+- [**closed**] #13989_契約一覧詳細情報取得 IF変更内容反映 [#1882](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1882)
+- [**closed**] #14092 カテゴリC対応　契約種別詳細を修正 [#1883](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1883)
+- [**closed**] #14040 カテゴリC対応　契約外部取込の登録用DTOと更新用DTOに設置先、基本契約区分、基本契約IDを追加 [#1881](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1881)
+- [**closed**] #14050_品種別チェック項目マスタに設置先必須フラグを追加 [#1880](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1880)
+- [**closed**] #14040 カテゴリC対応　注文基本情報の商品種別にMVBを追加 [#1877](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1877)
+- [**closed**] #14018_LMPI・SMPI連携API追加 [#1876](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1876)
+- [**closed**] #13716 カテゴリC対応　ライセンス状態のConverter修正 [#1872](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1872)
+- [**closed**] #13997_ライセンス一覧検索パラメータの情報区分の型を修正 [#1870](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1870)
+- [**closed**] #13973 メールマスタ.サブメールマスタIDのカラム追加 [#1868](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1868)
+
+---
+
 ## v4.14.0 (10/03/2022)
 - [**closed**] #13376_販売店用宛先を追加 [#1893](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1893)
 

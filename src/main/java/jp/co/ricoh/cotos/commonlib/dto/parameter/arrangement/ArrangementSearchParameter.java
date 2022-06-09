@@ -84,9 +84,18 @@ public class ArrangementSearchParameter {
 	private Date desiredDeliveryDateTo;
 
 	/**
-	 * 業務受理日時
+	 * 業務受理日時(前)
 	 */
-	@ApiParam(value = "業務受理日時", required = false)
+	@ApiParam(value = "業務受理日時(前)", required = false)
+	@ApiModelProperty(value = "業務受理日時<br />" //
+			+ "日付フォーマット:yyyy/MM/dd HH", //
+			required = false) //
+	private Date businessAcceptanceDateTimeFrom;
+
+	/**
+	 * 業務受理日時(後)
+	 */
+	@ApiParam(value = "業務受理日時(後)", required = false)
 	@ApiModelProperty(value = "業務受理日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
@@ -532,9 +541,18 @@ public class ArrangementSearchParameter {
 	private String approvalArrangementWorkTypeId;
 
 	/**
-	 * 手配承認日時
+	 * 手配承認日時(前)
 	 */
-	@ApiParam(value = "手配承認日時", required = false)
+	@ApiParam(value = "手配承認日時(前)", required = false)
+	@ApiModelProperty(value = "手配承認日時<br />" //
+			+ "日付フォーマット:yyyy/MM/dd HH", //
+			required = false) //
+	private Date approvalDateFrom;
+
+	/**
+	 * 手配承認日時(後)
+	 */
+	@ApiParam(value = "手配承認日時(後)", required = false)
 	@ApiModelProperty(value = "手配承認日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd HH", //
 			required = false) //
@@ -555,6 +573,22 @@ public class ArrangementSearchParameter {
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false) //
 	private String approvalArrangementWorkStatus;
+
+	/**
+	 * 関連手配業務
+	 */
+	@ApiParam(value = "関連手配業務タイプマスタID", required = false)
+	@ApiModelProperty(value = "関連手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	private String relatedArrangementWorkTypeId;
+
+	/**
+	 * 関連手配業務ステータス(関連手配業務状況検索条件)
+	 */
+	@ApiParam(value = "関連手配業務ステータス", required = false)
+	@ApiModelProperty(value = "関連手配業務ステータス(関連手配業務状況検索条件)<br />" //
+			+ "状態遷移上のワークフロー状態を表す。", //
+			required = false) //
+	private String relatedArrangementWorkStatus;
 
 	/**
 	 * パラメータをMapにする。

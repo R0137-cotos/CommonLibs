@@ -210,4 +210,12 @@ public class ContractChangeSpanMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "エラーフィールド", required = false, position = 18, allowableValues = "range[0,255]")
 	private String errorField;
+
+	/**
+	 * 承認アラート管理マスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "承認アラート管理マスタID", required = false, position = 19, allowableValues = "range[0,9223372036854775807]")
+	private Long approvalAlertManagementMasterId;
+
 }

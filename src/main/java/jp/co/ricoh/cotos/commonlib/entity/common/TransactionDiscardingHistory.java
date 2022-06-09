@@ -1,0 +1,95 @@
+package jp.co.ricoh.cotos.commonlib.entity.common;
+
+import java.util.Arrays;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 案件破棄履歴
+ */
+@Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Table(name = "transaction_discarding_history")
+public class TransactionDiscardingHistory extends EntityBase {
+
+	@Description(value = "トランザクション種別")
+	public enum TransactionType {
+
+		見積("1"), 契約("2");
+
+		private final String text;
+
+		private TransactionType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static TransactionType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_discarding_history_seq")
+	@SequenceGenerator(name = "transaction_discarding_history_seq", sequenceName = "transaction_discarding_history_seq", allocationSize = 1)
+	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	private long id;
+
+	/**
+	 * トランザクションID
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@ApiModelProperty(value = "契約ID", required = true, position = 2)
+	private long transactionId;
+
+	/**
+	 * トランザクション種別
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@ApiModelProperty(value = "トランザクション種別", required = true, allowableValues = "見積(\"1\"), 契約(\"2\")", position = 3)
+	private TransactionType transactionType;
+
+	/**
+	 * 破棄前最終ライフサイクル状態
+	 * NOTE: 設定値は各トランザクションのライフサイクルステータスに従う
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@ApiModelProperty(value = "破棄前最終ライフサイクル状態", required = true, position = 4)
+	private String lastLifecycleStatus;
+
+	/**
+	 * 破棄前最終ワークフロー状態
+	 * NOTE: 設定値は各トランザクションのワークフローステータスに従う
+	 */
+	@Column(nullable = false)
+	@NotNull
+	@ApiModelProperty(value = "破棄前最終ワークフロー状態", required = true, position = 5)
+	private String lastWorkflowStatus;
+}
