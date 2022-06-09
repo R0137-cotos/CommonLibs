@@ -368,6 +368,13 @@ public class EstimationSearchParameter {
 	private String imeiNumber;
 
 	/**
+	 * 破棄ステータスを除外
+	 */
+	@ApiParam(value = "破棄ステータスを除外", required = false)
+	@ApiModelProperty(value = "破棄ステータスを除外", required = false)
+	private boolean excludesDiscarded;
+	
+	/**
 	 * MNPタイプ
 	 */
 	@ApiParam(value = "MNPタイプ", required = false)
