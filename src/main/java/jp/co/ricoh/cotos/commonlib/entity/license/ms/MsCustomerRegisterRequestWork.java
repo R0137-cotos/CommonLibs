@@ -38,8 +38,7 @@ public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
 	/**
 	 * 処理状態
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "処理状態", required = false, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "処理状態", required = false, position = 3, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
 	private MsRequestStatus processStatus;
 
 	/**

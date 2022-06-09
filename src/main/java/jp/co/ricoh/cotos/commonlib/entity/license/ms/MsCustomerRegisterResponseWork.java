@@ -32,7 +32,7 @@ public class MsCustomerRegisterResponseWork extends AbstractMsResponseWork {
 	 * 処理状態
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理状態", required = false, position = 2, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "処理状態", required = false, position = 2, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
 	private MsResponseMappedStatus processStatus;
 
 	/**
