@@ -4,9 +4,6 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.AccountFixFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
 import lombok.Data;
 
 /**
@@ -60,9 +57,4 @@ public class ProductContractExtendsParameterOqcsDto {
 	 * 顔認証端末：問合先
 	 */
 	private String faceRecognitionTerminalContactInfo;
-	
-	/**
-	 * 顔認証端末：電話番号
-	 */
-	private String faceRecognitionTerminalPhoneNumber;
 }
