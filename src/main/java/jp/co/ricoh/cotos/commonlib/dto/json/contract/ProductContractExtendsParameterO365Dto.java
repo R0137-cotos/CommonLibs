@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,10 +11,10 @@ import lombok.Data;
 /**
  * 商品（契約用）拡張項目DTO（O365）
  */
-
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductContractExtendsParameterO365Dto {
+
 	/**
 	 * 契約種別詳細
 	 */
@@ -44,8 +46,8 @@ public class ProductContractExtendsParameterO365Dto {
 	private String primaryDomainName;
 
 	/**
-	 * 移行用項目
+	 * 品種(契約用)
 	 */
-	@JsonProperty("migrationParameter")
-	private ProductContractMigrationParameterDto productContractMigrationParameterDto;
+	@JsonProperty("itemContract")
+	private List<ItemContractO365Dto> itemContractDtoList;
 }
