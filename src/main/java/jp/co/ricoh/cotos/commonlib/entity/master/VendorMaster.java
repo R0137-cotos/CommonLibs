@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -64,4 +66,12 @@ public class VendorMaster extends EntityBaseMaster {
 	@JsonIgnore
 	@ApiModelProperty(value = "ベンダー商品マスタ", required = true, position = 5)
 	private List<VendorProductMaster> vendorProductMasterList;
+
+	/**
+	 * 添付ファイルパスワード不要
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "添付ファイルパスワード不要", required = false, position = 6, allowableValues = "range[0,9]")
+	private int attachedFilePasswordUnrequired;
 }
