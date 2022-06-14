@@ -25,6 +25,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -173,7 +175,7 @@ public class SMPIConnectionHelper {
 	/**
 	 * HttpHeadersを返します。
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
 
@@ -208,9 +210,10 @@ public class SMPIConnectionHelper {
 	 * @param responseClass
 	 * @return
 	 * @throws JsonProcessingException
-	 * @throws URISyntaxException 
-	 * @throws UnsupportedEncodingException 
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
 	 */
+	@Retryable(value = { RestClientException.class }, maxAttempts = 3, backoff = @Backoff(delay = 5000))
 	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
@@ -219,7 +222,16 @@ public class SMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
+		ResponseEntity<String> responseEntity = null;
+		try {
+			responseEntity = rest.exchange(requestEntity, String.class);
+		} catch (RestClientException e) {
+			// ログに出力する為、ｔｒｙ-catchしている。
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw e;
+		}
+		log.info("SMPI status : " + responseEntity.getStatusCodeValue());
 		log.info("SMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
