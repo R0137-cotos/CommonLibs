@@ -2,8 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.license;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.OnOffFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.OderDiv;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.OrderDiv;
 import lombok.Data;
 
 /**
@@ -16,26 +15,26 @@ public class LicenseInfoExtendsParameterO365Dto {
 	/**
 	 * アドオン有無フラグ
 	 */
-	private OnOffFlg addOnFlg;
+	private String addOnFlg;
 
 	/**
 	 * オンサイト有無フラグ
 	 */
-	private OnOffFlg onsiteFlg;
+	private String onsiteFlg;
 
 	/**
 	 * ユーザー登録有無フラグ
 	 */
-	private OnOffFlg userRegisterFlg;
+	private String userRegisterFlg;
 
 	/**
 	 * 独自ドメイン有無フラグ
 	 */
-	private OnOffFlg originalDomainFlg;
+	private String originalDomainFlg;
 
 	/**
 	 * 受注区分
 	 */
-	private OderDiv orderDiv;
+	private OrderDiv orderDiv;
 
 }
