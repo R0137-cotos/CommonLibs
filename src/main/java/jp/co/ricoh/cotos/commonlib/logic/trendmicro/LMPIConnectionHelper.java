@@ -27,6 +27,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -127,6 +130,10 @@ public class LMPIConnectionHelper {
 	private TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository;
 
 	private TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository;
+
+	//	private static final int RETRY_NUM = INSTANCE.properties.getRetryNum();
+	//
+	//	private static final int RETRY_WAIT_TIME = INSTANCE.properties.getRetryWaitTime();
 
 	private LMPIConnectionHelper() {
 		// シングルトン
@@ -414,7 +421,7 @@ public class LMPIConnectionHelper {
 	/**
 	 * HttpHeadersを返します。
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
 
@@ -449,10 +456,11 @@ public class LMPIConnectionHelper {
 	 * @param responseClass
 	 * @return
 	 * @throws JsonProcessingException
-	 * @throws URISyntaxException 
-	 * @throws UnsupportedEncodingException 
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
 	 */
-	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
+	@Retryable(value = { RestClientException.class }, maxAttempts = 3, backoff = @Backoff(delay = 5000))
+	public TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);
@@ -460,7 +468,16 @@ public class LMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
+		ResponseEntity<String> responseEntity = null;
+		try {
+			responseEntity = rest.exchange(requestEntity, String.class);
+		} catch (RestClientException e) {
+			// ログに出力する為、ｔｒｙ-catchしている。
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw e;
+		}
+		log.info("LMPI status : " + responseEntity.getStatusCodeValue());
 		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
@@ -475,7 +492,7 @@ public class LMPIConnectionHelper {
 	}
 
 	private long getPosixTime() {
-		return new Date().getTime() / 1000L;
+		return getSysDate().getTime() / 1000L;
 	}
 
 	/**
@@ -661,5 +678,20 @@ public class LMPIConnectionHelper {
 		}
 
 		// end -- DtoToResponseWork --
+	}
+
+	/**
+	 * API呼び出しエラー時に呼ばれるメソッドです。
+	 * @param exception
+	 * @return
+	 */
+	@Recover
+	private TmCallServiceResponseDto recoverCallService(RestClientException exception) {
+		log.info("リトライしましたが、API呼び出しに失敗しました。");
+		return null;
+	}
+
+	public Date getSysDate() {
+		return new Date();
 	}
 }
