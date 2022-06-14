@@ -73,5 +73,5 @@ public class VendorMaster extends EntityBaseMaster {
 	@Max(9)
 	@Min(0)
 	@ApiModelProperty(value = "添付ファイルパスワード不要", required = false, position = 6, allowableValues = "range[0,9]")
-	private int attachedFilePasswordUnrequired;
+	private Integer attachedFilePasswordUnrequired;
 }
