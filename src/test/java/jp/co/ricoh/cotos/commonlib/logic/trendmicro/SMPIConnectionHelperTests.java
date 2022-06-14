@@ -3,10 +3,10 @@ package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
@@ -51,6 +52,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパーテストクラス。
@@ -59,7 +61,10 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
+//TODO 確認終わったらコメント外す。
+//@Ignore
+@EnableRetry
+@Log4j
 public class SMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
@@ -130,7 +135,7 @@ public class SMPIConnectionHelperTests {
 	/**
 	 *  [POST] レポート作成API
 	 * @throws ParseException
-	 * @throws JsonProcessingException 
+	 * @throws JsonProcessingException
 	 */
 	@Test
 	@WithMockCustomUser
@@ -195,12 +200,13 @@ public class SMPIConnectionHelperTests {
 
 		TmPostWfbssReportRequestDto requestDto = new TmPostWfbssReportRequestDto();
 		requestDto.setSetting(setting);
-		
+
 		try {
 			TmPostWfbssReportResponseDto responceDto = getHelper().postWfbssReport(customerId, requestDto);
 			System.out.println("★★取得結果：" + responceDto);
 		} catch (RestClientException e) {
-			e.printStackTrace();
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -209,7 +215,7 @@ public class SMPIConnectionHelperTests {
 	/**
 	 *  [PUT] 通知設定作成API
 	 * @throws ParseException
-	 * @throws JsonProcessingException 
+	 * @throws JsonProcessingException
 	 */
 	@Test
 	@WithMockCustomUser
