@@ -1,21 +1,44 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
+import static org.mockito.Matchers.*;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.UUID;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
@@ -32,6 +55,8 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
+import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro LMPI連携 ヘルパーテストクラス。
@@ -41,10 +66,22 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Ignore
+// TODO 確認終わったらコメント外す。
+// @Ignore
+@EnableRetry
+@Log4j
 public class LMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
+
+	@Autowired
+	LMPIProperties properties;
+
+	@Autowired
+	ObjectMapper mapper;
+
+	@SpyBean
+	RestTemplate rest;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -364,4 +401,134 @@ public class LMPIConnectionHelperTests {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 *  [POST] 顧客作成APIリトライ
+	 * @throws JsonProcessingException
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void postCustomersRetryTest() throws JsonProcessingException, URISyntaxException, UnsupportedEncodingException {
+
+		Date date = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateString = df.format(date);
+
+		TmCreateCustomerRequestWork requestWork = new TmCreateCustomerRequestWork();
+		// abstractWork
+		//		requestWork.setRequestStatus(TmRequestStatus.未連携);
+		//		requestWork.setRequestTime(new Date());
+		//		requestWork.setUrl("setUrl");
+		//		requestWork.setHttpHeader("setHttpHeader");
+		//		requestWork.setHttpBody("setHttpBody");
+		// entityBase
+		//		requestWork.setCreatedAt(new Date());
+		//		requestWork.setCreatedUserId("setCreatedUserId");
+		//		requestWork.setUpdatedAt(new Date());
+		//		requestWork.setUpdatedUserId("setUpdatedUserId");
+		//		requestWork.setVersion(0);
+		// requestWork
+		//		requestWork.setId(0);
+		//		requestWork.setCompanyName("cas-cotos-companyName");
+		//		requestWork.setCompanyState("cas-cotos-companyState");
+		//		requestWork.setCompanyCountry("JP");
+		//		requestWork.setUserLoginName("cotosLN20201112153811");
+		//		requestWork.setUserFirstName("cas-cotos-userFirstName");
+		//		requestWork.setUserLastName("cas-userLastName");
+		//		requestWork.setUserEmail("cas-userEmail@gmail.com");
+		//		requestWork.setUserTimeZone("Tokyo Standard Time");
+		//		requestWork.setUserLanguage("ja-JP");
+		//		requestWork.setCompanyCity("cas-companyCity");
+
+		String body = null;
+		body = mapper.writeValueAsString(requestWork);
+		URI uri = new URI(properties.getUrlPrefix() + "/customers");
+		HttpHeaders header = getHttpHeaders(uri, HttpMethod.POST, body);
+		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, HttpMethod.POST, uri);
+
+		// Mock
+		Mockito.doThrow(new RestClientException("テストです。")).when(rest).exchange(eq(requestEntity), eq(String.class));
+
+		try {
+			getHelper().postCustomers(requestWork);
+		} catch (RestClientException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * HttpHeadersを返します。
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
+
+		HttpHeaders headers = new HttpHeaders();
+		byte[] content = bodyJson != null ? bodyJson.getBytes("UTF-8") : null;
+		String path = uri.getPath();
+		if (StringUtils.isNotEmpty(uri.getQuery())) {
+			path = path + "?" + uri.getQuery();
+		}
+		long posix_time = new Date().getTime() / 1000L;
+		headers.add("x-access-token", properties.getAccessToken());
+		headers.add("x-signature",
+				this.xSignatureGenerate(//
+						properties.getSecretKey(), //
+						posix_time, //
+						method.toString(), //
+						path, //
+						content));
+		headers.add("x-posix-time", String.valueOf(posix_time));
+		headers.add("x-traceid", UUID.randomUUID().toString());
+		headers.add("content-type", "application/json;charset=UTF-8");
+		return headers;
+	}
+
+	/**
+	 * Generate a x-signature header value that is required to invoke LMPI
+	 * @param secret The secret key assigned by Trend Micro
+	 * @param unixTimestamp The x-posix-time attribute specified in header, it is suppose to the request time in unix timestamp format.
+	 * @param method The HTTP method that is used to invoke LMPI
+	 * @param uri The absolute uri being requested. The url should url-encoded that is similar to something like:
+	 *  /customers?name=some%20customer%20name
+	 * @param content The HTTP content that is to be hashed, pass null if there's no content to be hashed.
+	 * @return a SHA-256 hashed digest in Base64 string.
+	 */
+	private String xSignatureGenerate(String secret, long unixTimestamp, String method, String uri, byte[] content) {
+		MessageDigest md = null;
+
+		String posix = String.valueOf(unixTimestamp);
+		String payload = posix + method.toUpperCase() + uri;
+		String contentBase64 = "";
+
+		// Create a MD5 hash of content if not null.
+		if (content != null) {
+			try {
+				md = MessageDigest.getInstance("MD5");
+				md.update(content);
+				contentBase64 = Base64.encodeBase64String(md.digest());
+			} catch (NoSuchAlgorithmException e) {
+				log.error(e);
+			}
+			payload += contentBase64;
+		}
+		try {
+			Mac hmac = Mac.getInstance("HmacSHA256");
+			SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes("UTF-8"), "HmacSHA256");
+			hmac.init(secret_key);
+
+			byte[] hashed = hmac.doFinal(payload.getBytes("UTF-8"));
+			return new Base64().encodeAsString(hashed);
+
+		} catch (Exception ex) {
+			log.error("unable to create message hash." + ex.toString());
+		}
+		return null;
+	}
+
 }

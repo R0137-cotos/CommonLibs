@@ -31,6 +31,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-mail')
+    compile('org.springframework.retry:spring-retry')
     compile group: 'com.github.spullara.mustache.java', name: 'compiler', version: '0.9.5'
     compileOnly('org.projectlombok:lombok')
     compile('org.hibernate:hibernate-validator:5.3.5.Final')
