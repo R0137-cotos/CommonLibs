@@ -296,4 +296,11 @@ public class LicenseSearchParameter {
 	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 31)
 	private String contactNo;
 
+	/**
+	 * サブドメイン
+	 */
+	@ApiParam(value = "サブドメイン", required = false)
+	@ApiModelProperty(value = "サブドメイン", required = false, position = 32)
+	private String subDomainName;
+
 }
