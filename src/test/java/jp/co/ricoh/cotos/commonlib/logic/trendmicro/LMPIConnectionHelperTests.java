@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
-import static org.mockito.Matchers.*;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -32,10 +30,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
-import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,7 +65,6 @@ import lombok.extern.log4j.Log4j;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 // TODO 確認終わったらコメント外す。
 // @Ignore
-@EnableRetry
 @Log4j
 public class LMPIConnectionHelperTests {
 
@@ -81,7 +77,7 @@ public class LMPIConnectionHelperTests {
 	ObjectMapper mapper;
 
 	@SpyBean
-	RestTemplate rest;
+	TrendMicroUtil trendMicroUtil;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -449,7 +445,7 @@ public class LMPIConnectionHelperTests {
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, HttpMethod.POST, uri);
 
 		// Mock
-		Mockito.doThrow(new RestClientException("テストです。")).when(rest).exchange(eq(requestEntity), eq(String.class));
+		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApi(Mockito.anyObject(), Mockito.anyObject());
 
 		try {
 			getHelper().postCustomers(requestWork);
@@ -476,13 +472,12 @@ public class LMPIConnectionHelperTests {
 		}
 		long posix_time = new Date().getTime() / 1000L;
 		headers.add("x-access-token", properties.getAccessToken());
-		headers.add("x-signature",
-				this.xSignatureGenerate(//
-						properties.getSecretKey(), //
-						posix_time, //
-						method.toString(), //
-						path, //
-						content));
+		headers.add("x-signature", this.xSignatureGenerate(//
+				properties.getSecretKey(), //
+				posix_time, //
+				method.toString(), //
+				path, //
+				content));
 		headers.add("x-posix-time", String.valueOf(posix_time));
 		headers.add("x-traceid", UUID.randomUUID().toString());
 		headers.add("content-type", "application/json;charset=UTF-8");
