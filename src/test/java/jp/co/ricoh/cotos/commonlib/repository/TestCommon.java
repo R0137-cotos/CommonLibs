@@ -122,7 +122,7 @@ public class TestCommon {
 
 	static ConfigurableApplicationContext context;
 
-	private static final String SYNONYM_NAME = "V_VALID_LICENSE_ACCOUNT_INFO";
+	private static final String SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
