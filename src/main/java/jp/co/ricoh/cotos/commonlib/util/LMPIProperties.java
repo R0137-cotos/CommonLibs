@@ -38,16 +38,6 @@ public class LMPIProperties {
 	private String secretKey = "zGPxd/SVAeevhxleN3SBPnvqM2SddrVBMNDW2JaTQs4=";
 
 	/**
-	 * リトライ回数
-	 */
-	private int retryNum = 3;
-
-	/**
-	 * リトライ待機時間（ミリ秒）
-	 */
-	private int retryWaitTime = 5000;
-
-	/**
 	 * URLの接頭辞を返す。
 	 * @return　apiUrl + "/" + version + "/"
 	 */
