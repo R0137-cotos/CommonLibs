@@ -26,7 +26,6 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
@@ -43,7 +42,6 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
-import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -59,12 +57,6 @@ import lombok.extern.log4j.Log4j;
 public class LMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
-
-	@Autowired
-	LMPIProperties properties;
-
-	@Autowired
-	ObjectMapper mapper;
 
 	@SpyBean
 	TrendMicroUtil trendMicroUtil;
