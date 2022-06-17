@@ -128,6 +128,8 @@ public class LMPIConnectionHelper {
 
 	private TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository;
 
+	private TrendMicroUtil trendMicroUtil;
+
 	private LMPIConnectionHelper() {
 		// シングルトン
 	}
@@ -147,6 +149,7 @@ public class LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
+				context.getBean(TrendMicroUtil.class), //
 				externalRestTemplate); //
 	}
 
@@ -164,6 +167,7 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionResponseWorkRepository tmUpdateSubscriptionResponseWorkRepository, //
 			TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository, //
 			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository, //
+			TrendMicroUtil trendMicroUtil, //
 			ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
@@ -199,6 +203,8 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmUpdateSubscriptionResponseWorkRepository = tmUpdateSubscriptionResponseWorkRepository;
 		INSTANCE.tmSuspendSubscriptionRequestWorkRepository = tmSuspendSubscriptionRequestWorkRepository;
 		INSTANCE.tmSuspendSubscriptionResponseWorkRepository = tmSuspendSubscriptionResponseWorkRepository;
+		// Util設定
+		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
 	public static LMPIConnectionHelper getInstance() {
@@ -381,11 +387,7 @@ public class LMPIConnectionHelper {
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 		String user_modified_start = sdf.format(start);
 		String user_modified_end = sdf.format(end);
-		String buildUrl = UriComponentsBuilder
-				.fromUriString(url)
-				.queryParam("user_modified_start", user_modified_start)
-				.queryParam("user_modified_end", user_modified_end)
-				.toUriString();
+		String buildUrl = UriComponentsBuilder.fromUriString(url).queryParam("user_modified_start", user_modified_start).queryParam("user_modified_end", user_modified_end).toUriString();
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
 			return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
@@ -414,7 +416,7 @@ public class LMPIConnectionHelper {
 	/**
 	 * HttpHeadersを返します。
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
 
@@ -426,13 +428,12 @@ public class LMPIConnectionHelper {
 		}
 		long posix_time = INSTANCE.getPosixTime();
 		headers.add("x-access-token", properties.getAccessToken());
-		headers.add("x-signature",
-				this.xSignatureGenerate(//
-						properties.getSecretKey(), //
-						posix_time, //
-						method.toString(), //
-						path, //
-						content));
+		headers.add("x-signature", this.xSignatureGenerate(//
+				properties.getSecretKey(), //
+				posix_time, //
+				method.toString(), //
+				path, //
+				content));
 		headers.add("x-posix-time", String.valueOf(posix_time));
 		headers.add("x-traceid", UUID.randomUUID().toString());
 		headers.add("content-type", "application/json;charset=UTF-8");
@@ -449,8 +450,8 @@ public class LMPIConnectionHelper {
 	 * @param responseClass
 	 * @return
 	 * @throws JsonProcessingException
-	 * @throws URISyntaxException 
-	 * @throws UnsupportedEncodingException 
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
 	 */
 	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
@@ -460,7 +461,8 @@ public class LMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
+		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
+		log.info("LMPI status : " + responseEntity.getStatusCodeValue());
 		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
@@ -488,8 +490,7 @@ public class LMPIConnectionHelper {
 	 * @param content The HTTP content that is to be hashed, pass null if there's no content to be hashed.
 	 * @return a SHA-256 hashed digest in Base64 string.
 	 */
-	private String xSignatureGenerate(String secret, long unixTimestamp,
-			String method, String uri, byte[] content) {
+	private String xSignatureGenerate(String secret, long unixTimestamp, String method, String uri, byte[] content) {
 		MessageDigest md = null;
 
 		String posix = String.valueOf(unixTimestamp);
