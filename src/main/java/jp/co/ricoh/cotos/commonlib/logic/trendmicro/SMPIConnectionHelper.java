@@ -229,8 +229,7 @@ public class SMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = null;
-		responseEntity = trendMicroUtil.callApi(rest, requestEntity);
+		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
 		log.info("SMPI status : " + responseEntity.getStatusCodeValue());
 		log.info("SMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();

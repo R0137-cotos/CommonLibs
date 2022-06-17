@@ -211,8 +211,7 @@ public class SMPIConnectionHelperTests {
 			TmPostWfbssReportResponseDto responceDto = getHelper().postWfbssReport(customerId, requestDto);
 			System.out.println("★★取得結果：" + responceDto);
 		} catch (RestClientException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
