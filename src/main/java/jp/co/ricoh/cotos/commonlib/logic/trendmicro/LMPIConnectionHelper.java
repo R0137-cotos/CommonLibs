@@ -27,7 +27,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.retry.annotation.Recover;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -204,6 +203,7 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmUpdateSubscriptionResponseWorkRepository = tmUpdateSubscriptionResponseWorkRepository;
 		INSTANCE.tmSuspendSubscriptionRequestWorkRepository = tmSuspendSubscriptionRequestWorkRepository;
 		INSTANCE.tmSuspendSubscriptionResponseWorkRepository = tmSuspendSubscriptionResponseWorkRepository;
+		// Util設定
 		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
@@ -453,7 +453,7 @@ public class LMPIConnectionHelper {
 	 * @throws URISyntaxException
 	 * @throws UnsupportedEncodingException
 	 */
-	public TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
+	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);
@@ -462,7 +462,6 @@ public class LMPIConnectionHelper {
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-
 		log.info("LMPI status : " + responseEntity.getStatusCodeValue());
 		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
@@ -478,7 +477,7 @@ public class LMPIConnectionHelper {
 	}
 
 	private long getPosixTime() {
-		return getSysDate().getTime() / 1000L;
+		return new Date().getTime() / 1000L;
 	}
 
 	/**
@@ -663,20 +662,5 @@ public class LMPIConnectionHelper {
 		}
 
 		// end -- DtoToResponseWork --
-	}
-
-	/**
-	 * API呼び出しエラー時に呼ばれるメソッドです。
-	 * @param exception
-	 * @return
-	 */
-	@Recover
-	private TmCallServiceResponseDto recoverCallService(RestClientException exception) {
-		log.info("リトライしましたが、API呼び出しに失敗しました。");
-		return null;
-	}
-
-	public Date getSysDate() {
-		return new Date();
 	}
 }

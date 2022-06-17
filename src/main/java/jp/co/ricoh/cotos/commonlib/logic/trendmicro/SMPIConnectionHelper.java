@@ -25,8 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -60,15 +58,23 @@ public class SMPIConnectionHelper {
 
 	private ObjectMapper mapper;
 
+	private TrendMicroUtil trendMicroUtil;
+
 	private SMPIConnectionHelper() {
 		// シングルトン
 	}
 
 	public static void init(ApplicationContext context, ExternalRestTemplate externalRestTemplate) {
-		init(context.getBean(SMPIProperties.class), externalRestTemplate);
+		init( //
+				context.getBean(SMPIProperties.class), //
+				context.getBean(TrendMicroUtil.class), //
+				externalRestTemplate);
 	}
 
-	private static void init(SMPIProperties properties, ExternalRestTemplate externalRestTemplate) {
+	private static void init( //
+			SMPIProperties properties, //
+			TrendMicroUtil trendMicroUtil, //
+			ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
 		rest.setErrorHandler(new DefaultResponseErrorHandler() {
@@ -88,6 +94,8 @@ public class SMPIConnectionHelper {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setOutputStreaming(false);
 		rest.setRequestFactory(requestFactory);
+		// Util設定
+		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
 	public static SMPIConnectionHelper getInstance() {
@@ -213,7 +221,6 @@ public class SMPIConnectionHelper {
 	 * @throws URISyntaxException
 	 * @throws UnsupportedEncodingException
 	 */
-	@Retryable(value = { RestClientException.class }, maxAttempts = 3, backoff = @Backoff(delay = 5000))
 	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
@@ -223,14 +230,7 @@ public class SMPIConnectionHelper {
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = null;
-		try {
-			responseEntity = rest.exchange(requestEntity, String.class);
-		} catch (RestClientException e) {
-			// ログに出力する為、ｔｒｙ-catchしている。
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw e;
-		}
+		responseEntity = trendMicroUtil.callApi(rest, requestEntity);
 		log.info("SMPI status : " + responseEntity.getStatusCodeValue());
 		log.info("SMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
