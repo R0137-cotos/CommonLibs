@@ -58,23 +58,15 @@ public class SMPIConnectionHelper {
 
 	private ObjectMapper mapper;
 
-	private TrendMicroUtil trendMicroUtil;
-
 	private SMPIConnectionHelper() {
 		// シングルトン
 	}
 
 	public static void init(ApplicationContext context, ExternalRestTemplate externalRestTemplate) {
-		init( //
-				context.getBean(SMPIProperties.class), //
-				context.getBean(TrendMicroUtil.class), //
-				externalRestTemplate);
+		init(context.getBean(SMPIProperties.class), externalRestTemplate);
 	}
 
-	private static void init( //
-			SMPIProperties properties, //
-			TrendMicroUtil trendMicroUtil, //
-			ExternalRestTemplate externalRestTemplate) {
+	private static void init(SMPIProperties properties, ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
 		rest.setErrorHandler(new DefaultResponseErrorHandler() {
@@ -94,8 +86,6 @@ public class SMPIConnectionHelper {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setOutputStreaming(false);
 		rest.setRequestFactory(requestFactory);
-		// Util設定
-		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
 	public static SMPIConnectionHelper getInstance() {
@@ -229,8 +219,7 @@ public class SMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-		log.info("SMPI status : " + responseEntity.getStatusCodeValue());
+		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
 		log.info("SMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
