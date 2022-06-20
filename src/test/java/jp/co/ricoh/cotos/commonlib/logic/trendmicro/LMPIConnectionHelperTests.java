@@ -1,31 +1,21 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
-import static org.junit.Assert.*;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
@@ -42,7 +32,6 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
-import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro LMPI連携 ヘルパーテストクラス。
@@ -52,14 +41,10 @@ import lombok.extern.log4j.Log4j;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Log4j
 @Ignore
 public class LMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
-
-	@SpyBean
-	TrendMicroUtil trendMicroUtil;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -375,32 +360,6 @@ public class LMPIConnectionHelperTests {
 			getHelper().getServicePlanId();
 		} catch (RestClientException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 *  [POST] APIリトライ
-	 * @throws JsonProcessingException
-	 * @throws URISyntaxException
-	 * @throws UnsupportedEncodingException
-	 */
-	@Test
-	@WithMockCustomUser
-	@Ignore
-	public void callApiRetryTest() throws JsonProcessingException, URISyntaxException, UnsupportedEncodingException {
-		// Mock
-		// リトライ確認用に用意したテストメソッドです。テスト終了後に削除しています。
-		//		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApiTest(Mockito.anyObject(), Mockito.anyObject());
-		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApi(Mockito.anyObject(), Mockito.anyObject());
-
-		try {
-			getHelper().postCustomers(new TmCreateCustomerRequestWork());
-			fail("正常終了しました。");
-		} catch (RestClientException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

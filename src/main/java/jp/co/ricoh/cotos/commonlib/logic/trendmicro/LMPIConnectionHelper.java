@@ -128,8 +128,6 @@ public class LMPIConnectionHelper {
 
 	private TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository;
 
-	private TrendMicroUtil trendMicroUtil;
-
 	private LMPIConnectionHelper() {
 		// シングルトン
 	}
@@ -149,7 +147,6 @@ public class LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
-				context.getBean(TrendMicroUtil.class), //
 				externalRestTemplate); //
 	}
 
@@ -167,7 +164,6 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionResponseWorkRepository tmUpdateSubscriptionResponseWorkRepository, //
 			TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository, //
 			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository, //
-			TrendMicroUtil trendMicroUtil, //
 			ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
@@ -203,8 +199,6 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmUpdateSubscriptionResponseWorkRepository = tmUpdateSubscriptionResponseWorkRepository;
 		INSTANCE.tmSuspendSubscriptionRequestWorkRepository = tmSuspendSubscriptionRequestWorkRepository;
 		INSTANCE.tmSuspendSubscriptionResponseWorkRepository = tmSuspendSubscriptionResponseWorkRepository;
-		// Util設定
-		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
 	public static LMPIConnectionHelper getInstance() {
@@ -461,8 +455,7 @@ public class LMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-		log.info("LMPI status : " + responseEntity.getStatusCodeValue());
+		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
 		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);

@@ -1,26 +1,20 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
-import static org.junit.Assert.*;
-
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -57,7 +51,6 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
-import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパーテストクラス。
@@ -66,14 +59,10 @@ import lombok.extern.log4j.Log4j;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Log4j
 @Ignore
 public class SMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
-
-	@SpyBean
-	TrendMicroUtil trendMicroUtil;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -324,32 +313,6 @@ public class SMPIConnectionHelperTests {
 			getHelper().putWfbssNotifSettings(customerId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 *  [GET] APIリトライテスト
-	 * @throws ParseException
-	 */
-	@Test
-	@WithMockCustomUser
-	@Ignore
-	public void callApiRetryTest() throws ParseException {
-		// Mock
-		// リトライ確認用に用意したテストメソッドです。テスト終了後に削除しています。
-		//		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApiTest(Mockito.anyObject(), Mockito.anyObject());
-		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApi(Mockito.anyObject(), Mockito.anyObject());
-
-		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
-
-		try {
-			getHelper().getWfbssDomains(customerId);
-			fail("正常終了しました。");
-		} catch (RestClientException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
