@@ -1,8 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
+import static org.junit.Assert.*;
+
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -51,6 +54,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパーテストクラス。
@@ -59,6 +63,7 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Log4j
 @Ignore
 public class SMPIConnectionHelperTests {
 
@@ -315,6 +320,29 @@ public class SMPIConnectionHelperTests {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  TrendMicroAPIリトライテスト
+	 */
+	@Test
+	@WithMockCustomUser
+	public void callApiRetryTest() {
+
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+
+		try {
+			TmGetWfbssDomainsResponseDto responceDto = getHelper().getWfbssDomains(customerId);
+			assertNotNull("結果が返ってくること。", responceDto);
+		} catch (RestClientException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
 		}
 	}
 }

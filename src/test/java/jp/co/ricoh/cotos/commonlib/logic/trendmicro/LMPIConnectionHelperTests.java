@@ -1,8 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
+import static org.junit.Assert.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.AfterClass;
@@ -25,6 +28,7 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequest
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
 import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
@@ -32,6 +36,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro LMPI連携 ヘルパーテストクラス。
@@ -41,6 +46,7 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Log4j
 @Ignore
 public class LMPIConnectionHelperTests {
 
@@ -362,6 +368,46 @@ public class LMPIConnectionHelperTests {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  TrendMicroAPIリトライテスト
+	 */
+	@Test
+	@WithMockCustomUser
+	public void callApiRetryTest() {
+
+		TmUpdateSubscriptionRequestWork requestWork = new TmUpdateSubscriptionRequestWork();
+		// abstractWork
+		requestWork.setRequestStatus(TmRequestStatus.未連携);
+		requestWork.setRequestTime(new Date());
+		requestWork.setUrl("setUrl");
+		requestWork.setHttpHeader("setHttpHeader");
+		requestWork.setHttpBody("setHttpBody");
+		// entityBase
+		requestWork.setCreatedAt(new Date());
+		requestWork.setCreatedUserId("setCreatedUserId");
+		requestWork.setUpdatedAt(new Date());
+		requestWork.setUpdatedUserId("setUpdatedUserId");
+		requestWork.setVersion(0);
+		// requestWork
+		requestWork.setId(0);
+		// TrendMicroAPIでエラーを発生させる為、サブスクリプションＩＤは未設定
+		requestWork.setCustomerId("9842f3d0-0993-4eea-a61f-0ca33b3f7c3e");
+		requestWork.setUnitsPerLicense("50");
+
+		try {
+			TmUpdateSubscriptionResponseWork result = getHelper().putSubscriptions(requestWork);
+			assertNotNull("結果が返ってくること。", result);
+		} catch (RestClientException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
 		}
 	}
 }

@@ -455,8 +455,36 @@ public class LMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
-		log.info("LMPI response : " + responseEntity.getBody());
+		ResponseEntity<String> responseEntity = null;
+		// リトライ回数
+		int count = 0;
+		// リトライ処理
+		while (true) {
+			// リトライ回数が1回以上の場合は実行まで少し待つ
+			if (count > 0) {
+				try {
+					Thread.sleep(INSTANCE.properties.getRetryWaitTime());
+				} catch (InterruptedException neverOccur) {
+					throw new RuntimeException(neverOccur);
+				}
+			}
+			log.info(String.format("===== %d回目のリトライを開始します。 =====", count));
+			responseEntity = rest.exchange(requestEntity, String.class);
+			log.info("LMPI status code : " + responseEntity.getStatusCodeValue());
+			log.info("LMPI response : " + responseEntity.getBody());
+			log.info(String.format("===== %d回目のリトライを終了します。 =====", count));
+			// リトライ回数が規定回数に到達してもエラーの場合はリトライ処理を終了
+			if (count == INSTANCE.properties.getRetryNum()) {
+				log.info(String.format("リトライ上限に達しました。%d回リトライしましたが、API呼び出しに失敗しました。", count));
+				break;
+			}
+			// HTTPステータスが400以上600未満（エラー）以外の場合はリトライ処理を終了
+			if (responseEntity.getStatusCodeValue() < 400 || responseEntity.getStatusCodeValue() >= 600) {
+				break;
+			}
+			// リトライ回数をカウントアップ
+			count++;
+		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
 		// リクエスト情報の保持
