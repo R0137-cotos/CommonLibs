@@ -373,11 +373,10 @@ public class LMPIConnectionHelperTests {
 
 	/**
 	 *  TrendMicroAPIリトライテスト
-	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
-	public void callApiRetryTest() throws ParseException {
+	public void callApiRetryTest() {
 
 		TmUpdateSubscriptionRequestWork requestWork = new TmUpdateSubscriptionRequestWork();
 		// abstractWork

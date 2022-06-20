@@ -325,7 +325,6 @@ public class SMPIConnectionHelperTests {
 
 	/**
 	 *  TrendMicroAPIリトライテスト
-	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
