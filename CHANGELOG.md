@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.3.0 (23/06/2022)
+- [**closed**] #14983 ベンダーマスタ.添付ファイルパスワード不要の型修正 [#1988](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1988)
+- [**closed**] #14983 ベンダーマスタ.添付ファイルパスワード不要を追加 [#1984](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1984)
+- [**closed**] #15226 MNPタイプ検索追加 [#1969](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1969)
+
+---
+
 ## v5.2.0 (09/06/2022)
 - [**closed**] #15172_有効ライセンスアカウント情報のマテビュー化対応 [#1979](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1979)
 - [**closed**] #13441 手配検索用パラメータ追加 [#1973](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1973)
