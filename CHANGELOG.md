@@ -1,5 +1,27 @@
 # Changelog
 
+## v5.3.0 (23/06/2022)
+- [**closed**] #14983 ベンダーマスタ.添付ファイルパスワード不要の型修正 [#1988](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1988)
+- [**closed**] #14983 ベンダーマスタ.添付ファイルパスワード不要を追加 [#1984](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1984)
+- [**closed**] #15226 MNPタイプ検索追加 [#1969](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1969)
+
+---
+
+## v5.2.0 (09/06/2022)
+- [**closed**] #15172_有効ライセンスアカウント情報のマテビュー化対応 [#1979](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1979)
+- [**closed**] #13441 手配検索用パラメータ追加 [#1973](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1973)
+- [**closed**] #14338_メール送信履歴テーブルのメールアドレス領域を1000に拡張 [#1965](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1965)
+- [**closed**] #13492 VMailAddressListに脱RITOS更新案内 BBC宛先用メールアドレスを追加 [#1957](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1957)
+- [**closed**] #13441 手配検索の日時をfrom-toに変更 [#1956](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1956)
+- [**closed**] #14901 MoM権限サービスRIZM対応 [#1951](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1951)
+- [**closed**] #14222 メールアドレス共通クラスのメール情報DTO取得処理修正 [#1941](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1941)
+- [**closed**] #10148 案件破棄履歴テーブルを追加&見積、契約検索パラメータに破棄ステータスを除外するフラグを追加 [#1932](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1932)
+- [**closed**] #13504 承認アラート管理マスタに新規カラムを追加、既存カラムのリネーム [#1925](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1925)
+- [**closed**] #13504 承認アラートマスタEntityの新規作成とカラム追加、アラート情報Dto作成 [#1906](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1906)
+- [**closed**] #14111 サイバー脅威レポートサービス内包フラグを追加 [#1890](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1890)
+
+---
+
 ## v5.1.1 (27/05/2022)
 - [**closed**] #15258_メール文字列置換追加 [#1970](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1970)
 
