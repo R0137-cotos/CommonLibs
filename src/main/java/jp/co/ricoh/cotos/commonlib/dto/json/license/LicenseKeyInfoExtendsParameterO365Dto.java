@@ -37,4 +37,10 @@ public class LicenseKeyInfoExtendsParameterO365Dto {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date possibleReduceTermEnd;
 
+	/**
+	 * 課金開始年月
+	 */
+	@JsonFormat(pattern = "yyyy/MM", timezone = "Asia/Tokyo")
+	private Date billingStartMonth;
+
 }
