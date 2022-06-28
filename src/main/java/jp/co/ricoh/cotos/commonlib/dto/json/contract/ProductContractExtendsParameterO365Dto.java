@@ -50,4 +50,14 @@ public class ProductContractExtendsParameterO365Dto {
 	 */
 	@JsonProperty("itemContract")
 	private List<ItemContractO365Dto> itemContractDtoList;
+
+	/**
+	 * キャンセル申込日
+	 */
+	private String cancellationApplicationDate;
+
+	/**
+	 * キャンセル可能期日
+	 */
+	private String cancellationDate;
 }
