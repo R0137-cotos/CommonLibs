@@ -509,6 +509,7 @@ public class TestAccounting {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "販売元仕入単価は小数点以下2桁を超えています。"));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void OsoRequestDataのテスト() throws Exception {
 
@@ -571,16 +572,18 @@ public class TestAccounting {
 		// 異常系（@Max ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setRtsManageBranchNumber(INT_1000);
+		testTarget.setRecoordinateFlg(INT_1000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RTS管理番号枝番は最大値（999）を超えています。"));
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setRtsManageBranchNumber(INT_MINUS_1);
+		testTarget.setRecoordinateFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RTS管理番号枝番は最小値（0）を下回っています。"));
 	}
