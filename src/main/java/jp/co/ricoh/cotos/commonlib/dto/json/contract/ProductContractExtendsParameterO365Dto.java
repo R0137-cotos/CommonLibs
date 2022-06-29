@@ -1,7 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
+import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -54,10 +56,12 @@ public class ProductContractExtendsParameterO365Dto {
 	/**
 	 * キャンセル申込日
 	 */
-	private String cancellationApplicationDate;
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date cancellationApplicationDate;
 
 	/**
 	 * キャンセル可能期日
 	 */
-	private String cancellationDate;
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date cancellationDate;
 }
