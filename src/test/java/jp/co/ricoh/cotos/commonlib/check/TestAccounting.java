@@ -572,9 +572,9 @@ public class TestAccounting {
 		// 異常系（@Max ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setRtsManageBranchNumber(INT_1000);
-		testTarget.setRecoordinateFlg(INT_1000);
+		testTarget.setRecoordinateFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertEquals(2, result.getErrorInfoList().size());
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RTS管理番号枝番は最大値（999）を超えています。"));
 
@@ -583,7 +583,7 @@ public class TestAccounting {
 		testTarget.setRtsManageBranchNumber(INT_MINUS_1);
 		testTarget.setRecoordinateFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertEquals(2, result.getErrorInfoList().size());
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "RTS管理番号枝番は最小値（0）を下回っています。"));
 	}
