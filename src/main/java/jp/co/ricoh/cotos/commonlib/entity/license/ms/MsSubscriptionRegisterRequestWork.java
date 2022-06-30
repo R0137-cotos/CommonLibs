@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,6 +28,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "ms_subscription_register_request_work")
 public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
+	@Description(value = "契約期間区分")
+	public enum IncreaseDecreaseDiv {
+
+		増数("1"), 減数("2");
+
+		private final String text;
+
+		private IncreaseDecreaseDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IncreaseDecreaseDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_subscription_register_request_work_seq")
@@ -93,5 +122,11 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@ApiModelProperty(value = "契約期間", required = false, position = 10, allowableValues = "range[0,255]")
 	private String contractTerm;
 
+	/**
+	 * 増減区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "増減区分", required = false, position = 11, allowableValues = "増数(\"1\"), 減数(\"2\")")
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 
 }
