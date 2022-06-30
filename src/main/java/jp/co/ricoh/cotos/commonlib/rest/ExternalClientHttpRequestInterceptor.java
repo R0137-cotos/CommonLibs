@@ -73,7 +73,12 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 	private void logResponse(ClientHttpResponse response) throws IOException {
 		String body = "";
 		if (logUtil.isOutputBody(response)) {
-			body = logUtil.outputLog(StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
+			try {
+				body = logUtil.outputLog(StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
+			} catch (IOException e) {
+				log.warn("想定外のエラーによりResponseBodyを取得できませんでした。");
+				return;
+			}
 		}
 		List<Object> regexList = Arrays.asList(String.valueOf(response.getStatusCode().value()), response.getHeaders().toString(), body, formatter.format(LocalDateTime.now()));
 		log.info(messageUtil.createMessageInfo("ExternalApiResponseLogInfo", regexList.toArray(new String[0])).getMsg());

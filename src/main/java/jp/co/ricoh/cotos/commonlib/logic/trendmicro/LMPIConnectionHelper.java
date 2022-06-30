@@ -471,7 +471,8 @@ public class LMPIConnectionHelper {
 			log.info(String.format("===== %d回目のリトライを開始します。 =====", count));
 			responseEntity = rest.exchange(requestEntity, String.class);
 			log.info("LMPI status code : " + responseEntity.getStatusCodeValue());
-			log.info("LMPI response : " + responseEntity.getBody());
+			log.info("LMPI headers     : " + responseEntity.getHeaders());
+			log.info("LMPI response    : " + responseEntity.getBody());
 			log.info(String.format("===== %d回目のリトライを終了します。 =====", count));
 			// リトライ回数が規定回数に到達してもエラーの場合はリトライ処理を終了
 			if (count == INSTANCE.properties.getRetryNum()) {

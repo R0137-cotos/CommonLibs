@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Log4j
-@Ignore
+//@Ignore
 public class SMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
@@ -329,7 +328,7 @@ public class SMPIConnectionHelperTests {
 	@Test
 	@WithMockCustomUser
 	public void callApiRetryTest() {
-
+		// TrendMicroに存在しないカスタマーID
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 
 		try {

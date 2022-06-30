@@ -105,11 +105,16 @@ public class SMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
 			// ステータスコードの確認
 			log.info("TrendMicroドメイン取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+			//			// HTTPステータスが200系以外の場合はエラーとする。
+			//			if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
+			//				throw new RuntimeException("[SMPI] TrendMicroAPIの顧客ドメイン取得APIでエラーが発生しました。");
+			//			}
 			// レスポンスの取得
 			TmGetWfbssDomainsResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetWfbssDomainsResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		}
 		return null;
 	}
@@ -126,7 +131,8 @@ public class SMPIConnectionHelper {
 			log.info("TrendMicroWFBSS初期化 StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
 			// 戻り値無し
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		}
 	}
 
@@ -146,7 +152,8 @@ public class SMPIConnectionHelper {
 			TmPostWfbssReportResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmPostWfbssReportResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		}
 		return null;
 	}
@@ -165,9 +172,9 @@ public class SMPIConnectionHelper {
 			// sync=true の為戻り値無し
 			return;
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		}
-		return;
 	}
 
 	/**
@@ -235,7 +242,8 @@ public class SMPIConnectionHelper {
 			log.info(String.format("===== %d回目のリトライを開始します。 =====", count));
 			responseEntity = rest.exchange(requestEntity, String.class);
 			log.info("SMPI status code : " + responseEntity.getStatusCodeValue());
-			log.info("SMPI response : " + responseEntity.getBody());
+			log.info("SMPI headers     : " + responseEntity.getHeaders());
+			log.info("SMPI response    : " + responseEntity.getBody());
 			log.info(String.format("===== %d回目のリトライを終了します。 =====", count));
 			// リトライ回数が規定回数に到達してもエラーの場合はリトライ処理を終了
 			if (count == INSTANCE.properties.getRetryNum()) {
