@@ -181,23 +181,36 @@ public class TestMailAddressUtil {
 	@Test
 	public void 正常系_対象エンティティが存在しない場合() {
 		// 各ドメインのID
+		long estimationId = 100L;
 		long contractId = 100000000001L;
+		long arrangementWorkId = 401L;
+		long licenseInfoId = 1L;
 		long mailMasterId = 100L;
 		// HashMap
 		HashMap<ServiceCategory, Long> map = new HashMap<>();
 		// 値を設定
+		map.put(ServiceCategory.見積, estimationId);
 		map.put(ServiceCategory.契約, contractId);
+		map.put(ServiceCategory.手配, arrangementWorkId);
+		map.put(ServiceCategory.ライセンス, licenseInfoId);
 
-		try {
-			// メール情報DTOを取得
-			mailAddressUtil.getMailInfo(map, mailMasterId);
-		} catch (ErrorCheckException e) {
-			List<ErrorInfo> errorList = e.getErrorInfoList();
-			// チェック
-			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
-			Assert.assertEquals("エラーIDが一致すること", "ROT00003", e.getErrorInfoList().get(0).getErrorId());
-			Assert.assertEquals("エラーメッセージが一致すること", "対象エンティティが特定できません。", e.getErrorInfoList().get(0).getErrorMessage());
-		}
+		// メール情報DTOを取得
+		MailInfoDto mailInfoDto = mailAddressUtil.getMailInfo(map, mailMasterId);
+		// チェック用メールマスタ取得
+		MailMaster mailMaster = mailMasterRepository.findOne(mailMasterId);
+		Contract contract = contractRepository.findOne(contractId);
+		ArrangementWork arrangementWork = arrangementWorkRepository.findOne(arrangementWorkId);
+		LicenseInfo licenseInfo = licenseInfoRepository.findOne(licenseInfoId);
+		// チェック
+		Assert.assertEquals("メールテンプレートマスタIDが一致すること", mailMaster.getMailTemplateMasterId(), (Long) mailInfoDto.getMailTemplateMasterId());
+		Assert.assertEquals("メールタイプ区分が一致すること", mailMaster.getMailTypeDiv(), mailInfoDto.getMailTypeDiv());
+		Assert.assertEquals("TOメールアドレスが１件であること（２件の内、１件はエンティティが存在しない）", 1, mailInfoDto.getToMailAddressList().size());
+		Assert.assertEquals("CCメールアドレスが１件であること（２件の内、１件はエンティティが存在しない）", 1, mailInfoDto.getCcMailAddressList().size());
+		Assert.assertEquals("BCCメールアドレスが２件であること（３件の内、１件はエンティティが存在しない）", 2, mailInfoDto.getBccMailAddressList().size());
+		Assert.assertEquals("TOメールアドレスの１件目が一致すること", licenseInfo.getMailAddress(), mailInfoDto.getToMailAddressList().get(0));
+		Assert.assertEquals("CCメールアドレスの１件目が一致すること", arrangementWork.getArrangementPicWorkerEmp().getMailAddress(), mailInfoDto.getCcMailAddressList().get(0));
+		Assert.assertEquals("BCCメールアドレスの１件目が一致すること", contract.getContractPicSaEmp().getMailAddress(), mailInfoDto.getBccMailAddressList().get(0));
+		Assert.assertEquals("BCCメールアドレスの２件目が一致すること", AUDIT_TRAIL_MAIL_ADDRESS, mailInfoDto.getBccMailAddressList().get(1));
 	}
 
 	@Test
