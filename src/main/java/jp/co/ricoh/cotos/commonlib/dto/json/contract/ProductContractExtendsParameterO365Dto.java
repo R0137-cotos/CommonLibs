@@ -64,4 +64,33 @@ public class ProductContractExtendsParameterO365Dto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date cancellationDate;
+
+	/**
+	 * 品種マスタID
+	 */
+	private String itemMasterID;
+
+	/**
+	 * 品種種別詳細
+	 */
+	private String detailsProductType;
+
+	/**
+	 * 自動更新日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date autoUpdateDate;
+
+	/**
+	 * 減数可能期間（From）
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date possibleReduceTermStart;
+
+	/**
+	 * 減数可能期間（To）
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date possibleReduceTermEnd;
+
 }
