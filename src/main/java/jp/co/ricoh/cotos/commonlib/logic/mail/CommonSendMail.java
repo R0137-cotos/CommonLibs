@@ -364,9 +364,11 @@ public class CommonSendMail {
 		attachedHelper.setFrom(appProperties.getMailProperties().getFromMailAddress());
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
-		String subject = writerMailSubject.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
+		String subject = writerMailSubject.toString().replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
+		
 		attachedHelper.setSubject(subject);
-		String text = writerMailText.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
+		String text = writerMailText.toString().replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
+		
 		attachedHelper.setText(text);
 
 		if (null != uploadFile) {
