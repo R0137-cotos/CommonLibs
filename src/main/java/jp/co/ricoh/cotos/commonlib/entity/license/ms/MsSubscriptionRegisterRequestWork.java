@@ -125,7 +125,6 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	/**
 	 * 増減区分
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "増減区分", required = false, position = 11, allowableValues = "増数(\"1\"), 減数(\"2\")")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 
