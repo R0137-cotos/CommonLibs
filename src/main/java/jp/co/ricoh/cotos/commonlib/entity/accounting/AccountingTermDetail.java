@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,8 +18,11 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,12 +45,13 @@ public class AccountingTermDetail extends EntityBase {
 	private long id;
 
 	/**
-	 * 契約明細ID
+	 * 契約明細
 	 */
-	@Column(nullable = false)
-	@Min(0)
-	@ApiModelProperty(value = "契約明細ID", required = true, position = 2, allowableValues = "range[0,9999999999999999999]")
-	private Long contractDetailId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "contract_detail_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約明細", required = true, position = 2)
+	private ContractDetail contractDetail;
 
 	/**
 	 * 計上開始日

@@ -374,7 +374,7 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
-		List<AccountingTermDetail> founds = accountingTermDetailRepository.findByContractDetailId(1L);
+		List<AccountingTermDetail> founds = accountingTermDetailRepository.findByContractDetailId(401L);
 
 
 		// Entity が null または 空 ではないことを確認
