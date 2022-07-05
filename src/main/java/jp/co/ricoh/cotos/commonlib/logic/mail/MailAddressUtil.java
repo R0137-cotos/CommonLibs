@@ -198,7 +198,7 @@ public class MailAddressUtil {
 		EntityBase targetChild = this.getAllChildrenEntity(targetEntity).stream().filter(e -> e.getClass().getSimpleName().equals(entityName)).findFirst().orElse(null);
 		// 子のエンティティが存在しない場合
 		if (targetChild == null) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "CannotIdentify", new String[] { "対象エンティティ" }));
+			return null;
 		}
 		// 子エンティティから取得
 		return this.callMethod(targetChild, fieldName);
