@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.4.0 (07/07/2022)
+- [**closed**] #15683 MailAddressUtilで子エンティティが取得できない場合の処理修正 [#2009](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2009)
+- [**closed**] #14627 OSO申込データ.再連携フラグ追加 [#2000](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2000)
+
+---
+
 ## v5.3.0 (23/06/2022)
 - [**closed**] #14983 ベンダーマスタ.添付ファイルパスワード不要の型修正 [#1988](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1988)
 - [**closed**] #14983 ベンダーマスタ.添付ファイルパスワード不要を追加 [#1984](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1984)
