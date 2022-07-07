@@ -31,6 +31,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
@@ -47,6 +48,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepositor
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.SeOperationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
 
 /**
@@ -114,6 +116,9 @@ public class TestEstimation {
 
 	@Autowired
 	DBUtil dbutil;
+
+	@Autowired
+	SeOperationHistoryRepository seOperationHistoryRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -377,6 +382,27 @@ public class TestEstimation {
 
 		// Entity 1件以上取得できていることを確認
 		Assert.assertNotEquals(foundList.size(), 0);
+
+	}
+
+	@Test
+	public void SeOperationHistoryRepositoryのテスト() throws Exception {
+
+		SeOperationHistory found = seOperationHistoryRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		List<SeOperationHistory> foundList = seOperationHistoryRepository.findByEstimationId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity 1件以上取得できていることを確認
+		Assert.assertNotEquals(foundList.size(), 0);
+
+		// Entity 2件取得できていることを確認
+		Assert.assertEquals(foundList.size(), 2);
 
 	}
 
