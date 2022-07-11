@@ -19,8 +19,8 @@ import lombok.extern.log4j.Log4j;
 @EnableRetry
 public class TrendMicroUtil {
 
-	private static final int RETRY_NUM = 3;
-	private static final int RETRY_WAIT_TIME = 5000;
+	private static final int RETRY_NUM = 5;
+	private static final int RETRY_WAIT_TIME = 10000;
 
 	/**
 	 * TrendMicroAPIコール
@@ -33,8 +33,17 @@ public class TrendMicroUtil {
 		ResponseEntity<String> responseEntity = null;
 		try {
 			responseEntity = rest.exchange(requestEntity, String.class);
+			// TrendMicroAPIはエラーでもエラー内容を正常終了と同じようにレスポンスBodyに設定する為、
+			// HTTPステータスが500系エラーの場合はリトライさせる目的で例外をスローする。
+			if (responseEntity.getStatusCode().is5xxServerError()) {
+				log.info("============================================================");
+				log.info("status  : " + responseEntity.getStatusCodeValue());
+				log.info("headers : " + responseEntity.getHeaders());
+				log.info("response: " + responseEntity.getBody());
+				log.info("============================================================");
+				throw new ResourceAccessException("TrendMicroAPIでエラーが発生しました。： " + responseEntity.getBody());
+			}
 		} catch (ResourceAccessException e) {
-			// リトライ処理毎にログに出力する為、try-catchしている。
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw e;
