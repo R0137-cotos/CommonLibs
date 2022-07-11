@@ -12,15 +12,12 @@ import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -72,9 +69,6 @@ public class SMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
 
-	@SpyBean
-	TrendMicroUtil trendMicroUtil;
-
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
@@ -101,12 +95,12 @@ public class SMPIConnectionHelperTests {
 	// log.info("SMPI requestBody : " + body);
 
 	/**
-	 *  [GET] サブスクリプション取得API
+	 *  [GET] 顧客のドメイン取得API
 	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
-	public void getSubscriptionsTest() throws ParseException {
+	public void getWfbssDomainsTest() throws ParseException {
 
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
 
@@ -330,28 +324,100 @@ public class SMPIConnectionHelperTests {
 	}
 
 	/**
-	 *  [GET] APIリトライテスト
-	 * @throws ParseException
+	 *  [GET] 顧客のドメイン取得APIエラーテスト
 	 */
 	@Test
 	@WithMockCustomUser
-	@Ignore
-	public void callApiRetryTest() throws ParseException {
-		// Mock
-		// リトライ確認用に用意したテストメソッドです。テスト終了後に削除しています。
-		//		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApiTest(Mockito.anyObject(), Mockito.anyObject());
-		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApi(Mockito.anyObject(), Mockito.anyObject());
-
-		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
-
+	public void getWfbssDomainsErrorTest() {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().getWfbssDomains(customerId);
 			fail("正常終了しました。");
 		} catch (RestClientException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 *  [POST] WFBSS初期化APIエラーテスト
+	 */
+	@Test
+	@WithMockCustomUser
+	public void postWfbssInitializeErrorTest() {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			getHelper().postWfbssInitialize(customerId);
+		} catch (RestClientException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 *  [POST] レポート作成APIエラーテスト
+	 */
+	@Test
+	@WithMockCustomUser
+	public void postWfbssReportErrorTest() {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			TmPostWfbssReportResponseDto responceDto = getHelper().postWfbssReport(customerId, new TmPostWfbssReportRequestDto());
+			System.out.println("★★取得結果：" + responceDto);
+		} catch (RestClientException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 *  [PUT] 通知設定作成APIエラーテスト
+	 */
+	@Test
+	@WithMockCustomUser
+	public void putWfbssNotifSettingsErrorTest() throws ParseException, JsonProcessingException {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			getHelper().putWfbssNotifSettings(customerId, new TmPutWfbssNotifSettingsRequestDto());
+		} catch (RestClientException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
 		}
 	}
 }

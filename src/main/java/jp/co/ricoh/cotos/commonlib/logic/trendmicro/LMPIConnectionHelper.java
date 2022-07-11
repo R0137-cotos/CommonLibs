@@ -216,201 +216,174 @@ public class LMPIConnectionHelper {
 
 	/**
 	 * [POST] 顧客作成API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmCreateCustomerResponseWork postCustomers(TmCreateCustomerRequestWork requestWork) {
+	public TmCreateCustomerResponseWork postCustomers(TmCreateCustomerRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers";
-		try {
-			TmCreateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-
-			// リクエストの更新
-			this.setRequestData(requestWork, serviceResponse);
-			TmCreateCustomerRequestWork updatedWork = tmCreateCustomerRequestWorkRepository.save(requestWork);
-
-			// レスポンスの登録
-			TmCreateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateCustomerResponseDto.class), updatedWork);
-			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-			return tmCreateCustomerResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmCreateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+		// リクエストの更新
+		this.setRequestData(requestWork, serviceResponse);
+		TmCreateCustomerRequestWork updatedWork = tmCreateCustomerRequestWorkRepository.save(requestWork);
+		// レスポンスの登録
+		TmCreateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateCustomerResponseDto.class), updatedWork);
+		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+		return tmCreateCustomerResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [PUT] 会社情報更新API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmUpdateCustomerResponseWork putCustomers(TmUpdateCustomerRequestWork requestWork) {
+	public TmUpdateCustomerResponseWork putCustomers(TmUpdateCustomerRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers/" + requestWork.getCustomerId();
-		try {
-			TmUpdateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
-			// リクエストの更新
-			this.setRequestData(requestWork, serviceResponse);
-			TmUpdateCustomerRequestWork updatedWork = tmUpdateCustomerRequestWorkRepository.save(requestWork);
-
-			// レスポンスの登録
-			TmUpdateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateCustomerResponseDto.class), updatedWork);
-			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-			return tmUpdateCustomerResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmUpdateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+		// リクエストの更新
+		this.setRequestData(requestWork, serviceResponse);
+		TmUpdateCustomerRequestWork updatedWork = tmUpdateCustomerRequestWorkRepository.save(requestWork);
+		// レスポンスの登録
+		TmUpdateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateCustomerResponseDto.class), updatedWork);
+		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+		return tmUpdateCustomerResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [PUT] ユーザーアカウント更新API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmUpdateUserResponseWork putUsers(TmUpdateUserRequestWork requestWork) {
+	public TmUpdateUserResponseWork putUsers(TmUpdateUserRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers/" + requestWork.getCustomerId() + "/users/" + requestWork.getUserId();
-		try {
-			TmUpdateUserRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
-			// リクエストの更新
-			this.setRequestData(requestWork, serviceResponse);
-			TmUpdateUserRequestWork updatedWork = tmUpdateUserRequestWorkRepository.save(requestWork);
-
-			// レスポンスの登録
-			TmUpdateUserResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateUserResponseDto.class), updatedWork);
-			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-			return tmUpdateUserResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmUpdateUserRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+		// リクエストの更新
+		this.setRequestData(requestWork, serviceResponse);
+		TmUpdateUserRequestWork updatedWork = tmUpdateUserRequestWorkRepository.save(requestWork);
+		// レスポンスの登録
+		TmUpdateUserResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateUserResponseDto.class), updatedWork);
+		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+		return tmUpdateUserResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [POST] サブスクリプション作成API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmCreateSubscriptionResponseWork postSubscriptions(TmCreateSubscriptionRequestWork requestWork) {
+	public TmCreateSubscriptionResponseWork postSubscriptions(TmCreateSubscriptionRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions";
-		try {
-			TmCreateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-
-			// リクエストの更新
-			this.setRequestData(requestWork, serviceResponse);
-			TmCreateSubscriptionRequestWork updatedWork = tmCreateSubscriptionRequestWorkRepository.save(requestWork);
-
-			// レスポンスの登録
-			TmCreateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class), updatedWork);
-			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-			return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmCreateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+		// リクエストの更新
+		this.setRequestData(requestWork, serviceResponse);
+		TmCreateSubscriptionRequestWork updatedWork = tmCreateSubscriptionRequestWorkRepository.save(requestWork);
+		// レスポンスの登録
+		TmCreateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class), updatedWork);
+		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+		return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [PUT]   サブスクリプション更新API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) {
+	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId();
-		try {
-			TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
-			// リクエストの更新
-			this.setRequestData(requestWork, serviceResponse);
-			TmUpdateSubscriptionRequestWork updatedWork = tmUpdateSubscriptionRequestWorkRepository.save(requestWork);
-
-			// レスポンスの登録
-			TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
-			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-			return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+		// リクエストの更新
+		this.setRequestData(requestWork, serviceResponse);
+		TmUpdateSubscriptionRequestWork updatedWork = tmUpdateSubscriptionRequestWorkRepository.save(requestWork);
+		// レスポンスの登録
+		TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
+		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+		return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [GET]   サブスクリプション取得API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmGetSubscriptionResponseDto getSubscriptions(TmGetSubscriptionRequestDto requestDto) {
+	public TmGetSubscriptionResponseDto getSubscriptions(TmGetSubscriptionRequestDto requestDto) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers/" + requestDto.getCustomerId() + "/subscriptions/" + requestDto.getSubscriptionId();
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
-			// ステータスコードの確認
-			log.info("TrendMicroサブスクリプション取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// レスポンスの取得
-			TmGetSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionResponseDto.class);
-			return responseDto;
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+		// ステータスコードの確認
+		log.info("TrendMicroサブスクリプション取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+		// レスポンスの取得
+		TmGetSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionResponseDto.class);
+		return responseDto;
 	}
 
 	/**
 	 * [PUT] サブスクリプション解約API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmSuspendSubscriptionResponseWork putSuspend(TmSuspendSubscriptionRequestWork requestWork) {
+	public TmSuspendSubscriptionResponseWork putSuspend(TmSuspendSubscriptionRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId() + "/suspend";
-		try {
-			TmSuspendSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
-			// リクエストの更新
-			this.setRequestData(requestWork, serviceResponse);
-			TmSuspendSubscriptionRequestWork updatedWork = tmSuspendSubscriptionRequestWorkRepository.save(requestWork);
-
-			// レスポンスの登録
-			// 解約成功時にはBodyが返らないのでnullチェックを行う。
-			TmSuspendSubscriptionResponseDto responseBodyDto = null;
-			if (serviceResponse.getResponseEntity().getBody() != null) {
-				responseBodyDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmSuspendSubscriptionResponseDto.class);
-			}
-			TmSuspendSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(responseBodyDto, updatedWork);
-			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-			return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		TmSuspendSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+		// リクエストの更新
+		this.setRequestData(requestWork, serviceResponse);
+		TmSuspendSubscriptionRequestWork updatedWork = tmSuspendSubscriptionRequestWorkRepository.save(requestWork);
+		// レスポンスの登録
+		// 解約成功時にはBodyが返らないのでnullチェックを行う。
+		TmSuspendSubscriptionResponseDto responseBodyDto = null;
+		if (serviceResponse.getResponseEntity().getBody() != null) {
+			responseBodyDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmSuspendSubscriptionResponseDto.class);
 		}
-		return null;
+		TmSuspendSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(responseBodyDto, updatedWork);
+		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+		return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [GET] 更新ユーザー取得API
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmGetCustomerResponseDto getCustomers(Date start, Date end) {
-
+	public TmGetCustomerResponseDto getCustomers(Date start, Date end) throws RestClientException, URISyntaxException, IOException {
 		String url = "/customers";
-
 		//パラメータ設定
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 		String user_modified_start = sdf.format(start);
 		String user_modified_end = sdf.format(end);
-		String buildUrl = UriComponentsBuilder.fromUriString(url).queryParam("user_modified_start", user_modified_start).queryParam("user_modified_end", user_modified_end).toUriString();
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
-			return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		String buildUrl = UriComponentsBuilder //
+				.fromUriString(url) //
+				.queryParam("user_modified_start", user_modified_start) //
+				.queryParam("user_modified_end", user_modified_end) //
+				.toUriString();
+		TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
+		return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
 	}
 
 	/**
 	 * [GET] サービスプランID取得
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
+	 * @throws JsonProcessingException
+	 * @throws RestClientException
 	 */
-	public String getServicePlanId() {
+	public String getServicePlanId() throws RestClientException, JsonProcessingException, UnsupportedEncodingException, URISyntaxException {
 		String url = "/me/serviceplans";
 		//パラメータ設定
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
-			log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
-			return serviceResponse.getResponseEntity().getBody();
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
-		}
-		return null;
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+		log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
+		return serviceResponse.getResponseEntity().getBody();
 	}
 
 	/**
@@ -462,7 +435,8 @@ public class LMPIConnectionHelper {
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-		log.info("LMPI status : " + responseEntity.getStatusCodeValue());
+		log.info("LMPI status   : " + responseEntity.getStatusCodeValue());
+		log.info("LMPI headers  : " + responseEntity.getHeaders());
 		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
