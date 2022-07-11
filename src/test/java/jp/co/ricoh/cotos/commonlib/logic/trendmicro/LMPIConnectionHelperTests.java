@@ -2,8 +2,6 @@ package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
 import static org.junit.Assert.*;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -14,18 +12,13 @@ import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
@@ -57,9 +50,6 @@ import lombok.extern.log4j.Log4j;
 public class LMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
-
-	@SpyBean
-	TrendMicroUtil trendMicroUtil;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -213,7 +203,7 @@ public class LMPIConnectionHelperTests {
 	public void postSubscriptionsTest() throws ParseException {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		Date date = df.parse("20220216");
+		Date date = df.parse("202200801");
 
 		TmCreateSubscriptionRequestWork requestWork = new TmCreateSubscriptionRequestWork();
 		// abstractWork
@@ -291,8 +281,8 @@ public class LMPIConnectionHelperTests {
 		TmGetSubscriptionRequestDto requestDto = new TmGetSubscriptionRequestDto();
 
 		// requestDto
-		requestDto.setCustomerId("5118f657-9f7d-407d-97ab-ca434c6dc936");
-		requestDto.setSubscriptionId("8cf1739a-b7f6-49f3-9bea-2c1ea0a7c05a");
+		requestDto.setCustomerId("bf46415e-5649-448b-a7cb-3f465508be5e");
+		requestDto.setSubscriptionId("bffe523f-3da7-4f87-9dd4-2606b0a527ae");
 
 		try {
 			getHelper().getSubscriptions(requestDto);
@@ -312,7 +302,7 @@ public class LMPIConnectionHelperTests {
 	public void putSuspendTest() throws ParseException {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		Date date = df.parse("20201130");
+		Date date = df.parse("20220731");
 
 		TmSuspendSubscriptionRequestWork requestWork = new TmSuspendSubscriptionRequestWork();
 		// abstractWork
@@ -329,8 +319,8 @@ public class LMPIConnectionHelperTests {
 		requestWork.setVersion(0);
 		// requestWork
 		requestWork.setId(0);
-		requestWork.setCustomerId("1e6749fe-8c89-4b23-8787-b5a258d2f6b6");
-		requestWork.setSubscriptionId("be5564c5-92d4-4ed5-a99c-86f5aa3b4bd9");
+		requestWork.setCustomerId("6198979e-dcf7-446e-949e-9b562574b125");
+		requestWork.setSubscriptionId("de7b56ec-bd34-4fc7-a35b-46131cbdef1d");
 		requestWork.setLicenseExpirationDate(date);
 
 		try {
@@ -381,20 +371,12 @@ public class LMPIConnectionHelperTests {
 	}
 
 	/**
-	 *  [POST] APIリトライ
-	 * @throws JsonProcessingException
-	 * @throws URISyntaxException
-	 * @throws UnsupportedEncodingException
+	 *  APIリトライテスト
 	 */
 	@Test
 	@WithMockCustomUser
 	@Ignore
-	public void callApiRetryTest() throws JsonProcessingException, URISyntaxException, UnsupportedEncodingException {
-		// Mock
-		// リトライ確認用に用意したテストメソッドです。テスト終了後に削除しています。
-		//		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApiTest(Mockito.anyObject(), Mockito.anyObject());
-		Mockito.doThrow(new ResourceAccessException("テストです。")).when(trendMicroUtil).callApi(Mockito.anyObject(), Mockito.anyObject());
-
+	public void callApiRetryTest() {
 		try {
 			getHelper().postCustomers(new TmCreateCustomerRequestWork());
 			fail("正常終了しました。");
@@ -402,7 +384,9 @@ public class LMPIConnectionHelperTests {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
 		}
 	}
 }

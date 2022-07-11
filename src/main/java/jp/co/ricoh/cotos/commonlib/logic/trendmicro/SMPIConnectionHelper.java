@@ -108,35 +108,40 @@ public class SMPIConnectionHelper {
 	/**
 	 * [GET] 顧客のドメイン取得API
 	 * @param customerId お客様(会社)を一意に表すID
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmGetWfbssDomainsResponseDto getWfbssDomains(String customerId) {
+	public TmGetWfbssDomainsResponseDto getWfbssDomains(String customerId) throws RestClientException, URISyntaxException, IOException {
 		String url = "/wfbss/api/domains?cids=" + customerId;
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
-			// ステータスコードの確認
-			log.info("TrendMicroドメイン取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// レスポンスの取得
-			TmGetWfbssDomainsResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetWfbssDomainsResponseDto.class);
-			return responseDto;
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+		// ステータスコードの確認
+		log.info("TrendMicroドメイン取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+		// HTTPステータスが200系以外はエラーとする。
+		if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
+			throw new RuntimeException("[TM] 顧客のドメイン取得APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
 		}
-		return null;
+		// レスポンスの取得
+		TmGetWfbssDomainsResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetWfbssDomainsResponseDto.class);
+		return responseDto;
 	}
 
 	/**
 	 * [POST] WFBSS初期化API
 	 * @param customerId お客様(会社)を一意に表すID
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
+	 * @throws JsonProcessingException
+	 * @throws RestClientException
 	 */
-	public void postWfbssInitialize(String customerId) {
+	public void postWfbssInitialize(String customerId) throws RestClientException, JsonProcessingException, UnsupportedEncodingException, URISyntaxException {
 		String url = "/wfbss/api/initialize?cids=" + customerId;
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, null);
-			// ステータスコードの確認
-			log.info("TrendMicroWFBSS初期化 StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// 戻り値無し
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, null);
+		// ステータスコードの確認
+		log.info("TrendMicroWFBSS初期化 StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+		// HTTPステータスが200系以外はエラーとする。
+		if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
+			throw new RuntimeException("[TM] WFBSS初期化APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
 		}
 	}
 
@@ -145,39 +150,43 @@ public class SMPIConnectionHelper {
 	 * TrendMicro側で作成されるレポートのスケジュール設定を行う
 	 * @param customerId お客様(会社)を一意に表すID
 	 * @param requestDto トレンドマイクロWfbssレポート作成リクエストDTO
+	 * @throws URISyntaxException
+	 * @throws RestClientException
+	 * @throws IOException
 	 */
-	public TmPostWfbssReportResponseDto postWfbssReport(String customerId, TmPostWfbssReportRequestDto requestDto) {
+	public TmPostWfbssReportResponseDto postWfbssReport(String customerId, TmPostWfbssReportRequestDto requestDto) throws RestClientException, URISyntaxException, IOException {
 		String url = "/wfbss/api/report?cids=" + customerId;
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-			// ステータスコードの確認
-			log.info("TrendMicroレポート作成API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// レスポンスの取得
-			TmPostWfbssReportResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmPostWfbssReportResponseDto.class);
-			return responseDto;
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+		// ステータスコードの確認
+		log.info("TrendMicroレポート作成API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+		// HTTPステータスが200系以外はエラーとする。
+		if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
+			throw new RuntimeException("[TM] レポート作成APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
 		}
-		return null;
+		// レスポンスの取得
+		TmPostWfbssReportResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmPostWfbssReportResponseDto.class);
+		return responseDto;
 	}
 
 	/**
 	 * [PUT] 通知設定変更API
 	 * @param customerId お客様(会社)を一意に表すID
 	 * @param requestDto トレンドマイクロWfbss通知設定更新リクエストDTO
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
+	 * @throws JsonProcessingException
+	 * @throws RestClientException
 	 */
-	public void putWfbssNotifSettings(String customerId, TmPutWfbssNotifSettingsRequestDto requestDto) {
+	public void putWfbssNotifSettings(String customerId, TmPutWfbssNotifSettingsRequestDto requestDto) throws RestClientException, JsonProcessingException, UnsupportedEncodingException, URISyntaxException {
 		String url = "/wfbss/api/notif_settings?cids=" + customerId + "&sync=true";
-		try {
-			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-			// ステータスコードの確認
-			log.info("TrendMicro通知設定変更API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// sync=true の為戻り値無し
-			return;
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+		// ステータスコードの確認
+		log.info("TrendMicro通知設定変更API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+		// HTTPステータスが200系以外はエラーとする。
+		if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
+			throw new RuntimeException("[TM] 通知設定変更APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
 		}
-		return;
+		// sync=true の為戻り値無し
 	}
 
 	/**
@@ -230,7 +239,8 @@ public class SMPIConnectionHelper {
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-		log.info("SMPI status : " + responseEntity.getStatusCodeValue());
+		log.info("SMPI status   : " + responseEntity.getStatusCodeValue());
+		log.info("SMPI headers  : " + responseEntity.getHeaders());
 		log.info("SMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
