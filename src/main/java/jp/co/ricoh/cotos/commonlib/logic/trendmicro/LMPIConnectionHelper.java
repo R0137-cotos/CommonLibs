@@ -28,7 +28,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -128,6 +127,8 @@ public class LMPIConnectionHelper {
 
 	private TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository;
 
+	private TrendMicroUtil trendMicroUtil;
+
 	private LMPIConnectionHelper() {
 		// シングルトン
 	}
@@ -147,6 +148,7 @@ public class LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
+				context.getBean(TrendMicroUtil.class), //
 				externalRestTemplate); //
 	}
 
@@ -164,6 +166,7 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionResponseWorkRepository tmUpdateSubscriptionResponseWorkRepository, //
 			TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository, //
 			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository, //
+			TrendMicroUtil trendMicroUtil, //
 			ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
@@ -199,6 +202,8 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmUpdateSubscriptionResponseWorkRepository = tmUpdateSubscriptionResponseWorkRepository;
 		INSTANCE.tmSuspendSubscriptionRequestWorkRepository = tmSuspendSubscriptionRequestWorkRepository;
 		INSTANCE.tmSuspendSubscriptionResponseWorkRepository = tmSuspendSubscriptionResponseWorkRepository;
+		// Util設定
+		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
 	public static LMPIConnectionHelper getInstance() {
@@ -216,19 +221,18 @@ public class LMPIConnectionHelper {
 		try {
 			TmCreateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
 			TmCreateCustomerRequestWork updatedWork = tmCreateCustomerRequestWorkRepository.save(requestWork);
-
 			// レスポンスの登録
 			TmCreateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateCustomerResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmCreateCustomerResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] 顧客作成APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
@@ -239,19 +243,18 @@ public class LMPIConnectionHelper {
 		try {
 			TmUpdateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
 			TmUpdateCustomerRequestWork updatedWork = tmUpdateCustomerRequestWorkRepository.save(requestWork);
-
 			// レスポンスの登録
 			TmUpdateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateCustomerResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateCustomerResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] 会社情報更新APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
@@ -262,19 +265,18 @@ public class LMPIConnectionHelper {
 		try {
 			TmUpdateUserRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
 			TmUpdateUserRequestWork updatedWork = tmUpdateUserRequestWorkRepository.save(requestWork);
-
 			// レスポンスの登録
 			TmUpdateUserResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateUserResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateUserResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
@@ -285,46 +287,44 @@ public class LMPIConnectionHelper {
 		try {
 			TmCreateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
 			TmCreateSubscriptionRequestWork updatedWork = tmCreateSubscriptionRequestWorkRepository.save(requestWork);
-
 			// レスポンスの登録
 			TmCreateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
-	 * [PUT]   サブスクリプション更新API
+	 * [PUT] サブスクリプション更新API
 	 */
 	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId();
 		try {
 			TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
 			TmUpdateSubscriptionRequestWork updatedWork = tmUpdateSubscriptionRequestWorkRepository.save(requestWork);
-
 			// レスポンスの登録
 			TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM]  サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
-	 * [GET]   サブスクリプション取得API
+	 * [GET] サブスクリプション取得API
 	 */
 	public TmGetSubscriptionResponseDto getSubscriptions(TmGetSubscriptionRequestDto requestDto) {
 		String url = "/customers/" + requestDto.getCustomerId() + "/subscriptions/" + requestDto.getSubscriptionId();
@@ -336,9 +336,10 @@ public class LMPIConnectionHelper {
 			TmGetSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
@@ -349,11 +350,9 @@ public class LMPIConnectionHelper {
 		try {
 			TmSuspendSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
 			TmSuspendSubscriptionRequestWork updatedWork = tmSuspendSubscriptionRequestWorkRepository.save(requestWork);
-
 			// レスポンスの登録
 			// 解約成功時にはBodyが返らないのでnullチェックを行う。
 			TmSuspendSubscriptionResponseDto responseBodyDto = null;
@@ -364,57 +363,57 @@ public class LMPIConnectionHelper {
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
 	 * [GET] 更新ユーザー取得API
 	 */
 	public TmGetCustomerResponseDto getCustomers(Date start, Date end) {
-
 		String url = "/customers";
-
 		//パラメータ設定
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 		String user_modified_start = sdf.format(start);
 		String user_modified_end = sdf.format(end);
-		String buildUrl = UriComponentsBuilder
-				.fromUriString(url)
-				.queryParam("user_modified_start", user_modified_start)
-				.queryParam("user_modified_end", user_modified_end)
+		String buildUrl = UriComponentsBuilder //
+				.fromUriString(url) //
+				.queryParam("user_modified_start", user_modified_start) //
+				.queryParam("user_modified_end", user_modified_end) //
 				.toUriString();
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
 			return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
-	 * [GET] サービスプランID取得
+	 * [GET] サービスプランID取得API
 	 */
 	public String getServicePlanId() {
 		String url = "/me/serviceplans";
-		//パラメータ設定
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
 			log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
 			return serviceResponse.getResponseEntity().getBody();
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
 	 * HttpHeadersを返します。
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
 
@@ -426,13 +425,12 @@ public class LMPIConnectionHelper {
 		}
 		long posix_time = INSTANCE.getPosixTime();
 		headers.add("x-access-token", properties.getAccessToken());
-		headers.add("x-signature",
-				this.xSignatureGenerate(//
-						properties.getSecretKey(), //
-						posix_time, //
-						method.toString(), //
-						path, //
-						content));
+		headers.add("x-signature", this.xSignatureGenerate(//
+				properties.getSecretKey(), //
+				posix_time, //
+				method.toString(), //
+				path, //
+				content));
 		headers.add("x-posix-time", String.valueOf(posix_time));
 		headers.add("x-traceid", UUID.randomUUID().toString());
 		headers.add("content-type", "application/json;charset=UTF-8");
@@ -449,10 +447,10 @@ public class LMPIConnectionHelper {
 	 * @param responseClass
 	 * @return
 	 * @throws JsonProcessingException
-	 * @throws URISyntaxException 
-	 * @throws UnsupportedEncodingException 
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
 	 */
-	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
+	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);
@@ -460,7 +458,9 @@ public class LMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
+		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
+		log.info("LMPI status   : " + responseEntity.getStatusCodeValue());
+		log.info("LMPI headers  : " + responseEntity.getHeaders());
 		log.info("LMPI response : " + responseEntity.getBody());
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
@@ -488,8 +488,7 @@ public class LMPIConnectionHelper {
 	 * @param content The HTTP content that is to be hashed, pass null if there's no content to be hashed.
 	 * @return a SHA-256 hashed digest in Base64 string.
 	 */
-	private String xSignatureGenerate(String secret, long unixTimestamp,
-			String method, String uri, byte[] content) {
+	private String xSignatureGenerate(String secret, long unixTimestamp, String method, String uri, byte[] content) {
 		MessageDigest md = null;
 
 		String posix = String.valueOf(unixTimestamp);
