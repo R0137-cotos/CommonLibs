@@ -121,9 +121,9 @@ public class SMPIConnectionHelper {
 			// レスポンスの取得
 			TmGetWfbssDomainsResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetWfbssDomainsResponseDto.class);
 			return responseDto;
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] 顧客のドメイン取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -142,9 +142,9 @@ public class SMPIConnectionHelper {
 			if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
 				throw new RuntimeException("[TM] WFBSS初期化APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
 			}
-		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] WFBSS初期化APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -168,9 +168,9 @@ public class SMPIConnectionHelper {
 			// レスポンスの取得
 			TmPostWfbssReportResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmPostWfbssReportResponseDto.class);
 			return responseDto;
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] レポート作成APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -191,9 +191,9 @@ public class SMPIConnectionHelper {
 				throw new RuntimeException("[TM] 通知設定変更APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
 			}
 			// sync=true の為戻り値無し
-		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] 通知設定変更APIで想定外のエラーが発生しました。");
 		}
 	}
