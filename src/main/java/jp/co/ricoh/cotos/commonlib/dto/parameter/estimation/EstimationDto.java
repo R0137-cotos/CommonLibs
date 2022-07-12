@@ -450,4 +450,10 @@ public class EstimationDto extends DtoBase {
 	@Valid
 	@ApiModelProperty(value = "違約金明細(見積用)", required = false, position = 60)
 	private List<PenaltyDetailEstimationDto> penaltyDetailEstimationList;
+
+	/**
+	 * 延長可能契約月数
+	 */
+	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 61)
+	private Long maxExtensionMonths;
 }
