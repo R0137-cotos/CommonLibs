@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterRequestWork;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsSubscriptionRegisterRequestWorkRepository;
@@ -84,6 +85,17 @@ public class TestMsWorks {
 
 	private void MsSubscriptionRegisterRequestWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(msSubscriptionRegisterRequestWorkRepository, 10L);
+		
+		// ライセンスIDから取得できること
+		List<MsSubscriptionRegisterRequestWork> entity = msSubscriptionRegisterRequestWorkRepository.findByLicenseInfoId(1L);
+		// 取得件数チェック
+		Assert.assertEquals("2件取得できていること", 2, entity.size());
+		// 全てのカラムがNullでないことを確認する
+		entity.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
 	}
 
 	private void MsSubscriptionRegisterResponseWorkRepositoryのテスト() {

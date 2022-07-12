@@ -118,4 +118,31 @@ public class MsCustomerRegisterResponseWork extends AbstractMsResponseWork {
 	@ApiModelProperty(value = "契約ID", required = true, position = 14, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
+	/**
+	 * 顧客テナントID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "顧客テナントID", required = false, position = 15, allowableValues = "range[0,255]")
+	private String customerId;
+	
+	/**
+	 * 管理者ユーザーID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "管理者ユーザーID", required = false, position = 16, allowableValues = "range[0,255]")
+	private String adminUserId;
+	
+	/**
+	 * 管理者ユーザーパスワード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "管理者ユーザーパスワード", required = false, position = 17, allowableValues = "range[0,255]")
+	private String adminUserPassword;
+	
+	/**
+	 * 確定サブドメイン
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "確定サブドメイン", required = false, position = 18, allowableValues = "range[0,255]")
+	private String commitSubDomain;
 }
