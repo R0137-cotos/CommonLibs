@@ -28,7 +28,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -216,146 +215,164 @@ public class LMPIConnectionHelper {
 
 	/**
 	 * [POST] 顧客作成API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
 	 */
-	public TmCreateCustomerResponseWork postCustomers(TmCreateCustomerRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
+	public TmCreateCustomerResponseWork postCustomers(TmCreateCustomerRequestWork requestWork) {
 		String url = "/customers";
 		TmCreateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-		// リクエストの更新
-		this.setRequestData(requestWork, serviceResponse);
-		TmCreateCustomerRequestWork updatedWork = tmCreateCustomerRequestWorkRepository.save(requestWork);
-		// レスポンスの登録
-		TmCreateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateCustomerResponseDto.class), updatedWork);
-		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-		return tmCreateCustomerResponseWorkRepository.save(responseWork);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmCreateCustomerRequestWork updatedWork = tmCreateCustomerRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			TmCreateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateCustomerResponseDto.class), updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmCreateCustomerResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] 顧客作成APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
 	 * [PUT] 会社情報更新API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
 	 */
-	public TmUpdateCustomerResponseWork putCustomers(TmUpdateCustomerRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
+	public TmUpdateCustomerResponseWork putCustomers(TmUpdateCustomerRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId();
 		TmUpdateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-		// リクエストの更新
-		this.setRequestData(requestWork, serviceResponse);
-		TmUpdateCustomerRequestWork updatedWork = tmUpdateCustomerRequestWorkRepository.save(requestWork);
-		// レスポンスの登録
-		TmUpdateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateCustomerResponseDto.class), updatedWork);
-		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-		return tmUpdateCustomerResponseWorkRepository.save(responseWork);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmUpdateCustomerRequestWork updatedWork = tmUpdateCustomerRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			TmUpdateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateCustomerResponseDto.class), updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmUpdateCustomerResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] 会社情報更新APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
 	 * [PUT] ユーザーアカウント更新API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
 	 */
-	public TmUpdateUserResponseWork putUsers(TmUpdateUserRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
+	public TmUpdateUserResponseWork putUsers(TmUpdateUserRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/users/" + requestWork.getUserId();
 		TmUpdateUserRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-		// リクエストの更新
-		this.setRequestData(requestWork, serviceResponse);
-		TmUpdateUserRequestWork updatedWork = tmUpdateUserRequestWorkRepository.save(requestWork);
-		// レスポンスの登録
-		TmUpdateUserResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateUserResponseDto.class), updatedWork);
-		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-		return tmUpdateUserResponseWorkRepository.save(responseWork);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmUpdateUserRequestWork updatedWork = tmUpdateUserRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			TmUpdateUserResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateUserResponseDto.class), updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmUpdateUserResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
 	 * [POST] サブスクリプション作成API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
 	 */
-	public TmCreateSubscriptionResponseWork postSubscriptions(TmCreateSubscriptionRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
+	public TmCreateSubscriptionResponseWork postSubscriptions(TmCreateSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions";
 		TmCreateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
-		// リクエストの更新
-		this.setRequestData(requestWork, serviceResponse);
-		TmCreateSubscriptionRequestWork updatedWork = tmCreateSubscriptionRequestWorkRepository.save(requestWork);
-		// レスポンスの登録
-		TmCreateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class), updatedWork);
-		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-		return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmCreateSubscriptionRequestWork updatedWork = tmCreateSubscriptionRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			TmCreateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class), updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
-	 * [PUT]   サブスクリプション更新API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
+	 * [PUT] サブスクリプション更新API
 	 */
-	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
+	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId();
 		TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-		// リクエストの更新
-		this.setRequestData(requestWork, serviceResponse);
-		TmUpdateSubscriptionRequestWork updatedWork = tmUpdateSubscriptionRequestWorkRepository.save(requestWork);
-		// レスポンスの登録
-		TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
-		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-		return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmUpdateSubscriptionRequestWork updatedWork = tmUpdateSubscriptionRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM]  サブスクリプション更新APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
-	 * [GET]   サブスクリプション取得API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
+	 * [GET] サブスクリプション取得API
 	 */
-	public TmGetSubscriptionResponseDto getSubscriptions(TmGetSubscriptionRequestDto requestDto) throws RestClientException, URISyntaxException, IOException {
+	public TmGetSubscriptionResponseDto getSubscriptions(TmGetSubscriptionRequestDto requestDto) {
 		String url = "/customers/" + requestDto.getCustomerId() + "/subscriptions/" + requestDto.getSubscriptionId();
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
-		// ステータスコードの確認
-		log.info("TrendMicroサブスクリプション取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-		// レスポンスの取得
-		TmGetSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionResponseDto.class);
-		return responseDto;
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+			// ステータスコードの確認
+			log.info("TrendMicroサブスクリプション取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
+			// レスポンスの取得
+			TmGetSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionResponseDto.class);
+			return responseDto;
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
 	 * [PUT] サブスクリプション解約API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
 	 */
-	public TmSuspendSubscriptionResponseWork putSuspend(TmSuspendSubscriptionRequestWork requestWork) throws RestClientException, URISyntaxException, IOException {
+	public TmSuspendSubscriptionResponseWork putSuspend(TmSuspendSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId() + "/suspend";
 		TmSuspendSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
-		// リクエストの更新
-		this.setRequestData(requestWork, serviceResponse);
-		TmSuspendSubscriptionRequestWork updatedWork = tmSuspendSubscriptionRequestWorkRepository.save(requestWork);
-		// レスポンスの登録
-		// 解約成功時にはBodyが返らないのでnullチェックを行う。
-		TmSuspendSubscriptionResponseDto responseBodyDto = null;
-		if (serviceResponse.getResponseEntity().getBody() != null) {
-			responseBodyDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmSuspendSubscriptionResponseDto.class);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmSuspendSubscriptionRequestWork updatedWork = tmSuspendSubscriptionRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			// 解約成功時にはBodyが返らないのでnullチェックを行う。
+			TmSuspendSubscriptionResponseDto responseBodyDto = null;
+			if (serviceResponse.getResponseEntity().getBody() != null) {
+				responseBodyDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmSuspendSubscriptionResponseDto.class);
+			}
+			TmSuspendSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(responseBodyDto, updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
-		TmSuspendSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(responseBodyDto, updatedWork);
-		responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
-		return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
 	}
 
 	/**
 	 * [GET] 更新ユーザー取得API
-	 * @throws URISyntaxException
-	 * @throws RestClientException
-	 * @throws IOException
 	 */
-	public TmGetCustomerResponseDto getCustomers(Date start, Date end) throws RestClientException, URISyntaxException, IOException {
+	public TmGetCustomerResponseDto getCustomers(Date start, Date end) {
 		String url = "/customers";
 		//パラメータ設定
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -367,23 +384,30 @@ public class LMPIConnectionHelper {
 				.queryParam("user_modified_start", user_modified_start) //
 				.queryParam("user_modified_end", user_modified_end) //
 				.toUriString();
-		TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
-		return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
+			return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
+		} catch (URISyntaxException | IOException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
-	 * [GET] サービスプランID取得
-	 * @throws URISyntaxException
-	 * @throws UnsupportedEncodingException
-	 * @throws JsonProcessingException
-	 * @throws RestClientException
+	 * [GET] サービスプランID取得API
 	 */
-	public String getServicePlanId() throws RestClientException, JsonProcessingException, UnsupportedEncodingException, URISyntaxException {
+	public String getServicePlanId() {
 		String url = "/me/serviceplans";
-		//パラメータ設定
-		TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
-		log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
-		return serviceResponse.getResponseEntity().getBody();
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+			log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
+			return serviceResponse.getResponseEntity().getBody();
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException neverOccur) {
+			log.error(neverOccur.toString());
+			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
+		}
 	}
 
 	/**
@@ -426,7 +450,7 @@ public class LMPIConnectionHelper {
 	 * @throws URISyntaxException
 	 * @throws UnsupportedEncodingException
 	 */
-	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
+	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);

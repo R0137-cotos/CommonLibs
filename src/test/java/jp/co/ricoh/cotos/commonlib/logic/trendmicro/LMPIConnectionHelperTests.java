@@ -379,10 +379,10 @@ public class LMPIConnectionHelperTests {
 	public void callApiRetryTest() {
 		try {
 			getHelper().postCustomers(new TmCreateCustomerRequestWork());
-			fail("正常終了しました。");
 		} catch (RestClientException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("エラーが発生しました。");
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
