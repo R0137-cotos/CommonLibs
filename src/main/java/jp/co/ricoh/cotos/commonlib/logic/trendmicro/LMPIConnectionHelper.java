@@ -348,7 +348,7 @@ public class LMPIConnectionHelper {
 	public TmSuspendSubscriptionResponseWork putSuspend(TmSuspendSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId() + "/suspend";
 		try {
-			TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+			TmSuspendSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
