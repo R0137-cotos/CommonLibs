@@ -2,6 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dateCalcPattern;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
@@ -207,6 +210,51 @@ public class TestDateContractUtil {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00045", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "JSON文字列からObjectの変換に失敗しました。", e.getErrorInfoList().get(0).getErrorMessage());
 		}
+	}
+
+	@Test
+	public void サービス終了最大延長日_60か月() throws Exception {
+		Contract contract = new Contract();
+		ProductContract productContract = new ProductContract();
+		productContract.setProductMasterId(6002);
+		List<ProductContract> list = new ArrayList<>();
+		list.add(productContract);
+		contract.setProductContractList(list);
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+		Date result = dateContractUtil.getServiceTermMaxEndFromProduct(contract, sf.parse("2022/08/01"), true);
+		Assert.assertEquals("60か月後の日付が返ること", "2027/07/31", sf.format(result));
+		result = dateContractUtil.getServiceTermMaxEndFromProduct(contract, sf.parse("2023/03/01"), true);
+		Assert.assertEquals("うるう年の場合には2/29が返ること", "2028/02/29", sf.format(result));
+	}
+
+	@Test
+	public void 延長可能契約月数() throws Exception {
+
+		Contract contract = new Contract();
+		Assert.assertNull("サービス終了日・サービス終了最大延長日が設定されていない場合にはnullが返ること", dateContractUtil.getMaxExtensionContractMonths(contract));
+		contract.setServiceTermEnd(new Date());
+		Assert.assertNull("サービス終了最大延長日が設定されていない場合にはnullが返ること", dateContractUtil.getMaxExtensionContractMonths(contract));
+		contract.setServiceTermEnd(null);
+		contract.setServiceTermMaxEnd(new Date());
+		Assert.assertNull("サービス終了日が設定されていない場合にはnullが返ること", dateContractUtil.getMaxExtensionContractMonths(contract));
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+		// 1年間のテスト
+		contract.setServiceTermEnd(sf.parse("2022/01/31"));
+		contract.setServiceTermMaxEnd(sf.parse("2023/1/31"));
+		Assert.assertEquals("1年間で12が返されること", Long.valueOf(12), dateContractUtil.getMaxExtensionContractMonths(contract));
+		contract.setServiceTermEnd(sf.parse("2024/02/29"));
+		contract.setServiceTermMaxEnd(sf.parse("2025/2/28"));
+		Assert.assertEquals("うるう年からの1年間で12が返されること", Long.valueOf(12), dateContractUtil.getMaxExtensionContractMonths(contract));
+		contract.setServiceTermEnd(sf.parse("2023/02/28"));
+		contract.setServiceTermMaxEnd(sf.parse("2024/2/29"));
+		Assert.assertEquals("うるう年までの1年間で12が返されること", Long.valueOf(12), dateContractUtil.getMaxExtensionContractMonths(contract));
+		// 4年間のテスト
+		contract.setServiceTermEnd(sf.parse("2022/01/31"));
+		contract.setServiceTermMaxEnd(sf.parse("2026/1/31"));
+		Assert.assertEquals("4年間で48が返されること", Long.valueOf(48), dateContractUtil.getMaxExtensionContractMonths(contract));
+		contract.setServiceTermEnd(sf.parse("2024/02/29"));
+		contract.setServiceTermMaxEnd(sf.parse("2028/2/29"));
+		Assert.assertEquals("うるう年からの4年間で48が返されること", Long.valueOf(48), dateContractUtil.getMaxExtensionContractMonths(contract));
 	}
 
 	private void テストデータ作成() {
