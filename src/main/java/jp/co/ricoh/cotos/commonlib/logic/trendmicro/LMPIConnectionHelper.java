@@ -218,8 +218,8 @@ public class LMPIConnectionHelper {
 	 */
 	public TmCreateCustomerResponseWork postCustomers(TmCreateCustomerRequestWork requestWork) {
 		String url = "/customers";
-		TmCreateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 		try {
+			TmCreateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
@@ -240,8 +240,8 @@ public class LMPIConnectionHelper {
 	 */
 	public TmUpdateCustomerResponseWork putCustomers(TmUpdateCustomerRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId();
-		TmUpdateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 		try {
+			TmUpdateCustomerRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
@@ -262,8 +262,8 @@ public class LMPIConnectionHelper {
 	 */
 	public TmUpdateUserResponseWork putUsers(TmUpdateUserRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/users/" + requestWork.getUserId();
-		TmUpdateUserRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 		try {
+			TmUpdateUserRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
@@ -284,8 +284,8 @@ public class LMPIConnectionHelper {
 	 */
 	public TmCreateSubscriptionResponseWork postSubscriptions(TmCreateSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions";
-		TmCreateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 		try {
+			TmCreateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
@@ -306,8 +306,8 @@ public class LMPIConnectionHelper {
 	 */
 	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId();
-		TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 		try {
+			TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
@@ -347,8 +347,8 @@ public class LMPIConnectionHelper {
 	 */
 	public TmSuspendSubscriptionResponseWork putSuspend(TmSuspendSubscriptionRequestWork requestWork) {
 		String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getSubscriptionId() + "/suspend";
-		TmSuspendSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 		try {
+			TmUpdateSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
 			// リクエストの更新
 			this.setRequestData(requestWork, serviceResponse);
