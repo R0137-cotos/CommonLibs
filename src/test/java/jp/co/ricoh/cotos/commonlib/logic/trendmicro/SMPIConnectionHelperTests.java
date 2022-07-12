@@ -358,6 +358,7 @@ public class SMPIConnectionHelperTests {
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().postWfbssInitialize(customerId);
+			fail("正常終了しました。");
 		} catch (RestClientException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -381,8 +382,8 @@ public class SMPIConnectionHelperTests {
 		// 存在しないカスタマーIDを設定
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
-			TmPostWfbssReportResponseDto responceDto = getHelper().postWfbssReport(customerId, new TmPostWfbssReportRequestDto());
-			System.out.println("★★取得結果：" + responceDto);
+			getHelper().postWfbssReport(customerId, new TmPostWfbssReportRequestDto());
+			fail("正常終了しました。");
 		} catch (RestClientException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -407,6 +408,7 @@ public class SMPIConnectionHelperTests {
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().putWfbssNotifSettings(customerId, new TmPutWfbssNotifSettingsRequestDto());
+			fail("正常終了しました。");
 		} catch (RestClientException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
