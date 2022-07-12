@@ -228,9 +228,9 @@ public class LMPIConnectionHelper {
 			TmCreateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateCustomerResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmCreateCustomerResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] 顧客作成APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -250,9 +250,9 @@ public class LMPIConnectionHelper {
 			TmUpdateCustomerResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateCustomerResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateCustomerResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] 会社情報更新APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -272,9 +272,9 @@ public class LMPIConnectionHelper {
 			TmUpdateUserResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateUserResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateUserResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -294,9 +294,9 @@ public class LMPIConnectionHelper {
 			TmCreateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -316,9 +316,9 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM]  サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -335,9 +335,9 @@ public class LMPIConnectionHelper {
 			// レスポンスの取得
 			TmGetSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionResponseDto.class);
 			return responseDto;
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -362,9 +362,9 @@ public class LMPIConnectionHelper {
 			TmSuspendSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(responseBodyDto, updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -387,9 +387,9 @@ public class LMPIConnectionHelper {
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
 			return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
-		} catch (URISyntaxException | IOException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -403,9 +403,9 @@ public class LMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
 			log.info("サービスプランID:" + serviceResponse.getResponseEntity().getBody());
 			return serviceResponse.getResponseEntity().getBody();
-		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException neverOccur) {
-			log.error(neverOccur.toString());
-			Arrays.asList(neverOccur.getStackTrace()).stream().forEach(s -> log.error(s));
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
 		}
 	}
