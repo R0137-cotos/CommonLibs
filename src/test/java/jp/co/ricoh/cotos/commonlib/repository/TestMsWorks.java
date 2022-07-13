@@ -18,7 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.AbstractMsResponseWork.MsResponseMappedStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterResponseWork;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsSubscriptionRegisterRequestWorkRepository;
@@ -77,15 +81,33 @@ public class TestMsWorks {
 
 	private void MsCustomerRegisterRequestWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(msCustomerRegisterRequestWorkRepository, 10L);
+
+		// 契約IDから取得できること
+		MsCustomerRegisterRequestWork entity = msCustomerRegisterRequestWorkRepository.findByContractId(1L);
+		Assert.assertNotNull(entity);
+		// 全てのカラムがNullではないことを確認
+		this.assertColumnsNotNull(entity);
 	}
 
 	private void MsCustomerRegisterResponseWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(msCustomerRegisterResponseWorkRepository, 10L);
+
+		//レスポンス反映状態から取得できること
+		List<MsCustomerRegisterResponseWork> entity = msCustomerRegisterResponseWorkRepository.findByProcessStatus(MsResponseMappedStatus.反映済);
+
+		Assert.assertEquals("1件取得できていること", 1, entity.size());
+
+		entity.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
+
 	}
 
 	private void MsSubscriptionRegisterRequestWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(msSubscriptionRegisterRequestWorkRepository, 10L);
-		
+
 		// ライセンスIDから取得できること
 		List<MsSubscriptionRegisterRequestWork> entity = msSubscriptionRegisterRequestWorkRepository.findByLicenseInfoId(1L);
 		// 取得件数チェック
@@ -100,6 +122,17 @@ public class TestMsWorks {
 
 	private void MsSubscriptionRegisterResponseWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(msSubscriptionRegisterResponseWorkRepository, 10L);
+
+		//レスポンス反映状態から取得できること
+		List<MsSubscriptionRegisterResponseWork> entity = msSubscriptionRegisterResponseWorkRepository.findByProcessStatus(MsResponseMappedStatus.反映済);
+
+		Assert.assertEquals("1件取得できていること", 1, entity.size());
+
+		entity.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
 	}
 
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
