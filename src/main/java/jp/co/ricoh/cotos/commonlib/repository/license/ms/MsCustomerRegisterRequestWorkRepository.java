@@ -8,4 +8,5 @@ import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWo
 @Repository
 public interface MsCustomerRegisterRequestWorkRepository extends CrudRepository<MsCustomerRegisterRequestWork, Long> {
 
+	public MsCustomerRegisterRequestWork findByContractId(long contractId);
 }
