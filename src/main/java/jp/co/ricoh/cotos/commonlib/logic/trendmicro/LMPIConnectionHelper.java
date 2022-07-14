@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
@@ -69,9 +68,6 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequest
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserResponseWork;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
-import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
-import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateCustomerRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateCustomerResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionRequestWorkRepository;
@@ -133,8 +129,6 @@ public class LMPIConnectionHelper {
 
 	private TrendMicroUtil trendMicroUtil;
 
-	private CheckUtil checkUtil;
-
 	private LMPIConnectionHelper() {
 		// シングルトン
 	}
@@ -155,7 +149,6 @@ public class LMPIConnectionHelper {
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
 				context.getBean(TrendMicroUtil.class), //
-				context.getBean(CheckUtil.class), //
 				externalRestTemplate); //
 	}
 
@@ -174,7 +167,6 @@ public class LMPIConnectionHelper {
 			TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository, //
 			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository, //
 			TrendMicroUtil trendMicroUtil, //
-			CheckUtil checkUtil, //
 			ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
@@ -212,7 +204,6 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmSuspendSubscriptionResponseWorkRepository = tmSuspendSubscriptionResponseWorkRepository;
 		// Util設定
 		INSTANCE.trendMicroUtil = trendMicroUtil;
-		INSTANCE.checkUtil = checkUtil;
 	}
 
 	public static LMPIConnectionHelper getInstance() {
@@ -240,7 +231,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] 顧客作成" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] 顧客作成APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -262,7 +254,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] 会社情報更新" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] 会社情報更新APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -284,7 +277,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] ユーザーアカウント更新" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -306,7 +300,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] サブスクリプション作成" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -328,7 +323,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM]  サブスクリプション更新" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -347,7 +343,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] サブスクリプション取得" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -374,7 +371,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] サブスクリプション解約" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -399,7 +397,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] 更新ユーザー取得" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -415,7 +414,8 @@ public class LMPIConnectionHelper {
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiUnexpectedError", new String[] { "[TM] サービスプランID取得" }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -470,7 +470,8 @@ public class LMPIConnectionHelper {
 		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
 		// HTTPステータスが200系以外はエラーとする。
 		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ExternalApiCallError", new String[] { "TrendMicro", Integer.toString(responseEntity.getStatusCodeValue()), responseEntity.getBody() }));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
 		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
