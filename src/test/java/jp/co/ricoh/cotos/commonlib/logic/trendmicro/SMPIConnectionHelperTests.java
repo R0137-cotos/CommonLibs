@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +49,8 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifS
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto.TmPutWfbssNotifSettingsRequestDtoNotifSetting.TmPutWfbssNotifSettingsRequestDtoWtp;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto.TmPutWfbssNotifSettingsRequestDtoNotifSetting.TmPutWfbssNotifSettingsRequestDtoWtp.TmPutWfbssNotifSettingsRequestDtoWtpThreshold;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDtoThreshold0;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
@@ -327,20 +330,20 @@ public class SMPIConnectionHelperTests {
 	 *  [GET] 顧客のドメイン取得APIエラーテスト
 	 */
 	@Test
-	@WithMockCustomUser
-	public void getWfbssDomainsErrorTest() {
+	public void 異常系_顧客のドメイン取得() {
 		// 存在しないカスタマーIDを設定
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().getWfbssDomains(customerId);
 			fail("正常終了しました。");
-		} catch (RestClientException e) {
+		} catch (ErrorCheckException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			fail("想定外のエラーが発生しました。");
-		} catch (RuntimeException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00052", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getErrorInfoList().get(0).getErrorMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -352,20 +355,20 @@ public class SMPIConnectionHelperTests {
 	 *  [POST] WFBSS初期化APIエラーテスト
 	 */
 	@Test
-	@WithMockCustomUser
-	public void postWfbssInitializeErrorTest() {
+	public void 異常系_WFBSS初期化() {
 		// 存在しないカスタマーIDを設定
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().postWfbssInitialize(customerId);
 			fail("正常終了しました。");
-		} catch (RestClientException e) {
+		} catch (ErrorCheckException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			fail("想定外のエラーが発生しました。");
-		} catch (RuntimeException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00052", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Cannot find product for cids: 5118F657-9F7D-407D-97AB-CA434C6DC936-11111\"}", e.getErrorInfoList().get(0).getErrorMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -377,20 +380,20 @@ public class SMPIConnectionHelperTests {
 	 *  [POST] レポート作成APIエラーテスト
 	 */
 	@Test
-	@WithMockCustomUser
-	public void postWfbssReportErrorTest() {
+	public void 異常系_レポート作成() {
 		// 存在しないカスタマーIDを設定
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().postWfbssReport(customerId, new TmPostWfbssReportRequestDto());
 			fail("正常終了しました。");
-		} catch (RestClientException e) {
+		} catch (ErrorCheckException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			fail("想定外のエラーが発生しました。");
-		} catch (RuntimeException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00052", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getErrorInfoList().get(0).getErrorMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -402,20 +405,20 @@ public class SMPIConnectionHelperTests {
 	 *  [PUT] 通知設定作成APIエラーテスト
 	 */
 	@Test
-	@WithMockCustomUser
-	public void putWfbssNotifSettingsErrorTest() throws ParseException, JsonProcessingException {
+	public void 異常系_通知設定作成() throws ParseException, JsonProcessingException {
 		// 存在しないカスタマーIDを設定
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
 		try {
 			getHelper().putWfbssNotifSettings(customerId, new TmPutWfbssNotifSettingsRequestDto());
 			fail("正常終了しました。");
-		} catch (RestClientException e) {
+		} catch (ErrorCheckException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			fail("想定外のエラーが発生しました。");
-		} catch (RuntimeException e) {
-			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00052", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getErrorInfoList().get(0).getErrorMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
