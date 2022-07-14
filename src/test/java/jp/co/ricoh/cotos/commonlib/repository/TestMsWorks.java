@@ -118,6 +118,17 @@ public class TestMsWorks {
 			// 全てのカラムがNullではないことを確認
 			this.assertColumnsNotNull(data);
 		});
+
+		// 顧客テナントID・製品ID・ライセンスNOから取得できること
+		List<MsSubscriptionRegisterRequestWork> entity2 = msSubscriptionRegisterRequestWorkRepository.findByCustomerIdAndOfferIdAndLicenseNo("1", "1", "1");
+		// 取得件数チェック
+		Assert.assertEquals("2件取得できていること", 2, entity2.size());
+		// 全てのカラムがNullでないことを確認する
+		entity2.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
 	}
 
 	private void MsSubscriptionRegisterResponseWorkRepositoryのテスト() {

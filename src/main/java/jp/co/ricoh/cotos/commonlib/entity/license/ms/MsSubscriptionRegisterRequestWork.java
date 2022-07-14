@@ -84,7 +84,7 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@Column(nullable = false)
 	@Size(max = 255)
 	@ApiModelProperty(value = "製品ID", required = true, position = 5, allowableValues = "range[0,255]")
-	private String offer_id;
+	private String offerId;
 
 	/**
 	 * 数量
