@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +31,8 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionReques
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.log.LogUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
@@ -371,18 +375,22 @@ public class LMPIConnectionHelperTests {
 	}
 
 	/**
-	 *  APIリトライテスト
+	 *  HTTPステータスが400系エラーのテスト
 	 */
 	@Test
 	@WithMockCustomUser
-	@Ignore
-	public void callApiRetryTest() {
+	public void 異常系_400系エラーテスト() {
 		try {
 			getHelper().postCustomers(new TmCreateCustomerRequestWork());
-		} catch (RestClientException e) {
+			fail("正常終了しました。");
+		} catch (ErrorCheckException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			fail("エラーが発生しました。");
+			// チェック
+			List<ErrorInfo> errorList = e.getErrorInfoList();
+			Assert.assertEquals("エラー件数が一致すること", 1, errorList.size());
+			Assert.assertEquals("エラーIDが一致すること", "ROT00052", e.getErrorInfoList().get(0).getErrorId());
+			Assert.assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"error_subject\":\"InvalidParameterscompany.name\",\"error_message\":\"The name field is required.\"}", e.getErrorInfoList().get(0).getErrorMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
