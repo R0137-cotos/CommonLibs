@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterReque
 public interface MsSubscriptionRegisterRequestWorkRepository extends CrudRepository<MsSubscriptionRegisterRequestWork, Long> {
 
 	public List<MsSubscriptionRegisterRequestWork> findByLicenseInfoId(long licenseInfoId);
+
+	public MsSubscriptionRegisterRequestWork findByCustomerIdAndOfferIdAndLicenseNo(String customerId, String offerId, String licenseNo);
 }
