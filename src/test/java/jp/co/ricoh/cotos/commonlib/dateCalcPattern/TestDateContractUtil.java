@@ -82,7 +82,7 @@ public class TestDateContractUtil {
 			Contract contract = contractRepository.findOne(5L);
 			dateContractUtil.getServiceTermEndFromItem(contract, null, true);
 			Assert.fail("正常終了した");
-		} catch(ErrorCheckException e) {
+		} catch (ErrorCheckException e) {
 			Assert.assertEquals("エラーIDが正しく設定されること", "ROT00013", e.getErrorInfoList().get(0).getErrorId());
 			Assert.assertEquals("エラーメッセージが正しく設定されること", "契約期間月数が設定されていません。", e.getErrorInfoList().get(0).getErrorMessage());
 		}
@@ -238,6 +238,8 @@ public class TestDateContractUtil {
 		contract.setServiceTermMaxEnd(new Date());
 		Assert.assertNull("サービス終了日が設定されていない場合にはnullが返ること", dateContractUtil.getMaxExtensionContractMonths(contract));
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+
+		// java.util.Date型のテスト
 		// 1年間のテスト
 		contract.setServiceTermEnd(sf.parse("2022/01/31"));
 		contract.setServiceTermMaxEnd(sf.parse("2023/1/31"));
@@ -255,6 +257,15 @@ public class TestDateContractUtil {
 		contract.setServiceTermEnd(sf.parse("2024/02/29"));
 		contract.setServiceTermMaxEnd(sf.parse("2028/2/29"));
 		Assert.assertEquals("うるう年からの4年間で48が返されること", Long.valueOf(48), dateContractUtil.getMaxExtensionContractMonths(contract));
+
+		// java.sql.Date型のテスト
+		contract = contractRepository.findOne(16L);
+		// 2024/02/29～2026/2/28
+		Assert.assertEquals("うるう年からの2年間で24が返されること", Long.valueOf(24), dateContractUtil.getMaxExtensionContractMonths(contract));
+
+		// サービス終了日：java.util.Date サービス終了最大延長日：java.sql.Date の場合のテスト(契約変更時にコールされることを想定)
+		contract.setServiceTermEnd(sf.parse("2025/02/28"));
+		Assert.assertEquals("1年間で12が返されること", Long.valueOf(12), dateContractUtil.getMaxExtensionContractMonths(contract));
 	}
 
 	private void テストデータ作成() {
