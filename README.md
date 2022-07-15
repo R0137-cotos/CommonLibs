@@ -470,4 +470,6 @@
 |513|音声SIM 見積検索項目にMNPタイプを追加|
 |514|ベンダーマスタ.添付ファイルパスワード不要を追加|
 |515|TrendMicroAPIのリトライ機能実装|
-|516|Messages.propertiesの修正|
+|516|TrendMicroAPIのエラー処理修正|
+|517|TrendMicroAPIのエラー処理追加修正|
+|518|Messages.propertiesの修正|

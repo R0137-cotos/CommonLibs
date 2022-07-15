@@ -231,6 +231,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 顧客作成APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -253,6 +254,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 会社情報更新APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -275,6 +277,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -297,6 +300,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -319,7 +323,8 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new RuntimeException("[TM]  サブスクリプション更新APIで想定外のエラーが発生しました。");
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -338,6 +343,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -365,6 +371,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -390,6 +397,7 @@ public class LMPIConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -406,6 +414,7 @@ public class LMPIConnectionHelper {
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -459,9 +468,11 @@ public class LMPIConnectionHelper {
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-		log.info("LMPI status   : " + responseEntity.getStatusCodeValue());
-		log.info("LMPI headers  : " + responseEntity.getHeaders());
-		log.info("LMPI response : " + responseEntity.getBody());
+		// HTTPステータスが200系以外はエラーとする。
+		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
 		// リクエスト情報の保持

@@ -371,18 +371,19 @@ public class LMPIConnectionHelperTests {
 	}
 
 	/**
-	 *  APIリトライテスト
+	 *  HTTPステータスが400系エラーのテスト
 	 */
 	@Test
 	@WithMockCustomUser
-	@Ignore
-	public void callApiRetryTest() {
+	public void 異常系_400系エラーテスト() {
 		try {
 			getHelper().postCustomers(new TmCreateCustomerRequestWork());
-		} catch (RestClientException e) {
+			fail("正常終了しました。");
+		} catch (RuntimeException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			fail("エラーが発生しました。");
+			// チェック
+			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"error_subject\":\"InvalidParameterscompany.name\",\"error_message\":\"The name field is required.\"}", e.getMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));

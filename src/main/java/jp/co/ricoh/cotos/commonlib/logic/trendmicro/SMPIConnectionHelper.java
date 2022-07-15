@@ -114,16 +114,13 @@ public class SMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
 			// ステータスコードの確認
 			log.info("TrendMicroドメイン取得API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// HTTPステータスが200系以外はエラーとする。
-			if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
-				throw new RuntimeException("[TM] 顧客のドメイン取得APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
-			}
 			// レスポンスの取得
 			TmGetWfbssDomainsResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetWfbssDomainsResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 顧客のドメイン取得APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -138,13 +135,10 @@ public class SMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, null);
 			// ステータスコードの確認
 			log.info("TrendMicroWFBSS初期化 StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// HTTPステータスが200系以外はエラーとする。
-			if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
-				throw new RuntimeException("[TM] WFBSS初期化APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
-			}
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] WFBSS初期化APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -161,16 +155,13 @@ public class SMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
 			// ステータスコードの確認
 			log.info("TrendMicroレポート作成API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// HTTPステータスが200系以外はエラーとする。
-			if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
-				throw new RuntimeException("[TM] レポート作成APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
-			}
 			// レスポンスの取得
 			TmPostWfbssReportResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmPostWfbssReportResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] レポート作成APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -186,14 +177,11 @@ public class SMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
 			// ステータスコードの確認
 			log.info("TrendMicro通知設定変更API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// HTTPステータスが200系以外はエラーとする。
-			if (!serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
-				throw new RuntimeException("[TM] 通知設定変更APIでエラーが発生しました。： " + serviceResponse.getResponseEntity().getBody());
-			}
 			// sync=true の為戻り値無し
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 通知設定変更APIで想定外のエラーが発生しました。");
 		}
 	}
@@ -248,9 +236,11 @@ public class SMPIConnectionHelper {
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
 		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
-		log.info("SMPI status   : " + responseEntity.getStatusCodeValue());
-		log.info("SMPI headers  : " + responseEntity.getHeaders());
-		log.info("SMPI response : " + responseEntity.getBody());
+		// HTTPステータスが200系以外はエラーとする。
+		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
 		// リクエスト情報の保持
