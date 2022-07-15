@@ -240,8 +240,7 @@ public class DateContractUtil {
 	private LocalDate toLocalDate(Date date) {
 		if (date instanceof java.sql.Date) {
 			return ((java.sql.Date) date).toLocalDate();
-		} else {
-			return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		}
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 }
