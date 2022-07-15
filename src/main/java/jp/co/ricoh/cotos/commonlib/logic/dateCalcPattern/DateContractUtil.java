@@ -221,13 +221,26 @@ public class DateContractUtil {
 		if (contract.getServiceTermEnd() == null || contract.getServiceTermMaxEnd() == null) {
 			return null;
 		}
-		LocalDate from = contract.getServiceTermEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate from = this.toLocalDate(contract.getServiceTermEnd());
 		// うるう年の2/29の場合、2/28として計算する
 		if (from.getMonthValue() == 2 && from.getDayOfMonth() == 29) {
 			from = from.minusDays(1);
 		}
-		LocalDate to = contract.getServiceTermMaxEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate to = this.toLocalDate(contract.getServiceTermMaxEnd());
 		return ChronoUnit.MONTHS.between(from, to);
 	}
 
+	/**
+	 * LocalDateへの変換を行います。
+	 * java.util.Date → new Date()等コード内で生成したDate型
+	 * java.sql.Date → DBから取得したDate型
+	 * @param date 日付
+	 * @return LocalDate
+	 */
+	private LocalDate toLocalDate(Date date) {
+		if (date instanceof java.sql.Date) {
+			return ((java.sql.Date) date).toLocalDate();
+		}
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
 }
