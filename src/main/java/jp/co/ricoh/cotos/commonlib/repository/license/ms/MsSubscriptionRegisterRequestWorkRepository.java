@@ -12,5 +12,5 @@ public interface MsSubscriptionRegisterRequestWorkRepository extends CrudReposit
 
 	public List<MsSubscriptionRegisterRequestWork> findByLicenseInfoId(long licenseInfoId);
 
-	public List<MsSubscriptionRegisterRequestWork> findByCustomerIdAndOfferIdAndLicenseNo(String customerId, String offerId, String licenseNo);
+	public MsSubscriptionRegisterRequestWork findByCustomerIdAndOfferIdAndLicenseNo(String customerId, String offerId, String licenseNo);
 }
