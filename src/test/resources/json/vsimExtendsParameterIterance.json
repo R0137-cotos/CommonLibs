@@ -13,7 +13,8 @@
       "cancelDate": "cancelDate_1",
       "mnpNumber": "mnpNumber_1",
       "mnpIssueDate": "mnpIssueDate_1",
-      "mnpExpirationDate": "mnpExpirationDate_1"
+      "mnpExpirationDate": "mnpExpirationDate_1",
+      "switchingDate": "switchingDate_1"
     },
     {
       "id": 2,
@@ -28,7 +29,8 @@
       "cancelDate": "cancelDate_2",
       "mnpNumber": "mnpNumber_2",
       "mnpIssueDate": "mnpIssueDate_2",
-      "mnpExpirationDate": "mnpExpirationDate_2"
+      "mnpExpirationDate": "mnpExpirationDate_2",
+      "switchingDate": "switchingDate_2"
     }
   ]
 }
