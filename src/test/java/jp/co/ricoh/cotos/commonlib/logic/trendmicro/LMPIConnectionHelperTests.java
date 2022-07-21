@@ -1,8 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
+import static org.junit.Assert.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.AfterClass;
@@ -32,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro LMPI連携 ヘルパーテストクラス。
@@ -41,6 +45,7 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Log4j
 @Ignore
 public class LMPIConnectionHelperTests {
 
@@ -198,7 +203,7 @@ public class LMPIConnectionHelperTests {
 	public void postSubscriptionsTest() throws ParseException {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		Date date = df.parse("20220216");
+		Date date = df.parse("202200801");
 
 		TmCreateSubscriptionRequestWork requestWork = new TmCreateSubscriptionRequestWork();
 		// abstractWork
@@ -276,8 +281,8 @@ public class LMPIConnectionHelperTests {
 		TmGetSubscriptionRequestDto requestDto = new TmGetSubscriptionRequestDto();
 
 		// requestDto
-		requestDto.setCustomerId("5118f657-9f7d-407d-97ab-ca434c6dc936");
-		requestDto.setSubscriptionId("8cf1739a-b7f6-49f3-9bea-2c1ea0a7c05a");
+		requestDto.setCustomerId("bf46415e-5649-448b-a7cb-3f465508be5e");
+		requestDto.setSubscriptionId("bffe523f-3da7-4f87-9dd4-2606b0a527ae");
 
 		try {
 			getHelper().getSubscriptions(requestDto);
@@ -297,7 +302,7 @@ public class LMPIConnectionHelperTests {
 	public void putSuspendTest() throws ParseException {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		Date date = df.parse("20201130");
+		Date date = df.parse("20220731");
 
 		TmSuspendSubscriptionRequestWork requestWork = new TmSuspendSubscriptionRequestWork();
 		// abstractWork
@@ -314,8 +319,8 @@ public class LMPIConnectionHelperTests {
 		requestWork.setVersion(0);
 		// requestWork
 		requestWork.setId(0);
-		requestWork.setCustomerId("1e6749fe-8c89-4b23-8787-b5a258d2f6b6");
-		requestWork.setSubscriptionId("be5564c5-92d4-4ed5-a99c-86f5aa3b4bd9");
+		requestWork.setCustomerId("6198979e-dcf7-446e-949e-9b562574b125");
+		requestWork.setSubscriptionId("de7b56ec-bd34-4fc7-a35b-46131cbdef1d");
 		requestWork.setLicenseExpirationDate(date);
 
 		try {
@@ -362,6 +367,27 @@ public class LMPIConnectionHelperTests {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  HTTPステータスが400系エラーのテスト
+	 */
+	@Test
+	@WithMockCustomUser
+	public void 異常系_400系エラーテスト() {
+		try {
+			getHelper().postCustomers(new TmCreateCustomerRequestWork());
+			fail("正常終了しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"error_subject\":\"InvalidParameterscompany.name\",\"error_message\":\"The name field is required.\"}", e.getMessage());
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
 		}
 	}
 }
