@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.5.0 (21/07/2022)
+- [**closed**] #15055 メールテンプレートマスタに添付ファイルパスを追加 [#1977](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1977)
+- [**closed**] #15344 納入日DTO追加 [#1976](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1976)
+- [**closed**] #15344 納入日追加 [#1974](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1974)
+- [**closed**] #15054 エラーメッセージ追加 [#1968](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1968)
+- [**closed**] #15054 インボイス連携メソッド追加 [#1966](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1966)
+- [**closed**] #15057 切替日追加 [#1960](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1960)
+- [**closed**] #15057 切替日追加 [#1959](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1959)
+
+---
+
 ## v5.4.0 (07/07/2022)
 - [**closed**] #15683 MailAddressUtilで子エンティティが取得できない場合の処理修正 [#2009](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2009)
 - [**closed**] #14627 OSO申込データ.再連携フラグ追加 [#2000](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2000)

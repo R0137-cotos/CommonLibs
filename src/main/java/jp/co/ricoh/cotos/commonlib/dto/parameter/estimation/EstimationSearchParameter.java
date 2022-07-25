@@ -373,7 +373,7 @@ public class EstimationSearchParameter {
 	@ApiParam(value = "破棄ステータスを除外", required = false)
 	@ApiModelProperty(value = "破棄ステータスを除外", required = false)
 	private boolean excludesDiscarded;
-
+	
 	/**
 	 * MNPタイプ
 	 */
