@@ -7,7 +7,7 @@ import lombok.Data;
  * O365契約ID・アカウント再発行用パラメータ
  */
 @Data
-public class O365AccountReissue {
+public class O365AccountReissueParameter {
 
 	/**
 	 * メールアドレス
