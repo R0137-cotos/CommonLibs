@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * O365アカウント再発行用パラメータ
+ * O365契約ID・アカウント再発行用パラメータ
  */
 @Data
 public class O365AccountReissue {
