@@ -768,4 +768,11 @@ public class ContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 102)
 	private Long maxExtensionMonths;
+	
+	/**
+	 * 納入日
+	 */
+	@ApiModelProperty(value = "納入日", required = false, position = 101)
+	@Temporal(TemporalType.DATE)
+	private Date deliveryDate;
 }
