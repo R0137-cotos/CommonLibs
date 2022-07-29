@@ -89,4 +89,11 @@ public class MailTemplateMaster extends EntityBaseMaster {
 	@Column
 	@ApiModelProperty(value = "fromメールアドレス", required = true, position = 9)
 	private String fromMailAddress;
+
+	/**
+	 * 添付ファイルパス
+	 */
+	@Column
+	@ApiModelProperty(value = "添付ファイルパス", required = true, position = 10)
+	private String attachedFilePath;
 }

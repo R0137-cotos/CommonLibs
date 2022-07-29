@@ -72,4 +72,9 @@ public class VSIMExtendsParameterIteranceDto {
 	 * 承諾番号 有効期限
 	 */
 	private String mnpExpirationDate;
+
+	/**
+	 * 切替日
+	 */
+	private String switchingDate;
 }
