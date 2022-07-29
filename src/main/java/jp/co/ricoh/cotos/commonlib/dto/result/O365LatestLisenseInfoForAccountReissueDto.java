@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
+import org.springframework.data.annotation.Id;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -10,26 +12,27 @@ import lombok.Data;
 public class O365LatestLisenseInfoForAccountReissueDto {
 
 	/**
+	 * ライセンス情報ID
+	 */
+	@Id
+	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 1)
+	private String id;
+
+	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = true, position = 1)
+	@ApiModelProperty(value = "RJ管理番号", required = true, position = 2)
 	private String rjManageNumber;
 
 	/**
 	 * サブドメイン名
 	 */
-	@ApiModelProperty(value = "サブドメイン名", required = true, position = 2)
+	@ApiModelProperty(value = "サブドメイン名", required = true, position = 3)
 	private String subDomainName;
 
 	/**
 	 * お客様名
 	 */
-	@ApiModelProperty(value = "お客様名", required = false, position = 3)
-	private String customer_name;
-
-	/**
-	 * ライセンス情報ID
-	 */
-	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 4)
-	private String id;
+	@ApiModelProperty(value = "お客様名", required = false, position = 4)
+	private String customerName;
 }
