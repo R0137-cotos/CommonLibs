@@ -27,6 +27,7 @@ import jp.co.ricoh.cotos.commonlib.entity.common.TransactionDiscardingHistory;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressArrangementList;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressContractList;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressEstimationList;
+import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressLicenseList;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList;
 import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster;
 import jp.co.ricoh.cotos.commonlib.repository.common.AttachedFileRepository;
@@ -39,6 +40,7 @@ import jp.co.ricoh.cotos.commonlib.repository.common.TransactionDiscardingHistor
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressArrangementListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressContractListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressEstimationListRepository;
+import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressLicenseListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressListRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MailControlMasterRepository;
 
@@ -103,6 +105,12 @@ public class TestCommon {
 	VMailAddressArrangementListRepository vMailAddressArrangementListRepository;
 
 	/**
+	 * メールアドレス一覧(契約)
+	 */
+	@Autowired
+	VMailAddressLicenseListRepository vMailAddressLicenseListRepository;
+
+	/**
 	 * 検索条件
 	 */
 	@Autowired
@@ -122,7 +130,8 @@ public class TestCommon {
 
 	static ConfigurableApplicationContext context;
 
-	private static final String SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
+	private static final String CONTRACT_SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
+	private static final String LICENSE_SYNONYM_NAME = "V_MAIL_ADDRESS_LICENSE_LIST";
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -143,6 +152,7 @@ public class TestCommon {
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/arrangement.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/transactionDiscardingHistory.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/vMailAddressLicenseList.sql");
 	}
 
 	@AfterClass
@@ -278,7 +288,7 @@ public class TestCommon {
 	public void VMailAddressListContractRepositoryのテスト() throws Exception {
 
 		// マテビューリフレッシュ
-		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(SYNONYM_NAME);
+		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(CONTRACT_SYNONYM_NAME);
 
 		VMailAddressContractList found = vMailAddressContractListRepository.findOne(1L);
 
@@ -301,6 +311,24 @@ public class TestCommon {
 		Assert.assertNotNull(found);
 
 		List<VMailAddressArrangementList> foundList = vMailAddressArrangementListRepository.findByTranId(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+	}
+
+	@Test
+	public void VMailAddressListLicenseRepositoryのテスト() throws Exception {
+
+		// マテビューリフレッシュ
+		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(LICENSE_SYNONYM_NAME);
+
+		VMailAddressLicenseList found = vMailAddressLicenseListRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		List<VMailAddressLicenseList> foundList = vMailAddressLicenseListRepository.findByTranId(601L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(foundList);
