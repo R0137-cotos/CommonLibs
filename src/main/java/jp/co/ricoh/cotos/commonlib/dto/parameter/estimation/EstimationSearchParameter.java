@@ -373,7 +373,14 @@ public class EstimationSearchParameter {
 	@ApiParam(value = "破棄ステータスを除外", required = false)
 	@ApiModelProperty(value = "破棄ステータスを除外", required = false)
 	private boolean excludesDiscarded;
-
+	
+	/**
+	 * MNPタイプ
+	 */
+	@ApiParam(value = "MNPタイプ", required = false)
+	@ApiModelProperty(value = "MNPタイプ", required = false, allowableValues = "range[0,255]")
+	private String mnpType;
+	
 	/**
 	 * パラメータをMapにする。
 	 */

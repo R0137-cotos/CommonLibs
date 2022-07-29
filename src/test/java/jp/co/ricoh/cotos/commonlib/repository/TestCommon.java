@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.db.RefreshMaterializedViewUtil;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.common.EimDocumentInfo;
@@ -116,12 +117,18 @@ public class TestCommon {
 	@Autowired
 	TestTools testTool;
 
+	@Autowired
+	RefreshMaterializedViewUtil refreshMaterializedViewUtil;
+
 	static ConfigurableApplicationContext context;
+
+	private static final String SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
+		refreshMaterializedViewUtil.initStoredProcedure(context);
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailTemplateMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
@@ -269,6 +276,9 @@ public class TestCommon {
 
 	@Test
 	public void VMailAddressListContractRepositoryのテスト() throws Exception {
+
+		// マテビューリフレッシュ
+		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(SYNONYM_NAME);
 
 		VMailAddressContractList found = vMailAddressContractListRepository.findOne(1L);
 

@@ -1028,4 +1028,11 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "契約状態遷移制御区分", required = false, position = 104, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
 	private ContractStatusControlType contractStatusControlType;
+
+	/**
+	 * 納入日
+	 */
+	@ApiModelProperty(value = "納入日", required = false, position = 105)
+	@Temporal(TemporalType.DATE)
+	private Date deliveryDate;
 }
