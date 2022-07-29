@@ -1030,7 +1030,6 @@ public class Contract extends EntityBase {
 	private ContractStatusControlType contractStatusControlType;
 
 	/**
-<<<<<<< HEAD
 	 * サービス終了最大延長日
 	 */
 	@ApiModelProperty(value = "サービス終了最大延長日", required = false, position = 105)
