@@ -12,27 +12,27 @@ import lombok.Data;
 public class O365LatestLisenseInfoForAccountReissueDto {
 
 	/**
-	 * ライセンス情報ID
+	 * ライセンス情報.ID
 	 */
 	@Id
-	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 1)
+	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 1)
 	private String id;
 
 	/**
-	 * RJ管理番号
+	 * ライセンス情報.RJ管理番号
 	 */
 	@ApiModelProperty(value = "RJ管理番号", required = true, position = 2)
 	private String rjManageNumber;
 
 	/**
-	 * サブドメイン名
+	 * 商品（契約用）.拡張項目.ドメイン名
 	 */
 	@ApiModelProperty(value = "サブドメイン名", required = true, position = 3)
 	private String subDomainName;
 
 	/**
-	 * お客様名
+	 * 顧客（契約用）.顧客名
 	 */
-	@ApiModelProperty(value = "お客様名", required = false, position = 4)
+	@ApiModelProperty(value = "お客様名", required = true, position = 4)
 	private String customerName;
 }
