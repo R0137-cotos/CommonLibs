@@ -475,3 +475,4 @@
 |518|外部連携エラーメッセージ追加|
 |519|契約一覧情報取得DTOにMOM社員IDを追加|
 |520|Messages.propertiesの追加|
+|521|TrendMicroAPIのリトライ機能実装|
