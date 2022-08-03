@@ -31,6 +31,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.CustomerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.DealerContractDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ManagedEstimationDetailDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.BasicContractDiv;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractStatusControlType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.IfsLinkageCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.SsWorkRequestCreateStatus;
@@ -505,4 +506,10 @@ public class ContractExtChangeDto extends DtoBase {
 	@Min(0)
 	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 64, allowableValues = "range[0,9]")
 	private Integer ssWorkRequestCreateFlg;
+
+	/**
+	 * 契約状態遷移制御区分
+	 */
+	@ApiModelProperty(value = "契約状態遷移制御区分", required = false, position = 65, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
+	private ContractStatusControlType contractStatusControlType;
 }
