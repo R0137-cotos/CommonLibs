@@ -132,7 +132,7 @@ public class TestMsWorks {
 		//レスポンス反映状態から取得できること
 		List<MsSubscriptionRegisterResponseWork> entity = msSubscriptionRegisterResponseWorkRepository.findByProcessStatus(MsResponseMappedStatus.反映済);
 
-		Assert.assertEquals("1件取得できていること", 1, entity.size());
+		Assert.assertEquals("2件取得できていること", 2, entity.size());
 
 		entity.stream().forEach(data -> {
 			Assert.assertNotNull(data);
