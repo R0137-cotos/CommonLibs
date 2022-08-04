@@ -13,4 +13,6 @@ public interface MsSubscriptionRegisterResponseWorkRepository extends CrudReposi
 
 	public List<MsSubscriptionRegisterResponseWork> findByProcessStatus(MsResponseMappedStatus processStatus);
 
+	public MsSubscriptionRegisterResponseWork findByLicenseNo(String licenseNo);
+
 }

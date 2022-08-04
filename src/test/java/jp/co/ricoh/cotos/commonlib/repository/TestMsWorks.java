@@ -139,6 +139,12 @@ public class TestMsWorks {
 			// 全てのカラムがNullではないことを確認
 			this.assertColumnsNotNull(data);
 		});
+
+		// ライセンスNOから取得できること
+		MsSubscriptionRegisterResponseWork entity2 = msSubscriptionRegisterResponseWorkRepository.findByLicenseNo("1");
+		Assert.assertNotNull(entity2);
+		// 全てのカラムがNullではないことを確認
+		this.assertColumnsNotNull(entity2);
 	}
 
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
