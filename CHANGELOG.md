@@ -1,5 +1,15 @@
 # Changelog
 
+## v5.6.0 (04/08/2022)
+- [**closed**] #15841 契約検索結果一覧表示にMOM社員IDを追加 [#2041](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2041)
+- [**closed**] #15452 TrendMicroAPIリトライ機能実装 [#2036](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2036)
+- [**closed**] #15787 外部連携エラーメッセージ修正 [#2035](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2035)
+- [**closed**] #15797_Messages.propertiesの追加 [#2033](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2033)
+- [**closed**] #15787 外部連携エラーメッセージ追加 [#2032](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2032)
+- [**closed**] #15867 契約情報変更DTOに契約状態遷移制御区分を追加 [#2031](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2031)
+
+---
+
 ## v5.5.0 (21/07/2022)
 - [**closed**] #15055 メールテンプレートマスタに添付ファイルパスを追加 [#1977](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1977)
 - [**closed**] #15344 納入日DTO追加 [#1976](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1976)
