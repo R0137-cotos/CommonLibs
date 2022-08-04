@@ -260,116 +260,122 @@ public class ContractListInfo {
 	private String ringsEmpCd;
 
 	/**
+	 * MOM社員ID
+	 */
+	@ApiModelProperty(value = "MOM社員ID", required = false, position = 39, allowableValues = "range[0,255]")
+	private String momEmpId;
+
+	/**
 	 * 作成者
 	 */
-	@ApiModelProperty(value = "作成者", required = false, position = 39, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "作成者", required = false, position = 40, allowableValues = "range[0,255]")
 	private String createdUser;
 
 	/**
 	 * 課金開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "課金開始日", required = false, position = 40, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "課金開始日", required = false, position = 41, allowableValues = "range[0,255]")
 	private Date billingStartDate;
 
 	/**
 	 * FFM発注問合せ番号
 	 */
-	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 41, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 42, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 42)
+	@ApiModelProperty(value = "登録日時", required = false, position = 43)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 43)
+	@ApiModelProperty(value = "更新日時", required = false, position = 44)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
 	/**
 	 * ベンダー管理番号
 	 */
-	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 45, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
 	 * 解約理由
 	 */
-	@ApiModelProperty(value = "解約理由", required = false, position = 45, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "解約理由", required = false, position = 46, allowableValues = "range[0,255]")
 	private String cancelReason;
 
 	/**
 	 * その他解約理由
 	 */
-	@ApiModelProperty(value = "その他解約理由", required = false, position = 46, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "その他解約理由", required = false, position = 47, allowableValues = "range[0,1000]")
 	private String cancelReasonEtc;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 47)
+	@ApiModelProperty(value = "拡張項目", required = false, position = 48)
 	private String extendsParameter;
 
 	/**
 	 * 設置先企業ID
 	 */
-	@ApiModelProperty(value = "設置先企業ID", required = false, position = 48, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先企業ID", required = false, position = 49, allowableValues = "range[0,1000]")
 	private String installationCompanyId;
 
 	/**
 	 * 設置先企業名
 	 */
-	@ApiModelProperty(value = "設置先企業名", required = false, position = 49, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先企業名", required = false, position = 50, allowableValues = "range[0,1000]")
 	private String installationCompanyName;
 
 	/**
 	 * 設置先事業所ID
 	 */
-	@ApiModelProperty(value = "設置先事業所ID", required = false, position = 50, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先事業所ID", required = false, position = 51, allowableValues = "range[0,1000]")
 	private String installationOfficeId;
 
 	/**
 	 * 設置先事業所名
 	 */
-	@ApiModelProperty(value = "設置先事業所名", required = false, position = 51, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先事業所名", required = false, position = 52, allowableValues = "range[0,1000]")
 	private String installationOfficeName;
 
 	/**
 	 * 設置先住所
 	 */
-	@ApiModelProperty(value = "設置先住所", required = false, position = 52, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先住所", required = false, position = 53, allowableValues = "range[0,1000]")
 	private String installationAddress;
 
 	/**
 	 * 設置先部門名
 	 */
-	@ApiModelProperty(value = "設置先部門名", required = false, position = 53, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先部門名", required = false, position = 54, allowableValues = "range[0,1000]")
 	private String installationDepartmentName;
 
 	/**
 	 * 設置先企事部ID
 	 */
-	@ApiModelProperty(value = "設置先企事部ID", required = false, position = 54, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先企事部ID", required = false, position = 55, allowableValues = "range[0,1000]")
 	private String installationMomCustId;
 
 	/**
 	 * サービス利用希望日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 55)
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 56)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * 解約予定日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "解約予定日", required = false, position = 56)
+	@ApiModelProperty(value = "解約予定日", required = false, position = 57)
 	private Date cancelScheduledDate;
 
 	@PrePersist

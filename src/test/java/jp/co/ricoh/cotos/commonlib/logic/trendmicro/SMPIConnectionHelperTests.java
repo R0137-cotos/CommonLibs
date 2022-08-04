@@ -1,8 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.logic.trendmicro;
 
+import static org.junit.Assert.*;
+
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -51,6 +54,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.extern.log4j.Log4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパーテストクラス。
@@ -59,6 +63,7 @@ import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Log4j
 @Ignore
 public class SMPIConnectionHelperTests {
 
@@ -90,12 +95,12 @@ public class SMPIConnectionHelperTests {
 	// log.info("SMPI requestBody : " + body);
 
 	/**
-	 *  [GET] サブスクリプション取得API
+	 *  [GET] 顧客のドメイン取得API
 	 * @throws ParseException
 	 */
 	@Test
 	@WithMockCustomUser
-	public void getSubscriptionsTest() throws ParseException {
+	public void getWfbssDomainsTest() throws ParseException {
 
 		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
 
@@ -130,7 +135,7 @@ public class SMPIConnectionHelperTests {
 	/**
 	 *  [POST] レポート作成API
 	 * @throws ParseException
-	 * @throws JsonProcessingException 
+	 * @throws JsonProcessingException
 	 */
 	@Test
 	@WithMockCustomUser
@@ -195,7 +200,7 @@ public class SMPIConnectionHelperTests {
 
 		TmPostWfbssReportRequestDto requestDto = new TmPostWfbssReportRequestDto();
 		requestDto.setSetting(setting);
-		
+
 		try {
 			TmPostWfbssReportResponseDto responceDto = getHelper().postWfbssReport(customerId, requestDto);
 			System.out.println("★★取得結果：" + responceDto);
@@ -209,7 +214,7 @@ public class SMPIConnectionHelperTests {
 	/**
 	 *  [PUT] 通知設定作成API
 	 * @throws ParseException
-	 * @throws JsonProcessingException 
+	 * @throws JsonProcessingException
 	 */
 	@Test
 	@WithMockCustomUser
@@ -315,6 +320,94 @@ public class SMPIConnectionHelperTests {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  [GET] 顧客のドメイン取得APIエラーテスト
+	 */
+	@Test
+	public void 異常系_顧客のドメイン取得() {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			getHelper().getWfbssDomains(customerId);
+			fail("正常終了しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getMessage());
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 *  [POST] WFBSS初期化APIエラーテスト
+	 */
+	@Test
+	public void 異常系_WFBSS初期化() {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			getHelper().postWfbssInitialize(customerId);
+			fail("正常終了しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Cannot find product for cids: 5118F657-9F7D-407D-97AB-CA434C6DC936-11111\"}", e.getMessage());
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 *  [POST] レポート作成APIエラーテスト
+	 */
+	@Test
+	public void 異常系_レポート作成() {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			getHelper().postWfbssReport(customerId, new TmPostWfbssReportRequestDto());
+			fail("正常終了しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getMessage());
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 *  [PUT] 通知設定作成APIエラーテスト
+	 */
+	@Test
+	public void 異常系_通知設定作成() throws ParseException, JsonProcessingException {
+		// 存在しないカスタマーIDを設定
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936-11111";
+		try {
+			getHelper().putWfbssNotifSettings(customerId, new TmPutWfbssNotifSettingsRequestDto());
+			fail("正常終了しました。");
+		} catch (RuntimeException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// チェック
+			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getMessage());
+		} catch (Exception e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			fail("想定外のエラーが発生しました。");
 		}
 	}
 }
