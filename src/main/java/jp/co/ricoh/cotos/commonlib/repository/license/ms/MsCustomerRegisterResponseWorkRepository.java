@@ -12,4 +12,7 @@ import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterResponseW
 public interface MsCustomerRegisterResponseWorkRepository extends CrudRepository<MsCustomerRegisterResponseWork, Long> {
 
 	public List<MsCustomerRegisterResponseWork> findByProcessStatus(MsResponseMappedStatus processStatus);
+
+	public MsCustomerRegisterResponseWork findByContractId(long contractId);
+
 }
