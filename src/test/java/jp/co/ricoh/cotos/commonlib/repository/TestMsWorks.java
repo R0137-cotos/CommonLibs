@@ -23,6 +23,7 @@ import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWo
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterResponseWork;
+import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsAutoUpdateDateManagementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsCustomerRegisterResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsSubscriptionRegisterRequestWorkRepository;
@@ -53,6 +54,9 @@ public class TestMsWorks {
 	MsSubscriptionRegisterResponseWorkRepository msSubscriptionRegisterResponseWorkRepository;
 
 	@Autowired
+	MsAutoUpdateDateManagementRepository msAutoUpdateDateManagementRepository;
+
+	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
@@ -77,6 +81,7 @@ public class TestMsWorks {
 		MsCustomerRegisterResponseWorkRepositoryのテスト();
 		MsSubscriptionRegisterRequestWorkRepositoryのテスト();
 		MsSubscriptionRegisterResponseWorkRepositoryのテスト();
+		MsAutoUpdateDateManagementRepositoryのテスト();
 	}
 
 	private void MsCustomerRegisterRequestWorkRepositoryのテスト() {
@@ -152,6 +157,9 @@ public class TestMsWorks {
 		this.assertColumnsNotNull(entity2);
 	}
 
+	private void MsAutoUpdateDateManagementRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(msAutoUpdateDateManagementRepository, 10L);
+	}
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
 		// テストデータ登録
 
