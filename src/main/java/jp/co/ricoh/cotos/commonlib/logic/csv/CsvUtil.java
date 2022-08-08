@@ -419,21 +419,20 @@ public class CsvUtil {
 	 * @param csvData
 	 * @param filePath(末尾に/無しのパス)
 	 * @param fileName
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void backupCsv(byte[] csvData, String filePath, String fileName) throws IOException {
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        String timeStamp = date.format(new Date());
+		String timeStamp = date.format(new Date());
 		Path fileFullPath = Paths.get(filePath + "/" + fileName + "_backup_" + timeStamp);
 		// 現状考えられるExceptionが発生するケースとして、
 		// ・サーバ容量がいっぱいの場合
 		try {
-            Files.write(fileFullPath, csvData);
-        }
-        catch (IOException e) {
-        	log.warn("バックアップファイルの作成に失敗しました。", e);
-        	throw e;
-        }
+			Files.write(fileFullPath, csvData);
+		} catch (IOException e) {
+			log.warn("バックアップファイルの作成に失敗しました。", e);
+			throw e;
+		}
 		log.info("バックアップファイル「" + fileFullPath.toString() + "」の作成が完了しました。");
 	}
 }
