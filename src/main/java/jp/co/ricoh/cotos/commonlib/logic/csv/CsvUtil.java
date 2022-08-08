@@ -422,7 +422,7 @@ public class CsvUtil {
 	 * @throws IOException 
 	 */
 	public void backupCsv(byte[] csvData, String filePath, String fileName) throws IOException {
-		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         String timeStamp = date.format(new Date());
 		Path fileFullPath = Paths.get(filePath + "/" + fileName + "_backup_" + timeStamp);
 		// 現状考えられるExceptionが発生するケースとして、
