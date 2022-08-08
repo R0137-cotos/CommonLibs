@@ -26,7 +26,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -58,15 +57,23 @@ public class SMPIConnectionHelper {
 
 	private ObjectMapper mapper;
 
+	private TrendMicroUtil trendMicroUtil;
+
 	private SMPIConnectionHelper() {
 		// シングルトン
 	}
 
 	public static void init(ApplicationContext context, ExternalRestTemplate externalRestTemplate) {
-		init(context.getBean(SMPIProperties.class), externalRestTemplate);
+		init( //
+				context.getBean(SMPIProperties.class), //
+				context.getBean(TrendMicroUtil.class), //
+				externalRestTemplate);
 	}
 
-	private static void init(SMPIProperties properties, ExternalRestTemplate externalRestTemplate) {
+	private static void init( //
+			SMPIProperties properties, //
+			TrendMicroUtil trendMicroUtil, //
+			ExternalRestTemplate externalRestTemplate) {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
 		rest.setErrorHandler(new DefaultResponseErrorHandler() {
@@ -86,6 +93,8 @@ public class SMPIConnectionHelper {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setOutputStreaming(false);
 		rest.setRequestFactory(requestFactory);
+		// Util設定
+		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
 
 	public static SMPIConnectionHelper getInstance() {
@@ -109,9 +118,11 @@ public class SMPIConnectionHelper {
 			TmGetWfbssDomainsResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetWfbssDomainsResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] 顧客のドメイン取得APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
@@ -124,9 +135,11 @@ public class SMPIConnectionHelper {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, null);
 			// ステータスコードの確認
 			log.info("TrendMicroWFBSS初期化 StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
-			// 戻り値無し
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] WFBSS初期化APIで想定外のエラーが発生しました。");
 		}
 	}
 
@@ -146,9 +159,11 @@ public class SMPIConnectionHelper {
 			TmPostWfbssReportResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmPostWfbssReportResponseDto.class);
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] レポート作成APIで想定外のエラーが発生しました。");
 		}
-		return null;
 	}
 
 	/**
@@ -163,17 +178,18 @@ public class SMPIConnectionHelper {
 			// ステータスコードの確認
 			log.info("TrendMicro通知設定変更API StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
 			// sync=true の為戻り値無し
-			return;
-		} catch (URISyntaxException | IOException e) {
-			log.error(e);
+		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] 通知設定変更APIで想定外のエラーが発生しました。");
 		}
-		return;
 	}
 
 	/**
 	 * HttpHeadersを返します。
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
 
@@ -208,10 +224,10 @@ public class SMPIConnectionHelper {
 	 * @param responseClass
 	 * @return
 	 * @throws JsonProcessingException
-	 * @throws URISyntaxException 
-	 * @throws UnsupportedEncodingException 
+	 * @throws URISyntaxException
+	 * @throws UnsupportedEncodingException
 	 */
-	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, RestClientException, URISyntaxException, UnsupportedEncodingException {
+	private TmCallServiceResponseDto callService(String url, HttpMethod method, AbstractTmRequestDto requestDto) throws JsonProcessingException, URISyntaxException, UnsupportedEncodingException {
 		String body = null;
 		if (requestDto != null) {
 			body = mapper.writeValueAsString(requestDto);
@@ -219,8 +235,12 @@ public class SMPIConnectionHelper {
 		URI uri = new URI(INSTANCE.properties.getUrlPrefix() + url);
 		HttpHeaders header = getHttpHeaders(uri, method, body);
 		RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, method, uri);
-		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
-		log.info("SMPI response : " + responseEntity.getBody());
+		ResponseEntity<String> responseEntity = trendMicroUtil.callApi(rest, requestEntity);
+		// HTTPステータスが200系以外はエラーとする。
+		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
 		// リクエスト情報の保持
