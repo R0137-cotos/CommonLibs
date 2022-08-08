@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,19 +36,6 @@ public class TestCsvUtil {
 
 	@Autowired
 	CsvUtil csvUtil;
-
-	@Before
-	public void init() throws IOException {
-		Files.createDirectories(Paths.get("outputCsv/"));
-		Stream.of(Paths.get("outputCsv/").toFile().listFiles()).forEach(s -> {
-			s.setWritable(true);
-			try {
-				Files.delete(s.toPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-	}
 
 	@Test
 	public void 正常系_CSV生成テスト_デフォルトパラメーター() throws ErrorCheckException, IOException, ParseException {
@@ -582,6 +568,17 @@ public class TestCsvUtil {
 
 	@Test
 	public void 正常系_バックアップCSV作成成功() throws IOException {
+		// 前処理として不要ファイルの削除
+		Files.createDirectories(Paths.get("outputCsv/"));
+		Stream.of(Paths.get("outputCsv/").toFile().listFiles()).forEach(s -> {
+			s.setWritable(true);
+			try {
+				Files.delete(s.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
 		// パラメータ作成
 		String csvDataString = "項目1,項目2,項目3\r\n" + ",,\r\n" + "1,2,3\r\n" + "test1,test2,test3";
 		byte[] csvData = csvDataString.getBytes();
