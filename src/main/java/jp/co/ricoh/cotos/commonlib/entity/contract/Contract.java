@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -1035,4 +1036,13 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "納入日", required = false, position = 105)
 	@Temporal(TemporalType.DATE)
 	private Date deliveryDate;
+
+	/**
+	 * 計上期間明細
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@OrderBy("item_master_id ASC, accounting_period_start ASC")
+	@ApiModelProperty(value = "計上期間明細", required = false, position = 106)
+	private List<AccountingPeriodDetail> accountingPeriodDetailList;
 }

@@ -19,6 +19,7 @@ import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.BatchCommonStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingTermDetail;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage;
@@ -36,6 +37,7 @@ import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj302SikyuMisiCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj303GnkHrkeCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.DataDiv;
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.ProcessingDiv;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingPeriodDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingTermDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
@@ -102,6 +104,9 @@ public class TestAccounting {
 
 	@Autowired
 	InvoiceLinkageRepository invoiceLinkageRepository;
+
+	@Autowired
+	AccountingPeriodDetailRepository accountingPeriodDetailRepository;
 
 	@Autowired
 	AccountingTermDetailRepository accountingTermDetailRepository;
@@ -384,5 +389,15 @@ public class TestAccounting {
 
 		// Entity が null または 空 ではないことを確認
 		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
+	}
+
+	@Test
+	public void AccountingPeriodDetailRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accountingPeriodDetail.sql");
+
+		AccountingPeriodDetail found = accountingPeriodDetailRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
 	}
 }
