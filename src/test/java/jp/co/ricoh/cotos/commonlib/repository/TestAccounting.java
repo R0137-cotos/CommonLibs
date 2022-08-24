@@ -20,7 +20,6 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.BatchCommonStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
-import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingTermDetail;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.InvoiceLinkage.InvoiceTaxType;
@@ -39,7 +38,6 @@ import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.Da
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.ProcessingDiv;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingPeriodDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
-import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingTermDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.InvoiceLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.OsoRequestDataRepository;
@@ -107,9 +105,6 @@ public class TestAccounting {
 
 	@Autowired
 	AccountingPeriodDetailRepository accountingPeriodDetailRepository;
-
-	@Autowired
-	AccountingTermDetailRepository accountingTermDetailRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -373,22 +368,6 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
-	}
-
-	@Test
-	public void AccountingTermDetailRepositoryのテスト() throws Exception {
-		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accountingTermDetail.sql");
-
-		AccountingTermDetail found = accountingTermDetailRepository.findOne(1L);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
-
-		List<AccountingTermDetail> founds = accountingTermDetailRepository.findByContractDetailId(401L);
-
-
-		// Entity が null または 空 ではないことを確認
-		Assert.assertTrue(!CollectionUtils.isEmpty(founds));
 	}
 
 	@Test

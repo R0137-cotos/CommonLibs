@@ -15,7 +15,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -37,7 +36,6 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialAccountSalesStatus;
-import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingTermDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -341,12 +339,4 @@ public class ContractDetail extends EntityBase {
 	@ApiModelProperty(value = "発送物あり明細", required = false, position = 25)
 	private List<ShippingThingDetail> shippingThingDetailList;
 
-	/**
-	 * 計上期間明細
-	 */
-	@Valid
-	@OneToMany(mappedBy = "contractDetail")
-	@OrderBy("accounting_term_start ASC")
-	@ApiModelProperty(value = "計上期間明細", required = false, position = 26)
-	private List<AccountingTermDetail> accountingTermDetailList;
 }
