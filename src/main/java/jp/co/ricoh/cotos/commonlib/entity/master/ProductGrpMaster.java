@@ -188,4 +188,11 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "満了解約後手配作成フラグ", required = false, position = 21, allowableValues = "range[0,9]")
 	private Integer createArrangementForExpirationCancellationFlg;
+
+	/**
+	 * S&S作業依頼ルート区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "S&S作業依頼ルート区分", required = false, position = 22, allowableValues = "range[0,255]")
+	private String ssWorkRequestRootDiv;
 }
