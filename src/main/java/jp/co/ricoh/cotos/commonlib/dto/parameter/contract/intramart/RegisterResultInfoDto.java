@@ -34,6 +34,7 @@ public class RegisterResultInfoDto {
 		/**
 		 * エラー内容詳細
 		 */
+		@JsonProperty("error_content")
 		private ErrorContent[] errorContent;
 
 		@Data

@@ -19,6 +19,6 @@ public class IntraMartProperties {
 	/**
 	 * APIURL（開発環境）
 	 */
-	private String apiUrl = "https://10.236.20.152/imsl/logic/api/sf_nim006_fd904";
+	private String apiUrl = "https://sld.imp.ricoh.co.jp/imsl/logic/api/sf_nim006_fd904";
 
 }

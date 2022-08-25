@@ -13,7 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.DefaultResponseErrorHandler;
@@ -25,9 +24,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.intramart.ImCallServiceResponseDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.intramart.RegisterResultInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.intramart.RegisterResultInfoDto.ErrorInfo.ErrorContent;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.intramart.SAndSWebRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.intramart.SAndSWebResponseDto;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.IntraMartProperties;
 import lombok.extern.log4j.Log4j;
@@ -62,10 +61,11 @@ public class IntraMartConnectionHelper {
 
 		RestTemplate rest = externalRestTemplate.loadRestTemplate();
 		rest.setErrorHandler(new DefaultResponseErrorHandler() {
-			@Override
-			public void handleError(ClientHttpResponse response) throws IOException {
-				// 何も書かないことで、サーバーエラーとクライアントエラーが起きても例外を発生させずにBodyにエラーメッセージを返す。
-			}
+			//			@Override
+			//			public void handleError(ClientHttpResponse response) throws IOException {
+			//				// 何も書かないことで、サーバーエラーとクライアントエラーが起きても例外を発生させずにBodyにエラーメッセージを返す。
+			//				// ★★★トレンド特有の処理。エラーが発生したときも200エラーが返ってきて、エラー内容がBodyに入ってしまっているため。不要かどうか確認し、不要であれば削除する。
+			//			}
 		});
 		MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
 		mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.TEXT_HTML, MediaType.APPLICATION_JSON));
@@ -90,12 +90,13 @@ public class IntraMartConnectionHelper {
 	/**
 	 * [POST] S&S作業依頼API
 	 */
-	public RegisterResultInfoDto postIntraMart(SAndSWebRequestDto requestDto) {
+	public SAndSWebResponseDto postIntraMart(SAndSWebRequestDto requestDto) {
 		try {
 			ImCallServiceResponseDto serviceResponse = callService(HttpMethod.POST, requestDto);
-			RegisterResultInfoDto result = mapper.readValue(serviceResponse.getResponseEntity().getBody(), RegisterResultInfoDto.class);
-			if (result.getErrorInfo() != null) {
-				ErrorContent[] array = result.getErrorInfo().getErrorContent();
+			String conversion = decodedToUTF8(serviceResponse.getResponseEntity().getBody());
+			SAndSWebResponseDto result = mapper.readValue(conversion, SAndSWebResponseDto.class);
+			if (result.getRegisterResultInfoDto().getErrorInfo() != null) {
+				ErrorContent[] array = result.getRegisterResultInfoDto().getErrorInfo().getErrorContent();
 				for (int i = 0; i < array.length; i++) {
 					log.info("Intra-mart S&S作業依頼API StatusCode：" + array[i].getErrorDocumentid() + "、エラー内容：" + array[i].getErrorMsg());
 				}
@@ -104,7 +105,7 @@ public class IntraMartConnectionHelper {
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
-			throw new RestClientException("Intra-mart S&S作業依頼APIで想定外のエラーが発生しました。");
+			throw new RestClientException("Intra-mart S&S作業依頼APIで想定外のエラーが発生しました。", e);
 		}
 	}
 
@@ -126,10 +127,12 @@ public class IntraMartConnectionHelper {
 
 		try {
 			responseEntity = rest.exchange(requestEntity, String.class);
+			String conversionRespomseBody = decodedToUTF8(responseEntity.getBody());
 			log.info("============================================================");
+			log.info("status  : " + requestEntity);
 			log.info("status  : " + responseEntity.getStatusCodeValue());
 			log.info("headers : " + responseEntity.getHeaders());
-			log.info("response: " + responseEntity.getBody());
+			log.info("response: " + conversionRespomseBody);
 			log.info("============================================================");
 		} catch (ResourceAccessException e) {
 			log.error(e.toString());
@@ -146,5 +149,9 @@ public class IntraMartConnectionHelper {
 		ret.setResponseEntity(responseEntity);
 
 		return ret;
+	}
+
+	private String decodedToUTF8(String encodedWithISO88591) throws UnsupportedEncodingException {
+		return new String(encodedWithISO88591.getBytes("ISO-8859-1"), "UTF-8");
 	}
 }
