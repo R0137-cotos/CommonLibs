@@ -78,7 +78,7 @@ public class RegisterInfoDto {
 	private String ankenTantoUserNm;
 
 	/**
-	 * 課所コード
+	 * 課所コード（SSコード）
 	 */
 	@JsonProperty("irai_busyo_code")
 	private String iraiBusyoCode;
