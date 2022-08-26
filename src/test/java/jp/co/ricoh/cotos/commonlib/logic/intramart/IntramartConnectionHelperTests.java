@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -44,6 +45,7 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Log4j
+@Ignore
 public class IntramartConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
