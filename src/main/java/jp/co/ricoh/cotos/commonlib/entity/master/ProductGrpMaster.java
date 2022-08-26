@@ -220,7 +220,6 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	/**
 	 * S&S作業依頼ルート区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "S&S作業依頼ルート区分", required = false, position = 22, allowableValues = "range[0,255]")
-	private String ssWorkRequestRootDiv;
+	@ApiModelProperty(value = "S&S作業依頼ルート区分", required = false, position = 22, allowableValues = "CSV作成(\"1\"), API連携(\"2\")")
+	private SsWorkRequestRootDiv ssWorkRequestRootDiv;
 }
