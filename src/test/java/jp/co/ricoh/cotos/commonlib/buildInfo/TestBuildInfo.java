@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.HashMap;
 import java.util.Properties;
 
-import javax.transaction.Transactional;
-
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +42,6 @@ public class TestBuildInfo {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	@Transactional
 	public void ビルド情報が取得できること() throws Exception {
 		val appProps = new Properties();
 		appProps.put("name", "testName");
