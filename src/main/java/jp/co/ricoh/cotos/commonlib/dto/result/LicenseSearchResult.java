@@ -327,12 +327,12 @@ public class LicenseSearchResult {
 	 * 設置先郵便番号
 	 */
 	@ApiModelProperty(value = "設置先郵便番号", required = false, position = 49)
-	private String instrallationLocationPostNumber;
+	private String instrallationLocationInputPostNumber;
 
 	/**
 	 * 設置先担当者部署
 	 */
 	@ApiModelProperty(value = "設置先担当者部署", required = false, position = 50)
-	private String instrallationLocationDeptName;
+	private String instrallationLocationPicDeptName;
 
 }
