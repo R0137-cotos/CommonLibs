@@ -333,6 +333,6 @@ public class LicenseSearchResult {
 	 * 設置先担当者部署
 	 */
 	@ApiModelProperty(value = "設置先担当者部署", required = false, position = 50)
-	private String instrallationLocationDeptName;
+	private String instrallationLocationPicDeptName;
 
 }
