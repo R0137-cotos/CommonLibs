@@ -1,0 +1,53 @@
+package jp.co.ricoh.cotos.commonlib.util;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+import lombok.Data;
+
+@Component
+@Data
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "cotos.microsoft")
+public class MicrosoftProperties {
+	/**
+	 * Microsoft 認証APIのベースURL
+	 */
+	String authorizationBaseUrl;
+
+	/**
+	 * Microsoft 認証APIのURL
+	 */
+	String authorizationUrl;
+
+	/**
+	 * Microsoft 顧客・サブスクリプション取得APIのベースURL
+	 */
+	String baseUrl;
+
+	/**
+	 * Microsoft 顧客取得APIのURL
+	 */
+	String customerUrl;
+
+	/**
+	 * Microsoft サブスクリプション取得APIのURL
+	 */
+	String subscriptionUrl;
+
+	/**
+	 * Microsoft アプリID
+	 */
+	String applicationId;
+
+	/**
+	 * Microsoft アカウントID
+	 */
+	String accountId;
+
+	/**
+	 * Microsoft キーID
+	 */
+	String keyId;
+}
