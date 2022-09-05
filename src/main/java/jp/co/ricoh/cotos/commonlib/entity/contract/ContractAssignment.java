@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -55,4 +57,12 @@ public class ContractAssignment extends EntityBase {
 	@OneToMany(mappedBy = "contractAssignment")
 	@ApiModelProperty(value = "契約業務添付ファイル", required = false, position = 4)
 	private List<ContractAssignmentAttachedFile> contractAssignmentAttachedFileList;
+
+	/**
+	 * 更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "更新フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	private Integer updateFlg;
 }
