@@ -1,5 +1,13 @@
 # Changelog
 
+## v5.7.0 (06/09/2022)
+- [**closed**] #14137 ファイルバックアップ共通処理実装 [#2063](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2063)
+- [**closed**] #14137 ymlファイルからバックアップ用ディレクトリが取得できるようにパラメータ追加 [#2065](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2065)
+- [**closed**] #15721_契約業務情報DTOの追加漏れ対応 [#2054](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2054)
+- [**closed**] #15721_更新フラグと更新用課金開始日の追加 [#2042](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2042)
+
+---
+
 ## v5.6.0 (04/08/2022)
 - [**closed**] #15841 契約検索結果一覧表示にMOM社員IDを追加 [#2041](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2041)
 - [**closed**] #15452 TrendMicroAPIリトライ機能実装 [#2036](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2036)
