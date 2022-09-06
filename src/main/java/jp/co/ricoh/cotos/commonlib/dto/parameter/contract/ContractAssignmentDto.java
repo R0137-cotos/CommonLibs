@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
@@ -29,4 +31,12 @@ public class ContractAssignmentDto extends DtoBase {
 	@OneToMany(mappedBy = "contractAssignment")
 	@ApiModelProperty(value = "契約業務添付ファイル", required = false, position = 4)
 	private List<ContractAssignmentAttachedFileDto> contractAssignmentAttachedFileList;
+
+	/**
+	 * 更新フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "更新フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	private Integer updateFlg;
 }
