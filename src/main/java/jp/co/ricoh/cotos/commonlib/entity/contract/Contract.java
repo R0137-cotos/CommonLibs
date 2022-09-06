@@ -1035,4 +1035,11 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "納入日", required = false, position = 105)
 	@Temporal(TemporalType.DATE)
 	private Date deliveryDate;
+
+	/**
+	 * 更新用課金開始日
+	 */
+	@ApiModelProperty(value = "更新用課金開始日", required = false, position = 106)
+	@Temporal(TemporalType.DATE)
+	private Date billingStartDateForUpdate;
 }
