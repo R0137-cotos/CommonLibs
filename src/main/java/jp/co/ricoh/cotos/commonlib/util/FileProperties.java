@@ -36,4 +36,8 @@ public class FileProperties {
 	 */
 	String tmpFileDir;
 
+	/**
+	 * ファイルバックアップ用ディレクトリ
+	 */
+	String backupDir;
 }
