@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Ignore;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetCustomerResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
@@ -341,11 +343,12 @@ public class LMPIConnectionHelperTests {
 	public void getCustomersTest() throws ParseException {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		Date startDate = df.parse("20201113");
-		Date endDate = df.parse("20201114");
+		Date startDate = df.parse("20220101");
+		Date endDate = df.parse("20220906");
 
 		try {
-			getHelper().getCustomers(startDate, endDate);
+			List<TmGetCustomerResponseDto> list = getHelper().getCustomers(startDate, endDate);
+			assertNotNull("結果が取得できること。", list);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
