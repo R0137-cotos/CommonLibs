@@ -42,9 +42,6 @@ public class CotosAuthenticationDetails implements UserDetails {
 	@Getter
 	private Map<ActionDiv, Map<AuthDiv, AuthLevel>> momAuthorities;
 
-	@Getter
-	private String name;
-
 	public CotosAuthenticationDetails(String momEmployeeId, String singleUserId, String origin, String applicationId, String jwt, boolean isSuperUser, boolean isDummyUser, Map<ActionDiv, Map<AuthDiv, AuthLevel>> momAuthorities) {
 		super();
 		this.momEmployeeId = momEmployeeId;
@@ -69,7 +66,7 @@ public class CotosAuthenticationDetails implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return "auth user";
+		return "userName";
 	}
 
 	@Override
