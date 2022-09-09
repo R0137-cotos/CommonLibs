@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.security;
 
-import java.security.Principal;
 import java.util.Collection;
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import lombok.Getter;
 /**
  * COTOS認証情報を保持するDTOクラス
  */
-public class CotosAuthenticationDetails implements UserDetails, Principal {
+public class CotosAuthenticationDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -56,7 +55,6 @@ public class CotosAuthenticationDetails implements UserDetails, Principal {
 		this.isSuperUser = isSuperUser;
 		this.isDummyUser = isDummyUser;
 		this.momAuthorities = momAuthorities;
-		this.name = "auth";
 	}
 
 	@Override
@@ -71,7 +69,7 @@ public class CotosAuthenticationDetails implements UserDetails, Principal {
 
 	@Override
 	public String getUsername() {
-		return null;
+		return "auth user";
 	}
 
 	@Override
