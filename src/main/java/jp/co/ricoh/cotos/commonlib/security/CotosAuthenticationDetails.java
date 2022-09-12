@@ -66,7 +66,7 @@ public class CotosAuthenticationDetails implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		// null返却不可なメソッドのため、MoM顧客IDがない場合はダミー文字列を返す
+		// null返却不可なメソッドのため、MoM社員IDがない場合はダミー文字列を返す
 		return (this.momEmployeeId == null) ? "dummyUser" : this.momEmployeeId;
 	}
 
