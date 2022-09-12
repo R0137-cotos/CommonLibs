@@ -483,3 +483,4 @@
 |526|20220906リリース分マージ|
 |527|TrendMicroの更新ユーザー取得APIのページング機能実装|
 |528|ビルド情報生成用クラス追加|
+|529|CotosAuthenticationDetails::getUserNameが文字列を返すように修正|
