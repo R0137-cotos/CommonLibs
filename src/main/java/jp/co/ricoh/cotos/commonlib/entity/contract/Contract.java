@@ -1037,9 +1037,22 @@ public class Contract extends EntityBase {
 	private Date deliveryDate;
 
 	/**
+	 * サービス終了最大延長日
+	 */
+	@ApiModelProperty(value = "サービス終了最大延長日", required = false, position = 106)
+	@Temporal(TemporalType.DATE)
+	private Date serviceTermMaxEnd;
+
+	/**
+	 * 延長可能契約月数
+	 */
+	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 107)
+	private Long maxExtensionMonths;
+
+	/**
 	 * 更新用課金開始日
 	 */
-	@ApiModelProperty(value = "更新用課金開始日", required = false, position = 106)
+	@ApiModelProperty(value = "更新用課金開始日", required = false, position = 108)
 	@Temporal(TemporalType.DATE)
 	private Date billingStartDateForUpdate;
 }

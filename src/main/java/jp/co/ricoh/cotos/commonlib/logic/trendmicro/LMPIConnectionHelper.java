@@ -7,8 +7,10 @@ import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -379,21 +381,45 @@ public class LMPIConnectionHelper {
 	/**
 	 * [GET] 更新ユーザー取得API
 	 */
-	public TmGetCustomerResponseDto getCustomers(Date start, Date end) {
+	public List<TmGetCustomerResponseDto> getCustomers(Date start, Date end) {
 		String url = "/customers";
 		//パラメータ設定
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 		String user_modified_start = sdf.format(start);
 		String user_modified_end = sdf.format(end);
-		String buildUrl = UriComponentsBuilder //
-				.fromUriString(url) //
-				.queryParam("user_modified_start", user_modified_start) //
-				.queryParam("user_modified_end", user_modified_end) //
-				.toUriString();
+
 		try {
-			TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
-			return mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
+			List<TmGetCustomerResponseDto> customerList = new ArrayList<>();
+			// ページ番号
+			int pageNum = 1;
+			// 取得件数
+			int num = 0;
+			while (true) {
+				// GETパラメータ
+				String buildUrl = UriComponentsBuilder //
+						.fromUriString(url) //
+						.queryParam("user_modified_start", user_modified_start) //
+						.queryParam("user_modified_end", user_modified_end) //
+						.queryParam("page", pageNum) //
+						.queryParam("limit", INSTANCE.properties.getUpdateCustomerInfoGetLimit()) //
+						.toUriString();
+				// APIコール
+				TmCallServiceResponseDto serviceResponse = callService(buildUrl, HttpMethod.GET, null);
+				// ResponseをDTOに変換
+				TmGetCustomerResponseDto dto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetCustomerResponseDto.class);
+				// リストに追加
+				customerList.add(dto);
+				// 取得件数に今回取得した顧客更新件数を加算
+				num += dto.getUsers().length;
+				// 取得件数が顧客更新件数を超えた場合、ループ処理を終了
+				if (dto.getPaging().getTotal() <= num) {
+					break;
+				}
+				// ページ番号をカウントアップ
+				pageNum++;
+			}
+			return customerList;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
