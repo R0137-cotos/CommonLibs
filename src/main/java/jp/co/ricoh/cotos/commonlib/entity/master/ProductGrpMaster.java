@@ -1,7 +1,6 @@
 
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,11 +20,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-import org.springframework.context.annotation.Description;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -42,29 +37,6 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product_grp_master")
 public class ProductGrpMaster extends EntityBaseMaster {
-
-	@Description(value = "S&S作業依頼ルート区分")
-	public enum SsWorkRequestRootDiv {
-
-		CSV作成("1"), API連携("2");
-
-		private final String text;
-
-		private SsWorkRequestRootDiv(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static SsWorkRequestRootDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * 商品グループマスタID
@@ -217,9 +189,4 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "満了解約後手配作成フラグ", required = false, position = 21, allowableValues = "range[0,9]")
 	private Integer createArrangementForExpirationCancellationFlg;
 
-	/**
-	 * S&S作業依頼ルート区分
-	 */
-	@ApiModelProperty(value = "S&S作業依頼ルート区分", required = false, position = 22, allowableValues = "CSV作成(\"1\"), API連携(\"2\")")
-	private SsWorkRequestRootDiv ssWorkRequestRootDiv;
 }
