@@ -323,4 +323,16 @@ public class LicenseSearchResult {
 	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 48)
 	private String contactNo;
 
+	/**
+	 * 設置先郵便番号(手入力)
+	 */
+	@ApiModelProperty(value = "設置先郵便番号(手入力)", required = false, position = 49)
+	private String instrallationLocationInputPostNumber;
+
+	/**
+	 * 設置先担当者部署
+	 */
+	@ApiModelProperty(value = "設置先担当者部署", required = false, position = 50)
+	private String instrallationLocationPicDeptName;
+
 }

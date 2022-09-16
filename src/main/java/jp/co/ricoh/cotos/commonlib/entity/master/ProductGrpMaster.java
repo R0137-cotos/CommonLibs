@@ -188,4 +188,5 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "満了解約後手配作成フラグ", required = false, position = 21, allowableValues = "range[0,9]")
 	private Integer createArrangementForExpirationCancellationFlg;
+
 }
