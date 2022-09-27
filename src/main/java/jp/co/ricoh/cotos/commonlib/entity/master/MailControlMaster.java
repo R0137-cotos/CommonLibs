@@ -210,4 +210,10 @@ public class MailControlMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "通知日タイミング区分", required = false, allowableValues = "トランザクションの日付カラム(\"0\"), 最終承認依頼日(\"1\")", example = "1", position = 18)
 	private NotificationDateType notificationDateType;
+
+	/**
+	 * 手配業務タイプマスタID
+	 */
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 19, allowableValues = "range[0,9223372036854775807]")
+	private Long arrangementWorkTypeMasterId;
 }
