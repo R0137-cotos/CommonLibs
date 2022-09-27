@@ -41,7 +41,7 @@ public class LicenseInfoOperationLog extends EntityBase {
 
 	@Description(value = "操作内容")
 	public enum Operation {
-		新規作成, 更新, 自動更新
+		新規作成, 更新, 自動更新, ライセンス情報洗替
 	}
 
 	/**
