@@ -1175,6 +1175,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailConvertValueMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkTypeMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1186,7 +1187,7 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		// エンティティの取得 処理実行日計算パターンマスタIDがnull
+		// nullableな項目が未設定な場合を確認
 		id = 2L;
 		found = mailControlMasterRepository.findOne(id);
 		// Entity が null ではないことを確認
@@ -2898,7 +2899,7 @@ public class TestMaster {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 	}
-	
+
 	@Test
 	public void ApprovalAlertManagementMasterのテスト() throws Exception {
 		// テストデータ登録
