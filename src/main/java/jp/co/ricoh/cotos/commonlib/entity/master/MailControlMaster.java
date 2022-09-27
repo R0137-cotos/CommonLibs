@@ -214,10 +214,6 @@ public class MailControlMaster extends EntityBaseMaster {
 	/**
 	 * 手配業務タイプマスタID
 	 */
-	@ManyToOne
-	@JoinColumn(name = "arrangement_work_type_master_id", referencedColumnName = "id")
-	@JsonIgnore
-	@ApiModelProperty(value = "手配業務タイプマスタ", required = false, position = 19, allowableValues = "range[0,9223372036854775807]")
-	private ArrangementWorkTypeMaster arrangementWorkTypeMaster;
-
+	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 19, allowableValues = "range[0,9223372036854775807]")
+	private Long arrangementWorkTypeMasterId;
 }
