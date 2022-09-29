@@ -338,4 +338,5 @@ public class ContractDetail extends EntityBase {
 	@OneToMany(mappedBy = "contractDetail")
 	@ApiModelProperty(value = "発送物あり明細", required = false, position = 25)
 	private List<ShippingThingDetail> shippingThingDetailList;
+
 }
