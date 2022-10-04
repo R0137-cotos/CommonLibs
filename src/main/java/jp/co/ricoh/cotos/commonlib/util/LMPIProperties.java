@@ -38,6 +38,11 @@ public class LMPIProperties {
 	private String secretKey = "zGPxd/SVAeevhxleN3SBPnvqM2SddrVBMNDW2JaTQs4=";
 
 	/**
+	 * 更新ユーザ取得最大数
+	 */
+	private int updateCustomerInfoGetLimit = 25;
+
+	/**
 	 * URLの接頭辞を返す。
 	 * @return　apiUrl + "/" + version + "/"
 	 */

@@ -108,4 +108,12 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "振替対象品種マスタ", required = true, position = 10, allowableValues = "range[0,255]")
 	private String trnsItemMasterId;
+
+	/**
+	 * 機器品種作成フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "機器品種作成フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	private Integer equipmentItemCreatingFlg;
 }

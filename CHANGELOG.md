@@ -1,5 +1,19 @@
 # Changelog
 
+## v5.8.0 (20/09/2022)
+- [**closed**] #15073 オンライン資格商品拡張項目用Dtoの作成 [#1962](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1962)
+- [**closed**] #15073 商品（契約用）拡張項目Dtoから顔認証端末：電話番号を削除 [#1982](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1982)
+- [**closed**] #15814 オンライン資格契約満了メール対応 [#2021](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2021)
+- [**closed**] #15814 延長可能契約月数計算ロジック修正 [#2029](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2029)
+- [**closed**] #16071 機種構成マスタEntityに機器品種作成フラグを追加 [#2062](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2062)
+- [**closed**] CotosAuthenticationDetails::getUserNameが文字列を返すように修正 [#2097](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2097)
+- [**closed**] #16034 ビルド情報用クラス追加 [#2092](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2092)
+- [**closed**] #16321 TrendMicroの更新ユーザー取得APIのページング機能実装 [#2090](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2090)
+- [**closed**] #16090 設置先郵便番号(手入力)と設置先担当者部署の変数名修正 [#2076](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2076)
+- [**closed**] #16090 ライセンス一覧検索結果用のDTO修正 [#2074](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2074)
+
+---
+
 ## v5.7.0 (06/09/2022)
 - [**closed**] #14137 ファイルバックアップ共通処理実装 [#2063](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2063)
 - [**closed**] #14137 ymlファイルからバックアップ用ディレクトリが取得できるようにパラメータ追加 [#2065](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2065)

@@ -1,5 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -59,7 +62,7 @@ public class DateContractUtil {
 		});
 		// 最大の契約月数を持つ品種マスタを取得
 		ItemMaster itemMaster = itemMasterList.stream().filter(s -> s.getContractSpanMonth() != null).max(Comparator.comparing(ItemMaster::getContractSpanMonth)).orElse(null);
-		if(itemMaster == null) {
+		if (itemMaster == null) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "契約期間月数" }));
 		}
 
@@ -189,5 +192,55 @@ public class DateContractUtil {
 			}
 		}
 		return billingStartDate;
+	}
+
+	/**
+	 * 積上がっている商品よりサービス終了最大延長日を取得する
+	 * 商品マスタに最長契約月数が設定されていない場合にはnullを返す
+	 * @param contract 	契約
+	 * @param startDate 開始日
+	 * @param endOfMonthFlg 終了日月末フラグ
+	 * @return サービス終了最大延長日
+	 */
+	public Date getServiceTermMaxEndFromProduct(Contract contract, Date startDate, boolean endOfMonthFlg) {
+		ProductMaster productMaster = productMasterRepository.findOne(contract.getProductContractList().get(0).getProductMasterId());
+		if (productMaster.getMaxContractMonths() == null) {
+			return null;
+		}
+		return addMonthServiceTermEnd(startDate, productMaster.getMaxContractMonths(), endOfMonthFlg);
+	}
+
+	/**
+	 * 延長可能契約月数を返す
+	 * サービス終了最大延長日とサービス終了日の差分を月数に変換して返す。
+	 * サービス終了最大延長日もしくはサービス終了日のどちらかがnullの場合にはnullを返す
+	 * @param contract 	契約
+	 * @return 延長可能契約月数
+	 */
+	public Long getMaxExtensionContractMonths(Contract contract) {
+		if (contract.getServiceTermEnd() == null || contract.getServiceTermMaxEnd() == null) {
+			return null;
+		}
+		LocalDate from = this.toLocalDate(contract.getServiceTermEnd());
+		// うるう年の2/29の場合、2/28として計算する
+		if (from.getMonthValue() == 2 && from.getDayOfMonth() == 29) {
+			from = from.minusDays(1);
+		}
+		LocalDate to = this.toLocalDate(contract.getServiceTermMaxEnd());
+		return ChronoUnit.MONTHS.between(from, to);
+	}
+
+	/**
+	 * LocalDateへの変換を行います。
+	 * java.util.Date → new Date()等コード内で生成したDate型
+	 * java.sql.Date → DBから取得したDate型
+	 * @param date 日付
+	 * @return LocalDate
+	 */
+	private LocalDate toLocalDate(Date date) {
+		if (date instanceof java.sql.Date) {
+			return ((java.sql.Date) date).toLocalDate();
+		}
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 }
