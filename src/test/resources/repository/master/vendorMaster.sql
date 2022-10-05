@@ -1,1 +1,1 @@
-INSERT INTO vendor_master (id,created_at,created_user_id,updated_at,updated_user_id,version,vendor_code,vendor_name,mail_address,attached_file_password_unrequired) VALUES(1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,1,'テスト','mail',1);
+INSERT INTO vendor_master (id,created_at,created_user_id,updated_at,updated_user_id,version,vendor_code,vendor_name,mail_address,attached_file_password_unrequired,etransporter_linkage_flg) VALUES(1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,1,'テスト','mail',1,1);
