@@ -575,4 +575,10 @@ public class Estimation extends EntityBase {
 		}
 		super.setUpdatedAt(new Date());
 	}
+
+	/**
+	 * 延長可能契約月数
+	 */
+	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 64)
+	private Long maxExtensionMonths;
 }
