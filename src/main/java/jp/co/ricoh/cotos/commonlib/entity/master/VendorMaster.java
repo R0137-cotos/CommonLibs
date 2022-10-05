@@ -74,4 +74,12 @@ public class VendorMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "添付ファイルパスワード不要", required = false, position = 6, allowableValues = "range[0,9]")
 	private Integer attachedFilePasswordUnrequired;
+
+	/**
+	 * eTransporter連携フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "eTransporter連携フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	private Integer etransporterLinkageFlg;
 }
