@@ -88,7 +88,6 @@ public class MailControlMaster extends EntityBaseMaster {
 	@Description(value = "通知日計算種別")
 	public enum NotificationDateCalcType {
 
-		// メール制御マスタの通知日計算種別がnullの場合と0の場合同じ暦日として扱う。（既存のマスタデータで空欄となるレコード部分があるため）
 		未設定(null), 暦日("0"), 営業日("1");
 
 		private final String text;
