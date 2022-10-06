@@ -24,9 +24,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.converter.master.NotificationDateCalcTypeConverter;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.*;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.MailControlMaster.NotificationDateCalcType;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.Domain;
 import jp.co.ricoh.cotos.commonlib.repository.master.*;
@@ -1192,6 +1194,10 @@ public class TestMaster {
 		found = mailControlMasterRepository.findOne(id);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull("Entityがnullではないことを確認", found);
+
+		Assert.assertEquals("通知日計算区分に未設定が設定可能であること", NotificationDateCalcType.未設定, found.getNotificationDateCalcType());
+		Assert.assertEquals("通知日計算区分.未設定をfromStringで取得可能であること", NotificationDateCalcType.未設定, NotificationDateCalcType.fromString(null));
+		Assert.assertEquals("通知日計算区分.未設定をconverterでnullに変換可能であること", null, new NotificationDateCalcTypeConverter().convertToDatabaseColumn(NotificationDateCalcType.未設定));
 	}
 
 	@Test

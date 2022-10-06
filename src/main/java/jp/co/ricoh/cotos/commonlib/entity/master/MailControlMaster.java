@@ -17,6 +17,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -104,7 +105,10 @@ public class MailControlMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static NotificationDateCalcType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			if (StringUtils.isEmpty(string)) {
+				return NotificationDateCalcType.未設定;
+			}
+			return Arrays.stream(values()).filter(v -> string.equals(v.text)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
