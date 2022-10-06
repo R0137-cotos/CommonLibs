@@ -3,7 +3,11 @@ package jp.co.ricoh.cotos.commonlib.logic.csv;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +24,7 @@ import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.ibm.icu.text.SimpleDateFormat;
 import com.ibm.icu.text.Transliterator;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.CsvParameter;
@@ -31,7 +36,9 @@ import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
@@ -123,6 +130,7 @@ public class CsvUtil {
 
 	/**
 	 * CSVパラメータを取得します
+	 * 
 	 * @param CsvFileSettingMaster
 	 * @return CSV設定情報
 	 */
@@ -343,8 +351,10 @@ public class CsvUtil {
 	/**
 	 * CSVデータ内にある文字化け対象の文字を文字化けしない文字に変換します。
 	 *
-	 * @param csvList CSVデータリスト
-	 * @param obj 対応するCSVのDTOクラス
+	 * @param csvList
+	 *            CSVデータリスト
+	 * @param obj
+	 *            対応するCSVのDTOクラス
 	 * @return 文字化け対応後のCSVデータリスト
 	 */
 	public <T> List<T> convertGarbledCharForCsvData(List<T> csvList, Class<T> obj) {
@@ -401,5 +411,28 @@ public class CsvUtil {
 		System.arraycopy(csv, 0, bomSetData, bom.length, csv.length);
 
 		return bomSetData;
+	}
+
+	/**
+	 * CSVのバックアップを対象のディレクトリ配下に作成する
+	 * 
+	 * @param csvData
+	 * @param filePath(末尾に/無しのパス)
+	 * @param fileName
+	 * @throws IOException
+	 */
+	public void backupCsv(byte[] csvData, String filePath, String fileName) throws IOException {
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String timeStamp = date.format(new Date());
+		Path fileFullPath = Paths.get(filePath + "/" + fileName + "_backup_" + timeStamp);
+		// 現状考えられるExceptionが発生するケースとして、
+		// ・サーバ容量がいっぱいの場合
+		try {
+			Files.write(fileFullPath, csvData);
+		} catch (IOException e) {
+			log.warn("バックアップファイルの作成に失敗しました。", e);
+			throw e;
+		}
+		log.info("バックアップファイル「" + fileFullPath.toString() + "」の作成が完了しました。");
 	}
 }

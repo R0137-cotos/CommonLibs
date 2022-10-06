@@ -1,7 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.csv;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,8 +13,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -561,6 +564,59 @@ public class TestCsvUtil {
 			e.printStackTrace();
 			fail("例外が発生している。");
 		}
+	}
+
+	@Test
+	public void 正常系_バックアップCSV作成成功() throws IOException {
+		// 前処理として不要ファイルの削除
+		Files.createDirectories(Paths.get("outputCsv/"));
+		Stream.of(Paths.get("outputCsv/").toFile().listFiles()).forEach(s -> {
+			s.setWritable(true);
+			try {
+				Files.delete(s.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		// パラメータ作成
+		String csvDataString = "項目1,項目2,項目3\r\n" + ",,\r\n" + "1,2,3\r\n" + "test1,test2,test3";
+		byte[] csvData = csvDataString.getBytes();
+		String filePath = "outputCsv";
+		String fileName = "バックアップテスト.csv";
+
+		try {
+			csvUtil.backupCsv(csvData, filePath, fileName);
+		} catch (IOException e) {
+			Assert.fail("エラーが発生してしまった。");
+			return;
+		}
+
+		// 検証のため出力されたファイルをバイト配列に変換
+		File file = new File("outputCsv");
+		File[] fileList = file.listFiles();
+
+		byte[] exec = Files.readAllBytes(Paths.get(fileList[0].getPath()));
+		Assert.assertArrayEquals("バイト配列が等しいこと", exec, csvData);
+	}
+
+	// Files、PathクラスがfinalクラスでMock化ができないためIgnore
+	// 考えられるエラー発生原因がサーバの容量上限による作成エラーor書き込みエラーくらいの認識なので検証不可
+	@Ignore
+	@Test
+	public void 正常系_バックアップCSV作成失敗_ファイル作成と書き込みエラー() throws IOException {
+		// パラメータ作成
+		byte[] csvData = {};
+		String filePath = "outputCsv";
+		String fileName = "バックアップテスト.csv";
+
+		try {
+			csvUtil.backupCsv(csvData, filePath, fileName);
+		} catch (IOException e) {
+			Assert.assertTrue("想定通りエラーが発生した。", true);
+			return;
+		}
+		Assert.fail("正常終了してしまった。");
 	}
 
 	/**
