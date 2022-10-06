@@ -17,7 +17,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -88,7 +87,7 @@ public class MailControlMaster extends EntityBaseMaster {
 	@Description(value = "通知日計算種別")
 	public enum NotificationDateCalcType {
 
-		未設定(null), 暦日("0"), 営業日("1");
+		暦日("0"), 営業日("1");
 
 		private final String text;
 
@@ -104,10 +103,7 @@ public class MailControlMaster extends EntityBaseMaster {
 
 		@JsonCreator
 		public static NotificationDateCalcType fromString(String string) {
-			if (StringUtils.isEmpty(string)) {
-				return NotificationDateCalcType.未設定;
-			}
-			return Arrays.stream(values()).filter(v -> string.equals(v.text)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
@@ -247,6 +243,6 @@ public class MailControlMaster extends EntityBaseMaster {
 	/**
 	 * 通知日計算種別
 	 */
-	@ApiModelProperty(value = "通知日計算種別", required = false, allowableValues = "未設定(\"null\"), 暦日(\"0\"), 営業日(\"1\")", example = "1", position = 20)
+	@ApiModelProperty(value = "通知日計算種別", required = false, allowableValues = "暦日(\"0\"), 営業日(\"1\")", example = "1", position = 20)
 	private NotificationDateCalcType notificationDateCalcType;
 }
