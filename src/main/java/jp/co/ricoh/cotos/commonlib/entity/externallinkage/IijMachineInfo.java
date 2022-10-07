@@ -29,7 +29,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "license_info")
+@Table(name = "iij_machine_info")
 public class IijMachineInfo extends EntityBase {
 
 	@Description(value = "設定状態")

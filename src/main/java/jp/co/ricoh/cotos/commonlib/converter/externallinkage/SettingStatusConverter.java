@@ -19,6 +19,6 @@ public class SettingStatusConverter implements AttributeConverter<SettingStatus,
 	public SettingStatus convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return SettingStatus.fromString(value); // IllegalArgumentExceptionはInfoDiv.fromString側で投げている
+		return SettingStatus.fromString(value); // IllegalArgumentExceptionはfromString側で投げている
 	}
 }
