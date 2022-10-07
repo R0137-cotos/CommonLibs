@@ -493,3 +493,4 @@
 |536|O365対応マージ|
 |537|Messages.propertiesの追加|
 |538|Message.propertiesにメッセージ追加|
+|539|通知メール制御マスタ.通知日計算種別追加, 通知日種別に区分値追加, メールアドレス情報を表すEntityのTableTypeに区分追加|

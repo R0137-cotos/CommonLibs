@@ -63,7 +63,7 @@ public class MailControlMaster extends EntityBaseMaster {
 
 	public enum NotificationDateType {
 
-		トランザクションの日付カラム("0"), 最終承認依頼日("1");
+		トランザクションの日付カラム("0"), 最終承認依頼日("1"), サービス利用希望日_手配用("2"), バウンスメール送信日("3");
 
 		private final String text;
 
@@ -82,6 +82,29 @@ public class MailControlMaster extends EntityBaseMaster {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 
+	}
+
+	@Description(value = "通知日計算種別")
+	public enum NotificationDateCalcType {
+
+		暦日("0"), 営業日("1");
+
+		private final String text;
+
+		private NotificationDateCalcType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static NotificationDateCalcType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
 	}
 
 	@Id
@@ -216,4 +239,10 @@ public class MailControlMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 19, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
+
+	/**
+	 * 通知日計算種別
+	 */
+	@ApiModelProperty(value = "通知日計算種別", required = false, allowableValues = "暦日(\"0\"), 営業日(\"1\")", example = "1", position = 20)
+	private NotificationDateCalcType notificationDateCalcType;
 }
