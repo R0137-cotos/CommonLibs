@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.IijMachineInfo.SettingStatus;
 import lombok.Data;
 
@@ -13,14 +14,7 @@ import lombok.Data;
  */
 
 @Data
-public class IijMachineInfoDto {
-
-	/**
-	 * IIJ機器情報ID
-	 */
-	@Min(0)
-	@ApiModelProperty(value = "IIJ機器情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long id;
+public class IijMachineInfoDto extends DtoBase {
 
 	/**
 	 * シリアル番号

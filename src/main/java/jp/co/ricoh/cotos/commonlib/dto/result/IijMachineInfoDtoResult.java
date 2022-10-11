@@ -1,25 +1,15 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.IijMachineInfo.SettingStatus;
 import lombok.Data;
 
 /**
  * IIJ機器情報を取得するためのDTOです。
  */
-@Entity
 @Data
-public class IijMachineInfoDtoResult {
-
-	/**
-	 * IIJ機器情報ID
-	 */
-	@Id
-	@ApiModelProperty(value = "IIJ機器情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
-	private long id;
+public class IijMachineInfoDtoResult extends DtoBase {
 
 	/**
 	 * シリアル番号
