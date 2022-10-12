@@ -24,14 +24,14 @@ public class ProductContractExtendsParameterOqcsDto {
 	private String onsiteConfirmationTime;
 
 	/**
-	 * 設置（予定）日
+	 * 設置日
 	 */
-	private Date installationScheduledDate;
+	private Date installationDate;
 	
 	/**
-	 * 設置（予定）日：時間
+	 * 設置日：時間
 	 */
-	private String installationScheduledTime;
+	private String installationTime;
 	
 	/**
 	 * オン資 専用ソフト：問合先
