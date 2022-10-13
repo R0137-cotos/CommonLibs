@@ -63,7 +63,7 @@ public class MailControlMaster extends EntityBaseMaster {
 
 	public enum NotificationDateType {
 
-		トランザクションの日付カラム("0"), 最終承認依頼日("1"), サービス利用希望日_手配用("2"), バウンスメール送信日("3");
+		トランザクションの日付カラム("0"), 最終承認依頼日("1"), 契約の日付カラム_手配用("2"), バウンスメール送信日("3");
 
 		private final String text;
 
