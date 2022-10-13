@@ -494,3 +494,4 @@
 |537|Messages.propertiesの追加|
 |538|Message.propertiesにメッセージ追加|
 |539|通知メール制御マスタ.通知日計算種別追加, 通知日種別に区分値追加, メールアドレス情報を表すEntityのTableTypeに区分追加|
+|540|O365対応 テストデータ追加対応をマージ(6507ee9db88c8395ee1b6867636d392cc9def6fe)|
