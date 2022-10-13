@@ -61,9 +61,10 @@ public class MailControlMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "通知日種別")
 	public enum NotificationDateType {
 
-		トランザクションの日付カラム("0"), 最終承認依頼日("1"), サービス利用希望日_手配用("2"), バウンスメール送信日("3");
+		トランザクションの日付カラム("0"), 最終承認依頼日("1"), 契約の日付カラム_手配用("2"), バウンスメール送信日("3");
 
 		private final String text;
 
@@ -229,9 +230,9 @@ public class MailControlMaster extends EntityBaseMaster {
 	private MailControlMaster errorMailControlMasterId;
 
 	/**
-	 * 通知日タイミング区分
+	 * 通知日種別
 	 */
-	@ApiModelProperty(value = "通知日タイミング区分", required = false, allowableValues = "トランザクションの日付カラム(\"0\"), 最終承認依頼日(\"1\")", example = "1", position = 18)
+	@ApiModelProperty(value = "通知日種別", required = false, allowableValues = "トランザクションの日付カラム(\"0\"), 最終承認依頼日(\"1\"), 契約の日付カラム_手配用(\"2\"), バウンスメール送信日(\"3\")", example = "1", position = 18)
 	private NotificationDateType notificationDateType;
 
 	/**
