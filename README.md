@@ -513,3 +513,5 @@
 |556|O365 商品（契約用）拡張項目DTO（O365）に項目追加|
 |557|DateUtilクラスを新規作成|
 |558|ArrangementSearchParameterに複数商材検索用の商品マスタID追加|
+|559|商品グループマスタにカラム追加、契約.S&S作業依頼作成状態にenum追加|
+|560|Messages.propertiesの追加、商品（契約用）拡張項目DTO（OQCS）.設置（予定）日を設置日に変更|
