@@ -1,0 +1,2 @@
+INSERT INTO public_holiday_master (holiday_date,created_at,created_user_id,updated_at,updated_user_id,version,holiday_name) VALUES ('2023/1/1','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'元日');
+INSERT INTO public_holiday_master (holiday_date,created_at,created_user_id,updated_at,updated_user_id,version,holiday_name) VALUES ('2023/1/2','2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'振替休日');
