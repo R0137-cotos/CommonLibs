@@ -450,6 +450,13 @@ public class ContractSearchParameter {
 	private Date cancelScheduledDateTo;
 
 	/**
+	 * 商品マスタIDリスト
+	 */
+	@ApiParam(value = "商品マスタIDリスト", required = false)
+	@ApiModelProperty(value = "商品マスタIDリスト", required = false)
+	private String productIdList;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
