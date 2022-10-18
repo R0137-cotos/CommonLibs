@@ -41,7 +41,7 @@ public class ContractListener {
 	public void setCheckUtil(CheckUtil checkUtil) {
 		ContractListener.checkUtil = checkUtil;
 	}
-	
+
 	@PrePersist
 	public void prePersist(Contract contract) {
 		this.appendsContractNumber(contract);
@@ -67,7 +67,7 @@ public class ContractListener {
 		 */
 		if (null == contract.getImmutableContIdentNumber()) {
 			long sequenceImmutable = dbUtil.loadSingleFromSQLFile("sql/nextImmutableContIdentNumberSequence.sql", GeneratedNumber.class).getGeneratedNumber();
-			contract.setImmutableContIdentNumber(ID_PREFIX_IMMUTABLE + new SimpleDateFormat("yyyyMMdd").format(new Date()) + String.format("%04d", sequenceImmutable));
+			contract.setImmutableContIdentNumber(ID_PREFIX_IMMUTABLE + new SimpleDateFormat("yyyyMMdd").format(new Date()) + String.format("%05d", sequenceImmutable));
 		}
 
 		/**
