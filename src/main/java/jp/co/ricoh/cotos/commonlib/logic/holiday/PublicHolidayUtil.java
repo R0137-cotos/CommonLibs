@@ -111,6 +111,14 @@ public class PublicHolidayUtil {
 	}
 
 	/**
+	 * 祝日マスタリポジトリ設定
+	 * @param publicHolidayMasterRepository
+	 */
+	public void setPublicHolidayMasterRepository(PublicHolidayMasterRepository publicHolidayMasterRepository) {
+		this.publicHolidayMasterRepository = publicHolidayMasterRepository;
+	}
+
+	/**
 	 * 日付切り捨て
 	 * @param date
 	 * @return
