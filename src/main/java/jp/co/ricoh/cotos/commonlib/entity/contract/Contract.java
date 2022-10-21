@@ -277,6 +277,29 @@ public class Contract extends EntityBase {
 		}
 	}
 
+	@Description(value = "契約変更タイミング")
+	public enum ContractChangeTiming {
+
+		自動更新時("0"), 契約期間途中("1");
+
+		private final String text;
+
+		private ContractChangeTiming(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonValue
+		public static ContractChangeTiming fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_seq")
 	@SequenceGenerator(name = "contract_seq", sequenceName = "contract_seq", allocationSize = 1)
@@ -1066,4 +1089,9 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "計上期間明細", required = false, position = 107)
 	private List<AccountingPeriodDetail> accountingPeriodDetailList;
 
+	/**
+	 * 契約変更タイミング
+	 */
+	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 105, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
+	private ContractChangeTiming contractChangeTiming;
 }
