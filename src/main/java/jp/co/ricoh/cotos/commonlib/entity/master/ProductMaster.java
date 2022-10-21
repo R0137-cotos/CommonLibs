@@ -277,4 +277,11 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "シリアル連絡区分", required = false, position = 29, allowableValues = "新規のみ(\"1\"), 新規と契約変更(\"2\")", example = "1")
 	private SerialContactDiv serialContactDiv;
+
+	/**
+	 * 正式商品名
+	 */
+	@Column(nullable = false)
+	@ApiModelProperty(value = "正式商品名", required = true, position = 30, allowableValues = "range[0,255]")
+	private String officialProductName;
 }
