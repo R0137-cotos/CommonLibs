@@ -449,7 +449,7 @@ public class CommonSendMail {
 	 *            メール件名置換リスト(最大5個まで)
 	 * @return Writer
 	 */
-	public Writer createMailSubject(MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList) {
+	private Writer createMailSubject(MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList) {
 		Writer writer = new StringWriter();
 
 		String stringMailSubject = mailTemplateMaster.getMailSubject();
@@ -470,7 +470,7 @@ public class CommonSendMail {
 	 *            メール本文置換リスト(最大15個まで)
 	 * @return Writer
 	 */
-	public Writer createMailText(MailTemplateMaster mailTemplateMaster, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues) {
+	private Writer createMailText(MailTemplateMaster mailTemplateMaster, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues) {
 		Writer writer = new StringWriter();
 
 		String stringMailText = mailTemplateMaster.getMailBody();
