@@ -137,6 +137,32 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	}
 
 	/**
+	 * EXCEL帳票出力区分
+	 */
+	@Description(value = "EXCEL帳票出力区分")
+	public enum ExcelOutputType {
+
+		jxls("0"), CreateForm("1");
+
+		private final String text;
+
+		private ExcelOutputType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ExcelOutputType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	/**
 	 * テンプレートID
 	 */
 	@Id
@@ -217,9 +243,23 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	private String extension;
 
 	/**
+	 * EXCEL帳票出力区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "EXCEL帳票出力区分", required = false, position = 12, allowableValues = "jxls(\"0\"), CreateForm(\"1\")")
+	private String excelOutputType;
+
+	/**
+	 * スタイルファイル名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "スタイルファイル名", required = false, position = 13, allowableValues = "range[0,255]")
+	private String styleFileName;
+
+	/**
 	 * 帳票ページ管理マスタ
 	 */
 	@OneToMany(mappedBy = "reportTemplateMaster")
-	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 12)
+	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 14)
 	private List<ReportPageMaster> reportPageMasterList;
 }
