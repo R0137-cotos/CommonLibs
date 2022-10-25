@@ -13,7 +13,7 @@ import lombok.Data;
  */
 
 @Data
-public class IijMachineSearchParameter {
+public class IijMachineInfoSearchParameter {
 
 	/**
 	 * IIJ機器情報ID
