@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -60,10 +59,8 @@ public class IijMachineInfoSearchParameter {
 	/**
 	 * 契約番号枝番
 	 */
-	@Max(99)
-	@Min(0)
-	@ApiModelProperty(value = "契約番号枝番", required = true, position = 7, allowableValues = "range[0,99]")
-	private int contractBranchNumber;
+	@ApiModelProperty(value = "契約番号枝番", required = false, position = 7, allowableValues = "range[0,2]")
+	private String contractBranchNumber;
 
 	/**
 	 * 契約ID
