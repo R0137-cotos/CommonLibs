@@ -29,4 +29,10 @@ public class EtransporterSendMailParameter {
 	@ApiModelProperty(value = "API呼び出しリトライ有無", required = false, position = 6)
 	private boolean retry;
 
+	@ApiModelProperty(value = "メール送信有無", required = false, position = 7)
+	private boolean shuldSendMail;
+
+	@ApiModelProperty(value = "送信先メールアドレス(CC)", required = false, position = 8, allowableValues = "range[0,255]")
+	private String mailCc;
+
 }
