@@ -6,10 +6,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * eTransporterメール送信API用パラメータ
+ * eTransporterファイルアップロードAPI用パラメータ
  */
 @Data
-public class EtransporterSendMailParameter {
+public class EtransporterFileUploadParameter {
 
 	@ApiModelProperty(value = "ユーザID", required = true, position = 1, allowableValues = "range[0,255]")
 	private String userId;
@@ -30,7 +30,7 @@ public class EtransporterSendMailParameter {
 	private boolean retry;
 
 	@ApiModelProperty(value = "メール送信有無", required = false, position = 7)
-	private boolean shuldSendMail;
+	private boolean sendmail;
 
 	@ApiModelProperty(value = "送信先メールアドレス(CC)", required = false, position = 8, allowableValues = "range[0,255]")
 	private String mailCc;
