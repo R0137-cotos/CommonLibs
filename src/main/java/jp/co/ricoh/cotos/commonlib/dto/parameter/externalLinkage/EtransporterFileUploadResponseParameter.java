@@ -4,10 +4,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * eTransporterメール送信APIのレスポンス取得用パラメータ
+ * eTransporterファイルアップロードAPIのレスポンス取得用パラメータ
  */
 @Data
-public class EtransporterSendMailResponseParameter {
+public class EtransporterFileUploadResponseParameter {
 
 	@ApiModelProperty(value = "ダウンロードパスワード", required = true, position = 1, allowableValues = "range[0,255]")
 	private String downloadPassword;
