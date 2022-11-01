@@ -32,7 +32,4 @@ public class EtransporterFileUploadParameter {
 	@ApiModelProperty(value = "メール送信有無", required = false, position = 7)
 	private boolean sendmail;
 
-	@ApiModelProperty(value = "送信先メールアドレス(CC)", required = false, position = 8, allowableValues = "range[0,255]")
-	private String mailCc;
-
 }
