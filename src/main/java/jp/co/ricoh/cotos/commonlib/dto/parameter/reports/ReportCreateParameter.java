@@ -38,4 +38,12 @@ public class ReportCreateParameter {
 	@ApiModelProperty(value = "帳票データ部マッピングリスト", required = true, position = 3)
 	private List<Map<String, List<Object>>> dataMapList;
 
+	/**
+	 * CreateFormワークディレクトリ(絶対パス指定)
+	 * 設定例）/sharestorage/reports/template/CreateForm/EstimationMediation
+	 *
+	 * 帳票テンプレート管理マスタの出力形式=2:Excel、かつExcel帳票出力区分=1:CreateFormの場合のみ設定必須
+	 * 呼び出し元のymlに設定しておき、帳票出力APIコール時に本パラメーターに設定すること
+	 */
+	private String workAbsoluteDir;
 }
