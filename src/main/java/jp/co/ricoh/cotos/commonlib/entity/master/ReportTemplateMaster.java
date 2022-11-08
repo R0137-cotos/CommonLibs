@@ -246,7 +246,7 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	 * EXCEL帳票出力区分
 	 */
 	@ApiModelProperty(value = "EXCEL帳票出力区分", required = false, position = 12, allowableValues = "jxls(\"0\"), CreateForm(\"1\")")
-	private String excelOutputType;
+	private ExcelOutputType excelOutputType;
 
 	/**
 	 * スタイルファイル名
