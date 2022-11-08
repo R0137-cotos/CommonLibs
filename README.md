@@ -493,4 +493,3 @@
 |536|O365対応マージ|
 |537|PPAP対応をリバート|
 |538|DifferentStatusのメッセージ修正|
-|539|DifferentStatusのメッセージの再修正|
