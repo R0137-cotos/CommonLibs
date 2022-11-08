@@ -142,7 +142,7 @@ public class Contract extends EntityBase {
 
 	@Description(value = "S&S作業依頼作成状態")
 	public enum SsWorkRequestCreateStatus {
-		未作成("0"), 作成済み("1"), 作成エラー("2");
+		未作成("0"), 作成済み("1"), 作成エラー("2"), IM連携済み("3"), IM連携エラー("4");
 
 		private final String text;
 
@@ -574,7 +574,7 @@ public class Contract extends EntityBase {
 	/**
 	 * S&S作業依頼作成状態
 	 */
-	@ApiModelProperty(value = "S&S作業依頼作成状態", required = false, position = 43, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")")
+	@ApiModelProperty(value = "S&S作業依頼作成状態", required = false, position = 43, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\"),IM連携済み(\"3\"),IM連携エラー(\"4\")")
 	private SsWorkRequestCreateStatus ssWorkRequestCreateStatus;
 
 	/**
