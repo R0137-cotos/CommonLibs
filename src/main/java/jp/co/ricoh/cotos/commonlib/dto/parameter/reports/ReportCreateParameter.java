@@ -45,5 +45,6 @@ public class ReportCreateParameter {
 	 * 帳票テンプレート管理マスタの出力形式=2:Excel、かつExcel帳票出力区分=1:CreateFormの場合のみ設定必須
 	 * 呼び出し元のymlに設定しておき、帳票出力APIコール時に本パラメーターに設定すること
 	 */
+	@ApiModelProperty(value = "CreateFormワークディレクトリ", required = false, position = 4)
 	private String workAbsoluteDir;
 }
