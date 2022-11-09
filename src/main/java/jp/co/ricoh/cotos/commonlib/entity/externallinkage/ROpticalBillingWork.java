@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "iij_machine_info")
+@Table(name = "r_optical_billing_work")
 public class ROpticalBillingWork extends EntityBase {
 
 	@Description(value = "東西種別")
