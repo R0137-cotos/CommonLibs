@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.converter.contract;
+package jp.co.ricoh.cotos.commonlib.converter.json;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
