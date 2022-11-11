@@ -513,3 +513,4 @@
 |556|PPAP メール送信APIパラメータ修正|
 |557|PPAP ベンダーマスタにeTransporter連携フラグ追加|
 |558|PPAP ベンダーマスタに項目追加、eTransporterファイルアップロードAPI用DTOを作成|
+|558|PPAP メール送信のリプレイス処理修正|
