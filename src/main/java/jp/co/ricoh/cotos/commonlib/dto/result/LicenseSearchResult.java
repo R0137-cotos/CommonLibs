@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.OrderDiv;
 import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseDetailExtendsParameterGspDto.ReceptionStatusFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.license.LicenseInfoExtendsParameterSsecDto.IntActingDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
@@ -334,5 +335,29 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "設置先担当者部署", required = false, position = 50)
 	private String instrallationLocationPicDeptName;
+
+	/**
+	 * Microsoftアカウント
+	 */
+	@ApiModelProperty(value = "Microsoftアカウント", required = false, position = 51)
+	private String userId;
+
+	/**
+	 * オンサイト
+	 */
+	@ApiModelProperty(value = "オンサイト", required = false, position = 52)
+	private String onsiteFlg;
+
+	/**
+	 * ユーザー登録
+	 */
+	@ApiModelProperty(value = "ユーザー登録", required = false, position = 53)
+	private String userRegisterFlg;
+
+	/**
+	 * 訪販/WEB
+	 */
+	@ApiModelProperty(value = "訪販/WEB", required = false, position = 54)
+	private OrderDiv orderDiv;
 
 }

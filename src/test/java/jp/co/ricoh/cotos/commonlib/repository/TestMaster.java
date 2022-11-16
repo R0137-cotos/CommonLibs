@@ -1,8 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -253,6 +251,8 @@ public class TestMaster {
 	private MvTjmoc290SsMasterRepository mvTjmoc290SsMasterRepository;
 	@Autowired
 	private ApprovalAlertManagementMasterRepository approvalAlertManagementMasterRepository;
+	@Autowired
+	private PublicHolidayMasterRepository publicHolidayMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2898,7 +2898,7 @@ public class TestMaster {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 	}
-	
+
 	@Test
 	public void ApprovalAlertManagementMasterのテスト() throws Exception {
 		// テストデータ登録
@@ -2906,6 +2906,23 @@ public class TestMaster {
 
 		// エンティティの取得
 		ApprovalAlertManagementMaster found = approvalAlertManagementMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void PublicHolidayMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/publicHolidayMaster.sql");
+
+		// エンティティの取得
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = sdf.parse("2019/01/01");
+		PublicHolidayMaster found = publicHolidayMasterRepository.findOne(date);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

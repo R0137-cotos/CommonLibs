@@ -39,7 +39,7 @@ public class OrderBasicInfo extends EntityBase {
 	@Description(value = "注文タイプ")
 	public enum OrdererType {
 
-		新規("1"), 変更("2"), 解約("3");
+		新規("1"), 変更("2"), 解約("3"), キャンセル("4");
 
 		private final String text;
 
@@ -62,7 +62,7 @@ public class OrderBasicInfo extends EntityBase {
 	@Description(value = "商品種別")
 	public enum ProductType {
 
-		RSI("1"), ROC("2"), MVB("4");
+		RSI("1"), ROC("2"), O365("3"), MVB("4");
 
 		private final String text;
 
@@ -125,14 +125,14 @@ public class OrderBasicInfo extends EntityBase {
 	 * 注文タイプ
 	 */
 	@Column
-	@ApiModelProperty(value = "注文タイプ", required = false, position = 3, allowableValues = "新規(\"1\"), 変更(\"2\"), 解約(\"3\")")
+	@ApiModelProperty(value = "注文タイプ", required = false, position = 3, allowableValues = "新規(\"1\"), 変更(\"2\"), 解約(\"3\"), キャンセル(\"4\")")
 	private OrdererType ordererType;
 
 	/**
 	 * 商品種別
 	 */
 	@Column
-	@ApiModelProperty(value = "商品種別", required = false, position = 4, allowableValues = "RSI(\"1\"), ROC(\"2\"), MVB(\"4\")")
+	@ApiModelProperty(value = "商品種別", required = false, position = 4, allowableValues = "RSI(\"1\"), ROC(\"2\"), O365(\"3\"), MVB(\"4\")")
 	private ProductType productType;
 
 	/**
