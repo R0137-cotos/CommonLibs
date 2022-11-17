@@ -1055,4 +1055,11 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "更新用課金開始日", required = false, position = 108)
 	@Temporal(TemporalType.DATE)
 	private Date billingStartDateForUpdate;
+
+	/**
+	 * NTTお客様ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 109, allowableValues = "range[0,255]")
+	private String nttCustomerId;
 }
