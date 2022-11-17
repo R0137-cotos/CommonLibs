@@ -625,7 +625,7 @@ public class ContractDto extends DtoBase {
 	 * 先頭3文字：商品マスタ.仕入先No、末尾9文字：契約情報画面（請求先情報セクション）より入力 <br>
 	 * 【任意コメントの場合】 <br>
 	 * 最大20Byteのコメント 契約情報画面（請求先情報セクション）より入力
-	 * 
+	 *
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "納品書・請求書印字用コメント", required = false, position = 82, allowableValues = "range[0,255]")
@@ -775,4 +775,11 @@ public class ContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 103)
 	private Long maxExtensionMonths;
+
+	/**
+	 * NTTお客様ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 104, allowableValues = "range[0,255]")
+	private String nttCustomerId;
 }

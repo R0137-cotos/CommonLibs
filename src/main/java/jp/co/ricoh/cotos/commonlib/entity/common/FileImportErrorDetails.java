@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -46,10 +45,9 @@ public class FileImportErrorDetails extends EntityBase {
 	/**
 	 * 行番号
 	 */
-	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "行番号", required = false, position = 3, allowableValues = "range[0,99999]")
-	private Integer lineNumber;
+	@ApiModelProperty(value = "行番号", required = false, position = 3, allowableValues = "range[0,9223372036854775807]")
+	private Long lineNumber;
 
 	/**
 	 * メッセージ
