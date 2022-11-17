@@ -64,6 +64,7 @@ public class TestEstimation {
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
 	private static final String STR_1001 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 	private static final int INT_MINUS_1 = -1;
+	private static final int INT_MINUS_100000 = -100000;
 	private static final int INT_10 = 10;
 	private static final int INT_100 = 100;
 	private static final int INT_1000 = 1000;
@@ -670,20 +671,22 @@ public class TestEstimation {
 		testTarget.setQuantity(INT_100000);
 		testTarget.setBeforeQuantity(INT_100000);
 		testTarget.setItemAddFlg(INT_10);
+		testTarget.setContractAmount(INT_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最大値（99999）を超えています。"));
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setQuantity(INT_MINUS_1);
-		testTarget.setBeforeQuantity(INT_MINUS_1);
+		testTarget.setQuantity(INT_MINUS_100000);
+		testTarget.setBeforeQuantity(INT_MINUS_100000);
 		testTarget.setItemAddFlg(INT_MINUS_1);
+		testTarget.setContractAmount(INT_MINUS_100000);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 3);
+		Assert.assertTrue(result.getErrorInfoList().size() == 4);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（0）を下回っています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@DecimalMax：）
 		BeanUtils.copyProperties(testTarget, entity);
@@ -882,7 +885,7 @@ public class TestEstimation {
 
 		// 異常系（@Min ：）
 		BeanUtils.copyProperties(testTarget, entity);
-		testTarget.setItemMasterId((long)INT_MINUS_1);
+		testTarget.setItemMasterId((long) INT_MINUS_1);
 		testTarget.setQuantity(INT_MINUS_1);
 		testTarget.setDeleteFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
