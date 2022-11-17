@@ -13,7 +13,7 @@ public class ExternalImportErrorResult {
 	 * 行番号
 	 */
 	@ApiModelProperty(value = "行番号", required = false, position = 1)
-	private int lineNo;
+	private Long lineNo;
 
 	/**
 	 * エラーメッセージ
