@@ -1,5 +1,22 @@
 # Changelog
 
+## v6.0.0 (18/11/2022)
+- [**closed**] #16920 NCEO365対応 DifferentStatusのメッセージの再修正 [#2141](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2141)
+- [**closed**] #16920 DifferentStatusのメッセージ修正 [#2139](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2139)
+- [**closed**] #16724 [O365]祝日ユーティリティを軽量バッチから使用できるよう修正 [#2123](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2123)
+- [**closed**] #16724 [O365]祝日マスタ、ユーティリティ追加 [#2122](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2122)
+- [**closed**] #16679 恒久契約識別番号の自動採番時桁数変更（4桁→5桁） [#2121](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2121)
+- [**closed**] #16341 [O365]転入チェックメッセージ追加 [#2093](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2093)
+- [**closed**] #16255 MS連携APIの調査・実装 メッセージ追加 [#2085](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2085)
+- [**closed**] #16255 MS連携APIの調査・実装 [#2078](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2078)
+- [**closed**] #16148 [O365]契約明細単位の計上期間明細エンティティを削除 [#2069](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2069)
+- [**closed**] #16148 [O365]契約品種単位の計上期間明細エンティティ追加 [#2066](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2066)
+- [**closed**] #16066 MS_自動更新日連携管理追加 [#2061](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2061)
+- [**closed**] 20220804Masterマージ メッセージ変更 [#2060](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2060)
+- [**closed**] #15880 顧客レスポンスWORKのリポジトリにメソッドの追加 [#2059](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2059)
+
+---
+
 ## v5.8.0 (20/09/2022)
 - [**closed**] #15073 オンライン資格商品拡張項目用Dtoの作成 [#1962](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1962)
 - [**closed**] #15073 商品（契約用）拡張項目Dtoから顔認証端末：電話番号を削除 [#1982](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1982)
