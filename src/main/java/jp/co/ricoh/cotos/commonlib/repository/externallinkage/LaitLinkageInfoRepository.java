@@ -14,5 +14,5 @@ public interface LaitLinkageInfoRepository extends CrudRepository<LaitLinkageInf
 
 	public List<LaitLinkageInfo> findBySaCode(String saCode);
 
-	public List<LaitLinkageInfo> findByContractId(String contractId);
+	public List<LaitLinkageInfo> findByContractId(long contractId);
 }
