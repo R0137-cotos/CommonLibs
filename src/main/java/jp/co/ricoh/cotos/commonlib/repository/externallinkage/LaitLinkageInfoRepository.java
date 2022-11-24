@@ -13,4 +13,6 @@ public interface LaitLinkageInfoRepository extends CrudRepository<LaitLinkageInf
 	public List<LaitLinkageInfo> findBySaLabel(String saLabel);
 
 	public List<LaitLinkageInfo> findBySaCode(String saCode);
+
+	public List<LaitLinkageInfo> findByContractId(String contractId);
 }

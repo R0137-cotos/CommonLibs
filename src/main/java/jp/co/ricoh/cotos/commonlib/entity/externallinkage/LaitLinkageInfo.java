@@ -127,7 +127,7 @@ public class LaitLinkageInfo extends EntityBase {
 		}
 	}
 
-	@Description(value = "受付状況")
+	@Description(value = "登録状況")
 	public enum EntryStatus {
 
 		未登録("0"), 登録済("1"), 解約済("2");
