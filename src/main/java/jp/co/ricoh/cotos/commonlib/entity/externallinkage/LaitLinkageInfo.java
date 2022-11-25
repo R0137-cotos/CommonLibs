@@ -27,7 +27,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * IIJ機器情報を表すEntity
+ * LaIT連携情報を表すEntity
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
@@ -231,7 +231,6 @@ public class LaitLinkageInfo extends EntityBase {
 	/**
 	 * 申請状況
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "申請状況", required = false, position = 12, allowableValues = "未(\"0\"), 済(\"1\")")
 	private RequestStatus requestStatus;
 
@@ -245,7 +244,6 @@ public class LaitLinkageInfo extends EntityBase {
 	/**
 	 * 受付状況
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "受付状況", required = false, position = 14, allowableValues = "未(\"0\"), 済(\"1\")")
 	private ReceiptStatus receiptStatus;
 
@@ -266,7 +264,6 @@ public class LaitLinkageInfo extends EntityBase {
 	/**
 	 * 登録状況
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "登録状況", required = false, position = 17, allowableValues = "未登録(\"0\"), 登録済み(\"1\"), 解約済み(\"2\")")
 	private EntryStatus entryStatus;
 
