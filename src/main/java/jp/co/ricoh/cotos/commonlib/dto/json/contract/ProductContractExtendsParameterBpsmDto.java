@@ -26,7 +26,7 @@ public class ProductContractExtendsParameterBpsmDto {
 	/**
 	 * RtoRフラグ
 	 */
-	private String RtoRFlg;
+	private String rtoRFlg;
 
 	/**
 	 * 移行用項目
