@@ -507,3 +507,4 @@
 |550|Repositoryにある契約ID検索の引数の型を修正。|
 |551|LaIT連携情報エンティティの不要アノテーションを削除。|
 |552|FileImportManagementRepositoryにSQL処理追加。|
+|553|モバイルオーダーの商品(契約用)の拡張項目を追加|
