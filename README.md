@@ -506,3 +506,4 @@
 |549|Repositoryに契約IDの検索を追加。LaIT連携情報エンティティの項目名誤りを修正|
 |550|Repositoryにある契約ID検索の引数の型を修正。|
 |551|LaIT連携情報エンティティの不要アノテーションを削除。|
+|552|FileImportManagementRepositoryにSQL処理追加。|
