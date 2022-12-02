@@ -775,4 +775,33 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	/**
+	 * （EDW年額期間対応）契約変更タイミング
+	 */
+	@Description(value = "自動更新時,契約期間途中")
+	public enum ContractChangeTiming {
+
+		自動更新時("0"), 契約期間途中("1");
+
+		private final String text;
+
+		private ContractChangeTiming(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ContractChangeTiming fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
