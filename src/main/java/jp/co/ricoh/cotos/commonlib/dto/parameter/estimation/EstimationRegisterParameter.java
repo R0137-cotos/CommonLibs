@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiParam;
-import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.ContractChangeTiming;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import lombok.Data;
 
 @Data
