@@ -509,3 +509,4 @@
 |552|FileImportManagementRepositoryにSQL処理追加。|
 |553|モバイルオーダーの商品(契約用)の拡張項目を追加|
 |554|品種ライセンス用設定マスタ拡張項目DTO（BPSM）を追加|
+|555|LaITCSVダウンロードAPIで使用するDTOを追加|
