@@ -797,7 +797,7 @@ public class EnumType {
 		}
 
 		@JsonCreator
-		public static BatchCommonStatus fromString(String string) {
+		public static ContractChangeTiming fromString(String string) {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
