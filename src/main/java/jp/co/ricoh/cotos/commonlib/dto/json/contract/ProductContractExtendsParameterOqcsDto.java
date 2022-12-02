@@ -12,47 +12,47 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductContractExtendsParameterOqcsDto {
-	
+
 	/**
 	 * 現地確認日
 	 */
 	private Date onsiteConfirmationDate;
-	
+
 	/**
 	 * 現地確認日：時間
 	 */
 	private String onsiteConfirmationTime;
 
 	/**
-	 * 設置日
+	 * 設置（予定）日
 	 */
-	private Date installationDate;
-	
+	private Date installationScheduledDate;
+
 	/**
-	 * 設置日：時間
+	 * 設置（予定）日：時間
 	 */
-	private String installationTime;
-	
+	private String installationScheduledTime;
+
 	/**
 	 * オン資 専用ソフト：問合先
 	 */
 	private String onlineQualificationSoftwareContactInfo;
-	
+
 	/**
 	 * オン資 専用ソフト：電話番号
 	 */
 	private String onlineQualificationSoftwarePhoneNumber;
-	
+
 	/**
 	 * レセコンソフト：問合先
 	 */
 	private String receiptComputerSoftwareContactInfo;
-	
+
 	/**
 	 * レセコンソフト：電話番号
 	 */
 	private String receiptComputerSoftwarePhoneNumber;
-	
+
 	/**
 	 * 顔認証端末：問合先
 	 */
