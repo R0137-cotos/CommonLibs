@@ -10,7 +10,6 @@ import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
@@ -378,12 +377,6 @@ public class ContractListInfo {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "解約予定日", required = false, position = 57)
 	private Date cancelScheduledDate;
-
-	/**
-	 * 契約変更タイミング
-	 */
-	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 58)
-	private ContractChangeTiming contractChangeTiming;
 
 	@PrePersist
 	public void prePersist() {
