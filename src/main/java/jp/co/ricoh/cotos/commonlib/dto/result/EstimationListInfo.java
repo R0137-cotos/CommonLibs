@@ -10,7 +10,6 @@ import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
@@ -214,12 +213,6 @@ public class EstimationListInfo {
 	 */
 	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 31, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
-
-	/**
-	 * 契約変更タイミング
-	 */
-	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 32)
-	private ContractChangeTiming contractChangeTiming;
 
 	@PrePersist
 	public void prePersist() {
