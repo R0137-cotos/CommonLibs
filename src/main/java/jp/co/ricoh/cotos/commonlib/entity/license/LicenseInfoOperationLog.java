@@ -41,7 +41,7 @@ public class LicenseInfoOperationLog extends EntityBase {
 
 	@Description(value = "操作内容")
 	public enum Operation {
-		新規作成, 更新, 自動更新
+		新規作成, 更新, 自動更新, ライセンス情報洗替
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class LicenseInfoOperationLog extends EntityBase {
 	 * 操作内容
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "操作内容", required = false, position = 3, allowableValues = "新規作成、更新、自動更新", readOnly = false)
+	@ApiModelProperty(value = "操作内容", required = false, position = 3, allowableValues = "新規作成、更新、自動更新、ライセンス情報洗替", readOnly = false)
 	private Operation operation;
 
 	/**

@@ -132,6 +132,7 @@ public class TestCommon {
 
 	private static final String CONTRACT_SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
 	private static final String LICENSE_SYNONYM_NAME = "V_MAIL_ADDRESS_LICENSE_LIST";
+	private static final String ARRANGEMENT_SYNONYM_NAME = "V_MAIL_ADDRESS_ARRANGEMENT_LIST";
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -304,6 +305,9 @@ public class TestCommon {
 
 	@Test
 	public void VMailAddressListArrangementRepositoryのテスト() throws Exception {
+
+		// マテビューリフレッシュ
+		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(ARRANGEMENT_SYNONYM_NAME);
 
 		VMailAddressArrangementList found = vMailAddressArrangementListRepository.findOne(1L);
 
