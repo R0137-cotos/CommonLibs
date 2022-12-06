@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.externallinkage;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,9 +15,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -31,6 +36,29 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "r_optical_billing")
 public class ROpticalBilling extends EntityBase {
+
+	@Description(value = "計上テーブル挿入区分")
+	public enum InsertAccountingFlg {
+
+		未済("0"), 済("1"), エラー("9");
+
+		private final String text;
+
+		private InsertAccountingFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static InsertAccountingFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * リコーひかり請求データID
@@ -102,15 +130,13 @@ public class ROpticalBilling extends EntityBase {
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 10, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "リコー品種コード", required = false, position = 10, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
-	 * 計上テーブル挿入フラグ
+	 * 計上テーブル挿入区分
 	 */
-	@Max(9)
-	@Min(0)
-	@ApiModelProperty(value = "計上テーブル挿入フラグ", required = false, position = 11, allowableValues = "range[0,9]")
-	private Integer insertAccountingFlg;
+	@ApiModelProperty(value = "計上テーブル挿入区分", required = false, position = 11, allowableValues = "未済(\"1\"), 済(\"2\"), エラー(\"9\")")
+	private InsertAccountingFlg insertAccountingFlg;
 
 }
