@@ -60,7 +60,7 @@ public class MobileEquipment extends EntityBase {
 	@Description(value = "処理区分")
 	public enum ProcessDiv {
 
-		処理対象("1"), 処理済("2"), 対象外("3");
+		未処理("0"), 処理済み("1"), 対象外("2");
 
 		private final String text;
 
@@ -190,6 +190,6 @@ public class MobileEquipment extends EntityBase {
 	/**
 	 * 処理区分
 	 */
-	@ApiModelProperty(value = "処理区分", required = false, position = 16, allowableValues = "処理対象(\"1\"), 処理済(\"2\"), 対象外(\"3\")")
+	@ApiModelProperty(value = "処理区分", required = false, position = 16, allowableValues = "未処理(\"0\"), 処理済み(\"1\"), 対象外(\"2\")")
 	private ProcessDiv processDiv;
 }
