@@ -335,4 +335,9 @@ public class LicenseSearchResult {
 	@ApiModelProperty(value = "設置先担当者部署", required = false, position = 50)
 	private String instrallationLocationPicDeptName;
 
+	/**
+	 * ベンダー区分
+	 */
+	@ApiModelProperty(value = "ベンダー区分", required = false, position = 51)
+	private String vendorDiv;
 }
