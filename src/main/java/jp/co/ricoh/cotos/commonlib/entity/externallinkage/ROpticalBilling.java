@@ -136,7 +136,7 @@ public class ROpticalBilling extends EntityBase {
 	/**
 	 * 計上テーブル挿入区分
 	 */
-	@ApiModelProperty(value = "計上テーブル挿入区分", required = false, position = 11, allowableValues = "未済(\"1\"), 済(\"2\"), エラー(\"9\")")
+	@ApiModelProperty(value = "計上テーブル挿入区分", required = false, position = 11, allowableValues = "未済(\"0\"), 済(\"1\"), エラー(\"9\")")
 	private InsertAccountingFlg insertAccountingFlg;
 
 }
