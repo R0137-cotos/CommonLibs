@@ -1,5 +1,17 @@
 # Changelog
 
+## v6.2.0 (08/12/2022)
+- [**closed**] #16081_契約.S&S作業依頼作成状態に追加したenum値が不要となったため削除 [#2158](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2158)
+- [**closed**] #16753 商品マスタEntityに正式商品名を追加 [#2128](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2128)
+- [**closed**] #14902 通知メール制御マスタ.通知日種別の区分を契約の日付カラム_手配用に修正、テーブル区分に担当作業者_担当CEを追加 [#2115](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2115)
+- [**closed**] #16461 通知メール制御マスタ.通知日計算種別追加, 通知日種別に区分値追加, メールアドレス情報を表すEntityのTableTypeに区分追加 [#2111](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2111)
+- [**closed**] #16588 Message.propertiesにメッセージ追加 [#2108](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2108)
+- [**closed**] #16178 通知メール制御マスタ.手配業務タイプマスタIDを追加, 宛先テーブル区分に承認依頼者を追加 [#2103](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2103)
+- [**closed**] #16524 ライセンスの操作内容を追加 [#2104](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2104)
+- [**closed**] #16081_商品グループマスタにカラム追加、契約.S&S作業依頼作成状態にenum値追加 [#2102](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2102)
+
+---
+
 ## v6.0.0 (18/11/2022)
 - [**closed**] #16920 NCEO365対応 DifferentStatusのメッセージの再修正 [#2141](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2141)
 - [**closed**] #16920 DifferentStatusのメッセージ修正 [#2139](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2139)
