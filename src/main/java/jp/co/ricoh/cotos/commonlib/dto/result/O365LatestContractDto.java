@@ -63,9 +63,39 @@ public class O365LatestContractDto {
 	private String cancellationDate;
 
 	/**
+	 * 得意先コード
+	 */
+	@ApiModelProperty(value = "得意先コード", required = false, position = 9)
+	private String customerCd;
+
+	/**
+	 * 会社名
+	 */
+	@ApiModelProperty(value = "会社名", required = false, position = 10)
+	private String companyName;
+
+	/**
+	 * 事業所名
+	 */
+	@ApiModelProperty(value = "事業所名", required = false, position = 11)
+	private String officeName;
+
+	/**
+	 * 住所
+	 */
+	@ApiModelProperty(value = "住所", required = false, position = 12)
+	private String address;
+
+	/**
+	 * 電話番号
+	 */
+	@ApiModelProperty(value = "電話番号", required = false, position = 13)
+	private String phoneNumber;
+
+	/**
 	 * 契約明細情報リスト
 	 */
-	@ApiModelProperty(value = "契約明細情報リスト", required = false, position = 9)
+	@ApiModelProperty(value = "契約明細情報リスト", required = false, position = 14)
 	private List<O365LatestContractDetailDto> contractDetailList;
 
 }
