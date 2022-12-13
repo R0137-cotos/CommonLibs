@@ -160,7 +160,7 @@ public class ArrangementAuthorityService {
 	 * @param allMomAuthorities ユーザの持つ全権限情報
 	 * @return trueの場合、システム管理者権限を持つ
 	 */
-	private boolean isSystemAdministrator(Map<ActionDiv, Map<AuthDiv, AuthLevel>> allMomAuthorities) {
+	public boolean isSystemAdministrator(Map<ActionDiv, Map<AuthDiv, AuthLevel>> allMomAuthorities) {
 		AuthLevel authLevel = allMomAuthorities.get(TARGET_ACTION_DIV).get(AuthDiv.システム管理);
 
 		return (TARGET_AUTH_LEVEL == authLevel);
@@ -171,7 +171,7 @@ public class ArrangementAuthorityService {
 	 * @param userInfo ユーザ情報
 	 * @return trueの場合、スーパーユーザー
 	 */
-	private boolean isSuperUser(CotosAuthenticationDetails userInfo) {
+	public boolean isSuperUser(CotosAuthenticationDetails userInfo) {
 		return superUserMasterRepository.existsByUserId(userInfo.getMomEmployeeId());
 	}
 
