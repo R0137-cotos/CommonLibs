@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -41,6 +42,9 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 
 	// バッチユーザ、UIユーザが使用するシングルユーザID
 	public static final String BATCH_UI_USER_SUID = "sid";
+
+	// バッチユーザーが使用するMoM社員ID
+	public static final String BATCH_USER_MID = "COTOS_BATCH_USER";
 
 	@Autowired
 	JwtProperties jwtProperties;
@@ -141,5 +145,20 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 		}
 
 		return null;
+	}
+
+	/**
+	 * バッチユーザーかどうかを判定
+	 * @param
+	 * @return
+	 */
+	public boolean isBatchUser() {
+		// ユーザー情報の取得
+		CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (BATCH_USER_MID.equals(userInfo.getMomEmployeeId())) {
+			return true;
+		}
+		return false;
 	}
 }

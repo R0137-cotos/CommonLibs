@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.MobileEquipment;
 public interface MobileEquipmentRepository extends CrudRepository<MobileEquipment, Long> {
 
 	public List<MobileEquipment> findByContractId(long contractId);
+
+	public List<MobileEquipment> findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
 }
