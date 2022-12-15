@@ -19,6 +19,6 @@ public class RtorSettingPossibleDivConverter implements AttributeConverter<RtorS
 	public RtorSettingPossibleDiv convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return RtorSettingPossibleDiv.fromString(value); //IllegalArgumentExceptionはContractType.fromString側で投げている
+		return RtorSettingPossibleDiv.fromString(value); //IllegalArgumentExceptionはfromString側で投げている
 	}
 }
