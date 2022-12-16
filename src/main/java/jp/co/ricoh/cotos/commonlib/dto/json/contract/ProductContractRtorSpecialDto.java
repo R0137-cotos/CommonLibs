@@ -14,7 +14,7 @@ import lombok.Data;
 public class ProductContractRtorSpecialDto {
 
 	/**
-	 * RtoRフラグ
+	 * RtoRフラグ (0:通常契約 1:RtoR)
 	 */
 	private String rtorFlg;
 
@@ -24,7 +24,7 @@ public class ProductContractRtorSpecialDto {
 	private OptionRtorDiv optionRtorDiv;
 
 	/**
-	 * ホスティングRtoRフラグ
+	 * ホスティングRtoRフラグ (0:ホスティングRtoR無し 1:ホスティングRtoRあり)
 	 */
 	private String hostingRtorFlg;
 

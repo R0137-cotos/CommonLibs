@@ -25,7 +25,7 @@ public class ProductContractExtendsParameterBpsmDto {
 	private VendorDiv vendorDiv;
 
 	/**
-	 * RtoRフラグ
+	 * RtoRフラグ (0:通常契約 1:RtoR)
 	 */
 	private String rtorFlg;
 
