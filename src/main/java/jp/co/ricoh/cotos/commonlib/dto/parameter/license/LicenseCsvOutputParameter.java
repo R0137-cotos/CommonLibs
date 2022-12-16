@@ -51,4 +51,22 @@ public class LicenseCsvOutputParameter {
 	@ApiParam(value = "再出力", required = false)
 	@ApiModelProperty(value = "再出力", required = false, position = 5)
 	private int reoutputFlg;
+
+	/**
+	 * 出力開始日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	@ApiParam(value = "出力開始日", required = false)
+	@ApiModelProperty(value = "出力開始日", required = false, position = 6)
+	private Date outputDateFrom;
+
+
+	/**
+	 * 出力終了日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	@ApiParam(value = "出力終了日", required = false)
+	@ApiModelProperty(value = "出力終了日", required = false, position = 7)
+	private Date outputDateFromTo;
+
 }
