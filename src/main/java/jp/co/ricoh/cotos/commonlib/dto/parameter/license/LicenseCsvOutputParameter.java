@@ -60,7 +60,6 @@ public class LicenseCsvOutputParameter {
 	@ApiModelProperty(value = "出力開始日", required = false, position = 6)
 	private Date outputDateFrom;
 
-
 	/**
 	 * 出力終了日
 	 */
