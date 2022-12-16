@@ -22,7 +22,7 @@ public class ProductContractExtendsParameterBpnBpsDto {
 	 * RtoR固有項目
 	 */
 	@JsonProperty("rtorSpecial")
-	private ProductContractRtoRSpecialDto productContractRtoRSpecialDto;
+	private ProductContractRtorSpecialDto productContractRtorSpecialDto;
 
 	/**
 	 * McAfee固有項目

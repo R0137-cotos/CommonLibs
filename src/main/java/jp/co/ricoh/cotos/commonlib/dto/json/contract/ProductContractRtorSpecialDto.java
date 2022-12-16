@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductContractRtoRSpecialDto {
+public class ProductContractRtorSpecialDto {
 
 	/**
 	 * RtoRフラグ
