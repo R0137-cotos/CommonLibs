@@ -3,8 +3,6 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRtor.InfoChangeDisplayFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRtor.InfoChangeSkipFlg;
 import lombok.Data;
 
 /**
@@ -24,10 +22,10 @@ public class ProductContractMcAfeeSpecialDto {
 	/**
 	 * 情報変更表示制御フラグ
 	 */
-	private InfoChangeDisplayFlg infoChangeDisplayFlg;
+	private String infoChangeDisplayFlg;
 
 	/**
 	 * 情報変更スキップ フラグ
 	 */
-	private InfoChangeSkipFlg infoChangeSkipFlg;
+	private String infoChangeSkipFlg;
 }

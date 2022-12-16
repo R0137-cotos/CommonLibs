@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.converter.contract;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRtor.OptionRtorDiv;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OptionRtorDiv;
 
 @Converter(autoApply = true)
 public class OptionRtorDivConverter implements AttributeConverter<OptionRtorDiv, String> {

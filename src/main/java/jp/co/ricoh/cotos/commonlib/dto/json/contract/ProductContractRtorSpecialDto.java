@@ -2,9 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRtor.HostingRtorFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRtor.OptionRtorDiv;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRtor.RtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OptionRtorDiv;
 import lombok.Data;
 
 /**
@@ -18,7 +16,7 @@ public class ProductContractRtorSpecialDto {
 	/**
 	 * RtoRフラグ
 	 */
-	private RtorFlg rtorFlg;
+	private String rtorFlg;
 
 	/**
 	 * オプションRtoR区分
@@ -28,6 +26,6 @@ public class ProductContractRtorSpecialDto {
 	/**
 	 * ホスティングRtoRフラグ
 	 */
-	private HostingRtorFlg hostingRtorFlg;
+	private String hostingRtorFlg;
 
 }
