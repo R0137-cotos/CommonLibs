@@ -20,12 +20,12 @@ public class ProductContractMcAfeeSpecialDto {
 	private ProductContractMcAfeeSearchConditionDto productContractMcAfeeSearchConditionDto;
 
 	/**
-	 * 情報変更表示制御フラグ
+	 * 情報変更表示フラグ
 	 */
 	private String infoChangeDisplayFlg;
 
 	/**
-	 * 情報変更スキップ フラグ
+	 * 情報変更スキップフラグ
 	 */
 	private String infoChangeSkipFlg;
 }
