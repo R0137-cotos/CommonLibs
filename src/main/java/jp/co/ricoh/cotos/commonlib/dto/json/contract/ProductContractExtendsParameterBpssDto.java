@@ -10,12 +10,13 @@ import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddMailDelete
 import lombok.Data;
 
 /**
- * 商品（契約用）拡張項目DTO（BPN BPS）
+ * 商品（契約用）拡張項目DTO（BPSS）
  */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductContractExtendsParameterBpnBpsDto {
+public class ProductContractExtendsParameterBpssDto {
+
 	/**
 	 * 契約種別詳細
 	 */
@@ -25,13 +26,7 @@ public class ProductContractExtendsParameterBpnBpsDto {
 	 * RtoR固有項目
 	 */
 	@JsonProperty("rtorSpecial")
-	private ProductContractRtorSpecialBpnBpsDto productContractRtorSpecialBpnBpsDto;
-
-	/**
-	 * McAfee固有項目
-	 */
-	@JsonProperty("mcAfeeSpecial")
-	private ProductContractMcAfeeSpecialDto productContractMcAfeeSpecialDto;
+	private ProductContractRtorSpecialBpssDto productContractRtorSpecialBpssDto;
 
 	/**
 	 * 追加メール削除フラグ

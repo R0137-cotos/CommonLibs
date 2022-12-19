@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Description;
 
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.AccountFixFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddMailDeleteFlg;
 import lombok.Data;
 
 /**
@@ -74,6 +76,22 @@ public class ProductContractExtendsParameterNspDto {
 	 * アカウント確定フラグ
 	 */
 	private AccountFixFlg accountFixFlg;
+
+	/**
+	 * 追加メール削除フラグ
+	 */
+	private AddMailDeleteFlg addMailDeleteFlg;
+
+	/**
+	 * 追加メール残数
+	 */
+	private String addMailRemainingNumber;
+
+	/**
+	 * 追加メールリスト
+	 */
+	@JsonProperty("addMail")
+	private List<ProductContractAddMailDto> addMailList;
 
 	/**
 	 * 移行用項目

@@ -1,12 +1,10 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
-import java.util.Arrays;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.SajitsutenFlg;
 import lombok.Data;
 
 /**
@@ -16,50 +14,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CpqReturnValueBpnBpsDto {
-
-	public enum HostingRtorFlg {
-
-		ホスティングRtoRなし("0"), ホスティングRtoRあり("1");
-
-		private final String text;
-
-		private HostingRtorFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static HostingRtorFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	public enum SajitsutenFlg {
-
-		サ実店以外("0"), サ実店("1");
-
-		private final String text;
-
-		private SajitsutenFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static SajitsutenFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * 見積種別詳細

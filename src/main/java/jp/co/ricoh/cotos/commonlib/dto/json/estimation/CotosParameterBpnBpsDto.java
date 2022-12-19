@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddMailDeleteFlg;
 import lombok.Data;
 
 /**
@@ -18,7 +19,7 @@ public class CotosParameterBpnBpsDto {
 	/**
 	 * 追加メール削除フラグ
 	 */
-	//private AddMailDeleteFlg addMailDeleteFlg;
+	private AddMailDeleteFlg addMailDeleteFlg;
 
 	/**
 	 * 追加メール残数
@@ -29,5 +30,5 @@ public class CotosParameterBpnBpsDto {
 	 * 追加メールリスト
 	 */
 	@JsonProperty("addMail")
-	private List<ParameterEstimationAddMailDto> addMailList;
+	private List<ProductEstimationAddMailDto> addMailList;
 }

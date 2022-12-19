@@ -9,12 +9,12 @@ import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddMailDelete
 import lombok.Data;
 
 /**
- * 商品（見積用）拡張項目COTOS商品固有項目DTO（BPSS）
+ * 商品（見積用）拡張項目COTOS商品固有項目DTO（NSP）
  */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CotosParameterBpssDto {
+public class CotosParameterNspDto {
 
 	/**
 	 * 追加メール削除フラグ

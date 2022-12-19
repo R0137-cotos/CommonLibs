@@ -6,29 +6,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 商品（見積用）拡張項目DTO（BPSS）
+ * 商品（見積用）拡張項目DTO（BPSM）
  */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductEstimationExtendsParameterBpssDto {
+public class ProductEstimationExtendsParameterBpsmDto {
 
 	/**
 	 * CPQ商品固有戻り値
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
-	private CpqReturnValueBpssDto cpqReturnValueBpssDto;
-
-	/**
-	 * COTOS商品固有項目
-	 */
-	@JsonProperty("cotosProductSpecificParameter")
-	private CotosParameterBpssDto cotosParameterBpssDto;
+	private CpqReturnValueBpsmDto cpqReturnValueBpsmDto;
 
 	/**
 	 * 移行用項目
 	 */
 	@JsonProperty("migrationParameter")
 	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
-
 }
