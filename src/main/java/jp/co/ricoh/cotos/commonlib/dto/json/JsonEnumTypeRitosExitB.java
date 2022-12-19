@@ -12,6 +12,29 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public class JsonEnumTypeRitosExitB {
 
+	@Description(value = "RtoRフラグ")
+	public enum RtorFlg {
+
+		通常契約("0"), RtoR("1");
+
+		private final String text;
+
+		private RtorFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static RtorFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Description(value = "ベンダー区分")
 	public enum VendorDiv {
 
@@ -54,6 +77,75 @@ public class JsonEnumTypeRitosExitB {
 
 		@JsonCreator
 		public static OptionRtorDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "ホスティングRtoRフラグ")
+	public enum HostingRtoRFlg {
+
+		ホスティングRtoR無し("0"), ホスティングRtoRあり("1");
+
+		private final String text;
+
+		private HostingRtoRFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static HostingRtoRFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "情報変更表示フラグ")
+	public enum InfoChangeDisplayFlg {
+
+		しない("0"), する("1");
+
+		private final String text;
+
+		private InfoChangeDisplayFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static InfoChangeDisplayFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "情報変更スキップフラグ")
+	public enum InfoChangeSkipFlg {
+
+		しない("0"), する("1");
+
+		private final String text;
+
+		private InfoChangeSkipFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static InfoChangeSkipFlg fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
