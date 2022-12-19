@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -58,7 +59,7 @@ public class LicenseCsvOutputParameter {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiParam(value = "出力開始日", required = false)
 	@ApiModelProperty(value = "出力開始日", required = false, position = 6)
-	private Date outputDateFrom;
+	private LocalDate outputDateFrom;
 
 	/**
 	 * 出力終了日
@@ -66,6 +67,6 @@ public class LicenseCsvOutputParameter {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiParam(value = "出力終了日", required = false)
 	@ApiModelProperty(value = "出力終了日", required = false, position = 7)
-	private Date outputDateTo;
+	private LocalDate outputDateTo;
 
 }
