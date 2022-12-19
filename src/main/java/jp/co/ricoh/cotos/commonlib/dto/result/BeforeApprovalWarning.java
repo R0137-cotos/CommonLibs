@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import javax.persistence.Entity;
-
 import lombok.Data;
 
 /**
@@ -9,7 +7,6 @@ import lombok.Data;
  * 承認者を取得するためには、こちらのクラスを使ってください。 <br/>
  * このクラスを使用してDBへの保存を行うことは出来ません。
  */
-@Entity
 @Data
 public class BeforeApprovalWarning {
 
