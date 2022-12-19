@@ -66,6 +66,6 @@ public class LicenseCsvOutputParameter {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiParam(value = "出力終了日", required = false)
 	@ApiModelProperty(value = "出力終了日", required = false, position = 7)
-	private Date outputDateFromTo;
+	private Date outputDateTo;
 
 }
