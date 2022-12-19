@@ -39,14 +39,6 @@ public class LicenseCsvOutputParameter {
 	private CsvOutputTargetType csvOutputTargetType;
 
 	/**
-	 * 出力日
-	 */
-	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
-	@ApiParam(value = "出力日", required = false)
-	@ApiModelProperty(value = "出力日", required = false, position = 4)
-	private Date outputDate;
-
-	/**
 	 * 再出力
 	 */
 	@ApiParam(value = "再出力", required = false)
