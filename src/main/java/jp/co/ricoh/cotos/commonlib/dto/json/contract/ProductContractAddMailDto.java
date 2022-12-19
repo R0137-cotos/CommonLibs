@@ -7,7 +7,7 @@ import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.NotEditFlg;
 import lombok.Data;
 
 /**
- * 商品（見積用）拡張項目 追加メールDTO
+ * 商品（契約用）拡張項目 追加メールDTO
  */
 
 @Data
