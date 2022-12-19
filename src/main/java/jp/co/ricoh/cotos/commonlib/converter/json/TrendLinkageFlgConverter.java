@@ -18,6 +18,6 @@ public class TrendLinkageFlgConverter implements AttributeConverter<TrendLinkage
 	public TrendLinkageFlg convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return TrendLinkageFlg.fromString(value); // IllegalArgumentExceptionはContractType.fromString側で投げている
+		return TrendLinkageFlg.fromString(value); // IllegalArgumentExceptionはfromString側で投げている
 	}
 }
