@@ -9,10 +9,10 @@ import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFl
 public class HostingRtorFlgConverter implements AttributeConverter<HostingRtorFlg, String> {
 
 	@Override
-	public String convertToDatabaseColumn(HostingRtorFlg hostingRtoRFlg) {
-		if (hostingRtoRFlg == null)
+	public String convertToDatabaseColumn(HostingRtorFlg hostingRtorFlg) {
+		if (hostingRtorFlg == null)
 			return null;
-		return hostingRtoRFlg.toString();
+		return hostingRtorFlg.toString();
 	}
 
 	@Override
