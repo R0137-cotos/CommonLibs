@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.VendorDiv;
 import lombok.Data;
 
@@ -25,9 +26,9 @@ public class ProductContractExtendsParameterBpsmDto {
 	private VendorDiv vendorDiv;
 
 	/**
-	 * RtoRフラグ (0:通常契約 1:RtoR)
+	 * RtoRフラグ
 	 */
-	private String rtorFlg;
+	private RtorFlg rtorFlg;
 
 	/**
 	 * 移行用項目

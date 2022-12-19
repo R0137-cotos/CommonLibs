@@ -82,13 +82,13 @@ public class JsonEnumTypeRitosExitB {
 	}
 
 	@Description(value = "ホスティングRtoRフラグ")
-	public enum HostingRtoRFlg {
+	public enum HostingRtorFlg {
 
 		ホスティングRtoR無し("0"), ホスティングRtoRあり("1");
 
 		private final String text;
 
-		private HostingRtoRFlg(final String text) {
+		private HostingRtorFlg(final String text) {
 			this.text = text;
 		}
 
@@ -99,7 +99,7 @@ public class JsonEnumTypeRitosExitB {
 		}
 
 		@JsonCreator
-		public static HostingRtoRFlg fromString(String string) {
+		public static HostingRtorFlg fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}

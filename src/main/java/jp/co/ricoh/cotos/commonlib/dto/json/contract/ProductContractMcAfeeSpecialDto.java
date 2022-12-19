@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.InfoChangeDisplayFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.InfoChangeSkipFlg;
 import lombok.Data;
 
 /**
@@ -20,12 +22,12 @@ public class ProductContractMcAfeeSpecialDto {
 	private ProductContractMcAfeeSearchConditionDto productContractMcAfeeSearchConditionDto;
 
 	/**
-	 * 情報変更表示フラグ (表示を 0：しない 1：する)
+	 * 情報変更表示フラグ
 	 */
-	private String infoChangeDisplayFlg;
+	private InfoChangeDisplayFlg infoChangeDisplayFlg;
 
 	/**
-	 * 情報変更スキップフラグ (スキップを 0：しない 1：する)
+	 * 情報変更スキップフラグ
 	 */
-	private String infoChangeSkipFlg;
+	private InfoChangeSkipFlg infoChangeSkipFlg;
 }
