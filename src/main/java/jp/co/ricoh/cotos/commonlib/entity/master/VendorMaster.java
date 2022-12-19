@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,7 +14,11 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -28,6 +33,29 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "vendor_master")
 public class VendorMaster extends EntityBaseMaster {
+
+	@Description(value = "eTransporter連携区分")
+	public enum EtransporterLinkageDiv {
+
+		連携しない("0"), 連携する_メール送信しない("1"), 連携する_メール送信する("2");
+
+		private final String text;
+
+		private EtransporterLinkageDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static EtransporterLinkageDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * ベンダーマスタID
@@ -74,4 +102,17 @@ public class VendorMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "添付ファイルパスワード不要", required = false, position = 6, allowableValues = "range[0,9]")
 	private Integer attachedFilePasswordUnrequired;
+
+	/**
+	 * eTransporter連携区分
+	 */
+	@ApiModelProperty(value = "eTransporter連携区分", required = false, position = 7, allowableValues = "連携しない(\"0\"), 連携する_メール送信しない(\"1\"), 連携する_メール送信する(\"2\")")
+	private EtransporterLinkageDiv etransporterLinkageDiv;
+
+	/**
+	 * メールアドレス(CC)
+	 */
+	@Size(max = 1000)
+	@ApiModelProperty(value = "メールアドレス(CC)", required = false, position = 8, allowableValues = "range[0,1000]")
+	private String mailAddressCc;
 }
