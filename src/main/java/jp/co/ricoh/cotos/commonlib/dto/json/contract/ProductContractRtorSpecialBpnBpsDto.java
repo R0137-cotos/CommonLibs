@@ -8,12 +8,12 @@ import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
 import lombok.Data;
 
 /**
- * 商品（契約用）拡張項目RtoR固有項目DTO
+ * 商品（契約用）拡張項目RtoR固有項目DTO（BPN・BPS）
  */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductContractRtorSpecialDto {
+public class ProductContractRtorSpecialBpnBpsDto {
 
 	/**
 	 * RtoRフラグ

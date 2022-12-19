@@ -104,6 +104,29 @@ public class JsonEnumTypeRitosExitB {
 		}
 	}
 
+	@Description(value = "サ実店フラグ")
+	public enum SajitsutenFlg {
+
+		サ実店以外("0"), サ実店("1");
+
+		private final String text;
+
+		private SajitsutenFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static SajitsutenFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Description(value = "情報変更表示フラグ")
 	public enum InfoChangeDisplayFlg {
 
@@ -150,4 +173,72 @@ public class JsonEnumTypeRitosExitB {
 		}
 	}
 
+	@Description(value = "追加メール削除フラグ")
+	public enum AddMailDeleteFlg {
+
+		なし("0"), あり("1");
+
+		private final String text;
+
+		private AddMailDeleteFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static AddMailDeleteFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "削除フラグ")
+	public enum DeleteFlg {
+
+		未削除("0"), 削除("1");
+
+		private final String text;
+
+		private DeleteFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static DeleteFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "編集不可フラグ")
+	public enum NotEditFlg {
+
+		不可("0"), 可("1");
+
+		private final String text;
+
+		private NotEditFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static NotEditFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
