@@ -4,31 +4,31 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.VendorDiv;
 import lombok.Data;
 
 /**
- * 商品（契約用）拡張項目DTO（BPSM）
+ * 商品（契約用）拡張項目DTO（BPN BPS）
  */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductContractExtendsParameterBpsmDto {
+public class ProductContractExtendsParameterBpnBpsDto {
 	/**
 	 * 契約種別詳細
 	 */
 	private ContractTypeDetails contractTypeDetails;
 
 	/**
-	 * ベンダー区分
+	 * RtoR固有項目
 	 */
-	private VendorDiv vendorDiv;
+	@JsonProperty("rtorSpecial")
+	private ProductContractRtorSpecialDto productContractRtorSpecialDto;
 
 	/**
-	 * RtoRフラグ
+	 * McAfee固有項目
 	 */
-	private RtorFlg rtorFlg;
+	@JsonProperty("mcAfeeSpecial")
+	private ProductContractMcAfeeSpecialDto productContractMcAfeeSpecialDto;
 
 	/**
 	 * 移行用項目
