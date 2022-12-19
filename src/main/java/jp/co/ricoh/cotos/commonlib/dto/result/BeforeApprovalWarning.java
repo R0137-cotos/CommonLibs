@@ -3,9 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 import lombok.Data;
 
 /**
- * 単一のString結果を取得するためのクラスです。<br/>
- * 承認者を取得するためには、こちらのクラスを使ってください。 <br/>
- * このクラスを使用してDBへの保存を行うことは出来ません。
+ * 契約承認前確認API返却値格納用Dtoクラス
  */
 @Data
 public class BeforeApprovalWarning {
