@@ -42,7 +42,7 @@ public class LicenseCsvOutputParameter {
 	 * 再出力
 	 */
 	@ApiParam(value = "再出力", required = false)
-	@ApiModelProperty(value = "再出力", required = false, position = 5)
+	@ApiModelProperty(value = "再出力", required = false, position = 4)
 	private int reoutputFlg;
 
 	/**
@@ -50,7 +50,7 @@ public class LicenseCsvOutputParameter {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiParam(value = "出力開始日", required = false)
-	@ApiModelProperty(value = "出力開始日", required = false, position = 6)
+	@ApiModelProperty(value = "出力開始日", required = false, position = 5)
 	private LocalDate outputDateFrom;
 
 	/**
@@ -58,7 +58,7 @@ public class LicenseCsvOutputParameter {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@ApiParam(value = "出力終了日", required = false)
-	@ApiModelProperty(value = "出力終了日", required = false, position = 7)
+	@ApiModelProperty(value = "出力終了日", required = false, position = 6)
 	private LocalDate outputDateTo;
 
 }
