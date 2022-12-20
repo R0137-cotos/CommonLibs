@@ -24,7 +24,7 @@ public class CotosParameterBpnBpsDto {
 	/**
 	 * 追加メール残数
 	 */
-	private String addMailRemainingNumber;
+	private Integer addMailRemainingNumber;
 
 	/**
 	 * 追加メールリスト
