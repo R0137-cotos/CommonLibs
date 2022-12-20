@@ -1,5 +1,18 @@
 # Changelog
 
+## v6.3.0 (20/12/2022)
+- [**closed**] #17172 (EDW年額対応)契約変更タイミングをEmunTypeに追加 [#2163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2163)
+- [**closed**] #17172 (EDW年額対応)契約変更タイミングentity修正、converter追加 [#2164](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2164)
+- [**closed**] #17172 (EDW年額)契約変更タイミングDTO [#2168](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2168)
+- [**closed**] #13905 契約数追加 [#1888](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1888)
+- [**closed**] #13913 契約承認時のサービス利用希望日チェック時のエラーメッセージ追加 [#1879](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1879)
+- [**closed**] #14059 マイナス値を許容する修正 [#1921](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1921)
+- [**closed**] #13907 契約変更タイミング、サービス利用希望日の追加 [#1860](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1860)
+- [**closed**] #17294 O365契約最新情報返却APIの項目追加 [#2177](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2177)
+- [**closed**] #17172 EDW年額対応　契約変更タイミングDTO追加 [#2169](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2169)
+
+---
+
 ## v6.2.0 (08/12/2022)
 - [**closed**] #16081_契約.S&S作業依頼作成状態に追加したenum値が不要となったため削除 [#2158](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2158)
 - [**closed**] #16753 商品マスタEntityに正式商品名を追加 [#2128](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2128)
