@@ -17,7 +17,7 @@ public class ProductEstimationAddMailDto {
 	/**
 	 * No
 	 */
-	private String addMailNo;
+	private Integer addMailNo;
 
 	/**
 	 * メールアドレス
