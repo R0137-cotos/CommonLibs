@@ -13,4 +13,6 @@ public interface MobileEquipmentRepository extends CrudRepository<MobileEquipmen
 	public List<MobileEquipment> findByContractId(long contractId);
 
 	public List<MobileEquipment> findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
+
+	public List<MobileEquipment> findByEstimationIdAndDisengagementFlg(long estimationId, int disengagementFlg);
 }
