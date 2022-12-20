@@ -17,7 +17,7 @@ public class ProductContractAddMailDto {
 	/**
 	 * No
 	 */
-	private String addMailNo;
+	private Integer addMailNo;
 
 	/**
 	 * メールアドレス

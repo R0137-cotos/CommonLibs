@@ -33,5 +33,5 @@ public class CpqReturnValueBpsmDto {
 	/**
 	 * 減数後台数
 	 */
-	private String subAmount;
+	private Integer subAmount;
 }
