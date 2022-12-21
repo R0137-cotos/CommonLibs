@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ContractSpanType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ServicePreferredSettingPossibleType;
@@ -243,4 +244,10 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 33, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
+
+	/**
+	 * 契約期間区分
+	 */
+	@ApiModelProperty(value = "契約期間区分", required = false, position = 34, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
+	private ContractSpanType contractSpanType;
 }

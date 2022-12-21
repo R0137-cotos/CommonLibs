@@ -185,8 +185,8 @@ public class ContractDetail extends EntityBase {
 	 * 変更前数量
 	 */
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
@@ -194,8 +194,8 @@ public class ContractDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Max(99999)
-	@Min(0)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[0,99999]")
+	@Min(-99999)
+	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -338,4 +338,12 @@ public class ContractDetail extends EntityBase {
 	@OneToMany(mappedBy = "contractDetail")
 	@ApiModelProperty(value = "発送物あり明細", required = false, position = 25)
 	private List<ShippingThingDetail> shippingThingDetailList;
+
+	/**
+	 * 契約数
+	 */
+	@Max(99999)
+	@Min(-99999)
+	@ApiModelProperty(value = "契約数", required = false, position = 26, allowableValues = "range[-99999,99999]")
+	private Integer contractAmount;
 }

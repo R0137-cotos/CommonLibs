@@ -261,4 +261,18 @@ public class LicenseDetail extends EntityBase {
 	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 21)
 	private Date licenseTermEnd;
 
+	/**
+	 * リクエスト予定日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "リクエスト予定日", required = false, position = 22)
+	private Date requestScheduleDate;
+
+	/**
+	 * ライセンスキー
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ライセンスキー", required = true, position = 23, allowableValues = "range[0,255]")
+	private String licenseKey;
+
 }

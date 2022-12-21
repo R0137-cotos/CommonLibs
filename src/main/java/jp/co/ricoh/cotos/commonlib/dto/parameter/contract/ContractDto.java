@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.AbsConCsvCreateStatus;
@@ -777,9 +778,15 @@ public class ContractDto extends DtoBase {
 	private Long maxExtensionMonths;
 
 	/**
+	 * 契約変更タイミング
+	 */
+	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 104)
+	private ContractChangeTiming contractChangeTiming;
+
+	/**
 	 * NTTお客様ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 104, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 105, allowableValues = "range[0,255]")
 	private String nttCustomerId;
 }
