@@ -208,6 +208,29 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "契約期間区分")
+	public enum ContractSpanType {
+
+		月契約("1"), 年契約("2");
+
+		private final String text;
+
+		private ContractSpanType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ContractSpanType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
@@ -608,4 +631,10 @@ public class ItemMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "オンサイトweb申込フラグ", required = false, position = 54, allowableValues = "range[0,9]")
 	private Integer onsiteWebApplicationFlg;
+
+	/**
+	 * 契約期間区分
+	 */
+	@ApiModelProperty(value = "契約期間区分", required = false, position = 55, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
+	private ContractSpanType contractSpanType;
 }
