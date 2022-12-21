@@ -31,9 +31,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -1057,9 +1059,24 @@ public class Contract extends EntityBase {
 	private Date billingStartDateForUpdate;
 
 	/**
+	 * 計上期間明細
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@OrderBy("item_master_id ASC, accounting_period_start ASC")
+	@ApiModelProperty(value = "計上期間明細", required = false, position = 109)
+	private List<AccountingPeriodDetail> accountingPeriodDetailList;
+
+	/**
+	 * 契約変更タイミング
+	 */
+	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 110, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
+	private ContractChangeTiming contractChangeTiming;
+
+	/**
 	 * NTTお客様ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 109, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 111, allowableValues = "range[0,255]")
 	private String nttCustomerId;
 }

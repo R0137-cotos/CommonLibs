@@ -35,6 +35,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import lombok.Data;
@@ -566,6 +567,19 @@ public class Estimation extends EntityBase {
 	@OneToMany(mappedBy = "estimation")
 	@ApiModelProperty(value = "違約金明細(見積用)", required = false, position = 63, readOnly = true)
 	private List<PenaltyDetailEstimation> penaltyDetailEstimationList;
+
+	/**
+	 * サービス利用希望日
+	 */
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 64)
+	@Temporal(TemporalType.DATE)
+	private Date conclusionPreferredDate;
+
+	/**
+	 * 契約変更タイミング
+	 */
+	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 105, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
+	private ContractChangeTiming contractChangeTiming;
 
 	@PreUpdate
 	public void preUpdate() {

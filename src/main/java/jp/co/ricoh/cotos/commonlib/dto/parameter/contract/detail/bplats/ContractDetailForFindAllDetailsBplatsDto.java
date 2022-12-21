@@ -162,4 +162,10 @@ public class ContractDetailForFindAllDetailsBplatsDto extends EntityBase {
 	 */
 	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 22, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
+
+	/**
+	 * 契約数
+	 */
+	@ApiModelProperty(value = "変更前数量", required = false, position = 23, allowableValues = "range[0,99999]")
+	private Integer contractAmount;
 }

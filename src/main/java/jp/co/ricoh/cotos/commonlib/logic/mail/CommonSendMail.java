@@ -421,9 +421,9 @@ public class CommonSendMail {
 		attachedHelper.setFrom(Optional.ofNullable(mailTemplateMaster.getFromMailAddress()).orElse(appProperties.getMailProperties().getFromMailAddress()));
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
-		String subject = writerMailSubject.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
+		String subject = writerMailSubject.toString().replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
 		attachedHelper.setSubject(subject);
-		String text = writerMailText.toString().replace("&#10;", "\r\n").replace("&#39;", "\'");
+		String text = writerMailText.toString().replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
 		attachedHelper.setText(text);
 
 		if (null != uploadFileList) {
@@ -449,7 +449,7 @@ public class CommonSendMail {
 	 *            メール件名置換リスト(最大5個まで)
 	 * @return Writer
 	 */
-	private Writer createMailSubject(MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList) {
+	public Writer createMailSubject(MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList) {
 		Writer writer = new StringWriter();
 
 		String stringMailSubject = mailTemplateMaster.getMailSubject();
@@ -470,7 +470,7 @@ public class CommonSendMail {
 	 *            メール本文置換リスト(最大15個まで)
 	 * @return Writer
 	 */
-	private Writer createMailText(MailTemplateMaster mailTemplateMaster, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues) {
+	public Writer createMailText(MailTemplateMaster mailTemplateMaster, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues) {
 		Writer writer = new StringWriter();
 
 		String stringMailText = mailTemplateMaster.getMailBody();

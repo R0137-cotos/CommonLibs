@@ -1,5 +1,47 @@
 # Changelog
 
+## v6.3.0 (20/12/2022)
+- [**closed**] #17172 (EDW年額対応)契約変更タイミングをEmunTypeに追加 [#2163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2163)
+- [**closed**] #17172 (EDW年額対応)契約変更タイミングentity修正、converter追加 [#2164](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2164)
+- [**closed**] #17172 (EDW年額)契約変更タイミングDTO [#2168](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2168)
+- [**closed**] #13905 契約数追加 [#1888](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1888)
+- [**closed**] #13913 契約承認時のサービス利用希望日チェック時のエラーメッセージ追加 [#1879](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1879)
+- [**closed**] #14059 マイナス値を許容する修正 [#1921](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1921)
+- [**closed**] #13907 契約変更タイミング、サービス利用希望日の追加 [#1860](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1860)
+- [**closed**] #17294 O365契約最新情報返却APIの項目追加 [#2177](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2177)
+- [**closed**] #17172 EDW年額対応　契約変更タイミングDTO追加 [#2169](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2169)
+
+---
+
+## v6.2.0 (08/12/2022)
+- [**closed**] #16081_契約.S&S作業依頼作成状態に追加したenum値が不要となったため削除 [#2158](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2158)
+- [**closed**] #16753 商品マスタEntityに正式商品名を追加 [#2128](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2128)
+- [**closed**] #14902 通知メール制御マスタ.通知日種別の区分を契約の日付カラム_手配用に修正、テーブル区分に担当作業者_担当CEを追加 [#2115](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2115)
+- [**closed**] #16461 通知メール制御マスタ.通知日計算種別追加, 通知日種別に区分値追加, メールアドレス情報を表すEntityのTableTypeに区分追加 [#2111](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2111)
+- [**closed**] #16588 Message.propertiesにメッセージ追加 [#2108](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2108)
+- [**closed**] #16178 通知メール制御マスタ.手配業務タイプマスタIDを追加, 宛先テーブル区分に承認依頼者を追加 [#2103](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2103)
+- [**closed**] #16524 ライセンスの操作内容を追加 [#2104](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2104)
+- [**closed**] #16081_商品グループマスタにカラム追加、契約.S&S作業依頼作成状態にenum値追加 [#2102](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2102)
+
+---
+
+## v6.0.0 (18/11/2022)
+- [**closed**] #16920 NCEO365対応 DifferentStatusのメッセージの再修正 [#2141](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2141)
+- [**closed**] #16920 DifferentStatusのメッセージ修正 [#2139](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2139)
+- [**closed**] #16724 [O365]祝日ユーティリティを軽量バッチから使用できるよう修正 [#2123](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2123)
+- [**closed**] #16724 [O365]祝日マスタ、ユーティリティ追加 [#2122](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2122)
+- [**closed**] #16679 恒久契約識別番号の自動採番時桁数変更（4桁→5桁） [#2121](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2121)
+- [**closed**] #16341 [O365]転入チェックメッセージ追加 [#2093](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2093)
+- [**closed**] #16255 MS連携APIの調査・実装 メッセージ追加 [#2085](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2085)
+- [**closed**] #16255 MS連携APIの調査・実装 [#2078](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2078)
+- [**closed**] #16148 [O365]契約明細単位の計上期間明細エンティティを削除 [#2069](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2069)
+- [**closed**] #16148 [O365]契約品種単位の計上期間明細エンティティ追加 [#2066](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2066)
+- [**closed**] #16066 MS_自動更新日連携管理追加 [#2061](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2061)
+- [**closed**] 20220804Masterマージ メッセージ変更 [#2060](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2060)
+- [**closed**] #15880 顧客レスポンスWORKのリポジトリにメソッドの追加 [#2059](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2059)
+
+---
+
 ## v5.8.0 (20/09/2022)
 - [**closed**] #15073 オンライン資格商品拡張項目用Dtoの作成 [#1962](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1962)
 - [**closed**] #15073 商品（契約用）拡張項目Dtoから顔認証端末：電話番号を削除 [#1982](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1982)
