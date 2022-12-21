@@ -209,8 +209,8 @@ public class McafeeLinkageInfo extends EntityBase {
 	 * ノード数
 	 */
 	@Max(99999)
-	@Min(-99999)
-	@ApiModelProperty(value = "ノード数", required = false, position = 15, allowableValues = "range[-99999,99999]")
+	@Min(0)
+	@ApiModelProperty(value = "ノード数", required = false, position = 15, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
