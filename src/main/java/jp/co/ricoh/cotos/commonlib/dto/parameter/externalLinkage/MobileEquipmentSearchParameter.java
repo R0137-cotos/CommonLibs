@@ -4,7 +4,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 public class MobileEquipmentSearchParameter {
 
 	/**
