@@ -151,6 +151,6 @@ public class ROpticalTransfer extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "rOpticalTransfer")
 	@ApiModelProperty(value = "リコーひかり異動情報NWサービス", required = false, position = 10, readOnly = true)
-	private List<ROpticalTransfer> rOpticalTransferList;
+	private List<ROpticalTransferNwservice> rOpticalTransferNwserviceList;
 
 }
