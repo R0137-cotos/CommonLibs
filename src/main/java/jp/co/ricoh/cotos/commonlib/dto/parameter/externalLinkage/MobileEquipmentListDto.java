@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.externallinkage.MobileEquipment;
 import lombok.Data;
 
 /**
@@ -20,5 +19,5 @@ public class MobileEquipmentListDto {
 	 */
 	@ApiModelProperty(value = "モバイル機器リスト", required = false, position = 1)
 	@Valid
-	private List<MobileEquipment> mobileEquipmentList;
+	private List<MobileEquipmentDto> mobileEquipmentList;
 }
