@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OptionRtorDiv;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorMailFlg;
 import lombok.Data;
 
 /**
@@ -19,6 +20,11 @@ public class ProductContractRtorSpecialBpnBpsDto {
 	 * RtoRフラグ
 	 */
 	private RtorFlg rtorFlg;
+
+	/**
+	 * RtoRメールフラグ
+	 */
+	private RtorMailFlg rtorMailFlg;
 
 	/**
 	 * オプションRtoR区分
