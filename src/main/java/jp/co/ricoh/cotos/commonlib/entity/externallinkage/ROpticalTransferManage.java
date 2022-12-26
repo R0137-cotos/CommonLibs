@@ -82,13 +82,13 @@ public class ROpticalTransferManage extends EntityBase {
 	}
 
 	@Description(value = "異動情報取込結果連携状態")
-	public enum OpticalTransferResultLinkage {
+	public enum OpticalTransferResultLinkageState {
 
 		未処理("0"), 連携継続("1"), 連携済み("2"), ファイル作成エラー("3"), 連携対象外("4");
 
 		private final String text;
 
-		private OpticalTransferResultLinkage(final String text) {
+		private OpticalTransferResultLinkageState(final String text) {
 			this.text = text;
 		}
 
@@ -99,7 +99,7 @@ public class ROpticalTransferManage extends EntityBase {
 		}
 
 		@JsonCreator
-		public static OpticalTransferResultLinkage fromString(String string) {
+		public static OpticalTransferResultLinkageState fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -180,7 +180,7 @@ public class ROpticalTransferManage extends EntityBase {
 	 * 異動情報取込結果連携状態
 	 */
 	@ApiModelProperty(value = "異動情報取込結果連携状態", required = false, allowableValues = "未処理(\"0\"), 連携継続(\"1\"), 連携済み(\"2\"), ファイル作成エラー(\"3\"), 連携対象外(\"4\")", example = "1", position = 11)
-	private OpticalTransferResultLinkage transferResultLinkageState;
+	private OpticalTransferResultLinkageState transferResultLinkageState;
 
 	/**
 	 * 異動情報取込結果連携日
