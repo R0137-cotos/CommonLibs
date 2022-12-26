@@ -14,14 +14,14 @@ public class MobileEquipmentSearchParameter {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "見積ID", required = false, position = 1, allowableValues = "range[0,9999999999999999999]")
-	private long estimationId;
+	private Long estimationId;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9999999999999999999]")
-	private long contractId;
+	private Long contractId;
 
 	/**
 	 * 解約フラグ
