@@ -81,6 +81,29 @@ public class ROpticalTransferManage extends EntityBase {
 		}
 	}
 
+	@Description(value = "異動情報取込結果連携状態")
+	public enum OpticalTransferResultLinkage {
+
+		未処理("0"), 連携継続("1"), 連携済み("2"), ファイル作成エラー("3"), 連携対象外("4");
+
+		private final String text;
+
+		private OpticalTransferResultLinkage(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static OpticalTransferResultLinkage fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * リコーひかり異動情報取込管理ID
 	 */
@@ -122,7 +145,7 @@ public class ROpticalTransferManage extends EntityBase {
 	private String accessKey;
 
 	/**
-	 * 異動情報種別
+	 * 契約確定異動情報区分
 	 */
 	@ApiModelProperty(value = "契約確定異動情報区分", required = false, allowableValues = "ひかり回線(\"1\"), ひかり電話(\"2\"), 両方(\"3\")", example = "1", position = 6)
 	private OpticalConfirmTransferDiv confirmTransferDiv;
@@ -156,8 +179,8 @@ public class ROpticalTransferManage extends EntityBase {
 	/**
 	 * 異動情報取込結果連携状態
 	 */
-	@ApiModelProperty(value = "異動情報取込結果連携状態", required = false, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1", position = 11)
-	private OpticalTransferStatus transferResultLinkageState;
+	@ApiModelProperty(value = "異動情報取込結果連携状態", required = false, allowableValues = "未処理(\"0\"), 連携継続(\"1\"), 連携済み(\"2\"), ファイル作成エラー(\"3\"), 連携対象外(\"4\")", example = "1", position = 11)
+	private OpticalTransferResultLinkage transferResultLinkageState;
 
 	/**
 	 * 異動情報取込結果連携日
