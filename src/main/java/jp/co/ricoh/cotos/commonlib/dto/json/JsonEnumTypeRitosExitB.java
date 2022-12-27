@@ -264,4 +264,27 @@ public class JsonEnumTypeRitosExitB {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	@Description(value = "サブドメイン追加フラグ")
+	public enum AddSubdomainFlg {
+
+		サブドメイン追加なし("0"), サブドメイン追加あり("1");
+
+		private final String text;
+
+		private AddSubdomainFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static AddSubdomainFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }

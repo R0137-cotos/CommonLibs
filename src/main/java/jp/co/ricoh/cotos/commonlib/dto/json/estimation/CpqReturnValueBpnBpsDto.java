@@ -29,4 +29,9 @@ public class CpqReturnValueBpnBpsDto {
 	 * サ実店フラグ
 	 */
 	private SajitsutenFlg sajitsutenFlg;
+
+	/**
+	 * スポーク拠点数
+	 */
+	private Integer spokeNumber;
 }
