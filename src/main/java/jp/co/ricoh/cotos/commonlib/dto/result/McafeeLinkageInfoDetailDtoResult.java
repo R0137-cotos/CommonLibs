@@ -102,7 +102,7 @@ public class McafeeLinkageInfoDetailDtoResult {
 	 * ノード数
 	 */
 	@ApiModelProperty(value = "ノード数", required = false, position = 15)
-	private Integer quantity;
+	private Integer nodeNum;
 
 	/**
 	 * 注文送信日
