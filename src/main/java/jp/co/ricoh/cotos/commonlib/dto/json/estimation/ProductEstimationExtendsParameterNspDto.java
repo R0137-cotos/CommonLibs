@@ -14,11 +14,6 @@ import lombok.Data;
 public class ProductEstimationExtendsParameterNspDto {
 
 	/**
-	 * MVBアカウント
-	 */
-	private String mvbAccount;
-
-	/**
 	 * CPQ商品固有戻り値
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
