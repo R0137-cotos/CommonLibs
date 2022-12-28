@@ -804,4 +804,37 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	/**
+	 * RPA連携用CPQ更新CSV作成状態
+	 */
+	@Description(value = "RPA連携用CPQ更新CSV作成状態")
+	public enum RpaLinkageCpqUpdateCsvCreateStatus {
+
+		未連携("0"), 連携("1"), 対象外("2");
+
+		private final String text;
+
+		private RpaLinkageCpqUpdateCsvCreateStatus(final String text) {
+			if (text == null) {
+				this.text = "未連携";
+			} else {
+				this.text = text;
+			}
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static RpaLinkageCpqUpdateCsvCreateStatus fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
