@@ -811,16 +811,12 @@ public class EnumType {
 	@Description(value = "RPA連携用CPQ更新CSV作成状態")
 	public enum RpaLinkageCpqUpdateCsvCreateStatus {
 
-		未連携("0"), 連携("1"), 対象外("2");
+		連携済み("1"), 対象外("2");
 
 		private final String text;
 
 		private RpaLinkageCpqUpdateCsvCreateStatus(final String text) {
-			if (text == null) {
-				this.text = "未連携";
-			} else {
 				this.text = text;
-			}
 		}
 
 		@Override
