@@ -1082,7 +1082,7 @@ public class Contract extends EntityBase {
 	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
 
 	/**
-	 * RPA連携用CPQ更新CSV作成日
+	 * RPA連携用CPQ更新CSV作成日時
 	 */
 	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 112)
 	@Temporal(TemporalType.TIMESTAMP)

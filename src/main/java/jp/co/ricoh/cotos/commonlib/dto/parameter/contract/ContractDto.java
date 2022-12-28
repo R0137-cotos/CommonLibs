@@ -787,11 +787,11 @@ public class ContractDto extends DtoBase {
 	/**
 	 * RPA連携用CPQ更新CSV作成状態
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 105, allowableValues = "未連携(\"0\"),csv作成済み(\"1\"),csv連携済み(\"2\"),対象外(\"3\"),CPQデータなし(\"4\")")
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 105, allowableValues = "未連携(\"0\"),連携(\"1\"),対象外(\"2\")")
 	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
 
 	/**
-	 * RPA連携用CPQ更新CSV作成日
+	 * RPA連携用CPQ更新CSV作成日時
 	 */
 	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 106)
 	@Temporal(TemporalType.DATE)
