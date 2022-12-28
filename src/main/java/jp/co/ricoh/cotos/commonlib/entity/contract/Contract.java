@@ -1078,7 +1078,7 @@ public class Contract extends EntityBase {
 	 * RPA連携用CPQ更新CSV作成状態
 	 */
 	//TODO デフォルト値でnullができないか
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 111, allowableValues = "未連携(\"0\"),連携(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 111, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
 	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
 
 	/**
