@@ -17,4 +17,9 @@ public class CpqReturnValueNspDto {
 	 * 見積種別詳細
 	 */
 	private EstimationTypeDetails estimationTypeDetails;
+
+	/**
+	 * スポーク拠点数
+	 */
+	private Integer spokeNumber;
 }
