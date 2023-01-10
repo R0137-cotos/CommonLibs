@@ -26,4 +26,9 @@ public class ReportsProperties {
 	 * CreateForm帳票出力ワークディレクトリ
 	 */
 	private String createFormWorkDir;
+
+	/**
+	 * CreateForm Expageランタイムjarファイルパス
+	 */
+	private String createFormExpageLibJarPath;
 }
