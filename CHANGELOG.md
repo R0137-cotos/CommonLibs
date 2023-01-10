@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.4.0 (10/01/2023)
+- [**closed**] #13612 ライセンス月次報告書出力DTOに出力日の開始日と終了日をDate型に修正 [#2199](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2199)
+- [**closed**] #13612 ライセンス月次報告書出力DTOに出力日の開始日と終了日を追加 [#2187](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2187)
+
+---
+
 ## v6.3.0 (20/12/2022)
 - [**closed**] #17172 (EDW年額対応)契約変更タイミングをEmunTypeに追加 [#2163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2163)
 - [**closed**] #17172 (EDW年額対応)契約変更タイミングentity修正、converter追加 [#2164](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2164)
