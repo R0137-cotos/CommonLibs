@@ -35,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.RpaLinkageCpqUpdateCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -1064,12 +1065,25 @@ public class Contract extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "contract")
 	@OrderBy("item_master_id ASC, accounting_period_start ASC")
-	@ApiModelProperty(value = "計上期間明細", required = false, position = 107)
+	@ApiModelProperty(value = "計上期間明細", required = false, position = 109)
 	private List<AccountingPeriodDetail> accountingPeriodDetailList;
 
 	/**
 	 * 契約変更タイミング
 	 */
-	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 105, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
+	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 110, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
 	private ContractChangeTiming contractChangeTiming;
+
+	/**
+	 * RPA連携用CPQ更新CSV作成状態
+	 */
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 111, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
+	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
+
+	/**
+	 * RPA連携用CPQ更新CSV作成日時
+	 */
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 112)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date rpaLinkageCpqUpdateCsvCreateAt;
 }

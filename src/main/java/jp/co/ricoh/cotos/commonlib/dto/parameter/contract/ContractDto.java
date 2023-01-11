@@ -20,6 +20,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.RpaLinkageCpqUpdateCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.AbsConCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ArcsPeriodSaleMntOriginStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.BasicContractDiv;
@@ -782,4 +783,17 @@ public class ContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 104)
 	private ContractChangeTiming contractChangeTiming;
+
+	/**
+	 * RPA連携用CPQ更新CSV作成状態
+	 */
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 105, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
+	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
+
+	/**
+	 * RPA連携用CPQ更新CSV作成日時
+	 */
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 106)
+	@Temporal(TemporalType.DATE)
+	private Date rpaLinkageCpqUpdateCsvCreateAt;
 }
