@@ -505,3 +505,4 @@
 |548|契約にRPA連携用CPQ更新CSV作成カラム追加、契約.RPA連携用CPQ更新CSV作成状態にenum追加|
 |549|契約.RPA連携用CPQ更新CSV作成状態のenum区分変更|
 |550|Message.propertiesにテナント未検索時のエラーメッセージを追加|
+|551|RSI基本ユーザー情報APIのURLをプロパティに追加|
