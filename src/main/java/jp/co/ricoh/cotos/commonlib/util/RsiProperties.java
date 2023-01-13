@@ -22,6 +22,11 @@ public class RsiProperties {
 	String authUrl;
 
 	/**
+	 * RSI 基本ユーザー情報APIのベースURL
+	 */
+	String basicUserInfoUrl;
+
+	/**
 	 * RSI 契約管理APIのユーザー認証用ユーザーID
 	 */
 	String userId;

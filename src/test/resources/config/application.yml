@@ -66,6 +66,7 @@ cotos:
   rsi:
     contractUrl: dummy_rsi_contract_url
     authUrl: dummy_rsi_auth_url
+    basicUserInfoUrl: dummy_rsi_basic_user_info_url
     userId: dummy_rsi_user_id
     userPassword: dummy_rsi_user_password
     userTenantId: dummy_rsi_user_tenantId
