@@ -68,7 +68,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * LocalDateをDateに変換する
+	 * LocalDateTimeをDateに変換する
 	 * @param localDateTime 変換対象
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * LocalDateを文字列に変換する
+	 * LocalDateを日付文字列に変換する
 	 * @param localDate
 	 * @param format 変換用フォーマット文字列。例：{@link DateUtil#DATE_FORMAT}
 	 * @return
@@ -98,7 +98,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * LocalDateTimeを文字列に変換する
+	 * LocalDateTimeを日時文字列に変換する
 	 * @param localDate
 	 * @param format 変換用フォーマット文字列。例：{@link DateUtil#DATETIME_FORMAT}
 	 * @return
@@ -108,8 +108,8 @@ public class DateUtil {
 	}
 
 	/**
-	 * 日付文字列をLocalDateTimeに変換する
-	 * @param dateStr 日付文字列
+	 * 日時文字列をLocalDateTimeに変換する
+	 * @param dateStr 日時文字列
 	 * @param format 変換用フォーマット文字列。例：{@link DateUtil#DATETIME_FORMAT}
 	 * @return
 	 * @throws DateTimeParseException フォーマットに失敗した場合or日付としてありえない文字列を渡された場合（実際に存在しない2023/01/32等）
