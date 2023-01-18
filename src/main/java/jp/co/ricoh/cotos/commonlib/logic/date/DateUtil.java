@@ -35,6 +35,14 @@ public class DateUtil {
 	}
 
 	/**
+	 * システム日時を取得する
+	 * @return
+	 */
+	public LocalDateTime getSystemDateTime() {
+		return LocalDateTime.now();
+	}
+
+	/**
 	 * {@link java.util.Date}や{@link java.sql.Date}をLocalDateに変換する<br>
 	 * <b>LocalDateに変換することで時分秒切り捨てとなる</b>
 	 * @param date 変換対象
