@@ -699,6 +699,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -899,6 +900,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
