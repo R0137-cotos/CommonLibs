@@ -188,7 +188,7 @@ public class TestCommon {
 		testTool.assertColumnsNotNull(found);
 
 		MailControlMaster mailControlMaster = mailControlMasterRepository.findOne(1L);
-		MailSendHistory found2 = mailSendHistoryRepository.findByTargetDataIdAndMailControlMasterAndMailSendType(1L, mailControlMaster, MailSendType.完了);
+		List<MailSendHistory> found2 = mailSendHistoryRepository.findByTargetDataIdAndMailControlMasterAndMailSendType(1L, mailControlMaster, MailSendType.完了);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found2);
 
