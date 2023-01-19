@@ -1,0 +1,1 @@
+INSERT INTO item_group_master (id,created_at,created_user_id,updated_at,updated_user_id,version,item_group_name,item_group_div,category) VALUES (1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,'test','test','test');

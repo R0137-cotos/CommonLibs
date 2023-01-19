@@ -253,6 +253,14 @@ public class TestMaster {
 	private ApprovalAlertManagementMasterRepository approvalAlertManagementMasterRepository;
 	@Autowired
 	private PublicHolidayMasterRepository publicHolidayMasterRepository;
+	@Autowired
+	private ItemGroupMasterRepository itemGroupMasterRepository;
+	@Autowired
+	private SpecificItemGroupMasterRepository specificItemGroupMasterRepository;
+	@Autowired
+	private SpecificControlMasterRepository specificControlMasterRepository;
+	@Autowired
+	private SpecificSectionMasterRepository specificSectionMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -945,6 +953,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementWorkAuthControlMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/authPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -993,6 +1002,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1026,10 +1036,12 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
 		RecordDecomposeMaster found = recordDecomposeMasterRepository.findOne(id);
+		// found.getRecordDecomposeCompMasterList().stream().forEach(master -> master.getItemMaster());
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -1242,6 +1254,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		List<String> appId = Arrays.asList("electric");
 		List<ProductMaster> list = productMasterRepository.findByAppIdNotInOrderByIdAsc(appId);
@@ -1276,6 +1289,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		List<String> appId = Arrays.asList("electric");
 		List<ProductMasterDto> list = productMasterDtoRepository.findByAppIdNotInOrderByIdAsc(appId);
@@ -1445,6 +1459,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1467,6 +1482,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1956,6 +1972,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -1993,6 +2010,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productPicMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2367,6 +2385,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2446,6 +2465,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2698,6 +2718,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/vendorProductMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		Long id = 1L;
@@ -2753,6 +2774,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/approvalRouteGrpMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/checkByItemMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/dateCalcPatternMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
 
 		// エンティティの取得
 		List<ItemTransCompMaster> foundList = itemTransCompMasterRepository.findByItemMasterId(1L);
@@ -2924,6 +2946,68 @@ public class TestMaster {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = sdf.parse("2019/01/01");
 		PublicHolidayMaster found = publicHolidayMasterRepository.findOne(date);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ItemGroupMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/ItemGroupMaster.sql");
+
+		// エンティティの取得
+		ItemGroupMaster found = itemGroupMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void SpecificItemGroupMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/SpecificItemGroupMaster.sql");
+
+		// エンティティの取得
+		SpecificItemGroupMaster found = specificItemGroupMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void SpecificControlMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/SpecificControlMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/SpecificItemGroupMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/SpecificSectionMaster.sql");
+
+		// エンティティの取得
+		SpecificControlMaster found = specificControlMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void SpecificSectionMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/SpecificSectionMaster.sql");
+
+		// エンティティの取得
+		SpecificSectionMaster found = specificSectionMasterRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
