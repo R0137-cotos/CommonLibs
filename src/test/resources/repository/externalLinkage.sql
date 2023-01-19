@@ -1,0 +1,1 @@
+INSERT INTO specific_info (id,created_at,created_user_id,updated_at,updated_user_id,version,contract_id,rj_manage_number,specific_control_master_id,specific_control_div,item_value_div,item_value,extends_parameter) VALUES (1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,1,'1',1,'1','1','1','test');

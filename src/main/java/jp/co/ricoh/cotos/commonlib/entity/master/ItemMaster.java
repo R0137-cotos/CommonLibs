@@ -637,4 +637,19 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "契約期間区分", required = false, position = 55, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
 	private ContractSpanType contractSpanType;
+
+	/**
+	 * 品種グループマスタID
+	 */
+	@ManyToOne
+	@JoinColumn(name = "item_group_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "品種グループマスタID", required = false, position = 56)
+	private ItemGroupMaster itemGroupMaster;
+
+	/**
+	 * 商材固有品種グループマスタID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 57, allowableValues = "range[0,9223372036854775807]")
+	private Long specificItemGroupMasterId;
 }
