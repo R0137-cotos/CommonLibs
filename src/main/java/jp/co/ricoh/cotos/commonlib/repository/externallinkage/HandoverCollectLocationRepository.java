@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository.externallinkage;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,4 +10,5 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocatio
 @Repository
 public interface HandoverCollectLocationRepository extends CrudRepository<HandoverCollectLocation, Long> {
 
+	public List<HandoverCollectLocation> findByContractId(long contractId);
 }
