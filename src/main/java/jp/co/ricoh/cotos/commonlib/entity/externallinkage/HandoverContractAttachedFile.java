@@ -44,8 +44,8 @@ public class HandoverContractAttachedFile extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Long contractId;
+	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	private long contractId;
 
 	/**
 	 * ファイル名
