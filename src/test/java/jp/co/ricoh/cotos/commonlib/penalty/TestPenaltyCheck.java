@@ -472,7 +472,7 @@ public class TestPenaltyCheck {
 	public void 異常系_違約金情報取得_契約ID未設定() throws Exception {
 
 		try {
-			penaltyUtil.getPenaltyInfo(null, new Date());
+			penaltyUtil.getPenaltyInfo(null, new Date(), 0, 0, 0);
 			fail("エラーなし");
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> errorList = e.getErrorInfoList();
@@ -486,7 +486,7 @@ public class TestPenaltyCheck {
 	public void 異常系_違約金情報取得_契約情報が取得できない() throws Exception {
 
 		try {
-			penaltyUtil.getPenaltyInfo(12345L, new Date());
+			penaltyUtil.getPenaltyInfo(12345L, new Date(), 0, 0, 0);
 			fail("エラーなし");
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> errorList = e.getErrorInfoList();
@@ -500,7 +500,7 @@ public class TestPenaltyCheck {
 	public void 異常系_違約金情報取得_解約予定日未設定() throws Exception {
 
 		try {
-			penaltyUtil.getPenaltyInfo(20L, null);
+			penaltyUtil.getPenaltyInfo(20L, null, 0, 0, 0);
 			fail("エラーなし");
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> errorList = e.getErrorInfoList();
@@ -515,7 +515,7 @@ public class TestPenaltyCheck {
 
 		Long contractId = 1L;
 		Date cancelScheduledDate = dateCalcPatternUtil.stringToDateConverter("2020/12/31", "yyyy/MM/dd");
-		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate);
+		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate, 0, 0, 0);
 		Assert.assertEquals("違約金が発生しない場合、空のリストが返却されること", 0, resultList.size());
 	}
 
@@ -524,7 +524,25 @@ public class TestPenaltyCheck {
 
 		Long contractId = 20L;
 		Date cancelScheduledDate = dateCalcPatternUtil.stringToDateConverter("2020/12/31", "yyyy/MM/dd");
-		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate);
+		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate, 0, 0, 0);
+		Assert.assertEquals("違約金情報が2件返却されること", 2, resultList.size());
+	}
+
+	@Test
+	public void 正常_違約金情報取得_契約_違約金情報あり_減数あり() throws Exception {
+
+		Long contractId = 20L;
+		Date cancelScheduledDate = dateCalcPatternUtil.stringToDateConverter("2020/12/31", "yyyy/MM/dd");
+		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate, 1, 0, 0);
+		Assert.assertEquals("違約金情報が1件返却されること", 1, resultList.size());
+	}
+
+	@Test
+	public void 正常_違約金情報取得_契約_違約金情報あり_紛失破損水没金品種() throws Exception {
+
+		Long contractId = 27L;
+		Date cancelScheduledDate = dateCalcPatternUtil.stringToDateConverter("2020/12/31", "yyyy/MM/dd");
+		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate, 1, 2, 3);
 		Assert.assertEquals("違約金情報が2件返却されること", 2, resultList.size());
 	}
 
@@ -660,7 +678,7 @@ public class TestPenaltyCheck {
 	@Test
 	public void 違約金情報作成_契約() throws Exception {
 
-		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class);
+		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, int.class, int.class);
 		method.setAccessible(true);
 
 		// 違約金発生なし
@@ -671,7 +689,7 @@ public class TestPenaltyCheck {
 		decreaseItemMap.put(16148L, 2);
 		decreaseItemMap.put(16220L, 1);
 		Date checkTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201231", null);
-		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>)method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract);
+		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0);
 		Assert.assertEquals("違約金が発生しない場合、戻り値リストが空であること", 0, resultList.size());
 
 		// 違約金発生あり
@@ -683,7 +701,40 @@ public class TestPenaltyCheck {
 		decreaseItemMap.put(16220L, 3);
 		decreaseItemMap.put(16128L, 4);
 
-		resultList = (List<PenaltyInfoDto>)method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract);
+		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0);
+		Assert.assertEquals("違約金情報リストに2件設定されていること", 2, resultList.size());
+		resultList.stream().forEach(penaltyInfoDto -> {
+			if (20L == penaltyInfoDto.getPenaltyItemMasterId()) {
+				Assert.assertEquals("違約金品種マスタIDが正しく設定されていること", String.valueOf(20), String.valueOf(penaltyInfoDto.getPenaltyItemMasterId()));
+				Assert.assertEquals("違約金品種名が正しく設定されていること", "ライトモデル20違約金", penaltyInfoDto.getPenaltyItemName());
+				Assert.assertEquals("違約金リコー品種コードが正しく設定されていること", "11111", penaltyInfoDto.getPenaltyRicohItemCode());
+				Assert.assertEquals("違約金品種区分が正しく設定されていること", ItemType.オプション, penaltyInfoDto.getPenaltyItemType());
+				Assert.assertEquals("元品種マスタIDが正しく設定されていること", String.valueOf(16127), String.valueOf(penaltyInfoDto.getOriginItemMasterId()));
+				Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(100), penaltyInfoDto.getPenaltyUnitPrice());
+				Assert.assertEquals("数量が正しく設定されていること", 2, penaltyInfoDto.getQuantity());
+				Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyAmountSummary());
+				Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20201231 00:00:00", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurCacnlLastDate(), "yyyyMMdd HH:mm:ss"));
+			} else if (30L == penaltyInfoDto.getPenaltyItemMasterId()) {
+				Assert.assertEquals("違約金品種マスタIDが正しく設定されていること", String.valueOf(30), String.valueOf(penaltyInfoDto.getPenaltyItemMasterId()));
+				Assert.assertEquals("違約金品種名が正しく設定されていること", "スタンダードモデル67違約金", penaltyInfoDto.getPenaltyItemName());
+				Assert.assertEquals("違約金リコー品種コードが正しく設定されていること", "22222", penaltyInfoDto.getPenaltyRicohItemCode());
+				Assert.assertEquals("違約金品種区分が正しく設定されていること", ItemType.基本, penaltyInfoDto.getPenaltyItemType());
+				Assert.assertEquals("元品種マスタIDが正しく設定されていること", String.valueOf(16128), String.valueOf(penaltyInfoDto.getOriginItemMasterId()));
+				Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyUnitPrice());
+				Assert.assertEquals("数量が正しく設定されていること", 4, penaltyInfoDto.getQuantity());
+				Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(800), penaltyInfoDto.getPenaltyAmountSummary());
+				Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20201231 00:00:00", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurCacnlLastDate(), "yyyyMMdd HH:mm:ss"));
+			} else {
+				Assert.fail();
+			}
+		});
+
+		// 紛失、破損・水没金品種あり
+		decreaseItemMap = new HashMap<Long, Integer>();
+		contractId = 27L;
+		contract = contractRepository.findOne(contractId);
+
+		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 2, 3);
 		Assert.assertEquals("違約金情報リストに2件設定されていること", 2, resultList.size());
 		resultList.stream().forEach(penaltyInfoDto -> {
 			if(20L == penaltyInfoDto.getPenaltyItemMasterId()) {
@@ -758,7 +809,7 @@ public class TestPenaltyCheck {
 		long contractId = 26L;
 
 		try {
-			penaltyUtil.getPenaltyInfo(contractId, new Date());
+			penaltyUtil.getPenaltyInfo(contractId, new Date(), 0, 0, 0);
 			fail("エラーなし");
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> errorList = e.getErrorInfoList();
