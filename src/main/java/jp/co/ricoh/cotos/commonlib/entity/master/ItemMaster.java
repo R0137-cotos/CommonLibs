@@ -653,7 +653,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 57, allowableValues = "range[0,9223372036854775807]")
 	private Long specificItemGroupMasterId;
 
-		/**
+	/**
 	 * 特殊加算月数
 	 */
 	@Max(99999)
