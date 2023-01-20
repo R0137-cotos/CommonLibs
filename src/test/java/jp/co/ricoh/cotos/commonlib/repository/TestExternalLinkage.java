@@ -12,7 +12,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfoDetail;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocation;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMobileEquipment;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverPenaltyDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.SpecificInfo;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverCollectLocationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverMobileEquipmentRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverPenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.SpecificInfoRepository;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +31,21 @@ public class TestExternalLinkage {
 
 	@Autowired
 	SpecificInfoRepository specificInfoRepository;
+
+	@Autowired
+	ElementInfoRepository elementInfoRepository;
+
+	@Autowired
+	ElementInfoDetailRepository elementInfoDetailRepository;
+
+	@Autowired
+	HandoverPenaltyDetailContractRepository handoverPenaltyDetailContractRepository;
+
+	@Autowired
+	HandoverMobileEquipmentRepository handoverMobileEquipmentRepository;
+
+	@Autowired
+	HandoverCollectLocationRepository handoverCollectLocationRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -46,6 +71,66 @@ public class TestExternalLinkage {
 	public void SpecificInfoRepositoryのテスト() throws Exception {
 
 		SpecificInfo found = specificInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ElementInfoRepositoryのテスト() throws Exception {
+
+		ElementInfo found = elementInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ElementInfoDetailRepositoryのテスト() throws Exception {
+
+		ElementInfoDetail found = elementInfoDetailRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void HandoverPenaltyDetailContractRepositoryのテスト() throws Exception {
+
+		HandoverPenaltyDetailContract found = handoverPenaltyDetailContractRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void HandoverMobileEquipmentRepositoryのテスト() throws Exception {
+
+		HandoverMobileEquipment found = handoverMobileEquipmentRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void HandoverCollectLocationRepositoryのテスト() throws Exception {
+
+		HandoverCollectLocation found = handoverCollectLocationRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
