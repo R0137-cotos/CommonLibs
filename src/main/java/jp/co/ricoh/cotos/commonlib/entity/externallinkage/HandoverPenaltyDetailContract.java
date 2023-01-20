@@ -1,7 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.externallinkage;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,13 +18,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.context.annotation.Description;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract.PenaltyAccountSalesStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract.SalesToType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -37,52 +33,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "handover_penalty_detail_contract")
 public class HandoverPenaltyDetailContract extends EntityBase {
-
-	@Description(value = "計上先区分")
-	public enum SalesToType {
-
-		エンドユーザ("1"), 課所止め("2");
-
-		private final String text;
-
-		private SalesToType(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static SalesToType fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
-	@Description(value = "違約金売上計上処理状態")
-	public enum PenaltyAccountSalesStatus {
-
-		未計上("0"), 計上済み("1"), 処理不要("2"), 処理不可("3");
-
-		private final String text;
-
-		private PenaltyAccountSalesStatus(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static PenaltyAccountSalesStatus fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * 引継ぎ用違約金明細ID
