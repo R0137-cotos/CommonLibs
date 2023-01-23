@@ -290,7 +290,7 @@ public class PenaltyUtil {
 						lostPenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
 						lostPenaltyInfoDto.setPenaltyUnitPrice(lostPenaltyItem.getStandardPrice());
 						lostPenaltyInfoDto.setQuantity(lostNum);
-						lostPenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(lostPenaltyItem, detail.getQuantity()));
+						lostPenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(lostPenaltyItem, lostPenaltyInfoDto.getQuantity()));
 						lostPenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
 						resultList.add(lostPenaltyInfoDto);
 
@@ -310,7 +310,7 @@ public class PenaltyUtil {
 						damagePenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
 						damagePenaltyInfoDto.setPenaltyUnitPrice(damagePenaltyItem.getStandardPrice());
 						damagePenaltyInfoDto.setQuantity(damageNum);
-						damagePenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(damagePenaltyItem, detail.getQuantity()));
+						damagePenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(damagePenaltyItem, damagePenaltyInfoDto.getQuantity()));
 						damagePenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
 						resultList.add(damagePenaltyInfoDto);
 

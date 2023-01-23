@@ -737,26 +737,26 @@ public class TestPenaltyCheck {
 		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 2, 3);
 		Assert.assertEquals("違約金情報リストに2件設定されていること", 2, resultList.size());
 		resultList.stream().forEach(penaltyInfoDto -> {
-			if(20L == penaltyInfoDto.getPenaltyItemMasterId()) {
-				Assert.assertEquals("違約金品種マスタIDが正しく設定されていること", String.valueOf(20), String.valueOf(penaltyInfoDto.getPenaltyItemMasterId()));
-				Assert.assertEquals("違約金品種名が正しく設定されていること", "ライトモデル20違約金", penaltyInfoDto.getPenaltyItemName());
-				Assert.assertEquals("違約金リコー品種コードが正しく設定されていること", "11111", penaltyInfoDto.getPenaltyRicohItemCode());
+			if (24579L == penaltyInfoDto.getPenaltyItemMasterId()) {
+				Assert.assertEquals("違約金品種マスタIDが正しく設定されていること", String.valueOf(24579), String.valueOf(penaltyInfoDto.getPenaltyItemMasterId()));
+				Assert.assertEquals("違約金品種名が正しく設定されていること", "LTE-D3 紛失(モバイルネット)", penaltyInfoDto.getPenaltyItemName());
+				Assert.assertEquals("違約金リコー品種コードが正しく設定されていること", "890802", penaltyInfoDto.getPenaltyRicohItemCode());
 				Assert.assertEquals("違約金品種区分が正しく設定されていること", ItemType.オプション, penaltyInfoDto.getPenaltyItemType());
-				Assert.assertEquals("元品種マスタIDが正しく設定されていること", String.valueOf(16127), String.valueOf(penaltyInfoDto.getOriginItemMasterId()));
-				Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(100), penaltyInfoDto.getPenaltyUnitPrice());
+				Assert.assertEquals("元品種マスタIDが正しく設定されていること", String.valueOf(24563), String.valueOf(penaltyInfoDto.getOriginItemMasterId()));
+				Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(22000), penaltyInfoDto.getPenaltyUnitPrice());
 				Assert.assertEquals("数量が正しく設定されていること", 2, penaltyInfoDto.getQuantity());
-				Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyAmountSummary());
-				Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20201231 00:00:00", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurCacnlLastDate(), "yyyyMMdd HH:mm:ss"));
-			} else if(30L == penaltyInfoDto.getPenaltyItemMasterId()) {
-				Assert.assertEquals("違約金品種マスタIDが正しく設定されていること", String.valueOf(30), String.valueOf(penaltyInfoDto.getPenaltyItemMasterId()));
-				Assert.assertEquals("違約金品種名が正しく設定されていること", "スタンダードモデル67違約金", penaltyInfoDto.getPenaltyItemName());
-				Assert.assertEquals("違約金リコー品種コードが正しく設定されていること", "22222", penaltyInfoDto.getPenaltyRicohItemCode());
-				Assert.assertEquals("違約金品種区分が正しく設定されていること", ItemType.基本, penaltyInfoDto.getPenaltyItemType());
-				Assert.assertEquals("元品種マスタIDが正しく設定されていること", String.valueOf(16128), String.valueOf(penaltyInfoDto.getOriginItemMasterId()));
-				Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(200), penaltyInfoDto.getPenaltyUnitPrice());
-				Assert.assertEquals("数量が正しく設定されていること", 4, penaltyInfoDto.getQuantity());
-				Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(800), penaltyInfoDto.getPenaltyAmountSummary());
-				Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", "20201231 00:00:00", dateCalcPatternUtil.dateToStringConverter(penaltyInfoDto.getPenaltyOccurCacnlLastDate(), "yyyyMMdd HH:mm:ss"));
+				Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(44000), penaltyInfoDto.getPenaltyAmountSummary());
+				Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", null, penaltyInfoDto.getPenaltyOccurCacnlLastDate());
+			} else if (24580L == penaltyInfoDto.getPenaltyItemMasterId()) {
+				Assert.assertEquals("違約金品種マスタIDが正しく設定されていること", String.valueOf(24580), String.valueOf(penaltyInfoDto.getPenaltyItemMasterId()));
+				Assert.assertEquals("違約金品種名が正しく設定されていること", "LTE-D3 端末破損・水没(モバイルネット)", penaltyInfoDto.getPenaltyItemName());
+				Assert.assertEquals("違約金リコー品種コードが正しく設定されていること", "890803", penaltyInfoDto.getPenaltyRicohItemCode());
+				Assert.assertEquals("違約金品種区分が正しく設定されていること", ItemType.オプション, penaltyInfoDto.getPenaltyItemType());
+				Assert.assertEquals("元品種マスタIDが正しく設定されていること", String.valueOf(24563), String.valueOf(penaltyInfoDto.getOriginItemMasterId()));
+				Assert.assertEquals("違約金単価が正しく設定されていること", BigDecimal.valueOf(22000), penaltyInfoDto.getPenaltyUnitPrice());
+				Assert.assertEquals("数量が正しく設定されていること", 3, penaltyInfoDto.getQuantity());
+				Assert.assertEquals("違約金額が正しく設定されていること", BigDecimal.valueOf(66000), penaltyInfoDto.getPenaltyAmountSummary());
+				Assert.assertEquals("違約金発生最終解約日が正しく設定されていること", null, penaltyInfoDto.getPenaltyOccurCacnlLastDate());
 			} else {
 				Assert.fail();
 			}
@@ -773,14 +773,14 @@ public class TestPenaltyCheck {
 		Long itemMasterId = 16125L;
 		ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
 		Integer quantity = 1;
-		BigDecimal rslut = (BigDecimal)method.invoke(penaltyUtil, itemMaster, quantity);
+		BigDecimal rslut = (BigDecimal) method.invoke(penaltyUtil, itemMaster, quantity);
 		Assert.assertEquals("数量1_標準単価 * 1の結果が設定されること", BigDecimal.valueOf(39840), rslut);
 
 		// 標準単価：8000
 		itemMasterId = 16220L;
 		itemMaster = itemMasterRepository.findOne(itemMasterId);
 		quantity = 2;
-		rslut = (BigDecimal)method.invoke(penaltyUtil, itemMaster, quantity);
+		rslut = (BigDecimal) method.invoke(penaltyUtil, itemMaster, quantity);
 		Assert.assertEquals("数量2_標準単価 * 2の結果が設定されること", BigDecimal.valueOf(16000), rslut);
 	}
 
@@ -792,14 +792,14 @@ public class TestPenaltyCheck {
 
 		ItemMaster item = new ItemMaster();
 		Date billingStartDate = new Date();
-		Date result = (Date)method.invoke(penaltyUtil, item, billingStartDate);
+		Date result = (Date) method.invoke(penaltyUtil, item, billingStartDate);
 		Assert.assertEquals("違約金起算日区分が未設定の場合、nullが返却されること", null, result);
 
 		// 違約金起算日区分：課金開始日 最低契約月数：12
 		Long itemMasterId = 16148L;
 		billingStartDate = dateCalcPatternUtil.stringToDateConverter("20200115", null);
 		item = itemMasterRepository.findOne(itemMasterId);
-		result = (Date)method.invoke(penaltyUtil, item, billingStartDate);
+		result = (Date) method.invoke(penaltyUtil, item, billingStartDate);
 		Assert.assertEquals("12か月後(指定月含む)の月の最終日が設定されていること", "20201130 23:59:59", dateCalcPatternUtil.dateToStringConverter(result, "yyyyMMdd HH:mm:ss"));
 	}
 
