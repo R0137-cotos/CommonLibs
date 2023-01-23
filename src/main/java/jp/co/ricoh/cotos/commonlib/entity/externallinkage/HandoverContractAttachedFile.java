@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,7 +16,6 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
-import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -62,12 +59,11 @@ public class HandoverContractAttachedFile extends EntityBase {
 	private String fileKind;
 
 	/**
-	 * 添付ファイル
+	 * 添付ファイルID
 	 */
-	@OneToOne(optional = true)
-	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "添付ファイル", required = false, position = 5)
-	private AttachedFile attachedFile;
+	@Min(0)
+	@ApiModelProperty(value = "添付ファイルID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	private Long attachedFileId;
 
 	/**
 	 * コメント
