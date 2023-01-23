@@ -652,4 +652,31 @@ public class ItemMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 57, allowableValues = "range[0,9223372036854775807]")
 	private Long specificItemGroupMasterId;
+
+	/**
+	 * 特殊加算月数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "特殊加算月数", required = false, position = 58, allowableValues = "range[0,99999]")
+	private Integer specialAddMonths;
+
+	/**
+	 * 紛失金品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "lost_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "紛失金品種マスタ", required = false, position = 59)
+	private ItemMaster lostItemMaster;
+
+	/**
+	 * 破損水没金品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "damage_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "破損水没金品種マスタ", required = false, position = 60)
+	private ItemMaster damageItemMaster;
+
 }

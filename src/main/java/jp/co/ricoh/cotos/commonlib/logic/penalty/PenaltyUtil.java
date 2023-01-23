@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import jp.co.ricoh.cotos.commonlib.dto.result.PenaltyInfoDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
@@ -164,9 +166,12 @@ public class PenaltyUtil {
 	 * 違約金が発生する場合、違約金情報を返却する。
 	 * @param contractId		   契約ID
 	 * @param cancelScheduledDate 解約予定日
+	 * @param decreaseFlg         減数フラグ
+	 * @param lostNumber          紛失数
+	 * @param damageNumber        破損・水没数
 	 * @return 違約金情報リスト
 	 */
-	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate) {
+	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, int decreaseFlg, int lostNumber, int damageNumber) {
 
 		// 契約情報取得
 		Optional.ofNullable(contractId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約ID" })));
@@ -177,12 +182,17 @@ public class PenaltyUtil {
 		// 品種単位の数量を取得
 		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
 		for (ContractDetail detail : contract.getContractDetailList()) {
-			if(detail.getQuantity() != 0) {
+			// 減数フラグが立っている場合は変更前数量から現在の数量を減算した値を取得
+			if (decreaseFlg == 1) {
+				if (detail.getBeforeQuantity() != null && detail.getBeforeQuantity() > detail.getQuantity()) {
+					decreaseItemMap.put(detail.getItemContract().getItemMasterId(), detail.getBeforeQuantity() - detail.getQuantity());
+				}
+			} else if (detail.getQuantity() != 0) {
 				decreaseItemMap.put(detail.getItemContract().getItemMasterId(), detail.getQuantity());
 			}
 		}
 		// 違約金情報生成
-		return createPenaltyInfoList(decreaseItemMap, cancelScheduledDate, contract);
+		return createPenaltyInfoList(decreaseItemMap, cancelScheduledDate, contract, lostNumber, damageNumber);
 	}
 
 //	/**
@@ -224,9 +234,11 @@ public class PenaltyUtil {
 	 * @param decreaseItemMap 		減数品種数量マップ
 	 * @param cancelScheduledDate  キャンセル予定日
 	 * @param contract	   	   		契約エンティティ
+	 * @param lostNumber          紛失数
+	 * @param damageNumber        破損・水没数
 	 * @return 違約金情報リスト
 	 */
-	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract) {
+	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, int lostNumber, int damageNumber) {
 
 		List<PenaltyInfoDto> resultList = new ArrayList<PenaltyInfoDto>();
 
@@ -260,6 +272,45 @@ public class PenaltyUtil {
 					resultList.add(penaltyInfoDto);
 				}
 			});
+		});
+
+		contract.getContractDetailList().stream().filter(detail -> detail.getItemContract().getCostType().equals(CostType.月額_定額)).collect(Collectors.toList()).forEach(detail -> {
+			long itemMasterId = detail.getItemContract().getItemMasterId();
+			ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
+			// 紛失金品種情報、違約金金額を戻り値に設定する
+			if (lostNumber != 0) {
+				Optional.ofNullable(itemMaster.getLostItemMaster()).ifPresent(lostPenaltyItem -> {
+					PenaltyInfoDto lostPenaltyInfoDto = new PenaltyInfoDto();
+					lostPenaltyInfoDto.setPenaltyItemMasterId(lostPenaltyItem.getId());
+					lostPenaltyInfoDto.setPenaltyItemName(lostPenaltyItem.getItemName());
+					lostPenaltyInfoDto.setPenaltyRicohItemCode(lostPenaltyItem.getRicohItemCode());
+					lostPenaltyInfoDto.setPenaltyItemType(lostPenaltyItem.getItemType());
+					lostPenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
+					lostPenaltyInfoDto.setPenaltyUnitPrice(lostPenaltyItem.getStandardPrice());
+					lostPenaltyInfoDto.setQuantity(lostNumber);
+					lostPenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(lostPenaltyItem, lostPenaltyInfoDto.getQuantity()));
+					lostPenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
+					resultList.add(lostPenaltyInfoDto);
+
+				});
+			}
+			// 破損・水没金品種情報、違約金金額を戻り値に設定する
+			if (damageNumber != 0) {
+				Optional.ofNullable(itemMaster.getDamageItemMaster()).ifPresent(damagePenaltyItem -> {
+					PenaltyInfoDto damagePenaltyInfoDto = new PenaltyInfoDto();
+					damagePenaltyInfoDto.setPenaltyItemMasterId(damagePenaltyItem.getId());
+					damagePenaltyInfoDto.setPenaltyItemName(damagePenaltyItem.getItemName());
+					damagePenaltyInfoDto.setPenaltyRicohItemCode(damagePenaltyItem.getRicohItemCode());
+					damagePenaltyInfoDto.setPenaltyItemType(damagePenaltyItem.getItemType());
+					damagePenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
+					damagePenaltyInfoDto.setPenaltyUnitPrice(damagePenaltyItem.getStandardPrice());
+					damagePenaltyInfoDto.setQuantity(damageNumber);
+					damagePenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(damagePenaltyItem, damagePenaltyInfoDto.getQuantity()));
+					damagePenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
+					resultList.add(damagePenaltyInfoDto);
+
+				});
+			}
 		});
 		return resultList;
 	}
