@@ -53,7 +53,7 @@ public class ElementInfoDetail extends EntityBase {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "部材マスタID", required = false, position = 3, allowableValues = "range[0,9223372036854775807]")
-	private Long element_master_id;
+	private Long elementMasterId;
 
 	/**
 	 * 数量

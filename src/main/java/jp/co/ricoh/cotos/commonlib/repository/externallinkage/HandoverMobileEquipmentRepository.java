@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMobileEquipmen
 public interface HandoverMobileEquipmentRepository extends CrudRepository<HandoverMobileEquipment, Long> {
 
 	public List<HandoverMobileEquipment> findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
+
+	public List<HandoverMobileEquipment> findByHandoverContractId(long contractId);
 }

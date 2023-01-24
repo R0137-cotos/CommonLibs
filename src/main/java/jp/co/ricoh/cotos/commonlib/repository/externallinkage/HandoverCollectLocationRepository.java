@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocatio
 public interface HandoverCollectLocationRepository extends CrudRepository<HandoverCollectLocation, Long> {
 
 	public List<HandoverCollectLocation> findByContractId(long contractId);
+
+	public List<HandoverCollectLocation> findByHandoverContractId(long contractId);
 }
