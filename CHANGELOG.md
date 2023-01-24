@@ -1,5 +1,13 @@
 # Changelog
 
+## v6.5.0 (24/01/2023)
+- [**closed**] #16766 契約にRPA連携用CPQ更新CSV作成状態と作成日時を追加 [#2221](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2221)
+- [**closed**] #16687 メール送信履歴テーブル取得処理をリストで取得するよう修正 [#2218](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2218)
+- [**closed**] #11644 RSI基本ユーザー情報APIのURLをプロパティに追加 [#2216](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2216)
+- [**closed**] #11644 テナント未検索時のエラーメッセージ追加 [#2215](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2215)
+
+---
+
 ## v6.4.0 (10/01/2023)
 - [**closed**] #13612 ライセンス月次報告書出力DTOに出力日の開始日と終了日をDate型に修正 [#2199](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2199)
 - [**closed**] #13612 ライセンス月次報告書出力DTOに出力日の開始日と終了日を追加 [#2187](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2187)
