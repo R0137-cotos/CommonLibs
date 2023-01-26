@@ -261,6 +261,8 @@ public class TestMaster {
 	private SpecificControlMasterRepository specificControlMasterRepository;
 	@Autowired
 	private SpecificSectionMasterRepository specificSectionMasterRepository;
+	@Autowired
+	private ElementMasterRepository elementMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -3010,6 +3012,21 @@ public class TestMaster {
 
 		// エンティティの取得
 		SpecificSectionMaster found = specificSectionMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ElementMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/elementMaster.sql");
+
+		// エンティティの取得
+		ElementMaster found = elementMasterRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

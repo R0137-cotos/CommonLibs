@@ -19,6 +19,6 @@ public class ItemValueDivConverter implements AttributeConverter<ItemValueDiv, S
 	public ItemValueDiv convertToEntityAttribute(String value) {
 		if (value == null)
 			return null;
-		return ItemValueDiv.fromString(value); //IllegalArgumentExceptionはContractType.fromString側で投げている
+		return ItemValueDiv.fromString(value); //IllegalArgumentExceptionはItemValueDiv.fromString側で投げている
 	}
 }

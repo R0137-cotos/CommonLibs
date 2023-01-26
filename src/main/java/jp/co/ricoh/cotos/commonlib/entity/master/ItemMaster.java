@@ -648,6 +648,7 @@ public class ItemMaster extends EntityBaseMaster {
 
 	/**
 	 * 商材固有品種グループマスタID
+	 * 用途が限定的かつ処理不可削減の為、エンティティとして保持しない
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 57, allowableValues = "range[0,9223372036854775807]")
