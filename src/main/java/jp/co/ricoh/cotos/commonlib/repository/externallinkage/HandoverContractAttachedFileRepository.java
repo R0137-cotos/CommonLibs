@@ -9,5 +9,8 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverContractAttach
 
 @Repository
 public interface HandoverContractAttachedFileRepository extends CrudRepository<HandoverContractAttachedFile, Long> {
+
 	public List<HandoverContractAttachedFile> findByContractId(long contractId);
+
+	public List<HandoverContractAttachedFile> findByHandoverContractId(long contractId);
 }
