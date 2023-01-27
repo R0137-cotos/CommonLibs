@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.SpecificInfo;
 public interface SpecificInfoRepository extends CrudRepository<SpecificInfo, Long> {
 
 	public List<SpecificInfo> findByContractId(long contractId);
+
+	public List<SpecificInfo> findBySpecificControlDivAndItemValue(String specificControlDiv, String itemValue);
 }
