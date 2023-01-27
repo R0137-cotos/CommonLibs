@@ -12,5 +12,5 @@ public interface HandoverMobileEquipmentRepository extends CrudRepository<Handov
 
 	public List<HandoverMobileEquipment> findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
 
-	public List<HandoverMobileEquipment> findByHandoverContractId(long contractId);
+	public List<HandoverMobileEquipment> findByHandoverContractId(long handoverContractId);
 }

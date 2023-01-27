@@ -12,5 +12,5 @@ public interface HandoverContractAttachedFileRepository extends CrudRepository<H
 
 	public List<HandoverContractAttachedFile> findByContractId(long contractId);
 
-	public List<HandoverContractAttachedFile> findByHandoverContractId(long contractId);
+	public List<HandoverContractAttachedFile> findByHandoverContractId(long handoverContractId);
 }
