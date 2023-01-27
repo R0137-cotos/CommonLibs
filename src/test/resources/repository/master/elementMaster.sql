@@ -1,0 +1,1 @@
+INSERT INTO element_master (id,created_at,created_user_id,updated_at,updated_user_id,version,item_master_id,element_div,category_type,thing_item_code,element_name,lengths,price,shipping_type,product_spreadsheet_flg,vendor_code,order_bad_check_flg) VALUES (1,'2018/09/19 12:09:10','COTOS','2018/09/19 12:09:10','COTOS',1,1,'1','1','1','1','1',100,'0',0,'1',1);
