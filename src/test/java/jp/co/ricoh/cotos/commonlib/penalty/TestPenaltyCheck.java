@@ -511,6 +511,15 @@ public class TestPenaltyCheck {
 	}
 
 	@Test
+	public void 正常_違約金情報取得_契約_任意パラメータ設定なし() throws Exception {
+
+		Long contractId = 1L;
+		Date cancelScheduledDate = dateCalcPatternUtil.stringToDateConverter("2020/12/31", "yyyy/MM/dd");
+		List<PenaltyInfoDto> resultList = penaltyUtil.getPenaltyInfo(contractId, cancelScheduledDate, null, null, null);
+		Assert.assertEquals("違約金が発生しない場合、空のリストが返却されること", 0, resultList.size());
+	}
+
+	@Test
 	public void 正常_違約金情報取得_契約_違約金情報なし() throws Exception {
 
 		Long contractId = 1L;
@@ -676,9 +685,28 @@ public class TestPenaltyCheck {
 
 	@SuppressWarnings("unchecked")
 	@Test
+	public void 違約金情報作成_契約_任意パラメータ設定なし() throws Exception {
+
+		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class);
+		method.setAccessible(true);
+
+		// 違約金発生なし
+		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
+		Long contractId = 3L;
+		Contract contract = contractRepository.findOne(contractId);
+		decreaseItemMap.put(16147L, 3);
+		decreaseItemMap.put(16148L, 2);
+		decreaseItemMap.put(16220L, 1);
+		Date checkTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201231", null);
+		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, null, null);
+		Assert.assertEquals("違約金が発生しない場合、戻り値リストが空であること", 0, resultList.size());
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
 	public void 違約金情報作成_契約() throws Exception {
 
-		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, int.class, int.class);
+		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class);
 		method.setAccessible(true);
 
 		// 違約金発生なし
