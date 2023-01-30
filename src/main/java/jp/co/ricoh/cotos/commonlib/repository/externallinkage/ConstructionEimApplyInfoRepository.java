@@ -6,9 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo.OrderType;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo.Status;
 
 @Repository
 public interface ConstructionEimApplyInfoRepository extends CrudRepository<ConstructionEimApplyInfo, Long> {
 
 	public List<ConstructionEimApplyInfo> findByContractIdAndDisengagementFlg(long contractId, int disengagementFlg);
+
+	public List<ConstructionEimApplyInfo> findByContractIdAndStatusAndOrderTypeNotIn(long contractId, Status status, List<OrderType> OrderTypeList);
 }
