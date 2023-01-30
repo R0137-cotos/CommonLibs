@@ -171,7 +171,7 @@ public class PenaltyUtil {
 	 * @param damageNumber        破損・水没数
 	 * @return 違約金情報リスト
 	 */
-	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, int decreaseFlg, int lostNumber, int damageNumber) {
+	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, Integer decreaseFlg, Integer lostNumber, Integer damageNumber) {
 
 		// 契約情報取得
 		Optional.ofNullable(contractId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約ID" })));
@@ -183,11 +183,15 @@ public class PenaltyUtil {
 		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
 		for (ContractDetail detail : contract.getContractDetailList()) {
 			// 減数フラグが立っている場合は変更前数量から現在の数量を減算した値を取得
-			if (decreaseFlg == 1) {
-				if (detail.getBeforeQuantity() != null && detail.getBeforeQuantity() > detail.getQuantity()) {
-					decreaseItemMap.put(detail.getItemContract().getItemMasterId(), detail.getBeforeQuantity() - detail.getQuantity());
+			if (decreaseFlg != null) {
+				if (decreaseFlg == 1) {
+					if (detail.getBeforeQuantity() != null && detail.getBeforeQuantity() > detail.getQuantity()) {
+						decreaseItemMap.put(detail.getItemContract().getItemMasterId(), detail.getBeforeQuantity() - detail.getQuantity());
+					}
+				} else if (detail.getQuantity() != 0) {
+					decreaseItemMap.put(detail.getItemContract().getItemMasterId(), detail.getQuantity());
 				}
-			} else if (detail.getQuantity() != 0) {
+			} else {
 				decreaseItemMap.put(detail.getItemContract().getItemMasterId(), detail.getQuantity());
 			}
 		}
@@ -238,7 +242,7 @@ public class PenaltyUtil {
 	 * @param damageNumber        破損・水没数
 	 * @return 違約金情報リスト
 	 */
-	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, int lostNumber, int damageNumber) {
+	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, Integer lostNumber, Integer damageNumber) {
 
 		List<PenaltyInfoDto> resultList = new ArrayList<PenaltyInfoDto>();
 
@@ -278,39 +282,43 @@ public class PenaltyUtil {
 			long itemMasterId = detail.getItemContract().getItemMasterId();
 			ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
 			// 紛失金品種情報、違約金金額を戻り値に設定する
-			if (lostNumber != 0) {
-				Optional.ofNullable(itemMaster.getLostItemMaster()).ifPresent(lostPenaltyItem -> {
-					PenaltyInfoDto lostPenaltyInfoDto = new PenaltyInfoDto();
-					lostPenaltyInfoDto.setPenaltyItemMasterId(lostPenaltyItem.getId());
-					lostPenaltyInfoDto.setPenaltyItemName(lostPenaltyItem.getItemName());
-					lostPenaltyInfoDto.setPenaltyRicohItemCode(lostPenaltyItem.getRicohItemCode());
-					lostPenaltyInfoDto.setPenaltyItemType(lostPenaltyItem.getItemType());
-					lostPenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
-					lostPenaltyInfoDto.setPenaltyUnitPrice(lostPenaltyItem.getStandardPrice());
-					lostPenaltyInfoDto.setQuantity(lostNumber);
-					lostPenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(lostPenaltyItem, lostPenaltyInfoDto.getQuantity()));
-					lostPenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
-					resultList.add(lostPenaltyInfoDto);
+			Optional.ofNullable(lostNumber).ifPresent(lostNum -> {
+				if (lostNum != 0) {
+					Optional.ofNullable(itemMaster.getLostItemMaster()).ifPresent(lostPenaltyItem -> {
+						PenaltyInfoDto lostPenaltyInfoDto = new PenaltyInfoDto();
+						lostPenaltyInfoDto.setPenaltyItemMasterId(lostPenaltyItem.getId());
+						lostPenaltyInfoDto.setPenaltyItemName(lostPenaltyItem.getItemName());
+						lostPenaltyInfoDto.setPenaltyRicohItemCode(lostPenaltyItem.getRicohItemCode());
+						lostPenaltyInfoDto.setPenaltyItemType(lostPenaltyItem.getItemType());
+						lostPenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
+						lostPenaltyInfoDto.setPenaltyUnitPrice(lostPenaltyItem.getStandardPrice());
+						lostPenaltyInfoDto.setQuantity(lostNum);
+						lostPenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(lostPenaltyItem, lostPenaltyInfoDto.getQuantity()));
+						lostPenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
+						resultList.add(lostPenaltyInfoDto);
 
-				});
-			}
+					});
+				}
+			});
 			// 破損・水没金品種情報、違約金金額を戻り値に設定する
-			if (damageNumber != 0) {
-				Optional.ofNullable(itemMaster.getDamageItemMaster()).ifPresent(damagePenaltyItem -> {
-					PenaltyInfoDto damagePenaltyInfoDto = new PenaltyInfoDto();
-					damagePenaltyInfoDto.setPenaltyItemMasterId(damagePenaltyItem.getId());
-					damagePenaltyInfoDto.setPenaltyItemName(damagePenaltyItem.getItemName());
-					damagePenaltyInfoDto.setPenaltyRicohItemCode(damagePenaltyItem.getRicohItemCode());
-					damagePenaltyInfoDto.setPenaltyItemType(damagePenaltyItem.getItemType());
-					damagePenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
-					damagePenaltyInfoDto.setPenaltyUnitPrice(damagePenaltyItem.getStandardPrice());
-					damagePenaltyInfoDto.setQuantity(damageNumber);
-					damagePenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(damagePenaltyItem, damagePenaltyInfoDto.getQuantity()));
-					damagePenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
-					resultList.add(damagePenaltyInfoDto);
+			Optional.ofNullable(damageNumber).ifPresent(damageNum -> {
+				if (damageNum != 0) {
+					Optional.ofNullable(itemMaster.getDamageItemMaster()).ifPresent(damagePenaltyItem -> {
+						PenaltyInfoDto damagePenaltyInfoDto = new PenaltyInfoDto();
+						damagePenaltyInfoDto.setPenaltyItemMasterId(damagePenaltyItem.getId());
+						damagePenaltyInfoDto.setPenaltyItemName(damagePenaltyItem.getItemName());
+						damagePenaltyInfoDto.setPenaltyRicohItemCode(damagePenaltyItem.getRicohItemCode());
+						damagePenaltyInfoDto.setPenaltyItemType(damagePenaltyItem.getItemType());
+						damagePenaltyInfoDto.setOriginItemMasterId(itemMaster.getId());
+						damagePenaltyInfoDto.setPenaltyUnitPrice(damagePenaltyItem.getStandardPrice());
+						damagePenaltyInfoDto.setQuantity(damageNum);
+						damagePenaltyInfoDto.setPenaltyAmountSummary(calcPenaltyAmount(damagePenaltyItem, damagePenaltyInfoDto.getQuantity()));
+						damagePenaltyInfoDto.setPenaltyOccurCacnlLastDate(null);
+						resultList.add(damagePenaltyInfoDto);
 
-				});
-			}
+					});
+				}
+			});
 		});
 		return resultList;
 	}
