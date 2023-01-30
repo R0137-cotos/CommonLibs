@@ -12,5 +12,7 @@ public interface HandoverCollectLocationRepository extends CrudRepository<Handov
 
 	public List<HandoverCollectLocation> findByContractId(long contractId);
 
+	public List<HandoverCollectLocation> findByContractIdAndCollectUnnecessaryFlg(long contractId, int collectUnnecessaryFlg);
+
 	public List<HandoverCollectLocation> findByHandoverContractId(long handoverContractId);
 }
