@@ -13,4 +13,6 @@ public interface SpecificInfoRepository extends CrudRepository<SpecificInfo, Lon
 	public List<SpecificInfo> findByContractId(long contractId);
 
 	public List<SpecificInfo> findBySpecificControlDivAndItemValue(String specificControlDiv, String itemValue);
+
+	public SpecificInfo findByContractIdAndSpecificControlMasterId(long contractId, long specificControlMasterId);
 }
