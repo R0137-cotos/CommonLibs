@@ -212,7 +212,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * 注文種別詳細
 	 */
-	@ApiModelProperty(value = "注文種別詳細", required = false, position = 12, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "注文種別詳細", required = false, position = 12, allowableValues = "移転, 同一フロア内移転, 終端装置変更")
 	@Enumerated(EnumType.STRING)
 	private OrderTypeDetail orderTypeDetail;
 
@@ -247,7 +247,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * 設置先NTT事業者
 	 */
-	@ApiModelProperty(value = "設置先NTT事業者", required = false, position = 17, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先NTT事業者", required = false, position = 17, allowableValues = "東日本, 西日本")
 	@Enumerated(EnumType.STRING)
 	private LineEastWest lineEastWest;
 
@@ -261,7 +261,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * 回線メニュー
 	 */
-	@ApiModelProperty(value = "回線メニュー", required = false, position = 19, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "回線メニュー", required = false, position = 19, allowableValues = "スタンダードメニュー, アクセスメニュー")
 	@Enumerated(EnumType.STRING)
 	private LineMenu lineMenu;
 
@@ -289,14 +289,14 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * 変更前設置先NTT事業者
 	 */
-	@ApiModelProperty(value = "変更前設置先NTT事業者", required = false, position = 23, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "変更前設置先NTT事業者", required = false, position = 23, allowableValues = "東日本, 西日本")
 	@Enumerated(EnumType.STRING)
 	private BeforeLineEastWest beforeLineEastWest;
 
 	/**
 	 * 変更前回線メニュー
 	 */
-	@ApiModelProperty(value = "変更前回線メニュー", required = false, position = 24, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "変更前回線メニュー", required = false, position = 24, allowableValues = "スタンダードメニュー, アクセスメニュー")
 	@Enumerated(EnumType.STRING)
 	private BeforeLineMenu beforeLineMenu;
 
@@ -310,14 +310,14 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * 設置先工事種別
 	 */
-	@ApiModelProperty(value = "設置先工事種別", required = false, position = 26, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置先工事種別", required = false, position = 26, allowableValues = "平日, 土休日, 無派遣")
 	@Enumerated(EnumType.STRING)
 	private InstallationWorkType installationWorkType;
 
 	/**
 	 * 配線ルート構築
 	 */
-	@ApiModelProperty(value = "配線ルート構築", required = false, position = 27, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "配線ルート構築", required = false, position = 27, allowableValues = "なし, 工事と同日, 工事と別日")
 	@Enumerated(EnumType.STRING)
 	private RootConstruction rootConstruction;
 
@@ -338,7 +338,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * 設置元工事種別
 	 */
-	@ApiModelProperty(value = "設置元工事種別", required = false, position = 30, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "設置元工事種別", required = false, position = 30, allowableValues = "平日, 土休日, 無派遣")
 	@Enumerated(EnumType.STRING)
 	private OriginInstallationWorkType originInstallationWorkType;
 
@@ -606,7 +606,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	/**
 	 * R割適用有無
 	 */
-	@ApiModelProperty(value = "R割適用有無", required = false, position = 68, allowableValues = "range[0,1000]")
+	@ApiModelProperty(value = "R割適用有無", required = false, position = 68, allowableValues = "通常, R割, ダブルR割")
 	@Enumerated(EnumType.STRING)
 	private RdiscountDiv rdiscountDiv;
 
