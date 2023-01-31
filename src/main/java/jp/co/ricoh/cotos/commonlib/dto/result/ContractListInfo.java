@@ -378,6 +378,12 @@ public class ContractListInfo {
 	@ApiModelProperty(value = "解約予定日", required = false, position = 57)
 	private Date cancelScheduledDate;
 
+	/**
+	 * 管理拠点契約ID
+	 */
+	@ApiModelProperty(value = "管理拠点契約ID", required = false, position = 58)
+	private String laitManageBaseContractId;
+
 	@PrePersist
 	public void prePersist() {
 		throw new IllegalAccessError();
