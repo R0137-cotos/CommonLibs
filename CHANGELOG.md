@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.5.1 (31/01/2023)
+- [**closed**] #17735 承認依頼時のテナント検索チェックエラーメッセージを修正 [#2237](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2237)
+
+---
+
 ## v6.5.0 (24/01/2023)
 - [**closed**] #16766 契約にRPA連携用CPQ更新CSV作成状態と作成日時を追加 [#2221](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2221)
 - [**closed**] #16687 メール送信履歴テーブル取得処理をリストで取得するよう修正 [#2218](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2218)
