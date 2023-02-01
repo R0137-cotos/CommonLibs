@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.externallinkage;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +12,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -739,4 +742,12 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	@Column(name = "representative_flg_6")
 	@ApiModelProperty(value = "代表フラグ6", required = false, position = 84, allowableValues = "range[0,9]")
 	private Integer representativeFlg6;
+
+	/**
+	 * 工事調整EIM申込品種情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "constructionEimApplyInfo")
+	@ApiModelProperty(value = "工事調整EIM申込品種情報", required = true, position = 85)
+	private List<ConstructionEimApplyInfo> constructionEimApplyInfoList;
 }
