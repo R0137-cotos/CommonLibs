@@ -160,6 +160,10 @@ public class PenaltyUtil {
 //		return createPenaltyInfoList(decreaseItemMap, new Date(), estimation);
 //	}
 
+	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate) {
+		return getPenaltyInfo(contractId, cancelScheduledDate, null, null, null);
+	}
+
 	/**
 	 * 違約金情報取得（契約）
 	 * 解約予定日、及び契約の品種より違約金発生の有無を判定。

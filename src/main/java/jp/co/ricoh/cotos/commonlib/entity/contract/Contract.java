@@ -1079,4 +1079,12 @@ public class Contract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 111, allowableValues = "range[0,255]")
 	private String nttCustomerId;
+
+	/**
+	 * 回収先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "回収先", required = true, position = 112)
+	private CollectLocation collectLocation;
 }
