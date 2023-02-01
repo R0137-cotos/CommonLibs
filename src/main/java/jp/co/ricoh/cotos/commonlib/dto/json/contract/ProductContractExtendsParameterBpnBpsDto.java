@@ -22,6 +22,16 @@ public class ProductContractExtendsParameterBpnBpsDto {
 	private ContractTypeDetails contractTypeDetails;
 
 	/**
+	 * スポーク拠点数
+	 */
+	private Integer spokeNumber;
+
+	/**
+	 * 管理拠点RJ管理番号
+	 */
+	private String baseRjManageNumber;
+
+	/**
 	 * RtoR固有項目
 	 */
 	@JsonProperty("rtorSpecial")

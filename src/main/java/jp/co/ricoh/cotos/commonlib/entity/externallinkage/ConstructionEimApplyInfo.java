@@ -749,5 +749,5 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "constructionEimApplyInfo")
 	@ApiModelProperty(value = "工事調整EIM申込品種情報", required = true, position = 85)
-	private List<ConstructionEimApplyInfo> constructionEimApplyInfoList;
+	private List<ConstructionEimItemInfo> constructionEimItemInfoList;
 }
