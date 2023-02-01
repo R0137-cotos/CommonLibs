@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimItemInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfoDetail;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocation;
@@ -20,6 +21,7 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMobileEquipmen
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverPenaltyDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.SpecificInfo;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimApplyInfoRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimItemInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverCollectLocationRepository;
@@ -51,6 +53,9 @@ public class TestExternalLinkage {
 
 	@Autowired
 	ConstructionEimApplyInfoRepository constructionEimApplyInfoRepository;
+
+	@Autowired
+	ConstructionEimItemInfoRepository constructionEimItemInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -148,6 +153,18 @@ public class TestExternalLinkage {
 	public void ConstructionEimApplyInfoRepositoryのテスト() throws Exception {
 
 		ConstructionEimApplyInfo found = constructionEimApplyInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ConstructionEimItemInfoRepositoryのテスト() throws Exception {
+
+		ConstructionEimItemInfo found = constructionEimItemInfoRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
