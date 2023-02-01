@@ -218,7 +218,7 @@ public class TestExternalLinkage {
 	}
 
 	@Test
-	public void ROpticalTransferNwserviceRepository() throws Exception {
+	public void ROpticalTransferNwserviceRepositoryのテスト() throws Exception {
 
 		ROpticalTransferNwservice found = rOpticalTransferNwserviceRepository.findOne(1L);
 
