@@ -122,4 +122,18 @@ public class HandoverContractAttachedFile extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "引継ぎ反映フラグ", required = false, position = 13, allowableValues = "range[0,9]")
 	private Integer handoverMappedFlg;
+
+	/**
+	 * 商品種類区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "商品種類区分", required = false, position = 14, allowableValues = "range[0,255]")
+	private String productClassDiv;
+
+	/**
+	 * カテゴリ
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "カテゴリ", required = false, position = 15, allowableValues = "range[0,255]")
+	private String category;
 }

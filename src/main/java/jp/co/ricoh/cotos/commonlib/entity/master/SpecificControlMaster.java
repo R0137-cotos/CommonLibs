@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -109,9 +110,8 @@ public class SpecificControlMaster extends EntityBase {
 	/**
 	 * 対象契約種別
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "対象契約種別", required = false, position = 7, allowableValues = "range[0,255]")
-	private String targetContractType;
+	@ApiModelProperty(value = "対象契約種別", required = false, position = 7)
+	private TargetContractType targetContractType;
 
 	/**
 	 * 活性フラグ
@@ -124,8 +124,7 @@ public class SpecificControlMaster extends EntityBase {
 	/**
 	 * 項目値区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "項目値区分", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "項目値区分", required = false, position = 9)
 	private ItemValueDiv itemValueDiv;
 
 	/**

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import org.springframework.context.annotation.Description;
@@ -197,4 +198,11 @@ public class ROpticalTransferManage extends EntityBase {
 	@ApiModelProperty(value = "リコーひかり異動情報", required = false, position = 13, readOnly = true)
 	private List<ROpticalTransfer> rOpticalTransferList;
 
+	/**
+	 * 解約フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "解約フラグ", required = false, position = 14, allowableValues = "range[0,9]")
+	private Integer disengagementFlg;
 }
