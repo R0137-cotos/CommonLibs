@@ -17,16 +17,24 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimItemInf
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfoDetail;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocation;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMobileEquipment;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverPenaltyDetailContract;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransfer;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransferManage;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransferNwservice;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.SpecificInfo;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimApplyInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimItemInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverCollectLocationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverMobileEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverPenaltyDetailContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ROpticalTransferManageRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ROpticalTransferNwserviceRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ROpticalTransferRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.SpecificInfoRepository;
 
 @RunWith(SpringRunner.class)
@@ -53,6 +61,18 @@ public class TestExternalLinkage {
 
 	@Autowired
 	ConstructionEimApplyInfoRepository constructionEimApplyInfoRepository;
+
+	@Autowired
+	HandoverContractAttachedFileRepository handoverContractAttachedFileRepository;
+
+	@Autowired
+	ROpticalTransferManageRepository rOpticalTransferManageRepository;
+
+	@Autowired
+	ROpticalTransferRepository rOpticalTransferRepository;
+
+	@Autowired
+	ROpticalTransferNwserviceRepository rOpticalTransferNwserviceRepository;
 
 	@Autowired
 	ConstructionEimItemInfoRepository constructionEimItemInfoRepository;
@@ -153,6 +173,54 @@ public class TestExternalLinkage {
 	public void ConstructionEimApplyInfoRepositoryのテスト() throws Exception {
 
 		ConstructionEimApplyInfo found = constructionEimApplyInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void handoverContractAttachedFileRepositoryのテスト() throws Exception {
+
+		HandoverContractAttachedFile found = handoverContractAttachedFileRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ROpticalTransferManageRepositoryのテスト() throws Exception {
+
+		ROpticalTransferManage found = rOpticalTransferManageRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ROpticalTransferRepositoryのテスト() throws Exception {
+
+		ROpticalTransfer found = rOpticalTransferRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ROpticalTransferNwserviceRepositoryのテスト() throws Exception {
+
+		ROpticalTransferNwservice found = rOpticalTransferNwserviceRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
