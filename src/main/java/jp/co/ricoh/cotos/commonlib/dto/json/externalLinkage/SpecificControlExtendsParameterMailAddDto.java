@@ -17,6 +17,6 @@ public class SpecificControlExtendsParameterMailAddDto {
 	/**
 	 * メールアドレス追加詳細リスト
 	 */
-	@JsonProperty("mailAdd")
-	private List<SpecificControlMailAddDto> mailAddList;
+	@JsonProperty("mailAddMailRequestList")
+	private List<SpecificControlMailAddDto> specificControlMailAddDtoList;
 }

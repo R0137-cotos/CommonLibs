@@ -14,70 +14,70 @@ public class SpecificControlMailAddDto {
 	/**
 	 * No
 	 */
-	private String no;
+	private String mailAddNoList;
 
 	/**
 	 * 削除
 	 */
-	private String delete;
+	private String mailAddDeleteList;
 
 	/**
 	 * 申請状態
 	 */
-	private String requestStatus;
+	private String mailAddRequestStatusList;
 
 	/**
 	 * 申請前メールアドレス
 	 */
-	private String preMail;
+	private String mailAddPreMailList;
 
 	/**
 	 * 第一希望メールアドレス
 	 */
-	private String firstHope;
+	private String mailAddFirstHopeList;
 
 	/**
 	 * 第一希望（再入力）
 	 */
-	private String firstHopeReEnter;
+	private String mailAddFirstHopeReEnterList;
 
 	/**
 	 * 第一希望（フリガナ）
 	 */
-	private String firstHopePhonetic;
+	private String mailAddFirstHopePhoneticList;
 
 	/**
 	 * 第二希望メールアドレス
 	 */
-	private String secondHope;
+	private String mailAddSecondHopeList;
 
 	/**
 	 * 第二希望（再入力）
 	 */
-	private String secondHopeReEnter;
+	private String mailAddSecondHopeReEnterList;
 
 	/**
 	 * 第二希望（フリガナ）
 	 */
-	private String secondHopePhonetic;
+	private String mailAddSecondHopePhoneticList;
 
 	/**
 	 * パスワード
 	 */
-	private String password;
+	private String mailAddPasswordList;
 
 	/**
 	 * パスワード（再入力）
 	 */
-	private String passwordReEnter;
+	private String mailAddPasswordReEnterList;
 
 	/**
 	 * キャンセル流用文書番号
 	 */
-	private String ispDiversionContractNumber;
+	private String mailAddDiversionContractNumberList;
 
 	/**
 	 * キャンセル流用
 	 */
-	private String diversion;
+	private String mailAddDiversionList;
 }
