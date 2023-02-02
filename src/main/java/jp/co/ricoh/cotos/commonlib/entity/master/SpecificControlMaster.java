@@ -110,8 +110,7 @@ public class SpecificControlMaster extends EntityBase {
 	/**
 	 * 対象契約種別
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "対象契約種別", required = false, position = 7, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "対象契約種別", required = false, position = 7)
 	private TargetContractType targetContractType;
 
 	/**
@@ -125,8 +124,7 @@ public class SpecificControlMaster extends EntityBase {
 	/**
 	 * 項目値区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "項目値区分", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "項目値区分", required = false, position = 9)
 	private ItemValueDiv itemValueDiv;
 
 	/**
