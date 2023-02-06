@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 import java.math.BigDecimal;
 
 import javax.persistence.Lob;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -95,4 +96,10 @@ public class ManagedEstimationDetailDto extends DtoBase {
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 12, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
+	/**
+	 * 変更前単価
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal beforeUnitPrice;
 }

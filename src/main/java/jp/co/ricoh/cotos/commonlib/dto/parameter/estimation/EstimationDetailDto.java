@@ -98,10 +98,18 @@ public class EstimationDetailDto extends DtoBase {
 	private Integer itemAddFlg;
 
 	/**
+	 * 変更前単価
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal beforeUnitPrice;
+
+	/**
 	 * 契約数
 	 */
 	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "契約数", required = false, position = 13, allowableValues = "range[-99999,99999]")
+	@ApiModelProperty(value = "契約数", required = false, position = 14, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
 }
