@@ -8,10 +8,10 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory.ProcessD
 @Converter(autoApply = true)
 public class ProcessDivConverter implements AttributeConverter<ProcessDiv, String> {
 	@Override
-	public String convertToDatabaseColumn(ProcessDiv estimationType) {
-		if (estimationType == null)
+	public String convertToDatabaseColumn(ProcessDiv processdiv) {
+		if (processdiv == null)
 			return null;
-		return estimationType.toString();
+		return processdiv.toString();
 	}
 
 	@Override
