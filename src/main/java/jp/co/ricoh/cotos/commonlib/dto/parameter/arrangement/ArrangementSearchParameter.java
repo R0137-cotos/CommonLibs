@@ -591,6 +591,13 @@ public class ArrangementSearchParameter {
 	private String relatedArrangementWorkStatus;
 
 	/**
+	 * 商品マスタID（複数商材検索用）
+	 */
+	@ApiParam(value = "商品マスタID:カンマ区切りで複数指定可", required = false)
+	@ApiModelProperty(value = "商品マスタID（複数商材検索用）", required = false)
+	private String stringProductId;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
