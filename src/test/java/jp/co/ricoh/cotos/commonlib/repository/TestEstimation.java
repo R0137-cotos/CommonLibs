@@ -49,7 +49,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.SeOperationHistoryRepository;
-import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
 
 /**
  * Repository（見積ドメイン）のテストクラス
