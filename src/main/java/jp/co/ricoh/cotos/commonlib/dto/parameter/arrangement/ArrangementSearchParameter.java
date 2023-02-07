@@ -591,11 +591,14 @@ public class ArrangementSearchParameter {
 	private String relatedArrangementWorkStatus;
 
 	/**
-	 * 商品マスタID（複数商材検索用）
+	 * 商品マスタIDリスト
+	 *
+	 * productIdの既存の実装ではlong型で一つのIDしか渡すことができない。
+	 * 別ドメインから呼ばれるため、既存の変数は変えずに新規で商品マスタＩＤのリストを格納する変数を追加
 	 */
-	@ApiParam(value = "商品マスタID:カンマ区切りで複数指定可", required = false)
-	@ApiModelProperty(value = "商品マスタID（複数商材検索用）", required = false)
-	private String stringProductId;
+	@ApiParam(value = "商品マスタIDリスト", required = false)
+	@ApiModelProperty(value = "商品マスタIDリスト", required = false)
+	private String productIdList;
 
 	/**
 	 * パラメータをMapにする。
