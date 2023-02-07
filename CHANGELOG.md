@@ -1,5 +1,12 @@
 # Changelog
 
+## v6.6.0 (07/02/2023)
+- [**closed**] #17719 見積明細DTOに変更前単価を追加 [#2232](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2232)
+- [**closed**] #17719 見積明細管理DTOに変更前単価を追加 [#2230](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2230)
+- [**closed**] #17579 FFM受注時にファイル内に同一変更元契約番号を持っている見積が存在する場合のエラーメッセージ作成 [#2227](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2227)
+
+---
+
 ## v6.5.1 (31/01/2023)
 - [**closed**] #17735 承認依頼時のテナント検索チェックエラーメッセージを修正 [#2237](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2237)
 
