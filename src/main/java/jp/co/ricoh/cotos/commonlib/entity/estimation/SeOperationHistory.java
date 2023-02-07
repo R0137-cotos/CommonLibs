@@ -73,17 +73,13 @@ public class SeOperationHistory extends EntityBase {
 	 * 処理区分
 	 */
 	@Column(nullable = false)
-	@NotNull
-	@ApiModelProperty(value = "処理区分", required = true, position = 3, allowableValues = "insert(\"0\"), update(\"1\"), delete(\"2\")")
+	@ApiModelProperty(value = "処理区分", position = 3, allowableValues = "insert(\"0\"), update(\"1\"), delete(\"2\")")
 	private ProcessDiv processDiv;
 	
 	/**
 	 * 処理内容
 	 */
 	@Column(nullable = false)
-	@NotNull
-	@ApiModelProperty(value = "処理内容", required = true, position = 4)
+	@ApiModelProperty(value = "処理内容", position = 4)
 	private String processContent;
-
-/**************/
 }
