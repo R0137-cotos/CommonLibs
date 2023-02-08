@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.LaitLinkageInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.LaitLinkageInfo.InfoDiv;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.LaitLinkageInfo.RouterApDiv;
 
 @Repository
 public interface LaitLinkageInfoRepository extends CrudRepository<LaitLinkageInfo, Long> {
@@ -20,4 +21,6 @@ public interface LaitLinkageInfoRepository extends CrudRepository<LaitLinkageInf
 	public List<LaitLinkageInfo> findByRjManageNumberAndDeleteFlgAndInfoDivIn(String rjManageNumber, Integer deleteFlg, List<InfoDiv> infoDivList);
 
 	public List<LaitLinkageInfo> findByBaseRjManageNumberAndDeleteFlgAndInfoDivIn(String baseRjManageNumber, Integer deleteFlg, List<InfoDiv> infoDivList);
+
+	public LaitLinkageInfo findByRjManageNumberAndInfoDivAndRouterApDivAndLaitId(String rjManageNumber, InfoDiv infoDiv, RouterApDiv routerApDiv, String laitId);
 }
