@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -58,50 +59,50 @@ public class PenaltyUtil {
 	@Autowired
 	DateContractUtil dateContractUtil;
 
-// RITOS移管Aカテゴリでは部分解約(見積での違約金表示)は対応不要となった。Bカテゴリ以降で対応する可能性あるためコメント化。以降のコメント箇所も同様。
-//	/**
-//	 *
-//	 * 違約金チェック（見積）
-//	 * 1.パラメーター.見積から変更元契約を取得する。
-//	 * 2.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
-//	 * 3.取得した品種マスタの違約金有無フラグが「1：有」の場合、3以降の処理を実施。そうでない場合、処理終了。
-//	 * 4.品種マスタ.契約期間起算日区分に合わせた判定方法で判定し、条件に一致した品種マスタを返却する。
-//	 * @param Estimation 見積
-//	 * @param itemMasterId 品種マスタID
-//	 * @return ItemMaster 品種マスタ
-//	 */
-//	public ItemMaster penaltyCheck(Estimation estimation, long itemMasterId) {
-//		// 見積情報チェック
-//		if (estimation == null) {
-//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistEstimation", new String[] { "見積" }));
-//		}
-//		// 1.パラメーター.見積から変更元契約を取得する。
-//		if (EstimationType.契約変更 != estimation.getEstimationType() || estimation.getOriginContractId() == null) {
-//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
-//		}
-//		Contract originContract = contractRepository.findOne(estimation.getOriginContractId());
-//		if (originContract == null) {
-//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
-//		}
-//		// 2.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
-//		ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
-//		if (itemMaster == null) {
-//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "品種マスタID" }));
-//		}
-//		// 対象品種の契約開始日を取得する
-//		Date itemServiceStartDate = getServiceStartDate(originContract, itemMaster);
-//
-//		// 3.取得した品種マスタの違約金有無フラグが「1：有」の場合、3以降の処理を実施。そうでない場合、処理終了。
-//		if (Optional.ofNullable(itemMaster.getPenaltyFlg()).orElse(0) == 1 && itemServiceStartDate != null) {
-//			// 4.品種マスタ.契約期間起算日区分に合わせた判定方法で判定し、条件に一致した品種マスタを返却する。
-//			// 違約金発生解約日の最終日を取得。対象日が最終日以前か判定。
-//			Date lastDate = penaltyOccurCacnlLastDate(itemMaster, itemServiceStartDate);
-//			if(lastDate != null && new Date().compareTo(lastDate) <= 0) {
-//				return itemMaster;
-//			}
-//		}
-//		return null;
-//	}
+	// RITOS移管Aカテゴリでは部分解約(見積での違約金表示)は対応不要となった。Bカテゴリ以降で対応する可能性あるためコメント化。以降のコメント箇所も同様。
+	//	/**
+	//	 *
+	//	 * 違約金チェック（見積）
+	//	 * 1.パラメーター.見積から変更元契約を取得する。
+	//	 * 2.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
+	//	 * 3.取得した品種マスタの違約金有無フラグが「1：有」の場合、3以降の処理を実施。そうでない場合、処理終了。
+	//	 * 4.品種マスタ.契約期間起算日区分に合わせた判定方法で判定し、条件に一致した品種マスタを返却する。
+	//	 * @param Estimation 見積
+	//	 * @param itemMasterId 品種マスタID
+	//	 * @return ItemMaster 品種マスタ
+	//	 */
+	//	public ItemMaster penaltyCheck(Estimation estimation, long itemMasterId) {
+	//		// 見積情報チェック
+	//		if (estimation == null) {
+	//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistEstimation", new String[] { "見積" }));
+	//		}
+	//		// 1.パラメーター.見積から変更元契約を取得する。
+	//		if (EstimationType.契約変更 != estimation.getEstimationType() || estimation.getOriginContractId() == null) {
+	//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
+	//		}
+	//		Contract originContract = contractRepository.findOne(estimation.getOriginContractId());
+	//		if (originContract == null) {
+	//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
+	//		}
+	//		// 2.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
+	//		ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
+	//		if (itemMaster == null) {
+	//			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "品種マスタID" }));
+	//		}
+	//		// 対象品種の契約開始日を取得する
+	//		Date itemServiceStartDate = getServiceStartDate(originContract, itemMaster);
+	//
+	//		// 3.取得した品種マスタの違約金有無フラグが「1：有」の場合、3以降の処理を実施。そうでない場合、処理終了。
+	//		if (Optional.ofNullable(itemMaster.getPenaltyFlg()).orElse(0) == 1 && itemServiceStartDate != null) {
+	//			// 4.品種マスタ.契約期間起算日区分に合わせた判定方法で判定し、条件に一致した品種マスタを返却する。
+	//			// 違約金発生解約日の最終日を取得。対象日が最終日以前か判定。
+	//			Date lastDate = penaltyOccurCacnlLastDate(itemMaster, itemServiceStartDate);
+	//			if(lastDate != null && new Date().compareTo(lastDate) <= 0) {
+	//				return itemMaster;
+	//			}
+	//		}
+	//		return null;
+	//	}
 
 	/**
 	 *
@@ -129,7 +130,7 @@ public class PenaltyUtil {
 			// 3.品種マスタ.契約期間起算日区分に合わせた判定方法で判定し、条件に一致した品種マスタを返却する。
 			// 違約金発生解約日の最終日を取得。対象日が最終日以前か判定。
 			Date lastDate = penaltyOccurCacnlLastDate(itemMaster, penalyStartingDate);
-			if(lastDate != null && cancelScheduledDate.compareTo(lastDate) <= 0) {
+			if (lastDate != null && cancelScheduledDate.compareTo(lastDate) <= 0) {
 				PenaltyCheckResultDTO resultDTO = new PenaltyCheckResultDTO();
 				resultDTO.setItemMaster(itemMaster);
 				resultDTO.setPenaltyOccurCacnlLastDate(lastDate);
@@ -140,28 +141,28 @@ public class PenaltyUtil {
 		return null;
 	}
 
-//	/**
-//	 * 違約金情報取得（見積）
-//	 * システム日付、及び見積の品種より違約金発生の有無を判定。
-//	 * 違約金が発生する場合、違約金情報を返却する。
-//	 * @param estimationId 見積ID
-//	 * @return 違約金情報リスト
-//	 */
-//	public List<PenaltyInfoDto> getPenaltyInfo(Long estimationId) {
-//
-//		// 見積情報取得
-//		Optional.ofNullable(estimationId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "見積ID" })));
-//		Estimation estimation = estimationRepository.findOne(estimationId);
-//		Optional.ofNullable(estimation).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistEstimation", new String[] { "見積" })));
-//
-//		// 減数された品種、及び数量情報を取得
-//		Map<Long, Integer> decreaseItemMap = getDecreaseItemList(estimation);
-//
-//		return createPenaltyInfoList(decreaseItemMap, new Date(), estimation);
-//	}
+	//	/**
+	//	 * 違約金情報取得（見積）
+	//	 * システム日付、及び見積の品種より違約金発生の有無を判定。
+	//	 * 違約金が発生する場合、違約金情報を返却する。
+	//	 * @param estimationId 見積ID
+	//	 * @return 違約金情報リスト
+	//	 */
+	//	public List<PenaltyInfoDto> getPenaltyInfo(Long estimationId) {
+	//
+	//		// 見積情報取得
+	//		Optional.ofNullable(estimationId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "見積ID" })));
+	//		Estimation estimation = estimationRepository.findOne(estimationId);
+	//		Optional.ofNullable(estimation).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistEstimation", new String[] { "見積" })));
+	//
+	//		// 減数された品種、及び数量情報を取得
+	//		Map<Long, Integer> decreaseItemMap = getDecreaseItemList(estimation);
+	//
+	//		return createPenaltyInfoList(decreaseItemMap, new Date(), estimation);
+	//	}
 
 	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate) {
-		return getPenaltyInfo(contractId, cancelScheduledDate, null, null, null);
+		return getPenaltyInfo(contractId, cancelScheduledDate, null, null, null, null);
 	}
 
 	/**
@@ -173,9 +174,10 @@ public class PenaltyUtil {
 	 * @param decreaseFlg         減数フラグ
 	 * @param lostNumber          紛失数
 	 * @param damageNumber        破損・水没数
+	 * @param penaltyStartDate    違約金計算起算日
 	 * @return 違約金情報リスト
 	 */
-	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, Integer decreaseFlg, Integer lostNumber, Integer damageNumber) {
+	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, Integer decreaseFlg, Integer lostNumber, Integer damageNumber, Date penaltyStartDate) {
 
 		// 契約情報取得
 		Optional.ofNullable(contractId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約ID" })));
@@ -200,41 +202,41 @@ public class PenaltyUtil {
 			}
 		}
 		// 違約金情報生成
-		return createPenaltyInfoList(decreaseItemMap, cancelScheduledDate, contract, lostNumber, damageNumber);
+		return createPenaltyInfoList(decreaseItemMap, cancelScheduledDate, contract, lostNumber, damageNumber, penaltyStartDate);
 	}
 
-//	/**
-//	 * 見積情報より減数した品種、数量のリストを取得する
-//	 *
-//	 * @param estimation 見積
-//	 * @return 減数品種数量マップ
-//	 */
-//	private Map<Long, Integer> getDecreaseItemList(Estimation estimation) {
-//
-//		if(estimation == null || CollectionUtils.isEmpty(estimation.getEstimationDetailList())) {
-//			return null;
-//		}
-//		// 現在数量と変更前数量を比較し減数されている場合、マップへ格納する
-//		Map<Long, Integer> resultMap = new HashMap<Long, Integer>();
-//		estimation.getEstimationDetailList().stream()
-//			.filter(s -> DetailStatus.DELETE == s.getState() || (s.getBeforeQuantity() != null && s.getBeforeQuantity() > s.getQuantity()))
-//			.forEach(detail -> {
-//				ItemEstimation itemEstimation = detail.getItemEstimation();
-//				Integer decreaseQuantity = 0;
-//				if(DetailStatus.DELETE == detail.getState()) {
-//					decreaseQuantity = detail.getBeforeQuantity();
-//					if(decreaseQuantity == null || decreaseQuantity == 0) {
-//						decreaseQuantity = detail.getQuantity();
-//					}
-//				} else {
-//					decreaseQuantity = detail.getBeforeQuantity() - detail.getQuantity();
-//				}
-//				if(decreaseQuantity != 0) {
-//					resultMap.put(itemEstimation.getItemMasterId(), decreaseQuantity);
-//				}
-//		});
-//		return resultMap;
-//	}
+	//	/**
+	//	 * 見積情報より減数した品種、数量のリストを取得する
+	//	 *
+	//	 * @param estimation 見積
+	//	 * @return 減数品種数量マップ
+	//	 */
+	//	private Map<Long, Integer> getDecreaseItemList(Estimation estimation) {
+	//
+	//		if(estimation == null || CollectionUtils.isEmpty(estimation.getEstimationDetailList())) {
+	//			return null;
+	//		}
+	//		// 現在数量と変更前数量を比較し減数されている場合、マップへ格納する
+	//		Map<Long, Integer> resultMap = new HashMap<Long, Integer>();
+	//		estimation.getEstimationDetailList().stream()
+	//			.filter(s -> DetailStatus.DELETE == s.getState() || (s.getBeforeQuantity() != null && s.getBeforeQuantity() > s.getQuantity()))
+	//			.forEach(detail -> {
+	//				ItemEstimation itemEstimation = detail.getItemEstimation();
+	//				Integer decreaseQuantity = 0;
+	//				if(DetailStatus.DELETE == detail.getState()) {
+	//					decreaseQuantity = detail.getBeforeQuantity();
+	//					if(decreaseQuantity == null || decreaseQuantity == 0) {
+	//						decreaseQuantity = detail.getQuantity();
+	//					}
+	//				} else {
+	//					decreaseQuantity = detail.getBeforeQuantity() - detail.getQuantity();
+	//				}
+	//				if(decreaseQuantity != 0) {
+	//					resultMap.put(itemEstimation.getItemMasterId(), decreaseQuantity);
+	//				}
+	//		});
+	//		return resultMap;
+	//	}
 
 	/**
 	 * 違約金情報作成
@@ -244,28 +246,38 @@ public class PenaltyUtil {
 	 * @param contract	   	   		契約エンティティ
 	 * @param lostNumber          紛失数
 	 * @param damageNumber        破損・水没数
+	 * @param penaltyStartDate    違約金計算起算日
 	 * @return 違約金情報リスト
 	 */
-	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, Integer lostNumber, Integer damageNumber) {
+	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, Integer lostNumber, Integer damageNumber, Date penaltyStartDate) {
 
 		List<PenaltyInfoDto> resultList = new ArrayList<PenaltyInfoDto>();
 
 		// 違約金起算日取得
 		// 最初の契約を取得する
 		Contract firstContract = dateContractUtil.getFirstContract(contract);
-		// 最初の契約の課金開始日(ランニング)を違約金計算の起算日とする
-		Date penalyStartingDate = dateContractUtil.getPenalyStartingDate(firstContract);
+
+		// 違約金計算起算日
+		Date penalyStartingDate;
+
+		if (Objects.isNull(penaltyStartDate)) {
+			// 最初の契約の課金開始日(ランニング)を違約金計算の起算日とする
+			penalyStartingDate = dateContractUtil.getPenalyStartingDate(firstContract);
+		} else {
+			// 引数にて違約金計算起算日が渡された場合、その値を違約金計算の起算日とする
+			penalyStartingDate = penaltyStartDate;
+		}
 
 		Optional.ofNullable(decreaseItemMap).ifPresent(itemMap -> {
 			itemMap.forEach((itemMasterId, quantity) -> {
 				ItemMaster itemMaster = null;
 				PenaltyCheckResultDTO penaltyCheckResultDTO = penaltyCheck(itemMasterId, cancelScheduledDate, penalyStartingDate);
-				if(penaltyCheckResultDTO != null) {
+				if (penaltyCheckResultDTO != null) {
 					itemMaster = penaltyCheckResultDTO.getItemMaster();
 				}
 
 				// 違約金が発生する場合、違約金品種情報、違約金金額を戻り値に設定する
-				if(itemMaster != null && itemMaster.getPenaltyItemMaster() != null) {
+				if (itemMaster != null && itemMaster.getPenaltyItemMaster() != null) {
 					ItemMaster penaltyItem = itemMaster.getPenaltyItemMaster();
 					PenaltyInfoDto penaltyInfoDto = new PenaltyInfoDto();
 					penaltyInfoDto.setPenaltyItemMasterId(penaltyItem.getId());
@@ -351,7 +363,7 @@ public class PenaltyUtil {
 	 */
 	private Date penaltyOccurCacnlLastDate(ItemMaster itemMaster, Date penalyStartingDate) {
 
-		if(itemMaster.getPenaltyStartDateType() == null || itemMaster.getMinContractMonths() == null) {
+		if (itemMaster.getPenaltyStartDateType() == null || itemMaster.getMinContractMonths() == null) {
 			return null;
 		}
 		// 違約金起算日に最低契約月数を加算して年月を取得
