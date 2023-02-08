@@ -594,7 +594,7 @@ public class ArrangementSearchParameter {
 	 * 商品マスタIDリスト
 	 *
 	 * productIdの既存の実装ではlong型で一つのIDしか渡すことができない。
-	 * 別ドメインから呼ばれるため、既存の変数は変えずに新規で商品マスタＩＤのリストを格納する変数を追加
+	 * 別ドメインから呼ばれるため、既存の変数は変えずに手配検索画面から商品マスタIDを複数含んだ文字列として受け取るために変数を追加
 	 */
 	@ApiParam(value = "商品マスタIDリスト", required = false)
 	@ApiModelProperty(value = "商品マスタIDリスト", required = false)
