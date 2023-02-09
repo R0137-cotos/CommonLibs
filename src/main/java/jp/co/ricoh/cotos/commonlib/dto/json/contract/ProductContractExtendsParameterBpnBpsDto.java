@@ -32,11 +32,6 @@ public class ProductContractExtendsParameterBpnBpsDto {
 	private String baseRjManageNumber;
 
 	/**
-	 * IT補助金初回課金開始日
-	 */
-	private String iTSubsidyFirstBillingStartDate;
-
-	/**
 	 * RtoR固有項目
 	 */
 	@JsonProperty("rtorSpecial")

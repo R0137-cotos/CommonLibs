@@ -3,6 +3,9 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddSubdomainFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.DomainRtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HandoverFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OptionRtorDiv;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
 import lombok.Data;
@@ -14,6 +17,21 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductContractRtorSpecialMwodDto {
+
+	/**
+	 * 引継ぎ情報フラグ
+	 */
+	private HandoverFlg handoverFlg;
+
+	/**
+	 * ドメインRtoRフラグ
+	 */
+	private DomainRtorFlg domainRtorFlg;
+
+	/**
+	 * ホスティングRtoRフラグ
+	 */
+	private HostingRtorFlg hostingRtorFlg;
 
 	/**
 	 * RtoRフラグ
