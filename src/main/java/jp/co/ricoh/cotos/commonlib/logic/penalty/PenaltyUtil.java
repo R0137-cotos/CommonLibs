@@ -264,7 +264,7 @@ public class PenaltyUtil {
 			// 最初の契約の課金開始日(ランニング)を違約金計算の起算日とする
 			penalyStartingDate = dateContractUtil.getPenalyStartingDate(firstContract);
 		} else {
-			// 引数にて違約金計算起算日が渡された場合、その値を違約金計算の起算日とする
+			// 違約金計算起算日が渡された場合、その値を違約金計算の起算日とする
 			penalyStartingDate = penaltyStartDate;
 		}
 

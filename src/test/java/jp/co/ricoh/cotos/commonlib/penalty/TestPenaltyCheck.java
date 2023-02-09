@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.penalty;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -13,9 +14,12 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -43,7 +47,7 @@ public class TestPenaltyCheck {
 	@Autowired
 	CheckUtil checkUtil;
 
-	@Autowired
+	@SpyBean
 	PenaltyUtil penaltyUtil;
 
 	@Autowired
@@ -687,7 +691,7 @@ public class TestPenaltyCheck {
 	@Test
 	public void 違約金情報作成_契約_任意パラメータ設定なし() throws Exception {
 
-		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class);
+		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class, Date.class);
 		method.setAccessible(true);
 
 		// 違約金発生なし
@@ -698,7 +702,7 @@ public class TestPenaltyCheck {
 		decreaseItemMap.put(16148L, 2);
 		decreaseItemMap.put(16220L, 1);
 		Date checkTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201231", null);
-		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, null, null);
+		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, null, null, null);
 		Assert.assertEquals("違約金が発生しない場合、戻り値リストが空であること", 0, resultList.size());
 	}
 
@@ -706,7 +710,7 @@ public class TestPenaltyCheck {
 	@Test
 	public void 違約金情報作成_契約() throws Exception {
 
-		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class);
+		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class, Date.class);
 		method.setAccessible(true);
 
 		// 違約金発生なし
@@ -717,7 +721,7 @@ public class TestPenaltyCheck {
 		decreaseItemMap.put(16148L, 2);
 		decreaseItemMap.put(16220L, 1);
 		Date checkTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201231", null);
-		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0);
+		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0, null);
 		Assert.assertEquals("違約金が発生しない場合、戻り値リストが空であること", 0, resultList.size());
 
 		// 違約金発生あり
@@ -729,7 +733,7 @@ public class TestPenaltyCheck {
 		decreaseItemMap.put(16220L, 3);
 		decreaseItemMap.put(16128L, 4);
 
-		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0);
+		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0, null);
 		Assert.assertEquals("違約金情報リストに2件設定されていること", 2, resultList.size());
 		resultList.stream().forEach(penaltyInfoDto -> {
 			if (20L == penaltyInfoDto.getPenaltyItemMasterId()) {
@@ -762,7 +766,7 @@ public class TestPenaltyCheck {
 		contractId = 27L;
 		contract = contractRepository.findOne(contractId);
 
-		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 2, 3);
+		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 2, 3, null);
 		Assert.assertEquals("違約金情報リストに2件設定されていること", 2, resultList.size());
 		resultList.stream().forEach(penaltyInfoDto -> {
 			if (24579L == penaltyInfoDto.getPenaltyItemMasterId()) {
@@ -789,6 +793,32 @@ public class TestPenaltyCheck {
 				Assert.fail();
 			}
 		});
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void 違約金情報作成_契約_違約金計算起算日あり() throws Exception {
+
+		Method method = PenaltyUtil.class.getDeclaredMethod("createPenaltyInfoList", Map.class, Date.class, Contract.class, Integer.class, Integer.class, Date.class);
+		method.setAccessible(true);
+
+		// 違約金発生なし
+		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
+		Long contractId = 3L;
+		Contract contract = contractRepository.findOne(contractId);
+		decreaseItemMap.put(16147L, 3);
+		decreaseItemMap.put(16148L, 2);
+		decreaseItemMap.put(16220L, 1);
+		Date checkTrgetDate = dateCalcPatternUtil.stringToDateConverter("20201231", null);
+		Date penalyStartDate = dateCalcPatternUtil.stringToDateConverter("20230209", null);
+		List<PenaltyInfoDto> resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 0, 0, penalyStartDate);
+		Assert.assertEquals("違約金が発生しない場合、戻り値リストが空であること", 0, resultList.size());
+
+		ArgumentCaptor<Date> captor = ArgumentCaptor.forClass(Date.class);
+		Mockito.verify(penaltyUtil, atLeastOnce()).penaltyCheck(Mockito.anyLong(), Mockito.any(), captor.capture());
+
+		Assert.assertEquals("違約金計算起算日が引数の値が設定されていること", captor.getValue(), penalyStartDate);
+
 	}
 
 	@Test
