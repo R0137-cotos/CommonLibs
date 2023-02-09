@@ -15,12 +15,12 @@ import lombok.Data;
 public class ProductContractRtorSpecialBpssDto {
 
 	/**
-	 * RtoRフラグ
-	 */
-	private RtorFlg rtorFlg;
-
-	/**
 	 * RtoRメールフラグ
 	 */
 	private RtorMailFlg rtorMailFlg;
+
+	/**
+	 * RtoRフラグ
+	 */
+	private RtorFlg rtorFlg;
 }

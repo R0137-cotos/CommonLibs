@@ -240,3 +240,4 @@ DELETE FROM handover_contract_attached_file;
 DELETE FROM r_optical_transfer_manage;
 DELETE FROM r_optical_transfer;
 DELETE FROM r_optical_transfer_nwservice;
+DELETE FROM handover_isp_linkage;
