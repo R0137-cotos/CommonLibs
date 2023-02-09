@@ -20,6 +20,7 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfoDetail;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocation;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverContractAttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverIspLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMobileEquipment;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverPenaltyDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransfer;
@@ -32,6 +33,7 @@ import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoDetailR
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverCollectLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverContractAttachedFileRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverIspLinkageRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverMobileEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverPenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ROpticalTransferManageRepository;
@@ -66,6 +68,9 @@ public class TestExternalLinkage {
 
 	@Autowired
 	HandoverContractAttachedFileRepository handoverContractAttachedFileRepository;
+
+	@Autowired
+	HandoverIspLinkageRepository handoverIspLinkageRepository;
 
 	@Autowired
 	ROpticalTransferManageRepository rOpticalTransferManageRepository;
@@ -199,9 +204,21 @@ public class TestExternalLinkage {
 	}
 
 	@Test
-	public void handoverContractAttachedFileRepositoryのテスト() throws Exception {
+	public void HandoverContractAttachedFileRepositoryのテスト() throws Exception {
 
 		HandoverContractAttachedFile found = handoverContractAttachedFileRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void HandoverIspLinkageRepositoryのテスト() throws Exception {
+
+		HandoverIspLinkage found = handoverIspLinkageRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

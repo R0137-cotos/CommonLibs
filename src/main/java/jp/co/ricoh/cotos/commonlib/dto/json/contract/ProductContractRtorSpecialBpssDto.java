@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorMailFlg;
 import lombok.Data;
 
 /**
@@ -14,8 +15,12 @@ import lombok.Data;
 public class ProductContractRtorSpecialBpssDto {
 
 	/**
+	 * RtoRメールフラグ
+	 */
+	private RtorMailFlg rtorMailFlg;
+
+	/**
 	 * RtoRフラグ
 	 */
 	private RtorFlg rtorFlg;
-
 }
