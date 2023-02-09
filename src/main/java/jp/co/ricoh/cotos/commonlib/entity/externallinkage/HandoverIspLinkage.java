@@ -100,8 +100,7 @@ public class HandoverIspLinkage extends EntityBase {
 	/**
 	 * ホスティングサービス区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "ホスティングサービス区分", required = false, position = 7, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ホスティングサービス区分", required = false, position = 7, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
 	private HostingServiceDiv hostingServiceDiv;
 
 	/**
