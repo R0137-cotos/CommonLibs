@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -179,6 +181,21 @@ public class TestExternalLinkage {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		List<ConstructionEimApplyInfo> foundListByContractId = constructionEimApplyInfoRepository.findByContractId(2L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundListByContractId);
+
+		// Entity 1件以上取得できていることを確認
+		Assert.assertNotEquals(foundListByContractId.size(), 0);
+
+		// Entity 2件取得できていることを確認
+		Assert.assertEquals(foundListByContractId.size(), 2);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
 	}
 
 	@Test

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -161,7 +162,7 @@ public class PenaltyUtil {
 //	}
 
 	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate) {
-		return getPenaltyInfo(contractId, cancelScheduledDate, null, null, null);
+		return getPenaltyInfo(contractId, cancelScheduledDate, null, null, null, null);
 	}
 
 	/**
@@ -173,9 +174,10 @@ public class PenaltyUtil {
 	 * @param decreaseFlg         減数フラグ
 	 * @param lostNumber          紛失数
 	 * @param damageNumber        破損・水没数
+	 * @param penaltyStartDate    違約金計算起算日
 	 * @return 違約金情報リスト
 	 */
-	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, Integer decreaseFlg, Integer lostNumber, Integer damageNumber) {
+	public List<PenaltyInfoDto> getPenaltyInfo(Long contractId, Date cancelScheduledDate, Integer decreaseFlg, Integer lostNumber, Integer damageNumber, Date penaltyStartDate) {
 
 		// 契約情報取得
 		Optional.ofNullable(contractId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約ID" })));
@@ -200,7 +202,7 @@ public class PenaltyUtil {
 			}
 		}
 		// 違約金情報生成
-		return createPenaltyInfoList(decreaseItemMap, cancelScheduledDate, contract, lostNumber, damageNumber);
+		return createPenaltyInfoList(decreaseItemMap, cancelScheduledDate, contract, lostNumber, damageNumber, penaltyStartDate);
 	}
 
 //	/**
@@ -244,17 +246,26 @@ public class PenaltyUtil {
 	 * @param contract	   	   		契約エンティティ
 	 * @param lostNumber          紛失数
 	 * @param damageNumber        破損・水没数
+	 * @param penaltyStartDate    違約金計算起算日
 	 * @return 違約金情報リスト
 	 */
-	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, Integer lostNumber, Integer damageNumber) {
+	private List<PenaltyInfoDto> createPenaltyInfoList(Map<Long, Integer> decreaseItemMap, Date cancelScheduledDate, Contract contract, Integer lostNumber, Integer damageNumber, Date penaltyStartDate) {
 
 		List<PenaltyInfoDto> resultList = new ArrayList<PenaltyInfoDto>();
 
-		// 違約金起算日取得
 		// 最初の契約を取得する
 		Contract firstContract = dateContractUtil.getFirstContract(contract);
-		// 最初の契約の課金開始日(ランニング)を違約金計算の起算日とする
-		Date penalyStartingDate = dateContractUtil.getPenalyStartingDate(firstContract);
+
+		// 違約金計算起算日
+		Date penalyStartingDate;
+
+		if (Objects.isNull(penaltyStartDate)) {
+			// 最初の契約の課金開始日(ランニング)を違約金計算の起算日とする
+			penalyStartingDate = dateContractUtil.getPenalyStartingDate(firstContract);
+		} else {
+			// 違約金計算起算日が渡された場合、その値を違約金計算の起算日とする
+			penalyStartingDate = penaltyStartDate;
+		}
 
 		Optional.ofNullable(decreaseItemMap).ifPresent(itemMap -> {
 			itemMap.forEach((itemMasterId, quantity) -> {
