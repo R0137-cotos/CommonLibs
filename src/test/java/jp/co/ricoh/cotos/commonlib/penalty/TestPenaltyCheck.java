@@ -817,7 +817,7 @@ public class TestPenaltyCheck {
 		ArgumentCaptor<Date> captor = ArgumentCaptor.forClass(Date.class);
 		Mockito.verify(penaltyUtil, atLeastOnce()).penaltyCheck(Mockito.anyLong(), Mockito.any(), captor.capture());
 
-		Assert.assertEquals("違約金計算起算日が引数の値が設定されていること", captor.getValue(), penalyStartDate);
+		Assert.assertEquals("引数で渡ってきた違約金計算起算日の値が設定されていること", captor.getValue(), penalyStartDate);
 
 	}
 

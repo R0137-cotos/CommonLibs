@@ -253,7 +253,6 @@ public class PenaltyUtil {
 
 		List<PenaltyInfoDto> resultList = new ArrayList<PenaltyInfoDto>();
 
-		// 違約金起算日取得
 		// 最初の契約を取得する
 		Contract firstContract = dateContractUtil.getFirstContract(contract);
 
