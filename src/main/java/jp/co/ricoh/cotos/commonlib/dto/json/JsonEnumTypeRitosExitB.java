@@ -127,29 +127,6 @@ public class JsonEnumTypeRitosExitB {
 		}
 	}
 
-	@Description(value = "引継ぎ情報フラグ")
-	public enum HandoverFlg {
-
-		未設定("0"), 引き継ぎ契約の解約("1"), オプションのみ削除("2");
-
-		private final String text;
-
-		private HandoverFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static HandoverFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
 	@Description(value = "サ実店フラグ")
 	public enum SajitsutenFlg {
 
