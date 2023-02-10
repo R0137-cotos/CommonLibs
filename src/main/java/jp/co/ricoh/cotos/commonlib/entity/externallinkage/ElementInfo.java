@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
@@ -66,7 +65,6 @@ public class ElementInfo extends EntityBase {
 	 * 部材情報明細
 	 */
 	@OneToMany(mappedBy = "elementInfo")
-	@OrderBy("seqNumber ASC")
 	@ApiModelProperty(value = "部材情報明細", required = false, position = 5)
 	private List<ElementInfoDetail> elementInfoDetailList;
 }
