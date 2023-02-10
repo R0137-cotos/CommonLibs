@@ -11,4 +11,7 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverPenaltyDetailC
 public interface HandoverPenaltyDetailContractRepository extends CrudRepository<HandoverPenaltyDetailContract, Long> {
 
 	public List<HandoverPenaltyDetailContract> findByContractId(long contractId);
+
+	public List<HandoverPenaltyDetailContract> findByHandoverContractId(long handoverContractId);
+
 }
