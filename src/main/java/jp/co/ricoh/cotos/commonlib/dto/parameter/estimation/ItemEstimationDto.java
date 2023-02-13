@@ -108,4 +108,10 @@ public class ItemEstimationDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 15, allowableValues = "range[0,255]")
 	private String makerItemCode;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 16, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }
