@@ -253,6 +253,8 @@ public class TestMaster {
 	private ApprovalAlertManagementMasterRepository approvalAlertManagementMasterRepository;
 	@Autowired
 	private PublicHolidayMasterRepository publicHolidayMasterRepository;
+	@Autowired
+	private PriceRevisionDateMasterRepository priceRevisionDateMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2924,6 +2926,21 @@ public class TestMaster {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = sdf.parse("2019/01/01");
 		PublicHolidayMaster found = publicHolidayMasterRepository.findOne(date);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void PriceRevisionDateMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/priceRevisionDateMaster.sql");
+
+		// エンティティの取得
+		PriceRevisionDateMaster found = priceRevisionDateMasterRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -111,5 +113,59 @@ public class AccountingPeriodDetail extends EntityBase {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "ランニング売上計上処理日", required = false, position = 10)
 	private Date runningAccountSalesDate;
+
+	/**
+	 * 標準価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "標準価格", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal standardPrice;
+
+	/**
+	 * Ｒ原価
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "Ｒ原価", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rCost;
+
+	/**
+	 * ＲＪ仕切価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rjPurchasePrice;
+
+	/**
+	 * ＲＪ仕切価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal rjDividingPrice;
+
+	/**
+	 * 仕切価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "仕切価格", required = false, position = 16, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal partitionPrice;
+
+	/**
+	 * 母店売価(接点店仕切)
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 17, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal motherStorePrice;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 18, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 
 }

@@ -79,4 +79,10 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "ディスパッチ振替フラグ", required = false, position = 4, allowableValues = "range[0,9]")
 	private Integer dispatchTransferFlg;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 5, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }
