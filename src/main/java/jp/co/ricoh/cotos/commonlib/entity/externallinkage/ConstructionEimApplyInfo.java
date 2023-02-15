@@ -639,7 +639,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "メールアドレスアドレス（第二希望）", required = false, position = 72, allowableValues = "range[0,255]")
-	private String second_choice_mail_address;
+	private String secondChoiceMailAddress;
 
 	/**
 	 * 電話番号1

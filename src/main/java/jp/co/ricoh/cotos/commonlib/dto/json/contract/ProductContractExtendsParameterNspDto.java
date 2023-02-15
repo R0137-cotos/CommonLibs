@@ -78,6 +78,16 @@ public class ProductContractExtendsParameterNspDto {
 	private AccountFixFlg accountFixFlg;
 
 	/**
+	 * 回線種別区分
+	 */
+	private String lineTypeDiv;
+
+	/**
+	 * 回線種別名
+	 */
+	private String lineTypeName;
+
+	/**
 	 * 追加メール削除フラグ
 	 */
 	private AddMailDeleteFlg addMailDeleteFlg;

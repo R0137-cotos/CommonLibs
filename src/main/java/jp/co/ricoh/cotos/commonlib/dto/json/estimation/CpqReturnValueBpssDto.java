@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.MailRtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
 import lombok.Data;
 
 /**
@@ -17,4 +19,14 @@ public class CpqReturnValueBpssDto {
 	 * 見積種別詳細
 	 */
 	private EstimationTypeDetails estimationTypeDetails;
+
+	/**
+	 * メールアドレスRtoRフラグ
+	 */
+	private MailRtorFlg mailRtorFlg;
+
+	/**
+	 * RtoRフラグ
+	 */
+	private RtorFlg rtorFlg;
 }
