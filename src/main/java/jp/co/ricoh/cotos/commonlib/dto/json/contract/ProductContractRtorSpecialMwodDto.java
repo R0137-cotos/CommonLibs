@@ -2,7 +2,6 @@ package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddSubdomainFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.DomainRtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OptionRtorDiv;
@@ -36,9 +35,4 @@ public class ProductContractRtorSpecialMwodDto {
 	 * オプションRtoR区分
 	 */
 	private OptionRtorDiv optionRtorDiv;
-
-	/**
-	 * サブドメイン追加フラグ
-	 */
-	private AddSubdomainFlg addSubdomainFlg;
 }

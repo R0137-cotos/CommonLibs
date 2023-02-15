@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddMailDeleteFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OtherCorpProviderFlg;
 import lombok.Data;
 
 /**
@@ -30,6 +31,21 @@ public class ProductContractExtendsParameterBpnBpsDto {
 	 * 管理拠点RJ管理番号
 	 */
 	private String baseRjManageNumber;
+
+	/**
+	 * 他社プロバイダーフラグ
+	 */
+	private OtherCorpProviderFlg otherCorpProviderFlg;
+
+	/**
+	 * 回線種別区分
+	 */
+	private String lineTypeDiv;
+
+	/**
+	 * 回線種別名
+	 */
+	private String lineTypeName;
 
 	/**
 	 * RtoR固有項目

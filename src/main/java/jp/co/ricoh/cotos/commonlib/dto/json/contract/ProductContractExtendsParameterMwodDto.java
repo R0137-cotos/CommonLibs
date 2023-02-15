@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddSubdomainFlg;
 import lombok.Data;
 
 /**
@@ -17,6 +18,11 @@ public class ProductContractExtendsParameterMwodDto {
 	 * 契約種別詳細
 	 */
 	private ContractTypeDetails contractTypeDetails;
+
+	/**
+	 * サブドメイン追加フラグ
+	 */
+	private AddSubdomainFlg addSubdomainFlg;
 
 	/**
 	 * RtoR固有項目
