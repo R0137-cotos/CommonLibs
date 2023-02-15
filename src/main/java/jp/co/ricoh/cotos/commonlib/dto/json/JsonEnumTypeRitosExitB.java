@@ -127,29 +127,6 @@ public class JsonEnumTypeRitosExitB {
 		}
 	}
 
-	@Description(value = "メールアドレスRtoRフラグ")
-	public enum MailRtorFlg {
-
-		引き継がない("0"), 引き継ぐ("1");
-
-		private final String text;
-
-		private MailRtorFlg(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static MailRtorFlg fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
-
 	@Description(value = "サ実店フラグ")
 	public enum SajitsutenFlg {
 

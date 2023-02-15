@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFlg;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.MailRtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OtherCorpProviderFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorMailFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.SajitsutenFlg;
 import lombok.Data;
 
@@ -31,7 +31,7 @@ public class CpqReturnValueBpnBpsDto {
 	/**
 	 * メールアドレスRtoRフラグ
 	 */
-	private MailRtorFlg mailRtorFlg;
+	private RtorMailFlg rtorMailFlg;
 
 	/**
 	 * RtoRフラグ
