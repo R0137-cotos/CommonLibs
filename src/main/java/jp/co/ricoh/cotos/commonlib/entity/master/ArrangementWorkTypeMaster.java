@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -101,4 +103,12 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	@JoinColumn(name = "arrangement_work_auth_control_master_id", referencedColumnName = "id")
 	@ApiModelProperty(value = "手配業務権限制御マスタ", required = false, position = 10)
 	private ArrangementWorkAuthControlMaster arrangementWorkAuthControlMaster;
+
+	/**
+	 * 契約フロー考慮不要フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "契約フロー考慮不要フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	private Integer contractFlowUnnecessaryFlg;
 }
