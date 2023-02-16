@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddSubdomainFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.DomainRtorFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.HostingRtorFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.RtorFlg;
 import lombok.Data;
 
@@ -19,6 +21,16 @@ public class CpqReturnValueMwodDto {
 	 * 見積種別詳細
 	 */
 	private EstimationTypeDetails estimationTypeDetails;
+
+	/**
+	 * ホスティングRtoRフラグ
+	 */
+	private HostingRtorFlg hostingRtorFlg;
+
+	/**
+	 * ドメインRtoRフラグ
+	 */
+	private DomainRtorFlg domainRtorFlg;
 
 	/**
 	 * RtoRフラグ
