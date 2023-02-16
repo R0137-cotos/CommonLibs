@@ -2948,4 +2948,18 @@ public class TestMaster {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
+
+	@Test
+	public void PriceRevisionDateMaster_findByProductMasterIdAndPriceRevisionDateのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/priceRevisionDateMaster.sql");
+
+		// エンティティの取得
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = sdf.parse("2023/04/02");
+		List<PriceRevisionDateMaster> result = priceRevisionDateMasterRepository.findByProductMasterIdAndPriceRevisionDate(1L, date);
+
+		// 価格改定日マスタID:2が取得できていること
+		Assert.assertEquals("取得データの価格改定日マスタIDが2であること", result.get(0).getId(), 2L);
+	}
 }
