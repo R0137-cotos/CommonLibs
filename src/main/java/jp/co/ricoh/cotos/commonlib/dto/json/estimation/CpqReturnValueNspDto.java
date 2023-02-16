@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OtherCorpProviderFlg;
 import lombok.Data;
 
 /**
@@ -22,4 +23,9 @@ public class CpqReturnValueNspDto {
 	 * スポーク拠点数
 	 */
 	private Integer spokeNumber;
+
+	/**
+	 * 他社プロバイダーフラグ
+	 */
+	private OtherCorpProviderFlg otherCorpProviderFlg;
 }

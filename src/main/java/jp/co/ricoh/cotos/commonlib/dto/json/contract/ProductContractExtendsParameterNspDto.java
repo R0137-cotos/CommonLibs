@@ -14,6 +14,7 @@ import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.AccountFixFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.NewExistingAccountType;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.AddMailDeleteFlg;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeRitosExitB.OtherCorpProviderFlg;
 import lombok.Data;
 
 /**
@@ -76,6 +77,11 @@ public class ProductContractExtendsParameterNspDto {
 	 * アカウント確定フラグ
 	 */
 	private AccountFixFlg accountFixFlg;
+
+	/**
+	 * 他社プロバイダーフラグ
+	 */
+	private OtherCorpProviderFlg otherCorpProviderFlg;
 
 	/**
 	 * 回線種別区分
