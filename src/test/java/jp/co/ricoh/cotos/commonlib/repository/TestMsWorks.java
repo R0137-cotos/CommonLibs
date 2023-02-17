@@ -21,6 +21,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.AbstractMsResponseWork.MsResponseMappedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsPriceRevisionWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterResponseWork;
 import jp.co.ricoh.cotos.commonlib.repository.license.ms.MsAutoUpdateDateManagementRepository;
@@ -168,6 +169,14 @@ public class TestMsWorks {
 
 	private void MsPriceRevisionWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(msPriceRevisionWorkRepository, 10L);
+
+		List<MsPriceRevisionWork> entity = msPriceRevisionWorkRepository.findByRjManageNumber("RJ001");
+		Assert.assertEquals("2件取得できていること", 2, entity.size());
+		entity.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
 	}
 
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
