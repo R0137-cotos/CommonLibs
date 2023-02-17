@@ -17,4 +17,6 @@ public interface ConstructionEimApplyInfoRepository extends CrudRepository<Const
 	public List<ConstructionEimApplyInfo> findByContractIdAndStatusAndOrderTypeNotIn(long contractId, Status status, List<OrderType> orderTypeList);
 
 	public List<ConstructionEimApplyInfo> findByContractId(long contractId);
+
+	public List<ConstructionEimApplyInfo> findByEstimationId(long estimationId);
 }

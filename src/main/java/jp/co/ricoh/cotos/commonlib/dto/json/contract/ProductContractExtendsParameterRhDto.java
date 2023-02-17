@@ -20,6 +20,16 @@ public class ProductContractExtendsParameterRhDto {
 	private String penaltyStartDate;
 
 	/**
+	 * 回線種別区分
+	 */
+	private String lineTypeDiv;
+
+	/**
+	 * 回線種別名
+	 */
+	private String lineTypeName;
+
+	/**
 	 * ISP設定情報確認書リスト
 	 */
 	private List<String> ispSettingBookList;
