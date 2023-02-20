@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConfigInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimItemInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
@@ -27,6 +28,7 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransfer;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransferManage;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransferNwservice;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.SpecificInfo;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConfigInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimApplyInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimItemInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoDetailRepository;
@@ -83,6 +85,9 @@ public class TestExternalLinkage {
 
 	@Autowired
 	ConstructionEimItemInfoRepository constructionEimItemInfoRepository;
+
+	@Autowired
+	ConfigInfoRepository configInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -283,6 +288,18 @@ public class TestExternalLinkage {
 	public void ConstructionEimItemInfoRepositoryのテスト() throws Exception {
 
 		ConstructionEimItemInfo found = constructionEimItemInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ConfigInfoRepositoryのテスト() throws Exception {
+
+		ConfigInfo found = configInfoRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
