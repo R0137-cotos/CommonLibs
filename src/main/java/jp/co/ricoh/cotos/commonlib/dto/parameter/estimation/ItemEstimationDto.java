@@ -103,9 +103,23 @@ public class ItemEstimationDto extends DtoBase {
 	private BigDecimal motherStorePrice;
 
 	/**
+	 * 標準価格
+	 */
+	@Column
+	@ApiModelProperty(value = "標準価格", required = false, position = 15)
+	private BigDecimal standardPrice;
+
+	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 15, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 16, allowableValues = "range[0,255]")
 	private String makerItemCode;
+
+	/**
+	 * ＲＪ販事本仕入価格
+	 */
+	@Column
+	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 17)
+	private BigDecimal rjHanjihonPurchasePrice;
 }
