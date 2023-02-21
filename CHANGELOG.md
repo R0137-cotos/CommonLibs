@@ -1,5 +1,13 @@
 # Changelog
 
+## v6.7.0 (21/02/2023)
+- [**closed**] #17664　NetRicohへ注文履歴APIで差分情報を連携する（#6、#9） [#2257](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2257)
+- [**closed**] #17788 ArrangementSearchParameterに複数商材検索用の商品マスタID追加 [#2256](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2256)
+- [**closed**] #17685 DateUtilクラスを新規作成 [#2254](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2254)
+- [**closed**] #17749 O365契約最新情報返却に変更申込用IDを追加 [#2247](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2247)
+
+---
+
 ## v6.6.0 (07/02/2023)
 - [**closed**] #17719 見積明細DTOに変更前単価を追加 [#2232](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2232)
 - [**closed**] #17719 見積明細管理DTOに変更前単価を追加 [#2230](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2230)
