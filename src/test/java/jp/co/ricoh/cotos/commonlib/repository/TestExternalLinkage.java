@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConfigInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimItemInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
@@ -27,6 +28,7 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransfer;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransferManage;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransferNwservice;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.SpecificInfo;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConfigInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimApplyInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ConstructionEimItemInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoDetailRepository;
@@ -83,6 +85,9 @@ public class TestExternalLinkage {
 
 	@Autowired
 	ConstructionEimItemInfoRepository constructionEimItemInfoRepository;
+
+	@Autowired
+	ConfigInfoRepository configInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -201,6 +206,22 @@ public class TestExternalLinkage {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
+		List<ConstructionEimApplyInfo> foundListByEstimationId = constructionEimApplyInfoRepository.findByEstimationId(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundListByEstimationId);
+
+		// Entity 1件以上取得できていることを確認
+		Assert.assertNotEquals(foundListByEstimationId.size(), 0);
+
+		// Entity 2件取得できていることを確認
+		Assert.assertEquals(foundListByEstimationId.size(), 3);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(foundListByEstimationId.get(0));
+		testTool.assertColumnsNotNull(foundListByEstimationId.get(1));
+		testTool.assertColumnsNotNull(foundListByEstimationId.get(2));
+
 	}
 
 	@Test
@@ -267,6 +288,18 @@ public class TestExternalLinkage {
 	public void ConstructionEimItemInfoRepositoryのテスト() throws Exception {
 
 		ConstructionEimItemInfo found = constructionEimItemInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ConfigInfoRepositoryのテスト() throws Exception {
+
+		ConfigInfo found = configInfoRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
