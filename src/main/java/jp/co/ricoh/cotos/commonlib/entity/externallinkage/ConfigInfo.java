@@ -159,7 +159,7 @@ public class ConfigInfo extends EntityBase {
 	@Size(max = 255)
 	@Column(name = "GE1P3_MEDIA")
 	@ApiModelProperty(value = "GE1P3メディア", required = false, position = 18, allowableValues = "range[0,255]")
-	private String ge1p3media;
+	private String ge1p3Media;
 
 	/**
 	 * IPV6ブリッジ
