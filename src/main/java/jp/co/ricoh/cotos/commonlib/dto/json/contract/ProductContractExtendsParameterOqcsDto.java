@@ -32,6 +32,7 @@ public class ProductContractExtendsParameterOqcsDto {
 	 * 設置日：時間
 	 */
 	private String installationTime;
+
 	/**
 	 * オン資 専用ソフト：問合先
 	 */
@@ -60,17 +61,17 @@ public class ProductContractExtendsParameterOqcsDto {
 	/**
 	 * SS調整済みフラグ
 	 */
-	private int sSAdjustedFlg;
+	private String ssAdjustedFlg;
 
 	/**
 	 * SS長了解済みフラグ
 	 */
-	private int sSChiefAcceptedFlg;
+	private String ssChiefAcceptedFlg;
 
 	/**
 	 * SS調整確認者(SS長)
 	 */
-	private String acceptedChiefNameOfSSAdjusted;
+	private String acceptedChief;
 
 	/**
 	 * 調整内容
