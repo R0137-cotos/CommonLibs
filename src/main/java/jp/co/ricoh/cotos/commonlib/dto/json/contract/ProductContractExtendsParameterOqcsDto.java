@@ -60,20 +60,20 @@ public class ProductContractExtendsParameterOqcsDto {
 	/**
 	 * SS調整済みフラグ
 	 */
-	private String sSAdjustedFlg;
+	private int sSAdjustedFlg;
 
 	/**
 	 * SS長了解済みフラグ
 	 */
-	private String sSChiefAcceptedFlg;
+	private int sSChiefAcceptedFlg;
 
 	/**
 	 * SS調整確認者(SS長)
 	 */
-	private String AcceptedChiefNameOfSSAdjusted;
+	private String acceptedChiefNameOfSSAdjusted;
 
 	/**
 	 * 調整内容
 	 */
-	private String AdjustedDescription;
+	private String adjustedDescription;
 }
