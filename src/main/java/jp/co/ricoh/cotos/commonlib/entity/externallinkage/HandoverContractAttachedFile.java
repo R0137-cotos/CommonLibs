@@ -3,9 +3,11 @@ package jp.co.ricoh.cotos.commonlib.entity.externallinkage;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,6 +26,7 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
+@EntityListeners(HandoverContractAttachedFileListener.class)
 @Data
 @Table(name = "handover_contract_attached_file")
 public class HandoverContractAttachedFile extends EntityBase {
@@ -136,4 +139,10 @@ public class HandoverContractAttachedFile extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "カテゴリ", required = false, position = 15, allowableValues = "range[0,255]")
 	private String category;
+
+	@PrePersist
+	public void prePersist() {
+		super.prePersist();
+		this.attachedAt = super.getCreatedAt();
+	}
 }
