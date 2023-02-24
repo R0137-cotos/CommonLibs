@@ -42,6 +42,9 @@ public class ItemEstimationListener {
 		if (itemEstimation.getPartitionPrice() == null) {
 			itemEstimation.setPartitionPrice(itemMaster.getPartitionPrice());
 		}
+		if (itemEstimation.getPriceRevisionDateMasterId() == null) {
+			itemEstimation.setPriceRevisionDateMasterId(itemMaster.getPriceRevisionDateMasterId());
+		}
 	}
 
 }
