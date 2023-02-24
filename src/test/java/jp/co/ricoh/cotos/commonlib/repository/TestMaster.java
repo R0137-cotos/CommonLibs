@@ -2947,5 +2947,10 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		List<PriceRevisionDateMaster> foundList = priceRevisionDateMasterRepository.findByProductMasterId(1L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
 	}
 }
