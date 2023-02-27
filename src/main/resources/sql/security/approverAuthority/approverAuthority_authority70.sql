@@ -13,6 +13,6 @@ WHERE
                                        FROM
                                          RESPONSIBLE_SALES REF_HANSH_SELC
                                        WHERE
-                                         REF_HANSH_SELC.SINGLEUSER_ID = :approverSingleUserId)
+                                         REF_HANSH_SELC.HAIKA_INTEGRATE_ID = :approverIntegrateId)
              )
- AND SINGLEUSER_ID = :requesterSingleUserId
+ AND HAIKA_INTEGRATE_ID = :requesterIntegrateId

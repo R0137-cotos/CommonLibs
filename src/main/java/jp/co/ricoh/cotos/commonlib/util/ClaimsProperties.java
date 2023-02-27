@@ -19,6 +19,8 @@ public class ClaimsProperties {
 	String origin;
 
 	String applicationId;
-	
+
 	String momAuth;
+
+	String integrateId;
 }

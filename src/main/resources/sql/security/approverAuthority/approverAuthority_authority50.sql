@@ -8,5 +8,5 @@ WHERE
               FROM
                 RESPONSIBLE_SALES M150_HANSH
               WHERE
-                M150_HANSH.SINGLEUSER_ID = :requesterSingleUserId)
- AND SINGLEUSER_ID = :approverSingleUserId
+                M150_HANSH.HAIKA_INTEGRATE_ID = :requesterIntegrateId)
+ AND HAIKA_INTEGRATE_ID = :approverIntegrateId

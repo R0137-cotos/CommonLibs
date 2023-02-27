@@ -3,5 +3,5 @@ SELECT
 FROM
  MV_ULI_HAIKA_USER_TBL_MCL
 WHERE
- SINGLEUSER_ID = :approverSingleUserId
- AND HAIKA_SINGLEUSER_ID = :requesterSingleUserId
+ INTEGRATE_ID = :approverIntegrateId
+ AND HAIKA_INTEGRATE_ID = :requesterIntegrateId

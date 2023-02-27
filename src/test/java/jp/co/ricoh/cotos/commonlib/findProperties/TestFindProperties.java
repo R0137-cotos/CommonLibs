@@ -67,6 +67,7 @@ public class TestFindProperties {
 		Assert.assertEquals("権限:jwt用シングルユーザーIDが正しく取得されること", "singleUserId", appProperties.getAuthProperties().getJwtProperties().getClaimsProperties().getSingleUserId());
 		Assert.assertEquals("権限:jwt用originが正しく取得されること", "origin", appProperties.getAuthProperties().getJwtProperties().getClaimsProperties().getOrigin());
 		Assert.assertEquals("権限:jwt用アプリケーションIDが正しく取得されること", "applicationId", appProperties.getAuthProperties().getJwtProperties().getClaimsProperties().getApplicationId());
+		Assert.assertEquals("権限:jwt用統合IDが正しく取得されること", "singleUserId", appProperties.getAuthProperties().getJwtProperties().getClaimsProperties().getIntegrateId());
 		Assert.assertEquals("権限:ヘッダーMoM社員IDが正しく取得されること", "headers_mom_emp_id", appProperties.getAuthProperties().getHeadersProperties().getMomEmpId());
 		Assert.assertEquals("権限:ヘッダーシングルユーザーIDが正しく取得されること", "headers_single_user_id", appProperties.getAuthProperties().getHeadersProperties().getSingleUserId());
 		Assert.assertEquals("権限:ヘッダーアプリケーションIDが正しく取得されること", "headers_applicationId", appProperties.getAuthProperties().getHeadersProperties().getApplicationId());
@@ -75,6 +76,7 @@ public class TestFindProperties {
 		Assert.assertEquals("権限:ヘッダー画面表示用ユーザー権限要否が正しく取得されること", "X-Cotos-Require-Disp-Authorize", appProperties.getAuthProperties().getHeadersProperties().getRequireDispAuthorize());
 		Assert.assertEquals("権限:ヘッダー画面表示用ユーザー権限が正しく取得されること", "X-Cotos-Disp-Authorization", appProperties.getAuthProperties().getHeadersProperties().getDispAuthorization());
 		Assert.assertEquals("権限:ヘッダーコンテントタイプが正しく取得されること", "Content-type", appProperties.getAuthProperties().getHeadersProperties().getContentType());
+		Assert.assertEquals("権限:ヘッダー統合IDが正しく取得されること", "headers_integrate_id", appProperties.getAuthProperties().getHeadersProperties().getIntegrateId());
 		Assert.assertEquals("外部参照:MoM承認権限用URLが正しく取得されること", "https://www.rizm.jw1.nihon-os.ricoh.co.jp/jmo/services/KengenService", appProperties.getRemoteMomProperties().getUrl());
 		Assert.assertEquals("外部参照:MoM承認権限用リテラルIDが正しく取得されること", "CSP", appProperties.getRemoteMomProperties().getRelatedid());
 		Assert.assertEquals("filenameが取得できること", "filename", appProperties.getAuthProperties().getHeadersProperties().getFilename());

@@ -10,6 +10,7 @@ cotos:
         origin: origin
         applicationId: applicationId
         momAuth: momAuth
+        integrateId: integrateId
       skipCheckOriginName: cforce
     headers:
       momEmpId: headers_mom_emp_id
@@ -21,6 +22,7 @@ cotos:
       dispAuthorization: X-Cotos-Disp-Authorization
       contentType: Content-type
       filename: filename
+      integrateId: headers_integrate_id
   log:
     request:
       outputLog: true
@@ -75,8 +77,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_commonlibs
-    password: cotos_ci_commonlibs
+    username: cotos_ci_common_new_auth
+    password: cotos_ci_common_new_auth
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -87,7 +89,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_commonlibs
+        default_schema: cotos_ci_common_new_auth
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true

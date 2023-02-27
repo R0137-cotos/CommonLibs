@@ -74,4 +74,12 @@ public class EstimationInitialCostDto {
 	@Size(max = 3)
 	@ApiModelProperty(value = "販社CD", required = true, position = 8, allowableValues = "range[0,3]")
 	private String hanshCd;
+
+	/**
+	 * 統合ID
+	 */
+	@NotNull
+	@Size(max = 64)
+	@ApiModelProperty(value = "統合ID", required = true, position = 9, allowableValues = "range[0,64]")
+	private String integrateId;
 }

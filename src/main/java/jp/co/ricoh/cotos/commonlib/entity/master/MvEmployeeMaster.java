@@ -1762,4 +1762,11 @@ public class MvEmployeeMaster {
 	@Column(length = 300)
 	@ApiModelProperty(value = "更新者名", required = false, position = 249, allowableValues = "range[0,300]")
 	private String cubicUpdatingUserName;
+
+	/**
+	 * 統合ID
+	 */
+	@Column(length = 300, name = "integrate_id")
+	@ApiModelProperty(value = "統合ID", required = false, position = 250, allowableValues = "range[0,300]")
+	private String integrateId;
 }

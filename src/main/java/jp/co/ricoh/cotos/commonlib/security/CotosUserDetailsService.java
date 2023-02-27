@@ -72,7 +72,7 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 
 		try {
 			cotosAuthenticationDetails = this.decodeAuthentication(authenticationHeader);
-			if (cotosAuthenticationDetails == null || StringUtils.isAnyBlank(cotosAuthenticationDetails.getMomEmployeeId(), cotosAuthenticationDetails.getSingleUserId(), cotosAuthenticationDetails.getOrigin(), cotosAuthenticationDetails.getApplicationId())) {
+			if (cotosAuthenticationDetails == null || StringUtils.isAnyBlank(cotosAuthenticationDetails.getMomEmployeeId(), cotosAuthenticationDetails.getIntegrateId(), cotosAuthenticationDetails.getOrigin(), cotosAuthenticationDetails.getApplicationId())) {
 				throw new UsernameNotFoundException("user not found");
 			}
 		} catch (Exception e) {
@@ -120,9 +120,9 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 					momAuthorities = objectMapper.readValue(jwt.getClaim(claimsProperties.getMomAuth()).asString(), new TypeReference<Map<ActionDiv, Map<AuthDiv, AuthLevel>>>() {
 					});
 				} else if (jwt.getClaim(claimsProperties.getMomAuth()).isNull()) {
-					// シングルユーザーIDに紐づく権限情報を取得
+					// 統合IDに紐づく権限情報を取得
 					try {
-						momAuthorities = momAuthorityService.searchAllMomAuthorities(jwt.getClaim(claimsProperties.getSingleUserId()).asString());
+						momAuthorities = momAuthorityService.searchAllMomAuthorities(jwt.getClaim(claimsProperties.getIntegrateId()).asString());
 					} catch (Exception e) {
 						throw e;
 					}
@@ -130,14 +130,14 @@ public class CotosUserDetailsService implements AuthenticationUserDetailsService
 
 				// 一般ユーザーで、MoM権限ユーザーが取得できない場合はエラー
 				if (!isSuperUser && momAuthorities == null) {
-					log.error(messageUtil.createMessageInfo("NoMomAuthoritiesError", Arrays.asList(jwt.getClaim(claimsProperties.getSingleUserId()).asString()).toArray(new String[0])).getMsg());
+					log.error(messageUtil.createMessageInfo("NoMomAuthoritiesError", Arrays.asList(jwt.getClaim(claimsProperties.getIntegrateId()).asString()).toArray(new String[0])).getMsg());
 					throw new Exception();
 				}
 			} else {
 				log.info("バッチユーザもしくはUIユーザのためMoM認証をスキップします。");
 			}
 
-			return new CotosAuthenticationDetails(jwt.getClaim(claimsProperties.getMomEmpId()).asString(), jwt.getClaim(claimsProperties.getSingleUserId()).asString(), jwt.getClaim(claimsProperties.getOrigin()).asString(), jwt.getClaim(claimsProperties.getApplicationId()).asString(), jwtString, isSuperUser, isDummyUser, momAuthorities);
+			return new CotosAuthenticationDetails(jwt.getClaim(claimsProperties.getMomEmpId()).asString(), jwt.getClaim(claimsProperties.getSingleUserId()).asString(), jwt.getClaim(claimsProperties.getOrigin()).asString(), jwt.getClaim(claimsProperties.getApplicationId()).asString(), jwtString, isSuperUser, isDummyUser, momAuthorities, jwt.getClaim(claimsProperties.getIntegrateId()).asString());
 		}
 
 		return null;

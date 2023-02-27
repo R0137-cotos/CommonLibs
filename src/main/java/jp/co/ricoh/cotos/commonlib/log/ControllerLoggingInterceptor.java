@@ -62,12 +62,12 @@ public class ControllerLoggingInterceptor {
 		Object ret = null;
 
 		try {
-			log.info(messageUtil.createMessageInfo("PerformLogInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), "start", userInfo.getSingleUserId(), userInfo.getMomEmployeeId(), formatter.format(LocalDateTime.now())).toArray(new String[0])).getMsg());
+			log.info(messageUtil.createMessageInfo("PerformLogInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), "start", userInfo.getIntegrateId(), userInfo.getMomEmployeeId(), formatter.format(LocalDateTime.now())).toArray(new String[0])).getMsg());
 
 			ret = proceedingJoinPoint.proceed();
 			return ret;
 		} finally {
-			log.info(messageUtil.createMessageInfo("PerformLogInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), "end", userInfo.getSingleUserId(), userInfo.getMomEmployeeId(), formatter.format(LocalDateTime.now())).toArray(new String[0])).getMsg());
+			log.info(messageUtil.createMessageInfo("PerformLogInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), "end", userInfo.getIntegrateId(), userInfo.getMomEmployeeId(), formatter.format(LocalDateTime.now())).toArray(new String[0])).getMsg());
 		}
 	}
 

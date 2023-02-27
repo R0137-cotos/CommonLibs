@@ -36,16 +36,16 @@ public class AccessLogOutputFilter extends OncePerRequestFilter {
 		
 		// 認証情報からログに必要な情報を取得
 		String momEmployeeId = authentication == null ? null : ((CotosAuthenticationDetails)authentication.getPrincipal()).getMomEmployeeId();
-		String singleUserId = authentication == null ? null : ((CotosAuthenticationDetails)authentication.getPrincipal()).getSingleUserId();
+		String integrateId = authentication == null ? null : ((CotosAuthenticationDetails) authentication.getPrincipal()).getIntegrateId();
 		String origin = StringUtils.isBlank(request.getHeader("origin")) ? null : request.getHeader("origin");
 		
 		// アクセス： start
-		log.info(messageUtil.createMessageInfo("AccessLogStartInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), singleUserId, momEmployeeId, origin).toArray(new String[0])).getMsg());
+		log.info(messageUtil.createMessageInfo("AccessLogStartInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), integrateId, momEmployeeId, origin).toArray(new String[0])).getMsg());
 		try {
 			filterChain.doFilter(request, response);
 		} finally {
 			// アクセス： end
-			log.info(messageUtil.createMessageInfo("AccessLogEndInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), (HttpStatus.OK.value() == response.getStatus() || HttpStatus.CREATED.value() == response.getStatus()) ? "success" : "fail", singleUserId, momEmployeeId, String.valueOf(response.getStatus())).toArray(new String[0])).getMsg());
+			log.info(messageUtil.createMessageInfo("AccessLogEndInfo", Arrays.asList(request.getMethod(), request.getRequestURL().toString(), (HttpStatus.OK.value() == response.getStatus() || HttpStatus.CREATED.value() == response.getStatus()) ? "success" : "fail", integrateId, momEmployeeId, String.valueOf(response.getStatus())).toArray(new String[0])).getMsg());
 		}
 	}
 }

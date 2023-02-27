@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +39,6 @@ import jp.co.ricoh.jmo.cache.AuthoritySearch;
 import jp.co.ricoh.jmo.dto.cache.AuthorityInfoActionDto;
 import jp.co.ricoh.jmo.dto.cache.AuthorityInfoLevelDto;
 import jp.co.ricoh.jmo.dto.service.EmployeeAuthInfoDto;
-import jp.co.ricoh.jmo.dto.service.EmployeeInfoDto;
-import jp.co.ricoh.jmo.dto.service.EmployeeOrgInfoDto;
-import jp.co.ricoh.jmo.service.KengenServiceServiceLocator;
 
 @Component
 public class MomAuthorityService {
@@ -89,17 +84,17 @@ public class MomAuthorityService {
 	/**
 	 * MoM権限レベルを取得
 	 */
-	public AuthLevel searchMomAuthority(String singleUserId, ActionDiv actionDiv, AuthDiv authDiv) throws RemoteException, SQLException, ServiceException {
+	public AuthLevel searchMomAuthority(String integrateId, ActionDiv actionDiv, AuthDiv authDiv) throws RemoteException, SQLException, ServiceException {
 
 		// MoM提供モジュール経由でMom権限情報を取得
-		List<AuthorityInfoActionDto> authorityInfoActionDtoList = this.searchMomAuthoritiesExternal(singleUserId);
+		List<AuthorityInfoActionDto> authorityInfoActionDtoList = this.searchMomAuthoritiesExternal(integrateId);
 
-		// Mom権限情報wお取得できない場合、nullを返却
+		// Mom権限情報を取得できない場合、nullを返却
 		if (authorityInfoActionDtoList == null) {
 			return null;
 		}
 
-		// 引数のアクション区分、権限情報からっ権限レベルを取得
+		// 引数のアクション区分、権限情報から権限レベルを取得
 		List<AuthorityInfoLevelDto> authorityInfoLevelDtoList = Arrays.asList(authorityInfoActionDtoList.stream().filter(authorityInfoActionDto -> actionDiv.toString().equals(authorityInfoActionDto.getActionId())).findFirst().get().getLevelList());
 		String targetAuthLevel = authorityInfoLevelDtoList.stream().filter(authorityInfoLevelDto -> authDiv.toString().equals(authorityInfoLevelDto.getInfoId())).findFirst().get().getLevelId();
 
@@ -108,17 +103,17 @@ public class MomAuthorityService {
 	}
 
 	/**
-	 * シングルユーザーIDに紐づく、すべてのCOTOS用MoM権限レベルを取得
+	 * 統合IDに紐づく、すべてのCOTOS用MoM権限レベルを取得
 	 *
 	 * @throws Exception
 	 */
-	public Map<ActionDiv, Map<AuthDiv, AuthLevel>> searchAllMomAuthorities(String singleUserId) throws Exception {
+	public Map<ActionDiv, Map<AuthDiv, AuthLevel>> searchAllMomAuthorities(String integrateId) throws Exception {
 
 		// 外部ライブラリ経由でMom権限情報を取得
 		List<AuthorityInfoActionDto> authorityInfoActionDtoList;
 
 		try {
-			authorityInfoActionDtoList = this.searchMomAuthoritiesExternal(singleUserId);
+			authorityInfoActionDtoList = this.searchMomAuthoritiesExternal(integrateId);
 		} catch (RemoteException | SQLException | ServiceException e) {
 			log.error(messageUtil.createMessageInfo("ExternalModuleError").getMsg(), e);
 			throw e;
@@ -211,7 +206,7 @@ public class MomAuthorityService {
 	public boolean hasAuthoritySubApprover(AuthorityJudgeParameter authParam, ActionDiv actionDiv, AuthDiv authDiv) throws Exception {
 
 		// 権限レベルを取得
-		AuthLevel authLevel = this.searchMomAuthority(authParam.getActorMvEmployeeMaster().getSingleUserId(), actionDiv, authDiv);
+		AuthLevel authLevel = this.searchMomAuthority(authParam.getActorMvEmployeeMaster().getIntegrateId(), actionDiv, authDiv);
 
 		// 認可判定処理開始
 		log.info(messageUtil.createMessageInfo("AuthorizeProcessJudgeStartInfo", Arrays.asList(AccessType.承認.name(), authLevel.name()).toArray(new String[0])).getMsg());
@@ -240,7 +235,7 @@ public class MomAuthorityService {
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getHanshCd().equals(targetEmployeeMaster.getHanshCd()));
 		case 地域:
 			// 担当SA、追加編集者、担当CE、担当SEの販社と関連販社であるか確認
-			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isRelatedOrg(targetEmployeeMaster.getSingleUserId(), editor.getSingleUserId()));
+			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isRelatedOrg(targetEmployeeMaster.getIntegrateId(), editor.getIntegrateId()));
 		case 東西:
 		case すべて:
 			return true;
@@ -263,8 +258,8 @@ public class MomAuthorityService {
 		case 自社:
 		case 地域:
 			Map<String, Object> queryParams = new HashMap<>();
-			queryParams.put("approverSingleUserId", approver.getSingleUserId());
-			queryParams.put("requesterSingleUserId", requester.getSingleUserId());
+			queryParams.put("approverIntegrateId", approver.getIntegrateId());
+			queryParams.put("requesterIntegrateId", requester.getIntegrateId());
 			long result = dbUtil.loadCountFromSQLFile("sql/security/approverAuthority/approverAuthority_authority" + authLevel.toValue() + ".sql", queryParams);
 			return 0 != result;
 		case 東西:
@@ -299,11 +294,11 @@ public class MomAuthorityService {
 	/**
 	 * 関連組織に所属するか判定する
 	 */
-	protected boolean isRelatedOrg(String targetSingleUserId, String editorSingleUserId) {
+	protected boolean isRelatedOrg(String targetIntegrateId, String editorIntegrateId) {
 
 		Map<String, Object> queryParams = new HashMap<>();
-		queryParams.put("editorSingleUserId", editorSingleUserId);
-		queryParams.put("targetSingleUserId", targetSingleUserId);
+		queryParams.put("editorIntegrateId", editorIntegrateId);
+		queryParams.put("targetIntegrateId", targetIntegrateId);
 
 		long result = dbUtil.loadCountFromSQLFile("sql/security/editorAuthority/isRelatedOrg.sql", queryParams);
 
@@ -311,24 +306,11 @@ public class MomAuthorityService {
 	}
 
 	/**
-	 * 外部ライブラリから、シングルユーザーIDに紐づく権限情報を取得する
+	 * 外部ライブラリから、統合IDに紐づく権限情報を取得する
 	 */
-	protected List<AuthorityInfoActionDto> searchMomAuthoritiesExternal(String singleUserId) throws SQLException, RemoteException, ServiceException {
-
-		// 権限情報取得用サービスを初期化
-		KengenServiceServiceLocator kengenServiceLocator = new KengenServiceServiceLocator();
-		kengenServiceLocator.setKengenServiceEndpointAddress(remoteMomProperties.getUrl());
-
-		// MoM提供モジュールから社員情報の取得
-		EmployeeInfoDto[] employeeInfoDtos = kengenServiceLocator.getKengenService().getContactEmpFromSUID(singleUserId, Calendar.getInstance(), false, remoteMomProperties.getRelatedid());
-		if (employeeInfoDtos.length != 1) {
-			return null;
-		}
-
+	protected List<AuthorityInfoActionDto> searchMomAuthoritiesExternal(String integrateId) throws SQLException, RemoteException, ServiceException {
 		// 社員情報から、権限分類を特定
-		List<EmployeeAuthInfoDto> empAuthInfoList = new ArrayList<>();
-		List<EmployeeOrgInfoDto> employeeOrgInfoDtoList = Arrays.asList(employeeInfoDtos[0].getOrgList());
-		employeeOrgInfoDtoList.stream().forEach(employeeOrgInfoDto -> Collections.addAll(empAuthInfoList, employeeOrgInfoDto.getClassifyList()));
+		List<EmployeeAuthInfoDto> empAuthInfoList = createEmpAuthInfoList();
 		List<String> classify = empAuthInfoList.stream().map(empAuthInfo -> empAuthInfo.getClassifyId()).collect(Collectors.toList());
 
 		AuthorityInfoActionDto[] authorityInfoActionDtos = null;
@@ -374,5 +356,11 @@ public class MomAuthorityService {
 
 		// 承認処理用の認可処理を実施
 		return this.hasApproveAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getRequesterMvEmployeeMaster());
+	}
+
+	private List<EmployeeAuthInfoDto> createEmpAuthInfoList() {
+		// MoM提供モジュールから社員情報の取得
+		List<EmployeeAuthInfoDto> empAuthInfoList = new ArrayList<>();
+		return empAuthInfoList;
 	}
 }

@@ -111,4 +111,6 @@ public class MvWjmoco40EmpAllInfoCom {
 	@Temporal(TemporalType.DATE)
 	private Date embEnterDate;
 
+	/** 統合ID */
+	private String integrateId;
 }
