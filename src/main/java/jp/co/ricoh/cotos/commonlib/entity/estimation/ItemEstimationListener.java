@@ -36,13 +36,10 @@ public class ItemEstimationListener {
 		if (StringUtils.isEmpty(itemEstimation.getItemEstimationName())) {
 			itemEstimation.setItemEstimationName(itemMaster.getItemName());
 		}
-		if (itemEstimation.getStandardPrice() == null) {
+		if (!"O365".equals(itemMaster.getProductMaster().getProductClassDiv())) {
+			// O365は契約変更時にマスタ価格ではなく変更元の価格を事前に設定しているためコピー対象外
 			itemEstimation.setStandardPrice(itemMaster.getStandardPrice());
-		}
-		if (itemEstimation.getPartitionPrice() == null) {
 			itemEstimation.setPartitionPrice(itemMaster.getPartitionPrice());
-		}
-		if (itemEstimation.getPriceRevisionDateMasterId() == null) {
 			itemEstimation.setPriceRevisionDateMasterId(itemMaster.getPriceRevisionDateMasterId());
 		}
 	}
