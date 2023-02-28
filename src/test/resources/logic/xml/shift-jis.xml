@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<testDto>
+   <id>20</id>
+   <estimationTitle>ƒ^ƒCƒgƒ‹</estimationTitle>
+   <lifecycle_status>1</lifecycle_status>
+   <workflowStatus>2</workflowStatus>
+   <contract_id>3</contract_id>
+   <Type>type</Type>
+   <inner>
+     <id>100</id>
+     <text>text1</text>
+   </inner>
+   <inner>
+     <id>200</id>
+     <text>text2</text>
+   </inner>
+</testDto>
