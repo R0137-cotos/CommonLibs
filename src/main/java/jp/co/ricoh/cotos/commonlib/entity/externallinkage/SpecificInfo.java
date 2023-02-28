@@ -69,7 +69,7 @@ public class SpecificInfo extends EntityBase {
 	 * 項目値区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "項目値区分", required = true, position = 6, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "項目値区分", required = true, position = 6)
 	private ItemValueDiv itemValueDiv;
 
 	/**
