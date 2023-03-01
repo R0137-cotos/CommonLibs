@@ -583,3 +583,4 @@
 |626|Messages.propertiesを修正|
 |627|ID:RCO00088のMessages.propertiesを修正|
 |628|商材固有項目エンティティの不要なアノテーションを削除|
+|629|XMLファイルのDTO変換処理を追加|
