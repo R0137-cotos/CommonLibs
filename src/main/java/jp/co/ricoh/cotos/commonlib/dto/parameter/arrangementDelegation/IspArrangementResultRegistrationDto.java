@@ -47,7 +47,6 @@ public class IspArrangementResultRegistrationDto {
 	/**
 	 * 手配業務ID
 	 */
-	@Valid
 	@NotNull
 	@ApiModelProperty(value = "手配業務ID", required = true, position = 1)
 	private String id;
@@ -55,7 +54,6 @@ public class IspArrangementResultRegistrationDto {
 	/**
 	 * 手配結果コード
 	 */
-	@Valid
 	@NotNull
 	@ApiModelProperty(value = "手配結果コード", required = true, position = 2)
 	private ResultCode resultCode;
