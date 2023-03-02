@@ -23,4 +23,6 @@ public interface LaitLinkageInfoRepository extends CrudRepository<LaitLinkageInf
 	public List<LaitLinkageInfo> findByBaseRjManageNumberAndDeleteFlgAndInfoDivIn(String baseRjManageNumber, Integer deleteFlg, List<InfoDiv> infoDivList);
 
 	public LaitLinkageInfo findByRjManageNumberAndInfoDivAndRouterApDivAndLaitId(String rjManageNumber, InfoDiv infoDiv, RouterApDiv routerApDiv, String laitId);
+
+	public LaitLinkageInfo findByRjManageNumberAndRouterApDivAndDeleteFlgAndInfoDivIn(String rjManageNumber, RouterApDiv routerApDiv, Integer deleteFlg, List<InfoDiv> infoDivList);
 }
