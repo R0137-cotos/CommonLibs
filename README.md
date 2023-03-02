@@ -515,3 +515,4 @@
 |558|ArrangementSearchParameterに複数商材検索用の商品マスタID追加|
 |559|Messages.propertiesの追加、商品（契約用）拡張項目DTO（OQCS）にコメント追加|
 |560|オン資用の商品（契約用）拡張項目DTOにSS調整の変数を追加|
+|561|Message.propertiesにTwoParametersNotInputErrorを追加|
