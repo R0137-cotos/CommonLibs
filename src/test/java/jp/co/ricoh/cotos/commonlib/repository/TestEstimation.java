@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.repository;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
@@ -377,6 +380,83 @@ public class TestEstimation {
 
 		// Entity 1件以上取得できていることを確認
 		Assert.assertNotEquals(foundList.size(), 0);
+
+	}
+
+	@Test
+	@WithMockCustomUser
+	@Transactional
+	public void EstimationRepositorySaveのテスト() throws Exception {
+
+		Estimation found = estimationRepository.findOne(4L);
+		found.setEstimationTitle("テスト見積タイトル");
+		estimationRepository.save(found);
+		Estimation foundUpd = estimationRepository.findOne(4L);
+		Assert.assertEquals("正しく更新されていること", "テスト見積タイトル", foundUpd.getEstimationTitle());
+
+	}
+
+	@Test
+	@WithMockCustomUser
+	@Transactional
+	public void EstimationPicSaEmpRepositorySaveのテスト() throws Exception {
+
+		EstimationPicSaEmp found = estimationPicSaEmpRepository.findOne(401L);
+		found.setAddress("テスト住所");
+		estimationPicSaEmpRepository.save(found);
+		EstimationPicSaEmp foundUpd = estimationPicSaEmpRepository.findOne(401L);
+		Assert.assertEquals("正しく更新されていること", "テスト住所", foundUpd.getAddress());
+
+	}
+
+	@Test
+	@WithMockCustomUser
+	@Transactional
+	public void CustomerEstimationRepositorySaveのテスト() throws Exception {
+
+		CustomerEstimation found = customerEstimationRepository.findOne(401L);
+		found.setAddress("テスト住所");
+		customerEstimationRepository.save(found);
+		CustomerEstimation foundUpd = customerEstimationRepository.findOne(401L);
+		Assert.assertEquals("正しく更新されていること", "テスト住所", foundUpd.getAddress());
+
+	}
+
+	@Test
+	@WithMockCustomUser
+	@Transactional
+	public void EstimationApprovalRouteRepositorySaveのテスト() throws Exception {
+
+		EstimationApprovalRoute found = estimationApprovalRouteRepository.findOne(401L);
+		found.setSpecialPriceApprovalFlg(2);
+		estimationApprovalRouteRepository.save(found);
+		EstimationApprovalRoute foundUpd = estimationApprovalRouteRepository.findOne(401L);
+		Assert.assertEquals("正しく更新されていること", 2, foundUpd.getSpecialPriceApprovalFlg());
+
+	}
+
+	@Test
+	@WithMockCustomUser
+	@Transactional
+	public void EstimationApprovalRouteRepositorySaveのテスト_削除() throws Exception {
+
+		EstimationApprovalRoute found = estimationApprovalRouteRepository.findOne(401L);
+		estimationApprovalRouteRepository.delete(found);
+		EstimationApprovalRoute foundDel = estimationApprovalRouteRepository.findOne(401L);
+		Assert.assertNull("削除されていること", foundDel);
+
+	}
+
+	@Test
+	@WithMockCustomUser
+	@Transactional
+	public void ItemEstimationRepositorySaveのテスト() throws Exception {
+
+		ItemEstimation found = itemEstimationRepository.findOne(401L);
+		found.setMakerItemCode("テストコード");
+		itemEstimationRepository.save(found);
+		ItemEstimation foundUpd = itemEstimationRepository.findOne(401L);
+		Assert.assertEquals("正しく更新されていること", "テストコード", foundUpd.getMakerItemCode());
 
 	}
 
