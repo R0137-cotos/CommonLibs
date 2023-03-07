@@ -49,6 +49,6 @@ public class ROpticalTransferNwservice extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "サービス名", required = false, position = 3, allowableValues = "range[0,255]")
-	private String service_name;
+	private String serviceName;
 
 }
