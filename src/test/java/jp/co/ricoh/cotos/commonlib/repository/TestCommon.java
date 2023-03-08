@@ -135,7 +135,6 @@ public class TestCommon {
 	private static final String LICENSE_SYNONYM_NAME = "V_MAIL_ADDRESS_LICENSE_LIST";
 	private static final String ARRANGEMENT_SYNONYM_NAME = "V_MAIL_ADDRESS_ARRANGEMENT_LIST";
 
-
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
