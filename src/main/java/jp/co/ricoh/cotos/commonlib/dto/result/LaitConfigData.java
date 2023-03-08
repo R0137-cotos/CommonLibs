@@ -29,7 +29,6 @@ public class LaitConfigData {
 	 * AP区分
 	 */
 	@ApiModelProperty(value = "AP区分", required = false, allowableValues = "AP以外(\"1\"), AP(\"2\")", position = 2)
-	@JsonIgnore
 	private String apFlg;
 
 	/**
