@@ -46,6 +46,6 @@ public class SacmArrangementWorkDto {
 	 * LaITコンフィグデータリスト
 	 */
 	@ApiModelProperty(value = "LaITコンフィグデータリスト", required = false, position = 6)
-	private List<LaitConfigDataDto> laitConfigDataList;
+	private List<LaitConfigData> laitConfigDataList;
 
 }
