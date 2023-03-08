@@ -590,3 +590,4 @@
 |633|SACM事前設定情報取得API用のDTOを新規作成|
 |634|ISP結果登録API用エラーメッセージ追加|
 |635|SACM事前設定情報取得API用のDTOにJsonIgnore追加|
+|636|Messages.propertiesを修正|
