@@ -28,14 +28,14 @@ public class LaitConfigData {
 	/**
 	 * AP区分
 	 */
-	@ApiModelProperty(value = "AP区分", required = false, position = 2)
+	@ApiModelProperty(value = "AP区分", required = false, allowableValues = "AP以外(\"1\"), AP(\"2\")", position = 2)
 	@JsonIgnore
 	private String apFlg;
 
 	/**
 	 * SACMマネジメントコード
 	 */
-	@ApiModelProperty(value = "SACMマネジメントコード", required = false, allowableValues = "AP以外(\"1\"), AP(\"2\")", position = 3)
+	@ApiModelProperty(value = "SACMマネジメントコード", required = false, position = 3)
 	private String sacmManageCode;
 
 	/**
