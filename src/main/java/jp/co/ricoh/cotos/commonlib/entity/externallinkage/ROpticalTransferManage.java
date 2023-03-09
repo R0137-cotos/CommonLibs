@@ -205,4 +205,10 @@ public class ROpticalTransferManage extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "解約フラグ", required = false, position = 14, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
+
+	/**
+	 * 工事調整完了番号
+	 */
+	@ApiModelProperty(value = "工事調整完了番号", required = false, position = 15, allowableValues = "range[0,255]")
+	private String constructAdjustmentNumber;
 }
