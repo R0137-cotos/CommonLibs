@@ -591,3 +591,4 @@
 |634|ISP結果登録API用エラーメッセージ追加|
 |635|SACM事前設定情報取得API用のDTOにJsonIgnore追加|
 |636|Messages.propertiesを修正|
+|637|LaIT連携情報レポジトリにメソッド追加|
