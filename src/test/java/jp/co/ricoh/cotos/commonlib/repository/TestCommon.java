@@ -130,6 +130,7 @@ public class TestCommon {
 
 	static ConfigurableApplicationContext context;
 
+	private static final String ESTIMATION_SYNONYM_NAME = "V_MAIL_ADDRESS_ESTIMATION_LIST";
 	private static final String CONTRACT_SYNONYM_NAME = "V_MAIL_ADDRESS_CONTRACT_LIST";
 	private static final String LICENSE_SYNONYM_NAME = "V_MAIL_ADDRESS_LICENSE_LIST";
 	private static final String ARRANGEMENT_SYNONYM_NAME = "V_MAIL_ADDRESS_ARRANGEMENT_LIST";
@@ -273,12 +274,15 @@ public class TestCommon {
 	@Test
 	public void VMailAddressListEstimationRepositoryのテスト() throws Exception {
 
+		// マテビューリフレッシュ
+		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(ESTIMATION_SYNONYM_NAME);
+
 		VMailAddressEstimationList found = vMailAddressEstimationListRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
-		List<VMailAddressEstimationList> foundList = vMailAddressEstimationListRepository.findByTranId(1L);
+		List<VMailAddressEstimationList> foundList = vMailAddressEstimationListRepository.findByTranId(4L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(foundList);
