@@ -36,4 +36,9 @@ public class ProductContractMigrationParameterDto {
 	 * 業務受付日
 	 */
 	private String operationAcceptanceDate;
+
+	/**
+	 * RITOS文書番号(最新の文書番号)
+	 */
+	private String ritosDocumentNumber;
 }
