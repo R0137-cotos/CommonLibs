@@ -1,9 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.TransferFlg;
 import lombok.Data;
@@ -26,4 +28,11 @@ public class CpqReturnValueO365Dto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date conclusionPreferredDate;
+
+	/**
+	 * アップグレード品種リスト
+	 */
+	@JsonProperty("upgradeItemList")
+	private List<CpqUpgradeItemO365Dto> upgradeItemList;
+
 }

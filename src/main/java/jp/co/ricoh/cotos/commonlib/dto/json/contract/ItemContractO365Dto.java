@@ -1,11 +1,14 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqUpgradeItemO365Dto;
 import lombok.Data;
 
 /**
@@ -42,5 +45,11 @@ public class ItemContractO365Dto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date possibleReduceTermEnd;
+
+	/**
+	 * アップグレード品種リスト
+	 */
+	@JsonProperty("upgradeItemList")
+	private List<CpqUpgradeItemO365Dto> upgradeItemList;
 
 }
