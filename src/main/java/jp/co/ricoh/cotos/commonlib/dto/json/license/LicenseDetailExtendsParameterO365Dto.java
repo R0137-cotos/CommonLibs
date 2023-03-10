@@ -31,4 +31,24 @@ public class LicenseDetailExtendsParameterO365Dto {
 	 */
 	private ContractTerm contractTerm;
 
+	/**
+	 * 移行元品種マスタID
+	 */
+	private String fromItemMasterId;
+
+	/**
+	 * 移行元ライセンスキー
+	 */
+	private String fromLicenseKey;
+
+	/**
+	 * 移行元製品ID
+	 */
+	private String fromOfferId;
+
+	/**
+	 * 処理優先順
+	 */
+	private String priorityOrder;
+
 }
