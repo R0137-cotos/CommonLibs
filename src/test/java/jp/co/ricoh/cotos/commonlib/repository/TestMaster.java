@@ -255,6 +255,8 @@ public class TestMaster {
 	private PublicHolidayMasterRepository publicHolidayMasterRepository;
 	@Autowired
 	private PriceRevisionDateMasterRepository priceRevisionDateMasterRepository;
+	@Autowired
+	private LicenseUpgradeItemMasterRepository licenseUpgradeItemMasterRepository;
 
 	@Autowired
 	TestTools testTool = null;
@@ -2952,5 +2954,18 @@ public class TestMaster {
 
 		// データが取得出来ている事を確認
 		Assert.assertTrue(foundList.size() > 0);
+	}
+
+	@Test
+	public void LicenseUpgradeItemMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseUpgradeItemMaster.sql");
+
+		// エンティティの取得
+		LicenseUpgradeItemMaster found = licenseUpgradeItemMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
 	}
 }
