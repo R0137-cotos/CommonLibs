@@ -516,3 +516,4 @@
 |559|Messages.propertiesの追加、商品（契約用）拡張項目DTO（OQCS）にコメント追加|
 |560|オン資用の商品（契約用）拡張項目DTOにSS調整の変数を追加|
 |561|Message.propertiesにTwoParametersNotInputErrorを追加|
+|562|配送先の社員存在チェックを修正|
