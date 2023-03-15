@@ -96,6 +96,52 @@ public class XmlUtilTest {
 	}
 
 	@Test
+	public void 正常系_xmlファイル_UTF8_BOM付き() {
+		Path path = Paths.get("src/test/resources/logic/xml/utf-8_BOM付き.xml");
+		try {
+			TestXmlDto dto = xmlUtil.convertToDtoForUtf8(path, TestXmlDto.class);
+			Assert.assertEquals("idが想定通りであること", 20, dto.getId().longValue());
+			Assert.assertEquals("estimationTitleが想定通りであること", "タイトル", dto.getEstimationTitle());
+			Assert.assertEquals("lifecycle_statusが文字列で取得できること", "1", dto.getLifecycleStatus());
+			Assert.assertNull("workflowStatusが取得できていないこと", dto.getWorkflowStatus()); // キャメルケースの変換は実施しない
+			Assert.assertEquals("contract_idが数字で取得できること", 3, dto.getContractId().longValue());
+			Assert.assertNull("Typeが取得できていないこと", dto.getType()); // クラス名は最初小文字で認識するが、配下は大文字小文字の区別あり
+			Assert.assertNull("emptyが取得できていないこと", dto.getEmpty());
+			Assert.assertEquals("innerの数が想定通りであること", 2, dto.getInnerList().size()); //インナークラスの場合「@XmlRootElement」で設定している値ではなく「@XmlElement」で指定している値優先
+			Assert.assertEquals("【1件目】idが想定通りであること", 100, dto.getInnerList().get(0).getId());
+			Assert.assertEquals("【1件目】textが想定通りであること", "text1", dto.getInnerList().get(0).getText());
+			Assert.assertEquals("【2件目】idが想定通りであること", 200, dto.getInnerList().get(1).getId());
+			Assert.assertEquals("【2件目】textが想定通りであること", "text2", dto.getInnerList().get(1).getText());
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("想定外のエラー");
+		}
+	}
+
+	@Test
+	public void 正常系_xmlファイル_UTF8_BOM無し() {
+		Path path = Paths.get("src/test/resources/logic/xml/utf-8_BOM無し.xml");
+		try {
+			TestXmlDto dto = xmlUtil.convertToDtoForUtf8(path, TestXmlDto.class);
+			Assert.assertEquals("idが想定通りであること", 20, dto.getId().longValue());
+			Assert.assertEquals("estimationTitleが想定通りであること", "タイトル", dto.getEstimationTitle());
+			Assert.assertEquals("lifecycle_statusが文字列で取得できること", "1", dto.getLifecycleStatus());
+			Assert.assertNull("workflowStatusが取得できていないこと", dto.getWorkflowStatus()); // キャメルケースの変換は実施しない
+			Assert.assertEquals("contract_idが数字で取得できること", 3, dto.getContractId().longValue());
+			Assert.assertNull("Typeが取得できていないこと", dto.getType()); // クラス名は最初小文字で認識するが、配下は大文字小文字の区別あり
+			Assert.assertNull("emptyが取得できていないこと", dto.getEmpty());
+			Assert.assertEquals("innerの数が想定通りであること", 2, dto.getInnerList().size()); //インナークラスの場合「@XmlRootElement」で設定している値ではなく「@XmlElement」で指定している値優先
+			Assert.assertEquals("【1件目】idが想定通りであること", 100, dto.getInnerList().get(0).getId());
+			Assert.assertEquals("【1件目】textが想定通りであること", "text1", dto.getInnerList().get(0).getText());
+			Assert.assertEquals("【2件目】idが想定通りであること", 200, dto.getInnerList().get(1).getId());
+			Assert.assertEquals("【2件目】textが想定通りであること", "text2", dto.getInnerList().get(1).getText());
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("想定外のエラー");
+		}
+	}
+
+	@Test
 	public void 異常系_文字列がnull() {
 		try {
 			xmlUtil.convertToDto(null, TestXmlDto.class);
