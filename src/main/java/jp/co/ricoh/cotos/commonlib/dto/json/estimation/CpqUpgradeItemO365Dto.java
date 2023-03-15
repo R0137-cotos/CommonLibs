@@ -15,7 +15,7 @@ public class CpqUpgradeItemO365Dto {
 	/**
 	 * 移行元品種マスタID
 	 */
-	private String fromItemMasterId;
+	private Long fromItemMasterId;
 
 	/**
 	 * 移行元品種コード
@@ -25,7 +25,7 @@ public class CpqUpgradeItemO365Dto {
 	/**
 	 * 移行先品種マスタID
 	 */
-	private String toItemMasterId;
+	private Long toItemMasterId;
 
 	/**
 	 * 移行先品種コード
