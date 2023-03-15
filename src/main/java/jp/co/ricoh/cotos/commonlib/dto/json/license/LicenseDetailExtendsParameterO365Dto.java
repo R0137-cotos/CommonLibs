@@ -34,7 +34,7 @@ public class LicenseDetailExtendsParameterO365Dto {
 	/**
 	 * 移行元品種マスタID
 	 */
-	private String fromItemMasterId;
+	private Long fromItemMasterId;
 
 	/**
 	 * 移行元ライセンスキー
@@ -49,6 +49,6 @@ public class LicenseDetailExtendsParameterO365Dto {
 	/**
 	 * 処理優先順
 	 */
-	private String priorityOrder;
+	private Integer priorityOrder;
 
 }
