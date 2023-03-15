@@ -12,4 +12,6 @@ public interface ConfigInfoRepository extends CrudRepository<ConfigInfo, Long> {
 
 	public List<ConfigInfo> findByContractId(long contractId);
 
+	public List<ConfigInfo> findByRjManageNumber(String rjManageNumber);
+
 }
