@@ -30,7 +30,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude={"itemEstimation"})
 @Data
 @Table(name = "estimation_detail")
 public class EstimationDetail extends EntityBase {
