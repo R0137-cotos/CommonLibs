@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.8.0 (09/03/2023)
+- [**closed**] #17973 見積エンティティアノテーション修正 [#2298](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2298)
+
+---
+
 ## v6.7.0 (21/02/2023)
 - [**closed**] #17664　NetRicohへ注文履歴APIで差分情報を連携する（#6、#9） [#2257](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2257)
 - [**closed**] #17788 ArrangementSearchParameterに複数商材検索用の商品マスタID追加 [#2256](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2256)
