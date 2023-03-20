@@ -36,11 +36,6 @@ public class ProductContractExtendsParameterOqcsDto {
 	private String installationScheduledTime;
 
 	/**
-	 * SS調整済みフラグ
-	 */
-	private String ssAdjustedFlg;
-
-	/**
 	 * SS長了解済みフラグ
 	 */
 	private String ssChiefAcceptedFlg;
