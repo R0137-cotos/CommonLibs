@@ -197,7 +197,7 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "工事調整完了番号", required = false, position = 9, allowableValues = "range[0,255]")
-	private String constructEimNumber;
+	private String constructAdjustmentNumber;
 
 	/**
 	 * 対象
