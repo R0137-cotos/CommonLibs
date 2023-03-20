@@ -36,5 +36,5 @@ public class OpticalTransferFileDto {
 	 * 工事調整完了番号
 	 */
 	@JsonProperty("工事調整完了番号")
-	private String constructEimNumber;
+	private String constructAdjustmentNumber;
 }
