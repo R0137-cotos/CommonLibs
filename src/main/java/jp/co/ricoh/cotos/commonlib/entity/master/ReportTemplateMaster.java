@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -231,9 +233,17 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	private String styleFileName;
 
 	/**
+	 * 総ページ数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "ジョブユニットID", required = false, position = 14, allowableValues = "range[0,99999]")
+	private Integer totalPageNumber;
+
+	/**
 	 * 帳票ページ管理マスタ
 	 */
 	@OneToMany(mappedBy = "reportTemplateMaster")
-	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 14)
+	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 15)
 	private List<ReportPageMaster> reportPageMasterList;
 }
