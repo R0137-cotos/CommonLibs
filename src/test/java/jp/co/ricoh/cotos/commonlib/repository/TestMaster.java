@@ -24,11 +24,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.dto.json.master.ReportPageMasterExtendsParameterDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.*;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.Domain;
+import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.repository.master.*;
 import lombok.val;
 
@@ -263,6 +265,9 @@ public class TestMaster {
 	private SpecificSectionMasterRepository specificSectionMasterRepository;
 	@Autowired
 	private ElementMasterRepository elementMasterRepository;
+
+	@Autowired
+	JsonUtil jsonUtil;
 
 	@Autowired
 	TestTools testTool = null;
@@ -1530,6 +1535,10 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		// 拡張項目をDTO変換できること
+		ReportPageMasterExtendsParameterDto dto = jsonUtil.convertToDto(found.getExtendsParameter(), ReportPageMasterExtendsParameterDto.class);
+		Assert.assertArrayEquals(Arrays.asList("2", "3").toArray(), dto.getCommercialFlowDivList().toArray());
 	}
 
 	@Test
