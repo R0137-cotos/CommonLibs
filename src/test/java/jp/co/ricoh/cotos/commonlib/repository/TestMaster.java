@@ -2968,4 +2968,17 @@ public class TestMaster {
 		Assert.assertNotNull(found);
 
 	}
+
+	@Test
+	public void LicenseUpgradeItemMaster_商品マスタIDで取得するテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseUpgradeItemMaster.sql");
+
+		// エンティティの取得
+		List<LicenseUpgradeItemMaster> foundList = licenseUpgradeItemMasterRepository.findByProductMasterId(1L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
+
+	}
 }
