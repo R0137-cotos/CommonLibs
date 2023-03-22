@@ -150,13 +150,19 @@ public class ItemEstimation extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 16, allowableValues = "range[0,255]")
 	private String makerItemCode;
-	
+
 	/**
 	 * ＲＪ販事本仕入価格
 	 */
 	@Column
 	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 17)
 	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 18, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 
 	@PrePersist
 	public void prePersist() {
