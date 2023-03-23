@@ -1,5 +1,21 @@
 # Changelog
 
+## v6.9.0 (23/03/2023)
+- [**closed**] #18008 [O365]価格改定対応 メッセージ修正 [#2314](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2314)
+- [**closed**] #18008 更新時価格改定対応_契約承認依頼API [#2300](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2300)
+- [**closed**] #18017 [O365]更新時価格改定対応 品種（見積用）リスナーのコピー除外項目追加 [#2289](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2289)
+- [**closed**] #18017 [O365]更新時価格改定対応 品種（見積用）リスナーのコピー除外項目追加 [#2287](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2287)
+- [**closed**] #18008 更新時価格改定対応_契約承認依頼API [#2286](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2286)
+- [**closed**] #17910 契約操作履歴に「価格改定」を追加 [#2279](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2279)
+- [**closed**] #17910 MS_価格改定対象WORKをRJ管理番号で取得できるようrepositoryにメソッド追加 [#2277](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2277)
+- [**closed**] #17919 更新時価格対応_見積明細作成API [#2275](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2275)
+- [**closed**] #17900 [O365]更新時価格改定対応 [#2265](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2265)
+- [**closed**] #17879 配送先社員のマスタチェック修正 [#2319](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2319)
+- [**closed**] #17355 Message.propertiesにTwoParametersNotInputError追加 [#2295](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2295)
+- [**closed**] #17355 過去チケット(#16383)分取込とオン資用の商品（契約用）拡張項目DTOにSS調整の変数を追加 [#2283](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2283)
+
+---
+
 ## v6.8.0 (09/03/2023)
 - [**closed**] #17973 見積エンティティアノテーション修正 [#2298](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2298)
 
