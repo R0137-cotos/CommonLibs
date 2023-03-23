@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
+import jp.co.ricoh.cotos.commonlib.entity.license.CloudEdgeAccountInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseAccount;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetailRefreshHis;
@@ -21,6 +22,7 @@ import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfoRefreshHis;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseKeyInfo;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseProcess;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseRemainingNumber;
+import jp.co.ricoh.cotos.commonlib.repository.license.CloudEdgeAccountInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseAccountRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseDetailRefreshHisRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseDetailRepository;
@@ -61,6 +63,9 @@ public class TestLicense {
 
 	@Autowired
 	LicenseDetailRefreshHisRepository licenseDetailRefreshHisRepository;
+
+	@Autowired
+	CloudEdgeAccountInfoRepository cloudEdgeAccountInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -198,4 +203,17 @@ public class TestLicense {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 	}
+
+	@Test
+	public void CloudEdgeAccountInfoRepositoryのテスト() throws Exception {
+
+		CloudEdgeAccountInfo found = cloudEdgeAccountInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
 }

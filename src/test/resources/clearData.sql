@@ -242,3 +242,4 @@ DELETE FROM r_optical_transfer;
 DELETE FROM r_optical_transfer_nwservice;
 DELETE FROM handover_isp_linkage;
 DELETE FROM CONFIG_INFO;
+DELETE FROM CLOUD_EDGE_ACCOUNT_INFO;
