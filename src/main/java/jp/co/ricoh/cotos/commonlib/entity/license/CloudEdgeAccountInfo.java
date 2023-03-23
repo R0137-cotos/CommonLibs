@@ -32,7 +32,7 @@ public class CloudEdgeAccountInfo extends EntityBase {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cloud_edge_account_info_seq")
-	@SequenceGenerator(name = "cloud_edge_account_info_seq", sequenceName = "cloud_edge_account_infoseq", allocationSize = 1)
+	@SequenceGenerator(name = "cloud_edge_account_info_seq", sequenceName = "cloud_edge_account_info_seq", allocationSize = 1)
 	@ApiModelProperty(value = "クラウドエッジアカウント情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
