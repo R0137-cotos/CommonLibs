@@ -21,14 +21,22 @@ import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
 @Component
 public class VKjbMasterUtil {
 
-	@Autowired
-	VKjbMasterRepository vKjbMasterRepository;
+	private static VKjbMasterRepository vKjbMasterRepository;
+
+	private static CheckUtil checkUtil;
 
 	@Autowired
-	CheckUtil checkUtil;
+	public void setVkjbMasterRepository(VKjbMasterRepository vKjbMasterRepository) {
+		VKjbMasterUtil.vKjbMasterRepository = vKjbMasterRepository;
+	}
+
+	@Autowired
+	public void setCheckUtil(CheckUtil checkUtil) {
+		VKjbMasterUtil.checkUtil = checkUtil;
+	}
 
 	/**
-	 * 
+	 *
 	 * @param customerEntity - 顧客エンティティ
 	 * @param entityLogicalName - エンティティ論理名
 	 * @return
@@ -38,7 +46,7 @@ public class VKjbMasterUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param dealerEntity - 販売店エンティティ
 	 * @param entityLogicalName - エンティティ論理名
 	 * @return
