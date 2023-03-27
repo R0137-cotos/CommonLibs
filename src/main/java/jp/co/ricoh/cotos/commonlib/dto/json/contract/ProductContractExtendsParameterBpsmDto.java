@@ -31,6 +31,11 @@ public class ProductContractExtendsParameterBpsmDto {
 	private RtorFlg rtorFlg;
 
 	/**
+	 * サービスコードKD
+	 */
+	private String serviceCdKd;
+
+	/**
 	 * 移行用項目
 	 */
 	@JsonProperty("migrationParameter")
