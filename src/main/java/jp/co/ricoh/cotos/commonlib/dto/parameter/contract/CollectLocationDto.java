@@ -76,6 +76,7 @@ public class CollectLocationDto extends DtoBase {
 
 	/**
 	 * 回収不要フラグ
+	 * 【商品種類区分がBPSMの場合】保存時に契約情報更新APIで値が自動設定される
 	 */
 	@Max(9)
 	@Min(0)
