@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.10.0 (06/04/2023)
+- [**closed**] #17355 オンライン資格確認システム　商材固有項目の承認依頼事入力チェック 要件追加実装含 [#2331](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2331)
+
+---
+
 ## v6.9.0 (23/03/2023)
 - [**closed**] #18008 [O365]価格改定対応 メッセージ修正 [#2314](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2314)
 - [**closed**] #18008 更新時価格改定対応_契約承認依頼API [#2300](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2300)
