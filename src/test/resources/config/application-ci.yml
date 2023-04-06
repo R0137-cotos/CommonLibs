@@ -1,8 +1,13 @@
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
+<<<<<<< HEAD
     username: cotos_ci_commonlibs
     password: cotos_ci_commonlibs
+=======
+    username: cotos_ci_batch_backlog77
+    password: cotos_ci_batch_backlog77
+>>>>>>> 9c045376a (18171 商品マスタにカラム：サービスコード追加)
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
