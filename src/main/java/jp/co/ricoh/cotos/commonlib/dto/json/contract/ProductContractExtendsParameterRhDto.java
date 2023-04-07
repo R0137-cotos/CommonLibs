@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,11 +26,6 @@ public class ProductContractExtendsParameterRhDto {
 	 * 回線種別名
 	 */
 	private String lineTypeName;
-
-	/**
-	 * ISP設定情報確認書リスト
-	 */
-	private List<String> ispSettingBookList;
 
 	/**
 	 * 移行用項目
