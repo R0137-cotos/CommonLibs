@@ -136,7 +136,6 @@ public class IntraMartUtil {
 		if(StringUtils.isNotEmpty(basicUser) || StringUtils.isNotEmpty(basicPassword)) {
 			String strAuth = basicUser + ":" + basicPassword;
 			String base64Auth = new String(Base64.getEncoder().encode(strAuth.getBytes()));
-			System.out.println("base64Auth：" + base64Auth);
 			headers.add("Authorization", base64Auth);
 		}
 
