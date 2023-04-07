@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.AbstractTmRequestDto;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
+import jp.co.ricoh.cotos.commonlib.util.AppProperties;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -33,10 +34,6 @@ import lombok.extern.log4j.Log4j;
 public class IntraMartUtil {
 
 	private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
-	/** Basic認証ユーザ（脱RITOSカテゴリBで使用した「ISP設定情報取得」「設定情報PDF参照」APIで使用） */
-	private static final String BASIC_USER = "API_SS_0172_USER";
-	/** Basic認証パスワード（脱RITOSカテゴリBで使用した「ISP設定情報取得」「設定情報PDF参照」APIで使用） */
-	private static final String BASIC_PASSWORD = "M4FhkTRg";
 
 	/** S&S作業依頼（Web受注分）IM連携バッチ時の返却値に関する文字コード */
 	public static final Charset CHARSET_S_AND_S_RESULT = Charset.forName("ISO-8859-1");
@@ -49,19 +46,21 @@ public class IntraMartUtil {
 	@Autowired
 	JsonUtil jsonUtil;
 
+	@Autowired
+	AppProperties appProperties;
+
 	/**
-	 * Intra-mart用外部APIを実行します
+	 * Intra-mart用外部APIを実行します<br>
+	 * <b>呼び出し元のymlに設定しているユーザとパスワードのどちらかがnullの場合は認証しない</b>
 	 * @param method 対象HTTPメソッド
 	 * @param requestDto リクエスト（GETパラメータ時はnull）
 	 * @param url REST実行先URL
 	 * @param responseCharset responseの文字コード（null、またはUTF-8指定時はログ出力用変換処理を実施しない）
-	 * @param basicUser BASIC認証用ユーザ（ユーザとパスワードのどちらかがnullの場合は認証しない）
-	 * @param basicPassword BASIC認証用パスワード（ユーザとパスワードのどちらかがnullの場合は認証しない）
 	 * @return
 	 * @see <a href=https://mygithub.ritscm.xyz/cotos/Batches/blob/master/Contract/CreateSAndSWorkRequestWebIntraMartLinkageData/src/main/java/jp/co/ricoh/cotos/component/base/BatchStepComponent.java#L318-L344>Batchesの参考</a>
 	 * @see jp.co.ricoh.cotos.commonlib.logic.trendmicro.LMPIConnectionHelper#callService(String, HttpMethod, AbstractTmRequestDto)
 	 */
-	public <T> ResponseEntity<String> callService(HttpMethod method, T requestDto, String url, Charset responseCharset, String basicUser, String basicPassword) {
+	public <T> ResponseEntity<String> callService(HttpMethod method, T requestDto, String url, Charset responseCharset) {
 		RestTemplate rest = externalRestTemplate.createRestTemplateForJson();
 		String body = null;
 
@@ -74,7 +73,7 @@ public class IntraMartUtil {
 			}
 
 			URI uri = new URI(url);
-			HttpHeaders headers = createHttpHeaders(basicUser, basicPassword);
+			HttpHeaders headers = createHttpHeaders(appProperties.getIntramartProperties().getUser(), appProperties.getIntramartProperties().getPassword());
 
 			RequestEntity<String> requestEntity = new RequestEntity<String>(body, headers, method, uri);
 			log.info("============================================================");
@@ -99,20 +98,6 @@ public class IntraMartUtil {
 		}
 
 		return responseEntity;
-	}
-
-	/**
-	 * 脱RITOSカテゴリBで連携されたユーザとパスワードを使用して、Intra-mart用外部APIを実行します
-	 * @param method 対象HTTPメソッド
-	 * @param requestDto リクエスト（GETパラメータ時はnull）
-	 * @param url REST実行先URL
-	 * @param responseCharset responseの文字コード（null、またはUTF-8指定時はログ出力用変換処理を実施しない）。S&S作業依頼時は{@link IntraMartUtil#CHARSET_S_AND_S_RESULT}を設定した
-	 * @return
-	 * @see IntraMartUtil#BASIC_USER
-	 * @see IntraMartUtil#BASIC_PASSWORD
-	 */
-	public <T> ResponseEntity<String> callService(HttpMethod method, T requestDto, String url, Charset responseCharset) {
-		return callService(method, requestDto, url, responseCharset, BASIC_USER, BASIC_PASSWORD);
 	}
 
 	/**
