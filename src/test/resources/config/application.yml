@@ -71,6 +71,10 @@ cotos:
     userTenantId: dummy_rsi_user_tenantId
     appUserId: dummy_rsi_app_user_id
     appUserPassword: dummy_rsi_app_user_password
+  intramart:
+    url: https://sld.imp.ricoh.co.jp/imsl/logic/api
+    user: API_SS_0172_USER
+    password: M4FhkTRg
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
