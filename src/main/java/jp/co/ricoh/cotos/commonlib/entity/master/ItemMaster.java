@@ -231,6 +231,29 @@ public class ItemMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "課税区分")
+	public enum TaxCategory {
+
+		対象外("0"), 外税("1"), 内税("2"), 免税("3"), 非課税("4");
+
+		private final String text;
+
+		private TaxCategory(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static TaxCategory fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
@@ -691,4 +714,10 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 62, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
+
+	/**
+	 * 課税区分
+	 */
+	@ApiModelProperty(value = "課税区分", required = false, position = 58, allowableValues = "対象外(\"0\"), 外税(\"1\"), 内税(\"2\"), 免税(\"3\"), 非課税(\"4\")")
+	private TaxCategory taxCategory;
 }
