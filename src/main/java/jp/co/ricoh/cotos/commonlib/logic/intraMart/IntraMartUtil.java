@@ -33,8 +33,6 @@ import lombok.extern.log4j.Log4j;
 @Component
 public class IntraMartUtil {
 
-	private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
-
 	/** S&S作業依頼（Web受注分）IM連携バッチ時の返却値に関する文字コード */
 	public static final Charset CHARSET_S_AND_S_RESULT = Charset.forName("ISO-8859-1");
 
@@ -117,11 +115,15 @@ public class IntraMartUtil {
 	 */
 	private HttpHeaders createHttpHeaders(String basicUser, String basicPassword) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("content-type", CONTENT_TYPE);
 		if(StringUtils.isNotEmpty(basicUser) || StringUtils.isNotEmpty(basicPassword)) {
 			String strAuth = basicUser + ":" + basicPassword;
 			String base64Auth = new String(Base64.getEncoder().encode(strAuth.getBytes()));
-			headers.add("Authorization", base64Auth);
+			headers.add("Authorization", "Basic " + base64Auth);
+
+			// パスワードはログ出力しない。別途テスト時の確認用にコードのみ残す形とした。
+			//			log.info("============================================================");
+			//			log.info("Authorization: " + headers.get("Authorization"));
+			//			log.info("============================================================");
 		}
 
 		return headers;

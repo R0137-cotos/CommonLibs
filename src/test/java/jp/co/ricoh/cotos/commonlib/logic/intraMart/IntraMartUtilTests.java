@@ -39,7 +39,7 @@ public class IntraMartUtilTests {
 	@Test
 	public void intraMartAPI接続確認() {
 
-		String url = "https://sld.imp.ricoh.co.jp/imsl/logic/api/ss_000172_fd204?rjManageNumber=rjManageNumber&contractNumber=contractNumber&contractBranchNumber=contractBranchNumber&whole_status=1";
+		String url = "https://slst.imp.ricoh.co.jp/imsl/logic/api/ss_000172_fd204?rjManageNumber=rjManageNumber&contractNumber=contractNumber&contractBranchNumber=contractBranchNumber&whole_status=1";
 
 		// 通信ができることのみ確認する。ステータスコードは確認しない
 		try {
