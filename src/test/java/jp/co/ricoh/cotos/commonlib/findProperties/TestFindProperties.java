@@ -78,7 +78,7 @@ public class TestFindProperties {
 		Assert.assertEquals("外部参照:MoM承認権限用URLが正しく取得されること", "https://www.rizm.jw1.nihon-os.ricoh.co.jp/jmo/services/KengenService", appProperties.getRemoteMomProperties().getUrl());
 		Assert.assertEquals("外部参照:MoM承認権限用リテラルIDが正しく取得されること", "CSP", appProperties.getRemoteMomProperties().getRelatedid());
 		Assert.assertEquals("filenameが取得できること", "filename", appProperties.getAuthProperties().getHeadersProperties().getFilename());
-		Assert.assertEquals("Intra-mart接続設定：URLが正しく取得されること", "https://sld.imp.ricoh.co.jp/imsl/logic/api", appProperties.getIntramartProperties().getUrl());
+		Assert.assertEquals("Intra-mart接続設定：URLが正しく取得されること", "https://slst.imp.ricoh.co.jp/imsl/logic/api", appProperties.getIntramartProperties().getUrl());
 		Assert.assertEquals("Intra-mart接続設定：接続ユーザが正しく取得されること", "API_SS_0172_USER", appProperties.getIntramartProperties().getUser());
 		Assert.assertEquals("Intra-mart接続設定：接続ユーザパスワードが正しく取得されること", "M4FhkTRg", appProperties.getIntramartProperties().getPassword());
 
