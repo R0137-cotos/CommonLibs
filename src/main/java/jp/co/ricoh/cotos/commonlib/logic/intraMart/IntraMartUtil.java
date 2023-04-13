@@ -6,11 +6,14 @@ import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -18,6 +21,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.estimation.IspSettingRootDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.IspGetSettingInfoParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.AbstractTmRequestDto;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
@@ -96,6 +101,27 @@ public class IntraMartUtil {
 		}
 
 		return responseEntity;
+	}
+
+	/**
+	 * Intra-mart用ISP設定情報取得APIを実行します
+	 * @param ispGetSettingInfoParameter
+	 * @return
+	 */
+	public Map<HttpStatus, IspSettingRootDto> callIspGetSettingInfo(IspGetSettingInfoParameter ispGetSettingInfoParameter) {
+		String apiUrl = appProperties.getIntramartProperties().getUrl() + "/ss_000172_fd202?rjManageNumber=" + ispGetSettingInfoParameter.getRjManageNumber() //
+				+ "&contractNumber=" + ispGetSettingInfoParameter.getContractNumber() //
+				+ "&contractBranchNumber=" + ispGetSettingInfoParameter.getContractBranchNumber() //
+				+ "&whole_status=" + ispGetSettingInfoParameter.getWholeStatus();
+		log.info("apiUrl = " + apiUrl);
+		// Stringでデータを受け取った後、変換する
+		ResponseEntity<String> serviceResult = callService(HttpMethod.GET, null, apiUrl, null);
+		IspSettingRootDto ispSettingRootDto = jsonUtil.convertToDto(serviceResult.getBody(), IspSettingRootDto.class);
+
+		Map<HttpStatus, IspSettingRootDto> result = new HashMap<>();
+		result.put(serviceResult.getStatusCode(), ispSettingRootDto);
+
+		return result;
 	}
 
 	/**

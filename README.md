@@ -613,3 +613,4 @@
 |656|Intra-mart用外部API実行クラスの作成|
 |657|手配業務操作履歴.操作内容に設定追加|
 |658|Intra-mart用外部APIについてHeader情報の修正|
+|659|Intra-mart用ISP設定情報取得API実行の追加|
