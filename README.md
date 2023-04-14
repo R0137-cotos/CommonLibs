@@ -615,3 +615,4 @@
 |658|Intra-mart用外部APIについてHeader情報の修正|
 |659|Intra-mart用ISP設定情報取得API実行の追加|
 |660|Intra-mart用ISP設定情報取得DTOの修正|
+|661|商材固有項目情報DTOの修正|
