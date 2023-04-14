@@ -75,8 +75,8 @@ public class SpecificInfo extends EntityBase {
 	/**
 	 * 値
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "値", required = false, position = 7, allowableValues = "range[0,255]")
+	@Size(max = 4000)
+	@ApiModelProperty(value = "値", required = false, position = 7, allowableValues = "range[0,4000]")
 	private String itemValue;
 
 	/**
