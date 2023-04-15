@@ -13,7 +13,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -114,9 +113,8 @@ public class ROpticalBilling extends EntityBase {
 	/**
 	 * 内訳金額
 	 */
-	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "内訳金額", required = false, position = 8, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "内訳金額", required = false, position = 8)
 	private BigDecimal billingBreakdown;
 
 	/**
