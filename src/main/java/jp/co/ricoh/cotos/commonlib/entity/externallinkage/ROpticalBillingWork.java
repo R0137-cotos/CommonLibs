@@ -126,7 +126,7 @@ public class ROpticalBillingWork extends EntityBase {
 	 * 内訳金額
 	 */
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "内訳金額", required = false, position = 10, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "内訳金額", required = false, position = 10)
 	private BigDecimal billingBreakdown;
 
 	/**
