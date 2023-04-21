@@ -37,6 +37,12 @@ public class IspSettingDto {
 	private String connectPrefix;
 
 	/**
+	 * 回線種別
+	 */
+	@JsonProperty("CIRCUIT_TYPE")
+	private String circuitType;
+
+	/**
 	 * ドメインの場合のドメイン名
 	 */
 	@JsonProperty("DOMAIN_NAME")
