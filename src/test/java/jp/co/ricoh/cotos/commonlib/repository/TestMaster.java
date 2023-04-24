@@ -265,6 +265,8 @@ public class TestMaster {
 	private SpecificSectionMasterRepository specificSectionMasterRepository;
 	@Autowired
 	private ElementMasterRepository elementMasterRepository;
+	@Autowired
+	private PriceRevisionDateMasterRepository priceRevisionDateMasterRepository;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -3042,5 +3044,25 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void PriceRevisionDateMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/priceRevisionDateMaster.sql");
+
+		// エンティティの取得
+		PriceRevisionDateMaster found = priceRevisionDateMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		List<PriceRevisionDateMaster> foundList = priceRevisionDateMasterRepository.findByProductMasterId(1L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
 	}
 }

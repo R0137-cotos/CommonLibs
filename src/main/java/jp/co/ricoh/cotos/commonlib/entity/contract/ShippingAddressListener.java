@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
@@ -56,9 +57,14 @@ public class ShippingAddressListener {
 
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(shippingAddress.getMomEmployeeId());
 
-		if (employeeMaster == null) {
+		ContractType contractType = shippingAddress.getContract().getContractType();
+		if (employeeMaster == null && ContractType.新規 == contractType) {
 			String[] regexList = { "配送先" };
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExistEmployeeMaster", regexList));
+		}
+
+		if (employeeMaster == null) {
+			return;
 		}
 
 		BeanUtils.copyProperties(employeeMaster, shippingAddress, "orgName", "salesCompanyName", "orgPhoneNumber", "salesDepartmentName", "employeeName", "postNumber", "phoneNumber", "prefectures", "cityStreet", "buildingName");

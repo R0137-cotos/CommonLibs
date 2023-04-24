@@ -141,4 +141,18 @@ public class ItemContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 18, allowableValues = "range[0,255]")
 	private String makerItemCode;
+
+	/**
+	 * 標準価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "標準価格", required = false, position = 19, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal standardPrice;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 20, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }

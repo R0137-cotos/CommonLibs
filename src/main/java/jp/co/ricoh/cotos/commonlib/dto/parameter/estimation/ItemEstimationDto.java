@@ -122,4 +122,10 @@ public class ItemEstimationDto extends DtoBase {
 	@Column
 	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 17)
 	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 18, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }
