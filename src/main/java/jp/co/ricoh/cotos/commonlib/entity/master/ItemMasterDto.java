@@ -250,4 +250,16 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "契約期間区分", required = false, position = 34, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
 	private ContractSpanType contractSpanType;
+
+	/**
+	 * イニシャルランニング対応品種マスタID
+	 */
+	@ApiModelProperty(value = "イニシャルランニング対応品種マスタID", required = false, position = 35, allowableValues = "range[0,9999999999999999999]")
+	private Long initialRunningItemMasterId;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 36, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }

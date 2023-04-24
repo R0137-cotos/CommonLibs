@@ -680,4 +680,15 @@ public class ItemMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "破損水没金品種マスタ", required = false, position = 60)
 	private ItemMaster damageItemMaster;
 
+	/**
+	 * イニシャルランニング対応品種マスタID
+	 */
+	@ApiModelProperty(value = "イニシャルランニング対応品種マスタID", required = false, position = 61, allowableValues = "range[0,9999999999999999999]")
+	private Long initialRunningItemMasterId;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 62, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }
