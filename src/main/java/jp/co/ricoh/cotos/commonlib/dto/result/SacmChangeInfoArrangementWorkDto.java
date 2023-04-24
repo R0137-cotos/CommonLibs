@@ -22,7 +22,7 @@ public class SacmChangeInfoArrangementWorkDto {
 	 * 文書番号
 	 */
 	@ApiModelProperty(value = "文書番号", required = false, position = 2)
-	private String estimationNumber;
+	private String contractNumber;
 
 	/**
 	 * 契約ID
