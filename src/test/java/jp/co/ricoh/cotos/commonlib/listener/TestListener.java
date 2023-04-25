@@ -19,6 +19,7 @@ import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DealerFlowOrder;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DummyCodeValue;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractPicAccCeEmp;
@@ -516,6 +517,7 @@ public class TestListener {
 
 		// 新規登録時の対象項目を未設定にした場合のテスト
 		contract.setId(1L);
+		contract.setContractType(ContractType.新規);
 		ShippingAddress shippingAddress = new ShippingAddress();
 		shippingAddress.setMomEmployeeId("00445702");
 		shippingAddress.setContract(contract);
@@ -535,6 +537,7 @@ public class TestListener {
 
 		// 新規登録時の対象項目を設定した場合のテスト
 		contract.setId(2L);
+		contract.setContractType(ContractType.新規);
 		shippingAddress = new ShippingAddress();
 		shippingAddress.setMomEmployeeId("00445702");
 		shippingAddress.setOrgName("テスト 所属組織名");
@@ -559,7 +562,9 @@ public class TestListener {
 		context.getBean(DBConfig.class).initTargetTestData("listener/shippingAddressListener.sql");
 
 		//ダミー社員名を設定した場合のテスト
+		contract = new Contract();
 		contract.setId(3L);
+		contract.setContractType(ContractType.新規);
 		shippingAddress = new ShippingAddress();
 		shippingAddress.setMomEmployeeId("COTOS_BATCH_USER");
 		shippingAddress.setContract(contract);
@@ -568,9 +573,12 @@ public class TestListener {
 		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
 		Assert.assertEquals("ダミー社員名が取得されていること", dummyUserMaster.getEmpName(), shippingAddress.getEmployeeName());
 
-		//RJ社員情報マスタがNULLの場合エラーが発生すること
+		// 新規契約の場合、RJ社員情報マスタがNULLの場合エラーが発生すること
 		shippingAddress = new ShippingAddress();
+		contract.setId(4L);
+		contract.setContractType(ContractType.新規);
 		shippingAddress.setMomEmployeeId(null);
+		shippingAddress.setContract(contract);
 		try {
 			shippingAddressRepository.save(shippingAddress);
 		} catch (ErrorCheckException e) {
@@ -580,6 +588,42 @@ public class TestListener {
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
 			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "配送先に存在しないMoM社員が設定されています。");
 		}
+
+		// 契約変更の場合、社員がマスタに存在しなくてもエラーが発生しないこと
+		contract.setId(5L);
+		contract.setContractType(ContractType.契約変更);
+		shippingAddress.setMomEmployeeId(null);
+		shippingAddress.setOrgName("テスト 所属組織名");
+		shippingAddress.setSalesCompanyName("テスト 販売会社名");
+		shippingAddress.setOrgPhoneNumber("000-111-222");
+		shippingAddress.setSalesDepartmentName("テスト 部署名");
+		shippingAddress.setEmployeeName("テスト 社員名");
+		shippingAddress.setContract(contract);
+		try {
+			shippingAddressRepository.save(shippingAddress);
+		} catch (Exception e) {
+			Assert.fail("エラー発生");
+		}
+
+		// 契約変更の場合、社員がマスタに存在するときエラーが発生しないこと
+		contract.setId(6L);
+		contract.setContractType(ContractType.契約変更);
+		shippingAddress = new ShippingAddress();
+		shippingAddress.setMomEmployeeId("00445702");
+		shippingAddress.setContract(contract);
+		employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(shippingAddress.getMomEmployeeId());
+		shippingAddressRepository.save(shippingAddress);
+		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		Assert.assertEquals("所属組織名が正しく取得されること", employeeMaster.getOrgName(), shippingAddress.getOrgName());
+		Assert.assertEquals("販売会社名が正しく取得されること", employeeMaster.getHanshSeiskNm(), shippingAddress.getSalesCompanyName());
+		Assert.assertEquals("会社代表電話番号が正しく取得されること", employeeMaster.getOrgPhoneNumber(), shippingAddress.getOrgPhoneNumber());
+		Assert.assertEquals("部署名が正しく取得されること", employeeMaster.getSalesDepartmentName(), shippingAddress.getSalesDepartmentName());
+		Assert.assertEquals("社員名が正しく取得されること", employeeMaster.getJobname1() + employeeMaster.getJobname2(), shippingAddress.getEmployeeName());
+		Assert.assertNull("郵便番号がNullであること", shippingAddress.getPostNumber());
+		Assert.assertNull("電話番号がNullであること", shippingAddress.getPhoneNumber());
+		Assert.assertNull("都道府県がNullであること", shippingAddress.getPrefectures());
+		Assert.assertNull("市区町村番地がNullであること", shippingAddress.getCityStreet());
+		Assert.assertNull("建物名がNullであること", shippingAddress.getBuildingName());
 	}
 
 	@Test

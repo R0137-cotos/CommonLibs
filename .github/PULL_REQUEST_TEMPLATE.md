@@ -10,3 +10,4 @@
  - [ ] テーブルとマッピングするEntityまたはDTOのDate型項目に@Temporalを付与しています。
  - [ ] enum追加時にConverterと@Descriptionを追加しています。
  - [ ] 新規コードの場合、既存コードの部分的な修正以外の場合は、日付/日時の型としてLocalDate/LocalDateTimeを使用し、計算/比較/変換処理は[サンプルコード](https://mygithub.ritscm.xyz/cotos/SampleCode/blob/master/src/main/java/dateAndTimeSample/Main.java)を確認して実装しています。
+ - [ ] Messages.propertiesにエラーIDを追加する際、[エラーID重複チェックジョブ](http://ci.cotos.ricoh.co.jp/view/Tools/job/CheckCommonLibsErrorMsgId/)にて重複が無いことを確認しました。

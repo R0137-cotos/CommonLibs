@@ -93,9 +93,15 @@ public class O365LatestContractDto {
 	private String phoneNumber;
 
 	/**
+	 * 変更申込用ID
+	 */
+	@ApiModelProperty(value = "変更申込用ID", required = false, position = 14)
+	private String changeApplyId;
+
+	/**
 	 * 契約明細情報リスト
 	 */
-	@ApiModelProperty(value = "契約明細情報リスト", required = false, position = 14)
+	@ApiModelProperty(value = "契約明細情報リスト", required = false, position = 15)
 	private List<O365LatestContractDetailDto> contractDetailList;
 
 }

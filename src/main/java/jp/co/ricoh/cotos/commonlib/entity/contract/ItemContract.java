@@ -226,4 +226,18 @@ public class ItemContract extends EntityBase {
 	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 24, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
+
+	/**
+	 * 標準価格
+	 */
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
+	@ApiModelProperty(value = "標準価格", required = false, position = 25, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal standardPrice;
+
+	/**
+	 * 価格改定日マスタID
+	 */
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 26, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionDateMasterId;
 }

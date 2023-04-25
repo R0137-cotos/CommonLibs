@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import javax.persistence.Lob;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -101,7 +100,8 @@ public class EstimationDetailDto extends DtoBase {
 	/**
 	 * 変更前単価
 	 */
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMin("0.00")
+	@Digits(integer = 19, fraction = 2)
 	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal beforeUnitPrice;
 

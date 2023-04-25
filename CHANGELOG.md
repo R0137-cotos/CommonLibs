@@ -1,5 +1,65 @@
 # Changelog
 
+## v6.10.0 (06/04/2023)
+- [**closed**] #17355 オンライン資格確認システム　商材固有項目の承認依頼事入力チェック 要件追加実装含 [#2331](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2331)
+
+---
+
+## v6.9.0 (23/03/2023)
+- [**closed**] #18008 [O365]価格改定対応 メッセージ修正 [#2314](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2314)
+- [**closed**] #18008 更新時価格改定対応_契約承認依頼API [#2300](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2300)
+- [**closed**] #18017 [O365]更新時価格改定対応 品種（見積用）リスナーのコピー除外項目追加 [#2289](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2289)
+- [**closed**] #18017 [O365]更新時価格改定対応 品種（見積用）リスナーのコピー除外項目追加 [#2287](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2287)
+- [**closed**] #18008 更新時価格改定対応_契約承認依頼API [#2286](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2286)
+- [**closed**] #17910 契約操作履歴に「価格改定」を追加 [#2279](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2279)
+- [**closed**] #17910 MS_価格改定対象WORKをRJ管理番号で取得できるようrepositoryにメソッド追加 [#2277](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2277)
+- [**closed**] #17919 更新時価格対応_見積明細作成API [#2275](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2275)
+- [**closed**] #17900 [O365]更新時価格改定対応 [#2265](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2265)
+- [**closed**] #17879 配送先社員のマスタチェック修正 [#2319](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2319)
+- [**closed**] #17355 Message.propertiesにTwoParametersNotInputError追加 [#2295](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2295)
+- [**closed**] #17355 過去チケット(#16383)分取込とオン資用の商品（契約用）拡張項目DTOにSS調整の変数を追加 [#2283](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2283)
+
+---
+
+## v6.8.0 (09/03/2023)
+- [**closed**] #17973 見積エンティティアノテーション修正 [#2298](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2298)
+
+---
+
+## v6.7.0 (21/02/2023)
+- [**closed**] #17664　NetRicohへ注文履歴APIで差分情報を連携する（#6、#9） [#2257](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2257)
+- [**closed**] #17788 ArrangementSearchParameterに複数商材検索用の商品マスタID追加 [#2256](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2256)
+- [**closed**] #17685 DateUtilクラスを新規作成 [#2254](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2254)
+- [**closed**] #17749 O365契約最新情報返却に変更申込用IDを追加 [#2247](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2247)
+
+---
+
+## v6.6.0 (07/02/2023)
+- [**closed**] #17719 見積明細DTOに変更前単価を追加 [#2232](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2232)
+- [**closed**] #17719 見積明細管理DTOに変更前単価を追加 [#2230](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2230)
+- [**closed**] #17579 FFM受注時にファイル内に同一変更元契約番号を持っている見積が存在する場合のエラーメッセージ作成 [#2227](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2227)
+
+---
+
+## v6.5.1 (31/01/2023)
+- [**closed**] #17735 承認依頼時のテナント検索チェックエラーメッセージを修正 [#2237](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2237)
+
+---
+
+## v6.5.0 (24/01/2023)
+- [**closed**] #16766 契約にRPA連携用CPQ更新CSV作成状態と作成日時を追加 [#2221](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2221)
+- [**closed**] #16687 メール送信履歴テーブル取得処理をリストで取得するよう修正 [#2218](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2218)
+- [**closed**] #11644 RSI基本ユーザー情報APIのURLをプロパティに追加 [#2216](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2216)
+- [**closed**] #11644 テナント未検索時のエラーメッセージ追加 [#2215](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2215)
+
+---
+
+## v6.4.0 (10/01/2023)
+- [**closed**] #13612 ライセンス月次報告書出力DTOに出力日の開始日と終了日をDate型に修正 [#2199](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2199)
+- [**closed**] #13612 ライセンス月次報告書出力DTOに出力日の開始日と終了日を追加 [#2187](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2187)
+
+---
+
 ## v6.3.0 (20/12/2022)
 - [**closed**] #17172 (EDW年額対応)契約変更タイミングをEmunTypeに追加 [#2163](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2163)
 - [**closed**] #17172 (EDW年額対応)契約変更タイミングentity修正、converter追加 [#2164](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2164)

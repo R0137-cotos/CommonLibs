@@ -64,4 +64,19 @@ public class ProductContractExtendsParameterO365Dto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date cancellationDate;
+
+	/**
+	 * 担当者氏名
+	 */
+	private String picName;
+
+	/**
+	 * 電話番号
+	 */
+	private String picPhoneNumber;
+
+	/**
+	 * メールアドレス
+	 */
+	private String picMailAddress;
 }

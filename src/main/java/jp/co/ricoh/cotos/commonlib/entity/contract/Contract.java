@@ -35,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.RpaLinkageCpqUpdateCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -1087,4 +1088,17 @@ public class Contract extends EntityBase {
 	@OneToOne(mappedBy = "contract")
 	@ApiModelProperty(value = "回収先", required = true, position = 112)
 	private CollectLocation collectLocation;
+
+	/**
+	 * RPA連携用CPQ更新CSV作成状態
+	 */
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 113, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
+	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
+
+	/**
+	 * RPA連携用CPQ更新CSV作成日
+	 */
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 114)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date rpaLinkageCpqUpdateCsvCreateAt;
 }
