@@ -11,4 +11,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.SpecificControlMaster;
 public interface SpecificControlMasterRepository extends CrudRepository<SpecificControlMaster, Long> {
 
 	public List<SpecificControlMaster> findByIdIn(List<Long> specificControlMasterIdList);
+
+	public List<SpecificControlMaster> findBySpecificItemGroupMasterIdAndSpecificControlDivIn(Long specificItemGroupMasterId, List<String> specificControlDivList);
 }
