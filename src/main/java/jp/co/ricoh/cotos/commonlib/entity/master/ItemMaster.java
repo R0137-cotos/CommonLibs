@@ -639,14 +639,56 @@ public class ItemMaster extends EntityBaseMaster {
 	private ContractSpanType contractSpanType;
 
 	/**
+	 * 品種グループマスタID
+	 */
+	@ManyToOne
+	@JoinColumn(name = "item_group_master_id", referencedColumnName = "id")
+	@ApiModelProperty(value = "品種グループマスタID", required = false, position = 56)
+	private ItemGroupMaster itemGroupMaster;
+
+	/**
+	 * 商材固有品種グループマスタID
+	 * 用途が限定的かつ処理不可削減の為、エンティティとして保持しない
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 57, allowableValues = "range[0,9223372036854775807]")
+	private Long specificItemGroupMasterId;
+
+	/**
+	 * 特殊加算月数
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "特殊加算月数", required = false, position = 58, allowableValues = "range[0,99999]")
+	private Integer specialAddMonths;
+
+	/**
+	 * 紛失金品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "lost_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "紛失金品種マスタ", required = false, position = 59)
+	private ItemMaster lostItemMaster;
+
+	/**
+	 * 破損水没金品種マスタ
+	 */
+	@ManyToOne
+	@JoinColumn(name = "damage_item_master_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "破損水没金品種マスタ", required = false, position = 60)
+	private ItemMaster damageItemMaster;
+
+	/**
 	 * イニシャルランニング対応品種マスタID
 	 */
-	@ApiModelProperty(value = "イニシャルランニング対応品種マスタID", required = false, position = 56, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "イニシャルランニング対応品種マスタID", required = false, position = 61, allowableValues = "range[0,9999999999999999999]")
 	private Long initialRunningItemMasterId;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 57, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 62, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 }

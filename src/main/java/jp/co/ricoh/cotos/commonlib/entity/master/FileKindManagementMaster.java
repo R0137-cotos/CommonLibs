@@ -141,4 +141,11 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	@JoinColumn(name = "csv_file_setting_master_id", referencedColumnName = "id")
 	@ApiModelProperty(value = "CSVファイル設定マスタ", required = false, position = 10)
 	private CsvFileSettingMaster csvFileSettingMaster;
+
+	/**
+	 * 取込ファイルタイプ
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "取込ファイルタイプ", required = false, position = 11, allowableValues = "range[0,255]")
+	private String inputFileType;
 }

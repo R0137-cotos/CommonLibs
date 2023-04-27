@@ -23,7 +23,10 @@ public class AppProperties {
 
 	@Autowired
 	RemoteMomProperties remoteMomProperties;
-	
+
 	@Autowired
 	MailProperties mailProperties;
+
+	@Autowired
+	IntramartProperties intramartProperties;
 }

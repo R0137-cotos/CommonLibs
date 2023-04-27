@@ -303,4 +303,17 @@ public class LicenseSearchParameter {
 	@ApiModelProperty(value = "サブドメイン", required = false, position = 32)
 	private String subDomainName;
 
+	/**
+	 * ベンダー区分
+	 */
+	@ApiParam(value = "ベンダー区分", required = false)
+	@ApiModelProperty(value = "ベンダー区分", required = false, position = 33)
+	private String vendorDiv;
+
+	/**
+	 * 端末電話番号
+	 */
+	@ApiParam(value = "端末電話番号", required = false)
+	@ApiModelProperty(value = "端末電話番号", required = false, position = 34)
+	private String phoneNumber;
 }

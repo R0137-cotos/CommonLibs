@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
+import jp.co.ricoh.cotos.commonlib.repository.contract.CollectLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractApprovalRouteNodeRepository;
@@ -197,6 +198,9 @@ public class TestContract {
 
 	@Autowired
 	TestTools testTools;
+
+	@Autowired
+	CollectLocationRepository collectLocationRepository;
 
 	static ConfigurableApplicationContext context;
 
@@ -402,6 +406,11 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_販売店_契約用_洗い替え履歴() {
 		全てのカラムがNullではないことを確認_共通(dealerContractRefreshHisRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_回収先() {
+		全てのカラムがNullではないことを確認_共通(collectLocationRepository, 502L);
 	}
 
 	@Test
