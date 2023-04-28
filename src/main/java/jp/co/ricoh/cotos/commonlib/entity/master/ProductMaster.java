@@ -284,10 +284,4 @@ public class ProductMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@ApiModelProperty(value = "正式商品名", required = true, position = 30, allowableValues = "range[0,255]")
 	private String officialProductName;
-
-	/**
-	 * サービスコード
-	 */
-	@ApiModelProperty(value = "サービスコード", required = false, position = 31, allowableValues = "range[0,255]")
-	private String serviceCode;
 }
