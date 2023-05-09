@@ -84,6 +84,14 @@ public class CpqProperties {
 	 */
 	String documentId;
 	/**
+	 * CPQのアクション情報
+	 */
+	String actionId;
+	/**
+	 * CPQのプロセス情報
+	 */
+	String processId;
+	/**
 	 * PCP移行データ作成時のダミートランザクションID情報
 	 */
 	String pcpDummyTransactionId;
