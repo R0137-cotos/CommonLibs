@@ -28,6 +28,11 @@ public class ProductContractExtendsParameterRhDto {
 	private String lineTypeName;
 
 	/**
+	 * NTTお客様ID
+	 */
+	private String nttCustomerId;
+
+	/**
 	 * 移行用項目
 	 */
 	@JsonProperty("migrationParameter")
