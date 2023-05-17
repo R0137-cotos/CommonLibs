@@ -16,4 +16,9 @@ public class ProductEstimationMigrationParameterDto {
 	 * 移行区分
 	 */
 	private MigrationDiv migrationDiv;
+
+	/**
+	 * PC台数
+	 */
+	private Integer pcAmount ;
 }
