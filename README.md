@@ -526,3 +526,4 @@
 |569|配送先の社員存在チェックを修正|
 |570|Messages.propertiesの追加、商品（契約用）拡張項目DTO（OQCS）にコメント追加、SS調整の変数を追加|
 |571|脱RITOSカテゴリBマージ|
+|572|topic/ritos_exit_bの取込み|
