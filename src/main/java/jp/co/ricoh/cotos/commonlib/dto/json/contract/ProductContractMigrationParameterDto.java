@@ -41,4 +41,9 @@ public class ProductContractMigrationParameterDto {
 	 * RITOS文書番号(最新の文書番号)
 	 */
 	private String ritosDocumentNumber;
+
+	/**
+	 * PC台数
+	 */
+	private Integer pcAmount;
 }
