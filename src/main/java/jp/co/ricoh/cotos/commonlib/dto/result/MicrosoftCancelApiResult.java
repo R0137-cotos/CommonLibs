@@ -19,6 +19,6 @@ public class MicrosoftCancelApiResult {
 	/**
 	 * メッセージ
 	 */
-	@ApiModelProperty(value = "メッセージ", required = false, position = 2, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "メッセージ", required = false, position = 2, allowableValues = "range[0,1024]")
 	private String apiMessage;
 }
