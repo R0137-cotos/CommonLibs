@@ -527,3 +527,4 @@
 |570|Messages.propertiesの追加、商品（契約用）拡張項目DTO（OQCS）にコメント追加、SS調整の変数を追加|
 |571|脱RITOSカテゴリBマージ|
 |572|topic/ritos_exit_bの取込み|
+|573|見積（商品）移行項目DTOにPC台数追加、商品（契約）移行項目DTOにPC台数追加|
