@@ -78,4 +78,10 @@ public class LicenseAccountListInfo {
 	 */
 	@ApiModelProperty(value = "MoM企業ID", required = false, position = 11, allowableValues = "range[0,255]")
 	private String momCompanyId;
+
+	/**
+	 * 商品種類区分
+	 */
+	@ApiModelProperty(value = "商品種類区分", required = false, position = 12, allowableValues = "range[0,255]")
+	private String productClassDiv;
 }
