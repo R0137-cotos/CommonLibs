@@ -528,3 +528,4 @@
 |571|脱RITOSカテゴリBマージ|
 |572|topic/ritos_exit_bの取込み|
 |573|見積（商品）移行項目DTOにPC台数追加、商品（契約）移行項目DTOにPC台数追加|
+|574|topic/ritos_exit_bの取込み|
