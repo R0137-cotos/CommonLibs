@@ -101,7 +101,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -154,7 +154,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -198,7 +198,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertTrue("承認者の社員情報が作成されていないこと", authParam.getApproverMvEmployeeMasterList().isEmpty());
@@ -251,7 +251,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertTrue("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList().size() == 3);
@@ -295,7 +295,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -341,7 +341,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -396,7 +396,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromEstimation(estimation, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -448,7 +448,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -588,7 +588,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.編集);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -645,7 +645,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -695,7 +695,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNull("正常に承認者の社員情報が作成されていないこと", authParam.getApproverMvEmployeeMasterList());
@@ -744,7 +744,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertTrue("承認者の社員情報が作成されていないこと", authParam.getApproverMvEmployeeMasterList().isEmpty());
@@ -801,7 +801,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertTrue("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList().size() == 3);
@@ -851,7 +851,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -900,7 +900,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -951,7 +951,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1002,7 +1002,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1062,7 +1062,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromContract(contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1115,7 +1115,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1173,7 +1173,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1222,7 +1222,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertTrue("承認者の社員情報が作成されていないこと", authParam.getApproverMvEmployeeMasterList().isEmpty());
@@ -1280,7 +1280,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.参照);
 
-		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getMvEmployeeMasterList().size());
+		Assert.assertEquals("正常に社員情報が作成されていること", 2, authParam.getEmployeeTransactionForAuthDtoList().size());
 		Assert.assertNotNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertTrue("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList().size() == 3);
@@ -1329,7 +1329,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に会社情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1379,7 +1379,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1438,7 +1438,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(arrangementWork, contract, actor, AccessType.承認);
 
-		Assert.assertNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNotNull("正常に承認者の社員情報が作成されていること", authParam.getApproverMvEmployeeMasterList());
@@ -1475,7 +1475,7 @@ public class TestAuthorityJudgeParamCreator {
 
 		AuthorityJudgeParameter authParam = authorityJudgeParamCreator.createFromArrangementWork(null, contract, actor, AccessType.参照);
 
-		Assert.assertNotNull("正常に社員情報が作成されていること", authParam.getMvEmployeeMasterList());
+		Assert.assertNotNull("正常に社員情報が作成されていること", authParam.getEmployeeTransactionForAuthDtoList());
 		Assert.assertNotNull("正常に顧客情報が作成されていること", authParam.getVKjbMaster());
 		Assert.assertNotNull("正常にログインユーザー情報が作成されていること", authParam.getActorMvEmployeeMaster());
 		Assert.assertNull("正常に承認者の社員情報が作成されていないこと", authParam.getApproverMvEmployeeMasterList());

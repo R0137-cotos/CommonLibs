@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EmployeeTransactionForAuthDto;
 import jp.co.ricoh.cotos.commonlib.dto.result.StringResult;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AccessType;
@@ -33,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.ActionDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AuthDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.repository.master.MvWjmoc020OrgAllInfoComRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.SuperUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.util.DatasourceProperties;
@@ -65,6 +67,9 @@ public class MomAuthorityService {
 
 	@Autowired
 	SuperUserMasterRepository superUserMasterRepository;
+
+	@Autowired
+	MvWjmoc020OrgAllInfoComRepository mvWjmoc020OrgAllInfoComRepository;
 
 	public enum AuthLevel {
 		不可("00"), 自顧客("10"), 配下("30"), 自社("50"), 地域("70"), 東西("80"), すべて("90");
@@ -196,7 +201,7 @@ public class MomAuthorityService {
 			}
 
 			// 参照・編集処理用の認可処理を実施
-			return this.hasEditAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getVKjbMaster(), authParam.getMvEmployeeMasterList());
+			return this.hasEditAuthority(authLevel, authParam.getActorMvEmployeeMaster(), authParam.getVKjbMaster(), authParam.getEmployeeTransactionForAuthDtoList());
 		} else if (AccessType.承認.equals(accessType)) {
 			// 承認処理用の認可処理を実施
 			return this.approveAuthority(authLevel, authParam);
@@ -221,9 +226,25 @@ public class MomAuthorityService {
 	}
 
 	/**
+	 * トランザクションの社員IDと組織IDから権限判定に用いる社員情報のDTOを生成する
+	 * @param momEmployeeId mom社員ID
+	 * @param momOrgId mom組織ID
+	 * @return EmployeeTransactionForAuthDto
+	 */
+	public EmployeeTransactionForAuthDto createEmployeeTransactionForAuthDto(String momEmployeeId, String momOrgId) {
+
+		EmployeeTransactionForAuthDto employeeTransactionForAuthDto = new EmployeeTransactionForAuthDto();
+		employeeTransactionForAuthDto.setMomEmployeeId(momEmployeeId);
+		employeeTransactionForAuthDto.setMomOrgId(momOrgId);
+		employeeTransactionForAuthDto.setHanshCd(mvWjmoc020OrgAllInfoComRepository.findOne(momOrgId).getRingsHanshCd());
+
+		return employeeTransactionForAuthDto;
+	}
+
+	/**
 	 * 参照・編集権限が存在するか判定する
 	 */
-	protected boolean hasEditAuthority(AuthLevel authLevel, MvEmployeeMaster editor, VKjbMaster customer, List<MvEmployeeMaster> targetEmployeeMasterList) {
+	protected boolean hasEditAuthority(AuthLevel authLevel, MvEmployeeMaster editor, VKjbMaster customer, List<EmployeeTransactionForAuthDto> targetEmployeeTransactionList) {
 
 		// 権限レベルによる認可処理を実施
 		switch (authLevel) {
@@ -231,16 +252,16 @@ public class MomAuthorityService {
 			return false;
 		case 自顧客:
 			// 担当SA、追加編集者、担当CE、担当SEであるかを確認
-			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getMomEmployeeId().equals(targetEmployeeMaster.getMomEmployeeId()));
+			return targetEmployeeTransactionList.stream().anyMatch(targetEmployeeTransaction -> editor.getMomEmployeeId().equals(targetEmployeeTransaction.getMomEmployeeId()));
 		case 配下:
 			// 担当SA、追加編集者、担当CE、担当SEの所属組織が配下であるか確認
-			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isLowerOrg(targetEmployeeMaster.getMomOrgId(), editor.getMomOrgId()));
+			return targetEmployeeTransactionList.stream().anyMatch(targetEmployeeTransaction -> this.isLowerOrg(targetEmployeeTransaction.getMomOrgId(), editor.getMomOrgId()));
 		case 自社:
 			// 担当SA、追加編集者、担当CE、担当SEと販社が同一であるか確認
-			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getHanshCd().equals(targetEmployeeMaster.getHanshCd()));
+			return targetEmployeeTransactionList.stream().anyMatch(targetEmployeeTransaction -> editor.getHanshCd().equals(targetEmployeeTransaction.getHanshCd()));
 		case 地域:
 			// 担当SA、追加編集者、担当CE、担当SEの販社と関連販社であるか確認
-			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isRelatedOrg(targetEmployeeMaster.getSingleUserId(), editor.getSingleUserId()));
+			return targetEmployeeTransactionList.stream().anyMatch(targetEmployeeTransaction -> this.isRelatedOrg(targetEmployeeTransaction.getHanshCd(), editor.getSingleUserId()));
 		case 東西:
 		case すべて:
 			return true;
@@ -299,11 +320,11 @@ public class MomAuthorityService {
 	/**
 	 * 関連組織に所属するか判定する
 	 */
-	protected boolean isRelatedOrg(String targetSingleUserId, String editorSingleUserId) {
+	protected boolean isRelatedOrg(String hanshCd, String editorSingleUserId) {
 
 		Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put("editorSingleUserId", editorSingleUserId);
-		queryParams.put("targetSingleUserId", targetSingleUserId);
+		queryParams.put("hanshCd", hanshCd);
 
 		long result = dbUtil.loadCountFromSQLFile("sql/security/editorAuthority/isRelatedOrg.sql", queryParams);
 

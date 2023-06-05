@@ -12,8 +12,8 @@ public class AuthorityJudgeParameter {
 	/** アクター用社員マスター */
 	private MvEmployeeMaster actorMvEmployeeMaster;
 
-	/** 社員マスター */
-	private List<MvEmployeeMaster> mvEmployeeMasterList;
+	/** 社員トランザクションリスト */
+	private List<EmployeeTransactionForAuthDto> employeeTransactionForAuthDtoList;
 
 	/** 承認依頼者社員マスター */
 	private MvEmployeeMaster requesterMvEmployeeMaster;
