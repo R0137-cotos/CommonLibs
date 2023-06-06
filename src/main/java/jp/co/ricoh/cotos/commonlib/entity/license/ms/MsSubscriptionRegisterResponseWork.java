@@ -103,4 +103,11 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "自動更新日", required = false, position = 11)
 	private Date autoUpdateDate;
+
+	/**
+	 * 移行元サブスクリプションID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "移行元サブスクリプションID", required = false, position = 12, allowableValues = "range[0,255]")
+	private String fromSubscriptionId;
 }
