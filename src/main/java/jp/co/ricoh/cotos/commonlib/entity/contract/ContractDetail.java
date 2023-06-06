@@ -346,4 +346,11 @@ public class ContractDetail extends EntityBase {
 	@Min(-99999)
 	@ApiModelProperty(value = "契約数", required = false, position = 26, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
+
+	/**
+	 * FFM検収予定日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "FFM検収予定日", required = false, position = 27)
+	private Date acceptanceScheduledDate;
 }

@@ -267,6 +267,8 @@ public class TestMaster {
 	private ElementMasterRepository elementMasterRepository;
 	@Autowired
 	private PriceRevisionDateMasterRepository priceRevisionDateMasterRepository;
+	@Autowired
+	private LicenseUpgradeItemMasterRepository licenseUpgradeItemMasterRepository;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -3064,5 +3066,31 @@ public class TestMaster {
 
 		// データが取得出来ている事を確認
 		Assert.assertTrue(foundList.size() > 0);
+	}
+
+	@Test
+	public void LicenseUpgradeItemMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseUpgradeItemMaster.sql");
+
+		// エンティティの取得
+		LicenseUpgradeItemMaster found = licenseUpgradeItemMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+	}
+
+	@Test
+	public void LicenseUpgradeItemMaster_商品マスタIDで取得するテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/licenseUpgradeItemMaster.sql");
+
+		// エンティティの取得
+		List<LicenseUpgradeItemMaster> foundList = licenseUpgradeItemMasterRepository.findByProductMasterId(1L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
+
 	}
 }
