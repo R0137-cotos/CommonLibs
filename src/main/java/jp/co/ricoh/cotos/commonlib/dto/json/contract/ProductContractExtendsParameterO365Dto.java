@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.estimation.CpqUpgradeItemO365Dto;
 import lombok.Data;
 
 /**
@@ -79,4 +80,10 @@ public class ProductContractExtendsParameterO365Dto {
 	 * メールアドレス
 	 */
 	private String picMailAddress;
+
+	/**
+	 * アップグレード品種リスト
+	 */
+	@JsonProperty("upgradeItemList")
+	private List<CpqUpgradeItemO365Dto> upgradeItemList;
 }
