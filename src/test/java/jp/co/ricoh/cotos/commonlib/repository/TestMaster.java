@@ -270,6 +270,8 @@ public class TestMaster {
 	private PriceRevisionDateMasterRepository priceRevisionDateMasterRepository;
 	@Autowired
 	private LicenseUpgradeItemMasterRepository licenseUpgradeItemMasterRepository;
+	@Autowired
+	private MvVJmch001MasterRepository mvVJmch001MasterRepository;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -2928,6 +2930,19 @@ public class TestMaster {
 		Assert.assertEquals("新規", found.getEnumValueName());
 		Assert.assertEquals("1", found.getEnumValueCode());
 		Assert.assertEquals("ContractType", found.getEnumClassName());
+	}
+
+	@Test
+	public void mvVJmch001MasterRepositoryのテスト() throws Exception {
+
+		// MoMから作成したMViewのためテストデータはなし
+
+		// エンティティの取得
+		String momKgyId = "1";
+		MvVJmch001Master found = mvVJmch001MasterRepository.findOne(momKgyId);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
 	}
 
 	@Test
