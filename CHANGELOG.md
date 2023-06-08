@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.14.0 (08/06/2023)
+- [**closed**] 18695 商品マスタにカラム：サービスコード追加 リリースブランチマージ [#2382](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2382)
+
+---
+
 ## v6.12.0 (11/05/2023)
 - [**closed**] #18436 登録結果反映 [#2343](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2343)
 - [**closed**] #18336　CPQコマース画面遷移URL生成API [#2340](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2340)
