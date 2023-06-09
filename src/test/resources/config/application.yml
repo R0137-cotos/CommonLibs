@@ -79,8 +79,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_topic_20230907
-    password: cotos_ci_common_topic_20230907
+    username: cotos_local_commonrelease0821
+    password: cotos_local_commonrelease0821
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -91,7 +91,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_common_topic_20230907
+        default_schema: cotos_local_commonrelease0821
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
