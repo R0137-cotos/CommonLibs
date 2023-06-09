@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.common.EmployeeTransactionForAuthDto;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWorkApprovalResult;
@@ -35,7 +34,6 @@ import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.repository.master.EmpGrpManagementMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.VKjbMasterRepository;
-import jp.co.ricoh.cotos.commonlib.security.mom.MomAuthorityService;
 
 @Component
 public class AuthorityJudgeParamCreator {
@@ -55,9 +53,6 @@ public class AuthorityJudgeParamCreator {
 	@Autowired
 	EmpGrpManagementMasterRepository empGrpManagementMasterRepository;
 
-	@Autowired
-	MomAuthorityService momAuthorityService;
-
 	public AuthorityJudgeParameter createFromEstimation(Estimation estimation, MvEmployeeMaster actor, AccessType accessType) {
 
 		// 権限判定用パラメーター
@@ -75,20 +70,20 @@ public class AuthorityJudgeParamCreator {
 			authJudgeParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findByMomEmployeeId(estimation.getEstimationApprovalRoute().getApprovalRequesterEmpId()));
 		} else {
 			// 社員情報
-			List<EmployeeTransactionForAuthDto> employeeTransactionForAuthDtoList = new ArrayList<>();
+			List<MvEmployeeMaster> employeeMasterList = new ArrayList<>();
 
 			// 担当SA
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("担当SA", "MoM社員ID", estimation.getEstimationPicSaEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-			employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(estimation.getEstimationPicSaEmp().getMomEmployeeId(), estimation.getEstimationPicSaEmp().getMomOrgId()));
+			employeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(estimation.getEstimationPicSaEmp().getMomEmployeeId()));
 
 			// 追加編集者
 			if (estimation.getEstimationAddedEditorEmpList() != null) {
-				employeeTransactionForAuthDtoList.addAll(estimation.getEstimationAddedEditorEmpList().stream().map(employee -> {
+				employeeMasterList.addAll(estimation.getEstimationAddedEditorEmpList().stream().map(employee -> {
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("追加編集者", "MoM社員ID", employee.getMomEmployeeId()).toArray(new String[0])).getMsg());
-					return momAuthorityService.createEmployeeTransactionForAuthDto(employee.getMomEmployeeId(), employee.getMomOrgId());
+					return mvEmployeeMasterRepository.findByMomEmployeeId(employee.getMomEmployeeId());
 				}).collect(Collectors.toList()));
 			}
-			authJudgeParam.setEmployeeTransactionForAuthDtoList(employeeTransactionForAuthDtoList);
+			authJudgeParam.setMvEmployeeMasterList(employeeMasterList);
 
 			// 顧客情報
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("顧客情報", "MoM企事部システム連携ID", estimation.getCustomerEstimation().getMomKjbSystemId()).toArray(new String[0])).getMsg());
@@ -177,39 +172,39 @@ public class AuthorityJudgeParamCreator {
 			authJudgeParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findByMomEmployeeId(targetContractApprovalRoute.getApprovalRequesterEmpId()));
 		} else {
 			// 社員情報設定
-			List<EmployeeTransactionForAuthDto> employeeTransactionForAuthDtoList = new ArrayList<>();
+			List<MvEmployeeMaster> mvEmployeeMasterList = new ArrayList<>();
 
 			// 担当SA
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("担当SA", "MoM社員ID", contract.getContractPicSaEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-			employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicSaEmp().getMomEmployeeId(), contract.getContractPicSaEmp().getMomOrgId()));
+			mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicSaEmp().getMomEmployeeId()));
 
 			// 受付担当CE
 			if (contract.getContractPicAccCeEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("受付担当CE", "MoM社員ID", contract.getContractPicAccCeEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicAccCeEmp().getMomEmployeeId(), contract.getContractPicAccCeEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicAccCeEmp().getMomEmployeeId()));
 			}
 
 			// 導入担当CE
 			if (contract.getContractPicIntCeEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("導入担当CE", "MoM社員ID", contract.getContractPicIntCeEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicIntCeEmp().getMomEmployeeId(), contract.getContractPicIntCeEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicIntCeEmp().getMomEmployeeId()));
 			}
 
 			// 保守担当CE
 			if (contract.getContractPicMntCeEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("保守担当CE", "MoM社員ID", contract.getContractPicMntCeEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicMntCeEmp().getMomEmployeeId(), contract.getContractPicMntCeEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicMntCeEmp().getMomEmployeeId()));
 			}
 
 			// 追加編集者
 			if (contract.getContractAddedEditorEmpList() != null) {
 
-				employeeTransactionForAuthDtoList.addAll(contract.getContractAddedEditorEmpList().stream().map(employee -> {
+				mvEmployeeMasterList.addAll(contract.getContractAddedEditorEmpList().stream().map(employee -> {
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("追加編集者", "MoM社員ID", employee.getMomEmployeeId()).toArray(new String[0])).getMsg());
-					return momAuthorityService.createEmployeeTransactionForAuthDto(employee.getMomEmployeeId(), employee.getMomOrgId());
+					return mvEmployeeMasterRepository.findByMomEmployeeId(employee.getMomEmployeeId());
 				}).collect(Collectors.toList()));
 			}
-			authJudgeParam.setEmployeeTransactionForAuthDtoList(employeeTransactionForAuthDtoList);
+			authJudgeParam.setMvEmployeeMasterList(mvEmployeeMasterList);
 
 			// 顧客情報
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("顧客情報", "MoM企事部システム連携ID", contract.getCustomerContract().getMomKjbSystemId()).toArray(new String[0])).getMsg());
@@ -338,44 +333,44 @@ public class AuthorityJudgeParamCreator {
 		} else {
 
 			// 社員情報設定
-			List<EmployeeTransactionForAuthDto> employeeTransactionForAuthDtoList = new ArrayList<>();
+			List<MvEmployeeMaster> mvEmployeeMasterList = new ArrayList<>();
 
 			// 担当SA
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("担当SA", "MoM社員ID", contract.getContractPicSaEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-			employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicSaEmp().getMomEmployeeId(), contract.getContractPicSaEmp().getMomOrgId()));
+			mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicSaEmp().getMomEmployeeId()));
 
 			// 手配担当者
 			if (arrangementWork != null && arrangementWork.getArrangementPicWorkerEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("担当作業者", "MoM社員ID", arrangementWork.getArrangementPicWorkerEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(arrangementWork.getArrangementPicWorkerEmp().getMomEmployeeId(), arrangementWork.getArrangementPicWorkerEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(arrangementWork.getArrangementPicWorkerEmp().getMomEmployeeId()));
 			}
 
 			// 受付担当CE
 			if (contract.getContractPicAccCeEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("受付担当CE", "MoM社員ID", contract.getContractPicAccCeEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicAccCeEmp().getMomEmployeeId(), contract.getContractPicAccCeEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicAccCeEmp().getMomEmployeeId()));
 			}
 
 			// 導入担当CE
 			if (contract.getContractPicIntCeEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("導入担当CE", "MoM社員ID", contract.getContractPicIntCeEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicIntCeEmp().getMomEmployeeId(), contract.getContractPicIntCeEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicIntCeEmp().getMomEmployeeId()));
 			}
 
 			// 保守担当CE
 			if (contract.getContractPicMntCeEmp() != null) {
 				log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("保守担当CE", "MoM社員ID", contract.getContractPicMntCeEmp().getMomEmployeeId()).toArray(new String[0])).getMsg());
-				employeeTransactionForAuthDtoList.add(momAuthorityService.createEmployeeTransactionForAuthDto(contract.getContractPicMntCeEmp().getMomEmployeeId(), contract.getContractPicMntCeEmp().getMomOrgId()));
+				mvEmployeeMasterList.add(mvEmployeeMasterRepository.findByMomEmployeeId(contract.getContractPicMntCeEmp().getMomEmployeeId()));
 			}
 
 			// 追加編集者
 			if (contract.getContractAddedEditorEmpList() != null) {
-				employeeTransactionForAuthDtoList.addAll(contract.getContractAddedEditorEmpList().stream().map(contractAddedEditorEmp -> {
+				mvEmployeeMasterList.addAll(contract.getContractAddedEditorEmpList().stream().map(contractAddedEditorEmp -> {
 					log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("追加編集者", "MoM社員ID", contractAddedEditorEmp.getMomEmployeeId()).toArray(new String[0])).getMsg());
-					return momAuthorityService.createEmployeeTransactionForAuthDto(contractAddedEditorEmp.getMomEmployeeId(), contractAddedEditorEmp.getMomOrgId());
+					return mvEmployeeMasterRepository.findByMomEmployeeId(contractAddedEditorEmp.getMomEmployeeId());
 				}).collect(Collectors.toList()));
 			}
-			authJudgeParam.setEmployeeTransactionForAuthDtoList(employeeTransactionForAuthDtoList);
+			authJudgeParam.setMvEmployeeMasterList(mvEmployeeMasterList);
 
 			// 顧客情報
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("顧客情報", "MoM企事部システム連携ID", contract.getCustomerContract().getMomKjbSystemId()).toArray(new String[0])).getMsg());
