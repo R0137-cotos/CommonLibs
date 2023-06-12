@@ -20,6 +20,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -33,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.ActionDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AuthDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
+import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.SuperUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.util.DatasourceProperties;
@@ -65,6 +67,9 @@ public class MomAuthorityService {
 
 	@Autowired
 	SuperUserMasterRepository superUserMasterRepository;
+
+	@Autowired
+	MvEmployeeMasterRepository mvEmployeeMasterRepository;
 
 	public enum AuthLevel {
 		不可("00"), 自顧客("10"), 配下("30"), 自社("50"), 地域("70"), 東西("80"), すべて("90");
@@ -221,6 +226,27 @@ public class MomAuthorityService {
 	}
 
 	/**
+	 * momEmployeeIdを使いmvEmployeeMasterから社員情報を取得し返す
+	 * ※ 退職などにより社員情報が見つからない場合は引数から渡された値のみを設定した社員情報entityを返す
+	 * @param momEmployeeId
+	 * @param momOrgId
+	 * @return MvEmployeeMaster 社員情報
+	 */
+	public MvEmployeeMaster findEmployeeFromEmployeeMasterRepository(String momEmployeeId, String momOrgId) {
+
+		MvEmployeeMaster employee = mvEmployeeMasterRepository.findByMomEmployeeId(momEmployeeId);
+		if (!ObjectUtils.isEmpty(employee)) {
+			return employee;
+		}
+
+		MvEmployeeMaster notExistEmployee = new MvEmployeeMaster();
+		notExistEmployee.setMomEmployeeId(momEmployeeId);
+		notExistEmployee.setMomOrgId(momOrgId);
+
+		return notExistEmployee;
+	}
+
+	/**
 	 * 参照・編集権限が存在するか判定する
 	 */
 	protected boolean hasEditAuthority(AuthLevel authLevel, MvEmployeeMaster editor, VKjbMaster customer, List<MvEmployeeMaster> targetEmployeeMasterList) {
@@ -230,16 +256,16 @@ public class MomAuthorityService {
 		case 不可:
 			return false;
 		case 自顧客:
-			// 担当SA、追加編集者、担当CE、担当SEであるかを確認
+			// 担当SA、追加編集者、担当CEであるかを確認
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getMomEmployeeId().equals(targetEmployeeMaster.getMomEmployeeId()));
 		case 配下:
-			// 担当SA、追加編集者、担当CE、担当SEの所属組織が配下であるか確認
+			// 担当SA、追加編集者、担当CEの所属組織が配下であるか確認
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isLowerOrg(targetEmployeeMaster.getMomOrgId(), editor.getMomOrgId()));
 		case 自社:
-			// 担当SA、追加編集者、担当CE、担当SEと販社が同一であるか確認
+			// 担当SA、追加編集者、担当CEと販社が同一であるか確認
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> editor.getHanshCd().equals(targetEmployeeMaster.getHanshCd()));
 		case 地域:
-			// 担当SA、追加編集者、担当CE、担当SEの販社と関連販社であるか確認
+			// 担当SA、追加編集者、担当CEの販社と関連販社であるか確認
 			return targetEmployeeMasterList.stream().anyMatch(targetEmployeeMaster -> this.isRelatedOrg(targetEmployeeMaster.getSingleUserId(), editor.getSingleUserId()));
 		case 東西:
 		case すべて:
