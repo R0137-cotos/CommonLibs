@@ -14,7 +14,6 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 import jp.co.ricoh.cotos.commonlib.security.mom.MomAuthorityService;
-import jp.co.ricoh.cotos.commonlib.security.util.AuthorityJudgeParamCreator;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -22,9 +21,6 @@ public class TestFindEmployeeFromEmployeeMasterRepository {
 
 	@Autowired
 	MomAuthorityService momAuthorityService;
-
-	@Autowired
-	AuthorityJudgeParamCreator authorityJudgeParamCreator;
 
 	@Autowired
 	MvEmployeeMasterRepository mvEmployeeMasterRepository;
