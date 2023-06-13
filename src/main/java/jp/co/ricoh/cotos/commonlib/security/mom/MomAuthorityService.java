@@ -20,7 +20,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -235,7 +234,7 @@ public class MomAuthorityService {
 	public MvEmployeeMaster findEmployeeFromEmployeeMasterRepository(String momEmployeeId, String momOrgId) {
 
 		MvEmployeeMaster employee = mvEmployeeMasterRepository.findByMomEmployeeId(momEmployeeId);
-		if (!ObjectUtils.isEmpty(employee)) {
+		if (null != employee) {
 			return employee;
 		}
 
