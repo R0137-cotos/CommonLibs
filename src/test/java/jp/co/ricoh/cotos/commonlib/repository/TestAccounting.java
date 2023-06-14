@@ -18,6 +18,7 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.BatchCommonStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
+import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountedCancellationData;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Accounting;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.CommissionData;
@@ -36,6 +37,7 @@ import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj302SikyuMisiCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.Wjcmj303GnkHrkeCtsWk;
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDataAbstractEntity.DataDiv;
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoRequestDetailDataAbstractEntity.ProcessingDiv;
+import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountedCancellationDataRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingPeriodDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.AccountingRepository;
 import jp.co.ricoh.cotos.commonlib.repository.accounting.CommissionDataRepository;
@@ -105,6 +107,9 @@ public class TestAccounting {
 
 	@Autowired
 	AccountingPeriodDetailRepository accountingPeriodDetailRepository;
+
+	@Autowired
+	AccountedCancellationDataRepository accountedCancellationDataRepository;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -375,6 +380,16 @@ public class TestAccounting {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accountingPeriodDetail.sql");
 
 		AccountingPeriodDetail found = accountingPeriodDetailRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void AccountedCancellationDataRepositoryのテスト() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accountedCancellationData.sql");
+
+		AccountedCancellationData found = accountedCancellationDataRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
