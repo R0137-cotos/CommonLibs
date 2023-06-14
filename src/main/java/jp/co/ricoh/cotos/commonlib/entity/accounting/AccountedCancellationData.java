@@ -11,7 +11,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -77,6 +76,7 @@ public class AccountedCancellationData extends EntityBase {
 	/**
 	 * 契約番号
 	 */
+	@Size(max = 255)
 	@ApiModelProperty(value = "契約番号", required = false, position = 3, allowableValues = "range[0,255]")
 	private String contractNumber;
 
@@ -96,7 +96,6 @@ public class AccountedCancellationData extends EntityBase {
 	/**
 	 * 費用種別
 	 */
-	@NotNull
 	@ApiModelProperty(value = "費用種別", required = false, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", position = 6)
 	private CostType costType;
 
