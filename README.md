@@ -531,3 +531,4 @@
 |574|topic/ritos_exit_bの取込み|
 |575|2023/05/11リリース分の取込み|
 |576|2023/06/16時点のmaster取込み|
+|577|Messages.properties修正|
