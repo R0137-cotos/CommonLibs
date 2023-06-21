@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -28,10 +30,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "ms_subscription_register_request_work")
 public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
-	@Description(value = "契約期間区分")
+	@Description(value = "増減区分")
 	public enum IncreaseDecreaseDiv {
 
-		増数("1"), 減数("2");
+		増数("1"), 減数("2"), アップグレード("3");
 
 		private final String text;
 
@@ -127,5 +129,27 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@ApiModelProperty(value = "増減区分", required = false, position = 11, allowableValues = "増数(\"1\"), 減数(\"2\")")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
+
+	/**
+	 * 移行元サブスクリプションID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "移行元サブスクリプションID", required = false, position = 12, allowableValues = "range[0,255]")
+	private String fromSubscriptionId;
+
+	/**
+	 * 移行元製品ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "移行元製品ID", required = false, position = 13, allowableValues = "range[0,255]")
+	private String fromOfferId;
+
+	/**
+	 * 処理優先順
+	 */
+	@Max(999)
+	@Min(0)
+	@ApiModelProperty(value = "処理優先順", required = false, position = 14, allowableValues = "range[0,999]")
+	private Integer priorityOrder;
 
 }

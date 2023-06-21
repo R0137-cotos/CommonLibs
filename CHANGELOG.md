@@ -1,5 +1,21 @@
 # Changelog
 
+## v6.14.0 (08/06/2023)
+- [**closed**] 18695 商品マスタにカラム：サービスコード追加 リリースブランチマージ [#2382](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2382)
+
+---
+
+## v6.12.0 (11/05/2023)
+- [**closed**] #18436 登録結果反映 [#2343](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2343)
+- [**closed**] #18336　CPQコマース画面遷移URL生成API [#2340](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2340)
+- [**closed**] #18207 アップグレード対象ライセンス品種対応マスタを商品マスタIDごとに取得できるようにする [#2333](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2333)
+- [**closed**] #18207 特定のアクション時のエラーメッセージを追加 [#2324](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2324)
+- [**closed**] #18165 拡張項目修正 [#2322](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2322)
+- [**closed**] #18150 [O365]アップグレード対応 エンティティ作成 [#2315](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2315)
+- [**closed**] #18165 拡張項目追加 [#2313](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2313)
+
+---
+
 ## v6.10.0 (06/04/2023)
 - [**closed**] #17355 オンライン資格確認システム　商材固有項目の承認依頼事入力チェック 要件追加実装含 [#2331](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2331)
 

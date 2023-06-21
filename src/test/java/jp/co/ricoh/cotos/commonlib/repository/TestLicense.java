@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -178,6 +180,9 @@ public class TestLicense {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+		List<LicenseKeyInfo> list = licenseKeyInfoRepository.findByLicenseAccountId(1L);
+		Assert.assertTrue(list.size() != 0);
 	}
 
 	@Test

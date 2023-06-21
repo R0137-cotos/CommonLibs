@@ -309,8 +309,14 @@ public class ProductMaster extends EntityBaseMaster {
 	private String officialProductName;
 
 	/**
+	 * サービスコード
+	 */
+	@ApiModelProperty(value = "サービスコード", required = false, position = 31, allowableValues = "range[0,255]")
+	private String serviceCode;
+
+	/**
 	 * RtoR設定可能区分
 	 */
-	@ApiModelProperty(value = "RtoR設定可能区分", required = false, position = 31, allowableValues = "引継ぎ先と引継ぎ元(\"1\"), 引継ぎ元のみ(\"2\")")
+	@ApiModelProperty(value = "RtoR設定可能区分", required = false, position = 32, allowableValues = "引継ぎ先と引継ぎ元(\"1\"), 引継ぎ元のみ(\"2\")")
 	private RtorSettingPossibleDiv rtorSettingPossibleDiv;
 }
