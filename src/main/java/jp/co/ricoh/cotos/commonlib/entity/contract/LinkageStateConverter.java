@@ -1,9 +1,10 @@
-package jp.co.ricoh.cotos.commonlib.converter.externallinkage;
+package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocation.LinkageState;
+import jp.co.ricoh.cotos.commonlib.entity.contract.CollectLocation.LinkageState;
+
 
 @Converter(autoApply = true)
 public class LinkageStateConverter implements AttributeConverter<LinkageState, String> {
