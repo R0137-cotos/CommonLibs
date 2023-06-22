@@ -2899,8 +2899,8 @@ public class TestMaster {
 		// MoMから作成したMViewのためテストデータはなし
 
 		// エンティティの取得
-		String momKgyId = "1";
-		MvVJmch001Master found = mvVJmch001MasterRepository.findOne(momKgyId);
+		String supplyCustomerId = "3360737";
+		MvVJmch001Master found = mvVJmch001MasterRepository.findOne(supplyCustomerId);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
