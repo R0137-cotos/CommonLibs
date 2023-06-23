@@ -40,7 +40,7 @@ public class ROpticalTransfer extends EntityBase {
 	@Description(value = "異動情報種別")
 	public enum OpticalTransferDiv {
 
-		ひかり回線("1"), 電話回線("2");
+		ひかり回線("1"), 電話回線("2"), リモートサポート("3");
 
 		private final String text;
 
@@ -104,7 +104,7 @@ public class ROpticalTransfer extends EntityBase {
 	/**
 	 * 異動情報種別
 	 */
-	@ApiModelProperty(value = "異動情報種別", required = false, allowableValues = "ひかり回線(\"1\"), 電話回線(\"2\")", example = "1", position = 3)
+	@ApiModelProperty(value = "異動情報種別", required = false, allowableValues = "ひかり回線(\"1\"), 電話回線(\"2\"), リモートサポート(\"3\")", example = "1", position = 3)
 	private OpticalTransferDiv transferDiv;
 
 	/**
