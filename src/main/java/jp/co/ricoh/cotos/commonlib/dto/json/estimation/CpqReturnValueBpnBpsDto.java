@@ -52,4 +52,9 @@ public class CpqReturnValueBpnBpsDto {
 	 * スポーク拠点数
 	 */
 	private Integer spokeNumber;
+
+	/**
+	 * PC台数
+	 */
+	private Integer pcAmount;
 }
