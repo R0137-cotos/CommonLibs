@@ -104,6 +104,11 @@ public class ProductContractExtendsParameterNspDto {
 	private Integer addMailRemainingNumber;
 
 	/**
+	 * PC台数
+	 */
+	private Integer pcAmount;
+
+	/**
 	 * 追加メールリスト
 	 */
 	@JsonProperty("addMail")
