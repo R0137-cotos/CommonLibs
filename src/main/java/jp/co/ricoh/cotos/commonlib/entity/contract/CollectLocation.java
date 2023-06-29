@@ -40,7 +40,7 @@ public class CollectLocation extends EntityBase {
 	@Description(value = "連携状態")
 	public enum LinkageState {
 
-		未連携("0"), 連携済("1"), 対象外("2");
+		AP削除連携済("1"), 解約連携済("2");
 
 		private final String text;
 
@@ -143,7 +143,7 @@ public class CollectLocation extends EntityBase {
 	/**
 	 * 連携状態
 	 */
-	@ApiModelProperty(value = "連携状態", required = false, position = 12, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 対象外(\"2\")")
+	@ApiModelProperty(value = "連携状態", required = false, position = 12, allowableValues = "AP削除連携済(\"1\"), 解約連携済(\"2\")")
 	private LinkageState linkageState;
 
 	/**

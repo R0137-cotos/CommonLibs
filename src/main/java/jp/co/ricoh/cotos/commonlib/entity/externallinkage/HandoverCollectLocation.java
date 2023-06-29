@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.externallinkage;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,13 +14,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-import org.springframework.context.annotation.Description;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.CollectLocation.LinkageState;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -33,29 +28,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "handover_collect_location")
 public class HandoverCollectLocation extends EntityBase {
-
-	@Description(value = "連携状態")
-	public enum LinkageState {
-
-		未連携("0"), 連携済("1"), 対象外("2");
-
-		private final String text;
-
-		private LinkageState(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static LinkageState fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 
 	/**
 	 * 回収先ID
@@ -148,7 +120,7 @@ public class HandoverCollectLocation extends EntityBase {
 	/**
 	 * 連携状態
 	 */
-	@ApiModelProperty(value = "連携状態", required = false, position = 13, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 対象外(\"2\")")
+	@ApiModelProperty(value = "連携状態", required = false, position = 13, allowableValues = "AP削除連携済(\"1\"), 解約連携済(\"2\")")
 	private LinkageState linkageState;
 
 	/**

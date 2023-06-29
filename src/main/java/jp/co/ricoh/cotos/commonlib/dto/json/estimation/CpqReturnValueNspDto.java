@@ -28,4 +28,9 @@ public class CpqReturnValueNspDto {
 	 * 他社プロバイダーフラグ
 	 */
 	private OtherCorpProviderFlg otherCorpProviderFlg;
+
+	/**
+	 * PC台数
+	 */
+	private Integer pcAmount;
 }
