@@ -34,7 +34,7 @@ public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
 	@Description(value = "チェックタイミング区分")
 	public enum CheckTimingDiv {
 
-		常に("0"), 承認のみ("1");
+		常時("0"), 承認のみ("1");
 
 		private final String text;
 
@@ -124,7 +124,7 @@ public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
 	/**
 	 * チェックタイミング区分
 	 */
-	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常に(\"0\"), 承認のみ(\"1\")", position = 10)
+	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")", position = 10)
 	private CheckTimingDiv checkTimingDiv;
 
 }

@@ -2326,7 +2326,7 @@ public class TestMaster {
 			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
 			Assert.assertEquals("xlsx", found.getExtension());
-			Assert.assertThat(found.getCheckTimingDiv(), anyOf(nullValue(), is(CheckTimingDiv.常に), is(CheckTimingDiv.承認のみ)));
+			Assert.assertThat(found.getCheckTimingDiv(), anyOf(nullValue(), is(CheckTimingDiv.常時), is(CheckTimingDiv.承認のみ)));
 		}
 	}
 
