@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
+import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -101,4 +102,10 @@ public class ContractAttachedFileDto extends DtoBase {
 	@Min(0)
 	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
+
+	/**
+	 * チェックタイミング区分
+	 */
+	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")", position = 13)
+	private CheckTimingDiv checkTimingDiv;
 }
