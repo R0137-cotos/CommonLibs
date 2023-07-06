@@ -14,5 +14,5 @@ public class SearchProperties {
 
 	int limitSize;
 
-	int searchIijMachineLimitSize;
+	int iijMachineLimitSize;
 }
