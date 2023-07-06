@@ -316,5 +316,5 @@ public class LaitLinkageInfo extends EntityBase {
 	 */
 	@Min(0)
 	@ApiModelProperty(value = "IIJ機器情報ID", required = false, position = 21, allowableValues = "range[0,9223372036854775807]")
-	private long iijMachineInfoId;
+	private Long iijMachineInfoId;
 }
