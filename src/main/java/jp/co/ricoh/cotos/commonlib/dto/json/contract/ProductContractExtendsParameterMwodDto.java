@@ -35,4 +35,14 @@ public class ProductContractExtendsParameterMwodDto {
 	 */
 	@JsonProperty("migrationParameter")
 	private ProductContractMigrationParameterDto productContractMigrationParameterDto;
+
+	/**
+	 * サブドメインWebホスティング数量
+	 */
+	private int subdomainWebQuantity;
+
+	/**
+	 * サブドメインメールホスティング数量
+	 */
+	private int subdomainMailQuantity;
 }
