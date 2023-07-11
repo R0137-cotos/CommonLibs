@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.converter;
+package jp.co.ricoh.cotos.commonlib.converter.master;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
