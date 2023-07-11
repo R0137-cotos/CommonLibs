@@ -41,4 +41,14 @@ public class CpqReturnValueMwodDto {
 	 * サブドメイン追加フラグ
 	 */
 	private AddSubdomainFlg addSubdomainFlg;
+
+	/**
+	 * サブドメインWebホスティング数量
+	 */
+	private int subdomainWebQuantity;
+
+	/**
+	 * サブドメインメールホスティング数量
+	 */
+	private int subdomainMailQuantity;
 }
