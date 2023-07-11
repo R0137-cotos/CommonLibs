@@ -259,8 +259,7 @@ public class TestEstimation {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		found = estimationApprovalRouteNodeRepository
-				.findByEstimationApprovalRouteIdAndApprovalOrderAndApproverEmpId(401L, 1, "00808347");
+		found = estimationApprovalRouteNodeRepository.findByEstimationApprovalRouteIdAndApprovalOrderAndApproverEmpId(401L, 1, "00808347");
 		Assert.assertNotNull(found);
 
 	}
@@ -477,14 +476,17 @@ public class TestEstimation {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		found = seOperationHistoryRepository.findByEstimationId(1L);
+		List<SeOperationHistory> foundList = seOperationHistoryRepository.findByEstimationId(1L);
 		
 		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
+		Assert.assertNotNull(foundList);
 
 		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(found);
+		testTool.assertColumnsNotNull(foundList.get(1));
 
+		// findByEstimationで2件取得出来ていること
+		Assert.assertEquals(foundList.size(), 2);
+		
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +30,6 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@EntityListeners(ItemEstimationListener.class)
 @Data
 @Table(name = "se_operation_history")
 public class SeOperationHistory extends EntityBase{
