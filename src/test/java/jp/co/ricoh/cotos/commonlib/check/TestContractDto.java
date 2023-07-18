@@ -154,6 +154,7 @@ public class TestContractDto {
 	private static final int INT_100000 = 100000;
 	private static final BigDecimal DECIMAL_MINUS_001 = new BigDecimal("-0.01");
 	private static final BigDecimal DECIMAL_0001 = new BigDecimal("0.001");
+	private static final BigDecimal DECIMAL_MINUS_1000000000000000000001 = new BigDecimal("-10000000000000000000.01");
 	private static final String STR_19 = "01234567890123456789";
 
 	static ConfigurableApplicationContext context;
@@ -698,11 +699,13 @@ public class TestContractDto {
 
 		// 異常系（@DecimalMin ：）
 		BeanUtils.copyProperties(entity, testTarget);
-		testTarget.setPrice(DECIMAL_MINUS_001);
+		testTarget.setPrice(DECIMAL_MINUS_1000000000000000000001);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 1);
-		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は最小値（0.00）を下回っています。"));
+		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(testTool.errorIdMatchesOne(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は最小値（-9999999999999999999.99）を下回っています。"));
+		Assert.assertTrue(testTool.errorIdMatchesOne(result.getErrorInfoList(), ParameterErrorIds.ROT00028));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "原価は小数点以下2桁を超えています。"));
 
 		// 異常系（@Digits ：）
 		BeanUtils.copyProperties(entity, testTarget);
