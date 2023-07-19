@@ -98,36 +98,57 @@ public class HandoverIspLinkage extends EntityBase {
 	private Long domainHandoverContractId;
 
 	/**
+	 * ドメイン引継ぎ元RJ管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ドメイン引継ぎ元RJ管理番号", required = false, position = 7, allowableValues = "range[0,255]")
+	private String domainHandoverRjManageNumber;
+
+	/**
 	 * ホスティングサービス区分
 	 */
-	@ApiModelProperty(value = "ホスティングサービス区分", required = false, position = 7, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
+	@ApiModelProperty(value = "ホスティングサービス区分", required = false, position = 8, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
 	private HostingServiceDiv hostingServiceDiv;
 
 	/**
 	 * アカウント名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アカウント名", required = false, position = 8, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "アカウント名", required = false, position = 9, allowableValues = "range[0,255]")
 	private String accountName;
 
 	/**
 	 * アカウント引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "アカウント引継ぎ元契約ID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "アカウント引継ぎ元契約ID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
 	private Long accountHandoverContractId;
+
+	/**
+	 * アカウント引継ぎ元RJ管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "アカウント引継ぎ元RJ管理番号", required = false, position = 11, allowableValues = "range[0,255]")
+	private String accountHandoverRjManageNumber;
 
 	/**
 	 * 接続ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "接続ID", required = false, position = 10, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "接続ID", required = false, position = 12, allowableValues = "range[0,255]")
 	private String connectId;
 
 	/**
 	 * 接続ID引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "接続ID引継ぎ元契約ID", required = false, position = 11, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "接続ID引継ぎ元契約ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
 	private Long connectHandoverContractId;
+
+	/**
+	 * 接続ID引継ぎ元RJ管理番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "接続ID引継ぎ元RJ管理番号", required = false, position = 14, allowableValues = "range[0,255]")
+	private String connectHandoverRjManageNumber;
 }
