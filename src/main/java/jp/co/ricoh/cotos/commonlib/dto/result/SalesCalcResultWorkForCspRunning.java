@@ -175,9 +175,4 @@ public class SalesCalcResultWorkForCspRunning {
 	 * 届先コード
 	 */
 	private String deliveryCd;
-
-	/**
-	 * NTTお客様ID
-	 */
-	private String nttCustomerId;
 }
