@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.accounting;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
@@ -1306,4 +1309,13 @@ public class Accounting extends EntityBase {
 	@ApiModelProperty(value = "計上日制御用商品種類区分", required = false, position = 252)
 	private String accountingProductClassDiv;
 
+	/** EDW用統合契約内部振替処理状態 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "EDW用統合契約内部振替処理状態", required = false, position = 253, allowableValues = "range[0,255]")
+	private String edwAbsConInsideTransStatus;
+
+	/** EDW用統合契約内部振替処理日 */
+	@ApiModelProperty(value = "EDW用統合契約内部振替処理日", required = false, position = 254)
+	@Temporal(TemporalType.DATE)
+	private Date edwAbsConInsideTransDate;
 }
