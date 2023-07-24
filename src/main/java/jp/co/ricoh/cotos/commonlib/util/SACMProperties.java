@@ -9,10 +9,22 @@ import lombok.Data;
 @Component
 @Data
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "cotos.search")
-public class SearchProperties {
+@ConfigurationProperties(prefix = "cotos.sacm")
+public class SACMProperties {
 
-	int limitSize;
+	/**
+	 * アクセスキー
+	 */
+	private String accessKey;
 
-	int iijMachineLimitSize;
+	/**
+	 * アクセスキーシークレット
+	 */
+	private String AccessKeySecret;
+
+	/**
+	 * APIURL
+	 */
+	private String apiUrl;
+
 }

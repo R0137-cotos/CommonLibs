@@ -48,6 +48,11 @@ public class ProductContractExtendsParameterBpnBpsDto {
 	private String lineTypeName;
 
 	/**
+	 * PC台数
+	 */
+	private Integer pcAmount;
+
+	/**
 	 * RtoR固有項目
 	 */
 	@JsonProperty("rtorSpecial")

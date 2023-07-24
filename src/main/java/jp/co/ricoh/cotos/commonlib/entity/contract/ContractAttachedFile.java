@@ -32,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
+import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -138,6 +139,12 @@ public class ContractAttachedFile extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
+
+	/**
+	 * チェックタイミング区分
+	 */
+	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")", position = 13)
+	private CheckTimingDiv checkTimingDiv;
 
 	/**
 	 * ファイル情報
