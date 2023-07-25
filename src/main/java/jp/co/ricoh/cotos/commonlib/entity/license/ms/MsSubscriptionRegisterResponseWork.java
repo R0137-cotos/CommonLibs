@@ -110,4 +110,11 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	@Size(max = 255)
 	@ApiModelProperty(value = "移行元サブスクリプションID", required = false, position = 12, allowableValues = "range[0,255]")
 	private String fromSubscriptionId;
+
+	/**
+	 * 調整後の終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "調整後の終了日", required = false, position = 13)
+	private Date customTermEndDate;
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.CustomTermPattern;
 import lombok.Data;
 
 /**
@@ -42,5 +43,16 @@ public class ItemContractO365Dto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date possibleReduceTermEnd;
+
+	/**
+	 * 変更パターン
+	 */
+	private CustomTermPattern customPattern;
+
+	/**
+	 * 変更後の終了日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date customTermEndDate;
 
 }

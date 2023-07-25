@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -33,7 +36,7 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@Description(value = "増減区分")
 	public enum IncreaseDecreaseDiv {
 
-		増数("1"), 減数("2"), アップグレード("3");
+		増数("1"), 減数("2"), アップグレード("3"), 更新期限の更新("4");
 
 		private final String text;
 
@@ -152,4 +155,10 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@ApiModelProperty(value = "処理優先順", required = false, position = 14, allowableValues = "range[0,999]")
 	private Integer priorityOrder;
 
+	/**
+	 * 調整後の終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "調整後の終了日", required = false, position = 15)
+	private Date customTermEndDate;
 }
