@@ -36,7 +36,7 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@Description(value = "増減区分")
 	public enum IncreaseDecreaseDiv {
 
-		増数("1"), 減数("2"), アップグレード("3"), 契約期間の更新("4");
+		増数("1"), 減数("2"), アップグレード("3"), 契約期間の変更("4");
 
 		private final String text;
 
