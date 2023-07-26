@@ -43,4 +43,10 @@ public class ItemEstimationO365Dto {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date reflectionDate;
 
+	/**
+	 * 同時終了反映日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date coterminateReflectionDate;
+
 }
