@@ -840,7 +840,7 @@ public class EnumType {
 	@Description(value = "契約情報変更アドオン処理区分")
 	public enum ContractInfoChangeAddOnProcType {
 
-		更新期限の変更("1");
+		契約期間の変更("1");
 
 		private final String text;
 
