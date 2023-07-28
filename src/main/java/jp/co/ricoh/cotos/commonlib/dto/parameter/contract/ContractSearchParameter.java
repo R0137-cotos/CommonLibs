@@ -478,6 +478,20 @@ public class ContractSearchParameter {
 	private String mobilePhoneNumber;
 
 	/**
+	 * お客様：担当者電話番号
+	 */
+	@ApiParam(value = "お客様：担当者電話番号", required = false)
+	@ApiModelProperty(value = "お客様：担当者電話番号", required = false)
+	private String customerPicPhoneNumber;
+
+	/**
+	 * 設置先：担当者電話番号
+	 */
+	@ApiParam(value = "設置先：担当者電話番号", required = false)
+	@ApiModelProperty(value = "設置先：担当者電話番号", required = false)
+	private String installationPicPhoneNumber;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
