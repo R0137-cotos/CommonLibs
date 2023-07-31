@@ -32,4 +32,6 @@ public interface LaitLinkageInfoRepository extends CrudRepository<LaitLinkageInf
 	public List<LaitLinkageInfo> findByRjManageNumberAndDeleteFlg(String rjManageNumber, Integer deleteFlg);
 
 	public List<LaitLinkageInfo> findByRjManageNumberAndDeleteFlgAndReceiptStatus(String rjManageNumber, Integer deleteFlg, ReceiptStatus receiptStatus);
+
+	public List<LaitLinkageInfo> findByBaseRjManageNumberAndDeleteFlg(String baseRjManageNumber, Integer deleteFlg);
 }
