@@ -355,4 +355,11 @@ public class ContractEquipment extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "Isys-One連携済機種コード", required = false, position = 29, allowableValues = "range[0,255]")
 	private String isysoneLinkagedEquipmentCode;
+
+	/**
+	 * ARCS期間売保守データ用保守形態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 30, allowableValues = "range[0,255]")
+	private String arcsMaintenanceForm;
 }
