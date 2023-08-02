@@ -179,4 +179,10 @@ public class ContractEquipmentDto extends DtoBase {
 	@ApiModelProperty(value = "機種名", required = false, position = 25, allowableValues = "range[0,255]")
 	private String equipmentName;
 
+	/**
+	 * ARCS期間売保守データ用保守形態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 26, allowableValues = "range[0,255]")
+	private String arcsMaintenanceForm;
 }
