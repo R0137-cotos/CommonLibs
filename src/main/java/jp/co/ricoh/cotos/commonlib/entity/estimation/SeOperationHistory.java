@@ -61,8 +61,8 @@ public class SeOperationHistory extends EntityBase{
 	 * id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounting_period_detail_seq")
-	@SequenceGenerator(name = "accounting_period_detail_seq", sequenceName = "accounting_period_detail_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "se_operation_history_seq")
+	@SequenceGenerator(name = "se_operation_history_seq", sequenceName = "se_operation_history_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 	
