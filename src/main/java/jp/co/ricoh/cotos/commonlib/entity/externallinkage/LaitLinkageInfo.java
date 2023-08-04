@@ -150,6 +150,29 @@ public class LaitLinkageInfo extends EntityBase {
 		}
 	}
 
+	@Description(value = "ディストリビューションID連携状態")
+	public enum DistributionidLinkageState {
+
+		未処理("0"), 連携済み("1"), エラー("2"), 処理対象外("3");
+
+		private final String text;
+
+		private DistributionidLinkageState(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static DistributionidLinkageState fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * LaIT連携情報ID
 	 */
@@ -274,4 +297,24 @@ public class LaitLinkageInfo extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "削除フラグ", required = false, position = 18, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
+
+	/**
+	 * ディストリビューションID連携状態
+	 */
+	@ApiModelProperty(value = "ディストリビューションID連携状態", required = false, position = 19, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), エラー(\"2\"), 処理対象外(\"3\")")
+	private DistributionidLinkageState distributionidLinkageState;
+
+	/**
+	 * ディストリビューションID連携日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "ディストリビューションID連携日", required = false, position = 20)
+	private Date distributionidLinkageDate;
+
+	/**
+	 * IIJ機器情報ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "IIJ機器情報ID", required = false, position = 21, allowableValues = "range[0,9223372036854775807]")
+	private Long iijMachineInfoId;
 }

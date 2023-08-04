@@ -22,6 +22,7 @@ import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfoDetail;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverCollectLocation;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverIspLinkage;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMailAddress;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverMobileEquipment;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.HandoverPenaltyDetailContract;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ROpticalTransfer;
@@ -36,6 +37,7 @@ import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ElementInfoReposit
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverCollectLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverContractAttachedFileRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverIspLinkageRepository;
+import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverMailAddressRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverMobileEquipmentRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.HandoverPenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ROpticalTransferManageRepository;
@@ -88,6 +90,9 @@ public class TestExternalLinkage {
 
 	@Autowired
 	ConfigInfoRepository configInfoRepository;
+
+	@Autowired
+	HandoverMailAddressRepository handoverMailAddressRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -300,6 +305,18 @@ public class TestExternalLinkage {
 	public void ConfigInfoRepositoryのテスト() throws Exception {
 
 		ConfigInfo found = configInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void HandoverMailAddressRepositoryのテスト() throws Exception {
+
+		HandoverMailAddress found = handoverMailAddressRepository.findOne(1L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

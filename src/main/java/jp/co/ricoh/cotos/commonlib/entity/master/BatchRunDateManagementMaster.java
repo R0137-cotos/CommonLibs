@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,6 +11,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -24,6 +30,29 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "batch_run_date_management_master")
 public class BatchRunDateManagementMaster extends EntityBaseMaster {
+
+	@Description(value = "FFM計上連携区分")
+	public enum FfmAccountingLinkageDiv {
+
+		売上振替全連携("0"), 売上全社勘定連携("1"), 振替連携("2");
+
+		private final String text;
+
+		private FfmAccountingLinkageDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static FfmAccountingLinkageDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * バッチ実行日管理マスタID
@@ -58,4 +87,10 @@ public class BatchRunDateManagementMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "バッチ実行日", required = false, position = 5)
 	@Temporal(TemporalType.DATE)
 	private Date batchRunDate;
+
+	/**
+	 * FFM計上連携区分
+	 */
+	@ApiModelProperty(value = "FFM計上連携区分", required = false, position = 6, allowableValues = "売上振替全連携(\"0\"), 売上全社勘定連携(\"1\"), 振替連携(\"2\")")
+	private FfmAccountingLinkageDiv ffmAccountingLinkageDiv;
 }

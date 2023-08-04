@@ -43,9 +43,9 @@ public class PenaltyDetailTrans extends EntityBase {
 	/**
 	 * 原価
 	 */
-	@DecimalMin("0.00")
+	@DecimalMin("-9999999999999999999.99")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "原価", required = false, position = 2, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "原価", required = false, position = 2, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
