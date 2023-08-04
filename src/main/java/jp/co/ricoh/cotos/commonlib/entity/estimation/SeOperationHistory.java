@@ -86,7 +86,6 @@ public class SeOperationHistory extends EntityBase{
 	 * 処理区分
 	 */
 	@NotNull
-	@Size(max = 255)
 	@ApiModelProperty(value = "処理区分", required = true, position = 4, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")")
 	private ProcessDiv processDiv;
 	
