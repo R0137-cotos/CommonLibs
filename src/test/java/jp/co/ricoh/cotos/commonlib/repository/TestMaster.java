@@ -28,6 +28,7 @@ import jp.co.ricoh.cotos.commonlib.dto.json.master.ReportPageMasterExtendsParame
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.*;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.Domain;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
@@ -2277,6 +2278,7 @@ public class TestMaster {
 			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
 			Assert.assertEquals("xlsx", found.getExtension());
+			Assert.assertNull(found.getCheckTimingDiv());
 		}
 	}
 
@@ -2300,6 +2302,7 @@ public class TestMaster {
 			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L)));
 			Assert.assertEquals("xlsx", found.getExtension());
+			Assert.assertNull(found.getCheckTimingDiv());
 		}
 	}
 
@@ -2311,7 +2314,7 @@ public class TestMaster {
 		// エンティティの取得
 		List<AttachedFileProductGrpCheckMaster> foundList = attachedFileProductGrpCheckMasterRepository.findByProductGrpMasterIdAndDomain(200L, "2");
 
-		// データが3件取得できていることを確認
+		// データが6件取得できていることを確認
 		Assert.assertEquals(6, foundList.size());
 		// 取得したデータの内容が正しいことを確認
 		for (AttachedFileProductGrpCheckMaster found : foundList) {
@@ -2323,6 +2326,7 @@ public class TestMaster {
 			Assert.assertThat(found.getItemMasterId(), anyOf(nullValue(), is(1L), is(2L)));
 			Assert.assertThat(found.getArrangementWorkTypeMasterId(), anyOf(nullValue(), is(1001L), is(1002L)));
 			Assert.assertEquals("xlsx", found.getExtension());
+			Assert.assertThat(found.getCheckTimingDiv(), anyOf(nullValue(), is(CheckTimingDiv.常時), is(CheckTimingDiv.承認のみ)));
 		}
 	}
 

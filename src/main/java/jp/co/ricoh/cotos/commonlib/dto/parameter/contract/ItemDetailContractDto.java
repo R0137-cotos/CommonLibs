@@ -22,9 +22,9 @@ public class ItemDetailContractDto extends DtoBase {
 	 * 原価
 	 */
 	@Digits(integer = 19, fraction = 2)
-	@DecimalMin("0.00")
+	@DecimalMin("-9999999999999999999.99")
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "原価", required = false, position = 3, allowableValues = "range[0.00,9999999999999999999.99]")
+	@ApiModelProperty(value = "原価", required = false, position = 3, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
@@ -46,7 +46,7 @@ public class ItemDetailContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, position = 6, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")")
 	private InitialRunningDiv initialRunningDiv;
-	
+
 	/**
 	 * 品種振替構成マスタID
 	 */
