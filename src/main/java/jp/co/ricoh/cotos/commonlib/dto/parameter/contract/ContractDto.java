@@ -785,15 +785,30 @@ public class ContractDto extends DtoBase {
 	private ContractChangeTiming contractChangeTiming;
 
 	/**
+	 * NTTお客様ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 105, allowableValues = "range[0,255]")
+	private String nttCustomerId;
+
+	/**
+	 * 回収先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "回収先", required = true, position = 106)
+	private CollectLocationDto collectLocation;
+
+	/**
 	 * RPA連携用CPQ更新CSV作成状態
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 105, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 107, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
 	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
 
 	/**
 	 * RPA連携用CPQ更新CSV作成日
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 106)
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 108)
 	@Temporal(TemporalType.DATE)
 	private Date rpaLinkageCpqUpdateCsvCreateAt;
 }

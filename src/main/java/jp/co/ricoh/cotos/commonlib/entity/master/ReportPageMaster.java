@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -82,4 +83,20 @@ public class ReportPageMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "ページ数", required = false, position = 7, allowableValues = "range[0,99999]")
 	private Integer pageNumber;
+
+	/**
+	 * 拡張項目
+	 * {@link jp.co.ricoh.cotos.commonlib.dto.json.master.ReportPageMasterExtendsParameterDto}
+	 */
+	@ApiModelProperty(value = "拡張項目", required = false, position = 8)
+	@Lob
+	private String extendsParameter;
+
+	/**
+	 * ジョブユニットID
+	 */
+	@Max(99999)
+	@Min(0)
+	@ApiModelProperty(value = "ジョブユニットID", required = false, position = 9, allowableValues = "range[0,99999]")
+	private Integer jobUnitId;
 }

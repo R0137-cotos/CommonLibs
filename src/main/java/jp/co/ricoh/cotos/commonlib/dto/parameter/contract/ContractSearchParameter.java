@@ -450,6 +450,48 @@ public class ContractSearchParameter {
 	private Date cancelScheduledDateTo;
 
 	/**
+	 * 商品マスタIDリスト
+	 */
+	@ApiParam(value = "商品マスタIDリスト", required = false)
+	@ApiModelProperty(value = "商品マスタIDリスト", required = false)
+	private String productIdList;
+
+	/**
+	 * お客様：会社代表電話番号
+	 */
+	@ApiParam(value = "お客様：会社代表電話番号", required = false)
+	@ApiModelProperty(value = "お客様：会社代表電話番号", required = false)
+	private String customerPhoneNumber;
+
+	/**
+	 * 設置先：会社代表電話番号
+	 */
+	@ApiParam(value = "設置先：会社代表電話番号", required = false)
+	@ApiModelProperty(value = "設置先：会社代表電話番号", required = false)
+	private String installationPhoneNumber;
+
+	/**
+	 * モバイル：端末電話番号
+	 */
+	@ApiParam(value = "モバイル：端末電話番号", required = false)
+	@ApiModelProperty(value = "モバイル：端末電話番号", required = false)
+	private String mobilePhoneNumber;
+
+	/**
+	 * お客様：担当者電話番号
+	 */
+	@ApiParam(value = "お客様：担当者電話番号", required = false)
+	@ApiModelProperty(value = "お客様：担当者電話番号", required = false)
+	private String customerPicPhoneNumber;
+
+	/**
+	 * 設置先：担当者電話番号
+	 */
+	@ApiParam(value = "設置先：担当者電話番号", required = false)
+	@ApiModelProperty(value = "設置先：担当者電話番号", required = false)
+	private String installationPicPhoneNumber;
+
+	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")

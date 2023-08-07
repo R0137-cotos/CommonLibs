@@ -360,4 +360,9 @@ public class LicenseSearchResult {
 	@ApiModelProperty(value = "訪販/WEB", required = false, position = 54)
 	private OrderDiv orderDiv;
 
+	/**
+	 * ベンダー区分
+	 */
+	@ApiModelProperty(value = "ベンダー区分", required = false, position = 55)
+	private String vendorDiv;
 }

@@ -43,7 +43,7 @@ public class FileImportManagement extends EntityBase {
 	@Description(value = "バッチ実行ステータス")
 	public enum BatchExecutionStatus {
 
-		取込待ち("1"), 取込中("2"), エラー("3"), 正常終了("4");
+		取込待ち("1"), 取込中("2"), エラー("3"), 正常終了("4"), 取込後処理中("5"), 取込エラー("6"), その他("99");
 
 		private final String text;
 
@@ -119,7 +119,7 @@ public class FileImportManagement extends EntityBase {
 	 * バッチ実行ステータス
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\"1\"), 取込中(\"2\"), エラー(\"3\"), 正常終了(\"4\")", //
+	@ApiModelProperty(value = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\"1\"), 取込中(\"2\"), エラー(\"3\"), 正常終了(\"4\"), 取込後処理中(\"5\"), 取込エラー(\"6\"), その他(\"99\")", //
 			position = 8, readOnly = false)
 	private BatchExecutionStatus batchExecutionStatus;
 

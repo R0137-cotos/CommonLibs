@@ -3,6 +3,9 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -81,6 +84,15 @@ public class LicenseAccountSearchParameter {
 	@ApiParam(value = "ライセンスアカウント区分名", required = false)
 	@ApiModelProperty(value = "ライセンスアカウント区分名", required = false, position = 10, allowableValues = "range[0,255]")
 	private String licenseAccountDivName;
+
+	/**
+	 * NSP検索追加フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiParam(value = "NSP検索追加フラグ", required = false)
+	@ApiModelProperty(value = "NSP検索追加フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	private Integer nspSearchAddFlg;
 
 	/**
 	 * パラメータをMapにする。

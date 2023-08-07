@@ -1075,15 +1075,30 @@ public class Contract extends EntityBase {
 	private ContractChangeTiming contractChangeTiming;
 
 	/**
+	 * NTTお客様ID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 111, allowableValues = "range[0,255]")
+	private String nttCustomerId;
+
+	/**
+	 * 回収先
+	 */
+	@Valid
+	@OneToOne(mappedBy = "contract")
+	@ApiModelProperty(value = "回収先", required = true, position = 112)
+	private CollectLocation collectLocation;
+
+	/**
 	 * RPA連携用CPQ更新CSV作成状態
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 111, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 113, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
 	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
 
 	/**
 	 * RPA連携用CPQ更新CSV作成日
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 112)
+	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 114)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date rpaLinkageCpqUpdateCsvCreateAt;
 }

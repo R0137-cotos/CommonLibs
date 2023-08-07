@@ -65,6 +65,29 @@ public class ProductMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "RtoR設定可能区分")
+	public enum RtorSettingPossibleDiv {
+
+		引継ぎ先と引継ぎ元("1"), 引継ぎ元のみ("2");
+
+		private final String text;
+
+		private RtorSettingPossibleDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static RtorSettingPossibleDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_master_seq")
 	@SequenceGenerator(name = "product_master_seq", sequenceName = "product_master_seq", allocationSize = 1)
@@ -286,8 +309,14 @@ public class ProductMaster extends EntityBaseMaster {
 	private String officialProductName;
 
 	/**
+	 * RtoR設定可能区分
+	 */
+	@ApiModelProperty(value = "RtoR設定可能区分", required = false, position = 31, allowableValues = "引継ぎ先と引継ぎ元(\"1\"), 引継ぎ元のみ(\"2\")")
+	private RtorSettingPossibleDiv rtorSettingPossibleDiv;
+
+	/**
 	 * サービスコード
 	 */
-	@ApiModelProperty(value = "サービスコード", required = false, position = 31, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "サービスコード", required = false, position = 32, allowableValues = "range[0,255]")
 	private String serviceCode;
 }

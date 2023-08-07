@@ -21,4 +21,14 @@ public class ReportsProperties {
 	 * 帳票出力一時ディレクトリ
 	 */
 	private String temporaryDir;
+
+	/**
+	 * CreateForm帳票出力ワークディレクトリ
+	 */
+	private String createFormWorkDir;
+
+	/**
+	 * CreateForm Expageランタイムjarファイルパス
+	 */
+	private String createFormExpageLibJarPath;
 }

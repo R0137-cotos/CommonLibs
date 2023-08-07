@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -23,6 +30,29 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "attached_file_product_grp_check_master")
 public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
+
+	@Description(value = "チェックタイミング区分")
+	public enum CheckTimingDiv {
+
+		常時("0"), 承認のみ("1");
+
+		private final String text;
+
+		private CheckTimingDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CheckTimingDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * 添付ファイル商品毎チェックマスタID
@@ -90,4 +120,11 @@ public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "拡張子", required = false, position = 9, allowableValues = "range[0,255]")
 	private String extension;
+
+	/**
+	 * チェックタイミング区分
+	 */
+	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")", position = 10)
+	private CheckTimingDiv checkTimingDiv;
+
 }
