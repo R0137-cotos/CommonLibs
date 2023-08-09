@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -66,6 +68,7 @@ public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 	/**
 	 * 洗替日時
 	 */
+	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "洗替日時", required = false, position = 5)
 	private Date refreshedAt;
 }
