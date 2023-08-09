@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -47,6 +49,7 @@ public class ContractPicMntCeEmpRefreshHis extends EmployeeAbstractEntity {
 	/**
 	 * 洗替日
 	 */
-	@ApiModelProperty(value = "洗替日", required = false, position = 3)
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "洗替日時", required = false, position = 3)
 	private Date refreshedAt;
 }

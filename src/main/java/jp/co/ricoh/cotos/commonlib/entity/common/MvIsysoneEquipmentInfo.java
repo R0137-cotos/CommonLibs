@@ -38,5 +38,5 @@ public class MvIsysoneEquipmentInfo {
 	/**
 	 * 保守担当課所MoM組織CD
 	 */
-	private String MOMSKID;
+	private String momskid;
 }
