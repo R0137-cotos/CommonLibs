@@ -211,4 +211,17 @@ public class ROpticalTransferManage extends EntityBase {
 	 */
 	@ApiModelProperty(value = "工事調整完了番号", required = false, position = 15, allowableValues = "range[0,255]")
 	private String constructAdjustmentNumber;
+
+	/**
+	 * リモートサポート異動情報取込状態
+	 */
+	@ApiModelProperty(value = "リモートサポート異動情報取込状態", required = false, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1", position = 16)
+	private OpticalTransferStatus opticalRemoteTransferStatus;
+
+	/**
+	 * リモートサポート異動情報取込日
+	 */
+	@ApiModelProperty(value = "リモートサポート異動情報取込日", required = false, position = 17)
+	@Temporal(TemporalType.DATE)
+	private Date opticalRemoteTransferDate;
 }
