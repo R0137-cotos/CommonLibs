@@ -150,4 +150,10 @@ public class ROpticalBillingWork extends EntityBase {
 	@ApiModelProperty(value = "ファイル取込管理ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
 	private long fileImportManagementId;
 
+	/**
+	 * 変換元疑似内訳コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "変換元疑似内訳コード", required = false, position = 14, allowableValues = "range[0,255]")
+	private String convertFromBreakdownCode;
 }
