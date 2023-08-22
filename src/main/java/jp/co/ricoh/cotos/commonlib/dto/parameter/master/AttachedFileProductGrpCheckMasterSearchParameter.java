@@ -3,6 +3,8 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -56,5 +58,13 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	 */
 	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
+
+	/**
+	 * V-UP連携チェック除外フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "V-UP連携チェック除外フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	private Integer vupLinkageCheckExcludeFlg;
 
 }
