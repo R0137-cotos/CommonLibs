@@ -22,6 +22,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ContractD
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ContractInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ErrorInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ItemContractDelegationDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ManagedEstimationDetailDelegationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.ProductContractDelegationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation.RatePlanChargeInfoDto;
 import jp.co.ricoh.cotos.commonlib.security.TestSecurityController;
@@ -81,12 +82,12 @@ public class TestArrangementResultDto {
 		//異常系_子エンティティ配下Null
 		arrangementResultDto = 異常系Nullデータ作成();
 		result = testSecurityController.callParameterCheck(arrangementResultDto, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 8);
+		Assert.assertTrue(result.getErrorInfoList().size() == 9);
 
 		//異常系_文字列最大値
 		arrangementResultDto = 異常系入力値不正データ作成();
 		result = testSecurityController.callParameterCheck(arrangementResultDto, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 22);
+		Assert.assertTrue(result.getErrorInfoList().size() == 27);
 	}
 
 	private ArrangementResultDto 正常系データ作成() {
@@ -130,6 +131,13 @@ public class TestArrangementResultDto {
 		productContractDelegationDtoList.add(productContractDelegationDto);
 		contractInfoDto.setProductContractList(productContractDelegationDtoList);
 
+		List<ManagedEstimationDetailDelegationDto> managedEstimationDetailDelegationDtoList = new ArrayList<>();
+		ManagedEstimationDetailDelegationDto managedEstimationDetailDelegationDto = new ManagedEstimationDetailDelegationDto();
+		managedEstimationDetailDelegationDto.setId(1);
+		managedEstimationDetailDelegationDto.setRatePlanChargeInfo(ratePlanChargeInfoDto);
+		managedEstimationDetailDelegationDtoList.add(managedEstimationDetailDelegationDto);
+		contractInfoDto.setManagedEstimationDetailList(managedEstimationDetailDelegationDtoList);
+
 		ArrangementResultDto arrangementResultDto = new ArrangementResultDto();
 		arrangementResultDto.setArrangementResultInfo(arrangementResultInfoDto);
 		arrangementResultDto.setContructInfo(contractInfoDto);
@@ -167,6 +175,13 @@ public class TestArrangementResultDto {
 		productContractDelegationDto.setTenantId(null);
 		productContractDelegationDtoList.add(productContractDelegationDto);
 		contractInfoDto.setProductContractList(productContractDelegationDtoList);
+
+		List<ManagedEstimationDetailDelegationDto> managedEstimationDetailDelegationDtoList = new ArrayList<>();
+		ManagedEstimationDetailDelegationDto managedEstimationDetailDelegationDto = new ManagedEstimationDetailDelegationDto();
+		managedEstimationDetailDelegationDto.setId(1);
+		managedEstimationDetailDelegationDto.setRatePlanChargeInfo(ratePlanChargeInfoDto);
+		managedEstimationDetailDelegationDtoList.add(managedEstimationDetailDelegationDto);
+		contractInfoDto.setManagedEstimationDetailList(managedEstimationDetailDelegationDtoList);
 
 		ArrangementResultDto arrangementResultDto = new ArrangementResultDto();
 		arrangementResultDto.setArrangementResultInfo(arrangementResultInfoDto);
@@ -215,6 +230,13 @@ public class TestArrangementResultDto {
 		productContractDelegationDto.setSubscriptionNumber(STR_256);
 		productContractDelegationDtoList.add(productContractDelegationDto);
 		contractInfoDto.setProductContractList(productContractDelegationDtoList);
+
+		List<ManagedEstimationDetailDelegationDto> managedEstimationDetailDelegationDtoList = new ArrayList<>();
+		ManagedEstimationDetailDelegationDto managedEstimationDetailDelegationDto = new ManagedEstimationDetailDelegationDto();
+		managedEstimationDetailDelegationDto.setId(INT_MINUS_1);
+		managedEstimationDetailDelegationDto.setRatePlanChargeInfo(ratePlanChargeInfoDto);
+		managedEstimationDetailDelegationDtoList.add(managedEstimationDetailDelegationDto);
+		contractInfoDto.setManagedEstimationDetailList(managedEstimationDetailDelegationDtoList);
 
 		ArrangementResultDto arrangementResultDto = new ArrangementResultDto();
 		arrangementResultDto.setArrangementResultInfo(arrangementResultInfoDto);
