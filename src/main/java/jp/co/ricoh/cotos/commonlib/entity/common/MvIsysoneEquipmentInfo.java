@@ -31,12 +31,12 @@ public class MvIsysoneEquipmentInfo {
 	private String kikino;
 
 	/**
+	 * 保守担当課所コード
+	 */
+	private String hstan_kscd;
+
+	/**
 	 * 保守担当CEコード
 	 */
 	private String hstan_cecd;
-
-	/**
-	 * 保守担当課所MoM組織CD
-	 */
-	private String momskid;
 }

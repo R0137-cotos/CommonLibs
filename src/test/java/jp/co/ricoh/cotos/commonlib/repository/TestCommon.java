@@ -35,7 +35,6 @@ import jp.co.ricoh.cotos.commonlib.repository.common.EimDocumentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.FileImportErrorDetailsRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.FileImportManagementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.MailSendHistoryRepository;
-import jp.co.ricoh.cotos.commonlib.repository.common.MvIsysoneEquipmentInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.SearchConditionRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.TransactionDiscardingHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.common.VMailAddressArrangementListRepository;
@@ -122,12 +121,6 @@ public class TestCommon {
 	 */
 	@Autowired
 	TransactionDiscardingHistoryRepository transactionDiscardingHistoryRepository;
-
-	/**
-	 * Isysone機器情報MVIEW
-	 */
-	@Autowired
-	MvIsysoneEquipmentInfoRepository mvIsysoneEquipmentInfoRepository;
 
 	@Autowired
 	TestTools testTool;
