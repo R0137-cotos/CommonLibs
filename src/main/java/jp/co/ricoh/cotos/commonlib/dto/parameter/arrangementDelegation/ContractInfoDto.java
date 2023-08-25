@@ -43,10 +43,10 @@ public class ContractInfoDto {
 	private List<ProductContractDelegationDto> productContractList;
 
 	/**
-	 * 見積明細管理情報リスト
+	 * 契約明細情報リスト
 	 */
 	@Valid
-	@ApiModelProperty(value = "見積明細管理情報リスト", required = false, position = 5)
+	@ApiModelProperty(value = "契約明細情報リスト", required = false, position = 5)
 	private List<ManagedEstimationDetailDelegationDto> managedEstimationDetailList;
 
 }
