@@ -1154,6 +1154,13 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		// エンティティの取得
+		String ceCd = "40782";
+		MvEmployeeMaster foundByCeIdResult = mvEmployeeMasterRepository.findByCeCd(ceCd);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByCeIdResult);
 	}
 
 	@Test
@@ -1560,6 +1567,12 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		MvWjmoc020OrgAllInfoCom foundByCubicOrgIdResult = mvWjmoc020OrgAllInfoComRepository.findByCubicOrgId("4080145", formatDate);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByCubicOrgIdResult);
+
 	}
 
 	@Test
