@@ -2817,6 +2817,13 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		// エンティティの取得
+		String orsServiceOrgId = "000258";
+		List<MvTjmob260OrgServiceMaster> foundList = mvTjmob260OrgServiceMasterRepository.findByOrsServiceOrgId(orsServiceOrgId);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
 	}
 
 	@Test
