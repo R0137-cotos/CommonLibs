@@ -55,7 +55,9 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicAccCeEmpReposi
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicAccSsOrgRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicIntCeEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicIntSsOrgRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntCeEmpRefreshHisRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntCeEmpRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntSsOrgRefreshHisRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicMntSsOrgRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicSaEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
@@ -195,6 +197,12 @@ public class TestContract {
 
 	@Autowired
 	DealerContractRefreshHisRepository dealerContractRefreshHisRepository;
+
+	@Autowired
+	ContractPicMntSsOrgRefreshHisRepository contractPicMntSsOrgRefreshHisRepository;
+
+	@Autowired
+	ContractPicMntCeEmpRefreshHisRepository contractPicMntCeEmpRefreshHisRepository;
 
 	@Autowired
 	TestTools testTools;
@@ -411,6 +419,16 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_回収先() {
 		全てのカラムがNullではないことを確認_共通(collectLocationRepository, 502L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約保守担当SS組織洗い替え履歴() {
+		全てのカラムがNullではないことを確認_共通(contractPicMntSsOrgRefreshHisRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_契約担当CE社員洗い替え履歴() {
+		全てのカラムがNullではないことを確認_共通(contractPicMntCeEmpRefreshHisRepository, 401L, 501L);
 	}
 
 	@Test
