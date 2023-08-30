@@ -66,7 +66,7 @@ public class CommissionData extends EntityBase {
 	@Description(value = "消費税区分")
 	public enum TaxRateDiv {
 
-		非課税("4"), 外税_5("C"), 外税_8("E"), 外税_10("G");
+		非課税("4"), 外税_5("C"), 外税_8("E"), 外税_10("G"), 適格請求書対応事業者以外("J");
 
 		private final String text;
 
