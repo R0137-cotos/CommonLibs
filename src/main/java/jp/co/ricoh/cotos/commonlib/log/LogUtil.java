@@ -27,7 +27,7 @@ public class LogUtil {
 	@Autowired
 	CheckUtil checkUtil;
 
-	private BigDecimal outputLogSizeLimit = new BigDecimal("2000000");
+	private BigDecimal outputLogSizeLimit = new BigDecimal("10000000");
 
 	/**
 	 * リクエストボディーをログ出力か否か

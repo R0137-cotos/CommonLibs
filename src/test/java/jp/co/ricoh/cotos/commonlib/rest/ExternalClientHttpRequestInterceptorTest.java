@@ -25,11 +25,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
-import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Log4j
 public class ExternalClientHttpRequestInterceptorTest {
 
 	static ConfigurableApplicationContext context;
@@ -61,7 +59,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 		} catch (ErrorCheckException e) {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
 			Assert.assertEquals(1, messageInfo.size());
-			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00070");
+			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00071");
 			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "CPQデータの取得に失敗しました。SE区へご連絡ください。");
 		} catch (Exception e) {
 			e.printStackTrace();
