@@ -71,7 +71,7 @@ public class LogUtil {
 			// CPQデータでかつ契約更新を繰り返し増大したレスポンスデータの場合はエラーとする
 			if (str.contains("_config_attr_info")) {
 				if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < str.length()) {
-					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesError", new String[] {}));
+					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] {}));
 				}
 			}
 		}
