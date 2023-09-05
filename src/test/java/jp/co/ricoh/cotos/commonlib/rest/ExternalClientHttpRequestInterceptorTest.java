@@ -9,12 +9,14 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -34,6 +37,9 @@ public class ExternalClientHttpRequestInterceptorTest {
 
 	@Autowired
 	ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor;
+
+	@SpyBean
+	ExternalLogResponseProperties externalLogResponseProperties;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -91,6 +97,25 @@ public class ExternalClientHttpRequestInterceptorTest {
 		try {
 			ClientHttpResponse clientHttpResponse = new MockClientHttpResponse(resstr.getBytes(), HttpStatus.OK);
 		ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
+			Mockito.doReturn(clientHttpResponse).when(execution).execute(any(), any());
+			externalClientHttpRequestInterceptor.intercept(request, body, execution);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("想定外のエラーが発生した");
+		}
+	}
+
+	// ログ出力に時間がかかるため普段はIgnore
+	@Ignore
+	@Test
+	public void outputLog_outputLogSizeLimit定義なし() {
+		HttpRequest request = mock(HttpRequest.class);
+		byte[] body = new byte[] {};
+		try {
+			byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/rest/レスポンス.txt"));
+			ClientHttpResponse clientHttpResponse = new MockClientHttpResponse(bytes, HttpStatus.OK);
+			ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
+			Mockito.doReturn(null).when(externalLogResponseProperties).getOutputLogSizeLimit();
 			Mockito.doReturn(clientHttpResponse).when(execution).execute(any(), any());
 			externalClientHttpRequestInterceptor.intercept(request, body, execution);
 		} catch (Exception e) {

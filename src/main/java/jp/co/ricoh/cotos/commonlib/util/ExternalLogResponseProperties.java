@@ -16,4 +16,9 @@ public class ExternalLogResponseProperties {
 	 * APIレスポンスログ出力有無
 	 */
 	private boolean outputLog;
+
+	/**
+	 * APIレスポンスログ出力サイズ上限
+	 */
+	private Integer outputLogSizeLimit;
 }
