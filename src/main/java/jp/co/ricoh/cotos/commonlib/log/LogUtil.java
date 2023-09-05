@@ -1,6 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.log;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 
 /**
  * ログ共通クラス
@@ -27,7 +27,8 @@ public class LogUtil {
 	@Autowired
 	CheckUtil checkUtil;
 
-	private BigDecimal outputLogSizeLimit = new BigDecimal("10000000");
+	@Autowired
+	ExternalLogResponseProperties externalLogResponseProperties;
 
 	/**
 	 * リクエストボディーをログ出力か否か
@@ -67,8 +68,9 @@ public class LogUtil {
 		}
 		if (obj instanceof String) {
 			String str = (String) obj;
+			// CPQデータでかつ契約更新を繰り返し増大したレスポンスデータの場合はエラーとする
 			if (str.contains("_config_attr_info")) {
-				if (outputLogSizeLimit.compareTo(new BigDecimal(str.length())) < 0) {
+				if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < str.length()) {
 					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesError", new String[] {}));
 				}
 			}
