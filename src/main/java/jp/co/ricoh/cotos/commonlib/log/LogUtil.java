@@ -69,7 +69,7 @@ public class LogUtil {
 			String str = (String) obj;
 			if (str.contains("_config_attr_info")) {
 				if (outputLogSizeLimit.compareTo(new BigDecimal(str.length())) < 0) {
-					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "DataSizeError", new String[] { "CPQデータの取得" }));
+					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesError", new String[] {}));
 				}
 			}
 		}
