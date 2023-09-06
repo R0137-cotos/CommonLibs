@@ -66,7 +66,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
 			Assert.assertEquals(1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00071");
-			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "システム管理者/ヘルプデスクにお伝えください。\n契約変更回数が上限に達したため、これ以上の操作は進められません。");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約変更回数が上限に達したためログ出力できません。");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生した");
