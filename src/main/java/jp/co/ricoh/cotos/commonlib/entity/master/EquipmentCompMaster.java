@@ -116,4 +116,11 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "機器品種作成フラグ", required = false, position = 11, allowableValues = "range[0,9]")
 	private Integer equipmentItemCreatingFlg;
+
+	/**
+	 * ARCS期間売保守データ用保守形態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 12, allowableValues = "range[0,255]")
+	private String arcsMaintenanceForm;
 }
