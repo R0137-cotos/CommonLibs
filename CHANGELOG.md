@@ -1,5 +1,18 @@
 # Changelog
 
+## v7.2.0 (07/09/2023)
+- [**closed**] #19890 TMのAPIコール用ヘッダーにUSER_AGENTを追加 [#2472](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2472)
+- [**closed**] 20053 契約機種、機種構成マスタにARCS期間売保守データ用保守形態追加 [#2460](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2460)
+- [**closed**] #19436 品種マスタに課税区分カラムを追加 [#2451](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2451)
+- [**closed**] 19259 エラーメッセージ追加 テナント検索時のメールアドレス検索エラー [#2429](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2429)
+- [**closed**] 18840 エラーメッセージ追加 メールアドレスが現在のテナントとは異なるテナントに紐づいていた場合 [#2417](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2417)
+- [**closed**] #18773 URL権限マスタ用の権限判定パラメータがnullにならないように修正 [#2415](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2415)
+- [**closed**] #18773 権限パラメータ作成処理一部切り戻し [#2407](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2407)
+- [**closed**] #18773 権限が自顧客と配下の場合にトランザクションから社員ＩＤを取得できるように [#2400](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2400)
+- [**closed**] 19185 減数可能期間 エラーメッセージ修正 [#2399](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2399)
+
+---
+
 ## v7.0.0 (10/08/2023)
 - [**closed**] #20054 LaIT連携情報リポジトリにメソッド追加 [#2454](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2454)
 - [**closed**] #20029 契約一覧検索パラメータにお客様：担当者電話番号、設置先：担当者電話番号追加 [#2453](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2453)
