@@ -19,6 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
@@ -452,6 +453,7 @@ public class LMPIConnectionHelper {
 	 */
 	private HttpHeaders getHttpHeaders(URI uri, HttpMethod method, String bodyJson) throws UnsupportedEncodingException {
 
+		String USER_AGENT = "rfbc9npdh95k7bx3vzqvej3fm";
 		HttpHeaders headers = new HttpHeaders();
 		byte[] content = bodyJson != null ? bodyJson.getBytes("UTF-8") : null;
 		String path = uri.getPath();
@@ -469,6 +471,7 @@ public class LMPIConnectionHelper {
 		headers.add("x-posix-time", String.valueOf(posix_time));
 		headers.add("x-traceid", UUID.randomUUID().toString());
 		headers.add("content-type", "application/json;charset=UTF-8");
+		headers.add(HTTP.USER_AGENT, USER_AGENT);
 		return headers;
 	}
 
