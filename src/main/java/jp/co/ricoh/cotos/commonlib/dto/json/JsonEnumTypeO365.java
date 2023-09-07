@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json;
 
 import java.util.Arrays;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -100,6 +101,32 @@ public class JsonEnumTypeO365 {
 
 		@JsonCreator
 		public static CancellationStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "更新期限変更パターン")
+	public enum CustomTermPattern {
+
+		暦月に合わせる("1"), 他サブスクリプションに合わせる("2"), 変更済みの内容を破棄する("3");
+
+		private final String text;
+
+		private CustomTermPattern(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static CustomTermPattern fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
