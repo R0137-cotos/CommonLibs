@@ -22,8 +22,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetCustomerResponseDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionIdRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmSuspendSubscriptionRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmUpdateSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequestWork;
@@ -237,6 +241,33 @@ public class LMPIConnectionHelperTests {
 	}
 
 	/**
+	 * [POST] サブスクリプション作成API
+	 * ※WORKテーブル更新無し
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void postSubscriptionsTest_notCreateWork() throws ParseException {
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = df.parse("20230910");
+
+		TmCreateSubscriptionRequestDto requestDto = new TmCreateSubscriptionRequestDto();
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
+		requestDto.setServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
+		requestDto.setUnitsPerLicense("10");
+		requestDto.setLicenseStartDate(date);
+
+		try {
+			getHelper().postSubscriptionsNotCreateWork(customerId, requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 *  [PUT] サブスクリプション更新API
 	 * @throws ParseException
 	 */
@@ -265,6 +296,29 @@ public class LMPIConnectionHelperTests {
 
 		try {
 			getHelper().putSubscriptions(requestWork);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  [PUT] サブスクリプション更新API
+	 *  ※WORKテーブル更新無し
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void putSubscriptionsTest_notCreateWork() throws ParseException {
+
+		TmUpdateSubscriptionRequestDto requestDto = new TmUpdateSubscriptionRequestDto();
+		String customerId = "9842f3d0-0993-4eea-a61f-0ca33b3f7c3e";
+		String subscriptionId = "7ef15198-607a-4eb3-9907-077468585172";
+		requestDto.setUnitsPerLicense("50");
+
+		try {
+			getHelper().putSubscriptionsNotCreateWork(customerId, subscriptionId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -335,6 +389,32 @@ public class LMPIConnectionHelperTests {
 	}
 
 	/**
+	 *  [PUT] サブスクリプション解約API
+	 *  ※WORKテーブル更新無し
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void putSuspendTest_notCreateWork() throws ParseException {
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = df.parse("20230910");
+
+		TmSuspendSubscriptionRequestDto requestDto = new TmSuspendSubscriptionRequestDto();
+		String customerId = "9842f3d0-0993-4eea-a61f-0ca33b3f7c3e";
+		String subscriptionId = "7ef15198-607a-4eb3-9907-077468585172";
+		requestDto.setLicenseExpirationDate(date);
+
+		try {
+			getHelper().putSuspendNotCreateWork(customerId, subscriptionId, requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 *  [GET] 更新ユーザー取得API
 	 * @throws ParseException
 	 */
@@ -366,6 +446,29 @@ public class LMPIConnectionHelperTests {
 
 		try {
 			getHelper().getServicePlanId();
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  [GET] サブスクリプションID取得API
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void getSubscriptionIdTest() throws ParseException {
+
+		TmGetSubscriptionIdRequestDto requestDto = new TmGetSubscriptionIdRequestDto();
+
+		// requestDto
+		requestDto.setCustomerId("3e2f134a-8ab3-4c12-8042-886afe77937d");
+		requestDto.setServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
+
+		try {
+			getHelper().getSubscriptionId(requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
