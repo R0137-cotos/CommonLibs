@@ -313,7 +313,7 @@ public class LMPIConnectionHelper {
 	 * [POST] サブスクリプション作成API
 	 * ※WORKテーブル更新無し
 	 */
-	public TmCreateSubscriptionResponseDto postSubscriptionsNotCreateWork(String customerId, TmCreateSubscriptionRequestDto requestDto) {
+	public TmCreateSubscriptionResponseDto postSubscriptions(String customerId, TmCreateSubscriptionRequestDto requestDto) {
 		String url = "/customers/" + customerId + "/subscriptions";
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
@@ -355,7 +355,7 @@ public class LMPIConnectionHelper {
 	 * [PUT] サブスクリプション更新API
 	 * ※WORKテーブル更新無し
 	 */
-	public TmUpdateSubscriptionResponseDto putSubscriptionsNotCreateWork(String customerId, String subscriptionId, TmUpdateSubscriptionRequestDto requestDto) {
+	public TmUpdateSubscriptionResponseDto putSubscriptions(String customerId, String subscriptionId, TmUpdateSubscriptionRequestDto requestDto) {
 		String url = "/customers/" + customerId + "/subscriptions/" + subscriptionId;
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
@@ -422,7 +422,7 @@ public class LMPIConnectionHelper {
 	 * [PUT] サブスクリプション解約API
 	 * ※WORKテーブル更新無し
 	 */
-	public TmSuspendSubscriptionResponseDto putSuspendNotCreateWork(String customerId, String subscriptionId, TmSuspendSubscriptionRequestDto requestDto) {
+	public TmSuspendSubscriptionResponseDto putSuspend(String customerId, String subscriptionId, TmSuspendSubscriptionRequestDto requestDto) {
 		String url = "/customers/" + customerId + "/subscriptions/" + subscriptionId + "/suspend";
 		try {
 			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);

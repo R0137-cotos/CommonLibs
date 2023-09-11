@@ -259,7 +259,7 @@ public class LMPIConnectionHelperTests {
 		requestDto.setLicenseStartDate(date);
 
 		try {
-			getHelper().postSubscriptionsNotCreateWork(customerId, requestDto);
+			getHelper().postSubscriptions(customerId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -318,7 +318,7 @@ public class LMPIConnectionHelperTests {
 		requestDto.setUnitsPerLicense("50");
 
 		try {
-			getHelper().putSubscriptionsNotCreateWork(customerId, subscriptionId, requestDto);
+			getHelper().putSubscriptions(customerId, subscriptionId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -406,7 +406,7 @@ public class LMPIConnectionHelperTests {
 		requestDto.setLicenseExpirationDate(date);
 
 		try {
-			getHelper().putSuspendNotCreateWork(customerId, subscriptionId, requestDto);
+			getHelper().putSuspend(customerId, subscriptionId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
