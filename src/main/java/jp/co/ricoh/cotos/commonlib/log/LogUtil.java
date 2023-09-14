@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.log;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,11 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
+import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 
 /**
  * ログ共通クラス
@@ -16,6 +23,12 @@ public class LogUtil {
 
 	@Autowired
 	ObjectMapper mapper;
+
+	@Autowired
+	CheckUtil checkUtil;
+
+	@Autowired
+	ExternalLogResponseProperties externalLogResponseProperties;
 
 	/**
 	 * リクエストボディーをログ出力か否か
@@ -52,6 +65,15 @@ public class LogUtil {
 	public String outputLog(Object obj) {
 		if (null == obj) {
 			return null;
+		}
+		if (obj instanceof String) {
+			String str = (String) obj;
+			// CPQデータでかつ契約更新を繰り返し増大したレスポンスデータの場合はエラーとする
+			if (str.contains("_config_attr_info")) {
+				if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < str.length()) {
+					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
+				}
+			}
 		}
 
 		String log = null;
