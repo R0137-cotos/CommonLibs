@@ -33,6 +33,7 @@ cotos:
       outputLog: false
     response:
       outputLog: true
+      outputLogSizeLimit: 10000000
   file:
     uploadFileDir: ./build/testTemp
     fileNmMaxSize: 14
