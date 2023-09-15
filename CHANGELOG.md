@@ -1,5 +1,11 @@
 # Changelog
 
+## v7.3.0 (15/09/2023)
+- [**closed**]  #19704 CPQの重いデータ対応 [#2481](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2481)
+- [**closed**] #20325 メールアドレス情報に異動情報取込手配リマインド用のテーブル区分追加 [#2479](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2479)
+
+---
+
 ## v7.2.0 (07/09/2023)
 - [**closed**] #19890 TMのAPIコール用ヘッダーにUSER_AGENTを追加 [#2472](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2472)
 - [**closed**] 20053 契約機種、機種構成マスタにARCS期間売保守データ用保守形態追加 [#2460](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2460)
