@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.accounting;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -11,6 +12,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -136,4 +140,95 @@ public class AccountedCancellationData extends EntityBase {
 	 */
 	@ApiModelProperty(value = "計上キャンセルステータス", required = false, allowableValues = "未連携(\"0\"), 連携準備中(\"1\"), 連携済(\"2\")", position = 12)
 	private AccountingCancellationStatus accountingCancellationStatus;
+
+	/**
+	 * 見積番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "見積番号", required = false, position = 13, allowableValues = "range[0,255]")
+	private String estimationNumber;
+
+	/**
+	 * 見積番号枝番
+	 */
+	@ApiModelProperty(value = "見積番号枝番", required = false, position = 14, allowableValues = "range[0,99]")
+	private int estimationBranchNumber;
+
+	/**
+	 * 企業名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "企業名", required = false, position = 15, allowableValues = "range[0,255]")
+	private String companyName;
+
+	/**
+	 * 検収日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "検収日", required = false, position = 16)
+	private Date acceptanceDate;
+
+	/**
+	 * 契約日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "契約日", required = false, position = 17)
+	private Date contractDate;
+
+	/**
+	 * サービス開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "サービス開始日", required = false, position = 18)
+	private Date serviceTermStart;
+
+	/**
+	 * 恒久契約識別番号
+	 */
+	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 19, allowableValues = "range[0,255]")
+	private String immutableContIdentNumber;
+
+	/**
+	 * お問い合わせ番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "お問い合わせ番号", required = false, position = 20, allowableValues = "range[0,255]")
+	private String contactNo;
+
+	/**
+	 * 得意先コード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "得意先コード", required = false, position = 21, allowableValues = "range[0,255]")
+	private String billingCustomerSpCode;
+
+	/**
+	 * 品種名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "品種名", required = false, position = 22, allowableValues = "range[0,255]")
+	private String itemName;
+
+	/**
+	 * 数量
+	 */
+	@Max(99999)
+	@Min(-99999)
+	@ApiModelProperty(value = "数量", required = false, position = 23, allowableValues = "range[-99999,99999]")
+	private int quantity;
+
+	/**
+	 * 単価
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "単価", required = false, position = 24, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal unitPrice;
+
+	/**
+	 * 金額
+	 */
+	@DecimalMax("9999999999999999999.99")
+	@ApiModelProperty(value = "金額", required = false, position = 25, allowableValues = "range[0.00,9999999999999999999.99]")
+	private BigDecimal amountSummary;
+
 }
