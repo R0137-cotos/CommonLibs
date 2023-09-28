@@ -240,4 +240,10 @@ public class ItemContract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 26, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
+
+	/**
+	 * 年額明細計上フラグ
+	 */
+	@ApiModelProperty(value = "年額明細計上フラグ", required = false, position = 27, allowableValues = "range[0,9]")
+	private Integer yearDetailAccountFlg;
 }
