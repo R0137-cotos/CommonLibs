@@ -1570,11 +1570,12 @@ public class TestMaster {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
-		MvWjmoc020OrgAllInfoCom foundByCubicOrgIdResult = mvWjmoc020OrgAllInfoComRepository.findByCubicOrgId("4080145", formatDate);
+		List<MvWjmoc020OrgAllInfoCom> foundByCubicOrgIdResultList = mvWjmoc020OrgAllInfoComRepository.findByCubicOrgId("4080145", formatDate);
 
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(foundByCubicOrgIdResult);
-		Assert.assertEquals("cubic_org_idが正しいこと", "4080145", foundByCubicOrgIdResult.getCubicOrgId());
+		// データが取得できていることを確認
+		Assert.assertNotNull(foundByCubicOrgIdResultList);
+		Assert.assertTrue(foundByCubicOrgIdResultList.size() > 0);
+		Assert.assertEquals("cubic_org_idが正しいこと", "4080145", foundByCubicOrgIdResultList.get(0).getCubicOrgId());
 
 	}
 
