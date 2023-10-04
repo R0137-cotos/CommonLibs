@@ -5,6 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.CustomTermPattern;
 import lombok.Data;
 
 /**
@@ -43,4 +44,20 @@ public class LicenseKeyInfoExtendsParameterO365Dto {
 	@JsonFormat(pattern = "yyyy/MM", timezone = "Asia/Tokyo")
 	private Date billingStartMonth;
 
+	/**
+	 * 変更パターン
+	 */
+	private CustomTermPattern customPattern;
+
+	/**
+	 * 変更後の終了日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date customTermEndDate;
+
+	/**
+	 * 同時終了反映日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date coterminateReflectionDate;
 }

@@ -51,4 +51,9 @@ public class LicenseDetailExtendsParameterO365Dto {
 	 */
 	private Integer priorityOrder;
 
+	/**
+	 * 変更後の終了日
+	 */
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date customTermEndDate;
 }
