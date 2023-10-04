@@ -76,6 +76,15 @@ public class LMPIConnectionHelperTests {
 		return LMPIConnectionHelper.getInstance();
 	}
 
+	private LMPIConnectionHelper getHelperNewProduct() {
+		// ヘルパー初期化
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor(new MessageUtil(), new LogUtil(), new ExternalLogRequestProperties(), new ExternalLogResponseProperties(), formatter);
+		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate(new RestTemplateBuilder(), externalClientHttpRequestInterceptor);
+		LMPIConnectionHelperNewProduct.init(context, externalRestTemplate);
+		return LMPIConnectionHelper.getInstance();
+	}
+
 	// ローカルでのテスト時にURL、requestBody、responseをログに出力したい場合は、
 	// LMPIConnectionHelper.javaのcallServiceメソッドに以下を記述すること
 	// コミット時は削除すること
@@ -342,6 +351,29 @@ public class LMPIConnectionHelperTests {
 
 		try {
 			getHelper().getSubscriptions(requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  [GET] サブスクリプション取得API（CLE）
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void getSubscriptionsNewProductTest() throws ParseException {
+
+		TmGetSubscriptionRequestDto requestDto = new TmGetSubscriptionRequestDto();
+
+		// requestDto
+		requestDto.setCustomerId("696ac4bd-8aac-45bb-9e61-16d9b173c89f");
+		requestDto.setSubscriptionId("6c70801f-af07-42e9-a9d4-6b16cae565b5");
+
+		try {
+			getHelperNewProduct().getSubscriptions(requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
