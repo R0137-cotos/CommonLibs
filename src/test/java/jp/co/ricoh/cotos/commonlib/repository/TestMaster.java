@@ -1154,6 +1154,15 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		// エンティティの取得
+		String ceCd = "40782";
+		MvEmployeeMaster foundByCeIdResult = mvEmployeeMasterRepository.findByCeCd(ceCd);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByCeIdResult);
+		Assert.assertEquals("ceCdが正しいこと", ceCd, foundByCeIdResult.getCeCd());
+
 	}
 
 	@Test
@@ -1560,6 +1569,14 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		List<MvWjmoc020OrgAllInfoCom> foundByCubicOrgIdResultList = mvWjmoc020OrgAllInfoComRepository.findByCubicOrgId("4080145", formatDate);
+
+		// データが取得できていることを確認
+		Assert.assertNotNull(foundByCubicOrgIdResultList);
+		Assert.assertTrue(foundByCubicOrgIdResultList.size() > 0);
+		Assert.assertEquals("cubic_org_idが正しいこと", "4080145", foundByCubicOrgIdResultList.get(0).getCubicOrgId());
+
 	}
 
 	@Test
@@ -2817,6 +2834,15 @@ public class TestMaster {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+
+		// エンティティの取得
+		String orsServiceOrgId = "000258";
+		List<MvTjmob260OrgServiceMaster> foundByOrsServiceOrgIdResultList = mvTjmob260OrgServiceMasterRepository.findByOrsServiceOrgId(orsServiceOrgId);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByOrsServiceOrgIdResultList);
+		Assert.assertEquals("ors_service_org_idが正しいこと", orsServiceOrgId, foundByOrsServiceOrgIdResultList.get(0).getOrsServiceOrgId());
+
 	}
 
 	@Test

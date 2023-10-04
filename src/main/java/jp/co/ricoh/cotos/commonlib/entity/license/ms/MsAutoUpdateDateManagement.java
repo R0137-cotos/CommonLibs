@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -52,4 +53,11 @@ public class MsAutoUpdateDateManagement extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "品種マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
 	private Long itemMasterId;
+
+	/**
+	 * サブスクリプションID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "サブスクリプションID", required = false, position = 5, allowableValues = "range[0,255]")
+	private String subscriptionId;
 }

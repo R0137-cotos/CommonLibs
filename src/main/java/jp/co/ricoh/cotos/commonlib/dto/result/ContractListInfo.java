@@ -24,10 +24,10 @@ import lombok.Data;
 @Data
 public class ContractListInfo {
 
-	@Id
 	@ApiModelProperty(value = "連番", required = true, position = 1)
-	private long seqNo;
+	private Long seqNo;
 
+	@Id
 	@ApiModelProperty(value = "契約ID", required = true, position = 2)
 	private long id;
 

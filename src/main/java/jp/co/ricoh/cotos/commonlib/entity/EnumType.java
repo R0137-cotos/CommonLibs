@@ -833,4 +833,33 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	/**
+	 * 契約情報変更アドオン処理区分
+	 */
+	@Description(value = "契約情報変更アドオン処理区分")
+	public enum ContractInfoChangeAddOnProcType {
+
+		契約期間の変更("1");
+
+		private final String text;
+
+		private ContractInfoChangeAddOnProcType(final String text) {
+				this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ContractInfoChangeAddOnProcType fromString(String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
