@@ -132,8 +132,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().postCustomers(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -169,8 +171,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putCustomers(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -204,8 +208,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putUsers(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -244,8 +250,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().postSubscriptions(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -271,8 +279,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().postSubscriptions(customerId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -307,8 +317,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putSubscriptions(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -330,8 +342,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putSubscriptions(customerId, subscriptionId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -353,8 +367,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().getSubscriptions(requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -376,8 +392,10 @@ public class LMPIConnectionHelperTests {
 			getHelperNewProduct().getSubscriptions(requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -415,8 +433,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putSuspend(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -441,8 +461,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putSuspend(customerId, subscriptionId, requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -463,8 +485,10 @@ public class LMPIConnectionHelperTests {
 			assertNotNull("結果が取得できること。", list);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -480,8 +504,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().getServicePlanId();
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -503,8 +529,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().getSubscriptionId(requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
