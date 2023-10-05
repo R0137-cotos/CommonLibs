@@ -1,5 +1,23 @@
 # Changelog
 
+## v7.4.0 (05/10/2023)
+- [**closed**] #13025 組織情報repositoryに追加したメソッドの戻り値の型修正 [#2504](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2504)
+- [**closed**] #20240 品種マスタDTOに拡張項目追加 [#2470](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2470)
+- [**closed**] #20092 O365契約期間変更対応 エラーメッセージ追加 [#2458](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2458)
+- [**closed**] #20092 O365契約期間変更対応 添付ファイル商品毎チェックマスタのEnum追加 [#2455](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2455)
+- [**closed**] #19974 O365更新期限変更対応 カラムEnum追加 [#2452](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2452)
+- [**closed**] #20547 O365計上後注文キャンセルデータ項目追加 [#2495](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2495)
+- [**closed**] #19464 O365キャンセル対応 計上後注文キャンセルデータテーブル追加 [#2402](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2402)
+- [**closed**] #19198 O365キャンセル対応 契約操作履歴区分追加 [#2391](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2391)
+- [**closed**] #19198 O365拡張項目にキャンセル処理状態を追加 [#2389](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2389)
+- [**closed**] #19112　MSキャンセルAPI [#2384](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2384)
+- [**closed**] #20643 契約検索用DTO修正 [#2499](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2499)
+- [**closed**] #13025 Isysoneの保守担当SSとCEをCOTOSと連携させたい。リリースブランチマージ [#2496](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2496)
+- [**closed**] #20331 エラーID桁数間違い修正 [#2489](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2489)
+- [**closed**] #20331 組織情報が有効期限切れのエラー追加 [#2484](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2484)
+
+---
+
 ## v7.3.0 (15/09/2023)
 - [**closed**]  #19704 CPQの重いデータ対応 [#2481](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2481)
 - [**closed**] #20325 メールアドレス情報に異動情報取込手配リマインド用のテーブル区分追加 [#2479](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2479)
