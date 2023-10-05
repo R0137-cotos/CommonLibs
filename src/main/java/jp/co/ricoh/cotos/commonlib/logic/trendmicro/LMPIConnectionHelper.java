@@ -86,6 +86,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserRequestWork
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
+import jp.co.ricoh.cotos.commonlib.util.LMPIPropertiesBase;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -101,7 +102,7 @@ public class LMPIConnectionHelper {
 
 	private TMConverter tmConverter;
 
-	private LMPIProperties properties;
+	private LMPIPropertiesBase properties;
 
 	private RestTemplate rest;
 
@@ -133,7 +134,7 @@ public class LMPIConnectionHelper {
 
 	private TrendMicroUtil trendMicroUtil;
 
-	private LMPIConnectionHelper() {
+	protected LMPIConnectionHelper() {
 		// シングルトン
 	}
 
@@ -156,8 +157,8 @@ public class LMPIConnectionHelper {
 				externalRestTemplate); //
 	}
 
-	private static void init( //
-			LMPIProperties properties, //
+	protected static void init( //
+			LMPIPropertiesBase properties, //
 			TmCreateCustomerRequestWorkRepository tmCreateCustomerRequestWorkRepository, //
 			TmCreateCustomerResponseWorkRepository tmCreateCustomerResponseWorkRepository, //
 			TmUpdateCustomerRequestWorkRepository tmUpdateCustomerRequestWorkRepository, //
