@@ -67,7 +67,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 			List<ErrorInfo> messageInfo = e.getErrorInfoList();
 			Assert.assertEquals(1, messageInfo.size());
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00071");
-			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約変更回数が上限に達したためログ出力できません。");
+			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "ログサイズ超過のためログ出力できません。");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("想定外のエラーが発生した");
@@ -98,7 +98,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 		String resstr = "1234567890";
 		try {
 			ClientHttpResponse clientHttpResponse = new MockClientHttpResponse(resstr.getBytes(), HttpStatus.OK);
-		ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
+			ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
 			Mockito.doReturn(clientHttpResponse).when(execution).execute(any(), any());
 			externalClientHttpRequestInterceptor.intercept(request, body, execution);
 		} catch (Exception e) {

@@ -1,10 +1,12 @@
 package jp.co.ricoh.cotos.commonlib.log;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,15 +68,6 @@ public class LogUtil {
 		if (null == obj) {
 			return null;
 		}
-		if (obj instanceof String) {
-			String str = (String) obj;
-			// CPQデータでかつ契約更新を繰り返し増大したレスポンスデータの場合はエラーとする
-			if (str.contains("_config_attr_info")) {
-				if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < str.length()) {
-					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
-				}
-			}
-		}
 
 		String log = null;
 		try {
@@ -83,5 +76,17 @@ public class LogUtil {
 			log = String.format("[TEXT] %s", obj.toString());
 		}
 		return log;
+	}
+
+	/**
+	 * レスポンスサイズ判定
+	 * @param response
+	 * @throws IOException
+	 */
+	public void checkLogSize(ClientHttpResponse response) throws IOException {
+		// レスポンスサイズ超過の場合はエラーとする
+		if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < response.getBody().available()) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "LogSizeLimitError", new String[] { "ログ出力" }));
+		}
 	}
 }
