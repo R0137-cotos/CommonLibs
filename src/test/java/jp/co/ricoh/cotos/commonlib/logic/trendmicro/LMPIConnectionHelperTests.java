@@ -22,8 +22,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetCustomerResponseDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionIdRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmSuspendSubscriptionRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmUpdateSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequestWork;
@@ -69,6 +73,15 @@ public class LMPIConnectionHelperTests {
 		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor(new MessageUtil(), new LogUtil(), new ExternalLogRequestProperties(), new ExternalLogResponseProperties(), formatter);
 		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate(new RestTemplateBuilder(), externalClientHttpRequestInterceptor);
 		LMPIConnectionHelper.init(context, externalRestTemplate);
+		return LMPIConnectionHelper.getInstance();
+	}
+
+	private LMPIConnectionHelper getHelperNewProduct() {
+		// ヘルパー初期化
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor = new ExternalClientHttpRequestInterceptor(new MessageUtil(), new LogUtil(), new ExternalLogRequestProperties(), new ExternalLogResponseProperties(), formatter);
+		ExternalRestTemplate externalRestTemplate = new ExternalRestTemplate(new RestTemplateBuilder(), externalClientHttpRequestInterceptor);
+		LMPIConnectionHelperNewProduct.init(context, externalRestTemplate);
 		return LMPIConnectionHelper.getInstance();
 	}
 
@@ -119,8 +132,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().postCustomers(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -156,8 +171,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putCustomers(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -191,8 +208,10 @@ public class LMPIConnectionHelperTests {
 			getHelper().putUsers(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -231,8 +250,39 @@ public class LMPIConnectionHelperTests {
 			getHelper().postSubscriptions(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 * [POST] サブスクリプション作成API
+	 * ※WORKテーブル更新無し
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void postSubscriptionsTest_notCreateWork() throws ParseException {
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = df.parse("20230910");
+
+		TmCreateSubscriptionRequestDto requestDto = new TmCreateSubscriptionRequestDto();
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
+		requestDto.setServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
+		requestDto.setUnitsPerLicense("10");
+		requestDto.setLicenseStartDate(date);
+
+		try {
+			getHelper().postSubscriptions(customerId, requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -267,8 +317,35 @@ public class LMPIConnectionHelperTests {
 			getHelper().putSubscriptions(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 *  [PUT] サブスクリプション更新API
+	 *  ※WORKテーブル更新無し
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void putSubscriptionsTest_notCreateWork() throws ParseException {
+
+		TmUpdateSubscriptionRequestDto requestDto = new TmUpdateSubscriptionRequestDto();
+		String customerId = "9842f3d0-0993-4eea-a61f-0ca33b3f7c3e";
+		String subscriptionId = "7ef15198-607a-4eb3-9907-077468585172";
+		requestDto.setUnitsPerLicense("50");
+
+		try {
+			getHelper().putSubscriptions(customerId, subscriptionId, requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -290,8 +367,35 @@ public class LMPIConnectionHelperTests {
 			getHelper().getSubscriptions(requestDto);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 *  [GET] サブスクリプション取得API（CLE）
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void getSubscriptionsNewProductTest() throws ParseException {
+
+		TmGetSubscriptionRequestDto requestDto = new TmGetSubscriptionRequestDto();
+
+		// requestDto
+		requestDto.setCustomerId("696ac4bd-8aac-45bb-9e61-16d9b173c89f");
+		requestDto.setSubscriptionId("6c70801f-af07-42e9-a9d4-6b16cae565b5");
+
+		try {
+			getHelperNewProduct().getSubscriptions(requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -329,8 +433,38 @@ public class LMPIConnectionHelperTests {
 			getHelper().putSuspend(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 *  [PUT] サブスクリプション解約API
+	 *  ※WORKテーブル更新無し
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void putSuspendTest_notCreateWork() throws ParseException {
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = df.parse("20230910");
+
+		TmSuspendSubscriptionRequestDto requestDto = new TmSuspendSubscriptionRequestDto();
+		String customerId = "9842f3d0-0993-4eea-a61f-0ca33b3f7c3e";
+		String subscriptionId = "7ef15198-607a-4eb3-9907-077468585172";
+		requestDto.setLicenseExpirationDate(date);
+
+		try {
+			getHelper().putSuspend(customerId, subscriptionId, requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -351,8 +485,10 @@ public class LMPIConnectionHelperTests {
 			assertNotNull("結果が取得できること。", list);
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 
@@ -368,8 +504,35 @@ public class LMPIConnectionHelperTests {
 			getHelper().getServicePlanId();
 		} catch (RestClientException e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 *  [GET] サブスクリプションID取得API
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void getSubscriptionIdTest() throws ParseException {
+
+		TmGetSubscriptionIdRequestDto requestDto = new TmGetSubscriptionIdRequestDto();
+
+		// requestDto
+		requestDto.setCustomerId("3e2f134a-8ab3-4c12-8042-886afe77937d");
+		requestDto.setServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
+
+		try {
+			getHelper().getSubscriptionId(requestDto);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
 		}
 	}
 

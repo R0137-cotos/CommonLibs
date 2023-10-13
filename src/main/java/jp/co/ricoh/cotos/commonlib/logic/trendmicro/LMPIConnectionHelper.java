@@ -45,6 +45,8 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateCustomer
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateSubscriptionResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetCustomerResponseDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionIdRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionIdResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmSuspendSubscriptionRequestDto;
@@ -85,6 +87,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserRequestWork
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
+import jp.co.ricoh.cotos.commonlib.util.LMPIPropertiesBase;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -100,7 +103,7 @@ public class LMPIConnectionHelper {
 
 	private TMConverter tmConverter;
 
-	private LMPIProperties properties;
+	private LMPIPropertiesBase properties;
 
 	private RestTemplate rest;
 
@@ -132,7 +135,7 @@ public class LMPIConnectionHelper {
 
 	private TrendMicroUtil trendMicroUtil;
 
-	private LMPIConnectionHelper() {
+	protected LMPIConnectionHelper() {
 		// シングルトン
 	}
 
@@ -155,8 +158,8 @@ public class LMPIConnectionHelper {
 				externalRestTemplate); //
 	}
 
-	private static void init( //
-			LMPIProperties properties, //
+	protected static void init( //
+			LMPIPropertiesBase properties, //
 			TmCreateCustomerRequestWorkRepository tmCreateCustomerRequestWorkRepository, //
 			TmCreateCustomerResponseWorkRepository tmCreateCustomerResponseWorkRepository, //
 			TmUpdateCustomerRequestWorkRepository tmUpdateCustomerRequestWorkRepository, //
@@ -309,6 +312,25 @@ public class LMPIConnectionHelper {
 	}
 
 	/**
+	 * [POST] サブスクリプション作成API
+	 * ※WORKテーブル更新無し
+	 */
+	public TmCreateSubscriptionResponseDto postSubscriptions(String customerId, TmCreateSubscriptionRequestDto requestDto) {
+		String url = "/customers/" + customerId + "/subscriptions";
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+			// レスポンスの取得
+			TmCreateSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmCreateSubscriptionResponseDto.class);
+			return responseDto;
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
 	 * [PUT] サブスクリプション更新API
 	 */
 	public TmUpdateSubscriptionResponseWork putSubscriptions(TmUpdateSubscriptionRequestWork requestWork) {
@@ -323,6 +345,25 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class), updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 * [PUT] サブスクリプション更新API
+	 * ※WORKテーブル更新無し
+	 */
+	public TmUpdateSubscriptionResponseDto putSubscriptions(String customerId, String subscriptionId, TmUpdateSubscriptionRequestDto requestDto) {
+		String url = "/customers/" + customerId + "/subscriptions/" + subscriptionId;
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+			// レスポンスの登録
+			TmUpdateSubscriptionResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmUpdateSubscriptionResponseDto.class);
+			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -371,6 +412,29 @@ public class LMPIConnectionHelper {
 			TmSuspendSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(responseBodyDto, updatedWork);
 			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
 			return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 * [PUT] サブスクリプション解約API
+	 * ※WORKテーブル更新無し
+	 */
+	public TmSuspendSubscriptionResponseDto putSuspend(String customerId, String subscriptionId, TmSuspendSubscriptionRequestDto requestDto) {
+		String url = "/customers/" + customerId + "/subscriptions/" + subscriptionId + "/suspend";
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+			// レスポンスの登録
+			// 解約成功時にはBodyが返らないのでnullチェックを行う。
+			TmSuspendSubscriptionResponseDto responseBodyDto = null;
+			if (serviceResponse.getResponseEntity().getBody() != null) {
+				responseBodyDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmSuspendSubscriptionResponseDto.class);
+			}
+			return responseBodyDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
@@ -443,6 +507,24 @@ public class LMPIConnectionHelper {
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
+	 * [GET] サブスクリプションID取得API
+	 */
+	public TmGetSubscriptionIdResponseDto getSubscriptionId(TmGetSubscriptionIdRequestDto requestDto) {
+		String url = "/customers/" + requestDto.getCustomerId() + "/serviceplan/" + requestDto.getServicePlanId() + "/getid";
+		try {
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.GET, null);
+			// レスポンスの取得
+			TmGetSubscriptionIdResponseDto responseDto = mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmGetSubscriptionIdResponseDto.class);
+			return responseDto;
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプションID取得APIで想定外のエラーが発生しました。");
 		}
 	}
 
