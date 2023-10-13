@@ -103,6 +103,7 @@ public class IntraMartUtil {
 			log.error("【APIエラー】  ", e);
 			throw new RuntimeException(e);
 		}
+
 		return responseEntity;
 	}
 
