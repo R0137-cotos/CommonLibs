@@ -81,11 +81,29 @@ cotos:
     accessKey: R8Js3xXeV5T70cpU
     AccessKeySecret: bnuD5E-DDrBvkZ1F4ysCxzErkWZsAJSn
     apiUrl: https://ricoh-demo.sacm.jp/public-api/v1
+  # LMPI接続情報
+  lmpi:
+    apiUrl: https://cspi-stg.trendmicro.com/LMPI
+    version: v2
+    accessToken: 74903e85-ee87-4712-97e1-5e30292e435c
+    secretKey: zGPxd/SVAeevhxleN3SBPnvqM2SddrVBMNDW2JaTQs4=
+  lmpiNewProduct:
+    apiUrl: https://cspi.trendmicro.com/LMPI
+    version: v2
+    accessToken: 7141118b-d53c-45fa-bcd2-3ffbecfbc0ea
+    secretKey: 5Krk8ppvXSPYH6Fa1Wyj7N4stlQgD5jG2j+uqHbdRdg=
+  # SMPI接続情報
+  smpi:
+    apiUrl: https://cspi-stg.trendmicro.com/SMPI
+    version: v2.2
+    service: /service
+    accessToken: 74903e85-ee87-4712-97e1-5e30292e435c
+    secretKey: zGPxd/SVAeevhxleN3SBPnvqM2SddrVBMNDW2JaTQs4=
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_commonlibs
-    password: cotos_ci_commonlibs
+    username: cotos_ci_common_csp_new_prod
+    password: cotos_ci_common_csp_new_prod
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -96,7 +114,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_commonlibs
+        default_schema: cotos_ci_common_csp_new_prod
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
