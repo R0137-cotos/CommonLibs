@@ -2,7 +2,10 @@ package jp.co.ricoh.cotos.commonlib.log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +34,8 @@ public class LogUtil {
 
 	@Autowired
 	ExternalLogResponseProperties externalLogResponseProperties;
+
+	private static final Log log = LogFactory.getLog(LogUtil.class);
 
 	/**
 	 * リクエストボディーをログ出力か否か
@@ -83,9 +88,16 @@ public class LogUtil {
 	 * @param response
 	 * @throws IOException
 	 */
-	public void checkLogSize(ClientHttpResponse response) throws IOException {
+	public void checkLogSize(ClientHttpResponse response) {
 		// レスポンスサイズ超過の場合はエラーとする
-		if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < response.getBody().available()) {
+		if (Optional.ofNullable(externalLogResponseProperties.getOutputLogSizeLimit()).map(s -> {
+			try {
+				return s < response.getBody().available();
+			} catch (IOException e) {
+				log.warn("想定外のエラーによりレスポンスサイズを取得できませんでした。");
+				return false;
+			}
+		}).orElse(false)) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "LogSizeLimitError", new String[] { "ログ出力" }));
 		}
 	}
