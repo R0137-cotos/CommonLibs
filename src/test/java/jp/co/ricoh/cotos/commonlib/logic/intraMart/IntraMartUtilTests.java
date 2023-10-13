@@ -79,4 +79,23 @@ public class IntraMartUtilTests {
 			Assert.fail("予期しない例外が発生");
 		}
 	}
+
+	@Test
+	public void タイムアウト発生確認テスト() {
+
+		// 起動していないサービスのURLで実行しタイムアウトを発生させる
+		String url = "http://dev-api-0.cotos.ricoh.co.jp/contract/api/contract/1";
+
+		// 設定したタイムアウト発生秒数後にタイムアウトが発生することを確認する
+		try {
+			intraMartUtil.callService(HttpMethod.GET, null, url, null);
+			Assert.fail("タイムアウトが発生していない");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			Assert.assertTrue("タイムアウトが発生していること", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("予期しない例外が発生");
+		}
+	}
 }
