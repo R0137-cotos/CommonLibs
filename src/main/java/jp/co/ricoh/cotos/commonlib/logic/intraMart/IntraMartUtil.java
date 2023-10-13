@@ -25,7 +25,7 @@ import jp.co.ricoh.cotos.commonlib.dto.json.estimation.IspSettingRootDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.IspGetSettingInfoParameter;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.AbstractTmRequestDto;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
-import jp.co.ricoh.cotos.commonlib.rest.ExternalIspRestTemplate;
+import jp.co.ricoh.cotos.commonlib.rest.ExternalIntraMartRestTemplate;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
 import lombok.extern.log4j.Log4j;
@@ -48,7 +48,7 @@ public class IntraMartUtil {
 	ExternalRestTemplate externalRestTemplate;
 
 	@Autowired
-	ExternalIspRestTemplate externalIspRestTemplate;
+	ExternalIntraMartRestTemplate externalIntraMartRestTemplate;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -68,7 +68,7 @@ public class IntraMartUtil {
 	 * @see jp.co.ricoh.cotos.commonlib.logic.trendmicro.LMPIConnectionHelper#callService(String, HttpMethod, AbstractTmRequestDto)
 	 */
 	public <T> ResponseEntity<String> callService(HttpMethod method, T requestDto, String url, Charset responseCharset) {
-		RestTemplate rest = externalIspRestTemplate.createRestTemplateForJson();
+		RestTemplate rest = externalIntraMartRestTemplate.createRestTemplateForJson();
 		String body = null;
 
 		ResponseEntity<String> responseEntity = null;

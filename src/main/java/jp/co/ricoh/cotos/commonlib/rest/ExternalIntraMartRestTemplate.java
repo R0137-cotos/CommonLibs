@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExternalIspRestTemplate {
+public class ExternalIntraMartRestTemplate {
 
 	@Autowired
 	RestTemplateBuilder restTemplateBuilder;
