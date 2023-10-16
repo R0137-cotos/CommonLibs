@@ -98,7 +98,7 @@ public class LogUtil {
 				return false;
 			}
 		}).orElse(false)) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "LogSizeLimitError", new String[] { "ログ出力" }));
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
 		}
 	}
 }
