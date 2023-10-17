@@ -74,6 +74,8 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 		String body = "";
 		if (logUtil.isOutputBody(response)) {
 			try {
+				// レスポンスサイズ判定
+				logUtil.checkLogSize(response);
 				body = logUtil.outputLog(StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
 			} catch (IOException e) {
 				log.warn("想定外のエラーによりResponseBodyを取得できませんでした。");

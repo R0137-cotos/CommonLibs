@@ -1,10 +1,15 @@
 package jp.co.ricoh.cotos.commonlib.log;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,6 +34,8 @@ public class LogUtil {
 
 	@Autowired
 	ExternalLogResponseProperties externalLogResponseProperties;
+
+	private static final Log log = LogFactory.getLog(LogUtil.class);
 
 	/**
 	 * リクエストボディーをログ出力か否か
@@ -66,15 +73,6 @@ public class LogUtil {
 		if (null == obj) {
 			return null;
 		}
-		if (obj instanceof String) {
-			String str = (String) obj;
-			// CPQデータでかつ契約更新を繰り返し増大したレスポンスデータの場合はエラーとする
-			if (str.contains("_config_attr_info")) {
-				if (externalLogResponseProperties.getOutputLogSizeLimit() != null && externalLogResponseProperties.getOutputLogSizeLimit() < str.length()) {
-					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
-				}
-			}
-		}
 
 		String log = null;
 		try {
@@ -83,5 +81,24 @@ public class LogUtil {
 			log = String.format("[TEXT] %s", obj.toString());
 		}
 		return log;
+	}
+
+	/**
+	 * レスポンスサイズ判定
+	 * @param response
+	 * @throws IOException
+	 */
+	public void checkLogSize(ClientHttpResponse response) {
+		// レスポンスサイズ超過の場合はエラーとする
+		if (Optional.ofNullable(externalLogResponseProperties.getOutputLogSizeLimit()).map(s -> {
+			try {
+				return s < response.getBody().available();
+			} catch (IOException e) {
+				log.warn("想定外のエラーによりレスポンスサイズを取得できませんでした。");
+				return false;
+			}
+		}).orElse(false)) {
+			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
+		}
 	}
 }
