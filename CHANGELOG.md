@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.4.2 (18/10/2023)
+- [**closed**] #20780 Intra-martAPIコール時のタイムアウト時間を10秒に設定 [#2510](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2510)
+
+---
+
 ## v7.4.0 (05/10/2023)
 - [**closed**] #13025 組織情報repositoryに追加したメソッドの戻り値の型修正 [#2504](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2504)
 - [**closed**] #20240 品種マスタDTOに拡張項目追加 [#2470](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2470)
