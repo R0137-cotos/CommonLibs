@@ -58,6 +58,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 		try {
 			byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/rest/レスポンス.txt"));
 			ClientHttpResponse clientHttpResponse = new MockClientHttpResponse(bytes, HttpStatus.OK);
+			clientHttpResponse.getHeaders().setContentLength(bytes.length);
 			ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
 			Mockito.doReturn(clientHttpResponse).when(execution).execute(any(), any());
 			externalClientHttpRequestInterceptor.intercept(request, body, execution);
@@ -80,6 +81,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 		try {
 			byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/rest/レスポンス_軽.txt"));
 			ClientHttpResponse clientHttpResponse = new MockClientHttpResponse(bytes, HttpStatus.OK);
+			clientHttpResponse.getHeaders().setContentLength(bytes.length);
 			ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
 			Mockito.doReturn(clientHttpResponse).when(execution).execute(any(), any());
 			externalClientHttpRequestInterceptor.intercept(request, body, execution);
@@ -96,7 +98,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 		String resstr = "1234567890";
 		try {
 			ClientHttpResponse clientHttpResponse = new MockClientHttpResponse(resstr.getBytes(), HttpStatus.OK);
-		ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
+			ClientHttpRequestExecution execution = mock(ClientHttpRequestExecution.class);
 			Mockito.doReturn(clientHttpResponse).when(execution).execute(any(), any());
 			externalClientHttpRequestInterceptor.intercept(request, body, execution);
 		} catch (Exception e) {
