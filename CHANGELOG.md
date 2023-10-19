@@ -1,5 +1,12 @@
 # Changelog
 
+## v7.5.0 (19/10/2023)
+- [**closed**] #20846 外部API連携ログサイズメッセージ修正 [#2512](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2512)
+- [**closed**] #20846　レスポンスサイズ判定タイミング変更 [#2508](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2508)
+- [**closed**] 19853 品種(契約用)エンティティに年額明細計上フラグ追加 [#2500](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2500)
+
+---
+
 ## v7.4.2 (18/10/2023)
 - [**closed**] #20780 Intra-martAPIコール時のタイムアウト時間を10秒に設定 [#2510](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2510)
 
