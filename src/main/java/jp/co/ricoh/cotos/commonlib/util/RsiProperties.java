@@ -17,14 +17,29 @@ public class RsiProperties {
 	String contractUrl;
 
 	/**
+	 * RSI 契約管理APIのベースURL 日本DC接続用
+	 */
+	String contractUrlForJpdc;
+
+	/**
 	 * RSI 契約管理APIのユーザー認証用URL
 	 */
 	String authUrl;
 
 	/**
+	 * RSI 契約管理APIのユーザー認証用URL 日本DC接続用
+	 */
+	String authUrlForJpdc;
+
+	/**
 	 * RSI 基本ユーザー情報APIのベースURL
 	 */
 	String basicUserInfoUrl;
+
+	/**
+	 * RSI 基本ユーザー情報APIのベースURL 日本DC接続用
+	 */
+	String basicUserInfoUrlForJpdc;
 
 	/**
 	 * RSI 契約管理APIのユーザー認証用ユーザーID
