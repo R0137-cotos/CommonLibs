@@ -66,8 +66,11 @@ cotos:
     systemName: CTSCont02
   rsi:
     contractUrl: dummy_rsi_contract_url
+    contractUrlForJpdc: dummy_rsi_contract_url_for_jpdc
     authUrl: dummy_rsi_auth_url
+    authUrlForJpdc: dummy_rsi_auth_url_for_jpdc
     basicUserInfoUrl: dummy_rsi_basic_user_info_url
+    basicUserInfoUrlForJpdc: dummy_rsi_basic_user_info_url_for_jpdc
     userId: dummy_rsi_user_id
     userPassword: dummy_rsi_user_password
     userTenantId: dummy_rsi_user_tenantId
