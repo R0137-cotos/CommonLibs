@@ -5,12 +5,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 /**
- * トレンドマイクロ連携設定
- * @author z00se03039
+ * トレンドマイクロ連携設定（新商品）
  *
  */
 @Component
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "cotos.lmpi")
-public class LMPIProperties extends LMPIPropertiesBase {
+@ConfigurationProperties(prefix = "cotos.lmpiNewProduct")
+public class LMPIPropertiesNewProduct extends LMPIPropertiesBase {
 }

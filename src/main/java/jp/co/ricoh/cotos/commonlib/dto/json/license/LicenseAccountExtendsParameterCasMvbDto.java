@@ -12,4 +12,9 @@ public class LicenseAccountExtendsParameterCasMvbDto {
 	 * インストールURL
 	 */
 	private String installUrl;
+
+	/**
+	 * 有償サンドボックスサブスクリプションID
+	 */
+	private String paidSandboxSubscriptionId;
 }
