@@ -92,17 +92,19 @@ public class LogUtil {
 	 * @param response
 	 * @throws IOException
 	 */
-	public void checkLogSize(ClientHttpResponse response) {
-		// レスポンスサイズ超過の場合はエラーとする
-		if (Optional.ofNullable(externalLogResponseProperties.getOutputLogSizeLimit()).map(s -> {
-			try {
-				return s < response.getBody().available();
-			} catch (IOException e) {
-				log.warn("想定外のエラーによりレスポンスサイズを取得できませんでした。");
-				return false;
+	public void checkLogSize(ClientHttpResponse response) throws IOException {
+		if (response == null || response.getBody() == null) {
+			// レスポンスサイズ超過の場合はエラーとする
+			if (Optional.ofNullable(externalLogResponseProperties.getOutputLogSizeLimit()).map(s -> {
+				try {
+					return s < response.getBody().available();
+				} catch (IOException e) {
+					log.warn("想定外のエラーによりレスポンスサイズを取得できませんでした。");
+					return false;
+				}
+			}).orElse(false)) {
+				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
 			}
-		}).orElse(false)) {
-			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "NumberOfContractChangesLimitError", new String[] { "ログ出力" }));
 		}
 	}
 }
