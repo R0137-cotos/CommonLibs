@@ -93,7 +93,7 @@ public class LogUtil {
 	 * @throws IOException
 	 */
 	public void checkLogSize(ClientHttpResponse response) throws IOException {
-		if (response == null || response.getBody() == null) {
+		if (response != null && response.getBody() != null) {
 			// レスポンスサイズ超過の場合はエラーとする
 			if (Optional.ofNullable(externalLogResponseProperties.getOutputLogSizeLimit()).map(s -> {
 				try {
