@@ -19,11 +19,15 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * ログ共通クラス
  */
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class LogUtil {
 
 	@Autowired
