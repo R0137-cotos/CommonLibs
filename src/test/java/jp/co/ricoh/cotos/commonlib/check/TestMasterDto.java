@@ -77,6 +77,7 @@ public class TestMasterDto {
 		dto.setEstimationContractType("1");
 		dto.setLifecycleStatus("1");
 		dto.setArrangementWorkTypeMasterId(1L);
+		dto.setVupLinkageCheckExcludeFlg(1);
 
 		AttachedFileProductClassCheckMasterSearchParameter testTarget = new AttachedFileProductClassCheckMasterSearchParameter();
 		BeanUtils.copyProperties(testTarget, dto);
@@ -108,6 +109,22 @@ public class TestMasterDto {
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品種類区分は最大文字数（255）を超えています。"));
 
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setVupLinkageCheckExcludeFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "V-UP連携チェック除外フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setVupLinkageCheckExcludeFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "V-UP連携チェック除外フラグは最小値（0）を下回っています。"));
+
 	}
 
 	@Test
@@ -121,6 +138,7 @@ public class TestMasterDto {
 		dto.setLifecycleStatus("1");
 		dto.setItemMasterIdList(Arrays.asList(1L, 2L));
 		dto.setArrangementWorkTypeMasterId(1L);
+		dto.setVupLinkageCheckExcludeFlg(1);
 
 		AttachedFileProductGrpCheckMasterSearchParameter testTarget = new AttachedFileProductGrpCheckMasterSearchParameter();
 		BeanUtils.copyProperties(testTarget, dto);
@@ -150,6 +168,22 @@ public class TestMasterDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ドメインは最大文字数（255）を超えています。"));
+
+		// 異常系（@Max ：）
+		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setVupLinkageCheckExcludeFlg(INT_10);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "V-UP連携チェック除外フラグは最大値（9）を超えています。"));
+
+		// 異常系（@Min ：）
+		BeanUtils.copyProperties(testTarget, dto);
+		testTarget.setVupLinkageCheckExcludeFlg(INT_MINUS_1);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00027));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "V-UP連携チェック除外フラグは最小値（0）を下回っています。"));
 
 	}
 }
