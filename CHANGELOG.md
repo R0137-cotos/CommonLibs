@@ -1,5 +1,17 @@
 # Changelog
 
+## v7.6.0 (07/11/2023)
+- [**closed**] #21182_LogUtilにアノテーション追加 [#2523](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2523)
+- [**closed**] #20593 帳票ページマスタリポジトリメソッド追加 [#2519](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2519)
+- [**closed**] #20904 Message.propertiesにデータ復旧支援(CSP)のサービス利用希望日エラーメッセージ追加 [#2509](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2509)
+- [**closed**] #20816_LMPIヘルパークラス_商品によって分けられるようサブクラスを作成 [#2506](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2506)
+- [**closed**] #20750 MVBアカウント用DTOに有償サンドボックスサブスクリプションIDを追加 [#2503](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2503)
+- [**closed**] #20482 TrendMicroLMPI連携ヘルパークラスにTM連携WORK作成を行わないAPI呼び出し機能を追加 [#2490](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2490)
+- [**closed**] #20341_品種ライセンス用設定の拡張項目DTO作成 [#2483](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2483)
+- [**closed**] #20288_商品（契約用）拡張項目DTO（CLE）作成 [#2475](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2475)
+
+---
+
 ## v7.5.0 (19/10/2023)
 - [**closed**] #20846 外部API連携ログサイズメッセージ修正 [#2512](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2512)
 - [**closed**] #20846　レスポンスサイズ判定タイミング変更 [#2508](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2508)
