@@ -328,15 +328,15 @@ public class TestAccounting {
 		testTarget.setFfmFlg(10);
 		testTarget.setCubicFlg(10);
 		testTarget.setFfmTotalBillingCount(100);
-		testTarget.setFfmUserSalesCnt(100000);
-		testTarget.setFfmRjSalesCnt(100000);
-		testTarget.setFfmRjPurchaseCnt(100000);
-		testTarget.setFfmShopSalesCnt(100000);
-		testTarget.setFfmRCostCnt(100000);
-		testTarget.setFfmCommissionCnt(100000);
+		testTarget.setFfmUserSalesCnt(100000000000);
+		testTarget.setFfmRjSalesCnt(100000000000);
+		testTarget.setFfmRjPurchaseCnt(100000000000);
+		testTarget.setFfmShopSalesCnt(100000000000);
+		testTarget.setFfmRCostCnt(100000000000);
+		testTarget.setFfmCommissionCnt(100000000000);
 		testTarget.setFfmThisBillingCnt(100000);
 		testTarget.setFfmForcedFlg(10);
-		testTarget.setCubicCount(100000);
+		testTarget.setCubicCount(100000000000);
 
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 12);
