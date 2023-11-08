@@ -9,8 +9,8 @@ import lombok.Data;
 @Component
 @Data
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "cotos.rsi")
-public class RsiProperties {
+@ConfigurationProperties(prefix = "cotos.rsiForJpdc")
+public class rsiForJpdcProperties {
 	/**
 	 * RSI 契約管理APIのベースURL
 	 */
