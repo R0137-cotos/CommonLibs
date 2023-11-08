@@ -555,4 +555,4 @@
 |598|帳票ページマスタのrepositoryにメソッド追加|
 |599|LogUtilにアノテーション追加|
 |600|SACM,LMPI,SMPI,ExternalRestTemplateのタイムアウト時間を設定|
-|601|商品マスタEntityにISMAP商品フラグを追加,rsiProperties修正|
+|601|商品マスタEntityにISMAP商品フラグを追加,rsiProperties|
