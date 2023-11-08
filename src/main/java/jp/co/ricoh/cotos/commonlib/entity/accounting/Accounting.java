@@ -447,7 +447,7 @@ public class Accounting extends EntityBase {
 	private String ffmDistType;
 
 	/** 売上数量 */
-	@Max(99999999999)
+	@Max(9999999999L)
 	@ApiModelProperty(value = "売上数量", required = false, position = 85, allowableValues = "range[0,99999999999]")
 	private Integer ffmUserSalesCnt;
 
@@ -487,7 +487,7 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmUserSalesTaxPrice;
 
 	/** RJ売上数量 */
-	@Max(99999999999)
+	@Max(9999999999L)
 	@ApiModelProperty(value = "RJ売上数量", required = false, position = 93, allowableValues = "range[0,99999999999]")
 	private Integer ffmRjSalesCnt;
 
@@ -527,7 +527,7 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmRjSalesTaxPrice;
 
 	/** RJ仕入数量 */
-	@Max(99999999999)
+	@Max(9999999999L)
 	@ApiModelProperty(value = "RJ仕入数量", required = false, position = 101, allowableValues = "range[0,99999999999]")
 	private Integer ffmRjPurchaseCnt;
 
@@ -567,7 +567,7 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmRjPurchaseTaxPrice;
 
 	/** 販売店売上数量 */
-	@Max(99999999999)
+	@Max(9999999999L)
 	@ApiModelProperty(value = "販売店売上数量", required = false, position = 109, allowableValues = "range[0,99999999999]")
 	private Integer ffmShopSalesCnt;
 
@@ -608,7 +608,7 @@ public class Accounting extends EntityBase {
 
 	/** R原価数量 */
 	@Column(name = "ffm_r_cost_cnt")
-	@Max(99999999999)
+	@Max(9999999999L)
 	@ApiModelProperty(value = "R原価数量", required = false, position = 117, allowableValues = "range[0,99999999999]")
 	private Integer ffmRCostCnt;
 
@@ -655,7 +655,7 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmRCostTaxPrice;
 
 	/** 手数料数量 */
-	@Max(99999999999)
+	@Max(99999999999L)
 	@ApiModelProperty(value = "手数料数量", required = false, position = 125, allowableValues = "range[0,99999999999]")
 	private Integer ffmCommissionCnt;
 
@@ -1037,7 +1037,7 @@ public class Accounting extends EntityBase {
 	private String cubicProjectCd;
 
 	/** 数量 */
-	@Max(99999999999)
+	@Max(99999999999L)
 	@ApiModelProperty(value = "数量", required = false, position = 199, allowableValues = "range[0,99999999999]")
 	private Integer cubicCount;
 
