@@ -19,6 +19,10 @@ import org.springframework.web.client.RestTemplate;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * 外部システム連携用RestTemplate
+ * タイムアウト時間が適合しない場合は、当クラスを継承しcreateRequestFactoryのタイムアウト時間を調整すること
+ */
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,12 +45,14 @@ public class ExternalRestTemplate {
 	private RestTemplate createRestTemplate() {
 		RestTemplate rest = restTemplateBuilder.build();
 		rest.setInterceptors(Stream.concat(rest.getInterceptors().stream(), Arrays.asList(externalClientHttpRequestInterceptor).stream()).collect(Collectors.toList()));
+		rest.setRequestFactory(createRequestFactory());
 		return rest;
 	}
 
 	private RestTemplate createRestTemplate(ClientHttpRequestInterceptor interceptor) {
 		RestTemplate rest = restTemplateBuilder.build();
 		rest.setInterceptors(Stream.concat(rest.getInterceptors().stream(), Arrays.asList(interceptor, externalClientHttpRequestInterceptor).stream()).collect(Collectors.toList()));
+		rest.setRequestFactory(createRequestFactory());
 		return rest;
 	}
 
@@ -75,7 +81,7 @@ public class ExternalRestTemplate {
 		mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.TEXT_HTML, MediaType.APPLICATION_JSON));
 		rest.getMessageConverters().add(mappingJackson2HttpMessageConverter);
 
-		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		SimpleClientHttpRequestFactory requestFactory = createRequestFactory();
 		requestFactory.setOutputStreaming(false);
 		rest.setRequestFactory(requestFactory);
 
@@ -88,5 +94,17 @@ public class ExternalRestTemplate {
 	 */
 	public RestTemplate createRestTemplateForJson() {
 		return createRestTemplateForJson(null);
+	}
+
+	/**
+	 * SimpleClientHttpRequestFactory生成
+	 * @return SimpleClientHttpRequestFactory
+	 */
+	protected SimpleClientHttpRequestFactory createRequestFactory() {
+		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		requestFactory.setConnectTimeout(10000);
+		requestFactory.setReadTimeout(15000);
+
+		return requestFactory;
 	}
 }

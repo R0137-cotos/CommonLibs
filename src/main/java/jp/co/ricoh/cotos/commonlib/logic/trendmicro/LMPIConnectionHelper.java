@@ -193,6 +193,8 @@ public class LMPIConnectionHelper {
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setOutputStreaming(false);
+		requestFactory.setConnectTimeout(10000);
+		requestFactory.setReadTimeout(30000);
 		rest.setRequestFactory(requestFactory);
 
 		// リポジトリ設定
