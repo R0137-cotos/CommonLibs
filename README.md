@@ -554,3 +554,4 @@
 |597|商品マスタEntityにISMAP商品フラグを追加 rsiProperties修正|
 |598|20231107リリース分マージ|
 |599|rsiPropertiesを北米DC用と日本DC用で分けて設定|
+|600|RsiForJpdcPropertiesのクラス名１文字目大文字に修正|

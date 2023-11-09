@@ -19,7 +19,7 @@ public class TestRsiForJpdcProperties {
 	static ConfigurableApplicationContext context;
 
 	@Autowired
-	rsiForJpdcProperties rsiForJpdcProperties;
+	RsiForJpdcProperties rsiForJpdcProperties;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -36,7 +36,7 @@ public class TestRsiForJpdcProperties {
 	}
 
 	@Test
-	public void RSIのプロパティが取得できること() {
+	public void RsiForJpdcのプロパティが取得できること() {
 		Assert.assertEquals("RSI 契約管理APIのベースURLが取得できること", rsiForJpdcProperties.getContractUrl(), "dummy_rsi_contract_url_for_jpdc");
 		Assert.assertEquals("RSI 契約管理APIのユーザー認証用URLが取得できること", rsiForJpdcProperties.getAuthUrl(), "dummy_rsi_auth_url_for_jpdc");
 		Assert.assertEquals("RSI 基本ユーザー情報APIのベースURLが取得できること", rsiForJpdcProperties.getBasicUserInfoUrl(), "dummy_rsi_basic_user_info_url_for_jpdc");
