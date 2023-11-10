@@ -554,3 +554,4 @@
 |597|CSP新商品追加対応|
 |598|帳票ページマスタのrepositoryにメソッド追加|
 |599|LogUtilにアノテーション追加|
+|600|SACM,LMPI,SMPI,ExternalRestTemplateのタイムアウト時間を設定|

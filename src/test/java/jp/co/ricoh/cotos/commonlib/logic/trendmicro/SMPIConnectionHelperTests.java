@@ -54,6 +54,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalClientHttpRequestInterceptor;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
+import jp.co.ricoh.cotos.commonlib.util.SMPIProperties;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -68,6 +69,9 @@ import lombok.extern.log4j.Log4j;
 public class SMPIConnectionHelperTests {
 
 	static ConfigurableApplicationContext context;
+
+	@Autowired
+	private SMPIProperties properties;
 
 	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
@@ -408,6 +412,32 @@ public class SMPIConnectionHelperTests {
 			log.error(e.toString());
 			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
 			fail("想定外のエラーが発生しました。");
+		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void タイムアウト発生確認テスト() {
+
+		// 起動していないサービスのURLで実行しタイムアウトを発生させる
+		String defaultUrl = properties.getApiUrl();
+		String url = "http://dev-api-0.cotos.ricoh.co.jp/contract/api/contract/1";
+		properties.setApiUrl(url);
+
+		String customerId = "5118f657-9f7d-407d-97ab-ca434c6dc936";
+
+		// 設定したタイムアウト発生秒数後にタイムアウトが発生することを確認する
+		try {
+			getHelper().getWfbssDomains(customerId);
+			fail("タイムアウトが発生していない");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			assertTrue("タイムアウトが発生していること", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("予期しない例外が発生");
+		} finally {
+			properties.setApiUrl(defaultUrl);
 		}
 	}
 }
