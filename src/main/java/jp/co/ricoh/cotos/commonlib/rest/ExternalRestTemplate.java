@@ -103,7 +103,7 @@ public class ExternalRestTemplate {
 	protected SimpleClientHttpRequestFactory createRequestFactory() {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setConnectTimeout(10000);
-		requestFactory.setReadTimeout(15000);
+		requestFactory.setReadTimeout(30000);
 
 		return requestFactory;
 	}
