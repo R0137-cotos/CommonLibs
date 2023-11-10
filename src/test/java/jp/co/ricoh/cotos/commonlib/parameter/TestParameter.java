@@ -1,8 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.parameter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,10 +9,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.CustomerBillingProfileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.CustomerCompanyProfileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.CustomerDto;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.Link;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.StandardResorceLinks;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.DefaultAddressDto;
 
 public class TestParameter {
 
@@ -22,27 +20,26 @@ public class TestParameter {
 	public void 非nullの項目だけでJSONが作成されること() throws JsonProcessingException {
 
 		CustomerDto customerDto = new CustomerDto();
-
-		customerDto.setId(null);
-		customerDto.setCommerceId(null);
 		CustomerCompanyProfileDto companyProfileDto = new CustomerCompanyProfileDto();
 		companyProfileDto.setDomain("domain");
 		customerDto.setCompanyProfile(companyProfileDto);
-		customerDto.setBillingProfile(null);
-		customerDto.setRelationshipToPartner(null);
-		customerDto.setAllowDelegatedAccess(true);
-		customerDto.setUserCredentials(null);
-		List<String> customDomains = new ArrayList<String>();
-		customDomains.add("test1");
-		customDomains.add("test2");
-		customDomains.add("test3");
-		customerDto.setCustomDomains(customDomains);
-		customerDto.setAssociatedPartnerId(null);
-		StandardResorceLinks standardResorceLinks = new StandardResorceLinks();
-		Link link = new Link();
-		link.setUri("uri");
-		standardResorceLinks.setSelf(link);
-		customerDto.setLinks(standardResorceLinks);
+		CustomerBillingProfileDto billingProfileDto = new CustomerBillingProfileDto();
+		billingProfileDto.setEmail("email");
+		billingProfileDto.setCulture("culture");
+		billingProfileDto.setLanguage("language");
+		billingProfileDto.setCompanyName("companyName");
+		DefaultAddressDto defaultAddressDto = new DefaultAddressDto();
+		defaultAddressDto.setCountry("country");
+		defaultAddressDto.setCity("city");
+		defaultAddressDto.setState("state");
+		defaultAddressDto.setAddressLine1("addressLine1");
+		defaultAddressDto.setAddressLine2("addressLine2");
+		defaultAddressDto.setPostalCode("postalCode");
+		defaultAddressDto.setFirstName("firstName");
+		defaultAddressDto.setLastName("lastName");
+		defaultAddressDto.setPhoneNumber("phoneNumber");
+		billingProfileDto.setDefaultAddress(defaultAddressDto);
+		customerDto.setBillingProfile(billingProfileDto);
 
 		// JavaオブジェクトをJSONに変換
 		String json = null;
@@ -50,10 +47,10 @@ public class TestParameter {
 		try {
 			json = mapper.writeValueAsString(customerDto);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			Assert.fail("例外が発生した");
 		}
 
-		String expected = "{\"links\":{\"self\":{\"uri\":\"uri\"}},\"companyProfile\":{\"domain\":\"domain\"},\"allowDelegatedAccess\":true,\"customDomains\":[\"test1\",\"test2\",\"test3\"]}";
+		String expected = "{\"companyProfile\":{\"domain\":\"domain\"},\"billingProfile\":{\"email\":\"email\",\"culture\":\"culture\",\"language\":\"language\",\"companyName\":\"companyName\",\"defaultAddress\":{\"country\":\"country\",\"city\":\"city\",\"state\":\"state\",\"addressLine1\":\"addressLine1\",\"addressLine2\":\"addressLine2\",\"postalCode\":\"postalCode\",\"firstName\":\"firstName\",\"lastName\":\"lastName\",\"phoneNumber\":\"phoneNumber\"}}}";
 		Assert.assertEquals(expected, json);
 	}
 
@@ -72,5 +69,7 @@ public class TestParameter {
 		}
 
 		Assert.assertEquals(customerDto.getId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
+		Assert.assertEquals(customerDto.getBillingProfile().getEmail(), "qqqq@itos.com");
+		Assert.assertEquals(customerDto.getBillingProfile().getDefaultAddress().getCountry(), "JP");
 	}
 }

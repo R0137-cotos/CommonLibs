@@ -6,7 +6,7 @@ import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class CustomerCompanyProfileDto extends ResorceBaseWithLinks {
+public class CustomerCompanyProfileDto extends ResourceBaseWithLinks {
 
 	/*
 	 * the azure active directory tenant identifier for the customer's tenant.

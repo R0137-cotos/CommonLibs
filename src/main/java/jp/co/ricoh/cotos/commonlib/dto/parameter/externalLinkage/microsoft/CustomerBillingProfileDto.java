@@ -6,7 +6,7 @@ import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class CustomerBillingProfileDto extends ResorceBaseWithLinks {
+public class CustomerBillingProfileDto extends ResourceBaseWithLinks {
 
 	/*
 	 * the profile identifier.

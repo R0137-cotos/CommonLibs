@@ -8,7 +8,7 @@ import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class CustomerDto extends ResorceBaseWithLinks {
+public class CustomerDto extends ResourceBaseWithLinks {
 
 	/*
 	 * the customer active directory tenant ID.

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
-public class ResorceBase {
+public class ResourceBase {
 
 	/*
 	 * the resource attributes.
