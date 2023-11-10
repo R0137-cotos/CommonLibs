@@ -57,7 +57,7 @@ public class TestParameter {
 	@Test
 	public void JSON文字列をDTOにマッピングできること_多重継承あり() throws JsonProcessingException {
 
-		String json = "{\"id\":\"6ebdeebe-daf5-468f-9c10-762cb382d3da\",\"commerceId\":\"ec5d089a-a823-4e4b-b0df-8269082deb18\",\"companyProfile\":{\"tenantId\":\"6ebdeebe-daf5-468f-9c10-762cb382d3da\",\"domain\":\"utf8test001002.onmicrosoft.com\",\"companyName\":\"株式会社ＲＩＴＯＳ\",\"links\":{\"self\":{\"uri\":\"/customers/6ebdeebe-daf5-468f-9c10-762cb382d3da/profiles/company\",\"method\":\"GET\",\"headers\":[]}},\"attributes\":{\"objectType\":\"CustomerCompanyProfile\"}},\"billingProfile\":{\"id\":\"83e2aa9c-1967-5851-2199-72abf62fd4f5\",\"email\":\"qqqq@itos.com\",\"culture\":\"ja-JP\",\"language\":\"ja\",\"companyName\":\"株式会社ＲＩＴＯＳ\",\"defaultAddress\":{\"country\":\"JP\",\"region\":\"東京都\",\"city\":\"大田区\",\"state\":\"東京都\",\"addressLine1\":\"東京都大田区大森西３丁目８－１１\",\"addressLine2\":\"\",\"addressLine3\":\"\",\"postalCode\":\"1430015\",\"firstName\":\"０1\",\"lastName\":\"テスト\",\"phoneNumber\":\"0123456789\"},\"links\":{\"self\":{\"uri\":\"/customers/6ebdeebe-daf5-468f-9c10-762cb382d3da/profiles/billing\",\"method\":\"GET\",\"headers\":[]}},\"attributes\":{\"etag\":\"3205030145379371967\",\"objectType\":\"CustomerBillingProfile\"}},\"relationshipToPartner\":\"reseller\",\"tags\":[],\"links\":{\"self\":{\"uri\":\"/customers/6ebdeebe-daf5-468f-9c10-762cb382d3da\",\"method\":\"GET\",\"headers\":[]}},\"attributes\":{\"objectType\":\"Customer\"}}";
+		String json = "{\"id\":\"6ebdeebe-daf5-468f-9c10-762cb382d3da\",\"commerceId\":\"ec5d089a-a823-4e4b-b0df-8269082deb18\",\"companyProfile\":{\"tenantId\":\"6ebdeebe-daf5-468f-9c10-762cb382d3da\",\"domain\":\"utf8test001002.onmicrosoft.com\",\"companyName\":\"株式会社ＲＩＴＯＳ\",\"links\":{\"self\":{\"uri\":\"/customers/6ebdeebe-daf5-468f-9c10-762cb382d3da/profiles/company\",\"method\":\"GET\",\"headers\":[]}},\"attributes\":{\"objectType\":\"CustomerCompanyProfile\"}},\"billingProfile\":{\"id\":\"83e2aa9c-1967-5851-2199-72abf62fd4f5\",\"email\":\"qqqq@itos.com\",\"culture\":\"ja-JP\",\"language\":\"ja\",\"companyName\":\"株式会社ＲＩＴＯＳ\",\"defaultAddress\":{\"country\":\"JP\",\"region\":\"東京都\",\"city\":\"大田区\",\"state\":\"東京都\",\"addressLine1\":\"東京都大田区大森西３丁目８－１１\",\"addressLine2\":\"\",\"addressLine3\":\"\",\"postalCode\":\"1430015\",\"firstName\":\"０1\",\"lastName\":\"テスト\",\"phoneNumber\":\"0123456789\"},\"links\":{\"self\":{\"uri\":\"/customers/6ebdeebe-daf5-468f-9c10-762cb382d3da/profiles/billing\",\"method\":\"GET\",\"headers\":[]}},\"attributes\":{\"etag\":\"3205030145379371967\",\"objectType\":\"CustomerBillingProfile\"}},\"relationshipToPartner\":\"reseller\",\"tags\":[],\"links\":{\"self\":{\"uri\":\"/customers/6ebdeebe-daf5-468f-9c10-762cb382d3da\",\"method\":\"GET\",\"headers\":[]}},\"attributes\":{\"objectType\":\"Customer\"},\"userCredentials\":{\"userName\":\"ユーザ\",\"password\":\"w8HSsQh3\"}}";
 
 		CustomerDto customerDto = new CustomerDto();
 		ObjectMapper mapper = new ObjectMapper();
@@ -69,7 +69,9 @@ public class TestParameter {
 		}
 
 		Assert.assertEquals(customerDto.getId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
+		Assert.assertEquals(customerDto.getCompanyProfile().getTenantId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
 		Assert.assertEquals(customerDto.getBillingProfile().getEmail(), "qqqq@itos.com");
 		Assert.assertEquals(customerDto.getBillingProfile().getDefaultAddress().getCountry(), "JP");
+		Assert.assertEquals(customerDto.getUserCredentials().getUserName(), "ユーザ");
 	}
 }
