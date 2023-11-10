@@ -1,4 +1,4 @@
-package jp.co.ricoh.cotos.commonlib.parameter;
+package jp.co.ricoh.cotos.commonlib.microsoftParameter;
 
 import java.io.IOException;
 
