@@ -14,7 +14,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.Custo
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.CustomerDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft.DefaultAddressDto;
 
-public class TestParameter {
+public class TestMicrosoftParameter {
 
 	@Test
 	public void 非nullの項目だけでJSONが作成されること() throws JsonProcessingException {
