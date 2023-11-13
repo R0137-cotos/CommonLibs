@@ -73,6 +73,15 @@ cotos:
     userTenantId: dummy_rsi_user_tenantId
     appUserId: dummy_rsi_app_user_id
     appUserPassword: dummy_rsi_app_user_password
+  rsiForJpdc:
+    contractUrl: dummy_rsi_contract_url_for_jpdc
+    authUrl: dummy_rsi_auth_url_for_jpdc
+    basicUserInfoUrl: dummy_rsi_basic_user_info_url_for_jpdc
+    userId: dummy_rsi_user_id_for_jpdc
+    userPassword: dummy_rsi_user_password_for_jpdc
+    userTenantId: dummy_rsi_user_tenantId_for_jpdc
+    appUserId: dummy_rsi_app_user_id_for_jpdc
+    appUserPassword: dummy_rsi_app_user_password_for_jpdc
   intramart:
     url: https://slst.imp.ricoh.co.jp/imsl/logic/api
     user: API_SS_0172_USER
@@ -102,8 +111,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_commonlibs
-    password: cotos_ci_commonlibs
+    username: cotos_ci_com_release_ismap
+    password: cotos_ci_com_release_ismap
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -114,7 +123,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_commonlibs
+        default_schema: cotos_ci_com_release_ismap
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
