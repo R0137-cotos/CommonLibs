@@ -18,4 +18,24 @@ public class AgreementDto {
 	 */
 	private PrimaryContactDto primaryContact;
 
+	/*
+	 * the template ID of the agreement.
+	 */
+	private String templateId;
+
+	/*
+	 * the date the agreement was signed.
+	 */
+	private String dateAgreed;
+
+	/*
+	 * the agreement type.
+	 */
+	private String type;
+
+	/*
+	 * the download link for the agreement.
+	 */
+	private String AgreementLink;
+
 }

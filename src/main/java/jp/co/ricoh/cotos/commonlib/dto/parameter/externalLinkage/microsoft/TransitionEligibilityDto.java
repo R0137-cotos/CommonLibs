@@ -26,7 +26,7 @@ public class TransitionEligibilityDto extends ResourceBase {
 	/*
 	 * the quantity of the new offer to be purchased.
 	 */
-	private String quantity;
+	private Integer quantity;
 
 	/*
 	 * the eligibilities.
