@@ -9,21 +9,6 @@ import lombok.Data;
 public class OrderDto extends OrderResourceLinks {
 
 	/*
-	 * the reference customer identifier.
-	 */
-	private String referenceCustomerId;
-
-	/*
-	 * the type of billing cycle for the selected offers.
-	 */
-	private String billingCycle;
-
-	/*
-	 * the Order line items.
-	 */
-	private LineItemsDto lineItems;
-
-	/*
 	 * the order identifier.
 	 */
 	private String id;
@@ -34,6 +19,16 @@ public class OrderDto extends OrderResourceLinks {
 	private String alternateId;
 
 	/*
+	 * the reference customer identifier.
+	 */
+	private String referenceCustomerId;
+
+	/*
+	 * the type of billing cycle for the selected offers.
+	 */
+	private String billingCycle;
+
+	/*
 	 * the currency code.
 	 */
 	private String currencyCode;
@@ -42,6 +37,11 @@ public class OrderDto extends OrderResourceLinks {
 	 * the currency symbol.
 	 */
 	private String currencySymbol;
+
+	/*
+	 * the Order line items.
+	 */
+	private LineItemsDto lineItems;
 
 	/*
 	 * the creation date of the order.

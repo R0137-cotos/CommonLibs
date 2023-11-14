@@ -9,6 +9,21 @@ import lombok.Data;
 public class TransitionDto extends ResourceBase {
 
 	/*
+	 * the operation id.
+	 */
+	private String operationId;
+
+	/*
+	 * the From catalog item id.
+	 */
+	private String fromCatalogItemId;
+
+	/*
+	 * the from subscription id.
+	 */
+	private String fromSubscriptionId;
+
+	/*
 	 * the To catalog item id.
 	 */
 	private String toCatalogItemId;
@@ -37,21 +52,6 @@ public class TransitionDto extends ResourceBase {
 	 * the transition type.
 	 */
 	private String transitionType;
-
-	/*
-	 * the operation id.
-	 */
-	private String operationId;
-
-	/*
-	 * the From catalog item id.
-	 */
-	private String fromCatalogItemId;
-
-	/*
-	 * the from subscription id.
-	 */
-	private String fromSubscriptionId;
 
 	/*
 	 * the promotionId.

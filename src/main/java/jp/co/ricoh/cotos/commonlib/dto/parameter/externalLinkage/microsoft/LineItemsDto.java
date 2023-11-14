@@ -21,21 +21,6 @@ public class LineItemsDto {
 	private String offerId;
 
 	/*
-	 * the friendly name for the result contract (subscription).
-	 */
-	private String friendlyName;
-
-	/*
-	 * the product quantity.
-	 */
-	private Integer quantity;
-
-	/*
-	 * the provisioning context for the offer.
-	 */
-	private HashMap<String, String> provisioningContext;
-
-	/*
 	 * the resulting subscription identifier.
 	 */
 	private String subscriptionId;
@@ -71,8 +56,38 @@ public class LineItemsDto {
 	private String customTermEndDate;
 
 	/*
+	 * the friendly name for the result contract (subscription).
+	 */
+	private String friendlyName;
+
+	/*
+	 * the product quantity.
+	 */
+	private Integer quantity;
+
+	/*
 	 * the pricing details.
 	 */
 	private PricingDto pricing;
+
+	/*
+	 * the partner identifier on record.
+	 */
+	private String partnerIdOnRecord;
+
+	/*
+	 * the additional partner identifiers on record.
+	 */
+	private String[] additionalPartnerIdsOnRecord;
+
+	/*
+	 * the provisioning context for the offer.
+	 */
+	private HashMap<String, String> provisioningContext;
+
+	/*
+	 * the acceptance of an attestation required by an offer prior to checking out an order.
+	 */
+	private Boolean attestationAccepted;
 
 }
