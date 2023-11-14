@@ -1,0 +1,41 @@
+package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
+public class AgreementsDto extends ResourceBase {
+
+	/*
+	 * the total count of the elements in the resource collection.
+	 */
+	private Integer totalCount;
+
+	/*
+	 * the collection items.
+	 */
+	private AgreementDto[] items;
+
+	/*
+	 * the template ID of the agreement.
+	 */
+	private String templateId;
+
+	/*
+	 * the date the agreement was signed.
+	 */
+	private String dateAgreed;
+
+	/*
+	 * the agreement type.
+	 */
+	private String type;
+
+	/*
+	 * the download link for the agreement.
+	 */
+	private String AgreementLink;
+
+}
