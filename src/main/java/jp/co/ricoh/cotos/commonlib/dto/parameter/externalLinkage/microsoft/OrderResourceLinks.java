@@ -1,9 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class OrderResourceLinks {
+@EqualsAndHashCode(callSuper=false)
+public class OrderResourceLinks extends AbstractMsResponseDto {
 
 	/*
 	 * the link to the provisioning status of an order.

@@ -51,7 +51,7 @@ public class TestMicrosoftParameter {
 		}
 
 		String expected = "{\"companyProfile\":{\"domain\":\"domain\"},\"billingProfile\":{\"email\":\"email\",\"culture\":\"culture\",\"language\":\"language\",\"companyName\":\"companyName\",\"defaultAddress\":{\"country\":\"country\",\"city\":\"city\",\"state\":\"state\",\"addressLine1\":\"addressLine1\",\"addressLine2\":\"addressLine2\",\"postalCode\":\"postalCode\",\"firstName\":\"firstName\",\"lastName\":\"lastName\",\"phoneNumber\":\"phoneNumber\"}}}";
-		Assert.assertEquals(expected, json);
+		Assert.assertEquals("値を設定した項目だけでjson文字列が作成されること", expected, json);
 	}
 
 	@Test
@@ -68,10 +68,13 @@ public class TestMicrosoftParameter {
 			e.printStackTrace();
 		}
 
-		Assert.assertEquals(customerDto.getId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
-		Assert.assertEquals(customerDto.getCompanyProfile().getTenantId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
-		Assert.assertEquals(customerDto.getBillingProfile().getEmail(), "qqqq@itos.com");
-		Assert.assertEquals(customerDto.getBillingProfile().getDefaultAddress().getCountry(), "JP");
-		Assert.assertEquals(customerDto.getUserCredentials().getUserName(), "ユーザ");
+		Assert.assertEquals("テナントIDが取得できること", customerDto.getId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
+		Assert.assertEquals("attributes.objectTypeが取得できること", customerDto.getAttributes().getObjectType(), "Customer");
+		Assert.assertEquals("テナントIDが取得できること", customerDto.getCompanyProfile().getTenantId(), "6ebdeebe-daf5-468f-9c10-762cb382d3da");
+		Assert.assertEquals("メールアドレスが取得できること", customerDto.getBillingProfile().getEmail(), "qqqq@itos.com");
+		Assert.assertEquals("国名コードが取得できること", customerDto.getBillingProfile().getDefaultAddress().getCountry(), "JP");
+		Assert.assertEquals("ユーザ名が取得できること", customerDto.getUserCredentials().getUserName(), "ユーザ");
+		Assert.assertNull("HTTPステータスが設定されていないこと", customerDto.getHttpStatus());
+		Assert.assertNull("エラーメッセージが設定されていないこと", customerDto.getHttpStatus());
 	}
 }

@@ -3,10 +3,12 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class AgreementDto {
+@EqualsAndHashCode(callSuper=false)
+public class AgreementDto extends AbstractMsResponseDto {
 
 	/*
 	 * the partner's user ID.
