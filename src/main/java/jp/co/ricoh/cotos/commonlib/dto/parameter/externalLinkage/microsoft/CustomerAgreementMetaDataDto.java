@@ -3,9 +3,11 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class CustomerAgreementMetaDataDto extends ResourceBase {
 
 	/*
@@ -17,5 +19,5 @@ public class CustomerAgreementMetaDataDto extends ResourceBase {
 	 * the collection items.
 	 */
 	private AgreementMetaDataDto[] items;
-	
+
 }
