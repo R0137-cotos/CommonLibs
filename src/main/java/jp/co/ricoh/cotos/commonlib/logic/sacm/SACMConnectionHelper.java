@@ -79,6 +79,8 @@ public class SACMConnectionHelper {
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setOutputStreaming(false);
+		requestFactory.setConnectTimeout(10000);
+		requestFactory.setReadTimeout(10000);
 		rest.setRequestFactory(requestFactory);
 		// Util設定
 		INSTANCE.sacmUtil = sacmUtil;

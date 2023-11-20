@@ -554,3 +554,5 @@
 |597|CSP新商品追加対応|
 |598|帳票ページマスタのrepositoryにメソッド追加|
 |599|LogUtilにアノテーション追加|
+|600|SACM,LMPI,SMPI,ExternalRestTemplateのタイムアウト時間を設定|
+|601|計上エンティティ数量項目桁数変更、売上計算結果作業用DTO修正|
