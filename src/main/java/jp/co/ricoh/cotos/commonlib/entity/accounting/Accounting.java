@@ -447,9 +447,9 @@ public class Accounting extends EntityBase {
 	private String ffmDistType;
 
 	/** 売上数量 */
-	@Max(99999)
-	@ApiModelProperty(value = "売上数量", required = false, position = 85, allowableValues = "range[0,99999]")
-	private Integer ffmUserSalesCnt;
+	@Max(9999999999L)
+	@ApiModelProperty(value = "売上数量", required = false, position = 85, allowableValues = "range[0,99999999999]")
+	private Long ffmUserSalesCnt;
 
 	/** ユーザ売上単価 */
 	@DecimalMax("9999999999999999999.99")
@@ -487,9 +487,9 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmUserSalesTaxPrice;
 
 	/** RJ売上数量 */
-	@Max(99999)
-	@ApiModelProperty(value = "RJ売上数量", required = false, position = 93, allowableValues = "range[0,99999]")
-	private Integer ffmRjSalesCnt;
+	@Max(9999999999L)
+	@ApiModelProperty(value = "RJ売上数量", required = false, position = 93, allowableValues = "range[0,99999999999]")
+	private Long ffmRjSalesCnt;
 
 	/** RJ売上単価 */
 	@DecimalMax("9999999999999999999.99")
@@ -527,9 +527,9 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmRjSalesTaxPrice;
 
 	/** RJ仕入数量 */
-	@Max(99999)
-	@ApiModelProperty(value = "RJ仕入数量", required = false, position = 101, allowableValues = "range[0,99999]")
-	private Integer ffmRjPurchaseCnt;
+	@Max(9999999999L)
+	@ApiModelProperty(value = "RJ仕入数量", required = false, position = 101, allowableValues = "range[0,99999999999]")
+	private Long ffmRjPurchaseCnt;
 
 	/** RJ仕入単価 */
 	@DecimalMax("9999999999999999999.99")
@@ -567,9 +567,9 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmRjPurchaseTaxPrice;
 
 	/** 販売店売上数量 */
-	@Max(99999)
-	@ApiModelProperty(value = "販売店売上数量", required = false, position = 109, allowableValues = "range[0,99999]")
-	private Integer ffmShopSalesCnt;
+	@Max(9999999999L)
+	@ApiModelProperty(value = "販売店売上数量", required = false, position = 109, allowableValues = "range[0,99999999999]")
+	private Long ffmShopSalesCnt;
 
 	/** 販売店売上単価 */
 	@DecimalMax("9999999999999999999.99")
@@ -608,9 +608,9 @@ public class Accounting extends EntityBase {
 
 	/** R原価数量 */
 	@Column(name = "ffm_r_cost_cnt")
-	@Max(99999)
-	@ApiModelProperty(value = "R原価数量", required = false, position = 117, allowableValues = "range[0,99999]")
-	private Integer ffmRCostCnt;
+	@Max(9999999999L)
+	@ApiModelProperty(value = "R原価数量", required = false, position = 117, allowableValues = "range[0,99999999999]")
+	private Long ffmRCostCnt;
 
 	/** R原価単価 */
 	@Column(name = "ffm_r_cost_price")
@@ -655,9 +655,9 @@ public class Accounting extends EntityBase {
 	private BigDecimal ffmRCostTaxPrice;
 
 	/** 手数料数量 */
-	@Max(99999)
-	@ApiModelProperty(value = "手数料数量", required = false, position = 125, allowableValues = "range[0,99999]")
-	private Integer ffmCommissionCnt;
+	@Max(99999999999L)
+	@ApiModelProperty(value = "手数料数量", required = false, position = 125, allowableValues = "range[0,99999999999]")
+	private Long ffmCommissionCnt;
 
 	/** 手数料単価 */
 	@DecimalMax("9999999999999999999.99")
@@ -1037,9 +1037,9 @@ public class Accounting extends EntityBase {
 	private String cubicProjectCd;
 
 	/** 数量 */
-	@Max(99999)
-	@ApiModelProperty(value = "数量", required = false, position = 199, allowableValues = "range[0,99999]")
-	private Integer cubicCount;
+	@Max(99999999999L)
+	@ApiModelProperty(value = "数量", required = false, position = 199, allowableValues = "range[0,99999999999]")
+	private Long cubicCount;
 
 	/** 取引金額 */
 	@DecimalMax("9999999999999999999.99")

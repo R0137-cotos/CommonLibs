@@ -88,7 +88,7 @@ public class SalesCalcResultWorkForCspRunning {
 	/**
 	 * 数量
 	 */
-	private Integer quantity;
+	private Long quantity;
 
 	/**
 	 * 金額

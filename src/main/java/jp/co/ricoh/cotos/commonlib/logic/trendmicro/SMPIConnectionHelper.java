@@ -93,6 +93,8 @@ public class SMPIConnectionHelper {
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setOutputStreaming(false);
+		requestFactory.setConnectTimeout(10000);
+		requestFactory.setReadTimeout(30000);
 		rest.setRequestFactory(requestFactory);
 		// Util設定
 		INSTANCE.trendMicroUtil = trendMicroUtil;
