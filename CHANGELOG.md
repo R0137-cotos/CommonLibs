@@ -1,5 +1,12 @@
 # Changelog
 
+## v7.7.0 (21/11/2023)
+- [**closed**] #21035 外部APIコール時のタイムアウト設定 [#2531](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2531)
+- [**closed**] #21183 売上計算結果作業用DTO修正 [#2530](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2530)
+- [**closed**] #21183 計上エンティティ数量項目桁数変更 [#2527](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2527)
+
+---
+
 ## v7.6.0 (07/11/2023)
 - [**closed**] #21182_LogUtilにアノテーション追加 [#2523](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2523)
 - [**closed**] #20593 帳票ページマスタリポジトリメソッド追加 [#2519](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2519)
