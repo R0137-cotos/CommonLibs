@@ -43,7 +43,7 @@ public class OrderDto extends OrderResourceLinks {
 	/*
 	 * the Order line items.
 	 */
-	private LineItemsDto lineItems;
+	private LineItemsDto[] lineItems;
 
 	/*
 	 * the creation date of the order.
