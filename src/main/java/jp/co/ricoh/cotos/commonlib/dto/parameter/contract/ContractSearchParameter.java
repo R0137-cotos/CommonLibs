@@ -563,6 +563,13 @@ public class ContractSearchParameter {
 	private boolean excludesDiscarded;
 
 	/**
+	 * 承認周り情報を取得
+	 */
+	@ApiParam(value = "承認周り情報を取得", required = false)
+	@ApiModelProperty(value = "承認周り情報を取得", required = false)
+	private boolean needApprovalInfo;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
