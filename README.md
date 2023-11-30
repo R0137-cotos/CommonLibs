@@ -556,3 +556,4 @@
 |599|LogUtilにアノテーション追加|
 |600|SACM,LMPI,SMPI,ExternalRestTemplateのタイムアウト時間を設定|
 |601|計上エンティティ数量項目桁数変更、売上計算結果作業用DTO修正|
+|602|契約検索DTOに承認周りのjoinを制御する項目追加|
