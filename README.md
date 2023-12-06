@@ -556,3 +556,6 @@
 |599|LogUtilにアノテーション追加|
 |600|SACM,LMPI,SMPI,ExternalRestTemplateのタイムアウト時間を設定|
 |601|計上エンティティ数量項目桁数変更、売上計算結果作業用DTO修正|
+|602|工事調整EIM申込情報を取得するメソッド追加|
+|603|Messages.properties修正|
+|604|McAfee連携情報エンティティに注文参照番号を追加|
