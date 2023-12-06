@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,6 +28,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "ms_customer_register_request_work")
 public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
+
+	@Description(value = "顧客連携状態")
+	public enum MsCustomerLinkageStatus {
+		未処理("0"), 顧客登録済("1"), 処理済("2"), 処理対象外("3"), エラー("4");
+
+		private final String text;
+
+		private MsCustomerLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MsCustomerLinkageStatus fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_customer_register_request_work_seq")
@@ -123,5 +152,11 @@ public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@ApiModelProperty(value = "契約ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
+
+	/**
+	 * 顧客連携状態
+	 */
+	@ApiModelProperty(value = "顧客連携状態", required = false, position = 16, allowableValues = "未処理(\"0\"), 顧客登録済(\"1\"), 処理済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
+	private MsCustomerLinkageStatus customerLinkageStatus;
 
 }

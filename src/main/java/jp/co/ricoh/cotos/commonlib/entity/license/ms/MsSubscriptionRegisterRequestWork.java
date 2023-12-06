@@ -33,6 +33,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "ms_subscription_register_request_work")
 public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
+
 	@Description(value = "増減区分")
 	public enum IncreaseDecreaseDiv {
 
@@ -52,6 +53,28 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 
 		@JsonCreator
 		public static IncreaseDecreaseDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "サブスクリプション連携状態")
+	public enum MsSubscriptionLinkageStatus {
+		未処理("0"), 連携済("1"), 反映確認済("2"), 処理対象外("3"), エラー("4");
+
+		private final String text;
+
+		private MsSubscriptionLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MsSubscriptionLinkageStatus fromString(final String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -161,4 +184,24 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "調整後の終了日", required = false, position = 15)
 	private Date customTermEndDate;
+
+	/**
+	 * サブスクリプション連携状態
+	 */
+	@ApiModelProperty(value = "サブスクリプション連携状態", required = false, position = 16, allowableValues = "未処理(\"0\"), 連携済(\"1\"), 反映確認済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
+	private MsSubscriptionLinkageStatus subscriptionLinkageStatus;
+
+	/**
+	 * 再実行日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "再実行日時", required = false, position = 17)
+	private Date retryDate;
+
+	/**
+	 * 連携済サブスクリプションID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "連携済サブスクリプションID", required = false, position = 18, allowableValues = "range[0,255]")
+	private String linkedSubscriptionId;
 }

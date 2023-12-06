@@ -98,6 +98,12 @@ public class TestMsWorks {
 		Assert.assertNotNull(entity);
 		// 全てのカラムがNullではないことを確認
 		this.assertColumnsNotNull(entity);
+
+		// ライセンス情報IDから取得できること
+		MsCustomerRegisterRequestWork entity2 = msCustomerRegisterRequestWorkRepository.findByLicenseInfoId(1L);
+		Assert.assertNotNull(entity2);
+		// 全てのカラムがNullではないことを確認
+		this.assertColumnsNotNull(entity2);
 	}
 
 	private void MsCustomerRegisterResponseWorkRepositoryのテスト() {
