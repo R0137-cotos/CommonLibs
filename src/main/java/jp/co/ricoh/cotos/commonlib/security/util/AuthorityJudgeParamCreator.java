@@ -171,9 +171,8 @@ public class AuthorityJudgeParamCreator {
 
 			// 対象の契約承認ルートを特定
 			ContractApprovalRoute targetContractApprovalRoute = contract.getContractApprovalRouteList().stream().filter(contractApprovalRoute -> contract.getLifecycleStatus().equals(contractApprovalRoute.getTargetLifecycleStatus())).findFirst().orElse(null);
-			// 契約承認ルートがnullの場合、既に他のユーザーが承認済であるため楽観ロックを動作させる
-			if (targetContractApprovalRoute == null)
-			{
+			// 契約承認ルートがnullの場合、既に他のユーザーが承認済であるため楽観ロックエラーとする
+			if (targetContractApprovalRoute == null) {
 				log.error(messageUtil.createMessageInfo("AlreadyApprovedError").getMsg());
 				throw new ObjectOptimisticLockingFailureException(Contract.class, contract.getId());
 			}
