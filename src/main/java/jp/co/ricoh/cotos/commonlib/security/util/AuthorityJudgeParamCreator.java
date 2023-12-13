@@ -11,6 +11,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Component;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AuthorityJudgeParameter;
@@ -169,8 +170,12 @@ public class AuthorityJudgeParamCreator {
 		if (AccessType.承認.equals(accessType)) {
 
 			// 対象の契約承認ルートを特定
-			ContractApprovalRoute targetContractApprovalRoute = contract.getContractApprovalRouteList().stream().filter(contractApprovalRoute -> contract.getLifecycleStatus().equals(contractApprovalRoute.getTargetLifecycleStatus())).findFirst().get();
-
+			ContractApprovalRoute targetContractApprovalRoute = contract.getContractApprovalRouteList().stream().filter(contractApprovalRoute -> contract.getLifecycleStatus().equals(contractApprovalRoute.getTargetLifecycleStatus())).findFirst().orElse(null);
+			// 契約承認ルートがnullの場合、既に他のユーザーが承認済であるため楽観ロックエラーとする
+			if (targetContractApprovalRoute == null) {
+				log.error(messageUtil.createMessageInfo("AlreadyApprovedError").getMsg());
+				throw new ObjectOptimisticLockingFailureException(Contract.class, contract.getId());
+			}
 			// 承認依頼者情報
 			log.info(messageUtil.createMessageInfo("AuthorizeSetJudgeParamInfo", Arrays.asList("承認依頼者", "MoM社員ID", targetContractApprovalRoute.getApprovalRequesterEmpId()).toArray(new String[0])).getMsg());
 			authJudgeParam.setRequesterMvEmployeeMaster(mvEmployeeMasterRepository.findByMomEmployeeId(targetContractApprovalRoute.getApprovalRequesterEmpId()));
