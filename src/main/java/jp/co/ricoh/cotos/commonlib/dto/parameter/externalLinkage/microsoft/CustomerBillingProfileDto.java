@@ -1,0 +1,53 @@
+package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.microsoft;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class CustomerBillingProfileDto extends ResourceBaseWithLinks {
+
+	/*
+	 * the profile identifier.
+	 */
+	private String id;
+
+	/*
+	 * the first name.
+	 */
+	private String firstName;
+
+	/*
+	 * the last name.
+	 */
+	private String lastName;
+
+	/*
+	 * the email.
+	 */
+	private String email;
+
+	/*
+	 * the culture.
+	 */
+	private String culture;
+
+	/*
+	 * the language.
+	 */
+	private String language;
+
+	/*
+	 * the name of the company.
+	 */
+	private String companyName;
+
+	/*
+	 * the default address for customer.
+	 */
+	private DefaultAddressDto defaultAddress;
+
+}
