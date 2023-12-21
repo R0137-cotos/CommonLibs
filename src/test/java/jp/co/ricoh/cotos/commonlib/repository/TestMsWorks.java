@@ -20,6 +20,7 @@ import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.AbstractMsResponseWork.MsResponseMappedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWork.MsCustomerLinkageStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsPriceRevisionWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterRequestWork;
@@ -104,6 +105,17 @@ public class TestMsWorks {
 		Assert.assertNotNull(entity2);
 		// 全てのカラムがNullではないことを確認
 		this.assertColumnsNotNull(entity2);
+
+		// 顧客連携状態から取得できること
+		List<MsCustomerRegisterRequestWork> entity3 = msCustomerRegisterRequestWorkRepository.findByCustomerLinkageStatus(MsCustomerLinkageStatus.未処理);
+
+		Assert.assertEquals("1件取得できていること", 1, entity3.size());
+
+		entity3.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
 	}
 
 	private void MsCustomerRegisterResponseWorkRepositoryのテスト() {
