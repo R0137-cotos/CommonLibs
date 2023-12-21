@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -107,9 +108,12 @@ public class TestMsWorks {
 		this.assertColumnsNotNull(entity2);
 
 		// 顧客連携状態から取得できること
-		List<MsCustomerRegisterRequestWork> entity3 = msCustomerRegisterRequestWorkRepository.findByCustomerLinkageStatus(MsCustomerLinkageStatus.未処理);
+		List<String> customerLinkageStatusList = new ArrayList<>();
+		customerLinkageStatusList.add(MsCustomerLinkageStatus.未処理.toString());
+		customerLinkageStatusList.add(MsCustomerLinkageStatus.顧客登録済.toString());
+		List<MsCustomerRegisterRequestWork> entity3 = msCustomerRegisterRequestWorkRepository.findByCustomerLinkageStatus(customerLinkageStatusList);
 
-		Assert.assertEquals("1件取得できていること", 1, entity3.size());
+		Assert.assertEquals("2件取得できていること", 2, entity3.size());
 
 		entity3.stream().forEach(data -> {
 			Assert.assertNotNull(data);
