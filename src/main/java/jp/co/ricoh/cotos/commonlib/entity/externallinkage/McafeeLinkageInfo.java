@@ -280,4 +280,11 @@ public class McafeeLinkageInfo extends EntityBase {
 	 */
 	@ApiModelProperty(value = "解約フラグ", required = false, position = 25, allowableValues = "通常時(\"0\"), 解約時(\"1\")")
 	private DisengagementFlg disengagementFlg;
+
+	/**
+	 * 注文参照番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "注文参照番号", required = false, position = 26, allowableValues = "range[0,255]")
+	private String orderReferenceNo;
 }

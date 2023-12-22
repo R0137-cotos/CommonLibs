@@ -1,5 +1,40 @@
 # Changelog
 
+## v7.9.0 (21/12/2023)
+- [**closed**] #21105 契約検索時に承認周りの情報を取得しないようにするパラメータを追加 [#2554](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2554)
+- [**closed**] #20141 検索用パラメータクラスにカラム追加 [#2471](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2471)
+- [**closed**] #20115_契約DTOにカラム追加 [#2477](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2477)
+- [**closed**] #20115_見積、添付ファイル商品毎チェックマスタ、添付ファイル商品種類区分毎チェックマスタにカラム追加 [#2461](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2461)
+
+---
+
+## v7.8.0 (07/12/2023)
+- [**closed**] #20744_McAfee連携情報エンティティに注文参照番号を追加 [#2532](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2532)
+- [**closed**] #21490_Messages.properties修正 [#2547](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2547)
+- [**closed**] #21323_工事調整EIM申込情報を取得するメソッド追加_version及びREADME修正 [#2539](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2539)
+- [**closed**] #21323_工事調整EIM申込情報を取得するメソッド追加 [#2537](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2537)
+
+---
+
+## v7.7.0 (21/11/2023)
+- [**closed**] #21035 外部APIコール時のタイムアウト設定 [#2531](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2531)
+- [**closed**] #21183 売上計算結果作業用DTO修正 [#2530](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2530)
+- [**closed**] #21183 計上エンティティ数量項目桁数変更 [#2527](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2527)
+
+---
+
+## v7.6.0 (07/11/2023)
+- [**closed**] #21182_LogUtilにアノテーション追加 [#2523](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2523)
+- [**closed**] #20593 帳票ページマスタリポジトリメソッド追加 [#2519](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2519)
+- [**closed**] #20904 Message.propertiesにデータ復旧支援(CSP)のサービス利用希望日エラーメッセージ追加 [#2509](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2509)
+- [**closed**] #20816_LMPIヘルパークラス_商品によって分けられるようサブクラスを作成 [#2506](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2506)
+- [**closed**] #20750 MVBアカウント用DTOに有償サンドボックスサブスクリプションIDを追加 [#2503](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2503)
+- [**closed**] #20482 TrendMicroLMPI連携ヘルパークラスにTM連携WORK作成を行わないAPI呼び出し機能を追加 [#2490](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2490)
+- [**closed**] #20341_品種ライセンス用設定の拡張項目DTO作成 [#2483](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2483)
+- [**closed**] #20288_商品（契約用）拡張項目DTO（CLE）作成 [#2475](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2475)
+
+---
+
 ## v7.5.0 (19/10/2023)
 - [**closed**] #20846 外部API連携ログサイズメッセージ修正 [#2512](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2512)
 - [**closed**] #20846　レスポンスサイズ判定タイミング変更 [#2508](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2508)

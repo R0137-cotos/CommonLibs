@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -127,4 +128,11 @@ public class AttachedFileProductGrpCheckMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\"), 常時しない(\"2\")", position = 10)
 	private CheckTimingDiv checkTimingDiv;
 
+	/**
+	 * V-UP連携チェック除外フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "V-UP連携チェック除外フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	private Integer vupLinkageCheckExcludeFlg;
 }
