@@ -1101,4 +1101,11 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 114)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date rpaLinkageCpqUpdateCsvCreateAt;
+
+	/**
+	 * V-UP見積番号
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 115, allowableValues = "range[0,255]")
+	private String vupEstimationNumber;
 }

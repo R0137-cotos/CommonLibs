@@ -16,6 +16,7 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConfigInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo;
+import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimApplyInfo.Status;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ConstructionEimItemInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfo;
 import jp.co.ricoh.cotos.commonlib.entity.externallinkage.ElementInfoDetail;
@@ -219,7 +220,7 @@ public class TestExternalLinkage {
 		// Entity 1件以上取得できていることを確認
 		Assert.assertNotEquals(foundListByEstimationId.size(), 0);
 
-		// Entity 2件取得できていることを確認
+		// Entity 3件取得できていることを確認
 		Assert.assertEquals(foundListByEstimationId.size(), 3);
 
 		// Entity の各項目の値が null ではないことを確認
@@ -227,6 +228,19 @@ public class TestExternalLinkage {
 		testTool.assertColumnsNotNull(foundListByEstimationId.get(1));
 		testTool.assertColumnsNotNull(foundListByEstimationId.get(2));
 
+		List<ConstructionEimApplyInfo> foundByEstimationIdAndDisengagementFlgAndStatus = constructionEimApplyInfoRepository.findByEstimationIdAndDisengagementFlgAndStatus(1L, 0, Status.取込済);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByEstimationIdAndDisengagementFlgAndStatus);
+
+		// Entity 1件以上取得できていることを確認
+		Assert.assertNotEquals(foundByEstimationIdAndDisengagementFlgAndStatus.size(), 0);
+
+		// Entity 1件取得できていることを確認
+		Assert.assertEquals(foundByEstimationIdAndDisengagementFlgAndStatus.size(), 1);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(foundByEstimationIdAndDisengagementFlgAndStatus.get(0));
 	}
 
 	@Test
