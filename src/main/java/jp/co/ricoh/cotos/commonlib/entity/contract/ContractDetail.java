@@ -50,7 +50,7 @@ public class ContractDetail extends EntityBase {
 
 	@Description(value = "FFM内部振替処理状態")
 	public enum FfmInsideTransStatus {
-		未処理("0"), CSV作成済み("1"), 連携済み("2"), 対象外("3");
+		未処理("0"), CSV作成済み("1"), 連携済み("2"), 対象外("3"), エラー("4");
 
 		private final String text;
 
@@ -261,7 +261,7 @@ public class ContractDetail extends EntityBase {
 	/**
 	 * FFM内部振替処理状態
 	 */
-	@ApiModelProperty(value = "FFM内部振替処理状態", required = false, allowableValues = "未処理中(\"0\"), 作成完了(\"1\"), 連携済み(\"2\"), 対象外(\"3\")", position = 14)
+	@ApiModelProperty(value = "FFM内部振替処理状態", required = false, allowableValues = "未処理中(\"0\"), 作成完了(\"1\"), 連携済み(\"2\"), 対象外(\"3\"), エラー(\"4\")", position = 14)
 	private FfmInsideTransStatus ffmInsideTransStatus;
 
 	/**
