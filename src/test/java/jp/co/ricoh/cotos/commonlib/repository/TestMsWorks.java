@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.AbstractMsResponseWork.MsResponseMappedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterRequestWork.MsCustomerLinkageStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsCustomerRegisterResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsPriceRevisionWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.ms.MsSubscriptionRegisterRequestWork;
@@ -104,6 +106,20 @@ public class TestMsWorks {
 		Assert.assertNotNull(entity2);
 		// 全てのカラムがNullではないことを確認
 		this.assertColumnsNotNull(entity2);
+
+		// 顧客連携状態から取得できること
+		List<String> customerLinkageStatusList = new ArrayList<>();
+		customerLinkageStatusList.add(MsCustomerLinkageStatus.未処理.toString());
+		customerLinkageStatusList.add(MsCustomerLinkageStatus.顧客登録済.toString());
+		List<MsCustomerRegisterRequestWork> entity3 = msCustomerRegisterRequestWorkRepository.findByCustomerLinkageStatus(customerLinkageStatusList);
+
+		Assert.assertEquals("2件取得できていること", 2, entity3.size());
+
+		entity3.stream().forEach(data -> {
+			Assert.assertNotNull(data);
+			// 全てのカラムがNullではないことを確認
+			this.assertColumnsNotNull(data);
+		});
 	}
 
 	private void MsCustomerRegisterResponseWorkRepositoryのテスト() {
