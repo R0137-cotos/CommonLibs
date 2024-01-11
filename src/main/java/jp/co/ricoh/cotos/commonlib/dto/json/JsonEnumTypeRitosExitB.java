@@ -333,4 +333,119 @@ public class JsonEnumTypeRitosExitB {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+
+	@Description(value = "Webフラグ")
+	public enum WebFlg {
+
+		利用しない("0"), 利用する("1");
+
+		private final String text;
+
+		private WebFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static WebFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "Web追加メニュー区分")
+	public enum WebAddMenuDiv {
+
+		未設定("0"), クイック認証SSL("1"), アクセス集中対策("2");
+
+		private final String text;
+
+		private WebAddMenuDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static WebAddMenuDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "Mailフラグ")
+	public enum MailFlg {
+
+		利用しない("0"), 利用する("1");
+
+		private final String text;
+
+		private MailFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MailFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "Mailホスティング 添付ファイル暗号化フラグ")
+	public enum MailAttachedFileFlg {
+
+		利用しない("0"), 利用する("1");
+
+		private final String text;
+
+		private MailAttachedFileFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MailAttachedFileFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "サブドメイン変更フラグ")
+	public enum SubEditFlg {
+
+		変更なし("0"), 変更あり("1");
+
+		private final String text;
+
+		private SubEditFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static SubEditFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 }
