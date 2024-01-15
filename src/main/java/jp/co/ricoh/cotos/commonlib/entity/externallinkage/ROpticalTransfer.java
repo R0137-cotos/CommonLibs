@@ -153,4 +153,58 @@ public class ROpticalTransfer extends EntityBase {
 	@ApiModelProperty(value = "リコーひかり異動情報NWサービス", required = false, position = 10, readOnly = true)
 	private List<ROpticalTransferNwservice> rOpticalTransferNwserviceList;
 
+	/**
+	 * NTT名義
+	 */
+	@ApiModelProperty(value = "NTT名義", required = false, position = 11, allowableValues = "range[0,255]")
+	private String contractorName;
+
+	/**
+	 * 設置先住所
+	 */
+	@ApiModelProperty(value = "設置先住所", required = false, position = 12, allowableValues = "range[0,255]")
+	private String curuserAddrCode;
+
+	/**
+	 * 回線種別
+	 */
+	@ApiModelProperty(value = "回線種別", required = false, position = 13, allowableValues = "range[0,255]")
+	private String serviceItem;
+
+	/**
+	 * 電話番号
+	 */
+	@ApiModelProperty(value = "電話番号", required = false, position = 14, allowableValues = "range[0,255]")
+	private String contractTelNo;
+
+	/**
+	 * 追加電話番号1
+	 */
+	@ApiModelProperty(value = "追加電話番号1", required = false, position = 15, allowableValues = "range[0,255]")
+	private String addContractTelNo1;
+
+	/**
+	 * 追加電話番号2
+	 */
+	@ApiModelProperty(value = "追加電話番号2", required = false, position = 16, allowableValues = "range[0,255]")
+	private String addContractTelNo2;
+
+	/**
+	 * 追加電話番号3
+	 */
+	@ApiModelProperty(value = "追加電話番号3", required = false, position = 16, allowableValues = "range[0,255]")
+	private String addContractTelNo3;
+
+	/**
+	 * 追加電話番号4
+	 */
+	@ApiModelProperty(value = "追加電話番号4", required = false, position = 16, allowableValues = "range[0,255]")
+	private String addContractTelNo4;
+
+	/**
+	 * 追加電話番号5
+	 */
+	@ApiModelProperty(value = "追加電話番号5", required = false, position = 17, allowableValues = "range[0,255]")
+	private String addContractTelNo5;
+
 }
