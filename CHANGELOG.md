@@ -1,7 +1,7 @@
 # Changelog
 
 ## v7.10.1 (16/01/2024)
-*No changelog for this release.*
+- [**closed**] 21963 売価チェック用エラーメッセージ追加 [#2570](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2570)
 
 ---
 
