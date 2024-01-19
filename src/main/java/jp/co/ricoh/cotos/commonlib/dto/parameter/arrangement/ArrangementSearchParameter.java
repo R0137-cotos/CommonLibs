@@ -601,6 +601,13 @@ public class ArrangementSearchParameter {
 	private String productIdList;
 
 	/**
+	 * 手配業務タイプマスタIDリスト
+	 */
+	@ApiParam(value = "手配業務タイプマスタIDリスト", required = false)
+	@ApiModelProperty(value = "手配業務タイプマスタIDリスト", required = false)
+	private String arrangementWorkTypeIdList;
+
+	/**
 	 * パラメータをMapにする。
 	 */
 	public Map<String, Object> createParamaterMap() {
