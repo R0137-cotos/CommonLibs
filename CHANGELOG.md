@@ -1,5 +1,18 @@
 # Changelog
 
+## v7.10.1 (16/01/2024)
+- [**closed**] 21963 売価チェック用エラーメッセージ追加 [#2570](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2570)
+
+---
+
+## v7.9.0 (21/12/2023)
+- [**closed**] #21105 契約検索時に承認周りの情報を取得しないようにするパラメータを追加 [#2554](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2554)
+- [**closed**] #20141 検索用パラメータクラスにカラム追加 [#2471](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2471)
+- [**closed**] #20115_契約DTOにカラム追加 [#2477](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2477)
+- [**closed**] #20115_見積、添付ファイル商品毎チェックマスタ、添付ファイル商品種類区分毎チェックマスタにカラム追加 [#2461](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2461)
+
+---
+
 ## v7.8.0 (07/12/2023)
 - [**closed**] #20744_McAfee連携情報エンティティに注文参照番号を追加 [#2532](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2532)
 - [**closed**] #21490_Messages.properties修正 [#2547](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2547)
