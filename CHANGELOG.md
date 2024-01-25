@@ -1,7 +1,21 @@
 # Changelog
 
+## v7.11.0 (25/01/2024)
+- [**closed**] #21454 MS顧客登録リクエストWORKリポジトリに項目追加 [#2563](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2563)
+- [**closed**] MS連携リクエストWORKテーブルに項目追加 [#2553](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2553)
+- [**closed**] Microsoft連携用のRestTemplate実装 [#2550](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2550)
+- [**closed**] #21261 注文リストの型誤りを修正 [#2545](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2545)
+- [**closed**] #21255 HttpStatusの型変更 [#2542](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2542)
+- [**closed**] #21255 レスポンスDTOに共通エラー項目追加 [#2541](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2541)
+- [**closed**] #21254 ドメイン検索API用のエラーメッセージ追加 [#2536](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2536)
+- [**closed**] #21247 MicrofostAPI連携用DTO作成 [#2535](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2535)
+- [**closed**] #21247 O365中継M移管対応 顧客用DTO作成 [#2533](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2533)
+- [**closed**] #21508 リコー光異動情報エンティティに項目を追加 [#2573](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2573)
+
+---
+
 ## v7.10.1 (16/01/2024)
-- [**closed**] 21963 売価チェック用エラーメッセージ追加 [#2570](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2570)
+*No changelog for this release.*
 
 ---
 
