@@ -36,6 +36,16 @@ public class ProductContractExtendsParameterBpsmDto {
 	private String serviceCdKd;
 
 	/**
+	 * アップグレード元RJ管理番号
+	 */
+	private String upgradeOriginRjManageNumber;
+
+	/**
+	 * アップグレード先RJ管理番号
+	 */
+	private String upgradeRjManageNumber;
+
+	/**
 	 * 移行用項目
 	 */
 	@JsonProperty("migrationParameter")
