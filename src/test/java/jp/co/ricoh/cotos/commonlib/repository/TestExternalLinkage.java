@@ -241,6 +241,17 @@ public class TestExternalLinkage {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(foundByEstimationIdAndDisengagementFlgAndStatus.get(0));
+
+		List<ConstructionEimApplyInfo> foundByEstimationIdAndDisengagementFlg = constructionEimApplyInfoRepository.findByEstimationIdAndDisengagementFlg(1L, 1);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByEstimationIdAndDisengagementFlg);
+
+		// Entity 1件取得できていることを確認
+		Assert.assertEquals(foundByEstimationIdAndDisengagementFlg.size(), 1);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(foundByEstimationIdAndDisengagementFlg.get(0));
 	}
 
 	@Test
