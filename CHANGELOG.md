@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.12.0 (06/02/2024)
+- [**closed**] #21713_BPSM用拡張項目に項目追加 [#2561](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2561)
+
+---
+
 ## v7.11.0 (25/01/2024)
 - [**closed**] #21454 MS顧客登録リクエストWORKリポジトリに項目追加 [#2563](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2563)
 - [**closed**] MS連携リクエストWORKテーブルに項目追加 [#2553](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2553)
