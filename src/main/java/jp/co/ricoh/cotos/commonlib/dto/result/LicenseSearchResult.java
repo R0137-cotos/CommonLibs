@@ -365,4 +365,10 @@ public class LicenseSearchResult {
 	 */
 	@ApiModelProperty(value = "ベンダー区分", required = false, position = 55)
 	private String vendorDiv;
+
+	/**
+	 * サービスプラン名
+	 */
+	@ApiModelProperty(value = "サービスプラン名", required = false, position = 56)
+	private String licenseServiceName;
 }
