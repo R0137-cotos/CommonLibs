@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +23,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "tm_suspend_subscription_response_work")
 public class TmSuspendSubscriptionResponseWork extends AbstractTmResponseWork {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_suspend_subscription_response_work_seq")
 	@SequenceGenerator(name = "tm_suspend_subscription_response_work_seq", sequenceName = "tm_suspend_subscription_response_work_seq", allocationSize = 1)
