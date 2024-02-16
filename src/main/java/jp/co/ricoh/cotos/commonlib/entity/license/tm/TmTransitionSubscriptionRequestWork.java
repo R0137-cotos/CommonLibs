@@ -89,7 +89,7 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	 * 乗換ユニット数
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ユニット数", required = false, position = 10, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "乗換ユニット数", required = false, position = 10, allowableValues = "range[0,255]")
 	private String transitionUnitsPerLicense;
 
 	/**
