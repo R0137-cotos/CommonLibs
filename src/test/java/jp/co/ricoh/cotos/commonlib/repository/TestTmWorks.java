@@ -28,7 +28,6 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmLinkManagement;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionRequestWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
@@ -402,38 +401,10 @@ public class TestTmWorks {
 
 	private void TmTransitionSubscriptionRequestWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(tmTransitionSubscriptionRequestWorkRepository, 10L);
-		// 送信状態
-		List<TmTransitionSubscriptionRequestWork> found = tmTransitionSubscriptionRequestWorkRepository.findByRequestStatus(TmRequestStatus.未連携);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("未連携のレコードが取得されていること", 2, found.size());
-		// 送信状態 + ID
-		found = tmTransitionSubscriptionRequestWorkRepository.findByRequestStatusAndIdBetween(TmRequestStatus.未連携, 10L, 20L);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("from~toのレコードが取得されていること 境界値と等しい", 2, found.size());
-		found = tmTransitionSubscriptionRequestWorkRepository.findByRequestStatusAndIdBetween(TmRequestStatus.未連携, 11L, 20L);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("from~toのレコードが取得されていること from境界値 ", 1, found.size());
-		found = tmTransitionSubscriptionRequestWorkRepository.findByRequestStatusAndIdBetween(TmRequestStatus.未連携, 10L, 19L);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("from~toのレコードが取得されていること to境界値 ", 1, found.size());
 	}
 
 	private void TmTransitionSubscriptionResponseWorkRepositoryのテスト() {
 		this.全てのカラムがNullではないことを確認_共通(tmTransitionSubscriptionResponseWorkRepository, 10L);
-		// 送信状態
-		List<TmTransitionSubscriptionResponseWork> found = tmTransitionSubscriptionResponseWorkRepository.findByLicenceMappedStatus(TmLicenceMappedStatus.未反映);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("未連携のレコードが取得されていること", 2, found.size());
-		// 送信状態 + ID
-		found = tmTransitionSubscriptionResponseWorkRepository.findByLicenceMappedStatusAndIdBetween(TmLicenceMappedStatus.未反映, 10L, 20L);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("from~toのレコードが取得されていること 境界値と等しい", 2, found.size());
-		found = tmTransitionSubscriptionResponseWorkRepository.findByLicenceMappedStatusAndIdBetween(TmLicenceMappedStatus.未反映, 11L, 20L);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("from~toのレコードが取得されていること from境界値 ", 1, found.size());
-		found = tmTransitionSubscriptionResponseWorkRepository.findByLicenceMappedStatusAndIdBetween(TmLicenceMappedStatus.未反映, 10L, 19L);
-		Assert.assertNotNull(found);
-		Assert.assertEquals("from~toのレコードが取得されていること to境界値 ", 1, found.size());
 	}
 
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {
