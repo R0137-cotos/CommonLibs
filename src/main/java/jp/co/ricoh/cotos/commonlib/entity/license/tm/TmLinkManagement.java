@@ -142,4 +142,13 @@ public class TmLinkManagement extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
 	private long licenseInfoId;
+
+	/**
+	 * トレンドマイクロサブスクリプション乗換リクエストWORK
+	 */
+	@OneToOne
+	@JoinColumn(name = "tm_transition_subscription_request_work_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換リクエストWORK", required = true, position = 16)
+	private TmTransitionSubscriptionRequestWork tmTransitionSubscriptionRequestWork;
 }
