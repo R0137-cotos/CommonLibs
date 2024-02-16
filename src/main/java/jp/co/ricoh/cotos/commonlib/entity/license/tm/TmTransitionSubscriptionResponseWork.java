@@ -32,7 +32,7 @@ public class TmTransitionSubscriptionResponseWork extends AbstractTmResponseWork
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_transition_subscription_response_work_seq")
 	@SequenceGenerator(name = "tm_transition_subscription_response_work_seq", sequenceName = "tm_transition_subscription_response_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換レスポンスWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換レスポンスWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**

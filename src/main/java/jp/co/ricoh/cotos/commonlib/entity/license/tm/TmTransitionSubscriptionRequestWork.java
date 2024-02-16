@@ -61,7 +61,7 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_transition_subscription_request_work_seq")
 	@SequenceGenerator(name = "tm_transition_subscription_request_work_seq", sequenceName = "tm_transition_subscription_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "サブスクリプション乗換リクエストWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "サブスクリプション乗換リクエストWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -132,6 +132,6 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成レスポンスWORK", required = false, position = 16)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換レスポンスWORK", required = false, position = 16)
 	private TmTransitionSubscriptionResponseWork responseWork;
 }
