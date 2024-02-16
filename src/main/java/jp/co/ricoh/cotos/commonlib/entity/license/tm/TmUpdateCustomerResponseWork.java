@@ -28,7 +28,7 @@ public class TmUpdateCustomerResponseWork extends AbstractTmResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_customer_response_work_seq")
 	@SequenceGenerator(name = "tm_update_customer_response_work_seq", sequenceName = "tm_update_customer_response_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "トレンドマイクロ会社情報更新レスポンスWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "トレンドマイクロ会社情報更新レスポンスWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
