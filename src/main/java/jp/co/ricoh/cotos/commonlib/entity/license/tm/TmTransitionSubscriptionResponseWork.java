@@ -41,7 +41,7 @@ public class TmTransitionSubscriptionResponseWork extends AbstractTmResponseWork
 	@OneToOne
 	@JoinColumn(name = "request_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成リクエストWORK", required = true, position = 2)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換リクエストWORK", required = true, position = 2)
 	private TmTransitionSubscriptionRequestWork requestWork;
 
 	/**
