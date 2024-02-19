@@ -1482,6 +1482,7 @@ insert into tm_transition_subscription_request_work (
   , from_service_plan_id
   , from_license_end_date
   , from_suspend_flg
+  , from_subscription_id
 ) values (
   10
   , '2020/11/02 17:00:00'
@@ -1503,6 +1504,7 @@ insert into tm_transition_subscription_request_work (
   , 'from_service_plan_id'
   , '2020/11/02 17:00:00'
   , 0
+  , 'from_subscription_id'
 );
 insert into tm_transition_subscription_request_work (
   id
@@ -1525,6 +1527,7 @@ insert into tm_transition_subscription_request_work (
   , from_service_plan_id
   , from_license_end_date
   , from_suspend_flg
+  , from_subscription_id
 ) values (
   20
   , '2020/11/02 17:00:00'
@@ -1546,6 +1549,7 @@ insert into tm_transition_subscription_request_work (
   , 'from_service_plan_id'
   , '2020/11/02 17:00:00'
   , 0
+  , 'from_subscription_id'
 );
 insert into tm_transition_subscription_request_work (
   id
@@ -1568,6 +1572,7 @@ insert into tm_transition_subscription_request_work (
   , from_service_plan_id
   , from_license_end_date
   , from_suspend_flg
+  , from_subscription_id
 ) values (
   30
   , '2020/11/02 17:00:00'
@@ -1589,6 +1594,7 @@ insert into tm_transition_subscription_request_work (
   , 'from_service_plan_id'
   , '2020/11/02 17:00:00'
   , 0
+  , 'from_subscription_id'
 );
 -- TM_サブスクリプション乗換レスポンスWORK
 insert into tm_transition_subscription_response_work (

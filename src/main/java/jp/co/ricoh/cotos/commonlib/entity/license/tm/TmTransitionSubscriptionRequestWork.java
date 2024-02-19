@@ -128,10 +128,17 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	private Integer fromSuspendFlg;
 
 	/**
+	 * 乗換元サブスクリプションID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "乗換元サブスクリプションID", required = false, position = 16, allowableValues = "range[0,255]")
+	private String fromSubscriptionId;
+
+	/**
 	 * トレンドマイクロサブスクリプション乗換レスポンスWORK
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換レスポンスWORK", required = false, position = 16)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換レスポンスWORK", required = false, position = 17)
 	private TmTransitionSubscriptionResponseWork responseWork;
 }
