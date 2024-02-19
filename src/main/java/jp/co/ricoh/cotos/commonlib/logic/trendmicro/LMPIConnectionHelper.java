@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -30,11 +31,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.AbstractTmRequestDto;
@@ -44,6 +47,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateCustomer
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateCustomerResponseDto.TmCreateCustomerResponseDtoUser;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmCreateSubscriptionResponseDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmDowngradeSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetCustomerResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionIdRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionIdResponseDto;
@@ -51,6 +55,8 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptio
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmGetSubscriptionResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmSuspendSubscriptionRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmSuspendSubscriptionResponseDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmTranrisionSubscriptionRequestDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmTransitionSubscriptionResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmUpdateCustomerRequestDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmUpdateCustomerResponseDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmUpdateSubscriptionRequestDto;
@@ -67,6 +73,9 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequest
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionRequestWork.CrossGradeDiv;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
@@ -79,6 +88,8 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionReq
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmTransitionSubscriptionRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmTransitionSubscriptionResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionRequestWorkRepository;
@@ -132,6 +143,10 @@ public class LMPIConnectionHelper {
 	private TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository;
 
 	private TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository;
+
+	private TmTransitionSubscriptionRequestWorkRepository tmTransitionSubscriptionRequestWorkRepository;
+
+	private TmTransitionSubscriptionResponseWorkRepository tmTransitionSubscriptionResponseWorkRepository;
 
 	private TrendMicroUtil trendMicroUtil;
 
@@ -531,6 +546,53 @@ public class LMPIConnectionHelper {
 	}
 
 	/**
+	 * [PUT/POST] サブスクリプション乗換API
+	 */
+	public TmTransitionSubscriptionResponseWork transitionSubscriptions(TmTransitionSubscriptionRequestWork requestWork) {
+		// 乗換元サービスプラン解約処理
+		try {
+			TmDowngradeSubscriptionRequestDto requestDto = tmConverter.convertRequestToDtoForDowngrade(requestWork);
+			if (!ObjectUtils.isEmpty(requestDto) && requestWork.getFromSuspendFlg() != 1) {
+				String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions/" + requestWork.getFromSubscriptionId();
+				TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.PUT, requestDto);
+				// リクエストの更新
+				this.setRequestDataForDowngrade(requestWork, serviceResponse);
+				String errorMessage = this.getErrorMessage(serviceResponse);
+				if (StringUtils.isNotEmpty(errorMessage)) {
+					log.error(errorMessage);
+					// ResponseWorkを作成しないため、エラーメッセージが返却された場合Exceptionをthrowする。
+					// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+					throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
+				}
+			}
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
+		}
+
+		// 乗換処理
+		try {
+			TmTranrisionSubscriptionRequestDto requestDto = tmConverter.convertRequestToDto(requestWork);
+			String url = "/customers/" + requestWork.getCustomerId() + "/subscriptions";
+			TmCallServiceResponseDto serviceResponse = callService(url, HttpMethod.POST, requestDto);
+			// リクエストの更新
+			this.setRequestData(requestWork, serviceResponse);
+			TmTransitionSubscriptionRequestWork updatedWork = tmTransitionSubscriptionRequestWorkRepository.save(requestWork);
+			// レスポンスの登録
+			TmTransitionSubscriptionResponseWork responseWork = tmConverter.convertDtoToResponseWork(mapper.readValue(serviceResponse.getResponseEntity().getBody(), TmTransitionSubscriptionResponseDto.class), updatedWork);
+			responseWork.setHttpStatus(serviceResponse.getResponseEntity().getStatusCode().toString());
+			return tmTransitionSubscriptionResponseWorkRepository.save(responseWork);
+		} catch (URISyntaxException | IOException e) {
+			log.error(e.toString());
+			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
+			throw new RuntimeException("[TM] サブスクリプション乗換APIで想定外のエラーが発生しました。");
+		}
+	}
+
+	/**
 	 * HttpHeadersを返します。
 	 * @return
 	 * @throws UnsupportedEncodingException
@@ -656,6 +718,24 @@ public class LMPIConnectionHelper {
 		}
 	}
 
+	private void setRequestDataForDowngrade(TmTransitionSubscriptionRequestWork requestWork, TmCallServiceResponseDto serviceResponse) {
+		requestWork.setHttpBody(serviceResponse.getHttpBody());
+		requestWork.setHttpHeader(serviceResponse.getHttpHeaders().toString());
+		requestWork.setRequestTime(serviceResponse.getRequestTime());
+		requestWork.setUrl(serviceResponse.getUrl());
+		if (serviceResponse.getResponseEntity().getStatusCode().is2xxSuccessful()) {
+			requestWork.setFromSuspendFlg(1);
+		} else {
+			requestWork.setRequestStatus(TmRequestStatus.連携エラー);
+		}
+	}
+
+	private String getErrorMessage(TmCallServiceResponseDto serviceResponse) throws IOException {
+		HashMap<String, Object> responseJsonMap = mapper.readValue(serviceResponse.getResponseEntity().getBody(), new TypeReference<Object>() {
+		});
+		return (String) responseJsonMap.get("error_message");
+	}
+
 	/**
 	 * トレンドマイクロ連携WORK、DTOのコンバーター
 	 * @author z00se03039
@@ -705,6 +785,23 @@ public class LMPIConnectionHelper {
 
 		public TmUpdateUserRequestDto convertRequestToDto(TmUpdateUserRequestWork work) {
 			TmUpdateUserRequestDto dto = new TmUpdateUserRequestDto();
+			BeanUtils.copyProperties(work, dto);
+			return dto;
+		}
+
+		public TmDowngradeSubscriptionRequestDto convertRequestToDtoForDowngrade(TmTransitionSubscriptionRequestWork work) {
+			if (CrossGradeDiv.ダウングレード == work.getCrossGradeDiv()) {
+				TmDowngradeSubscriptionRequestDto dto = new TmDowngradeSubscriptionRequestDto();
+				dto.setUnitsPerLicense(work.getTransitionUnitsPerLicense());
+				dto.setLicenseExpirationDate(work.getFromLicenseEndDate());
+				return dto;
+			} else {
+				return null;
+			}
+		}
+
+		public TmTranrisionSubscriptionRequestDto convertRequestToDto(TmTransitionSubscriptionRequestWork work) {
+			TmTranrisionSubscriptionRequestDto dto = new TmTranrisionSubscriptionRequestDto();
 			BeanUtils.copyProperties(work, dto);
 			return dto;
 		}
@@ -777,6 +874,17 @@ public class LMPIConnectionHelper {
 			TmUpdateUserResponseDtoPhone phoneDto = dto.getPhone();
 			if (phoneDto != null) {
 				BeanUtils.copyProperties(phoneDto, work);
+			}
+			work.setRequestWork(requestWork);
+			work.setLicenceMappedStatus(TmLicenceMappedStatus.未反映);
+			return work;
+		}
+
+		public TmTransitionSubscriptionResponseWork convertDtoToResponseWork(TmTransitionSubscriptionResponseDto dto, TmTransitionSubscriptionRequestWork requestWork) {
+			TmTransitionSubscriptionResponseWork work = new TmTransitionSubscriptionResponseWork();
+			BeanUtils.copyProperties(dto, work);
+			if (dto.getLicenses() != null) {
+				BeanUtils.copyProperties(dto.getLicenses()[0], work);
 			}
 			work.setRequestWork(requestWork);
 			work.setLicenceMappedStatus(TmLicenceMappedStatus.未反映);
