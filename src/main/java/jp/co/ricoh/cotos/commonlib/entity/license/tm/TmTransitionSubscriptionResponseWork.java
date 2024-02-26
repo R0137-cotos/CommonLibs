@@ -21,28 +21,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * トレンドマイクロサブスクリプション作成レスポンスWORK
+ * トレンドマイクロサブスクリプション乗換レスポンスWORK
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "tm_create_subscription_response_work")
-public class TmCreateSubscriptionResponseWork extends AbstractTmResponseWork {
+@Table(name = "tm_transition_subscription_response_work")
+public class TmTransitionSubscriptionResponseWork extends AbstractTmResponseWork {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_create_subscription_response_work_seq")
-	@SequenceGenerator(name = "tm_create_subscription_response_work_seq", sequenceName = "tm_create_subscription_response_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成レスポンスWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_transition_subscription_response_work_seq")
+	@SequenceGenerator(name = "tm_transition_subscription_response_work_seq", sequenceName = "tm_transition_subscription_response_work_seq", allocationSize = 1)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換レスポンスWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
-	 * トレンドマイクロサブスクリプション作成リクエストWORK
+	 * トレンドマイクロサブスクリプション乗換リクエストWORK
 	 */
 	@OneToOne
 	@JoinColumn(name = "request_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成リクエストWORK", required = true, position = 2)
-	private TmCreateSubscriptionRequestWork requestWork;
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換リクエストWORK", required = true, position = 2)
+	private TmTransitionSubscriptionRequestWork requestWork;
 
 	/**
 	 * サブスクリプションID
@@ -96,20 +96,20 @@ public class TmCreateSubscriptionResponseWork extends AbstractTmResponseWork {
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 13, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 13)
 	private Date licenseStartDate;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 14, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 14)
 	private Date licenseExpirationDate;
 
 	/**
 	 * 課金開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "課金開始日", required = false, position = 15, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "課金開始日", required = false, position = 15)
 	private Date startChargeDate;
 }
