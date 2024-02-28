@@ -53,4 +53,28 @@ public class IspSettingDto {
 	 */
 	@JsonProperty("SITE_ID")
 	private String siteId;
+
+	/**
+	 * ドメインの場合のサブドメイン名１
+	 */
+	@JsonProperty("SUB_DOMAIN_NAME1")
+	private String subDomainName1;
+
+	/**
+	 * ドメインの場合のサブドメイン名２
+	 */
+	@JsonProperty("SUB_DOMAIN_NAME2")
+	private String subDomainName2;
+
+	/**
+	 * ドメインの場合のサブドメイン名３
+	 */
+	@JsonProperty("SUB_DOMAIN_NAME3")
+	private String subDomainName3;
+
+	/**
+	 * ドメインの場合のサブドメイン名４
+	 */
+	@JsonProperty("SUB_DOMAIN_NAME4")
+	private String subDomainName4;
 }
