@@ -1,5 +1,11 @@
 # Changelog
 
+## v7.14.0 (07/03/2024)
+- [**closed**] 21977_サブドメイン対応_拡張項目Dtoに項目追加 [#2569](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2569)
+- [**closed**] #21989_エラーメッセージ追加・ISP設定情報取得DTO修正 [#2575](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2575)
+
+---
+
 ## v7.12.0 (06/02/2024)
 - [**closed**] #21713_BPSM用拡張項目に項目追加 [#2561](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2561)
 
