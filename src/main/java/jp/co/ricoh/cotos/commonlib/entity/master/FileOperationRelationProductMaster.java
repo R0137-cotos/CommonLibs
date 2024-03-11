@@ -37,7 +37,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	@Description(value = "カテゴリ")
 	public enum CategoryType {
 
-		ヤマト便管理("1"), ライセンス管理("2"), 外部連携("3"), マスタ管理("4"), LaIT連携("5"), リコーひかり("6");
+		ヤマト便管理("1"), ライセンス管理("2"), 外部連携("3"), マスタ管理("4"), LaIT連携("5"), リコーひかり("6"), 機器情報("7"), 振替情報("8");
 
 		private final String text;
 
