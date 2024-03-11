@@ -169,6 +169,8 @@ public class LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
+				context.getBean(TmTransitionSubscriptionRequestWorkRepository.class), //
+				context.getBean(TmTransitionSubscriptionResponseWorkRepository.class), //
 				context.getBean(TrendMicroUtil.class), //
 				externalRestTemplate); //
 	}
@@ -187,6 +189,8 @@ public class LMPIConnectionHelper {
 			TmUpdateSubscriptionResponseWorkRepository tmUpdateSubscriptionResponseWorkRepository, //
 			TmSuspendSubscriptionRequestWorkRepository tmSuspendSubscriptionRequestWorkRepository, //
 			TmSuspendSubscriptionResponseWorkRepository tmSuspendSubscriptionResponseWorkRepository, //
+			TmTransitionSubscriptionRequestWorkRepository tmTransitionSubscriptionRequestWorkRepository, //
+			TmTransitionSubscriptionResponseWorkRepository tmTransitionSubscriptionResponseWorkRepository, //
 			TrendMicroUtil trendMicroUtil, //
 			ExternalRestTemplate externalRestTemplate) {
 
@@ -225,6 +229,8 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmUpdateSubscriptionResponseWorkRepository = tmUpdateSubscriptionResponseWorkRepository;
 		INSTANCE.tmSuspendSubscriptionRequestWorkRepository = tmSuspendSubscriptionRequestWorkRepository;
 		INSTANCE.tmSuspendSubscriptionResponseWorkRepository = tmSuspendSubscriptionResponseWorkRepository;
+		INSTANCE.tmTransitionSubscriptionRequestWorkRepository = tmTransitionSubscriptionRequestWorkRepository;
+		INSTANCE.tmTransitionSubscriptionResponseWorkRepository = tmTransitionSubscriptionResponseWorkRepository;
 		// Util設定
 		INSTANCE.trendMicroUtil = trendMicroUtil;
 	}
