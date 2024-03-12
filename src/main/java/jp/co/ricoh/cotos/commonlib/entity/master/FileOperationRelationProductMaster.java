@@ -84,7 +84,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	/**
 	 * カテゴリ
 	 */
-	@ApiModelProperty(value = "カテゴリ", required = false, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\"), 外部連携(\"3\"), マスタ管理(\"4\"), LaIT連携(\"5\"), リコーひかり(\"6\")", position = 4)
+	@ApiModelProperty(value = "カテゴリ", required = false, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\"), 外部連携(\"3\"), マスタ管理(\"4\"), LaIT連携(\"5\"), リコーひかり(\"6\"), 機器情報(\"7\"), 振替情報(\"8\")", position = 4)
 	private CategoryType categoryType;
 
 	/**
