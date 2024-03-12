@@ -569,3 +569,4 @@
 |612|手配検索API用パラメータ追加|
 |613|BPSMの拡張項目に項目追加|
 |614|サブドメイン対応 拡張項目、エラーメッセージ追加|
+|615|ProductGrpMasterRepositoryにメソッド追加、FileOperationRelationProductMasterのEnum修正|
