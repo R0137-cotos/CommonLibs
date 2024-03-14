@@ -5,16 +5,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -38,8 +32,6 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	 * 商品グループマスタID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_grp_master_seq")
-	@SequenceGenerator(name = "product_grp_master_seq", sequenceName = "product_grp_master_seq", allocationSize = 1)
 	@ApiModelProperty(value = "商品グループマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
@@ -83,7 +75,6 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	/**
 	 * 商品グループコード
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "商品グループコード", required = false, position = 7, allowableValues = "range[0,255]")
 	private String productGroupCd;
 
@@ -127,7 +118,6 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	/**
 	 * 解約予定日差分
 	 */
-	@Max(99)
 	@ApiModelProperty(value = "解約予定日差分", required = false, position = 14, allowableValues = "range[0,99]")
 	private Integer cancelScheduledDateDifference;
 
@@ -140,7 +130,6 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	/**
 	 * 最長納期日数
 	 */
-	@Max(999)
 	@ApiModelProperty(value = "最長納期日数", required = false, position = 16, allowableValues = "range[0,999]")
 	private Integer longestDeliveryDate;
 
@@ -153,24 +142,18 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	/**
 	 * 期間売外部請求対象フラグ
 	 */
-	@Max(9)
-	@Min(0)
 	@ApiModelProperty(value = "期間売外部請求対象フラグ", required = false, position = 18, allowableValues = "range[0,9]")
 	private Integer periodSellingExternalBillingFlg;
 
 	/**
 	 * 契約承認後キャンセルフラグ
 	 */
-	@Max(9)
-	@Min(0)
 	@ApiModelProperty(value = "契約承認後キャンセルフラグ", required = false, position = 19, allowableValues = "range[0,9]")
 	private Integer contractAfterApprovalCancelFlg;
 
 	/**
 	 * 満了解約後手配作成フラグ
 	 */
-	@Max(9)
-	@Min(0)
 	@ApiModelProperty(value = "満了解約後手配作成フラグ", required = false, position = 20, allowableValues = "range[0,9]")
 	private Integer createArrangementForExpirationCancellationFlg;
 
