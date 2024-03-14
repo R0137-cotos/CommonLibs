@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,6 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -24,6 +30,29 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "license_service_master")
 public class LicenseServiceMaster extends EntityBase {
+
+	@Description(value = "ライセンス区分")
+	public enum LicenseType {
+
+		ベース("1"), アドオン("2");
+
+		private final String text;
+
+		private LicenseType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static LicenseType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	/**
 	 * ライセンスサービスマスタID
@@ -61,4 +90,10 @@ public class LicenseServiceMaster extends EntityBase {
 	@OneToMany(mappedBy = "licenseServiceMaster")
 	@ApiModelProperty(value = "ライセンス区分構成マスタ", required = true, position = 5)
 	private List<LicenseServiceCompMaster> licenseServiceCompMasterList;
+
+	/**
+	 * ライセンス区分
+	 */
+	@ApiModelProperty(value = "ライセンス区分", required = false, position = 6, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	private LicenseType licenseType;
 }
