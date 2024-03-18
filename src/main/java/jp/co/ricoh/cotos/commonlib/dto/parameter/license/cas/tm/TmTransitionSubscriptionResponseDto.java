@@ -11,12 +11,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * トレンドマイクロサブスクリプション作成レスポンスDTO
+ * トレンドマイクロサブスクリプション乗換レスポンスDTO
  */
 @EqualsAndHashCode(callSuper = false)
 @MappedSuperclass
 @Data
-public class TmCreateSubscriptionResponseDto extends AbstractTmResponseDto {
+public class TmTransitionSubscriptionResponseDto extends AbstractTmResponseDto {
 
 	/**
 	 * サブスクリプションID
@@ -35,10 +35,10 @@ public class TmCreateSubscriptionResponseDto extends AbstractTmResponseDto {
 	@JsonProperty("service_url")
 	private String serviceUrl;
 
-	private TmCreateSubscriptionResponseDtoLicense[] licenses;
+	private TmTransitionSubscriptionResponseDtoLicense[] licenses;
 
 	@Data
-	public static class TmCreateSubscriptionResponseDtoLicense {
+	public static class TmTransitionSubscriptionResponseDtoLicense {
 
 		/**
 		 * 製品ID

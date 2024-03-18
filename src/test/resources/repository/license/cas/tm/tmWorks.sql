@@ -20,6 +20,7 @@ insert into tm_link_management (
   , mom_cust_id
   , company_name_kana
   , license_info_id
+  , tm_transition_subscription_request_work_id
 ) values (
   10
   , '2020/11/02 17:00:00'
@@ -41,6 +42,7 @@ insert into tm_link_management (
   , 'mom_cust_id'
   , 'company_name_kana'
   , 1
+  , 10
 );
 insert into tm_link_management (
   id
@@ -63,6 +65,7 @@ insert into tm_link_management (
   , mom_cust_id
   , company_name_kana
   , license_info_id
+  , tm_transition_subscription_request_work_id
 ) values (
   20
   , '2020/11/02 17:00:00'
@@ -84,6 +87,7 @@ insert into tm_link_management (
   , 'mom_cust_id'
   , 'company_name_kana'
   , 1
+  , 20
 );
 insert into tm_link_management (
   id
@@ -106,6 +110,7 @@ insert into tm_link_management (
   , mom_cust_id
   , company_name_kana
   , license_info_id
+  , tm_transition_subscription_request_work_id
 ) values (
   30
   , '2020/11/02 17:00:00'
@@ -127,6 +132,7 @@ insert into tm_link_management (
   , 'mom_cust_id'
   , 'company_name_kana'
   , 1
+  , 30
 );
 -- TM_顧客情報作成リクエストWORK
 insert into tm_create_customer_request_work (
@@ -1453,4 +1459,270 @@ insert into tm_update_user_response_work (
   , 'phone_area_code'
   , 'phone_number'
   , 'phone_extension'
+);
+-- TM_サブスクリプション乗換リクエストWORK
+insert into tm_transition_subscription_request_work (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , request_status
+  , request_time
+  , url
+  , http_header
+  , http_body
+  , customer_id
+  , service_plan_id
+  , units_per_license
+  , transition_units_per_license
+  , license_start_date
+  , cross_grade_div
+  , from_service_plan_id
+  , from_license_end_date
+  , from_suspend_flg
+  , from_subscription_id
+) values (
+  10
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , 0
+  , '0'
+  , '2020/11/02 17:00:00'
+  , 'url'
+  , 'http_header'
+  , 'http_body'
+  , 'customer_id'
+  , 'service_plan_id'
+  , 'units_per_license'
+  , 'from_units_per_license'
+  , '2020/11/02 17:00:00'
+  , '1'
+  , 'from_service_plan_id'
+  , '2020/11/02 17:00:00'
+  , 0
+  , 'from_subscription_id'
+);
+insert into tm_transition_subscription_request_work (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , request_status
+  , request_time
+  , url
+  , http_header
+  , http_body
+  , customer_id
+  , service_plan_id
+  , units_per_license
+  , transition_units_per_license
+  , license_start_date
+  , cross_grade_div
+  , from_service_plan_id
+  , from_license_end_date
+  , from_suspend_flg
+  , from_subscription_id
+) values (
+  20
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , 0
+  , '0'
+  , '2020/11/02 17:00:00'
+  , 'url'
+  , 'http_header'
+  , 'http_body'
+  , 'customer_id'
+  , 'service_plan_id'
+  , 'units_per_license'
+  , 'from_units_per_license'
+  , '2020/11/02 17:00:00'
+  , '1'
+  , 'from_service_plan_id'
+  , '2020/11/02 17:00:00'
+  , 0
+  , 'from_subscription_id'
+);
+insert into tm_transition_subscription_request_work (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , request_status
+  , request_time
+  , url
+  , http_header
+  , http_body
+  , customer_id
+  , service_plan_id
+  , units_per_license
+  , transition_units_per_license
+  , license_start_date
+  , cross_grade_div
+  , from_service_plan_id
+  , from_license_end_date
+  , from_suspend_flg
+  , from_subscription_id
+) values (
+  30
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , 0
+  , '1'
+  , '2020/11/02 17:00:00'
+  , 'url'
+  , 'http_header'
+  , 'http_body'
+  , 'customer_id'
+  , 'service_plan_id'
+  , 'units_per_license'
+  , 'from_units_per_license'
+  , '2020/11/02 17:00:00'
+  , '1'
+  , 'from_service_plan_id'
+  , '2020/11/02 17:00:00'
+  , 0
+  , 'from_subscription_id'
+);
+-- TM_サブスクリプション乗換レスポンスWORK
+insert into tm_transition_subscription_response_work (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , request_id
+  , http_status
+  , error_message
+  , licence_mapped_status
+  , subscription_id
+  , product_name
+  , service_url
+  , product_id
+  , versionlicence_version
+  , ac_code
+  , units
+  , license_start_date
+  , license_expiration_date
+  , start_charge_date
+) values (
+  10
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , 0
+  , 10
+  , 'http_status'
+  , 'error_message'
+  , 0
+  , 'subscription_id'
+  , 'product_name'
+  , 'service_url'
+  , 'product_id'
+  , 'versionlicence_version'
+  , 'ac_code'
+  , 'units'
+  , '2020/11/02 17:00:00'
+  , '2020/11/02 17:00:00'
+  , '2020/11/02 17:00:00'
+);
+ insert into tm_transition_subscription_response_work (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , request_id
+  , http_status
+  , error_message
+  , licence_mapped_status
+  , subscription_id
+  , product_name
+  , service_url
+  , product_id
+  , versionlicence_version
+  , ac_code
+  , units
+  , license_start_date
+  , license_expiration_date
+  , start_charge_date
+) values (
+  20
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , 0
+  , 20
+  , 'http_status'
+  , 'error_message'
+  , 0
+  , 'subscription_id'
+  , 'product_name'
+  , 'service_url'
+  , 'product_id'
+  , 'versionlicence_version'
+  , 'ac_code'
+  , 'units'
+  , '2020/11/02 17:00:00'
+  , '2020/11/02 17:00:00'
+  , '2020/11/02 17:00:00'
+);
+ insert into tm_transition_subscription_response_work (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , request_id
+  , http_status
+  , error_message
+  , licence_mapped_status
+  , subscription_id
+  , product_name
+  , service_url
+  , product_id
+  , versionlicence_version
+  , ac_code
+  , units
+  , license_start_date
+  , license_expiration_date
+  , start_charge_date
+) values (
+  30
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , '2020/11/02 17:00:00'
+  , 'COTOS'
+  , 0
+  , 30
+  , 'http_status'
+  , 'error_message'
+  , 1
+  , 'subscription_id'
+  , 'product_name'
+  , 'service_url'
+  , 'product_id'
+  , 'versionlicence_version'
+  , 'ac_code'
+  , 'units'
+  , '2020/11/02 17:00:00'
+  , '2020/11/02 17:00:00'
+  , '2020/11/02 17:00:00'
 );

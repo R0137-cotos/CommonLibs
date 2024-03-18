@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmResponseWork.TmLicenceMappedStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequestWork;
@@ -25,14 +27,13 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRespons
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmLinkManagement;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionResponseWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionResponseWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserResponseWork;
-import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmRequestStatus;
-import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmResponseWork.TmLicenceMappedStatus;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateCustomerRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateCustomerResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionRequestWorkRepository;
@@ -40,6 +41,8 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionRes
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmLinkManagementRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmTransitionSubscriptionRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmTransitionSubscriptionResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionRequestWorkRepository;
@@ -99,6 +102,12 @@ public class TestTmWorks {
 	TmUpdateUserResponseWorkRepository tmUpdateUserResponseWorkRepository;
 
 	@Autowired
+	TmTransitionSubscriptionRequestWorkRepository tmTransitionSubscriptionRequestWorkRepository;
+
+	@Autowired
+	TmTransitionSubscriptionResponseWorkRepository tmTransitionSubscriptionResponseWorkRepository;
+
+	@Autowired
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
@@ -132,6 +141,8 @@ public class TestTmWorks {
 		TmUpdateSubscriptionResponseWorkRepositoryのテスト();
 		TmUpdateUserRequestWorkRepositoryのテスト();
 		TmUpdateUserResponseWorkRepositoryのテスト();
+		TmTransitionSubscriptionRequestWorkRepositoryのテスト();
+		TmTransitionSubscriptionResponseWorkRepositoryのテスト();
 	}
 
 	private void TmLinkManagementRepositoryのテスト() {
@@ -166,6 +177,10 @@ public class TestTmWorks {
 		found = tmLinkManagementRepository.findByTmSuspendSubscriptionRequestWork(tmSuspendSubscriptionRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロサブスクリプション解約リクエストWORKをキーにレコードが取得されること ", 1, found.size());
+		TmTransitionSubscriptionRequestWork tmTransitionSubscriptionRequestWork = tmTransitionSubscriptionRequestWorkRepository.findOne(10L);
+		found = tmLinkManagementRepository.findByTmTransitionSubscriptionRequestWork(tmTransitionSubscriptionRequestWork);
+		Assert.assertNotNull(found);
+		Assert.assertEquals("トレンドマイクロサブスクリプション乗換リクエストWORKをキーにレコードが取得されること ", 1, found.size());
 	}
 
 	private void TmCreateCustomerRequestWorkRepositoryのテスト() {
@@ -382,6 +397,14 @@ public class TestTmWorks {
 		found = tmUpdateUserResponseWorkRepository.findByLicenceMappedStatusAndIdBetween(TmLicenceMappedStatus.未反映, 10L, 19L);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("from~toのレコードが取得されていること to境界値 ", 1, found.size());
+	}
+
+	private void TmTransitionSubscriptionRequestWorkRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(tmTransitionSubscriptionRequestWorkRepository, 10L);
+	}
+
+	private void TmTransitionSubscriptionResponseWorkRepositoryのテスト() {
+		this.全てのカラムがNullではないことを確認_共通(tmTransitionSubscriptionResponseWorkRepository, 10L);
 	}
 
 	private <T extends EntityBase, ID extends Serializable> void 全てのカラムがNullではないことを確認_共通(CrudRepository<T, ID> repository, @SuppressWarnings("unchecked") ID... ids) {

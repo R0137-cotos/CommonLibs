@@ -30,7 +30,7 @@ public class TmLinkManagement extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_link_management_seq")
 	@SequenceGenerator(name = "tm_link_management_seq", sequenceName = "tm_link_management_seq", allocationSize = 1)
-	@ApiModelProperty(value = "トレンドマイクロ連携管理", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "トレンドマイクロ連携管理ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -46,7 +46,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_create_customer_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロ顧客情報作成リクエストWORK", required = true, position = 3)
+	@ApiModelProperty(value = "トレンドマイクロ顧客情報作成リクエストWORK", required = false, position = 3)
 	private TmCreateCustomerRequestWork tmCreateCustomerRequestWork;
 
 	/**
@@ -55,7 +55,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_create_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成リクエストWORK", required = true, position = 4)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成リクエストWORK", required = false, position = 4)
 	private TmCreateSubscriptionRequestWork tmCreateSubscriptionRequestWork;
 
 	/**
@@ -64,7 +64,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_update_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション更新リクエストWORK", required = true, position = 5)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション更新リクエストWORK", required = false, position = 5)
 	private TmUpdateSubscriptionRequestWork tmUpdateSubscriptionRequestWork;
 
 	/**
@@ -73,7 +73,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_update_customer_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロ会社情報更新リクエストWORK", required = true, position = 6)
+	@ApiModelProperty(value = "トレンドマイクロ会社情報更新リクエストWORK", required = false, position = 6)
 	private TmUpdateCustomerRequestWork tmUpdateCustomerRequestWork;
 
 	/**
@@ -82,7 +82,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_update_user_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ユーザーアカウント更新リクエストWORK", required = true, position = 7)
+	@ApiModelProperty(value = "ユーザーアカウント更新リクエストWORK", required = false, position = 7)
 	private TmUpdateUserRequestWork tmUpdateUserRequestWork;
 
 	/**
@@ -91,7 +91,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_suspend_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション解約リクエストWORK", required = true, position = 8)
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション解約リクエストWORK", required = false, position = 8)
 	private TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork;
 
 	/**
@@ -142,4 +142,13 @@ public class TmLinkManagement extends EntityBase {
 	@Min(0)
 	@ApiModelProperty(value = "ライセンス情報ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
 	private long licenseInfoId;
+
+	/**
+	 * トレンドマイクロサブスクリプション乗換リクエストWORK
+	 */
+	@OneToOne
+	@JoinColumn(name = "tm_transition_subscription_request_work_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "トレンドマイクロサブスクリプション乗換リクエストWORK", required = false, position = 16)
+	private TmTransitionSubscriptionRequestWork tmTransitionSubscriptionRequestWork;
 }
