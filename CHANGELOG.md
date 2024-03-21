@@ -1,5 +1,12 @@
 # Changelog
 
+## v7.15.0 (21/03/2024)
+- [**closed**] #21671 工事調整EIM申込情報テーブルにキャンペーン対象カラム追加 [#2608](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2608)
+- [**closed**] #23018 SVP_受注時/売上時RSSP顧客連携月報 出力内容不正対応DTO 項目の型修正 [#2604](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2604)
+- [**closed**] #23018 SVP_受注時/売上時RSSP顧客連携月報 出力内容不正対応 DTO修正 [#2598](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2598)
+
+---
+
 ## v7.14.0 (07/03/2024)
 - [**closed**] 21977_サブドメイン対応_拡張項目Dtoに項目追加 [#2569](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2569)
 - [**closed**] #21989_エラーメッセージ追加・ISP設定情報取得DTO修正 [#2575](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2575)
