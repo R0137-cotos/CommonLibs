@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.estimation;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,7 +22,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -34,6 +39,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @Table(name = "estimation_detail")
 public class EstimationDetail extends EntityBase {
+
+	@Description(value = "増減区分")
+	public enum IncreaseDecreaseDiv {
+		増数("1"), 減数("2");
+
+		private final String text;
+
+		private IncreaseDecreaseDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static IncreaseDecreaseDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_detail_seq")
@@ -146,4 +173,10 @@ public class EstimationDetail extends EntityBase {
 	public void prePersist() {
 		super.setCreatedAt(new Date());
 	}
+
+	/**
+	 * 増減区分
+	 */
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 15, readOnly = true)
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -137,4 +138,9 @@ public class ManagedEstimationDetail extends EntityBase {
 	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal beforeUnitPrice;
 
+	/**
+	 * 増減区分
+	 */
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 15, readOnly = true)
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }
