@@ -107,6 +107,6 @@ public class ManagedEstimationDetailDto extends DtoBase {
 	/**
 	 * 増減区分
 	 */
-	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 15)
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 14)
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }
