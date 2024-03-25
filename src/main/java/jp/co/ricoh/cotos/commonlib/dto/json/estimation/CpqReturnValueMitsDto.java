@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.json.estimation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.BillingMethod;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.ContractYears;
 import lombok.Data;
@@ -16,9 +16,9 @@ import lombok.Data;
 public class CpqReturnValueMitsDto {
 
 	/**
-	 * 契約種別詳細
+	 * 見積種別詳細
 	 */
-	private ContractTypeDetails contractTypeDetails;
+	private EstimationTypeDetails estimationTypeDetails;
 
 	/**
 	 * 請求方法
