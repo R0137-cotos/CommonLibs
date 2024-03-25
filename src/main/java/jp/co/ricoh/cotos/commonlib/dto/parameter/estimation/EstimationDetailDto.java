@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -112,4 +113,10 @@ public class EstimationDetailDto extends DtoBase {
 	@Max(99999)
 	@ApiModelProperty(value = "契約数", required = false, position = 14, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
+
+	/**
+	 * 増減区分
+	 */
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 15)
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

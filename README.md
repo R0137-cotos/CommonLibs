@@ -571,3 +571,4 @@
 |614|サブドメイン対応 拡張項目、エラーメッセージ追加|
 |615|ProductGrpMasterRepositoryにメソッド追加、FileOperationRelationProductMasterのEnum修正|
 |616|商品グループマスタ用DTO追加、商品グループマスタリポジトリの修正|
+|617|見積明細、契約明細、見積明細管理に項目追加、MITSの拡張項目を追加|
