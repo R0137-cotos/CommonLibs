@@ -1,7 +1,5 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,13 +19,11 @@ public class ProductContractExtendsParameterMitsDto {
 	/**
 	 * 契約種別詳細
 	 */
-	@NotNull
 	private ContractTypeDetails contractTypeDetails;
 
 	/**
 	 * 請求方法
 	 */
-	@NotNull
 	private BillingMethod billingMethod;
 
 	/**
