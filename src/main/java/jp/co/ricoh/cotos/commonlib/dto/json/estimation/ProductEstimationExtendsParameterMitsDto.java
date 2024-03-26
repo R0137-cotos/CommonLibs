@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 商品（見積用）拡張項目DTO（MWOD）
+ * 商品（見積用）拡張項目DTO（MITS）
  */
 
 @Data
@@ -18,11 +18,4 @@ public class ProductEstimationExtendsParameterMitsDto {
 	 */
 	@JsonProperty("cpqProductSpecificReturnValue")
 	private CpqReturnValueMitsDto cpqReturnValueMitsDto;
-
-	/**
-	 * 移行用項目
-	 */
-	@JsonProperty("migrationParameter")
-	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
-
 }
