@@ -1,12 +1,13 @@
 package jp.co.ricoh.cotos.commonlib.dto.json.contract;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.BillingMethod;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.ContractYears;
-import jp.co.ricoh.cotos.commonlib.dto.json.estimation.ProductEstimationMigrationParameterDto;
 import lombok.Data;
 
 /**
@@ -34,11 +35,6 @@ public class ProductContractExtendsParameterMitsDto {
 	/**
 	 * サービス利用希望日
 	 */
-	private boolean conclusionPreferredDate;
-
-	/**
-	 * 移行用項目
-	 */
-	@JsonProperty("migrationParameter")
-	private ProductEstimationMigrationParameterDto productEstimationMigrationParameterDto;
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+	private Date conclusionPreferredDate;
 }
