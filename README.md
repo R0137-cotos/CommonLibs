@@ -572,3 +572,4 @@
 |615|ProductGrpMasterRepositoryにメソッド追加、FileOperationRelationProductMasterのEnum修正|
 |616|商品グループマスタ用DTO追加、商品グループマスタリポジトリの修正|
 |617|見積明細、契約明細、見積明細管理に項目追加、MITSの拡張項目を追加|
+|618|商品（見積用）、商品（契約用）拡張項目DTO（MITS）修正|
