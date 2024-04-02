@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.ContractTerm;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseServiceMaster.LicenseType;
 import lombok.Data;
 
 /**
@@ -56,4 +58,14 @@ public class LicenseDetailExtendsParameterO365Dto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	private Date customTermEndDate;
+
+	/**
+	 * 支払周期区分
+	 */
+	private PaymentCycleType paymentCycleType;
+
+	/**
+	 * ライセンス区分
+	 */
+	private LicenseType licenseType;
 }
