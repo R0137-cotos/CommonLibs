@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.16.0 (04/04/2024)
+- [**closed**] #22904 O365 Copilot対応 [#2597](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2597)
+
+---
+
 ## v7.15.0 (21/03/2024)
 - [**closed**] #21671 工事調整EIM申込情報テーブルにキャンペーン対象カラム追加 [#2608](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2608)
 - [**closed**] #23018 SVP_受注時/売上時RSSP顧客連携月報 出力内容不正対応DTO 項目の型修正 [#2604](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2604)
