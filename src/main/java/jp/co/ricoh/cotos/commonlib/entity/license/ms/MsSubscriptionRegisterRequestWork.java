@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseServiceMaster.LicenseType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -204,4 +206,16 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@Size(max = 255)
 	@ApiModelProperty(value = "連携済サブスクリプションID", required = false, position = 18, allowableValues = "range[0,255]")
 	private String linkedSubscriptionId;
+
+	/**
+	 * 支払周期区分
+	 */
+	@ApiModelProperty(value = "支払周期区分", required = false, position = 19, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	private PaymentCycleType paymentCycleType;
+
+	/**
+	 * ライセンス区分
+	 */
+	@ApiModelProperty(value = "ライセンス区分", required = false, position = 20, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	private LicenseType licenseType;
 }
