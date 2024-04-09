@@ -80,4 +80,24 @@ public class SpecificControlMailAddDto {
 	 * キャンセル流用
 	 */
 	private String mailAddDiversionList;
+
+	/**
+	 * 旧メールアドレス併用希望
+	 */
+	private String mailAddConbinedUseList;
+
+	/**
+	 * 変更希望日
+	 */
+	private String mailAddChangeHopeDateList;
+
+	/**
+	 * 変更希望時間帯AM
+	 */
+	private String mailAddChangeHopeTimeAmList;
+
+	/**
+	 * 変更希望時間帯PM
+	 */
+	private String mailAddChangeHopeTimePmList;
 }
