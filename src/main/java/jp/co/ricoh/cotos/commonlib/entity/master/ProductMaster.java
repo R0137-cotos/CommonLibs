@@ -319,4 +319,12 @@ public class ProductMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "サービスコード", required = false, position = 32, allowableValues = "range[0,255]")
 	private String serviceCode;
+
+	/**
+	 * ISMAP商品フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "ISMAP商品フラグ", required = false, position = 33, allowableValues = "range[0,9]")
+	private Integer ismapProductFlg;
 }
