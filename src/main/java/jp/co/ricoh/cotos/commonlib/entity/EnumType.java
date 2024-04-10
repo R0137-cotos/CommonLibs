@@ -816,7 +816,7 @@ public class EnumType {
 		private final String text;
 
 		private RpaLinkageCpqUpdateCsvCreateStatus(final String text) {
-				this.text = text;
+			this.text = text;
 		}
 
 		@Override
@@ -845,7 +845,7 @@ public class EnumType {
 		private final String text;
 
 		private ContractInfoChangeAddOnProcType(final String text) {
-				this.text = text;
+			this.text = text;
 		}
 
 		@Override
@@ -882,6 +882,29 @@ public class EnumType {
 
 		@JsonCreator
 		public static PaymentCycleType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "更新月計上不要区分")
+	public enum UpdateMonthNotAccountingDiv {
+
+		サービス開始日("1"), 課金開始日("2");
+
+		private final String text;
+
+		private UpdateMonthNotAccountingDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static UpdateMonthNotAccountingDiv fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
