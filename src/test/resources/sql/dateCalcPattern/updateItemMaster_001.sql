@@ -1,0 +1,1 @@
+update item_master set update_month_not_accounting_div = '1' where id in (13008,13011);
