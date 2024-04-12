@@ -70,9 +70,9 @@ public class ContractCheckResult extends EntityBase {
 	 * チェック事項文面
 	 */
 	@NotNull
-	@Size(max = 255)
+	@Size(max = 1000)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "チェック事項文面", required = true, position = 5, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "チェック事項文面", required = true, position = 5, allowableValues = "range[0,1000]")
 	private String checkMatterText;
 
 	/**

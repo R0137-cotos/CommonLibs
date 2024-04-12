@@ -43,7 +43,7 @@ public class GpCheckMatterMaster extends EntityBaseMaster {
 	 * チェック事項文面
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "チェック事項文面", required = true, position = 3, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "チェック事項文面", required = true, position = 3, allowableValues = "range[0,1000]")
 	private String checkMatterText;
 
 	/**
