@@ -18,11 +18,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.UpdateMonthNotAccountingDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ItemContract;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductMaster;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
+import jp.co.ricoh.cotos.commonlib.logic.businessday.BusinessDayUtil;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
@@ -48,6 +52,9 @@ public class DateContractUtil {
 
 	@Autowired
 	DateCalcPatternUtil dateCalcPatternUtil;
+
+	@Autowired
+	BusinessDayUtil businessDayUtil;
 
 	/**
 	 * 積上がっている品種より最大の契約期間月数を取得する
@@ -242,5 +249,58 @@ public class DateContractUtil {
 			return ((java.sql.Date) date).toLocalDate();
 		}
 		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
+	/**
+	 * ランニング売上計上処理日設定
+	 * 品種マスタ．更新月計上不要区分の設定値を元にランニング売上計上処理日に計算した結果を設定する。
+	 * @param contract　契約
+	 */
+	public void setRunningAccountSalesDate(Contract contract) {
+		contract.getContractDetailList().stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
+			ItemContract itemContract = detail.getItemContract();
+			ItemMaster itemMaster = itemMasterRepository.findOne(itemContract.getItemMasterId());
+
+			Date runningAccountSalesDate = null;
+			if (itemMaster.getUpdateMonthNotAccountingDiv() != null) {
+				if (UpdateMonthNotAccountingDiv.サービス開始日.equals(itemMaster.getUpdateMonthNotAccountingDiv())) {
+					runningAccountSalesDate = getFirstBusinessDay(contract.getServiceTermStart());
+				}
+				if (UpdateMonthNotAccountingDiv.課金開始日.equals(itemMaster.getUpdateMonthNotAccountingDiv())) {
+					runningAccountSalesDate = getFirstBusinessDay(contract.getBillingStartDate());
+				}
+			}
+			detail.setRunningAccountSalesDate(runningAccountSalesDate);
+		});
+	}
+
+	/**
+	 * 月初第一営業日を取得する
+	 *
+	 * @param baseDate 対象日付
+	 * @return firstBusinessDay
+	 */
+	private Date getFirstBusinessDay(Date baseDate) {
+		if (baseDate == null) {
+			return null;
+		}
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(baseDate);
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int date = 1;
+
+		calendar.set(year, month, date, 0, 0, 0);
+		Date firstBusinessDay = null;
+		for (int i = 0; i <= calendar.getActualMaximum(Calendar.DATE); i++) {
+			firstBusinessDay = calendar.getTime();
+			if (businessDayUtil.isBusinessDay(firstBusinessDay)) {
+				break;
+			}
+			calendar.add(Calendar.DATE, 1);
+		}
+		return firstBusinessDay;
 	}
 }
