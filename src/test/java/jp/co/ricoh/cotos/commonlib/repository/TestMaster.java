@@ -3138,4 +3138,32 @@ public class TestMaster {
 		Assert.assertTrue(foundList.size() > 0);
 
 	}
+
+	@Test
+	public void ProductExtendsParameterMaster_商品マスタIDで取得するテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productExtendsParameterMaster.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/jsonMaster.sql");
+
+		// エンティティの取得
+		List<ProductExtendsParameterMaster> foundList = productExtendsParameterMasterRepository.findByProductMasterId(2L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
+
+		// Entity の各項目の値が null ではないことを確認
+		foundList.stream().forEach(found -> {
+			try {
+				testTool.assertColumnsNotNull(found);
+				if (found.getProductMaster() == null)
+					Assert.assertTrue(false);
+				if (found.getJsonSchemaMaster() == null)
+					if (found.getProductMaster() == null)
+						Assert.assertTrue(false);
+			} catch (Exception e) {
+				Assert.fail("throw Exception :" + e.getMessage());
+			}
+		});
+	}
 }
