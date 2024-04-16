@@ -92,12 +92,7 @@ public class SpecificControlMailAddDto {
 	private String mailAddChangeHopeDateList;
 
 	/**
-	 * 変更希望時間帯AM
+	 * 変更希望時間帯
 	 */
-	private String mailAddChangeHopeTimeAmList;
-
-	/**
-	 * 変更希望時間帯PM
-	 */
-	private String mailAddChangeHopeTimePmList;
+	private String mailAddChangeHopeTimeList;
 }
