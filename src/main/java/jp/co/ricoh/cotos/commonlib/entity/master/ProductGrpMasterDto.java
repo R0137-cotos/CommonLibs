@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.SsWorkRequestRootDiv;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.TransferHeaderSettingDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -162,4 +163,28 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "S&S作業依頼ルート区分", required = false, position = 21, allowableValues = "CSV作成(\"1\"), API連携(\"2\")")
 	private SsWorkRequestRootDiv ssWorkRequestRootDiv;
+
+	/**
+	 * 振替ヘッダー設定区分
+	 */
+	@ApiModelProperty(value = "振替ヘッダー設定区分", required = false, position = 22, allowableValues = "受付に受付担当ＣＥ設定(\"1\"), 受注に統括コード設定(\"2\"), 受注未設定(\"3\")")
+	private TransferHeaderSettingDiv transferHeaderSettingDiv;
+
+	/**
+	 * 一括取込商品フラグ
+	 */
+	@ApiModelProperty(value = "一括取込商品フラグ", required = false, position = 23, allowableValues = "range[0,9]")
+	private Integer batchImportProductFlg;
+
+	/**
+	 * 契約承認時確認API実行フラグ
+	 */
+	@ApiModelProperty(value = "契約承認時確認API実行フラグ", required = false, position = 24, allowableValues = "range[0,9]")
+	private Integer contractApprovalCheckapiExecutionFlg;
+
+	/**
+	 * ISYSONE保守レポート対象外フラグ
+	 */
+	@ApiModelProperty(value = "ISYSONE保守レポート対象外フラグ", required = false, position = 25, allowableValues = "range[0,9]")
+	private Integer isysoneMaintereportNoTargetFlg;
 }
