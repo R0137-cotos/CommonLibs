@@ -90,5 +90,5 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	 * 一括取込商品フラグ
 	 */
 	@ApiModelProperty(value = "一括取込商品フラグ", required = false, position = 6, allowableValues = "range[0,9]")
-	private Integer batchImportProductFlg;
+	private Integer batchImportTargetFlg;
 }
