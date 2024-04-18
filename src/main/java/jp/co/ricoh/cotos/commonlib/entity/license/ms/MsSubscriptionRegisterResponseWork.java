@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
+import jp.co.ricoh.cotos.commonlib.entity.master.LicenseServiceMaster.LicenseType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -117,4 +119,16 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "調整後の終了日", required = false, position = 13)
 	private Date customTermEndDate;
+
+	/**
+	 * 支払周期区分
+	 */
+	@ApiModelProperty(value = "支払周期区分", required = false, position = 14, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	private PaymentCycleType paymentCycleType;
+
+	/**
+	 * ライセンス区分
+	 */
+	@ApiModelProperty(value = "ライセンス区分", required = false, position = 15, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	private LicenseType licenseType;
 }

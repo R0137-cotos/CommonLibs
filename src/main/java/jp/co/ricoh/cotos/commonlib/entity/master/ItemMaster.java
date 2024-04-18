@@ -32,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -720,4 +721,10 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "課税区分", required = false, position = 58, allowableValues = "対象外(\"0\"), 外税(\"1\"), 内税(\"2\"), 免税(\"3\"), 非課税(\"4\")")
 	private TaxCategory taxCategory;
+
+	/**
+	 * 支払周期区分
+	 */
+	@ApiModelProperty(value = "支払周期区分", required = false, position = 59, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	private PaymentCycleType paymentCycleType;
 }
