@@ -750,4 +750,12 @@ public class ConstructionEimApplyInfo extends EntityBase {
 	@OneToMany(mappedBy = "constructionEimApplyInfo")
 	@ApiModelProperty(value = "工事調整EIM申込品種情報", required = true, position = 85)
 	private List<ConstructionEimItemInfo> constructionEimItemInfoList;
+
+	/**
+	 * キャンペーン対象
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "キャンペーン対象", required = false, position = 86, allowableValues = "range[0,255]")
+	private String campaignTarget;
+
 }

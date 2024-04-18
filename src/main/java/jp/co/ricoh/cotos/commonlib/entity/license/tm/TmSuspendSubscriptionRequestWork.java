@@ -30,7 +30,7 @@ public class TmSuspendSubscriptionRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_suspend_subscription_request_work_seq")
 	@SequenceGenerator(name = "tm_suspend_subscription_request_work_seq", sequenceName = "tm_suspend_subscription_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "サブスクリプション解約リクエストWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "サブスクリプション解約リクエストWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**

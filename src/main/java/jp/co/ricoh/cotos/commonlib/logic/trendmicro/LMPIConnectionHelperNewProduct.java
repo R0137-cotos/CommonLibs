@@ -8,6 +8,8 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionReq
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmCreateSubscriptionResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmSuspendSubscriptionResponseWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmTransitionSubscriptionRequestWorkRepository;
+import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmTransitionSubscriptionResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerRequestWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateCustomerResponseWorkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateSubscriptionRequestWorkRepository;
@@ -42,6 +44,8 @@ public class LMPIConnectionHelperNewProduct extends LMPIConnectionHelper {
 				context.getBean(TmUpdateSubscriptionResponseWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionRequestWorkRepository.class), //
 				context.getBean(TmSuspendSubscriptionResponseWorkRepository.class), //
+				context.getBean(TmTransitionSubscriptionRequestWorkRepository.class), //
+				context.getBean(TmTransitionSubscriptionResponseWorkRepository.class), //
 				context.getBean(TrendMicroUtil.class), //
 				externalRestTemplate); //
 	}

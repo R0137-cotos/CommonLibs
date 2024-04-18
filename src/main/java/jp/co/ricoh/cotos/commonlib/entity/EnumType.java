@@ -116,7 +116,7 @@ public class EnumType {
 	@Description(value = "処理カテゴリー")
 	public enum ProcessCategory {
 
-		承認依頼("1"), 承認依頼取消("2"), 承認依頼差戻("3"), 承認("4"), 作業依頼("5"), 作業完了("6"), キャンセル手続き("7"), キャンセル手続き中止("8"), 解約手続き("9"), 解約手続き中止("10"), 問い合わせ("11"), 売上計上停止("12"), 売上計上再開("13"), 売上開始指示("14"), 問い合わせ返信("15"), 承認済差戻("16"), デバイス空欄警告("17");
+		承認依頼("1"), 承認依頼取消("2"), 承認依頼差戻("3"), 承認("4"), 作業依頼("5"), 作業完了("6"), キャンセル手続き("7"), キャンセル手続き中止("8"), 解約手続き("9"), 解約手続き中止("10"), 問い合わせ("11"), 売上計上停止("12"), 売上計上再開("13"), 売上開始指示("14"), 問い合わせ返信("15"), 承認済差戻("16"), デバイス空欄警告("17"), 特殊審査依頼("18");
 
 		private final String text;
 
@@ -859,6 +859,29 @@ public class EnumType {
 			if (StringUtils.isEmpty(string)) {
 				return null;
 			}
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "支払周期区分")
+	public enum PaymentCycleType {
+
+		月額("1"), 年額("2");
+
+		private final String text;
+
+		private PaymentCycleType(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static PaymentCycleType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}

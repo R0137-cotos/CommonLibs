@@ -1,5 +1,26 @@
 # Changelog
 
+## v7.17.0 (18/04/2024)
+- [**closed**] #20662 ISMAP商品対応 リリースブランチマージ [#2617](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2617)
+- [**closed**] #21913 処理カテゴリに特殊審査依頼を追加、メッセージを追加 [#2592](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2592)
+- [**closed**] #21913 商品拡張項目マスタを商品マスタIDで取得する処理を追加 [#2595](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2595)
+- [**closed**] #21913 RSI基本ユーザー情報API呼び出し用のDTOを追加 [#2602](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2602)
+- [**closed**] #21913 RSI基本ユーザー情報API呼び出し用のDTOを追加(不足分) [#2603](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2603)
+
+---
+
+## v7.16.0 (04/04/2024)
+- [**closed**] #22904 O365 Copilot対応 [#2597](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2597)
+
+---
+
+## v7.15.0 (21/03/2024)
+- [**closed**] #21671 工事調整EIM申込情報テーブルにキャンペーン対象カラム追加 [#2608](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2608)
+- [**closed**] #23018 SVP_受注時/売上時RSSP顧客連携月報 出力内容不正対応DTO 項目の型修正 [#2604](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2604)
+- [**closed**] #23018 SVP_受注時/売上時RSSP顧客連携月報 出力内容不正対応 DTO修正 [#2598](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2598)
+
+---
+
 ## v7.14.0 (07/03/2024)
 - [**closed**] 21977_サブドメイン対応_拡張項目Dtoに項目追加 [#2569](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2569)
 - [**closed**] #21989_エラーメッセージ追加・ISP設定情報取得DTO修正 [#2575](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2575)
