@@ -1,5 +1,14 @@
 # Changelog
 
+## v7.17.0 (18/04/2024)
+- [**closed**] #20662 ISMAP商品対応 リリースブランチマージ [#2617](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2617)
+- [**closed**] #21913 処理カテゴリに特殊審査依頼を追加、メッセージを追加 [#2592](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2592)
+- [**closed**] #21913 商品拡張項目マスタを商品マスタIDで取得する処理を追加 [#2595](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2595)
+- [**closed**] #21913 RSI基本ユーザー情報API呼び出し用のDTOを追加 [#2602](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2602)
+- [**closed**] #21913 RSI基本ユーザー情報API呼び出し用のDTOを追加(不足分) [#2603](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2603)
+
+---
+
 ## v7.16.0 (04/04/2024)
 - [**closed**] #22904 O365 Copilot対応 [#2597](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2597)
 
