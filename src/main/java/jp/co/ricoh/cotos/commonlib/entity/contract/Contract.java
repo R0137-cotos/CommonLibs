@@ -1108,4 +1108,12 @@ public class Contract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 115, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 契約機種付加情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 116, readOnly = true)
+	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfo;
 }
