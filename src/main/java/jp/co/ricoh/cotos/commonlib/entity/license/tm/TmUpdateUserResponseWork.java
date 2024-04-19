@@ -28,7 +28,7 @@ public class TmUpdateUserResponseWork extends AbstractTmResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_user_response_work_seq")
 	@SequenceGenerator(name = "tm_update_user_response_work_seq", sequenceName = "tm_update_user_response_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -39,7 +39,7 @@ public class TmUpdateUserResponseWork extends AbstractTmResponseWork {
 	@JsonIgnore
 	@ApiModelProperty(value = "ユーザーアカウント更新リクエストWORK", required = true, position = 2)
 	private TmUpdateUserRequestWork requestWork;
-	
+
 	/**
 	 * ユーザーID
 	 */
@@ -81,21 +81,21 @@ public class TmUpdateUserResponseWork extends AbstractTmResponseWork {
 	@Size(max = 255)
 	@ApiModelProperty(value = "言語", required = false, position = 11, allowableValues = "range[0,255]")
 	private String language;
-	
+
 	/**
 	 * 市外局番
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "市外局番", required = false, position = 12, allowableValues = "range[0,255]")
 	private String phoneAreaCode;
-	
+
 	/**
 	 * 電話番号
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "電話番号", required = false, position = 13, allowableValues = "range[0,255]")
 	private String phoneNumber;
-	
+
 	/**
 	 * 内線番号
 	 */

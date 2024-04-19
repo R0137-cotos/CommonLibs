@@ -32,6 +32,8 @@ import jp.co.ricoh.cotos.commonlib.entity.license.tm.AbstractTmRequestWork.TmReq
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmCreateSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmSuspendSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionRequestWork;
+import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmTransitionSubscriptionRequestWork.CrossGradeDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateCustomerRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateSubscriptionRequestWork;
 import jp.co.ricoh.cotos.commonlib.entity.license.tm.TmUpdateUserRequestWork;
@@ -506,6 +508,102 @@ public class LMPIConnectionHelperTests {
 
 		try {
 			getHelper().getServicePlanId();
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 * [POST] サブスクリプション乗換API
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void transitionSubscriptionsTest_upgrade() throws ParseException {
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = df.parse("202200801");
+
+		TmTransitionSubscriptionRequestWork requestWork = new TmTransitionSubscriptionRequestWork();
+		// abstractWork
+		requestWork.setRequestStatus(TmRequestStatus.未連携);
+		requestWork.setRequestTime(new Date());
+		requestWork.setUrl("setUrl");
+		requestWork.setHttpHeader("setHttpHeader");
+		requestWork.setHttpBody("setHttpBody");
+		// entityBase
+		requestWork.setCreatedAt(new Date());
+		requestWork.setCreatedUserId("setCreatedUserId");
+		requestWork.setUpdatedAt(new Date());
+		requestWork.setUpdatedUserId("setUpdatedUserId");
+		requestWork.setVersion(0);
+		// requestWork
+		requestWork.setId(0);
+		requestWork.setCustomerId("5118f657-9f7d-407d-97ab-ca434c6dc936");
+		requestWork.setServicePlanId("5fd57263-69df-4d2c-a9ea-6c358e6b90d3");
+		requestWork.setUnitsPerLicense("10");
+		requestWork.setTransitionUnitsPerLicense("10");
+		requestWork.setLicenseStartDate(date);
+		requestWork.setCrossGradeDiv(CrossGradeDiv.アップグレード);
+		requestWork.setFromServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
+		requestWork.setFromLicenseEndDate(date);
+		requestWork.setFromSuspendFlg(0);
+		requestWork.setFromSubscriptionId("7ef15198-607a-4eb3-9907-077468585172");
+
+		try {
+			getHelper().transitionSubscriptions(requestWork);
+		} catch (RestClientException e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("エラーが発生した");
+		}
+	}
+
+	/**
+	 * [POST] サブスクリプション乗換API
+	 * @throws ParseException
+	 */
+	@Test
+	@WithMockCustomUser
+	public void transitionSubscriptionsTest_downgrade() throws ParseException {
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = df.parse("202200801");
+
+		TmTransitionSubscriptionRequestWork requestWork = new TmTransitionSubscriptionRequestWork();
+		// abstractWork
+		requestWork.setRequestStatus(TmRequestStatus.未連携);
+		requestWork.setRequestTime(new Date());
+		requestWork.setUrl("setUrl");
+		requestWork.setHttpHeader("setHttpHeader");
+		requestWork.setHttpBody("setHttpBody");
+		// entityBase
+		requestWork.setCreatedAt(new Date());
+		requestWork.setCreatedUserId("setCreatedUserId");
+		requestWork.setUpdatedAt(new Date());
+		requestWork.setUpdatedUserId("setUpdatedUserId");
+		requestWork.setVersion(0);
+		// requestWork
+		requestWork.setId(0);
+		requestWork.setCustomerId("5118f657-9f7d-407d-97ab-ca434c6dc936");
+		requestWork.setServicePlanId("4c011d2a-3df4-48aa-bc2a-e632e6d58adf");
+		requestWork.setUnitsPerLicense("10");
+		requestWork.setTransitionUnitsPerLicense("10");
+		requestWork.setLicenseStartDate(date);
+		requestWork.setCrossGradeDiv(CrossGradeDiv.ダウングレード);
+		requestWork.setFromServicePlanId("5fd57263-69df-4d2c-a9ea-6c358e6b90d3");
+		requestWork.setFromLicenseEndDate(null);
+		requestWork.setFromSuspendFlg(0);
+		requestWork.setFromSubscriptionId("7ef15198-607a-4eb3-9907-077468585172");
+
+		try {
+			getHelper().transitionSubscriptions(requestWork);
 		} catch (RestClientException e) {
 			e.printStackTrace();
 			fail("エラーが発生した");

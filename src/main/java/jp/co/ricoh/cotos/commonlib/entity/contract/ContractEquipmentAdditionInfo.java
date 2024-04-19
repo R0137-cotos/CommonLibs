@@ -31,7 +31,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 契約機種を表すEntity
+ * 契約機種付加情報を表すEntity
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)

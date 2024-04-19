@@ -51,4 +51,28 @@ public class LicenseRemainingNumberExtendsParameterSvpDto {
 	 */
 	private String updateSalesRSSPCustomerManagementDBDate;
 
+	/**
+	 * 2回目更新分RSSP顧客管理DB連携契約ID
+	 */
+	private Long secondUpdateRSSPCustomerManagementDBCooperationContractId;
+
+	/**
+	 * 2回目更新分RSSP顧客管理DB連携状況（受注時）
+	 */
+	private String secondUpdateOrdersRSSPCustomerManagementDBCooperationStatus;
+
+	/**
+	 * 2回目更新分RSSP顧客管理DB出力日（受注時）
+	 */
+	private String secondUpdateOrdersRSSPCustomerManagementDBDate;
+
+	/**
+	 * 2回目更新分RSSP顧客管理DB連携状況（売上時）
+	 */
+	private String secondUpdateSalesRSSPCustomerManagementDBCooperationStatus;
+
+	/**
+	 * 2回目更新分RSSP顧客管理DB出力日（売上時）
+	 */
+	private String secondUpdateSalesRSSPCustomerManagementDBDate;
 }
