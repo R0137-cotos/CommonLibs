@@ -698,7 +698,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "振替先課所コードは最大文字数（255）を超えています。"));
 
 		// 異常系（@Max ：）
-		BeanUtils.copyProperties(testTarget, entity);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setBatchImportFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
@@ -706,7 +706,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "一括登録フラグは最大値（9）を超えています。"));
 
 		// 異常系（@Min ：）
-		BeanUtils.copyProperties(testTarget, entity);
+		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setBatchImportFlg(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
