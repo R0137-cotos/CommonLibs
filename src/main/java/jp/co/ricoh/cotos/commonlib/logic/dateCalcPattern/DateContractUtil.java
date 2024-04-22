@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.UpdateMonthNotAccountingDiv;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ItemContract;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
@@ -28,6 +29,7 @@ import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.businessday.BusinessDayUtil;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.repository.contract.ContractDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ProductMasterRepository;
@@ -55,6 +57,9 @@ public class DateContractUtil {
 
 	@Autowired
 	BusinessDayUtil businessDayUtil;
+
+	@Autowired
+	ContractDetailRepository contractDetailRepository;
 
 	/**
 	 * 積上がっている品種より最大の契約期間月数を取得する
@@ -257,7 +262,8 @@ public class DateContractUtil {
 	 * @param contract　契約
 	 */
 	public void setRunningAccountSalesDate(Contract contract) {
-		contract.getContractDetailList().stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
+		List<ContractDetail> contractDetailList = contractDetailRepository.findByContractId(contract.getId());
+		contractDetailList.stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
 			ItemContract itemContract = detail.getItemContract();
 			ItemMaster itemMaster = itemMasterRepository.findOne(itemContract.getItemMasterId());
 
@@ -272,6 +278,7 @@ public class DateContractUtil {
 			}
 			detail.setRunningAccountSalesDate(runningAccountSalesDate);
 		});
+		contract.setContractDetailList(contractDetailList);
 	}
 
 	/**
