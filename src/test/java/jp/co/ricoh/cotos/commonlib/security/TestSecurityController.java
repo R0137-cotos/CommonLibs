@@ -162,6 +162,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFileLinkage;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentItemLink;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentNoIsysone;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
@@ -549,6 +550,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipment")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipment entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipmentAdditionInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipmentAdditionInfo entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
