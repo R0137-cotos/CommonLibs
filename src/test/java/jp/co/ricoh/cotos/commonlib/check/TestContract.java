@@ -501,7 +501,7 @@ public class TestContract {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.setCheckMatterCode(STR_256);
-		testTarget.setCheckMatterText(STR_256);
+		testTarget.setCheckMatterText(STR_1001);
 		testTarget.setCheckedUserId(STR_256);
 		testTarget.setCheckedUserName(STR_256);
 		testTarget.setCheckedOrgName(STR_256);

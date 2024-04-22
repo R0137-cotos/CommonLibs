@@ -715,14 +715,14 @@ public class TestEstimationDto {
 		// 異常系（@Size(max) ：）
 		BeanUtils.copyProperties(entity, testTarget);
 		testTarget.setCheckMatterCode(STR_256);
-		testTarget.setCheckMatterText(STR_256);
+		testTarget.setCheckMatterText(STR_1001);
 		testTarget.setCheckedUserId(STR_256);
 		testTarget.setCheckedUserName(STR_256);
 		testTarget.setCheckedOrgName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
-		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "チェック事項文面は最大文字数（255）を超えています。"));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "チェック事項文面は最大文字数（1000）を超えています。"));
 
 		// 異常系（@Max ：）
 		BeanUtils.copyProperties(entity, testTarget);
