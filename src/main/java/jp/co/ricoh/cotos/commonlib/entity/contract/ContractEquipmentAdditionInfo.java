@@ -42,7 +42,7 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 
 	@Description(value = "変更区分")
 	public enum ChangeKbn {
-		追加("0"), 変更("1"), 削除("2");
+		追加("1"), 変更("2"), 削除("3");
 
 		private final String text;
 
@@ -83,7 +83,7 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	/**
 	 * 変更区分
 	 */
-	@ApiModelProperty(value = "変更区分", required = false, position = 3, allowableValues = "追加(\"0\"),変更(\"1\"),削除(\"2\")")
+	@ApiModelProperty(value = "変更区分", required = false, position = 3, allowableValues = "追加(\"1\"),変更(\"2\"),削除(\"3\")")
 	private ChangeKbn changeKbn;
 
 	/**
