@@ -1114,6 +1114,7 @@ public class Contract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 116, readOnly = true)
-	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfo;
+	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 116)
+	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfoList;
+
 }

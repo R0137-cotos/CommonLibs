@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -74,16 +75,15 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	 * 契約
 	 */
 	@ManyToOne(optional = false)
-	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
+	@JsonIgnore
 	@ApiModelProperty(value = "契約", required = true, position = 2)
 	private Contract contract;
 
 	/**
 	 * 変更区分
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "変更区分", required = false, position = 3, allowableValues = "追加(\"0\"), 変更(\"1\"), 削除(\"2\")")
+	@ApiModelProperty(value = "変更区分", required = false, position = 3, allowableValues = "追加(\"0\"),変更(\"1\"),削除(\"2\")")
 	private ChangeKbn changeKbn;
 
 	/**
@@ -174,7 +174,7 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "住所コ－ド", required = false, position = 16, allowableValues = "range[0,255]")
-	private String addr_cd;
+	private String addrCd;
 
 	/**
 	 * 電話番号
@@ -275,92 +275,100 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	private String picMntSalesDepartmentNameKana;
 
 	/**
+	 * 保守担当者名（カナ）
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "保守担当者名（カナ）", required = false, position = 31, allowableValues = "range[0,255]")
+	private String picMntEmployeeNameKana;
+
+	/**
 	 * 導入担当課所コード(MoM組織ID)
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入担当課所コード(MoM組織ID)", required = false, position = 31, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当課所コード(MoM組織ID)", required = false, position = 32, allowableValues = "range[0,255]")
 	private String picIntMomOrgId;
 
 	/**
 	 * 導入担当CEコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入担当CEコード", required = false, position = 32, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当CEコード", required = false, position = 33, allowableValues = "range[0,255]")
 	private String picIntCeCd;
 
 	/**
 	 * 導入担当MoM社員ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入担当MoM社員ID", required = false, position = 33, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当MoM社員ID", required = false, position = 34, allowableValues = "range[0,255]")
 	private String picIntMomEmployeeId;
 
 	/**
 	 * 導入部署名（漢字）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入部署名（漢字）", required = false, position = 34, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入部署名（漢字）", required = false, position = 35, allowableValues = "range[0,255]")
 	private String picIntSalesDepartmentName;
 
 	/**
 	 * 導入担当者名（漢字）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入担当者名（漢字）", required = false, position = 35, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当者名（漢字）", required = false, position = 36, allowableValues = "range[0,255]")
 	private String picIntEmployeeName;
 
 	/**
 	 * 導入部署名（カナ）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入部署名（カナ）", required = false, position = 36, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入部署名（カナ）", required = false, position = 37, allowableValues = "range[0,255]")
 	private String picIntSalesDepartmentNameKana;
 
 	/**
 	 * 導入担当者名（カナ）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "導入担当者名（カナ）", required = false, position = 37, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "導入担当者名（カナ）", required = false, position = 38, allowableValues = "range[0,255]")
 	private String picIntEmployeeNameKana;
 
 	/**
 	 * Isys-One処理状態
 	 */
-	@ApiModelProperty(value = "Isys-One 処理状態", required = false, position = 38, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 連携済み(\"2\"), 連携エラー(\"3\"), 対象外(\"4\"), 管理対象外(\"5\")")
+	@ApiModelProperty(value = "Isys-One処理状態", required = false, position = 39, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\"),連携エラー(\"3\"),対象外(\"4\"),管理対象外(\"5\")")
 	private IsysoneProcStatus isysoneProcStatus;
 
 	/**
 	 * IsysOne連携日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "IsysOne連携日時", required = false, position = 39)
+	@ApiModelProperty(value = "IsysOne連携日時", required = false, position = 40)
 	private Date isysoneLinkageAt;
 
 	/**
 	 * ARCS期間売保守契約処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守契約処理状態", required = false, position = 40, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),管理対象外(\"3\")")
+	@ApiModelProperty(value = "ARCS期間売保守契約処理状態", required = false, position = 41, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMainteProcStatus arcsPeriodSaleMainteProcStatus;
 
 	/**
 	 * ARCS期間売保守契約連携日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "ARCS期間売保守契約連携日", required = false, position = 41)
+	@ApiModelProperty(value = "ARCS期間売保守契約連携日", required = false, position = 42)
 	private Date arcsPeriodSaleMainteLinkageAt;
 
 	/**
 	 * 機器問い合わせ番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "機器問い合わせ番号", required = false, position = 42, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "機器問い合わせ番号", required = false, position = 43, allowableValues = "range[0,255]")
 	private String equipmentContactNo;
 
 	/**
 	 * 累積契約機種ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "累積契約機種ID", required = true, position = 43, allowableValues = "range[0,9223372036854775807]")
+	@Column(nullable = false)
+	@ApiModelProperty(value = "累積契約機種ID", required = true, position = 44, allowableValues = "range[0,9223372036854775807]")
 	private long accumulationContractEquipmentId;
 
 	/**
