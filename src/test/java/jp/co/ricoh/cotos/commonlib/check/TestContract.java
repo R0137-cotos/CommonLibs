@@ -1912,6 +1912,7 @@ public class TestContract {
 		testTarget.setPhoneNumber(STR_256);
 		testTarget.setCrpStatusKbn(STR_256);
 		testTarget.setDepartmentName(STR_256);
+		testTarget.setPicName(STR_256);
 		testTarget.setDepartmentNameKana(STR_256);
 		testTarget.setPicNameKana(STR_256);
 		testTarget.setCustomerNumber(STR_256);
@@ -1933,7 +1934,7 @@ public class TestContract {
 		testTarget.setPicIntEmployeeNameKana(STR_256);
 		testTarget.setEquipmentContactNo(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 36);
+		Assert.assertTrue(result.getErrorInfoList().size() == 37);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM企事部IDは最大文字数（255）を超えています。"));
 
