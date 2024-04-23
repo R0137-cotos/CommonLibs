@@ -60,6 +60,6 @@ public class ItemDetailContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "一括登録フラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "一括登録フラグ", required = false, position = 9, allowableValues = "range[0,9]")
 	private Integer batchImportFlg;
 }
