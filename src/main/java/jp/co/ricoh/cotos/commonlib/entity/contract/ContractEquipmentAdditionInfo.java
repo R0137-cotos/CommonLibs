@@ -379,4 +379,12 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	@ApiModelProperty(value = "代表設置先フラグ", required = false, position = 45, allowableValues = "range[0,9]")
 	private Integer representationInstallationFlg;
 
+	/**
+	 * 取込フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "取込フラグ", required = false, position = 46, allowableValues = "range[0,9]")
+	private Integer captureFlg;
+
 }
