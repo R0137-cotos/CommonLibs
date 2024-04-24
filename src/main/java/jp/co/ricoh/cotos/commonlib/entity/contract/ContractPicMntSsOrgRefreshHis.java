@@ -71,4 +71,11 @@ public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "洗替日時", required = false, position = 5)
 	private Date refreshedAt;
+
+	/**
+	 * 更新元バッチID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "更新元バッチID", required = false, position = 6, allowableValues = "range[0,255]")
+	private String updateBatchId;
 }

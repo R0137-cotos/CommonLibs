@@ -1,9 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.contract;
 
-import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,56 +16,31 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-import org.springframework.context.annotation.Description;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.ArcsPeriodSaleMainteProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneProcStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo.ChangeKbn;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 契約機種付加情報を表すEntity
+ * 契約機種付加情報の洗い替え履歴を表すEntity
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "contract_equipment_addition_info")
-public class ContractEquipmentAdditionInfo extends EntityBase {
-
-	@Description(value = "変更区分")
-	public enum ChangeKbn {
-		追加("1"), 変更("2"), 削除("3");
-
-		private final String text;
-
-		private ChangeKbn(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ChangeKbn fromString(final String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
+@Table(name = "contract_equipment_addition_info_refresh_his")
+public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 
 	/**
 	 * ID
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_equipment_addition_info_seq")
-	@SequenceGenerator(name = "contract_equipment_addition_info_seq", sequenceName = "contract_equipment_addition_info_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_equipment_addition_info_refresh_his_seq")
+	@SequenceGenerator(name = "contract_equipment_addition_info_refresh_his_seq", sequenceName = "contract_equipment_addition_info_refresh_his_seq", allocationSize = 1)
 	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
@@ -374,9 +347,8 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	 * 累積契約機種ID
 	 */
 	@Min(0)
-	@Column(nullable = false)
-	@ApiModelProperty(value = "累積契約機種ID", required = true, position = 45, allowableValues = "range[0,9223372036854775807]")
-	private long accumulationContractEquipmentId;
+	@ApiModelProperty(value = "累積契約機種ID", required = false, position = 45, allowableValues = "range[0,9223372036854775807]")
+	private Long accumulationContractEquipmentId;
 
 	/**
 	 * 代表設置先フラグ
@@ -394,4 +366,17 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	@ApiModelProperty(value = "取込フラグ", required = false, position = 47, allowableValues = "range[0,9]")
 	private Integer captureFlg;
 
+	/**
+	 * 洗替日時
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "洗替日時", required = false, position = 48)
+	private Date refreshedAt;
+
+	/**
+	 * 更新元バッチID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "更新元バッチID", required = false, position = 49, allowableValues = "range[0,255]")
+	private String updateBatchId;
 }
