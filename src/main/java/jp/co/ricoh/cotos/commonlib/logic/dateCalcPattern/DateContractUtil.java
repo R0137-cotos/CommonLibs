@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -263,22 +264,32 @@ public class DateContractUtil {
 	 */
 	public void setRunningAccountSalesDate(Contract contract) {
 		List<ContractDetail> contractDetailList = contractDetailRepository.findByContractId(contract.getId());
-		contractDetailList.stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
+		// 更新月計上不要区分取得　複数品種に別の更新月計上不要区分が設定されている場合は、先頭の品種の区分を使用する
+		List<ItemMaster> itemMasterList = new ArrayList<ItemMaster>();
+		contractDetailList.stream().forEach(detail -> {
 			ItemContract itemContract = detail.getItemContract();
 			ItemMaster itemMaster = itemMasterRepository.findOne(itemContract.getItemMasterId());
-
-			Date runningAccountSalesDate = null;
 			if (itemMaster.getUpdateMonthNotAccountingDiv() != null) {
-				if (UpdateMonthNotAccountingDiv.サービス開始日.equals(itemMaster.getUpdateMonthNotAccountingDiv())) {
-					runningAccountSalesDate = getFirstBusinessDay(contract.getServiceTermStart());
-				}
-				if (UpdateMonthNotAccountingDiv.課金開始日.equals(itemMaster.getUpdateMonthNotAccountingDiv())) {
-					runningAccountSalesDate = getFirstBusinessDay(contract.getBillingStartDate());
-				}
+				itemMasterList.add(itemMaster);
+				return;
 			}
-			detail.setRunningAccountSalesDate(runningAccountSalesDate);
 		});
-		contract.setContractDetailList(contractDetailList);
+		if (!CollectionUtils.isEmpty(itemMasterList)) {
+			contractDetailList.stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
+				Date runningAccountSalesDate = null;
+				if (itemMasterList.get(0).getUpdateMonthNotAccountingDiv() != null) {
+					if (UpdateMonthNotAccountingDiv.サービス開始日.equals(itemMasterList.get(0).getUpdateMonthNotAccountingDiv())) {
+						runningAccountSalesDate = getFirstBusinessDay(contract.getServiceTermStart());
+					}
+					if (UpdateMonthNotAccountingDiv.課金開始日.equals(itemMasterList.get(0).getUpdateMonthNotAccountingDiv())) {
+						runningAccountSalesDate = getFirstBusinessDay(contract.getBillingStartDate());
+					}
+				}
+				detail.setRunningAccountSalesDate(runningAccountSalesDate);
+			});
+
+			contract.setContractDetailList(contractDetailList);
+		}
 	}
 
 	/**

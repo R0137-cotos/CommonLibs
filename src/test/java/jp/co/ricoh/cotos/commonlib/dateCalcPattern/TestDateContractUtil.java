@@ -287,8 +287,12 @@ public class TestDateContractUtil {
 		Contract contract = contractRepository.findOne(contractId);
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
 		dateContractUtil.setRunningAccountSalesDate(contract);
-		contract.getContractDetailList().stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
-			Assert.assertEquals("サービス開始日の月初日が設定されること", "2024/07/01", sf.format(detail.getRunningAccountSalesDate()));
+		contract.getContractDetailList().stream().forEach(detail -> {
+			if (detail.getItemContract().getCostType() == CostType.月額_定額) {
+				Assert.assertEquals("サービス開始日の月初日が設定されること", "2024/07/01", sf.format(detail.getRunningAccountSalesDate()));
+			} else {
+				Assert.assertNull("ライニング計上処理日が未設定であること", detail.getRunningAccountSalesDate());
+			}
 		});
 	}
 
@@ -299,8 +303,12 @@ public class TestDateContractUtil {
 		Contract contract = contractRepository.findOne(contractId);
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
 		dateContractUtil.setRunningAccountSalesDate(contract);
-		contract.getContractDetailList().stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
-			Assert.assertEquals("課金開始日の月初日が設定されること", "2024/08/01", sf.format(detail.getRunningAccountSalesDate()));
+		contract.getContractDetailList().stream().forEach(detail -> {
+			if (detail.getItemContract().getCostType() == CostType.月額_定額) {
+				Assert.assertEquals("課金開始日の月初日が設定されること", "2024/08/01", sf.format(detail.getRunningAccountSalesDate()));
+			} else {
+				Assert.assertNull("ライニング計上処理日が未設定であること", detail.getRunningAccountSalesDate());
+			}
 		});
 	}
 
