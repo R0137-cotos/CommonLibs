@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.ArcsPeriodSaleMainteProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo.ChangeKbn;
@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ContractEquipmentAdditionInfoDto extends EntityBase {
+public class ContractEquipmentAdditionInfoDto extends DtoBase {
 
 	/**
 	 * 変更区分
