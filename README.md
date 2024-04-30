@@ -584,3 +584,4 @@
 |627|品種明細（契約用）に数量を追加|
 |628|契約機種付加情報Dtoを追加|
 |629|契約のARCS期間売保守元契約処理状態のenum追加|
+|630|ContractExtCreateDto、ContractExtChangeDtoを修正|
