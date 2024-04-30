@@ -1779,6 +1779,11 @@ public class TestContractDto {
 		BeanUtils.copyProperties(entity.getContractAddedEditorEmpList().get(0), editor);
 		dto.setContractAddedEditorEmpList(Arrays.asList(editor));
 
+		// 契約機種付加情報
+		ContractEquipmentAdditionInfoDto equipmentAdd = new ContractEquipmentAdditionInfoDto();
+		BeanUtils.copyProperties(entity.getContractEquipmentAdditionInfoList().get(0), equipmentAdd);
+		dto.setContractEquipmentAdditionInfoList(Arrays.asList(equipmentAdd));
+
 		// 正常系
 		BeanUtils.copyProperties(dto, testTarget);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -1851,8 +1856,9 @@ public class TestContractDto {
 		testTarget.getCustomerContract().setCustomerName(STR_256);
 		testTarget.getDealerContractList().get(0).setDealerName(STR_256);
 		testTarget.getProductContractList().get(0).setProductContractName(STR_256);
+		testTarget.getContractEquipmentAdditionInfoList().get(0).setCompanyName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 7);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
 
@@ -1905,6 +1911,11 @@ public class TestContractDto {
 		ContractAddedEditorEmpDto editor = new ContractAddedEditorEmpDto();
 		BeanUtils.copyProperties(entity.getContractAddedEditorEmpList().get(0), editor);
 		dto.setContractAddedEditorEmpList(Arrays.asList(editor));
+
+		// 契約機種付加情報
+		ContractEquipmentAdditionInfoDto equipmentAdd = new ContractEquipmentAdditionInfoDto();
+		BeanUtils.copyProperties(entity.getContractEquipmentAdditionInfoList().get(0), equipmentAdd);
+		dto.setContractEquipmentAdditionInfoList(Arrays.asList(equipmentAdd));
 
 		// 正常系
 		BeanUtils.copyProperties(dto, testTarget);
@@ -1973,8 +1984,9 @@ public class TestContractDto {
 		testTarget.getCustomerContract().setCustomerName(STR_256);
 		testTarget.getDealerContractList().get(0).setDealerName(STR_256);
 		testTarget.getProductContractList().get(0).setProductContractName(STR_256);
+		testTarget.getContractEquipmentAdditionInfoList().get(0).setCompanyName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 6);
+		Assert.assertTrue(result.getErrorInfoList().size() == 7);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品名は最大文字数（255）を超えています。"));
 
