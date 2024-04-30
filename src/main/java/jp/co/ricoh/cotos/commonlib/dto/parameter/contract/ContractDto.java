@@ -698,7 +698,7 @@ public class ContractDto extends DtoBase {
 	/**
 	 * ARCS期間売保守元契約処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 92, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 92, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
 
 	/**
