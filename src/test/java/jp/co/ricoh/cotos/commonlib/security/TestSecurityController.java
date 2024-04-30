@@ -50,6 +50,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAttachedFileLi
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractCheckResultDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentAdditionInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentNoIsysoneDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
@@ -555,6 +556,11 @@ public class TestSecurityController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipmentAdditionInfo")
 	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipmentAdditionInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ContractEquipmentAdditionInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ContractEquipmentAdditionInfoDto entity, BindingResult result) {
 		return createParameterCheckResult(result);
 	}
 
