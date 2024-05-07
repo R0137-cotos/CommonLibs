@@ -585,3 +585,4 @@
 |628|契約機種付加情報Dtoを追加|
 |629|契約のARCS期間売保守元契約処理状態のenum追加|
 |630|ContractExtCreateDto、ContractExtChangeDtoを修正|
+|631|登録済み契約機種取得APIの実施結果用パラメーター、契約機種付加情報リポジトリを修正|
