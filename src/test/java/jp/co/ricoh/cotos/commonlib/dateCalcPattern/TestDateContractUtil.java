@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dateCalcPattern;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ProductContract;
+import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
@@ -266,6 +267,49 @@ public class TestDateContractUtil {
 		// サービス終了日：java.util.Date サービス終了最大延長日：java.sql.Date の場合のテスト(契約変更時にコールされることを想定)
 		contract.setServiceTermEnd(sf.parse("2025/02/28"));
 		Assert.assertEquals("1年間で12が返されること", Long.valueOf(12), dateContractUtil.getMaxExtensionContractMonths(contract));
+	}
+
+	@Test
+	public void ランニング売上計上処理日_区分なし() throws Exception {
+		long contractId = 17L;
+		Contract contract = contractRepository.findOne(contractId);
+		dateContractUtil.setRunningAccountSalesDate(contract);
+		contract = contractRepository.findOne(contractId);
+		contract.getContractDetailList().stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
+			Assert.assertNull("ランニング売上計上処理日にNULLが設定されること", detail.getRunningAccountSalesDate());
+		});
+	}
+
+	@Test
+	public void ランニング売上計上処理日_サービス開始日() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/updateItemMaster_001.sql");
+		long contractId = 18L;
+		Contract contract = contractRepository.findOne(contractId);
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+		dateContractUtil.setRunningAccountSalesDate(contract);
+		contract.getContractDetailList().stream().forEach(detail -> {
+			if (detail.getItemContract().getCostType() == CostType.月額_定額) {
+				Assert.assertEquals("サービス開始日の月初日が設定されること", "2024/07/01", sf.format(detail.getRunningAccountSalesDate()));
+			} else {
+				Assert.assertNull("ライニング計上処理日が未設定であること", detail.getRunningAccountSalesDate());
+			}
+		});
+	}
+
+	@Test
+	public void ランニング売上計上処理日_課金開始日() throws Exception {
+		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/updateItemMaster_002.sql");
+		long contractId = 19L;
+		Contract contract = contractRepository.findOne(contractId);
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+		dateContractUtil.setRunningAccountSalesDate(contract);
+		contract.getContractDetailList().stream().forEach(detail -> {
+			if (detail.getItemContract().getCostType() == CostType.月額_定額) {
+				Assert.assertEquals("課金開始日の月初日が設定されること", "2024/08/01", sf.format(detail.getRunningAccountSalesDate()));
+			} else {
+				Assert.assertNull("ライニング計上処理日が未設定であること", detail.getRunningAccountSalesDate());
+			}
+		});
 	}
 
 	private void テストデータ作成() {
