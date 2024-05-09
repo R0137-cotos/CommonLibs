@@ -1,5 +1,11 @@
 # Changelog
 
+## v7.18.0 (09/05/2024)
+- [**closed**] #22238 品種マスタ項目追加、ランニング計上処理日設定処理追加 [#2640](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2640)
+- [**closed**] #23821 機器登録重複エラーメッセージ追加 [#2628](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2628)
+
+---
+
 ## v7.17.0 (18/04/2024)
 - [**closed**] #20662 ISMAP商品対応 リリースブランチマージ [#2617](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2617)
 - [**closed**] #21913 処理カテゴリに特殊審査依頼を追加、メッセージを追加 [#2592](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2592)
