@@ -394,4 +394,11 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	@ApiModelProperty(value = "取込フラグ", required = false, position = 47, allowableValues = "range[0,9]")
 	private Integer captureFlg;
 
+	/**
+	 * 契約形態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約形態", required = false, position = 48, allowableValues = "range[0,255]")
+	private String contractForm;
+
 }

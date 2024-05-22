@@ -367,16 +367,24 @@ public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 	private Integer captureFlg;
 
 	/**
+	 * 契約形態
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "契約形態", required = false, position = 48, allowableValues = "range[0,255]")
+	private String contractForm;
+
+	/**
 	 * 洗替日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日時", required = false, position = 48)
+	@ApiModelProperty(value = "洗替日時", required = false, position = 49)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "更新元バッチID", required = false, position = 49, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "更新元バッチID", required = false, position = 50, allowableValues = "range[0,255]")
 	private String updateBatchId;
+
 }
