@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.19.0 (23/05/2024)
+- [**closed**] #24291 異常な工事調整EIM情報エラーメッセージ追加 [#2648](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2648)
+
+---
+
 ## v7.18.0 (09/05/2024)
 - [**closed**] #22238 品種マスタ項目追加、ランニング計上処理日設定処理追加 [#2640](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2640)
 - [**closed**] #23821 機器登録重複エラーメッセージ追加 [#2628](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2628)
