@@ -3,7 +3,6 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +26,6 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@EntityListeners(ContractInstallationLocationListener.class)
 @Data
 @Table(name = "contract_installation_location_refresh_his")
 public class ContractInstallationLocationRefreshHis extends CustomerAbstractEntity {
