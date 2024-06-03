@@ -89,6 +89,29 @@ public class ProductGrpMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "価格改定処理パターン区分")
+	public enum PriceRevisionProcDiv {
+
+		価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新("1");
+
+		private final String text;
+
+		private PriceRevisionProcDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static PriceRevisionProcDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * 商品グループマスタID
 	 */
@@ -269,4 +292,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "ISYSONE保守レポート対象外フラグ", required = false, position = 26, allowableValues = "range[0,9]")
 	private Integer isysoneMaintereportNoTargetFlg;
+
+	/**
+	 * 価格改定処理パターン区分
+	 */
+	@ApiModelProperty(value = "価格改定処理パターン区分", required = false, position = 27, allowableValues = "価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新(\"1\")")
+	private PriceRevisionProcDiv priceRevisionProcDiv;
 }
