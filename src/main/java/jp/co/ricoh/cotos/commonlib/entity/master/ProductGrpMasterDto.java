@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.PriceRevisionProcDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.SsWorkRequestRootDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.TransferHeaderSettingDiv;
 import lombok.Data;
@@ -187,4 +188,10 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "ISYSONE保守レポート対象外フラグ", required = false, position = 25, allowableValues = "range[0,9]")
 	private Integer isysoneMaintereportNoTargetFlg;
+
+	/**
+	 * 価格改定処理パターン区分
+	 */
+	@ApiModelProperty(value = "価格改定処理パターン区分", required = false, position = 26, allowableValues = "価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新(\"1\")")
+	private PriceRevisionProcDiv priceRevisionProcDiv;
 }

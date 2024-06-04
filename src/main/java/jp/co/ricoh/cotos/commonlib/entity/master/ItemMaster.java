@@ -727,4 +727,11 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "支払周期区分", required = false, position = 59, allowableValues = "月額(\"1\"), 年額(\"2\")")
 	private PaymentCycleType paymentCycleType;
+
+	/**
+	 * 売上可能開始日
+	 */
+	@ApiModelProperty(value = "売上可能開始日", required = false, position = 60)
+	@Temporal(TemporalType.DATE)
+	private Date accountPossibleStartDate;
 }

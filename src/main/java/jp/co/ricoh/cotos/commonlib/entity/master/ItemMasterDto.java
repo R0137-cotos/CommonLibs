@@ -270,4 +270,11 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 37, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
+
+	/**
+	 * 売上可能開始日
+	 */
+	@ApiModelProperty(value = "売上可能開始日", required = false, position = 38)
+	@Temporal(TemporalType.DATE)
+	private Date accountPossibleStartDate;
 }
