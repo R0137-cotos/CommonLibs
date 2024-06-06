@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.20.0 (06/06/2024)
+- [**closed**] #23662 カテB商材固有項目追加対応 [#2654](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2654)
+
+---
+
 ## v7.19.0 (23/05/2024)
 - [**closed**] #24291 異常な工事調整EIM情報エラーメッセージ追加 [#2648](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2648)
 
