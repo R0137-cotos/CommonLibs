@@ -21,7 +21,7 @@ public class FindAttachedFileDto {
 
 	/** 連番 */
 	@Id
-	@ApiModelProperty(value = "連番", required = false, position = 1)
+	@ApiModelProperty(value = "連番", required = true, position = 1)
 	private int seq;
 
 	/** 見積ID */
@@ -89,7 +89,7 @@ public class FindAttachedFileDto {
 	private String fileName;
 
 	/** 添付ファイルID */
-	@ApiModelProperty(value = "添付ファイルID", required = false, position = 18)
+	@ApiModelProperty(value = "添付ファイルID", required = true, position = 18)
 	private Long attachedFileId;
 
 	/** 添付者氏名 */
@@ -104,8 +104,8 @@ public class FindAttachedFileDto {
 	@ApiModelProperty(value = "添付日時", required = false, position = 21)
 	private Date attachedAt;
 
-	/** 各ドメインの添付ファイルID */
-	@ApiModelProperty(value = "各ドメインの添付ファイルID", required = false, position = 22)
+	/** 各ドメイン添付ファイルID */
+	@ApiModelProperty(value = "各ドメイン添付ファイルID", required = true, position = 22)
 	private Long domainAttachedFileId;
 
 	/** コメント */
