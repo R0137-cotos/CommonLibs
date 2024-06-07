@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.EstimationTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.BillingMethod;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.ContractYears;
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.EntryDiv;
 import lombok.Data;
 
 /**
@@ -29,4 +30,9 @@ public class CpqReturnValueMitsDto {
 	 * 契約年数
 	 */
 	private ContractYears contractYears;
+
+	/**
+	 * 登録区分
+	 */
+	private EntryDiv entryDiv;
 }
