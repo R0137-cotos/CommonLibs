@@ -80,35 +80,39 @@ public class FindAttachedFileDto {
 	@ApiModelProperty(value = "ファイル種類", required = false, position = 15)
 	private String fileKind;
 
+	/** ファイル種類名称 */
+	@ApiModelProperty(value = "ファイル種類名称", required = false, position = 16)
+	private String fileKindName;
+
 	/** 添付必須フラグ */
-	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 16)
+	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 17)
 	private Integer attachedRequiredFlg;
 
 	/** ファイル名 */
-	@ApiModelProperty(value = "ファイル名", required = false, position = 17)
+	@ApiModelProperty(value = "ファイル名", required = false, position = 18)
 	private String fileName;
 
 	/** 添付ファイルID */
-	@ApiModelProperty(value = "添付ファイルID", required = true, position = 18)
+	@ApiModelProperty(value = "添付ファイルID", required = true, position = 19)
 	private Long attachedFileId;
 
 	/** 添付者氏名 */
-	@ApiModelProperty(value = "添付者氏名", required = false, position = 19)
+	@ApiModelProperty(value = "添付者氏名", required = false, position = 20)
 	private String attachedEmpName;
 
 	/** 添付者組織名 */
-	@ApiModelProperty(value = "添付者組織名", required = false, position = 20)
+	@ApiModelProperty(value = "添付者組織名", required = false, position = 21)
 	private String attachedOrgName;
 
 	/** 添付日時 */
-	@ApiModelProperty(value = "添付日時", required = false, position = 21)
+	@ApiModelProperty(value = "添付日時", required = false, position = 22)
 	private Date attachedAt;
 
 	/** 各ドメイン添付ファイルID */
-	@ApiModelProperty(value = "各ドメイン添付ファイルID", required = true, position = 22)
+	@ApiModelProperty(value = "各ドメイン添付ファイルID", required = true, position = 23)
 	private Long domainAttachedFileId;
 
 	/** コメント */
-	@ApiModelProperty(value = "コメント", required = false, position = 23)
+	@ApiModelProperty(value = "コメント", required = false, position = 24)
 	private String attachedComment;
 }
