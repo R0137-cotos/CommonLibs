@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.BillingMethod;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.ContractYears;
-import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.EntryContent;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeMits.EntryDiv;
 import lombok.Data;
 
@@ -39,5 +38,5 @@ public class ProductContractExtendsParameterMitsDto {
 	/**
 	 * 登録内容
 	 */
-	private EntryContent entryContent;
+	private String entryContent;
 }
