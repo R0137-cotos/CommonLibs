@@ -277,4 +277,10 @@ public class ItemMasterDto extends EntityBaseMaster {
 	@ApiModelProperty(value = "売上可能開始日", required = false, position = 38)
 	@Temporal(TemporalType.DATE)
 	private Date accountPossibleStartDate;
+
+	/**
+	 * 価格改定前リコー品種コード
+	 */
+	@ApiModelProperty(value = "価格改定前リコー品種コード", required = false, position = 39, allowableValues = "range[0,255]")
+	private String bfPriceRevisionItemCode;
 }
