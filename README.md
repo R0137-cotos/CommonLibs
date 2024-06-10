@@ -596,3 +596,4 @@
 |639|添付ファイル一覧取得DTO追加|
 |640|商品（見積用）、商品（契約用）拡張項目DTO（MITS）修正|
 |641|添付ファイル一覧取得DTOに項目追加|
+|641|EstimationDetailRegisterParameterに価格改定前品種コードを追加|
