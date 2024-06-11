@@ -740,4 +740,10 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定前リコー品種コード", required = false, position = 61, allowableValues = "range[0,255]")
 	private String bfPriceRevisionItemCode;
+
+	/**
+	 * 価格改定処理グループID
+	 */
+	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 62, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionProcessGrpId;
 }

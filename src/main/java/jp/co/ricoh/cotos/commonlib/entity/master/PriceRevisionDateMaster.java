@@ -104,45 +104,51 @@ public class PriceRevisionDateMaster extends EntityBaseMaster {
 	private Date priceRevisionDate;
 
 	/**
+	 * 価格改定処理グループID
+	 */
+	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 4, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionProcessGrpId;
+
+	/**
 	 * BTCOCR024バッチ対象フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "BTCOCR024バッチ対象フラグ", required = false, position = 4, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "BTCOCR024バッチ対象フラグ", required = false, position = 5, allowableValues = "range[0,9]")
 	private Integer btcocr024batchFlg;
 
 	/**
 	 * 差額処理区分（差額マイナス）
 	 */
-	@ApiModelProperty(value = "差額処理区分（差額マイナス）", required = false, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1", position = 5)
+	@ApiModelProperty(value = "差額処理区分（差額マイナス）", required = false, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1", position = 6)
 	private DifferenceProcDiv differenceProcDivMinus;
 
 	/**
 	 * 差額処理区分（差額プラス）
 	 */
-	@ApiModelProperty(value = "差額処理区分（差額プラス）", required = false, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1", position = 6)
+	@ApiModelProperty(value = "差額処理区分（差額プラス）", required = false, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1", position = 7)
 	private DifferenceProcDiv differenceProcDivPlus;
 
 	/**
 	 * 差額計算区分（差額マイナス）
 	 */
-	@ApiModelProperty(value = "差額計算区分（差額マイナス）", required = false, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1", position = 7)
+	@ApiModelProperty(value = "差額計算区分（差額マイナス）", required = false, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1", position = 8)
 	private DifferenceCalcDiv differenceCalcDivMinus;
 
 	/**
 	 * 差額計算区分（差額プラス）
 	 */
-	@ApiModelProperty(value = "差額計算区分（差額プラス）", required = false, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1", position = 8)
+	@ApiModelProperty(value = "差額計算区分（差額プラス）", required = false, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1", position = 9)
 	private DifferenceCalcDiv differenceCalcDivPlus;
 
 	/**
 	 * 契約ライフサイクル状態
 	 */
-	@ApiModelProperty(value = "契約ライフサイクル状態", required = false, position = 9, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約ライフサイクル状態", required = false, position = 10, allowableValues = "range[0,255]")
 	private String contractLifecycleStatus;
 
 	/**
 	 * 追加条件式
 	 */
-	@ApiModelProperty(value = "追加条件式", required = false, position = 10)
+	@ApiModelProperty(value = "追加条件式", required = false, position = 11)
 	private String extendsQuery;
 }

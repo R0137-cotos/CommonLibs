@@ -155,4 +155,10 @@ public class ItemContractDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 20, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
+
+	/**
+	 * 価格改定処理グループID
+	 */
+	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 28, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionProcessGrpId;
 }
