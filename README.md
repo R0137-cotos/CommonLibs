@@ -599,3 +599,4 @@
 |642|EstimationDetailRegisterParameterに価格改定前品種コードを追加|
 |643|Messages.properties修正|
 |644|価格改定日マスタ、品種マスタに価格改定関連のカラム追加|
+|645|通知メール一括送信の宛先テーブル区分を追加|
