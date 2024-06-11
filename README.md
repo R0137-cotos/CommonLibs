@@ -598,3 +598,4 @@
 |641|添付ファイル一覧取得DTOに項目追加|
 |642|EstimationDetailRegisterParameterに価格改定前品種コードを追加|
 |643|Messages.properties修正|
+|644|価格改定日マスタ、品種マスタに価格改定関連のカラム追加|
