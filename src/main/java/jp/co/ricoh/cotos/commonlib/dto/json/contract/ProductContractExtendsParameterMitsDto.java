@@ -34,9 +34,4 @@ public class ProductContractExtendsParameterMitsDto {
 	 * 登録区分
 	 */
 	private EntryDiv entryDiv;
-
-	/**
-	 * 登録内容
-	 */
-	private String entryContent;
 }
