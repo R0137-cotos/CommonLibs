@@ -124,9 +124,9 @@ public class EstimationDetailRegisterParameter {
 	private Integer contractAmount;
 
 	/**
-	 * 価格改定前品種コード
+	 * 価格改定前リコー品種コード
 	 */
 	@Size(max = 255)
-	@ApiParam(value = "価格改定前品種コード", allowableValues = "range[0,255]", required = false)
+	@ApiParam(value = "価格改定前リコー品種コード", allowableValues = "range[0,255]", required = false)
 	private String bfPriceRevisionItemCode;
 }
