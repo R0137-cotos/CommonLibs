@@ -603,3 +603,4 @@
 |646|商品（契約用）拡張項目DTO（MITS）修正|
 |647|Messages.properties修正|
 |648|価格改定処理バッチ関連Messages.properties修正|
+|649|Messages.propertiesに機番、IsysOne連携、ARCS連携未設定時のエラーメッセージ追加、EstimationDetailRegisterParameter内のコメント修正|
