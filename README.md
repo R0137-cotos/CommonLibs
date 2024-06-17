@@ -602,3 +602,4 @@
 |645|通知メール一括送信の宛先テーブル区分を追加|
 |646|商品（契約用）拡張項目DTO（MITS）修正|
 |647|Messages.properties修正|
+|648|価格改定処理バッチ関連Messages.properties修正|
