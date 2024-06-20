@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.21.0 (20/06/2024)
+- [**closed**] #24669_[再発防止] 機器情報の欠損エラー_メッセージ追加 [#2669](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2669)
+
+---
+
 ## v7.20.0 (06/06/2024)
 - [**closed**] #23662 カテB商材固有項目追加対応 [#2654](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2654)
 
