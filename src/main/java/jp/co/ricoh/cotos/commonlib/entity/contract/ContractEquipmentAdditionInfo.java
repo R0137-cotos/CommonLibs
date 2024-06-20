@@ -62,6 +62,28 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 		}
 	}
 
+	@Description(value = "移行機種判別区分")
+	public enum MigarateEquipmentDiv {
+		移行_追加("1"), 移行_既存("2"), 移行_未確定("3"), 移行以外("4");
+
+		private final String text;
+
+		private MigarateEquipmentDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static MigarateEquipmentDiv fromString(final String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * ID
 	 */
@@ -400,5 +422,25 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "契約形態", required = false, position = 48, allowableValues = "range[0,255]")
 	private String contractForm;
+
+	/**
+	 * 移行機種判別区分
+	 */
+	@ApiModelProperty(value = "移行機種判別区分", required = false, position = 49, allowableValues = "移行_追加(\"1\"),移行_既存(\"2\"),移行_未確定(\"3\"),移行以外(\"4\")")
+	private MigarateEquipmentDiv migarateEquipmentDiv;
+
+	/**
+	 * 点検診断月区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "点検診断月区分", required = false, position = 50, allowableValues = "range[0,255]")
+	private String inspectionMonthDiv;
+
+	/**
+	 * 点検診断月
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "点検診断月", required = false, position = 51, allowableValues = "range[0,255]")
+	private String inspectionMonth;
 
 }
