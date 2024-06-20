@@ -23,6 +23,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.ArcsPeriodSaleMainteProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment.IsysoneProcStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo.ChangeKbn;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo.MigarateEquipmentDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -374,17 +375,37 @@ public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 	private String contractForm;
 
 	/**
+	 * 移行機種判別区分
+	 */
+	@ApiModelProperty(value = "移行機種判別区分", required = false, position = 49, allowableValues = "移行_追加(\"1\"),移行_既存(\"2\"),移行_未確定(\"3\"),移行以外(\"4\")")
+	private MigarateEquipmentDiv migarateEquipmentDiv;
+
+	/**
+	 * 点検診断月区分
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "点検診断月区分", required = false, position = 50, allowableValues = "range[0,255]")
+	private String inspectionMonthDiv;
+
+	/**
+	 * 点検診断月
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "点検診断月", required = false, position = 51, allowableValues = "range[0,255]")
+	private String inspectionMonth;
+
+	/**
 	 * 洗替日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日時", required = false, position = 49)
+	@ApiModelProperty(value = "洗替日時", required = false, position = 52)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "更新元バッチID", required = false, position = 50, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "更新元バッチID", required = false, position = 53, allowableValues = "range[0,255]")
 	private String updateBatchId;
 
 }
