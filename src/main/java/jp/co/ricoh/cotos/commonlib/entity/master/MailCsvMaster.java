@@ -52,7 +52,6 @@ public class MailCsvMaster extends EntityBaseMaster {
 	 * CSVファイル名
 	 */
 	@Column(nullable = false)
-	@Lob
 	@ApiModelProperty(value = "CSVファイル名", required = true, position = 4)
 	private String csvFileName;
 
@@ -68,21 +67,21 @@ public class MailCsvMaster extends EntityBaseMaster {
 	 */
 	@Column
 	@ApiModelProperty(value = "TO", required = true, position = 6)
-	private String to;
+	private String toMailAddress;
 
 	/**
 	 * CC
 	 */
 	@Column
 	@ApiModelProperty(value = "CC", required = true, position = 7)
-	private String cc;
+	private String ccMailAddress;
 
 	/**
 	 * BCC
 	 */
 	@Column
 	@ApiModelProperty(value = "BCC", required = true, position = 8)
-	private String bcc;
+	private String bccMailAddress;
 
 	/**
 	 * CSVメール制御タイプ区分
