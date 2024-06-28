@@ -1,20 +1,16 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,64 +26,63 @@ public class MailCsvMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_csv_master_seq")
 	@SequenceGenerator(name = "mail_csv_master_seq", sequenceName = "mail_csv_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "CSVメール制御マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "CSVメール制御マスタID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * メール件名
 	 */
-	@Column(nullable = false)
-	@ApiModelProperty(value = "メール件名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Size(max = 255)
+	@ApiModelProperty(value = "メール件名", required = false, position = 2, allowableValues = "range[0,255]")
 	private String mailSubject;
 
 	/**
 	 * メール本文
 	 */
-	@Column(nullable = false)
 	@Lob
-	@ApiModelProperty(value = "メール本文", required = true, position = 3)
+	@ApiModelProperty(value = "メール本文", required = false, position = 3)
 	private String mailBody;
 
 	/**
 	 * CSVファイル名
 	 */
-	@Column(nullable = false)
-	@ApiModelProperty(value = "CSVファイル名", required = true, position = 4)
+	@Size(max = 255)
+	@ApiModelProperty(value = "CSVファイル名", required = false, position = 4, allowableValues = "range[0,255]")
 	private String csvFileName;
 
 	/**
 	 * fromメールアドレス
 	 */
-	@Column
-	@ApiModelProperty(value = "fromメールアドレス", required = true, position = 5)
+	@Size(max = 255)
+	@ApiModelProperty(value = "fromメールアドレス", required = false, position = 5, allowableValues = "range[0,255]")
 	private String fromMailAddress;
 
 	/**
 	 * TO
 	 */
-	@Column
-	@ApiModelProperty(value = "TO", required = true, position = 6)
+	@Size(max = 255)
+	@ApiModelProperty(value = "TO", required = false, position = 6, allowableValues = "range[0,255]")
 	private String toMailAddress;
 
 	/**
 	 * CC
 	 */
-	@Column
-	@ApiModelProperty(value = "CC", required = true, position = 7)
+	@Size(max = 255)
+	@ApiModelProperty(value = "CC", required = false, position = 7, allowableValues = "range[0,255]")
 	private String ccMailAddress;
 
 	/**
 	 * BCC
 	 */
-	@Column
-	@ApiModelProperty(value = "BCC", required = true, position = 8)
+	@Size(max = 255)
+	@ApiModelProperty(value = "BCC", required = false, position = 8, allowableValues = "range[0,255]")
 	private String bccMailAddress;
 
 	/**
 	 * CSVメール制御タイプ区分
 	 */
-	@Column
-	@ApiModelProperty(value = "CSVメール制御タイプ区分", required = true, position = 9)
+	@Size(max = 255)
+	@ApiModelProperty(value = "CSVメール制御タイプ区分", required = false, position = 9, allowableValues = "range[0,255]")
 	private String csvMailTypeDiv;
 
 }
