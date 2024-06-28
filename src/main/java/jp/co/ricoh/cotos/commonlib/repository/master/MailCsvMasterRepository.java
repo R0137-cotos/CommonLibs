@@ -9,6 +9,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MailCsvMaster;
 
 @Repository
 public interface MailCsvMasterRepository extends CrudRepository<MailCsvMaster, Long> {
-	public List<MailCsvMaster> findByIdIn(String[] ids);
+	public List<MailCsvMaster> findByIdIn(List<Long> idList);
 
 }
