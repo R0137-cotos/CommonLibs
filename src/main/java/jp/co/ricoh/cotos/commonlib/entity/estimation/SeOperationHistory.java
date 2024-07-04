@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -100,6 +102,7 @@ public class SeOperationHistory extends EntityBase {
 	 * 有効期限From
 	 */
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "有効期限From", required = true, position = 11, allowableValues = "range[0,9223372036854775807]")
 	private Date expirationDateFrom;
 
@@ -107,6 +110,7 @@ public class SeOperationHistory extends EntityBase {
 	 * 有効期限To
 	 */
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "有効期限To", required = true, position = 12, allowableValues = "range[0,9223372036854775807]")
 	private Date expirationDateTo;
 
