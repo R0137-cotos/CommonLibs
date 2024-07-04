@@ -65,39 +65,6 @@ public class SeOperationHistory extends EntityBase {
 	private long id;
 
 	/**
-	 * 登録日時
-	 */
-	@ApiModelProperty(value = "登録日時", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private Date createdAt;
-
-	/**
-	 * 登録者
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "登録者", required = true, position = 3, allowableValues = "range[0,255]")
-	private String createdUserId;
-
-	/**
-	 * 更新日時
-	 */
-	@ApiModelProperty(value = "更新日時", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
-	private Date updatedAt;
-
-	/**
-	 * 更新者
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "更新者", required = true, position = 5, allowableValues = "range[0,255]")
-	private String updatedUserId;
-
-	/**
-	 * version
-	 */
-	@Digits(integer = 19, fraction = 0)
-	@ApiModelProperty(value = "version", required = true, position = 6, allowableValues = "range[0,9223372036854775807]")
-	private long version;
-
-	/**
 	 * 見積ID
 	 */
 	@NotNull
