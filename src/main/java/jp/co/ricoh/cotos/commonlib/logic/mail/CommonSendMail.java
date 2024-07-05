@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -435,6 +436,56 @@ public class CommonSendMail {
 		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
 		SMTPMessage.setEnvelopeFrom(Optional.ofNullable(mailTemplateMaster.getEnvelopeFrom()).orElse(appProperties.getMailProperties().getEnvelopeFromMailAddress()));
 		setOriginalHeader(SMTPMessage, mailTemplateMaster, bounceMailHeaderDto);
+		// ログにTo、Cc、Bccのメールアドレスを出力
+		outputLog(SMTPMessage);
+		javaMailSender.send(SMTPMessage);
+	}
+
+	/**
+	 * メール送信処理_添付ファイルあり_メールテンプレートマスタ不使用
+	 *
+	 * @param emailTo
+	 *            Toメールアドレス
+	 * @param emailFrom
+	 *            FROMメールアドレス           
+	 * @param emailCcList
+	 *            CCメールアドレスリスト
+	 * @param emailBccList
+	 *            BCCメールアドレスリスト
+	 * @param mailSubject
+	 *            メール件名
+	 * @param mailText
+	 *            メール本文
+	 * @param uploadFile
+	 *            添付ファイル
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
+	@Async
+	public void sendMail(List<String> emailToList, String emailFrom, List<String> emailCcList, List<String> emailBccList, String mailSubject, String mailText, String uploadFile) throws MessagingException, IOException {
+		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
+		attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
+		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
+
+		String[] toEmail = (String[]) emailToList.toArray(new String[0]);
+		String[] ccEmail = (String[]) emailCcList.toArray(new String[0]);
+		String[] bccEmail = (String[]) emailBccList.toArray(new String[0]);
+
+		attachedHelper.setTo(toEmail);
+		attachedHelper.setFrom(emailFrom);
+		attachedHelper.setCc(ccEmail);
+		attachedHelper.setBcc(bccEmail);
+		attachedHelper.setSubject(mailSubject);
+		attachedHelper.setText(mailText);
+
+		if (null != uploadFile) {
+			FileSystemResource res = new FileSystemResource(uploadFile);
+			attachedHelper.addAttachment(res.getFilename(), res);
+		}
+		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
+
 		// ログにTo、Cc、Bccのメールアドレスを出力
 		outputLog(SMTPMessage);
 		javaMailSender.send(SMTPMessage);
