@@ -475,10 +475,8 @@ public class CommonSendMail {
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
 		String subject = mailSubject.replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
-
 		attachedHelper.setSubject(subject);
 		String text = mailText.replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
-
 		attachedHelper.setText(text);
 
 		if (null != uploadFile) {
