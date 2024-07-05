@@ -312,43 +312,49 @@ public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 	private String picIntEmployeeNameKana;
 
 	/**
+	 * 変更前Isys-One連携状態
+	 */
+	@ApiModelProperty(value = "変更前Isys-One連携状態", required = false, position = 40, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\"),連携エラー(\"3\"),対象外(\"4\"),管理対象外(\"5\")")
+	private IsysoneProcStatus beforeIsysoneProcStatus;
+
+	/**
 	 * Isys-One連携状態
 	 */
-	@ApiModelProperty(value = "Isys-One連携状態", required = false, position = 40, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\"),連携エラー(\"3\"),対象外(\"4\"),管理対象外(\"5\")")
+	@ApiModelProperty(value = "Isys-One連携状態", required = false, position = 41, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\"),連携エラー(\"3\"),対象外(\"4\"),管理対象外(\"5\")")
 	private IsysoneProcStatus isysoneProcStatus;
 
 	/**
 	 * IsysOne連携日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "IsysOne連携日時", required = false, position = 41)
+	@ApiModelProperty(value = "IsysOne連携日時", required = false, position = 42)
 	private Date isysoneLinkageAt;
 
 	/**
 	 * ARCS期間売保守処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 42, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),管理対象外(\"3\")")
+	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 43, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMainteProcStatus arcsPeriodSaleMainteProcStatus;
 
 	/**
 	 * ARCS期間売保守連携日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 43)
+	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 44)
 	private Date arcsPeriodSaleMainteLinkageAt;
 
 	/**
 	 * 機器問い合わせ番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "機器問い合わせ番号", required = false, position = 44, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "機器問い合わせ番号", required = false, position = 45, allowableValues = "range[0,255]")
 	private String equipmentContactNo;
 
 	/**
 	 * 累積契約機種ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "累積契約機種ID", required = false, position = 45, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "累積契約機種ID", required = false, position = 46, allowableValues = "range[0,9223372036854775807]")
 	private Long accumulationContractEquipmentId;
 
 	/**
@@ -356,7 +362,7 @@ public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "代表設置先フラグ", required = false, position = 46, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "代表設置先フラグ", required = false, position = 47, allowableValues = "range[0,9]")
 	private Integer representationInstallationFlg;
 
 	/**
@@ -364,48 +370,48 @@ public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "取込フラグ", required = false, position = 47, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "取込フラグ", required = false, position = 48, allowableValues = "range[0,9]")
 	private Integer captureFlg;
 
 	/**
 	 * 契約形態
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約形態", required = false, position = 48, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "契約形態", required = false, position = 49, allowableValues = "range[0,255]")
 	private String contractForm;
 
 	/**
 	 * 移行機種判別区分
 	 */
-	@ApiModelProperty(value = "移行機種判別区分", required = false, position = 49, allowableValues = "移行_追加(\"1\"),移行_既存(\"2\"),移行_未確定(\"3\"),移行以外(\"4\")")
+	@ApiModelProperty(value = "移行機種判別区分", required = false, position = 50, allowableValues = "移行_追加(\"1\"),移行_既存(\"2\"),移行_未確定(\"3\"),移行以外(\"4\")")
 	private MigarateEquipmentDiv migarateEquipmentDiv;
 
 	/**
 	 * 点検診断月区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "点検診断月区分", required = false, position = 50, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "点検診断月区分", required = false, position = 51, allowableValues = "range[0,255]")
 	private String inspectionMonthDiv;
 
 	/**
 	 * 点検診断月
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "点検診断月", required = false, position = 51, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "点検診断月", required = false, position = 52, allowableValues = "range[0,255]")
 	private String inspectionMonth;
 
 	/**
 	 * 洗替日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日時", required = false, position = 52)
+	@ApiModelProperty(value = "洗替日時", required = false, position = 53)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "更新元バッチID", required = false, position = 53, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "更新元バッチID", required = false, position = 54, allowableValues = "range[0,255]")
 	private String updateBatchId;
 
 }
