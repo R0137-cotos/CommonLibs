@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
@@ -50,6 +51,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepositor
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.SeOperationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
 
 /**
@@ -114,6 +116,9 @@ public class TestEstimation {
 
 	@Autowired
 	VupCaseWorkRepository vupCaseWorkRepository;
+
+	@Autowired
+	SeOperationHistoryRepository seOperationHistoryRepository;
 
 	@Autowired
 	DBUtil dbutil;
@@ -457,6 +462,27 @@ public class TestEstimation {
 		itemEstimationRepository.save(found);
 		ItemEstimation foundUpd = itemEstimationRepository.findOne(401L);
 		Assert.assertEquals("正しく更新されていること", "テストコード", foundUpd.getMakerItemCode());
+
+	}
+
+	@Test
+	public void SeOperationHistoryRepositoryのテスト() throws Exception {
+
+		SeOperationHistory found = seOperationHistoryRepository.findOne(401L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		List<SeOperationHistory> foundByEstimationIdList = seOperationHistoryRepository.findByEstimationId(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundByEstimationIdList);
+
+		// Entity 2件以上取得できていることを確認
+		Assert.assertNotEquals(foundByEstimationIdList.size(), 1);
 
 	}
 
