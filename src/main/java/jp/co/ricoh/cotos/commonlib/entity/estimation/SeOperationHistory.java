@@ -71,7 +71,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@NotNull
 	@Digits(integer = 19, fraction = 0)
-	@ApiModelProperty(value = "見積ID", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
 
 	/**
@@ -79,7 +79,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ドメイン", required = true, position = 8, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "ドメイン", required = true, position = 3, allowableValues = "range[0,255]")
 	private String domain;
 
 	/**
@@ -87,7 +87,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理区分", required = true, position = 9, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")")
+	@ApiModelProperty(value = "処理区分", required = true, position = 4, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")")
 	private ProcessDiv processDiv;
 
 	/**
@@ -95,7 +95,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理内容", required = true, position = 10, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "処理内容", required = true, position = 5, allowableValues = "range[0,255]")
 	private String prosessContent;
 
 	/**
@@ -103,7 +103,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "有効期限From", required = true, position = 11, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "有効期限From", required = true, position = 6, allowableValues = "range[0,9223372036854775807]")
 	private Date expirationDateFrom;
 
 	/**
@@ -111,7 +111,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "有効期限To", required = true, position = 12, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "有効期限To", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
 	private Date expirationDateTo;
 
 }

@@ -481,8 +481,8 @@ public class TestEstimation {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(foundByEstimationIdList);
 
-		// Entity 1件以上取得できていることを確認
-		Assert.assertNotEquals(foundByEstimationIdList.size(), 0);
+		// Entity 2件以上取得できていることを確認
+		Assert.assertNotEquals(foundByEstimationIdList.size(), 1);
 
 	}
 
