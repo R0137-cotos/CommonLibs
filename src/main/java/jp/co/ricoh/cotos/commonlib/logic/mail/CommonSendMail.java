@@ -23,7 +23,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -463,8 +462,6 @@ public class CommonSendMail {
 	 */
 	@Async
 	public void sendMail(List<String> emailToList, String emailFrom, List<String> emailCcList, List<String> emailBccList, String mailSubject, String mailText, String uploadFile) throws MessagingException, IOException {
-		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-
 		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
 		attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
 		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
@@ -477,8 +474,12 @@ public class CommonSendMail {
 		attachedHelper.setFrom(emailFrom);
 		attachedHelper.setCc(ccEmail);
 		attachedHelper.setBcc(bccEmail);
-		attachedHelper.setSubject(mailSubject);
-		attachedHelper.setText(mailText);
+		String subject = mailSubject.replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
+
+		attachedHelper.setSubject(subject);
+		String text = mailText.replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
+
+		attachedHelper.setText(text);
 
 		if (null != uploadFile) {
 			FileSystemResource res = new FileSystemResource(uploadFile);
