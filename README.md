@@ -606,3 +606,4 @@
 |649|Messages.propertiesに機番、IsysOne連携、ARCS連携未設定時のエラーメッセージ追加、EstimationDetailRegisterParameter内のコメント修正|
 |650|契約機種付加情報、契約機種付加情報洗い替え履歴テーブルに項目追加|
 |651|MoM組織提供マスタリポジトリにメソッド追加|
+|652|契約機種付加情報と洗い替えテーブルに項目追加|
