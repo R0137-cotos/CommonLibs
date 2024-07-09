@@ -16,7 +16,7 @@ public class RtorTransferInfoDto {
 	 * 引継ぎ先契約ID(rj管理番号)
 	 */
 	@ApiModelProperty(value = "引継ぎ先契約ID", required = false, position = 2, allowableValues = "range[0,255]")
-	private String TransferRjManageNumber;
+	private String transferRjManageNumber;
 
 	/**
 	 * 契約ID
