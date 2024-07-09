@@ -20,6 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.protocol.HTTP;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
@@ -474,8 +475,8 @@ public class LMPIConnectionHelper {
 		//パラメータ設定
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
-		String user_modified_start = sdf.format(start);
-		String user_modified_end = sdf.format(end);
+		String user_modified_start = sdf.format(DateUtils.addHours(start, -9));
+		String user_modified_end = sdf.format(DateUtils.addHours(end, -9));
 
 		try {
 			List<TmGetCustomerResponseDto> customerList = new ArrayList<>();
