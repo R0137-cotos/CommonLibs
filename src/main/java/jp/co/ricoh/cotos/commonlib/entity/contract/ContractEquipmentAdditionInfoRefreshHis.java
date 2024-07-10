@@ -414,4 +414,11 @@ public class ContractEquipmentAdditionInfoRefreshHis extends EntityBase {
 	@ApiModelProperty(value = "更新元バッチID", required = false, position = 54, allowableValues = "range[0,255]")
 	private String updateBatchId;
 
+	/**
+	 * ARCS連携ファイル出力フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "ARCS連携ファイル出力フラグ", required = false, position = 55, allowableValues = "range[0,9]")
+	private Integer arcsLinkageFileOutputFlg;
 }
