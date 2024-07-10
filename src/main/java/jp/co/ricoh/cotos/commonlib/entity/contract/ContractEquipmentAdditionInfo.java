@@ -449,4 +449,11 @@ public class ContractEquipmentAdditionInfo extends EntityBase {
 	@ApiModelProperty(value = "点検診断月", required = false, position = 52, allowableValues = "range[0,255]")
 	private String inspectionMonth;
 
+	/**
+	 * ARCS連携ファイル出力フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "ARCS連携ファイル出力フラグ", required = false, position = 53, allowableValues = "range[0,9]")
+	private Integer arcsLinkageFileOutputFlg;
 }
