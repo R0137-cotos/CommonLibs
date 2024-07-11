@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.22.0 (11/07/2024)
+- [**closed**] #24883 トレンドマイクロAPIのパラメータ修正（リリースブランチマージ） [#2677](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2677)
+
+---
+
 ## v7.21.0 (20/06/2024)
 - [**closed**] #24669_[再発防止] 機器情報の欠損エラー_メッセージ追加 [#2669](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2669)
 
