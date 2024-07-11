@@ -102,7 +102,7 @@ public class SeOperationHistory extends EntityBase {
 	 * 有効期限From
 	 */
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "有効期限From", required = true, position = 6, allowableValues = "range[0,9223372036854775807]")
 	private Date expirationDateFrom;
 
@@ -110,7 +110,7 @@ public class SeOperationHistory extends EntityBase {
 	 * 有効期限To
 	 */
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "有効期限To", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
 	private Date expirationDateTo;
 
