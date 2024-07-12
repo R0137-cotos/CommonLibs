@@ -1,5 +1,31 @@
 # Changelog
 
+## v7.22.0 (11/07/2024)
+- [**closed**] #24883 トレンドマイクロAPIのパラメータ修正（リリースブランチマージ） [#2677](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2677)
+
+---
+
+## v7.21.0 (20/06/2024)
+- [**closed**] #24669_[再発防止] 機器情報の欠損エラー_メッセージ追加 [#2669](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2669)
+
+---
+
+## v7.20.0 (06/06/2024)
+- [**closed**] #23662 カテB商材固有項目追加対応 [#2654](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2654)
+
+---
+
+## v7.19.0 (23/05/2024)
+- [**closed**] #24291 異常な工事調整EIM情報エラーメッセージ追加 [#2648](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2648)
+
+---
+
+## v7.18.0 (09/05/2024)
+- [**closed**] #22238 品種マスタ項目追加、ランニング計上処理日設定処理追加 [#2640](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2640)
+- [**closed**] #23821 機器登録重複エラーメッセージ追加 [#2628](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2628)
+
+---
+
 ## v7.17.0 (18/04/2024)
 - [**closed**] #20662 ISMAP商品対応 リリースブランチマージ [#2617](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2617)
 - [**closed**] #21913 処理カテゴリに特殊審査依頼を追加、メッセージを追加 [#2592](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2592)
