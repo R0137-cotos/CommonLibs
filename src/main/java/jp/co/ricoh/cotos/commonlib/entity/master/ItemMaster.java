@@ -33,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.UpdateMonthNotAccountingDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -729,21 +730,27 @@ public class ItemMaster extends EntityBaseMaster {
 	private PaymentCycleType paymentCycleType;
 
 	/**
+	 * 更新月計上不要区分
+	 */
+	@ApiModelProperty(value = "更新月計上不要区分", required = false, position = 60, allowableValues = "サービス開始日(\"1\"), 課金開始日(\"2\")")
+	private UpdateMonthNotAccountingDiv updateMonthNotAccountingDiv;
+
+	/**
 	 * 売上可能開始日
 	 */
-	@ApiModelProperty(value = "売上可能開始日", required = false, position = 60)
+	@ApiModelProperty(value = "売上可能開始日", required = false, position = 61)
 	@Temporal(TemporalType.DATE)
 	private Date accountPossibleStartDate;
 
 	/**
 	 * 価格改定前リコー品種コード
 	 */
-	@ApiModelProperty(value = "価格改定前リコー品種コード", required = false, position = 61, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "価格改定前リコー品種コード", required = false, position = 62, allowableValues = "range[0,255]")
 	private String bfPriceRevisionItemCode;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 62, allowableValues = "range[0,9999999999999999999]")
+	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 63, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 }
