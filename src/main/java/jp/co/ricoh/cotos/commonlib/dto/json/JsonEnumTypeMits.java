@@ -38,7 +38,7 @@ public class JsonEnumTypeMits {
 	@Description(value = "契約年数")
 	public enum ContractYears {
 
-		一括1年("1"), 一括5年("2");
+		なし("0"), 一括1年("1"), 一括5年("2");
 
 		private final String text;
 
