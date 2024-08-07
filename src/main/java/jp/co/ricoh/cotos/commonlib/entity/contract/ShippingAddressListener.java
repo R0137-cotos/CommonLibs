@@ -51,7 +51,9 @@ public class ShippingAddressListener {
 	public void appendsEmployeeFields(ShippingAddress shippingAddress) {
 		if (dummyUserMasterRepository.existsByUserId(shippingAddress.getMomEmployeeId())) {
 			DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(shippingAddress.getMomEmployeeId());
-			shippingAddress.setEmployeeName(dummyUserMaster.getEmpName());
+			if (StringUtils.isBlank(shippingAddress.getEmployeeName())) {
+				shippingAddress.setEmployeeName(dummyUserMaster.getEmpName());
+			}
 			return;
 		}
 
