@@ -272,6 +272,8 @@ public class TestMaster {
 	private LicenseUpgradeItemMasterRepository licenseUpgradeItemMasterRepository;
 	@Autowired
 	private MvVJmch001MasterRepository mvVJmch001MasterRepository;
+	@Autowired
+	private MailCsvMasterRepository mailCsvMasterRepository;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -3165,5 +3167,21 @@ public class TestMaster {
 				Assert.fail("throw Exception :" + e.getMessage());
 			}
 		});
+	}
+
+	@Test
+	public void MailCsvMasterRepositoryのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/mailCsvMaster.sql");
+
+		Long id = 1L;
+		MailCsvMaster found = mailCsvMasterRepository.findOne(id);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
 	}
 }
