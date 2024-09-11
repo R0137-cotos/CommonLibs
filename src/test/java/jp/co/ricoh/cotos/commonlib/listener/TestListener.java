@@ -624,6 +624,19 @@ public class TestListener {
 		Assert.assertNull("都道府県がNullであること", shippingAddress.getPrefectures());
 		Assert.assertNull("市区町村番地がNullであること", shippingAddress.getCityStreet());
 		Assert.assertNull("建物名がNullであること", shippingAddress.getBuildingName());
+
+		//ダミー社員名を設定した場合のテスト
+		contract = new Contract();
+		contract.setId(7L);
+		contract.setContractType(ContractType.新規);
+		shippingAddress = new ShippingAddress();
+		shippingAddress.setMomEmployeeId("COTOS_BATCH_USER");
+		shippingAddress.setEmployeeName("ダミー 社員名");
+		shippingAddress.setContract(contract);
+		shippingAddressRepository.save(shippingAddress);
+		dummyUserMaster = dummyUserMasterRepository.findByUserId(shippingAddress.getMomEmployeeId());
+		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		Assert.assertEquals("ダミー社員名が取得されていること", "ダミー 社員名", shippingAddress.getEmployeeName());
 	}
 
 	@Test
