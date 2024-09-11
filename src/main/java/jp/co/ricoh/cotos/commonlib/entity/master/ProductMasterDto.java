@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -221,4 +224,18 @@ public class ProductMasterDto extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "仕入先No", required = false, position = 24, allowableValues = "range[0,255]")
 	private String siiresakiNo;
+
+	/**
+	 * 情報変更禁止開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "情報変更禁止開始日", required = false, position = 25)
+	private LocalDate infoChangeProhibitedPeriodFrom;
+
+	/**
+	 * 情報変更禁止終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "情報変更禁止終了日", required = false, position = 26)
+	private LocalDate infoChangeProhibitedPeriodTo;
 }
