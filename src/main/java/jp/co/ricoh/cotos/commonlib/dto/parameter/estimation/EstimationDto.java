@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.ElectronicContractLinkageStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
@@ -463,4 +464,10 @@ public class EstimationDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 62)
 	private ContractChangeTiming contractChangeTiming;
+
+	/**
+	 * 電子契約連携状態
+	 */
+	@ApiModelProperty(value = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1", position = 63)
+	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
 }
