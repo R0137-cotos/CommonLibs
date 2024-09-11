@@ -15,8 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -334,14 +332,12 @@ public class ProductMaster extends EntityBaseMaster {
 	/**
 	 * 情報変更禁止開始日
 	 */
-	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "情報変更禁止開始日", required = false, position = 34)
 	private LocalDate infoChangeProhibitedPeriodFrom;
 
 	/**
 	 * 情報変更禁止終了日
 	 */
-	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "情報変更禁止終了日", required = false, position = 35)
 	private LocalDate infoChangeProhibitedPeriodTo;
 }
