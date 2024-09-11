@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -327,4 +330,18 @@ public class ProductMaster extends EntityBaseMaster {
 	@Min(0)
 	@ApiModelProperty(value = "ISMAP商品フラグ", required = false, position = 33, allowableValues = "range[0,9]")
 	private Integer ismapProductFlg;
+
+	/**
+	 * 情報変更禁止開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "情報変更禁止開始日", required = false, position = 34)
+	private Date infoChangeProhibitedPeriodFrom;
+
+	/**
+	 * 情報変更禁止終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "情報変更禁止終了日", required = false, position = 35)
+	private Date infoChangeProhibitedPeriodTo;
 }
