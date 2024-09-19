@@ -1,5 +1,12 @@
 # Changelog
 
+## v7.26.0 (19/09/2024)
+- [**closed**] 22111_認可処理メソッドのアクセス修飾子をpublicに変更 [#2711](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2711)
+- [**closed**] #25559 商品マスタに情報変更禁止開始日・終了日追加、 エラーメッセージ追加 [#2710](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2710)
+- [**closed**] #26215 検索条件未設定エラーメッセージ追加 [#2702](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2702)
+
+---
+
 ## v7.25.0 (05/09/2024)
 - [**closed**] #25912 配送先情報にダミーユーザーが設定された時の処理を変更 [#2697](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2697)
 - [**closed**] #24997 メールアドレス情報のテーブル区分に受付導入保守CEを追加 [#2684](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2684)
@@ -251,11 +258,3 @@
 
 ## v6.8.0 (09/03/2023)
 - [**closed**] #17973 見積エンティティアノテーション修正 [#2298](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2298)
-
----
-
-## v6.7.0 (21/02/2023)
-- [**closed**] #17664　NetRicohへ注文履歴APIで差分情報を連携する（#6、#9） [#2257](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2257)
-- [**closed**] #17788 ArrangementSearchParameterに複数商材検索用の商品マスタID追加 [#2256](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2256)
-- [**closed**] #17685 DateUtilクラスを新規作成 [#2254](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2254)
-- [**closed**] #17749 O365契約最新情報返却に変更申込用IDを追加 [#2247](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2247)
