@@ -120,6 +120,29 @@ public class Estimation extends EntityBase {
 		}
 	}
 
+	@Description(value = "電子契約連携状態")
+	public enum ElectronicContractLinkageStatus {
+
+		しない("0"), 未連携("1"), 連携済("2");
+
+		private final String text;
+
+		private ElectronicContractLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ElectronicContractLinkageStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_seq")
 	@SequenceGenerator(name = "estimation_seq", sequenceName = "estimation_seq", allocationSize = 1)
@@ -595,4 +618,10 @@ public class Estimation extends EntityBase {
 	 */
 	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 64)
 	private Long maxExtensionMonths;
+
+	/**
+	 * 電子契約連携状態
+	 */
+	@ApiModelProperty(value = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1", position = 65)
+	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
 }
