@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentAdditionInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccCeEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccSsOrgDto;
@@ -512,4 +513,12 @@ public class ContractExtChangeDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "契約状態遷移制御区分", required = false, position = 65, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
 	private ContractStatusControlType contractStatusControlType;
+
+	/**
+	 * 契約機種付加情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 66)
+	private List<ContractEquipmentAdditionInfoDto> contractEquipmentAdditionInfoList;
 }

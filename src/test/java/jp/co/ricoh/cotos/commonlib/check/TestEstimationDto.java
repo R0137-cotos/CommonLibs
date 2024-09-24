@@ -1068,6 +1068,7 @@ public class TestEstimationDto {
 		dto.setAmountSummary(new BigDecimal("11.11"));
 		dto.setExtendsParameter("dummy_extends_param");
 		dto.setContractAmount(11);
+		dto.setBfPriceRevisionItemCode("dummy_bf_price_revision_item_code");
 
 		EstimationDetailRegisterParameter testTarget = new EstimationDetailRegisterParameter();
 
@@ -1090,8 +1091,9 @@ public class TestEstimationDto {
 		BeanUtils.copyProperties(dto, testTarget);
 		testTarget.setStatus(STR_256);
 		testTarget.setRicohItemCode(STR_256);
+		testTarget.setBfPriceRevisionItemCode(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 2);
+		Assert.assertTrue(result.getErrorInfoList().size() == 3);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "ステータスは最大文字数（255）を超えています。"));
 

@@ -246,4 +246,10 @@ public class ItemContract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "年額明細計上フラグ", required = false, position = 27, allowableValues = "range[0,9]")
 	private Integer yearDetailAccountFlg;
+
+	/**
+	 * 価格改定処理グループID
+	 */
+	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 28, allowableValues = "range[0,9999999999999999999]")
+	private Long priceRevisionProcessGrpId;
 }

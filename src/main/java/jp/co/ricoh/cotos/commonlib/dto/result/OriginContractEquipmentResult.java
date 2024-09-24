@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo;
 import lombok.Data;
 
 /**
@@ -22,4 +23,10 @@ public class OriginContractEquipmentResult {
 	 */
 	@ApiModelProperty(value = "削除フラグ", required = false, position = 2)
 	private Integer deleteFlg;
+
+	/**
+	 * 契約機種付加情報を表すEntity
+	 */
+	@ApiModelProperty(value = "契約機種付加情報を表すEntity", required = false, position = 3)
+	private ContractEquipmentAdditionInfo contractEquipmentAdditionInfo;
 }
