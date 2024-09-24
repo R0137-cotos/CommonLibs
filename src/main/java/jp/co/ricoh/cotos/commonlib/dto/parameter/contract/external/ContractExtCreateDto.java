@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDetailDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractEquipmentAdditionInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractInstallationLocationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccCeEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractPicAccSsOrgDto;
@@ -504,4 +505,12 @@ public class ContractExtCreateDto extends DtoBase {
 	@Min(0)
 	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 64, allowableValues = "range[0,9]")
 	private Integer ssWorkRequestCreateFlg;
+
+	/**
+	 * 契約機種付加情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 65)
+	private List<ContractEquipmentAdditionInfoDto> contractEquipmentAdditionInfoList;
 }

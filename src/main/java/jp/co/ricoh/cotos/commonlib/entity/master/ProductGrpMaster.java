@@ -66,6 +66,52 @@ public class ProductGrpMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "振替ヘッダー設定区分")
+	public enum TransferHeaderSettingDiv {
+
+		受付に受付担当ＣＥ設定("1"), 受注に統括コード設定("2"), 受注未設定("3");
+
+		private final String text;
+
+		private TransferHeaderSettingDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static TransferHeaderSettingDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "価格改定処理パターン区分")
+	public enum PriceRevisionProcDiv {
+
+		価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新("1");
+
+		private final String text;
+
+		private PriceRevisionProcDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static PriceRevisionProcDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * 商品グループマスタID
 	 */
@@ -222,4 +268,34 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "S&S作業依頼ルート区分", required = false, position = 22, allowableValues = "CSV作成(\"1\"), API連携(\"2\")")
 	private SsWorkRequestRootDiv ssWorkRequestRootDiv;
+
+	/**
+	 * 振替ヘッダー設定区分
+	 */
+	@ApiModelProperty(value = "振替ヘッダー設定区分", required = false, position = 23, allowableValues = "受付に受付担当ＣＥ設定(\"1\"), 受注に統括コード設定(\"2\"), 受注未設定(\"3\")")
+	private TransferHeaderSettingDiv transferHeaderSettingDiv;
+
+	/**
+	 * 一括取込商品フラグ
+	 */
+	@ApiModelProperty(value = "一括取込商品フラグ", required = false, position = 24, allowableValues = "range[0,9]")
+	private Integer batchImportProductFlg;
+
+	/**
+	 * 契約承認時確認API実行フラグ
+	 */
+	@ApiModelProperty(value = "契約承認時確認API実行フラグ", required = false, position = 25, allowableValues = "range[0,9]")
+	private Integer contractApprovalCheckapiExecutionFlg;
+
+	/**
+	 * ISYSONE保守レポート対象外フラグ
+	 */
+	@ApiModelProperty(value = "ISYSONE保守レポート対象外フラグ", required = false, position = 26, allowableValues = "range[0,9]")
+	private Integer isysoneMaintereportNoTargetFlg;
+
+	/**
+	 * 価格改定処理パターン区分
+	 */
+	@ApiModelProperty(value = "価格改定処理パターン区分", required = false, position = 27, allowableValues = "価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新(\"1\")")
+	private PriceRevisionProcDiv priceRevisionProcDiv;
 }

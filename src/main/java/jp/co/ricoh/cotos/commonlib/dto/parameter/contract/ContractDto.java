@@ -698,7 +698,7 @@ public class ContractDto extends DtoBase {
 	/**
 	 * ARCS期間売保守元契約処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 92, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 92, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
 
 	/**
@@ -818,4 +818,28 @@ public class ContractDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 109, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 機器情報取込不要フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "機器情報取込不要フラグ", required = false, position = 110, allowableValues = "range[0,9]")
+	private Integer equipmentImportUnnecessaryFlg;
+
+	/**
+	 * 振替情報取込不要フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "振替情報取込不要フラグ", required = false, position = 111, allowableValues = "range[0,9]")
+	private Integer transImportUnnecessaryFlg;
+
+	/**
+	 * 契約機種付加情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 112)
+	private List<ContractEquipmentAdditionInfoDto> contractEquipmentAdditionInfoList;
 }
