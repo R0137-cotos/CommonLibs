@@ -51,7 +51,6 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentAddition
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentItemLinkRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentNoIsysoneRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractEquipmentRepository;
-import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRefreshHisRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractOperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicAccCeEmpRepository;
@@ -218,9 +217,6 @@ public class TestContract {
 
 	@Autowired
 	ContractEquipmentAdditionInfoRefreshHisRepository contractEquipmentAdditionInfoRefreshHisRepository;
-
-	@Autowired
-	ContractInstallationLocationRefreshHisRepository contractInstallationLocationRefreshHisRepository;
 
 	static ConfigurableApplicationContext context;
 
@@ -451,11 +447,6 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種付加情報洗い替え履歴() {
 		全てのカラムがNullではないことを確認_共通(contractEquipmentAdditionInfoRefreshHisRepository, 401L, 501L);
-	}
-
-	@Test
-	public void 全てのカラムがNullではないことを確認_設置先_契約用_洗い替え履歴() {
-		全てのカラムがNullではないことを確認_共通(contractInstallationLocationRefreshHisRepository, 401L, 501L);
 	}
 
 	@Test
