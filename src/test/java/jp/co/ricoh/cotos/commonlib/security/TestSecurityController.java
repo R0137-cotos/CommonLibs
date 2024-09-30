@@ -187,6 +187,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddressSsOrg;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingThingDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.ElectronicContractInfo;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalResult;
@@ -1324,4 +1325,8 @@ public class TestSecurityController {
 		return createParameterCheckResult(result);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ElectronicContractInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ElectronicContractInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
 }

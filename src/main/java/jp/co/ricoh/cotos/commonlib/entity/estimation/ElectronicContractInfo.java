@@ -198,14 +198,12 @@ public class ElectronicContractInfo extends EntityBase {
 	/**
 	 * お客様ご担当者区分
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "お客様ご担当者区分", required = false, position = 18, allowableValues = "お客様情報を使用する(\"1\"), 決裁権限者をお客様担当者に設定する(\"2\"), 一次承認者をお客様担当者に設定する(\"3\"), お客様にクラウドサイン上で入力いただく(\"4\")")
 	private CustomerPicDiv customerPicDiv;
 
 	/**
 	 * 利用開始希望日区分
 	 */
-	@Size(max = 255)
 	@ApiModelProperty(value = "利用開始希望日区分", required = false, position = 19, allowableValues = "SA入力(\"1\"), お客様に入力いただく(\"2\")")
 	private DesiredStartDateDiv desiredStartDateDiv;
 
