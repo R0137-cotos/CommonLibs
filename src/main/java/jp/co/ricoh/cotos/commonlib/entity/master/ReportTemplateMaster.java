@@ -246,4 +246,20 @@ public class ReportTemplateMaster extends EntityBaseMaster {
 	@OneToMany(mappedBy = "reportTemplateMaster")
 	@ApiModelProperty(value = "帳票ページ管理マスタ", required = false, position = 15)
 	private List<ReportPageMaster> reportPageMasterList;
+
+	/**
+	 * 電子契約連携対象フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "電子契約連携対象フラグ", required = false, position = 16, allowableValues = "range[0,9]")
+	private Integer electronicContractLinkageFlg;
+
+	/**
+	 * 利用開始希望日ありフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "利用開始希望日ありフラグ", required = false, position = 17, allowableValues = "range[0,9]")
+	private Integer desiredStartDateExistFlg;
 }
