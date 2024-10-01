@@ -45,7 +45,7 @@ import lombok.EqualsAndHashCode;
  * 見積を表すEntityです。
  */
 @Entity
-@EqualsAndHashCode(callSuper = true, exclude={"estimationApprovalRoute","estimationPicSaEmp","customerEstimation"})
+@EqualsAndHashCode(callSuper = true, exclude = { "estimationApprovalRoute", "estimationPicSaEmp", "customerEstimation", "electronicContractInfo" })
 @EntityListeners(EstimationListener.class)
 @Data
 @Table(name = "estimation")
@@ -624,4 +624,12 @@ public class Estimation extends EntityBase {
 	 */
 	@ApiModelProperty(value = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1", position = 65)
 	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
+
+	/**
+	 * 電子契約情報
+	 */
+	@Valid
+	@OneToOne(mappedBy = "estimation")
+	@ApiModelProperty(value = "電子契約情報", required = false, position = 66)
+	private ElectronicContractInfo electronicContractInfo;
 }
