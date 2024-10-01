@@ -1307,7 +1307,7 @@ public class TestEstimationDto {
 	@Test
 	public void ElectronicContractInfoDtoのテスト() throws Exception {
 		ElectronicContractInfoDto dto = new ElectronicContractInfoDto();
-		ElectronicContractInfo entity = electronicContractInfoRepository.findOne(1L);
+		ElectronicContractInfo entity = electronicContractInfoRepository.findOne(401L);
 		BeanUtils.copyProperties(entity, dto);
 
 		ElectronicContractInfoDto testTarget = new ElectronicContractInfoDto();
