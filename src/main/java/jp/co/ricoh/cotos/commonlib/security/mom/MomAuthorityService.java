@@ -248,7 +248,7 @@ public class MomAuthorityService {
 	/**
 	 * 参照・編集権限が存在するか判定する
 	 */
-	protected boolean hasEditAuthority(AuthLevel authLevel, MvEmployeeMaster editor, VKjbMaster customer, List<MvEmployeeMaster> targetEmployeeMasterList) {
+	public boolean hasEditAuthority(AuthLevel authLevel, MvEmployeeMaster editor, VKjbMaster customer, List<MvEmployeeMaster> targetEmployeeMasterList) {
 
 		// 権限レベルによる認可処理を実施
 		switch (authLevel) {

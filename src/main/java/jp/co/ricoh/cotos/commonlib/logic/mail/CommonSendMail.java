@@ -441,6 +441,56 @@ public class CommonSendMail {
 	}
 
 	/**
+	 * メール送信処理_添付ファイルあり_メールテンプレートマスタ不使用
+	 *
+	 * @param emailTo
+	 *            Toメールアドレス
+	 * @param emailFrom
+	 *            FROMメールアドレス           
+	 * @param emailCcList
+	 *            CCメールアドレスリスト
+	 * @param emailBccList
+	 *            BCCメールアドレスリスト
+	 * @param mailSubject
+	 *            メール件名
+	 * @param mailText
+	 *            メール本文
+	 * @param uploadFile
+	 *            添付ファイル
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
+	@Async
+	public void sendMail(List<String> emailToList, String emailFrom, List<String> emailCcList, List<String> emailBccList, String mailSubject, String mailText, String uploadFile) throws MessagingException, IOException {
+		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
+		attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
+		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
+
+		String[] toEmail = (String[]) emailToList.toArray(new String[0]);
+		String[] ccEmail = (String[]) emailCcList.toArray(new String[0]);
+		String[] bccEmail = (String[]) emailBccList.toArray(new String[0]);
+
+		attachedHelper.setTo(toEmail);
+		attachedHelper.setFrom(emailFrom);
+		attachedHelper.setCc(ccEmail);
+		attachedHelper.setBcc(bccEmail);
+		String subject = mailSubject.replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
+		attachedHelper.setSubject(subject);
+		String text = mailText.replace("&#10;", "\r\n").replace("&#39;", "\'").replace("&quot;", "\"").replace("&amp;", "&").replace("&lt;", "<").replace("&#61;", "=").replace("&gt;", ">").replace("&#96;", "`");
+		attachedHelper.setText(text);
+
+		if (null != uploadFile) {
+			FileSystemResource res = new FileSystemResource(uploadFile);
+			attachedHelper.addAttachment(res.getFilename(), res);
+		}
+		SMTPMessage SMTPMessage = new SMTPMessage(attachedMsg);
+
+		// ログにTo、Cc、Bccのメールアドレスを出力
+		outputLog(SMTPMessage);
+		javaMailSender.send(SMTPMessage);
+	}
+
+	/**
 	 * メール件名作成
 	 *
 	 * @param mailTemplateMaster
