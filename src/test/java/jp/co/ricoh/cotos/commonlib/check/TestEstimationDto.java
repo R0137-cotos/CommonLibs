@@ -23,6 +23,7 @@ import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.CustomerEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.DealerEstimationDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ElectronicContractInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationApprovalRouteDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationApprovalRouteNodeDto;
@@ -41,6 +42,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationI
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.external.EstimationInitialCostInfoDto;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.ElectronicContractInfo;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalRoute;
@@ -54,6 +56,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.ElectronicContractInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalRouteNodeRepository;
@@ -142,6 +145,9 @@ public class TestEstimationDto {
 
 	@Autowired
 	PenaltyDetailEstimationRepository penaltyDetailEstimationRepository;
+
+	@Autowired
+	ElectronicContractInfoRepository electronicContractInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -346,6 +352,11 @@ public class TestEstimationDto {
 		PenaltyDetailEstimationDto penalty = new PenaltyDetailEstimationDto();
 		BeanUtils.copyProperties(entity.getPenaltyDetailEstimationList().get(0), penalty);
 		dto.setPenaltyDetailEstimationList(Arrays.asList(penalty));
+
+		// 電子契約情報
+		ElectronicContractInfoDto elcon = new ElectronicContractInfoDto();
+		BeanUtils.copyProperties(entity.getElectronicContractInfo(), elcon);
+		dto.setElectronicContractInfo(elcon);
 
 		// 正常系
 		BeanUtils.copyProperties(dto, testTarget);
@@ -1291,5 +1302,45 @@ public class TestEstimationDto {
 		Assert.assertTrue(result.getErrorInfoList().size() == 2);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "違約金金額は最大値（9999999999999999999.99）を超えています。"));
+	}
+
+	@Test
+	public void ElectronicContractInfoDtoのテスト() throws Exception {
+		ElectronicContractInfoDto dto = new ElectronicContractInfoDto();
+		ElectronicContractInfo entity = electronicContractInfoRepository.findOne(401L);
+		BeanUtils.copyProperties(entity, dto);
+
+		ElectronicContractInfoDto testTarget = new ElectronicContractInfoDto();
+
+		// 正常系
+		BeanUtils.copyProperties(dto, testTarget);
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size ：）
+		BeanUtils.copyProperties(dto, testTarget);
+		testTarget.setImfrSdInsertId(STR_256);
+		testTarget.setImfrSdRowNo(STR_256);
+		testTarget.setCompanyId(STR_256);
+		testTarget.setCompanyName(STR_256);
+		testTarget.setOfficeId(STR_256);
+		testTarget.setOfficeName(STR_256);
+		testTarget.setPrimaryApprover(STR_256);
+		testTarget.setPrimaryDep(STR_256);
+		testTarget.setPrimaryPostname(STR_256);
+		testTarget.setPrimaryEmail(STR_256);
+		testTarget.setFinalApprover(STR_256);
+		testTarget.setFinalDep(STR_256);
+		testTarget.setFinalPostname(STR_256);
+		testTarget.setFinalEmail(STR_256);
+		testTarget.setPaymentTerms(STR_256);
+		testTarget.setSpecialNotes(STR_256);
+		testTarget.setElectronicContractDocumentKey(STR_256);
+		testTarget.setElectronicContractDocumentId(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 18);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "イントラマート電子契約事前確認申請管理番号は最大文字数（255）を超えています。"));
+
 	}
 }

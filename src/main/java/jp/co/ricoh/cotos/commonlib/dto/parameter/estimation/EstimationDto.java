@@ -470,4 +470,12 @@ public class EstimationDto extends DtoBase {
 	 */
 	@ApiModelProperty(value = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1", position = 63)
 	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
+
+	/**
+	 * 電子契約情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "estimation")
+	@ApiModelProperty(value = "電子契約情報", required = false, position = 64)
+	private ElectronicContractInfoDto electronicContractInfo;
 }
