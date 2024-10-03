@@ -273,6 +273,8 @@ public class TestMaster {
 	@Autowired
 	private MvVJmch001MasterRepository mvVJmch001MasterRepository;
 	@Autowired
+	private ProductGrpMasterDtoRepository productGrpMasterDtoRepository;
+	@Autowired
 	private MailCsvMasterRepository mailCsvMasterRepository;
 
 	@Autowired
@@ -3138,6 +3140,25 @@ public class TestMaster {
 
 		// データが取得出来ている事を確認
 		Assert.assertTrue(foundList.size() > 0);
+
+	}
+
+	@Test
+	public void ProductGrpMasterDtoのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+
+		List<Long> idList = Arrays.asList(new Long[] { 1L });
+
+		// エンティティの取得
+		List<ProductGrpMasterDto> foundList = productGrpMasterDtoRepository.findByIdIn(idList);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(foundList.get(0));
 
 	}
 
