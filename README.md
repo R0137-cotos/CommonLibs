@@ -600,3 +600,4 @@
 |643|見積Entity修正|
 |644|見積Dto修正、電子契約情報Dto作成|
 |645|商品グループマスタ用DTO追加、商品グループマスタDTOリポジトリの追加|
+|646|MomAuthorityServiceのhasEditAuthorityメソッド修正(protected→public)|
