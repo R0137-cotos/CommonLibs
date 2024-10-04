@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
-import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,8 +26,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -37,7 +34,6 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
-import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -580,15 +576,6 @@ public class Estimation extends EntityBase {
 	 */
 	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 105, allowableValues = "自動更新時(\"0\"),契約期間途中(\"1\")")
 	private ContractChangeTiming contractChangeTiming;
-
-	@PreUpdate
-	public void preUpdate() {
-		if (StringUtils.isEmpty(super.getUpdatedUserId())) {
-			CotosAuthenticationDetails userInfo = (CotosAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			super.setUpdatedUserId(userInfo.getMomEmployeeId());
-		}
-		super.setUpdatedAt(new Date());
-	}
 
 	/**
 	 * 延長可能契約月数
