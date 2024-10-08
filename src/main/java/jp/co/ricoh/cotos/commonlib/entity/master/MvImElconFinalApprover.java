@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -62,7 +63,7 @@ public class MvImElconFinalApprover {
 	private String imfrUdGt1Consenter;
 
 	/** お客様同意年月日 */
-	private String imfrUdGt1AgreeDate;
+	private Date imfrUdGt1AgreeDate;
 
 	/** 一次承認者有無 */
 	private String imfrUdGt1PExistence;
