@@ -13,11 +13,13 @@ import lombok.Data;
 @Data
 @Table(name = "mv_im_elcon_final_approver")
 public class MvImElconFinalApprover {
+
 	/** 管理番号 */
 	@Id
 	private String imfrSdInsertId;
 
 	/** 管理行番号 */
+	@Id
 	private String imfrSdRowNo;
 
 	/** 適応範囲（コメント） */
