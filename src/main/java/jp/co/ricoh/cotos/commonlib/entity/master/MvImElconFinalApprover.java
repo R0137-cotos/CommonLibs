@@ -1,7 +1,10 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -14,13 +17,19 @@ import lombok.Data;
 @Table(name = "mv_im_elcon_final_approver")
 public class MvImElconFinalApprover {
 
-	/** 管理番号 */
-	@Id
-	private String imfrSdInsertId;
+	@Embeddable
+	@Data
+	public static class Id implements Serializable {
 
-	/** 管理行番号 */
-	@Id
-	private String imfrSdRowNo;
+		/** 管理番号 */
+		private String imfrSdInsertId;
+
+		/** 管理行番号 */
+		private String imfrSdRowNo;
+	}
+
+	@EmbeddedId
+	private Id id;
 
 	/** 適応範囲（コメント） */
 	private String imfrUdGt1Scope;
