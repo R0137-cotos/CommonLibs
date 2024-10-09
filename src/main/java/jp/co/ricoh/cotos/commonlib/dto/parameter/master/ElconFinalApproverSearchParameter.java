@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -16,8 +17,9 @@ public class ElconFinalApproverSearchParameter extends DtoBase {
 	/**
 	 * 企業ID
 	 */
+	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "企業ID", required = false, position = 1, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "企業ID", required = true, position = 1, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
