@@ -1,5 +1,13 @@
 # Changelog
 
+## v7.27.0 (10/10/2024)
+- [**closed**] 26631 リコーひかり　R割適用対応 [#2721](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2721)
+- [**closed**] #26479 見積エンティティ事後処理削除 [#2716](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2716)
+- [**closed**] #26402 契約チェックリスト構成マスタにチェック必須フラグを追加 [#2704](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2704)
+- [**closed**] #25863 エラーメッセージを追加 [#2696](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2696)
+
+---
+
 ## v7.26.0 (19/09/2024)
 - [**closed**] 22111_認可処理メソッドのアクセス修飾子をpublicに変更 [#2711](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2711)
 - [**closed**] #25559 商品マスタに情報変更禁止開始日・終了日追加、 エラーメッセージ追加 [#2710](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2710)
@@ -253,8 +261,3 @@
 - [**closed**] #17879 配送先社員のマスタチェック修正 [#2319](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2319)
 - [**closed**] #17355 Message.propertiesにTwoParametersNotInputError追加 [#2295](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2295)
 - [**closed**] #17355 過去チケット(#16383)分取込とオン資用の商品（契約用）拡張項目DTOにSS調整の変数を追加 [#2283](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2283)
-
----
-
-## v6.8.0 (09/03/2023)
-- [**closed**] #17973 見積エンティティアノテーション修正 [#2298](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2298)
