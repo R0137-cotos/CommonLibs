@@ -75,6 +75,13 @@ public class ElconDocumentRegistrationParameter {
 	private String customerName;
 
 	/**
+	 * お客様事業所コード
+	 */
+	@ApiParam(value = "お客様事業所コード", required = false)
+	@ApiModelProperty(value = "お客様事業所コード", required = false, allowableValues = "range[0,255]")
+	private String customerOfficeCode;
+
+	/**
 	 * IM管理番号
 	 */
 	@ApiParam(value = "IM管理番号", required = true)
