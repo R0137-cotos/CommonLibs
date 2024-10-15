@@ -908,30 +908,4 @@ public class EnumType {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
-
-	/**
-	 * 電子契約連携対象帳票取得区分
-	 */
-	@Description(value = "電子契約連携対象帳票取得区分")
-	public enum ElectronicContractLinkageReportDiv {
-
-		電子契約連携対象以外("0"), 電子契約連携対象のみ("1"), 全て("2");
-
-		private final String text;
-
-		private ElectronicContractLinkageReportDiv(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static ElectronicContractLinkageReportDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
-		}
-	}
 }
