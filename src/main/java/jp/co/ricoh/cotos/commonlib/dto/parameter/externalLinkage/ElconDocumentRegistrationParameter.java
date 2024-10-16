@@ -100,21 +100,21 @@ public class ElconDocumentRegistrationParameter {
 	 */
 	@ApiParam(value = "初期費用総計", required = false)
 	@ApiModelProperty(value = "初期費用総計", required = false)
-	private Integer totalInitialCosts;
+	private String totalInitialCosts;
 
 	/**
 	 * 月額総計
 	 */
 	@ApiParam(value = "月額総計", required = false)
 	@ApiModelProperty(value = "月額総計", required = false)
-	private Integer monthlyTotal;
+	private String monthlyTotal;
 
 	/**
 	 * 年額総計
 	 */
 	@ApiParam(value = "年額総計", required = false)
 	@ApiModelProperty(value = "年額総計", required = false)
-	private Integer annualTotal;
+	private String annualTotal;
 
 	/**
 	 * 正式帳票名
