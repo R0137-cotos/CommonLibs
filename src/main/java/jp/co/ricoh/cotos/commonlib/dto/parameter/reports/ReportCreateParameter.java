@@ -52,6 +52,8 @@ public class ReportCreateParameter {
 
 	/**
 	 * PDF出力フラグ
+	 *
+	 * 帳票テンプレート管理マスタの出力形式=2:Excel の場合のみ有効
 	 */
 	@Max(9)
 	@Min(0)
