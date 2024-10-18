@@ -51,10 +51,10 @@ public class ReportCreateParameter {
 	private String workAbsoluteDir;
 
 	/**
-	 * 電子契約フラグ
+	 * PDF出力フラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "電子契約フラグ", required = false, position = 5)
-	private Integer electronicContractFlg;
+	@ApiModelProperty(value = "PDF出力フラグ", required = false, position = 5)
+	private Integer pdfOutputFlg;
 }
