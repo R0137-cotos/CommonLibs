@@ -3,7 +3,6 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.reports;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.ElectronicContractLinkageReportDiv;
 import lombok.Data;
 
 /**
@@ -69,5 +68,5 @@ public class ReportListParameter {
 	 * 電子契約連携対象帳票取得区分
 	 */
 	@ApiModelProperty(value = "電子契約連携対象帳票取得区分", required = false, allowableValues = "電子契約連携対象以外(\"0\"), 電子契約連携対象のみ(\"1\"), 全て(\"2\")", example = "0", position = 10)
-	private ElectronicContractLinkageReportDiv electronicContractLinkageReportDiv;
+	private String electronicContractLinkageReportDiv;
 }

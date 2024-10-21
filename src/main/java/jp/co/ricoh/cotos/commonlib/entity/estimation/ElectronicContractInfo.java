@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -53,6 +54,9 @@ public class ElectronicContractInfo extends EntityBase {
 
 		@JsonCreator
 		public static CustomerPicDiv fromString(final String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -75,6 +79,9 @@ public class ElectronicContractInfo extends EntityBase {
 
 		@JsonCreator
 		public static DesiredStartDateDiv fromString(final String string) {
+			if (StringUtils.isEmpty(string)) {
+				return null;
+			}
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
