@@ -45,8 +45,6 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	private static final String ERROR_DOCUMENT_ID = "[ドキュメントID:%s]";
 
-	private static final String ERROR_RJ_MANAGE_NUMBER = "[RJ管理番号:%s]";
-
 	private static final Charset CHARSET_UTF8 = StandardCharsets.UTF_8;
 
 	private static final Charset CHARSET_ISO_8859_1 = StandardCharsets.ISO_8859_1;
