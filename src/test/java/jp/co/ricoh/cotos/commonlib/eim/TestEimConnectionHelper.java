@@ -76,7 +76,7 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void アプリに文書を登録_動作確認() {
 		try {
 			DocumentUploadRequest request = new DocumentUploadRequest();

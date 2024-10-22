@@ -23,12 +23,12 @@ public class ElconEimConnectionProperties extends EimConnectionProperties {
 	String xApplicationId;
 
 	/**
-	 * アプリケーションKey
+	 * アプリケーションキー
 	 */
 	String xApplicationKey;
 
 	/**
-	 * modelId
+	 * モデルId（COTOS）
 	 */
-	String modelId;
+	String modelIdCotos;
 }

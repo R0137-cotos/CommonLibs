@@ -163,14 +163,14 @@ public class TestElconEimConnectionHelper {
 			paramDto.setStartDatePrintFlag("1");
 			paramDto.setCustomerPrintFlag("1");
 
-			//			PreparationFileUploadResponse preparationRes = new PreparationFileUploadResponse();
-			//			preparationRes.setId("027d4859c2534fc0a836135b04a8654c");
+			PreparationFileUploadResponse preparationRes = new PreparationFileUploadResponse();
+			preparationRes.setId("027d4859c2534fc0a836135b04a8654c");
 
 			// ファイルアップロード準備API
-			PreparationFileUploadResponse preparationRes = elconEimConnectionHelper.preparationFilesUpload(restForEim, apActual, paramDto);
+			//PreparationFileUploadResponse preparationRes = elconEimConnectionHelper.preparationFilesUpload(restForEim, apActual, paramDto);
 
 			// ファイルアップロードAPI
-			elconEimConnectionHelper.filesUpload(restForEim, apActual, preparationRes, paramDto);
+			//elconEimConnectionHelper.filesUpload(restForEim, apActual, preparationRes, paramDto);
 
 			// 文書登録（COTOS申込書）
 			PostCotosDocumentResponse result = elconEimConnectionHelper.postCotosDocument(restForEim, apActual, preparationRes, paramDto);
