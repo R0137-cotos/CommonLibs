@@ -70,18 +70,14 @@ public class EimConnectionHelper {
 	 * @param systemAuth
 	 * @return
 	 */
-	private ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
+	protected ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
 		try {
 			// アプリケーション認証
 
 			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getApiAuthPath();
 
 			// HEADER設定
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add("X-Application-Id", systemAuth.getApplicationId());
-			headers.add("X-Application-Key", systemAuth.getApplicationKey());
-			headers.add("X-Site-Id", systemAuth.getSiteId());
+			HttpHeaders headers = createHttpHeadersApiAuth(systemAuth);
 
 			ApiAuthRequest apiAuthRequest = new ApiAuthRequest();
 			apiAuthRequest.setLoginUserName(eimConnectionProperties.getLoginUserName());
@@ -101,6 +97,22 @@ public class EimConnectionHelper {
 			log.error("【APIエラー】  ", e);
 			throw new RestClientException("【APIエラー】 EIMアプリケーション認証 Status Code:" + e.getMessage());
 		}
+	}
+
+	/**
+	 * アプリケーション認証用ヘッダー情報を作成する
+	 * 
+	 * @return HttpHeaders
+	 */
+	protected HttpHeaders createHttpHeadersApiAuth(SystemAuthResponse systemAuth) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("X-Application-Id", systemAuth.getApplicationId());
+		headers.add("X-Application-Key", systemAuth.getApplicationKey());
+		headers.add("X-Site-Id", systemAuth.getSiteId());
+
+		return headers;
 	}
 
 	/**
