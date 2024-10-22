@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 文書取得のpropertiesレスポンスボディ
+ * 文書取得のpropertiesレスポンス
  */
 
 @Data
