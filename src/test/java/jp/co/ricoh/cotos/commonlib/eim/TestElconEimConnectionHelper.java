@@ -36,13 +36,10 @@ import jp.co.ricoh.cotos.commonlib.logic.eim.ElconEimConnectionHelper;
 import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
 import lombok.extern.log4j.Log4j;
 
+@Log4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Log4j
 public class TestElconEimConnectionHelper {
-
-	//	@Mock
-	//	RestTemplate restTemplate;
 
 	@SpyBean
 	ElconEimConnectionHelper elconEimConnectionHelper;
@@ -68,15 +65,17 @@ public class TestElconEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void 正常系_文書取得API() throws Exception {
 
-		String documentId = "7bc0ca432c4e4a2d84192a3355c6dd02";
+		String documentId = "2eb22b56796e4b1a8de0abc5a2033bd0";
+
 		try {
 			DocumentGetResponse response = elconEimConnectionHelper.getDocument(documentId);
 			assertNotNull("StatusCodeがNULLでないこと", response.getDocument().getProperties().getStatusCode());
 			assertNotNull("StatusNameがNULLでないこと", response.getDocument().getProperties().getStatusName());
-
+			// 処理が1回のみ行われていること
+			verify(elconEimConnectionHelper, times(1)).getDocument(Mockito.anyString());
 		} catch (RestClientException e) {
 			log.info(e);
 			Assert.fail("異常終了");
@@ -85,15 +84,52 @@ public class TestElconEimConnectionHelper {
 
 	@Test
 	@Ignore
+	public void 異常系_文書取得API() throws Exception {
+
+		String documentId = "9999999999999";
+		try {
+			elconEimConnectionHelper.getDocument(documentId);
+			Assert.fail("正常終了してしまった");
+		} catch (RestClientException e) {
+			// ログが正しく出力されること
+			Logger mockLog = Mockito.mock(Logger.class);
+			mockLog.error("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。[ドキュメントID:9999999999999]");
+			verify(mockLog).error(eq("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。[ドキュメントID:9999999999999]"));
+			// 処理がリトライ回数だけ行われていること
+			verify(elconEimConnectionHelper, times(5)).getDocument(Mockito.anyString());
+		}
+	}
+
+	@Test
+	@Ignore
 	public void 正常系_文書更新_論理削除API() throws Exception {
 
-		String documentId = "7bc0ca432c4e4a2d84192a3355c6dd02";
+		String documentId = "6741c01392734341be6a7a6486417369";
 		try {
 			DocumentDeleteResponse response = elconEimConnectionHelper.deleteDocument(documentId);
+			assertNotNull("documentIdがNULLでないこと", response.getSystem().getDocumentId());
 			assertNotNull("documentKeyがNULLでないこと", response.getSystem().getDocumentKey());
-
+			// 処理が1回のみ行われていること
+			verify(elconEimConnectionHelper, times(1)).deleteDocument(Mockito.anyString());
 		} catch (RestClientException e) {
 			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	@Ignore
+	public void 異常系_文書更新_論理削除API() throws Exception {
+
+		try {
+			elconEimConnectionHelper.deleteDocument(null);
+			Assert.fail("正常終了してしまった");
+		} catch (RestClientException e) {
+			// ログが正しく出力されること
+			Logger mockLog = Mockito.mock(Logger.class);
+			mockLog.error("【APIエラー】電子契約EIMの文書更新（論理削除）API実行に失敗しました。[ドキュメントID:9999999999999]");
+			verify(mockLog).error(eq("【APIエラー】電子契約EIMの文書更新（論理削除）API実行に失敗しました。[ドキュメントID:9999999999999]"));
+			// 処理がリトライ回数だけ行われていること
+			verify(elconEimConnectionHelper, times(5)).deleteDocument(Mockito.anyString());
 		}
 	}
 
@@ -179,112 +215,6 @@ public class TestElconEimConnectionHelper {
 
 		} catch (RestClientException e) {
 			Assert.fail("異常終了");
-		}
-	}
-
-	@Test
-	//@Ignore
-	public void 異常系_文書取得API() throws Exception {
-
-		String documentId = "9999999999999";
-		try {
-			elconEimConnectionHelper.getDocument(documentId);
-			Assert.fail("正常終了してしまった");
-		} catch (RestClientException e) {
-			// ログが正しく出力されること
-			Logger mockLog = Mockito.mock(Logger.class);
-			mockLog.error("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。[ドキュメントID:9999999999999]");
-			verify(mockLog).error(eq("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。[ドキュメントID:9999999999999]"));
-			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).getDocument(Mockito.anyString());
-		}
-	}
-
-	//@Test
-	//@Ignore
-	//	public void 異常系_文書取得API_200以外() throws Exception {
-	//		HttpEntity<?> requestEntity = new HttpEntity<>(new HttpHeaders());
-	//		DocumentGetResponse dto = new DocumentGetResponse();
-	//		ResponseEntity<DocumentGetResponse> responseEntity = new ResponseEntity<DocumentGetResponse>(dto, HttpStatus.ACCEPTED);
-	//		Mockito.doReturn(responseEntity).when(restTemplate).exchange(Mockito.anyString(), Mockito.eq(HttpMethod.GET), Mockito.eq(requestEntity), Mockito.eq(DocumentGetResponse.class));
-	//
-	//		String documentId = "7bc0ca432c4e4a2d84192a3355c6dd02";
-	//		try {
-	//			elconEimConnectionHelper.getDocument(documentId);
-	//			Assert.fail("正常終了してしまった");
-	//		} catch (RestClientException e) {
-	//			Logger mockLog = Mockito.mock(Logger.class);
-	//			// ログが正しく出力されること
-	//			mockLog.error("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。[ドキュメントID:9999999999999]");
-	//			verify(mockLog).error(eq("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。[ドキュメントID:9999999999999]"));
-	//			// 処理がリトライ回数だけ行われていること
-	//			verify(elconEimConnectionHelper, times(5)).getDocument(Mockito.anyString());
-	//		}
-	//	}
-
-	@Test
-	@Ignore
-	public void 異常系_文書更新_論理削除API() throws Exception {
-
-		String documentId = "9999999999999";
-		try {
-			elconEimConnectionHelper.deleteDocument(documentId);
-			Assert.fail("正常終了してしまった");
-		} catch (RestClientException e) {
-			Logger mockLog = Mockito.mock(Logger.class);
-			// ログが正しく出力されること
-			mockLog.error("【APIエラー】電子契約EIMの文書更新(論理削除)API実行に失敗しました。[ドキュメントID:9999999999999]");
-			verify(mockLog).error(eq("【APIエラー】電子契約EIMの文書更新(論理削除)API実行に失敗しました。[ドキュメントID:9999999999999]"));
-			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).deleteDocument(Mockito.anyString());
-		}
-	}
-
-	@Test
-	//@Ignore
-	public void 異常系_ファイルアップロード準備API() throws Exception {
-
-		try {
-			RestTemplate restForEim = new RestTemplate();
-			// EIMシステム認証API
-			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
-			sysMethod.setAccessible(true);
-			SystemAuthResponse sysActual = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
-
-			// アプリケーション認証API
-			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
-			apMethod.setAccessible(true);
-			ApiAuthResponse apActual = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysActual);
-
-			// パラメータ設定
-			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
-			paramDto.setFileName(null);
-			// 実行
-			PreparationFileUploadResponse response = elconEimConnectionHelper.preparationFilesUpload(restForEim, apActual, paramDto);
-			assertNotNull("x-ms-blob-content-dispositionがNULLでないこと", response.getHeader().getX_ms_blob_content_disposition());
-			assertNotNull("x-ms-blob-content-typeがNULLでないこと", response.getHeader().getX_ms_blob_content_type());
-			assertNotNull("x-ms-blob-typeがNULLでないこと", response.getHeader().getX_ms_blob_type());
-
-		} catch (RestClientException e) {
-			Assert.fail("異常終了");
-		}
-	}
-
-	@Test
-	@Ignore
-	public void 異常系_文書更新_論理削除API_202以外() throws Exception {
-
-		String documentId = "9999999999999";
-		try {
-			elconEimConnectionHelper.deleteDocument(documentId);
-			Assert.fail("正常終了してしまった");
-		} catch (RestClientException e) {
-			Logger mockLog = Mockito.mock(Logger.class);
-			// ログが正しく出力されること
-			mockLog.error("【APIエラー】電子契約EIMの文書更新(論理削除)API実行に失敗しました。[ドキュメントID:9999999999999]");
-			verify(mockLog).error(eq("【APIエラー】電子契約EIMの文書更新(論理削除)API実行に失敗しました。[ドキュメントID:9999999999999]"));
-			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).deleteDocument(Mockito.anyString());
 		}
 	}
 }

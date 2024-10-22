@@ -1,21 +1,26 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 /**
- * 文書取得のpropertiesレスポンスボディ
+ * 文書取得のpropertiesレスポンス
  */
 
 @Data
 public class DocumentGetResponseProperties {
 
 	/**
-	 * StatusCode
+	 * statusCode
 	 */
-	private String StatusCode;
+	@JsonProperty("StatusCode")
+	private String statusCode;
 
 	/**
-	 * StatusName
+	 * statusName
 	 */
-	private String StatusName;
+	@JsonProperty("StatusName")
+	private String statusName;
+
 }

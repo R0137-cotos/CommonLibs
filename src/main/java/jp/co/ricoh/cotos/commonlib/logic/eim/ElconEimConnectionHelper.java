@@ -24,9 +24,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.DocumentUploadProperties;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.DocumentUploadRequest;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.DocumentUploadSystem;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.DocumentDeleteRequest;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.DocumentDeleteRequestProperties;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.DocumentDeleteRequestSystem;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.PostCotosDocumentRequest;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.PostCotosDocumentRequestBibliography;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.PostCotosDocumentRequestProperties;
@@ -91,13 +91,11 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	 * [GET]電子契約EIMの文書取得API
 	 * 
 	 * @param 電子契約情報.電子契約ドキュメントID
-	 * @return
+	 * @return 文書取得レスポンスDTO
 	 */
 	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
 	public DocumentGetResponse getDocument(String documentId) {
 
-		ResponseEntity<String> responseEntity = null;
-		DocumentGetResponse responseDto = new DocumentGetResponse();
 		try {
 			RestTemplate restForEim = new RestTemplate();
 
@@ -111,23 +109,23 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
-			// URL取得
+			// 文書取得APIコール
 			String url = "https://" + elconEimConnectionProperties.getHostName() + "." + elconEimConnectionProperties.getDomainName() + "/" + elconEimConnectionProperties.getResourcesPath() + elconEimConnectionProperties.getAppId() + "/" + elconEimConnectionProperties.getDocumentsPath() + "/" + documentId;
-			responseEntity = restForEim.exchange(new URI(url), HttpMethod.GET, httpEntity, String.class);
+			ResponseEntity<String> responseEntity = restForEim.exchange(new URI(url), HttpMethod.GET, httpEntity, String.class);
 
-			// ステータスコードが200以外はエラーとする
+			// ステータスコードが「200：OK」以外はエラーとする
 			if (HttpStatus.OK != responseEntity.getStatusCode()) {
 				throw new RestClientException("【APIエラー】電子契約EIM文書取得 Status Code:" + responseEntity.getStatusCode());
 			}
 
-			// 文字コードの変換処理を実施する
+			// 文字コードの変換処理を実施
 			String conversionRespomseBody = decodedToUTF8(responseEntity.getBody(), CHARSET_ISO_8859_1);
-			responseDto = mapper.readValue(conversionRespomseBody, DocumentGetResponse.class);
+			DocumentGetResponse responseDto = mapper.readValue(conversionRespomseBody, DocumentGetResponse.class);
 
 			return responseDto;
 
 		} catch (Exception e) {
-			log.error("【APIエラー】電子契約EIMの文書取得API実行に失敗しました。" + String.format(ERROR_DOCUMENT_ID, documentId), e);
+			log.error("電子契約EIMの文書取得API実行に失敗しました。" + String.format(ERROR_DOCUMENT_ID, documentId), e);
 			throw new RestClientException("【APIエラー】電子契約EIM文書取得 Status Code:" + e.getMessage());
 		}
 	}
@@ -145,27 +143,25 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	}
 
 	/**
-	 * [PUT]電子契約EIMの文書更新(論理削除)API
+	 * [PUT]電子契約EIMの文書更新（論理削除）API
 	 * 
 	 * @param 電子契約情報.電子契約ドキュメントID
-	 * @return
+	 * @return 文書更新（論理削除）レスポンスDTO
 	 */
 	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
 	public DocumentDeleteResponse deleteDocument(String documentId) {
-		// リクエストボディの設定
-		DocumentUploadRequest requestDto = new DocumentUploadRequest();
-		DocumentUploadSystem systemDto = new DocumentUploadSystem();
-		systemDto.setAppId(elconEimConnectionProperties.getAppId());
-		systemDto.setModelId(elconEimConnectionProperties.getModelId());
-		requestDto.setSystem(systemDto);
-		DocumentUploadProperties propertiesDto = new DocumentUploadProperties();
-		propertiesDto.setDelFlg(1);
-		requestDto.setProperties(propertiesDto);
-
-		ResponseEntity<String> responseEntity = null;
-		DocumentDeleteResponse responseDto = new DocumentDeleteResponse();
 
 		try {
+			// リクエストボディの設定
+			DocumentDeleteRequestSystem systemDto = new DocumentDeleteRequestSystem();
+			systemDto.setAppId(elconEimConnectionProperties.getAppId());
+			systemDto.setModelId(elconEimConnectionProperties.getModelId());
+			DocumentDeleteRequestProperties propertiesDto = new DocumentDeleteRequestProperties();
+			propertiesDto.setDeleteFlag("1");
+			DocumentDeleteRequest requestDto = new DocumentDeleteRequest();
+			requestDto.setSystem(systemDto);
+			requestDto.setProperties(propertiesDto);
+
 			RestTemplate restForEim = new RestTemplate();
 
 			// アプリケーション認証APIコール
@@ -177,37 +173,37 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			headers.add("X-Site-Id", elconEimConnectionProperties.getXSiteId());
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
 
-			// URL取得
+			// 文書更新（論理削除）APIコール
 			String url = "https://" + elconEimConnectionProperties.getHostName() + "." + elconEimConnectionProperties.getDomainName() + "/" + elconEimConnectionProperties.getResourcesPath() + elconEimConnectionProperties.getAppId() + "/" + elconEimConnectionProperties.getDocumentsPath() + "/" + documentId;
-			RequestEntity<DocumentUploadRequest> requestEntity = new RequestEntity<>(requestDto, headers, HttpMethod.PUT, new URI(url));
-			responseEntity = restForEim.exchange(requestEntity, String.class);
+			RequestEntity<DocumentDeleteRequest> requestEntity = new RequestEntity<>(requestDto, headers, HttpMethod.PUT, new URI(url));
+			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
 
-			// ステータスコードが202以外はエラーとする
+			// ステータスコードが「202：ACCEPTED」以外はエラーとする
 			if (HttpStatus.ACCEPTED != responseEntity.getStatusCode()) {
-				throw new RestClientException("【APIエラー】電子契約EIM文書更新(論理削除)Status Code:" + responseEntity.getStatusCode());
+				throw new RestClientException("【APIエラー】電子契約EIM文書更新（論理削除） Status Code:" + responseEntity.getStatusCode());
 			}
 
-			// 文字コードの変換処理を実施する
+			// 文字コードの変換処理を実施
 			String conversionRespomseBody = decodedToUTF8(responseEntity.getBody(), CHARSET_ISO_8859_1);
-			responseDto = mapper.readValue(conversionRespomseBody, DocumentDeleteResponse.class);
+			DocumentDeleteResponse responseDto = mapper.readValue(conversionRespomseBody, DocumentDeleteResponse.class);
 
 			return responseDto;
 
 		} catch (Exception e) {
-			log.error("【APIエラー】電子契約EIMの文書更新(論理削除)API実行に失敗しました。" + String.format(ERROR_DOCUMENT_ID, documentId), e);
+			log.error("電子契約EIMの文書更新（論理削除）API実行に失敗しました。" + String.format(ERROR_DOCUMENT_ID, documentId), e);
 			throw new RestClientException("【APIエラー】電子契約EIM文書更新（論理削除） Status Code:" + e.getMessage());
 		}
 	}
 
 	/**
-	 * 電子契約EIMの文書更新(論理削除)APIエラー時に呼ばれるメソッド
+	 * 電子契約EIMの文書更新（論理削除）APIエラー時に呼ばれるメソッド
 	 * 
 	 * @param リトライ対象例外クラスインスタンス
 	 * @return リトライ対象メソッドの戻り値
 	 */
 	@Recover
 	private DocumentDeleteResponse recoverCallDeleteDocumentApi(RestClientException e) {
-		log.error(String.format("%d回リトライしましたが、電子契約EIMの文書更新(論理削除)API呼び出しに失敗しました。", RETRY_NUM));
+		log.error(String.format("%d回リトライしましたが、電子契約EIMの文書更新（論理削除）API呼び出しに失敗しました。", RETRY_NUM));
 		throw e;
 	}
 
