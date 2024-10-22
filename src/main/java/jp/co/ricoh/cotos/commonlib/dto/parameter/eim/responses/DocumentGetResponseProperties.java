@@ -1,5 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 /**
@@ -12,11 +14,13 @@ public class DocumentGetResponseProperties {
 	/**
 	 * statusCode
 	 */
-	private String StatusCode;
+	@JsonProperty("StatusCode")
+	private String statusCode;
 
 	/**
 	 * statusName
 	 */
-	private String StatusName;
+	@JsonProperty("StatusName")
+	private String statusName;
 
 }
