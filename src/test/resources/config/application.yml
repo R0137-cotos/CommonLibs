@@ -67,17 +67,18 @@ cotos:
   elconEim:
     hostName: app-dev28
     domainName: ope.azure.ricoh-eim.com
+    apiAuthPath: api/v1/auth
     loginUserName: test02
     loginPassword: P@ssw0rd
-    xSiteId: 412e9d2e34884529bf1d0b53ef7f11e4
-    xApplicationId: App-Deploy-Reg-dev28-01
-    xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
-    appId: RFG_RJ_AGREE_01
-    apiAuthPath: api/v1/auth
     fileUploadPath: services/v1/files/upload
+    appId: RFG_RJ_AGREE_01
     resourcesPath: resources/v3/apps/
     documentsPath: documents
     modelId: DM_FmCloudsignLink
+    modelIdCotos: DM_FmCloudsignLink_COTOS
+    xSiteId: 412e9d2e34884529bf1d0b53ef7f11e4
+    xApplicationId: App-Deploy-Reg-dev28-01
+    xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
   rsi:
     contractUrl: dummy_rsi_contract_url
     authUrl: dummy_rsi_auth_url

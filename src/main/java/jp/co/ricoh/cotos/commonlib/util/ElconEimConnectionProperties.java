@@ -27,4 +27,8 @@ public class ElconEimConnectionProperties extends EimConnectionProperties {
 	 */
 	String xApplicationKey;
 
+	/**
+	 * モデルId（COTOS）
+	 */
+	String modelIdCotos;
 }

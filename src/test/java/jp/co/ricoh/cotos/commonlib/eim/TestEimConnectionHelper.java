@@ -1,5 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.eim;
 
+import static org.junit.Assert.*;
+
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -165,6 +168,32 @@ public class TestEimConnectionHelper {
 			eimConnectionHelper.putDocument(request);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	public void properties取得() {
+		try {
+			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("getProperties");
+			sysMethod.setAccessible(true);
+			EimConnectionProperties properties = (EimConnectionProperties) sysMethod.invoke(eimConnectionHelper);
+
+			assertEquals("hostNameが想定通りであること", "app-dev28", properties.getHostName());
+			assertEquals("domainNameが想定通りであること", "ope.azure.ricoh-eim.com", properties.getDomainName());
+			assertEquals("systemAuthPathが想定通りであること", "services/v1/system/auth", properties.getSystemAuthPath());
+			assertEquals("apiAuthPathが想定通りであること", "api/v1/auth", properties.getApiAuthPath());
+			assertEquals("loginUserNameが想定通りであること", "test02", properties.getLoginUserName());
+			assertEquals("loginPasswordが想定通りであること", "P@ssw0rd", properties.getLoginPassword());
+			assertEquals("fileUploadPathが想定通りであること", "services/v1/files/upload", properties.getFileUploadPath());
+			assertEquals("appIdが想定通りであること", "RFG_CTS_CNT_02", properties.getAppId());
+			assertEquals("appIdMonthDBが想定通りであること", "RFG_CTS_CNT_01", properties.getAppIdMonthDB());
+			assertEquals("resourcesPathが想定通りであること", "resources/v3/apps/", properties.getResourcesPath());
+			assertEquals("documentsPathが想定通りであること", "documents", properties.getDocumentsPath());
+			assertEquals("fileDownloadPathが想定通りであること", "services/v1/files/download", properties.getFileDownloadPath());
+			assertEquals("modelIdが想定通りであること", "DetailForm^CotosContractModel", properties.getModelId());
+			assertEquals("systemNameが想定通りであること", "CTSCont02", properties.getSystemName());
+		} catch (Exception e) {
+			Assert.fail("エラーが発生した");
 		}
 	}
 }
