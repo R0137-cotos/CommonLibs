@@ -22,5 +22,5 @@ public class PostCotosDocumentRequestProperties {
 	/**
 	 * 添付ファイルID
 	 */
-	private String documentUniqueID;
+	private String[] documentUniqueID;
 }

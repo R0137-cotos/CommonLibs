@@ -34,11 +34,11 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.PostCotosDocumentR
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.ApiAuthResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentDeleteResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentGetResponse;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PostCotosDocumentResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.SystemAuthResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.ElconDocumentRegistrationParameter;
+import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
 import lombok.extern.log4j.Log4j;
 
@@ -71,13 +71,23 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	ElconEimConnectionProperties elconEimConnectionProperties;
 
 	/**
-	 * アプリケーション認証用ヘッダー情報を作成する
+	 * propertiesクラス取得
+	 * ※ElconEimConnectionPropertiesのみに存在する項目については取得できないため注意
+	 *
+	 * @return EimConnectionProperties
+	 */
+	@Override
+	protected EimConnectionProperties getProperties() {
+		return elconEimConnectionProperties;
+	}
+
+	/**
+	 * アプリケーション認証用ヘッダー情報作成
 	 * 
 	 * @return HttpHeaders
 	 */
 	@Override
 	protected HttpHeaders createHttpHeadersApiAuth(SystemAuthResponse systemAuth) {
-
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("X-Application-Id", elconEimConnectionProperties.getXApplicationId());
@@ -97,10 +107,14 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	public DocumentGetResponse getDocument(String documentId) {
 
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEim = new RestTemplate();
 
 			// アプリケーション認証APIコール
 			ApiAuthResponse apiAuthRes = apiAuth(restForEim, null);
+			log.info(apiAuthRes);
 
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
@@ -110,7 +124,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
 			// 文書取得APIコール
-			String url = "https://" + elconEimConnectionProperties.getHostName() + "." + elconEimConnectionProperties.getDomainName() + "/" + elconEimConnectionProperties.getResourcesPath() + elconEimConnectionProperties.getAppId() + "/" + elconEimConnectionProperties.getDocumentsPath() + "/" + documentId;
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "/" + documentId;
 			ResponseEntity<String> responseEntity = restForEim.exchange(new URI(url), HttpMethod.GET, httpEntity, String.class);
 
 			// ステータスコードが「200：OK」以外はエラーとする
@@ -152,6 +166,9 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	public DocumentDeleteResponse deleteDocument(String documentId) {
 
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEim = new RestTemplate();
 
 			// アプリケーション認証APIコール
@@ -165,8 +182,8 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 			// リクエストボディの設定
 			DocumentDeleteRequestSystem systemDto = new DocumentDeleteRequestSystem();
-			systemDto.setAppId(elconEimConnectionProperties.getAppId());
-			systemDto.setModelId(elconEimConnectionProperties.getModelId());
+			systemDto.setAppId(properties.getAppId());
+			systemDto.setModelId(properties.getModelId());
 			DocumentDeleteRequestProperties propertiesDto = new DocumentDeleteRequestProperties();
 			propertiesDto.setDeleteFlag("1");
 			DocumentDeleteRequest requestDto = new DocumentDeleteRequest();
@@ -175,7 +192,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			String requestBody = mapper.writeValueAsString(requestDto);
 
 			// 文書更新（論理削除）APIコール
-			String url = "https://" + elconEimConnectionProperties.getHostName() + "." + elconEimConnectionProperties.getDomainName() + "/" + elconEimConnectionProperties.getResourcesPath() + elconEimConnectionProperties.getAppId() + "/" + elconEimConnectionProperties.getDocumentsPath() + "/" + documentId;
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "/" + documentId;
 			RequestEntity<String> requestEntity = new RequestEntity<>(requestBody, headers, HttpMethod.PUT, new URI(url));
 			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
 
@@ -217,9 +234,12 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	* @return ファイルアップロード準備レスポンス
 	*/
 	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
-	public PreparationFileUploadResponse preparationFilesUpload(RestTemplate restForEim, ApiAuthResponse apiAuthRes, ElconDocumentRegistrationParameter paramDto) {
+	public PreparationFileUploadResponse preparationFilesUpload(RestTemplate restForEim, ApiAuthResponse apiAuthRes, ElconDocumentRegistrationParameter registParam) {
 
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -227,7 +247,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
 			// APIコール
-			String url = "https://" + elconEimConnectionProperties.getHostName() + "." + elconEimConnectionProperties.getDomainName() + "/" + elconEimConnectionProperties.getFileUploadPath() + "?filename=" + paramDto.getFileName();
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + registParam.getFileName();
 			ResponseEntity<String> responseEntity = restForEim.exchange(new URI(url), HttpMethod.GET, httpEntity, String.class);
 
 			// ステータスコードが「200：OK」以外はエラーとする
@@ -242,7 +262,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			return responseDto;
 
 		} catch (Exception e) {
-			log.error("電子契約EIMのファイルアップロード準備API実行に失敗しました。" + String.format(ERROR_RJ_MANAGE_NUMBER, paramDto.getVupContractNo()), e);
+			log.error("電子契約EIMのファイルアップロード準備API実行に失敗しました。" + String.format(ERROR_RJ_MANAGE_NUMBER, registParam.getVupContractNo()), e);
 			throw new RestClientException("【APIエラー】電子契約EIMのファイルアップロード準備 Status Code:" + e.getMessage());
 		}
 	}
@@ -254,7 +274,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	 * @return リトライ対象メソッドの戻り値
 	 */
 	@Recover
-	private FileUploadResponse recoverCallPreparationFilesUploadApi(RestClientException e) {
+	private PreparationFileUploadResponse recoverCallPreparationFilesUploadApi(RestClientException e) {
 		log.error(String.format("%d回リトライしましたが、電子契約EIMのファイルアップロード準備API呼び出しに失敗しました。", RETRY_NUM));
 		throw e;
 	}
@@ -267,21 +287,21 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	* @param ファイルアップロード準備レスポンス
 	* @param 電子契約文書登録用パラメータDto
 	*/
-	//@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
-	public void filesUpload(RestTemplate restForEim, ApiAuthResponse apiAuthRes, PreparationFileUploadResponse fileUploadResponse, ElconDocumentRegistrationParameter paramDto) {
+	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
+	public void fileUpload(RestTemplate restForEim, ApiAuthResponse apiAuthRes, PreparationFileUploadResponse preparaFileUpRes, ElconDocumentRegistrationParameter registParam) {
 
 		try {
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_PDF);
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
-			headers.add("x-ms-blob-content-disposition", fileUploadResponse.getHeader().getX_ms_blob_content_disposition());
-			headers.add("x-ms-blob-content-type", fileUploadResponse.getHeader().getX_ms_blob_content_type());
-			headers.add("x-ms-blob-type", fileUploadResponse.getHeader().getX_ms_blob_type());
+			headers.add("x-ms-blob-content-disposition", preparaFileUpRes.getHeader().getX_ms_blob_content_disposition());
+			headers.add("x-ms-blob-content-type", preparaFileUpRes.getHeader().getX_ms_blob_content_type());
+			headers.add("x-ms-blob-type", preparaFileUpRes.getHeader().getX_ms_blob_type());
 
 			// APIコール
-			String url = fileUploadResponse.getUrl();
-			RequestEntity<?> requestEntity = new RequestEntity<>(paramDto.getTargetPdf(), headers, HttpMethod.PUT, new URI(url));
+			String url = preparaFileUpRes.getUrl();
+			RequestEntity<?> requestEntity = new RequestEntity<>(registParam.getTargetPdf(), headers, HttpMethod.PUT, new URI(url));
 			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
 
 			// ステータスコードが「201：Created」以外はエラーとする
@@ -290,10 +310,9 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			}
 
 		} catch (Exception e) {
-			log.error("電子契約EIMのファイルアップロードAPI実行に失敗しました。" + String.format(ERROR_RJ_MANAGE_NUMBER, paramDto.getVupContractNo()), e);
+			log.error("電子契約EIMのファイルアップロードAPI実行に失敗しました。" + String.format(ERROR_RJ_MANAGE_NUMBER, registParam.getVupContractNo()), e);
 			throw new RestClientException("【APIエラー】電子契約EIMのファイルアップロード Status Code:" + e.getMessage());
 		}
-
 	}
 
 	/**
@@ -313,13 +332,16 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	* 
 	* @param RestTemplate
 	* @param アプリ認証レスポンス
-	* @param ファイルアップロード準備レスポンス
+	* @param 添付ファイルID
 	* @param 電子契約文書登録用パラメータDto
 	* @return レスポンスDTO
 	*/
-	//@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
-	public PostCotosDocumentResponse postCotosDocument(RestTemplate restForEim, ApiAuthResponse apiAuthRes, PreparationFileUploadResponse fileUploadResponse, ElconDocumentRegistrationParameter paramDto) {
+	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
+	public PostCotosDocumentResponse postCotosDocument(RestTemplate restForEim, ApiAuthResponse apiAuthRes, String documentUniqueID, ElconDocumentRegistrationParameter paramDto) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("content-type", "application/json; charset=UTF-8");
@@ -327,12 +349,12 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 			// リクエストボディの設定
 			PostCotosDocumentRequestSystem requestSystemDto = new PostCotosDocumentRequestSystem();
-			requestSystemDto.setAppId(elconEimConnectionProperties.getAppId());
+			requestSystemDto.setAppId(properties.getAppId());
 			requestSystemDto.setModelId(elconEimConnectionProperties.getModelIdCotos());
 			PostCotosDocumentRequestProperties requestPropertiesDto = new PostCotosDocumentRequestProperties();
 			requestPropertiesDto.setSystemName("電子契約連携システム");
 			requestPropertiesDto.setTitle("電子契約指示");
-			requestPropertiesDto.setDocumentUniqueID(fileUploadResponse.getId());
+			requestPropertiesDto.setDocumentUniqueID(new String[] { documentUniqueID });
 			PostCotosDocumentRequestBibliography requestBibliography = new PostCotosDocumentRequestBibliography();
 			PostCotosDocumentRequest requestDto = new PostCotosDocumentRequest();
 			BeanUtils.copyProperties(paramDto, requestDto);
@@ -343,18 +365,18 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			String requestBody = mapper.writeValueAsString(requestDto);
 
 			// APIコール
-			String url = "https://" + elconEimConnectionProperties.getHostName() + "." + elconEimConnectionProperties.getDomainName() + "/" + elconEimConnectionProperties.getResourcesPath() + elconEimConnectionProperties.getAppId() + "/" + elconEimConnectionProperties.getDocumentsPath();
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath();
 			RequestEntity<String> requestEntity = new RequestEntity<>(requestBody, headers, HttpMethod.POST, new URI(url));
 			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
-
-			// 文字コードの変換処理を実施する
-			String conversionRespomseBody = decodedToUTF8(responseEntity.getBody(), CHARSET_ISO_8859_1);
-			PostCotosDocumentResponse responseDto = mapper.readValue(conversionRespomseBody, PostCotosDocumentResponse.class);
 
 			// ステータスコードが「201：Created」以外はエラーとする
 			if (HttpStatus.CREATED != responseEntity.getStatusCode()) {
 				throw new RestClientException("【APIエラー】電子契約EIM文書更新(論理削除)Status Code:" + responseEntity.getStatusCode());
 			}
+
+			// 文字コードの変換処理を実施する
+			String conversionRespomseBody = decodedToUTF8(responseEntity.getBody(), CHARSET_ISO_8859_1);
+			PostCotosDocumentResponse responseDto = mapper.readValue(conversionRespomseBody, PostCotosDocumentResponse.class);
 
 			return responseDto;
 

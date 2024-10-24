@@ -29,10 +29,12 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentDeleteRes
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentGetResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PostCotosDocumentResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponse;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponseHeader;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.SystemAuthResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.ElconDocumentRegistrationParameter;
 import jp.co.ricoh.cotos.commonlib.logic.eim.EimConnectionHelper;
 import jp.co.ricoh.cotos.commonlib.logic.eim.ElconEimConnectionHelper;
+import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
 import lombok.extern.log4j.Log4j;
 
@@ -134,61 +136,184 @@ public class TestElconEimConnectionHelper {
 	}
 
 	@Test
-	//@Ignore
-	public void 正常系_ファイルアップロード準備API() throws Exception {
+	@Ignore
+	public void 正常系_ファイルアップロード準備API() {
 
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// EIMシステム認証API
 			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
 			sysMethod.setAccessible(true);
-			SystemAuthResponse sysActual = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
+			SystemAuthResponse sysReponse = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
 
 			// アプリケーション認証API
 			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
 			apMethod.setAccessible(true);
-			ApiAuthResponse apActual = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysActual);
+			ApiAuthResponse apResponse = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysReponse);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
-			paramDto.setFileName("ファイルアップロード準備APIテスト");
+			paramDto.setFileName("elconEim_test01.pdf");
 			paramDto.setVupContractNo("RJ管理番号1");
 
 			// 実行
-			PreparationFileUploadResponse response = elconEimConnectionHelper.preparationFilesUpload(restForEim, apActual, paramDto);
+			PreparationFileUploadResponse response = elconEimConnectionHelper.preparationFilesUpload(restForEim, apResponse, paramDto);
 			assertNotNull("x-ms-blob-content-dispositionがNULLでないこと", response.getHeader().getX_ms_blob_content_disposition());
 			assertNotNull("x-ms-blob-content-typeがNULLでないこと", response.getHeader().getX_ms_blob_content_type());
 			assertNotNull("x-ms-blob-typeがNULLでないこと", response.getHeader().getX_ms_blob_type());
 
 		} catch (RestClientException e) {
-			Assert.fail("異常終了");
+			Assert.fail("エラーが発生した");
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
 		}
 	}
 
 	@Test
-	//@Ignore
-	public void 正常系_ファイルアップロードAPI() throws Exception {
+	@Ignore
+	public void 異常系_ファイルアップロード準備API() {
 
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// EIMシステム認証API
 			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
 			sysMethod.setAccessible(true);
-			SystemAuthResponse sysActual = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
+			SystemAuthResponse sysResponse = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
 
 			// アプリケーション認証API
 			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
 			apMethod.setAccessible(true);
-			ApiAuthResponse apActual = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysActual);
-
-			byte[] fileBody = Files.readAllBytes(Paths.get("src/test/resources/emi/test01.pdf"));
+			ApiAuthResponse apReponse = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysResponse);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
-			paramDto.setFileName("ファイルアップロード準備APIテスト");
+			paramDto.setFileName(" ");
 			paramDto.setVupContractNo("RJ管理番号1");
+
+			// 実行
+			elconEimConnectionHelper.preparationFilesUpload(restForEim, apReponse, paramDto);
+			Assert.fail("正常終了してしまった");
+
+		} catch (RestClientException e) {
+			// ログが正しく出力されること
+			Logger mockLog = Mockito.mock(Logger.class);
+			mockLog.error("電子契約EIMのファイルアップロード準備API実行に失敗しました。[RJ管理番号:RJ管理番号1]");
+			verify(mockLog).error(eq("電子契約EIMのファイルアップロード準備API実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
+			// 処理がリトライ回数だけ行われていること
+			verify(elconEimConnectionHelper, times(5)).preparationFilesUpload(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject());
+
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
+		}
+	}
+
+	@Test
+	@Ignore
+	public void 正常系_ファイルアップロードAPI() {
+
+		try {
+			RestTemplate restForEim = new RestTemplate();
+			// EIMシステム認証API
+			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
+			sysMethod.setAccessible(true);
+			SystemAuthResponse sysResponse = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
+
+			// アプリケーション認証API
+			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
+			apMethod.setAccessible(true);
+			ApiAuthResponse apReponse = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysResponse);
+
+			// パラメータ設定
+			PreparationFileUploadResponseHeader headerResponse = new PreparationFileUploadResponseHeader();
+			headerResponse.setX_ms_blob_content_disposition("attachment; filename*=UTF-8''elconEim%5Ftest01%2Epdf");
+			headerResponse.setX_ms_blob_content_type("binary/octet-stream");
+			headerResponse.setX_ms_blob_type("BlockBlob");
+			PreparationFileUploadResponse preparaReponse = new PreparationFileUploadResponse();
+			preparaReponse.setHeader(headerResponse);
+			preparaReponse.setUrl("https://dev01blob.blob.core.windows.net/412e9d2e34884529bf1d0b53ef7f11e4/911fd1d779fb48c99f00e3afd26e10c5/file?sig=KMEWO3hO0KZlWTKfqNncBP9kzkImiVo3xIm4NWdk%2BrI%3D&se=2024-10-24T17%3A20%3A02Z&sv=2017-04-17&sp=w&sr=b");
+
+			byte[] fileBody = Files.readAllBytes(Paths.get("src/test/resources/emi/elconEim_test01.pdf"));
+			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
 			paramDto.setTargetPdf(fileBody);
-			paramDto.setVupContractNo("vup契約No");
+			paramDto.setVupContractNo("RJ管理番号1");
+
+			// 実行
+			elconEimConnectionHelper.fileUpload(restForEim, apReponse, preparaReponse, paramDto);
+
+		} catch (RestClientException e) {
+			Assert.fail("エラーが発生した");
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
+		}
+	}
+
+	@Test
+	@Ignore
+	public void 異常系_ファイルアップロードAPI() {
+
+		try {
+			RestTemplate restForEim = new RestTemplate();
+			// EIMシステム認証API
+			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
+			sysMethod.setAccessible(true);
+			SystemAuthResponse sysResponse = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
+
+			// アプリケーション認証API
+			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
+			apMethod.setAccessible(true);
+			ApiAuthResponse apReponse = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysResponse);
+
+			// パラメータ設定
+			PreparationFileUploadResponseHeader headerResponse = new PreparationFileUploadResponseHeader();
+			headerResponse.setX_ms_blob_content_disposition("attachment; filename*=UTF-8");
+			headerResponse.setX_ms_blob_content_type("binary/octet-stream");
+			headerResponse.setX_ms_blob_type("BlockBlob");
+			PreparationFileUploadResponse preparaReponse = new PreparationFileUploadResponse();
+			preparaReponse.setHeader(headerResponse);
+			// ダミーURL設定
+			preparaReponse.setUrl("https://dev01blob.blob.core.windows.net/412e9d2e34884529bf1d0b53ef7f11e4/dummydummydummy/file?sig=ehtD0GlwyJzSi1hriWaNQtd1yXzm62ovQkXU9tMuqow%3D&se=2024-10-24T14%3A33%3A03Z&sv=2017-04-17&sp=w&sr=b");
+
+			byte[] fileBody = Files.readAllBytes(Paths.get("src/test/resources/emi/elconEim_test01.pdf"));
+			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
+			paramDto.setTargetPdf(fileBody);
+			paramDto.setVupContractNo("RJ管理番号1");
+
+			// 実行
+			elconEimConnectionHelper.fileUpload(restForEim, apReponse, preparaReponse, paramDto);
+			Assert.fail("正常終了してしまった");
+
+		} catch (RestClientException e) {
+			// ログが正しく出力されること
+			Logger mockLog = Mockito.mock(Logger.class);
+			mockLog.error("電子契約EIMのファイルアップロードAPI実行に失敗しました。[RJ管理番号:RJ管理番号1]");
+			verify(mockLog).error(eq("電子契約EIMのファイルアップロードAPI実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
+			// 処理がリトライ回数だけ行われていること
+			verify(elconEimConnectionHelper, times(5)).fileUpload(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject());
+
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
+		}
+	}
+
+	@Test
+	@Ignore
+	public void 正常系_文書登録_COTOS申込書API() {
+
+		try {
+			RestTemplate restForEim = new RestTemplate();
+			// EIMシステム認証API
+			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
+			sysMethod.setAccessible(true);
+			SystemAuthResponse sysResponse = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
+
+			// アプリケーション認証API
+			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
+			apMethod.setAccessible(true);
+			ApiAuthResponse apReponse = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysResponse);
+
+			// パラメータ設定
+			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
+			paramDto.setVupContractNo("RJ管理番号1");
 			paramDto.setVupEstimatesNo("vup見積No");
 			paramDto.setAnknMi("案件名");
 			paramDto.setHanshaCd("091");
@@ -198,23 +323,81 @@ public class TestElconEimConnectionHelper {
 			paramDto.setImfrSdRowNo("2");
 			paramDto.setStartDatePrintFlag("1");
 			paramDto.setCustomerPrintFlag("1");
+			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
 
-			PreparationFileUploadResponse preparationRes = new PreparationFileUploadResponse();
-			preparationRes.setId("027d4859c2534fc0a836135b04a8654c");
-
-			// ファイルアップロード準備API
-			//PreparationFileUploadResponse preparationRes = elconEimConnectionHelper.preparationFilesUpload(restForEim, apActual, paramDto);
-
-			// ファイルアップロードAPI
-			//elconEimConnectionHelper.filesUpload(restForEim, apActual, preparationRes, paramDto);
-
-			// 文書登録（COTOS申込書）
-			PostCotosDocumentResponse result = elconEimConnectionHelper.postCotosDocument(restForEim, apActual, preparationRes, paramDto);
+			// 実行
+			PostCotosDocumentResponse result = elconEimConnectionHelper.postCotosDocument(restForEim, apReponse, documentUniqueID, paramDto);
 			assertNotNull("documentIdがNULLでないこと", result.getSystem().getDocumentId());
 			assertNotNull("documentKeyがNULLでないこと", result.getSystem().getDocumentKey());
 
 		} catch (RestClientException e) {
-			Assert.fail("異常終了");
+			Assert.fail("エラーが発生した");
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
 		}
 	}
+
+	@Test
+	@Ignore
+	public void 異常系_文書登録_COTOS申込書API() {
+		try {
+			RestTemplate restForEim = new RestTemplate();
+			// EIMシステム認証API
+			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("systemAuth", RestTemplate.class);
+			sysMethod.setAccessible(true);
+			SystemAuthResponse sysResponse = (SystemAuthResponse) sysMethod.invoke(eimConnectionHelper, restForEim);
+
+			// アプリケーション認証API
+			Method apMethod = EimConnectionHelper.class.getDeclaredMethod("apiAuth", RestTemplate.class, SystemAuthResponse.class);
+			apMethod.setAccessible(true);
+			ApiAuthResponse apReponse = (ApiAuthResponse) apMethod.invoke(eimConnectionHelper, restForEim, sysResponse);
+
+			// パラメータ設定
+			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
+			paramDto.setVupContractNo("RJ管理番号1");
+			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
+
+			// 実行
+			elconEimConnectionHelper.postCotosDocument(restForEim, apReponse, documentUniqueID, paramDto);
+			Assert.fail("正常終了してしまった");
+
+		} catch (RestClientException e) {
+			// ログが正しく出力されること
+			Logger mockLog = Mockito.mock(Logger.class);
+			mockLog.error("電子契約EIMの文書登録（COTOS申込書）API実行に失敗しました。[RJ管理番号:RJ管理番号1]");
+			verify(mockLog).error(eq("電子契約EIMの文書登録（COTOS申込書）API実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
+			// 処理がリトライ回数だけ行われていること
+			verify(elconEimConnectionHelper, times(5)).postCotosDocument(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyString(), Mockito.anyObject());
+
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
+		}
+	}
+
+	@Test
+	public void properties取得() {
+		try {
+			Method sysMethod = ElconEimConnectionHelper.class.getDeclaredMethod("getProperties");
+			sysMethod.setAccessible(true);
+			EimConnectionProperties properties = (EimConnectionProperties) sysMethod.invoke(elconEimConnectionHelper);
+
+			assertEquals("hostNameが想定通りであること", "app-dev28", properties.getHostName());
+			assertEquals("domainNameが想定通りであること", "ope.azure.ricoh-eim.com", properties.getDomainName());
+			assertNull("systemAuthPathが想定通りであること", properties.getSystemAuthPath());
+			assertEquals("apiAuthPathが想定通りであること", "api/v1/auth", properties.getApiAuthPath());
+			assertEquals("loginUserNameが想定通りであること", "test02", properties.getLoginUserName());
+			assertEquals("loginPasswordが想定通りであること", "P@ssw0rd", properties.getLoginPassword());
+			assertEquals("fileUploadPathが想定通りであること", "services/v1/files/upload", properties.getFileUploadPath());
+			assertEquals("appIdが想定通りであること", "RFG_RJ_AGREE_01", properties.getAppId());
+			assertNull("appIdMonthDBが想定通りであること", properties.getAppIdMonthDB());
+			assertEquals("resourcesPathが想定通りであること", "resources/v3/apps/", properties.getResourcesPath());
+			assertEquals("documentsPathが想定通りであること", "documents", properties.getDocumentsPath());
+			assertNull("fileDownloadPathが想定通りであること", properties.getFileDownloadPath());
+			assertEquals("modelIdが想定通りであること", "DM_FmCloudsignLink", properties.getModelId());
+			assertNull("systemNameが想定通りであること", properties.getSystemName());
+		} catch (Exception e) {
+			Assert.fail("エラーが発生した");
+		}
+	}
+
 }

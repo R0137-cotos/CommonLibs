@@ -3,31 +3,21 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses;
 import lombok.Data;
 
 /**
- * ファイルアップロード準備のレスポンスボディ
+ * ファイルアップロード準備のレスポンス
  */
 
 @Data
 public class PreparationFileUploadResponse {
 
 	/**
-	 * url
-	 */
-	private String url;
-
-	/**
-	 * id
-	 */
-	private String id;
-
-	/**
-	 * header
-	 */
-	private PreparationFileUploadResponseHeader header;
-
-	/**
 	 * type
 	 */
 	private String type;
+
+	/**
+	 * url
+	 */
+	private String url;
 
 	/**
 	 * baseUrl
@@ -48,4 +38,15 @@ public class PreparationFileUploadResponse {
 	 * sas
 	 */
 	private String sas;
+
+	/**
+	 * header
+	 */
+	private PreparationFileUploadResponseHeader header;
+
+	/**
+	 * id
+	 */
+	private String id;
+
 }
