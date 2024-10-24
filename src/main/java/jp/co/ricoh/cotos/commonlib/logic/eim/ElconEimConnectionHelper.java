@@ -114,7 +114,6 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 			// アプリケーション認証APIコール
 			ApiAuthResponse apiAuthRes = apiAuth(restForEim, null);
-			log.info(apiAuthRes);
 
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
