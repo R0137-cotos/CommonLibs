@@ -370,7 +370,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 			// ステータスコードが「201：Created」以外はエラーとする
 			if (HttpStatus.CREATED != responseEntity.getStatusCode()) {
-				throw new RestClientException("【APIエラー】電子契約EIM文書更新(論理削除)Status Code:" + responseEntity.getStatusCode());
+				throw new RestClientException("【APIエラー】電子契約EIM文書登録（COTOS申込書）Status Code:" + responseEntity.getStatusCode());
 			}
 
 			// 文字コードの変換処理を実施する
