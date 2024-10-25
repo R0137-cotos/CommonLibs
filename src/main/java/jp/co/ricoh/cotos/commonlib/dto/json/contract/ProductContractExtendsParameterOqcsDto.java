@@ -74,4 +74,14 @@ public class ProductContractExtendsParameterOqcsDto {
 	 * 顔認証端末：問合先
 	 */
 	private String faceRecognitionTerminalContactInfo;
+
+	/**
+	 * 事前調査実施済み
+	 */
+	private String preliminaryInvestigated;
+
+	/**
+	 * 調整内容 その他説明
+	 */
+	private String adjustedDescriptionOther;
 }
