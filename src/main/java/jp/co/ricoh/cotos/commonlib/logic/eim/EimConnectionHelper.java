@@ -287,7 +287,7 @@ public class EimConnectionHelper {
 	 * @return
 	 * @throws Exception
 	 */
-	protected RestTemplate createEimRestTemplate() throws Exception {
+	public RestTemplate createEimRestTemplate() throws Exception {
 		// propertiesを取得
 		EimConnectionProperties properties = getProperties();
 

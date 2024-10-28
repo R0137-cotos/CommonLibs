@@ -414,7 +414,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	 * @return RestTemplate
 	 */
 	@Override
-	protected RestTemplate createEimRestTemplate() {
+	public RestTemplate createEimRestTemplate() {
 		return new RestTemplate();
 	}
 }
