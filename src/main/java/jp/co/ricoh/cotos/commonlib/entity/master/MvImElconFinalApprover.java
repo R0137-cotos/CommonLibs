@@ -21,6 +21,10 @@ public class MvImElconFinalApprover {
 	@Embeddable
 	@Data
 	public static class Id implements Serializable {
+		/**
+		 * シリアルバージョンID
+		 */
+		private static final long serialVersionUID = 1L;
 
 		/** 管理番号 */
 		private String imfrSdInsertId;
