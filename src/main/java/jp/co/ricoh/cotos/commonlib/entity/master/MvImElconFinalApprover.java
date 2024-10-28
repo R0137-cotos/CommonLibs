@@ -83,4 +83,7 @@ public class MvImElconFinalApprover {
 	/** 事業所名 */
 	private String imfrUdOfficeName;
 
+	/** 申請者(担当SA)名 */
+	private String imfrUdReqUserName;
+
 }
