@@ -407,4 +407,14 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	private String decodedToUTF8(String encode, Charset charset) throws UnsupportedEncodingException {
 		return new String(encode.getBytes(charset), CHARSET_UTF8);
 	}
+
+	/**
+	 * EIM認証RestTemplate作成
+	 * 
+	 * @return RestTemplate
+	 */
+	@Override
+	protected RestTemplate createEimRestTemplate() {
+		return new RestTemplate();
+	}
 }
