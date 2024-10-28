@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- * IM電子契約決済権限者Mview
+ * IM電子契約決裁権限者Mview
  */
 @Entity
 @Data
@@ -83,4 +83,6 @@ public class MvImElconFinalApprover {
 	/** 事業所名 */
 	private String imfrUdOfficeName;
 
+	/** 申請者(担当SA)名 */
+	private String imfrUdReqUserName;
 }
