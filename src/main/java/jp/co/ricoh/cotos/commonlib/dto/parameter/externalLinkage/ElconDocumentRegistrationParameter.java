@@ -131,7 +131,7 @@ public class ElconDocumentRegistrationParameter {
 	private String startDatePrintFlag;
 
 	/**
-	 * 利用開始希望日入力制御フラグ
+	 * 担当者印字フラグ
 	 */
 	@ApiParam(value = "担当者印字フラグ", required = true)
 	@ApiModelProperty(value = "担当者印字フラグ", required = true, allowableValues = "range[0,255]")
