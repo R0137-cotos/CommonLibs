@@ -24,11 +24,12 @@ public interface ReportTemplateMasterRepository extends CrudRepository<ReportTem
 	List<ReportTemplateMaster> findByReportListParameter(@Param("OUTPUT_TYPE") String outputType, @Param("SERVICE_CATEGORY") String serviceCategory, @Param("TARGET_TYPE") String targetType, @Param("COMMERCIAL_FLOW_DIV") String commercialFlowDiv, @Param("PRODUCT_MASTER_ID") Long productMasterId, @Param("LIFECYCLE_STATUS") String lifecycleStatus, @Param("WORKFLOW_STATUS") String workflowStatus);
 
 	//電子契約連携対象区分を引数に追加
+	//上記のメソッドと異なり商流区分の条件が":COMMERCIAL_FLOW_DIV IS NULL"⇒"COMMERCIAL_FLOW_DIV IS NULL"(コロンなし。商流区分指定時にもNULLのレコードを取得するため)となっている点に注意
 	@Query(value = "SELECT * FROM REPORT_TEMPLATE_MASTER" //
 			+ " WHERE (OUTPUT_TYPE = :OUTPUT_TYPE OR :OUTPUT_TYPE IS NULL)" //
 			+ " AND (SERVICE_CATEGORY = :SERVICE_CATEGORY OR :SERVICE_CATEGORY IS NULL)" //
 			+ " AND (TARGET_TYPE = :TARGET_TYPE OR :TARGET_TYPE IS NULL)" //
-			+ " AND (COMMERCIAL_FLOW_DIV = :COMMERCIAL_FLOW_DIV OR :COMMERCIAL_FLOW_DIV IS NULL OR COMMERCIAL_FLOW_DIV = '0')" //
+			+ " AND (COMMERCIAL_FLOW_DIV = :COMMERCIAL_FLOW_DIV OR COMMERCIAL_FLOW_DIV IS NULL OR COMMERCIAL_FLOW_DIV = '0')" //
 			+ " AND (PRODUCT_MASTER_ID = :PRODUCT_MASTER_ID OR :PRODUCT_MASTER_ID IS NULL)" //
 			+ " AND (LIFECYCLE_STATUS = :LIFECYCLE_STATUS OR :LIFECYCLE_STATUS IS NULL OR LIFECYCLE_STATUS = '0')" //
 			+ " AND (WORKFLOW_STATUS = :WORKFLOW_STATUS OR :WORKFLOW_STATUS IS NULL OR WORKFLOW_STATUS = '0')" //

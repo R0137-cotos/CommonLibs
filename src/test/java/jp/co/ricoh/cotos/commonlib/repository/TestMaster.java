@@ -1623,7 +1623,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/reportTemplateMaster.sql");
 		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", "1", 1L, "1", "2", "1");
 		// 電子契約連携対象のデータが取得できていることを確認
-		Assert.assertTrue(foundList.size() == 1);
+		Assert.assertTrue(foundList.size() == 3);
 
 		// Entity の各項目の値が null ではないことを確認
 		try {
