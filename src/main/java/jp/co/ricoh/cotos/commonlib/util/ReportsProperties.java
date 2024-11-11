@@ -31,4 +31,9 @@ public class ReportsProperties {
 	 * CreateForm Expageランタイムjarファイルパス
 	 */
 	private String createFormExpageLibJarPath;
+
+	/**
+	 * 帳票フォントディレクトリ
+	 */
+	private String templateFontsDir;
 }
