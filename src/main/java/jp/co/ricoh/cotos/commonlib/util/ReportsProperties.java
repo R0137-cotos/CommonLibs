@@ -36,4 +36,9 @@ public class ReportsProperties {
 	 * 帳票フォントディレクトリ
 	 */
 	private String templateFontsDir;
+
+	/**
+	 * Asposeライセンスディレクトリ
+	 */
+	private String asposeLicenseDir;
 }
