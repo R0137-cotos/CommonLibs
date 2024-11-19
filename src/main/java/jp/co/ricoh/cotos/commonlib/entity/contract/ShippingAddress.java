@@ -149,4 +149,11 @@ public class ShippingAddress extends EntityBase {
 	@ApiModelProperty(value = "建物名", required = false, position = 16, allowableValues = "range[0,255]", readOnly = false)
 	private String buildingName;
 
+	/**
+	 * 企業名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "企業名", required = false, position = 17, allowableValues = "range[0,255]", readOnly = false)
+	private String companyName;
+
 }
