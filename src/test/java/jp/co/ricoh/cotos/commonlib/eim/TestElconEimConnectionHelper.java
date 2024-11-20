@@ -278,10 +278,16 @@ public class TestElconEimConnectionHelper {
 			paramDto.setAnknMi("案件名");
 			paramDto.setHanshaCd("091");
 			paramDto.setSaId("00229746");
+			paramDto.setCustomerCode("顧客CD");
 			paramDto.setCustomerName("企業名");
+			paramDto.setCustomerOfficeCode("部署名");
 			paramDto.setImfrSdInsertId("2000000001");
 			paramDto.setImfrSdRowNo("2");
-			paramDto.setStartDatePrintFlag("1");
+			paramDto.setTotalInitialCosts("999");
+			paramDto.setMonthlyTotal("998");
+			paramDto.setAnnualTotal("997");
+			paramDto.setReportName("TEST_帳票");
+			paramDto.setStartDatePrintFlag("0");
 			paramDto.setCustomerPrintFlag("1");
 			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
 
