@@ -350,7 +350,7 @@ public class TestElconEimConnectionHelper {
 			assertEquals("loginUserNameが想定通りであること", "test02", properties.getLoginUserName());
 			assertEquals("loginPasswordが想定通りであること", "P@ssw0rd", properties.getLoginPassword());
 			assertEquals("fileUploadPathが想定通りであること", "services/v1/files/upload", properties.getFileUploadPath());
-			assertEquals("appIdが想定通りであること", "RFG_RJ_AGREE_01", properties.getAppId());
+			assertEquals("appIdが想定通りであること", "RFG_RJ_AGREE_CTS", properties.getAppId());
 			assertNull("appIdMonthDBが想定通りであること", properties.getAppIdMonthDB());
 			assertEquals("resourcesPathが想定通りであること", "resources/v3/apps/", properties.getResourcesPath());
 			assertEquals("documentsPathが想定通りであること", "documents", properties.getDocumentsPath());
