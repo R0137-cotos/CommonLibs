@@ -71,7 +71,7 @@ cotos:
     loginUserName: test02
     loginPassword: P@ssw0rd
     fileUploadPath: services/v1/files/upload
-    appId: RFG_RJ_AGREE_01
+    appId: RFG_RJ_AGREE_CTS
     resourcesPath: resources/v3/apps/
     documentsPath: documents
     modelId: DM_FmCloudsignLink

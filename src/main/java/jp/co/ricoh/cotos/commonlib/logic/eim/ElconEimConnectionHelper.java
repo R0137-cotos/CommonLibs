@@ -43,7 +43,7 @@ import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
 import lombok.extern.log4j.Log4j;
 
 /**
- * 
+ *
  * 電子契約EIM連携 ヘルパークラス
  *
  */
@@ -83,7 +83,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * アプリケーション認証用ヘッダー情報作成
-	 * 
+	 *
 	 * @return HttpHeaders
 	 */
 	@Override
@@ -99,7 +99,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * [GET]電子契約EIMの文書取得API
-	 * 
+	 *
 	 * @param 電子契約情報.電子契約ドキュメントID
 	 * @return 文書取得レスポンスDTO
 	 */
@@ -123,8 +123,18 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
 			// 文書取得APIコール
+			log.info("電子計契約EIM 文書取得APIコール");
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "/" + documentId;
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + httpEntity.getHeaders());
+			log.info("============================================================");
+
 			ResponseEntity<String> responseEntity = restForEim.exchange(new URI(url), HttpMethod.GET, httpEntity, String.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("body    : " + responseEntity.getBody());
+			log.info("============================================================");
 
 			// ステータスコードが「200：OK」以外はエラーとする
 			if (HttpStatus.OK != responseEntity.getStatusCode()) {
@@ -145,7 +155,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * 電子契約EIMの文書取得APIエラー時に呼ばれるメソッド
-	 * 
+	 *
 	 * @param リトライ対象例外クラスインスタンス
 	 * @return リトライ対象メソッドの戻り値
 	 */
@@ -157,7 +167,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * [PUT]電子契約EIMの文書更新（論理削除）API
-	 * 
+	 *
 	 * @param 電子契約情報.電子契約ドキュメントID
 	 * @return 文書更新（論理削除）レスポンスDTO
 	 */
@@ -191,9 +201,20 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			String requestBody = mapper.writeValueAsString(requestDto);
 
 			// 文書更新（論理削除）APIコール
+			log.info("電子計契約EIM 文書更新(論理削除)APIコール");
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "/" + documentId;
 			RequestEntity<String> requestEntity = new RequestEntity<>(requestBody, headers, HttpMethod.PUT, new URI(url));
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + requestEntity.getUrl());
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("body    : " + requestEntity.getBody());
+			log.info("============================================================");
+
 			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("body    : " + responseEntity.getBody());
+			log.info("============================================================");
 
 			// ステータスコードが「202：ACCEPTED」以外はエラーとする
 			if (HttpStatus.ACCEPTED != responseEntity.getStatusCode()) {
@@ -214,7 +235,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * 電子契約EIMの文書更新（論理削除）APIエラー時に呼ばれるメソッド
-	 * 
+	 *
 	 * @param リトライ対象例外クラスインスタンス
 	 * @return リトライ対象メソッドの戻り値
 	 */
@@ -226,7 +247,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	* [GET]電子契約EIMのファイルアップロード準備API
-	* 
+	*
 	* @param RestTemplate
 	* @param アプリ認証レスポンス
 	* @param 電子契約文書登録用パラメータDto
@@ -246,8 +267,18 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
 			// APIコール
+			log.info("電子計契約EIM ファイルアップロード準備APIコール");
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + registParam.getFileName();
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + httpEntity.getHeaders());
+			log.info("============================================================");
+
 			ResponseEntity<String> responseEntity = restForEim.exchange(new URI(url), HttpMethod.GET, httpEntity, String.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("body    : " + responseEntity.getBody());
+			log.info("============================================================");
 
 			// ステータスコードが「200：OK」以外はエラーとする
 			if (HttpStatus.OK != responseEntity.getStatusCode()) {
@@ -268,7 +299,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * 電子契約EIMのファイルアップロード準備APIエラー時に呼ばれるメソッド
-	 * 
+	 *
 	 * @param リトライ対象例外クラスインスタンス
 	 * @return リトライ対象メソッドの戻り値
 	 */
@@ -280,7 +311,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	* [GET]電子契約EIMのファイルアップロードAPI
-	* 
+	*
 	* @param RestTemplate
 	* @param アプリ認証レスポンス
 	* @param ファイルアップロード準備レスポンス
@@ -299,9 +330,18 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			headers.add("x-ms-blob-type", preparaFileUpRes.getHeader().getX_ms_blob_type());
 
 			// APIコール
+			log.info("電子計契約EIM ファイルアップロードAPIコール");
 			String url = preparaFileUpRes.getUrl();
 			RequestEntity<?> requestEntity = new RequestEntity<>(registParam.getTargetPdf(), headers, HttpMethod.PUT, new URI(url));
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("============================================================");
+
 			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("============================================================");
 
 			// ステータスコードが「201：Created」以外はエラーとする
 			if (HttpStatus.CREATED != responseEntity.getStatusCode()) {
@@ -316,7 +356,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * 電子契約EIMのファイルアップロードAPIエラー時に呼ばれるメソッド
-	 * 
+	 *
 	 * @param リトライ対象例外クラスインスタンス
 	 * @return リトライ対象メソッドの戻り値
 	 */
@@ -328,7 +368,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	* [POST]電子契約EIMの文書登録（COTOS申込書）API
-	* 
+	*
 	* @param RestTemplate
 	* @param アプリ認証レスポンス
 	* @param 添付ファイルID
@@ -347,26 +387,42 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
 
 			// リクエストボディの設定
+			PostCotosDocumentRequest requestDto = new PostCotosDocumentRequest();
+
+			// systemの設定
 			PostCotosDocumentRequestSystem requestSystemDto = new PostCotosDocumentRequestSystem();
 			requestSystemDto.setAppId(properties.getAppId());
 			requestSystemDto.setModelId(elconEimConnectionProperties.getModelIdCotos());
+			requestDto.setSystem(requestSystemDto);
+
+			// propertiesの設定
 			PostCotosDocumentRequestProperties requestPropertiesDto = new PostCotosDocumentRequestProperties();
+			BeanUtils.copyProperties(paramDto, requestPropertiesDto);
 			requestPropertiesDto.setSystemName("電子契約連携システム");
 			requestPropertiesDto.setTitle("電子契約指示");
 			requestPropertiesDto.setDocumentUniqueID(new String[] { documentUniqueID });
 			PostCotosDocumentRequestBibliography requestBibliography = new PostCotosDocumentRequestBibliography();
-			PostCotosDocumentRequest requestDto = new PostCotosDocumentRequest();
-			BeanUtils.copyProperties(paramDto, requestDto);
-			requestDto.setSystem(requestSystemDto);
+			requestPropertiesDto.setBibliography(requestBibliography);
+			requestPropertiesDto.setDeleteFlag("0");
 			requestDto.setProperties(requestPropertiesDto);
-			requestDto.setBibliography(requestBibliography);
-			requestDto.setDeleteFlag("0");
+
 			String requestBody = mapper.writeValueAsString(requestDto);
 
 			// APIコール
+			log.info("電子計契約EIM 文書登録(COTOS申込書)APIコール");
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath();
 			RequestEntity<String> requestEntity = new RequestEntity<>(requestBody, headers, HttpMethod.POST, new URI(url));
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("body    : " + requestEntity.getBody());
+			log.info("============================================================");
+
 			ResponseEntity<String> responseEntity = restForEim.exchange(requestEntity, String.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("body    : " + responseEntity.getBody());
+			log.info("============================================================");
 
 			// ステータスコードが「201：Created」以外はエラーとする
 			if (HttpStatus.CREATED != responseEntity.getStatusCode()) {
@@ -387,7 +443,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * 電子契約EIMの文書登録(COTOS申込書)APIエラー時に呼ばれるメソッド
-	 * 
+	 *
 	 * @param リトライ対象例外クラスインスタンス
 	 * @return リトライ対象メソッドの戻り値
 	 */
@@ -399,7 +455,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * 文字コードをUTF-8に変換した文字列を取得する
-	 * 
+	 *
 	 * @param encode 変換対象文字列
 	 * @param charset 変換前の文字コード
 	 * @return String
@@ -410,7 +466,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 	/**
 	 * EIM認証RestTemplate作成
-	 * 
+	 *
 	 * @return RestTemplate
 	 */
 	@Override

@@ -278,10 +278,16 @@ public class TestElconEimConnectionHelper {
 			paramDto.setAnknMi("案件名");
 			paramDto.setHanshaCd("091");
 			paramDto.setSaId("00229746");
+			paramDto.setCustomerCode("顧客CD");
 			paramDto.setCustomerName("企業名");
+			paramDto.setCustomerOfficeCode("部署名");
 			paramDto.setImfrSdInsertId("2000000001");
 			paramDto.setImfrSdRowNo("2");
-			paramDto.setStartDatePrintFlag("1");
+			paramDto.setTotalInitialCosts("999");
+			paramDto.setMonthlyTotal("998");
+			paramDto.setAnnualTotal("997");
+			paramDto.setReportName("TEST_帳票");
+			paramDto.setStartDatePrintFlag("0");
 			paramDto.setCustomerPrintFlag("1");
 			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
 
@@ -344,7 +350,7 @@ public class TestElconEimConnectionHelper {
 			assertEquals("loginUserNameが想定通りであること", "test02", properties.getLoginUserName());
 			assertEquals("loginPasswordが想定通りであること", "P@ssw0rd", properties.getLoginPassword());
 			assertEquals("fileUploadPathが想定通りであること", "services/v1/files/upload", properties.getFileUploadPath());
-			assertEquals("appIdが想定通りであること", "RFG_RJ_AGREE_01", properties.getAppId());
+			assertEquals("appIdが想定通りであること", "RFG_RJ_AGREE_CTS", properties.getAppId());
 			assertNull("appIdMonthDBが想定通りであること", properties.getAppIdMonthDB());
 			assertEquals("resourcesPathが想定通りであること", "resources/v3/apps/", properties.getResourcesPath());
 			assertEquals("documentsPathが想定通りであること", "documents", properties.getDocumentsPath());
