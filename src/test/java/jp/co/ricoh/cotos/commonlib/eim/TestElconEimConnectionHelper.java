@@ -289,6 +289,8 @@ public class TestElconEimConnectionHelper {
 			paramDto.setReportName("TEST_帳票");
 			paramDto.setStartDatePrintFlag("0");
 			paramDto.setCustomerPrintFlag("1");
+			paramDto.setEstimationNumber("TEST_01");
+			paramDto.setEstimationBranchNumber("1");
 			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
 
 			// 実行
