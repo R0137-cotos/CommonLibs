@@ -137,5 +137,18 @@ public class ElconDocumentRegistrationParameter {
 	@ApiModelProperty(value = "担当者印字フラグ", required = true, allowableValues = "range[0,255]")
 	private String customerPrintFlag;
 
+	/**
+	 * 見積番号
+	 */
+	@ApiParam(value = "見積番号", required = true)
+	@ApiModelProperty(value = "見積番号", required = true, allowableValues = "range[0,255]")
+	private String estimationNumber;
+
+	/**
+	 * 見積番号枝番
+	 */
+	@ApiParam(value = "見積番号枝番", required = true)
+	@ApiModelProperty(value = "見積番号枝番", required = true)
+	private String estimationBranchNumber;
 }
 

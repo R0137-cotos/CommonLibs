@@ -403,6 +403,9 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			requestPropertiesDto.setDocumentUniqueID(new String[] { documentUniqueID });
 			PostCotosDocumentRequestBibliography requestBibliography = new PostCotosDocumentRequestBibliography();
 			requestPropertiesDto.setBibliography(requestBibliography);
+			requestPropertiesDto.setEstimateNumber(paramDto.getEstimationNumber());
+			requestPropertiesDto.setEstimateBranchNumber(paramDto.getEstimationBranchNumber());
+			requestPropertiesDto.setStatusCode("1");
 			requestPropertiesDto.setDeleteFlag("0");
 			requestDto.setProperties(requestPropertiesDto);
 

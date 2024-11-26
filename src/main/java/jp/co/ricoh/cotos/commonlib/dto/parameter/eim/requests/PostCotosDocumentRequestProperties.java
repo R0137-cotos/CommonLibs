@@ -113,6 +113,22 @@ public class PostCotosDocumentRequestProperties {
 	private String customerPrintFlag;
 
 	/**
+	 * 見積番号
+	 */
+	private String estimateNumber;
+
+	/**
+	 * 見積番号枝番
+	 */
+	private String estimateBranchNumber;
+
+	/**
+	 * 進捗状況コード
+	 */
+	@JsonProperty("StatusCode")
+	private String statusCode;
+
+	/**
 	 * 削除フラグ
 	 */
 	private String deleteFlag;
