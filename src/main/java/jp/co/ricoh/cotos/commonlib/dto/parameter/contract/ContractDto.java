@@ -842,4 +842,13 @@ public class ContractDto extends DtoBase {
 	@OneToMany(mappedBy = "contract")
 	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 112)
 	private List<ContractEquipmentAdditionInfoDto> contractEquipmentAdditionInfoList;
+
+	/**
+	 * 契約機種状態管理
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 113)
+	private List<ManagedContractEquipmentStatusDto> managedContractEquipmentStatusList;
+
 }

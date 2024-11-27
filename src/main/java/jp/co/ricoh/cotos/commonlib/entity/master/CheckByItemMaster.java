@@ -55,4 +55,11 @@ public class CheckByItemMaster extends EntityBaseMaster {
 	@Max(9)
 	@ApiModelProperty(value = "設置先必須フラグ", required = false, position = 5, allowableValues = "range[0,9]")
 	private int installationLocationRequiredFlg;
+
+	/**
+	 * 得意先必須フラグ
+	 */
+	@Max(9)
+	@ApiModelProperty(value = "設置先必須フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	private int billingCustomerRequiredFlg;
 }
