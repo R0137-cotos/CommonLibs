@@ -219,8 +219,6 @@ public class TestContract {
 	@Autowired
 	ContractEquipmentAdditionInfoRefreshHisRepository contractEquipmentAdditionInfoRefreshHisRepository;
 
-
-
 	static ConfigurableApplicationContext context;
 
 	@Autowired
