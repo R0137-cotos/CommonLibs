@@ -13,25 +13,18 @@ import lombok.EqualsAndHashCode;
 public class ManagedContractEquipmentStatusDto extends DtoBase {
 
 	/**
-	 * 契約ID
-	 */
-	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = true, position = 3)
-	private long contractId;
-
-	/**
 	 * 契約機種ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約機種ID", required = true, position = 4)
-	private long contractEquipmentId;
+	@ApiModelProperty(value = "契約機種ID", required = true, position = 3)
+	private Long contractEquipmentId;
 
 	/**
 	 * 継続フラグ
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "継続フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "継続フラグ", required = false, position = 4, allowableValues = "range[0,9]")
 	private Integer continueFlg;
 
 	/**
@@ -39,7 +32,7 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "再契約不可フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "再契約不可フラグ", required = false, position = 5, allowableValues = "range[0,9]")
 	private Integer reContractNotAllowedFlg;
 
 	/**
@@ -47,7 +40,7 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "削除フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "削除フラグ", required = false, position = 6, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
@@ -55,13 +48,13 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "契約年数", required = false, position = 8, allowableValues = "range[0,99999]")
+	@ApiModelProperty(value = "契約年数", required = false, position = 7, allowableValues = "range[0,99999]")
 	private Integer contractYears;
 
 	/**
 	 * 機器削除契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "機器削除契約ID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
-	private long equipmentDeletedContractId;
+	@ApiModelProperty(value = "機器削除契約ID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
+	private Long equipmentDeletedContractId;
 }

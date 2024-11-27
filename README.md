@@ -602,3 +602,4 @@
 |645|Messages.propertiesに一括取込時の注意文言追加|
 |646|一括取込時の注意文言の誤字修正|
 |647|無線LANパック カラム追加のEntity、repository、Dto修正|
+|648|ManagedContractEquipmentStatusDto修正|
