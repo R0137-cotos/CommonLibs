@@ -33,6 +33,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractAttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CollectLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
@@ -687,5 +688,20 @@ public class TestContract {
 
 		// Entity 2件レコードが取得できていることを確認
 		Assert.assertEquals(foundList.size(), 2);
+	}
+
+	@Test
+	public void ManagedContractEquipmentStatusRepositoryのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		List<ManagedContractEquipmentStatus> foundList = managedContractEquipmentStatusRepository.findByContractId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity 1件レコードが取得できていることを確認
+		Assert.assertEquals(foundList.size(), 1);
 	}
 }
