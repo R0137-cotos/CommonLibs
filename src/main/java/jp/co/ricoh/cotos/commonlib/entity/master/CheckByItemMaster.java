@@ -60,6 +60,6 @@ public class CheckByItemMaster extends EntityBaseMaster {
 	 * 得意先必須フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "設置先必須フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	@ApiModelProperty(value = "得意先必須フラグ", required = false, position = 6, allowableValues = "range[0,9]")
 	private int billingCustomerRequiredFlg;
 }

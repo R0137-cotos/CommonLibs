@@ -79,10 +79,10 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
 
 	/**
-	 * 品種マスタID機器削除契約ID
+	 * 機器削除契約ID
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "機器削除契約ID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "機器削除契約ID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
 	private long equipmentDeletedContractId;
 }
