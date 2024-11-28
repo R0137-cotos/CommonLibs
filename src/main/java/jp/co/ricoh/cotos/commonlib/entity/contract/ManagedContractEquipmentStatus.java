@@ -100,5 +100,5 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	@Min(0)
 	@Column(nullable = false)
 	@ApiModelProperty(value = "機器削除契約ID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
-	private long equipmentDeletedContractId;
+	private Long equipmentDeletedContractId;
 }

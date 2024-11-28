@@ -37,8 +37,8 @@ public class OriginContractEquipmentResult {
 	private String equipmentDeletedDocumentNumber;
 
 	/**
-	 * 機器削除可能フラグ
+	 * 機器削除チェックボックス活性化フラグ
 	 */
-	@ApiModelProperty(value = "機器削除可能フラグ", required = false, position = 5)
-	private Integer equipmentDeletableFlg;
+	@ApiModelProperty(value = "機器削除チェックボックス活性化フラグ", required = false, position = 5)
+	private Integer activateEquipmentDeleteCheckboxFlg;
 }
