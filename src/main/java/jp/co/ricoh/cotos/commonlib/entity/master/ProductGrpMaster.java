@@ -112,6 +112,29 @@ public class ProductGrpMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "契約機種品種紐づけ処理区分")
+	public enum EquipmentItemLinkProcDiv {
+
+		品種グループマスタで紐づける("1");
+
+		private final String text;
+
+		private EquipmentItemLinkProcDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static EquipmentItemLinkProcDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	/**
 	 * 商品グループマスタID
 	 */
@@ -298,4 +321,10 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定処理パターン区分", required = false, position = 27, allowableValues = "価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新(\"1\")")
 	private PriceRevisionProcDiv priceRevisionProcDiv;
+
+	/**
+	 * 契約機種品種紐づけ処理区分
+	 */
+	@ApiModelProperty(value = "契約機種品種紐づけ処理区分", required = false, position = 28, allowableValues = "品種グループマスタで紐づける(\"1\")")
+	private EquipmentItemLinkProcDiv equipmentItemLinkProcDiv;
 }
