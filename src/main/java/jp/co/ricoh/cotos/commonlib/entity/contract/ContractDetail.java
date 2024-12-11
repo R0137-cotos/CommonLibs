@@ -36,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialAccountSalesStatus;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -353,4 +354,10 @@ public class ContractDetail extends EntityBase {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "FFM検収予定日", required = false, position = 27)
 	private Date acceptanceScheduledDate;
+
+	/**
+	 * 増減区分
+	 */
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 28)
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

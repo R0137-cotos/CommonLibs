@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -52,4 +53,11 @@ public class ContractPicMntCeEmpRefreshHis extends EmployeeAbstractEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "洗替日時", required = false, position = 3)
 	private Date refreshedAt;
+
+	/**
+	 * 更新元バッチID
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "更新元バッチID", required = false, position = 4, allowableValues = "range[0,255]")
+	private String updateBatchId;
 }

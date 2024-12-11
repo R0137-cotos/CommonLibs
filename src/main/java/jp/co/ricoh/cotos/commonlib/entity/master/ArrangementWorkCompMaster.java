@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -93,5 +94,9 @@ public class ArrangementWorkCompMaster extends EntityBaseMaster {
 	@ApiModelProperty(value = "対象契約種別詳細", required = false, position = 8, allowableValues = "range[0,255]")
 	private String targetContractTypeDetails;
 
-
+	/**
+	 * 増減区分
+	 */
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 9)
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }
