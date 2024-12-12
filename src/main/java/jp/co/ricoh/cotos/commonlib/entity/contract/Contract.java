@@ -1108,4 +1108,26 @@ public class Contract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 115, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 電子契約正式帳票名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "電子契約正式帳票名", required = false, position = 116, allowableValues = "range[0,255]")
+	private String electronicContractOfficialReportName;
+
+	/**
+	 * 電子契約帳票EIMアップロードフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "電子契約帳票EIMアップロードフラグ", required = false, position = 117, allowableValues = "range[0,9]")
+	private Integer electronicContractReportEimUploadFlg;
+
+	/**
+	 * 電子契約締結日
+	 */
+	@ApiModelProperty(value = "電子契約締結日", required = false, position = 118)
+	@Temporal(TemporalType.DATE)
+	private Date electronicContractConclusionDate;
 }

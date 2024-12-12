@@ -721,8 +721,9 @@ public class TestContract {
 		testTarget.setToVendorComment(STR_1334);
 		testTarget.setMvbAccount(STR_19);
 		testTarget.setNttCustomerId(STR_256);
+		testTarget.setElectronicContractOfficialReportName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 26);
+		Assert.assertTrue(result.getErrorInfoList().size() == 27);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "変更元文書番号は最大文字数（255）を超えています。"));
 
@@ -732,8 +733,9 @@ public class TestContract {
 		testTarget.setEstimationBranchNumber(INT_100);
 		testTarget.setManualUpdateFlg(INT_10);
 		testTarget.setSsWorkRequestCreateFlg(INT_10);
+		testTarget.setElectronicContractReportEimUploadFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 4);
+		Assert.assertTrue(result.getErrorInfoList().size() == 5);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積番号枝番は最大値（99）を超えています。"));
 
