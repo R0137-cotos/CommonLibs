@@ -631,3 +631,4 @@
 |674|電子契約EIM文書登録APIパラメータDto、文書登録（COTOS申込書）のpropertiesリクエストボディの修正|
 |675|契約に電子契約関連カラムを追加|
 |676|EIM書誌情報連携項目追加|
+|677|EimDocumentInfoRepositoryに契約IDを条件にデータを取得するメソッド追加|
