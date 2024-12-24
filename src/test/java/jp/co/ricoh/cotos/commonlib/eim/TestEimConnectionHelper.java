@@ -182,7 +182,7 @@ public class TestEimConnectionHelper {
 			properties.setCsibmnName4("豊島サービスステーション");
 			properties.setSiskThNm("正式帳票名");
 			properties.setSkbtKbn("1");
-			properties.setKiykKngk("2000");
+			properties.setKiykKngk(2000l);
 			properties.setKiykTiktHi("2024-12-11T15:00:00.000Z");
 			properties.setKeiyakType("2");
 			properties.setFfmHttiawsNo("ffm001");

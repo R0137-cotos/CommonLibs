@@ -368,7 +368,7 @@ public class DocumentUploadProperties {
 	* 契約金額
 	*/
 	@JsonProperty("kiyk_Kngk")
-	private String kiykKngk;
+	private Long kiykKngk;
 
 	/**
 	* 契約締結日
