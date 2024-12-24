@@ -604,4 +604,4 @@
 |647|無線LANパック カラム追加のEntity、repository、Dto修正|
 |648|契約機器状態管理Dto,Entity修正|
 |649|商品グループマスタに契約機種品種紐づけ処理区分を追加|
-|650|VMailAddressListAbstractEntityのテーブル区分に区分を追加|
+|650|VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加|
