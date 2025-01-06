@@ -41,7 +41,7 @@ import lombok.EqualsAndHashCode;
  * 見積を表すEntityです。
  */
 @Entity
-@EqualsAndHashCode(callSuper = true, exclude={"estimationApprovalRoute","estimationPicSaEmp","customerEstimation"})
+@EqualsAndHashCode(callSuper = true, exclude = { "estimationApprovalRoute", "estimationPicSaEmp", "customerEstimation", "electronicContractInfo" })
 @EntityListeners(EstimationListener.class)
 @Data
 @Table(name = "estimation")
@@ -112,6 +112,29 @@ public class Estimation extends EntityBase {
 
 		@JsonCreator
 		public static EstimationType fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
+	@Description(value = "電子契約連携状態")
+	public enum ElectronicContractLinkageStatus {
+
+		しない("0"), 未連携("1"), 連携済("2");
+
+		private final String text;
+
+		private ElectronicContractLinkageStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ElectronicContractLinkageStatus fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -582,4 +605,18 @@ public class Estimation extends EntityBase {
 	 */
 	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 64)
 	private Long maxExtensionMonths;
+
+	/**
+	 * 電子契約連携状態
+	 */
+	@ApiModelProperty(value = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1", position = 65)
+	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
+
+	/**
+	 * 電子契約情報
+	 */
+	@Valid
+	@OneToOne(mappedBy = "estimation")
+	@ApiModelProperty(value = "電子契約情報", required = false, position = 66)
+	private ElectronicContractInfo electronicContractInfo;
 }

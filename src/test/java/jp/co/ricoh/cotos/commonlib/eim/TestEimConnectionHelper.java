@@ -1,5 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.eim;
 
+import static org.junit.Assert.*;
+
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -157,6 +160,36 @@ public class TestEimConnectionHelper {
 			properties.setUjgsNm("本＊＊");
 			properties.setFileCount(3);
 			properties.setDelFlg(0);
+			properties.setHnsyNm("北海道支社");
+			properties.setBmnName1("販売事業本部");
+			properties.setBmnName2("北海道支社");
+			properties.setBmnName3("札幌南西営業部");
+			properties.setBmnName4("小樽営業所");
+			properties.setCshnsyNm("東京支社");
+			properties.setCsbmnName1("販売事業本部");
+			properties.setCsbmnName2("東京支社");
+			properties.setCsbmnName3("城北Ｓ＆Ｓ部");
+			properties.setCsbmnName4("豊島サービスステーション");
+			properties.setCsrhnsyNm("東京支社");
+			properties.setCsrbmnName1("販売事業本部");
+			properties.setCsrbmnName2("東京支社");
+			properties.setCsrbmnName3("城北Ｓ＆Ｓ部");
+			properties.setCsrbmnName4("豊島サービスステーション");
+			properties.setCsihnsyNm("東京支社");
+			properties.setCsibmnName1("販売事業本部");
+			properties.setCsibmnName2("東京支社");
+			properties.setCsibmnName3("城北Ｓ＆Ｓ部");
+			properties.setCsibmnName4("豊島サービスステーション");
+			properties.setSiskThNm("正式帳票名");
+			properties.setSkbtKbn("1");
+			properties.setKiykKngk(2000l);
+			properties.setKiykTiktHi("2024-12-11T15:00:00.000Z");
+			properties.setKeiyakType("2");
+			properties.setFfmHttiawsNo("ffm001");
+			properties.setVupMtmriNo("V2000162420");
+			properties.setVupAnknNo("100032719");
+			properties.setSerKisHi("2024-12-12T15:00:00.000Z");
+			properties.setSerRyuKbuHi("2024-12-13T15:00:00.000Z");
 
 			List<String> fileBody = Arrays.asList("e4a7c6194562473aa1f42f7262a8a612", "55262ce4c21648cbabaf98488666cb70", "18c4d845a89f414bb8263cb1dfd369b6");
 			properties.setFileBody(fileBody);
@@ -165,6 +198,32 @@ public class TestEimConnectionHelper {
 			eimConnectionHelper.putDocument(request);
 		} catch (Exception e) {
 			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	public void properties取得() {
+		try {
+			Method sysMethod = EimConnectionHelper.class.getDeclaredMethod("getProperties");
+			sysMethod.setAccessible(true);
+			EimConnectionProperties properties = (EimConnectionProperties) sysMethod.invoke(eimConnectionHelper);
+
+			assertEquals("hostNameが想定通りであること", "app-dev28", properties.getHostName());
+			assertEquals("domainNameが想定通りであること", "ope.azure.ricoh-eim.com", properties.getDomainName());
+			assertEquals("systemAuthPathが想定通りであること", "services/v1/system/auth", properties.getSystemAuthPath());
+			assertEquals("apiAuthPathが想定通りであること", "api/v1/auth", properties.getApiAuthPath());
+			assertEquals("loginUserNameが想定通りであること", "test02", properties.getLoginUserName());
+			assertEquals("loginPasswordが想定通りであること", "P@ssw0rd", properties.getLoginPassword());
+			assertEquals("fileUploadPathが想定通りであること", "services/v1/files/upload", properties.getFileUploadPath());
+			assertEquals("appIdが想定通りであること", "RFG_CTS_CNT_02", properties.getAppId());
+			assertEquals("appIdMonthDBが想定通りであること", "RFG_CTS_CNT_01", properties.getAppIdMonthDB());
+			assertEquals("resourcesPathが想定通りであること", "resources/v3/apps/", properties.getResourcesPath());
+			assertEquals("documentsPathが想定通りであること", "documents", properties.getDocumentsPath());
+			assertEquals("fileDownloadPathが想定通りであること", "services/v1/files/download", properties.getFileDownloadPath());
+			assertEquals("modelIdが想定通りであること", "DetailForm^CotosContractModel", properties.getModelId());
+			assertEquals("systemNameが想定通りであること", "CTSCont02", properties.getSystemName());
+		} catch (Exception e) {
+			Assert.fail("エラーが発生した");
 		}
 	}
 }
