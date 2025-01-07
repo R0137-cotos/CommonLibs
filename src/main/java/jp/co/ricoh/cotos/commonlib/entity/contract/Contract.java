@@ -1133,4 +1133,25 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 118)
 	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfoList;
 
+	/**
+	 * 電子契約正式帳票名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "電子契約正式帳票名", required = false, position = 116, allowableValues = "range[0,255]")
+	private String electronicContractOfficialReportName;
+
+	/**
+	 * 電子契約帳票EIMアップロードフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "電子契約帳票EIMアップロードフラグ", required = false, position = 117, allowableValues = "range[0,9]")
+	private Integer electronicContractReportEimUploadFlg;
+
+	/**
+	 * 電子契約締結日
+	 */
+	@ApiModelProperty(value = "電子契約締結日", required = false, position = 118)
+	@Temporal(TemporalType.DATE)
+	private Date electronicContractConclusionDate;
 }

@@ -47,15 +47,27 @@ public class EimConnectionHelper {
 	EimConnectionProperties eimConnectionProperties;
 
 	/**
+	 * propertiesクラス取得
+	 *
+	 * @return EimConnectionProperties
+	 */
+	protected EimConnectionProperties getProperties() {
+		return eimConnectionProperties;
+	}
+
+	/**
 	 * EIMシステム認証
 	 * @return
 	 */
 	private SystemAuthResponse systemAuth(RestTemplate restForEmi) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			// EIMシステム認証
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getSystemAuthPath();
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getSystemAuthPath();
 			HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(null, headers);
 			log.info("URL:" + url);
 			return restForEmi.exchange(url, HttpMethod.POST, requestEntity, SystemAuthResponse.class).getBody();
@@ -70,22 +82,20 @@ public class EimConnectionHelper {
 	 * @param systemAuth
 	 * @return
 	 */
-	private ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
+	public ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
 		try {
-			// アプリケーション認証
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
 
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getApiAuthPath();
+			// アプリケーション認証
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getApiAuthPath();
 
 			// HEADER設定
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add("X-Application-Id", systemAuth.getApplicationId());
-			headers.add("X-Application-Key", systemAuth.getApplicationKey());
-			headers.add("X-Site-Id", systemAuth.getSiteId());
+			HttpHeaders headers = createHttpHeadersApiAuth(systemAuth);
 
 			ApiAuthRequest apiAuthRequest = new ApiAuthRequest();
-			apiAuthRequest.setLoginUserName(eimConnectionProperties.getLoginUserName());
-			apiAuthRequest.setLoginPassword(eimConnectionProperties.getLoginPassword());
+			apiAuthRequest.setLoginUserName(properties.getLoginUserName());
+			apiAuthRequest.setLoginPassword(properties.getLoginPassword());
 
 			RequestEntity<ApiAuthRequest> requestEntity = new RequestEntity<ApiAuthRequest>(apiAuthRequest, headers, HttpMethod.POST, new URI(url));
 
@@ -104,6 +114,22 @@ public class EimConnectionHelper {
 	}
 
 	/**
+	 * アプリケーション認証用ヘッダー情報作成
+	 * 
+	 * @return HttpHeaders
+	 */
+	protected HttpHeaders createHttpHeadersApiAuth(SystemAuthResponse systemAuth) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("X-Application-Id", systemAuth.getApplicationId());
+		headers.add("X-Application-Key", systemAuth.getApplicationKey());
+		headers.add("X-Site-Id", systemAuth.getSiteId());
+
+		return headers;
+	}
+
+	/**
 	 * 添付ファイルアップロード要求
 	 * @param fileName
 	 * @param fileBody
@@ -111,6 +137,9 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<FileUploadResponse> postFile(String fileName, byte[] fileBody, MediaType contentType) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			// EIMシステム認証
 			SystemAuthResponse systemRes = systemAuth(restForEmi);
@@ -123,7 +152,7 @@ public class EimConnectionHelper {
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 
 			// 添付ファイルのアップロードを要求(GET)
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getFileUploadPath() + "?" + "filename=" + fileName;
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?" + "filename=" + fileName;
 			ResponseEntity<FileUploadResponse> res = restForEmi.exchange(url, HttpMethod.GET, entity, FileUploadResponse.class);
 
 			FileUploadResponseHeader headerRes = res.getBody().getHeader();
@@ -154,6 +183,9 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<DocumentUploadResponse> postDocument(DocumentUploadRequest request) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			// EIMシステム認証
 			SystemAuthResponse systemRes = systemAuth(restForEmi);
@@ -165,7 +197,7 @@ public class EimConnectionHelper {
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
 
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath();
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath();
 			RequestEntity<DocumentUploadRequest> requestEntity = new RequestEntity<DocumentUploadRequest>(request, headers, HttpMethod.POST, new URI(url));
 			return restForEmi.exchange(requestEntity, DocumentUploadResponse.class);
 		} catch (Exception e) {
@@ -181,6 +213,9 @@ public class EimConnectionHelper {
 	 */
 	public byte[] getFile(String fileId) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			log.info("start -- getFile　--");
 			log.info("start -- EIM認証RestTemplate作成 --");
 			RestTemplate restForEmi = this.createEimRestTemplate();
@@ -202,7 +237,7 @@ public class EimConnectionHelper {
 			headers.add("X-Site-Id", systemRes.getSiteId());
 			headers.add("Cookie", "X-Application-Token=" + systemRes.getApplicationKey());
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getFileDownloadPath() + "/" + fileId;
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileDownloadPath() + "/" + fileId;
 			//ログ出力
 			log.info("URL:" + url);
 			log.info("Cookie:" + headers.get("Cookie"));
@@ -225,6 +260,9 @@ public class EimConnectionHelper {
 	 */
 	public void putDocument(DocumentUploadRequest request) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			// EIMシステム認証
 			SystemAuthResponse systemRes = systemAuth(restForEmi);
@@ -235,7 +273,7 @@ public class EimConnectionHelper {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
 			RequestEntity<?> requestEntity = new RequestEntity<>(request, headers, HttpMethod.PUT, new URI(url));
 			restForEmi.put(new URI(url), requestEntity);
 		} catch (Exception e) {
@@ -249,9 +287,11 @@ public class EimConnectionHelper {
 	 * @return
 	 * @throws Exception
 	 */
-	private RestTemplate createEimRestTemplate() throws Exception {
+	public RestTemplate createEimRestTemplate() throws Exception {
+		// propertiesを取得
+		EimConnectionProperties properties = getProperties();
 
-		if ("rfg3".equals(eimConnectionProperties.getHostName())) {
+		if ("rfg3".equals(properties.getHostName())) {
 
 			String key = "cotoscotoscotos";
 			String algorithm = "BLOWFISH";

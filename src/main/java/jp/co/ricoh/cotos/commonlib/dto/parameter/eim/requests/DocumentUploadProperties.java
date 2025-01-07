@@ -235,4 +235,176 @@ public class DocumentUploadProperties {
 	 * 削除フラグ
 	 */
 	private int delFlg;
+
+	/**
+	* 担当販社名
+	*/
+	private String hnsyNm;
+
+	/**
+	* 部門階層名1
+	*/
+	@JsonProperty("bmnName_1")
+	private String bmnName1;
+
+	/**
+	* 部門階層名2
+	*/
+	@JsonProperty("bmnName_2")
+	private String bmnName2;
+
+	/**
+	* 部門階層名3
+	*/
+	@JsonProperty("bmnName_3")
+	private String bmnName3;
+
+	/**
+	* 部門階層名4
+	*/
+	@JsonProperty("bmnName_4")
+	private String bmnName4;
+
+	/**
+	* 販社名（CE/SE）
+	*/
+	private String cshnsyNm;
+
+	/**
+	* 部門階層名1(CE/SE)
+	*/
+	@JsonProperty("csbmnName_1")
+	private String csbmnName1;
+
+	/**
+	* 部門階層名2(CE/SE)
+	*/
+	@JsonProperty("csbmnName_2")
+	private String csbmnName2;
+
+	/**
+	* 部門階層名3(CE/SE)
+	*/
+	@JsonProperty("csbmnName_3")
+	private String csbmnName3;
+
+	/**
+	* 部門階層名4(CE/SE)
+	*/
+	@JsonProperty("csbmnName_4")
+	private String csbmnName4;
+
+	/**
+	* 支社名（CE/SE）受付
+	*/
+	private String csrhnsyNm;
+
+	/**
+	* 部門階層名1(CE/SE) 受付
+	*/
+	@JsonProperty("csrbmnName_1")
+	private String csrbmnName1;
+
+	/**
+	* 部門階層名2(CE/SE) 受付
+	*/
+	@JsonProperty("csrbmnName_2")
+	private String csrbmnName2;
+
+	/**
+	* 部門階層名3(CE/SE) 受付
+	*/
+	@JsonProperty("csrbmnName_3")
+	private String csrbmnName3;
+
+	/**
+	* 部門階層名4(CE/SE) 受付
+	*/
+	@JsonProperty("csrbmnName_4")
+	private String csrbmnName4;
+
+	/**
+	* 支社名（CE/SE）導入
+	*/
+	private String csihnsyNm;
+
+	/**
+	* 部門階層名1(CE/SE) 導入
+	*/
+	@JsonProperty("csibmnName_1")
+	private String csibmnName1;
+
+	/**
+	* 部門階層名2(CE/SE) 導入
+	*/
+	@JsonProperty("csibmnName_2")
+	private String csibmnName2;
+
+	/**
+	* 部門階層名3(CE/SE) 導入
+	*/
+	@JsonProperty("csibmnName_3")
+	private String csibmnName3;
+
+	/**
+	* 部門階層名4(CE/SE) 導入
+	*/
+	@JsonProperty("csibmnName_4")
+	private String csibmnName4;
+
+	/**
+	* 正式帳票名
+	*/
+	@JsonProperty("sisk_thNm")
+	private String siskThNm;
+
+	/**
+	* 識別区分
+	*/
+	@JsonProperty("skbt_Kbn")
+	private String skbtKbn;
+
+	/**
+	* 契約金額
+	*/
+	@JsonProperty("kiyk_Kngk")
+	private Long kiykKngk;
+
+	/**
+	* 契約締結日
+	*/
+	private String kiykTiktHi;
+
+	/**
+	* 契約種類区分
+	*/
+	private String keiyakType;
+
+	/**
+	* FFM発注問い合わせ番号
+	*/
+	@JsonProperty("FFM_httiawsNo")
+	private String ffmHttiawsNo;
+
+	/**
+	* V-UP見積番号
+	*/
+	@JsonProperty("V-UP_mtmriNo")
+	private String vupMtmriNo;
+
+	/**
+	* V-UP案件番号
+	*/
+	@JsonProperty("V-UP_anknNo")
+	private String vupAnknNo;
+
+	/**
+	* サービス開始日
+	*/
+	private String serKisHi;
+
+	/**
+	* サービス利用希望日
+	*/
+	private String serRyuKbuHi;
 }
