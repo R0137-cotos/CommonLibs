@@ -5,6 +5,7 @@ import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -407,6 +408,11 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			requestPropertiesDto.setEstimateBranchNumber(paramDto.getEstimationBranchNumber());
 			requestPropertiesDto.setStatusCode("1");
 			requestPropertiesDto.setDeleteFlag("0");
+			Integer imfrSdRowNo = null;
+			if (StringUtils.isNotBlank(paramDto.getImfrSdRowNo())) {
+				imfrSdRowNo = Integer.valueOf(paramDto.getImfrSdRowNo());
+			}
+			requestPropertiesDto.setImfrSdRowNo(imfrSdRowNo);
 			requestDto.setProperties(requestPropertiesDto);
 
 			String requestBody = mapper.writeValueAsString(requestDto);
