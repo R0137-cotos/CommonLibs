@@ -80,7 +80,7 @@ public class PostCotosDocumentRequestProperties {
 	/**
 	 * IM行番号
 	 */
-	private String imfrSdRowNo;
+	private Integer imfrSdRowNo;
 
 	/**
 	 * 初期費用総計
