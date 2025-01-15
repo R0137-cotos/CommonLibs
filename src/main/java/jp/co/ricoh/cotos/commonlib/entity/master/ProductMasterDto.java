@@ -238,4 +238,18 @@ public class ProductMasterDto extends EntityBaseMaster {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "情報変更禁止終了日", required = false, position = 26)
 	private Date infoChangeProhibitedPeriodTo;
+
+	/**
+	 * 契約変更禁止開始日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "契約変更禁止開始日", required = false, position = 25)
+	private Date contractChangeProhibitedPeriodFrom;
+
+	/**
+	 * 契約変更禁止終了日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "契約変更禁止終了日", required = false, position = 26)
+	private Date contractChangeProhibitedPeriodTo;
 }
