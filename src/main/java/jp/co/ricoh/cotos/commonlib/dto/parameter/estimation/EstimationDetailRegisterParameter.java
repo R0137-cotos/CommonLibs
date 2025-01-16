@@ -123,4 +123,10 @@ public class EstimationDetailRegisterParameter {
 	@ApiModelProperty(value = "契約数", allowableValues = "range[-99999,99999]", required = false)
 	private Integer contractAmount;
 
+	/**
+	 * 価格改定前リコー品種コード
+	 */
+	@Size(max = 255)
+	@ApiParam(value = "価格改定前リコー品種コード", allowableValues = "range[0,255]", required = false)
+	private String bfPriceRevisionItemCode;
 }

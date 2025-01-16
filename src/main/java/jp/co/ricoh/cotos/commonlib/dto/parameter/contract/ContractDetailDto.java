@@ -24,6 +24,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.AbsConInsideTr
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.FfmAcceptanceLinkingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.FfmInsideTransStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.RunningAccountSalesStatus;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -191,5 +192,11 @@ public class ContractDetailDto extends DtoBase {
 	@Max(99999)
 	@ApiModelProperty(value = "契約数", required = false, position = 25, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
+
+	/**
+	 * 増減区分
+	 */
+	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 26)
+	private IncreaseDecreaseDiv increaseDecreaseDiv;
 
 }

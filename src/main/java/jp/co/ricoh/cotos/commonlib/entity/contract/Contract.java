@@ -213,7 +213,7 @@ public class Contract extends EntityBase {
 	@Description(value = "ARCS期間売保守元契約処理状態")
 	public enum ArcsPeriodSaleMntOriginStatus {
 
-		未作成("0"), CSV作成済み("1"), 対象外("2");
+		未作成("0"), CSV作成済み("1"), 対象外("2"), 管理対象外("3");
 
 		private final String text;
 
@@ -995,7 +995,7 @@ public class Contract extends EntityBase {
 	/**
 	 * ARCS期間売保守元契約処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 99, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\")")
+	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 99, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
 
 	/**
@@ -1108,4 +1108,29 @@ public class Contract extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 115, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
+
+	/**
+	 * 機器情報取込不要フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "機器情報取込不要フラグ", required = false, position = 116, allowableValues = "range[0,9]")
+	private Integer equipmentImportUnnecessaryFlg;
+
+	/**
+	 * 振替情報取込不要フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "振替情報取込不要フラグ", required = false, position = 117, allowableValues = "range[0,9]")
+	private Integer transImportUnnecessaryFlg;
+
+	/**
+	 * 契約機種付加情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 118)
+	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfoList;
+
 }

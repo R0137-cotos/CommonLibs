@@ -1,5 +1,17 @@
 # Changelog
 
+## v8.0.0 (19/12/2024)
+- [**closed**] #27371_messages.properties_一括取込時の注意文言の誤字修正 [#2765](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2765)
+- [**closed**] #27371_Messages.propertiesに一括取込時の注意文言追加 [#2759](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2759)
+- [**closed**] #26696_MomAuthorityServiceのhasEditAuthorityメソッド修正(protected→public) [#2728](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2728)
+- [**closed**] #26448_release20241219__topic_mitsブランチの内容取込 [#2717](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2717)
+- [**closed**] #26307_メールアドレス情報.テーブル区分のラベル名修正 [#2700](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2700)
+- [**closed**] #25549_MITSの拡張項目の契約年数と登録区分のEnum値を追加 [#2692](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2692)
+- [**closed**] #25308 契約機種付加情報と洗い替えテーブルにARCS連携ファイル出力フラグ追加 [#2687](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2687)
+- [**closed**] #25251_メールアドレス情報.テーブル区分のEnum追加 [#2685](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2685)
+
+---
+
 ## v7.28.0 (24/10/2024)
 - [**closed**] 26508 見積明細不正時のメッセージ追加 [#2745](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2745)
 - [**closed**] #25070 オン資商材固有項目追加 [#2739](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2739)
@@ -246,8 +258,3 @@
 - [**closed**] #18165 拡張項目修正 [#2322](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2322)
 - [**closed**] #18150 [O365]アップグレード対応 エンティティ作成 [#2315](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2315)
 - [**closed**] #18165 拡張項目追加 [#2313](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2313)
-
----
-
-## v6.10.0 (06/04/2023)
-- [**closed**] #17355 オンライン資格確認システム　商材固有項目の承認依頼事入力チェック 要件追加実装含 [#2331](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2331)

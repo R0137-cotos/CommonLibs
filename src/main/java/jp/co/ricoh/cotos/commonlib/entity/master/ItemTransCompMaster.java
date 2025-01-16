@@ -85,4 +85,10 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 5, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
+
+	/**
+	 * 一括取込商品フラグ
+	 */
+	@ApiModelProperty(value = "一括取込商品フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	private Integer batchImportTargetFlg;
 }

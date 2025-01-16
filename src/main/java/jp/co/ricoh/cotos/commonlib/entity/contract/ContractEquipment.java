@@ -43,7 +43,7 @@ public class ContractEquipment extends EntityBase {
 
 	@Description(value = "Isys-One 処理状態")
 	public enum IsysoneProcStatus {
-		未処理("0"), CSV作成済み("1"), 連携済み("2"), 連携エラー("3");
+		未処理("0"), CSV作成済み("1"), 連携済み("2"), 連携エラー("3"), 対象外("4"), 管理対象外("5");
 
 		private final String text;
 
@@ -87,7 +87,7 @@ public class ContractEquipment extends EntityBase {
 
 	@Description(value = "ARCS期間売保守処理状態")
 	public enum ArcsPeriodSaleMainteProcStatus {
-		未作成("0"), CSV作成済み("1"), 対象外("2");
+		未作成("0"), CSV作成済み("1"), 対象外("2"), 管理対象外("3");
 
 		private final String text;
 
@@ -234,7 +234,7 @@ public class ContractEquipment extends EntityBase {
 	/**
 	 * Isys-One 処理状態
 	 */
-	@ApiModelProperty(value = "Isys-One 処理状態", required = false, position = 12, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\"),連携エラー(\"3\")")
+	@ApiModelProperty(value = "Isys-One 処理状態", required = false, position = 12, allowableValues = "未処理(\"0\"),CSV作成済み(\"1\"),連携済み(\"2\"),連携エラー(\"3\"),対象外(\"4\"),管理対象外(\"5\")")
 	private IsysoneProcStatus isysoneProcStatus;
 
 	/**
@@ -283,7 +283,7 @@ public class ContractEquipment extends EntityBase {
 	/**
 	 * ARCS期間売保守処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 19, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),作成エラー(\"3\")")
+	@ApiModelProperty(value = "ARCS期間売保守処理状態", required = false, position = 19, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成不要(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMainteProcStatus arcsPeriodSaleMainteProcStatus;
 
 	/**
