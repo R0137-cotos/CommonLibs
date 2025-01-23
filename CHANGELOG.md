@@ -1,5 +1,15 @@
 # Changelog
 
+## v8.2.0 (23/01/2025)
+- [**closed**] #28522_カスタムデシリアライザクラスを作成 [#2789](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2789)
+- [**closed**] #28210 価格改定時の契約変更不可対応 [#2788](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2788)
+- [**closed**] 24751_ARCS登録用データが混在して出力される [#2786](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2786)
+- [**closed**] #23263_【EDW】年額期間合わせ_契約文書にてサービス希望日を変更した場合のエラー文言変更_追加修正 [#2767](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2767)
+- [**closed**] 25983_配送先情報に企業名の項目を追加したい [#2770](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2770)
+- [**closed**] #23263_【EDW】年額期間合わせ_契約文書にてサービス希望日を変更した場合のエラー文言変更 [#2763](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2763)
+
+---
+
 ## v8.0.0 (19/12/2024)
 - [**closed**] #27371_messages.properties_一括取込時の注意文言の誤字修正 [#2765](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2765)
 - [**closed**] #27371_Messages.propertiesに一括取込時の注意文言追加 [#2759](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2759)
@@ -247,14 +257,3 @@
 
 ## v6.14.0 (08/06/2023)
 - [**closed**] 18695 商品マスタにカラム：サービスコード追加 リリースブランチマージ [#2382](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2382)
-
----
-
-## v6.12.0 (11/05/2023)
-- [**closed**] #18436 登録結果反映 [#2343](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2343)
-- [**closed**] #18336　CPQコマース画面遷移URL生成API [#2340](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2340)
-- [**closed**] #18207 アップグレード対象ライセンス品種対応マスタを商品マスタIDごとに取得できるようにする [#2333](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2333)
-- [**closed**] #18207 特定のアクション時のエラーメッセージを追加 [#2324](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2324)
-- [**closed**] #18165 拡張項目修正 [#2322](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2322)
-- [**closed**] #18150 [O365]アップグレード対応 エンティティ作成 [#2315](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2315)
-- [**closed**] #18165 拡張項目追加 [#2313](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2313)
