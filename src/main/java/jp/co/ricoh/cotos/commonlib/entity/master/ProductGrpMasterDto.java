@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.EquipmentItemLinkProcDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.PriceRevisionProcDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.SsWorkRequestRootDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.TransferHeaderSettingDiv;
@@ -194,4 +195,10 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定処理パターン区分", required = false, position = 26, allowableValues = "価格改定前品種を持つ明細を品種ごと価格改定後品種へ更新(\"1\")")
 	private PriceRevisionProcDiv priceRevisionProcDiv;
+
+	/**
+	 * 契約機種品種紐づけ処理区分
+	 */
+	@ApiModelProperty(value = "契約機種品種紐づけ処理区分", required = false, position = 27, allowableValues = "品種グループマスタで紐づける(\"1\")")
+	private EquipmentItemLinkProcDiv equipmentItemLinkProcDiv;
 }
