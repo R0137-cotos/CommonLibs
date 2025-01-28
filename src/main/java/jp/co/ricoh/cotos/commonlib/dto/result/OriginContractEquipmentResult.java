@@ -29,4 +29,16 @@ public class OriginContractEquipmentResult {
 	 */
 	@ApiModelProperty(value = "契約機種付加情報を表すEntity", required = false, position = 3)
 	private ContractEquipmentAdditionInfo contractEquipmentAdditionInfo;
+
+	/**
+	 * 機器削除済文書番号
+	 */
+	@ApiModelProperty(value = "機器削除済文書番号", required = false, position = 4)
+	private String equipmentDeletedDocumentNumber;
+
+	/**
+	 * 機器削除チェックボックス活性化フラグ
+	 */
+	@ApiModelProperty(value = "機器削除チェックボックス活性化フラグ", required = false, position = 5)
+	private Integer activateEquipmentDeleteCheckboxFlg;
 }
