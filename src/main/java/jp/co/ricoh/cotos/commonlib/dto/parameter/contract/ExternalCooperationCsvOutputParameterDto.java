@@ -36,4 +36,11 @@ public class ExternalCooperationCsvOutputParameterDto {
 	@ApiModelProperty(value = "出力日", required = false, position = 3)
 	private Date outputDate;
 
+	/**
+	 * 商品マスタID
+	 */
+	@ApiParam(value = "商品マスタID", required = false)
+	@ApiModelProperty(value = "商品マスタID", required = false, position = 4)
+	private long productMasterId;
+
 }
