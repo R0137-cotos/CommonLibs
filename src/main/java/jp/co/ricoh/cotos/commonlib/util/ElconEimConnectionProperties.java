@@ -13,21 +13,6 @@ import lombok.Data;
 public class ElconEimConnectionProperties extends EimConnectionProperties {
 
 	/**
-	 * サイトID
-	 */
-	String xSiteId;
-
-	/**
-	 * アプリケーションID
-	 */
-	String xApplicationId;
-
-	/**
-	 * アプリケーションキー
-	 */
-	String xApplicationKey;
-
-	/**
 	 * モデルId（COTOS）
 	 */
 	String modelIdCotos;
