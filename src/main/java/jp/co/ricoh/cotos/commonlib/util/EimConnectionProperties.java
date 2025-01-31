@@ -80,4 +80,19 @@ public class EimConnectionProperties {
 	 * システム名
 	 */
 	String systemName;
+
+	/**
+	 * サイトID
+	 */
+	String xSiteId;
+
+	/**
+	 * アプリケーションID
+	 */
+	String xApplicationId;
+
+	/**
+	 * アプリケーションキー
+	 */
+	String xApplicationKey;
 }

@@ -24,7 +24,6 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,7 +34,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentUploadRes
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileDownloadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponseHeader;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.SystemAuthResponse;
 import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 
 @Component
@@ -56,33 +54,11 @@ public class EimConnectionHelper {
 	}
 
 	/**
-	 * EIMシステム認証
-	 * @return
-	 */
-	private SystemAuthResponse systemAuth(RestTemplate restForEmi) {
-		try {
-			// propertiesを取得
-			EimConnectionProperties properties = getProperties();
-
-			// EIMシステム認証
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getSystemAuthPath();
-			HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(null, headers);
-			log.info("URL:" + url);
-			return restForEmi.exchange(url, HttpMethod.POST, requestEntity, SystemAuthResponse.class).getBody();
-		} catch (Exception e) {
-			log.error("【APIエラー】  ", e);
-			throw new RestClientException("【APIエラー】 EIMシステム認証 Status Code:" + e.getMessage());
-		}
-	}
-
-	/**
 	 * アプリケーション認証
 	 * @param systemAuth
 	 * @return
 	 */
-	public ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
+	public ApiAuthResponse apiAuth(RestTemplate restForEmi) {
 		try {
 			// propertiesを取得
 			EimConnectionProperties properties = getProperties();
@@ -91,7 +67,7 @@ public class EimConnectionHelper {
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getApiAuthPath();
 
 			// HEADER設定
-			HttpHeaders headers = createHttpHeadersApiAuth(systemAuth);
+			HttpHeaders headers = createHttpHeadersApiAuth();
 
 			ApiAuthRequest apiAuthRequest = new ApiAuthRequest();
 			apiAuthRequest.setLoginUserName(properties.getLoginUserName());
@@ -118,13 +94,13 @@ public class EimConnectionHelper {
 	 * 
 	 * @return HttpHeaders
 	 */
-	protected HttpHeaders createHttpHeadersApiAuth(SystemAuthResponse systemAuth) {
+	protected HttpHeaders createHttpHeadersApiAuth() {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.add("X-Application-Id", systemAuth.getApplicationId());
-		headers.add("X-Application-Key", systemAuth.getApplicationKey());
-		headers.add("X-Site-Id", systemAuth.getSiteId());
+		headers.add("X-Application-Id", eimConnectionProperties.getXApplicationId());
+		headers.add("X-Application-Key", eimConnectionProperties.getXApplicationKey());
+		headers.add("X-Site-Id", eimConnectionProperties.getXSiteId());
 
 		return headers;
 	}
@@ -141,10 +117,8 @@ public class EimConnectionHelper {
 			EimConnectionProperties properties = getProperties();
 
 			RestTemplate restForEmi = this.createEimRestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -187,10 +161,8 @@ public class EimConnectionHelper {
 			EimConnectionProperties properties = getProperties();
 
 			RestTemplate restForEmi = this.createEimRestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -221,21 +193,17 @@ public class EimConnectionHelper {
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			log.info("end -- EIM認証RestTemplate作成 --");
 
-			// EIMシステム認証
-			log.info("start -- EIMシステム認証 --");
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
-			log.info("end -- EIMシステム認証 --");
 			// アプリケーション認証
 			log.info("start -- アプリケーション認証 --");
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
 			log.info("end -- アプリケーション認証 --");
 			// HEADER設定
 			log.info("start -- ファイルダウンロード --");
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add("X-Site-Id", systemRes.getSiteId());
-			headers.add("Cookie", "X-Application-Token=" + systemRes.getApplicationKey());
+			headers.add("X-Site-Id", properties.getXSiteId());
+			headers.add("Cookie", "X-Application-Token=" + properties.getXApplicationKey());
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileDownloadPath() + "/" + fileId;
 			//ログ出力
@@ -264,10 +232,8 @@ public class EimConnectionHelper {
 			EimConnectionProperties properties = getProperties();
 
 			RestTemplate restForEmi = this.createEimRestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
