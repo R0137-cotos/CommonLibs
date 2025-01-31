@@ -137,7 +137,7 @@ public class TestElconEimConnectionHelper {
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
-			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim, null);
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
@@ -164,7 +164,7 @@ public class TestElconEimConnectionHelper {
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
-			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim, null);
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
@@ -195,7 +195,7 @@ public class TestElconEimConnectionHelper {
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
-			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim, null);
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
 
 			// パラメータ設定
 			PreparationFileUploadResponseHeader headerResponse = new PreparationFileUploadResponseHeader();
@@ -228,7 +228,7 @@ public class TestElconEimConnectionHelper {
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
-			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim, null);
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
 
 			// パラメータ設定
 			PreparationFileUploadResponseHeader headerResponse = new PreparationFileUploadResponseHeader();
@@ -269,7 +269,7 @@ public class TestElconEimConnectionHelper {
 		try {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
-			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim, null);
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
@@ -314,7 +314,7 @@ public class TestElconEimConnectionHelper {
 
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
-			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim, null);
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();

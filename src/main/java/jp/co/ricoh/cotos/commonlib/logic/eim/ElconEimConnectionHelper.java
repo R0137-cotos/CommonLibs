@@ -37,7 +37,6 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentDeleteRes
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentGetResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PostCotosDocumentResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponse;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.SystemAuthResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.ElconDocumentRegistrationParameter;
 import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
@@ -88,7 +87,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	 * @return HttpHeaders
 	 */
 	@Override
-	protected HttpHeaders createHttpHeadersApiAuth(SystemAuthResponse systemAuth) {
+	protected HttpHeaders createHttpHeadersApiAuth() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("X-Application-Id", elconEimConnectionProperties.getXApplicationId());
@@ -114,7 +113,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			RestTemplate restForEim = new RestTemplate();
 
 			// アプリケーション認証APIコール
-			ApiAuthResponse apiAuthRes = apiAuth(restForEim, null);
+			ApiAuthResponse apiAuthRes = apiAuth(restForEim);
 
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
@@ -182,7 +181,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			RestTemplate restForEim = new RestTemplate();
 
 			// アプリケーション認証APIコール
-			ApiAuthResponse apiAuthRes = apiAuth(restForEim, null);
+			ApiAuthResponse apiAuthRes = apiAuth(restForEim);
 
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
