@@ -185,4 +185,11 @@ public class ContractEquipmentDto extends DtoBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 26, allowableValues = "range[0,255]")
 	private String arcsMaintenanceForm;
+
+	/**
+	 * Isys-One再連携済設置日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "Isys-One再連携済設置日", required = false, position = 27)
+	private Date isysoneLinkagedInstallationDate;
 }
