@@ -127,7 +127,17 @@ public class EimConnectionHelper {
 
 			// 添付ファイルのアップロードを要求(GET)
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?" + "filename=" + fileName;
+			log.info("EIM ファイルアップロード準備APIコール");
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + entity.getHeaders());
+			log.info("============================================================");
+
 			ResponseEntity<FileUploadResponse> res = restForEmi.exchange(url, HttpMethod.GET, entity, FileUploadResponse.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + res.getStatusCodeValue());
+			log.info("body    : " + res.getBody());
+			log.info("============================================================");
 
 			FileUploadResponseHeader headerRes = res.getBody().getHeader();
 			// 添付ファイルのアップロードを要求(PUT)
@@ -143,7 +153,13 @@ public class EimConnectionHelper {
 			headers.add("x-ms-blob-type", headerRes.getX_ms_blob_type());
 
 			RequestEntity<?> requestEntity = new RequestEntity<>(fileBody, headers, HttpMethod.PUT, new URI(res.getBody().getUrl()));
+			log.info("EIM ファイルアップロードAPIコール");
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + requestEntity.getUrl());
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("============================================================");
 			restForEmi.put(new URI(res.getBody().getUrl()), requestEntity);
+
 			return res;
 		} catch (Exception e) {
 			log.error("【APIエラー】  ", e);
@@ -169,9 +185,22 @@ public class EimConnectionHelper {
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
 
+			log.info("EIM 文書登録(COTOS申込書)APIコール");
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath();
 			RequestEntity<DocumentUploadRequest> requestEntity = new RequestEntity<DocumentUploadRequest>(request, headers, HttpMethod.POST, new URI(url));
-			return restForEmi.exchange(requestEntity, DocumentUploadResponse.class);
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("body    : " + requestEntity.getBody());
+			log.info("============================================================");
+
+			ResponseEntity<DocumentUploadResponse> responseEntity = restForEmi.exchange(requestEntity, DocumentUploadResponse.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("body    : " + responseEntity.getBody());
+			log.info("============================================================");
+			return responseEntity;
+
 		} catch (Exception e) {
 			log.error("【APIエラー】  ", e);
 			throw new RestClientException("【APIエラー】 文書登録 Status Code:" + e.getMessage());
