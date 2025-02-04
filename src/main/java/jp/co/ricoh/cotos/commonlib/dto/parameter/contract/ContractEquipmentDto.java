@@ -187,9 +187,9 @@ public class ContractEquipmentDto extends DtoBase {
 	private String arcsMaintenanceForm;
 
 	/**
-	 * Isys-One再連携済設置日
+	 * Isys-One連携済設置日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "Isys-One再連携済設置日", required = false, position = 27)
+	@ApiModelProperty(value = "Isys-One連携済設置日", required = false, position = 27)
 	private Date isysoneLinkagedInstallationDate;
 }
