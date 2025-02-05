@@ -356,7 +356,7 @@ public class DocumentUploadProperties {
 	* 正式帳票名
 	*/
 	@JsonProperty("sisk_thNm")
-	private String siskThNm;
+	private List<String> siskThNm;
 
 	/**
 	* 識別区分
