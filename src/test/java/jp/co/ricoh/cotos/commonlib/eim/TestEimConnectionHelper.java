@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -113,7 +114,6 @@ public class TestEimConnectionHelper {
 	}
 
 	@Test
-	@Ignore
 	public void 文書を文書キーで保存_動作確認() {
 		try {
 			DocumentUploadRequest request = new DocumentUploadRequest();
@@ -180,7 +180,9 @@ public class TestEimConnectionHelper {
 			properties.setCsibmnName2("東京支社");
 			properties.setCsibmnName3("城北Ｓ＆Ｓ部");
 			properties.setCsibmnName4("豊島サービスステーション");
-			properties.setSiskThNm("正式帳票名");
+			List<String> siskThNms = new ArrayList<String>();
+			siskThNms.add("正式帳票名");
+			properties.setSiskThNm(siskThNms);
 			properties.setSkbtKbn("1");
 			properties.setKiykKngk(2000l);
 			properties.setKiykTiktHi("2024-12-11T15:00:00.000Z");
