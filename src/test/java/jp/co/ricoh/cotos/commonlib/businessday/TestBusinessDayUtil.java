@@ -617,7 +617,7 @@ public class TestBusinessDayUtil {
 		testDay.setTime(new Date());
 		// 上記の年、月、日を設定（時間は実行した時間が入る想定）
 		testDay.set(Calendar.YEAR, year);
-		testDay.set(Calendar.MONTH, month);
+		testDay.set(Calendar.MONTH, month - 1);
 		testDay.set(Calendar.DATE, day);
 
 		// 第3営業日を設定
