@@ -707,10 +707,10 @@ public class BusinessDayUtil {
 		// 引数に月初日を設定
 		date.setTime(firstDayOfTheTargetMonth);
 
-		// 全非営業日カレンダーマスタを取得
-		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findByVendorShortNameIsNull();
-		// 非営業日リストを作成nonBusinessDayCalendarMasterList.stream().filter(null)
-		// 非営業日リスト
+		// 対象月の非営業日カレンダーマスタを取得
+		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findByNonBusinessDayBetweenAndVendorShortNameIsNull(firstDayOfTheTargetMonth, lastDayOfTheTargetMonth);
+
+		// Date型の非営業日リストを作成
 		List<Date> nonBusinessDayList = new ArrayList<>();
 
 		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayCalendarMasterList) {
