@@ -6,6 +6,7 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpHost;
@@ -126,6 +127,10 @@ public class EimConnectionHelper {
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 
 			// 添付ファイルのアップロードを要求(GET)
+			// ファイル名に半角スペースを含む場合、半角スペース部分をエンコードする。
+			if (StringUtils.isNotBlank(fileName) && fileName.contains(" ")) {
+				fileName = fileName.replace(" ", "%20");
+			}
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?" + "filename=" + fileName;
 			log.info("EIM ファイルアップロード準備APIコール");
 			log.info("＜Request＞=================================================");

@@ -401,10 +401,12 @@ public class DocumentUploadProperties {
 	/**
 	* サービス開始日
 	*/
+	@JsonProperty("SerKisHi")
 	private String serKisHi;
 
 	/**
 	* サービス利用希望日
 	*/
+	@JsonProperty("SerRyuKbuHi")
 	private String serRyuKbuHi;
 }
