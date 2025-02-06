@@ -602,6 +602,46 @@ public class TestBusinessDayUtil {
 		Assert.assertEquals("2019/06/09の1営業日前は2019/06/07であること", LocalDate.of(2019, 6, 7), businessDayUtil.getBusinessDateNumberBusinessDaysBeforeBaseDate(LocalDate.of(2019, 6, 9), 1, true));
 	}
 
+	@Test
+	public void 営業日リスト取得() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/businessday/testBusinessdayList.sql");
+		// 2025年1月 営業日日数は19日
+
+		// 日付の引数設定
+		// テストしたい日付を設定
+		int year = 2025;
+		int month = 1;
+		int day = 10;
+		int day3 = 8;
+		Calendar testDay = Calendar.getInstance();
+		testDay.setTime(new Date());
+		// 上記の年、月、日を設定（時間は実行した時間が入る想定）
+		testDay.set(Calendar.YEAR, year);
+		testDay.set(Calendar.MONTH, month);
+		testDay.set(Calendar.DATE, day);
+
+		// 第3営業日を設定
+		Calendar businessDay3 = Calendar.getInstance();
+		businessDay3.set(Calendar.YEAR, year);
+		businessDay3.set(Calendar.MONTH, month - 1);
+		businessDay3.set(Calendar.DATE, day3);
+		businessDay3.set(Calendar.HOUR_OF_DAY, 0);
+		businessDay3.set(Calendar.MINUTE, 0);
+		businessDay3.set(Calendar.SECOND, 0);
+		businessDay3.set(Calendar.MILLISECOND, 0);
+
+		// 期待値
+		// 1.1月の営業日数19日
+		int expectBusinessDayJan = 19;
+
+		// 営業日リスト取得
+		List<Date> resultBusinessDayList = businessDayUtil.findBusinessDayCalendarForSpecifiedMonth(testDay);
+
+		// 比較結果
+		Assert.assertEquals("2025年1月の営業日数が同じであること", expectBusinessDayJan, resultBusinessDayList.size());
+		Assert.assertEquals("第3営業日が同じであること", businessDay3.getTime(), resultBusinessDayList.get(2));
+	}
+
 	private Date 日付想定値取得(String expected) {
 		if (expected == null) {
 			return null;
