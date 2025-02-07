@@ -23,7 +23,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.DBConfig;
+import jp.co.ricoh.cotos.commonlib.entity.master.NonBusinessDayCalendarMaster;
 import jp.co.ricoh.cotos.commonlib.logic.businessday.BusinessDayUtil;
+import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
+import jp.co.ricoh.cotos.commonlib.repository.master.NonBusinessDayCalendarMasterRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -39,6 +42,12 @@ public class TestBusinessDayUtil {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
 	}
+
+	@Autowired
+	private DateCalcPatternUtil dateCalcPatternUtil;
+
+	@Autowired
+	private NonBusinessDayCalendarMasterRepository nonBusinessDayCalendarMasterRepository;
 
 	@AfterClass
 	public static void stopAPServer() throws InterruptedException {
@@ -640,6 +649,30 @@ public class TestBusinessDayUtil {
 		// 比較結果
 		Assert.assertEquals("2025年1月の営業日数が同じであること", expectBusinessDayJan, resultBusinessDayList.size());
 		Assert.assertEquals("第3営業日が同じであること", businessDay3.getTime(), resultBusinessDayList.get(2));
+	}
+
+	@Test
+	public void 対象月分の非営業日リスト取得() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/businessday/testBusinessdayList.sql");
+		// 2025年1月 営業日日数は19日（非営業日：12）
+		// 2025年2月 営業日日数は18日（非営業日：10）
+		// 2025年3月 営業日日数は20日（非営業日：11）
+
+		// 3月の月初日と月末日を設定
+		String testDate_firstDay = "20250301";
+		String testDate_lastDay = "20250331";
+		Date firstDay = dateCalcPatternUtil.stringToDateConverter(testDate_firstDay, null);
+		Date lastDay = dateCalcPatternUtil.stringToDateConverter(testDate_lastDay, null);
+
+		// 期待値
+		// 1.3月の非営業日数11日
+		int expectBusinessDay = 11;
+
+		// 非営業日リスト取得
+		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findByNonBusinessDayBetweenAndVendorShortNameIsNull(firstDay, lastDay);
+
+		// 比較結果
+		Assert.assertEquals("2025年3月の非営業日数が11であること", expectBusinessDay, nonBusinessDayCalendarMasterList.size());
 	}
 
 	private Date 日付想定値取得(String expected) {
