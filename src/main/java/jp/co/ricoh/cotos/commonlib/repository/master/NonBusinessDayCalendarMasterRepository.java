@@ -15,4 +15,6 @@ public interface NonBusinessDayCalendarMasterRepository extends CrudRepository<N
 	public NonBusinessDayCalendarMaster findOneByNonBusinessDayAndVendorShortNameIsNull(Date nonBusinessDay);
 
 	public NonBusinessDayCalendarMaster findOneByNonBusinessDayAndVendorShortNameLike(Date nonBusinessDay, String vendorShortName);
+
+	public Iterable<NonBusinessDayCalendarMaster> findByNonBusinessDayBetweenAndVendorShortNameIsNull(Date fromNonBusinessDay, Date toNonBusinessDay);
 }

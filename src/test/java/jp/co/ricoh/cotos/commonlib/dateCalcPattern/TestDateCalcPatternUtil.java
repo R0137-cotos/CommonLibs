@@ -322,6 +322,28 @@ public class TestDateCalcPatternUtil {
 		Assert.assertEquals("契約満了月の4ヶ月前の月末から7営業日前", "20210323", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
 
+	@Test
+	public void 通知メール送信タイミング_第1営業日() throws Exception {
+
+		String testDate = "20210201";
+		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
+		Long trgetId = 33L;
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
+		Assert.assertEquals("2021年2月の第1営業日が20210201であること", "20210201", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
+	}
+
+	@Test
+	public void 通知メール送信タイミング_第6営業日() throws Exception {
+
+		String testDate = "20210202";
+		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
+		Long trgetId = 34L;
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
+		Assert.assertEquals("2021年2月の第6営業日が20210208であること", "20210208", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
+	}
+
 	private void テストデータ作成() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/testDateCalcPatternMasterInsert.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/testNonBusinessDayCalendarMasterInsert.sql");
