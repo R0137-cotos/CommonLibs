@@ -39,7 +39,7 @@ public class JsonEnumTypeO365 {
 	@Description(value = "支払周期変更フラグ")
 	public enum PaymentCycleChangeFlg {
 
-		通常("0"), 支払周期変更入("1");
+		通常("0"), 支払周期変更("1");
 
 		private final String text;
 
