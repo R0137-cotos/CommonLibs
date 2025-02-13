@@ -124,6 +124,6 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	 * 契約種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "契約種別種別", required = false, allowableValues = "新規(\"1\"), 契約更新(\"2\"), 再契約(\"3\"), アップグレード(\"4\"), メニュー変更(\"5\"), 基本プラン減数(\"6\"), プラン_オプション_減数_削除(\"7\"), オプション_追加_増数(\"8\"), オプション_追加_減数(\"9\"), 自動更新(\"10\")", position = 8)
+	@ApiModelProperty(value = "契約種別種別", required = false, allowableValues = "新規(\"1\"), 契約更新(\"2\"), 再契約(\"3\"), アップグレード(\"4\"), メニュー変更(\"5\"), 基本プラン減数(\"6\"), プラン_オプション_減数_削除(\"7\"), オプション_追加_増数(\"8\"), オプション_追加_減数(\"9\"), 自動更新(\"10\"), 支払周期変更(\"26\")", position = 8)
 	private ContractTypeDetails contractTypeDetail;
 }
