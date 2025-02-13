@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.PaymentCycleChangeFlg;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumTypeO365.TransferFlg;
 import lombok.Data;
 
@@ -22,6 +23,11 @@ public class CpqReturnValueO365Dto {
 	 * 転入フラグ
 	 */
 	private TransferFlg transferFlg;
+
+	/**
+	 * 支払周期変更フラグ
+	 */
+	private PaymentCycleChangeFlg paymentCycleChangeFlg;
 
 	/**
 	 * サービス利用希望日

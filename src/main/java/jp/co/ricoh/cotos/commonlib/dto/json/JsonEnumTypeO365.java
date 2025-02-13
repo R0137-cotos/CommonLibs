@@ -36,6 +36,29 @@ public class JsonEnumTypeO365 {
 		}
 	}
 
+	@Description(value = "支払周期変更フラグ")
+	public enum PaymentCycleChangeFlg {
+
+		通常("0"), 支払周期変更("1");
+
+		private final String text;
+
+		private PaymentCycleChangeFlg(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static PaymentCycleChangeFlg fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Description(value = "受注区分")
 	public enum OrderDiv {
 
