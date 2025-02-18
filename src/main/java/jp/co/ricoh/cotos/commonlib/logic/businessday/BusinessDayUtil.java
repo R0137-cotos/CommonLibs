@@ -679,4 +679,63 @@ public class BusinessDayUtil {
 		}
 		return date;
 	}
+
+	/**
+	 * 引数月の営業日カレンダーリスト取得
+	 *
+	 * @param date 日付
+	 * @return 営業日カレンダーリスト（1月分）
+	 */
+	public List<Date> findBusinessDayCalendarForSpecifiedMonth(Calendar date) {
+
+		// 対象月の営業日リスト
+		List<Date> targetMonthList = new ArrayList<>();
+
+		// 引数の年を設定
+		int year = date.get(Calendar.YEAR);
+		// 引数の月を設定
+		// 月初日と月末日取得の処理でmonth-1がされていため、+1する（MONTHは0番目が1月となっている）
+		int month = date.get(Calendar.MONTH) + 1;
+		// 加算する日数を設定
+		String addDay = "+1";
+
+		// 対象月月初日
+		Date firstDayOfTheTargetMonth = getStartOfMonth(year, month);
+		// 対象月月末日
+		Date lastDayOfTheTargetMonth = getEndOfMonth(year, month);
+
+		// 引数に月初日を設定
+		date.setTime(firstDayOfTheTargetMonth);
+
+		// 対象月の非営業日カレンダーマスタを取得
+		List<NonBusinessDayCalendarMaster> nonBusinessDayCalendarMasterList = (List<NonBusinessDayCalendarMaster>) nonBusinessDayCalendarMasterRepository.findByNonBusinessDayBetweenAndVendorShortNameIsNull(firstDayOfTheTargetMonth, lastDayOfTheTargetMonth);
+
+		// Date型の非営業日リストを作成
+		List<Date> nonBusinessDayList = new ArrayList<>();
+
+		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayCalendarMasterList) {
+			nonBusinessDayList.add(nonBusinessDay.getNonBusinessDay());
+		}
+
+		if (CollectionUtils.isEmpty(nonBusinessDayCalendarMasterList)) {
+			return null;
+		}
+
+		// 営業日リストを作成
+		// 月末日になるまで繰り返す
+		while (true) {
+			// 営業日チェック
+			// 営業日なら、リストに追加
+			if (!nonBusinessDayList.contains(date.getTime())) {
+				targetMonthList.add(date.getTime());
+			}
+
+			if (DateUtils.isSameDay(DateUtils.truncate(date.getTime(), Calendar.DAY_OF_MONTH), lastDayOfTheTargetMonth)) {
+				return targetMonthList;
+			}
+
+			// 加算処理
+			date.add(Calendar.DATE, Integer.valueOf(addDay.substring(1)));
+		}
+	}
 }
