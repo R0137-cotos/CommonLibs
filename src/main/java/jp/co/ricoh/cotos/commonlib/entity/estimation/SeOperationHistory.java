@@ -96,7 +96,7 @@ public class SeOperationHistory extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long estimation_id;
+	private long estimationId;
 
 	/**
 	 * ドメイン
@@ -112,7 +112,7 @@ public class SeOperationHistory extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4, readOnly = true)
-	private ProcessingCategory processing_category;
+	private ProcessingCategory processingCategory;
 
 	/**
 	 * 処理内容
@@ -121,7 +121,7 @@ public class SeOperationHistory extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "処理内容", required = true, position = 5, allowableValues = "range[0,255]")
-	private String processing_details;
+	private String processingDetails;
 
 	/**
 	 * 有効期限From
@@ -130,7 +130,7 @@ public class SeOperationHistory extends EntityBase {
 	@NotNull
 	@ApiModelProperty(value = "有効期限From", required = true, position = 6)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date expiration_from;
+	private Date expirationFrom;
 
     /**
 	 * 有効期限To
@@ -139,6 +139,6 @@ public class SeOperationHistory extends EntityBase {
 	@NotNull
 	@ApiModelProperty(value = "有効期限To", required = true, position = 7)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date expiration_to;
+	private Date expirationTo;
 
 }
