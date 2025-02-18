@@ -42,7 +42,7 @@ public class SeOperationHistory extends EntityBase {
 
 		private final String text;
 
-		private Domain (final String text) {
+		private Domain(final String text) {
 			this.text = text;
 		}
 
@@ -65,7 +65,7 @@ public class SeOperationHistory extends EntityBase {
 
 		private final String text;
 
-		private ProcessingCategory (final String text) {
+		private ProcessingCategory(final String text) {
 			this.text = text;
 		}
 
@@ -132,7 +132,7 @@ public class SeOperationHistory extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date expirationFrom;
 
-    /**
+	/**
 	 * 有効期限To
 	 */
 	@Column(nullable = false)
