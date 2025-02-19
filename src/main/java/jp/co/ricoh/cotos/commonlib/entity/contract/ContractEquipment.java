@@ -362,4 +362,11 @@ public class ContractEquipment extends EntityBase {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 30, allowableValues = "range[0,255]")
 	private String arcsMaintenanceForm;
+
+	/**
+	 * Isys-One連携済設置日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "Isys-One連携済設置日", required = false, position = 31)
+	private Date isysoneLinkagedInstallationDate;
 }
