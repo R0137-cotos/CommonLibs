@@ -130,6 +130,16 @@ public class DateCalcPatternUtil {
 				} else {
 					addCalucDay(trgetCalendar, Calendar.DATE, addDay);
 					addCalucBusinessDay(trgetCalendar, addDay, businessDayType, businessDayFlg);
+
+					// 以下条件の場合、営業日リスト[DateCalcDay-1](= DateCalcDayの営業日) を設定する
+					// 1．日付計算パターンマスタ．date_calc_dayに+/-がつかない
+					// 2．日付計算パターンマスタ．date_calc_business_day_flg = 1
+					if ((!PLUS.equals(addDay.substring(0, 1)) && !MINUS.equals(addDay.substring(0, 1))) && (businessDayFlg == 1)) {
+						// 営業日リストを取得する
+						List<Date> businessDayList = businessDayUtil.findBusinessDayCalendarForSpecifiedMonth(trgetCalendar);
+						// 営業日リストのcalcValue-1のデータを計算対象カレンダーオブジェクトに設定する
+						trgetCalendar.setTime(businessDayList.get(Integer.parseInt(addDay) - 1));
+					}
 				}
 				monthCalucBusinessDayFlg = false;
 			}
