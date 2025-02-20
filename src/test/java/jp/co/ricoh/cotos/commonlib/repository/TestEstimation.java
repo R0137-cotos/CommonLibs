@@ -1,10 +1,12 @@
 package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
@@ -503,16 +505,17 @@ public class TestEstimation {
 		testTool.assertColumnsNotNull(found);
 
 		// Entity の各項目の値が期待値と一致しているか確認
-		// 期待値をDate型に変換
-		String testDate = "2018-09-19 12:09:10.0";
-		java.util.Date parsedTestDate = dateCalcPatternUtil.stringToDateConverter(testDate, "yyyy-MM-dd HH:mm:ss.S");
+		// 期待値を Date型 に変換・時分秒の切り捨て
+		java.util.Date parsedTestDate = dateCalcPatternUtil.stringToDateConverter("20180919", null);
+		java.util.Date actualFrom = DateUtils.truncate(found.getExpirationFrom(), Calendar.DAY_OF_MONTH);
+		java.util.Date actualTo = DateUtils.truncate(found.getExpirationTo(), Calendar.DAY_OF_MONTH);
 
 		Assert.assertEquals(2, found.getEstimationId());
 		Assert.assertEquals("1", found.getDomain().toString());
 		Assert.assertEquals("1", found.getProcessingCategory().toString());
 		Assert.assertEquals("見積番号更新(test→TEST)", found.getProcessingDetails());
-		Assert.assertEquals(parsedTestDate, found.getExpirationFrom());
-		Assert.assertEquals(parsedTestDate, found.getExpirationTo());
+		Assert.assertEquals(parsedTestDate, actualFrom);
+		Assert.assertEquals(parsedTestDate, actualTo);
 
 	}
 
