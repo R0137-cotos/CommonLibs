@@ -15,8 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ibm.icu.text.SimpleDateFormat;
-
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
@@ -39,6 +37,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
+import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ElectronicContractInfoRepository;
@@ -126,6 +125,9 @@ public class TestEstimation {
 
 	@Autowired
 	SeOperationHistoryRepository seOperationHistoryRepository;
+
+	@Autowired
+	private DateCalcPatternUtil dateCalcPatternUtil;
 
 	@Autowired
 	DBUtil dbutil;
@@ -503,15 +505,14 @@ public class TestEstimation {
 		// Entity の各項目の値が期待値と一致しているか確認
 		// 期待値をDate型に変換
 		String testDate = "2018-09-19 12:09:10.0";
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		java.util.Date testDateFormat = format.parse(testDate);
+		java.util.Date parsedTestDate = dateCalcPatternUtil.stringToDateConverter(testDate, "yyyy-MM-dd HH:mm:ss.S");
 
 		Assert.assertEquals(2, found.getEstimationId());
 		Assert.assertEquals("1", found.getDomain().toString());
 		Assert.assertEquals("1", found.getProcessingCategory().toString());
 		Assert.assertEquals("見積番号更新(test→TEST)", found.getProcessingDetails());
-		Assert.assertEquals(testDateFormat, found.getExpirationFrom());
-		Assert.assertEquals(testDateFormat, found.getExpirationTo());
+		Assert.assertEquals(parsedTestDate, found.getExpirationFrom());
+		Assert.assertEquals(parsedTestDate, found.getExpirationTo());
 
 	}
 
