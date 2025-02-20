@@ -83,10 +83,8 @@ public class SeOperationHistory extends EntityBase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "se_operation_history_seq")
-	@Column(nullable = false)
-	@NotNull
 	@SequenceGenerator(name = "se_operation_history_seq", sequenceName = "se_operation_history_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, readOnly = true)
+	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, readOnly = true, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -103,7 +101,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "ドメイン", required = true, allowableValues = "RSI(\"1\"), ROC(\"2\"), OTHER(\"3\")", example = "1", position = 3, readOnly = true)
+	@ApiModelProperty(value = "ドメイン", required = true, allowableValues = "RSI(\"1\"), ROC(\"2\"), OTHER(\"3\")", example = "1", position = 3)
 	private Domain domain;
 
 	/**
@@ -111,7 +109,7 @@ public class SeOperationHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4, readOnly = true)
+	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4)
 	private ProcessingCategory processingCategory;
 
 	/**

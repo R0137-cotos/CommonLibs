@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ibm.icu.text.SimpleDateFormat;
+
 import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
@@ -35,6 +37,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
@@ -52,6 +55,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepositor
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.SeOperationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
 
 /**
@@ -119,6 +123,9 @@ public class TestEstimation {
 
 	@Autowired
 	ElectronicContractInfoRepository electronicContractInfoRepository;
+
+	@Autowired
+	SeOperationHistoryRepository seOperationHistoryRepository;
 
 	@Autowired
 	DBUtil dbutil;
@@ -479,6 +486,32 @@ public class TestEstimation {
 		itemEstimationRepository.save(found);
 		ItemEstimation foundUpd = itemEstimationRepository.findOne(401L);
 		Assert.assertEquals("正しく更新されていること", "テストコード", foundUpd.getMakerItemCode());
+
+	}
+
+	@Test
+	public void SeOperationHistoryRepositoryのテスト() throws Exception {
+
+		SeOperationHistory found = seOperationHistoryRepository.findOne(1234L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// Entity の各項目の値が期待値と一致しているか確認
+		// 期待値をDate型に変換
+		String testDate = "2018-09-19 12:09:10.0";
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		java.util.Date testDateFormat = format.parse(testDate);
+
+		Assert.assertEquals(2, found.getEstimationId());
+		Assert.assertEquals("1", found.getDomain().toString());
+		Assert.assertEquals("1", found.getProcessingCategory().toString());
+		Assert.assertEquals("見積番号更新(test→TEST)", found.getProcessingDetails());
+		Assert.assertEquals(testDateFormat, found.getExpirationFrom());
+		Assert.assertEquals(testDateFormat, found.getExpirationTo());
 
 	}
 
