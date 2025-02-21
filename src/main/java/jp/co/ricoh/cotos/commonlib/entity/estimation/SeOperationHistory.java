@@ -3,7 +3,6 @@ package jp.co.ricoh.cotos.commonlib.entity.estimation;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -91,7 +90,6 @@ public class SeOperationHistory extends EntityBase {
 	 * 見積ID
 	 */
 	@Min(0)
-	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
@@ -99,7 +97,6 @@ public class SeOperationHistory extends EntityBase {
 	/**
 	 * ドメイン
 	 */
-	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "ドメイン", required = true, allowableValues = "RSI(\"1\"), ROC(\"2\"), OTHER(\"3\")", example = "1", position = 3)
 	private Domain domain;
@@ -107,7 +104,6 @@ public class SeOperationHistory extends EntityBase {
 	/**
 	 * 処理区分
 	 */
-	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4)
 	private ProcessingCategory processingCategory;
@@ -116,7 +112,6 @@ public class SeOperationHistory extends EntityBase {
 	 * 処理内容
 	 */
 	@Size(max = 255)
-	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "処理内容", required = true, position = 5, allowableValues = "range[0,255]")
 	private String processingDetails;
@@ -124,19 +119,17 @@ public class SeOperationHistory extends EntityBase {
 	/**
 	 * 有効期限From
 	 */
-	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "有効期限From", required = true, position = 6)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date expirationFrom;
 
 	/**
 	 * 有効期限To
 	 */
-	@Column(nullable = false)
 	@NotNull
 	@ApiModelProperty(value = "有効期限To", required = true, position = 7)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date expirationTo;
 
 }
