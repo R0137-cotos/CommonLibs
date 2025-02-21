@@ -35,7 +35,9 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
+import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ElectronicContractInfoRepository;
@@ -52,6 +54,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepositor
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.SeOperationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
 
 /**
@@ -119,6 +122,12 @@ public class TestEstimation {
 
 	@Autowired
 	ElectronicContractInfoRepository electronicContractInfoRepository;
+
+	@Autowired
+	SeOperationHistoryRepository seOperationHistoryRepository;
+
+	@Autowired
+	private DateCalcPatternUtil dateCalcPatternUtil;
 
 	@Autowired
 	DBUtil dbutil;
@@ -479,6 +488,31 @@ public class TestEstimation {
 		itemEstimationRepository.save(found);
 		ItemEstimation foundUpd = itemEstimationRepository.findOne(401L);
 		Assert.assertEquals("正しく更新されていること", "テストコード", foundUpd.getMakerItemCode());
+
+	}
+
+	@Test
+	public void SeOperationHistoryRepositoryのテスト() throws Exception {
+
+		SeOperationHistory found = seOperationHistoryRepository.findOne(1234L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// Entity の各項目の値が期待値と一致しているか確認
+		// 期待値を Date型 に変換
+		java.util.Date parsedTestDateFrom = dateCalcPatternUtil.stringToDateConverter("20180919", null);
+		java.util.Date parsedTestDateTo = dateCalcPatternUtil.stringToDateConverter("20240919", null);
+
+		Assert.assertEquals(2, found.getEstimationId());
+		Assert.assertEquals("1", found.getDomain().toString());
+		Assert.assertEquals("1", found.getProcessingCategory().toString());
+		Assert.assertEquals("見積番号更新(test→TEST)", found.getProcessingDetails());
+		Assert.assertEquals(parsedTestDateFrom, found.getExpirationFrom());
+		Assert.assertEquals(parsedTestDateTo, found.getExpirationTo());
 
 	}
 
