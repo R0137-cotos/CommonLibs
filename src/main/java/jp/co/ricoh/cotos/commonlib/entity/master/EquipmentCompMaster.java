@@ -123,4 +123,19 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	@Size(max = 255)
 	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 12, allowableValues = "range[0,255]")
 	private String arcsMaintenanceForm;
+
+	/**
+	 * メーカーコード
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "メーカーコード", required = false, position = 13, allowableValues = "range[0,255]")
+	private String makerCode;
+
+	/**
+	 * 機種削除可能フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "機種削除可能フラグ", required = false, position = 14, allowableValues = "range[0,9]")
+	private Integer equipmentDeletableFlg;
 }

@@ -2,6 +2,7 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -92,4 +93,12 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	@OneToMany(mappedBy = "managedContractEquipmentStatus")
 	@ApiModelProperty(value = "契約機種品種紐づけシーケンス", required = false, position = 8)
 	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
+
+	/**
+	 * 機器削除契約ID
+	 */
+	@Min(0)
+	@Column(nullable = false)
+	@ApiModelProperty(value = "機器削除契約ID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
+	private Long equipmentDeletedContractId;
 }
