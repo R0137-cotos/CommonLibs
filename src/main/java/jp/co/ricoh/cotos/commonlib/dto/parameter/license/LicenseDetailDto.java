@@ -63,7 +63,7 @@ public class LicenseDetailDto extends DtoBase {
 	/**
 	 * 情報区分
 	 */
-	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\"), 乗換え減数(\"8\")", position = 9)
+	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\"), 乗換え減数(\"8\"), 支払周期変更(\"9\")", position = 9)
 	private InfoDiv infoDiv;
 
 }
