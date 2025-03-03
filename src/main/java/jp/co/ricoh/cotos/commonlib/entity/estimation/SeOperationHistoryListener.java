@@ -23,7 +23,7 @@ public class SeOperationHistoryListener {
 	 * @param SeOperationHistory
 	 */
 	@PrePersist
-	public void automaticSetExpiration(SeOperationHistory seOperationHistory) {
+	public void grantExpiration(SeOperationHistory seOperationHistory) {
 
 		// 有効期限From
 		LocalDate localDate = dateUtil.getSystemDate();
