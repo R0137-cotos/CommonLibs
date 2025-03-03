@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.4.0 (20/02/2025)
+- [**closed**] #28049_[障害対応]メール送信バッチ営業日対応 [#2803](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2803)
+- [**closed**] 28636_契約機種にIsysOne連携済設置日を追加 [#2799](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2799)
+
+---
+
 ## v8.2.0 (23/01/2025)
 - [**closed**] #28522_カスタムデシリアライザクラスを作成 [#2789](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2789)
 - [**closed**] #28210 価格改定時の契約変更不可対応 [#2788](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2788)
@@ -252,8 +258,3 @@
 - [**closed**] #19181_添付日付の日付自動設定を削除。 [#2385](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2385)
 - [**closed**] #18144 商品(契約用)の移行用拡張項目にPC台数を追加 [#2383](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2383)
 - [**closed**] #18915 見積（商品）移行項目にPC台数追加 [#2380](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2380)
-
----
-
-## v6.14.0 (08/06/2023)
-- [**closed**] 18695 商品マスタにカラム：サービスコード追加 リリースブランチマージ [#2382](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2382)
