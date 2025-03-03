@@ -7,4 +7,5 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
 
 @Repository
 public interface SeOperationHistoryRepository extends CrudRepository<SeOperationHistory, Long> {
+	public SeOperationHistory findByEstimationId(long estimationId);
 }
