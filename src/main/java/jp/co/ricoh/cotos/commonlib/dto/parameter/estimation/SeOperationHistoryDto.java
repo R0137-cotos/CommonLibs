@@ -17,7 +17,7 @@ public class SeOperationHistoryDto extends DtoBase {
 	 * 見積ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@ApiModelProperty(value = "見積ID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
 
 	/**
