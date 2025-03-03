@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.entity.estimation;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -90,21 +90,21 @@ public class SeOperationHistory extends EntityBase {
 	 * 見積ID
 	 */
 	@Min(0)
-	@NotNull
+	@Column(nullable = false)
 	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
 
 	/**
 	 * ドメイン
 	 */
-	@NotNull
+	@Column(nullable = false)
 	@ApiModelProperty(value = "ドメイン", required = true, allowableValues = "RSI(\"1\"), ROC(\"2\"), OTHER(\"3\")", example = "1", position = 3)
 	private Domain domain;
 
 	/**
 	 * 処理区分
 	 */
-	@NotNull
+	@Column(nullable = false)
 	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4)
 	private ProcessingCategory processingCategory;
 
@@ -112,14 +112,14 @@ public class SeOperationHistory extends EntityBase {
 	 * 処理内容
 	 */
 	@Size(max = 255)
-	@NotNull
+	@Column(nullable = false)
 	@ApiModelProperty(value = "処理内容", required = true, position = 5, allowableValues = "range[0,255]")
 	private String processingDetails;
 
 	/**
 	 * 有効期限From
 	 */
-	@NotNull
+	@Column(nullable = false)
 	@ApiModelProperty(value = "有効期限From", required = true, position = 6)
 	@Temporal(TemporalType.DATE)
 	private Date expirationFrom;
@@ -127,7 +127,7 @@ public class SeOperationHistory extends EntityBase {
 	/**
 	 * 有効期限To
 	 */
-	@NotNull
+	@Column(nullable = false)
 	@ApiModelProperty(value = "有効期限To", required = true, position = 7)
 	@Temporal(TemporalType.DATE)
 	private Date expirationTo;
