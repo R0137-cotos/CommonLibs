@@ -1007,7 +1007,7 @@ public class TestListener {
 		seOperationHistoryRepository.save(seOperationHistory);
 
 		// 見積IDをキーにデータ取得
-		SeOperationHistory getSeOperationHistory = seOperationHistoryRepository.findByEstimationId(1L);
+		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findByEstimationId(1L);
 
 		// 有効期限From
 		LocalDate localDate = dateUtil.getSystemDate();
@@ -1016,8 +1016,8 @@ public class TestListener {
 		LocalDate localDateNextMonth = localDate.plus(1, ChronoUnit.MONTHS);
 		Date parsedExpirationTo = dateUtil.convertLocalDate2Date(localDateNextMonth);
 
-		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom, getSeOperationHistory.getExpirationFrom());
-		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, getSeOperationHistory.getExpirationTo());
+		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom, selectedSeOperationHistory.getExpirationFrom());
+		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, selectedSeOperationHistory.getExpirationTo());
 	}
 
 	@Test
@@ -1042,7 +1042,7 @@ public class TestListener {
 		seOperationHistoryRepository.save(seOperationHistory);
 
 		// 見積IDをキーにデータ取得
-		SeOperationHistory getSeOperationHistory = seOperationHistoryRepository.findByEstimationId(1L);
+		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findByEstimationId(1L);
 
 		// 有効期限From
 		LocalDate localDate2 = dateUtil.getSystemDate();
@@ -1051,7 +1051,7 @@ public class TestListener {
 		LocalDate localDateNextMonth = localDate2.plus(1, ChronoUnit.MONTHS);
 		Date parsedExpirationTo = dateUtil.convertLocalDate2Date(localDateNextMonth);
 
-		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom2, getSeOperationHistory.getExpirationFrom());
-		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, getSeOperationHistory.getExpirationTo());
+		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom2, selectedSeOperationHistory.getExpirationFrom());
+		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, selectedSeOperationHistory.getExpirationTo());
 	}
 }
