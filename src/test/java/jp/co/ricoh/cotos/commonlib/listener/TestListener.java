@@ -1,6 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.listener;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -34,12 +36,17 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory.Domain;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory.ProcessingCategory;
 import jp.co.ricoh.cotos.commonlib.entity.master.DummyUserMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvEmployeeMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.VKjbMaster.DepartmentDiv;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
 import jp.co.ricoh.cotos.commonlib.logic.check.CheckUtil;
+import jp.co.ricoh.cotos.commonlib.logic.date.DateUtil;
+import jp.co.ricoh.cotos.commonlib.logic.dateCalcPattern.DateCalcPatternUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractInstallationLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractPicAccCeEmpRepository;
@@ -54,6 +61,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationReposit
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationPicSaEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.SeOperationHistoryRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.DummyUserMasterRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.MvEmployeeMasterRepository;
 
@@ -112,7 +120,16 @@ public class TestListener {
 	ContractPicMntCeEmpRepository contractPicMntCeEmpRepository;
 
 	@Autowired
+	SeOperationHistoryRepository seOperationHistoryRepository;
+
+	@Autowired
 	CheckUtil checkUtil;
+
+	@Autowired
+	DateUtil dateUtil;
+
+	@Autowired
+	DateCalcPatternUtil dateCalcPatternUtil;
 
 	// システム連携ID
 	static final String MOM_KJB_SYSTEM_ID = "000000000433091";
@@ -969,5 +986,73 @@ public class TestListener {
 			Assert.assertEquals(messageInfo.get(0).getErrorId(), "ROT00008");
 			Assert.assertEquals(messageInfo.get(0).getErrorMessage(), "契約担当CE社員に存在しないMoM社員が設定されています。");
 		}
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 正常系_SeOperationHistoryListenerのテスト_インサート() {
+
+		SeOperationHistory seOperationHistory = new SeOperationHistory();
+
+		// 型変換したテストデータ
+		Domain testDataDomain = Domain.fromString("1");
+		ProcessingCategory testDataProcessingCategory = ProcessingCategory.fromString("1");
+
+		seOperationHistory.setId(0);
+		seOperationHistory.setEstimationId(1L);
+		seOperationHistory.setDomain(testDataDomain);
+		seOperationHistory.setProcessingCategory(testDataProcessingCategory);
+		seOperationHistory.setProcessingDetails("見積番号更新(test→TEST)");
+
+		seOperationHistoryRepository.save(seOperationHistory);
+
+		// 見積IDをキーにデータ取得
+		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findOne(seOperationHistory.getId());
+
+		// 有効期限From
+		LocalDate localDate = dateUtil.getSystemDate();
+		Date parsedExpirationFrom = dateUtil.convertLocalDate2Date(localDate);
+		// 有効期限To
+		LocalDate localDateNextMonth = localDate.plus(1, ChronoUnit.MONTHS);
+		Date parsedExpirationTo = dateUtil.convertLocalDate2Date(localDateNextMonth);
+
+		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom, selectedSeOperationHistory.getExpirationFrom());
+		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, selectedSeOperationHistory.getExpirationTo());
+	}
+
+	@Test
+	@WithMockCustomUser
+	public void 正常系_SeOperationHistoryListenerのテスト_アップデート() {
+
+		SeOperationHistory seOperationHistory = new SeOperationHistory();
+
+		// 型変換したテストデータ
+		Domain testDataDomain = Domain.fromString("1");
+		ProcessingCategory testDataProcessingCategory = ProcessingCategory.fromString("1");
+		Date parsedTestDateFrom = dateCalcPatternUtil.stringToDateConverter("20180919", null);
+		Date parsedTestDateTo = dateCalcPatternUtil.stringToDateConverter("20181019", null);
+
+		seOperationHistory.setId(0);
+		seOperationHistory.setEstimationId(1L);
+		seOperationHistory.setDomain(testDataDomain);
+		seOperationHistory.setProcessingCategory(testDataProcessingCategory);
+		seOperationHistory.setProcessingDetails("見積番号更新(test→TEST)");
+		seOperationHistory.setExpirationFrom(parsedTestDateFrom);
+		seOperationHistory.setExpirationTo(parsedTestDateTo);
+
+		seOperationHistoryRepository.save(seOperationHistory);
+
+		// 見積IDをキーにデータ取得
+		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findOne(seOperationHistory.getId());
+
+		// 有効期限From
+		LocalDate localDate = dateUtil.getSystemDate();
+		Date parsedExpirationFrom = dateUtil.convertLocalDate2Date(localDate);
+		// 有効期限To
+		LocalDate localDateNextMonth = localDate.plus(1, ChronoUnit.MONTHS);
+		Date parsedExpirationTo = dateUtil.convertLocalDate2Date(localDateNextMonth);
+
+		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom, selectedSeOperationHistory.getExpirationFrom());
+		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, selectedSeOperationHistory.getExpirationTo());
 	}
 }

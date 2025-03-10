@@ -14,8 +14,12 @@ import jp.co.ricoh.cotos.commonlib.logic.date.DateUtil;
 @Component
 public class SeOperationHistoryListener {
 
+	private static DateUtil dateUtil;
+
 	@Autowired
-	DateUtil dateUtil;
+	public void setDateUtil(DateUtil dateUtil) {
+		SeOperationHistoryListener.dateUtil = dateUtil;
+	}
 
 	/**
 	 * 有効期限From、有効期限Toを自動的に付与する。
