@@ -998,8 +998,8 @@ public class TestListener {
 		Domain testDataDomain = Domain.fromString("1");
 		ProcessingCategory testDataProcessingCategory = ProcessingCategory.fromString("1");
 
+		seOperationHistory.setId(0);
 		seOperationHistory.setEstimationId(1L);
-		seOperationHistory.setVersion(1);
 		seOperationHistory.setDomain(testDataDomain);
 		seOperationHistory.setProcessingCategory(testDataProcessingCategory);
 		seOperationHistory.setProcessingDetails("見積番号更新(test→TEST)");
@@ -1007,7 +1007,7 @@ public class TestListener {
 		seOperationHistoryRepository.save(seOperationHistory);
 
 		// 見積IDをキーにデータ取得
-		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findByEstimationId(1L);
+		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findOne(seOperationHistory.getId());
 
 		// 有効期限From
 		LocalDate localDate = dateUtil.getSystemDate();
@@ -1029,29 +1029,30 @@ public class TestListener {
 		// 型変換したテストデータ
 		Domain testDataDomain = Domain.fromString("1");
 		ProcessingCategory testDataProcessingCategory = ProcessingCategory.fromString("1");
-		Date parsedTestDate = dateCalcPatternUtil.stringToDateConverter("20180919", null);
+		Date parsedTestDateFrom = dateCalcPatternUtil.stringToDateConverter("20180919", null);
+		Date parsedTestDateTo = dateCalcPatternUtil.stringToDateConverter("20181019", null);
 
+		seOperationHistory.setId(0);
 		seOperationHistory.setEstimationId(1L);
-		seOperationHistory.setVersion(1);
 		seOperationHistory.setDomain(testDataDomain);
 		seOperationHistory.setProcessingCategory(testDataProcessingCategory);
 		seOperationHistory.setProcessingDetails("見積番号更新(test→TEST)");
-		seOperationHistory.setExpirationFrom(parsedTestDate);
-		seOperationHistory.setExpirationTo(parsedTestDate);
+		seOperationHistory.setExpirationFrom(parsedTestDateFrom);
+		seOperationHistory.setExpirationTo(parsedTestDateTo);
 
 		seOperationHistoryRepository.save(seOperationHistory);
 
 		// 見積IDをキーにデータ取得
-		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findByEstimationId(1L);
+		SeOperationHistory selectedSeOperationHistory = seOperationHistoryRepository.findOne(seOperationHistory.getId());
 
 		// 有効期限From
-		LocalDate localDate2 = dateUtil.getSystemDate();
-		Date parsedExpirationFrom2 = dateUtil.convertLocalDate2Date(localDate2);
+		LocalDate localDate = dateUtil.getSystemDate();
+		Date parsedExpirationFrom = dateUtil.convertLocalDate2Date(localDate);
 		// 有効期限To
-		LocalDate localDateNextMonth = localDate2.plus(1, ChronoUnit.MONTHS);
+		LocalDate localDateNextMonth = localDate.plus(1, ChronoUnit.MONTHS);
 		Date parsedExpirationTo = dateUtil.convertLocalDate2Date(localDateNextMonth);
 
-		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom2, selectedSeOperationHistory.getExpirationFrom());
+		Assert.assertEquals("有効期限Fromが正しく取得されること", parsedExpirationFrom, selectedSeOperationHistory.getExpirationFrom());
 		Assert.assertEquals("有効期限Toが正しく取得されること", parsedExpirationTo, selectedSeOperationHistory.getExpirationTo());
 	}
 }
