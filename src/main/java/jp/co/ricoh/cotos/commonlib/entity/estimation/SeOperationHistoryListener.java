@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ public class SeOperationHistoryListener {
 	 *
 	 * @param SeOperationHistory
 	 */
+	@PreUpdate
 	@PrePersist
 	public void grantExpiration(SeOperationHistory seOperationHistory) {
 
