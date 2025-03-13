@@ -22,7 +22,7 @@ public class SeOperationHistoryDto extends DtoBase {
 	/**
 	 * 処理区分
 	 */
-	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4)
+	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "range[0,255]", position = 4)
 	private String processingCategory;
 
 	/**
