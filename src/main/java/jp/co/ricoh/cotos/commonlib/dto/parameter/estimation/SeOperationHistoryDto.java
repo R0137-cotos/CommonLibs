@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
-import jp.co.ricoh.cotos.commonlib.entity.estimation.SeOperationHistory.ProcessingCategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,7 +23,7 @@ public class SeOperationHistoryDto extends DtoBase {
 	 * 処理区分
 	 */
 	@ApiModelProperty(value = "処理区分", required = true, allowableValues = "insert(\"1\"), update(\"2\"), delete(\"3\")", example = "1", position = 4)
-	private ProcessingCategory processingCategory;
+	private String processingCategory;
 
 	/**
 	 * 処理内容
