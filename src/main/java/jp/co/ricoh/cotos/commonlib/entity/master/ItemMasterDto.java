@@ -289,4 +289,10 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
+
+	/**
+	 * 月割対応品種マスタID
+	 */
+	@ApiModelProperty(value = "月割対応品種マスタID", required = false, position = 41, allowableValues = "range[0,9999999999999999999]")
+	private Long monthlyRateItemMasterId;
 }
