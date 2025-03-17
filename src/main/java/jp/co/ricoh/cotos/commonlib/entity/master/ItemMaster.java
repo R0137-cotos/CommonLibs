@@ -755,8 +755,8 @@ public class ItemMaster extends EntityBaseMaster {
 	private Long priceRevisionProcessGrpId;
 
 	/**
-	 * 月割対応品種マスタID
+	 * 月割品種対応初期費品種マスタID
 	 */
-	@ApiModelProperty(value = "月割対応品種マスタID", required = false, position = 64, allowableValues = "range[0,9999999999999999999]")
-	private Long monthlyRateItemMasterId;
+	@ApiModelProperty(value = "月割品種対応初期費品種マスタID", required = false, position = 64, allowableValues = "range[0,9999999999999999999]")
+	private Long prorationLinkedInitialItemMasterId;
 }
