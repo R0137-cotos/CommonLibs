@@ -16,5 +16,5 @@ public interface FileImportErrorDetailsRepository extends CrudRepository<FileImp
 			+ "order by id", nativeQuery = true)
 	public List<FileImportErrorDetails> findByFileImportManagementOrderById(@Param("fileKindManagementMasterId") long fileKindManagementMasterId);
 
-	public List<FileImportErrorDetails> findTop100ByFileImportManagementId(long fileImportManagementId);
+	public List<FileImportErrorDetails> findTop100ByFileImportManagementIdOrderById(long fileImportManagementId);
 }
