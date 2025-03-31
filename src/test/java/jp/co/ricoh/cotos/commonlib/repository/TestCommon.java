@@ -258,6 +258,9 @@ public class TestCommon {
 		Assert.assertEquals(foundList.get(0).getId(), 2);
 		Assert.assertEquals(foundList.get(1).getId(), 10);
 
+		List<FileImportErrorDetails> foundList2 = fileImportErrorDetailsRepository.findTop100ByFileImportManagementId(11L);
+		// Entityが指定件数取得できていることを確認する
+		Assert.assertEquals(foundList2.size(), 100);
 	}
 
 	@Test
