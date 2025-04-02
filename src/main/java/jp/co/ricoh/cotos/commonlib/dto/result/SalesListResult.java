@@ -9,7 +9,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import lombok.Data;
 
@@ -265,4 +264,10 @@ public class SalesListResult {
 	 */
 	@ApiModelProperty(value = "母店手数料金額", required = false, position = 40)
 	private BigDecimal motherStoreCommissionAmount;
+
+	/**
+	 * 商品区分
+	 */
+	@ApiModelProperty(value = "商品区分", required = true, position = 41)
+	private String rocProductDiv;
 }
