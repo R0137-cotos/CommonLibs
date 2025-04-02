@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import lombok.Data;
 
