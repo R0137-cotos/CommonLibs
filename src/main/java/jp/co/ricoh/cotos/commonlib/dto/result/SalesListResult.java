@@ -269,6 +269,6 @@ public class SalesListResult {
 	/**
 	 * 商品区分
 	 */
-	@ApiModelProperty(value = "商品区分", required = true, position = 41)
+	@ApiModelProperty(value = "商品区分", required = false, position = 41)
 	private String rocProductDiv;
 }
