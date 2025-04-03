@@ -9,7 +9,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
-import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import lombok.Data;
 
@@ -270,5 +269,5 @@ public class SalesListResult {
 	 * 商品区分
 	 */
 	@ApiModelProperty(value = "商品区分", required = false, position = 41)
-	private String rocProductDiv;
+	private String productClassDiv;
 }

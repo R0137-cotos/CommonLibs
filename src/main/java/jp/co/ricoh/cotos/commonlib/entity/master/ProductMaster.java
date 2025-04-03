@@ -17,7 +17,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -361,10 +360,10 @@ public class ProductMaster extends EntityBaseMaster {
 	private Date contractChangeProhibitedPeriodTo;
 
 	/**
-	 * サブ契約種類区分
+	 * サブ商品種類区分
 	 */
-	@ApiModelProperty(value = "サブ契約種類区分", required = false, position = 38, allowableValues = "range[0,255]")
-	private String sub_contract_class_div;
+	@ApiModelProperty(value = "サブ商品種類区分", required = false, position = 38, allowableValues = "range[0,255]")
+	private String subProductClassDiv;
 
 	/**
 	 * 品種明細情報取込フラグ
@@ -372,19 +371,18 @@ public class ProductMaster extends EntityBaseMaster {
 	@Max(9)
 	@Min(0)
 	@ApiModelProperty(value = "品種明細情報取込フラグ", required = false, position = 39, allowableValues = "range[0,9]")
-	private Integer item_detail_info_import_flg;
+	private Integer itemDetailInfoImportFlg;
 
 	/**
 	 * 取込ファイルバージョン
 	 */
-	@Version
 	@ApiModelProperty(value = "取込ファイルバージョン", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
-	private Long import_file_version;
+	private Long ImportFileVersion;
 
 	/**
 	 * 取込ファイル格納URL
 	 */
 	@Size(max = 255)
 	@ApiModelProperty(value = "取込ファイル格納URL", required = false, position = 41, allowableValues = "range[0,255]")
-	private String import_file_url;
+	private String ImportFileUrl;
 }
