@@ -377,12 +377,12 @@ public class ProductMaster extends EntityBaseMaster {
 	 * 取込ファイルバージョン
 	 */
 	@ApiModelProperty(value = "取込ファイルバージョン", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
-	private Long ImportFileVersion;
+	private Long importFileVersion;
 
 	/**
 	 * 取込ファイル格納URL
 	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "取込ファイル格納URL", required = false, position = 41, allowableValues = "range[0,255]")
-	private String ImportFileUrl;
+	@Size(max = 1000)
+	@ApiModelProperty(value = "取込ファイル格納URL", required = false, position = 41, allowableValues = "range[0,1000]")
+	private String importFileUrl;
 }
