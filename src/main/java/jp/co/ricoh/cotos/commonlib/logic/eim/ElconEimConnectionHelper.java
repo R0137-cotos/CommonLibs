@@ -35,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.requests.PostCotosDocumentR
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.ApiAuthResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentDeleteResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentGetResponse;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.GetSessionResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PostCotosDocumentResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.ElconDocumentRegistrationParameter;
@@ -92,6 +93,23 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("X-Application-Id", elconEimConnectionProperties.getXApplicationId());
 		headers.add("X-Application-Key", elconEimConnectionProperties.getXApplicationKey());
+		headers.add("X-Site-Id", elconEimConnectionProperties.getXSiteId());
+
+		return headers;
+	}
+
+	/**
+	 * セッション取得用ヘッダー情報作成
+	 * 
+	 * @param apiAuthRes
+	 * @return HttpHeaders
+	 */
+	@Override
+	protected HttpHeaders createHttpHeadersGetSession(ApiAuthResponse apiAuthRes) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("X-Site-Id", elconEimConnectionProperties.getXSiteId());
 
 		return headers;
@@ -183,11 +201,15 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			// アプリケーション認証APIコール
 			ApiAuthResponse apiAuthRes = apiAuth(restForEim);
 
+			// セッション取得APIコール
+			GetSessionResponse getSessionRes = getSession(restForEim, apiAuthRes);
+
 			// ヘッダー設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("content-type", "application/json; charset=UTF-8");
 			headers.add("X-Site-Id", elconEimConnectionProperties.getXSiteId());
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
 			// リクエストボディの設定
 			DocumentDeleteRequestSystem systemDto = new DocumentDeleteRequestSystem();
@@ -268,7 +290,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 
 			// APIコール
 			log.info("電子計契約EIM ファイルアップロード準備APIコール");
-			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + registParam.getFileName();
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + registParam.getReportName() + ".pdf";
 			log.info("＜Request＞=================================================");
 			log.info("url     : " + url);
 			log.info("headers : " + httpEntity.getHeaders());
@@ -310,15 +332,16 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	}
 
 	/**
-	* [GET]電子契約EIMのファイルアップロードAPI
+	* [PUT]電子契約EIMのファイルアップロードAPI
 	*
 	* @param RestTemplate
 	* @param アプリ認証レスポンス
+	* @param セッション取得レスポンス
 	* @param ファイルアップロード準備レスポンス
 	* @param 電子契約文書登録用パラメータDto
 	*/
 	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
-	public void fileUpload(RestTemplate restForEim, ApiAuthResponse apiAuthRes, PreparationFileUploadResponse preparaFileUpRes, ElconDocumentRegistrationParameter registParam) {
+	public void fileUpload(RestTemplate restForEim, ApiAuthResponse apiAuthRes, GetSessionResponse getSessionRes, PreparationFileUploadResponse preparaFileUpRes, ElconDocumentRegistrationParameter registParam) {
 
 		try {
 			// ヘッダー設定
@@ -328,6 +351,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			headers.add("x-ms-blob-content-disposition", preparaFileUpRes.getHeader().getX_ms_blob_content_disposition());
 			headers.add("x-ms-blob-content-type", preparaFileUpRes.getHeader().getX_ms_blob_content_type());
 			headers.add("x-ms-blob-type", preparaFileUpRes.getHeader().getX_ms_blob_type());
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
 			// APIコール
 			log.info("電子計契約EIM ファイルアップロードAPIコール");
@@ -371,12 +395,13 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 	*
 	* @param RestTemplate
 	* @param アプリ認証レスポンス
+	* @param セッション取得レスポンス
 	* @param 添付ファイルID
 	* @param 電子契約文書登録用パラメータDto
 	* @return レスポンスDTO
 	*/
 	@Retryable(value = { RestClientException.class }, maxAttempts = RETRY_NUM, backoff = @Backoff(delay = RETRY_WAIT_TIME))
-	public PostCotosDocumentResponse postCotosDocument(RestTemplate restForEim, ApiAuthResponse apiAuthRes, String documentUniqueID, ElconDocumentRegistrationParameter paramDto) {
+	public PostCotosDocumentResponse postCotosDocument(RestTemplate restForEim, ApiAuthResponse apiAuthRes, GetSessionResponse getSessionRes, String documentUniqueID, ElconDocumentRegistrationParameter paramDto) {
 		try {
 			// propertiesを取得
 			EimConnectionProperties properties = getProperties();
@@ -385,6 +410,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("content-type", "application/json; charset=UTF-8");
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
 			// リクエストボディの設定
 			PostCotosDocumentRequest requestDto = new PostCotosDocumentRequest();

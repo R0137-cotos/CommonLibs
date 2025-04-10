@@ -42,6 +42,11 @@ public class EimConnectionProperties {
 	String loginPassword;
 
 	/**
+	 * セッション取得のパス
+	 */
+	String getSessionPath;
+
+	/**
 	 * ファイルアップロードのパス
 	 */
 	String fileUploadPath;
