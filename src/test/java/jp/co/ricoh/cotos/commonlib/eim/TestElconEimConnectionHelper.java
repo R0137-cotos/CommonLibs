@@ -142,7 +142,7 @@ public class TestElconEimConnectionHelper {
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
-			paramDto.setFileName("elconEim_test01.pdf");
+			paramDto.setReportName("elconEim_test01");
 			paramDto.setVupContractNo("RJ管理番号1");
 
 			// 実行
