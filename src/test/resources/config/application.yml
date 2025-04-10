@@ -67,6 +67,7 @@ cotos:
     xSiteId: 412e9d2e34884529bf1d0b53ef7f11e4
     xApplicationId: App-Deploy-Reg-dev28-01
     xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
+    getSessionPath: services/v1/users/session
   elconEim:
     hostName: app-dev28
     domainName: ope.azure.ricoh-eim.com
@@ -82,6 +83,7 @@ cotos:
     xSiteId: 412e9d2e34884529bf1d0b53ef7f11e4
     xApplicationId: App-Deploy-Reg-dev28-01
     xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
+    getSessionPath: services/v1/users/session
   rsi:
     contractUrl: dummy_rsi_contract_url
     authUrl: dummy_rsi_auth_url

@@ -214,6 +214,7 @@ public class TestEimConnectionHelper {
 			assertEquals("domainNameが想定通りであること", "ope.azure.ricoh-eim.com", properties.getDomainName());
 			assertEquals("systemAuthPathが想定通りであること", "services/v1/system/auth", properties.getSystemAuthPath());
 			assertEquals("apiAuthPathが想定通りであること", "api/v1/auth", properties.getApiAuthPath());
+			assertEquals("getSessionPathが想定通りであること", "services/v1/users/session", properties.getGetSessionPath());
 			assertEquals("loginUserNameが想定通りであること", "test02", properties.getLoginUserName());
 			assertEquals("loginPasswordが想定通りであること", "P@ssw0rd", properties.getLoginPassword());
 			assertEquals("fileUploadPathが想定通りであること", "services/v1/files/upload", properties.getFileUploadPath());
