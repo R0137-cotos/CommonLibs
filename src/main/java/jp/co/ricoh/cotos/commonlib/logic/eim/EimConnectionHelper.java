@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentUploadRes
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileDownloadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponseHeader;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.GetSessionResponse;
 import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 
 @Component
@@ -106,6 +107,53 @@ public class EimConnectionHelper {
 	}
 
 	/**
+	 * セッション取得
+	 * @param restForEmi
+	 * @param apiAuthRes
+	 * @return セッション取得レスポンスDTO
+	 */
+	public GetSessionResponse getSession(RestTemplate restForEmi, ApiAuthResponse apiAuthRes) {
+		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
+			// HEADER設定
+			HttpHeaders headers = createHttpHeadersGetSession(apiAuthRes);
+			HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+			// セッション取得を要求(GET)
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getGetSessionPath();
+			ResponseEntity<GetSessionResponse> res = restForEmi.exchange(url, HttpMethod.GET, entity, GetSessionResponse.class);
+
+			//ログ出力
+			log.info("URL:" + url);
+			log.info("Cookie:" + headers.get("Cookie"));
+			log.info("X-Site-Id:" + headers.get("X-Site-Id"));
+
+			return res.getBody();
+		} catch (Exception e) {
+			log.error("【APIエラー】  ", e);
+			throw new RestClientException("【APIエラー】セッション取得 Status Code:" + e.getMessage());
+		}
+	}
+
+	/**
+	 * セッション取得用ヘッダー情報作成
+	 * 
+	 * @param apiAuthRes
+	 * @return HttpHeaders
+	 */
+	protected HttpHeaders createHttpHeadersGetSession(ApiAuthResponse apiAuthRes) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("X-Site-Id", eimConnectionProperties.getXSiteId());
+
+		return headers;
+	}
+
+	/**
 	 * 添付ファイルアップロード要求
 	 * @param fileName
 	 * @param fileBody
@@ -119,6 +167,8 @@ public class EimConnectionHelper {
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			// アプリケーション認証
 			ApiAuthResponse apiRes = apiAuth(restForEmi);
+			// セッション取得
+			GetSessionResponse getSessionRes = getSession(restForEmi, apiRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -141,6 +191,7 @@ public class EimConnectionHelper {
 			headers.add("x-ms-blob-content-disposition", headerRes.getX_ms_blob_content_disposition());
 			headers.add("x-ms-blob-content-type", headerRes.getX_ms_blob_content_type());
 			headers.add("x-ms-blob-type", headerRes.getX_ms_blob_type());
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
 			RequestEntity<?> requestEntity = new RequestEntity<>(fileBody, headers, HttpMethod.PUT, new URI(res.getBody().getUrl()));
 			restForEmi.put(new URI(res.getBody().getUrl()), requestEntity);
@@ -163,11 +214,14 @@ public class EimConnectionHelper {
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			// アプリケーション認証
 			ApiAuthResponse apiRes = apiAuth(restForEmi);
+			// セッション取得
+			GetSessionResponse getSessionRes = getSession(restForEmi, apiRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath();
 			RequestEntity<DocumentUploadRequest> requestEntity = new RequestEntity<DocumentUploadRequest>(request, headers, HttpMethod.POST, new URI(url));
@@ -234,11 +288,14 @@ public class EimConnectionHelper {
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			// アプリケーション認証
 			ApiAuthResponse apiRes = apiAuth(restForEmi);
+			// セッション取得
+			GetSessionResponse getSessionRes = getSession(restForEmi, apiRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
 			RequestEntity<?> requestEntity = new RequestEntity<>(request, headers, HttpMethod.PUT, new URI(url));
 			restForEmi.put(new URI(url), requestEntity);
