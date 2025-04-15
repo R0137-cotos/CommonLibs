@@ -27,6 +27,7 @@ import org.springframework.web.client.RestTemplate;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.ApiAuthResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentDeleteResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentGetResponse;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.GetSessionResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PostCotosDocumentResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUploadResponseHeader;
@@ -141,7 +142,7 @@ public class TestElconEimConnectionHelper {
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
-			paramDto.setFileName("elconEim_test01.pdf");
+			paramDto.setReportName("elconEim_test01");
 			paramDto.setVupContractNo("RJ管理番号1");
 
 			// 実行
@@ -168,7 +169,7 @@ public class TestElconEimConnectionHelper {
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
-			paramDto.setFileName(" ");
+			paramDto.setReportName(" ");
 			paramDto.setVupContractNo("RJ管理番号1");
 
 			// 実行
@@ -196,6 +197,8 @@ public class TestElconEimConnectionHelper {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
 			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
+			// セッション取得API
+			GetSessionResponse getSessionResponse = elconEimConnectionHelper.getSession(restForEim, apResponse);
 
 			// パラメータ設定
 			PreparationFileUploadResponseHeader headerResponse = new PreparationFileUploadResponseHeader();
@@ -204,7 +207,7 @@ public class TestElconEimConnectionHelper {
 			headerResponse.setX_ms_blob_type("BlockBlob");
 			PreparationFileUploadResponse preResponse = new PreparationFileUploadResponse();
 			preResponse.setHeader(headerResponse);
-			preResponse.setUrl("https://dev01blob.blob.core.windows.net/412e9d2e34884529bf1d0b53ef7f11e4/911fd1d779fb48c99f00e3afd26e10c5/file?sig=KMEWO3hO0KZlWTKfqNncBP9kzkImiVo3xIm4NWdk%2BrI%3D&se=2024-10-24T17%3A20%3A02Z&sv=2017-04-17&sp=w&sr=b");
+			preResponse.setUrl("https://dev01blob.blob.core.windows.net/412e9d2e34884529bf1d0b53ef7f11e4/aef4d01d8f124c1cb1bc7ee449e0de15/file?sig=L3HV7SqHHEUJ7A3l8WJyWotm4xxQsuvrTsYSGGcMhkI%3D&se=2025-04-10T20%3A01%3A20Z&sv=2017-04-17&sp=w&sr=b");
 
 			byte[] fileBody = Files.readAllBytes(Paths.get("src/test/resources/emi/elconEim_test01.pdf"));
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
@@ -212,7 +215,7 @@ public class TestElconEimConnectionHelper {
 			paramDto.setVupContractNo("RJ管理番号1");
 
 			// 実行
-			elconEimConnectionHelper.fileUpload(restForEim, apResponse, preResponse, paramDto);
+			elconEimConnectionHelper.fileUpload(restForEim, apResponse, getSessionResponse, preResponse, paramDto);
 
 		} catch (RestClientException e) {
 			Assert.fail("エラーが発生した");
@@ -229,6 +232,8 @@ public class TestElconEimConnectionHelper {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
 			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
+			// セッション取得API
+			GetSessionResponse getSessionResponse = elconEimConnectionHelper.getSession(restForEim, apResponse);
 
 			// パラメータ設定
 			PreparationFileUploadResponseHeader headerResponse = new PreparationFileUploadResponseHeader();
@@ -246,7 +251,7 @@ public class TestElconEimConnectionHelper {
 			paramDto.setVupContractNo("RJ管理番号1");
 
 			// 実行
-			elconEimConnectionHelper.fileUpload(restForEim, apResponse, preResponse, paramDto);
+			elconEimConnectionHelper.fileUpload(restForEim, apResponse, getSessionResponse, preResponse, paramDto);
 			Assert.fail("正常終了してしまった");
 
 		} catch (RestClientException e) {
@@ -255,7 +260,7 @@ public class TestElconEimConnectionHelper {
 			mockLog.error("電子契約EIMのファイルアップロードAPI実行に失敗しました。[RJ管理番号:RJ管理番号1]");
 			verify(mockLog).error(eq("電子契約EIMのファイルアップロードAPI実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
 			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).fileUpload(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject());
+			verify(elconEimConnectionHelper, times(5)).fileUpload(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject());
 
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラーが発生した");
@@ -270,6 +275,8 @@ public class TestElconEimConnectionHelper {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
 			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
+			// セッション取得API
+			GetSessionResponse getSessionResponse = elconEimConnectionHelper.getSession(restForEim, apResponse);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
@@ -294,7 +301,7 @@ public class TestElconEimConnectionHelper {
 			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
 
 			// 実行
-			PostCotosDocumentResponse response = elconEimConnectionHelper.postCotosDocument(restForEim, apResponse, documentUniqueID, paramDto);
+			PostCotosDocumentResponse response = elconEimConnectionHelper.postCotosDocument(restForEim, apResponse, getSessionResponse, documentUniqueID, paramDto);
 			assertNotNull("documentIdがNULLでないこと", response.getSystem().getDocumentId());
 			assertNotNull("documentKeyがNULLでないこと", response.getSystem().getDocumentKey());
 
@@ -315,6 +322,8 @@ public class TestElconEimConnectionHelper {
 			RestTemplate restForEim = new RestTemplate();
 			// アプリケーション認証API
 			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
+			// セッション取得API
+			GetSessionResponse getSessionResponse = elconEimConnectionHelper.getSession(restForEim, apResponse);
 
 			// パラメータ設定
 			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
@@ -322,7 +331,7 @@ public class TestElconEimConnectionHelper {
 			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
 
 			// 実行
-			elconEimConnectionHelper.postCotosDocument(restForEim, apResponse, documentUniqueID, paramDto);
+			elconEimConnectionHelper.postCotosDocument(restForEim, apResponse, getSessionResponse, documentUniqueID, paramDto);
 			Assert.fail("正常終了してしまった");
 
 		} catch (RestClientException e) {
@@ -331,7 +340,7 @@ public class TestElconEimConnectionHelper {
 			mockLog.error("電子契約EIMの文書登録（COTOS申込書）API実行に失敗しました。[RJ管理番号:RJ管理番号1]");
 			verify(mockLog).error(eq("電子契約EIMの文書登録（COTOS申込書）API実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
 			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).postCotosDocument(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyString(), Mockito.anyObject());
+			verify(elconEimConnectionHelper, times(5)).postCotosDocument(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyString(), Mockito.anyObject());
 
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラーが発生した");
