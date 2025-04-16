@@ -289,4 +289,11 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
+
+	/**
+	 * 同一SS用最短納期日数
+	 */
+	@Max(99)
+	@ApiModelProperty(value = "同一SS用最短納期日数", required = false, position = 41, allowableValues = "range[0,99]")
+	private Integer shortestDeliveryDateForSameSs;
 }
