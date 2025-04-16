@@ -288,9 +288,14 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
+			// ファイル名にスペースが含まれる場合、エンコードする
+			String filename = registParam.getReportName();
+			if (StringUtils.isNotBlank(filename) && (filename.contains(" ") || filename.contains("　"))) {
+				filename = filename.replaceAll("　| ", "%2520");
+			}
 			// APIコール
 			log.info("電子計契約EIM ファイルアップロード準備APIコール");
-			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + registParam.getReportName() + ".pdf";
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + filename + ".pdf";
 			log.info("＜Request＞=================================================");
 			log.info("url     : " + url);
 			log.info("headers : " + httpEntity.getHeaders());

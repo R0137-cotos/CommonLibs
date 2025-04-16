@@ -160,6 +160,33 @@ public class TestElconEimConnectionHelper {
 
 	@Test
 	@Ignore
+	public void 正常系_ファイルアップロード準備API_ファイル名に空白含む() {
+
+		try {
+			RestTemplate restForEim = new RestTemplate();
+			// アプリケーション認証API
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
+
+			// パラメータ設定
+			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
+			paramDto.setReportName("elconEim test01　空 白　あり ");
+			paramDto.setVupContractNo("RJ管理番号1");
+
+			// 実行
+			PreparationFileUploadResponse response = elconEimConnectionHelper.preparationFilesUpload(restForEim, apResponse, paramDto);
+			assertNotNull("x-ms-blob-content-dispositionがNULLでないこと", response.getHeader().getX_ms_blob_content_disposition());
+			assertNotNull("x-ms-blob-content-typeがNULLでないこと", response.getHeader().getX_ms_blob_content_type());
+			assertNotNull("x-ms-blob-typeがNULLでないこと", response.getHeader().getX_ms_blob_type());
+
+		} catch (RestClientException e) {
+			Assert.fail("エラーが発生した");
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
+		}
+	}
+
+	@Test
+	@Ignore
 	public void 異常系_ファイルアップロード準備API() {
 
 		try {
