@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -289,10 +290,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
 			// ファイル名にスペースが含まれる場合、エンコードする
-			String filename = registParam.getReportName();
-			if (StringUtils.isNotBlank(filename) && (filename.contains(" ") || filename.contains("　"))) {
-				filename = filename.replaceAll("　| ", "%2520");
-			}
+			String filename = Optional.ofNullable(registParam.getReportName()).map(o -> o.replaceAll("　| ", "%2520")).orElse(null);
 			// APIコール
 			log.info("電子計契約EIM ファイルアップロード準備APIコール");
 			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?filename=" + filename + ".pdf";
