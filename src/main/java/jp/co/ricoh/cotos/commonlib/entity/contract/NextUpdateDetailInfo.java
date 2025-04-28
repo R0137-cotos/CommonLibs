@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,6 +26,7 @@ import javax.validation.constraints.Size;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -77,10 +80,13 @@ public class NextUpdateDetailInfo extends EntityBase {
 	private long id;
 
 	/**
-	 * 契約ID
+	 * 契約
 	 */
-	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
-	private long contractId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "contract_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "契約", required = true, position = 2)
+	private Contract contract;
 
 	/**
 	 * 商品マスタID

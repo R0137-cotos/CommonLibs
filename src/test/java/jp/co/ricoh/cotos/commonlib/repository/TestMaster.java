@@ -26,14 +26,12 @@ import jp.co.ricoh.cotos.commonlib.DBConfig;
 import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.dto.json.master.ReportPageMasterExtendsParameterDto;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
-import jp.co.ricoh.cotos.commonlib.entity.contract.NextUpdateDetailInfo;
 import jp.co.ricoh.cotos.commonlib.entity.master.*;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.Domain;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
-import jp.co.ricoh.cotos.commonlib.repository.contract.NextUpdateDetailInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.*;
 import lombok.val;
 
@@ -278,8 +276,6 @@ public class TestMaster {
 	private ProductGrpMasterDtoRepository productGrpMasterDtoRepository;
 	@Autowired
 	private MailCsvMasterRepository mailCsvMasterRepository;
-	@Autowired
-	private NextUpdateDetailInfoRepository nextUpdateDetailInfoRepository;
 	@Autowired
 	private ContractDateSettingMasterRepository contractDateSettingMasterRepository;
 
@@ -3208,20 +3204,6 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
-	}
-
-	@Test
-	public void NextUpdateDetailInfoのテスト() throws Exception {
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/nextUpdateDetailInfo.sql");
-		// エンティティの取得
-		NextUpdateDetailInfo found = nextUpdateDetailInfoRepository.findOne(1L);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(found);
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(found);
-
 	}
 
 	@Test
