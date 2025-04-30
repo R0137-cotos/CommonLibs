@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -129,7 +129,7 @@ public class TestCommunication {
 	@Test
 	public void 親がいない場合には親がnullになることを確認_問い合わせ() {
 		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
-		Contact child = contactRepository.findOne(4L);
+		Contact child = contactRepository.findById(4L).get();
 		Assert.assertNull(child.getParent());
 	}
 
@@ -172,7 +172,7 @@ public class TestCommunication {
 
 		idList.stream().forEach(id -> {
 			// データが取得できることを確認
-			T found = repository.findOne(id);
+			T found = repository.findById(id).get();
 
 			Assert.assertNotNull(found);
 			// 全てのカラムがNullではないことを確認

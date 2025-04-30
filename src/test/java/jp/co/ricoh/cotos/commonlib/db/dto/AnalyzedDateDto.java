@@ -2,8 +2,8 @@ package jp.co.ricoh.cotos.commonlib.db.dto;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import lombok.Data;
 

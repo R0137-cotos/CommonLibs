@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -117,7 +117,7 @@ public class TestCommonDto {
 
 	@Test
 	public void FileImportManagementParameterのテスト() throws Exception {
-		AttachedFile entity = attachedFileRepository.findOne(1L);
+		AttachedFile entity = attachedFileRepository.findById(1L).get();
 		FileImportManagementParameter testTarget = new FileImportManagementParameter();
 		FileImportManagementParameter dto = new FileImportManagementParameter();
 		dto.setFileName("dummy_file_name");

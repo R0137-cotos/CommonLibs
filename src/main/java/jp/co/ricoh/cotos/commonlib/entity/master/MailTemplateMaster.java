@@ -2,15 +2,15 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
@@ -36,14 +36,14 @@ public class MailTemplateMaster extends EntityBaseMaster {
 	/**
 	 * サービスカテゴリ
 	 */
-	@Column(nullable = false)
+	@Column(nullable = false, name = "service_category")
 	@ApiModelProperty(value = "サービスカテゴリ", required = true, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1", position = 2)
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * 処理カテゴリ
 	 */
-	@Column(nullable = false)
+	@Column(nullable = false, name = "process_category")
 	@ApiModelProperty(value = "処理カテゴリ", required = true, allowableValues = "承認依頼(\"1\"), 承認依頼取消(\"2\"), 承認依頼差戻(\"3\"), 承認(\"4\"), 作業依頼(\"5\"), 作業完了(\"6\"), キャンセル手続き(\"7\"), キャンセル手続き中止(\"8\"), 解約手続き(\"9\"), 解約手続き中止(\"10\"), 問い合わせ(\"11\"), 100(お客様担当者), 101(接点店担当者), 102(母店接点店担当者)", example = "1", position = 3)
 	private String processCategory;
 

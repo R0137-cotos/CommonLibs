@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -42,7 +42,6 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.master.CommonMasterDetail;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
-import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
@@ -56,9 +55,6 @@ public class CheckUtil {
 
 	@Autowired
 	MessageUtil messageUtil;
-
-	@Autowired
-	JsonUtil jsonUtil;
 
 	@Autowired
 	ContractRepository contractRepository;
@@ -667,14 +663,17 @@ public class CheckUtil {
 			return false;
 		}
 		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String, HashMap<String, Object>> productExtendsParameterMap;
-		HashMap<String, Object> migrationMap;
+		Map<String, Object> productExtendsParameterMap;
+		Map<String, Object> migrationMap;
 		MigrationDiv checkMigrationDiv = null;
 		try {
 			// 拡張項目から移行用DTO.移行区分を取得
-			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Object>() {
+			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Map<String, Object>>() {
 			});
-			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
+			migrationMap = (Map<String, Object>) productExtendsParameterMap.get("migrationParameter");
+			if (migrationMap != null && StringUtils.isNotBlank(migrationMap.get("migrationDiv").toString())) {
+				checkMigrationDiv = MigrationDiv.fromString(migrationMap.get("migrationDiv").toString());
+			}
 			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {
 				checkMigrationDiv = MigrationDiv.fromString(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString());
 			}

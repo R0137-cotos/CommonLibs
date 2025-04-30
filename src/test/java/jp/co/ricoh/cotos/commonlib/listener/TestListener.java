@@ -147,7 +147,7 @@ public class TestListener {
 		estimation.setId(1L);
 		customerEstimation.setEstimation(estimation);
 		customerEstimationRepository.save(customerEstimation);
-		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
+		customerEstimation = customerEstimationRepository.findById(customerEstimation.getId()).get();
 		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000007309661", customerEstimation.getMomCustId());
 		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", customerEstimation.getCompanyId());
 		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000255394", customerEstimation.getOfficeId());
@@ -165,7 +165,7 @@ public class TestListener {
 		customerEstimation.setOfficeName("＊＊＊");
 		customerEstimation.setDepartmentName("＊＊");
 		customerEstimationRepository.save(customerEstimation);
-		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
+		customerEstimation = customerEstimationRepository.findById(customerEstimation.getId()).get();
 		Assert.assertEquals("顧客名が正しく取得されること", "有＊ト＊タルハウジング＊＊＊＊＊", customerEstimation.getCustomerName());
 		Assert.assertEquals("企業名が正しく取得されること", "有＊ト＊タルハウジング", customerEstimation.getCompanyName());
 		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerEstimation.getOfficeName());
@@ -182,7 +182,7 @@ public class TestListener {
 		estimation.setId(1L);
 		customerEstimation.setEstimation(estimation);
 		customerEstimationRepository.save(customerEstimation);
-		customerEstimation = customerEstimationRepository.findOne(customerEstimation.getId());
+		customerEstimation = customerEstimationRepository.findById(customerEstimation.getId()).get();
 		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, customerEstimation.getMomKjbSystemId());
 	}
 
@@ -223,7 +223,7 @@ public class TestListener {
 		contract.setId(1L);
 		customerContract.setContract(contract);
 		customerContractRepository.save(customerContract);
-		customerContract = customerContractRepository.findOne(customerContract.getId());
+		customerContract = customerContractRepository.findById(customerContract.getId()).get();
 		Assert.assertEquals("MoM企事部IDが正しく取得されること", "000000007309661", customerContract.getMomCustId());
 		Assert.assertEquals("MoM企業IDが正しく取得されること", "000000000348689", customerContract.getCompanyId());
 		Assert.assertEquals("MoM事業所IDが正しく取得されること", "000000000255394", customerContract.getOfficeId());
@@ -237,7 +237,7 @@ public class TestListener {
 		customerContract.setOfficeName("＊＊＊");
 		customerContract.setDepartmentName("＊＊");
 		customerContractRepository.save(customerContract);
-		customerContract = customerContractRepository.findOne(customerContract.getId());
+		customerContract = customerContractRepository.findById(customerContract.getId()).get();
 		Assert.assertEquals("顧客名が正しく取得されること", "有＊ト＊タルハウジング＊＊＊＊＊", customerContract.getCustomerName());
 		Assert.assertEquals("企業名が正しく取得されること", "有＊ト＊タルハウジング", customerContract.getCompanyName());
 		Assert.assertEquals("事業所名が正しく取得されること", "＊＊＊", customerContract.getOfficeName());
@@ -274,7 +274,7 @@ public class TestListener {
 		estimation.setId(1L);
 		dealerEstimation.setEstimation(estimation);
 		dealerEstimationRespository.save(dealerEstimation);
-		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
+		dealerEstimation = dealerEstimationRespository.findById(dealerEstimation.getId()).get();
 		Assert.assertEquals("販売店名が正しく取得されること", "株式会社ティーガイア", dealerEstimation.getDealerName());
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerEstimation.getPostNumber());
 		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", dealerEstimation.getAddress());
@@ -283,7 +283,7 @@ public class TestListener {
 
 		dealerEstimation.setDistributorMomCmpId(null);
 		dealerEstimationRespository.save(dealerEstimation);
-		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
+		dealerEstimation = dealerEstimationRespository.findById(dealerEstimation.getId()).get();
 		Assert.assertEquals("MoM会社IDが正しく取得されること", "999999", dealerEstimation.getDistributorMomCmpId());
 	}
 
@@ -298,7 +298,7 @@ public class TestListener {
 		estimation.setId(1L);
 		dealerEstimation.setEstimation(estimation);
 		dealerEstimationRespository.save(dealerEstimation);
-		dealerEstimation = dealerEstimationRespository.findOne(dealerEstimation.getId());
+		dealerEstimation = dealerEstimationRespository.findById(dealerEstimation.getId()).get();
 		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, dealerEstimation.getMomKjbSystemId());
 	}
 
@@ -333,7 +333,7 @@ public class TestListener {
 		contract.setId(1L);
 		dealerContract.setContract(contract);
 		dealerContractRepository.save(dealerContract);
-		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
+		dealerContract = dealerContractRepository.findById(dealerContract.getId()).get();
 		Assert.assertEquals("販売店名が正しく取得されること", "株式会社ティーガイア", dealerContract.getDealerName());
 		Assert.assertEquals("郵便番号が正しく取得されること", "1660002", dealerContract.getPostNumber());
 		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", dealerContract.getAddress());
@@ -342,7 +342,7 @@ public class TestListener {
 
 		dealerContract.setDistributorMomCmpId(null);
 		dealerContractRepository.save(dealerContract);
-		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
+		dealerContract = dealerContractRepository.findById(dealerContract.getId()).get();
 		Assert.assertEquals("MoM会社IDが正しく取得されること", "999999", dealerContract.getDistributorMomCmpId());
 	}
 
@@ -357,7 +357,7 @@ public class TestListener {
 		contract.setId(1L);
 		dealerContract.setContract(contract);
 		dealerContractRepository.save(dealerContract);
-		dealerContract = dealerContractRepository.findOne(dealerContract.getId());
+		dealerContract = dealerContractRepository.findById(dealerContract.getId()).get();
 		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, dealerContract.getMomKjbSystemId());
 	}
 
@@ -391,7 +391,7 @@ public class TestListener {
 		contract.setId(1L);
 		contractInstallationLocation.setContract(contract);
 		contractInstallationLocationRepository.save(contractInstallationLocation);
-		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+		contractInstallationLocation = contractInstallationLocationRepository.findById(contractInstallationLocation.getId()).get();
 
 		Assert.assertEquals("顧客名が正しく取得されること", "ティーガイア＊", contractInstallationLocation.getCustomerName());
 		Assert.assertEquals("住所が正しく取得されること", "東京都杉並区高円寺北２丁目２２－０６", contractInstallationLocation.getAddress());
@@ -417,7 +417,7 @@ public class TestListener {
 		contract.setId(1L);
 		contractInstallationLocation.setContract(contract);
 		contractInstallationLocationRepository.save(contractInstallationLocation);
-		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+		contractInstallationLocation = contractInstallationLocationRepository.findById(contractInstallationLocation.getId()).get();
 		Assert.assertEquals("システム連携IDが正しく取得されること", MOM_KJB_SYSTEM_ID, contractInstallationLocation.getMomKjbSystemId());
 	}
 
@@ -435,7 +435,7 @@ public class TestListener {
 		contract.setId(1L);
 		contractInstallationLocation.setContract(contract);
 		contractInstallationLocationRepository.save(contractInstallationLocation);
-		contractInstallationLocation = contractInstallationLocationRepository.findOne(contractInstallationLocation.getId());
+		contractInstallationLocation = contractInstallationLocationRepository.findById(contractInstallationLocation.getId()).get();
 
 		Assert.assertEquals("MoM企事部システム連携IDが設定されること", DummyCodeValue.Dummy_Mcl_MoM_Rel_Id.toString(), contractInstallationLocation.getMomKjbSystemId());
 		Assert.assertEquals("企事部設定区分が設定されること", DepartmentDiv.企事部, contractInstallationLocation.getDepartmentDiv());
@@ -477,14 +477,14 @@ public class TestListener {
 	public void EstimationListenerのテスト_番号未付与() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("listener/sequence.sql");
 
-		Estimation estimation = estimationRepository.findOne(1L);
+		Estimation estimation = estimationRepository.findById(1L).get();
 		estimation.setId(0);
 		estimation.setEstimationNumber(null);
 		estimation.setEstimationBranchNumber(2);
 		estimation.setProductGrpMasterId(1L);
 		estimation.setRjManageNumber(null);
 		estimationRepository.save(estimation);
-		Estimation result = estimationRepository.findOne(estimation.getId());
+		Estimation result = estimationRepository.findById(estimation.getId()).get();
 
 		String expectEstimationNumber = "CE" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "00001";
 		Assert.assertEquals("見積番号が正しく取得されること", expectEstimationNumber, result.getEstimationNumber());
@@ -497,14 +497,14 @@ public class TestListener {
 	@Test
 	@WithMockCustomUser
 	public void EstimationListenerのテスト_番号付与済() throws Exception {
-		Estimation estimation = estimationRepository.findOne(1L);
+		Estimation estimation = estimationRepository.findById(1L).get();
 		estimation.setId(0);
 		estimation.setEstimationNumber("CE000000000001");
 		estimation.setEstimationBranchNumber(2);
 		estimation.setProductGrpMasterId(1L);
 		estimation.setRjManageNumber("1230000001");
 		estimationRepository.save(estimation);
-		Estimation result = estimationRepository.findOne(estimation.getId());
+		Estimation result = estimationRepository.findById(estimation.getId()).get();
 
 		Assert.assertEquals("見積番号が正しく取得されること", "CE000000000001", result.getEstimationNumber());
 		Assert.assertEquals("RJ管理番号が正しく取得されること", "1230000001", result.getRjManageNumber());
@@ -523,7 +523,7 @@ public class TestListener {
 		shippingAddress.setContract(contract);
 		MvEmployeeMaster employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(shippingAddress.getMomEmployeeId());
 		shippingAddressRepository.save(shippingAddress);
-		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		shippingAddress = shippingAddressRepository.findById(shippingAddress.getId()).get();
 		Assert.assertEquals("所属組織名が正しく取得されること", employeeMaster.getOrgName(), shippingAddress.getOrgName());
 		Assert.assertEquals("販売会社名が正しく取得されること", employeeMaster.getHanshSeiskNm(), shippingAddress.getSalesCompanyName());
 		Assert.assertEquals("会社代表電話番号が正しく取得されること", employeeMaster.getOrgPhoneNumber(), shippingAddress.getOrgPhoneNumber());
@@ -547,7 +547,7 @@ public class TestListener {
 		shippingAddress.setEmployeeName("テスト 社員名");
 		shippingAddress.setContract(contract);
 		shippingAddressRepository.save(shippingAddress);
-		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		shippingAddress = shippingAddressRepository.findById(shippingAddress.getId()).get();
 		Assert.assertEquals("所属組織名が正しく取得されること", "テスト 所属組織名", shippingAddress.getOrgName());
 		Assert.assertEquals("販売会社名が正しく取得されること", "テスト 販売会社名", shippingAddress.getSalesCompanyName());
 		Assert.assertEquals("会社代表電話番号が正しく取得されること", "000-111-222", shippingAddress.getOrgPhoneNumber());
@@ -570,7 +570,7 @@ public class TestListener {
 		shippingAddress.setContract(contract);
 		shippingAddressRepository.save(shippingAddress);
 		DummyUserMaster dummyUserMaster = dummyUserMasterRepository.findByUserId(shippingAddress.getMomEmployeeId());
-		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		shippingAddress = shippingAddressRepository.findById(shippingAddress.getId()).get();
 		Assert.assertEquals("ダミー社員名が取得されていること", dummyUserMaster.getEmpName(), shippingAddress.getEmployeeName());
 
 		// 新規契約の場合、RJ社員情報マスタがNULLの場合エラーが発生すること
@@ -613,7 +613,7 @@ public class TestListener {
 		shippingAddress.setContract(contract);
 		employeeMaster = mvEmployeeMasterRepository.findByMomEmployeeId(shippingAddress.getMomEmployeeId());
 		shippingAddressRepository.save(shippingAddress);
-		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		shippingAddress = shippingAddressRepository.findById(shippingAddress.getId()).get();
 		Assert.assertEquals("所属組織名が正しく取得されること", employeeMaster.getOrgName(), shippingAddress.getOrgName());
 		Assert.assertEquals("販売会社名が正しく取得されること", employeeMaster.getHanshSeiskNm(), shippingAddress.getSalesCompanyName());
 		Assert.assertEquals("会社代表電話番号が正しく取得されること", employeeMaster.getOrgPhoneNumber(), shippingAddress.getOrgPhoneNumber());
@@ -635,7 +635,7 @@ public class TestListener {
 		shippingAddress.setContract(contract);
 		shippingAddressRepository.save(shippingAddress);
 		dummyUserMaster = dummyUserMasterRepository.findByUserId(shippingAddress.getMomEmployeeId());
-		shippingAddress = shippingAddressRepository.findOne(shippingAddress.getId());
+		shippingAddress = shippingAddressRepository.findById(shippingAddress.getId()).get();
 		Assert.assertEquals("ダミー社員名が取得されていること", "ダミー 社員名", shippingAddress.getEmployeeName());
 	}
 

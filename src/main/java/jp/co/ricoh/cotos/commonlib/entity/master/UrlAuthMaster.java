@@ -3,13 +3,13 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpMethod;
@@ -145,7 +145,6 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 * HTTPメソッド
 		 */
 		@Column(nullable = false)
-		@Enumerated(EnumType.STRING)
 		@ApiModelProperty(value = "HTTPメソッド", required = true, position = 2)
 		private HttpMethod method;
 

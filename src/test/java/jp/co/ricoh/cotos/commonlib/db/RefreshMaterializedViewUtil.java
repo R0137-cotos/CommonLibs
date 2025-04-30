@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

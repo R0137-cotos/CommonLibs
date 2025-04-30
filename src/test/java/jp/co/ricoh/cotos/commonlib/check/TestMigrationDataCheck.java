@@ -10,9 +10,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -66,7 +66,7 @@ public class TestMigrationDataCheck {
 	@Test
 	public void 正常系_見積_標準データ() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
-		Estimation estimation = estimationRepository.findOne(4L);
+		Estimation estimation = estimationRepository.findById(4L).get();
 		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 		Assert.assertFalse(result);
 	}
@@ -74,7 +74,7 @@ public class TestMigrationDataCheck {
 	@Test
 	public void 正常系_見積_RITOS移行データ() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
-		Estimation estimation = estimationRepository.findOne(5L);
+		Estimation estimation = estimationRepository.findById(5L).get();
 		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 		Assert.assertTrue(result);
 	}
@@ -82,7 +82,7 @@ public class TestMigrationDataCheck {
 	@Test
 	public void 正常系_見積_拡張項目NULL() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
-		Estimation estimation = estimationRepository.findOne(4L);
+		Estimation estimation = estimationRepository.findById(4L).get();
 		estimation.getProductEstimationList().get(0).setExtendsParameter(null);
 		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, estimation);
 		Assert.assertFalse(result);
@@ -91,7 +91,7 @@ public class TestMigrationDataCheck {
 	@Test
 	public void 正常系_契約_標準データ() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
-		Contract contract = contractRepository.findOne(4L);
+		Contract contract = contractRepository.findById(4L).get();
 		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 		Assert.assertFalse(result);
 	}
@@ -99,7 +99,7 @@ public class TestMigrationDataCheck {
 	@Test
 	public void 正常系_契約_RITOS移行データ() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
-		Contract contract = contractRepository.findOne(5L);
+		Contract contract = contractRepository.findById(5L).get();
 		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 		Assert.assertTrue(result);
 	}
@@ -107,7 +107,7 @@ public class TestMigrationDataCheck {
 	@Test
 	public void 正常系_契約_拡張項目NULL() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMigrationDataCheck.sql");
-		Contract contract = contractRepository.findOne(4L);
+		Contract contract = contractRepository.findById(4L).get();
 		boolean result = checkUtil.migrationDataCheck(MigrationDiv.RITOS移行, contract);
 		Assert.assertFalse(result);
 	}

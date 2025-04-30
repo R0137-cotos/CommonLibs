@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -130,7 +130,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementPicWorkerEmpのテスト() throws Exception {
-		ArrangementPicWorkerEmp entity = arrangementPicWorkerEmpRepository.findOne(401L);
+		ArrangementPicWorkerEmp entity = arrangementPicWorkerEmpRepository.findById(401L).get();
 		ArrangementPicWorkerEmp testTarget = new ArrangementPicWorkerEmp();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -149,7 +149,7 @@ public class TestArrangement {
 
 	@Test
 	public void Arrangementのテスト() throws Exception {
-		Arrangement entity = arrangementRepository.findOne(4L);
+		Arrangement entity = arrangementRepository.findById(4L).get();
 		Arrangement testTarget = new Arrangement();
 		entity.setArrangementWorkList(null);
 		BeanUtils.copyProperties(testTarget, entity);
@@ -185,7 +185,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkApprovalResultのテスト() throws Exception {
-		ArrangementWorkApprovalResult entity = arrangementWorkApprovalResultRepository.findOne(401L);
+		ArrangementWorkApprovalResult entity = arrangementWorkApprovalResultRepository.findById(401L).get();
 		ArrangementWorkApprovalResult testTarget = new ArrangementWorkApprovalResult();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -218,7 +218,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkApprovalRouteNodeのテスト() throws Exception {
-		ArrangementWorkApprovalRouteNode entity = arrangementWorkApprovalRouteNodeRepository.findOne(401L);
+		ArrangementWorkApprovalRouteNode entity = arrangementWorkApprovalRouteNodeRepository.findById(401L).get();
 		ArrangementWorkApprovalRouteNode testTarget = new ArrangementWorkApprovalRouteNode();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -271,7 +271,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkApprovalRouteのテスト() throws Exception {
-		ArrangementWorkApprovalRoute entity = arrangementWorkApprovalRouteRepository.findOne(401L);
+		ArrangementWorkApprovalRoute entity = arrangementWorkApprovalRouteRepository.findById(401L).get();
 		ArrangementWorkApprovalRoute testTarget = new ArrangementWorkApprovalRoute();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -293,7 +293,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkAttachedFileのテスト() throws Exception {
-		ArrangementWorkAttachedFile entity = arrangementWorkAttachedFileRepository.findOne(401L);
+		ArrangementWorkAttachedFile entity = arrangementWorkAttachedFileRepository.findById(401L).get();
 		ArrangementWorkAttachedFile testTarget = new ArrangementWorkAttachedFile();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -337,7 +337,7 @@ public class TestArrangement {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "添付必須フラグは最小値（0）を下回っています。"));
 
 		// 異常系（@Valid ：添付ファイル）
-		entity = arrangementWorkAttachedFileRepository.findOne(401L);
+		entity = arrangementWorkAttachedFileRepository.findById(401L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getAttachedFile().setFilePhysicsName(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -349,7 +349,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkCheckResultのテスト() throws Exception {
-		ArrangementWorkCheckResult entity = arrangementWorkCheckResultRepository.findOne(401L);
+		ArrangementWorkCheckResult entity = arrangementWorkCheckResultRepository.findById(401L).get();
 		ArrangementWorkCheckResult testTarget = new ArrangementWorkCheckResult();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -398,7 +398,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkOperationLogのテスト() throws Exception {
-		ArrangementWorkOperationLog entity = arrangementWorkOperationLogRepository.findOne(401L);
+		ArrangementWorkOperationLog entity = arrangementWorkOperationLogRepository.findById(401L).get();
 		ArrangementWorkOperationLog testTarget = new ArrangementWorkOperationLog();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -427,7 +427,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkのテスト() throws Exception {
-		ArrangementWork entity = arrangementWorkRepository.findOne(401L);
+		ArrangementWork entity = arrangementWorkRepository.findById(401L).get();
 		ArrangementWork testTarget = new ArrangementWork();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -482,7 +482,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkErrorLogのテスト() throws Exception {
-		ArrangementWorkErrorLog entity = arrangementWorkErrorLogRepository.findOne(401L);
+		ArrangementWorkErrorLog entity = arrangementWorkErrorLogRepository.findById(401L).get();
 		ArrangementWorkErrorLog testTarget = new ArrangementWorkErrorLog();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -503,7 +503,7 @@ public class TestArrangement {
 
 	@Test
 	public void ArrangementWorkAttachedFileLinkageのテスト() throws Exception {
-		ArrangementWorkAttachedFileLinkage entity = arrangementWorkAttachedFileLinkageRepository.findOne(401L);
+		ArrangementWorkAttachedFileLinkage entity = arrangementWorkAttachedFileLinkageRepository.findById(401L).get();
 		ArrangementWorkAttachedFileLinkage testTarget = new ArrangementWorkAttachedFileLinkage();
 		BeanUtils.copyProperties(testTarget, entity);
 

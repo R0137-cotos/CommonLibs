@@ -2,8 +2,8 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract;

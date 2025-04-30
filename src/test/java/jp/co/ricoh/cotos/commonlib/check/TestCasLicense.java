@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -91,7 +91,7 @@ public class TestCasLicense {
 	@Test
 	public void CasLicenseBasicInfoRepositoryのテスト() throws Exception {
 
-		CasLicenseBasicInfo entity = casLicenseBasicInfoRepository.findOne(9999L);
+		CasLicenseBasicInfo entity = casLicenseBasicInfoRepository.findById(9999L).get();
 		CasLicenseBasicInfo testTarget = new CasLicenseBasicInfo();
 
 		// 正常系
@@ -130,7 +130,7 @@ public class TestCasLicense {
 	@Test
 	public void CasLicenseManagementInfoのテスト() throws Exception {
 
-		CasLicenseManagementInfo entity = casLicenseManagementInfoRepository.findOne(9999L);
+		CasLicenseManagementInfo entity = casLicenseManagementInfoRepository.findById(9999L).get();
 		CasLicenseManagementInfo testTarget = new CasLicenseManagementInfo();
 
 		// 正常系
@@ -169,7 +169,7 @@ public class TestCasLicense {
 	@Test
 	public void CasLicenseDetailInfoのテスト() throws Exception {
 
-		CasLicenseDetailInfo entity = casLicenseDetailInfoRepository.findOne(9999L);
+		CasLicenseDetailInfo entity = casLicenseDetailInfoRepository.findById(9999L).get();
 		CasLicenseDetailInfo testTarget = new CasLicenseDetailInfo();
 
 		// 正常系

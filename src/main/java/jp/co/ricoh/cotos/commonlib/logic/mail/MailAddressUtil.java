@@ -78,7 +78,7 @@ public class MailAddressUtil {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "各ドメインの対象テーブルIDマップ" }));
 		}
 		// メールマスタを取得
-		MailMaster mailMaster = mailMasterRepository.findOne(mailMasterId);
+		MailMaster mailMaster = mailMasterRepository.findById(mailMasterId).get();
 		// メールマスタが存在しない場合
 		if (null == mailMaster) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "MasterDoesNotExist", new String[] { "メールマスタ" }));
@@ -107,7 +107,7 @@ public class MailAddressUtil {
 					break;
 				}
 				// 見積を取得
-				Estimation estimation = estimationRepository.findOne(targetIdMap.get(ServiceCategory.見積));
+				Estimation estimation = estimationRepository.findById(targetIdMap.get(ServiceCategory.見積)).get();
 				// メールアドレスを取得
 				mailAddress = this.getMailAddress(estimation, mailAddressMaster.getTargetEntityName(), mailAddressMaster.getTargetFieldName());
 				break;
@@ -117,7 +117,7 @@ public class MailAddressUtil {
 					break;
 				}
 				// 契約を取得
-				Contract contract = contractRepository.findOne(targetIdMap.get(ServiceCategory.契約));
+				Contract contract = contractRepository.findById(targetIdMap.get(ServiceCategory.契約)).get();
 				// メールアドレスを取得
 				mailAddress = this.getMailAddress(contract, mailAddressMaster.getTargetEntityName(), mailAddressMaster.getTargetFieldName());
 				break;
@@ -127,7 +127,7 @@ public class MailAddressUtil {
 					break;
 				}
 				// 手配を取得
-				ArrangementWork arrangementWork = arrangementWorkRepository.findOne(targetIdMap.get(ServiceCategory.手配));
+				ArrangementWork arrangementWork = arrangementWorkRepository.findById(targetIdMap.get(ServiceCategory.手配)).get();
 				// メールアドレスを取得
 				mailAddress = this.getMailAddress(arrangementWork, mailAddressMaster.getTargetEntityName(), mailAddressMaster.getTargetFieldName());
 				break;
@@ -137,7 +137,7 @@ public class MailAddressUtil {
 					break;
 				}
 				// ライセンス情報を取得
-				LicenseInfo licenseInfo = licenseInfoRepository.findOne(targetIdMap.get(ServiceCategory.ライセンス));
+				LicenseInfo licenseInfo = licenseInfoRepository.findById(targetIdMap.get(ServiceCategory.ライセンス)).get();
 				// メールアドレスを取得
 				mailAddress = this.getMailAddress(licenseInfo, mailAddressMaster.getTargetEntityName(), mailAddressMaster.getTargetFieldName());
 				break;

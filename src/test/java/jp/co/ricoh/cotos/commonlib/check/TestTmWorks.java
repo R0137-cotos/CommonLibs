@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -147,7 +147,7 @@ public class TestTmWorks {
 	}
 
 	private void TmUpdateUserResponseWorkRepositoryのテスト() {
-		val entity = tmUpdateUserResponseWorkRepository.findOne(10L);
+		val entity = tmUpdateUserResponseWorkRepository.findById(10L);
 		val testTarget = new TmUpdateUserResponseWork();
 
 		// 正常系
@@ -175,7 +175,7 @@ public class TestTmWorks {
 
 	private void TmUpdateSubscriptionResponseWorkRepositoryのテスト() {
 
-		val entity = tmUpdateSubscriptionResponseWorkRepository.findOne(10L);
+		val entity = tmUpdateSubscriptionResponseWorkRepository.findById(10L);
 		val testTarget = new TmUpdateSubscriptionResponseWork();
 
 		// 正常系
@@ -197,7 +197,7 @@ public class TestTmWorks {
 
 	private void TmUpdateUserRequestWorkRepositoryのテスト() {
 
-		val entity = tmUpdateUserRequestWorkRepository.findOne(10L);
+		val entity = tmUpdateUserRequestWorkRepository.findById(10L);
 		val testTarget = new TmUpdateUserRequestWork();
 
 		// 正常系
@@ -217,7 +217,7 @@ public class TestTmWorks {
 
 	private void TmUpdateSubscriptionRequestWorkRepositoryのテスト() {
 
-		val entity = tmUpdateSubscriptionRequestWorkRepository.findOne(10L);
+		val entity = tmUpdateSubscriptionRequestWorkRepository.findById(10L);
 		val testTarget = new TmUpdateSubscriptionRequestWork();
 
 		// 正常系
@@ -239,7 +239,7 @@ public class TestTmWorks {
 
 	private void TmUpdateCustomerRequestWorkRepositoryのテスト() {
 
-		val entity = tmUpdateCustomerRequestWorkRepository.findOne(10L);
+		val entity = tmUpdateCustomerRequestWorkRepository.findById(10L);
 		val testTarget = new TmUpdateCustomerRequestWork();
 
 		// 正常系
@@ -262,7 +262,7 @@ public class TestTmWorks {
 
 	private void TmUpdateCustomerResponseWorkRepositoryのテスト() {
 
-		val entity = tmUpdateCustomerResponseWorkRepository.findOne(10L);
+		val entity = tmUpdateCustomerResponseWorkRepository.findById(10L);
 		val testTarget = new TmUpdateCustomerResponseWork();
 
 		// 正常系
@@ -289,7 +289,7 @@ public class TestTmWorks {
 
 	private void TmSuspendSubscriptionResponseWorkRepositoryのテスト() {
 
-		val entity = tmSuspendSubscriptionResponseWorkRepository.findOne(10L);
+		val entity = tmSuspendSubscriptionResponseWorkRepository.findById(10L);
 		val testTarget = new TmSuspendSubscriptionResponseWork();
 
 		// 正常系
@@ -310,7 +310,7 @@ public class TestTmWorks {
 
 	private void TmSuspendSubscriptionRequestWorkRepositoryのテスト() {
 
-		val entity = tmSuspendSubscriptionRequestWorkRepository.findOne(10L);
+		val entity = tmSuspendSubscriptionRequestWorkRepository.findById(10L);
 		val testTarget = new TmSuspendSubscriptionRequestWork();
 
 		// 正常系
@@ -331,7 +331,7 @@ public class TestTmWorks {
 
 	private void TmCreateSubscriptionRequestWorkRepositoryのテスト() {
 
-		val entity = tmCreateSubscriptionRequestWorkRepository.findOne(10L);
+		val entity = tmCreateSubscriptionRequestWorkRepository.findById(10L);
 		val testTarget = new TmCreateSubscriptionRequestWork();
 
 		// 正常系
@@ -353,7 +353,7 @@ public class TestTmWorks {
 
 	private void TmCreateSubscriptionResponseWorkRepositoryのテスト() {
 
-		val entity = tmCreateSubscriptionResponseWorkRepository.findOne(10L);
+		val entity = tmCreateSubscriptionResponseWorkRepository.findById(10L);
 		val testTarget = new TmCreateSubscriptionResponseWork();
 
 		// 正常系
@@ -378,7 +378,7 @@ public class TestTmWorks {
 
 	private void TmCreateCustomerResponseWorkRepositoryのテスト() {
 
-		val entity = tmCreateCustomerResponseWorkRepository.findOne(10L);
+		val entity = tmCreateCustomerResponseWorkRepository.findById(10L);
 		val testTarget = new TmCreateCustomerResponseWork();
 
 		// 正常系
@@ -402,7 +402,7 @@ public class TestTmWorks {
 
 	private void TmCreateCustomerRequestWorkRepositoryのテスト() {
 
-		val entity = tmCreateCustomerRequestWorkRepository.findOne(10L);
+		val entity = tmCreateCustomerRequestWorkRepository.findById(10L);
 		val testTarget = new TmCreateCustomerRequestWork();
 
 		// 正常系
@@ -431,7 +431,7 @@ public class TestTmWorks {
 
 	private void TmLinkManagementRepositoryのテスト() {
 
-		val entity = tmLinkManagementRepository.findOne(10L);
+		val entity = tmLinkManagementRepository.findById(10L);
 		val testTarget = new TmLinkManagement();
 
 		// 正常系

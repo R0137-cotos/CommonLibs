@@ -168,7 +168,7 @@ public class TestCommon {
 	@Test
 	public void AttachedFileRepositoryのテスト() throws Exception {
 
-		AttachedFile found = attachedFileRepository.findOne(1L);
+		AttachedFile found = attachedFileRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -180,7 +180,7 @@ public class TestCommon {
 	@Test
 	public void MailSendHistoryRepositoryのテスト() throws Exception {
 
-		MailSendHistory found = mailSendHistoryRepository.findOne(1L);
+		MailSendHistory found = mailSendHistoryRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -188,7 +188,7 @@ public class TestCommon {
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
 
-		MailControlMaster mailControlMaster = mailControlMasterRepository.findOne(1L);
+		MailControlMaster mailControlMaster = mailControlMasterRepository.findById(1L).get();
 		List<MailSendHistory> found2 = mailSendHistoryRepository.findByTargetDataIdAndMailControlMasterAndMailSendType(1L, mailControlMaster, MailSendType.完了);
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found2);
@@ -201,7 +201,7 @@ public class TestCommon {
 	@Test
 	public void VMailAddressListRepositoryのテスト() throws Exception {
 
-		VMailAddressList found = vMailAddressListRepository.findOne(1L);
+		VMailAddressList found = vMailAddressListRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -215,7 +215,7 @@ public class TestCommon {
 
 	@Test
 	public void EimDocumentInfoRepositoryのテスト() throws Exception {
-		EimDocumentInfo found = eimDocumentInfoRepository.findOne(1L);
+		EimDocumentInfo found = eimDocumentInfoRepository.findById(1L).get();
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
@@ -230,7 +230,7 @@ public class TestCommon {
 
 	@Test
 	public void SearchConditionRepositoryのテスト() throws Exception {
-		SearchCondition found = searchConditionRepository.findOne(1L);
+		SearchCondition found = searchConditionRepository.findById(1L).get();
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 		// Entity の各項目の値が null ではないことを確認
@@ -244,7 +244,7 @@ public class TestCommon {
 
 	@Test
 	public void FileImportErrorDetailsRepositoryのテスト() throws Exception {
-		FileImportErrorDetails found = fileImportErrorDetailsRepository.findOne(1L);
+		FileImportErrorDetails found = fileImportErrorDetailsRepository.findById(1L).get();
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
@@ -262,7 +262,7 @@ public class TestCommon {
 
 	@Test
 	public void FileImportManagementRepositoryのテスト() throws Exception {
-		FileImportManagement found = fileImportManagementRepository.findOne(1L);
+		FileImportManagement found = fileImportManagementRepository.findById(1L).get();
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
@@ -277,7 +277,7 @@ public class TestCommon {
 		// マテビューリフレッシュ
 		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(ESTIMATION_SYNONYM_NAME);
 
-		VMailAddressEstimationList found = vMailAddressEstimationListRepository.findOne(1L);
+		VMailAddressEstimationList found = vMailAddressEstimationListRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -295,7 +295,7 @@ public class TestCommon {
 		// マテビューリフレッシュ
 		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(CONTRACT_SYNONYM_NAME);
 
-		VMailAddressContractList found = vMailAddressContractListRepository.findOne(1L);
+		VMailAddressContractList found = vMailAddressContractListRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -313,7 +313,7 @@ public class TestCommon {
 		// マテビューリフレッシュ
 		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(ARRANGEMENT_SYNONYM_NAME);
 
-		VMailAddressArrangementList found = vMailAddressArrangementListRepository.findOne(1L);
+		VMailAddressArrangementList found = vMailAddressArrangementListRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -331,7 +331,7 @@ public class TestCommon {
 		// マテビューリフレッシュ
 		refreshMaterializedViewUtil.refreshMViewAndSwitchOfLicenseAccountInfo(LICENSE_SYNONYM_NAME);
 
-		VMailAddressLicenseList found = vMailAddressLicenseListRepository.findOne(1L);
+		VMailAddressLicenseList found = vMailAddressLicenseListRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -346,7 +346,7 @@ public class TestCommon {
 	@Test
 	public void TransactionDiscardingHistoryRepositoryのテスト() throws Exception {
 
-		TransactionDiscardingHistory found = transactionDiscardingHistoryRepository.findOne(1L);
+		TransactionDiscardingHistory found = transactionDiscardingHistoryRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

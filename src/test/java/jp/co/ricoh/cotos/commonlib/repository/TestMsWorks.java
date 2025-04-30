@@ -208,7 +208,7 @@ public class TestMsWorks {
 
 		idList.stream().forEach(id -> {
 			// データが取得できることを確認
-			T found = repository.findOne(id);
+			T found = repository.findById(id).get();
 			Assert.assertNotNull(found);
 			// 全てのカラムがNullではないことを確認
 			this.assertColumnsNotNull(found);

@@ -71,7 +71,7 @@ public class DateContractUtil {
 		// 品種マスタ取得
 		List<ItemMaster> itemMasterList = new ArrayList<>();
 		contract.getContractDetailList().stream().forEach(contractDetail -> {
-			itemMasterList.add(itemMasterRepository.findOne(contractDetail.getItemContract().getItemMasterId()));
+			itemMasterList.add(itemMasterRepository.findById(contractDetail.getItemContract().getItemMasterId()).get());
 		});
 		// 最大の契約月数を持つ品種マスタを取得
 		ItemMaster itemMaster = itemMasterList.stream().filter(s -> s.getContractSpanMonth() != null).max(Comparator.comparing(ItemMaster::getContractSpanMonth)).orElse(null);
@@ -144,7 +144,7 @@ public class DateContractUtil {
 		// 変更元契約IDがある場合、再帰的に元契約に遡って取得する
 		Contract baseContract = contract;
 		while (baseContract.getOriginContractId() != null) {
-			baseContract = contractRepository.findOne(baseContract.getOriginContractId());
+			baseContract = contractRepository.findById(baseContract.getOriginContractId()).get();
 			if (baseContract == null) {
 				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
 			}
@@ -164,7 +164,7 @@ public class DateContractUtil {
 	public boolean contractUpdatePossibleCheck(Contract contract, Date updateServiceEndDate, boolean endOfMonthFlg) {
 
 		boolean updatePossible = true;
-		ProductMaster productMaster = productMasterRepository.findOne(contract.getProductContractList().get(0).getProductMasterId());
+		ProductMaster productMaster = productMasterRepository.findById(contract.getProductContractList().get(0).getProductMasterId()).get();
 		if (productMaster.getMaxContractMonths() != null) {
 			// 最初の契約を取得する
 			Contract firstContract = getFirstContract(contract);
@@ -191,7 +191,7 @@ public class DateContractUtil {
 			ObjectMapper mapper = new ObjectMapper();
 			HashMap<String, HashMap<String, Object>> extendesParamMap = new HashMap<>();
 			try {
-				extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<Object>() {
+				extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<HashMap<String, HashMap<String, Object>>>() {
 				});
 			} catch (Exception e) {
 				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "JsonConvertFormTextToObjectError"));
@@ -216,7 +216,7 @@ public class DateContractUtil {
 	 * @return サービス終了最大延長日
 	 */
 	public Date getServiceTermMaxEndFromProduct(Contract contract, Date startDate, boolean endOfMonthFlg) {
-		ProductMaster productMaster = productMasterRepository.findOne(contract.getProductContractList().get(0).getProductMasterId());
+		ProductMaster productMaster = productMasterRepository.findById(contract.getProductContractList().get(0).getProductMasterId()).get();
 		if (productMaster.getMaxContractMonths() == null) {
 			return null;
 		}
@@ -268,7 +268,7 @@ public class DateContractUtil {
 		List<ItemMaster> itemMasterList = new ArrayList<ItemMaster>();
 		contractDetailList.stream().forEach(detail -> {
 			ItemContract itemContract = detail.getItemContract();
-			ItemMaster itemMaster = itemMasterRepository.findOne(itemContract.getItemMasterId());
+			ItemMaster itemMaster = itemMasterRepository.findById(itemContract.getItemMasterId()).get();
 			if (itemMaster.getUpdateMonthNotAccountingDiv() != null) {
 				itemMasterList.add(itemMaster);
 				return;

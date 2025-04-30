@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.PrePersist;
+import jakarta.persistence.PrePersist;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -53,7 +53,7 @@ public class EstimationListener {
 		 * RJ管理番号
 		 * 商品グループマスタ.商品グループ識別子 + 7桁の連番
 		 */
-		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findOne(entity.getProductGrpMasterId());
+		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findById(entity.getProductGrpMasterId()).get();
 		if (null == entity.getRjManageNumber() && null != productGrpMaster) {
 			ProductGrpIdentifierMaster productGrpIdentifierMaster = productGrpMaster.getProductGrpIdentifierMaster();
 			if (null == productGrpIdentifierMaster) return;

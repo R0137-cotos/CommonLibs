@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -133,7 +133,7 @@ public class TestAccounting {
 	@Test
 	public void Accountingのテスト() throws Exception {
 
-		Accounting entity = accountingRespository.findOne(1L);
+		Accounting entity = accountingRespository.findById(1L).get();
 		Accounting testTarget = new Accounting();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -397,7 +397,7 @@ public class TestAccounting {
 	@Test
 	public void CommissionDataのテスト() throws Exception {
 
-		CommissionData entity = commissionDataRespository.findOne(1L);
+		CommissionData entity = commissionDataRespository.findById(1L).get();
 		CommissionData testTarget = new CommissionData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -513,7 +513,7 @@ public class TestAccounting {
 	@Test
 	public void OsoRequestDataのテスト() throws Exception {
 
-		OsoRequestData entity = osoRequestDataRepository.findOne(1L);
+		OsoRequestData entity = osoRequestDataRepository.findById(1L).get();
 		OsoRequestData testTarget = new OsoRequestData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -591,7 +591,7 @@ public class TestAccounting {
 	@Test
 	public void OsoRequestDetailDataのテスト() throws Exception {
 
-		OsoRequestDetailData entity = osoRequestDetailDataRepository.findOne(1L);
+		OsoRequestDetailData entity = osoRequestDetailDataRepository.findById(1L).get();
 		OsoRequestDetailData testTarget = new OsoRequestDetailData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -658,7 +658,7 @@ public class TestAccounting {
 	@Test
 	public void OsoRequestDetailPlanDataのテスト() throws Exception {
 
-		OsoRequestDetailPlanData entity = osoRequestDetailPlanDataRepository.findOne(1L);
+		OsoRequestDetailPlanData entity = osoRequestDetailPlanDataRepository.findById(1L).get();
 		OsoRequestDetailPlanData testTarget = new OsoRequestDetailPlanData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -725,7 +725,7 @@ public class TestAccounting {
 	@Test
 	public void OsoRequestPlanDataのテスト() throws Exception {
 
-		OsoRequestPlanData entity = osoRequestPlanDataRepository.findOne(1L);
+		OsoRequestPlanData entity = osoRequestPlanDataRepository.findById(1L).get();
 		OsoRequestPlanData testTarget = new OsoRequestPlanData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -801,7 +801,7 @@ public class TestAccounting {
 	@Test
 	public void OsoResultsDataのテスト() throws Exception {
 
-		OsoResultsData entity = osoResultsDataRepository.findOne(1L);
+		OsoResultsData entity = osoResultsDataRepository.findById(1L).get();
 		OsoResultsData testTarget = new OsoResultsData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -884,7 +884,7 @@ public class TestAccounting {
 	@Test
 	public void OsoResultsPlanDataのテスト() throws Exception {
 
-		OsoResultsPlanData entity = osoResultsPlanDataRepository.findOne(1L);
+		OsoResultsPlanData entity = osoResultsPlanDataRepository.findById(1L).get();
 		OsoResultsPlanData testTarget = new OsoResultsPlanData();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -967,7 +967,7 @@ public class TestAccounting {
 	@Test
 	public void UsageQuantityのテスト() throws Exception {
 
-		UsageQuantity entity = usageQuantityRepository.findOne(1L);
+		UsageQuantity entity = usageQuantityRepository.findById(1L).get();
 		UsageQuantity testTarget = new UsageQuantity();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1019,7 +1019,7 @@ public class TestAccounting {
 	@Test
 	public void InvoiceLinkageのテスト() throws Exception {
 
-		InvoiceLinkage entity = invoiceLinkageRepository.findOne(1L);
+		InvoiceLinkage entity = invoiceLinkageRepository.findById(1L).get();
 		InvoiceLinkage testTarget = new InvoiceLinkage();
 		BeanUtils.copyProperties(testTarget, entity);
 

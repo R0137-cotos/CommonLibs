@@ -653,7 +653,7 @@ public class LMPIConnectionHelper {
 		// HTTPステータスが200系以外はエラーとする。
 		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
-			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode() + "、エラー内容：" + responseEntity.getBody());
 		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
@@ -738,7 +738,7 @@ public class LMPIConnectionHelper {
 	}
 
 	private String getErrorMessage(TmCallServiceResponseDto serviceResponse) throws IOException {
-		HashMap<String, Object> responseJsonMap = mapper.readValue(serviceResponse.getResponseEntity().getBody(), new TypeReference<Object>() {
+		HashMap<String, Object> responseJsonMap = mapper.readValue(serviceResponse.getResponseEntity().getBody(), new TypeReference<HashMap<String, Object>>() {
 		});
 		return (String) responseJsonMap.get("error_message");
 	}

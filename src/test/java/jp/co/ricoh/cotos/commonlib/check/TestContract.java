@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -267,7 +267,7 @@ public class TestContract {
 
 	@Test
 	public void ContractAddedEditorEmpのテスト() throws Exception {
-		ContractAddedEditorEmp entity = contractAddedEditorEmpRepository.findOne(401L);
+		ContractAddedEditorEmp entity = contractAddedEditorEmpRepository.findById(401L).get();
 		ContractAddedEditorEmp testTarget = new ContractAddedEditorEmp();
 
 		// 正常系
@@ -295,7 +295,7 @@ public class TestContract {
 
 	@Test
 	public void ContractApprovalResultのテスト() throws Exception {
-		ContractApprovalResult entity = contractApprovalResultRepository.findOne(401L);
+		ContractApprovalResult entity = contractApprovalResultRepository.findById(401L).get();
 		ContractApprovalResult testTarget = new ContractApprovalResult();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -337,7 +337,7 @@ public class TestContract {
 
 	@Test
 	public void ContractApprovalRouteNodeのテスト() throws Exception {
-		ContractApprovalRouteNode entity = contractApprovalRouteNodeRepository.findOne(401L);
+		ContractApprovalRouteNode entity = contractApprovalRouteNodeRepository.findById(401L).get();
 		ContractApprovalRouteNode testTarget = new ContractApprovalRouteNode();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -389,7 +389,7 @@ public class TestContract {
 
 	@Test
 	public void ContractApprovalRouteのテスト() throws Exception {
-		ContractApprovalRoute entity = contractApprovalRouteRepository.findOne(401L);
+		ContractApprovalRoute entity = contractApprovalRouteRepository.findById(401L).get();
 		ContractApprovalRoute testTarget = new ContractApprovalRoute();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -435,7 +435,7 @@ public class TestContract {
 
 	@Test
 	public void ContractAttachedFileのテスト() throws Exception {
-		ContractAttachedFile entity = contractAttachedFileRepository.findOne(401L);
+		ContractAttachedFile entity = contractAttachedFileRepository.findById(401L).get();
 		ContractAttachedFile testTarget = new ContractAttachedFile();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -485,7 +485,7 @@ public class TestContract {
 
 	@Test
 	public void ContractCheckResultのテスト() throws Exception {
-		ContractCheckResult entity = contractCheckResultRepository.findOne(401L);
+		ContractCheckResult entity = contractCheckResultRepository.findById(401L).get();
 		ContractCheckResult testTarget = new ContractCheckResult();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -535,7 +535,7 @@ public class TestContract {
 
 	@Test
 	public void ContractDetailのテスト() throws Exception {
-		ContractDetail entity = contractDetailRepository.findOne(401L);
+		ContractDetail entity = contractDetailRepository.findById(401L).get();
 		ContractDetail testTarget = new ContractDetail();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -585,7 +585,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "数量は最小値（-99999）を下回っています。"));
 
 		// 異常系（@Valid ：品種(契約用)）
-		entity = contractDetailRepository.findOne(401L);
+		entity = contractDetailRepository.findById(401L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getItemContract().setItemContractName(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -605,7 +605,7 @@ public class TestContract {
 
 	@Test
 	public void ContractOperationLogのテスト() throws Exception {
-		ContractOperationLog entity = contractOperationLogRepository.findOne(401L);
+		ContractOperationLog entity = contractOperationLogRepository.findById(401L).get();
 		ContractOperationLog testTarget = new ContractOperationLog();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -637,7 +637,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicSaEmpのテスト() throws Exception {
-		ContractPicSaEmp entity = contractPicSaEmpRepository.findOne(401L);
+		ContractPicSaEmp entity = contractPicSaEmpRepository.findById(401L).get();
 		ContractPicSaEmp testTarget = new ContractPicSaEmp();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -681,7 +681,7 @@ public class TestContract {
 
 	@Test
 	public void Contractのテスト() throws Exception {
-		Contract entity = contractRepository.findOne(4L);
+		Contract entity = contractRepository.findById(4L).get();
 		Contract testTarget = new Contract();
 
 		// 正常系
@@ -758,7 +758,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積IDは最小値（0）を下回っています。"));
 
 		// 異常系（@Valid：契約明細）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractDetailList().get(0).setState(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -767,7 +767,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "状態が設定されていません。"));
 
 		// 異常系（@Valid：契約担当SA社員）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicSaEmp().setMomEmployeeId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -776,7 +776,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
 
 		// 異常系（@Valid：販売店(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getDealerContractList().get(0).setDistributorCd(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -785,7 +785,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "販売店コードは最大文字数（255）を超えています。"));
 
 		// 異常系（@Valid：顧客(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getCustomerContract().setCompanyRepresentativeNameKana(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -794,7 +794,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM非連携_企業代表者名(カナ)は最大文字数（255）を超えています。"));
 
 		// 異常系（@Valid：商品(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getProductContractList().get(0).setProductMasterId(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -803,7 +803,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品マスタIDは最小値（0）を下回っています。"));
 
 		// 異常系（@Valid：見積明細管理）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getManagedEstimationDetailList().get(0).setState(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -812,7 +812,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "状態が設定されていません。"));
 
 		// 異常系（@Valid：契約受付担当CE社員）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicAccCeEmp().setMomEmployeeId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -821,7 +821,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
 
 		// 異常系（@Valid：契約導入担当CE社員）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicIntCeEmp().setMomEmployeeId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -830,7 +830,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
 
 		// 異常系（@Valid：契約保守担当CE社員）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicMntCeEmp().setMomEmployeeId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -839,7 +839,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
 
 		// 異常系（@Valid：契約受付担当SS）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicAccSsOrg().setMomOrgId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -848,7 +848,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDが設定されていません。"));
 
 		// 異常系（@Valid：契約導入担当SS）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicIntSsOrg().setMomOrgId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -857,7 +857,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDが設定されていません。"));
 
 		// 異常系（@Valid：契約保守担当SS）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractPicMntSsOrg().setMomOrgId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -866,7 +866,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "所属組織MoM組織IDが設定されていません。"));
 
 		// 異常系（@Valid：契約機種）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractEquipmentList().get(0).setEquipmentCode(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -875,7 +875,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "機種コードが設定されていません。"));
 
 		// 異常系（@Valid：設置先(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractInstallationLocation().setMomKjbSystemId(null);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -884,7 +884,7 @@ public class TestContract {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM企事部システム連携IDが設定されていません。"));
 
 		// 異常系（@Valid：契約機種付加情報）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getContractEquipmentAdditionInfoList().get(0).setAccumulationContractEquipmentId(INT_MINUS_1);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -896,7 +896,7 @@ public class TestContract {
 
 	@Test
 	public void CustomerContractのテスト() throws Exception {
-		CustomerContract entity = customerContractRepository.findOne(401L);
+		CustomerContract entity = customerContractRepository.findById(401L).get();
 		CustomerContract testTarget = new CustomerContract();
 
 		// 正常系
@@ -928,7 +928,7 @@ public class TestContract {
 
 	@Test
 	public void ContractInstallationLocationのテスト() throws Exception {
-		ContractInstallationLocation entity = contractInstallationLocationRepository.findOne(401L);
+		ContractInstallationLocation entity = contractInstallationLocationRepository.findById(401L).get();
 		ContractInstallationLocation testTarget = new ContractInstallationLocation();
 
 		// 正常系
@@ -957,7 +957,7 @@ public class TestContract {
 
 	@Test
 	public void DealerContractのテスト() throws Exception {
-		DealerContract entity = dealerContractRepository.findOne(401L);
+		DealerContract entity = dealerContractRepository.findById(401L).get();
 		DealerContract testTarget = new DealerContract();
 
 		// 正常系
@@ -1024,7 +1024,7 @@ public class TestContract {
 
 	@Test
 	public void ItemContractのテスト() throws Exception {
-		ItemContract entity = itemContractRepository.findOne(401L);
+		ItemContract entity = itemContractRepository.findById(401L).get();
 		ItemContract testTarget = new ItemContract();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1096,7 +1096,7 @@ public class TestContract {
 
 	@Test
 	public void ItemDetailContractのテスト() throws Exception {
-		ItemDetailContract entity = itemDetailContractRepository.findOne(401L);
+		ItemDetailContract entity = itemDetailContractRepository.findById(401L).get();
 		ItemDetailContract testTarget = new ItemDetailContract();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1150,7 +1150,7 @@ public class TestContract {
 
 	@Test
 	public void ContractEquipmentのテスト() throws Exception {
-		ContractEquipment entity = contractEquipmentRepository.findOne(401L);
+		ContractEquipment entity = contractEquipmentRepository.findById(401L).get();
 		ContractEquipment testTarget = new ContractEquipment();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1190,7 +1190,7 @@ public class TestContract {
 
 	@Test
 	public void ProductContractのテスト() throws Exception {
-		ProductContract entity = productContractRepository.findOne(401L);
+		ProductContract entity = productContractRepository.findById(401L).get();
 		ProductContract testTarget = new ProductContract();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1211,7 +1211,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicMntCeEmpのテスト() throws Exception {
-		ContractPicMntCeEmp entity = contractPicMntCeEmpRepository.findOne(401L);
+		ContractPicMntCeEmp entity = contractPicMntCeEmpRepository.findById(401L).get();
 		ContractPicMntCeEmp testTarget = new ContractPicMntCeEmp();
 
 		// 正常系
@@ -1239,7 +1239,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicIntCeEmpのテスト() throws Exception {
-		ContractPicIntCeEmp entity = contractPicIntCeEmpRepository.findOne(401L);
+		ContractPicIntCeEmp entity = contractPicIntCeEmpRepository.findById(401L).get();
 		ContractPicIntCeEmp testTarget = new ContractPicIntCeEmp();
 
 		// 正常系
@@ -1267,7 +1267,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicAccCeEmpのテスト() throws Exception {
-		ContractPicAccCeEmp entity = contractPicAccCeEmpRepository.findOne(401L);
+		ContractPicAccCeEmp entity = contractPicAccCeEmpRepository.findById(401L).get();
 		ContractPicAccCeEmp testTarget = new ContractPicAccCeEmp();
 
 		// 正常系
@@ -1295,7 +1295,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicMntSsOrgのテスト() throws Exception {
-		ContractPicMntSsOrg entity = contractPicMntSsOrgRepository.findOne(401L);
+		ContractPicMntSsOrg entity = contractPicMntSsOrgRepository.findById(401L).get();
 		ContractPicMntSsOrg testTarget = new ContractPicMntSsOrg();
 
 		// 正常系
@@ -1323,7 +1323,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicAccSsOrgのテスト() throws Exception {
-		ContractPicAccSsOrg entity = contractPicAccSsOrgRepository.findOne(401L);
+		ContractPicAccSsOrg entity = contractPicAccSsOrgRepository.findById(401L).get();
 		ContractPicAccSsOrg testTarget = new ContractPicAccSsOrg();
 
 		// 正常系
@@ -1351,7 +1351,7 @@ public class TestContract {
 
 	@Test
 	public void ContractPicIntSsOrgのテスト() throws Exception {
-		ContractPicIntSsOrg entity = contractPicIntSsOrgRepository.findOne(401L);
+		ContractPicIntSsOrg entity = contractPicIntSsOrgRepository.findById(401L).get();
 		ContractPicIntSsOrg testTarget = new ContractPicIntSsOrg();
 
 		// 正常系
@@ -1379,7 +1379,7 @@ public class TestContract {
 
 	@Test
 	public void ManagedEstimationDetailのテスト() throws Exception {
-		ManagedEstimationDetail entity = managedEstimationDetailRepository.findOne(401L);
+		ManagedEstimationDetail entity = managedEstimationDetailRepository.findById(401L).get();
 		ManagedEstimationDetail testTarget = new ManagedEstimationDetail();
 
 		// 正常系
@@ -1435,7 +1435,7 @@ public class TestContract {
 
 	@Test
 	public void ContractAttachedFileHistoryのテスト() throws Exception {
-		ContractAttachedFileHistory entity = contractAttachedFileHistoryRepository.findOne(401L);
+		ContractAttachedFileHistory entity = contractAttachedFileHistoryRepository.findById(401L).get();
 		ContractAttachedFileHistory testTarget = new ContractAttachedFileHistory();
 
 		// 正常系
@@ -1485,7 +1485,7 @@ public class TestContract {
 
 	@Test
 	public void ContractAttachedFileLinkageのテスト() throws Exception {
-		ContractAttachedFileLinkage entity = contractAttachedFileLinkageRepository.findOne(401L);
+		ContractAttachedFileLinkage entity = contractAttachedFileLinkageRepository.findById(401L).get();
 		ContractAttachedFileLinkage testTarget = new ContractAttachedFileLinkage();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1513,7 +1513,7 @@ public class TestContract {
 
 	@Test
 	public void ContractAssignmentのテスト() throws Exception {
-		ContractAssignment entity = contractAssignmentRepository.findOne(401L);
+		ContractAssignment entity = contractAssignmentRepository.findById(401L).get();
 		ContractAssignment testTarget = new ContractAssignment();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1546,7 +1546,7 @@ public class TestContract {
 
 	@Test
 	public void ContractAssignmentAttachedFileのテスト() throws Exception {
-		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findOne(401L);
+		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findById(401L).get();
 		ContractAssignmentAttachedFile testTarget = new ContractAssignmentAttachedFile();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -1595,7 +1595,7 @@ public class TestContract {
 
 	@Test
 	public void ShippingAddressのテスト() throws Exception {
-		ShippingAddress entity = shippingAddressRepository.findOne(4L);
+		ShippingAddress entity = shippingAddressRepository.findById(4L).get();
 		ShippingAddress testTarget = new ShippingAddress();
 
 		// 正常系
@@ -1642,7 +1642,7 @@ public class TestContract {
 
 	@Test
 	public void ShippingAddressSsOrgのテスト() throws Exception {
-		ShippingAddressSsOrg entity = shippingAddressSsOrgRepository.findOne(1L);
+		ShippingAddressSsOrg entity = shippingAddressSsOrgRepository.findById(1L).get();
 		ShippingAddressSsOrg testTarget = new ShippingAddressSsOrg();
 
 		// 正常系
@@ -1670,7 +1670,7 @@ public class TestContract {
 
 	@Test
 	public void ContractEquipmentNoIsysoneのテスト() throws Exception {
-		ContractEquipmentNoIsysone entity = contractEquipmentNoIsysoneRepository.findOne(1L);
+		ContractEquipmentNoIsysone entity = contractEquipmentNoIsysoneRepository.findById(1L).get();
 		ContractEquipmentNoIsysone testTarget = new ContractEquipmentNoIsysone();
 
 		// 正常系
@@ -1692,7 +1692,7 @@ public class TestContract {
 
 	@Test
 	public void ShippingThingDetailのテスト() throws Exception {
-		ShippingThingDetail entity = shippingThingDetailRepository.findOne(401L);
+		ShippingThingDetail entity = shippingThingDetailRepository.findById(401L).get();
 		ShippingThingDetail testTarget = new ShippingThingDetail();
 
 		// 正常系
@@ -1749,7 +1749,7 @@ public class TestContract {
 
 	@Test
 	public void ManagedContractEquipmentStatusのテスト() throws Exception {
-		ManagedContractEquipmentStatus entity = managedContractEquipmentStatusRepository.findOne(1L);
+		ManagedContractEquipmentStatus entity = managedContractEquipmentStatusRepository.findById(1L).get();
 		ManagedContractEquipmentStatus testTarget = new ManagedContractEquipmentStatus();
 
 		// 正常系
@@ -1782,7 +1782,7 @@ public class TestContract {
 
 	@Test
 	public void PenaltyDetailTransのテスト() throws Exception {
-		PenaltyDetailTrans entity = penaltyDetailTransRepository.findOne(4L);
+		PenaltyDetailTrans entity = penaltyDetailTransRepository.findById(4L).get();
 		PenaltyDetailTrans testTarget = new PenaltyDetailTrans();
 
 		// 正常系
@@ -1820,7 +1820,7 @@ public class TestContract {
 
 	@Test
 	public void PenaltyDetailContractのテスト() throws Exception {
-		PenaltyDetailContract entity = penaltyDetailContractRepository.findOne(4L);
+		PenaltyDetailContract entity = penaltyDetailContractRepository.findById(4L).get();
 		PenaltyDetailContract testTarget = new PenaltyDetailContract();
 
 		// 正常系
@@ -1886,7 +1886,7 @@ public class TestContract {
 
 	@Test
 	public void ContractEquipmentAdditionInfoのテスト() throws Exception {
-		ContractEquipmentAdditionInfo entity = contractEquipmentAdditionInfoRepository.findOne(401L);
+		ContractEquipmentAdditionInfo entity = contractEquipmentAdditionInfoRepository.findById(401L).get();
 		ContractEquipmentAdditionInfo testTarget = new ContractEquipmentAdditionInfo();
 
 		// 正常系

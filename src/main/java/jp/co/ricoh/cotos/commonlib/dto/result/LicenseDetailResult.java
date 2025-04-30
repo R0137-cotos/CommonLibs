@@ -2,11 +2,11 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Version;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.RequestCreateStatus;

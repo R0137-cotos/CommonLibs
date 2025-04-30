@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.approvalsearch;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;

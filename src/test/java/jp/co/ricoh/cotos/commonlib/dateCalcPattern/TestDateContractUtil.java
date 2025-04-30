@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dateCalcPattern;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 月加算_終了日月末() throws Exception {
 
-		Contract contract = contractRepository.findOne(4L);
+		Contract contract = contractRepository.findById(4L).get();
 
 		String testDate = "20200101";
 		Date resultDate = dateContractUtil.getServiceTermEndFromItem(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), true);
@@ -70,7 +70,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 月加算_終了日() throws Exception {
 
-		Contract contract = contractRepository.findOne(4L);
+		Contract contract = contractRepository.findById(4L).get();
 
 		String testDate = "20200110";
 		Date resultDate = dateContractUtil.getServiceTermEndFromItem(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -80,7 +80,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 異常系_契約期間なし() throws Exception {
 		try {
-			Contract contract = contractRepository.findOne(5L);
+			Contract contract = contractRepository.findById(5L).get();
 			dateContractUtil.getServiceTermEndFromItem(contract, null, true);
 			Assert.fail("正常終了した");
 		} catch (ErrorCheckException e) {
@@ -108,7 +108,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 最初の契約取得確認() throws Exception {
 
-		Contract contract = contractRepository.findOne(8L);
+		Contract contract = contractRepository.findById(8L).get();
 
 		Contract resultContract = dateContractUtil.getFirstContract(contract);
 		Assert.assertEquals("最初の契約が正しく取得されること", 6, resultContract.getId());
@@ -117,7 +117,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 異常系_変更元契約なし() throws Exception {
 
-		Contract contract = contractRepository.findOne(8L);
+		Contract contract = contractRepository.findById(8L).get();
 		contract.setOriginContractId(99L);
 		try {
 			dateContractUtil.getFirstContract(contract);
@@ -133,7 +133,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_最長契約月数なし() throws Exception {
 
-		Contract contract = contractRepository.findOne(9L);
+		Contract contract = contractRepository.findById(9L).get();
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, null, false);
 		Assert.assertTrue("契約更新可能であること", result);
@@ -142,7 +142,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_更新可能() throws Exception {
 
-		Contract contract = contractRepository.findOne(10L);
+		Contract contract = contractRepository.findById(10L).get();
 		String testDate = "20231031";
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -152,7 +152,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_更新不可() throws Exception {
 
-		Contract contract = contractRepository.findOne(10L);
+		Contract contract = contractRepository.findById(10L).get();
 		String testDate = "20231101";
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -162,7 +162,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_更新可能_拡張項目Null() throws Exception {
 
-		Contract contract = contractRepository.findOne(11L);
+		Contract contract = contractRepository.findById(11L).get();
 		String testDate = "20231031";
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -172,7 +172,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_更新可能_migrationParameter_Null() throws Exception {
 
-		Contract contract = contractRepository.findOne(12L);
+		Contract contract = contractRepository.findById(12L).get();
 		String testDate = "20231031";
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -182,7 +182,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_更新可能_migrationDivがRITOS移管以外() throws Exception {
 
-		Contract contract = contractRepository.findOne(13L);
+		Contract contract = contractRepository.findById(13L).get();
 		String testDate = "20231031";
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -192,7 +192,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 契約更新可能判定_更新不可_正常な移行データ() throws Exception {
 
-		Contract contract = contractRepository.findOne(14L);
+		Contract contract = contractRepository.findById(14L).get();
 		String testDate = "20231031";
 
 		boolean result = dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -202,7 +202,7 @@ public class TestDateContractUtil {
 	@Test
 	public void 異常系_契約更新可能判定_Json変換例外() throws Exception {
 
-		Contract contract = contractRepository.findOne(15L);
+		Contract contract = contractRepository.findById(15L).get();
 		String testDate = "20231031";
 		try {
 			dateContractUtil.contractUpdatePossibleCheck(contract, dateCalcPatternUtil.stringToDateConverter(testDate, null), false);
@@ -260,7 +260,7 @@ public class TestDateContractUtil {
 		Assert.assertEquals("うるう年からの4年間で48が返されること", Long.valueOf(48), dateContractUtil.getMaxExtensionContractMonths(contract));
 
 		// java.sql.Date型のテスト
-		contract = contractRepository.findOne(16L);
+		contract = contractRepository.findById(16L).get();
 		// 2024/02/29～2026/2/28
 		Assert.assertEquals("うるう年からの2年間で24が返されること", Long.valueOf(24), dateContractUtil.getMaxExtensionContractMonths(contract));
 
@@ -272,9 +272,9 @@ public class TestDateContractUtil {
 	@Test
 	public void ランニング売上計上処理日_区分なし() throws Exception {
 		long contractId = 17L;
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		dateContractUtil.setRunningAccountSalesDate(contract);
-		contract = contractRepository.findOne(contractId);
+		contract = contractRepository.findById(contractId).get();
 		contract.getContractDetailList().stream().filter(s -> s.getItemContract().getCostType() == CostType.月額_定額).forEach(detail -> {
 			Assert.assertNull("ランニング売上計上処理日にNULLが設定されること", detail.getRunningAccountSalesDate());
 		});
@@ -284,7 +284,7 @@ public class TestDateContractUtil {
 	public void ランニング売上計上処理日_サービス開始日() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/updateItemMaster_001.sql");
 		long contractId = 18L;
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
 		dateContractUtil.setRunningAccountSalesDate(contract);
 		contract.getContractDetailList().stream().forEach(detail -> {
@@ -300,7 +300,7 @@ public class TestDateContractUtil {
 	public void ランニング売上計上処理日_課金開始日() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("sql/dateCalcPattern/updateItemMaster_002.sql");
 		long contractId = 19L;
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
 		dateContractUtil.setRunningAccountSalesDate(contract);
 		contract.getContractDetailList().stream().forEach(detail -> {

@@ -19,9 +19,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StreamUtils;
 
@@ -56,7 +56,7 @@ public class TestFileUpDownload {
 	@Autowired
 	ObjectMapper mapper;
 
-	@SpyBean
+	@MockitoSpyBean
 	CreateZipParameter parameter;
 
 	@Autowired
@@ -453,7 +453,7 @@ public class TestFileUpDownload {
 				StreamUtils.copy(stream, out);
 			}
 			Assert.assertTrue("ファイル内容が一致していること", Arrays.equals(Files.readAllBytes(file.toPath()), Files.readAllBytes(compareFile.toPath())));
-			AttachedFile attachedFileDb = attachedFileRepository.findOne(attachedFileId);
+			AttachedFile attachedFileDb = attachedFileRepository.findById(attachedFileId).get();
 			Assert.assertEquals("物理ファイル名が正しく登録されていること", attachedFileId + "_" + compareFileNm, attachedFileDb.getFilePhysicsName());
 
 			// 作成した一時ファイルを削除

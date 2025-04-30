@@ -34,14 +34,14 @@ public class TrendMicroUtil {
 		try {
 			responseEntity = rest.exchange(requestEntity, String.class);
 			log.info("============================================================");
-			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("status  : " + responseEntity.getStatusCode());
 			log.info("headers : " + responseEntity.getHeaders());
 			log.info("response: " + responseEntity.getBody());
 			log.info("============================================================");
 			// TrendMicroAPIはエラーでもエラー内容を正常終了と同じようにレスポンスBodyに設定する為、
 			// HTTPステータスが500系エラーの場合はリトライさせる目的で例外をスローする。
 			if (responseEntity.getStatusCode().is5xxServerError()) {
-				throw new ResourceAccessException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容： " + responseEntity.getBody());
+				throw new ResourceAccessException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode() + "、エラー内容： " + responseEntity.getBody());
 			}
 		} catch (ResourceAccessException e) {
 			log.error(e.toString());

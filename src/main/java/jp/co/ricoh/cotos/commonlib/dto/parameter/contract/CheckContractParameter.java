@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import io.swagger.annotations.ApiParam;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;

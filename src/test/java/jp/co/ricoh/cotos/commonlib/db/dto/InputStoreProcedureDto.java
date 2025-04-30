@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.db.dto;
 
-import javax.persistence.ParameterMode;
+import jakarta.persistence.ParameterMode;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

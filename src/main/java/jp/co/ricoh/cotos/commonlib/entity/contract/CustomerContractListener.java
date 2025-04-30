@@ -2,9 +2,9 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.util.ArrayList;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.transaction.Transactional;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

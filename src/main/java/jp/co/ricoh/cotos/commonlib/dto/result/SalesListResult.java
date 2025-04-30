@@ -3,10 +3,10 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;

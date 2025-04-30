@@ -111,11 +111,15 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_commonlibs
-    password: cotos_ci_commonlibs
+    username: cotos_local_aws_eosl
+    password: cotos_local_aws_eosl
     driverClassName: oracle.jdbc.OracleDriver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
   jpa:
-    database-platform: org.hibernate.dialect.Oracle12cDialect
+    database-platform: org.hibernate.dialect.OracleDialect
     hibernate:
       ddl-auto: none
     properties:
@@ -123,7 +127,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_commonlibs
+        default_schema: cotos_local_aws_eosl
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
@@ -139,6 +143,10 @@ spring:
   messages:
     basename: Messages
     defaultEncoding: UTF-8
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
 remote:
   momauthority:
     url: https://www.rizm.jw1.nihon-os.ricoh.co.jp/jmo/services/KengenService

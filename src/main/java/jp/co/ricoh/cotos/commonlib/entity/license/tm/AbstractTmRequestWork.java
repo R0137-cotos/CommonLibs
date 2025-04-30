@@ -3,10 +3,10 @@ package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 

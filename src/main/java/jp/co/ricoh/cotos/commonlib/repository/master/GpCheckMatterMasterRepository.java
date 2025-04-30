@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import jp.co.ricoh.cotos.commonlib.entity.master.GpCheckMatterMaster;
 
 public interface GpCheckMatterMasterRepository extends CrudRepository<GpCheckMatterMaster, Long> {
-	public GpCheckMatterMaster findOneByCheckMatterCode(String CheckMatterCode);
+	public GpCheckMatterMaster findByIdByCheckMatterCode(String CheckMatterCode);
 }

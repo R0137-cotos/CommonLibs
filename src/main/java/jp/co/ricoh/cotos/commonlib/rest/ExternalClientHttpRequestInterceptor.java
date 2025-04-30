@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -97,13 +97,13 @@ public class ExternalClientHttpRequestInterceptor implements ClientHttpRequestIn
 		}
 
 		@Override
-		public HttpStatus getStatusCode() throws IOException {
+		public HttpStatusCode getStatusCode() throws IOException {
 			return this.response.getStatusCode();
 		}
 
 		@Override
 		public int getRawStatusCode() throws IOException {
-			return this.response.getRawStatusCode();
+			return this.response.getStatusCode().value();
 		}
 
 		@Override

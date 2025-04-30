@@ -32,7 +32,7 @@ public class PublicHolidayUtil {
 	 * @return
 	 */
 	public boolean isPublicHoliday(Date date) {
-		PublicHolidayMaster publicHolidayMaster = publicHolidayMasterRepository.findOne(truncateDate(date));
+		PublicHolidayMaster publicHolidayMaster = publicHolidayMasterRepository.findById(truncateDate(date)).get();
 		return publicHolidayMaster != null;
 	}
 

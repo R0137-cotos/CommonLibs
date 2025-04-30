@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.rest;
 
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.nio.file.Files;
@@ -16,13 +16,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.mock.http.client.MockClientHttpResponse;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
@@ -38,7 +38,7 @@ public class ExternalClientHttpRequestInterceptorTest {
 	@Autowired
 	ExternalClientHttpRequestInterceptor externalClientHttpRequestInterceptor;
 
-	@SpyBean
+	@MockitoSpyBean
 	ExternalLogResponseProperties externalLogResponseProperties;
 
 	@Autowired

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -556,7 +556,7 @@ public class TestContract {
 
 		idList.stream().forEach(id -> {
 			// データが取得できることを確認
-			T found = repository.findOne(id);
+			T found = repository.findById(id).get();
 			Assert.assertNotNull(found);
 			// 全てのカラムがNullではないことを確認
 			try {

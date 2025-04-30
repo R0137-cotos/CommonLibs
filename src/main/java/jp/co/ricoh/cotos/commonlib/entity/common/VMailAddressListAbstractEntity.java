@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.common;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.common.VMailAddressList.TableType;

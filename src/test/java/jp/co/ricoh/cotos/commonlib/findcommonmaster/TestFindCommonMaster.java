@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.findcommonmaster;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;

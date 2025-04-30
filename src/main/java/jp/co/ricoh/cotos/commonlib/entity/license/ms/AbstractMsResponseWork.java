@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
 import java.util.Arrays;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 import org.springframework.context.annotation.Description;
 

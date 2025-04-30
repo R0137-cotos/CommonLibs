@@ -66,27 +66,27 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201202";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 1L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("指定月が指定されていること", "20201002", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 2L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 + 1ヵ月であること", "20210102", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 3L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 + 5ヶ月であること", "20210502", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 4L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 - 1ヵ月であること", "20201102", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 5L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 - 3ヵ月であること(時間指定あり)", "20200902 220501", dateCalcPatternUtil.dateToStringConverter(resultDate, "yyyyMMdd HHmmss"));
 
@@ -98,21 +98,21 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20210131";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 6L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 - 1ヵ月であること(前営業日)", "20201228", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		testDate = "20201231";
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 7L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 + 1ヵ月であること(後営業日)", "20210201", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		testDate = "20201101";
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 8L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 + 1ヵ月であること(1ヵ月後が営業日)", "20201201", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -123,32 +123,32 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201202";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 9L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("指定日が設定されていること", "20201210", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 10L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("指定日の月の最終日が設定されていること", "20201231", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 11L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 + 1日", "20201203", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 12L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 + 10日", "20201212", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 13L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 - 1日", "20201201", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 14L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("基準日 - 5日(時間指定あり)", "20201127 090000", dateCalcPatternUtil.dateToStringConverter(resultDate, "yyyyMMdd HHmmss"));
 	}
@@ -159,32 +159,32 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201202";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 15L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("前営業日が設定されること", "20201204", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 16L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("後営業日が設定されること", "20201207", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 17L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("指定された日が営業日の場合、指定日が設定されること", "20201210", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 18L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("月末指定_後営業日が設定されること", "20210105", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		testDate = "20201101";
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 19L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("月末指定_対象が営業日でない場合そのまま設定されること", "20201130", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -195,19 +195,19 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201202";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 20L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("指定日数分の営業日のみカウントされること(-)", "20201125", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		testDate = "20201031";
 		referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		trgetId = 21L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("指定日数分の営業日のみカウントされること(+)", "20201102", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 
 		trgetId = 22L;
-		dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("日付計算営業日フラグが0の場合、営業日が考慮されないこと", "20201101", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -218,7 +218,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201202";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId =23L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("満了月の2ヶ月前の1日であること", "20201001", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -229,7 +229,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 24L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("満了日の7営業日前であること", "20201126", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -240,7 +240,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 25L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("満了月の20日であること", "20201220", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -251,7 +251,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 26L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("満了月の3ヶ月前の月末であること", "20200930", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -262,7 +262,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 27L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("満了月の4ヶ月前の最終日から7日前のさらに７営業日前の日付であること", "20200806", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -273,7 +273,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 28L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("満了日の4ヶ月の20日から10営業日をマイナスした日付であること", "20200730", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -284,7 +284,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 29L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("当月20日の22時", "20201220220000", dateCalcPatternUtil.dateToStringConverter(resultDate, "yyyyMMddHHmmss"));
 	}
@@ -295,7 +295,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 30L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("拡張項目のソート確認", "20200813091000", dateCalcPatternUtil.dateToStringConverter(resultDate, "yyyyMMddHHmmss"));
 	}
@@ -306,7 +306,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20201206";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 31L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("拡張項目のソート確認", "20200918000000", dateCalcPatternUtil.dateToStringConverter(resultDate, "yyyyMMddHHmmss"));
 	}
@@ -317,7 +317,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20210702";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 32L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("契約満了月の4ヶ月前の月末から7営業日前", "20210323", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -328,7 +328,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20210201";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 33L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("2021年2月の第1営業日が20210201であること", "20210201", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}
@@ -339,7 +339,7 @@ public class TestDateCalcPatternUtil {
 		String testDate = "20210202";
 		Date referenceDate = dateCalcPatternUtil.stringToDateConverter(testDate, null);
 		Long trgetId = 34L;
-		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findOne(trgetId);
+		DateCalcPatternMaster dateCalcPatternMaster = dateCalcPatternMasterRepository.findById(trgetId).get();
 		Date resultDate = dateCalcPatternUtil.dateCalc(dateCalcPatternMaster, referenceDate);
 		Assert.assertEquals("2021年2月の第6営業日が20210208であること", "20210208", dateCalcPatternUtil.dateToStringConverter(resultDate, null));
 	}

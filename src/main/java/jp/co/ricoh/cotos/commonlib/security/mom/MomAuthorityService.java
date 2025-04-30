@@ -13,10 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.xml.rpc.ServiceException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -45,6 +44,7 @@ import jp.co.ricoh.jmo.dto.service.EmployeeAuthInfoDto;
 import jp.co.ricoh.jmo.dto.service.EmployeeInfoDto;
 import jp.co.ricoh.jmo.dto.service.EmployeeOrgInfoDto;
 import jp.co.ricoh.jmo.service.KengenServiceServiceLocator;
+
 
 @Component
 public class MomAuthorityService {
@@ -93,7 +93,7 @@ public class MomAuthorityService {
 	/**
 	 * MoM権限レベルを取得
 	 */
-	public AuthLevel searchMomAuthority(String singleUserId, ActionDiv actionDiv, AuthDiv authDiv) throws RemoteException, SQLException, ServiceException {
+	public AuthLevel searchMomAuthority(String singleUserId, ActionDiv actionDiv, AuthDiv authDiv) throws RemoteException, SQLException, javax.xml.rpc.ServiceException {
 
 		// MoM提供モジュール経由でMom権限情報を取得
 		List<AuthorityInfoActionDto> authorityInfoActionDtoList = this.searchMomAuthoritiesExternal(singleUserId);
@@ -338,7 +338,7 @@ public class MomAuthorityService {
 	/**
 	 * 外部ライブラリから、シングルユーザーIDに紐づく権限情報を取得する
 	 */
-	protected List<AuthorityInfoActionDto> searchMomAuthoritiesExternal(String singleUserId) throws SQLException, RemoteException, ServiceException {
+	protected List<AuthorityInfoActionDto> searchMomAuthoritiesExternal(String singleUserId) throws SQLException, RemoteException, ServiceException, javax.xml.rpc.ServiceException {
 
 		// 権限情報取得用サービスを初期化
 		KengenServiceServiceLocator kengenServiceLocator = new KengenServiceServiceLocator();

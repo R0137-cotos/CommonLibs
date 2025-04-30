@@ -99,7 +99,7 @@ public class ExcelUtil {
 	 * @param sheetNameList 削除シート名配列
 	 */
 	@Deprecated
-	public void deleteExcelSheet(String filePath, List<String> sheetNameList) throws ErrorCheckException {
+	public void deleteExcelSheet(String filePath, List<String> sheetNameList) throws ErrorCheckException, InvalidFormatException {
 		List<ErrorInfo> errorInfoList = new ArrayList<>();
 
 		//引数チェック
@@ -137,7 +137,7 @@ public class ExcelUtil {
 			}
 		} catch (FileNotFoundException e) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(errorInfoList, "FileNotFoundError", new String[] { inputFile.getAbsolutePath() }));
-		} catch (IOException | EncryptedDocumentException | InvalidFormatException e) {
+		} catch (IOException | EncryptedDocumentException e) {
 			throw new ErrorFatalException(checkUtil.addErrorInfo(errorInfoList, "FileOutputFailed", new String[] { inputFile.getAbsolutePath() }));
 		} finally {
 			// テンポラリファイル削除

@@ -94,7 +94,7 @@ public class IntraMartUtil {
 				conversionRespomseBody = decodedToUTF8(responseEntity.getBody(), responseCharset);
 			}
 			log.info("============================================================");
-			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("status  : " + responseEntity.getStatusCode());
 			log.info("headers : " + responseEntity.getHeaders());
 			log.info("response: " + conversionRespomseBody);
 			log.info("============================================================");
@@ -123,7 +123,7 @@ public class IntraMartUtil {
 		IspSettingRootDto ispSettingRootDto = jsonUtil.convertToDto(serviceResult.getBody(), IspSettingRootDto.class);
 
 		Map<HttpStatus, IspSettingRootDto> result = new HashMap<>();
-		result.put(serviceResult.getStatusCode(), ispSettingRootDto);
+		result.put((HttpStatus) serviceResult.getStatusCode(), ispSettingRootDto);
 
 		return result;
 	}
