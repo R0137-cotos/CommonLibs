@@ -212,7 +212,7 @@ public class NextUpdateDetailInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "状態", required = true, position = 18, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")")
+	@ApiModelProperty(value = "状態", required = true, position = 18, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus state;
 
 	/**
