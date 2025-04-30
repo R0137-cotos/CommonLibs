@@ -32,13 +32,13 @@ import lombok.EqualsAndHashCode;
 public class ContractDateSettingMaster extends EntityBaseMaster {
 
 	@Description(value = "サービス開始日設定区分")
-	public enum ServiceTermStartSettingDate {
+	public enum ServiceTermStartSettingType {
 
 		システム日付("1"), システム日付の翌月1日("2");
 
 		private final String text;
 
-		private ServiceTermStartSettingDate(final String text) {
+		private ServiceTermStartSettingType(final String text) {
 			this.text = text;
 		}
 
@@ -49,19 +49,19 @@ public class ContractDateSettingMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static ServiceTermStartSettingDate fromString(String string) {
+		public static ServiceTermStartSettingType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	@Description(value = "課金開始日設定区分")
-	public enum BillingStartDateSettingDate {
+	public enum BillingStartDateSettingType {
 
 		システム日付の翌月１日("1"), サービス開始日と同日("2");
 
 		private final String text;
 
-		private BillingStartDateSettingDate(final String text) {
+		private BillingStartDateSettingType(final String text) {
 			this.text = text;
 		}
 
@@ -72,19 +72,19 @@ public class ContractDateSettingMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static BillingStartDateSettingDate fromString(String string) {
+		public static BillingStartDateSettingType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
 
 	@Description(value = "サービス終了日設定区分")
-	public enum ServiceTermEndSettingDate {
+	public enum ServiceTermEndSettingType {
 
 		課金開始日からNヵ月後の日付("1"), 課金開始日からNヵ月後の日付の月末("2");
 
 		private final String text;
 
-		private ServiceTermEndSettingDate(final String text) {
+		private ServiceTermEndSettingType(final String text) {
 			this.text = text;
 		}
 
@@ -95,7 +95,7 @@ public class ContractDateSettingMaster extends EntityBaseMaster {
 		}
 
 		@JsonCreator
-		public static ServiceTermEndSettingDate fromString(String string) {
+		public static ServiceTermEndSettingType fromString(String string) {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
@@ -134,17 +134,17 @@ public class ContractDateSettingMaster extends EntityBaseMaster {
 	 * サービス開始日設定区分
 	 */
 	@ApiModelProperty(value = "サービス開始日設定区分", required = false, allowableValues = "システム日付(\"1\"), システム日付の翌月1日(\"2\")", example = "1", position = 5)
-	private ServiceTermStartSettingDate serviceTermStartSettingDate;
+	private ServiceTermStartSettingType serviceTermStartSettingType;
 
 	/**
 	 * 課金開始日設定区分
 	 */
 	@ApiModelProperty(value = "課金開始日設定区分", required = false, allowableValues = "システム日付の翌月１日(\"1\"), サービス開始日と同日(\"2\")", example = "1", position = 6)
-	private BillingStartDateSettingDate billingStartDateSettingDate;
+	private BillingStartDateSettingType billingStartDateSettingType;
 
 	/**
 	 * サービス終了日設定区分
 	 */
 	@ApiModelProperty(value = "サービス終了日設定区分", required = false, allowableValues = "課金開始日からNヵ月後の日付(\"1\"), 課金開始日からNヵ月後の日付の月末(\"2\")", example = "1", position = 7)
-	private ServiceTermEndSettingDate serviceTermEndSettingDate;
+	private ServiceTermEndSettingType serviceTermEndSettingType;
 }
