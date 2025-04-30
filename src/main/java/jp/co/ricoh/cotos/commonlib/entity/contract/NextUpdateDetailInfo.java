@@ -134,7 +134,7 @@ public class NextUpdateDetailInfo extends EntityBase {
 	 * 費用種別
 	 */
 	@NotNull
-	@ApiModelProperty(value = "費用種別", required = false, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1", position = 8)
+	@ApiModelProperty(value = "費用種別", required = false, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1", position = 8)
 	private CostType costType;
 
 	/**
@@ -212,7 +212,7 @@ public class NextUpdateDetailInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "状態", required = true, position = 18, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "状態", required = true, position = 18, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")")
 	private DetailStatus state;
 
 	/**
