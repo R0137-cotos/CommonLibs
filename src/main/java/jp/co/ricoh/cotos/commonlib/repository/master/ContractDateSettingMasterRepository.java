@@ -13,10 +13,6 @@ import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster;
 @Repository
 public interface ContractDateSettingMasterRepository extends CrudRepository<ContractDateSettingMaster, Long> {
 
-	@Query(value = "select * from contract_date_setting_master" +
-			"where product_master_id in :product_master_id" +
-			"and (contract_type in :contract_type" +
-			"or contract_type = null)" +
-			"and arrangement_work_type_master_id in :arrangement_work_type_master_id")
+	@Query(value = "select * from ContractDateSettingMaster where product_master_id in :productMasterId and (contract_type in :contractType or contract_type is null) and arrangement_work_type_master_id in :arrangementWorkTypeMasterId", nativeQuery = true)
 	public List<ContractDateSettingMaster> findByProductMasterIdAndContractTypeAndArrangementWorkTypeMasterId(@Param("productMasterId") long productMasterId, @Param("contractType") ContractType contractType, @Param("arrangementWorkTypeMasterId") Long arrangementWorkTypeMasterId);
 }
