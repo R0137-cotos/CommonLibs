@@ -1133,4 +1133,12 @@ public class Contract extends EntityBase {
 	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 118)
 	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfoList;
 
+	/**
+	 * 次回更新明細情報
+	 */
+	@Valid
+	@OneToMany(mappedBy = "contract")
+	@ApiModelProperty(value = "次回更新明細情報", required = false, position = 119)
+	private List<NextUpdateDetailInfo> nextUpdateDetailInfoList;
+
 }
