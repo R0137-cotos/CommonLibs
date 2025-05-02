@@ -759,4 +759,11 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "月割品種対応初期費品種マスタID", required = false, position = 64, allowableValues = "range[0,9999999999999999999]")
 	private Long prorationLinkedInitialItemMasterId;
+
+	/**
+	 * 同一SS用最短納期日数
+	 */
+	@Max(99)
+	@ApiModelProperty(value = "同一SS用最短納期日数", required = false, position = 65, allowableValues = "range[0,99]")
+	private Integer shortestDeliveryDateForSameSs;
 }
