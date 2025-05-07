@@ -150,7 +150,7 @@ public class CommonSendMail {
 	 * @throws IOException
 	 */
 	public void findMailTemplateMasterAndSendMail(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
-		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).get();
+		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).orElse(null);
 		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, null, uploadFile, bounceMailHeaderDto);
 	}
 
@@ -213,7 +213,7 @@ public class CommonSendMail {
 	 * @throws IOException
 	 */
 	public void findMailTemplateMasterAndSendMail(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
-		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).get();
+		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).orElse(null);
 		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, uploadFile, bounceMailHeaderDto);
 	}
 
@@ -259,7 +259,7 @@ public class CommonSendMail {
 	 * @throws IOException
 	 */
 	public void findMailTemplateMasterAndSendMailAndAttachedFiles(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<String> uploadFileList, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
-		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).get();
+		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).orElse(null);
 		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, null, uploadFileList, bounceMailHeaderDto);
 	}
 
@@ -322,7 +322,7 @@ public class CommonSendMail {
 	 * @throws IOException
 	 */
 	public void findMailTemplateMasterAndSendMailAndAttachedFiles(long mailTemplateMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues, List<String> uploadFileList, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
-		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).get();
+		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findById(mailTemplateMasterId).orElse(null);
 		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, uploadFileList, bounceMailHeaderDto);
 	}
 

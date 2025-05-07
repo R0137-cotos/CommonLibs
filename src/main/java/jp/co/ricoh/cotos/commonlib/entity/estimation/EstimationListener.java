@@ -53,7 +53,7 @@ public class EstimationListener {
 		 * RJ管理番号
 		 * 商品グループマスタ.商品グループ識別子 + 7桁の連番
 		 */
-		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findById(entity.getProductGrpMasterId()).get();
+		ProductGrpMaster productGrpMaster = productGrpMasterRepository.findById(entity.getProductGrpMasterId()).orElse(null);
 		if (null == entity.getRjManageNumber() && null != productGrpMaster) {
 			ProductGrpIdentifierMaster productGrpIdentifierMaster = productGrpMaster.getProductGrpIdentifierMaster();
 			if (null == productGrpIdentifierMaster) return;

@@ -19,9 +19,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StreamUtils;
 
@@ -56,7 +56,7 @@ public class TestFileUpDownload {
 	@Autowired
 	ObjectMapper mapper;
 
-	@MockitoSpyBean
+	@SpyBean
 	CreateZipParameter parameter;
 
 	@Autowired

@@ -119,7 +119,7 @@ public class PenaltyUtil {
 	public PenaltyCheckResultDTO penaltyCheck(long itemMasterId, Date cancelScheduledDate, Date penalyStartingDate) {
 
 		// 1.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
-		ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).get();
+		ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).orElse(null);
 		if (itemMaster == null) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "品種マスタID" }));
 		}
@@ -152,7 +152,7 @@ public class PenaltyUtil {
 //
 //		// 見積情報取得
 //		Optional.ofNullable(estimationId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "見積ID" })));
-//		Estimation estimation = estimationRepository.findById(estimationId);
+//		Estimation estimation = estimationRepository.findOne(estimationId);
 //		Optional.ofNullable(estimation).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistEstimation", new String[] { "見積" })));
 //
 //		// 減数された品種、及び数量情報を取得
@@ -181,7 +181,7 @@ public class PenaltyUtil {
 
 		// 契約情報取得
 		Optional.ofNullable(contractId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約ID" })));
-		Contract contract = contractRepository.findById(contractId).get();
+		Contract contract = contractRepository.findById(contractId).orElse(null);
 		Optional.ofNullable(contract).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "契約" })));
 		Optional.ofNullable(cancelScheduledDate).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "解約予定日" })));
 
@@ -295,7 +295,7 @@ public class PenaltyUtil {
 
 		contract.getContractDetailList().stream().filter(detail -> detail.getItemContract().getCostType().equals(CostType.月額_定額)).collect(Collectors.toList()).forEach(detail -> {
 			long itemMasterId = detail.getItemContract().getItemMasterId();
-			ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).get();
+			ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).orElse(null);
 			// 紛失金品種情報、違約金金額を戻り値に設定する
 			Optional.ofNullable(lostNumber).ifPresent(lostNum -> {
 				if (lostNum != 0) {

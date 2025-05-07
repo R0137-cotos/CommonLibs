@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -663,17 +663,14 @@ public class CheckUtil {
 			return false;
 		}
 		ObjectMapper mapper = new ObjectMapper();
-		Map<String, Object> productExtendsParameterMap;
-		Map<String, Object> migrationMap;
+		HashMap<String, HashMap<String, Object>> productExtendsParameterMap;
+		HashMap<String, Object> migrationMap;
 		MigrationDiv checkMigrationDiv = null;
 		try {
 			// 拡張項目から移行用DTO.移行区分を取得
-			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Map<String, Object>>() {
+			productExtendsParameterMap = (HashMap<String, HashMap<String, Object>>) mapper.readValue(extendsParameter, new TypeReference<Object>() {
 			});
-			migrationMap = (Map<String, Object>) productExtendsParameterMap.get("migrationParameter");
-			if (migrationMap != null && StringUtils.isNotBlank(migrationMap.get("migrationDiv").toString())) {
-				checkMigrationDiv = MigrationDiv.fromString(migrationMap.get("migrationDiv").toString());
-			}
+			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
 			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {
 				checkMigrationDiv = MigrationDiv.fromString(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString());
 			}

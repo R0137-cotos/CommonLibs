@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -431,8 +431,8 @@ public class TestTmWorks {
 
 	private void TmLinkManagementRepositoryのテスト() {
 
-		val entity = tmLinkManagementRepository.findById(10L);
-		val testTarget = new TmLinkManagement();
+		TmLinkManagement entity = tmLinkManagementRepository.findById(10L).get();
+		TmLinkManagement testTarget = new TmLinkManagement();
 
 		// 正常系
 		BeanUtils.copyProperties(entity, testTarget);

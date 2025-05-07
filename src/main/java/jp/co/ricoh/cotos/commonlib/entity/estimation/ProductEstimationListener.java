@@ -28,7 +28,7 @@ public class ProductEstimationListener {
 	@PrePersist
 	@Transactional
 	public void appendsEstimationProductsFields(ProductEstimation productEstimation) {
-		ProductMaster productMaster = productMasterRepository.findById(productEstimation.getProductMasterId()).get();
+		ProductMaster productMaster = productMasterRepository.findById(productEstimation.getProductMasterId()).orElse(null);
 		productEstimation.setProductMasterId(productMaster.getId());
 		BeanUtils.copyProperties(productMaster, productEstimation, "id", "updatedAt", "updatedUserId", "createdAt", "createdUserId", "version");
 		productEstimation.setProductEstimationName(productMaster.getProductName());

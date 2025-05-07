@@ -124,7 +124,7 @@ public class ArrangementAuthorityService {
 			boolean errorFlg = true;
 
 			for (ArrangementWorkAuthControlMaster authControlMaster : arrangementWorkAuthControlMasterList) {
-				ArrangementWorkTypeMaster arrangementWorkTypeMaster = arrangementWorkTypeMasterRepository.findById(work.getArrangementWorkTypeMasterId()).get();
+				ArrangementWorkTypeMaster arrangementWorkTypeMaster = arrangementWorkTypeMasterRepository.findById(work.getArrangementWorkTypeMasterId()).orElse(null);
 				if (arrangementWorkTypeMaster == null) {
 					// 通常は発生しない
 					throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistArrangement", new String[] { "手配業務" }));
@@ -146,8 +146,8 @@ public class ArrangementAuthorityService {
 
 			if (errorFlg) {
 				// 引数の手配業務タイプマスタに対して権限が存在しない場合、エラー情報を追加する
-				ArrangementWorkTypeMaster arrangementWorkTypeMaster = arrangementWorkTypeMasterRepository.findById(work.getArrangementWorkTypeMasterId()).get();
-				Contract contract = contractRepository.findById(work.getArrangement().getContractId()).get();
+				ArrangementWorkTypeMaster arrangementWorkTypeMaster = arrangementWorkTypeMasterRepository.findById(work.getArrangementWorkTypeMasterId()).orElse(null);
+				Contract contract = contractRepository.findById(work.getArrangement().getContractId()).orElse(null);
 				checkUtil.addErrorInfo(errorInfoList, "NoArrangementWorkAuthoritiesError", new String[] { contract.getContractNumber(), arrangementWorkTypeMaster.getArrangementWorkName() });
 			}
 		});

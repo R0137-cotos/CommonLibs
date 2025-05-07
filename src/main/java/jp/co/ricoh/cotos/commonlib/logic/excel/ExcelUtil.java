@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.jxls.common.Context;
@@ -99,7 +98,7 @@ public class ExcelUtil {
 	 * @param sheetNameList 削除シート名配列
 	 */
 	@Deprecated
-	public void deleteExcelSheet(String filePath, List<String> sheetNameList) throws ErrorCheckException, InvalidFormatException {
+	public void deleteExcelSheet(String filePath, List<String> sheetNameList) throws ErrorCheckException {
 		List<ErrorInfo> errorInfoList = new ArrayList<>();
 
 		//引数チェック
@@ -120,11 +119,12 @@ public class ExcelUtil {
 		}
 
 		Path tempPath = Paths.get(inputFile.getParent(), UUID.randomUUID().toString().replaceAll("-", "") + ".bak");
-
+		
 		try (InputStream in = new FileInputStream(inputFile)) {
 			// シート削除エクセルファイルをテンポラリとして作成
-			try (OutputStream out = new FileOutputStream(tempPath.toFile())) {
-				Workbook wb = WorkbookFactory.create(in);
+			try (OutputStream out = new FileOutputStream(tempPath.toFile());
+					Workbook wb = WorkbookFactory.create(in)) {
+				
 				sheetNameList.stream().map(s -> wb.getSheetIndex(s)).filter(idx -> idx >= 0).forEach(idx -> wb.removeSheetAt(idx));
 				wb.write(out);
 			}
