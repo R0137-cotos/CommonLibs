@@ -431,6 +431,7 @@ public class ElconEimConnectionHelper extends EimConnectionHelper {
 			requestPropertiesDto.setTitle("電子契約指示");
 			requestPropertiesDto.setDocumentUniqueID(new String[] { documentUniqueID });
 			PostCotosDocumentRequestBibliography requestBibliography = new PostCotosDocumentRequestBibliography();
+			requestBibliography.setQrInfo2(paramDto.getAnknNumber());
 			requestPropertiesDto.setBibliography(requestBibliography);
 			requestPropertiesDto.setEstimateNumber(paramDto.getEstimationNumber());
 			requestPropertiesDto.setEstimateBranchNumber(paramDto.getEstimationBranchNumber());

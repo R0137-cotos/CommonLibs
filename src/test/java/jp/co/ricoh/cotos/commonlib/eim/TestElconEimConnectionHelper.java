@@ -341,6 +341,54 @@ public class TestElconEimConnectionHelper {
 
 	@Test
 	@Ignore
+	public void 正常系_文書登録_COTOS申込書API_電子契約() {
+
+		try {
+			RestTemplate restForEim = new RestTemplate();
+			// アプリケーション認証API
+			ApiAuthResponse apResponse = elconEimConnectionHelper.apiAuth(restForEim);
+			// セッション取得API
+			GetSessionResponse getSessionResponse = elconEimConnectionHelper.getSession(restForEim, apResponse);
+
+			// パラメータ設定
+			ElconDocumentRegistrationParameter paramDto = new ElconDocumentRegistrationParameter();
+			paramDto.setVupContractNo("RJ管理番号1");
+			paramDto.setVupEstimatesNo("vup見積No");
+			paramDto.setAnknMi("案件名");
+			paramDto.setAnknNumber("22222");
+			paramDto.setHanshaCd("091");
+			paramDto.setSaId("00229746");
+			paramDto.setCustomerCode("顧客CD");
+			paramDto.setCustomerName("企業名");
+			paramDto.setCustomerOfficeCode("部署名");
+			paramDto.setImfrSdInsertId("2000000001");
+			paramDto.setImfrSdRowNo("2");
+			paramDto.setTotalInitialCosts("999");
+			paramDto.setMonthlyTotal("998");
+			paramDto.setAnnualTotal("997");
+			paramDto.setReportName("TEST_帳票");
+			paramDto.setStartDatePrintFlag("0");
+			paramDto.setCustomerPrintFlag("1");
+			paramDto.setEstimationNumber("TEST_01");
+			paramDto.setEstimationBranchNumber("1");
+			paramDto.setEstimationTitle("見積件名");
+			paramDto.setEstimationId(11111L);
+			String documentUniqueID = "911fd1d779fb48c99f00e3afd26e10c5";
+
+			// 実行
+			PostCotosDocumentResponse response = elconEimConnectionHelper.postCotosDocument(restForEim, apResponse, getSessionResponse, documentUniqueID, paramDto);
+			assertNotNull("documentIdがNULLでないこと", response.getSystem().getDocumentId());
+			assertNotNull("documentKeyがNULLでないこと", response.getSystem().getDocumentKey());
+
+		} catch (RestClientException e) {
+			Assert.fail("エラーが発生した");
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラーが発生した");
+		}
+	}
+
+	@Test
+	@Ignore
 	public void 異常系_文書登録_COTOS申込書API() {
 		try {
 			// モック化

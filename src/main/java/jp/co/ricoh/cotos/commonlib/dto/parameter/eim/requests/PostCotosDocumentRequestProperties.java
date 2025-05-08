@@ -123,6 +123,16 @@ public class PostCotosDocumentRequestProperties {
 	private String estimateBranchNumber;
 
 	/**
+	 * 見積件名
+	 */
+	private String estimationTitle;
+
+	/**
+	 * 見積ID
+	 */
+	private Long estimationId;
+
+	/**
 	 * 進捗状況コード
 	 */
 	@JsonProperty("StatusCode")

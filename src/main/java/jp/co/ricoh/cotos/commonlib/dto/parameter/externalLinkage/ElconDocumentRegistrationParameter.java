@@ -47,6 +47,13 @@ public class ElconDocumentRegistrationParameter {
 	private String anknMi;
 
 	/**
+	 * 案件番号
+	 */
+	@ApiParam(value = "案件番号", required = false)
+	@ApiModelProperty(value = "案件番号", required = false, allowableValues = "range[0,255]")
+	private String anknNumber;
+
+	/**
 	 * 販社CD
 	 */
 	@ApiParam(value = "販社CD", required = true)
@@ -150,5 +157,19 @@ public class ElconDocumentRegistrationParameter {
 	@ApiParam(value = "見積番号枝番", required = true)
 	@ApiModelProperty(value = "見積番号枝番", required = true)
 	private String estimationBranchNumber;
+
+	/**
+	 * 見積件名
+	 */
+	@ApiParam(value = "見積件名", required = false)
+	@ApiModelProperty(value = "見積件名", required = false)
+	private String estimationTitle;
+
+	/**
+	 * 見積ID
+	 */
+	@ApiParam(value = "見積ID", required = false)
+	@ApiModelProperty(value = "見積ID", required = false)
+	private Long estimationId;
 }
 
