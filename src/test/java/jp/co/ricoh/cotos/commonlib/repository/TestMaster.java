@@ -3238,7 +3238,7 @@ public class TestMaster {
 		testTool.assertColumnsNotNull(found);
 
 		// 取得したデータの内容が正しいことを確認
-		Assert.assertEquals(1, found.getId());
+		Assert.assertEquals(2, found.getId());
 		Assert.assertEquals(ServiceTermStartSettingType.システム日付, found.getServiceTermStartSettingType());
 		Assert.assertEquals(BillingStartDateSettingType.システム日付の翌月１日, found.getBillingStartDateSettingType());
 		Assert.assertEquals(ServiceTermEndSettingType.課金開始日からNヵ月後の日付, found.getServiceTermEndSettingType());
