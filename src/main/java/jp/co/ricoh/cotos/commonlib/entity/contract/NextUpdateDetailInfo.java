@@ -280,7 +280,7 @@ public class NextUpdateDetailInfo extends EntityBase {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ベンダー連携日時(作成時不要)", required = false, position = 27, readOnly = true)
-	private Date vendor_linkage_at;
+	private Date vendorLinkageAt;
 
 	/**
 	 * 削除フラグ

@@ -29,6 +29,9 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.*;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
+import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster.BillingStartDateSettingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster.ServiceTermEndSettingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster.ServiceTermStartSettingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.Domain;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
@@ -3217,6 +3220,28 @@ public class TestMaster {
 		Assert.assertNotNull(found);
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+	}
+
+	@Test
+	public void ContractDateSettingMasterのテスト_テストデータが取得できるか() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractDateSettingMaster2.sql");
+
+		// エンティティの取得
+		ContractDateSettingMaster found = contractDateSettingMasterRepository.findByProductMasterIdAndContractTypeAndArrangementWorkTypeMasterId(1024L, ContractType.契約変更.toString(), 1006L).stream().findFirst().get();
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// 取得したデータの内容が正しいことを確認
+		Assert.assertEquals(2, found.getId());
+		Assert.assertEquals(ServiceTermStartSettingType.システム日付, found.getServiceTermStartSettingType());
+		Assert.assertEquals(BillingStartDateSettingType.システム日付の翌月１日, found.getBillingStartDateSettingType());
+		Assert.assertEquals(ServiceTermEndSettingType.課金開始日からNヵ月後の日付, found.getServiceTermEndSettingType());
 
 	}
 }
