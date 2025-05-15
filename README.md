@@ -616,3 +616,4 @@
 |659|ROC-Lite売上実績・予定一覧画面修正対応|
 |660|ROC-Lite 見積画面ボタン追加|
 |661|ROC-Lite 次回更新明細情報テーブル・契約日付設定テーブル作成|
+|662|ROC-Lite ContractDateSettingMasterRepository修正|
