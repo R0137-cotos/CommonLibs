@@ -619,3 +619,4 @@
 |662|ROC-Lite ContractDateSettingMasterRepository修正|
 |663|ROC-Lite 共通チェックロジック追加|
 |664|ROC-Lite ItemMasterRepositoryにメソッド追加|
+|665|ROC-Lite ファイル操作関連商品マスタのenum値追加|
