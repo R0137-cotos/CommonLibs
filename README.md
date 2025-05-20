@@ -618,3 +618,4 @@
 |661|ROC-Lite 次回更新明細情報テーブル・契約日付設定テーブル作成|
 |662|ROC-Lite ContractDateSettingMasterRepository修正|
 |663|ROC-Lite 共通チェックロジック追加|
+|664|ROC-Lite ItemMasterRepositoryにメソッド追加|
