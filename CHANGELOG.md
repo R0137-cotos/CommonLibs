@@ -1,5 +1,19 @@
 # Changelog
 
+## v8.7.0 (10/04/2025)
+- [**closed**] #29148_O365年額対応 拡張項目と区分追加 [#2807](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2807)
+- [**closed**] 29911_メールアドレス一覧view.テーブル区分追加 [#2826](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2826)
+
+---
+
+## v8.5.0 (04/03/2025)
+- [**closed**] #28138_VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加 [#2782](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2782)
+- [**closed**] #27677 商品グループマスタに契約機種品種紐づけ処理区分を追加 [#2775](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2775)
+- [**closed**] #27677 契約機種状態管理entity Dto修正 [#2774](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2774)
+- [**closed**] #27677 無線LANパック Entity、Repository、Dto修正 [#2773](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2773)
+
+---
+
 ## v8.4.0 (20/02/2025)
 - [**closed**] #28049_[障害対応]メール送信バッチ営業日対応 [#2803](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2803)
 - [**closed**] 28636_契約機種にIsysOne連携済設置日を追加 [#2799](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2799)
@@ -210,51 +224,3 @@
 ## v7.3.0 (15/09/2023)
 - [**closed**]  #19704 CPQの重いデータ対応 [#2481](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2481)
 - [**closed**] #20325 メールアドレス情報に異動情報取込手配リマインド用のテーブル区分追加 [#2479](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2479)
-
----
-
-## v7.2.0 (07/09/2023)
-- [**closed**] #19890 TMのAPIコール用ヘッダーにUSER_AGENTを追加 [#2472](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2472)
-- [**closed**] 20053 契約機種、機種構成マスタにARCS期間売保守データ用保守形態追加 [#2460](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2460)
-- [**closed**] #19436 品種マスタに課税区分カラムを追加 [#2451](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2451)
-- [**closed**] 19259 エラーメッセージ追加 テナント検索時のメールアドレス検索エラー [#2429](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2429)
-- [**closed**] 18840 エラーメッセージ追加 メールアドレスが現在のテナントとは異なるテナントに紐づいていた場合 [#2417](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2417)
-- [**closed**] #18773 URL権限マスタ用の権限判定パラメータがnullにならないように修正 [#2415](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2415)
-- [**closed**] #18773 権限パラメータ作成処理一部切り戻し [#2407](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2407)
-- [**closed**] #18773 権限が自顧客と配下の場合にトランザクションから社員ＩＤを取得できるように [#2400](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2400)
-- [**closed**] 19185 減数可能期間 エラーメッセージ修正 [#2399](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2399)
-
----
-
-## v7.0.0 (10/08/2023)
-- [**closed**] #20054 LaIT連携情報リポジトリにメソッド追加 [#2454](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2454)
-- [**closed**] #20029 契約一覧検索パラメータにお客様：担当者電話番号、設置先：担当者電話番号追加 [#2453](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2453)
-- [**closed**] #19925 値引き反映ボタン押し忘れ対応エラーメッセージ追加 [#2450](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2450)
-- [**closed**] #19933_リコーひかり請求データWORKテーブルに変換元疑似内訳コードを追加 [#2448](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2448)
-- [**closed**] #19898 引継ぎ用ISP連携に項目追加 [#2441](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2441)
-- [**closed**] #19854振替原価マイナス対応 [#2437](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2437)
-- [**closed**] #19834 Messages.propertiesに管理拠点IDの契約承認前確認アラートメッセージ追加 [#2436](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2436)
-- [**closed**] #19747 SACMAPI呼び出し機能追加 [#2434](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2434)
-- [**closed**] #19423 バッチ実行日管理マスタにFFM計上連携区分を追加 [#2433](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2433)
-- [**closed**] #19618_サブドメイン、Webホスティング数量・メールホスティング数量を追加。 [#2432](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2432)
-- [**closed**] #19765 検索プロパティにIIJ機器一覧検索用の検索数上限定義を追加 [#2427](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2427)
-- [**closed**] #19745 IIJ機器情報ID型の修正 [#2425](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2425)
-- [**closed**] #19745 LaIT連携情報テーブルに項目を追加 [#2424](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2424)
-- [**closed**] #19660 契約添付ファイルDTOにチェックタイミング区分カラムを追加 [#2423](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2423)
-- [**closed**] #19660 契約添付ファイルにチェックタイミング区分カラムを追加 [#2422](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2422)
-- [**closed**] #19671引継ぎ用メールアドレス リポジトリメソッド修正 [#2421](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2421)
-- [**closed**] #19671 引継ぎ用メールアドレスエンティティ,リポジトリメソッド作成 [#2420](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2420)
-- [**closed**] #19660 添付ファイル商品毎チェックにチェックタイミング区分カラムを追加 [#2418](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2418)
-- [**closed**] #19527_リコーひかり異動情報取込管理にリモートサポートに関するカラムを追加 [#2414](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2414)
-- [**closed**] #19427 拡張項目にPC台数を追加 [#2408](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2408)
-- [**closed**] #19508_Messages.properties修正 [#2405](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2405)
-- [**closed**] #19407 引継ぎ回収先.連携状態は回収先.連携状態のenum定義を参照するように修正 [#2404](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2404)
-- [**closed**] #19407 回収先.連携状態のConverter追加 [#2403](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2403)
-- [**closed**] #19407 回収先、引継ぎ用回収先の連携状態Enum修正 [#2401](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2401)
-- [**closed**] #19221 工事調整EIM申込情報レポジトリにメソッド追加 [#2390](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2390)
-- [**closed**] #19133 ライセンスアカウント検索結果取得用DTOに商品種類区分追加 [#2388](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2388)
-- [**closed**] BBパックSelect、Nextの商品(見積用)、商品(契約用)の移行用拡張項目にPC台数を追加 [#2387](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2387)
-- [**closed**] #19133 ライセンスアカウント検索パラメータ用DTOにNSP検索追加フラグ追加 [#2386](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2386)
-- [**closed**] #19181_添付日付の日付自動設定を削除。 [#2385](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2385)
-- [**closed**] #18144 商品(契約用)の移行用拡張項目にPC台数を追加 [#2383](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2383)
-- [**closed**] #18915 見積（商品）移行項目にPC台数追加 [#2380](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2380)
