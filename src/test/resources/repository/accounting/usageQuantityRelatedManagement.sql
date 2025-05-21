@@ -1,1 +1,1 @@
-INSERT INTO usage_quantity_related_management (id,created_at,created_user_id,updated_at,updated_user_id,version,usage_quantity_id,sales_data_id_div,sales_data_id) values (1,'2018/11/16 12:09:10','COTOS','2018/11/16 12:09:10','COTOS',1,1,'1',1);
+INSERT INTO usage_quantity_related_management (id,created_at,created_user_id,updated_at,updated_user_id,version,usage_quantity_id,sales_data_id_div,sales_data_id) values (1,TO_DATE('2018/11/16 12:09:10', 'YYYY/MM/DD HH24:MI:SS'),'COTOS',TO_DATE('2018/11/16 12:09:10', 'YYYY/MM/DD HH24:MI:SS'),'COTOS',1,1,'1',1);
