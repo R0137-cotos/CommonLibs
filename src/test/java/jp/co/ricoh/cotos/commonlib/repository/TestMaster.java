@@ -581,7 +581,7 @@ public class TestMaster {
 	}
 
 	@Test
-	public void GpCheckMatterMasterRepository_findByIdByCheckMatterCode() throws Exception {
+	public void GpCheckMatterMasterRepository_findOneByCheckMatterCode() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/gpCheckMatterMaster.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/arrangementChecklistCompMaster.sql");
@@ -597,7 +597,7 @@ public class TestMaster {
 
 		// エンティティの取得
 		String checkMatterCode = "TEST_1";
-		GpCheckMatterMaster found = gpCheckMatterMasterRepository.findByIdByCheckMatterCode(checkMatterCode);
+		GpCheckMatterMaster found = gpCheckMatterMasterRepository.findOneByCheckMatterCode(checkMatterCode);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

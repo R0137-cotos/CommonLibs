@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -46,7 +47,7 @@ public class TestPenaltyCheck {
 	@Autowired
 	CheckUtil checkUtil;
 
-	@Autowired
+	@SpyBean
 	PenaltyUtil penaltyUtil;
 
 	@Autowired

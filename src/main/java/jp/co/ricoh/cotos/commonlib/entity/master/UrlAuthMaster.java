@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
+import jp.co.ricoh.cotos.commonlib.converter.HttpMethodConverter;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -144,6 +146,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		/**
 		 * HTTPメソッド
 		 */
+		@Convert(converter = HttpMethodConverter.class)
 		@Column(nullable = false)
 		@ApiModelProperty(value = "HTTPメソッド", required = true, position = 2)
 		private HttpMethod method;

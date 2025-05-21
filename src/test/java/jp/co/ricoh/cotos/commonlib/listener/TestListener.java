@@ -590,6 +590,7 @@ public class TestListener {
 		}
 
 		// 契約変更の場合、社員がマスタに存在しなくてもエラーが発生しないこと
+		shippingAddress = new ShippingAddress();
 		contract.setId(5L);
 		contract.setContractType(ContractType.契約変更);
 		shippingAddress.setMomEmployeeId(null);

@@ -115,9 +115,6 @@ spring:
     password: cotos_local_aws_eosl
     driverClassName: oracle.jdbc.OracleDriver
     type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      maximum-pool-size: 3
-      minimum-idle: 1
   jpa:
     database-platform: org.hibernate.dialect.OracleDialect
     hibernate:

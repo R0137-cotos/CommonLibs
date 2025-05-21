@@ -12,12 +12,12 @@ import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc020OrgAllInfoCom;
 
 @Repository
 public interface MvWjmoc020OrgAllInfoComRepository extends CrudRepository<MvWjmoc020OrgAllInfoCom, String> {
-	@Query(value = "FROM MvWjmoc020OrgAllInfoCom WHERE org_id = :ORG_ID AND :BASE_DATE BETWEEN start_date AND end_date", nativeQuery = true)
+	@Query(value = "SELECT * FROM mv_wjmoc020_org_all_info_com WHERE org_id = :ORG_ID AND :BASE_DATE BETWEEN start_date AND end_date", nativeQuery = true)
 	public MvWjmoc020OrgAllInfoCom findByOrgId(@Param("ORG_ID") String orgId, @Param("BASE_DATE") Date baseDate);
 
-	@Query(value = "FROM MvWjmoc020OrgAllInfoCom WHERE cubic_org_id = :CUBIC_ORG_ID AND :BASE_DATE BETWEEN start_date AND end_date", nativeQuery = true)
+	@Query(value = "SELECT * FROM mv_wjmoc020_org_all_info_com WHERE cubic_org_id = :CUBIC_ORG_ID AND :BASE_DATE BETWEEN start_date AND end_date", nativeQuery = true)
 	public List<MvWjmoc020OrgAllInfoCom> findByCubicOrgId(@Param("CUBIC_ORG_ID") String orgId, @Param("BASE_DATE") Date baseDate);
 
-	@Query(value = "FROM MvWjmoc020OrgAllInfoCom WHERE org_id in (:ORG_ID_LIST) AND :BASE_DATE BETWEEN start_date AND end_date", nativeQuery = true)
+	@Query(value = "SELECT * FROM mv_wjmoc020_org_all_info_com WHERE org_id in (:ORG_ID_LIST) AND :BASE_DATE BETWEEN start_date AND end_date", nativeQuery = true)
 	public List<MvWjmoc020OrgAllInfoCom> findByOrgIdIn(@Param("ORG_ID_LIST") List<String> orgIdList, @Param("BASE_DATE") Date baseDate);
 }

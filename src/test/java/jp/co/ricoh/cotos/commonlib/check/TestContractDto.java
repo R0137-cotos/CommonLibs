@@ -521,6 +521,9 @@ public class TestContractDto {
 		// 契約承認ルート
 		ContractApprovalRouteDto route = new ContractApprovalRouteDto();
 		BeanUtils.copyProperties(entity.getContractApprovalRouteList().get(0), route);
+		ContractApprovalRouteNodeDto approvalNode = new ContractApprovalRouteNodeDto();
+		BeanUtils.copyProperties(entity.getContractApprovalRouteList().get(0).getContractApprovalRouteNodeList().get(0), approvalNode);
+		route.setContractApprovalRouteNodeList(Arrays.asList(approvalNode));
 		dto.setContractApprovalRouteList(Arrays.asList(route));
 
 		// 見積チェック結果

@@ -191,7 +191,7 @@ public class DateContractUtil {
 			ObjectMapper mapper = new ObjectMapper();
 			HashMap<String, HashMap<String, Object>> extendesParamMap = new HashMap<>();
 			try {
-				extendesParamMap = mapper.readValue(extendesParameter, new TypeReference<HashMap<String, HashMap<String, Object>>>() {
+				extendesParamMap = (HashMap<String, HashMap<String, Object>>) mapper.readValue(extendesParameter, new TypeReference<Object>() {
 				});
 			} catch (Exception e) {
 				throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "JsonConvertFormTextToObjectError"));
