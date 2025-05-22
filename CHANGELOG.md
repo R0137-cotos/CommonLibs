@@ -1,5 +1,17 @@
 # Changelog
 
+## v9.0.0 (22/05/2025)
+- [**closed**] 30078_品種マスタ.entity,dtoに同一SS用最短納期日数追加 [#2836](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2836)
+- [**closed**] #25356_商材固有項目マスタにカラム追加、商材固有項目マスタリポジトリにメソッド追加 [#2838](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2838)
+- [**closed**] #29981_コミュニケーション登録パラメータにリスト項目追加、CommonSendMailクラスにメソッド追加 [#2841](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2841)
+- [**closed**] #30550 計上データ作成バッチ_原価設定対応 [#2843](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2843)
+- [**closed**] #29755_O365最新契約明細情報へ項目追加 [#2823](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2823)
+- [**closed**] 29699_o365年額増数.サービス利用希望日用エラーメッセージ追加 [#2822](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2822)
+- [**closed**] #29684_品種マスタリポジトリにメソッド追加 [#2821](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2821)
+- [**closed**] #29634_品種マスタ、計上期間明細にカラム追加 [#2820](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2820)
+
+---
+
 ## v8.7.0 (10/04/2025)
 - [**closed**] #29148_O365年額対応 拡張項目と区分追加 [#2807](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2807)
 - [**closed**] 29911_メールアドレス一覧view.テーブル区分追加 [#2826](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2826)
@@ -218,9 +230,3 @@
 - [**closed**] #13025 Isysoneの保守担当SSとCEをCOTOSと連携させたい。リリースブランチマージ [#2496](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2496)
 - [**closed**] #20331 エラーID桁数間違い修正 [#2489](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2489)
 - [**closed**] #20331 組織情報が有効期限切れのエラー追加 [#2484](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2484)
-
----
-
-## v7.3.0 (15/09/2023)
-- [**closed**]  #19704 CPQの重いデータ対応 [#2481](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2481)
-- [**closed**] #20325 メールアドレス情報に異動情報取込手配リマインド用のテーブル区分追加 [#2479](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2479)
