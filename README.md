@@ -621,3 +621,4 @@
 |664|ROC-Lite ItemMasterRepositoryにメソッド追加|
 |665|ROC-Lite ファイル操作関連商品マスタのenum値追加|
 |666|ROC-Lite 見積明細情報インポート登録API 原価チェック処理削除 |
+|667|ROC-Lite 見積明細情報インポート登録API 共通チェック処理修正|

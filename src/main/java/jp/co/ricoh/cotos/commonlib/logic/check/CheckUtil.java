@@ -759,6 +759,10 @@ public class CheckUtil {
 		if (null == productStackingMiddleDto.getImportFileVersion()) {
 			addErrorInfo(errorList, "EntityCheckNotNullError", new String[] { "ver" });
 		}
+		if (CollectionUtils.isNotEmpty(errorList)) {
+			// 必須チェックでエラーになった場合、以降のチェックを実施しない
+			return errorList;
+		}
 		// 商品マスタチェック
 		if (null == productStackingMiddleDto.getProductMaster()) {
 			addErrorInfo(errorList, "CannotIdentify", new String[] { "商品マスタ" });

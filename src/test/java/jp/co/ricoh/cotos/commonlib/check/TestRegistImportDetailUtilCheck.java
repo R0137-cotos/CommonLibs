@@ -135,6 +135,25 @@ public class TestRegistImportDetailUtilCheck {
 		}
 	}
 
+	@Test
+	public void TestMssLinkageRjManageNumberCheck_単体項目エラーで後続チェックが実施されない() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
+		ProductMaster pm = productMasterRepository.findOne(1L);
+		ItemMaster im = itemMasterRepository.findOne(1L);
+		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
+		dto.setImportFileVersion(null);
+		List<ErrorInfo> errorList = new ArrayList<>();
+		try {
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			Assert.assertEquals(1, errorList.size());
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "verが設定されていません。".equals(e.getErrorMessage())));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("予期せぬエラー");
+		}
+	}
+
 	private ProductStackingMiddleDto setTestDataProductStackingMiddleDto(ProductMaster pm,ItemMaster im) {
 		ProductStackingMiddleDto dto = new ProductStackingMiddleDto();
 		dto.setRicohItemCode("LiteCode100");
