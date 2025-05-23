@@ -729,15 +729,15 @@ public class CheckUtil {
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
 		}
 	}
-	
+
 	/**
 	 * 明細情報インポート登録API共通チェック
 	 * 見積明細情報インポート登録APIと契約明細情報インポート登録APIの共通チェック
 	 */
 	public List<ErrorInfo> registImportDetailUtilCheck(ProductStackingMiddleDto productStackingMiddleDto) {
-		
+
 		List<ErrorInfo> errorList = new ArrayList<>();
-		
+
 		// 必須チェック
 		// 品種コード
 		if(StringUtils.isEmpty(productStackingMiddleDto.getRicohItemCode())) {
@@ -771,11 +771,6 @@ public class CheckUtil {
 		if (null == productStackingMiddleDto.getItemMaster()) {
 			addErrorInfo(errorList, "CannotIdentify", new String[] { "品種マスタ" });
 		} else {
-			// 原価チェック
-			// CSV.単価（E/U売価）と品種マスタ.標準価格が一致しない場合、エラー
-			if (productStackingMiddleDto.getUnitPrice().compareTo(productStackingMiddleDto.getItemMaster().getStandardPrice()) != 0) {
-				addErrorInfo(errorList, "IncorrectError", new String[] { "単価（E/U売価）" });
-			}
 			// 値引き下限値チェック
 			// CSV.単価(E/U売価) < 品種マスタ.値引き下限値の場合、エラー
 			if (productStackingMiddleDto.getUnitPrice().compareTo(productStackingMiddleDto.getItemMaster().getLowerLimit()) < 0) {

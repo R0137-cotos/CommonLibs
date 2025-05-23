@@ -109,9 +109,8 @@ public class TestRegistImportDetailUtilCheck {
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
 			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
-			Assert.assertEquals(2, errorList.size());
+			Assert.assertEquals(1, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "最新のファイルバージョンではありません。".equals(e.getErrorMessage())));
-			Assert.assertTrue(errorList.stream().anyMatch(e -> "単価（E/U売価）が正しくありません。".equals(e.getErrorMessage())));
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
 			e.printStackTrace();
