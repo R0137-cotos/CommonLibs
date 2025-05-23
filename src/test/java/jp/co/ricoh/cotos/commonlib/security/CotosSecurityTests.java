@@ -54,7 +54,7 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 import lombok.val;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = "test.context.id = CotosSecurityTests")
 public class CotosSecurityTests {
 
 	public String momAuth = "NO_AUTHORITIES";
