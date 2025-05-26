@@ -165,4 +165,11 @@ public class OrderProductInfo extends EntityBase {
 	@ApiModelProperty(value = "売価合計", required = false, position = 11)
 	private BigDecimal amountSummary;
 
+	/**
+	 * Bplats用ダミー商品コード（RICOH品種コード）
+	 */
+	@Column
+	@ApiModelProperty(value = "Bplats用ダミー商品コード（RICOH品種コード）", required = false, position = 12, allowableValues = "range[0,]")
+	private String bplatsDummyProductCd;
+
 }
