@@ -59,7 +59,7 @@ public class TestRegistImportDetailUtilCheck {
 	}
 
 	@Test
-	public void TestMssLinkageRjManageNumberCheck_エラーなし() {
+	public void エラーなし() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
 		ProductMaster pm = productMasterRepository.findOne(1L);
@@ -76,19 +76,34 @@ public class TestRegistImportDetailUtilCheck {
 	}
 
 	@Test
-	public void TestMssLinkageRjManageNumberCheck_エラーあり_必須チェック() {
+	public void エラーあり_必須チェック() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDtoNodata(null, null);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
 			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
-			Assert.assertEquals(7, errorList.size());
+			Assert.assertEquals(5, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種コードが設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種名が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "数量が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "単価(E/U売価)が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "verが設定されていません。".equals(e.getErrorMessage())));
+		} catch (Exception e) {
+			Assert.fail("予期せぬエラー");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void エラーあり_マスタ有無チェック() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
+		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(null, null);
+		List<ErrorInfo> errorList = new ArrayList<>();
+		try {
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			Assert.assertEquals(2, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "商品マスタが特定できません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種マスタが特定できません。".equals(e.getErrorMessage())));
 		} catch (Exception e) {
@@ -98,7 +113,7 @@ public class TestRegistImportDetailUtilCheck {
 	}
 
 	@Test
-	public void TestMssLinkageRjManageNumberCheck_エラーあり_マスタチェック() {
+	public void エラーあり_マスタチェック() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
 		ProductMaster pm = productMasterRepository.findOne(1L);
@@ -118,7 +133,7 @@ public class TestRegistImportDetailUtilCheck {
 	}
 
 	@Test
-	public void TestMssLinkageRjManageNumberCheck_エラーあり_マスタチェック2() {
+	public void エラーあり_マスタチェック2() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_2.sql");
 		ProductMaster pm = productMasterRepository.findOne(1L);
@@ -132,6 +147,25 @@ public class TestRegistImportDetailUtilCheck {
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
 			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void 単体項目エラーで後続チェックが実施されない() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
+		ProductMaster pm = productMasterRepository.findOne(1L);
+		ItemMaster im = itemMasterRepository.findOne(1L);
+		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
+		dto.setImportFileVersion(null);
+		List<ErrorInfo> errorList = new ArrayList<>();
+		try {
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			Assert.assertEquals(1, errorList.size());
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "verが設定されていません。".equals(e.getErrorMessage())));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("予期せぬエラー");
 		}
 	}
 
