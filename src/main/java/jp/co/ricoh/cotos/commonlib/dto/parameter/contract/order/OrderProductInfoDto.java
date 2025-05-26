@@ -93,11 +93,4 @@ public class OrderProductInfoDto {
 	@ApiModelProperty(value = "売価合計", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
-	/**
-	 * Bplats用ダミー商品コード（RICOH品種コード）
-	 */
-	@Size(max = 255)
-	@ApiModelProperty(value = "Bplats用ダミー商品コード（RICOH品種コード）", required = false, position = 12, allowableValues = "range[0,255]")
-	private String bplatsDummyProductCd;
-
 }
