@@ -1,5 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.common;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -287,4 +290,187 @@ public class EimDocumentInfo extends EntityBase {
 	 */
 	@ApiModelProperty(value = "旧文書フラグ", required = true, position = 43)
 	private boolean oldDocumentFlg;
+	
+	/**
+	* 担当販社名
+	*/
+	@ApiModelProperty(value = "担当販社名", required = false, position = 44)
+	private String hnsyNm;
+
+	/**
+	* 部門階層名1
+	*/
+	@ApiModelProperty(value = "部門階層名1", required = false, position = 45)
+	private String bmnName1;
+
+	/**
+	* 部門階層名2
+	*/
+	@ApiModelProperty(value = "部門階層名2", required = false, position = 46)
+	private String bmnName2;
+
+	/**
+	* 部門階層名3
+	*/
+	@ApiModelProperty(value = "部門階層名3", required = false, position = 47)
+	private String bmnName3;
+
+	/**
+	* 部門階層名4
+	*/
+	@ApiModelProperty(value = "部門階層名4", required = false, position = 48)
+	private String bmnName4;
+
+	/**
+	* 販社名（CE/SE）
+	*/
+	@ApiModelProperty(value = "販社名（CE/SE）", required = false, position = 49)
+	private String cshnsyNm;
+
+	/**
+	* 部門階層名1(CE/SE)
+	*/
+	@ApiModelProperty(value = "部門階層名1(CE/SE)", required = false, position = 50)
+	private String csbmnName1;
+
+	/**
+	* 部門階層名2(CE/SE)
+	*/
+	@ApiModelProperty(value = "部門階層名2(CE/SE)", required = false, position = 51)
+	private String csbmnName2;
+
+	/**
+	* 部門階層名3(CE/SE)
+	*/
+	@ApiModelProperty(value = "部門階層名3(CE/SE)", required = false, position = 52)
+	private String csbmnName3;
+
+	/**
+	* 部門階層名4(CE/SE)
+	*/
+	@ApiModelProperty(value = "部門階層名4(CE/SE)", required = false, position = 53)
+	private String csbmnName4;
+
+	/**
+	* 支社名（CE/SE）受付
+	*/
+	@ApiModelProperty(value = "支社名（CE/SE）受付", required = false, position = 54)
+	private String csrhnsyNm;
+
+	/**
+	* 部門階層名1(CE/SE) 受付
+	*/
+	@ApiModelProperty(value = "部門階層名1(CE/SE) 受付", required = false, position = 55)
+	private String csrbmnName1;
+
+	/**
+	* 部門階層名2(CE/SE) 受付
+	*/
+	@ApiModelProperty(value = "部門階層名2(CE/SE) 受付", required = false, position = 56)
+	private String csrbmnName2;
+
+	/**
+	* 部門階層名3(CE/SE) 受付
+	*/
+	@ApiModelProperty(value = "部門階層名3(CE/SE) 受付", required = false, position = 57)
+	private String csrbmnName3;
+
+	/**
+	* 部門階層名4(CE/SE) 受付
+	*/
+	@ApiModelProperty(value = "部門階層名4(CE/SE) 受付", required = false, position = 58)
+	private String csrbmnName4;
+
+	/**
+	* 支社名（CE/SE）導入
+	*/
+	@ApiModelProperty(value = "支社名（CE/SE）導入", required = false, position = 59)
+	private String csihnsyNm;
+
+	/**
+	* 部門階層名1(CE/SE) 導入
+	*/
+	@ApiModelProperty(value = "部門階層名1(CE/SE) 導入", required = false, position = 60)
+	private String csibmnName1;
+
+	/**
+	* 部門階層名2(CE/SE) 導入
+	*/
+	@ApiModelProperty(value = "部門階層名2(CE/SE) 導入", required = false, position = 61)
+	private String csibmnName2;
+
+	/**
+	* 部門階層名3(CE/SE) 導入
+	*/
+	@ApiModelProperty(value = "部門階層名3(CE/SE) 導入", required = false, position = 62)
+	private String csibmnName3;
+
+	/**
+	* 部門階層名4(CE/SE) 導入
+	*/
+	@ApiModelProperty(value = "部門階層名4(CE/SE) 導入", required = false, position = 63)
+	private String csibmnName4;
+
+	/**
+	* 正式帳票名
+	*/
+	@ApiModelProperty(value = "正式帳票名", required = false, position = 64)
+	private String siskThNm;
+
+	/**
+	* 識別区分
+	*/
+	@ApiModelProperty(value = "識別区分", required = false, position = 65)
+	private Integer skbtKbn;
+
+	/**
+	* 契約金額
+	*/
+	@ApiModelProperty(value = "契約金額", required = false, position = 66)
+	private BigDecimal kiykKngk;
+
+	/**
+	* 契約締結日
+	*/
+	@ApiModelProperty(value = "契約締結日", required = false, position = 67)
+	@Temporal(TemporalType.DATE)
+	private Date kiykTiktHi;
+
+	/**
+	* 契約種類区分
+	*/
+	@ApiModelProperty(value = "契約種類区分", required = false, position = 68)
+	private String keiyakType;
+
+	/**
+	* FFM発注問い合わせ番号
+	*/
+	@ApiModelProperty(value = "FFM発注問い合わせ番号", required = false, position = 69)
+	private String ffmHttiawsNo;
+
+	/**
+	* V-UP見積番号
+	*/
+	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 70)
+	private String vupMtmriNo;
+
+	/**
+	* V-UP案件番号
+	*/
+	@ApiModelProperty(value = "V-UP案件番号", required = false, position = 71)
+	private String vupAnknNo;
+
+	/**
+	* サービス開始日
+	*/
+	@ApiModelProperty(value = "サービス開始日", required = false, position = 72)
+	@Temporal(TemporalType.DATE)
+	private Date serKisHi;
+
+	/**
+	* サービス利用希望日
+	*/
+	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 73)
+	@Temporal(TemporalType.DATE)
+	private Date serRyuKbuHi;
 }

@@ -226,6 +226,9 @@ public class TestCommon {
 		// データが取得できていることを確認
 		Assert.assertEquals(1, foundList.size());
 
+		List<EimDocumentInfo> foundList2 = eimDocumentInfoRepository.findByContractIdAndEimLinkedStatusAndOldDocumentFlg(36l, EimLinkedStatus.連携済, false);
+		// データが取得できていることを確認
+		Assert.assertEquals(1, foundList2.size());
 	}
 
 	@Test
