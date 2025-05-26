@@ -21,6 +21,7 @@ import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.ElectronicContractInfo;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalResult;
@@ -37,6 +38,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.ElectronicContractInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalRouteNodeRepository;
@@ -114,6 +116,9 @@ public class TestEstimation {
 
 	@Autowired
 	VupCaseWorkRepository vupCaseWorkRepository;
+
+	@Autowired
+	ElectronicContractInfoRepository electronicContractInfoRepository;
 
 	@Autowired
 	DBUtil dbutil;
@@ -364,6 +369,23 @@ public class TestEstimation {
 	public void VupCaseWorkRepositoryのテスト() throws Exception {
 
 		VupCaseWork found = vupCaseWorkRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void ElectronicContractInfoRepositoryのテスト() throws Exception {
+
+		ElectronicContractInfo found = electronicContractInfoRepository.findOne(401L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		found = electronicContractInfoRepository.findByEstimationId(4L);
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

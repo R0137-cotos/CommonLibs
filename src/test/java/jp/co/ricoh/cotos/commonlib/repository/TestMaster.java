@@ -1623,6 +1623,38 @@ public class TestMaster {
 	}
 
 	@Test
+	public void ReportTemplateMasterRepository_findByReportListParameterのテスト_電子契約連携対象区分() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/reportTemplateMaster.sql");
+		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", "1", 1L, "1", "2", "1");
+		// 電子契約連携対象のデータが取得できていることを確認
+		Assert.assertTrue(foundList.size() == 3);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
+	}
+
+	@Test
+	public void ReportTemplateMasterRepository_findByReportListParameterのテスト_電子契約連携対象区分_商流区分がNULL() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/reportTemplateMaster.sql");
+		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", null, 1L, "1", "2", "1");
+		// 電子契約連携対象のデータが取得できていることを確認
+		Assert.assertTrue(foundList.size() == 4);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
+	}
+
+	@Test
 	public void MvTJmcj005Masterのテスト() throws Exception {
 
 		// テストデータはなし
@@ -3149,6 +3181,25 @@ public class TestMaster {
 	}
 
 	@Test
+	public void ProductGrpMasterDtoのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+
+		List<Long> idList = Arrays.asList(new Long[] { 1L });
+
+		// エンティティの取得
+		List<ProductGrpMasterDto> foundList = productGrpMasterDtoRepository.findByIdIn(idList);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(foundList.get(0));
+
+	}
+
+	@Test
 	public void ProductExtendsParameterMaster_商品マスタIDで取得するテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
@@ -3174,24 +3225,6 @@ public class TestMaster {
 				Assert.fail("throw Exception :" + e.getMessage());
 			}
 		});
-	}
-
-	@Test
-	public void ProductGrpMasterDtoのテスト() throws Exception {
-
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
-
-		List<Long> idList = Arrays.asList(new Long[] { 1L });
-
-		// エンティティの取得
-		List<ProductGrpMasterDto> foundList = productGrpMasterDtoRepository.findByIdIn(idList);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(foundList);
-
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(foundList.get(0));
 	}
 
 	public void MailCsvMasterRepositoryのテスト() throws Exception {
