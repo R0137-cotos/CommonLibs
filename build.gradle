@@ -113,3 +113,10 @@ task sourcesJar(type: Jar, dependsOn:classes) {
 artifacts {
      archives sourcesJar
 }
+
+test {
+	useJUnit()
+	forkEvery = 0L
+	def heapSize = System.getProperty('test.maxHeapSize') ?: '3G'
+	maxHeapSize = heapSize
+}
