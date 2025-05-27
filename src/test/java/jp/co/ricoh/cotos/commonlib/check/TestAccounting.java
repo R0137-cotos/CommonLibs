@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,10 +103,6 @@ public class TestAccounting {
 	public void injectContext(ConfigurableApplicationContext injectContext) {
 		context = injectContext;
 		context.getBean(DBConfig.class).clearData();
-	}
-
-	@Before
-	public void initTestData() {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accounting.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/commissionData.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestData.sql");
