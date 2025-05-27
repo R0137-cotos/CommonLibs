@@ -113,19 +113,3 @@ task sourcesJar(type: Jar, dependsOn:classes) {
 artifacts {
      archives sourcesJar
 }
-
-test {
-	useJUnit()
-	forkEvery = 0L
-	maxHeapSize = '3G'
-
-	testLogging {
-		events "passed", "failed"
-		exceptionFormat "short"
-		showExceptions true
-		showCauses true
-		showStackTraces true
-	}
-
-}
-
