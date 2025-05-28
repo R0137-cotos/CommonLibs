@@ -100,7 +100,7 @@ publishing {
     repositories {
         maven {
             url = "file://${repo.absolutePath}"
-            version = '0.0.659'
+            version = '0.0.660'
             group = 'jp.co.ricoh.cotos'
             name = 'common-libraries'
         }
