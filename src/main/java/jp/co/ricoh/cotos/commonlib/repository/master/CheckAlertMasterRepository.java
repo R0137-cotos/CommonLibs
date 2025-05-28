@@ -11,7 +11,7 @@ import jp.co.ricoh.cotos.commonlib.entity.master.CheckAlertMaster;
 
 @Repository
 public interface CheckAlertMasterRepository extends CrudRepository<CheckAlertMaster, Long> {
-	@Query(value = "select * from check_alert_master cm"//
+	@Query(value = "select cm.* from check_alert_master cm"//
 			+ " left outer join check_alert_target_master tm on tm.check_alert_master_id = cm.id"//
 			+ " where  cm.service_category = :SERVICE_CATEGORY"//
 			+ " and (cm.common_check_flg = 1 or "//

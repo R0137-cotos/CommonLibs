@@ -33,13 +33,13 @@ public class SACMUtil {
 		try {
 			responseEntity = rest.exchange(requestEntity, String.class);
 			log.info("============================================================");
-			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("status  : " + responseEntity.getStatusCode().value());
 			log.info("headers : " + responseEntity.getHeaders());
 			log.info("response: " + responseEntity.getBody());
 			log.info("============================================================");
 			// HTTPステータスが200系以外はエラーとする。
 			if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-				throw new RuntimeException("SACMAPI呼び出しでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+				throw new RuntimeException("SACMAPI呼び出しでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode().value() + "、エラー内容：" + responseEntity.getBody());
 			}
 		} catch (ResourceAccessException e) {
 			log.error(e);

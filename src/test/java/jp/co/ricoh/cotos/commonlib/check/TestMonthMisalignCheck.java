@@ -12,9 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -30,7 +28,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
  * 月ずれチェックメソッドのテストクラス
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestMonthMisalignCheck {
 
 	@Autowired
@@ -48,9 +46,6 @@ public class TestMonthMisalignCheck {
 		context.getBean(DBConfig.class).initTargetTestData("sql/check/testMonthMisalignCheck.sql");
 	}
 
-	@LocalServerPort
-	private int localServerPort;
-
 	@AfterClass
 	public static void stopAPServer() throws InterruptedException {
 		if (null != context) {
@@ -67,7 +62,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01";
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -92,7 +87,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/11/01"; // 月数:10
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -117,7 +112,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/12/01";
 		final String strDateTo = "2020/12/01"; // 月数:12
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -142,7 +137,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/02/01";
 		final String strDateTo = "2020/12/01"; // 月数:10
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -167,7 +162,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/03/01";
 		final String strDateTo = "2020/12/01"; // 月数:9
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -192,7 +187,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/11/01";
 		final String strDateTo = "2020/12/01"; // 月数:13
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -217,7 +212,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/02/01";
 		final String strDateTo = "2020/12/01"; // 月数:10
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -242,7 +237,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/11/01";
 		final String strDateTo = "2020/12/01"; // 月数:13
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -267,7 +262,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/03/01";
 		final String strDateTo = "2020/12/01"; // 月数:9
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -292,7 +287,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/11/01";
 		final String strDateTo = "2020/12/01"; // 月数:13
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -317,7 +312,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/12/01";
 		final String strDateTo = "2020/12/31"; // 月数:0
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -342,7 +337,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/15"; // 月数:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -367,7 +362,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/09/01";
 		final String strDateTo = "2020/12/01"; // 月数:15
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -392,7 +387,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01"; // 月数:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -417,7 +412,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01"; // 月数:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -442,7 +437,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01"; // 月数:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -467,7 +462,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/12/01";
 		final String strDateTo = "2020/12/01"; // 月数:12
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -492,7 +487,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01"; // 月数:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -517,7 +512,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/12/01";
 		final String strDateTo = "2020/12/01"; // 月数:12
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -542,7 +537,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01"; // 月数:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -567,7 +562,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/02/01";
 		final String strDateTo = "2020/12/01"; // 月数:10
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -592,7 +587,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2019/12/01";
 		final String strDateTo = "2020/12/01"; // 月数:12
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -618,7 +613,7 @@ public class TestMonthMisalignCheck {
 		final String strDateTo = "2022/03/16"; // 月数:10
 		// 日も含めて考えると2021/05/17～2022/03/16の差分は9カ月27日になり、結果がtrueとなってしまう
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -672,7 +667,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01";
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -701,7 +696,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01";
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -730,7 +725,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/01/01";
 		final String strDateTo = "2020/12/01";
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -759,7 +754,7 @@ public class TestMonthMisalignCheck {
 		final String strDateFrom = "2020/12/01";
 		final String strDateTo = "2020/01/01";
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date checkDateFrom;
@@ -786,7 +781,7 @@ public class TestMonthMisalignCheck {
 		final long contractId = 1L; // サービス開始日：2020/01/01 サービス終了日：2020/11/01 月数：10
 		final long itemMasterId = 2006L; // 数量:11
 
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		Assert.assertEquals("月ずれチェック結果がTrueか確認", checkUtil.monthMisalignCheck(contract, itemMasterId, contract.getServiceTermStart(), contract.getServiceTermEnd(), ToleranceType.一致), true);
 

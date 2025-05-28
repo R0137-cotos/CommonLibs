@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

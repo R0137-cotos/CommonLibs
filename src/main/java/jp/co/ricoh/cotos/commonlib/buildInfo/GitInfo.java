@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.buildInfo;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,9 +21,9 @@ class GitInfo {
 	final private String branch;
 
 	GitInfo(GitProperties gitProperties) {
-		Date commitTimeDate = gitProperties.getCommitTime();
+		Instant commitTimeDate = gitProperties.getCommitTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-		commitTime = (Objects.isNull(commitTimeDate)) ? "" : sdf.format(commitTimeDate);
+		commitTime = (Objects.isNull(commitTimeDate)) ? "" : sdf.format(Date.from(commitTimeDate));
 		commitId = gitProperties.getCommitId();
 		tags = gitProperties.get("tags");
 		branch = gitProperties.getBranch();

@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -55,7 +54,7 @@ import jp.co.ricoh.cotos.commonlib.repository.accounting.Wjcmj302SikyuMisiCtsWkR
 import jp.co.ricoh.cotos.commonlib.repository.accounting.Wjcmj303GnkHrkeCtsWkRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestAccounting {
 
 	static ConfigurableApplicationContext context;
@@ -129,7 +128,7 @@ public class TestAccounting {
 	@Test
 	public void AccountingRepositoryのテスト() throws Exception {
 
-		Accounting found = accountingRespository.findOne(1L);
+		Accounting found = accountingRespository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -144,7 +143,7 @@ public class TestAccounting {
 
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/wjcmj301KiykSikyuCtsWk.sql");
 
-		Wjcmj301KiykSikyuCtsWk found = wjcmj301KiykSikyuCtsWkRepository.findOne("00011878000001000000");
+		Wjcmj301KiykSikyuCtsWk found = wjcmj301KiykSikyuCtsWkRepository.findById("00011878000001000000").get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -155,7 +154,7 @@ public class TestAccounting {
 
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/wjcmj302SikyuMisiCtsWk.sql");
 
-		Wjcmj302SikyuMisiCtsWk found = wjcmj302SikyuMisiCtsWkRepository.findOne("00011878000001000000");
+		Wjcmj302SikyuMisiCtsWk found = wjcmj302SikyuMisiCtsWkRepository.findById("00011878000001000000").get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -166,7 +165,7 @@ public class TestAccounting {
 
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/wjcmj303GnkHrkeCtsWk.sql");
 
-		Wjcmj303GnkHrkeCtsWk found = wjcmj303GnkHrkeCtsWkRepository.findOne("00011878000001001000");
+		Wjcmj303GnkHrkeCtsWk found = wjcmj303GnkHrkeCtsWkRepository.findById("00011878000001001000").get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -176,7 +175,7 @@ public class TestAccounting {
 	public void CommissionDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/commissionData.sql");
 
-		CommissionData found = commissionDataRepository.findOne(1L);
+		CommissionData found = commissionDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -186,7 +185,7 @@ public class TestAccounting {
 	public void OsoRequestDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestData.sql");
 
-		OsoRequestData found = osoRequestDataRepository.findOne(1L);
+		OsoRequestData found = osoRequestDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -196,7 +195,7 @@ public class TestAccounting {
 	public void OsoRequestPlanDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestPlanData.sql");
 
-		OsoRequestPlanData found = osoRequestPlanDataRepository.findOne(1L);
+		OsoRequestPlanData found = osoRequestPlanDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -206,7 +205,7 @@ public class TestAccounting {
 	public void OsoRequestDetailDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestDetailData.sql");
 
-		OsoRequestDetailData found = osoRequestDetailDataRepository.findOne(1L);
+		OsoRequestDetailData found = osoRequestDetailDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -216,7 +215,7 @@ public class TestAccounting {
 	public void OsoRequestDetailPlanDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoRequestDetailPlanData.sql");
 
-		OsoRequestDetailPlanData found = osoRequestDetailPlanDataRepository.findOne(1L);
+		OsoRequestDetailPlanData found = osoRequestDetailPlanDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -226,7 +225,7 @@ public class TestAccounting {
 	public void OsoResultsDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsData.sql");
 
-		OsoResultsData found = osoResultsDataRepository.findOne(1L);
+		OsoResultsData found = osoResultsDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -248,7 +247,7 @@ public class TestAccounting {
 	public void OsoResultsPlanDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/osoResultsPlanData.sql");
 
-		OsoResultsPlanData found = osoResultsPlanDataRepository.findOne(1L);
+		OsoResultsPlanData found = osoResultsPlanDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -258,7 +257,7 @@ public class TestAccounting {
 	public void UsageQuantityRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/usageQuantity.sql");
 
-		UsageQuantity found = usageQuantityRepository.findOne(1L);
+		UsageQuantity found = usageQuantityRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -284,7 +283,7 @@ public class TestAccounting {
 	public void UsageQuantityRelatedManagementRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/usageQuantityRelatedManagement.sql");
 
-		UsageQuantityRelatedManagement found = usageQuantityRelatedManagementRepository.findOne(1L);
+		UsageQuantityRelatedManagement found = usageQuantityRelatedManagementRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -329,7 +328,7 @@ public class TestAccounting {
 	public void InvoiceLinkageRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
 
-		InvoiceLinkage found = invoiceLinkageRepository.findOne(1L);
+		InvoiceLinkage found = invoiceLinkageRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -379,7 +378,7 @@ public class TestAccounting {
 	public void AccountingPeriodDetailRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accountingPeriodDetail.sql");
 
-		AccountingPeriodDetail found = accountingPeriodDetailRepository.findOne(1L);
+		AccountingPeriodDetail found = accountingPeriodDetailRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -389,7 +388,7 @@ public class TestAccounting {
 	public void AccountedCancellationDataRepositoryのテスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/accountedCancellationData.sql");
 
-		AccountedCancellationData found = accountedCancellationDataRepository.findOne(1L);
+		AccountedCancellationData found = accountedCancellationDataRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

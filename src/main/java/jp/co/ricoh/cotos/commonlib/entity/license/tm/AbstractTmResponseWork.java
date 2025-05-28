@@ -2,8 +2,8 @@ package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 
 import java.util.Arrays;
 
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.Size;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 

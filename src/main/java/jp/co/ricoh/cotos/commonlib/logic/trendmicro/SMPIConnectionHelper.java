@@ -244,7 +244,7 @@ public class SMPIConnectionHelper {
 		// HTTPステータスが200系以外はエラーとする。
 		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
-			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode().value() + "、エラー内容：" + responseEntity.getBody());
 		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);

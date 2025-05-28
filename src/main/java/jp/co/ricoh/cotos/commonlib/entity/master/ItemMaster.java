@@ -5,24 +5,25 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
@@ -537,7 +538,7 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 分解元品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "origin_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "分解元品種マスタ", required = false, position = 39)
@@ -568,7 +569,7 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 違約金品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "penalty_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "違約金品種マスタ", required = false, position = 43)
@@ -630,7 +631,7 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 契約更新品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contract_update_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "契約更新品種マスタ", required = false, position = 51)
@@ -690,7 +691,7 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 紛失金品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lost_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "紛失金品種マスタ", required = false, position = 59)
@@ -699,7 +700,7 @@ public class ItemMaster extends EntityBaseMaster {
 	/**
 	 * 破損水没金品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "damage_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "破損水没金品種マスタ", required = false, position = 60)

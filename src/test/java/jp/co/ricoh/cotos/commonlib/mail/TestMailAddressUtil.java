@@ -94,11 +94,11 @@ public class TestMailAddressUtil {
 		// メール情報DTOを取得
 		MailInfoDto mailInfoDto = mailAddressUtil.getMailInfo(map, mailMasterId);
 		// チェック用メールマスタ取得
-		MailMaster mailMaster = mailMasterRepository.findOne(mailMasterId);
-		Estimation estimation = estimationRepository.findOne(estimationId);
-		Contract contract = contractRepository.findOne(contractId);
-		ArrangementWork arrangementWork = arrangementWorkRepository.findOne(arrangementWorkId);
-		LicenseInfo licenseInfo = licenseInfoRepository.findOne(licenseInfoId);
+		MailMaster mailMaster = mailMasterRepository.findById(mailMasterId).get();
+		Estimation estimation = estimationRepository.findById(estimationId).get();
+		Contract contract = contractRepository.findById(contractId).get();
+		ArrangementWork arrangementWork = arrangementWorkRepository.findById(arrangementWorkId).get();
+		LicenseInfo licenseInfo = licenseInfoRepository.findById(licenseInfoId).get();
 		// チェック
 		Assert.assertNotNull("メール情報DTOが取得できること", mailInfoDto);
 		Assert.assertEquals("メールテンプレートマスタIDが一致すること", mailMaster.getMailTemplateMasterId(), (Long) mailInfoDto.getMailTemplateMasterId());
@@ -197,10 +197,10 @@ public class TestMailAddressUtil {
 		// メール情報DTOを取得
 		MailInfoDto mailInfoDto = mailAddressUtil.getMailInfo(map, mailMasterId);
 		// チェック用メールマスタ取得
-		MailMaster mailMaster = mailMasterRepository.findOne(mailMasterId);
-		Contract contract = contractRepository.findOne(contractId);
-		ArrangementWork arrangementWork = arrangementWorkRepository.findOne(arrangementWorkId);
-		LicenseInfo licenseInfo = licenseInfoRepository.findOne(licenseInfoId);
+		MailMaster mailMaster = mailMasterRepository.findById(mailMasterId).get();
+		Contract contract = contractRepository.findById(contractId).get();
+		ArrangementWork arrangementWork = arrangementWorkRepository.findById(arrangementWorkId).get();
+		LicenseInfo licenseInfo = licenseInfoRepository.findById(licenseInfoId).get();
 		// チェック
 		Assert.assertEquals("メールテンプレートマスタIDが一致すること", mailMaster.getMailTemplateMasterId(), (Long) mailInfoDto.getMailTemplateMasterId());
 		Assert.assertEquals("メールタイプ区分が一致すること", mailMaster.getMailTypeDiv(), mailInfoDto.getMailTypeDiv());

@@ -2,8 +2,9 @@ package jp.co.ricoh.cotos.commonlib.repository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -59,7 +59,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestEstimation {
 
 	static ConfigurableApplicationContext context;
@@ -137,7 +137,7 @@ public class TestEstimation {
 	@Test
 	public void AttachedFileRepositoryのテスト() throws Exception {
 
-		EstimationAttachedFile found = estimationAttachedFileRepository.findOne(401L);
+		EstimationAttachedFile found = estimationAttachedFileRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -157,7 +157,7 @@ public class TestEstimation {
 	@Test
 	public void OperationLogRepositoryのテスト() throws Exception {
 
-		OperationLog found = operationLogRepository.findOne(401L);
+		OperationLog found = operationLogRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -169,7 +169,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationAddedEditorEmpRepositoryのテスト() throws Exception {
 
-		EstimationAddedEditorEmp found = estimationAddedEditorEmpRepository.findOne(401L);
+		EstimationAddedEditorEmp found = estimationAddedEditorEmpRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -181,7 +181,7 @@ public class TestEstimation {
 	@Test
 	public void DealerEstimationRepositoryのテスト() throws Exception {
 
-		DealerEstimation found = dealerEstimationRepository.findOne(402L);
+		DealerEstimation found = dealerEstimationRepository.findById(402L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -194,7 +194,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationCheckResultRepositoryのテスト() throws Exception {
 
-		EstimationCheckResult found = estimationCheckResultRepository.findOne(401L);
+		EstimationCheckResult found = estimationCheckResultRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -207,7 +207,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationDetailRepositoryのテスト() throws Exception {
 
-		EstimationDetail found = estimationDetailRepository.findOne(401L);
+		EstimationDetail found = estimationDetailRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -220,7 +220,7 @@ public class TestEstimation {
 	@Test
 	public void ProductEstimationRepositoryのテスト() throws Exception {
 
-		ProductEstimation found = productEstimationRepository.findOne(401L);
+		ProductEstimation found = productEstimationRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -233,7 +233,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationApprovalResultRepositoryのテスト() throws Exception {
 
-		EstimationApprovalResult found = estimationApprovalResultRepository.findOne(401L);
+		EstimationApprovalResult found = estimationApprovalResultRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -246,7 +246,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationApprovalRouteNodeRepositoryのテスト() throws Exception {
 
-		EstimationApprovalRouteNode found = estimationApprovalRouteNodeRepository.findOne(401L);
+		EstimationApprovalRouteNode found = estimationApprovalRouteNodeRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -262,7 +262,7 @@ public class TestEstimation {
 	@Test
 	public void CustomerEstimationRepositoryのテスト() throws Exception {
 
-		CustomerEstimation found = customerEstimationRepository.findOne(401L);
+		CustomerEstimation found = customerEstimationRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -275,7 +275,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationPicSaEmpRepositoryのテスト() throws Exception {
 
-		EstimationPicSaEmp found = estimationPicSaEmpRepository.findOne(401L);
+		EstimationPicSaEmp found = estimationPicSaEmpRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -288,7 +288,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationApprovalRouteRepositoryのテスト() throws Exception {
 
-		EstimationApprovalRoute found = estimationApprovalRouteRepository.findOne(401L);
+		EstimationApprovalRoute found = estimationApprovalRouteRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -303,7 +303,7 @@ public class TestEstimation {
 	@Test
 	public void ItemEstimationRepositoryのテスト() throws Exception {
 
-		ItemEstimation found = itemEstimationRepository.findOne(401L);
+		ItemEstimation found = itemEstimationRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -316,7 +316,7 @@ public class TestEstimation {
 	@Test
 	public void EstimationRepositoryのテスト() throws Exception {
 
-		Estimation found = estimationRepository.findOne(4L);
+		Estimation found = estimationRepository.findById(4L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -351,7 +351,7 @@ public class TestEstimation {
 	@Test
 	public void PenaltyDetailEstimationRepositoryのテスト() throws Exception {
 
-		PenaltyDetailEstimation found = penaltyDetailEstimationRepository.findOne(1L);
+		PenaltyDetailEstimation found = penaltyDetailEstimationRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -363,7 +363,7 @@ public class TestEstimation {
 	@Test
 	public void VupCaseWorkRepositoryのテスト() throws Exception {
 
-		VupCaseWork found = vupCaseWorkRepository.findOne(1L);
+		VupCaseWork found = vupCaseWorkRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -388,10 +388,10 @@ public class TestEstimation {
 	@Transactional
 	public void EstimationRepositorySaveのテスト() throws Exception {
 
-		Estimation found = estimationRepository.findOne(4L);
+		Estimation found = estimationRepository.findById(4L).get();
 		found.setEstimationTitle("テスト見積タイトル");
 		estimationRepository.save(found);
-		Estimation foundUpd = estimationRepository.findOne(4L);
+		Estimation foundUpd = estimationRepository.findById(4L).get();
 		Assert.assertEquals("正しく更新されていること", "テスト見積タイトル", foundUpd.getEstimationTitle());
 
 	}
@@ -401,10 +401,10 @@ public class TestEstimation {
 	@Transactional
 	public void EstimationPicSaEmpRepositorySaveのテスト() throws Exception {
 
-		EstimationPicSaEmp found = estimationPicSaEmpRepository.findOne(401L);
+		EstimationPicSaEmp found = estimationPicSaEmpRepository.findById(401L).get();
 		found.setAddress("テスト住所");
 		estimationPicSaEmpRepository.save(found);
-		EstimationPicSaEmp foundUpd = estimationPicSaEmpRepository.findOne(401L);
+		EstimationPicSaEmp foundUpd = estimationPicSaEmpRepository.findById(401L).get();
 		Assert.assertEquals("正しく更新されていること", "テスト住所", foundUpd.getAddress());
 
 	}
@@ -414,10 +414,10 @@ public class TestEstimation {
 	@Transactional
 	public void CustomerEstimationRepositorySaveのテスト() throws Exception {
 
-		CustomerEstimation found = customerEstimationRepository.findOne(401L);
+		CustomerEstimation found = customerEstimationRepository.findById(401L).get();
 		found.setAddress("テスト住所");
 		customerEstimationRepository.save(found);
-		CustomerEstimation foundUpd = customerEstimationRepository.findOne(401L);
+		CustomerEstimation foundUpd = customerEstimationRepository.findById(401L).get();
 		Assert.assertEquals("正しく更新されていること", "テスト住所", foundUpd.getAddress());
 
 	}
@@ -427,10 +427,10 @@ public class TestEstimation {
 	@Transactional
 	public void EstimationApprovalRouteRepositorySaveのテスト() throws Exception {
 
-		EstimationApprovalRoute found = estimationApprovalRouteRepository.findOne(401L);
+		EstimationApprovalRoute found = estimationApprovalRouteRepository.findById(401L).get();
 		found.setSpecialPriceApprovalFlg(2);
 		estimationApprovalRouteRepository.save(found);
-		EstimationApprovalRoute foundUpd = estimationApprovalRouteRepository.findOne(401L);
+		EstimationApprovalRoute foundUpd = estimationApprovalRouteRepository.findById(401L).get();
 		Assert.assertEquals("正しく更新されていること", 2, foundUpd.getSpecialPriceApprovalFlg());
 
 	}
@@ -440,10 +440,10 @@ public class TestEstimation {
 	@Transactional
 	public void EstimationApprovalRouteRepositorySaveのテスト_削除() throws Exception {
 
-		EstimationApprovalRoute found = estimationApprovalRouteRepository.findOne(401L);
+		EstimationApprovalRoute found = estimationApprovalRouteRepository.findById(401L).get();
 		estimationApprovalRouteRepository.delete(found);
-		EstimationApprovalRoute foundDel = estimationApprovalRouteRepository.findOne(401L);
-		Assert.assertNull("削除されていること", foundDel);
+		Optional<EstimationApprovalRoute> foundDel = estimationApprovalRouteRepository.findById(401L);
+		Assert.assertFalse("削除されていること", foundDel.isPresent());
 
 	}
 
@@ -452,10 +452,10 @@ public class TestEstimation {
 	@Transactional
 	public void ItemEstimationRepositorySaveのテスト() throws Exception {
 
-		ItemEstimation found = itemEstimationRepository.findOne(401L);
+		ItemEstimation found = itemEstimationRepository.findById(401L).get();
 		found.setMakerItemCode("テストコード");
 		itemEstimationRepository.save(found);
-		ItemEstimation foundUpd = itemEstimationRepository.findOne(401L);
+		ItemEstimation foundUpd = itemEstimationRepository.findById(401L).get();
 		Assert.assertEquals("正しく更新されていること", "テストコード", foundUpd.getMakerItemCode());
 
 	}

@@ -3,8 +3,8 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.context.annotation.Description;
 

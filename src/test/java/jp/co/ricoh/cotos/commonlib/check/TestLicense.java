@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,7 +36,7 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = "test.context.id = TestLicense")
 public class TestLicense {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
@@ -93,7 +93,7 @@ public class TestLicense {
 
 	@Test
 	public void LicenseInfoのテスト() throws Exception {
-		LicenseInfo entity = licenseInfoRepository.findOne(1L);
+		LicenseInfo entity = licenseInfoRepository.findById(1L).get();
 		LicenseInfo testTarget = new LicenseInfo();
 
 		// 正常系
@@ -144,7 +144,7 @@ public class TestLicense {
 
 	@Test
 	public void LicenseRemainingNumberのテスト() throws Exception {
-		LicenseRemainingNumber entity = licenseRemainingNumberRepository.findOne(1L);
+		LicenseRemainingNumber entity = licenseRemainingNumberRepository.findById(1L).get();
 		LicenseRemainingNumber testTarget = new LicenseRemainingNumber();
 
 		// 正常系
@@ -181,7 +181,7 @@ public class TestLicense {
 
 	@Test
 	public void LicenseInfoOperationLogのテスト() throws Exception {
-		LicenseInfoOperationLog entity = licenseInfoOperationLogRepository.findOne(1L);
+		LicenseInfoOperationLog entity = licenseInfoOperationLogRepository.findById(1L).get();
 		LicenseInfoOperationLog testTarget = new LicenseInfoOperationLog();
 
 		// 正常系
@@ -210,7 +210,7 @@ public class TestLicense {
 
 	@Test
 	public void LicenseProcessのテスト() throws Exception {
-		LicenseProcess entity = licenseProcessRepository.findOne(1L);
+		LicenseProcess entity = licenseProcessRepository.findById(1L).get();
 		LicenseProcess testTarget = new LicenseProcess();
 
 		// 正常系
@@ -250,7 +250,7 @@ public class TestLicense {
 
 	@Test
 	public void LicenseDetailのテスト() throws Exception {
-		LicenseDetail entity = licenseDetailRepository.findOne(1L);
+		LicenseDetail entity = licenseDetailRepository.findById(1L).get();
 		LicenseDetail testTarget = new LicenseDetail();
 
 		// 正常系

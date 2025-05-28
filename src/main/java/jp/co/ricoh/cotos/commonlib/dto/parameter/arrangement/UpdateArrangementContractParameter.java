@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;

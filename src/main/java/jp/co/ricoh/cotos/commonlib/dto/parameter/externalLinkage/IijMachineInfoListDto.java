@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

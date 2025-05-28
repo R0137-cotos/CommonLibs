@@ -3,9 +3,9 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail.bplats;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Lob;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

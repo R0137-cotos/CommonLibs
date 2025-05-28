@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 

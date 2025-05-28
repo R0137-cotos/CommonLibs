@@ -2,11 +2,11 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
 import java.util.List;
 
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;

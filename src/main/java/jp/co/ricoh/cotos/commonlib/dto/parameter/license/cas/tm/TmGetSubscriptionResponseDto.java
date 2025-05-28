@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm;
 
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
