@@ -97,21 +97,23 @@ sonarqube {
 def repo = new File(rootDir, "repository")
 
 publishing {
-    repositories {
-        maven {
-            url = "file://${repo.absolutePath}"
-            version = '0.0.660'
-            group = 'jp.co.ricoh.cotos'
-            name = 'common-libraries'
+    publications {
+		mavenJava(MavenPublication) {
+            version = '0.0.661'
+            groupId = 'jp.co.ricoh.cotos'
+            artifactId = 'common-libraries'
+            from components.java
         }
     }
+    repositories {
+		maven {
+			url = "file://${repo.absolutePath}"
+		}
+	}
 }
-task sourcesJar(type: Jar, dependsOn:classes) {
-     archiveClassifier.set('sources')
-     from sourceSets.main.allSource
-}
-artifacts {
-     archives sourcesJar
+
+java {
+	withSourcesJar()
 }
 
 test {
