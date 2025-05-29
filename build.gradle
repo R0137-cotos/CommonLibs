@@ -98,7 +98,7 @@ def repo = new File(rootDir, "repository")
 
 publishing {
     publications {
-		mavenJava(MavenPublication) {
+        mavenJava(MavenPublication) {
             version = '0.0.661'
             groupId = 'jp.co.ricoh.cotos'
             artifactId = 'common-libraries'
