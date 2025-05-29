@@ -17,6 +17,6 @@ public class CreateNextUpdateDetailInfoDto extends DtoBase {
 	 * 次回更新明細登録Dtoリスト
 	 */
 	@Valid
-	private List<CreateNextUpdateDetailInfoDto> nextUpdateDetailInfoDtoList;
+	private List<NextUpdateDetailInfoDto> nextUpdateDetailInfoDtoList;
 
 }
