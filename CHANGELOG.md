@@ -1,5 +1,23 @@
 # Changelog
 
+## v9.0.0 (22/05/2025)
+- [**closed**] 30078_品種マスタ.entity,dtoに同一SS用最短納期日数追加 [#2836](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2836)
+- [**closed**] #25356_商材固有項目マスタにカラム追加、商材固有項目マスタリポジトリにメソッド追加 [#2838](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2838)
+- [**closed**] #29981_コミュニケーション登録パラメータにリスト項目追加、CommonSendMailクラスにメソッド追加 [#2841](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2841)
+- [**closed**] #30550 計上データ作成バッチ_原価設定対応 [#2843](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2843)
+- [**closed**] #29755_O365最新契約明細情報へ項目追加 [#2823](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2823)
+- [**closed**] 29699_o365年額増数.サービス利用希望日用エラーメッセージ追加 [#2822](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2822)
+- [**closed**] #29684_品種マスタリポジトリにメソッド追加 [#2821](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2821)
+- [**closed**] #29634_品種マスタ、計上期間明細にカラム追加 [#2820](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2820)
+
+---
+
+## v8.7.0 (10/04/2025)
+- [**closed**] #29148_O365年額対応 拡張項目と区分追加 [#2807](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2807)
+- [**closed**] 29911_メールアドレス一覧view.テーブル区分追加 [#2826](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2826)
+
+---
+
 ## v8.5.0 (04/03/2025)
 - [**closed**] #28138_VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加 [#2782](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2782)
 - [**closed**] #27677 商品グループマスタに契約機種品種紐づけ処理区分を追加 [#2775](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2775)
@@ -212,22 +230,3 @@
 - [**closed**] #13025 Isysoneの保守担当SSとCEをCOTOSと連携させたい。リリースブランチマージ [#2496](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2496)
 - [**closed**] #20331 エラーID桁数間違い修正 [#2489](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2489)
 - [**closed**] #20331 組織情報が有効期限切れのエラー追加 [#2484](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2484)
-
----
-
-## v7.3.0 (15/09/2023)
-- [**closed**]  #19704 CPQの重いデータ対応 [#2481](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2481)
-- [**closed**] #20325 メールアドレス情報に異動情報取込手配リマインド用のテーブル区分追加 [#2479](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2479)
-
----
-
-## v7.2.0 (07/09/2023)
-- [**closed**] #19890 TMのAPIコール用ヘッダーにUSER_AGENTを追加 [#2472](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2472)
-- [**closed**] 20053 契約機種、機種構成マスタにARCS期間売保守データ用保守形態追加 [#2460](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2460)
-- [**closed**] #19436 品種マスタに課税区分カラムを追加 [#2451](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2451)
-- [**closed**] 19259 エラーメッセージ追加 テナント検索時のメールアドレス検索エラー [#2429](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2429)
-- [**closed**] 18840 エラーメッセージ追加 メールアドレスが現在のテナントとは異なるテナントに紐づいていた場合 [#2417](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2417)
-- [**closed**] #18773 URL権限マスタ用の権限判定パラメータがnullにならないように修正 [#2415](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2415)
-- [**closed**] #18773 権限パラメータ作成処理一部切り戻し [#2407](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2407)
-- [**closed**] #18773 権限が自顧客と配下の場合にトランザクションから社員ＩＤを取得できるように [#2400](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2400)
-- [**closed**] 19185 減数可能期間 エラーメッセージ修正 [#2399](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2399)

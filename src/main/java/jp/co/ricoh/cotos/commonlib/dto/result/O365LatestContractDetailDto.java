@@ -84,4 +84,10 @@ public class O365LatestContractDetailDto {
 	@ApiModelProperty(value = "減数可能期間（To）", required = false, position = 12)
 	private String decreasablePeriodEnd;
 
+	/**
+	 * 年額計上月
+	 */
+	@ApiModelProperty(value = "年額計上月", required = false, position = 13)
+	private String annualAmountRecordMonth;
+
 }
