@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.AbsConInsideTransStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.RunningAccountSalesStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -168,4 +169,16 @@ public class AccountingPeriodDetail extends EntityBase {
 	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 18, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
+	/**
+	 * 統合契約内部振替処理状態
+	 */
+	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 19)
+	private AbsConInsideTransStatus absConInsideTransStatus;
+
+	/**
+	 * 統合契約内部振替連携日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "統合契約内部振替連携日", required = false, position = 20)
+	private Date absConInsideLinkDate;
 }

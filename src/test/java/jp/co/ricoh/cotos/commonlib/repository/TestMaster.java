@@ -1010,6 +1010,11 @@ public class TestMaster {
 		id = 3L;
 		found = itemMasterRepository.findOne(id);
 		Assert.assertNotNull(found);
+
+		id = 1001L;
+		ItemMaster found4 = itemMasterRepository.findByProrationLinkedInitialItemMasterId(id);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found4);
 	}
 
 	@Test

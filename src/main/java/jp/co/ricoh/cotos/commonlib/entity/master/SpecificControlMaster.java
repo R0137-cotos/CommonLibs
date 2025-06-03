@@ -133,4 +133,12 @@ public class SpecificControlMaster extends EntityBase {
 	@ApiModelProperty(value = "拡張項目", required = false, position = 10)
 	@Lob
 	private String extendsParameter;
+
+	/**
+	 * 解約用商材固有項目追加フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "解約用商材固有項目追加フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	private Integer specificControlAddFlgCancel;
 }
