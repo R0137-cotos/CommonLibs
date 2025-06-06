@@ -1,5 +1,11 @@
 # Changelog
 
+## v9.1.0 (05/06/2025)
+- [**closed**] #29543 ファイル取込管理DTOを追加 [#2854](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2854)
+- [**closed**] #29543 ファイル取込エラー詳細リポジトリメソッド修正(topic/backlog125 2025/5/9臨時リリース) [#2831](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2831)
+
+---
+
 ## v9.0.0 (22/05/2025)
 - [**closed**] 30078_品種マスタ.entity,dtoに同一SS用最短納期日数追加 [#2836](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2836)
 - [**closed**] #25356_商材固有項目マスタにカラム追加、商材固有項目マスタリポジトリにメソッド追加 [#2838](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2838)
@@ -212,21 +218,3 @@
 
 ## v7.4.2 (18/10/2023)
 - [**closed**] #20780 Intra-martAPIコール時のタイムアウト時間を10秒に設定 [#2510](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2510)
-
----
-
-## v7.4.0 (05/10/2023)
-- [**closed**] #13025 組織情報repositoryに追加したメソッドの戻り値の型修正 [#2504](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2504)
-- [**closed**] #20240 品種マスタDTOに拡張項目追加 [#2470](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2470)
-- [**closed**] #20092 O365契約期間変更対応 エラーメッセージ追加 [#2458](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2458)
-- [**closed**] #20092 O365契約期間変更対応 添付ファイル商品毎チェックマスタのEnum追加 [#2455](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2455)
-- [**closed**] #19974 O365更新期限変更対応 カラムEnum追加 [#2452](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2452)
-- [**closed**] #20547 O365計上後注文キャンセルデータ項目追加 [#2495](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2495)
-- [**closed**] #19464 O365キャンセル対応 計上後注文キャンセルデータテーブル追加 [#2402](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2402)
-- [**closed**] #19198 O365キャンセル対応 契約操作履歴区分追加 [#2391](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2391)
-- [**closed**] #19198 O365拡張項目にキャンセル処理状態を追加 [#2389](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2389)
-- [**closed**] #19112　MSキャンセルAPI [#2384](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2384)
-- [**closed**] #20643 契約検索用DTO修正 [#2499](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2499)
-- [**closed**] #13025 Isysoneの保守担当SSとCEをCOTOSと連携させたい。リリースブランチマージ [#2496](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2496)
-- [**closed**] #20331 エラーID桁数間違い修正 [#2489](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2489)
-- [**closed**] #20331 組織情報が有効期限切れのエラー追加 [#2484](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2484)
