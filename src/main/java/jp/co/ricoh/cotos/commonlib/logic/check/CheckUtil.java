@@ -734,30 +734,30 @@ public class CheckUtil {
 	 * 明細情報インポート登録API共通チェック
 	 * 見積明細情報インポート登録APIと契約明細情報インポート登録APIの共通チェック
 	 */
-	public List<ErrorInfo> registImportDetailUtilCheck(ProductStackingMiddleDto productStackingMiddleDto) {
+	public List<ErrorInfo> registImportDetailUtilCheck(ProductStackingMiddleDto productStackingMiddleDto, String entity) {
 
 		List<ErrorInfo> errorList = new ArrayList<>();
 
 		// 必須チェック
 		// 品種コード
 		if(StringUtils.isEmpty(productStackingMiddleDto.getRicohItemCode())) {
-			addErrorInfo(errorList, "EntityCheckNotNullError", new String[] { "品種コード" });
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "品種コード" }, null, entity);
 		}
 		// 品種名
 		if(StringUtils.isEmpty(productStackingMiddleDto.getRicohItemName())) {
-			addErrorInfo(errorList, "EntityCheckNotNullError", new String[] { "品種名" });
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "品種名" }, null, entity);
 		}
 		// 数量
 		if (null == productStackingMiddleDto.getQuantity()) {
-			addErrorInfo(errorList, "EntityCheckNotNullError", new String[] { "数量" });
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "数量" }, null, entity);
 		}
 		// 単価（E/U売価）
 		if (null == productStackingMiddleDto.getUnitPrice()) {
-			addErrorInfo(errorList, "EntityCheckNotNullError", new String[] { "単価(E/U売価)" });
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "単価(E/U売価)" }, null, entity);
 		}
 		// ver
 		if (null == productStackingMiddleDto.getImportFileVersion()) {
-			addErrorInfo(errorList, "EntityCheckNotNullError", new String[] { "ver" });
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "ver" }, null, entity);
 		}
 		if (CollectionUtils.isNotEmpty(errorList)) {
 			// 必須チェックでエラーになった場合、以降のチェックを実施しない
@@ -765,20 +765,20 @@ public class CheckUtil {
 		}
 		// 商品マスタチェック
 		if (null == productStackingMiddleDto.getProductMaster()) {
-			addErrorInfo(errorList, "CannotIdentify", new String[] { "商品マスタ" });
+			addErrorInfoFiledEntity(errorList, "CannotIdentify", new String[] { "商品マスタ" }, null, entity);
 		} else if (!productStackingMiddleDto.getImportFileVersion().equals(productStackingMiddleDto.getProductMaster().getImportFileVersion())) {
 			// ファイルバージョンチェック
-			addErrorInfo(errorList, "LatestFileVersionCheck");
+			addErrorInfoFiledEntity(errorList, "LatestFileVersionCheck", null, null, entity);
 		}
 
 		// 品種マスタチェック
 		if (null == productStackingMiddleDto.getItemMaster()) {
-			addErrorInfo(errorList, "CannotIdentify", new String[] { "品種マスタ" });
+			addErrorInfoFiledEntity(errorList, "CannotIdentify", new String[] { "品種マスタ" }, null, entity);
 		} else {
 			// 値引き下限値チェック
 			// CSV.単価(E/U売価) < 品種マスタ.値引き下限値の場合、エラー
 			if (productStackingMiddleDto.getUnitPrice().compareTo(productStackingMiddleDto.getItemMaster().getLowerLimit()) < 0) {
-				addErrorInfo(errorList, "lowerLimitError", new String[] { "単価（E/U売価）" });
+				addErrorInfoFiledEntity(errorList, "lowerLimitError", new String[] { "単価（E/U売価）" }, null, entity);
 			}
 		}
 		return errorList;

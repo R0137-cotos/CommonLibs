@@ -626,3 +626,4 @@
 |669|ROC-Lite ファイル操作関連商品マスタのenum値追加|
 |670|ROC-Lite対応_masterブランチマージ|
 |671|VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加|
+|672|ROC-Lite 共通チェックロジック修正|
