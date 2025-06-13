@@ -625,3 +625,4 @@
 |668|ROC-Lite 次回更新明細情報作成用Dto追加||
 |669|ROC-Lite ファイル操作関連商品マスタのenum値追加|
 |670|ROC-Lite対応_masterブランチマージ|
+|671|VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加|
