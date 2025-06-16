@@ -67,7 +67,7 @@ public class TestRegistImportDetailUtilCheck {
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
-			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productContract"));
 			Assert.assertTrue(CollectionUtils.isEmpty(errorList));
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
@@ -82,13 +82,15 @@ public class TestRegistImportDetailUtilCheck {
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDtoNodata(null, null);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
-			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productContract"));
 			Assert.assertEquals(5, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種コードが設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種名が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "数量が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "単価(E/U売価)が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "verが設定されていません。".equals(e.getErrorMessage())));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> null == e.getErrorField()));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "productContract".equals(e.getErrorEntity())));
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
 			e.printStackTrace();
@@ -102,10 +104,12 @@ public class TestRegistImportDetailUtilCheck {
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(null, null);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
-			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productContract"));
 			Assert.assertEquals(2, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "商品マスタが特定できません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種マスタが特定できません。".equals(e.getErrorMessage())));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> null == e.getErrorField()));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "productContract".equals(e.getErrorEntity())));
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
 			e.printStackTrace();
@@ -123,9 +127,11 @@ public class TestRegistImportDetailUtilCheck {
 		dto.setUnitPrice(new BigDecimal(6050));
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
-			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productContract"));
 			Assert.assertEquals(1, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "最新のファイルバージョンではありません。".equals(e.getErrorMessage())));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> null == e.getErrorField()));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "productContract".equals(e.getErrorEntity())));
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
 			e.printStackTrace();
@@ -141,9 +147,11 @@ public class TestRegistImportDetailUtilCheck {
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
-			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productEstimation"));
 			Assert.assertEquals(1, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "単価（E/U売価）が値引き限度額を下回っています。".equals(e.getErrorMessage())));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> null == e.getErrorField()));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "productEstimation".equals(e.getErrorEntity())));
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラー");
 			e.printStackTrace();
@@ -160,9 +168,11 @@ public class TestRegistImportDetailUtilCheck {
 		dto.setImportFileVersion(null);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
-			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto));
+			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productEstimation"));
 			Assert.assertEquals(1, errorList.size());
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "verが設定されていません。".equals(e.getErrorMessage())));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> null == e.getErrorField()));
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "productEstimation".equals(e.getErrorEntity())));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("予期せぬエラー");
