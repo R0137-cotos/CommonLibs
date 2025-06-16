@@ -618,3 +618,4 @@
 |661|EOSL対応 SpringBootのバージョンを3.5.0に変更|
 |662|EOSL対応 StoredProcedureUtil修正|
 |663|EOSL対応 修正漏れ対応|
+|664|EOSL対応 Jenkinsfile追加|
