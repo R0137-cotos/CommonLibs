@@ -7,7 +7,7 @@ import lombok.Data;
  * 商品(見積)・商品(契約)共に共通
  */
 @Data
-public class DSIMExtendsParameterIteranceDto {
+public class DsimExtendsParameterIteranceDto {
 
 	private long id;
 
