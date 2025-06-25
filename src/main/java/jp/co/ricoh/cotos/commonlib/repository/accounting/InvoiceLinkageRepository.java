@@ -16,7 +16,7 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 * @param receiveStatus 請求受信ステータス
 	 * @return
 	 */
-	public List<InvoiceLinkage> findByCreateYmAndReceiveStatus(String createYm, BatchCommonStatus receiveStatus);
+	public List<InvoiceLinkage> findByCreateYmAndReceiveStatusAndProductClassDiv(String createYm, BatchCommonStatus receiveStatus, String productClassDiv);
 
 	/**
 	 * 契約送信ステータスから取得
@@ -24,7 +24,7 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 * @param sendStatus 契約送信ステータス
 	 * @return
 	 */
-	public List<InvoiceLinkage> findBySendStatusOrderById(BatchCommonStatus sendStatus);
+	public List<InvoiceLinkage> findBySendStatusAndProductClassDivOrderById(BatchCommonStatus sendStatus, String productClassDiv);
 
 	/**
 	 * 契約No.、商品コード、シリアル番号、連携月、契約送信ステータス、請求受信ステータスから取得
@@ -61,7 +61,7 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 * @param receiveStatus 請求受信ステータス
 	 * @return 
 	 */
-	public List<InvoiceLinkage> findBySendStatusAndReceiveStatus(BatchCommonStatus sendStatus, BatchCommonStatus receiveStatus);
+	public List<InvoiceLinkage> findBySendStatusAndReceiveStatusAndProductClassDiv(BatchCommonStatus sendStatus, BatchCommonStatus receiveStatus, String productClassDiv);
 
 	/**
 	 * 契約No.、商品コード、シリアル番号、連携月から取得
