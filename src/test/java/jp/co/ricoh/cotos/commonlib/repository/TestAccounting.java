@@ -334,6 +334,7 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 		Assert.assertEquals(InvoiceTaxType.免税, found.getSalesTaxType());
+		Assert.assertEquals("RSI", found.getProductClassDiv());
 	}
 
 	@Test
