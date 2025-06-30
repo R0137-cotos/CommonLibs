@@ -31,7 +31,8 @@ import lombok.EqualsAndHashCode;
  * 契約情報と紐づく手配情報を表すEntity
  */
 @Entity
-@EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude={"arrangementWorkList"})
 @Data
 @Table(name = "arrangement")
 public class Arrangement extends EntityBase {

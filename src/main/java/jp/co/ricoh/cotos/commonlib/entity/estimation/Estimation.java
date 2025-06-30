@@ -41,7 +41,8 @@ import lombok.EqualsAndHashCode;
  * 見積を表すEntityです。
  */
 @Entity
-@EqualsAndHashCode(callSuper = true, exclude={"estimationApprovalRoute","estimationPicSaEmp","customerEstimation"})
+//@EqualsAndHashCode(callSuper = true, exclude={"estimationApprovalRoute","estimationPicSaEmp","customerEstimation"})
+@EqualsAndHashCode(callSuper = true, exclude={"estimationApprovalRoute","estimationPicSaEmp","customerEstimation", "estimationCheckResultList", "operationLogList", "estimationAttachedFileList", "estimationAddedEditorEmpList", "dealerEstimationList", "estimationDetailList", "productEstimationList", "penaltyDetailEstimationList"})
 @EntityListeners(EstimationListener.class)
 @Data
 @Table(name = "estimation")

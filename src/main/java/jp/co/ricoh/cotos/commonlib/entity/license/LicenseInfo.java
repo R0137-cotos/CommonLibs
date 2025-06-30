@@ -39,7 +39,8 @@ import lombok.EqualsAndHashCode;
  * ライセンス情報を表すEntity
  */
 @Entity
-@EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"licenseDetailList", "licenseProcessList", "licenseRemainingNumber", "licenseOperationLogList", "licenseAccount"})
 @Data
 @Table(name = "license_info")
 public class LicenseInfo extends EntityBase {
