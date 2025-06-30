@@ -619,3 +619,4 @@
 |662|EOSL対応 StoredProcedureUtil修正|
 |663|EOSL対応 修正漏れ対応|
 |664|EOSL対応 Jenkinsfile追加|
+|665|EOSL対応 EqualsAndHashCodeアノテーションを修正|
