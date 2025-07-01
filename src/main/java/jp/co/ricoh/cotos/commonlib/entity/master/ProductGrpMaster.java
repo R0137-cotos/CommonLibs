@@ -89,6 +89,28 @@ public class ProductGrpMaster extends EntityBaseMaster {
 		}
 	}
 
+	@Description(value = "電子契約利用開始希望日制御区分")
+	public enum ElectronicContractDesiredStartDateDiv {
+
+		新規のみ入力可能_契約変更入力不可("1"), 新規_契約変更ともに入力可能("2"), 契約変更のみ入力可能_新規入力不可("3"), 新規_契約変更いずれも入力不可("4");
+		private final String text;
+
+		private ElectronicContractDesiredStartDateDiv(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static ElectronicContractDesiredStartDateDiv fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
+
 	@Description(value = "価格改定処理パターン区分")
 	public enum PriceRevisionProcDiv {
 
@@ -327,4 +349,18 @@ public class ProductGrpMaster extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "契約機種品種紐づけ処理区分", required = false, position = 28, allowableValues = "品種グループマスタで紐づける(\"1\")")
 	private EquipmentItemLinkProcDiv equipmentItemLinkProcDiv;
+
+	/**
+	 * 電子契約対応フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "電子契約対応フラグ", required = false, position = 23, allowableValues = "range[0,9]")
+	private Integer electronicContractFlg;
+
+	/**
+	 * 電子契約利用開始希望日制御区分
+	 */
+	@ApiModelProperty(value = "電子契約利用開始希望日制御区分", required = false, position = 24, allowableValues = "新規のみ入力可能_契約変更入力不可(\"1\"), 新規_契約変更ともに入力可能(\"2\"), 契約変更のみ入力可能_新規入力不可(\"3\"), 新規_契約変更いずれも入力不可(\"4\")")
+	private ElectronicContractDesiredStartDateDiv electronicContractDesiredStartDateDiv;
 }
