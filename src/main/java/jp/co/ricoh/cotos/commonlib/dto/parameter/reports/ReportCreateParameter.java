@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -47,4 +49,14 @@ public class ReportCreateParameter {
 	 */
 	@ApiModelProperty(value = "CreateFormワークディレクトリ", required = false, position = 4)
 	private String workAbsoluteDir;
+
+	/**
+	 * PDF出力フラグ
+	 *
+	 * 帳票テンプレート管理マスタの出力形式=2:Excel の場合のみ有効
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "PDF出力フラグ", required = false, position = 5)
+	private Integer pdfOutputFlg;
 }

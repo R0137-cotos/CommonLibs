@@ -851,4 +851,25 @@ public class ContractDto extends DtoBase {
 	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 113)
 	private List<ManagedContractEquipmentStatusDto> managedContractEquipmentStatusList;
 
+	/**
+	 * 電子契約正式帳票名
+	 */
+	@Size(max = 255)
+	@ApiModelProperty(value = "電子契約正式帳票名", required = false, position = 110, allowableValues = "range[0,255]")
+	private String electronicContractOfficialReportName;
+
+	/**
+	 * 電子契約帳票EIMアップロードフラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "電子契約帳票EIMアップロードフラグ", required = false, position = 111, allowableValues = "range[0,9]")
+	private Integer electronicContractReportEimUploadFlg;
+
+	/**
+	 * 電子契約締結日
+	 */
+	@ApiModelProperty(value = "電子契約締結日", required = false, position = 112)
+	@Temporal(TemporalType.DATE)
+	private Date electronicContractConclusionDate;
 }

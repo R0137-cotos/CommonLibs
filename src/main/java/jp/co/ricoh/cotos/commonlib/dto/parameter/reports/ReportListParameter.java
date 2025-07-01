@@ -63,4 +63,10 @@ public class ReportListParameter {
 	 */
 	@ApiModelProperty(value = "ワークフロー状態", required = false, allowableValues = "作成中(\"1\"), 業務依頼中(\"2\"), 業務処理完了(\"3\"), 承認依頼中(\"4\"), 承認済(\"5\"), 顧客提示済(\"6\"), キャンセル申請中(\"7\"), 売上可能(\"8\"), 解約申請中(\"9\"), 手配中(\"10\"), 手配完了(\"11\"), 受付待ち(\"12\"), 作業中(\"13\"), 作業完了報告(\"14\"), 作業完了(\"15\"), エラー(\"16\")", example = "1", position = 9)
 	private String workflowStatus;
+	
+	/**
+	 * 電子契約連携対象帳票取得区分
+	 */
+	@ApiModelProperty(value = "電子契約連携対象帳票取得区分", required = false, allowableValues = "電子契約連携対象以外(\"0\"), 電子契約連携対象のみ(\"1\"), 全て(\"2\")", example = "0", position = 10)
+	private String electronicContractLinkageReportDiv;
 }

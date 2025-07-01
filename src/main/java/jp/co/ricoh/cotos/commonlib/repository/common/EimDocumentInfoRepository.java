@@ -13,4 +13,5 @@ public interface EimDocumentInfoRepository extends CrudRepository<EimDocumentInf
 
 	public List<EimDocumentInfo> findByKeiyakNoAndEimLinkedStatusAndOldDocumentFlg(String keiyakNo, EimLinkedStatus eimLinkedStatus, boolean oldDocumentFlg);
 	
+	public List<EimDocumentInfo> findByContractIdAndEimLinkedStatusAndOldDocumentFlg(long contractId, EimLinkedStatus eimLinkedStatus, boolean oldDocumentFlg);
 }

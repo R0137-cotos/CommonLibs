@@ -620,8 +620,9 @@ public class TestContractDto {
 		testTarget.setPurchaseManageNumber(STR_256);
 		testTarget.setMvbAccount(STR_19);
 		testTarget.setNttCustomerId(STR_256);
+		testTarget.setElectronicContractOfficialReportName(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 28);
+		Assert.assertTrue(result.getErrorInfoList().size() == 29);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "得意先宛先名は最大文字数（255）を超えています。"));
 
@@ -632,8 +633,9 @@ public class TestContractDto {
 		testTarget.setAccountSalesFlg(INT_10);
 		testTarget.setManualUpdateFlg(INT_10);
 		testTarget.setSsWorkRequestCreateFlg(INT_10);
+		testTarget.setElectronicContractReportEimUploadFlg(INT_10);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
-		Assert.assertTrue(result.getErrorInfoList().size() == 5);
+		Assert.assertTrue(result.getErrorInfoList().size() == 6);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00015));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "売上計上フラグは最大値（9）を超えています。"));
 
