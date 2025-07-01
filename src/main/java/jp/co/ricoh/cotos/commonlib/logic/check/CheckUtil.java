@@ -739,6 +739,10 @@ public class CheckUtil {
 		List<ErrorInfo> errorList = new ArrayList<>();
 
 		// 必須チェック
+		// 商品コード
+		if (StringUtils.isEmpty(productStackingMiddleDto.getProductMasterId())) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "商品コード" }, null, entity);
+		}
 		// 品種コード
 		if(StringUtils.isEmpty(productStackingMiddleDto.getRicohItemCode())) {
 			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "品種コード" }, null, entity);
