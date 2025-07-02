@@ -627,3 +627,4 @@
 |670|ROC-Lite対応_masterブランチマージ|
 |671|VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加|
 |672|ROC-Lite 共通チェックロジック修正|
+|673|ROC-Lite 商品コード追加、明細情報インポート登録API共通チェックの必須チェック追加|

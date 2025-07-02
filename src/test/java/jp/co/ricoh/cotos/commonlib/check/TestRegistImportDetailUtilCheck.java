@@ -83,7 +83,8 @@ public class TestRegistImportDetailUtilCheck {
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
 			errorList.addAll(checkUtil.registImportDetailUtilCheck(dto, "productContract"));
-			Assert.assertEquals(5, errorList.size());
+			Assert.assertEquals(6, errorList.size());
+			Assert.assertTrue(errorList.stream().anyMatch(e -> "商品コードが設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種コードが設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "品種名が設定されていません。".equals(e.getErrorMessage())));
 			Assert.assertTrue(errorList.stream().anyMatch(e -> "数量が設定されていません。".equals(e.getErrorMessage())));
@@ -181,6 +182,7 @@ public class TestRegistImportDetailUtilCheck {
 
 	private ProductStackingMiddleDto setTestDataProductStackingMiddleDto(ProductMaster pm,ItemMaster im) {
 		ProductStackingMiddleDto dto = new ProductStackingMiddleDto();
+		dto.setProductMasterId("1");
 		dto.setRicohItemCode("LiteCode100");
 		dto.setRicohItemName("ROCLite品種名1");
 		dto.setQuantity(2);
@@ -195,6 +197,7 @@ public class TestRegistImportDetailUtilCheck {
 
 	private ProductStackingMiddleDto setTestDataProductStackingMiddleDtoNodata(ProductMaster pm, ItemMaster im) {
 		ProductStackingMiddleDto dto = new ProductStackingMiddleDto();
+		dto.setProductMasterId(null);
 		dto.setRicohItemCode(null);
 		dto.setRicohItemName(null);
 		dto.setQuantity(null);

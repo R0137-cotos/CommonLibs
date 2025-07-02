@@ -13,6 +13,11 @@ import lombok.Data;
 public class ProductStackingMiddleDto {
 
 	/**
+	 * 商品コード
+	 */
+	private String productMasterId;
+
+	/**
 	 * 品種コード
 	 */
 	private String ricohItemCode;

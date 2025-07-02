@@ -8,8 +8,15 @@ import jp.co.ricoh.cotos.commonlib.logic.csv.EmptyToNullDeserializer;
 import lombok.Data;
 
 @Data
-@JsonPropertyOrder({ "品種コード", "品種名", "数量", "単価（E/U売価）", "システム用項目１", "システム用項目２", "ver" })
+@JsonPropertyOrder({ "商品コード", "品種コード", "品種名", "数量", "単価（E/U売価）", "システム用項目１", "システム用項目２", "ver" })
 public class ProductStackingFileDto {
+	/**
+	 * 商品コード
+	 */
+	@JsonDeserialize(using = EmptyToNullDeserializer.class)
+	@JsonProperty("商品コード")
+	private String productMasterId;
+
 	/**
 	 * 品種コード
 	 */
