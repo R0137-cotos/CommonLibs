@@ -38,7 +38,6 @@ import lombok.EqualsAndHashCode;
  * 手配業務情報を表すEntity
  */
 @Entity
-//@EqualsAndHashCode(callSuper = true)
 @EqualsAndHashCode(callSuper = true, exclude = {"arrangementWorkApprovalRoute", "arrangementPicWorkerEmp", "arrangementWorkOperationLogList", "workAttachedFileList", "arrangementWorkCheckResultList", "arrangementWorkErrorLogList"})
 @Data
 @Table(name = "arrangement_work")
