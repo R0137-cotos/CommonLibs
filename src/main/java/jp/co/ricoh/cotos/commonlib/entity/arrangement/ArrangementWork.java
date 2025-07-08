@@ -33,12 +33,14 @@ import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * 手配業務情報を表すEntity
  */
 @Entity
 @EqualsAndHashCode(callSuper = true, exclude = {"arrangementWorkApprovalRoute", "arrangementPicWorkerEmp", "arrangementWorkOperationLogList", "workAttachedFileList", "arrangementWorkCheckResultList", "arrangementWorkErrorLogList"})
+@ToString(callSuper = true, exclude = {"arrangementWorkApprovalRoute", "arrangementPicWorkerEmp", "arrangementWorkOperationLogList", "workAttachedFileList", "arrangementWorkCheckResultList", "arrangementWorkErrorLogList"})
 @Data
 @Table(name = "arrangement_work")
 public class ArrangementWork extends EntityBase {
