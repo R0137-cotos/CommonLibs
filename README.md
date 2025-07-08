@@ -620,4 +620,5 @@
 |663|EOSL対応 修正漏れ対応|
 |664|EOSL対応 Jenkinsfile追加|
 |665|EOSL対応 EqualsAndHashCodeアノテーションを修正|
-|666|EOSL対応 MoM権限サービスのバージョンアップ対応|
+|666|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
+|667|EOSL対応 MoM権限サービスのバージョンアップ対応|
