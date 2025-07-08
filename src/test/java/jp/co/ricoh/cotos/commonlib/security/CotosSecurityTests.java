@@ -782,7 +782,6 @@ public class CotosSecurityTests {
 	@Test
 	@WithMockCustomUser(actionDiv = ActionDiv.更新, authDiv = AuthDiv.見積_契約_手配)
 	@Transactional
-	@Ignore("TODO kengenService.jarをjava21に差し替えたら削除")
 	public void 正常_MoM権限を取得できること() throws Exception {
 
 		AuthLevel result = momAuthorityService.searchMomAuthority("u0200757", ActionDiv.更新, AuthDiv.見積_契約_手配);
@@ -799,7 +798,6 @@ public class CotosSecurityTests {
 
 	@Test
 	@Transactional
-	@Ignore("TODO kengenService.jarをjava21に差し替えたら削除")
 	public void 正常_MoM権限マップを取得できないこと() throws Exception {
 
 		Map<ActionDiv, Map<AuthDiv, AuthLevel>> result = momAuthorityService.searchAllMomAuthorities("test");

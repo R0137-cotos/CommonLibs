@@ -212,7 +212,6 @@ public class LMPIConnectionHelper {
 		INSTANCE.tmConverter = new TMConverter();
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setOutputStreaming(false);
 		requestFactory.setConnectTimeout(10000);
 		requestFactory.setReadTimeout(30000);
 		rest.setRequestFactory(requestFactory);
