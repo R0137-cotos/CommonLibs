@@ -34,12 +34,14 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * ライセンス情報を表すEntity
  */
 @Entity
 @EqualsAndHashCode(callSuper = true, exclude = {"licenseDetailList", "licenseProcessList", "licenseRemainingNumber", "licenseOperationLogList", "licenseAccount"})
+@ToString(callSuper = true, exclude = {"licenseDetailList", "licenseProcessList", "licenseRemainingNumber", "licenseOperationLogList", "licenseAccount"})
 @Data
 @Table(name = "license_info")
 public class LicenseInfo extends EntityBase {

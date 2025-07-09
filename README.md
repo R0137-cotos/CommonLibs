@@ -621,3 +621,4 @@
 |664|EOSL対応 Jenkinsfile追加|
 |665|EOSL対応 EqualsAndHashCodeアノテーションを修正|
 |666|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
+|667|EOSL対応 ToStringアノテーションを修正|
