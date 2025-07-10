@@ -373,6 +373,11 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
 
+		found = invoiceLinkageRepository.findByContractIdAndRicohItemCodeAndLineNumberAndCreateYm("contract_id_5", "ricoh_item_code_5", "line_number_5", "202507");
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
 	}
 
 	@Test
