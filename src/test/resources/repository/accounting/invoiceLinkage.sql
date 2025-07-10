@@ -303,3 +303,64 @@ insert into INVOICE_LINKAGE (
   , SYSDATE
   ,'ROC'
 );
+insert into INVOICE_LINKAGE (
+  id
+  , created_at
+  , created_user_id
+  , updated_at
+  , updated_user_id
+  , version
+  , contract_tran_id
+  , rj_manage_number
+  , contract_id
+  , ricoh_item_code
+  , item_contract_name
+  , line_number
+  , serial_number
+  , create_ym
+  , order_price
+  , billing_date
+  , sales_cnt
+  , sales_price
+  , sales_tax_type
+  , sales_tax_rate
+  , sales_tax_price
+  , remarks
+  , send_status
+  , send_date
+  , receive_status
+  , receive_date
+  , accounting_status
+  , accounting_date
+  , product_class_div
+) values (
+  11
+  , SYSTIMESTAMP
+  , 'created_user_id'
+  , SYSTIMESTAMP
+  , 'updated_user_id'
+  , 0
+  , 1
+  , 'rj_manage_number_5'
+  , 'contract_id_5'
+  , 'ricoh_item_code_5'
+  , 'item_contract_name_5'
+  , 'line_number_5'
+  , 'serial_number_5'
+  , '202507'
+  , 1
+  , 'billing_date_5'
+  , 1
+  , 1
+  , '3'
+  , 1
+  , 1
+  , 1
+  , '0'
+  , SYSDATE
+  , '0'
+  , SYSDATE
+  , '0'
+  , SYSDATE
+  ,'DSIM'
+);

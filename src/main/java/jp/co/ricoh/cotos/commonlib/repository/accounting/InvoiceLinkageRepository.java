@@ -74,4 +74,15 @@ public interface InvoiceLinkageRepository extends CrudRepository<InvoiceLinkage,
 	 */
 	public InvoiceLinkage findByContractIdAndRicohItemCodeAndSerialNumberAndCreateYm(String contractId, String ricohItemCode, String serialNumber, String createYm);
 
+	/**
+	 * 契約No.、商品コード、回線番号、連携月から取得
+	 * インボイス請求データ取込バッチの一部更新で対象データを取得するために使用する。
+	 * @param contractId 契約No.、
+	 * @param ricohItemCode 商品コード
+	 * @param lineNumber 回線番号
+	 * @param createYm 連携月
+	 * @return
+	 */
+	public InvoiceLinkage findByContractIdAndRicohItemCodeAndLineNumberAndCreateYm(String contractId, String ricohItemCode, String lineNumber, String createYm);
+
 }
