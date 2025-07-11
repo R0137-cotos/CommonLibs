@@ -19,6 +19,7 @@ import jp.co.ricoh.cotos.commonlib.TestTools;
 import jp.co.ricoh.cotos.commonlib.TestTools.ParameterErrorIds;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.ElectronicContractInfo;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalResult;
@@ -34,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.ElectronicContractInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalRouteNodeRepository;
@@ -122,6 +124,9 @@ public class TestEstimation {
 
 	@Autowired
 	PenaltyDetailEstimationRepository penaltyDetailEstimationRepository;
+
+	@Autowired
+	ElectronicContractInfoRepository electronicContractInfoRepository;
 
 	@Autowired
 	TestTools testTool;
@@ -265,6 +270,7 @@ public class TestEstimation {
 		testTarget.setEstimationAddedEditorEmpList(null);
 		testTarget.setDealerEstimationList(null);
 		testTarget.setEstimationDetailList(null);
+		testTarget.setElectronicContractInfo(null);
 		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		testTool.assertValidationOk(result);
 
@@ -379,7 +385,6 @@ public class TestEstimation {
 		entity = estimationRepository.findOne(4L);
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getDealerEstimationList().get(0).setPicMailAddress(STR_256);
-		;
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
@@ -393,6 +398,15 @@ public class TestEstimation {
 		Assert.assertTrue(result.getErrorInfoList().size() == 1);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00013));
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
+
+		// 異常系（@Valid ：電子契約情報）
+		entity = estimationRepository.findOne(4L);
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.getElectronicContractInfo().setImfrSdInsertId(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 1);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "イントラマート電子契約事前確認申請管理番号は最大文字数（255）を超えています。"));
 
 	}
 
@@ -903,4 +917,39 @@ public class TestEstimation {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "違約金単価は最大値（9999999999999999999.99）を超えています。"));
 	}
 
+	@Test
+	public void ElectronicContractInfoのテスト() throws Exception {
+		ElectronicContractInfo entity = electronicContractInfoRepository.findOne(401L);
+		ElectronicContractInfo testTarget = new ElectronicContractInfo();
+		BeanUtils.copyProperties(testTarget, entity);
+
+		// 正常系
+		ParamterCheckResult result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		testTool.assertValidationOk(result);
+
+		// 異常系（@Size(max) ：）
+		BeanUtils.copyProperties(testTarget, entity);
+		testTarget.setImfrSdInsertId(STR_256);
+		testTarget.setImfrSdRowNo(STR_256);
+		testTarget.setCompanyId(STR_256);
+		testTarget.setCompanyName(STR_256);
+		testTarget.setOfficeId(STR_256);
+		testTarget.setOfficeName(STR_256);
+		testTarget.setPrimaryApprover(STR_256);
+		testTarget.setPrimaryDep(STR_256);
+		testTarget.setPrimaryPostname(STR_256);
+		testTarget.setPrimaryEmail(STR_256);
+		testTarget.setFinalApprover(STR_256);
+		testTarget.setFinalDep(STR_256);
+		testTarget.setFinalPostname(STR_256);
+		testTarget.setFinalEmail(STR_256);
+		testTarget.setPaymentTerms(STR_256);
+		testTarget.setSpecialNotes(STR_256);
+		testTarget.setElectronicContractDocumentKey(STR_256);
+		testTarget.setElectronicContractDocumentId(STR_256);
+		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
+		Assert.assertTrue(result.getErrorInfoList().size() == 18);
+		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));
+		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "イントラマート電子契約事前確認申請管理番号は最大文字数（255）を超えています。"));
+	}
 }
