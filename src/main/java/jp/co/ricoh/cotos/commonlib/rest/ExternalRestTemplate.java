@@ -82,7 +82,6 @@ public class ExternalRestTemplate {
 		rest.getMessageConverters().add(mappingJackson2HttpMessageConverter);
 
 		SimpleClientHttpRequestFactory requestFactory = createRequestFactory();
-		requestFactory.setOutputStreaming(false);
 		rest.setRequestFactory(requestFactory);
 
 		return rest;

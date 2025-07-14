@@ -622,3 +622,4 @@
 |665|EOSL対応 EqualsAndHashCodeアノテーションを修正|
 |666|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
 |667|EOSL対応 ToStringアノテーションを修正|
+|668|EOSL対応 MoM権限サービスのバージョンアップ対応|

@@ -85,6 +85,8 @@ dependencies {
     implementation ('org.springframework.boot:spring-boot-starter-actuator:3.5.0')
     implementation ('org.springframework.boot:spring-boot-starter-validation:3.5.0')
     implementation ('jakarta.xml.bind:jakarta.xml.bind-api:4.0.0')
+    
+    implementation("javax.xml.soap:javax.xml.soap-api:1.4.0")
 }
 
 sonarqube {
@@ -99,7 +101,7 @@ def repo = new File(rootDir, "repository")
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            version = '0.0.667'
+            version = '0.0.668'
             groupId = 'jp.co.ricoh.cotos'
             artifactId = 'common-libraries'
             from components.java

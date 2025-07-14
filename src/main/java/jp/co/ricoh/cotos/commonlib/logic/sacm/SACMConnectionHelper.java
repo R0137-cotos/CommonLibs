@@ -78,7 +78,6 @@ public class SACMConnectionHelper {
 		INSTANCE.mapper.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setOutputStreaming(false);
 		requestFactory.setConnectTimeout(10000);
 		requestFactory.setReadTimeout(10000);
 		rest.setRequestFactory(requestFactory);

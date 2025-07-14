@@ -92,7 +92,6 @@ public class SMPIConnectionHelper {
 		INSTANCE.mapper.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setOutputStreaming(false);
 		requestFactory.setConnectTimeout(10000);
 		requestFactory.setReadTimeout(30000);
 		rest.setRequestFactory(requestFactory);

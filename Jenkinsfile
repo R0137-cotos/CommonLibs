@@ -28,11 +28,12 @@ pipeline {
               }
               def gradleTestOption = "${env.GRADLE_TEST_OPTION}"
               sh "gradle ${gradleTestOption} test"
-              junit "build/test-results/test/*.xml"
-              archiveArtifacts "build/test-results/test/*.xml"
               notifyStatus('success', 'All tests passed.', "${GITHUB_TOKEN}")
             } catch (e) {
               notifyStatus('failure', 'Some tests failed.', "${GITHUB_TOKEN}")
+            } finally {
+              junit "build/test-results/test/*.xml"
+              archiveArtifacts "build/test-results/test/*.xml"
             }
           }
         }
