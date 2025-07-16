@@ -1,5 +1,15 @@
 # Changelog
 
+## v9.3.0 (04/07/2025)
+- [**closed**] #30540_電子契約EIM文書登録IF連携項目追加 メッセージプロパティREX00013の修正 [#2844](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2844)
+- [**closed**] #30080_EIMセッション取得API追加、電子契約EIMのファイルアップロード準備API [#2833](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2833)
+- [**closed**] #28911 EIM書誌情報連携バッチ システム認証APIを通さないよう修正 [#2797](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2797)
+- [**closed**] #28436 電子契約EIM文書登録（COTOS申込書）IFIM行番号の型変更 [#2785](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2785)
+- [**closed**] #28106 EIM文書登録用エンティティの契約金額の型変更 [#2781](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2781)
+- [**closed**] #28106 EimDocumentInfoRepositoryに契約IDを条件にデータを取得するメソッド追加 [#2780](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2780)
+
+---
+
 ## v9.1.0 (05/06/2025)
 - [**closed**] #29543 ファイル取込管理DTOを追加 [#2854](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2854)
 - [**closed**] #29543 ファイル取込エラー詳細リポジトリメソッド修正(topic/backlog125 2025/5/9臨時リリース) [#2831](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2831)
@@ -213,8 +223,3 @@
 - [**closed**] #20846 外部API連携ログサイズメッセージ修正 [#2512](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2512)
 - [**closed**] #20846　レスポンスサイズ判定タイミング変更 [#2508](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2508)
 - [**closed**] 19853 品種(契約用)エンティティに年額明細計上フラグ追加 [#2500](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2500)
-
----
-
-## v7.4.2 (18/10/2023)
-- [**closed**] #20780 Intra-martAPIコール時のタイムアウト時間を10秒に設定 [#2510](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2510)
