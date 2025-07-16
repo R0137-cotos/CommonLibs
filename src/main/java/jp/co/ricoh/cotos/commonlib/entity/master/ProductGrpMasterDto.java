@@ -9,9 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
+import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.ElectronicContractDesiredStartDateDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.EquipmentItemLinkProcDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.PriceRevisionProcDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ProductGrpMaster.SsWorkRequestRootDiv;
@@ -201,4 +204,18 @@ public class ProductGrpMasterDto extends EntityBaseMaster {
 	 */
 	@ApiModelProperty(value = "契約機種品種紐づけ処理区分", required = false, position = 27, allowableValues = "品種グループマスタで紐づける(\"1\")")
 	private EquipmentItemLinkProcDiv equipmentItemLinkProcDiv;
+
+	/**
+	 * 電子契約対応フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "電子契約対応フラグ", required = false, position = 22, allowableValues = "range[0,9]")
+	private Integer electronicContractFlg;
+
+	/**
+	 * 電子契約利用開始希望日制御区分
+	 */
+	@ApiModelProperty(value = "電子契約利用開始希望日制御区分", required = false, position = 23, allowableValues = "新規のみ入力可能_契約変更入力不可(\"1\"), 新規_契約変更ともに入力可能(\"2\"), 契約変更のみ入力可能_新規入力不可(\"3\"), 新規_契約変更いずれも入力不可(\"4\")")
+	private ElectronicContractDesiredStartDateDiv electronicContractDesiredStartDateDiv;
 }

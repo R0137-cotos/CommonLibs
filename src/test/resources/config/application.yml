@@ -64,6 +64,26 @@ cotos:
     fileDownloadPath: services/v1/files/download
     modelId: DetailForm^CotosContractModel
     systemName: CTSCont02
+    xSiteId: 412e9d2e34884529bf1d0b53ef7f11e4
+    xApplicationId: App-Deploy-Reg-dev28-01
+    xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
+    getSessionPath: services/v1/users/session
+  elconEim:
+    hostName: app-dev28
+    domainName: ope.azure.ricoh-eim.com
+    apiAuthPath: api/v1/auth
+    loginUserName: test02
+    loginPassword: P@ssw0rd
+    fileUploadPath: services/v1/files/upload
+    appId: RFG_RJ_AGREE_CTS
+    resourcesPath: resources/v3/apps/
+    documentsPath: documents
+    modelId: DM_FmCloudsignLink
+    modelIdCotos: DM_FmCloudsignLink_COTOS
+    xSiteId: 412e9d2e34884529bf1d0b53ef7f11e4
+    xApplicationId: App-Deploy-Reg-dev28-01
+    xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
+    getSessionPath: services/v1/users/session
   rsi:
     contractUrl: dummy_rsi_contract_url
     authUrl: dummy_rsi_auth_url
@@ -111,8 +131,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_backlog127_130
-    password: cotos_ci_common_backlog127_130
+    username: cotos_ci_common_release_0724
+    password: cotos_ci_common_release_0724
     driverClassName: oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
@@ -123,7 +143,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_common_backlog127_130
+        default_schema: cotos_ci_common_release_0724
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
