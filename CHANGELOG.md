@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.5.0 (24/07/2025)
+- [**closed**] #29869_注文商品情報にカラム追加、Bplatsリコー品種コード変換情報エンティティ新規追加、契約一覧詳細情報取得APIパラメータ.シ… [#2857](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2857)
+
+---
+
 ## v9.3.0 (04/07/2025)
 - [**closed**] #30540_電子契約EIM文書登録IF連携項目追加 メッセージプロパティREX00013の修正 [#2844](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2844)
 - [**closed**] #30080_EIMセッション取得API追加、電子契約EIMのファイルアップロード準備API [#2833](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2833)
@@ -216,10 +221,3 @@
 - [**closed**] #20482 TrendMicroLMPI連携ヘルパークラスにTM連携WORK作成を行わないAPI呼び出し機能を追加 [#2490](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2490)
 - [**closed**] #20341_品種ライセンス用設定の拡張項目DTO作成 [#2483](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2483)
 - [**closed**] #20288_商品（契約用）拡張項目DTO（CLE）作成 [#2475](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2475)
-
----
-
-## v7.5.0 (19/10/2023)
-- [**closed**] #20846 外部API連携ログサイズメッセージ修正 [#2512](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2512)
-- [**closed**] #20846　レスポンスサイズ判定タイミング変更 [#2508](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2508)
-- [**closed**] 19853 品種(契約用)エンティティに年額明細計上フラグ追加 [#2500](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2500)
