@@ -624,3 +624,4 @@
 |667|EOSL対応 ToStringアノテーションを修正|
 |668|EOSL対応 MoM権限サービスのバージョンアップ対応|
 |669|EOSL対応 ItemMasterにJsonIgnorePropertiesアノテーションを付与|
+|670|EOSL対応 AWSサーバ構成変更|
