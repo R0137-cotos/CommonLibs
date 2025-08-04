@@ -110,7 +110,7 @@ cotos:
     secretKey: zGPxd/SVAeevhxleN3SBPnvqM2SddrVBMNDW2JaTQs4=
 spring:
   datasource:
-    url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
+    url: jdbc:oracle:thin:@dev-db-aws.cotos.ricoh.co.jp:1521/pdb1
     username: cotos_ci_common_aws_eosl
     password: cotos_ci_common_aws_eosl
     driverClassName: oracle.jdbc.OracleDriver
