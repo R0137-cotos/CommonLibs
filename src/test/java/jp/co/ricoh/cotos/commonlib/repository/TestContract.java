@@ -74,6 +74,8 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedContractEquipmentS
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PriceRewriteExclusionContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PriceRewriteItemInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ProductContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressSsOrgRepository;
@@ -218,6 +220,12 @@ public class TestContract {
 
 	@Autowired
 	ContractEquipmentAdditionInfoRefreshHisRepository contractEquipmentAdditionInfoRefreshHisRepository;
+
+	@Autowired
+	PriceRewriteItemInfoRepository priceRewriteItemInfoRepository;
+
+	@Autowired
+	PriceRewriteExclusionContractRepository priceRewriteExclusionContractRepository;
 
 	static ConfigurableApplicationContext context;
 
@@ -448,6 +456,16 @@ public class TestContract {
 	@Test
 	public void 全てのカラムがNullではないことを確認_契約機種付加情報洗い替え履歴() {
 		全てのカラムがNullではないことを確認_共通(contractEquipmentAdditionInfoRefreshHisRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_価格書換品種情報() {
+		全てのカラムがNullではないことを確認_共通(priceRewriteItemInfoRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_価格書換除外契約() {
+		全てのカラムがNullではないことを確認_共通(priceRewriteExclusionContractRepository, 401L, 501L);
 	}
 
 	@Test
