@@ -465,7 +465,7 @@ public class TestContract {
 
 	@Test
 	public void 全てのカラムがNullではないことを確認_価格書換品種情報() {
-		全てのカラムがNullではないことを確認_共通(contractEquipmentAdditionInfoRefreshHisRepository, 401L, 501L);
+		全てのカラムがNullではないことを確認_共通(priceRewriteItemInfoRepository, 401L, 501L);
 	}
 
 	@Test
