@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -24,10 +25,14 @@ import javax.validation.constraints.Size;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteExclusionContract;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PriceRewriteEstimationDestructionItem;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -144,4 +149,35 @@ public class FileImportManagement extends EntityBase {
 	@OrderBy("lineNumber ASC")
 	@ApiModelProperty(value = "ファイル取込エラー詳細", required = false, position = 11)
 	private List<FileImportErrorDetails> fileImportErrorDetailsList;
+
+	/**
+	 * 価格書換見積破棄対象品種
+	 */
+	@OneToOne(mappedBy = "fileImportManagement")
+	@ApiModelProperty(value = "価格書換見積破棄対象品種", required = false, position = 12)
+	private PriceRewriteEstimationDestructionItem priceRewriteEstimationDestructionItem;
+
+	/**
+	 * 価格書換除外契約
+	 */
+	@OneToOne(mappedBy = "fileImportManagement")
+	@ApiModelProperty(value = "価格書換除外契約", required = false, position = 13)
+	private PriceRewriteExclusionContract priceRewriteExclusionContract;
+
+	/**
+	 * 価格書換品種情報
+	 */
+	@OneToOne(mappedBy = "fileImportManagement")
+	@ApiModelProperty(value = "価格書換品種情報", required = false, position = 14)
+	private PriceRewriteItemInfo priceRewriteItemInfo;
+
+	/**
+	 * 関連ファイル取込管理ID
+	 */
+	@ManyToOne
+	@JoinColumn(name = "related_file_import_management_id", referencedColumnName = "id")
+	@JsonIgnore
+	@ApiModelProperty(value = "関連ファイル取込管理ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
+	private FileImportManagement relatedFileImportManagementId;
+
 }
