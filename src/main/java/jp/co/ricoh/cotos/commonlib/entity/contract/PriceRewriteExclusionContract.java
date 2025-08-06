@@ -43,7 +43,7 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ファイル取込管理", required = true, position = 2)
+	@ApiModelProperty(value = "ファイル取込管理", required = false, position = 2)
 	private FileImportManagement fileImportManagement;
 
 	/**
