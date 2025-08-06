@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,6 +49,7 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	/**
 	 * RJ管理番号
 	 */
+	@Column
 	@Size(max = 255)
 	@ApiModelProperty(value = "RJ管理番号", required = false, position = 3, allowableValues = "range[0,255]")
 	private String rjManageNumber;
@@ -58,7 +58,6 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	 * リコー品種コード
 	 */
 	@Column
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = false, position = 4, allowableValues = "range[0,255]")
 	private String ricohItemCode;

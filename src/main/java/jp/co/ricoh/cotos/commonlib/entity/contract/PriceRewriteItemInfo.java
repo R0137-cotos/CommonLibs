@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -81,7 +80,6 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * リコー品種コード
 	 */
 	@Column
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = false, position = 3, allowableValues = "range[0,255]")
 	private String ricohItemCode;
@@ -130,7 +128,6 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 変更後品種コード
 	 */
 	@Column
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "変更後品種コード", required = false, position = 9, allowableValues = "range[0,255]")
 	private String afterChangeRicohItemCode;
@@ -139,7 +136,6 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 変更後メーカー商品コード
 	 */
 	@Column
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "変更後メーカー商品コード", required = false, position = 10, allowableValues = "range[0,255]")
 	private String afterChangeMakerItemCode;
@@ -147,6 +143,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	/**
 	 * 対象外契約日
 	 */
+	@Column
 	@ApiModelProperty(value = "対象外契約日", required = false, position = 11)
 	@Temporal(TemporalType.DATE)
 	private Date noTargetContractDate;
@@ -155,13 +152,13 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 状態
 	 */
 	@Column
-	@NotNull
 	@ApiModelProperty(value = "状態", required = false, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1", position = 12)
 	private Status status;
 
 	/**
 	 * 反映日時
 	 */
+	@Column
 	@ApiModelProperty(value = "反映日時", required = false, position = 13)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reflectionAt;
