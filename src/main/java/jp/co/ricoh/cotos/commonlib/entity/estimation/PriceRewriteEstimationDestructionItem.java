@@ -15,7 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -81,7 +80,6 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	 * リコー品種コード
 	 */
 	@Column
-	@NotNull
 	@Size(max = 255)
 	@ApiModelProperty(value = "リコー品種コード", required = false, position = 3, allowableValues = "range[0,255]")
 	private String ricohItemCode;
@@ -89,6 +87,7 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	/**
 	 * 削除対象日
 	 */
+	@Column
 	@ApiModelProperty(value = "削除対象日", required = false, position = 4)
 	@Temporal(TemporalType.DATE)
 	private Date deleteTargetDate;
@@ -97,13 +96,13 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	 * ステータス
 	 */
 	@Column
-	@NotNull
 	@ApiModelProperty(value = "ステータス", required = false, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1", position = 5)
 	private Status status;
 
 	/**
 	 * 反映日時
 	 */
+	@Column
 	@ApiModelProperty(value = "反映日時", required = false, position = 6)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reflectionAt;
