@@ -177,7 +177,7 @@ public class FileImportManagement extends EntityBase {
 	@ManyToOne
 	@JoinColumn(name = "related_file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "関連ファイル取込管理ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
-	private FileImportManagement relatedFileImportManagementId;
+	@ApiModelProperty(value = "関連ファイル取込管理", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
+	private FileImportManagement relatedFileImportManagement;
 
 }
