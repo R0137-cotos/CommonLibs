@@ -11,13 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,6 +41,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "price_rewrite_item_info")
 public class PriceRewriteItemInfo extends EntityBase {
 
+	@Description(value = "ステータス")
 	public enum Status {
 		未反映("0"), 反映済み("1"), 反映エラー("2"), 反映不要("3");
 
@@ -70,7 +73,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	/**
 	 * ファイル取込管理ID
 	 */
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
 	@ApiModelProperty(value = "ファイル取込管理", required = false, position = 2)

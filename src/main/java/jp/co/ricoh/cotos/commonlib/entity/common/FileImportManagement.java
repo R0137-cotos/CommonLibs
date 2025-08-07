@@ -153,23 +153,23 @@ public class FileImportManagement extends EntityBase {
 	/**
 	 * 価格書換見積破棄対象品種
 	 */
-	@OneToOne(mappedBy = "fileImportManagement")
+	@OneToMany(mappedBy = "fileImportManagement")
 	@ApiModelProperty(value = "価格書換見積破棄対象品種", required = false, position = 12)
-	private PriceRewriteEstimationDestructionItem priceRewriteEstimationDestructionItem;
+	private List<PriceRewriteEstimationDestructionItem> priceRewriteEstimationDestructionItemList;
 
 	/**
 	 * 価格書換除外契約
 	 */
-	@OneToOne(mappedBy = "fileImportManagement")
+	@OneToMany(mappedBy = "fileImportManagement")
 	@ApiModelProperty(value = "価格書換除外契約", required = false, position = 13)
-	private PriceRewriteExclusionContract priceRewriteExclusionContract;
+	private List<PriceRewriteExclusionContract> priceRewriteExclusionContractList;
 
 	/**
 	 * 価格書換品種情報
 	 */
-	@OneToOne(mappedBy = "fileImportManagement")
+	@OneToMany(mappedBy = "fileImportManagement")
 	@ApiModelProperty(value = "価格書換品種情報", required = false, position = 14)
-	private PriceRewriteItemInfo priceRewriteItemInfo;
+	private List<PriceRewriteItemInfo> priceRewriteItemInfoList;
 
 	/**
 	 * 関連ファイル取込管理ID
