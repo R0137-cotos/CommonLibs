@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Description;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -39,6 +41,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "price_rewrite_item_info")
 public class PriceRewriteItemInfo extends EntityBase {
 
+	@Description(value = "ステータス")
 	public enum Status {
 		未反映("0"), 反映済み("1"), 反映エラー("2"), 反映不要("3");
 
