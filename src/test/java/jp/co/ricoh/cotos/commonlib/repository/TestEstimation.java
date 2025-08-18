@@ -35,6 +35,7 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PriceRewriteEstimationDestructionItem;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PriceRewriteEstimationDestructionItem.Status;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
@@ -406,6 +407,19 @@ public class TestEstimation {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+
+	}
+
+	@Test
+	public void PriceRewriteEstimationDestructionItemRepositoryの条件テスト() throws Exception {
+
+		List<PriceRewriteEstimationDestructionItem> foundList = priceRewriteEstimationDestructionItemRepository.findByStatus(Status.未反映);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		/// Entity 2件取得できていることを確認
+		Assert.assertNotEquals(foundList.size(), 0);
 
 	}
 
