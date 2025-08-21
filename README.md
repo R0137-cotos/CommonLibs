@@ -624,3 +624,4 @@
 |667|ROC-Lite対応マージ|
 |668|ROC-Lite対応マージ 連携ステータス追加|
 |669|2025/07/24リリース分マージ|
+|670|MicrosoftPropertiesにrefreshToken追加|
