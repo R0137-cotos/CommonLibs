@@ -74,7 +74,7 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 		/**
 		 * ドメイン
 		 */
-		@Column(nullable = false)
+		@Column(name = "domain", nullable = false)
 		@ApiModelProperty(value = "システムドメイン", required = true, position = 2)
 		private Domain domain;
 	}
