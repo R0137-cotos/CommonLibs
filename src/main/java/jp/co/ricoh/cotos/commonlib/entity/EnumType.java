@@ -342,7 +342,7 @@ public class EnumType {
 	@Description(value = "連携ステータス")
 	public enum FileLinkageStatus {
 
-		連携対象外("0"), 未連携("1"), 連携済("2");
+		連携対象外("0"), 未連携("1"), 連携済("2"), 送付済("3");
 
 		private final String text;
 
