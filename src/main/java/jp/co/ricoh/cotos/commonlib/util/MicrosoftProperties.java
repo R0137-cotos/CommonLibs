@@ -50,4 +50,10 @@ public class MicrosoftProperties {
 	 * Microsoft キーID
 	 */
 	String keyId;
+
+	/**
+	 * Microsoft リフレッシュトークン
+	 * 暫定対応として認証情報取得APIで利用する
+	 */
+	String refreshToken;
 }
