@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.7.1 (27/08/2025)
+- [**closed**] #27978 MS認証修正 MicrosoftPropertiesにrefreshToken追加 [#2900](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2900)
+
+---
+
 ## v9.7.0 (26/08/2025)
 - [**closed**] #31612_ファイル連携ステータスに送付済を追加 [#2888](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2888)
 - [**closed**] #31368_明細情報インポートAPI_商品コード追加 [#2878](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2878)
@@ -221,10 +226,3 @@
 - [**closed**] #21490_Messages.properties修正 [#2547](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2547)
 - [**closed**] #21323_工事調整EIM申込情報を取得するメソッド追加_version及びREADME修正 [#2539](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2539)
 - [**closed**] #21323_工事調整EIM申込情報を取得するメソッド追加 [#2537](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2537)
-
----
-
-## v7.7.0 (21/11/2023)
-- [**closed**] #21035 外部APIコール時のタイムアウト設定 [#2531](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2531)
-- [**closed**] #21183 売上計算結果作業用DTO修正 [#2530](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2530)
-- [**closed**] #21183 計上エンティティ数量項目桁数変更 [#2527](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2527)
