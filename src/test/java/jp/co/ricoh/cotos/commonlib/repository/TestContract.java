@@ -35,6 +35,8 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.NextUpdateDetailInfo;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo.Status;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CollectLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
@@ -521,7 +523,7 @@ public class TestContract {
 		Assert.assertTrue(cancelDecisionDate.size() > 0);
 
 		// 契約IDリスト指定
-		List<Long> contractIdList = Arrays.asList(8L, 10L,12L);
+		List<Long> contractIdList = Arrays.asList(8L, 10L, 12L);
 		List<Contract> contractList = contractRepository.findByIdIn(contractIdList);
 		Assert.assertTrue(contractList.size() == 3);
 	}
@@ -740,6 +742,20 @@ public class TestContract {
 		Assert.assertNotNull(found);
 		// Entity の各項目の値が null ではないことを確認
 		testTools.assertColumnsNotNull(found);
+	}
 
+	@Test
+	public void PriceRewriteItemInfoRepositoryの条件テスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		List<PriceRewriteItemInfo> foundList = priceRewriteItemInfoRepository.findByStatus(Status.反映済み);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		/// Entity 2件取得できていることを確認
+		Assert.assertNotEquals(foundList.size(), 2);
 	}
 }
