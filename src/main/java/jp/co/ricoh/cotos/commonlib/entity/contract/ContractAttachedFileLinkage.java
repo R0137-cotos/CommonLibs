@@ -66,7 +66,7 @@ public class ContractAttachedFileLinkage extends EntityBase {
 	 * 連携ステータス
 	 */
 	@NotNull
-	@ApiModelProperty(value = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\")", example = "0", position = 5)
+	@ApiModelProperty(value = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0", position = 5)
 	private FileLinkageStatus linkageStatus;
 	
 	/**

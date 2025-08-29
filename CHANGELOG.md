@@ -1,5 +1,29 @@
 # Changelog
 
+## v9.7.1 (27/08/2025)
+- [**closed**] #27978 MS認証修正 MicrosoftPropertiesにrefreshToken追加 [#2900](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2900)
+
+---
+
+## v9.7.0 (26/08/2025)
+- [**closed**] #31612_ファイル連携ステータスに送付済を追加 [#2888](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2888)
+- [**closed**] #31368_明細情報インポートAPI_商品コード追加 [#2878](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2878)
+- [**closed**] #31096_共通チェックロジック修正 [#2871](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2871)
+- [**closed**] #31066_VMailAddressList、VMailAddressListAbstractEntityのテーブル区分に区分を追加 [#2870](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2870)
+- [**closed**] #29912  ファイル操作関連商品マスタ カテゴリenum値修正 [#2862](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2862)
+- [**closed**] 30725_次回更新明細情報作成用Dto追加 [#2861](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2861)
+- [**closed**] #30631_見積明細情報インポート登録　共通チェック処理修正 [#2856](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2856)
+- [**closed**] #30631 見積明細情報インポート登録API 原価チェック処理削除 [#2855](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2855)
+- [**closed**] #30705 ファイル操作関連商品マスタ カテゴリenum値修正 [#2851](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2851)
+- [**closed**] #30631_ItemMasterRepositoryにメソッド追加 [#2850](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2850)
+- [**closed**] #30631_明細情報インポートAPIのための共通チェックロジックの追加 [#2848](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2848)
+- [**closed**] #30410 ROC-Lite対応 ContractDateSettingMasterRepository、vendorLinkageAtフィールド名修正 [#2847](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2847)
+- [**closed**] #30410 ROC-Lite対応_次回更新明細情報テーブル・契約日付設定テーブル追加 [#2839](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2839)
+- [**closed**] #30144 見積画面ボタン追加対応＿商品マスタDTO修正 [#2835](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2835)
+- [**closed**] #29965 ROC_Lite商品区分追加対応 カラム追加 [#2829](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2829)
+
+---
+
 ## v9.5.0 (24/07/2025)
 - [**closed**] #29869_注文商品情報にカラム追加、Bplatsリコー品種コード変換情報エンティティ新規追加、契約一覧詳細情報取得APIパラメータ.シ… [#2857](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2857)
 
@@ -202,22 +226,3 @@
 - [**closed**] #21490_Messages.properties修正 [#2547](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2547)
 - [**closed**] #21323_工事調整EIM申込情報を取得するメソッド追加_version及びREADME修正 [#2539](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2539)
 - [**closed**] #21323_工事調整EIM申込情報を取得するメソッド追加 [#2537](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2537)
-
----
-
-## v7.7.0 (21/11/2023)
-- [**closed**] #21035 外部APIコール時のタイムアウト設定 [#2531](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2531)
-- [**closed**] #21183 売上計算結果作業用DTO修正 [#2530](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2530)
-- [**closed**] #21183 計上エンティティ数量項目桁数変更 [#2527](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2527)
-
----
-
-## v7.6.0 (07/11/2023)
-- [**closed**] #21182_LogUtilにアノテーション追加 [#2523](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2523)
-- [**closed**] #20593 帳票ページマスタリポジトリメソッド追加 [#2519](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2519)
-- [**closed**] #20904 Message.propertiesにデータ復旧支援(CSP)のサービス利用希望日エラーメッセージ追加 [#2509](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2509)
-- [**closed**] #20816_LMPIヘルパークラス_商品によって分けられるようサブクラスを作成 [#2506](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2506)
-- [**closed**] #20750 MVBアカウント用DTOに有償サンドボックスサブスクリプションIDを追加 [#2503](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2503)
-- [**closed**] #20482 TrendMicroLMPI連携ヘルパークラスにTM連携WORK作成を行わないAPI呼び出し機能を追加 [#2490](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2490)
-- [**closed**] #20341_品種ライセンス用設定の拡張項目DTO作成 [#2483](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2483)
-- [**closed**] #20288_商品（契約用）拡張項目DTO（CLE）作成 [#2475](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2475)
