@@ -34,6 +34,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractCheckResult;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
+import jp.co.ricoh.cotos.commonlib.entity.contract.NextUpdateDetailInfo;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo.Status;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
@@ -74,6 +75,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ItemContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ItemDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedContractEquipmentStatusRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.NextUpdateDetailInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PriceRewriteExclusionContractRepository;
@@ -228,6 +230,9 @@ public class TestContract {
 
 	@Autowired
 	PriceRewriteExclusionContractRepository priceRewriteExclusionContractRepository;
+	
+	@Autowired
+	private NextUpdateDetailInfoRepository nextUpdateDetailInfoRepository;
 
 	static ConfigurableApplicationContext context;
 
@@ -738,5 +743,21 @@ public class TestContract {
 
 		/// Entity 2件取得できていることを確認
 		Assert.assertNotEquals(foundList.size(), 2);
+	}
+
+	@Test
+	public void NextUpdateDetailInfoのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/nextUpdateDetailInfo.sql");
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+		// エンティティの取得
+		NextUpdateDetailInfo found = nextUpdateDetailInfoRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+		// Entity の各項目の値が null ではないことを確認
+		testTools.assertColumnsNotNull(found);
+
+
 	}
 }
