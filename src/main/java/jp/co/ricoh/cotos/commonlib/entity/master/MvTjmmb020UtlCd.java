@@ -33,7 +33,7 @@ public class MvTjmmb020UtlCd {
 		/**
 		 * マスタID
 		 */
-		@Column(name = "itemId", length = 40, nullable = false)
+		@Column(name = "item_id", length = 40, nullable = false)
 		@ApiModelProperty(value = "マスタID", required = true, position = 1, allowableValues = "range[0,40]")
 		private String itemId;
 
