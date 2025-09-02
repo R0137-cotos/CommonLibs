@@ -95,7 +95,7 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	/**
 	 * ライセンス取得日
 	 */
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ライセンス取得日", required = false, position = 10)
 	private Date licenseAcquisitionDate;
 
