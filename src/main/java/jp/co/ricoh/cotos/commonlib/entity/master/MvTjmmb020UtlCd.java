@@ -40,7 +40,7 @@ public class MvTjmmb020UtlCd {
 		/**
 		 * コード値
 		 */
-		@Column(length = 100, nullable = false)
+		@Column(name = "cd_val", length = 100, nullable = false)
 		@ApiModelProperty(value = "コード値", required = true, position = 2, allowableValues = "range[0,100]")
 		private String cdVal;
 
