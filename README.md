@@ -626,3 +626,4 @@
 |669|EOSL対応 ItemMasterにJsonIgnorePropertiesアノテーションを付与|
 |670|EOSL対応 AWSサーバ構成変更|
 |671|ExtendsParameterCorrelationCheckMaster.domainの名称を明示|
+|672|MvTjmmb020UtlCd.itemIdの名称を明示|
