@@ -71,4 +71,9 @@ public class FileImportManagementDto {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date importEndDate;
 
+	/**
+	 * 関連ファイル取込管理ID
+	 */
+	@Column(name = "related_file_import_management_id")
+	private Long relatedFileImportManagementId;
 }
