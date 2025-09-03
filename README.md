@@ -628,3 +628,4 @@
 |671|ExtendsParameterCorrelationCheckMaster.domainの名称を明示|
 |672|MvTjmmb020UtlCd.itemIdの名称を明示|
 |673|ファイルアップロードの検証|
+|674|MultipleReadEnableFilterのラップ処理を修正|
