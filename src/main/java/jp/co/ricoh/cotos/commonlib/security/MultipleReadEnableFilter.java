@@ -16,8 +16,14 @@ public class MultipleReadEnableFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-		// リクエストのInputStreamを何度も使用できるようにラップする
-		HttpServletRequest wrappedRequest = new BufferedServletRequestWrapper((HttpServletRequest) request);
-		filterChain.doFilter(wrappedRequest, response);
+		String contentType = request.getContentType();
+		if (contentType != null && contentType.contains("multipart/form-data")) {
+			// multipartの場合はラップしない
+			filterChain.doFilter(request, response);
+		} else {
+			// 通常のリクエストはラップする
+			HttpServletRequest wrappedRequest = new BufferedServletRequestWrapper((HttpServletRequest) request);
+			filterChain.doFilter(wrappedRequest, response);
+		}
 	}
 }
