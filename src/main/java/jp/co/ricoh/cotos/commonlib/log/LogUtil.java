@@ -11,6 +11,7 @@ import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,6 +70,7 @@ public class LogUtil {
 	/**
 	 * ログ出力
 	 * ※JSON変換できる場合はJSONで出力、変換不可の場合はtoStringで出力
+	 * ※MultipartFileの場合はファイル名やサイズのみ出力
 	 *
 	 * @param obj
 	 * @throws JsonProcessingException
@@ -76,6 +78,11 @@ public class LogUtil {
 	public String outputLog(Object obj) {
 		if (null == obj) {
 			return null;
+		}
+
+		if (obj instanceof MultipartFile) {
+			MultipartFile file = (MultipartFile) obj;
+			return String.format("[MultipartFile] name=%s, originalFilename=%s, size=%d bytes", file.getName(), file.getOriginalFilename(), file.getSize());
 		}
 
 		String log = null;
