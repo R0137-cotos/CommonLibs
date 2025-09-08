@@ -85,7 +85,6 @@ public class PriceRewriteItemInfo extends EntityBase {
 		}
 	}
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_item_info_seq")
 	@SequenceGenerator(name = "price_rewrite_item_info_seq", sequenceName = "price_rewrite_item_info_seq", allocationSize = 1)
