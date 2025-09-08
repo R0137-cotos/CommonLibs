@@ -281,6 +281,8 @@ public class TestMaster {
 	private MailCsvMasterRepository mailCsvMasterRepository;
 	@Autowired
 	private ContractDateSettingMasterRepository contractDateSettingMasterRepository;
+	@Autowired
+	private ItemcodeChangeMasterRepository itemcodeChangeMasterRepository;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -3280,6 +3282,32 @@ public class TestMaster {
 		Assert.assertEquals(ServiceTermStartSettingType.システム日付, found.getServiceTermStartSettingType());
 		Assert.assertEquals(BillingStartDateSettingType.システム日付の翌月１日, found.getBillingStartDateSettingType());
 		Assert.assertEquals(ServiceTermEndSettingType.課金開始日からNヵ月後の日付, found.getServiceTermEndSettingType());
+
+	}
+
+	@Test
+	public void ItemcodeChangeMasterRepositoryのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemcodeChangeMaster.sql");
+
+		// エンティティの取得
+		ItemcodeChangeMaster found = itemcodeChangeMasterRepository.findOne(1L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+	}
+
+	@Test
+	public void ItemcodeChangeMasterRepositoryMaster_旧契約IDで取得するテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemcodeChangeMaster.sql");
+
+		// エンティティの取得
+		List<ItemcodeChangeMaster> foundList = itemcodeChangeMasterRepository.findByOldMasterId(100L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
 
 	}
 }

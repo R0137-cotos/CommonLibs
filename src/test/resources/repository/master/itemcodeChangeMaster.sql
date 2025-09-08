@@ -1,0 +1,2 @@
+INSERT INTO itemcode_change_master (id,created_at,created_user_id,updated_at,updated_user_id,version,old_master_id,new_master_id) VALUES (1,'2025/09/08 12:09:10','COTOS','2025/09/08 12:09:10','COTOS',1,100,101);
+INSERT INTO itemcode_change_master (id,created_at,created_user_id,updated_at,updated_user_id,version,old_master_id,new_master_id) VALUES (2,'2025/09/08 12:09:10','COTOS','2025/09/08 12:09:10','COTOS',1,102,103);
