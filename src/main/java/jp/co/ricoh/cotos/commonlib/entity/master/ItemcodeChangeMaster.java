@@ -36,9 +36,9 @@ public class ItemcodeChangeMaster extends EntityBaseMaster {
 	private Long oldMasterId;
 
 	/**
-	 * 新新種マスタID
+	 * 新品種マスタID
 	 */
 	@Column(name = "new_master_id", nullable = false)
-	@ApiModelProperty(value = "新新種マスタID", required = true)
+	@ApiModelProperty(value = "新品種マスタID", required = true)
 	private Long newMasterId;
 }
