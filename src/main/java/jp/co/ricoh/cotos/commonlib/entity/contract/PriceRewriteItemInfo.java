@@ -171,6 +171,6 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@ApiModelProperty(value = "旧品種非表示フラグ", required = false, allowableValues = "表示(\"0\"), 非表示(\"1\")", example = "1", position = 14)
-	private long oldItemHiddenFlag;
+	private Long oldItemHiddenFlag;
 
 }
