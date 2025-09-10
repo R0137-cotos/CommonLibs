@@ -630,3 +630,4 @@
 |673|MvTjmmb020UtlCd.cdValの名称を明示|
 |674|multipart/form-dataのリクエストの場合にInputStreamを消費しないように改修|
 |675|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
+|676|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
