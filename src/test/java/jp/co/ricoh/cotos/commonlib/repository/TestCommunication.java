@@ -145,6 +145,7 @@ public class TestCommunication {
 	@Test
 	public void BounceMailRecordRepositoryの条件テスト() {
 		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
+		// ① contractId: 値あり, nXContractId: 値あり, sentAt: 値あり
 		String contractId = "E000000001";
 		String nXContractId = "1";
 		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -156,6 +157,15 @@ public class TestCommunication {
 		}
 		List<BounceMailRecord> list1 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(contractId, nXContractId, sentAt);
 		Assert.assertNotEquals(0, list1.size());
+
+		// ② contractId: NULL, nXContractId: NULL, sentAt: NULL
+		List<BounceMailRecord> listNull = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(null, null, null);
+		Assert.assertNotEquals(0, listNull.size());
+
+		// ③ contractId: "", nXContractId: "", sentAt: 値あり
+		List<BounceMailRecord> listEmpty = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt("", "", sentAt);
+		Assert.assertNotEquals(0, listEmpty.size());
+
 		String docNumber = "CC2020102800001";
 		Integer contractBranchNumber = 1;
 		List<BounceMailRecord> list2 = bounceMailRecordRepository.findByDocNumberAndContractBranchNumber(docNumber, contractBranchNumber);
