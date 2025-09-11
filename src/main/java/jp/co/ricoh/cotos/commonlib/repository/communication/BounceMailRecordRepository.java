@@ -15,11 +15,15 @@ import jp.co.ricoh.cotos.commonlib.entity.communication.BounceMailRecord;
 public interface BounceMailRecordRepository extends CrudRepository<BounceMailRecord, Long> {
 
 	@Query(value = """
-			SELECT * FROM bounce_mail_record
+			SELECT *
+			FROM bounce_mail_record
 			WHERE
-			  (:contractId IS NULL OR contract_id = :contractId)
-			  AND (:nXContractId IS NULL OR n_x_contract_id = :nXContractId)
-			  AND (:sentAt IS NULL OR sent_at = :sentAt)
+			  (:contractId IS NULL AND contract_id IS NULL
+			   OR :contractId IS NOT NULL AND contract_id = :contractId)
+			  AND (:nXContractId IS NULL AND n_x_contract_id IS NULL
+			   OR :nXContractId IS NOT NULL AND n_x_contract_id = :nXContractId)
+			  AND (:sentAt IS NULL AND sent_at IS NULL
+			   OR :sentAt IS NOT NULL AND sent_at = :sentAt)
 			""", nativeQuery = true)
 	public List<BounceMailRecord> findByContractIdAndNXContractIdAndSentAt(@Param("contractId") String contractId, @Param("nXContractId") String nXContractId, @Param("sentAt") Date sentAt);
 
