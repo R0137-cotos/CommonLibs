@@ -631,3 +631,4 @@
 |674|multipart/form-dataのリクエストの場合にInputStreamを消費しないように改修|
 |675|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
 |676|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
+|677|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
