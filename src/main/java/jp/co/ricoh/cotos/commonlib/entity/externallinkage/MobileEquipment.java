@@ -176,7 +176,7 @@ public class MobileEquipment extends EntityBase {
 	/**
 	 * 端末解約送信日
 	 */
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "端末解約送信日", required = false, position = 14)
 	private Date cancelSendDate;
 
