@@ -1037,6 +1037,7 @@ public class TestAccounting {
 		testTarget.setSerialNumber(STR_256);
 		testTarget.setCreateYm(STR_256);
 		testTarget.setBillingDate(STR_256);
+		testTarget.setProductClassDiv(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
 		Assert.assertTrue(result.getErrorInfoList().size() == 8);
 		Assert.assertTrue(testTool.errorIdMatchesAll(result.getErrorInfoList(), ParameterErrorIds.ROT00014));

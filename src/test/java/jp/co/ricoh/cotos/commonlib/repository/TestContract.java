@@ -35,6 +35,8 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ContractInstallationLocation;
 import jp.co.ricoh.cotos.commonlib.entity.contract.DealerContract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ManagedContractEquipmentStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.NextUpdateDetailInfo;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo;
+import jp.co.ricoh.cotos.commonlib.entity.contract.PriceRewriteItemInfo.Status;
 import jp.co.ricoh.cotos.commonlib.entity.contract.VValidContractPeriodHistory;
 import jp.co.ricoh.cotos.commonlib.repository.contract.CollectLocationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractAddedEditorEmpRepository;
@@ -76,6 +78,8 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ManagedEstimationDetailRe
 import jp.co.ricoh.cotos.commonlib.repository.contract.NextUpdateDetailInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.PenaltyDetailTransRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PriceRewriteExclusionContractRepository;
+import jp.co.ricoh.cotos.commonlib.repository.contract.PriceRewriteItemInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ProductContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressRepository;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingAddressSsOrgRepository;
@@ -223,6 +227,12 @@ public class TestContract {
 
 	@Autowired
 	private NextUpdateDetailInfoRepository nextUpdateDetailInfoRepository;
+
+	@Autowired
+	PriceRewriteItemInfoRepository priceRewriteItemInfoRepository;
+
+	@Autowired
+	PriceRewriteExclusionContractRepository priceRewriteExclusionContractRepository;
 
 	static ConfigurableApplicationContext context;
 
@@ -456,6 +466,16 @@ public class TestContract {
 	}
 
 	@Test
+	public void 全てのカラムがNullではないことを確認_価格書換品種情報() {
+		全てのカラムがNullではないことを確認_共通(priceRewriteItemInfoRepository, 401L, 501L);
+	}
+
+	@Test
+	public void 全てのカラムがNullではないことを確認_価格書換除外契約() {
+		全てのカラムがNullではないことを確認_共通(priceRewriteExclusionContractRepository, 401L, 501L);
+	}
+
+	@Test
 	public void 契約承認ルート条件取得確認() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/attachedFile.sql");
@@ -503,7 +523,7 @@ public class TestContract {
 		Assert.assertTrue(cancelDecisionDate.size() > 0);
 
 		// 契約IDリスト指定
-		List<Long> contractIdList = Arrays.asList(8L, 10L,12L);
+		List<Long> contractIdList = Arrays.asList(8L, 10L, 12L);
 		List<Contract> contractList = contractRepository.findByIdIn(contractIdList);
 		Assert.assertTrue(contractList.size() == 3);
 	}
@@ -722,6 +742,20 @@ public class TestContract {
 		Assert.assertNotNull(found);
 		// Entity の各項目の値が null ではないことを確認
 		testTools.assertColumnsNotNull(found);
+	}
 
+	@Test
+	public void PriceRewriteItemInfoRepositoryの条件テスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
+
+		List<PriceRewriteItemInfo> foundList = priceRewriteItemInfoRepository.findByStatus(Status.反映済み);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		/// Entity 2件取得できていることを確認
+		Assert.assertNotEquals(foundList.size(), 2);
 	}
 }
