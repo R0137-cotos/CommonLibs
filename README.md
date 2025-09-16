@@ -632,4 +632,5 @@
 |675|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
 |676|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
 |677|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
-|678|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
+|678|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
+|679|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
