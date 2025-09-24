@@ -607,12 +607,12 @@ public class CheckUtil {
 	 *
 	 * @param basename
 	 *            ベースネーム
-	 * @param defaultEncoding
+	 * @param encoding
 	 *            デフォルトエンコーディング
 	 */
-	public void setMessageUtil(String basename, String defaultEncoding) {
+	public void setMessageUtil(String basename, String encoding) {
 		this.messageUtil = new MessageUtil();
-		this.messageUtil.setMessageSource(basename, defaultEncoding);
+		this.messageUtil.setMessageSource(basename, encoding);
 	}
 
 	/**

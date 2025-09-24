@@ -21,8 +21,8 @@ public class TestSetMessageUtil {
 
 	@Value("${spring.messages.basename}")
 	String basename;
-	@Value("${spring.messages.defaultEncoding}")
-	String defaultEncoding;
+	@Value("${spring.messages.encoding}")
+	String encoding;
 
 	static ConfigurableApplicationContext context;
 
@@ -42,7 +42,7 @@ public class TestSetMessageUtil {
 	public void エラーが発生しないこと() {
 		try {
 			CheckUtil checkUtil = new CheckUtil();
-			checkUtil.setMessageUtil(basename, defaultEncoding);
+			checkUtil.setMessageUtil(basename, encoding);
 		} catch (Exception e) {
 			Assert.fail();
 		}
