@@ -634,3 +634,4 @@
 |677|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
 |678|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
 |679|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
+|680|ymlのspring.message.defaultEncodingをencodingに修正|
