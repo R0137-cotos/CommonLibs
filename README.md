@@ -635,3 +635,4 @@
 |678|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
 |679|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
 |680|ymlのspring.message.defaultEncodingをencodingに修正|
+|681|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|
