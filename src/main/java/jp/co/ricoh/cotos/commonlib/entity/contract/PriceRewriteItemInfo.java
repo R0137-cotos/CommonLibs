@@ -63,6 +63,27 @@ public class PriceRewriteItemInfo extends EntityBase {
 		}
 	}
 
+	@Description(value = "旧品種非表示フラグ")
+	public enum OldItemHiddenFlag {
+		表示("0"), 非表示("1");
+
+		private final String text;
+
+		private OldItemHiddenFlag(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static OldItemHiddenFlag fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_item_info_seq")
@@ -165,5 +186,12 @@ public class PriceRewriteItemInfo extends EntityBase {
 	@ApiModelProperty(value = "反映日時", required = false, position = 13)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reflectionAt;
+
+	/**
+	 * 旧品種非表示フラグ
+	 */
+	@Column
+	@ApiModelProperty(value = "旧品種非表示フラグ", required = false, allowableValues = "表示(\"0\"), 非表示(\"1\")", example = "1", position = 14)
+	private OldItemHiddenFlag oldItemHiddenFlag;
 
 }
