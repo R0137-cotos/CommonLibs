@@ -139,7 +139,7 @@ spring:
     password: koike.shinichi
   messages:
     basename: Messages
-    defaultEncoding: UTF-8
+    encoding: UTF-8
 remote:
   momauthority:
     url: https://www.rizm.jw1.nihon-os.ricoh.co.jp/jmo/services/KengenService

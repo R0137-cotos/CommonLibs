@@ -57,7 +57,7 @@ public class TmCreateSubscriptionRequestWork extends AbstractTmRequestWork {
 	/**
 	 * ライセンス開始日
 	 */
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 10, allowableValues = "range[0,255]")
 	private Date licenseStartDate;
 
