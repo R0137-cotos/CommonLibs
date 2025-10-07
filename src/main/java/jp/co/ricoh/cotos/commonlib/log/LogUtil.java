@@ -70,6 +70,7 @@ public class LogUtil {
 	/**
 	 * ログ出力
 	 * ※JSON変換できる場合はJSONで出力、変換不可の場合はtoStringで出力
+	 * ※MultipartFileの場合はファイル名やサイズのみ出力
 	 *
 	 * @param obj
 	 * @throws JsonProcessingException
@@ -79,11 +80,10 @@ public class LogUtil {
 			return null;
 		}
 
-	    if (obj instanceof MultipartFile) {
-	        MultipartFile file = (MultipartFile) obj;
-	        return String.format("[MultipartFile] name=%s, originalFilename=%s, size=%d bytes",
-	                file.getName(), file.getOriginalFilename(), file.getSize());
-	    }
+		if (obj instanceof MultipartFile) {
+			MultipartFile file = (MultipartFile) obj;
+			return String.format("[MultipartFile] name=%s, originalFilename=%s, size=%d bytes", file.getName(), file.getOriginalFilename(), file.getSize());
+		}
 
 		String log = null;
 		try {

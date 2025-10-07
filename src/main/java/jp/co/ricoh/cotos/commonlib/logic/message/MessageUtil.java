@@ -86,13 +86,13 @@ public class MessageUtil {
 	 *
 	 * @param basename
 	 *            ベースネーム
-	 * @param defaultEncoding
+	 * @param encoding
 	 *            デフォルトエンコーディング
 	 */
-	public void setMessageSource(String basename, String defaultEncoding) {
+	public void setMessageSource(String basename, String encoding) {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.addBasenames(basename);
-		messageSource.setDefaultEncoding(defaultEncoding);
+		messageSource.setDefaultEncoding(encoding);
 		this.messageSource = messageSource;
 	}
 }

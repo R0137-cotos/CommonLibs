@@ -629,3 +629,4 @@
 |672|MvTjmmb020UtlCd.itemIdの名称を明示|
 |673|ファイルアップロードの検証|
 |674|MultipleReadEnableFilterのラップ処理を修正|
+|675|aws_eosl最新分マージ、メールヘッダー設定の検証|

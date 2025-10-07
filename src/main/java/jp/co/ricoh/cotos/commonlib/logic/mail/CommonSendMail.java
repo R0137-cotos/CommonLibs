@@ -351,7 +351,7 @@ public class CommonSendMail {
 	@Async
 	private void sendMail(List<String> emailToList, List<String> emailCcList, List<String> emailBccList, MailTemplateMaster mailTemplateMaster, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
 		MimeMessage attachedMsg = javaMailSender.createMimeMessage();
-		attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
+		//attachedMsg.setHeader("Content-Transfer-Encoding", "base64");
 		MimeMessageHelper attachedHelper = new MimeMessageHelper(attachedMsg, true, StandardCharsets.UTF_8.name());
 
 		Writer writerMailSubject = createMailSubject(mailTemplateMaster, mailSubjectRepalceValueList);
