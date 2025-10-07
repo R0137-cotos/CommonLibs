@@ -262,4 +262,4 @@ DELETE FROM BPLATS_RICOH_ITEM_CODE_CONVERT_INFO;
 DELETE FROM price_rewrite_estimation_destruction_item;
 DELETE FROM price_rewrite_item_info;
 DELETE FROM price_rewrite_exclusion_contract;
-DELETE FROM ITEMCODE_CHANGE_MASTER;
+DELETE FROM itemcode_change_master;
