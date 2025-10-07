@@ -263,3 +263,4 @@ DELETE FROM ELECTRONIC_CONTRACT_INFO;
 DELETE FROM price_rewrite_estimation_destruction_item;
 DELETE FROM price_rewrite_item_info;
 DELETE FROM price_rewrite_exclusion_contract;
+DELETE FROM itemcode_change_master;
