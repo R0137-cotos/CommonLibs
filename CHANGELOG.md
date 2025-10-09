@@ -70,6 +70,34 @@
 
 ---
 
+## v9.10.0 (09/10/2025)
+- [**closed**] #31549 価格改定 品種コード差し替え処理対応 [#2921](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2921)
+- [**closed**] #31216_旧品種非表示フラグをenum型に変更 [#2922](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2922)
+- [**closed**] #31216_価格書換品種情報テーブルにカラム追加 [#2920](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2920)
+
+---
+
+## v9.9.0 (18/09/2025)
+- [**closed**] #31101_ドコモSIM用拡張項目繰返DTO作成 [#2872](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2872)
+- [**closed**] #31103_ドコモSIM_商品（見積用）拡張項目DTO作成 [#2873](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2873)
+- [**closed**] #31212_ドコモSIM用商品（契約用）拡張項目用DTO作成 [#2874](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2874)
+- [**closed**] #31257 ドコモSIM_インボイス連携データテーブルに商品種類区分を追加 [#2875](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2875)
+- [**closed**] 31466_インボイス連携データリポジトリメソッド追加 [#2884](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2884)
+- [**closed**] #31216_旧品種非表示フラグをenum型に変更 [#2922](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2922)
+- [**closed**] #31549 価格改定 品種コード差し替え処理対応 [#2921](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2921)
+- [**closed**] #31216_価格書換品種情報テーブルにカラム追加 [#2920](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2920)
+- [**closed**] #31216 ファイル取得管理Dtoの修正 [#2909](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2909)
+- [**closed**] #31216 価格書換品種情報リポジトリにメソッド追加 [#2907](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2907)
+- [**closed**] #31216 リポジトリの項目追加 [#2905](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2905)
+- [**closed**] 31846_見積操作履歴.操作内容に項目追加 [#2899](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2899)
+- [**closed**] 31846_価格書換見積破棄品種リポジトリにメソッド追加 [#2898](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2898)
+- [**closed**] OneToOneからmanyToOneに修正 [#2896](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2896)
+- [**closed**] 31846_アノテーション修正 [#2895](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2895)
+- [**closed**] #31216_ファイル取込管理パラメータへ項目追加、message.propertiesにエラーメッセージ追加 [#2894](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2894)
+- [**closed**] 31846_価格書換用エンティティ新規追加,ファイル取込管理カラム追加 [#2893](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2893)
+
+---
+
 ## v9.7.1 (27/08/2025)
 - [**closed**] #27978 MS認証修正 MicrosoftPropertiesにrefreshToken追加 [#2900](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2900)
 
@@ -275,16 +303,3 @@
 - [**closed**] #21247 MicrofostAPI連携用DTO作成 [#2535](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2535)
 - [**closed**] #21247 O365中継M移管対応 顧客用DTO作成 [#2533](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2533)
 - [**closed**] #21508 リコー光異動情報エンティティに項目を追加 [#2573](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2573)
-
----
-
-## v7.10.1 (16/01/2024)
-*No changelog for this release.*
-
----
-
-## v7.9.0 (21/12/2023)
-- [**closed**] #21105 契約検索時に承認周りの情報を取得しないようにするパラメータを追加 [#2554](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2554)
-- [**closed**] #20141 検索用パラメータクラスにカラム追加 [#2471](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2471)
-- [**closed**] #20115_契約DTOにカラム追加 [#2477](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2477)
-- [**closed**] #20115_見積、添付ファイル商品毎チェックマスタ、添付ファイル商品種類区分毎チェックマスタにカラム追加 [#2461](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2461)
