@@ -252,4 +252,31 @@ public class ProductMasterDto extends EntityBaseMaster {
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "契約変更禁止終了日", required = false, position = 28)
 	private Date contractChangeProhibitedPeriodTo;
+
+	/**
+	 * サブ商品種類区分
+	 */
+	@ApiModelProperty(value = "サブ商品種類区分", required = false, position = 29, allowableValues = "range[0,255]")
+	private String subProductClassDiv;
+
+	/**
+	 * 品種明細情報取込フラグ
+	 */
+	@Max(9)
+	@Min(0)
+	@ApiModelProperty(value = "品種明細情報取込フラグ", required = false, position = 30, allowableValues = "range[0,9]")
+	private Integer itemDetailInfoImportFlg;
+
+	/**
+	 * 取込ファイルバージョン
+	 */
+	@ApiModelProperty(value = "取込ファイルバージョン", required = false, position = 31, allowableValues = "range[0,9999999999999999999]")
+	private Long importFileVersion;
+
+	/**
+	 * 取込ファイル格納URL
+	 */
+	@Size(max = 1000)
+	@ApiModelProperty(value = "取込ファイル格納URL", required = false, position = 32, allowableValues = "range[0,1000]")
+	private String importFileUrl;
 }

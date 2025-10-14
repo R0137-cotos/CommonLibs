@@ -10,6 +10,7 @@ import jakarta.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.ElectronicContractLinkageStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.EstimationType;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.WorkflowStatus;
@@ -218,4 +219,10 @@ public class EstimationListInfo {
 	public void prePersist() {
 		throw new IllegalAccessError();
 	}
+
+	/**
+	 * 電子契約連携状態
+	 */
+	@ApiModelProperty(value = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1", position = 32)
+	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
 }

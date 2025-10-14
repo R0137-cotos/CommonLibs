@@ -614,25 +614,19 @@
 |657|無線LANパック対応|
 |658|O365年額対応|
 |659|メールアドレス一覧View.テーブル区分に1004を追加|
-|660|EOSL対応|
-|661|EOSL対応 SpringBootのバージョンを3.5.0に変更|
-|662|EOSL対応 StoredProcedureUtil修正|
-|663|EOSL対応 修正漏れ対応|
-|664|EOSL対応 Jenkinsfile追加|
-|665|EOSL対応 EqualsAndHashCodeアノテーションを修正|
-|666|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
-|667|EOSL対応 ToStringアノテーションを修正|
-|668|EOSL対応 MoM権限サービスのバージョンアップ対応|
-|669|EOSL対応 ItemMasterにJsonIgnorePropertiesアノテーションを付与|
-|670|EOSL対応 AWSサーバ構成変更|
-|671|ExtendsParameterCorrelationCheckMaster.domainの名称を明示|
-|672|MvTjmmb020UtlCd.itemIdの名称を明示|
-|673|MvTjmmb020UtlCd.cdValの名称を明示|
-|674|multipart/form-dataのリクエストの場合にInputStreamを消費しないように改修|
-|675|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
-|676|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
-|677|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
-|678|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
-|679|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
-|680|ymlのspring.message.defaultEncodingをencodingに修正|
-|681|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|
+|660|O365年額増数対応|
+|661|品種マスタentity,dtoに同一SS用最短納期日数追加|
+|662|FFM計上対象データ抽出結果格納オブジェクトに売上原価金額追加|
+|663|コミュニケーション登録パラメータにリスト項目追加、CommonSendMailクラスにメソッド追加|
+|664|商材固有項目マスタにカラム追加、商材固有項目マスタリポジトリにメソッド追加|
+|665|ファイル取込エラー詳細リポジトリメソッド追加、DTO追加|
+|666|電子契約対応マージ|
+|667|注文商品情報にカラム追加、Bplatsリコー品種コード変換情報エンティティ新規追加、契約一覧詳細情報取得APIパラメータ.システム区分の型変更|
+|668|ROC-Lite対応マージ|
+|669|MicrosoftPropertiesにrefreshToken追加|
+|670|ドコモSIM対応取込|
+|671|ファイル取込管理にカラム追加、ファイル取込管理エンティティ、価格書換除外契約エンティティ、価格書換見積破棄対象品種エンティティ新規追加、見積操作履歴.操作内容に項目追加|
+|672|リポジトリの項目追加、価格書換品種情報リポジトリにメソッド追加、ファイル取得管理Dtoの修正|
+|673|ファイル取込管理パラメータへ項目追加、message.propertiesにエラーメッセージ追加|
+|674|価格改定機能品種差し替え対応|
+|675|EOSL対応|

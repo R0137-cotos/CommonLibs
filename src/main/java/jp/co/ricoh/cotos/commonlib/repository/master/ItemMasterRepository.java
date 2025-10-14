@@ -12,4 +12,7 @@ public interface ItemMasterRepository extends CrudRepository<ItemMaster, Long> {
 	public ItemMaster findByProductMasterIdAndRicohItemCode(long productMasterId, String code);
 
 	public List<ItemMaster> findByIdIn(List<Long> id);
+
+	public List<ItemMaster> findByRicohItemCode(String code);
+	public ItemMaster findByProrationLinkedInitialItemMasterId(Long id);
 }

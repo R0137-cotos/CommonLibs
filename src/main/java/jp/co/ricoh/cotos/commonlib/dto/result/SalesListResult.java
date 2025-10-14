@@ -265,4 +265,10 @@ public class SalesListResult {
 	 */
 	@ApiModelProperty(value = "母店手数料金額", required = false, position = 40)
 	private BigDecimal motherStoreCommissionAmount;
+
+	/**
+	 * 商品区分
+	 */
+	@ApiModelProperty(value = "商品区分", required = false, position = 41)
+	private String productClassDiv;
 }

@@ -339,12 +339,12 @@ public class TestAccounting {
 	public void InvoiceLinkageRepositoryの条件テスト() throws Exception {
 		context.getBean(DBConfig.class).initTargetTestData("repository/accounting/invoiceLinkage.sql");
 
-		List<InvoiceLinkage> list = invoiceLinkageRepository.findByCreateYmAndReceiveStatus("202107", BatchCommonStatus.未処理);
+		List<InvoiceLinkage> list = invoiceLinkageRepository.findByCreateYmAndReceiveStatusAndProductClassDiv("202107", BatchCommonStatus.未処理, "RSI");
 
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
 
-		list = invoiceLinkageRepository.findBySendStatusOrderById(BatchCommonStatus.未処理);
+		list = invoiceLinkageRepository.findBySendStatusAndProductClassDivOrderById(BatchCommonStatus.未処理, "RSI");
 
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
@@ -362,12 +362,17 @@ public class TestAccounting {
 		// Entity が null ではないことを確認
 		Assert.assertEquals(1, list.size());
 
-		list = invoiceLinkageRepository.findBySendStatusAndReceiveStatus(BatchCommonStatus.処理済, BatchCommonStatus.未処理);
+		list = invoiceLinkageRepository.findBySendStatusAndReceiveStatusAndProductClassDiv(BatchCommonStatus.処理済, BatchCommonStatus.未処理, "RSI");
 
 		// Entity が null ではないことを確認
 		Assert.assertEquals(2, list.size());
 
 		found = invoiceLinkageRepository.findByContractIdAndRicohItemCodeAndSerialNumberAndCreateYm("contract_id_1", "ricoh_item_code_1", "serial_number_1", "202107");
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		found = invoiceLinkageRepository.findByContractIdAndRicohItemCodeAndLineNumberAndCreateYm("contract_id_5", "ricoh_item_code_5", "line_number_5", "202507");
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

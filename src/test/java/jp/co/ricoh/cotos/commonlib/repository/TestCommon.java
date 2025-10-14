@@ -225,6 +225,9 @@ public class TestCommon {
 		// データが取得できていることを確認
 		Assert.assertEquals(1, foundList.size());
 
+		List<EimDocumentInfo> foundList2 = eimDocumentInfoRepository.findByContractIdAndEimLinkedStatusAndOldDocumentFlg(36l, EimLinkedStatus.連携済, false);
+		// データが取得できていることを確認
+		Assert.assertEquals(1, foundList2.size());
 	}
 
 	@Test
@@ -257,6 +260,9 @@ public class TestCommon {
 		Assert.assertEquals(foundList.get(0).getId(), 2);
 		Assert.assertEquals(foundList.get(1).getId(), 10);
 
+		List<FileImportErrorDetails> foundList2 = fileImportErrorDetailsRepository.findTop100ByFileImportManagementIdOrderById(11L);
+		// Entityが指定件数取得できていることを確認する
+		Assert.assertEquals(foundList2.size(), 100);
 	}
 
 	@Test

@@ -280,6 +280,43 @@ public class TestSendMail {
 	}
 
 	@Test
+	public void メール送信リスト置換リストあり_サービスカテゴリと処理カテゴリを元にテンプレート特定() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> emailCcList = 送信先CCメールアドレスリスト作成();
+		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		List<List<String>> mailTextRepalceListValues = メール本文リスト置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.契約, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
+	public void メール送信リスト置換リストあり_サービスカテゴリと処理カテゴリを元にテンプレート特定_Null値あり() throws MessagingException {
+		テストデータ作成();
+
+		List<String> emailToList = 送信先TOメールアドレスリスト作成();
+		List<String> emailCcList = 送信先CCメールアドレスリスト作成();
+		List<String> emailBccList = 送信先BCCメールアドレスリスト作成();
+		List<String> mailSubjectRepalceValueList = メール件名置換リスト作成();
+		List<String> mailTextRepalceValueList = メール本文置換リスト作成();
+		BounceMailHeaderDto bounceMailHeaderDto = バウンスメールヘッダーDTO作成();
+
+		try {
+			commonSendMail.findMailTemplateMasterAndSendMail(ServiceCategory.見積, ProcessCategory.承認依頼.toString(), 1L, emailToList, emailCcList, emailBccList, mailSubjectRepalceValueList, mailTextRepalceValueList, null, null, bounceMailHeaderDto);
+		} catch (Exception e) {
+			Assert.fail("異常終了");
+		}
+	}
+
+	@Test
 	public void メール送信リストマッピング最大件数テスト() throws MessagingException {
 		テストデータ作成();
 

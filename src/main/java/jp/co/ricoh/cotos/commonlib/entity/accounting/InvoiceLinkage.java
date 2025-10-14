@@ -228,4 +228,10 @@ public class InvoiceLinkage extends EntityBase {
 	@Temporal(TemporalType.DATE)
 	private Date accountingDate;
 
+	/**
+	 * 商品種類区分
+	 */
+	@ApiModelProperty(value = "商品種類区分", required = false, position = 24, allowableValues = "range[0,255]")
+	private String productClassDiv;
+
 }

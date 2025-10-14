@@ -175,4 +175,9 @@ public class SalesCalcResultWorkForCspRunning {
 	 * 届先コード
 	 */
 	private String deliveryCd;
+
+	/**
+	 * 売上原価金額
+	 */
+	private BigDecimal revenueCostprice;
 }
