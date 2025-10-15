@@ -62,8 +62,8 @@ public class TestRegistImportDetailUtilCheck {
 	public void エラーなし() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
-		ProductMaster pm = productMasterRepository.findOne(1L);
-		ItemMaster im = itemMasterRepository.findOne(1L);
+		ProductMaster pm = productMasterRepository.findById(1L).get();
+		ItemMaster im = itemMasterRepository.findById(1L).get();
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
@@ -121,8 +121,8 @@ public class TestRegistImportDetailUtilCheck {
 	public void エラーあり_マスタチェック() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
-		ProductMaster pm = productMasterRepository.findOne(1L);
-		ItemMaster im = itemMasterRepository.findOne(1L);
+		ProductMaster pm = productMasterRepository.findById(1L).get();
+		ItemMaster im = itemMasterRepository.findById(1L).get();
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
 		dto.setImportFileVersion(3L);
 		dto.setUnitPrice(new BigDecimal(6050));
@@ -143,8 +143,8 @@ public class TestRegistImportDetailUtilCheck {
 	public void エラーあり_マスタチェック2() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_2.sql");
-		ProductMaster pm = productMasterRepository.findOne(1L);
-		ItemMaster im = itemMasterRepository.findOne(1L);
+		ProductMaster pm = productMasterRepository.findById(1L).get();
+		ItemMaster im = itemMasterRepository.findById(1L).get();
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
 		List<ErrorInfo> errorList = new ArrayList<>();
 		try {
@@ -163,8 +163,8 @@ public class TestRegistImportDetailUtilCheck {
 	public void 単体項目エラーで後続チェックが実施されない() {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("check/RegistImportDetailUtilCheck_1.sql");
-		ProductMaster pm = productMasterRepository.findOne(1L);
-		ItemMaster im = itemMasterRepository.findOne(1L);
+		ProductMaster pm = productMasterRepository.findById(1L).get();
+		ItemMaster im = itemMasterRepository.findById(1L).get();
 		ProductStackingMiddleDto dto = setTestDataProductStackingMiddleDto(pm, im);
 		dto.setImportFileVersion(null);
 		List<ErrorInfo> errorList = new ArrayList<>();

@@ -1136,7 +1136,6 @@ public class Contract extends EntityBase {
 	private List<ContractEquipmentAdditionInfo> contractEquipmentAdditionInfoList;
 
 	/**
-<<<<<<< HEAD
 	 * 電子契約正式帳票名
 	 */
 	@Size(max = 255)

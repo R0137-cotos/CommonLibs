@@ -735,7 +735,7 @@ public class TestContract {
 		context.getBean(DBConfig.class).initTargetTestData("repository/nextUpdateDetailInfo.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 		// エンティティの取得
-		NextUpdateDetailInfo found = nextUpdateDetailInfoRepository.findOne(1L);
+		NextUpdateDetailInfo found = nextUpdateDetailInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.eim;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.lang.reflect.Method;
@@ -209,7 +209,7 @@ public class TestElconEimConnectionHelper {
 			mockLog.error("電子契約EIMのファイルアップロード準備API実行に失敗しました。[RJ管理番号:RJ管理番号1]");
 			verify(mockLog).error(eq("電子契約EIMのファイルアップロード準備API実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
 			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).preparationFilesUpload(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject());
+			verify(elconEimConnectionHelper, times(5)).preparationFilesUpload(Mockito.any(), Mockito.any(), Mockito.any());
 
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラーが発生した");
@@ -287,7 +287,7 @@ public class TestElconEimConnectionHelper {
 			mockLog.error("電子契約EIMのファイルアップロードAPI実行に失敗しました。[RJ管理番号:RJ管理番号1]");
 			verify(mockLog).error(eq("電子契約EIMのファイルアップロードAPI実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
 			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).fileUpload(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject());
+			verify(elconEimConnectionHelper, times(5)).fileUpload(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
 
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラーが発生した");
@@ -415,7 +415,7 @@ public class TestElconEimConnectionHelper {
 			mockLog.error("電子契約EIMの文書登録（COTOS申込書）API実行に失敗しました。[RJ管理番号:RJ管理番号1]");
 			verify(mockLog).error(eq("電子契約EIMの文書登録（COTOS申込書）API実行に失敗しました。[RJ管理番号:RJ管理番号1]"));
 			// 処理がリトライ回数だけ行われていること
-			verify(elconEimConnectionHelper, times(5)).postCotosDocument(Mockito.anyObject(), Mockito.anyObject(), Mockito.anyObject(), Mockito.anyString(), Mockito.anyObject());
+			verify(elconEimConnectionHelper, times(5)).postCotosDocument(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.anyString(), Mockito.any());
 
 		} catch (Exception e) {
 			Assert.fail("予期せぬエラーが発生した");

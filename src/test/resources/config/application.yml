@@ -68,7 +68,7 @@ cotos:
     xApplicationId: App-Deploy-Reg-dev28-01
     xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
     getSessionPath: services/v1/users/session
-  elconEim:
+  elcon-eim:
     hostName: app-dev28
     domainName: ope.azure.ricoh-eim.com
     apiAuthPath: api/v1/auth

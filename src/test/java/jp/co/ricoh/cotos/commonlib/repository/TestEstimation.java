@@ -383,7 +383,7 @@ public class TestEstimation {
 	@Test
 	public void ElectronicContractInfoRepositoryのテスト() throws Exception {
 
-		ElectronicContractInfo found = electronicContractInfoRepository.findOne(401L);
+		ElectronicContractInfo found = electronicContractInfoRepository.findById(401L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -400,7 +400,7 @@ public class TestEstimation {
 	@Test
 	public void PriceRewriteEstimationDestructionItemRepositoryのテスト() throws Exception {
 
-		PriceRewriteEstimationDestructionItem found = priceRewriteEstimationDestructionItemRepository.findOne(123L);
+		PriceRewriteEstimationDestructionItem found = priceRewriteEstimationDestructionItemRepository.findById(123L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

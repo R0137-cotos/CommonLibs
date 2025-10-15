@@ -630,3 +630,24 @@
 |673|ファイル取込管理パラメータへ項目追加、message.propertiesにエラーメッセージ追加|
 |674|価格改定機能品種差し替え対応|
 |675|EOSL対応|
+|676|EOSL対応 SpringBootのバージョンを3.5.0に変更|
+|677|EOSL対応 StoredProcedureUtil修正|
+|678|EOSL対応 修正漏れ対応|
+|679||EOSL対応 Jenkinsfile追加|
+|680|EOSL対応 EqualsAndHashCodeアノテーションを修正|
+|681|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
+|682|EOSL対応 ToStringアノテーションを修正|
+|683|EOSL対応 MoM権限サービスのバージョンアップ対応|
+|684|EOSL対応 ItemMasterにJsonIgnorePropertiesアノテーションを付与|
+|685|EOSL対応 AWSサーバ構成変更|
+|686|ExtendsParameterCorrelationCheckMaster.domainの名称を明示|
+|687|MvTjmmb020UtlCd.itemIdの名称を明示|
+|688|MvTjmmb020UtlCd.cdValの名称を明示|
+|689|multipart/form-dataのリクエストの場合にInputStreamを消費しないように改修|
+|690|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
+|691|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
+|692|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
+|693|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
+|694|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
+|695|ymlのspring.message.defaultEncodingをencodingに修正|
+|696|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|

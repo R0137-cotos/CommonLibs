@@ -3253,7 +3253,7 @@ public class TestMaster {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractDateSettingMaster.sql");
 		// エンティティの取得
-		ContractDateSettingMaster found = contractDateSettingMasterRepository.findOne(1L);
+		ContractDateSettingMaster found = contractDateSettingMasterRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -3290,7 +3290,7 @@ public class TestMaster {
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemcodeChangeMaster.sql");
 
 		// エンティティの取得
-		ItemcodeChangeMaster found = itemcodeChangeMasterRepository.findOne(1L);
+		ItemcodeChangeMaster found = itemcodeChangeMasterRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

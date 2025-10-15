@@ -400,7 +400,7 @@ public class TestEstimation {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
 
 		// 異常系（@Valid ：電子契約情報）
-		entity = estimationRepository.findOne(4L);
+		entity = estimationRepository.findById(4L).get();
 		BeanUtils.copyProperties(testTarget, entity);
 		testTarget.getElectronicContractInfo().setImfrSdInsertId(STR_256);
 		result = testSecurityController.callParameterCheck(testTarget, headersProperties, localServerPort);
@@ -919,7 +919,7 @@ public class TestEstimation {
 
 	@Test
 	public void ElectronicContractInfoのテスト() throws Exception {
-		ElectronicContractInfo entity = electronicContractInfoRepository.findOne(401L);
+		ElectronicContractInfo entity = electronicContractInfoRepository.findById(401L).get();
 		ElectronicContractInfo testTarget = new ElectronicContractInfo();
 		BeanUtils.copyProperties(testTarget, entity);
 
