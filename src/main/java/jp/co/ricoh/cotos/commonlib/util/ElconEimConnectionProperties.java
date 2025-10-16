@@ -9,7 +9,7 @@ import lombok.Data;
 @Component
 @Data
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "cotos.elco-eim")
+@ConfigurationProperties(prefix = "cotos.elcon-eim")
 public class ElconEimConnectionProperties extends EimConnectionProperties {
 
 	/**
