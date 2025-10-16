@@ -20,4 +20,9 @@ public interface PriceRewriteItemInfoRepository extends CrudRepository<PriceRewr
 	 * 品種コードから取得
 	 */
 	public List<PriceRewriteItemInfo> findByRicohItemCode(String code);
+
+    /**
+     * ファイル取込管理IDから取得
+     */
+    List<PriceRewriteItemInfo> findByFileImportManagement_Id(Long fileImportManagementId);
 }
