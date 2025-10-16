@@ -54,6 +54,13 @@ public class MicrosoftProperties {
 	/**
 	 * Microsoft リフレッシュトークン
 	 * 暫定対応として認証情報取得APIで利用する
+	 * ⇒ トークン外出し対応によりrefreshTokenTextFilePathのtxtファイルからリフレッシュトークン取得に修正したため未使用
 	 */
 	String refreshToken;
+
+	/**
+	 * Microsoft リフレッシュトークン外出しtxtファイルパス
+	 * 認証情報取得APIで利用する
+	 */
+	String refreshTokenTextFilePath;
 }
