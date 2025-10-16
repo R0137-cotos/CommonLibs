@@ -21,6 +21,7 @@ import jp.co.ricoh.cotos.commonlib.WithMockCustomUser;
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.ElectronicContractInfo;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalResult;
@@ -33,10 +34,13 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationPicSaEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ItemEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.OperationLog;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PriceRewriteEstimationDestructionItem;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.PriceRewriteEstimationDestructionItem.Status;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.ProductEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.VupCaseWork;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.CustomerEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.DealerEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.ElectronicContractInfoRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationAddedEditorEmpRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalResultRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationApprovalRouteNodeRepository;
@@ -49,6 +53,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.OperationLogRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.PenaltyDetailEstimationRepository;
+import jp.co.ricoh.cotos.commonlib.repository.estimation.PriceRewriteEstimationDestructionItemRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ProductEstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.VupCaseWorkRepository;
 
@@ -114,6 +119,12 @@ public class TestEstimation {
 
 	@Autowired
 	VupCaseWorkRepository vupCaseWorkRepository;
+
+	@Autowired
+	ElectronicContractInfoRepository electronicContractInfoRepository;
+	
+	@Autowired
+	PriceRewriteEstimationDestructionItemRepository priceRewriteEstimationDestructionItemRepository;
 
 	@Autowired
 	DBUtil dbutil;
@@ -367,6 +378,49 @@ public class TestEstimation {
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void ElectronicContractInfoRepositoryのテスト() throws Exception {
+
+		ElectronicContractInfo found = electronicContractInfoRepository.findById(401L).get();
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		found = electronicContractInfoRepository.findByEstimationId(4L);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+	}
+
+	@Test
+	public void PriceRewriteEstimationDestructionItemRepositoryのテスト() throws Exception {
+
+		PriceRewriteEstimationDestructionItem found = priceRewriteEstimationDestructionItemRepository.findById(123L).get();
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+	}
+
+	@Test
+	public void PriceRewriteEstimationDestructionItemRepositoryの条件テスト() throws Exception {
+
+		List<PriceRewriteEstimationDestructionItem> foundList = priceRewriteEstimationDestructionItemRepository.findByStatus(Status.未反映);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		/// Entity 2件取得できていることを確認
+		Assert.assertNotEquals(foundList.size(), 0);
+
 	}
 
 	@Test

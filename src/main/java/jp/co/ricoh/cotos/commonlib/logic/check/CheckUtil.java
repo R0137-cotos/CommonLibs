@@ -31,6 +31,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.MigrationDiv;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.common.ProductStackingMiddleDto;
 import jp.co.ricoh.cotos.commonlib.dto.result.MessageInfo;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ToleranceType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
@@ -723,5 +724,63 @@ public class CheckUtil {
 			// MSSのルーター/UTMプラン月額品種が積み上がっていない
 			throw new ErrorCheckException(addErrorInfo(new ArrayList<ErrorInfo>(), "MssInfoDoesNotExist", new String[] { "MerakiスマートサービスUTM/ルータプラン契約ID" }));
 		}
+	}
+
+	/**
+	 * 明細情報インポート登録API共通チェック
+	 * 見積明細情報インポート登録APIと契約明細情報インポート登録APIの共通チェック
+	 */
+	public List<ErrorInfo> registImportDetailUtilCheck(ProductStackingMiddleDto productStackingMiddleDto, String entity) {
+
+		List<ErrorInfo> errorList = new ArrayList<>();
+
+		// 必須チェック
+		// 商品コード
+		if (StringUtils.isEmpty(productStackingMiddleDto.getProductMasterId())) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "商品コード" }, null, entity);
+		}
+		// 品種コード
+		if(StringUtils.isEmpty(productStackingMiddleDto.getRicohItemCode())) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "品種コード" }, null, entity);
+		}
+		// 品種名
+		if(StringUtils.isEmpty(productStackingMiddleDto.getRicohItemName())) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "品種名" }, null, entity);
+		}
+		// 数量
+		if (null == productStackingMiddleDto.getQuantity()) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "数量" }, null, entity);
+		}
+		// 単価（E/U売価）
+		if (null == productStackingMiddleDto.getUnitPrice()) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "単価(E/U売価)" }, null, entity);
+		}
+		// ver
+		if (null == productStackingMiddleDto.getImportFileVersion()) {
+			addErrorInfoFiledEntity(errorList, "EntityCheckNotNullError", new String[] { "ver" }, null, entity);
+		}
+		if (CollectionUtils.isNotEmpty(errorList)) {
+			// 必須チェックでエラーになった場合、以降のチェックを実施しない
+			return errorList;
+		}
+		// 商品マスタチェック
+		if (null == productStackingMiddleDto.getProductMaster()) {
+			addErrorInfoFiledEntity(errorList, "CannotIdentify", new String[] { "商品マスタ" }, null, entity);
+		} else if (!productStackingMiddleDto.getImportFileVersion().equals(productStackingMiddleDto.getProductMaster().getImportFileVersion())) {
+			// ファイルバージョンチェック
+			addErrorInfoFiledEntity(errorList, "LatestFileVersionCheck", null, null, entity);
+		}
+
+		// 品種マスタチェック
+		if (null == productStackingMiddleDto.getItemMaster()) {
+			addErrorInfoFiledEntity(errorList, "CannotIdentify", new String[] { "品種マスタ" }, null, entity);
+		} else {
+			// 値引き下限値チェック
+			// CSV.単価(E/U売価) < 品種マスタ.値引き下限値の場合、エラー
+			if (productStackingMiddleDto.getUnitPrice().compareTo(productStackingMiddleDto.getItemMaster().getLowerLimit()) < 0) {
+				addErrorInfoFiledEntity(errorList, "lowerLimitError", new String[] { "単価（E/U売価）" }, null, entity);
+			}
+		}
+		return errorList;
 	}
 }

@@ -45,4 +45,11 @@ public class FileImportManagementParameter {
 	@ApiModelProperty(value = "取込実施者", required = true, position = 4, allowableValues = "range[0,255]")
 	private String importUser;
 
+	/**
+	 * 関連ファイル取込管理ID
+	 */
+	@Min(0)
+	@ApiModelProperty(value = "関連ファイル取込管理ID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	private Long relatedFileImportManagementId;
+
 }

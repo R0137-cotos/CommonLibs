@@ -7,6 +7,7 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpHost;
@@ -24,7 +25,6 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,7 +35,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.DocumentUploadRes
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileDownloadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponse;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.FileUploadResponseHeader;
-import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.SystemAuthResponse;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.GetSessionResponse;
 import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 
 @Component
@@ -47,22 +47,12 @@ public class EimConnectionHelper {
 	EimConnectionProperties eimConnectionProperties;
 
 	/**
-	 * EIMシステム認証
-	 * @return
+	 * propertiesクラス取得
+	 *
+	 * @return EimConnectionProperties
 	 */
-	private SystemAuthResponse systemAuth(RestTemplate restForEmi) {
-		try {
-			// EIMシステム認証
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getSystemAuthPath();
-			HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(null, headers);
-			log.info("URL:" + url);
-			return restForEmi.exchange(url, HttpMethod.POST, requestEntity, SystemAuthResponse.class).getBody();
-		} catch (Exception e) {
-			log.error("【APIエラー】  ", e);
-			throw new RestClientException("【APIエラー】 EIMシステム認証 Status Code:" + e.getMessage());
-		}
+	protected EimConnectionProperties getProperties() {
+		return eimConnectionProperties;
 	}
 
 	/**
@@ -70,22 +60,20 @@ public class EimConnectionHelper {
 	 * @param systemAuth
 	 * @return
 	 */
-	private ApiAuthResponse apiAuth(RestTemplate restForEmi, SystemAuthResponse systemAuth) {
+	public ApiAuthResponse apiAuth(RestTemplate restForEmi) {
 		try {
-			// アプリケーション認証
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
 
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getApiAuthPath();
+			// アプリケーション認証
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getApiAuthPath();
 
 			// HEADER設定
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add("X-Application-Id", systemAuth.getApplicationId());
-			headers.add("X-Application-Key", systemAuth.getApplicationKey());
-			headers.add("X-Site-Id", systemAuth.getSiteId());
+			HttpHeaders headers = createHttpHeadersApiAuth();
 
 			ApiAuthRequest apiAuthRequest = new ApiAuthRequest();
-			apiAuthRequest.setLoginUserName(eimConnectionProperties.getLoginUserName());
-			apiAuthRequest.setLoginPassword(eimConnectionProperties.getLoginPassword());
+			apiAuthRequest.setLoginUserName(properties.getLoginUserName());
+			apiAuthRequest.setLoginPassword(properties.getLoginPassword());
 
 			RequestEntity<ApiAuthRequest> requestEntity = new RequestEntity<ApiAuthRequest>(apiAuthRequest, headers, HttpMethod.POST, new URI(url));
 
@@ -104,6 +92,69 @@ public class EimConnectionHelper {
 	}
 
 	/**
+	 * アプリケーション認証用ヘッダー情報作成
+	 * 
+	 * @return HttpHeaders
+	 */
+	protected HttpHeaders createHttpHeadersApiAuth() {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("X-Application-Id", eimConnectionProperties.getXApplicationId());
+		headers.add("X-Application-Key", eimConnectionProperties.getXApplicationKey());
+		headers.add("X-Site-Id", eimConnectionProperties.getXSiteId());
+
+		return headers;
+	}
+
+	/**
+	 * セッション取得
+	 * @param restForEmi
+	 * @param apiAuthRes
+	 * @return セッション取得レスポンスDTO
+	 */
+	public GetSessionResponse getSession(RestTemplate restForEmi, ApiAuthResponse apiAuthRes) {
+		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
+			// HEADER設定
+			HttpHeaders headers = createHttpHeadersGetSession(apiAuthRes);
+			HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+			// セッション取得を要求(GET)
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getGetSessionPath();
+			ResponseEntity<GetSessionResponse> res = restForEmi.exchange(url, HttpMethod.GET, entity, GetSessionResponse.class);
+
+			//ログ出力
+			log.info("URL:" + url);
+			log.info("Cookie:" + headers.get("Cookie"));
+			log.info("X-Site-Id:" + headers.get("X-Site-Id"));
+
+			return res.getBody();
+		} catch (Exception e) {
+			log.error("【APIエラー】  ", e);
+			throw new RestClientException("【APIエラー】セッション取得 Status Code:" + e.getMessage());
+		}
+	}
+
+	/**
+	 * セッション取得用ヘッダー情報作成
+	 * 
+	 * @param apiAuthRes
+	 * @return HttpHeaders
+	 */
+	protected HttpHeaders createHttpHeadersGetSession(ApiAuthResponse apiAuthRes) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Cookie", "APISID=" + apiAuthRes.getAccess_token());
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("X-Site-Id", eimConnectionProperties.getXSiteId());
+
+		return headers;
+	}
+
+	/**
 	 * 添付ファイルアップロード要求
 	 * @param fileName
 	 * @param fileBody
@@ -111,11 +162,14 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<FileUploadResponse> postFile(String fileName, byte[] fileBody, MediaType contentType) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEmi = this.createEimRestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
+			// セッション取得
+			GetSessionResponse getSessionRes = getSession(restForEmi, apiRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
@@ -123,8 +177,22 @@ public class EimConnectionHelper {
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
 
 			// 添付ファイルのアップロードを要求(GET)
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getFileUploadPath() + "?" + "filename=" + fileName;
+			// ファイル名に半角スペースを含む場合、半角スペース部分をエンコードする。
+			if (StringUtils.isNotBlank(fileName) && fileName.contains(" ")) {
+				fileName = fileName.replace(" ", "%20");
+			}
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileUploadPath() + "?" + "filename=" + fileName;
+			log.info("EIM ファイルアップロード準備APIコール");
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + entity.getHeaders());
+			log.info("============================================================");
+
 			ResponseEntity<FileUploadResponse> res = restForEmi.exchange(url, HttpMethod.GET, entity, FileUploadResponse.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + res.getStatusCodeValue());
+			log.info("body    : " + res.getBody());
+			log.info("============================================================");
 
 			FileUploadResponseHeader headerRes = res.getBody().getHeader();
 			// 添付ファイルのアップロードを要求(PUT)
@@ -138,9 +206,16 @@ public class EimConnectionHelper {
 			headers.add("x-ms-blob-content-disposition", headerRes.getX_ms_blob_content_disposition());
 			headers.add("x-ms-blob-content-type", headerRes.getX_ms_blob_content_type());
 			headers.add("x-ms-blob-type", headerRes.getX_ms_blob_type());
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
 			RequestEntity<?> requestEntity = new RequestEntity<>(fileBody, headers, HttpMethod.PUT, new URI(res.getBody().getUrl()));
+			log.info("EIM ファイルアップロードAPIコール");
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + requestEntity.getUrl());
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("============================================================");
 			restForEmi.put(new URI(res.getBody().getUrl()), requestEntity);
+
 			return res;
 		} catch (Exception e) {
 			log.error("【APIエラー】  ", e);
@@ -154,20 +229,37 @@ public class EimConnectionHelper {
 	 */
 	public ResponseEntity<DocumentUploadResponse> postDocument(DocumentUploadRequest request) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEmi = this.createEimRestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
+			// セッション取得
+			GetSessionResponse getSessionRes = getSession(restForEmi, apiRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
 
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath();
+			log.info("EIM 文書登録(COTOS申込書)APIコール");
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath();
 			RequestEntity<DocumentUploadRequest> requestEntity = new RequestEntity<DocumentUploadRequest>(request, headers, HttpMethod.POST, new URI(url));
-			return restForEmi.exchange(requestEntity, DocumentUploadResponse.class);
+			log.info("＜Request＞=================================================");
+			log.info("url     : " + url);
+			log.info("headers : " + requestEntity.getHeaders());
+			log.info("body    : " + requestEntity.getBody());
+			log.info("============================================================");
+
+			ResponseEntity<DocumentUploadResponse> responseEntity = restForEmi.exchange(requestEntity, DocumentUploadResponse.class);
+			log.info("＜Response＞=================================================");
+			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("body    : " + responseEntity.getBody());
+			log.info("============================================================");
+			return responseEntity;
+
 		} catch (Exception e) {
 			log.error("【APIエラー】  ", e);
 			throw new RestClientException("【APIエラー】 文書登録 Status Code:" + e.getMessage());
@@ -181,28 +273,27 @@ public class EimConnectionHelper {
 	 */
 	public byte[] getFile(String fileId) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			log.info("start -- getFile　--");
 			log.info("start -- EIM認証RestTemplate作成 --");
 			RestTemplate restForEmi = this.createEimRestTemplate();
 			log.info("end -- EIM認証RestTemplate作成 --");
 
-			// EIMシステム認証
-			log.info("start -- EIMシステム認証 --");
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
-			log.info("end -- EIMシステム認証 --");
 			// アプリケーション認証
 			log.info("start -- アプリケーション認証 --");
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
 			log.info("end -- アプリケーション認証 --");
 			// HEADER設定
 			log.info("start -- ファイルダウンロード --");
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add("X-Site-Id", systemRes.getSiteId());
-			headers.add("Cookie", "X-Application-Token=" + systemRes.getApplicationKey());
+			headers.add("X-Site-Id", properties.getXSiteId());
+			headers.add("Cookie", "X-Application-Token=" + properties.getXApplicationKey());
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getFileDownloadPath() + "/" + fileId;
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getFileDownloadPath() + "/" + fileId;
 			//ログ出力
 			log.info("URL:" + url);
 			log.info("Cookie:" + headers.get("Cookie"));
@@ -225,17 +316,21 @@ public class EimConnectionHelper {
 	 */
 	public void putDocument(DocumentUploadRequest request) {
 		try {
+			// propertiesを取得
+			EimConnectionProperties properties = getProperties();
+
 			RestTemplate restForEmi = this.createEimRestTemplate();
-			// EIMシステム認証
-			SystemAuthResponse systemRes = systemAuth(restForEmi);
 			// アプリケーション認証
-			ApiAuthResponse apiRes = apiAuth(restForEmi, systemRes);
+			ApiAuthResponse apiRes = apiAuth(restForEmi);
+			// セッション取得
+			GetSessionResponse getSessionRes = getSession(restForEmi, apiRes);
 
 			// HEADER設定
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Cookie", "APISID=" + apiRes.getAccess_token());
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			String url = "https://" + eimConnectionProperties.getHostName() + "." + eimConnectionProperties.getDomainName() + "/" + eimConnectionProperties.getResourcesPath() + eimConnectionProperties.getAppId() + "/" + eimConnectionProperties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
+			headers.add("X-Csrf-Token", getSessionRes.getCsrfToken());
+			String url = "https://" + properties.getHostName() + "." + properties.getDomainName() + "/" + properties.getResourcesPath() + properties.getAppId() + "/" + properties.getDocumentsPath() + "?documentKey=" + request.getProperties().getDocumentKey();
 			RequestEntity<?> requestEntity = new RequestEntity<>(request, headers, HttpMethod.PUT, new URI(url));
 			restForEmi.put(new URI(url), requestEntity);
 		} catch (Exception e) {
@@ -249,9 +344,11 @@ public class EimConnectionHelper {
 	 * @return
 	 * @throws Exception
 	 */
-	private RestTemplate createEimRestTemplate() throws Exception {
+	public RestTemplate createEimRestTemplate() throws Exception {
+		// propertiesを取得
+		EimConnectionProperties properties = getProperties();
 
-		if ("rfg3".equals(eimConnectionProperties.getHostName())) {
+		if ("rfg3".equals(properties.getHostName())) {
 
 			String key = "cotoscotoscotos";
 			String algorithm = "BLOWFISH";

@@ -95,6 +95,7 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.order.OrderSetupInfoDt
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.order.OrdererInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.CustomerEstimationDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.DealerEstimationDto;
+import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.ElectronicContractInfoDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationAddedEditorEmpDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationApprovalRouteDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.estimation.EstimationApprovalRouteNodeDto;
@@ -189,6 +190,7 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingAddressSsOrg;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ShippingThingDetail;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.CustomerEstimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.DealerEstimation;
+import jp.co.ricoh.cotos.commonlib.entity.estimation.ElectronicContractInfo;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationAddedEditorEmp;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalResult;
@@ -1336,4 +1338,13 @@ public class TestSecurityController {
 		return createParameterCheckResult(result);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ElectronicContractInfo")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ElectronicContractInfo entity, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/ParameterCheck/ElectronicContractInfoDto")
+	public ParamterCheckResult callParamterCheck(@RequestBody @Validated ElectronicContractInfoDto dto, BindingResult result) {
+		return createParameterCheckResult(result);
+	}
 }

@@ -28,6 +28,9 @@ import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.master.*;
 import jp.co.ricoh.cotos.commonlib.entity.master.ArrangementWorkOrderMaster.CheckTimingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
+import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster.BillingStartDateSettingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster.ServiceTermEndSettingType;
+import jp.co.ricoh.cotos.commonlib.entity.master.ContractDateSettingMaster.ServiceTermStartSettingType;
 import jp.co.ricoh.cotos.commonlib.entity.master.MvWjmoc080DealerInfo.Id;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.Domain;
 import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
@@ -275,6 +278,10 @@ public class TestMaster {
 	private ProductGrpMasterDtoRepository productGrpMasterDtoRepository;
 	@Autowired
 	private MailCsvMasterRepository mailCsvMasterRepository;
+	@Autowired
+	private ContractDateSettingMasterRepository contractDateSettingMasterRepository;
+	@Autowired
+	private ItemcodeChangeMasterRepository itemcodeChangeMasterRepository;
 
 	@Autowired
 	JsonUtil jsonUtil;
@@ -1004,6 +1011,11 @@ public class TestMaster {
 		id = 3L;
 		found = itemMasterRepository.findById(id).get();
 		Assert.assertNotNull(found);
+
+		id = 1001L;
+		ItemMaster found4 = itemMasterRepository.findByProrationLinkedInitialItemMasterId(id);
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found4);
 	}
 
 	@Test
@@ -1607,6 +1619,38 @@ public class TestMaster {
 		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", "1", 1L, "1", "2");
 		// データが取得できていることを確認
 		Assert.assertTrue(foundList.size() > 0);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
+	}
+
+	@Test
+	public void ReportTemplateMasterRepository_findByReportListParameterのテスト_電子契約連携対象区分() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/reportTemplateMaster.sql");
+		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", "1", 1L, "1", "2", "1");
+		// 電子契約連携対象のデータが取得できていることを確認
+		Assert.assertTrue(foundList.size() == 3);
+
+		// Entity の各項目の値が null ではないことを確認
+		try {
+			testTool.assertColumnsNotNull(foundList.get(0));
+		} catch (Exception e) {
+			Assert.fail("throw Exception :" + e.getMessage());
+		}
+	}
+
+	@Test
+	public void ReportTemplateMasterRepository_findByReportListParameterのテスト_電子契約連携対象区分_商流区分がNULL() {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/reportTemplateMaster.sql");
+		List<ReportTemplateMaster> foundList = reportTemplateMasterRepository.findByReportListParameter("1", "1", "1", null, 1L, "1", "2", "1");
+		// 電子契約連携対象のデータが取得できていることを確認
+		Assert.assertTrue(foundList.size() == 4);
 
 		// Entity の各項目の値が null ではないことを確認
 		try {
@@ -3143,6 +3187,25 @@ public class TestMaster {
 	}
 
 	@Test
+	public void ProductGrpMasterDtoのテスト() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
+
+		List<Long> idList = Arrays.asList(new Long[] { 1L });
+
+		// エンティティの取得
+		List<ProductGrpMasterDto> foundList = productGrpMasterDtoRepository.findByIdIn(idList);
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(foundList);
+
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(foundList.get(0));
+
+	}
+
+	@Test
 	public void ProductExtendsParameterMaster_商品マスタIDで取得するテスト() throws Exception {
 		// テストデータ登録
 		context.getBean(DBConfig.class).initTargetTestData("repository/master/productMaster.sql");
@@ -3170,24 +3233,6 @@ public class TestMaster {
 		});
 	}
 
-	@Test
-	public void ProductGrpMasterDtoのテスト() throws Exception {
-
-		// テストデータ登録
-		context.getBean(DBConfig.class).initTargetTestData("repository/master/productGrpMaster.sql");
-
-		List<Long> idList = Arrays.asList(new Long[] { 1L });
-
-		// エンティティの取得
-		List<ProductGrpMasterDto> foundList = productGrpMasterDtoRepository.findByIdIn(idList);
-
-		// Entity が null ではないことを確認
-		Assert.assertNotNull(foundList);
-
-		// Entity の各項目の値が null ではないことを確認
-		testTool.assertColumnsNotNull(foundList.get(0));
-	}
-
 	public void MailCsvMasterRepositoryのテスト() throws Exception {
 
 		// テストデータ登録
@@ -3201,5 +3246,67 @@ public class TestMaster {
 
 		// Entity の各項目の値が null ではないことを確認
 		testTool.assertColumnsNotNull(found);
+	}
+
+	@Test
+	public void ContractDateSettingMasterのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractDateSettingMaster.sql");
+		// エンティティの取得
+		ContractDateSettingMaster found = contractDateSettingMasterRepository.findById(1L).get();
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+	}
+
+	@Test
+	public void ContractDateSettingMasterのテスト_テストデータが取得できるか() throws Exception {
+
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/contractDateSettingMaster2.sql");
+
+		// エンティティの取得
+		ContractDateSettingMaster found = contractDateSettingMasterRepository.findByProductMasterIdAndContractTypeAndArrangementWorkTypeMasterId(1024L, ContractType.契約変更.toString(), 1006L).stream().findFirst().get();
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+		// Entity の各項目の値が null ではないことを確認
+		testTool.assertColumnsNotNull(found);
+
+		// 取得したデータの内容が正しいことを確認
+		Assert.assertEquals(2, found.getId());
+		Assert.assertEquals(ServiceTermStartSettingType.システム日付, found.getServiceTermStartSettingType());
+		Assert.assertEquals(BillingStartDateSettingType.システム日付の翌月１日, found.getBillingStartDateSettingType());
+		Assert.assertEquals(ServiceTermEndSettingType.課金開始日からNヵ月後の日付, found.getServiceTermEndSettingType());
+
+	}
+
+	@Test
+	public void ItemcodeChangeMasterRepositoryのテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemcodeChangeMaster.sql");
+
+		// エンティティの取得
+		ItemcodeChangeMaster found = itemcodeChangeMasterRepository.findById(1L).get();
+
+		// Entity が null ではないことを確認
+		Assert.assertNotNull(found);
+
+	}
+
+	@Test
+	public void ItemcodeChangeMasterRepositoryMaster_旧契約IDで取得するテスト() throws Exception {
+		// テストデータ登録
+		context.getBean(DBConfig.class).initTargetTestData("repository/master/itemcodeChangeMaster.sql");
+
+		// エンティティの取得
+		List<ItemcodeChangeMaster> foundList = itemcodeChangeMasterRepository.findByOldMasterId(100L);
+
+		// データが取得出来ている事を確認
+		Assert.assertTrue(foundList.size() > 0);
+
 	}
 }

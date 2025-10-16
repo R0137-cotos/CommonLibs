@@ -13,4 +13,6 @@ public interface SpecificControlMasterRepository extends CrudRepository<Specific
 	public List<SpecificControlMaster> findByIdIn(List<Long> specificControlMasterIdList);
 
 	public List<SpecificControlMaster> findBySpecificItemGroupMasterIdAndSpecificControlDivIn(Long specificItemGroupMasterId, List<String> specificControlDivList);
+
+	public List<SpecificControlMaster> findBySpecificItemGroupMasterIdInAndSpecificControlAddFlgCancel(List<Long> specificItemGroupMasterIdList, Integer specificControlAddFlgCancel);
 }

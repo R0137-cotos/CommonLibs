@@ -1,15 +1,10 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.communication;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.springframework.context.annotation.Description;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
@@ -20,29 +15,6 @@ import lombok.Data;
  */
 @Data
 public class ContractSearchParameterForDetailOutsideCotos {
-
-	@Description(value = " 外部システム区分")
-	public enum OutsideSystemDiv {
-
-		Bplats("1");
-
-		private final String text;
-
-		private OutsideSystemDiv(final String text) {
-			this.text = text;
-		}
-
-		@Override
-		@JsonValue
-		public String toString() {
-			return this.text;
-		}
-
-		@JsonCreator
-		public static OutsideSystemDiv fromString(String string) {
-			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElse(null);
-		}
-	}
 
 	/**
 	 * 商品種別
@@ -109,10 +81,11 @@ public class ContractSearchParameterForDetailOutsideCotos {
 
 	/**
 	 * システム区分
+	 * 1：Bplats
 	 */
 	@ApiParam(value = "システム区分", required = false)
 	@ApiModelProperty(value = "システム区分", required = false)
-	private OutsideSystemDiv systemDiv;
+	private String systemDiv;
 
 	/**
 	 * パラメータをMapにする。

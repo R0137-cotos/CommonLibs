@@ -113,6 +113,73 @@ public class CommonSendMail {
 	 *
 	 * <pre>
 	 * 【処理内容】
+	 * ・引数のサービスカテゴリー(見積、契約、手配etc)と処理カテゴリー(承認、承認依頼、承認依頼差戻etc)と商品グループマスタIDを元にメールテンプレートマスタTBL(MAIL_TEMPLATE_MASTER)からメールテンプレートマスタ情報を取得　　詳細は以下を参照
+	 *  条件：
+	 *    サービスカテゴリー(MAIL_TEMPLATE_MASTER.SERVICE_CATEGORY)=引数のサービスカテゴリー
+	 *    処理カテゴリー(MAIL_TEMPLATE_MASTER.PROCESS_CATEGORY)=引数の処理カテゴリー
+	 *    商品グループマスタID
+	 * ・引数のメール件名置換リストとメールテンプレートマスタTBL.メール件名(MAIL_TEMPLATE_MASTER.MAIL_SUBJECT)を元にメール件名作成
+	 *  例：
+	 *    メールテンプレートマスタTBL.メール件名(MAIL_TEMPLATE_MASTER.MAIL_SUBJECT)
+	 *     【{{replaceValue1}}】見積承認依頼メール {{replaceValue2}}
+	 *    メール件名置換リスト
+	 *     テスト1,テスト2,テスト3
+	 *    各値が上記の場合、以下が生成されるメール件名
+	 *     【テスト1】見積承認依頼メール テスト2
+	 * ・引数のメール本文置換リストとメールテンプレートマスタTBL.メール本文(MAIL_TEMPLATE_MASTER.MAIL_BODY)を元にメール本文作成
+	 *  ※文字列生成方法はメール件名と同じだが、メール本文ではリストデータの置換も可能としている。
+	 *  例：
+	 *  　メールテンプレートマスタTBL.メール本文(MAIL_TEMPLATE_MASTER.MAIL_BODY)
+	 *  　　商品名：{{replaceValue1}}
+	 *  　　▼品種名
+	 *  　　{{replaceList1}}
+	 *  　メール本文置換リスト
+	 *  　　テスト商品
+	 *  　メール本文リスト置換リスト
+	 *  　　{テスト品種1,テスト品種2,テスト品種3}
+	 *  　各値が上記の場合、以下が生成されるメール本文
+	 *  　　商品名：テスト商品
+	 *  　　▼品種名
+	 *  　　テスト品種1
+	 *  　　テスト品種2
+	 *  　　テスト品種3  
+	 * ・引数のバウンスメールヘッダーDTOを使用し、バウンスメール処理のための独自ヘッダーを付与
+	 * ・引数のToメールアドレスリストとCCメールアドレスリストと上記で作成したメール件名やメール本文を使用してメール送信
+	 * ・送信元メールアドレスは、メールテンプレートマスタTBL.送信元メールアドレス(MAIL_TEMPLATE_MASTER.SEND_FROM_MAIL_ADDRESS)から取得
+	 * ・メールは文字コードをUTF-8で作成しており、ファイル添付も可能
+	 * </pre>
+	 *
+	 * @param emailToList
+	 *            Toメールアドレスリスト(複数設定可能)
+	 * @param emailCcList
+	 *            CCメールアドレスリスト(複数設定可能)
+	 * @param serviceCategory
+	 *            サービスカテゴリー
+	 * @param processCategory
+	 *            処理カテゴリー
+	 * @param mailSubjectRepalceValueList
+	 *            メール件名置換リスト(最大5個まで)
+	 * @param mailTextRepalceValueList
+	 *            メール本文置換リスト(最大15個まで)
+	 * @param mailTextRepalceListValues
+	 *            メール本文リスト置換リスト(最大3個まで)            
+	 * @param uploadFile
+	 *            添付ファイル
+	 * @param bounceMailHeaderDto
+	 *            バウンスメールヘッダーDTO
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
+	public void findMailTemplateMasterAndSendMail(ServiceCategory serviceCategory, String processCategory, Long productGrpMasterId, List<String> emailToList, List<String> emailCcList, List<String> emailBccList, List<String> mailSubjectRepalceValueList, List<String> mailTextRepalceValueList, List<List<String>> mailTextRepalceListValues, String uploadFile, BounceMailHeaderDto bounceMailHeaderDto) throws MessagingException, IOException {
+		MailTemplateMaster mailTemplateMaster = mailTemplateMasterRepository.findByServiceCategoryAndProcessCategoryAndProductGrpMasterId(serviceCategory.toString(), processCategory, productGrpMasterId != null ? productGrpMasterId : 0L);
+		sendMail(emailToList, emailCcList, emailBccList, mailTemplateMaster, mailSubjectRepalceValueList, mailTextRepalceValueList, mailTextRepalceListValues, uploadFile, bounceMailHeaderDto);
+	}
+
+	/**
+	 * メールテンプレートマスタ特定&メール送信処理
+	 *
+	 * <pre>
+	 * 【処理内容】
 	 * ・引数のメールテンプレートマスタIDを元にメールテンプレートマスタTBL(MAIL_TEMPLATE_MASTER)からメールテンプレートマスタ情報を取得
 	 *  条件：
 	 *    メールテンプレートマスタID(MAIL_TEMPLATE_MASTER.ID)=引数のメールテンプレートマスタID

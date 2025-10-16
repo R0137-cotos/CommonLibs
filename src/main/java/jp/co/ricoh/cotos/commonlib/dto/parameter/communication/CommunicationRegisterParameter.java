@@ -40,6 +40,12 @@ public class CommunicationRegisterParameter {
 	@NotNull
 	@ApiParam(value = "メール本文置換リスト", required = true)
 	private List<String> mailTextRepalceValueList;
+
+	/**
+	 * メール本文リスト置換リスト
+	 */
+	@ApiParam(value = "メール本文リスト置換リスト", required = false)
+	List<List<String>> mailTextRepalceListValues;
 	
 	/**
 	 * グループ承認フラグ
