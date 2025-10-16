@@ -629,3 +629,5 @@
 |672|リポジトリの項目追加、価格書換品種情報リポジトリにメソッド追加、ファイル取得管理Dtoの修正|
 |673|ファイル取込管理パラメータへ項目追加、message.propertiesにエラーメッセージ追加|
 |674|価格改定機能品種差し替え対応|
+|675|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
+
