@@ -84,6 +84,28 @@ public class PriceRewriteItemInfo extends EntityBase {
 			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
 		}
 	}
+	
+	@Description(value = "書換リスト出力フラグ")
+	public enum RewriteListOutputFlag {
+		未出力("0"), 出力済み("1");
+
+		private final String text;
+
+		private RewriteListOutputFlag(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static RewriteListOutputFlag fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_item_info_seq")
@@ -193,5 +215,12 @@ public class PriceRewriteItemInfo extends EntityBase {
 	@Column
 	@ApiModelProperty(value = "旧品種非表示フラグ", required = false, allowableValues = "表示(\"0\"), 非表示(\"1\")", example = "1", position = 14)
 	private OldItemHiddenFlag oldItemHiddenFlag;
+	
+	/**
+	 * 書換リスト出力フラグ
+	 */
+	@Column
+	@ApiModelProperty(value = "書換リスト出力フラグ", required = false, allowableValues = "未出力(\"0\"), 出力済み(\"1\")", example = "1", position = 15)
+	private RewriteListOutputFlag rewriteListOutputFlag;
 
 }

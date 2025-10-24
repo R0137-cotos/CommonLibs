@@ -52,8 +52,8 @@ public class MicrosoftProperties {
 	String keyId;
 
 	/**
-	 * Microsoft リフレッシュトークン
-	 * 暫定対応として認証情報取得APIで利用する
+	 * Microsoft リフレッシュトークン外出しtxtファイルパス
+	 * 認証情報取得APIで利用する
 	 */
-	String refreshToken;
+	String refreshTokenTextFilePath;
 }

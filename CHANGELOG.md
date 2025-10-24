@@ -1,5 +1,12 @@
 # Changelog
 
+## v9.11.0 (01/01/1970)
+- [**closed**] #32120 Microsoft リフレッシュトークン外だし用txtファイルパス追加 [#2939](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2939)
+- [**closed**] 32766 検索項目追加 [#2938](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2938)
+- [**closed**] #32766 追加対応No.5、9 [#2936](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2936)
+
+---
+
 ## v4.0.0 (01/01/1970)
 - [**closed**] #11417_手配業務権限制御マスタ、及び、処理に関して追加 [#1560](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1560)
 - [**closed**] #11433 CpqPropertiesに動的移行用項目追加 [#1559](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/1559)
@@ -289,17 +296,3 @@
 
 ## v7.12.0 (06/02/2024)
 - [**closed**] #21713_BPSM用拡張項目に項目追加 [#2561](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2561)
-
----
-
-## v7.11.0 (25/01/2024)
-- [**closed**] #21454 MS顧客登録リクエストWORKリポジトリに項目追加 [#2563](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2563)
-- [**closed**] MS連携リクエストWORKテーブルに項目追加 [#2553](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2553)
-- [**closed**] Microsoft連携用のRestTemplate実装 [#2550](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2550)
-- [**closed**] #21261 注文リストの型誤りを修正 [#2545](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2545)
-- [**closed**] #21255 HttpStatusの型変更 [#2542](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2542)
-- [**closed**] #21255 レスポンスDTOに共通エラー項目追加 [#2541](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2541)
-- [**closed**] #21254 ドメイン検索API用のエラーメッセージ追加 [#2536](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2536)
-- [**closed**] #21247 MicrofostAPI連携用DTO作成 [#2535](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2535)
-- [**closed**] #21247 O365中継M移管対応 顧客用DTO作成 [#2533](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2533)
-- [**closed**] #21508 リコー光異動情報エンティティに項目を追加 [#2573](https://mygithub.ritscm.xyz/cotos/CommonLibs/pull/2573)
