@@ -633,7 +633,7 @@
 |676|EOSL対応 SpringBootのバージョンを3.5.0に変更|
 |677|EOSL対応 StoredProcedureUtil修正|
 |678|EOSL対応 修正漏れ対応|
-|679||EOSL対応 Jenkinsfile追加|
+|679|EOSL対応 Jenkinsfile追加|
 |680|EOSL対応 EqualsAndHashCodeアノテーションを修正|
 |681|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
 |682|EOSL対応 ToStringアノテーションを修正|
@@ -651,4 +651,7 @@
 |694|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
 |695|ymlのspring.message.defaultEncodingをencodingに修正|
 |696|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|
-|697|UnixTimestampDateSerializerクラス作成|
+|697|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
+|698|見積エラーメッセージ追加、価格書換品種情報リポジトリにメソッド追加、価格書換品種情報エンティティに項目追加|
+|699|価格書換品種情報リポジトリにメソッド追加|
+|670|UnixTimestampDateSerializerクラス作成|
