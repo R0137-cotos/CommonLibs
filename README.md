@@ -651,3 +651,4 @@
 |694|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
 |695|ymlのspring.message.defaultEncodingをencodingに修正|
 |696|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|
+|697|UnixTimestampDateSerializerクラス作成|
