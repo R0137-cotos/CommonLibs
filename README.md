@@ -654,5 +654,5 @@
 |697|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
 |698|見積エラーメッセージ追加、価格書換品種情報リポジトリにメソッド追加、価格書換品種情報エンティティに項目追加|
 |699|価格書換品種情報リポジトリにメソッド追加|
-|670|UnixTimestampDateSerializerクラス作成|
-|671|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
+|700|UnixTimestampDateSerializerクラス作成|
+|701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
