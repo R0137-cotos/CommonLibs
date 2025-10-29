@@ -9,8 +9,11 @@ import jakarta.persistence.Version;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 
 /**
@@ -20,12 +23,15 @@ import lombok.Data;
 @MappedSuperclass
 @Data
 public class EntityBase {
+	
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "登録日時(作成時不要)", required = true, position = 101, readOnly = true)
 	private Date createdAt;
 
 	@ApiModelProperty(value = "登録者(作成時不要)", required = true, position = 102, allowableValues = "range[0,255]", readOnly = true)
 	private String createdUserId;
 
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "更新日時(作成時不要)", required = true, position = 103, readOnly = true)
 	private Date updatedAt;
 

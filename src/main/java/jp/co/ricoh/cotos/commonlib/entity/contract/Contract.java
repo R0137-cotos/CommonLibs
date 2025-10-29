@@ -28,6 +28,7 @@ import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -37,6 +38,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.MvbAccountEntryDiv;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.RpaLinkageCpqUpdateCsvCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.accounting.AccountingPeriodDetail;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -1004,6 +1006,7 @@ public class Contract extends EntityBase {
 	 * ARCS期間売保守元契約連携日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 100)
 	private Date arcsPeriodSaleMntOriginLinkAt;
 
@@ -1102,6 +1105,7 @@ public class Contract extends EntityBase {
 	 */
 	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 114)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date rpaLinkageCpqUpdateCsvCreateAt;
 
 	/**

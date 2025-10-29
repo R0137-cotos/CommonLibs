@@ -28,11 +28,13 @@ import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -121,6 +123,7 @@ public class ContractAttachedFile extends EntityBase {
 	 * 添付日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "添付日時(作成時不要)", required = true, position = 10, readOnly = true)
 	private Date attachedAt;
 

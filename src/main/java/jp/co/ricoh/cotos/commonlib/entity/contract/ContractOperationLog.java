@@ -23,9 +23,11 @@ import jakarta.validation.constraints.Size;
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -99,6 +101,7 @@ public class ContractOperationLog extends EntityBase {
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "実施日時(作成時不要)", required = true, position = 7, readOnly = true)
 	private Date operatedAt;
 

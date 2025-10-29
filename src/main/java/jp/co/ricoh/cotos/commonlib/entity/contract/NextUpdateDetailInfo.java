@@ -28,6 +28,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
@@ -35,6 +36,7 @@ import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -279,6 +281,7 @@ public class NextUpdateDetailInfo extends EntityBase {
 	 * ベンダー連携日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "ベンダー連携日時(作成時不要)", required = false, position = 27, readOnly = true)
 	private Date vendorLinkageAt;
 
