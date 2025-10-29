@@ -8,11 +8,14 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.WorkflowStatus;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 
 /**
@@ -289,6 +292,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "登録日時", required = false, position = 43)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date createdAt;
 
 	/**
@@ -296,6 +300,7 @@ public class ContractListInfo {
 	 */
 	@ApiModelProperty(value = "更新日時", required = false, position = 44)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date updatedAt;
 
 	/**

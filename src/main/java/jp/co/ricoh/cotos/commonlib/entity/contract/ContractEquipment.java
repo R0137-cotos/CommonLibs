@@ -26,9 +26,11 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -241,6 +243,7 @@ public class ContractEquipment extends EntityBase {
 	 * Isys-One 連携日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "Isys-One 連携日時(1時間毎に連携するため日時とする)", required = false, position = 13)
 	private Date isysoneLinkageAt;
 
@@ -277,6 +280,7 @@ public class ContractEquipment extends EntityBase {
 	 * Isys-One保守レポート連携日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "Isys-One保守レポート連携日時", required = false, position = 18)
 	private Date isysoneMaintereportLinkageAt;
 
@@ -290,6 +294,7 @@ public class ContractEquipment extends EntityBase {
 	 * ARCS期間売保守連携日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	@ApiModelProperty(value = "ARCS期間売保守連携日", required = false, position = 20)
 	private Date arcsPeriodSaleMainteLinkageAt;
 

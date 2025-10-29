@@ -8,12 +8,15 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import io.swagger.annotations.ApiModelProperty;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 
 /**
@@ -106,6 +109,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "希望納期", required = false, position = 13)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date desiredDeliveryDate;
 
 	/**
@@ -119,6 +123,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "業務受理日時", required = false, position = 15)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date businessAcceptanceDateTime;
 
 	/**
@@ -158,6 +163,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "サービス開始日", required = false, position = 21)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date serviceTermStart;
 
 	/**
@@ -165,6 +171,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "サービス終了日", required = false, position = 22)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date serviceTermEnd;
 
 	/**
@@ -234,6 +241,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "登録日時", required = false, position = 33)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date createdAt;
 
 	/**
@@ -241,6 +249,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "更新日時", required = false, position = 34)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date updatedAt;
 
 	/**
@@ -254,6 +263,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "作業完了日時", required = false, position = 36)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date workCompletedAt;
 
 	/**
@@ -297,6 +307,7 @@ public class ArrangementListInfo {
 	 */
 	@ApiModelProperty(value = "手配承認日時", required = false, position = 43)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date approvalDate;
 
 	/**
