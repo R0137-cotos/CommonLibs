@@ -656,3 +656,4 @@
 |699|価格書換品種情報リポジトリにメソッド追加|
 |700|UnixTimestampDateSerializerクラス作成|
 |701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
+|702|AFTER_UI_EOSL対応  ファイル操作関連商品マスタのenum値追加|
