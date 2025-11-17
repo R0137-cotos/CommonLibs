@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import jp.co.ricoh.cotos.commonlib.db.DBUtil;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
-@Log4j
+@Slf4j
 public class CommonLibConfig {
 	@Bean
 	public DBUtil loadDBUtil(ConfigurableApplicationContext context) {

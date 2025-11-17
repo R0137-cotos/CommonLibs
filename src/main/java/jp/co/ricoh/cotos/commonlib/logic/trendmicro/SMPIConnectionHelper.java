@@ -40,14 +40,14 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPostWfbssRepor
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.SMPIProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパークラス
  * BatchesLightTemplateでも使用することを想定するため、コンポーネント化しない
  *
  */
-@Log4j
+@Slf4j
 public class SMPIConnectionHelper {
 
 	private static final SMPIConnectionHelper INSTANCE = new SMPIConnectionHelper();

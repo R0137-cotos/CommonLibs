@@ -54,7 +54,7 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 import jp.co.ricoh.cotos.commonlib.util.SMPIProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパーテストクラス。
@@ -63,7 +63,7 @@ import lombok.extern.log4j.Log4j;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Log4j
+@Slf4j
 @Ignore
 public class SMPIConnectionHelperTests {
 

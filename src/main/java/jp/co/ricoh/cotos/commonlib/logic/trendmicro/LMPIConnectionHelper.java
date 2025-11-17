@@ -100,7 +100,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWor
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
 import jp.co.ricoh.cotos.commonlib.util.LMPIPropertiesBase;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * TrendMicro LMPI連携 ヘルパークラス
@@ -108,7 +108,7 @@ import lombok.extern.log4j.Log4j;
  * @author z00se03039
  *
  */
-@Log4j
+@Slf4j
 public class LMPIConnectionHelper {
 
 	private static final LMPIConnectionHelper INSTANCE = new LMPIConnectionHelper();

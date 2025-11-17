@@ -26,14 +26,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.SACMUpdateServiceAdapterInfoRequestParameter;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.SACMProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SACM連携 ヘルパークラス
  * BatchesLightTemplateでも使用するため、コンポーネント化しない
  *
  */
-@Log4j
+@Slf4j
 public class SACMConnectionHelper {
 
 	private static final SACMConnectionHelper INSTANCE = new SACMConnectionHelper();
