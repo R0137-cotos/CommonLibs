@@ -338,12 +338,12 @@ public class SMPIConnectionHelperTests {
 			fail("正常終了しました。");
 		} catch (RuntimeException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			// チェック
 			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("想定外のエラーが発生しました。", e);
 			fail("想定外のエラーが発生しました。");
 		}
 	}
@@ -360,12 +360,12 @@ public class SMPIConnectionHelperTests {
 			fail("正常終了しました。");
 		} catch (RuntimeException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			// チェック
 			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Cannot find product for cids: 5118F657-9F7D-407D-97AB-CA434C6DC936-11111\"}", e.getMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("想定外のエラーが発生しました。", e);
 			fail("想定外のエラーが発生しました。");
 		}
 	}
@@ -382,12 +382,12 @@ public class SMPIConnectionHelperTests {
 			fail("正常終了しました。");
 		} catch (RuntimeException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			// チェック
 			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("想定外のエラーが発生しました。", e);
 			fail("想定外のエラーが発生しました。");
 		}
 	}
@@ -404,12 +404,12 @@ public class SMPIConnectionHelperTests {
 			fail("正常終了しました。");
 		} catch (RuntimeException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			// チェック
 			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"code\": \"400 Bad Request\", \"message\": \"Invalid cids\"}", e.getMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("想定外のエラーが発生しました。", e);
 			fail("想定外のエラーが発生しました。");
 		}
 	}

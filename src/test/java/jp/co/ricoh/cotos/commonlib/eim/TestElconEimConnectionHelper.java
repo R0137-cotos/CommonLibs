@@ -75,7 +75,7 @@ public class TestElconEimConnectionHelper {
 			// 処理が1回のみ行われていること
 			verify(elconEimConnectionHelper, times(1)).getDocument(Mockito.anyString());
 		} catch (RestClientException e) {
-			log.info(e);
+			log.info("異常終了", e);
 			Assert.fail("異常終了");
 		}
 	}

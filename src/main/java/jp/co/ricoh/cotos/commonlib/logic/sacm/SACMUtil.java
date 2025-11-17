@@ -42,7 +42,7 @@ public class SACMUtil {
 				throw new RuntimeException("SACMAPI呼び出しでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode().value() + "、エラー内容：" + responseEntity.getBody());
 			}
 		} catch (ResourceAccessException e) {
-			log.error(e);
+			log.error("SACMAPI呼び出しでエラーが発生しました。", e);
 			throw e;
 		}
 

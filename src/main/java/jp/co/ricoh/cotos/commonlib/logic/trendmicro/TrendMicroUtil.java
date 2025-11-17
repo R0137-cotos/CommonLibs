@@ -45,7 +45,7 @@ public class TrendMicroUtil {
 			}
 		} catch (ResourceAccessException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			throw e;
 		}
 		return responseEntity;

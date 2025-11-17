@@ -127,7 +127,7 @@ public class SACMConnectionHelper {
 			RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, HttpMethod.PUT, uri);
 			sacmUtil.callApi(rest, requestEntity);
 		} catch (URISyntaxException | JsonProcessingException | UnsupportedEncodingException e) {
-			log.error(e);
+			log.error("SACMサービスアダプタ情報更新APIでエラーが発生しました。", e);
 			throw new RuntimeException("SACMサービスアダプタ情報更新APIでエラーが発生しました。");
 		}
 

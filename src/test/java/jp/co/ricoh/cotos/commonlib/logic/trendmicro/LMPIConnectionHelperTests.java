@@ -649,12 +649,12 @@ public class LMPIConnectionHelperTests {
 			fail("正常終了しました。");
 		} catch (RuntimeException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			// チェック
 			assertEquals("エラーメッセージが一致すること", "TrendMicroAPIでエラーが発生しました。ステータスコード： 400、エラー内容：{\"error_subject\":\"InvalidParameterscompany.name\",\"error_message\":\"The name field is required.\"}", e.getMessage());
 		} catch (Exception e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("想定外のエラーが発生しました。", e);
 			fail("想定外のエラーが発生しました。");
 		}
 	}
