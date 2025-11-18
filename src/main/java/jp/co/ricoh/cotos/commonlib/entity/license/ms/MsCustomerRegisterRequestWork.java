@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
@@ -31,7 +34,7 @@ public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
 
 	@Description(value = "顧客連携状態")
 	public enum MsCustomerLinkageStatus {
-		未処理("0"), 顧客登録済("1"), 処理済("2"), 処理対象外("3"), エラー("4");
+		未処理("0"), 顧客登録済("1"), 処理済("2"), 処理対象外("3"), エラー("4"), 顧客MCA同意依頼済("5"), 顧客MCA同意依頼メール送信エラー("6");
 
 		private final String text;
 
@@ -158,5 +161,12 @@ public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@Schema(description = "顧客連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 顧客登録済(\"1\"), 処理済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
 	private MsCustomerLinkageStatus customerLinkageStatus;
+
+	/**
+	 * メール送信日
+	 */
+	@Temporal(TemporalType.DATE)
+	@ApiModelProperty(value = "メール送信日", required = false, position = 17)
+	private Date sentAt;
 
 }

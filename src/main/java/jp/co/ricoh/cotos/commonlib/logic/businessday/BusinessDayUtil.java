@@ -394,6 +394,72 @@ public class BusinessDayUtil {
 	}
 
 	/**
+	 * 基準日(営業日)からn営業日後の営業日を取得する
+	 * @param baseDate 基準日
+	 * @param afterNumber n営業日前の指定
+	 * @return 基準日からn営業日後の営業日
+	 */
+	public LocalDate getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate baseDate, int afterNumber) {
+		return getBusinessDateNumberBusinessDaysAfterBaseDate(baseDate, afterNumber, false);
+	}
+
+	/**
+	 * 基準日(営業日)からn営業日後の営業日を取得する
+	 * @param baseDate 基準日
+	 * @param afterNumber n営業日前の指定
+	 * @param permitBaseDateNonBusiness 基準日が非営業日でも値を取得する
+	 * @return 基準日からn営業日後の営業日
+	 */
+	public LocalDate getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate baseDate, int afterNumber, boolean permitBaseDateNonBusiness) {
+		if (baseDate == null) {
+			return null;
+		}
+		// baseDate=非営業日の場合、nullを返す
+		if (!permitBaseDateNonBusiness
+				&& !isBusinessDay(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+			return null;
+		}
+		if (afterNumber < 0) {
+			return null;
+		}
+		if (afterNumber == 0) {
+			return baseDate;
+		}
+
+		// 非営業日リストを取得
+		Iterable<NonBusinessDayCalendarMaster> nonBusinessDayIterable = nonBusinessDayCalendarMasterRepository.findByVendorShortNameIsNull();
+
+		if (nonBusinessDayIterable == null) {
+			// 非営業日リストが存在しない場合、全て営業日なので単純に日数分増加すれば良い
+			return baseDate.plusDays(afterNumber);
+		}
+
+		// 非営業日リスト
+		List<Date> nonBusinessDayList = new ArrayList<>();
+
+		for (NonBusinessDayCalendarMaster nonBusinessDay : nonBusinessDayIterable) {
+			nonBusinessDayList.add(nonBusinessDay.getNonBusinessDay());
+		}
+
+		boolean notTarget = true;
+		while (notTarget) {
+			// カウントが0になった時の日付が取得対象
+			if (afterNumber == 0) {
+				notTarget = false;
+			} else {
+				baseDate = baseDate.plusDays(1);
+			}
+
+			// 非営業日リストにない場合カウントを進める
+			if (!nonBusinessDayList.contains(Date.from(baseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))) {
+				afterNumber--;
+			}
+		}
+
+		return baseDate;
+	}
+
+	/**
 	 * 日付1は日付2のn営業日以内か
 	 * @param date1 日付1
 	 * @param date2 日付2
