@@ -656,3 +656,4 @@
 |699|価格書換品種情報リポジトリにメソッド追加|
 |700|UnixTimestampDateSerializerクラス作成|
 |701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
+|702|32991 O365 MCA認証対応|
