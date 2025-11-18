@@ -100,7 +100,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWor
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.LMPIProperties;
 import jp.co.ricoh.cotos.commonlib.util.LMPIPropertiesBase;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * TrendMicro LMPI連携 ヘルパークラス
@@ -108,7 +108,7 @@ import lombok.extern.log4j.Log4j;
  * @author z00se03039
  *
  */
-@Log4j
+@Slf4j
 public class LMPIConnectionHelper {
 
 	private static final LMPIConnectionHelper INSTANCE = new LMPIConnectionHelper();
@@ -259,7 +259,7 @@ public class LMPIConnectionHelper {
 			return tmCreateCustomerResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] 顧客作成APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 顧客作成APIで想定外のエラーが発生しました。");
 		}
@@ -282,7 +282,7 @@ public class LMPIConnectionHelper {
 			return tmUpdateCustomerResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] 会社情報更新APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 会社情報更新APIで想定外のエラーが発生しました。");
 		}
@@ -305,7 +305,7 @@ public class LMPIConnectionHelper {
 			return tmUpdateUserResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] ユーザーアカウント更新APIで想定外のエラーが発生しました。");
 		}
@@ -328,7 +328,7 @@ public class LMPIConnectionHelper {
 			return tmCreateSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
 		}
@@ -347,7 +347,7 @@ public class LMPIConnectionHelper {
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション作成APIで想定外のエラーが発生しました。");
 		}
@@ -370,7 +370,7 @@ public class LMPIConnectionHelper {
 			return tmUpdateSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
@@ -389,7 +389,7 @@ public class LMPIConnectionHelper {
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
@@ -409,7 +409,7 @@ public class LMPIConnectionHelper {
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション取得APIで想定外のエラーが発生しました。");
 		}
@@ -437,7 +437,7 @@ public class LMPIConnectionHelper {
 			return tmSuspendSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
@@ -460,7 +460,7 @@ public class LMPIConnectionHelper {
 			return responseBodyDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション解約APIで想定外のエラーが発生しました。");
 		}
@@ -510,7 +510,7 @@ public class LMPIConnectionHelper {
 			return customerList;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 更新ユーザー取得APIで想定外のエラーが発生しました。");
 		}
@@ -527,7 +527,7 @@ public class LMPIConnectionHelper {
 			return serviceResponse.getResponseEntity().getBody();
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サービスプランID取得APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サービスプランID取得APIで想定外のエラーが発生しました。");
 		}
@@ -545,7 +545,7 @@ public class LMPIConnectionHelper {
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプションID取得APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプションID取得APIで想定外のエラーが発生しました。");
 		}
@@ -573,7 +573,7 @@ public class LMPIConnectionHelper {
 			}
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション更新APIで想定外のエラーが発生しました。");
 		}
@@ -592,7 +592,7 @@ public class LMPIConnectionHelper {
 			return tmTransitionSubscriptionResponseWorkRepository.save(responseWork);
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] サブスクリプション乗換APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] サブスクリプション乗換APIで想定外のエラーが発生しました。");
 		}
@@ -694,7 +694,7 @@ public class LMPIConnectionHelper {
 				md.update(content);
 				contentBase64 = Base64.encodeBase64String(md.digest());
 			} catch (NoSuchAlgorithmException e) {
-				log.error(e);
+				log.error("Base64へのエンコードに失敗しました。", e);
 			}
 			payload += contentBase64;
 		}
