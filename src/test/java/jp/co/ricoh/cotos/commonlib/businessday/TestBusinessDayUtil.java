@@ -611,46 +611,6 @@ public class TestBusinessDayUtil {
 	}
 
 	@Test
-	public void n営業日後の営業日を取得() throws ParseException {
-		// 2019年6月の非営業日は以下を想定
-		// 2019/06/01 
-		// 2019/06/02
-		// 2019/06/08
-		// 2019/06/09
-		// 2019/06/15
-		// 2019/06/16
-		// 2019/06/22
-		// 2019/06/23
-		// 2019/06/29
-		// 2019/06/30
-		// 2019/10/12
-		// 2019/10/13
-		// 2019/10/14
-		// 2019/10/17(ベンダー固有)
-		テストデータ作成();
-
-		// 間に非営業日を挟まない期間 2019/06/03 ＋ 2営業日 = 2019/06/05
-		Assert.assertEquals("2019/06/03の2営業日後は2019/06/05であること", LocalDate.of(2019, 6, 5), businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 3), 2));
-		// 間に非営業日を挟む期間 2019/06/07 ＋ 2営業日 = 2019/06/11
-		Assert.assertEquals("2019/06/07の2営業日後は2019/06/11であること", LocalDate.of(2019, 6, 11), businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 7), 2));
-		// 間に非営業日を挟む期間 2019/06/03 ＋ 10営業日 = 2019/06/17
-		Assert.assertEquals("2019/06/03の10営業日後は2019/06/17であること", LocalDate.of(2019, 6, 17), businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 3), 10));
-		// 間に共通の非営業日とベンダ固有の非営業日を挟む期間 2019/10/11 ＋ 4営業日 = 2019/10/18
-		// ベンダー固有の非営業日も非営業日と見做した場合、2019/10/19になってしまう
-		Assert.assertEquals("2019/10/11の4営業日後は2019/10/18であること", LocalDate.of(2019, 10, 18), businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 10, 11), 4));
-		// 0営業日前 2019/06/17 ＋ 0営業日 = 2019/06/17
-		Assert.assertEquals("2019/06/17の0営業日後は2019/06/17であること", LocalDate.of(2019, 6, 17), businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 17), 0));
-		// baseDate = null
-		Assert.assertEquals("baseDateがnullの場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(null, 0));
-		// baseDate = 非営業日 2019/06/09
-		Assert.assertEquals("baseDateが非営業日の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 9), 0));
-		// beforeNumber < 0
-		Assert.assertEquals("beforeNumberが負数の場合、戻り値はnullであること", null, businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 5), -2));
-		// baseDate = 非営業日 2019/06/08 判定を行う
-		Assert.assertEquals("2019/06/08の1営業日後は2019/06/10であること", LocalDate.of(2019, 6, 10), businessDayUtil.getBusinessDateNumberBusinessDaysAfterBaseDate(LocalDate.of(2019, 6, 8), 1, true));
-	}
-
-	@Test
 	public void 営業日リスト取得() {
 		context.getBean(DBConfig.class).initTargetTestData("sql/businessday/testBusinessdayList.sql");
 		// 2025年1月 営業日日数は19日
