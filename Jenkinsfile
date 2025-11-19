@@ -6,6 +6,9 @@ pipeline {
         expression {
           def isJobNameMatch = "${env.JOB_NAME}".contains("PullRequestBuild")
           def isTargetBranchMatch = "${env.CHANGE_TARGET}" == "topic/aws_eosl"
+          if("${env.CHANGE_TARGET}" == "topic/o365_mca"){
+            isTargetBranchMatch = "topic/o365_mca"
+          }
           return isJobNameMatch && isTargetBranchMatch
         }
       }
