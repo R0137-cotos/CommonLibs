@@ -11,6 +11,6 @@ public class McaResponseDto extends ResourceBaseWithLinks {
 	 * the customer consent status.
 	 * 同意済(true)、未同意(false)
 	 */
-	private boolean signatureStatus;
+	private Boolean isSigned;
 
 }
