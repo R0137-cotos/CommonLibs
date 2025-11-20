@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -167,6 +167,6 @@ public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@Temporal(TemporalType.DATE)
 	@ApiModelProperty(value = "メール送信日", required = false, position = 17)
-	private Date sentAt;
+	private LocalDate sentAt;
 
 }
