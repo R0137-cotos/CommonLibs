@@ -629,6 +629,7 @@
 |672|リポジトリの項目追加、価格書換品種情報リポジトリにメソッド追加、ファイル取得管理Dtoの修正|
 |673|ファイル取込管理パラメータへ項目追加、message.propertiesにエラーメッセージ追加|
 |674|価格改定機能品種差し替え対応|
+<<<<<<< HEAD
 |675|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
 |676|見積エラーメッセージ追加、価格書換品種情報リポジトリにメソッド追加、価格書換品種情報エンティティに項目追加|
 |677|価格書換品種情報リポジトリにメソッド追加|
@@ -668,3 +669,4 @@
 |711|UnixTimestampDateSerializerクラス作成|
 |712|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
 |713|AFTER_UI_EOSL対応  ファイル操作関連商品マスタのenum値追加|
+|714|AFTER_UI_EOSL対応  契約操作履歴のenum値追加|
