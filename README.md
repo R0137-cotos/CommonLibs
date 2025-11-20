@@ -657,3 +657,4 @@
 |700|UnixTimestampDateSerializerクラス作成|
 |701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
 |702|AFTER_UI_EOSL対応  ファイル操作関連商品マスタのenum値追加|
+|703|AFTER_UI_EOSL対応  契約操作履歴のenum値追加|
