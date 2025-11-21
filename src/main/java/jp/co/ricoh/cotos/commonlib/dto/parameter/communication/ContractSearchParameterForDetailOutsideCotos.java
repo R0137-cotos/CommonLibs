@@ -82,6 +82,7 @@ public class ContractSearchParameterForDetailOutsideCotos {
 	/**
 	 * システム区分
 	 * 1：Bplats
+	 * 2：ecbeing
 	 */
 	@ApiParam(value = "システム区分", required = false)
 	@ApiModelProperty(value = "システム区分", required = false)

@@ -657,3 +657,4 @@
 |700|UnixTimestampDateSerializerクラス作成|
 |701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
 |702|Log4j→Slf4jに変更|
+|703|注文管理情報テーブルへ「注文受付メール送信状況」「注文受付メール送信日時」の項目追加
