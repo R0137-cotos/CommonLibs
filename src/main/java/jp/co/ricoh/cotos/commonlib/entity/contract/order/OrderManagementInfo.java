@@ -58,6 +58,30 @@ public class OrderManagementInfo extends EntityBase {
 		}
 	}
 
+	@Description(value = "注文受付メール送信状況")
+	public enum OrderReceptionMailSendStatus {
+
+		未送信("0"), 送信済み("1");
+
+		private final String text;
+
+		private OrderReceptionMailSendStatus(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		@JsonValue
+		public String toString() {
+			return this.text;
+		}
+
+		@JsonCreator
+		public static OrderReceptionMailSendStatus fromString(String string) {
+			return Arrays.stream(values()).filter(v -> v.text.equals(string)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.valueOf(string)));
+		}
+
+	}
+
 	/**
 	 * ID
 	 */
@@ -117,4 +141,19 @@ public class OrderManagementInfo extends EntityBase {
 	@Column
 	@ApiModelProperty(value = "見積ID", required = false, position = 7)
 	private long estimationId;
+
+	/**
+	 * 注文受付メールの送信状況
+	 */
+	@Column
+	@ApiModelProperty(value = "注文受付メールの送信状況", required = false, position = 8, allowableValues = "未送信(\"0\"), 送信済み(\"1\")")
+	private OrderReceptionMailSendStatus orderManagementInfoOrderReceptionMailSendStatus;
+
+	/**
+	 * 注文受付メールの送信日時
+	 */
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	@ApiModelProperty(value = "注文受付メール送信日時", required = false, position = 9)
+	private Date orderReceptionMailSendAt;
 }
