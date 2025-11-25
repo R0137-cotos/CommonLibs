@@ -147,7 +147,7 @@ public class OrderManagementInfo extends EntityBase {
 	 */
 	@Column
 	@ApiModelProperty(value = "注文受付メールの送信状況", required = false, position = 8, allowableValues = "未送信(\"0\"), 送信済み(\"1\")")
-	private OrderReceptionMailSendStatus orderManagementInfoOrderReceptionMailSendStatus;
+	private OrderReceptionMailSendStatus orderReceptionMailSendStatus;
 
 	/**
 	 * 注文受付メールの送信日時
