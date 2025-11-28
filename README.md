@@ -659,3 +659,4 @@
 |702|32991 O365 MCA認証対応|
 |703|32991 O365 MCA認証対応_APIとパラメータ名を一致|
 |704|32991 O365 MCA認証対応_日付の型をLocalDateに変更|
+|705|32991 O365 MCA認証対応_MsCustomerRegisterRequestWork.customerLinkageStatusのアノテーション修正|
