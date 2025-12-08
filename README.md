@@ -657,3 +657,4 @@
 |700|UnixTimestampDateSerializerクラス作成|
 |701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
 |702|Log4j→Slf4jに変更|
+|703|汎用マスタ取得処理について検索条件にカラム名を指定可能とするよう修正|
