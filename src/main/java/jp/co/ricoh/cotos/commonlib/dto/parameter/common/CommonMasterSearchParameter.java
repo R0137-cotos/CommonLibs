@@ -18,4 +18,10 @@ public class CommonMasterSearchParameter {
 	 */
 	@ApiParam(value = "空行追加フラグ", required = true, allowableValues = "true, false")
 	private boolean addBlankRowFlg = false;
+	
+	/**
+	 * カラム名
+	 */
+	@ApiParam(value = "カラム名", required = false, allowableValues = "range[0,255]")
+	private String columnName;	
 }

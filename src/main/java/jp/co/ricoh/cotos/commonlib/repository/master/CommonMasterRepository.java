@@ -22,4 +22,7 @@ public interface CommonMasterRepository extends CrudRepository<CommonMaster, Lon
 	public List<CommonMaster> findByColumnNameAndServiceCategoryAndDetailCodeValues(@Param("COLUMN_NAME") String columnName, @Param("SERVICE_CATEGORY") String serviceCategory, @Param("CODE_VALUES") List<String> codeValues);
 
 	public List<CommonMaster> findByColumnName(String columnName);
+	
+	@Query(value = "SELECT * FROM common_master WHERE service_category = :SERVICE_CATEGORY AND column_name = :COLUMN_NAME AND delete_flg = 0 order by id", nativeQuery = true)
+	public List<CommonMaster> findByServiceCategoryAndColumnNameReturnList(@Param("SERVICE_CATEGORY") String serviceCategory, @Param("COLUMN_NAME") String columnName);
 }
