@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetDirectionType;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Contact;
 import lombok.Data;
@@ -27,21 +28,21 @@ public class ContactComponentsParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Parameter(description = "問い合わせタイトル", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "問い合わせタイトル", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String contactTitle;
 
 	/**
 	 * 問い合わせ内容
 	 */
 	@NotNull
-	@Parameter(description = "問い合わせ内容", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "問い合わせ内容", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String contactMessage;
 
 	/**
 	 * 宛先種別
 	 */
 	@NotNull
-	@Parameter(description = "宛先種別", allowableValues = "担当CE(\"1\"), 担当SA(\"2\"), 全担当者(\"98\"), その他(\"99\");", required = true)
+	@Parameter(description = "宛先種別", required = true, schema = @Schema(allowableValues = { "担当CE(\"1\")", "担当SA(\"2\")", "全担当者(\"98\")", "その他(\"99\")" }))
 	private TargetDirectionType targetDirectionType;
 
 	/**

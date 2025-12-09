@@ -22,7 +22,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Parameter(description = "ステータス", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "ステータス", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String status;
 
 	/**
@@ -30,14 +30,14 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Parameter(description = "品種コード", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "品種コード", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String ricohItemCode;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@Parameter(description = "品種名", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "品種名", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String ricohItemName;
 
 	/**
@@ -53,13 +53,13 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@Min(-99999)
 	@Max(99999)
-	@Parameter(description = "数量", allowableValues = "range[-99999,99999]", required = true)
+	@Parameter(description = "数量", required = true, schema = @Schema(allowableValues = "range[-99999,99999]"))
 	private int quantity;
 
 	/**
 	 * 見積単価
 	 */
-	@Parameter(description = "見積単価", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "見積単価", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal unitPrice;
 
 	/**
@@ -67,7 +67,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@NotNull
 	@Digits(integer = 19, fraction = 2)
-	@Parameter(description = "見積金額", allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]", required = true)
+	@Parameter(description = "見積金額", required = true, schema = @Schema(allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]"))
 	private BigDecimal amountSummary;
 
 	/**
@@ -75,7 +75,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Parameter(description = "R原価", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "R原価", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal rCost;
 
 	/**
@@ -83,7 +83,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Parameter(description = "ＲＪ仕入価格", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "ＲＪ仕入価格", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -91,7 +91,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Parameter(description = "ＲＪ仕切価格", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "ＲＪ仕切価格", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -99,7 +99,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Parameter(description = "母店売価(接点店仕切)", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "母店売価(接点店仕切)", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal motherStorePrice;
 
 	/**
@@ -127,6 +127,6 @@ public class EstimationDetailRegisterParameter {
 	 * 価格改定前リコー品種コード
 	 */
 	@Size(max = 255)
-	@Parameter(description = "価格改定前リコー品種コード", allowableValues = "range[0,255]", required = false)
+	@Parameter(description = "価格改定前リコー品種コード", required = false, schema = @Schema(allowableValues = "range[0,255]"))
 	private String bfPriceRevisionItemCode;
 }

@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import lombok.Data;
 
@@ -22,14 +23,14 @@ public class EstimationRegisterParameter {
 	 * 見積ID
 	 */
 	@Min(0)
-	@Parameter(description = "見積ID", allowableValues = "range[0,9223372036854775807]", required = true)
+	@Parameter(description = "見積ID", required = true, schema = @Schema(allowableValues = "range[0,9223372036854775807]"))
 	private long estimationId;
 
 	/**
 	 * 商品グループマスタID
 	 */
 	@Min(0)
-	@Parameter(description = "商品グループマスタID", allowableValues = "range[0,9223372036854775807]", required = true)
+	@Parameter(description = "商品グループマスタID", required = true, schema = @Schema(allowableValues = "range[0,9223372036854775807]"))
 	private long productGroupMasterId;
 
 	/**
@@ -45,7 +46,7 @@ public class EstimationRegisterParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Parameter(description = "登録者", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "登録者", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String createdUser;
 
 	/**

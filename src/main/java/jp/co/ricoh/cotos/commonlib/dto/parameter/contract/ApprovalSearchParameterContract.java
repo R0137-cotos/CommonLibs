@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -25,6 +26,6 @@ public class ApprovalSearchParameterContract {
 	/**
 	 * 承認ルート登録フラグ
 	 */
-	@Parameter(description = "承認ルート登録フラグ", required = true, allowableValues = "true, false")
+	@Parameter(description = "承認ルート登録フラグ", required = true, schema = @Schema(allowableValues = { "true", "false" }))
 	private boolean approvalRouteRegisterFlg = false;
 }
