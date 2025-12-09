@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -15,7 +15,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@ApiModelProperty(value = "ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -23,7 +23,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -31,7 +31,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -39,7 +39,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種名", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
@@ -47,7 +47,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 }

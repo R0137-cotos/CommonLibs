@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,19 +34,19 @@ public class ContractAssignment extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_assignment_seq")
 	@SequenceGenerator(name = "contract_assignment_seq", sequenceName = "contract_assignment_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約業務情報ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約業務情報ID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 契約ID
 	 */
-	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * メモ
 	 */
-	@ApiModelProperty(value = "メモ", required = false, position = 3)
+	@Schema(description = "メモ", required = false)
 	@Lob
 	private String memo;
 
@@ -55,7 +55,7 @@ public class ContractAssignment extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractAssignment")
-	@ApiModelProperty(value = "契約業務添付ファイル", required = false, position = 4)
+	@Schema(description = "契約業務添付ファイル", required = false)
 	private List<ContractAssignmentAttachedFile> contractAssignmentAttachedFileList;
 
 	/**
@@ -63,6 +63,6 @@ public class ContractAssignment extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "更新フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	@Schema(description = "更新フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer updateFlg;
 }

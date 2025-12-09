@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -24,31 +24,31 @@ public class VupCaseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vup_case_work_seq")
 	@SequenceGenerator(name = "vup_case_work_seq", sequenceName = "vup_case_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "V-UP案件ワークID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "V-UP案件ワークID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 案件名
 	 */
-	@ApiModelProperty(value = "案件名", required = false, position = 2, allowableValues = "range[0,40]")
+	@Schema(description = "案件名", required = false, allowableValues = "range[0,40]")
 	private String anknNm;
 
 	/**
 	 * 案件ID
 	 */
-	@ApiModelProperty(value = "案件ID", required = false, position = 3, allowableValues = "range[0,15]")
+	@Schema(description = "案件ID", required = false, allowableValues = "range[0,15]")
 	private String anknId;
 
 	/**
 	 * 見積ID
 	 */
-	@ApiModelProperty(value = "見積ID", required = false, position = 4, allowableValues = "range[0,11]")
+	@Schema(description = "見積ID", required = false, allowableValues = "range[0,11]")
 	private String estId;
 
 	/**
 	 * 汎用見積番号
 	 */
-	@ApiModelProperty(value = "汎用見積番号", required = false, position = 5, allowableValues = "range[0,25]")
+	@Schema(description = "汎用見積番号", required = false, allowableValues = "range[0,25]")
 	private String rtsEstId;
 
 }

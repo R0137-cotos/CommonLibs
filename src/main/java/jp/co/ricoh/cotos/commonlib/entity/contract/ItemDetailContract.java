@@ -19,7 +19,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialRunningDiv;
 import lombok.Data;
@@ -40,7 +40,7 @@ public class ItemDetailContract extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_detail_contract_seq")
 	@SequenceGenerator(name = "item_detail_contract_seq", sequenceName = "item_detail_contract_seq", allocationSize = 1)
-	@ApiModelProperty(value = "品種明細ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "品種明細ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -49,27 +49,27 @@ public class ItemDetailContract extends EntityBase {
 	@DecimalMin("-9999999999999999999.99")
 	@Digits(integer = 19, fraction = 2)
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "原価", required = false, position = 2, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
+	@Schema(description = "原価", required = false, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 振替先課所コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "振替先課所コード", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所コード", required = false, allowableValues = "range[0,255]")
 	private String transToServiceOrgCode;
 
 	/**
 	 * 振替先課所名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "振替先課所名", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所名", required = false, allowableValues = "range[0,255]")
 	private String transToServiceOrgName;
 
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, position = 5, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")")
+	@Schema(description = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")")
 	private InitialRunningDiv initialRunningDiv;
 
 	/**
@@ -78,14 +78,14 @@ public class ItemDetailContract extends EntityBase {
 	@ManyToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "item_contract_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "品種(契約用)", required = true, position = 6)
+	@Schema(description = "品種(契約用)", required = true)
 	private ItemContract itemContract;
 
 	/**
 	 * 品種振替構成マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "品種振替構成マスタID", required = false, position = 7, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種振替構成マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long itemTransCompMasterId;
 
 	/**
@@ -93,7 +93,7 @@ public class ItemDetailContract extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "一括登録フラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	@Schema(description = "一括登録フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer batchImportFlg;
 
 	/**
@@ -101,6 +101,6 @@ public class ItemDetailContract extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "数量", required = false, position = 9, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", required = false, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 }

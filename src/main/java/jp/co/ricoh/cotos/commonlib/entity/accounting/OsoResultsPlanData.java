@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.OsoResultsDataAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +24,6 @@ public class OsoResultsPlanData extends OsoResultsDataAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "oso_results_plan_data_seq")
 	@SequenceGenerator(name = "oso_results_plan_data_seq", sequenceName = "oso_results_plan_data_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 }

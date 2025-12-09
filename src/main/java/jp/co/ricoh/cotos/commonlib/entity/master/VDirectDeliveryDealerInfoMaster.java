@@ -8,7 +8,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,13 +35,13 @@ public class VDirectDeliveryDealerInfoMaster {
 		/**
 		 * 販売店識別子
 		 */
-		@ApiModelProperty(value = "販売店識別子", required = true, position = 1)
+		@Schema(description = "販売店識別子", required = true)
 		private String dealerDiscrimCd;
 
 		/**
 		 * URLパターン
 		 */
-		@ApiModelProperty(value = "デポコード", required = true, position = 2)
+		@Schema(description = "デポコード", required = true)
 		private String dpCd;
 
 	}
@@ -50,23 +50,23 @@ public class VDirectDeliveryDealerInfoMaster {
 	private Id id;
 
 	@Column
-	@ApiModelProperty(value = "販売店名(漢字)", required = false, position = 3)
+	@Schema(description = "販売店名(漢字)", required = false)
 	private String dlPrCommDistDealerName;
 
 	@Column
-	@ApiModelProperty(value = "販売店名(カナ)", required = false, position = 4)
+	@Schema(description = "販売店名(カナ)", required = false)
 	private String dlPrCommDistDealerNameKana;
 
 	@Column
-	@ApiModelProperty(value = "デポ名(漢字)", required = false, position = 5)
+	@Schema(description = "デポ名(漢字)", required = false)
 	private String dlDpName;
 
 	@Column
-	@ApiModelProperty(value = "デポ名(カナ)", required = false, position = 6)
+	@Schema(description = "デポ名(カナ)", required = false)
 	private String dlDpNameKana;
 
 	@Column
-	@ApiModelProperty(value = "売上情報送信年月日", required = false, position = 7)
+	@Schema(description = "売上情報送信年月日", required = false)
 	private String adSalesSendDate; //yyyyMMddのフォーマットの文字列で設定されている
 
 }

@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipment;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractEquipmentAdditionInfo;
 import lombok.Data;
@@ -15,30 +15,30 @@ public class OriginContractEquipmentResult {
 	/**
 	 * 契約機種を表すEntity
 	 */
-	@ApiModelProperty(value = "契約機種を表すEntity", required = true, position = 1)
+	@Schema(description = "契約機種を表すEntity", required = true)
 	private ContractEquipment contractEquipment;
 
 	/**
 	 * 削除フラグ
 	 */
-	@ApiModelProperty(value = "削除フラグ", required = false, position = 2)
+	@Schema(description = "削除フラグ", required = false)
 	private Integer deleteFlg;
 
 	/**
 	 * 契約機種付加情報を表すEntity
 	 */
-	@ApiModelProperty(value = "契約機種付加情報を表すEntity", required = false, position = 3)
+	@Schema(description = "契約機種付加情報を表すEntity", required = false)
 	private ContractEquipmentAdditionInfo contractEquipmentAdditionInfo;
 
 	/**
 	 * 機器削除済文書番号
 	 */
-	@ApiModelProperty(value = "機器削除済文書番号", required = false, position = 4)
+	@Schema(description = "機器削除済文書番号", required = false)
 	private String equipmentDeletedDocumentNumber;
 
 	/**
 	 * 機器削除チェックボックス活性化フラグ
 	 */
-	@ApiModelProperty(value = "機器削除チェックボックス活性化フラグ", required = false, position = 5)
+	@Schema(description = "機器削除チェックボックス活性化フラグ", required = false)
 	private Integer activateEquipmentDeleteCheckboxFlg;
 }

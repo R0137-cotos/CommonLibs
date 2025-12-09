@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,14 +35,14 @@ public class ElementInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "element_info_seq")
 	@SequenceGenerator(name = "element_info_seq", sequenceName = "element_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "部材情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "部材情報ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
@@ -50,7 +50,7 @@ public class ElementInfo extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "注文なしフラグ", required = false, position = 3, allowableValues = "range[0,9]")
+	@Schema(description = "注文なしフラグ", required = false, allowableValues = "range[0,9]")
 	private Integer noOrderFlg;
 
 	/**
@@ -58,13 +58,13 @@ public class ElementInfo extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "原価合計金額", required = false, position = 4, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価合計金額", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal totalPrice;
 
 	/**
 	 * 部材情報明細
 	 */
 	@OneToMany(mappedBy = "elementInfo")
-	@ApiModelProperty(value = "部材情報明細", required = false, position = 5)
+	@Schema(description = "部材情報明細", required = false)
 	private List<ElementInfoDetail> elementInfoDetailList;
 }

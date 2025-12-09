@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
@@ -38,7 +38,7 @@ public class ArrangementWorkCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_comp_master_seq")
 	@SequenceGenerator(name = "arrangement_work_comp_master_seq", sequenceName = "arrangement_work_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務構成マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "手配業務構成マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -47,21 +47,21 @@ public class ArrangementWorkCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = false, position = 2)
+	@Schema(description = "品種マスタ", required = false)
 	private ItemMaster itemMaster;
 
 	/**
 	 * 対象契約種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "対象契約種別", required = true, allowableValues = "共通(\"1\"), 新規(\"2\"), 契約変更(\"3\"), 情報変更(\"4\"), 契約更新(\"5\")", example = "1", position = 3)
+	@Schema(description = "対象契約種別", required = true, allowableValues = "共通(\"1\"), 新規(\"2\"), 契約変更(\"3\"), 情報変更(\"4\"), 契約更新(\"5\")", example = "1")
 	private TargetContractType targetContractType;
 
 	/**
 	 * 解約フラグ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "解約フラグ", required = true, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", required = true, allowableValues = "range[0,9]")
 	private int disengagementFlg;
 
 	/**
@@ -70,33 +70,33 @@ public class ArrangementWorkCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_type_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "手配業務タイプマスタ", required = true, position = 5)
+	@Schema(description = "手配業務タイプマスタ", required = true)
 	private ArrangementWorkTypeMaster arrangementWorkTypeMaster;
 
 	/**
 	 * 明細番号
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "明細番号", required = true, position = 6, allowableValues = "range[0,999]")
+	@Schema(description = "明細番号", required = true, allowableValues = "range[0,999]")
 	private int seqNumber;
 
 	/**
 	 * 明細状態
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "明細状態", required = false, position = 7, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
+	@Schema(description = "明細状態", required = false, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus detailStatus;
 
 	/**
 	 * 対象契約種別詳細
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "対象契約種別詳細", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "対象契約種別詳細", required = false, allowableValues = "range[0,255]")
 	private String targetContractTypeDetails;
 
 	/**
 	 * 増減区分
 	 */
-	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 9)
+	@Schema(description = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

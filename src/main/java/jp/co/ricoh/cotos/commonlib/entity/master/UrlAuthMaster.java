@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.converter.HttpMethodConverter;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
@@ -142,7 +142,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 * URLパターン
 		 */
 		@Column(nullable = false)
-		@ApiModelProperty(value = "URLパターン", required = true, position = 1)
+		@Schema(description = "URLパターン", required = true)
 		private String urlPattern;
 
 		/**
@@ -150,7 +150,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 */
 		@Convert(converter = HttpMethodConverter.class)
 		@Column(nullable = false)
-		@ApiModelProperty(value = "HTTPメソッド", required = true, position = 2)
+		@Schema(description = "HTTPメソッド", required = true)
 		@JsonSerialize(using = ToStringSerializer.class)
 		private HttpMethod method;
 
@@ -159,7 +159,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 */
 		@Column(nullable = false)
 		@Enumerated(EnumType.STRING)
-		@ApiModelProperty(value = "システムドメイン", required = true, position = 3)
+		@Schema(description = "システムドメイン", required = true)
 		private Domain domain;
 	}
 
@@ -170,7 +170,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 	 * 認可処理実施要否
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "認可処理実施要否", required = true, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "認可処理実施要否", required = true, allowableValues = "range[0,9]")
 	private int requireAuthorize;
 
 	/**
@@ -178,55 +178,55 @@ public class UrlAuthMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
-	@ApiModelProperty(value = "外部参照ドメイン", required = false, position = 5)
+	@Schema(description = "外部参照ドメイン", required = false)
 	private Domain externalRefDomain;
 
 	/**
 	 * DBデータ存在有無
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "DBデータ存在有無", required = true, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "DBデータ存在有無", required = true, allowableValues = "range[0,9]")
 	private int existsDb;
 
 	/**
 	 * パラメータータイプ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "パラメータータイプ", required = true, allowableValues = "none(\"0\"), path(\"1\"), query(\"2\"), json(\"3\")", example = "1", position = 7)
+	@Schema(description = "パラメータータイプ", required = true, allowableValues = "none(\"0\"), path(\"1\"), query(\"2\"), json(\"3\")", example = "1")
 	private ParameterType paramType;
 
 	/**
 	 * パラメーターキー
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "パラメーターキー", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "パラメーターキー", required = false, allowableValues = "range[0,255]")
 	private String paramKey;
 
 	/**
 	 * アクション区分
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "アクション区分", required = true, allowableValues = "なし(\"00\"), 照会(\"01\"), 登録(\"02\"), 更新(\"03\"), 削除(\"04\"), 印刷(\"05\"), ダウンロード(\"06\"), 集計(\"07\")", example = "01", position = 9)
+	@Schema(description = "アクション区分", required = true, allowableValues = "なし(\"00\"), 照会(\"01\"), 登録(\"02\"), 更新(\"03\"), 削除(\"04\"), 印刷(\"05\"), ダウンロード(\"06\"), 集計(\"07\")", example = "01")
 	private ActionDiv actionDiv;
 
 	/**
 	 * 権限区分
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0", position = 10)
+	@Schema(description = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0")
 	private AuthDiv authDiv;
 
 	/**
 	 * 参照種別
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "参照種別", required = true, allowableValues = "なし(\"0\"), 参照(\"1\"), 編集(\"2\"), 承認(\"3\")", example = "1", position = 11)
+	@Schema(description = "参照種別", required = true, allowableValues = "なし(\"0\"), 参照(\"1\"), 編集(\"2\"), 承認(\"3\")", example = "1")
 	private AccessType accessType;
 
 	/**
 	 * 処理概要
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "処理概要", required = true, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "処理概要", required = true, allowableValues = "range[0,255]")
 	private String description;
 }

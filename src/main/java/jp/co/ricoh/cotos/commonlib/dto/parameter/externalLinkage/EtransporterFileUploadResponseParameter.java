@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class EtransporterFileUploadResponseParameter {
 
-	@ApiModelProperty(value = "ダウンロードパスワード", required = true, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "ダウンロードパスワード", required = true, allowableValues = "range[0,255]")
 	private String downloadPassword;
 
-	@ApiModelProperty(value = "ダウンロードURL", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ダウンロードURL", required = true, allowableValues = "range[0,255]")
 	private String downloadUrl;
 
 }

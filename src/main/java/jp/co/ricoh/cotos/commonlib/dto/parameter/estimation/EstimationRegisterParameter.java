@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import lombok.Data;
 
@@ -22,21 +22,21 @@ public class EstimationRegisterParameter {
 	 * 見積ID
 	 */
 	@Min(0)
-	@ApiParam(value = "見積ID", allowableValues = "range[0,9223372036854775807]", required = true)
+	@Parameter(description = "見積ID", allowableValues = "range[0,9223372036854775807]", required = true)
 	private long estimationId;
 
 	/**
 	 * 商品グループマスタID
 	 */
 	@Min(0)
-	@ApiParam(value = "商品グループマスタID", allowableValues = "range[0,9223372036854775807]", required = true)
+	@Parameter(description = "商品グループマスタID", allowableValues = "range[0,9223372036854775807]", required = true)
 	private long productGroupMasterId;
 
 	/**
 	 * 拡張項目
 	 */
 	@NotNull
-	@ApiParam(value = "拡張項目", required = true)
+	@Parameter(description = "拡張項目", required = true)
 	@Lob
 	private String extendsParameter;
 
@@ -45,7 +45,7 @@ public class EstimationRegisterParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiParam(value = "登録者", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "登録者", allowableValues = "range[0,255]", required = true)
 	private String createdUser;
 
 	/**
@@ -53,19 +53,19 @@ public class EstimationRegisterParameter {
 	 */
 	@NotNull
 	@Valid
-	@ApiParam(value = "見積明細", required = true)
+	@Parameter(description = "見積明細", required = true)
 	private List<EstimationDetailRegisterParameter> estimationDetailRegisterParameterList;
 
 	/**
 	 * サービス利用希望日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiParam(value = "サービス利用希望日", required = false)
+	@Parameter(description = "サービス利用希望日", required = false)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * 契約変更タイミング
 	 */
-	@ApiParam(value = "契約変更タイミング", required = false)
+	@Parameter(description = "契約変更タイミング", required = false)
 	private ContractChangeTiming contractChangeTiming;
 }

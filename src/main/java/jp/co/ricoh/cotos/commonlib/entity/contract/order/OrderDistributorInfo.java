@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +32,7 @@ public class OrderDistributorInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_distributor_info_seq")
 	@SequenceGenerator(name = "order_distributor_info_seq", sequenceName = "order_distributor_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1)
+	@Schema(description = "ID", required = true)
 	private long id;
 
 	/**
@@ -47,63 +47,63 @@ public class OrderDistributorInfo extends EntityBase {
 	 * 販売店コード
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店コード", required = false, position = 2, allowableValues = "range[0,]")
+	@Schema(description = "販売店コード", required = false, allowableValues = "range[0,]")
 	private String distributorCd;
 
 	/**
 	 * 販売店名
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店名", required = false, position = 3, allowableValues = "range[0,]")
+	@Schema(description = "販売店名", required = false, allowableValues = "range[0,]")
 	private String distributorName;
 
 	/**
 	 * OE届け先コード
 	 */
 	@Column
-	@ApiModelProperty(value = "OE届け先コード", required = false, position = 4, allowableValues = "range[0,]")
+	@Schema(description = "OE届け先コード", required = false, allowableValues = "range[0,]")
 	private String oeDeliveryCd;
 
 	/**
 	 * 販売店区分
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店区分", required = false, position = 5, allowableValues = "range[0,]")
+	@Schema(description = "販売店区分", required = false, allowableValues = "range[0,]")
 	private String distributorCustomerType;
 
 	/**
 	 * 販売店担当営業
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店担当営業", required = false, position = 6, allowableValues = "range[0,]")
+	@Schema(description = "販売店担当営業", required = false, allowableValues = "range[0,]")
 	private String distributorEmployeeName;
 
 	/**
 	 * 販売店担当営業メールアドレス
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店担当営業メールアドレス", required = false, position = 7, allowableValues = "range[0,]")
+	@Schema(description = "販売店担当営業メールアドレス", required = false, allowableValues = "range[0,]")
 	private String distributorEmployeeMailAddress;
 
 	/**
 	 * Rings得意先コード
 	 */
 	@Column
-	@ApiModelProperty(value = "Rings得意先コード", required = false, position = 8, allowableValues = "range[0,]")
+	@Schema(description = "Rings得意先コード", required = false, allowableValues = "range[0,]")
 	private String ringsCustomerCd;
 
 	/**
 	 * 販売店郵便番号
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店郵便番号", required = false, position = 9, allowableValues = "range[0,]")
+	@Schema(description = "販売店郵便番号", required = false, allowableValues = "range[0,]")
 	private String distributorPostNumber;
 
 	/**
 	 * 販売店住所
 	 */
 	@Column
-	@ApiModelProperty(value = "販売店住所", required = false, position = 10, allowableValues = "range[0,]")
+	@Schema(description = "販売店住所", required = false, allowableValues = "range[0,]")
 	private String distributorAddress;
 
 }

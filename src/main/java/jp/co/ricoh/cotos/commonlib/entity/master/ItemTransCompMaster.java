@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialRunningDiv;
 import lombok.Data;
@@ -40,27 +40,27 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_trans_comp_master_seq")
 	@SequenceGenerator(name = "item_trans_comp_master_seq", sequenceName = "item_trans_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * 原価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "原価", required = false, position = 2, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 振替先課所コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "振替先課所コード", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所コード", required = false, allowableValues = "range[0,255]")
 	private String transToServiceOrgCode;
 
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\"), 期間売_月額(\"4\")", position = 4)
+	@Schema(description = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\"), 期間売_月額(\"4\")")
 	private InitialRunningDiv initialRunningDiv;
 
 	/**
@@ -69,7 +69,7 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = true, position = 5)
+	@Schema(description = "品種マスタ", required = true)
 	private ItemMaster itemMaster;
 
 	/**
@@ -77,18 +77,18 @@ public class ItemTransCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "ディスパッチ振替フラグ", required = false, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "ディスパッチ振替フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer dispatchTransferFlg;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 5, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 一括取込商品フラグ
 	 */
-	@ApiModelProperty(value = "一括取込商品フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "一括取込商品フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer batchImportTargetFlg;
 }

@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.AttachedFileDto;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
@@ -30,14 +30,14 @@ public class ContractAttachedFileDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル種類", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", required = false, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
@@ -47,14 +47,14 @@ public class ContractAttachedFileDto extends DtoBase {
 	@NotNull
 	@OneToOne(optional = false)
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "添付ファイル", required = true, position = 5)
+	@Schema(description = "添付ファイル", required = true)
 	private AttachedFileDto attachedFile;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "コメント", required = false, position = 6, allowableValues = "range[0,1000]")
+	@Schema(description = "コメント", required = false, allowableValues = "range[0,1000]")
 	private String attachedComment;
 
 	/**
@@ -62,7 +62,7 @@ public class ContractAttachedFileDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者MoM社員ID", required = true, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "添付者MoM社員ID", required = true, allowableValues = "range[0,255]")
 	private String attachedEmpId;
 
 	/**
@@ -70,20 +70,20 @@ public class ContractAttachedFileDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者氏名", required = true, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "添付者氏名", required = true, allowableValues = "range[0,255]")
 	private String attachedEmpName;
 
 	/**
 	 * 添付者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者組織名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "添付者組織名", required = false, allowableValues = "range[0,255]")
 	private String attachedOrgName;
 
 	/**
 	 * 添付日時
 	 */
-	@ApiModelProperty(value = "添付日時", required = true, position = 10)
+	@Schema(description = "添付日時", required = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date attachedAt;
 
@@ -92,7 +92,7 @@ public class ContractAttachedFileDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractAttachedFile")
-	@ApiModelProperty(value = "契約添付ファイル連携先", required = false, position = 11)
+	@Schema(description = "契約添付ファイル連携先", required = false)
 	private List<ContractAttachedFileLinkageDto> contractAttachedFileLinkageList;
 
 	/**
@@ -100,12 +100,12 @@ public class ContractAttachedFileDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	@Schema(description = "添付必須フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
 
 	/**
 	 * チェックタイミング区分
 	 */
-	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")", position = 13)
+	@Schema(description = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")")
 	private CheckTimingDiv checkTimingDiv;
 }

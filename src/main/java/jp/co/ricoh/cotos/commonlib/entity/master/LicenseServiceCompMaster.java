@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,13 +33,13 @@ public class LicenseServiceCompMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_service_comp_master_seq")
 	@SequenceGenerator(name = "license_service_comp_master_seq", sequenceName = "license_service_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンスサービス構成マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンスサービス構成マスタID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 品種マスタID
 	 */
-	@ApiModelProperty(value = "品種マスタID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -50,7 +50,7 @@ public class LicenseServiceCompMaster extends EntityBase {
 	@JsonIgnore
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "license_service_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "ライセンスサービスマスタ", required = true, position = 3)
+	@Schema(description = "ライセンスサービスマスタ", required = true)
 	private LicenseServiceMaster licenseServiceMaster;
 
 }

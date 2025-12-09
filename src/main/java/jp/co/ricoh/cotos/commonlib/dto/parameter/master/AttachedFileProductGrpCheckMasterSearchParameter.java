@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -19,7 +19,7 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品グループマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品グループマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private Long productGrpMasterId;
 
 	/**
@@ -27,7 +27,7 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ドメイン", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン", required = true, allowableValues = "range[0,255]")
 	private String domain;
 
 	/**
@@ -35,7 +35,7 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "見積/契約種別", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "見積/契約種別", required = true, allowableValues = "range[0,255]")
 	private String estimationContractType;
 
 	/**
@@ -43,20 +43,20 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライフサイクル状態", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ライフサイクル状態", required = true, allowableValues = "range[0,255]")
 	private String lifecycleStatus;
 
 	/**
 	 * 品種マスタIDリスト
 	 */
 	@NotNull
-	@ApiModelProperty(value = "品種マスタIDリスト", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタIDリスト", required = true, allowableValues = "range[0,9223372036854775807]")
 	private List<Long> itemMasterIdList;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**
@@ -64,7 +64,7 @@ public class AttachedFileProductGrpCheckMasterSearchParameter {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "V-UP連携チェック除外フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@Schema(description = "V-UP連携チェック除外フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer vupLinkageCheckExcludeFlg;
 
 }

@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement;
 
 import jakarta.validation.Valid;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.contract.ContractDto;
 import lombok.Data;
 
@@ -13,10 +13,10 @@ import lombok.Data;
 public class UpdateArrangementContractParameter {
 
 	@Valid
-	@ApiModelProperty(value = "手配", required = true)
+	@Schema(description = "手配", required = true)
 	private ArrangementDto arrangementDto;
 
 	@Valid
-	@ApiModelProperty(value = "契約", required = true)
+	@Schema(description = "契約", required = true)
 	private ContractDto contractDto;
 }

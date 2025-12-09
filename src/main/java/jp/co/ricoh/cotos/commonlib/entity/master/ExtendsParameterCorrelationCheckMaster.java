@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -68,14 +68,14 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 		 * 商品マスタID
 		 */
 		@Column(name = "product_master_id", nullable = false)
-		@ApiModelProperty(value = "商品マスタID", required = true, position = 1)
+		@Schema(description = "商品マスタID", required = true)
 		private long productMasterId;
 
 		/**
 		 * ドメイン
 		 */
 		@Column(name = "domain", nullable = false)
-		@ApiModelProperty(value = "システムドメイン", required = true, position = 2)
+		@Schema(description = "システムドメイン", required = true)
 		private Domain domain;
 	}
 
@@ -92,7 +92,7 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 	 * 相関チェック条件式
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "相関チェック条件式", required = true, position = 3)
+	@Schema(description = "相関チェック条件式", required = true)
 	@Lob
 	private String correlationCheckConditionFormula;
 }

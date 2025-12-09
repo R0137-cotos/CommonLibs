@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import lombok.Data;
@@ -65,7 +65,7 @@ public class EstimationDetail extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_detail_seq")
 	@SequenceGenerator(name = "estimation_detail_seq", sequenceName = "estimation_detail_seq", allocationSize = 1)
-	@ApiModelProperty(value = "見積明細ID(作成時不要)", required = true, position = 1, readOnly = true)
+	@Schema(description = "見積明細ID(作成時不要)", required = true, readOnly = true)
 	private long id;
 
 	/**
@@ -73,7 +73,7 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "見積", required = true, position = 2)
+	@Schema(description = "見積", required = true)
 	@JsonIgnore
 	private Estimation estimation;
 
@@ -82,7 +82,7 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "状態", required = true, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1", position = 3)
+	@Schema(description = "状態", required = true, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus state;
 
 	/**
@@ -90,7 +90,7 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
+	@Schema(description = "変更前数量", required = false, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
@@ -99,7 +99,7 @@ public class EstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", required = true, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -108,7 +108,7 @@ public class EstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "見積単価", required = true, position = 6, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "見積単価", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal estimationUnitPrice;
 
 	/**
@@ -117,32 +117,32 @@ public class EstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "見積金額", required = true, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "見積金額", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal estimationAmountSummary;
 
 	/**
 	 * 摘要
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "摘要", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "摘要", required = false, allowableValues = "range[0,255]")
 	private String detailAbstract;
 
 	/**
 	 * 拡張項目
 	 */
 	@Lob
-	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
+	@Schema(description = "拡張項目", required = false)
 	private String extendsParameter;
 
 	@OneToOne(mappedBy = "estimationDetail")
-	@ApiModelProperty(value = "品種(見積用)(作成時不要)", required = true, position = 10, readOnly = true)
+	@Schema(description = "品種(見積用)(作成時不要)", required = true, readOnly = true)
 	private ItemEstimation itemEstimation;
 
 	/**
 	 * 契約期間
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約期間", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "契約期間", required = false, allowableValues = "range[0,255]")
 	private String contractSpan;
 
 	/**
@@ -150,7 +150,7 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	@Schema(description = "品種追加フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
 
 	/**
@@ -158,7 +158,7 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "変更前単価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal beforeUnitPrice;
 
 	/**
@@ -166,7 +166,7 @@ public class EstimationDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "契約数", required = false, position = 14, allowableValues = "range[-99999,99999]")
+	@Schema(description = "契約数", required = false, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
 
 	@PrePersist
@@ -177,6 +177,6 @@ public class EstimationDetail extends EntityBase {
 	/**
 	 * 増減区分
 	 */
-	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 15)
+	@Schema(description = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

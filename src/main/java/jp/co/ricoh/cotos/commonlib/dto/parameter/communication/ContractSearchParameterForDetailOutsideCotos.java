@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -19,72 +19,72 @@ public class ContractSearchParameterForDetailOutsideCotos {
 	/**
 	 * 商品種別
 	 */
-	@ApiParam(value = "商品種別", required = false)
-	@ApiModelProperty(value = "商品種別", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "商品種別", required = false)
+	@Schema(description = "商品種別", required = false, allowableValues = "range[0,15]")
 	private List<String> productType;
 
 	/**
 	 * COTOS契約ライフサイクル状態
 	 */
-	@ApiParam(value = "COTOS契約ライフサイクル状態", required = true)
-	@ApiModelProperty(value = "COTOS契約ライフサイクル状態", required = true)
+	@Parameter(description = "COTOS契約ライフサイクル状態", required = true)
+	@Schema(description = "COTOS契約ライフサイクル状態", required = true)
 	private List<String> status;
 
 	/**
 	 * 契約情報更新日From
 	 */
-	@ApiParam(value = "契約情報更新日From", required = false)
-	@ApiModelProperty(value = "契約情報更新日From", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "契約情報更新日From", required = false)
+	@Schema(description = "契約情報更新日From", required = false, allowableValues = "range[0,15]")
 	private String updateFrom;
 
 	/**
 	 * 契約情報更新日To
 	 */
-	@ApiParam(value = "契約情報更新日To", required = false)
-	@ApiModelProperty(value = "契約情報更新日To", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "契約情報更新日To", required = false)
+	@Schema(description = "契約情報更新日To", required = false, allowableValues = "range[0,15]")
 	private String updateTo;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiParam(value = "RJ管理番号", required = false)
-	@ApiModelProperty(value = "RJ管理番号", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "RJ管理番号", required = false)
+	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,15]")
 	private String rjManageNumber;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
-	@ApiParam(value = "アプリケーションIDリスト", required = true)
-	@ApiModelProperty(value = "アプリケーションIDリスト", required = true)
+	@Parameter(description = "アプリケーションIDリスト", required = true)
+	@Schema(description = "アプリケーションIDリスト", required = true)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
-	@ApiParam(value = "他システムデータ排他フラグ", required = true)
-	@ApiModelProperty(value = "他システムデータ排他フラグ", required = true)
+	@Parameter(description = "他システムデータ排他フラグ", required = true)
+	@Schema(description = "他システムデータ排他フラグ", required = true)
 	private int otherSysDataExcludeFlg;
 
 	/**
 	 * 取得開始行
 	 */
-	@ApiParam(value = "取得開始行", required = false)
-	@ApiModelProperty(value = "取得開始行", required = false)
+	@Parameter(description = "取得開始行", required = false)
+	@Schema(description = "取得開始行", required = false)
 	private String startLine;
 
 	/**
 	 * 取得行数
 	 */
-	@ApiParam(value = "取得行数", required = false)
-	@ApiModelProperty(value = "取得行数", required = false)
+	@Parameter(description = "取得行数", required = false)
+	@Schema(description = "取得行数", required = false)
 	private String offset;
 
 	/**
 	 * システム区分
 	 * 1：Bplats
 	 */
-	@ApiParam(value = "システム区分", required = false)
-	@ApiModelProperty(value = "システム区分", required = false)
+	@Parameter(description = "システム区分", required = false)
+	@Schema(description = "システム区分", required = false)
 	private String systemDiv;
 
 	/**

@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -60,7 +60,7 @@ public class ContactTo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_to_seq")
 	@SequenceGenerator(name = "contact_to_seq", sequenceName = "contact_to_seq", allocationSize = 1)
-	@ApiModelProperty(value = "宛先ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "宛先ID (作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -69,13 +69,13 @@ public class ContactTo extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contact_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "問い合わせ", required = true, position = 2)
+	@Schema(description = "問い合わせ", required = true)
 	private Contact contact;
 
 	/**
 	 * 送信タイプ
 	 */
-	@ApiModelProperty(value = "送信タイプ", required = false, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1", position = 3)
+	@Schema(description = "送信タイプ", required = false, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
 	private SendType sendType;
 
 	/**
@@ -84,20 +84,20 @@ public class ContactTo extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "宛先MoM社員ID", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "宛先MoM社員ID", required = true, allowableValues = "range[0,255]")
 	private String contactToEmpId;
 
 	/**
 	 * 宛先メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "宛先メールアドレス", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "宛先メールアドレス", required = false, allowableValues = "range[0,255]")
 	private String contactToEmail;
 
 	/**
 	 * 宛先氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "宛先氏名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "宛先氏名", required = false, allowableValues = "range[0,255]")
 	private String contactToEmpName;
 }

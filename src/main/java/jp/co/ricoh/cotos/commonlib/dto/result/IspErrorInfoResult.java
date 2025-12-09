@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -12,13 +12,13 @@ public class IspErrorInfoResult {
 	/**
 	 * エラーID
 	 */
-	@ApiModelProperty(value = "エラーID", required = false, position = 1)
+	@Schema(description = "エラーID", required = false)
 	private String errorId;
 
 	/**
 	 * エラーメッセージ
 	 */
-	@ApiModelProperty(value = "エラーメッセージ", required = false, position = 2)
+	@Schema(description = "エラーメッセージ", required = false)
 	private String errorMessage;
 
 }

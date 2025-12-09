@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -86,21 +86,21 @@ public class MobileEquipment extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mobile_equipment_seq")
 	@SequenceGenerator(name = "mobile_equipment_seq", sequenceName = "mobile_equipment_seq", allocationSize = 1)
-	@ApiModelProperty(value = "モバイル機器ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "モバイル機器ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 見積ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "見積ID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long estimationId;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
@@ -108,88 +108,88 @@ public class MobileEquipment extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 端末種別
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "端末種別", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "端末種別", required = false, allowableValues = "range[0,255]")
 	private String terminalType;
 
 	/**
 	 * サービスコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービスコード", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "サービスコード", required = false, allowableValues = "range[0,255]")
 	private String serviceCd;
 
 	/**
 	 * 端末電話番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "端末電話番号", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "端末電話番号", required = false, allowableValues = "range[0,255]")
 	private String phoneNumber;
 
 	/**
 	 * シリアル番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "シリアル番号", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "シリアル番号", required = false, allowableValues = "range[0,255]")
 	private String serialNumber;
 
 	/**
 	 * モバイル利用開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "モバイル利用開始日", required = false, position = 10)
+	@Schema(description = "モバイル利用開始日", required = false)
 	private Date mobileUsageStartDate;
 
 	/**
 	 * モバイル課金開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "モバイル課金開始日", required = false, position = 11)
+	@Schema(description = "モバイル課金開始日", required = false)
 	private Date mobileBillingStartDate;
 
 	/**
 	 * モバイル伝票番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "モバイル伝票番号", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "モバイル伝票番号", required = false, allowableValues = "range[0,255]")
 	private String mobileSlipNumber;
 
 	/**
 	 * 端末状態区分
 	 */
-	@ApiModelProperty(value = "端末状態区分", required = false, position = 13, allowableValues = "契約中(\"1\"), 返却(\"2\"), 紛失(\"3\"), 破損水没(\"4\")")
+	@Schema(description = "端末状態区分", required = false, allowableValues = "契約中(\"1\"), 返却(\"2\"), 紛失(\"3\"), 破損水没(\"4\")")
 	private TerminalStatusDiv terminalStatusDiv;
 
 	/**
 	 * 端末解約送信日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "端末解約送信日", required = false, position = 14)
+	@Schema(description = "端末解約送信日", required = false)
 	private Date cancelSendDate;
 
 	/**
 	 * 端末解約契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "端末解約契約ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "端末解約契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long cancelContractId;
 
 	/**
 	 * 処理区分
 	 */
-	@ApiModelProperty(value = "処理区分", required = false, position = 16, allowableValues = "未処理(\"0\"), 処理済み(\"1\"), 対象外(\"2\")")
+	@Schema(description = "処理区分", required = false, allowableValues = "未処理(\"0\"), 処理済み(\"1\"), 対象外(\"2\")")
 	private ProcessDiv processDiv;
 }

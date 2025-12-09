@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,13 +26,13 @@ public class SuperUserMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "super_user_master_seq")
 	@SequenceGenerator(name = "super_user_master_seq", sequenceName = "super_user_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "スーパーユーザーマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "スーパーユーザーマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * MoM社員ID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "MoM社員ID", required = true, position = 2)
+	@Schema(description = "MoM社員ID", required = true)
 	private String userId;
 }

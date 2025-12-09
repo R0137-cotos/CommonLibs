@@ -9,7 +9,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,7 +29,7 @@ public class EmpGrpManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_grp_management_master_seq")
 	@SequenceGenerator(name = "emp_grp_management_master_seq", sequenceName = "emp_grp_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "社員グループ管理マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "社員グループ管理マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -37,14 +37,14 @@ public class EmpGrpManagementMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "グループコード", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "グループコード", required = true, allowableValues = "range[0,255]")
 	private String groupCode;
 
 	/**
 	 * グループ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "グループ名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "グループ名", required = false, allowableValues = "range[0,255]")
 	private String groupName;
 
 	/**
@@ -52,6 +52,6 @@ public class EmpGrpManagementMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "MoM社員ID", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "MoM社員ID", required = true, allowableValues = "range[0,255]")
 	private String momEmpId;
 }

@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.FileLinkageStatus;
 import lombok.Data;
@@ -36,7 +36,7 @@ public class ContractAttachedFileLinkage extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_attached_file_linkage_seq")
 	@SequenceGenerator(name = "contract_attached_file_linkage_seq", sequenceName = "contract_attached_file_linkage_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約業務添付ファイル連携先ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約業務添付ファイル連携先ID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -45,13 +45,13 @@ public class ContractAttachedFileLinkage extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_attached_file_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約添付ファイルID", required = true, position = 2)
+	@Schema(description = "契約添付ファイルID", required = true)
 	private ContractAttachedFile contractAttachedFile;
 
 	/**
 	 * ファイル連携先ID
 	 */
-	@ApiModelProperty(value = "ファイル連携先ID", required = true, position = 3)
+	@Schema(description = "ファイル連携先ID", required = true)
 	private long attachedFileLinkageId;
 
 	/**
@@ -59,14 +59,14 @@ public class ContractAttachedFileLinkage extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル連携先", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル連携先", required = true, allowableValues = "range[0,255]")
 	private String attachedFileLinkageName;
 
 	/**
 	 * 連携ステータス
 	 */
 	@NotNull
-	@ApiModelProperty(value = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0", position = 5)
+	@Schema(description = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0")
 	private FileLinkageStatus linkageStatus;
 	
 	/**
@@ -74,6 +74,6 @@ public class ContractAttachedFileLinkage extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 }

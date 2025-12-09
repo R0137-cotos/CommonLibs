@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -12,13 +12,13 @@ public class ElconEimDocumentRegistrationResult {
 	/**
 	 * ドキュメントID
 	 */
-	@ApiModelProperty(value = "ドキュメントID", required = false, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "ドキュメントID", required = false, allowableValues = "range[0,255]")
 	private String documentId;
 
 	/**
 	 * ドキュメントKey
 	 */
-	@ApiModelProperty(value = "ドキュメントKey", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ドキュメントKey", required = false, allowableValues = "range[0,255]")
 	private String documentKey;
 
 }

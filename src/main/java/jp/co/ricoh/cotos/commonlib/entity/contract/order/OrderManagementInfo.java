@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -64,7 +64,7 @@ public class OrderManagementInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_management_info_seq")
 	@SequenceGenerator(name = "order_management_info_seq", sequenceName = "order_management_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1)
+	@Schema(description = "ID", required = true)
 	private long id;
 
 	/**
@@ -79,7 +79,7 @@ public class OrderManagementInfo extends EntityBase {
 	 * 契約取込状況
 	 */
 	@Column
-	@ApiModelProperty(value = "契約取込状況", required = true, position = 2, allowableValues = "未取込(\"0\"), 取込済(\"1\"), 取込対象外(\"9\"), 処理不可(\"E\"), 異常取込(\"W\"), 取込情報(\"I\")")
+	@Schema(description = "契約取込状況", required = true, allowableValues = "未取込(\"0\"), 取込済(\"1\"), 取込対象外(\"9\"), 処理不可(\"E\"), 異常取込(\"W\"), 取込情報(\"I\")")
 	private CaptureStatus contractCaptureStatus;
 
 	/**
@@ -87,34 +87,34 @@ public class OrderManagementInfo extends EntityBase {
 	 */
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "契約取込日時", required = false, position = 3)
+	@Schema(description = "契約取込日時", required = false)
 	private Date contractCaptureAt;
 
 	/**
 	 * 処理不可事由
 	 */
 	@Column
-	@ApiModelProperty(value = "処理不可事由", required = false, position = 4, allowableValues = "range[0,]")
+	@Schema(description = "処理不可事由", required = false, allowableValues = "range[0,]")
 	private String unprocessedReason;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Column
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 5, allowableValues = "range[0,]")
+	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約ID
 	 */
 	@Column
-	@ApiModelProperty(value = "契約ID", required = false, position = 6)
+	@Schema(description = "契約ID", required = false)
 	private long contractId;
 
 	/**
 	 * 見積ID
 	 */
 	@Column
-	@ApiModelProperty(value = "見積ID", required = false, position = 7)
+	@Schema(description = "見積ID", required = false)
 	private long estimationId;
 }

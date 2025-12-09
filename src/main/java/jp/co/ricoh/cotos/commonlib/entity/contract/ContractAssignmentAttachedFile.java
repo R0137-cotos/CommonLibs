@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import lombok.Data;
@@ -49,7 +49,7 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_assignment_attached_file_seq")
 	@SequenceGenerator(name = "contract_assignment_attached_file_seq", sequenceName = "contract_assignment_attached_file_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約添付ファイルID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約添付ファイルID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -58,7 +58,7 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_assignment_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約業務ID", required = true, position = 2)
+	@Schema(description = "契約業務ID", required = true)
 	private ContractAssignment contractAssignment;
 
 	/**
@@ -67,14 +67,14 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル種類", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", required = false, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
@@ -84,7 +84,7 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@NotNull
 	@OneToOne(optional = false)
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "添付ファイル", required = true, position = 5)
+	@Schema(description = "添付ファイル", required = true)
 	private AttachedFile attachedFile;
 
 	/**
@@ -93,7 +93,7 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "添付者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, allowableValues = "range[0,255]")
 	private String attachedEmpId;
 
 	/**
@@ -102,21 +102,21 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者氏名", required = true, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "添付者氏名", required = true, allowableValues = "range[0,255]")
 	private String attachedEmpName;
 
 	/**
 	 * 添付者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者組織名", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "添付者組織名", required = false, allowableValues = "range[0,255]")
 	private String attachedOrgName;
 
 	/**
 	 * 添付日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "添付日時(作成時不要)", required = true, position = 9, readOnly = true)
+	@Schema(description = "添付日時(作成時不要)", required = true, readOnly = true)
 	private Date attachedAt;
 
 	/**
@@ -124,14 +124,14 @@ public class ContractAssignmentAttachedFile extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 10, allowableValues = "range[0,9]")
+	@Schema(description = "添付必須フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
 
 	/**
 	 * ファイル情報
 	 */
 	@Transient
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private MultipartFile multipartFile;
 
 	@PrePersist

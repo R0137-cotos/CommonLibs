@@ -2,9 +2,9 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -15,25 +15,25 @@ public class ReportSpecificResult {
 	/**
 	 * テンプレートID
 	 */
-	@ApiModelProperty(value = "テンプレートID", required = true, allowableValues = "range[0,9999999999999999999]", position = 1)
+	@Schema(description = "テンプレートID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * テンプレート名(帳票作成時不要)
 	 */
-	@ApiModelProperty(value = "テンプレート名(帳票作成時不要)", required = false, allowableValues = "range[255]", position = 2)
+	@Schema(description = "テンプレート名(帳票作成時不要)", required = false, allowableValues = "range[255]")
 	private String templateName;
 
 	/**
 	 * 拡張子(帳票作成時不要)
 	 */
-	@ApiModelProperty(value = "拡張子(帳票作成時不要)", required = false, allowableValues = "range[255]", position = 3)
+	@Schema(description = "拡張子(帳票作成時不要)", required = false, allowableValues = "range[255]")
 	private String extension;
 
 	/**
 	 * ページIDリスト
 	 */
 	@NotEmpty
-	@ApiModelProperty(value = "ページIDリスト", required = true, allowableValues = "range[255]", position = 4)
+	@Schema(description = "ページIDリスト", required = true, allowableValues = "range[255]")
 	private List<Long> pageIdList;
 }

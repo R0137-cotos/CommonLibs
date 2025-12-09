@@ -6,8 +6,8 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -44,276 +44,276 @@ public class LicenseSearchParameter {
 	/**
 	 * ライセンス検索区分
 	 */
-	@ApiParam(value = "ライセンス検索区分", required = false)
-	@ApiModelProperty(value = "ライセンス検索区分", required = false, allowableValues = "通常検索(\"1\"), 追加検索(\"2\"), 新規検索(\"3\"), 保守延長検索(\"4\"), 開通確認検索(\"5\"), 解約検索(\"6\")", position = 1)
+	@Parameter(description = "ライセンス検索区分", required = false)
+	@Schema(description = "ライセンス検索区分", required = false, allowableValues = "通常検索(\"1\"), 追加検索(\"2\"), 新規検索(\"3\"), 保守延長検索(\"4\"), 開通確認検索(\"5\"), 解約検索(\"6\")")
 	private LicenseSearchDiv licenseSearchDiv;
 
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@ApiParam(value = "ライセンス区分マスタID", required = false)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = false, allowableValues = "range[0,255]", position = 2)
+	@Parameter(description = "ライセンス区分マスタID", required = false)
+	@Schema(description = "ライセンス区分マスタID", required = false, allowableValues = "range[0,255]")
 	private String licenseDivMasterId;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiParam(value = "RJ管理番号", required = false)
-	@ApiModelProperty(value = "RJ管理番号", required = false, allowableValues = "range[0,255]", position = 3)
+	@Parameter(description = "RJ管理番号", required = false)
+	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
-	@ApiParam(value = "契約番号", required = false)
-	@ApiModelProperty(value = "契約番号", required = false, allowableValues = "range[0,15]", position = 4)
+	@Parameter(description = "契約番号", required = false)
+	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
-	@ApiParam(value = "契約番号枝番", required = false)
-	@ApiModelProperty(value = "契約番号枝番", required = false, allowableValues = "range[0,2]", position = 5)
+	@Parameter(description = "契約番号枝番", required = false)
+	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
 	 * オーガニゼーションID
 	 */
-	@ApiParam(value = "オーガニゼーションID", required = false)
-	@ApiModelProperty(value = "オーガニゼーションID", required = false, allowableValues = "range[0,255]", position = 6)
+	@Parameter(description = "オーガニゼーションID", required = false)
+	@Schema(description = "オーガニゼーションID", required = false, allowableValues = "range[0,255]")
 	private String organizationId;
 
 	/**
 	 * ライセンスキー
 	 */
-	@ApiParam(value = "ライセンスキー", required = false)
-	@ApiModelProperty(value = "ライセンスキー", required = false, allowableValues = "range[0,255]", position = 7)
+	@Parameter(description = "ライセンスキー", required = false)
+	@Schema(description = "ライセンスキー", required = false, allowableValues = "range[0,255]")
 	private String licenseKey;
 
 	/**
 	 * アカウント
 	 */
-	@ApiParam(value = "アカウント", required = false)
-	@ApiModelProperty(value = "アカウント", required = false, allowableValues = "range[0,255]", position = 8)
+	@Parameter(description = "アカウント", required = false)
+	@Schema(description = "アカウント", required = false, allowableValues = "range[0,255]")
 	private String account;
 
 	/**
 	 * 工程ステータス
 	 */
-	@ApiParam(value = "工程ステータス", required = false)
-	@ApiModelProperty(value = "工程ステータス<br />" //
+	@Parameter(description = "工程ステータス", required = false)
+	@Schema(description = "工程ステータス<br />" //
 			+ "ライセンス検索条件の「工程ステータス」の検索に使用するカラム", //
-			required = false, allowableValues = "range[0,255]", position = 9)
+			required = false, allowableValues = "range[0,255]")
 	private String licenseProcessStatus;
 
 	/**
 	 * サービス利用希望日（前）
 	 */
-	@ApiParam(value = "サービス利用希望日（前）", required = false)
-	@ApiModelProperty(value = "サービス利用希望日（前）<br />" //
+	@Parameter(description = "サービス利用希望日（前）", required = false)
+	@Schema(description = "サービス利用希望日（前）<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 10)
+			required = false)
 	private Date conclusionPreferredDateFrom;
 
 	/**
 	 * サービス利用希望日（後）
 	 */
-	@ApiParam(value = "サービス利用希望日（後）", required = false)
-	@ApiModelProperty(value = "サービス利用希望日（後）<br />" //
+	@Parameter(description = "サービス利用希望日（後）", required = false)
+	@Schema(description = "サービス利用希望日（後）<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 11)
+			required = false)
 	private Date conclusionPreferredDateTo;
 
 	/**
 	 * 契約種別
 	 */
-	@ApiParam(value = "契約種別", required = false)
-	@ApiModelProperty(value = "契約種別<br />" //
+	@Parameter(description = "契約種別", required = false)
+	@Schema(description = "契約種別<br />" //
 			+ "新規、契約変更、情報変更、契約更新などの契約種別を表す。", //
-			required = false, position = 12)
+			required = false)
 	private String contractType;
 
 	/**
 	 * 契約種別詳細
 	 */
-	@ApiParam(value = "契約種別詳細", required = false)
-	@ApiModelProperty(value = "契約種別詳細<br />" //
+	@Parameter(description = "契約種別詳細", required = false)
+	@Schema(description = "契約種別詳細<br />" //
 			+ "選択したライセンスに紐づく契約種別詳細を表す。", //
-			required = false, position = 13)
+			required = false)
 	private String contractTypeDetails;
 
 	/**
 	 * 契約ステータス
 	 */
-	@ApiParam(value = "契約ステータス:カンマ区切りで複数指定可", required = false)
-	@ApiModelProperty(value = "契約ステータス<br />" //
+	@Parameter(description = "契約ステータス:カンマ区切りで複数指定可", required = false)
+	@Schema(description = "契約ステータス<br />" //
 			+ "状態遷移上のワークフローステータスを表す。", //
-			required = false, position = 14)
+			required = false)
 	private String workflowStatus;
 
 	/**
 	 * 契約状態
 	 */
-	@ApiParam(value = "契約状態:カンマ区切りで複数指定可", required = false)
-	@ApiModelProperty(value = "契約状態<br />" //
+	@Parameter(description = "契約状態:カンマ区切りで複数指定可", required = false)
+	@Schema(description = "契約状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
-			required = false, position = 15)
+			required = false)
 	private String lifecycleStatus;
 
 	/**
 	 * キャンセル状態
 	 */
-	@ApiParam(value = "キャンセル状態", required = false)
-	@ApiModelProperty(value = "キャンセル状態", required = false, position = 16)
+	@Parameter(description = "キャンセル状態", required = false)
+	@Schema(description = "キャンセル状態", required = false)
 	private String cancelStatus;
 
 	/**
 	 * 解約予定日（前）
 	 */
-	@ApiParam(value = "解約予定日（前）", required = false)
-	@ApiModelProperty(value = "解約予定日（前）<br />" //
+	@Parameter(description = "解約予定日（前）", required = false)
+	@Schema(description = "解約予定日（前）<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 17)
+			required = false)
 	private Date cancelScheduledDateFrom;
 
 	/**
 	 * 解約予定日（後）
 	 */
-	@ApiParam(value = "解約予定日（後）", required = false)
-	@ApiModelProperty(value = "解約予定日（後）<br />" //
+	@Parameter(description = "解約予定日（後）", required = false)
+	@Schema(description = "解約予定日（後）<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 18)
+			required = false)
 	private Date cancelScheduledDateTo;
 
 	/**
 	 * 工程ステータス
 	 */
-	@ApiParam(value = "工程ステータス", required = false)
-	@ApiModelProperty(value = "工程ステータス<br />" //
+	@Parameter(description = "工程ステータス", required = false)
+	@Schema(description = "工程ステータス<br />" //
 			+ "ライセンス検索条件の「工程実施日時」の検索に使用するカラム", //
-			required = false, allowableValues = "range[0,255]", position = 19)
+			required = false, allowableValues = "range[0,255]")
 	private String licenseProcessStatusForOperatedDateTime;
 
 	/**
 	 * 工程実施日時(年月日)
 	 */
-	@ApiParam(value = "工程実施日時", required = false)
-	@ApiModelProperty(value = "工程実施日時<br />" //
+	@Parameter(description = "工程実施日時", required = false)
+	@Schema(description = "工程実施日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 20)
+			required = false)
 	private Date processOperatedDateTime;
 
 	/**
 	 * 工程実施日時(時)
 	 */
-	@ApiParam(value = "工程実施日時", required = false)
-	@ApiModelProperty(value = "工程実施日時<br />" //
+	@Parameter(description = "工程実施日時", required = false)
+	@Schema(description = "工程実施日時<br />" //
 			+ "日付フォーマット:HH:00", //
-			required = false, position = 20)
+			required = false)
 	private String processOperatedTime;
 
 	/**
 	 * 情報区分
 	 */
-	@ApiParam(value = "情報区分", required = false)
-	@ApiModelProperty(value = "情報区分<br />" //
+	@Parameter(description = "情報区分", required = false)
+	@Schema(description = "情報区分<br />" //
 			+ "アカウント単位での情報を表す。", //
-			required = false, position = 21)
+			required = false)
 	private String infoDiv;
 
 	// =========================== 以下、ライセンス詳細検索条件
 	/**
 	 * 受付状況フラグ
 	 */
-	@ApiParam(value = "受付状況フラグ", required = false)
-	@ApiModelProperty(value = "受付状況フラグ", required = false, position = 22)
+	@Parameter(description = "受付状況フラグ", required = false)
+	@Schema(description = "受付状況フラグ", required = false)
 	private Integer receptionStatusFlg;
 
 	/**
 	 * CSV出力日時
 	 */
-	@ApiParam(value = "CSV出力日時", required = false)
-	@ApiModelProperty(value = "CSV出力日時<br />" //
+	@Parameter(description = "CSV出力日時", required = false)
+	@Schema(description = "CSV出力日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 23)
+			required = false)
 	private Date csvOutputAt;
 
 	/**
 	 * RMA契約番号
 	 */
-	@ApiParam(value = "RMA契約番号", required = false)
-	@ApiModelProperty(value = "RMA契約番号", required = false, allowableValues = "range[0,255]", position = 24)
+	@Parameter(description = "RMA契約番号", required = false)
+	@Schema(description = "RMA契約番号", required = false, allowableValues = "range[0,255]")
 	private String rmaContractNumber;
 
 	/**
 	 * 割当区分
 	 */
-	@ApiParam(value = "割当区分", required = false)
-	@ApiModelProperty(value = "割当区分", required = false, position = 25)
+	@Parameter(description = "割当区分", required = false)
+	@Schema(description = "割当区分", required = false)
 	private Integer allocationDiv;
 
 	/**
 	 * 送信結果区分
 	 */
-	@ApiParam(value = "送信結果区分", required = false)
-	@ApiModelProperty(value = "送信結果区分", required = false, position = 26)
+	@Parameter(description = "送信結果区分", required = false)
+	@Schema(description = "送信結果区分", required = false)
 	private Integer mailSendResultDiv;
 
 	/**
 	 * 申込日
 	 */
-	@ApiParam(value = "申込日", required = false)
-	@ApiModelProperty(value = "申込日<br />" //
+	@Parameter(description = "申込日", required = false)
+	@Schema(description = "申込日<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
-			required = false, position = 27)
+			required = false)
 	private Date applicationDateAt;
 
 	/**
 	 * Welcomeメール送信状況
 	 */
-	@ApiParam(value = "Welcomeメール送信状況", required = false)
-	@ApiModelProperty(value = "Welcomeメール送信状況", required = false, position = 28)
+	@Parameter(description = "Welcomeメール送信状況", required = false)
+	@Schema(description = "Welcomeメール送信状況", required = false)
 	private Integer wellcomeMailSendResultDiv;
 
 	/**
 	 * 導入代行
 	 */
-	@ApiParam(value = "導入代行", required = false)
-	@ApiModelProperty(value = "導入代行", required = false, position = 29)
+	@Parameter(description = "導入代行", required = false)
+	@Schema(description = "導入代行", required = false)
 	private Integer intActingDiv;
 
 	/**
 	 * MerakiスマートサービスオーガニゼーションID
 	 */
-	@ApiParam(value = "MerakiスマートサービスオーガニゼーションID", required = false)
-	@ApiModelProperty(value = "MerakiスマートサービスオーガニゼーションID", required = false, position = 30)
+	@Parameter(description = "MerakiスマートサービスオーガニゼーションID", required = false)
+	@Schema(description = "MerakiスマートサービスオーガニゼーションID", required = false)
 	private String mssLinkageOrganizationId;
 
 	/**
 	 * FFM発注問合せ番号
 	 */
-	@ApiParam(value = "FFM発注問合せ番号", required = false)
-	@ApiModelProperty(value = "FFM発注問合せ番号", required = false, position = 31)
+	@Parameter(description = "FFM発注問合せ番号", required = false)
+	@Schema(description = "FFM発注問合せ番号", required = false)
 	private String contactNo;
 
 	/**
 	 * サブドメイン
 	 */
-	@ApiParam(value = "サブドメイン", required = false)
-	@ApiModelProperty(value = "サブドメイン", required = false, position = 32)
+	@Parameter(description = "サブドメイン", required = false)
+	@Schema(description = "サブドメイン", required = false)
 	private String subDomainName;
 
 	/**
 	 * ベンダー区分
 	 */
-	@ApiParam(value = "ベンダー区分", required = false)
-	@ApiModelProperty(value = "ベンダー区分", required = false, position = 33)
+	@Parameter(description = "ベンダー区分", required = false)
+	@Schema(description = "ベンダー区分", required = false)
 	private String vendorDiv;
 
 	/**
 	 * 端末電話番号
 	 */
-	@ApiParam(value = "端末電話番号", required = false)
-	@ApiModelProperty(value = "端末電話番号", required = false, position = 34)
+	@Parameter(description = "端末電話番号", required = false)
+	@Schema(description = "端末電話番号", required = false)
 	private String phoneNumber;
 }

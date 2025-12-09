@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.validation.Valid;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -17,7 +17,7 @@ public class IijMachineInfoListDto {
 	/**
 	 * IIJ機器情報リスト
 	 */
-	@ApiModelProperty(value = "IIJ機器情報リスト", required = false, position = 1)
+	@Schema(description = "IIJ機器情報リスト", required = false)
 	@Valid
 	private List<IijMachineInfoDto> iijMachineInfoList;
 }

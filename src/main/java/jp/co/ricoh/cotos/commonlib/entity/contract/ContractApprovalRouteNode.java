@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster.ApproverDeriveMethodDiv;
 import lombok.Data;
@@ -35,7 +35,7 @@ public class ContractApprovalRouteNode extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_approval_route_node_seq")
 	@SequenceGenerator(name = "contract_approval_route_node_seq", sequenceName = "contract_approval_route_node_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約承認ルートノードID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]", readOnly = true)
+	@Schema(description = "契約承認ルートノードID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]", readOnly = true)
 	private long id;
 
 	/**
@@ -44,7 +44,7 @@ public class ContractApprovalRouteNode extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_approval_route_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約承認ルート", required = true, position = 2)
+	@Schema(description = "契約承認ルート", required = true)
 	private ContractApprovalRoute contractApprovalRoute;
 
 	/**
@@ -54,14 +54,14 @@ public class ContractApprovalRouteNode extends EntityBase {
 	@OrderBy("desc")
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "承認順", required = true, position = 3, allowableValues = "range[0,999]")
+	@Schema(description = "承認順", required = true, allowableValues = "range[0,999]")
 	private int approvalOrder;
 
 	/**
 	 * 承認者組織階層レベル
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "承認者組織階層レベル", required = false, position = 4, allowableValues = "range[0,2147483647]")
+	@Schema(description = "承認者組織階層レベル", required = false, allowableValues = "range[0,2147483647]")
 	private Integer approverOrgLevel;
 
 	/**
@@ -70,7 +70,7 @@ public class ContractApprovalRouteNode extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認者MoM社員ID", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "承認者MoM社員ID", required = true, allowableValues = "range[0,255]")
 	private String approverEmpId;
 
 	/**
@@ -79,47 +79,47 @@ public class ContractApprovalRouteNode extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認者氏名", required = true, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "承認者氏名", required = true, allowableValues = "range[0,255]")
 	private String approverName;
 
 	/**
 	 * 承認者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認者組織名", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "承認者組織名", required = false, allowableValues = "range[0,255]")
 	private String approverOrgName;
 
 	/**
 	 * 代理承認者MoM社員ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "代理承認者MoM社員ID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者MoM社員ID", required = false, allowableValues = "range[0,255]")
 	private String subApproverEmpId;
 
 	/**
 	 * 代理承認者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "代理承認者氏名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者氏名", required = false, allowableValues = "range[0,255]")
 	private String subApproverName;
 
 	/**
 	 * 代理承認者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "代理承認者組織名", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者組織名", required = false, allowableValues = "range[0,255]")
 	private String subApproverOrgName;
 
 	/**
 	 * 承認者導出方式区分
 	 */
-	@ApiModelProperty(value = "承認者導出方式区分", required = false, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), -組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1", position = 11)
+	@Schema(description = "承認者導出方式区分", required = false, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), -組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1")
 	private ApproverDeriveMethodDiv approverDeriveMethodDiv;
 
 	/**
 	 * グループ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "グループ名", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "グループ名", required = false, allowableValues = "range[0,255]")
 	private String groupName;
 }

@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.common;
 
 import jakarta.validation.constraints.Min;
 
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.Data;
 
 /**
@@ -15,13 +15,13 @@ public class CheckResultUpdateParameter {
 	 * チェック結果ID
 	 */
 	@Min(0)
-	@ApiParam(value = "チェック結果ID", allowableValues = "range[0,9223372036854775807]", required = true)
+	@Parameter(description = "チェック結果ID", allowableValues = "range[0,9223372036854775807]", required = true)
 	private long checkResultId;
 
 	/**
 	 * 更新ステータス
 	 */
-	@ApiParam(value = "更新ステータス", required = true)
+	@Parameter(description = "更新ステータス", required = true)
 	private boolean updateStatus;
 
 }

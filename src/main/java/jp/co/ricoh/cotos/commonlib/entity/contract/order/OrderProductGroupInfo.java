@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +32,7 @@ public class OrderProductGroupInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_product_group_info_seq")
 	@SequenceGenerator(name = "order_product_group_info_seq", sequenceName = "order_product_group_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1)
+	@Schema(description = "ID", required = true)
 	private long id;
 
 	/**
@@ -47,14 +47,14 @@ public class OrderProductGroupInfo extends EntityBase {
 	 * 商品グループコード
 	 */
 	@Column
-	@ApiModelProperty(value = "商品グループコード", required = false, position = 2, allowableValues = "range[0,]")
+	@Schema(description = "商品グループコード", required = false, allowableValues = "range[0,]")
 	private String productGroupCd;
 
 	/**
 	 * 商品グループ名
 	 */
 	@Column
-	@ApiModelProperty(value = "商品グループ名", required = false, position = 3, allowableValues = "range[0,]")
+	@Schema(description = "商品グループ名", required = false, allowableValues = "range[0,]")
 	private String productGroupName;
 
 }

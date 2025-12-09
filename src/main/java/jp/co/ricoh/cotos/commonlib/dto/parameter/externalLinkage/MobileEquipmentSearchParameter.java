@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -13,14 +13,14 @@ public class MobileEquipmentSearchParameter {
 	 * 見積ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "見積ID", required = false, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "見積ID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long estimationId;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long contractId;
 
 	/**
@@ -28,6 +28,6 @@ public class MobileEquipmentSearchParameter {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 3, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 }

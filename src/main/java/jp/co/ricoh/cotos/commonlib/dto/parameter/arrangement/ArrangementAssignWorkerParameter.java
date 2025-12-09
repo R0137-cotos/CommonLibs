@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangement;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import lombok.Data;
 
@@ -16,12 +16,12 @@ public class ArrangementAssignWorkerParameter {
 	/**
 	 * 手配業務リスト
 	 */
-	@ApiModelProperty(value = "手配業務リスト", required = true, position = 1)
+	@Schema(description = "手配業務リスト", required = true)
 	private List<ArrangementWork> arrangementWorkList;
 
 	/**
 	 * MoM社員ID（手配担当作業者）
 	 */
-	@ApiModelProperty(value = "MoM社員ID", required = true, position = 2, allowableValues = "range[0,24]")
+	@Schema(description = "MoM社員ID", required = true, allowableValues = "range[0,24]")
 	private String employeeId;
 }

@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -20,36 +20,36 @@ public class YamatoSearchParameter {
 	/**
 	 * 商品マスタID
 	 */
-	@ApiParam(value = "商品マスタID", required = false)
-	@ApiModelProperty(value = "商品マスタID", required = false)
+	@Parameter(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", required = false)
 	private Long productMasterId;
 
 	/**
 	 * お問い合わせ番号
 	 */
-	@ApiParam(value = "お問い合わせ番号", required = false)
-	@ApiModelProperty(value = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "お問い合わせ番号", required = false)
+	@Schema(description = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 契約番号
 	 */
-	@ApiParam(value = "契約番号", required = false)
-	@ApiModelProperty(value = "契約番号", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "契約番号", required = false)
+	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
-	@ApiParam(value = "契約番号枝番", required = false)
-	@ApiModelProperty(value = "契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Parameter(description = "契約番号枝番", required = false)
+	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
 	 * 業務受付日時
 	 */
-	@ApiParam(value = "業務受付日時", required = false)
-	@ApiModelProperty(value = "業務受付日時<br />" //
+	@Parameter(description = "業務受付日時", required = false)
+	@Schema(description = "業務受付日時<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false) //
 	private Date businessAcceptDateTime;
@@ -57,15 +57,15 @@ public class YamatoSearchParameter {
 	/**
 	 * アプリケーションIDリスト
 	 */
-	@ApiParam(value = "アプリケーションIDリスト", required = false)
-	@ApiModelProperty(value = "アプリケーションIDリスト", required = false)
+	@Parameter(description = "アプリケーションIDリスト", required = false)
+	@Schema(description = "アプリケーションIDリスト", required = false)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
-	@ApiParam(value = "他システムデータ排他フラグ", required = false)
-	@ApiModelProperty(value = "他システムデータ排他フラグ", required = false)
+	@Parameter(description = "他システムデータ排他フラグ", required = false)
+	@Schema(description = "他システムデータ排他フラグ", required = false)
 	private int otherSysDataExcludeFlg;
 
 	/**

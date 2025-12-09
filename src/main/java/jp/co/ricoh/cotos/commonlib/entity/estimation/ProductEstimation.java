@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,7 +39,7 @@ public class ProductEstimation extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_estimation_seq")
 	@SequenceGenerator(name = "product_estimation_seq", sequenceName = "product_estimation_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -47,7 +47,7 @@ public class ProductEstimation extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID<br/>※POST時「商品マスタ」存在チェック実施", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID<br/>※POST時「商品マスタ」存在チェック実施", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -56,21 +56,21 @@ public class ProductEstimation extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商品名", required = true, allowableValues = "range[0,255]")
 	private String productEstimationName;
 
 	/**
 	 * 代表品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "代表品種マスタID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "代表品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long repItemMasterId;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービス識別番号", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "サービス識別番号", required = false, allowableValues = "range[0,255]")
 	private String serviceIdentNumber;
 
 	/**
@@ -78,21 +78,21 @@ public class ProductEstimation extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "見積", required = true, position = 6)
+	@Schema(description = "見積", required = true)
 	@JsonIgnore
 	private Estimation estimation;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 7)
+	@Schema(description = "拡張項目", required = false)
 	@Lob
 	private String extendsParameter;
 
 	/**
 	 * 拡張項目繰返
 	 */
-	@ApiModelProperty(value = "拡張項目繰返", required = false, position = 8)
+	@Schema(description = "拡張項目繰返", required = false)
 	@Lob
 	private String extendsParameterIterance;
 

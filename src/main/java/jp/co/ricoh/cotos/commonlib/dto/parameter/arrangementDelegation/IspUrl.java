@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation;
 
 import jakarta.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -16,14 +16,14 @@ public class IspUrl {
 	 * 作業区分
 	 */
 	@NotNull
-	@ApiModelProperty(value = "作業区分", required = true, position = 1)
+	@Schema(description = "作業区分", required = true)
 	private String workingDiv;
 
 	/**
 	 * ISPURL
 	 */
 	@NotNull
-	@ApiModelProperty(value = "ISPURL", required = true, position = 2)
+	@Schema(description = "ISPURL", required = true)
 	private String ispUrl;
 
 }

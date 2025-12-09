@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,24 +13,24 @@ public class HistoryDetailDto {
 	/**
 	 * 品種名
 	 */
-	@ApiModelProperty(value = "品種名", required = false, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", required = false, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
 	 * リコー品種コード
 	 */
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 費用種別
 	 */
-	@ApiModelProperty(value = "費用種別", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "費用種別", required = false, allowableValues = "range[0,255]")
 	private String costName;
 
 	/**
 	 * 数量
 	 */
-	@ApiModelProperty(value = "数量", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "数量", required = false, allowableValues = "range[0,255]")
 	private String quantity;
 }

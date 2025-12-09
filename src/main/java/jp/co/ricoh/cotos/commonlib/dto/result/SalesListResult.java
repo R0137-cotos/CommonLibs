@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoDealerFlow;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import lombok.Data;
@@ -26,249 +26,249 @@ public class SalesListResult {
 	 * 連番
 	 */
 	@Id
-	@ApiModelProperty(value = "連番", required = true, position = 1)
+	@Schema(description = "連番", required = true)
 	private long seqNo;
 
 	/**
 	 * 売上年月
 	 */
-	@ApiModelProperty(value = "売上年月", required = true, position = 2)
+	@Schema(description = "売上年月", required = true)
 	private String salesMonth;
 
 	/**
 	 * 注文日
 	 */
-	@ApiModelProperty(value = "注文日", required = false, position = 3)
+	@Schema(description = "注文日", required = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date applicationDate;
 
 	/**
 	 * 支店コード
 	 */
-	@ApiModelProperty(value = "支店コード", required = true, position = 4)
+	@Schema(description = "支店コード", required = true)
 	private String salesCompanyCode;
 
 	/**
 	 * 支店名
 	 */
-	@ApiModelProperty(value = "支店名", required = true, position = 5)
+	@Schema(description = "支店名", required = true)
 	private String salesCompanyName;
 
 	/**
 	 * 担当SA所属名
 	 */
-	@ApiModelProperty(value = "担当SA所属名", required = true, position = 6)
+	@Schema(description = "担当SA所属名", required = true)
 	private String salesDepartmentName;
 
 	/**
 	 * 担当SA名
 	 */
-	@ApiModelProperty(value = "担当SA名", required = true, position = 7)
+	@Schema(description = "担当SA名", required = true)
 	private String employeeName;
 
 	/**
 	 * E/U：企業ID
 	 */
-	@ApiModelProperty(value = "E/U：企業ID", required = true, position = 8)
+	@Schema(description = "E/U：企業ID", required = true)
 	private String companyId;
 
 	/**
 	 * E/U：企事部ID
 	 */
-	@ApiModelProperty(value = "E/U：企事部ID", required = true, position = 9)
+	@Schema(description = "E/U：企事部ID", required = true)
 	private String momCustId;
 
 	/**
 	 * E/U：上流システムコード
 	 */
-	@ApiModelProperty(value = "E/U：上流システムコード", required = true, position = 10)
+	@Schema(description = "E/U：上流システムコード", required = true)
 	private String salesCompanyCustomerCode;
 
 	/**
 	 * E/U：お客様名
 	 */
-	@ApiModelProperty(value = "E/U：お客様名", required = true, position = 11)
+	@Schema(description = "E/U：お客様名", required = true)
 	private String companyName;
 
 	/**
 	 * ベンダ名
 	 */
-	@ApiModelProperty(value = "ベンダ名", required = false, position = 12)
+	@Schema(description = "ベンダ名", required = false)
 	private String vendorName;
 
 	/**
 	 * サービス名
 	 */
-	@ApiModelProperty(value = "サービス名", required = true, position = 13)
+	@Schema(description = "サービス名", required = true)
 	private String productContractName;
 
 	/**
 	 * 契約種別
 	 */
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "初期費(\"1\"), 月額定額(\"2\"), 年額(\"3\"), 月額従量(\"4\")", example = "1", position = 14)
+	@Schema(description = "契約種別", required = true, allowableValues = "初期費(\"1\"), 月額定額(\"2\"), 年額(\"3\"), 月額従量(\"4\")", example = "1")
 	private CostType cotosCostType;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 15)
+	@Schema(description = "RJ管理番号", required = false)
 	private String rjManageNumber;
 
 	/**
 	 * ベンダ契約番号
 	 */
-	@ApiModelProperty(value = "ベンダ契約番号", required = false, position = 16)
+	@Schema(description = "ベンダ契約番号", required = false)
 	private String vendorManageNumber;
 
 	/**
 	 * 注文番号
 	 */
-	@ApiModelProperty(value = "注文番号", required = true, position = 17)
+	@Schema(description = "注文番号", required = true)
 	private String contractNumber;
 
 	/**
 	 * 品種コード
 	 */
-	@ApiModelProperty(value = "品種コード", required = true, position = 18)
+	@Schema(description = "品種コード", required = true)
 	private String itemCode;
 
 	/**
 	 * 商品名称
 	 */
-	@ApiModelProperty(value = "商品名称", required = true, position = 19)
+	@Schema(description = "商品名称", required = true)
 	private String itemName;
 
 	/**
 	 * 数量
 	 */
-	@ApiModelProperty(value = "数量", required = true, position = 20)
+	@Schema(description = "数量", required = true)
 	private Integer quantity;
 
 	/**
 	 * 売価単価
 	 */
-	@ApiModelProperty(value = "売価単価", required = true, position = 21)
+	@Schema(description = "売価単価", required = true)
 	private BigDecimal salesCompanySalesPrice;
 
 	/**
 	 * 金額
 	 */
-	@ApiModelProperty(value = "金額", required = true, position = 22)
+	@Schema(description = "金額", required = true)
 	private BigDecimal salesCompanySalesAmount;
 
 	/**
 	 * 販社仕切単価
 	 */
-	@ApiModelProperty(value = "販社仕切単価", required = false, position = 23)
+	@Schema(description = "販社仕切単価", required = false)
 	private BigDecimal ricohSalesPrice;
 
 	/**
 	 * リコー仕切単価
 	 */
-	@ApiModelProperty(value = "リコー仕切単価", required = false, position = 24)
+	@Schema(description = "リコー仕切単価", required = false)
 	private BigDecimal ricohPartitionPrice;
 
 	/**
 	 * サービス開始日
 	 */
-	@ApiModelProperty(value = "サービス開始日", required = true, position = 25)
+	@Schema(description = "サービス開始日", required = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date serviceTermStart;
 
 	/**
 	 * 課金開始日
 	 */
-	@ApiModelProperty(value = "課金開始日", required = false, position = 26)
+	@Schema(description = "課金開始日", required = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date billingStartDate;
 
 	/**
 	 * Web受付番号
 	 */
-	@ApiModelProperty(value = "Web受付番号", required = false, position = 27)
+	@Schema(description = "Web受付番号", required = false)
 	private String webOrderNumber;
 
 	/**
 	 * COTOS商流区分
 	 */
-	@ApiModelProperty(value = "COTOS商流区分", required = true, allowableValues = "1:直売  2:代売_接点店  3:代売_母店_接点店", example = "1", position = 28)
+	@Schema(description = "COTOS商流区分", required = true, allowableValues = "1:直売  2:代売_接点店  3:代売_母店_接点店", example = "1")
 	private String cotosDealerFlow;
 
 	/**
 	 * 接点店：企事部ID
 	 */
-	@ApiModelProperty(value = "接点店：企事部ID", required = false, position = 29)
+	@Schema(description = "接点店：企事部ID", required = false)
 	private String contactStoreMomCustId;
 
 	/**
 	 * 接点店名
 	 */
-	@ApiModelProperty(value = "接点店名", required = false, position = 30)
+	@Schema(description = "接点店名", required = false)
 	private String contactStoreDealerName;
 
 	/**
 	 * 接点店：取引先コード（手数料用）
 	 */
-	@ApiModelProperty(value = "接点店：取引先コード（手数料用）", required = false, position = 31)
+	@Schema(description = "接点店：取引先コード（手数料用）", required = false)
 	private String contactStoreDistributorRtcCd;
 
 	/**
 	 * 接点店：販売店担当営業名
 	 */
-	@ApiModelProperty(value = "接点店：販売店担当営業名", required = false, position = 32)
+	@Schema(description = "接点店：販売店担当営業名", required = false)
 	private String contactStorePicName;
 
 	/**
 	 * 接点店担当営業メールアドレス
 	 */
-	@ApiModelProperty(value = "接点店担当営業メールアドレス", required = false, position = 33)
+	@Schema(description = "接点店担当営業メールアドレス", required = false)
 	private String contactStoreDistributorEmployeeMailAddress;
 
 	/**
 	 * 接点店担当営業電話番号
 	 */
-	@ApiModelProperty(value = "接点店担当営業電話番号", required = false, position = 34)
+	@Schema(description = "接点店担当営業電話番号", required = false)
 	private String contactStorePicPhoneNumber;
 
 	/**
 	 * 接点店住所
 	 */
-	@ApiModelProperty(value = "接点店住所", required = false, position = 35)
+	@Schema(description = "接点店住所", required = false)
 	private String contactStoreAddress;
 
 	/**
 	 * 接点店手数料金額
 	 */
-	@ApiModelProperty(value = "接点店手数料金額", required = false, position = 36)
+	@Schema(description = "接点店手数料金額", required = false)
 	private BigDecimal contactStoreCommissionAmount;
 
 	/**
 	 * 母店：企事部ID
 	 */
-	@ApiModelProperty(value = "母店：企事部ID", required = false, position = 37)
+	@Schema(description = "母店：企事部ID", required = false)
 	private String motherStoreMomCustId;
 
 	/**
 	 * 母店名
 	 */
-	@ApiModelProperty(value = "母店名", required = false, position = 38)
+	@Schema(description = "母店名", required = false)
 	private String motherStoreDealerName;
 
 	/**
 	 * 母店：取引先コード（手数料用）
 	 */
-	@ApiModelProperty(value = "母店：取引先コード（手数料用）", required = false, position = 39)
+	@Schema(description = "母店：取引先コード（手数料用）", required = false)
 	private String motherStoreDistributorRtcCd;
 
 	/**
 	 * 母店手数料金額
 	 */
-	@ApiModelProperty(value = "母店手数料金額", required = false, position = 40)
+	@Schema(description = "母店手数料金額", required = false)
 	private BigDecimal motherStoreCommissionAmount;
 
 	/**
 	 * 商品区分
 	 */
-	@ApiModelProperty(value = "商品区分", required = false, position = 41)
+	@Schema(description = "商品区分", required = false)
 	private String productClassDiv;
 }

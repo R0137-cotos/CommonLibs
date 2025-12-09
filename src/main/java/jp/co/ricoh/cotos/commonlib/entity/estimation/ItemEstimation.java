@@ -22,7 +22,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
@@ -43,7 +43,7 @@ public class ItemEstimation extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_estimation_seq")
 	@SequenceGenerator(name = "item_estimation_seq", sequenceName = "item_estimation_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -51,14 +51,14 @@ public class ItemEstimation extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 商品マスタ
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "商品マスタ", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタ", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -66,7 +66,7 @@ public class ItemEstimation extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種名", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
 	private String itemEstimationName;
 
 	/**
@@ -74,21 +74,21 @@ public class ItemEstimation extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード<br/>※POST時「品種マスタ」存在チェック実施", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード<br/>※POST時「品種マスタ」存在チェック実施", required = true, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@NotNull
-	@ApiModelProperty(value = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1", position = 6)
+	@Schema(description = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
 	 * 費用種別
 	 */
 	@NotNull
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1", position = 7)
+	@Schema(description = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1")
 	private CostType costType;
 
 	/**
@@ -97,7 +97,7 @@ public class ItemEstimation extends EntityBase {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "仕切価格", required = true, position = 8, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -105,7 +105,7 @@ public class ItemEstimation extends EntityBase {
 	 */
 	@OneToOne(optional = false)
 	@JoinColumn(name = "estimation_detail_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "見積明細", required = true, position = 9)
+	@Schema(description = "見積明細", required = true)
 	@JsonIgnore
 	private EstimationDetail estimationDetail;
 
@@ -113,55 +113,55 @@ public class ItemEstimation extends EntityBase {
 	 * Ｒ原価
 	 */
 	@Column
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 11)
+	@Schema(description = "Ｒ原価", required = false)
 	private BigDecimal rCost;
 
 	/**
 	 * ＳＡ仕切価格
 	 */
 	@Column
-	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12)
+	@Schema(description = "ＳＡ仕切価格", required = false)
 	private BigDecimal rjPurchasePrice;
 
 	/**
 	 * ＲＪ仕切価格
 	 */
 	@Column
-	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 13)
+	@Schema(description = "ＲＪ仕切価格", required = false)
 	private BigDecimal rjDividingPrice;
 
 	/**
 	 * 母店売価(接点店仕切)
 	 */
 	@Column
-	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14)
+	@Schema(description = "母店売価(接点店仕切)", required = false)
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 標準価格
 	 */
 	@Column
-	@ApiModelProperty(value = "標準価格", required = false, position = 15)
+	@Schema(description = "標準価格", required = false)
 	private BigDecimal standardPrice;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 16, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * ＲＪ販事本仕入価格
 	 */
 	@Column
-	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 17)
+	@Schema(description = "ＲＪ販事本仕入価格", required = false)
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 18, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	@PrePersist

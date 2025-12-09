@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
@@ -77,7 +77,7 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_checklist_comp_master_seq")
 	@SequenceGenerator(name = "contract_checklist_comp_master_seq", sequenceName = "contract_checklist_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約チェックリスト構成マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約チェックリスト構成マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -86,23 +86,23 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品マスタ", required = true, position = 2)
+	@Schema(description = "商品マスタ", required = true)
 	private ProductMaster productMaster;
 
 	/**
 	 * 対象契約種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "対象契約種別<br /> "//
-			+ "共通/新規/契約変更/情報変更/契約更新", required = true, allowableValues = "共通(\"1\"), 新規(\"2\"), 契約変更(\"3\"), 情報変更(\"4\"), 契約更新(\"5\")", example = "1", position = 3)
+	@Schema(description = "対象契約種別<br /> "//
+			+ "共通/新規/契約変更/情報変更/契約更新", required = true, allowableValues = "共通(\"1\"), 新規(\"2\"), 契約変更(\"3\"), 情報変更(\"4\"), 契約更新(\"5\")", example = "1")
 	private TargetContractType targetContractType;
 
 	/**
 	 * 対象ライフサイクル状態
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "対象ライフサイクル状態<br /> "//
-			+ "作成中/キャンセル手続き中/解約手続き中", required = true, allowableValues = "作成中(\"1\"), キャンセル手続き中(\"2\"), 解約手続き中(\"3\")", example = "1", position = 4)
+	@Schema(description = "対象ライフサイクル状態<br /> "//
+			+ "作成中/キャンセル手続き中/解約手続き中", required = true, allowableValues = "作成中(\"1\"), キャンセル手続き中(\"2\"), 解約手続き中(\"3\")", example = "1")
 	private TargetLifecycleStatus targetLifecycleStatus;
 
 	/**
@@ -111,14 +111,14 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "gp_check_matter_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "汎用チェック事項マスタ", required = true, position = 5)
+	@Schema(description = "汎用チェック事項マスタ", required = true)
 	private GpCheckMatterMaster gpCheckMatterMaster;
 
 	/**
 	 * 表示順
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "表示順", required = true, position = 6, allowableValues = "range[0,999]")
+	@Schema(description = "表示順", required = true, allowableValues = "range[0,999]")
 	private int displayOrder;
 
 	/**
@@ -126,7 +126,7 @@ public class ContractChecklistCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "チェック必須フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@Schema(description = "チェック必須フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer checkRequiredFlg;
 
 }

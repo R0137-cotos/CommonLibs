@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -12,12 +12,12 @@ public class ExternalImportErrorResult {
 	/**
 	 * 行番号
 	 */
-	@ApiModelProperty(value = "行番号", required = false, position = 1)
+	@Schema(description = "行番号", required = false)
 	private Long lineNo;
 
 	/**
 	 * エラーメッセージ
 	 */
-	@ApiModelProperty(value = "エラーメッセージ", required = true, position = 2)
+	@Schema(description = "エラーメッセージ", required = true)
 	private String errorMessage;
 }

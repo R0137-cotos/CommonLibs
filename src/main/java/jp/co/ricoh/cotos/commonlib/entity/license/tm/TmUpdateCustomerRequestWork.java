@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,42 +26,42 @@ public class TmUpdateCustomerRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_customer_request_work_seq")
 	@SequenceGenerator(name = "tm_update_customer_request_work_seq", sequenceName = "tm_update_customer_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "トレンドマイクロ会社情報更新リクエストWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロ会社情報更新リクエストWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 会社
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "会社", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "会社", required = false, allowableValues = "range[0,255]")
 	private String name;
 
 	/**
 	 * 都道府県
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "都道府県", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県", required = false, allowableValues = "range[0,255]")
 	private String state;
 
 	/**
 	 * 国
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "国", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "国", required = false, allowableValues = "range[0,255]")
 	private String country;
 
 	/**
 	 * 市区町村
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "市区町村", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "市区町村", required = false, allowableValues = "range[0,255]")
 	private String city;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "会社ID", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", required = false, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
@@ -69,7 +69,7 @@ public class TmUpdateCustomerRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "トレンドマイクロ会社情報更新レスポンスWORK", required = false, position = 12)
+	@Schema(description = "トレンドマイクロ会社情報更新レスポンスWORK", required = false)
 	private TmUpdateCustomerResponseWork responseWork;
 
 }

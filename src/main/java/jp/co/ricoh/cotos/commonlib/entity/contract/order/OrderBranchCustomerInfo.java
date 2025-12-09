@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +32,7 @@ public class OrderBranchCustomerInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_branch_customer_info_seq")
 	@SequenceGenerator(name = "order_branch_customer_info_seq", sequenceName = "order_branch_customer_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1)
+	@Schema(description = "ID", required = true)
 	private long id;
 
 	/**
@@ -47,56 +47,56 @@ public class OrderBranchCustomerInfo extends EntityBase {
 	 * 支社コード
 	 */
 	@Column
-	@ApiModelProperty(value = "支社コード", required = false, position = 2, allowableValues = "range[0,]")
+	@Schema(description = "支社コード", required = false, allowableValues = "range[0,]")
 	private String branchCustomerCd;
 
 	/**
 	 * 支社名
 	 */
 	@Column
-	@ApiModelProperty(value = "支社名", required = false, position = 3, allowableValues = "range[0,]")
+	@Schema(description = "支社名", required = false, allowableValues = "range[0,]")
 	private String branchCustomerName;
 
 	/**
 	 * 課所コード
 	 */
 	@Column
-	@ApiModelProperty(value = "課所コード", required = false, position = 4, allowableValues = "range[0,]")
+	@Schema(description = "課所コード", required = false, allowableValues = "range[0,]")
 	private String officeCd;
 
 	/**
 	 * 課所名
 	 */
 	@Column
-	@ApiModelProperty(value = "課所名", required = false, position = 5, allowableValues = "range[0,]")
+	@Schema(description = "課所名", required = false, allowableValues = "range[0,]")
 	private String officeName;
 
 	/**
 	 * 営業コード
 	 */
 	@Column
-	@ApiModelProperty(value = "営業コード", required = false, position = 6, allowableValues = "range[0,]")
+	@Schema(description = "営業コード", required = false, allowableValues = "range[0,]")
 	private String employeeCd;
 
 	/**
 	 * 営業名
 	 */
 	@Column
-	@ApiModelProperty(value = "営業名", required = false, position = 7, allowableValues = "range[0,]")
+	@Schema(description = "営業名", required = false, allowableValues = "range[0,]")
 	private String employeeName;
 
 	/**
 	 * 担当営業電話番号
 	 */
 	@Column
-	@ApiModelProperty(value = "担当営業電話番号", required = false, position = 8, allowableValues = "range[0,]")
+	@Schema(description = "担当営業電話番号", required = false, allowableValues = "range[0,]")
 	private String employeePhoneNumber;
 
 	/**
 	 * 担当営業メールアドレス
 	 */
 	@Column
-	@ApiModelProperty(value = "担当営業メールアドレス", required = false, position = 9, allowableValues = "range[0,]")
+	@Schema(description = "担当営業メールアドレス", required = false, allowableValues = "range[0,]")
 	private String employeeMailAddress;
 
 }

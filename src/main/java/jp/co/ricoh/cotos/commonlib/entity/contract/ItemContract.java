@@ -22,7 +22,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemDecomposeType;
@@ -43,7 +43,7 @@ public class ItemContract extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_contract_seq")
 	@SequenceGenerator(name = "item_contract_seq", sequenceName = "item_contract_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -51,7 +51,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -59,7 +59,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -68,7 +68,7 @@ public class ItemContract extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種名", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
@@ -77,7 +77,7 @@ public class ItemContract extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -85,7 +85,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1", position = 6)
+	@Schema(description = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
@@ -93,7 +93,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 7)
+	@Schema(description = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1")
 	private CostType costType;
 
 	/**
@@ -103,7 +103,7 @@ public class ItemContract extends EntityBase {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "仕切価格", required = true, position = 8, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -112,14 +112,14 @@ public class ItemContract extends EntityBase {
 	@OneToOne(optional = false)
 	@JoinColumn(name = "contract_detail_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約明細", required = true, position = 9)
+	@Schema(description = "契約明細", required = true)
 	private ContractDetail contractDetail;
 
 	/**
 	 * 仕入取引先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "仕入取引先コード", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", required = false, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
@@ -127,7 +127,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
@@ -135,7 +135,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＳＡ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -143,7 +143,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -151,20 +151,20 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "母店売価(接点店仕切)", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 消費税区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "消費税区分", required = false, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", required = false, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * IFS連携フラグ
 	 */
-	@ApiModelProperty(value = "IFS連携フラグ", required = true, position = 16, allowableValues = "range[0,9]")
+	@Schema(description = "IFS連携フラグ", required = true, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
 
 	/**
@@ -172,27 +172,27 @@ public class ItemContract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemContract")
-	@ApiModelProperty(value = "品種明細(契約用)", required = false, position = 17)
+	@Schema(description = "品種明細(契約用)", required = false)
 	private List<ItemDetailContract> itemDetailContractList;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 18, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * 分解後品種区分
 	 */
-	@ApiModelProperty(value = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")", position = 19)
+	@Schema(description = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
 	 * 分解後品種名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "分解後品種名", required = false, position = 20, allowableValues = "range[0,255]")
+	@Schema(description = "分解後品種名", required = false, allowableValues = "range[0,255]")
 	private String itemDecomposeName;
 
 	/**
@@ -200,7 +200,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "分解後原価", required = false, position = 21, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "分解後原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal itemDecomposePrice;
 
 	/**
@@ -208,7 +208,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemContract")
-	@ApiModelProperty(value = "契約機種品種紐づけ", required = false, position = 22, readOnly = true)
+	@Schema(description = "契約機種品種紐づけ", required = false, readOnly = true)
 	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
 
 	/**
@@ -216,7 +216,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "autoUpdateItemContract")
-	@ApiModelProperty(value = "契約機種品種紐づけ_自動更新", required = false, position = 23, readOnly = true)
+	@Schema(description = "契約機種品種紐づけ_自動更新", required = false, readOnly = true)
 	private List<ContractEquipmentItemLink> contractEquipmentItemAutoUpdateLinkList;
 
 	/**
@@ -224,7 +224,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 24, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ販事本仕入価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
@@ -232,24 +232,24 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "標準価格", required = false, position = 25, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "標準価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal standardPrice;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 26, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 年額明細計上フラグ
 	 */
-	@ApiModelProperty(value = "年額明細計上フラグ", required = false, position = 27, allowableValues = "range[0,9]")
+	@Schema(description = "年額明細計上フラグ", required = false, allowableValues = "range[0,9]")
 	private Integer yearDetailAccountFlg;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 28, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定処理グループID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 }

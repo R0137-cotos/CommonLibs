@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,7 +31,7 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "json_schema_master_seq")
 	@SequenceGenerator(name = "json_schema_master_seq", sequenceName = "json_schema_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "JSONスキーママスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "JSONスキーママスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -39,14 +39,14 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "jsonSchemaMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品拡張項目マスタ", required = false, position = 2)
+	@Schema(description = "商品拡張項目マスタ", required = false)
 	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
 
 	/**
 	 * JSONスキーマ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "JSONスキーマ", required = true, position = 3)
+	@Schema(description = "JSONスキーマ", required = true)
 	@Lob
 	private String jsonSchema;
 
@@ -54,7 +54,7 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	 * JSONスキーマ初期値
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "JSONスキーマ初期値", required = true, position = 4)
+	@Schema(description = "JSONスキーマ初期値", required = true)
 	@Lob
 	private String jsonSchemaInitial;
 

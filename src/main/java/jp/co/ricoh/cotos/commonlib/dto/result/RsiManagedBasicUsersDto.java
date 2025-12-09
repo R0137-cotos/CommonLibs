@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -15,25 +15,25 @@ public class RsiManagedBasicUsersDto {
 	/**
 	 * 取得結果1ページあたりの件数
 	 */
-	@ApiModelProperty(value = "取得結果1ページあたりの件数", required = false, position = 1)
+	@Schema(description = "取得結果1ページあたりの件数", required = false)
 	private Integer itemsPerPage;
 
 	/**
 	 * 現在のページ番号
 	 */
-	@ApiModelProperty(value = "現在のページ番号", required = false, position = 2)
+	@Schema(description = "現在のページ番号", required = false)
 	private Integer page;
 
 	/**
 	 * 総取得結果数
 	 */
-	@ApiModelProperty(value = "総取得結果数", required = false, position = 3)
+	@Schema(description = "総取得結果数", required = false)
 	private Integer totalResults;
 
 	/**
 	 * 管理対象テナントの基本ユーザー情報一覧
 	 */
-	@ApiModelProperty(value = "お客様テナント情報一覧", required = false, position = 4)
+	@Schema(description = "お客様テナント情報一覧", required = false)
 	private List<RsiManagedBasicUsersResultsDto> results;
 
 }

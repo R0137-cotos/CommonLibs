@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ItemType;
@@ -37,7 +37,7 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_decompose_master_seq")
 	@SequenceGenerator(name = "item_decompose_master_seq", sequenceName = "item_decompose_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -46,40 +46,40 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_decompose_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "分解後品種マスタ", required = true, position = 2)
+	@Schema(description = "分解後品種マスタ", required = true)
 	private ItemMaster decomposeItemMaster;
 
 	/**
 	 * 分解後品種名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "分解後品種名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "分解後品種名", required = false, allowableValues = "range[0,255]")
 	private String itemDecomposeName;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 分解後品種区分
 	 */
-	@ApiModelProperty(value = "分解後品種区分", required = false, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", position = 5)
+	@Schema(description = "分解後品種区分", required = false, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")")
 	private ItemType itemType;
 
 	/**
 	 * 分解後費用種別
 	 */
-	@ApiModelProperty(value = "分解後費用種別", required = false, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", position = 6)
+	@Schema(description = "分解後費用種別", required = false, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")")
 	private CostType costType;
 
 	/**
 	 * 分解後原価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "分解後原価", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "分解後原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
@@ -88,7 +88,7 @@ public class ItemDecomposeMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = true, position = 8)
+	@Schema(description = "品種マスタ", required = true)
 	private ItemMaster itemMaster;
 
 }

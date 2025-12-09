@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -19,21 +19,21 @@ import lombok.Data;
 public class BusinessCalendar {
 
 	@Id
-	@ApiModelProperty(value = "カレンダー日付", required = true, position = 1)
+	@Schema(description = "カレンダー日付", required = true)
 	private Date calendarDate;
 
 	/**
 	 * 休日フラグ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "休日フラグ", required = true, position = 2, allowableValues = "range[0,1]")
+	@Schema(description = "休日フラグ", required = true, allowableValues = "range[0,1]")
 	private int businessHoliday;
 
 	/**
 	 * 営業日付
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "営業日付", required = true, position = 3)
+	@Schema(description = "営業日付", required = true)
 	private Date businessDay;
 
 }

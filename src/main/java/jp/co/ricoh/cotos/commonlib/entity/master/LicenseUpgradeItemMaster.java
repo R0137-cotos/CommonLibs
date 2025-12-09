@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,27 +28,27 @@ public class LicenseUpgradeItemMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_upgrade_item_master_seq")
 	@SequenceGenerator(name = "license_upgrade_item_master_seq", sequenceName = "license_upgrade_item_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "アップグレード対象ライセンス品種対応マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "アップグレード対象ライセンス品種対応マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private Long productMasterId;
 
 	/**
 	 * アップグレード元品種マスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "アップグレード元品種マスタID", required = true, position = 3, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "アップグレード元品種マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private Long fromItemMasterId;
 
 	/**
 	 * アップグレード先品種マスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "アップグレード先品種マスタID", required = true, position = 4, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "アップグレード先品種マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private Long toItemMasterId;
 }

@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import lombok.Data;
 
@@ -19,7 +19,7 @@ public class FileImportManagementParameter {
 	 * ファイル種別管理マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ファイル種別管理マスタID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ファイル種別管理マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long fileKindManagementMasterId;
 
 	/**
@@ -27,14 +27,14 @@ public class FileImportManagementParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * 添付ファイル
 	 */
 	@NotNull
-	@ApiModelProperty(value = "添付ファイル", required = true, position = 3)
+	@Schema(description = "添付ファイル", required = true)
 	private AttachedFile attachedFile;
 
 	/**
@@ -42,14 +42,14 @@ public class FileImportManagementParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "取込実施者", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "取込実施者", required = true, allowableValues = "range[0,255]")
 	private String importUser;
 
 	/**
 	 * 関連ファイル取込管理ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "関連ファイル取込管理ID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "関連ファイル取込管理ID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long relatedFileImportManagementId;
 
 }

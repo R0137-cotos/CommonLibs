@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class AttachedFileLinkage extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attached_file_linkage_seq")
 	@SequenceGenerator(name = "attached_file_linkage_seq", sequenceName = "attached_file_linkage_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ファイル連携先ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ファイル連携先ID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -42,27 +42,27 @@ public class AttachedFileLinkage extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2)
+	@Schema(description = "商品マスタID", required = true)
 	private ProductMaster productMaster;
 
 	/**
 	 * ファイル連携先
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル連携先", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル連携先", required = true, allowableValues = "range[0,255]")
 	private String attachedFileLinkageName;
 
 	/**
 	 * 連携フラグ初期値
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "連携フラグ初期値", required = true, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "連携フラグ初期値", required = true, allowableValues = "range[0,9]")
 	private Integer linkageFlgDefault;
 
 	/**
 	 * 汎用マスタ明細コード値
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "汎用マスタ明細コード値", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "汎用マスタ明細コード値", required = false, allowableValues = "range[0,255]")
 	private String codeValue;
 }

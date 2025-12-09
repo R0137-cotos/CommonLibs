@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,7 +28,7 @@ public class TmCreateCustomerResponseWork extends AbstractTmResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_create_customer_response_work_seq")
 	@SequenceGenerator(name = "tm_create_customer_response_work_seq", sequenceName = "tm_create_customer_response_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "トレンドマイクロ顧客情報作成レスポンスWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロ顧客情報作成レスポンスWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -37,41 +37,41 @@ public class TmCreateCustomerResponseWork extends AbstractTmResponseWork {
 	@OneToOne
 	@JoinColumn(name = "request_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "トレンドマイクロ顧客情報作成リクエストWORK", required = true, position = 2)
+	@Schema(description = "トレンドマイクロ顧客情報作成リクエストWORK", required = true)
 	private TmCreateCustomerRequestWork requestWork;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "会社ID", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", required = false, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
 	 * ユーザーID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ユーザーID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザーID", required = false, allowableValues = "range[0,255]")
 	private String userId;
 
 	/**
 	 * ログインアカウント
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ログインアカウント", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "ログインアカウント", required = false, allowableValues = "range[0,255]")
 	private String userLoginName;
 
 	/**
 	 * ログインパスワード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ログインパスワード", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "ログインパスワード", required = false, allowableValues = "range[0,255]")
 	private String userPassword;
 
 	/**
 	 * リセット用パスワードURL
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "リセット用パスワードURL", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "リセット用パスワードURL", required = false, allowableValues = "range[0,255]")
 	private String userResetpasswordurl;
 }

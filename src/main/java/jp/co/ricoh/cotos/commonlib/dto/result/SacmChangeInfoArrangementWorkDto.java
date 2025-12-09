@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -15,25 +15,25 @@ public class SacmChangeInfoArrangementWorkDto {
 	/**
 	 * 手配業務ID
 	 */
-	@ApiModelProperty(value = "手配業務ID", required = false, position = 1)
+	@Schema(description = "手配業務ID", required = false)
 	private String arrangementWorkId;
 
 	/**
 	 * 文書番号
 	 */
-	@ApiModelProperty(value = "文書番号", required = false, position = 2)
+	@Schema(description = "文書番号", required = false)
 	private String contractNumber;
 
 	/**
 	 * 契約ID
 	 */
-	@ApiModelProperty(value = "契約ID", required = false, position = 3)
+	@Schema(description = "契約ID", required = false)
 	private String rjManageNumber;
 
 	/**
 	 * 手配業務明細リスト
 	 */
-	@ApiModelProperty(value = "手配業務明細リスト", required = false, position = 4)
+	@Schema(description = "手配業務明細リスト", required = false)
 	private List<ArrangementWorkDetail> arrangementWorkDetailList;
 
 }

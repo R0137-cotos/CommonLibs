@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -60,37 +60,37 @@ public class BatchRunDateManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_run_date_management_master_seq")
 	@SequenceGenerator(name = "batch_run_date_management_master_seq", sequenceName = "batch_run_date_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "バッチ実行日管理マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "バッチ実行日管理マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 対象バッチ処理ID
 	 */
-	@ApiModelProperty(value = "対象バッチ処理ID", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "対象バッチ処理ID", required = false, allowableValues = "range[0,255]")
 	private String targetBatchId;
 
 	/**
 	 * 商品種類区分
 	 */
-	@ApiModelProperty(value = "商品種類区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商品種類区分", required = false, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
 	/**
 	 * 商品マスタID
 	 */
-	@ApiModelProperty(value = "商品マスタID", required = false, position = 4, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
 	private Long productMasterId;
 
 	/**
 	 * バッチ実行日
 	 */
-	@ApiModelProperty(value = "バッチ実行日", required = false, position = 5)
+	@Schema(description = "バッチ実行日", required = false)
 	@Temporal(TemporalType.DATE)
 	private Date batchRunDate;
 
 	/**
 	 * FFM計上連携区分
 	 */
-	@ApiModelProperty(value = "FFM計上連携区分", required = false, position = 6, allowableValues = "売上振替全連携(\"0\"), 売上全社勘定連携(\"1\"), 振替連携(\"2\")")
+	@Schema(description = "FFM計上連携区分", required = false, allowableValues = "売上振替全連携(\"0\"), 売上全社勘定連携(\"1\"), 振替連携(\"2\")")
 	private FfmAccountingLinkageDiv ffmAccountingLinkageDiv;
 }

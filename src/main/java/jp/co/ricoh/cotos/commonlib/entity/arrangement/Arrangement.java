@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractStatusControlType;
 import lombok.Data;
@@ -64,7 +64,7 @@ public class Arrangement extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_seq")
 	@SequenceGenerator(name = "arrangement_seq", sequenceName = "arrangement_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配ID (作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -72,7 +72,7 @@ public class Arrangement extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
@@ -81,7 +81,7 @@ public class Arrangement extends EntityBase {
 	@Column(nullable = false)
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = true, position = 3, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", required = true, allowableValues = "range[0,9]")
 	private int disengagementFlg;
 
 	/**
@@ -89,20 +89,20 @@ public class Arrangement extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "ワークフロー状態", required = true, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", example = "1", position = 4)
+	@Schema(description = "ワークフロー状態", required = true, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", example = "1")
 	private WorkflowStatus workflowStatus;
 
 	/**
 	 * 手配業務
 	 */
 	@OneToMany(mappedBy = "arrangement")
-	@ApiModelProperty(value = "手配業務", required = true, position = 5)
+	@Schema(description = "手配業務", required = true)
 	@JsonIgnore
 	private List<ArrangementWork> arrangementWorkList;
 
 	/**
 	 * 契約状態遷移制御区分
 	 */
-	@ApiModelProperty(value = "契約状態遷移制御区分", required = false, position = 6, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
+	@Schema(description = "契約状態遷移制御区分", required = false, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
 	private ContractStatusControlType contractStatusControlType;
 }

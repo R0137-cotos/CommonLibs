@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class UploadFileParameter {
 
-	@ApiModelProperty(value = "ファイルパス", required = true, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "ファイルパス", required = true, allowableValues = "range[0,255]")
 	private String path;
 
-	@ApiModelProperty(value = "ファイル名", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", required = false, allowableValues = "range[0,255]")
 	private String fileName;
 
 }

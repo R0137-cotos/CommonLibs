@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,7 +36,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_details_management_master_seq")
 	@SequenceGenerator(name = "menu_details_management_master_seq", sequenceName = "menu_details_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "メニュー明細管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "メニュー明細管理マスタID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -46,14 +46,14 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "menu_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "メニュー管理マスタ", required = true, position = 2)
+	@Schema(description = "メニュー管理マスタ", required = true)
 	private MenuManagementMaster menuManagementMaster;
 
 	/**
 	 * メニュー明細名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メニュー明細名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "メニュー明細名", required = false, allowableValues = "range[0,255]")
 	private String menuDetailsName;
 
 	/**
@@ -62,7 +62,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "順序", required = true, position = 4, allowableValues = "range[0,999]")
+	@Schema(description = "順序", required = true, allowableValues = "range[0,999]")
 	private int orderNumber;
 
 	/**
@@ -71,7 +71,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "URL", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "URL", required = true, allowableValues = "range[0,255]")
 	private String url;
 
 }

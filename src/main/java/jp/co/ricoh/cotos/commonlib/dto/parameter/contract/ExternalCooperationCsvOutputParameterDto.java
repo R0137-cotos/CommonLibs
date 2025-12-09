@@ -4,8 +4,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -17,30 +17,30 @@ public class ExternalCooperationCsvOutputParameterDto {
 	/**
 	 * ファイル種別管理マスタID
 	 */
-	@ApiParam(value = "ファイル種別管理マスタID", required = false)
-	@ApiModelProperty(value = "ファイル種別管理マスタID", required = false, position = 1)
+	@Parameter(description = "ファイル種別管理マスタID", required = false)
+	@Schema(description = "ファイル種別管理マスタID", required = false)
 	private long fileKindManagementMasterId;
 
 	/**
 	 * 商品種類区分
 	 */
-	@ApiParam(value = "商品種類区分", required = false)
-	@ApiModelProperty(value = "商品種類区分", required = false, position = 2)
+	@Parameter(description = "商品種類区分", required = false)
+	@Schema(description = "商品種類区分", required = false)
 	private String productClassDiv;
 
 	/**
 	 * 出力日
 	 */
 	@JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Tokyo")
-	@ApiParam(value = "出力日", required = false)
-	@ApiModelProperty(value = "出力日", required = false, position = 3)
+	@Parameter(description = "出力日", required = false)
+	@Schema(description = "出力日", required = false)
 	private Date outputDate;
 
 	/**
 	 * 商品マスタID
 	 */
-	@ApiParam(value = "商品マスタID", required = false)
-	@ApiModelProperty(value = "商品マスタID", required = false, position = 4)
+	@Parameter(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", required = false)
 	private long productMasterId;
 
 }

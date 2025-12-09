@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class ProductContract extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_contract_seq")
 	@SequenceGenerator(name = "product_contract_seq", sequenceName = "product_contract_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -41,28 +41,28 @@ public class ProductContract extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
 	 * 商品名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品名(作成時不要)", required = true, position = 3, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "商品名(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String productContractName;
 
 	/**
 	 * 代表品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "代表品種マスタID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "代表品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
 	private Long repItemMasterId;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "サービス識別番号(作成時不要)", required = true, position = 5, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "サービス識別番号(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String serviceIdentNumber;
 
 	/**
@@ -71,20 +71,20 @@ public class ProductContract extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 6)
+	@Schema(description = "契約", required = true)
 	private Contract contract;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 7)
+	@Schema(description = "拡張項目", required = false)
 	@Lob
 	private String extendsParameter;
 	
 	/**
 	 * 拡張項目繰返
 	 */
-	@ApiModelProperty(value = "拡張項目繰返", required = false, position = 8)
+	@Schema(description = "拡張項目繰返", required = false)
 	@Lob
 	private String extendsParameterIterance;
 

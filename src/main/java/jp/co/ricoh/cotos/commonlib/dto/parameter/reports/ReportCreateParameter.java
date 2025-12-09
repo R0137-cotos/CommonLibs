@@ -10,7 +10,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.result.ReportSpecificResult;
 import lombok.Data;
 
@@ -24,21 +24,21 @@ public class ReportCreateParameter {
 	 * 出力ファイル名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "出力ファイル名", required = true, allowableValues = "range[0,255]", position = 1)
+	@Schema(description = "出力ファイル名", required = true, allowableValues = "range[0,255]")
 	private String outputFileName;
 
 	/**
 	 * 帳票テンプレート特定結果
 	 */
 	@Valid
-	@ApiModelProperty(value = "帳票テンプレート特定結果", required = true, position = 2)
+	@Schema(description = "帳票テンプレート特定結果", required = true)
 	private ReportSpecificResult reportSpecificResult;
 
 	/**
 	 * 帳票データ部マッピングリスト（ページ毎）
 	 */
 	@NotNull
-	@ApiModelProperty(value = "帳票データ部マッピングリスト", required = true, position = 3)
+	@Schema(description = "帳票データ部マッピングリスト", required = true)
 	private List<Map<String, List<Object>>> dataMapList;
 
 	/**
@@ -48,7 +48,7 @@ public class ReportCreateParameter {
 	 * 帳票テンプレート管理マスタの出力形式=2:Excel、かつExcel帳票出力区分=1:CreateFormの場合のみ設定必須
 	 * 呼び出し元のymlに設定しておき、帳票出力APIコール時に本パラメーターに設定すること
 	 */
-	@ApiModelProperty(value = "CreateFormワークディレクトリ", required = false, position = 4)
+	@Schema(description = "CreateFormワークディレクトリ", required = false)
 	private String workAbsoluteDir;
 
 	/**
@@ -58,6 +58,6 @@ public class ReportCreateParameter {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "PDF出力フラグ", required = false, position = 5)
+	@Schema(description = "PDF出力フラグ", required = false)
 	private Integer pdfOutputFlg;
 }

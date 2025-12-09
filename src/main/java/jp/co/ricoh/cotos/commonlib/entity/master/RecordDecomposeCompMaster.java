@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class RecordDecomposeCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "record_decompose_comp_master_seq")
 	@SequenceGenerator(name = "record_decompose_comp_master_seq", sequenceName = "record_decompose_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "計上分解構成マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "計上分解構成マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -41,21 +41,21 @@ public class RecordDecomposeCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = true, position = 2)
+	@Schema(description = "品種マスタ", required = true)
 	private ItemMaster itemMaster;
 
 	/**
 	 * 対象契約種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "対象契約種別", required = true, allowableValues = "共通(\"1\"), 新規(\"2\"), 契約変更(\"3\"), 情報変更(\"4\"), 契約更新(\"5\")", example = "1", position = 3)
+	@Schema(description = "対象契約種別", required = true, allowableValues = "共通(\"1\"), 新規(\"2\"), 契約変更(\"3\"), 情報変更(\"4\"), 契約更新(\"5\")", example = "1")
 	private TargetContractType targetContractType;
 
 	/**
 	 * 解約フラグ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "解約フラグ", required = true, position = 4)
+	@Schema(description = "解約フラグ", required = true)
 	private int disengagementFlg;
 
 	/**
@@ -63,14 +63,14 @@ public class RecordDecomposeCompMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "record_decompose_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "計上分解マスタ", required = true, position = 5)
+	@Schema(description = "計上分解マスタ", required = true)
 	private RecordDecomposeMaster recordDecomposeMaster;
 
 	/**
 	 * 明細番号
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "明細番号", required = true, position = 6, allowableValues = "range[0,999]")
+	@Schema(description = "明細番号", required = true, allowableValues = "range[0,999]")
 	private int seqNumber;
 
 }

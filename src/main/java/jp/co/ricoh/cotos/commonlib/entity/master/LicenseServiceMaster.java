@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -60,40 +60,40 @@ public class LicenseServiceMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_service_master_seq")
 	@SequenceGenerator(name = "license_service_master_seq", sequenceName = "license_service_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンスサービスマスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンスサービスマスタID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * ライセンスサービスID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスサービスID", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービスID", required = true, allowableValues = "range[0,255]")
 	private String licenseServiceId;
 
 	/**
 	 * ライセンスサービス名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスサービス名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービス名", required = false, allowableValues = "range[0,255]")
 	private String licenseServiceName;
 
 	/**
 	 * ライセンスサービス種類区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスサービス種類区分", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービス種類区分", required = false, allowableValues = "range[0,255]")
 	private String licenseServiceClassDiv;
 
 	/**
 	 * ライセンス区分構成マスタ
 	 */
 	@OneToMany(mappedBy = "licenseServiceMaster")
-	@ApiModelProperty(value = "ライセンス区分構成マスタ", required = true, position = 5)
+	@Schema(description = "ライセンス区分構成マスタ", required = true)
 	private List<LicenseServiceCompMaster> licenseServiceCompMasterList;
 
 	/**
 	 * ライセンス区分
 	 */
-	@ApiModelProperty(value = "ライセンス区分", required = false, position = 6, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	@Schema(description = "ライセンス区分", required = false, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
 	private LicenseType licenseType;
 }
