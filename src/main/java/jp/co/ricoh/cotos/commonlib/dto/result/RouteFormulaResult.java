@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -33,18 +33,18 @@ public class RouteFormulaResult {
 	/**
 	 * 条件式実行結果
 	 */
-	@ApiModelProperty(value = "条件式判定結果", required = true, position = 1)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private boolean applyRoute;
 
 	/**
 	 * 条件式実行結果ステータス
 	 */
-	@ApiModelProperty(value = "条件式実行結果ステータス", required = true, position = 2)
+	@Schema(description = "条件式実行結果ステータス", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaStatus status;
 
 	/**
 	 * エラー発生項目
 	 */
-	@ApiModelProperty(value = "エラー発生項目", required = true, position = 3)
+	@Schema(description = "エラー発生項目", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<String> errorPropertyList;
 }

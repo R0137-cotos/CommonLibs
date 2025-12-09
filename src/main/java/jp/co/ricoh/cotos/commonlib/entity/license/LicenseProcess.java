@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessMaster.OperationDiv;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseProcessPatternMaster.MailDiv;
@@ -92,7 +92,7 @@ public class LicenseProcess extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_process_seq")
 	@SequenceGenerator(name = "license_process_seq", sequenceName = "license_process_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス工程ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス工程ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -101,7 +101,7 @@ public class LicenseProcess extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ライセンス情報", required = true, position = 2)
+	@Schema(description = "ライセンス情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseInfo licenseInfo;
 
 	/**
@@ -110,7 +110,7 @@ public class LicenseProcess extends EntityBase {
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "工程順", required = true, position = 3, allowableValues = "range[0,999]")
+	@Schema(description = "工程順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int processOrder;
 
 	/**
@@ -118,7 +118,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス工程マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス工程マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long processMasterId;
 
 	/**
@@ -126,7 +126,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "手配業務ID", required = true, position = 5, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long arrangementWorkId;
 
 	/**
@@ -134,7 +134,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 6)
+	@Schema(description = "操作区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")")
 	private OperationDiv operationDiv;
 
 	/**
@@ -142,39 +142,39 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@Schema(description = "メール到達チェックフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "メール送信日", required = false, position = 8)
+	@Schema(description = "メール送信日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date mailSendAt;
 
 	/**
 	 * 送信結果区分
 	 */
-	@ApiModelProperty(value = "送信結果区分", required = false, position = 9, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
+	@Schema(description = "送信結果区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
 	private MailSendResultDiv mailSendResultDiv;
 
 	/**
 	 * メール区分
 	 */
-	@ApiModelProperty(value = "メール区分", required = false, position = 10, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
+	@Schema(description = "メール区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
 	 * 工程状態
 	 */
-	@ApiModelProperty(value = "工程状態", required = false, position = 11, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
+	@Schema(description = "工程状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
 	private ProcessStatus processStatus;
 
 	/**
 	 * メールマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "メールマスタID", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
 
 	/**
@@ -182,20 +182,20 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "メール到着チェック時間", required = false, position = 13, allowableValues = "range[-99999,99999]")
+	@Schema(description = "メール到着チェック時間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer mailArrivalCheckHour;
 
 	/**
 	 * 到着チェックメール制御マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "到着チェックメール制御マスタID", required = false, position = 14, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "到着チェックメール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrivalCheckMailControlMasterId;
 
 	/**
 	 * 実施日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "実施日時", required = false, position = 15)
+	@Schema(description = "実施日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date operatedAt;
 }

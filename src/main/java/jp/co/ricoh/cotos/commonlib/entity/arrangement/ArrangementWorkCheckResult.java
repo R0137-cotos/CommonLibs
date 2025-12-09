@@ -21,7 +21,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,7 +38,7 @@ public class ArrangementWorkCheckResult extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_check_result_seq")
 	@SequenceGenerator(name = "arrangement_work_check_result_seq", sequenceName = "arrangement_work_check_result_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務チェック結果ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配業務チェック結果ID (作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -46,7 +46,7 @@ public class ArrangementWorkCheckResult extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "手配業務", required = true, position = 2)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ArrangementWork arrangementWork;
 
@@ -56,7 +56,7 @@ public class ArrangementWorkCheckResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック事項コード", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterCode;
 
 	/**
@@ -65,7 +65,7 @@ public class ArrangementWorkCheckResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック事項文面", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項文面", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterText;
 
 	/**
@@ -75,34 +75,34 @@ public class ArrangementWorkCheckResult extends EntityBase {
 	@Min(0)
 	@OrderBy("desc")
 	@Column(nullable = false)
-	@ApiModelProperty(value = "表示順", required = true, position = 5, allowableValues = "range[0,999]")
+	@Schema(description = "表示順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int displayOrder;
 
 	/**
 	 * チェック実施者
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック実施者", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedUserId;
 
 	/**
 	 * チェック実施者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック実施者氏名", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedUserName;
 
 	/**
 	 * チェック実施者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック実施者組織名", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedOrgName;
 
 	/**
 	 * チェック実施日時
 	 */
-	@ApiModelProperty(value = "チェック実施日時", required = false, position = 9)
+	@Schema(description = "チェック実施日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date checkedAt;
 

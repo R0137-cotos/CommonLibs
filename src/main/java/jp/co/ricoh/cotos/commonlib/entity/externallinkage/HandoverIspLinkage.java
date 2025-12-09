@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,96 +59,96 @@ public class HandoverIspLinkage extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "handover_isp_linkage_seq")
 	@SequenceGenerator(name = "handover_isp_linkage_seq", sequenceName = "handover_isp_linkage_seq", allocationSize = 1)
-	@ApiModelProperty(value = "引継ぎ用ISP連携ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "引継ぎ用ISP連携ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * メールアカウント
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアカウント", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "メールアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAccount;
 
 	/**
 	 * メール引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "メール引継ぎ元契約ID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メール引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailHandoverContractId;
 
 	/**
 	 * ドメイン名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ドメイン名", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String domainName;
 
 	/**
 	 * ドメイン引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ドメイン引継ぎ元契約ID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ドメイン引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long domainHandoverContractId;
 
 	/**
 	 * ドメイン引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ドメイン引継ぎ元RJ管理番号", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String domainHandoverRjManageNumber;
 
 	/**
 	 * ホスティングサービス区分
 	 */
-	@ApiModelProperty(value = "ホスティングサービス区分", required = false, position = 8, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
+	@Schema(description = "ホスティングサービス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
 	private HostingServiceDiv hostingServiceDiv;
 
 	/**
 	 * アカウント名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アカウント名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "アカウント名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String accountName;
 
 	/**
 	 * アカウント引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "アカウント引継ぎ元契約ID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "アカウント引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long accountHandoverContractId;
 
 	/**
 	 * アカウント引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アカウント引継ぎ元RJ管理番号", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "アカウント引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String accountHandoverRjManageNumber;
 
 	/**
 	 * 接続ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "接続ID", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "接続ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String connectId;
 
 	/**
 	 * 接続ID引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "接続ID引継ぎ元契約ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "接続ID引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long connectHandoverContractId;
 
 	/**
 	 * 接続ID引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "接続ID引継ぎ元RJ管理番号", required = false, position = 14, allowableValues = "range[0,255]")
+	@Schema(description = "接続ID引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String connectHandoverRjManageNumber;
 }

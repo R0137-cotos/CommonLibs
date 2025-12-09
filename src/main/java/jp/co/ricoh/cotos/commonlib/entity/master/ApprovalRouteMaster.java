@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -61,7 +61,7 @@ public class ApprovalRouteMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_route_master_seq")
 	@SequenceGenerator(name = "approval_route_master_seq", sequenceName = "approval_route_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "承認ルートマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "承認ルートマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -69,7 +69,7 @@ public class ApprovalRouteMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "approval_route_grp_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "承認ルートグループマスタ", required = true, position = 2)
+	@Schema(description = "承認ルートグループマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ApprovalRouteGrpMaster approvalRouteGrpMaster;
 
@@ -77,46 +77,46 @@ public class ApprovalRouteMaster extends EntityBaseMaster {
 	 * 承認ルート名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "承認ルート名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "承認ルート名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRouteName;
 
 	/**
 	 * 説明
 	 */
-	@ApiModelProperty(value = "説明", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "説明", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
 	 * 特価承認対象フラグ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "特価承認対象フラグ", required = true, position = 5, allowableValues = "range[0,9]")
+	@Schema(description = "特価承認対象フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int specialPriceApprovalFlg;
 
 	/**
 	 * ルート条件式
 	 */
-	@ApiModelProperty(value = "ルート条件式", required = false, position = 6)
+	@Schema(description = "ルート条件式", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String routeConditionFormula;
 
 	/**
 	 * 条件判定順
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "条件判定順 ", required = true, position = 7, allowableValues = "range[0,999]")
+	@Schema(description = "条件判定順 ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int condDetermineOrder;
 
 	/**
 	 * 承認ルートノードマスタ
 	 */
 	@OneToMany(mappedBy = "approvalRouteMaster")
-	@ApiModelProperty(value = "承認ルートノードマスタ", required = true, position = 8)
+	@Schema(description = "承認ルートノードマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ApprovalRouteNodeMaster> approvalRouteNodeMasterList;
 
 	/**
 	 * 契約承認依頼者区分
 	 */
-	@ApiModelProperty(value = "契約承認依頼者区分", required = false, position = 9, allowableValues = "担当SA(\"1\"), 受付担当CE(\"2\"), 導入担当CE(\"3\"), 保守担当CE(\"4\")", example = "1")
+	@Schema(description = "契約承認依頼者区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "担当SA(\"1\"), 受付担当CE(\"2\"), 導入担当CE(\"3\"), 保守担当CE(\"4\")", example = "1")
 	private ContractApprovalRequesterDiv contractApprovalRequesterDiv;
 
 }

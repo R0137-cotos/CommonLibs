@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -19,50 +19,50 @@ public class ContractSearchParameterForDetail {
 	/**
 	 * 商品種別
 	 */
-	@ApiParam(value = "商品種別", required = false)
-	@ApiModelProperty(value = "商品種別", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "商品種別")
+	@Schema(description = "商品種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private List<String> productType;
 
 	/**
 	 * COTOS契約ライフサイクル状態
 	 */
-	@ApiParam(value = "COTOS契約ライフサイクル状態", required = true)
-	@ApiModelProperty(value = "COTOS契約ライフサイクル状態", required = true)
+	@Parameter(description = "COTOS契約ライフサイクル状態")
+	@Schema(description = "COTOS契約ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<String> status;
 
 	/**
 	 * 契約情報更新日From
 	 */
-	@ApiParam(value = "契約情報更新日From", required = false)
-	@ApiModelProperty(value = "契約情報更新日From", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "契約情報更新日From")
+	@Schema(description = "契約情報更新日From", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String updateFrom;
 
 	/**
 	 * 契約情報更新日To
 	 */
-	@ApiParam(value = "契約情報更新日To", required = false)
-	@ApiModelProperty(value = "契約情報更新日To", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "契約情報更新日To")
+	@Schema(description = "契約情報更新日To", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String updateTo;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiParam(value = "RJ管理番号", required = false)
-	@ApiModelProperty(value = "RJ管理番号", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "RJ管理番号")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String rjManageNumber;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
-	@ApiParam(value = "アプリケーションIDリスト", required = true)
-	@ApiModelProperty(value = "アプリケーションIDリスト", required = true)
+	@Parameter(description = "アプリケーションIDリスト")
+	@Schema(description = "アプリケーションIDリスト", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
-	@ApiParam(value = "他システムデータ排他フラグ", required = true)
-	@ApiModelProperty(value = "他システムデータ排他フラグ", required = true)
+	@Parameter(description = "他システムデータ排他フラグ")
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private int otherSysDataExcludeFlg;
 
 	/**

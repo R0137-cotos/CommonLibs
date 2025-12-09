@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -71,7 +71,7 @@ public class ArrangementWork extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_seq")
 	@SequenceGenerator(name = "arrangement_work_seq", sequenceName = "arrangement_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配業務ID (作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -81,7 +81,7 @@ public class ArrangementWork extends EntityBase {
 	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "手配", required = true, position = 2)
+	@Schema(description = "手配", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Arrangement arrangement;
 
 	/**
@@ -89,7 +89,7 @@ public class ArrangementWork extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long arrangementWorkTypeMasterId;
 
 	/**
@@ -97,14 +97,14 @@ public class ArrangementWork extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "ワークフロー状態", required = true, allowableValues = "受付待ち(\"1\"), 作業中(\"2\"), 作業完了報告(\"3\"), 承認依頼中(\"4\"), 作業完了(\"5\"), エラー(\"6\"), 破棄(\"7\")", example = "1", position = 4)
+	@Schema(description = "ワークフロー状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "受付待ち(\"1\"), 作業中(\"2\"), 作業完了報告(\"3\"), 承認依頼中(\"4\"), 作業完了(\"5\"), エラー(\"6\"), 破棄(\"7\")", example = "1")
 	private WorkflowStatus workflowStatus;
 
 	/**
 	 * メモ
 	 */
 	@Size(max = 4000)
-	@ApiModelProperty(value = "メモ", required = false, position = 5, allowableValues = "range[0,4000]")
+	@Schema(description = "メモ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String memo;
 
 	/**
@@ -113,21 +113,21 @@ public class ArrangementWork extends EntityBase {
 	@Column(nullable = false)
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "保留フラグ", required = true, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "保留フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int holdingFlg;
 
 	/**
 	 * 手配業務承認ルート
 	 */
 	@OneToOne(mappedBy = "arrangementWork")
-	@ApiModelProperty(value = "手配業務承認ルート", required = false, position = 7)
+	@Schema(description = "手配業務承認ルート", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ArrangementWorkApprovalRoute arrangementWorkApprovalRoute;
 
 	/**
 	 * 担当作業者社員
 	 */
 	@OneToOne(mappedBy = "arrangementWork")
-	@ApiModelProperty(value = "担当作業者社員", required = false, position = 8)
+	@Schema(description = "担当作業者社員", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ArrangementPicWorkerEmp arrangementPicWorkerEmp;
 
 	/**
@@ -135,14 +135,14 @@ public class ArrangementWork extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "arrangementWork")
 	@OrderBy("operatedAt ASC")
-	@ApiModelProperty(value = "手配業務操作履歴", required = false, position = 9)
+	@Schema(description = "手配業務操作履歴", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkOperationLog> arrangementWorkOperationLogList;
 
 	/**
 	 * 手配業務添付ファイル
 	 */
 	@OneToMany(mappedBy = "arrangementWork")
-	@ApiModelProperty(value = "手配業務添付ファイル", required = false, position = 10)
+	@Schema(description = "手配業務添付ファイル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkAttachedFile> workAttachedFileList;
 
 	/**
@@ -150,41 +150,41 @@ public class ArrangementWork extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "arrangementWork")
 	@OrderBy("displayOrder ASC")
-	@ApiModelProperty(value = "手配業務チェック結果", required = false, position = 11)
+	@Schema(description = "手配業務チェック結果", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkCheckResult> arrangementWorkCheckResultList;
 
 	/**
 	 * 手配業務エラー履歴
 	 */
 	@OneToMany(mappedBy = "arrangementWork")
-	@ApiModelProperty(value = "手配業務エラー履歴", required = false, position = 12)
+	@Schema(description = "手配業務エラー履歴", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkErrorLog> arrangementWorkErrorLogList;
 
 	/**
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アプリケーションID", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	/**
 	 * 作業完了日時
 	 */
-	@ApiModelProperty(value = "作業完了日時", required = false, position = 14)
+	@Schema(description = "作業完了日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date workCompletedAt;
 
 	/**
 	 * 業務受理日時
 	 */
-	@ApiModelProperty(value = "業務受理日時", required = false, position = 15)
+	@Schema(description = "業務受理日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date businessAcceptanceDateTime;
 
 	/**
 	 * 業務受付日時
 	 */
-	@ApiModelProperty(value = "業務受付日時", required = false, position = 16)
+	@Schema(description = "業務受付日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date businessAcceptDateTime;
 
@@ -193,7 +193,7 @@ public class ArrangementWork extends EntityBase {
 	 */
 	@Max(99)
 	@Min(1)
-	@ApiModelProperty(value = "業務受付枝番", required = false, position = 17, allowableValues = "range[1,99]")
+	@Schema(description = "業務受付枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[1,99]")
 	private Integer businessAcceptBranchNumber;
 
 }

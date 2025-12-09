@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,7 +37,7 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "equipment_comp_master_seq")
 	@SequenceGenerator(name = "equipment_comp_master_seq", sequenceName = "equipment_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "機種構成マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999999999999]")
+	@Schema(description = "機種構成マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999999999999]")
 	private long id;
 
 	/**
@@ -45,7 +45,7 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "機種コード", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "機種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String equipmentCode;
 
 	/**
@@ -53,7 +53,7 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "本体フラグ", required = false, position = 3, allowableValues = "range[0,9]")
+	@Schema(description = "本体フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer bodyFlg;
 
 	/**
@@ -61,7 +61,7 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "サービス機器フラグ", required = false, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "サービス機器フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer serviceMachineFlg;
 
 	/**
@@ -69,14 +69,14 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "保守売上連携フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	@Schema(description = "保守売上連携フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer maintenanceLinkageFlg;
 
 	/**
 	 * 保守形態
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "保守形態", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "保守形態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String maintenanceForm;
 
 	/**
@@ -85,28 +85,28 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = true, position = 7)
+	@Schema(description = "品種マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ItemMaster itemMaster;
 
 	/**
 	 * 点検診断月指定
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "点検診断月指定", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "点検診断月指定", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String inspectionMonth;
 
 	/**
 	 * 点検診断月(12ヶ月分)
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "点検診断月(12ヶ月分)", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "点検診断月(12ヶ月分)", allowableValues = "range[0,255]")
 	private String inspectionMonthYearWorth;
 
 	/**
 	 * 振替対象品種マスタ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "振替対象品種マスタ", required = true, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "振替対象品種マスタ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String trnsItemMasterId;
 
 	/**
@@ -114,21 +114,21 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "機器品種作成フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	@Schema(description = "機器品種作成フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer equipmentItemCreatingFlg;
 
 	/**
 	 * ARCS期間売保守データ用保守形態
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ARCS期間売保守データ用保守形態", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "ARCS期間売保守データ用保守形態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String arcsMaintenanceForm;
 
 	/**
 	 * メーカーコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカーコード", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "メーカーコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerCode;
 
 	/**
@@ -136,6 +136,6 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "機種削除可能フラグ", required = false, position = 14, allowableValues = "range[0,9]")
+	@Schema(description = "機種削除可能フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer equipmentDeletableFlg;
 }

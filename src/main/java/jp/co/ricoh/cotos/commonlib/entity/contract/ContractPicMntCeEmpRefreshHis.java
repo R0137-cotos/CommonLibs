@@ -16,8 +16,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.EmployeeAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,13 +28,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "contract_pic_mnt_ce_emp_refresh_his")
-@ApiModel(description = "契約保守担当CE社員洗い替え履歴(作成時不要)")
+@Schema(description = "契約保守担当CE社員洗い替え履歴(作成時不要)")
 public class ContractPicMntCeEmpRefreshHis extends EmployeeAbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_pic_mnt_ce_emp_refresh_his_seq")
 	@SequenceGenerator(name = "contract_pic_mnt_ce_emp_refresh_his_seq", sequenceName = "contract_pic_mnt_ce_emp_refresh_his_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -44,20 +43,20 @@ public class ContractPicMntCeEmpRefreshHis extends EmployeeAbstractEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 洗替日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日時", required = false, position = 3)
+	@Schema(description = "洗替日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "更新元バッチID", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "更新元バッチID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String updateBatchId;
 }

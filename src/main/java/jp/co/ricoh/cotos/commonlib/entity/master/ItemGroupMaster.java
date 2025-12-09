@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,7 +34,7 @@ public class ItemGroupMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_group_master_seq")
 	@SequenceGenerator(name = "item_group_master_seq", sequenceName = "item_group_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "品種グループマスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "品種グループマスタID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -42,21 +42,21 @@ public class ItemGroupMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種グループ名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "品種グループ名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemGroupName;
 
 	/**
 	 * 品種グループ区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種グループ区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "品種グループ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemGroupDiv;
 
 	/**
 	 * カテゴリ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "カテゴリ", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String category;
 
 	/**
@@ -64,6 +64,6 @@ public class ItemGroupMaster extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "itemGroupMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = true, position = 5)
+	@Schema(description = "品種マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ItemMaster> itemMasterList;
 }

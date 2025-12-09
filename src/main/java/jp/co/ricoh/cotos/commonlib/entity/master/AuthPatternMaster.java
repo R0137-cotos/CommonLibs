@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.AccessType;
 import jp.co.ricoh.cotos.commonlib.entity.master.UrlAuthMaster.ActionDiv;
@@ -56,42 +56,42 @@ public class AuthPatternMaster extends EntityBaseMaster {
 	}
 
 	@Id
-	@ApiModelProperty(value = "権限パターンID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "権限パターンID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long authPatternId;
 
 	/**
 	 * アクション区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "アクション区分", required = true, allowableValues = "なし(\"00\"), 照会(\"01\"), 登録(\"02\"), 更新(\"03\"), 削除(\"04\"), 印刷(\"05\"), ダウンロード(\"06\"), 集計(\"07\")", example = "00", position = 2)
+	@Schema(description = "アクション区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"00\"), 照会(\"01\"), 登録(\"02\"), 更新(\"03\"), 削除(\"04\"), 印刷(\"05\"), ダウンロード(\"06\"), 集計(\"07\")", example = "00")
 	private ActionDiv actionDiv;
 
 	/**
 	 * 権限区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0", position = 3)
+	@Schema(description = "権限区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0")
 	private AuthDiv authDiv;
 
 	/**
 	 * 参照種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "参照種別", required = true, allowableValues = "なし(\"0\"), 参照(\"1\"), 編集(\"2\"), 承認(\"3\")", example = "1", position = 4)
+	@Schema(description = "参照種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 参照(\"1\"), 編集(\"2\"), 承認(\"3\")", example = "1")
 	private AccessType accessType;
 
 	/**
 	 * 権限判定方式区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "権限判定方式区分", required = true, allowableValues = "COTOS認可(\"01\"), MoM権限(\"02\")", example = "01", position = 5)
+	@Schema(description = "権限判定方式区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "COTOS認可(\"01\"), MoM権限(\"02\")", example = "01")
 	private AuthJudgeDiv authJudgeDiv;
 
 	/**
 	 * MoM権限閾値
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "MoM権限閾値", required = false, allowableValues = "不可(\"00\"), 自顧客(\"10\"), 配下(\"30\"), 自社(\"50\"), 地域(\"70\"), 東西(\"80\"), すべて(\"90\")", example = "90", position = 6)
+	@Schema(description = "MoM権限閾値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "不可(\"00\"), 自顧客(\"10\"), 配下(\"30\"), 自社(\"50\"), 地域(\"70\"), 東西(\"80\"), すべて(\"90\")", example = "90")
 	private AuthLevel momThresholdLevel;
 
 	/**
@@ -99,7 +99,7 @@ public class AuthPatternMaster extends EntityBaseMaster {
 	 */
 	@JsonIgnore
 	@OneToMany(mappedBy = "authPatternMaster")
-	@ApiModelProperty(value = "画面URL権限マスタ", required = false, position = 7)
+	@Schema(description = "画面URL権限マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<DispUrlAuthMaster> authPatternMasterList;
 
 	/**
@@ -107,6 +107,6 @@ public class AuthPatternMaster extends EntityBaseMaster {
 	 */
 	@JsonIgnore
 	@OneToMany(mappedBy = "authPatternMaster")
-	@ApiModelProperty(value = "手配業務権限制御マスタ", required = false, position = 8)
+	@Schema(description = "手配業務権限制御マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkAuthControlMaster> arrangementWorkAuthControlMasterList;
 }

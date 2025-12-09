@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -12,30 +12,30 @@ public class O365CheckTenantParameter {
 	/**
 	 * 見積番号
 	 */
-	@ApiModelProperty(value = "見積番号", required = true, allowableValues = "range[0,255]", position = 1)
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
 	 * 企事部ID
 	 */
-	@ApiModelProperty(value = "企事部ID", required = true, allowableValues = "range[0,255]", position = 2)
+	@Schema(description = "企事部ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
 	 * テナントID(ディレクトリID)
 	 */
-	@ApiModelProperty(value = "テナントID(ディレクトリID)", required = true, allowableValues = "range[0,255]", position = 3)
+	@Schema(description = "テナントID(ディレクトリID)", allowableValues = "range[0,255]")
 	private String tenantId;
 
 	/**
 	 * ドメイン名
 	 */
-	@ApiModelProperty(value = "ドメイン名", required = true, allowableValues = "range[0,255]", position = 4)
+	@Schema(description = "ドメイン名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String domainName;
 
 	/**
 	 * プライマリドメイン名
 	 */
-	@ApiModelProperty(value = "プライマリドメイン名", required = true, allowableValues = "range[0,255]", position = 5)
+	@Schema(description = "プライマリドメイン名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String primaryDomainName;
 }

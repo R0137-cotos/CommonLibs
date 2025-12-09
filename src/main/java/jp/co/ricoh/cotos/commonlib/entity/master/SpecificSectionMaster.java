@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,7 +34,7 @@ public class SpecificSectionMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specific_section_master_seq")
 	@SequenceGenerator(name = "specific_section_master_seq", sequenceName = "specific_section_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "商材固有セクションマスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "商材固有セクションマスタID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -42,14 +42,14 @@ public class SpecificSectionMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有セクション名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有セクション名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String specificSectionName;
 
 	/**
 	 * 商材固有セクション区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有セクション区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有セクション区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificSectionDiv;
 
 	/**
@@ -57,7 +57,7 @@ public class SpecificSectionMaster extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "specificSectionMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "商材固有項目マスタ", required = true, position = 4)
+	@Schema(description = "商材固有項目マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<SpecificControlMaster> specificControlMaster;
 
 }

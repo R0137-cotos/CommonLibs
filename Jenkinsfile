@@ -5,8 +5,7 @@ pipeline {
       when {
         expression {
           def isJobNameMatch = "${env.JOB_NAME}".contains("PullRequestBuild")
-          def isTargetBranchMatch = "${env.CHANGE_TARGET}" == "topic/aws_eosl"
-          return isJobNameMatch && isTargetBranchMatch
+          return isJobNameMatch
         }
       }
       steps {
@@ -18,7 +17,7 @@ pipeline {
             echo "PR作成者： ${env.CHANGE_AUTHOR}"
             echo "Forkリポジトリ： ${env.CHANGE_FORK}"
             echo "PRブランチ： ${env.CHANGE_BRANCH}"
-            echo "ターゲットブランチ： ${env.CHANGE_TARGET}" 
+            echo "ターゲットブランチ： ${env.CHANGE_TARGET}"
             try {
               sh "gradle clean"
               if ("${env.CHANGE_TARGET}" == 'master') {

@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoProcessingStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.OsoSalesDataIdDiv;
@@ -92,53 +92,53 @@ public class CommissionData extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commission_data_seq")
 	@SequenceGenerator(name = "commission_data_seq", sequenceName = "commission_data_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 売上計上データID区分
 	 */
-	@ApiModelProperty(value = "売上計上データID区分", required = false, allowableValues = "OSO申込データ(\"1\"), OSO申込明細データ(\"2\"), OSO実績データ(\"3\")", example = "1", position = 2)
+	@Schema(description = "売上計上データID区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "OSO申込データ(\"1\"), OSO申込明細データ(\"2\"), OSO実績データ(\"3\")", example = "1")
 	private OsoSalesDataIdDiv salesDataIdDiv;
 
 	/**
 	 * 売上計上データID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "売上計上データID", required = true, position = 3, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "売上計上データID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long salesDataId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 5, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long contractId;
 
 	/**
 	 * 契約明細ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約明細ID", required = false, position = 6, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約明細ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long contractDetailId;
 
 	/**
 	 * 売上計上データID区分
 	 */
-	@ApiModelProperty(value = "売上計上データID区分", required = false, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0", position = 7)
+	@Schema(description = "売上計上データID区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0")
 	private OsoProcessingStatus processingStatus;
 
 	/**
 	 * 処理日時
 	 */
-	@ApiModelProperty(value = "処理日時", required = false, position = 8)
+	@Schema(description = "処理日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date processingAt;
 
@@ -147,55 +147,55 @@ public class CommissionData extends EntityBase {
 	 */
 	@Column(name = "message")
 	@Size(max = 4000)
-	@ApiModelProperty(value = "メッセージ", required = false, position = 9, allowableValues = "range[0,4000]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String osoMessage;
 
 	/**
 	 * 商流区分
 	 */
-	@ApiModelProperty(value = "商流区分", required = false, allowableValues = "リコーなし代売売上１手数料（通常）(\"N\"), リコーなし代売売上１手数料（北海道）(\"P\"), リコーなし代売売上２手数料（通常）(\"T\"), リコーなし代売売上２手数料（北海道）(\"U\")", example = "N", position = 10)
+	@Schema(description = "商流区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "リコーなし代売売上１手数料（通常）(\"N\"), リコーなし代売売上１手数料（北海道）(\"P\"), リコーなし代売売上２手数料（通常）(\"T\"), リコーなし代売売上２手数料（北海道）(\"U\")", example = "N")
 	private NspCommercialFlowDiv nspCommercialFlowDiv;
 
 	/**
 	 * サービスID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービスID", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "サービスID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceId;
 
 	/**
 	 * 販社コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "販社コード", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "販社コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String salesCompanyCode;
 
 	/**
 	 * 販社得意先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "販社得意先コード", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "販社得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String salesCompanyCustomerCode;
 
 	/**
 	 * 販社届先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "販社届先コード", required = false, position = 14, allowableValues = "range[0,255]")
+	@Schema(description = "販社届先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String salesCompanyDeliveryCode;
 
 	/**
 	 * 届け先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "届け先コード", required = false, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "届け先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryCode;
 
 	/**
 	 * ローカル商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ローカル商品コード", required = false, position = 16, allowableValues = "range[0,255]")
+	@Schema(description = "ローカル商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String localProductCode;
 
 	/**
@@ -203,13 +203,13 @@ public class CommissionData extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "数量", required = false, position = 17, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
 	 * 取引日
 	 */
-	@ApiModelProperty(value = "取引日", required = false, position = 18)
+	@Schema(description = "取引日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date tradingDate;
 
@@ -218,7 +218,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売元仕入単価", required = false, position = 19, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売元仕入単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal distributorPurchasePrice;
 
 	/**
@@ -226,7 +226,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売元売上単価", required = false, position = 20, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売元売上単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal distributorSalesPrice;
 
 	/**
@@ -234,7 +234,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販社売上単価", required = false, position = 21, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販社売上単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal salesCompanySalesPrice;
 
 	/**
@@ -242,7 +242,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売店売上単価", required = false, position = 22, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売店売上単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal dealerSalesPrice;
 
 	/**
@@ -250,7 +250,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売元仕入金額", required = false, position = 23, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売元仕入金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal distributorPurchaseAmount;
 
 	/**
@@ -258,7 +258,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売元売上金額", required = false, position = 24, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売元売上金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal distributorSalesAmount;
 
 	/**
@@ -266,7 +266,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販社売上金額", required = false, position = 25, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販社売上金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal salesCompanySalesAmount;
 
 	/**
@@ -274,13 +274,13 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売店売上金額", required = false, position = 26, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売店売上金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal dealerSalesAmount;
 
 	/**
 	 * 消費税区分
 	 */
-	@ApiModelProperty(value = "消費税区分", required = false, allowableValues = "非課税(\"4\"), ５％外税(\"C\"), ８％外税(\"E\"), １０％外税(\"G\")", example = "4", position = 27)
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "非課税(\"4\"), ５％外税(\"C\"), ８％外税(\"E\"), １０％外税(\"G\")", example = "4")
 	private TaxRateDiv taxRateDiv;
 
 	/**
@@ -288,7 +288,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売二次店売上単価", required = false, position = 28, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売二次店売上単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal secondaryStoreSalesPrice;
 
 	/**
@@ -296,21 +296,21 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売二次店売上金額", required = false, position = 29, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売二次店売上金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal secondaryStoreSalesAmount;
 
 	/**
 	 * 販社二次店得意先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "販社二次店得意先コード", required = false, position = 30, allowableValues = "range[0,255]")
+	@Schema(description = "販社二次店得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String secondaryStoreCustomerCode;
 
 	/**
 	 * 販社二次店届先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "販社二次店届先コード", required = false, position = 31, allowableValues = "range[0,255]")
+	@Schema(description = "販社二次店届先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String secondaryStoreDeliveryCode;
 
 	/**
@@ -318,56 +318,56 @@ public class CommissionData extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "販売元仕入消費税", required = false, position = 32, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "販売元仕入消費税", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal distributorPurchaseTaxAmount;
 
 	/**
 	 * 納品：届先名１
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：届先名１", required = false, position = 33, allowableValues = "range[0,255]")
+	@Schema(description = "納品：届先名１", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryName1;
 
 	/**
 	 * 納品：届先名２
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：届先名２", required = false, position = 34, allowableValues = "range[0,255]")
+	@Schema(description = "納品：届先名２", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryName2;
 
 	/**
 	 * 納品：郵便番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：郵便番号", required = false, position = 35, allowableValues = "range[0,255]")
+	@Schema(description = "納品：郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryPostNumber;
 
 	/**
 	 * 納品：届先住所１
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：届先住所１", required = false, position = 36, allowableValues = "range[0,255]")
+	@Schema(description = "納品：届先住所１", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryAddress1;
 
 	/**
 	 * 納品：届先住所２
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：届先住所２", required = false, position = 37, allowableValues = "range[0,255]")
+	@Schema(description = "納品：届先住所２", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryAddress2;
 
 	/**
 	 * 納品：届先住所３
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：届先住所３", required = false, position = 38, allowableValues = "range[0,255]")
+	@Schema(description = "納品：届先住所３", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryAddress3;
 
 	/**
 	 * 納品：届先電話番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品：届先電話番号", required = false, position = 39, allowableValues = "range[0,255]")
+	@Schema(description = "納品：届先電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryPhoneNumber;
 
 	/**
@@ -375,7 +375,7 @@ public class CommissionData extends EntityBase {
 	 */
 	@Column(name = "article1_kanji")
 	@Size(max = 255)
-	@ApiModelProperty(value = "記事１（漢字）", required = false, position = 40, allowableValues = "range[0,255]")
+	@Schema(description = "記事１（漢字）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String article1Kanji;
 
 	/**
@@ -383,160 +383,160 @@ public class CommissionData extends EntityBase {
 	 */
 	@Column(name = "article2_kanji")
 	@Size(max = 255)
-	@ApiModelProperty(value = "記事２（漢字）", required = false, position = 41, allowableValues = "range[0,255]")
+	@Schema(description = "記事２（漢字）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String article2Kanji;
 
 	/**
 	 * コメント１
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "コメント１", required = false, position = 42, allowableValues = "range[0,255]")
+	@Schema(description = "コメント１", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String comment1;
 
 	/**
 	 * コメント２
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "コメント２", required = false, position = 43, allowableValues = "range[0,255]")
+	@Schema(description = "コメント２", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String comment2;
 
 	/**
 	 * 仕入先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "仕入先コード", required = false, position = 44, allowableValues = "range[0,255]")
+	@Schema(description = "仕入先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorCode;
 
 	/**
 	 * OSO管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "OSO管理番号", required = false, position = 45, allowableValues = "range[0,255]")
+	@Schema(description = "OSO管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String osoManageNumber;
 
 	/**
 	 * 債権債務照合キー
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "債権債務照合キー", required = false, position = 46, allowableValues = "range[0,255]")
+	@Schema(description = "債権債務照合キー", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String matchingKey;
 
 	/**
 	 * 予備
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "予備", required = false, position = 47, allowableValues = "range[0,255]")
+	@Schema(description = "予備", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String reserve;
 
 	/**
 	 * サービス種類区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービス種類区分", required = false, position = 48, allowableValues = "range[0,255]")
+	@Schema(description = "サービス種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceTypeDiv;
 
 	/**
 	 * サービス名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービス名", required = false, position = 49, allowableValues = "range[0,255]")
+	@Schema(description = "サービス名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceName;
 
 	/**
 	 * コメント使用タイプ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "コメント使用タイプ", required = false, position = 50, allowableValues = "range[0,255]")
+	@Schema(description = "コメント使用タイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String commentUsageType;
 
 	/**
 	 * 手数料取引先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "手数料取引先コード", required = false, position = 51, allowableValues = "range[0,255]")
+	@Schema(description = "手数料取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String commissionSupplierCode;
 
 	/**
 	 * 手数料ローカル商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "手数料ローカル商品コード", required = false, position = 52, allowableValues = "range[0,255]")
+	@Schema(description = "手数料ローカル商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String commissionLocalProductCode;
 
 	/**
 	 * 担当ＳＡコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当ＳＡコード", required = false, position = 53, allowableValues = "range[0,255]")
+	@Schema(description = "担当ＳＡコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picSaCode;
 
 	/**
 	 * 値引適用フラグ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "値引適用フラグ", required = false, position = 54, allowableValues = "range[0,255]")
+	@Schema(description = "値引適用フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String discountApplyFlg;
 
 	/**
 	 * 都度値引名称
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "都度値引名称", required = false, position = 55, allowableValues = "range[0,255]")
+	@Schema(description = "都度値引名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String discountName;
 
 	/**
 	 * 都度値引値
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "都度値引値", required = false, position = 56, allowableValues = "range[0,255]")
+	@Schema(description = "都度値引値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String discountPrice;
 
 	/**
 	 * 値引種類(売上)
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "値引種類(売上)", required = false, position = 57, allowableValues = "range[0,255]")
+	@Schema(description = "値引種類(売上)", allowableValues = "range[0,255]")
 	private String discountTyprForSales;
 
 	/**
 	 * 値引種類(仕入)
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "値引種類(仕入)", required = false, position = 58, allowableValues = "range[0,255]")
+	@Schema(description = "値引種類(仕入)", allowableValues = "range[0,255]")
 	private String discountTyprForPurchase;
 
 	/**
 	 * 発注No
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "発注No", required = false, position = 59, allowableValues = "range[0,255]")
+	@Schema(description = "発注No", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orderNumber;
 
 	/**
 	 * 商品名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品名", required = false, position = 60, allowableValues = "range[0,255]")
+	@Schema(description = "商品名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productName;
 
 	/**
 	 * 得意先名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "得意先名", required = false, position = 61, allowableValues = "range[0,255]")
+	@Schema(description = "得意先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
 	 * 傘下店名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "傘下店名", required = false, position = 62, allowableValues = "range[0,255]")
+	@Schema(description = "傘下店名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dealerName;
 
 	/**
 	 * データ連携日付
 	 */
-	@ApiModelProperty(value = "データ連携日付", required = false, position = 63)
+	@Schema(description = "データ連携日付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date cooperationDate;
 
@@ -544,13 +544,13 @@ public class CommissionData extends EntityBase {
 	 * 計上部門コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "計上部門コード", required = false, position = 64, allowableValues = "range[0,255]")
+	@Schema(description = "計上部門コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String accountingDepartmentCode;
 
 	/**
 	 * 経費データフラグ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "経費データフラグ", required = false, position = 65, allowableValues = "range[0,255]")
+	@Schema(description = "経費データフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String expenseDataFlg;
 }

@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,7 +48,7 @@ public class ArrangementWorkOperationLog extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_operation_log_seq")
 	@SequenceGenerator(name = "arrangement_work_operation_log_seq", sequenceName = "arrangement_work_operation_log_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務操作履歴ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配業務操作履歴ID (作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -56,7 +56,7 @@ public class ArrangementWorkOperationLog extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "手配業務", required = true, position = 2)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ArrangementWork arrangementWork;
 
@@ -65,7 +65,7 @@ public class ArrangementWorkOperationLog extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "操作内容", required = true, position = 3, allowableValues = "range[0,1000]")
+	@Schema(description = "操作内容", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1000]")
 	@Enumerated(EnumType.STRING)
 	private Operation operation;
 
@@ -74,28 +74,28 @@ public class ArrangementWorkOperationLog extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "操作者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 4)
+	@Schema(description = "操作者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String operatorEmpId;
 
 	/**
 	 * 操作者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "操作者氏名", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "操作者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String operatorName;
 
 	/**
 	 * 操作者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "操作者組織名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "操作者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String operatorOrgName;
 
 	/**
 	 * 実施日時
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "実施日時(作成時不要)", required = true, position = 7, readOnly = true)
+	@Schema(description = "実施日時(作成時不要)", readOnly = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date operatedAt;
 

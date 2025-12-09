@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.SpecificControlMaster.ItemValueDiv;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class SpecificInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specific_info_seq")
 	@SequenceGenerator(name = "specific_info_seq", sequenceName = "specific_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "商材固有項目情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "商材固有項目情報ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -40,14 +40,14 @@ public class SpecificInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
@@ -55,34 +55,34 @@ public class SpecificInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "商材固有項目マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商材固有項目マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long specificControlMasterId;
 
 	/**
 	 * 商材固有項目区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有項目区分", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有項目区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificControlDiv;
 
 	/**
 	 * 項目値区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "項目値区分", required = true, position = 6)
+	@Schema(description = "項目値区分", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ItemValueDiv itemValueDiv;
 
 	/**
 	 * 値
 	 */
 	@Size(max = 4000)
-	@ApiModelProperty(value = "値", required = false, position = 7, allowableValues = "range[0,4000]")
+	@Schema(description = "値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String itemValue;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 8)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 }

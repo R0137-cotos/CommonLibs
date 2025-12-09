@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -11,25 +11,25 @@ import lombok.Data;
 @Data
 public class EtransporterFileUploadParameter {
 
-	@ApiModelProperty(value = "ユーザID", required = true, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String userId;
 
-	@ApiModelProperty(value = "送信先メールアドレス", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "送信先メールアドレス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String mailTo;
 
-	@ApiModelProperty(value = "メール件名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "メール件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailSubjct;
 
-	@ApiModelProperty(value = "メールメッセージ", required = false, position = 4, allowableValues = "range[0,20000]")
+	@Schema(description = "メールメッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,20000]")
 	private String mailMessage;
 
-	@ApiModelProperty(value = "アップロードファイル", required = true, position = 5)
+	@Schema(description = "アップロードファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<UploadFileParameter> fileList;
 
-	@ApiModelProperty(value = "API呼び出しリトライ有無", required = false, position = 6)
+	@Schema(description = "API呼び出しリトライ有無", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean retry;
 
-	@ApiModelProperty(value = "メール送信有無", required = false, position = 7)
+	@Schema(description = "メール送信有無", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean sendmail;
 
 }

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -16,7 +16,7 @@ public class MailInfoDto {
 	 * メールテンプレートマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "メールテンプレートマスタID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールテンプレートマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long mailTemplateMasterId;
 
 	/**
@@ -24,24 +24,24 @@ public class MailInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールタイプ区分", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "メールタイプ区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String mailTypeDiv;
 
 	/**
 	 * TOメールアドレスリスト
 	 */
-	@ApiModelProperty(value = "TOメールアドレスリスト", required = false, position = 3)
+	@Schema(description = "TOメールアドレスリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> toMailAddressList;
 
 	/**
 	 * CCメールアドレスリスト
 	 */
-	@ApiModelProperty(value = "CCメールアドレスリスト", required = false, position = 4)
+	@Schema(description = "CCメールアドレスリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> ccMailAddressList;
 
 	/**
 	 * BCCメールアドレスリスト
 	 */
-	@ApiModelProperty(value = "BCCメールアドレスリスト", required = false, position = 5)
+	@Schema(description = "BCCメールアドレスリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> bccMailAddressList;
 }

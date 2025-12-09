@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.DealerAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class DealerEstimation extends DealerAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dealer_estimation_seq")
 	@SequenceGenerator(name = "dealer_estimation_seq", sequenceName = "dealer_estimation_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, readOnly = true)
+	@Schema(description = "ID(作成時不要)", readOnly = true)
 	private long id;
 
 	/**
@@ -42,14 +42,14 @@ public class DealerEstimation extends DealerAbstractEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "見積", required = true, position = 2)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Estimation estimation;
 
 	/**
 	 * 担当者メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当者メールアドレス", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
@@ -57,7 +57,7 @@ public class DealerEstimation extends DealerAbstractEntity {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "更新案内メール送信フラグ", required = false, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "更新案内メール送信フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer sendUpdateMailFlg;
 
 }

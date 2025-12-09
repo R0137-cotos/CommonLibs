@@ -16,8 +16,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,13 +28,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "arrangement_work_approval_route")
-@ApiModel(description = "手配業務承認ルート(作成時不要)")
+@Schema(description = "手配業務承認ルート(作成時不要)")
 public class ArrangementWorkApprovalRoute extends EntityBase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_approval_route_seq")
 	@SequenceGenerator(name = "arrangement_work_approval_route_seq", sequenceName = "arrangement_work_approval_route_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務承認ルートID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配業務承認ルートID (作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -44,34 +43,34 @@ public class ArrangementWorkApprovalRoute extends EntityBase {
 	@OneToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "手配業務", required = true, position = 2)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWork arrangementWork;
 
 	/**
 	 * 承認依頼者MoM社員ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認依頼者MoM社員ID", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterEmpId;
 
 	/**
 	 * 承認依頼者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認依頼者氏名", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterName;
 
 	/**
 	 * 承認依頼者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認依頼者組織名", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterOrgName;
 
 	/**
 	 * 承認ルートマスタID
 	 */
-	@ApiModelProperty(value = "承認ルートマスタID", required = false, position = 6)
+	@Schema(description = "承認ルートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long approvalRouteMasterId;
 
 	/**
@@ -79,7 +78,7 @@ public class ArrangementWorkApprovalRoute extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "arrangementWorkApprovalRoute")
 	@OrderBy("processedAt ASC")
-	@ApiModelProperty(value = "手配業務承認実績", required = false, position = 7)
+	@Schema(description = "手配業務承認実績", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkApprovalResult> arrangementWorkApprovalResultList;
 
 	/**
@@ -87,7 +86,7 @@ public class ArrangementWorkApprovalRoute extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "arrangementWorkApprovalRoute")
 	@OrderBy("approvalOrder ASC")
-	@ApiModelProperty(value = "手配業務承認ルートノード", required = true, position = 8)
+	@Schema(description = "手配業務承認ルートノード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ArrangementWorkApprovalRouteNode> arrangementWorkApprovalRouteNodeList;
 
 }

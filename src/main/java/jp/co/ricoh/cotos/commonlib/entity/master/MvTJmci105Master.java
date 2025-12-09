@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -21,68 +21,68 @@ public class MvTJmci105Master {
 
 	/** 顧客番号 */
 	@Id
-	@ApiModelProperty(value = "顧客番号", required = true, position = 1)
+	@Schema(description = "顧客番号", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String customerNumber;
 
 	/** MOM企業ID */
-	@ApiModelProperty(value = "MOM企業ID", required = false, position = 2)
+	@Schema(description = "MOM企業ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String sortCompanyId;
 
 	/** 顧客タイプ */
-	@ApiModelProperty(value = "顧客タイプ", required = false, position = 3)
+	@Schema(description = "顧客タイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cstTyp;
 
 	/** 顧客有効フラグ */
-	@ApiModelProperty(value = "顧客有効フラグ", required = false, position = 4)
+	@Schema(description = "顧客有効フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerEnabledFlag;
 
 	/** 企業名_漢字 */
-	@ApiModelProperty(value = "企業名_漢字", required = false, position = 5)
+	@Schema(description = "企業名_漢字", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String enterpriseName;
 
 	/** 企業名_ｶﾅ */
-	@ApiModelProperty(value = "企業名_ｶﾅ", required = false, position = 6)
+	@Schema(description = "企業名_ｶﾅ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String enterprisePhonetic;
 
 	/** 名寄せ用_企業名_漢字 */
-	@ApiModelProperty(value = "名寄せ用_企業名_漢字", required = false, position = 7)
+	@Schema(description = "名寄せ用_企業名_漢字", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String enterpriseNameFormal;
 
 	/** 名寄せ用_企業名_ｶﾅ */
-	@ApiModelProperty(value = "名寄せ用_企業名_ｶﾅ", required = false, position = 8)
+	@Schema(description = "名寄せ用_企業名_ｶﾅ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String enterprisePhoneticFormal;
 
 	/** 法人格付企業名_漢字 */
-	@ApiModelProperty(value = "法人格付企業名_漢字", required = false, position = 9)
+	@Schema(description = "法人格付企業名_漢字", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cstKnjiNm;
 
 	/** 法人格付企業名_ｶﾅ */
-	@ApiModelProperty(value = "法人格付企業名_ｶﾅ", required = false, position = 10)
+	@Schema(description = "法人格付企業名_ｶﾅ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cstKanaNm;
 
 	/** 関係会社区分 */
-	@ApiModelProperty(value = "関係会社区分", required = false, position = 11)
+	@Schema(description = "関係会社区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String kanCorpKb;
 
 	/** 関係会社コード */
-	@ApiModelProperty(value = "関係会社コード", required = false, position = 12)
+	@Schema(description = "関係会社コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String kanCorpCd;
 
 	/** 系列会社区分 */
-	@ApiModelProperty(value = "系列会社区分", required = false, position = 13)
+	@Schema(description = "系列会社区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String affiliatedCompanyCode;
 
 	/** 連結会社区分 */
-	@ApiModelProperty(value = "連結会社区分", required = false, position = 14)
+	@Schema(description = "連結会社区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String connectCompanyCls;
 
 	/** ICI更新日時 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ICI更新日時", required = false, position = 15)
+	@Schema(description = "ICI更新日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date iciUpdtDt;
 
 	/** MoM最終更新日時時刻 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "MoM最終更新日時時刻", required = false, position = 16)
+	@Schema(description = "MoM最終更新日時時刻", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date scMomUpdtDtTm;
 }

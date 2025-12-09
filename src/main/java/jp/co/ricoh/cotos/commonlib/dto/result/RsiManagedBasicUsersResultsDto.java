@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,31 +13,31 @@ public class RsiManagedBasicUsersResultsDto {
 	/**
 	 * テナントID
 	 */
-	@ApiModelProperty(value = "テナントID", required = false, position = 1)
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String tenantId;
 
 	/**
 	 * ユーザーID
 	 */
-	@ApiModelProperty(value = "ユーザーID", required = false, position = 2)
+	@Schema(description = "ユーザーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String userId;
 
 	/**
 	 * 姓
 	 */
-	@ApiModelProperty(value = "姓", required = false, position = 3)
+	@Schema(description = "姓", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String familyName;
 
 	/**
 	 * 名
 	 */
-	@ApiModelProperty(value = "名", required = false, position = 4)
+	@Schema(description = "名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String givenName;
 
 	/**
 	 * メールアドレス
 	 */
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 5)
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String loginMailAddress;
 
 }

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.EimLinkedStatus;
 import lombok.Data;
@@ -30,7 +30,7 @@ public class AttachedFile extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attached_file_seq")
 	@SequenceGenerator(name = "attached_file_seq", sequenceName = "attached_file_seq", allocationSize = 1)
-	@ApiModelProperty(value = "添付ファイルID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "添付ファイルID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -39,14 +39,14 @@ public class AttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "物理ファイル名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "物理ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String filePhysicsName;
 
 	/**
 	 * ファイルサイズ
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "ファイルサイズ", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ファイルサイズ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long fileSize;
 
 	/**
@@ -55,7 +55,7 @@ public class AttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "コンテンツタイプ", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "コンテンツタイプ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contentType;
 
 	/**
@@ -64,18 +64,18 @@ public class AttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 1000)
-	@ApiModelProperty(value = "サーバーパス", required = true, position = 5, allowableValues = "range[0,1000]")
+	@Schema(description = "サーバーパス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1000]")
 	private String savedPath;
 
 	/**
 	 * EIM連携済状態
 	 */
-	@ApiModelProperty(value = "EIM連携済状態", required = false, position = 6, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
+	@Schema(description = "EIM連携済状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
 
 	/**
 	 * EIMファイルID
 	 */
-	@ApiModelProperty(value = "EIMファイルID", required = false, position = 7)
+	@Schema(description = "EIMファイルID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String eimFileId;
 }

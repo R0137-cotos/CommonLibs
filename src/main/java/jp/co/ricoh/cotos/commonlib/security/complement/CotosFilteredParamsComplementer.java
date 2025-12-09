@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.util.ReflectionUtils;
+import io.swagger.v3.core.util.ReflectionUtils;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.security.filter.CotosDisclosable;
 import jp.co.ricoh.cotos.commonlib.security.mom.MomAuthorityService.AuthLevel;
@@ -145,7 +145,7 @@ public class CotosFilteredParamsComplementer {
 
 	/**
 	 * エンティティの値・アノテーション情報を元に、 MoM権限によりフィルタリングされた情報を補完する
-	 * 
+	 *
 	 * @param target
 	 *            補完対象
 	 * @param src

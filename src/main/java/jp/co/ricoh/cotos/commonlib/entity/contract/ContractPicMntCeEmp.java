@@ -12,8 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.EmployeeAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,13 +25,13 @@ import lombok.EqualsAndHashCode;
 @EntityListeners(ContractPicMntCeEmpListener.class)
 @Data
 @Table(name = "contract_pic_mnt_ce_emp")
-@ApiModel(description = "契約保守担当CE社員(作成時不要)")
+@Schema(description = "契約保守担当CE社員(作成時不要)")
 public class ContractPicMntCeEmp extends EmployeeAbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_pic_ce_emp_seq")
 	@SequenceGenerator(name = "contract_pic_ce_emp_seq", sequenceName = "contract_pic_ce_emp_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -41,6 +40,6 @@ public class ContractPicMntCeEmp extends EmployeeAbstractEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 }

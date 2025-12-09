@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -15,7 +15,7 @@ public class ContractDetailDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@ApiModelProperty(value = "契約明細ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約明細ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -23,7 +23,7 @@ public class ContractDetailDelegationDto {
 	 */
 	@Valid
 	@NotNull
-	@ApiModelProperty(value = "品種(契約用)", required = true, position = 2)
+	@Schema(description = "品種(契約用)")
 	private ItemContractDelegationDto itemContract;
 
 	/**
@@ -31,7 +31,7 @@ public class ContractDetailDelegationDto {
 	 */
 	@Valid
 	@NotNull
-	@ApiModelProperty(value = "レートプランチャージ情報", required = true, position = 3)
+	@Schema(description = "レートプランチャージ情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RatePlanChargeInfoDto ratePlanChargeInfo;
 
 }

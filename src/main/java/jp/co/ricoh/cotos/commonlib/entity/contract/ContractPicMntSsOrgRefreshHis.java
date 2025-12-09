@@ -18,8 +18,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,13 +30,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "contract_pic_mnt_ss_org_refresh_his")
-@ApiModel(description = "契約保守担当SS組織洗い替え履歴")
+@Schema(description = "契約保守担当SS組織洗い替え履歴")
 public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_pic_mnt_ss_org_refresh_his_seq")
 	@SequenceGenerator(name = "contract_pic_mnt_ss_org_refresh_his_seq", sequenceName = "contract_pic_mnt_ss_org_refresh_his_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -46,14 +45,14 @@ public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "MoM組織ID", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "MoM組織ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momOrgId;
 
 	/**
 	 * 課所名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "課所名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceOrgName;
 
 	/**
@@ -62,20 +61,20 @@ public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 4)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 洗替日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日時", required = false, position = 5)
+	@Schema(description = "洗替日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "更新元バッチID", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "更新元バッチID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String updateBatchId;
 }

@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,13 +13,13 @@ public class IspErrorInfo {
 	/**
 	 * エラーコード
 	 */
-	@ApiModelProperty(value = "エラーコード", required = false, position = 1)
+	@Schema(description = "エラーコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String errorCode;
 
 	/**
 	 * エラー内容
 	 */
-	@ApiModelProperty(value = "エラー内容", required = false, position = 2)
+	@Schema(description = "エラー内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String errorContents;
 
 }

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
 
@@ -48,29 +48,29 @@ public class VMailAddressList {
 	}
 
 	@Id
-	@ApiModelProperty(value = "トランザクションID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "トランザクションID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 	/**
 	 * ドメイン区分
 	 */
-	@ApiModelProperty(value = "ドメイン区分", required = true, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1", position = 2)
+	@Schema(description = "ドメイン区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory domainType;
 
 	/**
 	 * テーブル区分
 	 */
-	@ApiModelProperty(value = "テーブル区分", required = true, position = 3, allowableValues = "担当SA(\"1\"), 担当編集者(\"2\"), 担当CE(\"3\"), 販売店(\"4\"), 顧客(\"5\"), 担当作業者(\"6\"), 導入CE(\"7\"), 保守CE(\"8\"), 大塚商会連絡用アドレス(\"101\"), OR年額_大塚商会連絡用アドレス(\"102\"), OR年額_OR営本グループアドレス(\"103\"), EDW_年額更新時期案内_不着連絡用メールアドレス(\"104\"), 脱RITOS更新案内_BBC宛先用メールアドレス(\"105\"), O365事務局_BCC宛先用メールアドレス(\"106\"), 異動情報取込手配リマインド_TO宛先用メールアドレス(\"107\"), 異動情報取込手配リマインド_BCC宛先用メールアドレス(\"108\"), SIM用固定メールアドレス(\"300\"), 担当SA_追加編集者(\"1002\"), 担当SA_導入担当CE_追加編集者(\"9\"), 商品担当区グループアドレス(\"10\"), 担当SA上長(\"1003\"), 承認者_代理承認者(\"APPROVER\"), SSec不達連絡用メールアドレス(\"14\"), 担当作業者_担当CE(\"15\"), 担当SA_追加編集者_リコーひかり業務(\"400\"), 受付導入保守CE(\"16\"), 受付CE_導入CE_担当作業者(\"17\"), 受付CE_保守CE_担当作業者(\"18\"), 受付CE_SA上長_追加編集者(\"19\"), 受付CE_保守CE(\"21\"), 担当SA_受付CE_保守CE(\"22\"), 担当SA上長_MITS商品担当区グループアドレス(\"1004\"), ROCLite用固定メールアドレス(\"110\")", example = "1")
+	@Schema(description = "テーブル区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "担当SA(\"1\"), 担当編集者(\"2\"), 担当CE(\"3\"), 販売店(\"4\"), 顧客(\"5\"), 担当作業者(\"6\"), 導入CE(\"7\"), 保守CE(\"8\"), 大塚商会連絡用アドレス(\"101\"), OR年額_大塚商会連絡用アドレス(\"102\"), OR年額_OR営本グループアドレス(\"103\"), EDW_年額更新時期案内_不着連絡用メールアドレス(\"104\"), 脱RITOS更新案内_BBC宛先用メールアドレス(\"105\"), O365事務局_BCC宛先用メールアドレス(\"106\"), 異動情報取込手配リマインド_TO宛先用メールアドレス(\"107\"), 異動情報取込手配リマインド_BCC宛先用メールアドレス(\"108\"), SIM用固定メールアドレス(\"300\"), 担当SA_追加編集者(\"1002\"), 担当SA_導入担当CE_追加編集者(\"9\"), 商品担当区グループアドレス(\"10\"), 担当SA上長(\"1003\"), 承認者_代理承認者(\"APPROVER\"), SSec不達連絡用メールアドレス(\"14\"), 担当作業者_担当CE(\"15\"), 担当SA_追加編集者_リコーひかり業務(\"400\"), 受付導入保守CE(\"16\"), 受付CE_導入CE_担当作業者(\"17\"), 受付CE_保守CE_担当作業者(\"18\"), 受付CE_SA上長_追加編集者(\"19\"), 受付CE_保守CE(\"21\"), 担当SA_受付CE_保守CE(\"22\"), 担当SA上長_MITS商品担当区グループアドレス(\"1004\"), ROCLite用固定メールアドレス(\"110\")", example = "1")
 	private TableType tableType;
 
 	/**
 	 * トランザクションID
 	 */
-	@ApiModelProperty(value = "トランザクションID", required = true, position = 4, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "トランザクションID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long transactionId;
 
 	/**
 	 * メールアドレス
 	 */
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 }

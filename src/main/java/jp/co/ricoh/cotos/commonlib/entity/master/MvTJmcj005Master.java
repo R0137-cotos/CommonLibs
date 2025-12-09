@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -22,13 +22,13 @@ public class MvTJmcj005Master {
 
 	/** 販社別設置届先ID */
 	@Id
-	@ApiModelProperty(value = "販社別設置届先ID", required = true, position = 1)
+	@Schema(description = "販社別設置届先ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String hanshSetiskiId;
 
 	private String setiskiId;
 	
 	/** 販社コード(支社コード) */
-	@ApiModelProperty(value = "販社コード(支社コード)", required = true, position = 3)
+	@Schema(description = "販社コード(支社コード)")
 	private String hanshCd;
 
 	private String susSiteId;
@@ -40,11 +40,11 @@ public class MvTJmcj005Master {
 	private String trsMotoSysKbn;
 
 	/** RINGS得意先コード */
-	@ApiModelProperty(value = "RINGS得意先コード", required = true, position = 8)
+	@Schema(description = "RINGS得意先コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String ringsTkiskCd;
 
 	/** RINGS届先コード */
-	@ApiModelProperty(value = "RINGS届先コード", required = true, position = 8)
+	@Schema(description = "RINGS届先コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String ringsTodokesakiCd;
 
 	private String ricohTkiskCd;

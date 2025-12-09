@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
@@ -47,115 +47,115 @@ public class ItemContractDetailForFindAllDetailsBplatsDto extends EntityBase {
 		}
 	}
 
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 品種マスタID
 	 */
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 商品マスタID
 	 */
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
 	 * 品種名
 	 */
-	@ApiModelProperty(value = "品種名", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
 	 * リコー品種コード
 	 */
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
-	@ApiModelProperty(value = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1", position = 6)
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
 	 * 費用種別
 	 */
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 7)
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1")
 	private CostType costType;
 
 	/**
 	 * 仕切価格
 	 */
-	@ApiModelProperty(value = "仕切価格", required = true, position = 8, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
 	 * 契約明細
 	 */
 	@JsonIgnore
-	@ApiModelProperty(value = "契約明細", required = true, position = 9)
+	@Schema(description = "契約明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractDetail contractDetail;
 
 	/**
 	 * 仕入取引先コード
 	 */
-	@ApiModelProperty(value = "仕入取引先コード", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
 	 * Ｒ原価
 	 */
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
 	 * ＲＪ仕入価格
 	 */
-	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
 	 * ＲＪ仕切価格
 	 */
-	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
 	 * 母店売価(接点店仕切)
 	 */
-	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "母店売価(接点店仕切)", allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 消費税区分
 	 */
-	@ApiModelProperty(value = "消費税区分", required = false, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * IFS連携フラグ
 	 */
-	@ApiModelProperty(value = "IFS連携フラグ", required = true, position = 16, allowableValues = "range[0,9]")
+	@Schema(description = "IFS連携フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
 
 	/**
 	 * メーカー商品コード
 	 */
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 17, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * BplatsWeb販売用オプション識別区分
 	 */
-	@ApiModelProperty(value = "BplatsWeb販売用オプション識別区分", required = false, allowableValues = "基本商品(\"1\"), 専用オプション(\"2\"), 共通オプション(\"3\")", example = "1", position = 18)
+	@Schema(description = "BplatsWeb販売用オプション識別区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "基本商品(\"1\"), 専用オプション(\"2\"), 共通オプション(\"3\")", example = "1")
 	private BplatsOptionType bplatsOptionType;
 
 	/**
 	 * BplatsWeb販売用オプション親コード
 	 */
-	@ApiModelProperty(value = "BplatsWeb販売用オプション親コード", required = false, position = 19, allowableValues = "range[0,255]")
+	@Schema(description = "BplatsWeb販売用オプション親コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bplatsParentOptionProductCd;
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
 import jp.co.ricoh.cotos.commonlib.entity.communication.Communication;
 import lombok.Data;
 
@@ -18,38 +18,38 @@ public class CommunicationRegisterParameter {
 	 * コミュニケーションエンティティ
 	 */
 	@NotNull
-	@ApiParam(value = "コミュニケーションエンティティ", required = true)
+	@Parameter(description = "コミュニケーションエンティティ")
 	private Communication communication;
 
 	/**
 	 * メールCC送付先MoM社員IDリスト
 	 */
-	@ApiParam(value = "メールCC送付先MoM社員IDリスト", required = false)
+	@Parameter(description = "メールCC送付先MoM社員IDリスト")
 	private List<String> momEmpList;
 
 	/**
 	 * メール件名置換リスト
 	 */
 	@NotNull
-	@ApiParam(value = "メール件名置換リスト", required = true)
+	@Parameter(description = "メール件名置換リスト")
 	private List<String> mailSubjectRepalceValueList;
 
 	/**
 	 * メール本文置換リスト
 	 */
 	@NotNull
-	@ApiParam(value = "メール本文置換リスト", required = true)
+	@Parameter(description = "メール本文置換リスト")
 	private List<String> mailTextRepalceValueList;
 
 	/**
 	 * メール本文リスト置換リスト
 	 */
-	@ApiParam(value = "メール本文リスト置換リスト", required = false)
+	@Parameter(description = "メール本文リスト置換リスト")
 	List<List<String>> mailTextRepalceListValues;
 	
 	/**
 	 * グループ承認フラグ
 	 */
-	@ApiParam(value = "グループ承認フラグ", required = true)
+	@Parameter(description = "グループ承認フラグ")
 	private boolean isGroupApproval = false;
 }

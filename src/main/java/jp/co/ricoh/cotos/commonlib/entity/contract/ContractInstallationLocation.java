@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.CustomerAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,28 +34,28 @@ public class ContractInstallationLocation extends CustomerAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_installation_location_seq")
 	@SequenceGenerator(name = "contract_installation_location_seq", sequenceName = "contract_installation_location_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * MoM非連携_企業代表者名（カナ）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "MoM非連携_企業代表者名（カナ）", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_企業代表者名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyRepresentativeNameKana;
 
 	/**
 	 * MoM非連携_郵便番号(手入力)
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "MoM非連携_郵便番号(手入力)", required = false, position = 72, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_郵便番号(手入力)", allowableValues = "range[0,255]")
 	private String inputPostNumber;
 
 	/**
 	 * MoM非連携_住所(手入力)
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "MoM非連携_住所(手入力)", required = false, position = 73, allowableValues = "range[0,1000]")
+	@Schema(description = "MoM非連携_住所(手入力)", allowableValues = "range[0,1000]")
 	private String inputAddress;
 
 	/**
@@ -64,6 +64,6 @@ public class ContractInstallationLocation extends CustomerAbstractEntity {
 	@OneToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "契約", required = true, position = 74)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 }

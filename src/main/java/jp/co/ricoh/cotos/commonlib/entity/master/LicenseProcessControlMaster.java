@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import lombok.Data;
@@ -33,7 +33,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_process_control_master_seq")
 	@SequenceGenerator(name = "license_process_control_master_seq", sequenceName = "license_process_control_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス工程制御マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス工程制御マスタID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -41,7 +41,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
@@ -49,7 +49,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -57,7 +57,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 4)
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
@@ -66,7 +66,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約種別詳細", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "契約種別詳細", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
@@ -74,7 +74,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
@@ -82,7 +82,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "工程パターンID", required = true, position = 7, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "工程パターンID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long processPatternId;
 
 	/**
@@ -91,7 +91,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "明細状態", required = true, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "明細状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String detailStatus;
 
 

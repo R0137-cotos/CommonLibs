@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,7 +34,7 @@ public class SpecificItemGroupMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specific_item_group_master_seq")
 	@SequenceGenerator(name = "specific_item_group_master_seq", sequenceName = "specific_item_group_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "商材固有品種グループマスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "商材固有品種グループマスタID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -42,14 +42,14 @@ public class SpecificItemGroupMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有品種グループ名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有品種グループ名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String specificItemGroupName;
 
 	/**
 	 * 商材固有品種グループ区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有品種グループ区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有品種グループ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificItemGroupDiv;
 
 	/**
@@ -57,6 +57,6 @@ public class SpecificItemGroupMaster extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "specificItemGroupMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "商材固有項目マスタ", required = true, position = 4)
+	@Schema(description = "商材固有項目マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<SpecificControlMaster> specificControlMaster;
 }

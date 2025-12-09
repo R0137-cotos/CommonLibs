@@ -3,7 +3,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,15 +13,15 @@ import lombok.Data;
 public class ProcessingTaskDto {
 
 	/** 作成中見積一覧 */
-	@ApiModelProperty(value = "作成中見積一覧", required = false, position = 1)
+	@Schema(description = "作成中見積一覧", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<WorkInProgresTaskDto> estimationWIPList;
 
 	/** 作成中契約一覧 */
-	@ApiModelProperty(value = "作成中契約一覧", required = false, position = 2)
+	@Schema(description = "作成中契約一覧", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<WorkInProgresTaskDto> contractWIPList;
 
 	/** 手配処理中一覧 */
-	@ApiModelProperty(value = "手配処理中一覧", required = false, position = 3)
+	@Schema(description = "手配処理中一覧", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<WorkInProgresTaskDto> arrangeWIPList;
 
 	/**

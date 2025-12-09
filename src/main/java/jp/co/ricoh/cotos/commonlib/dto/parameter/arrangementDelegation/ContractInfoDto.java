@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -17,7 +17,7 @@ public class ContractInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約番号", required = true, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -25,21 +25,21 @@ public class ContractInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約番号枝番", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractBranchNumber;
 
 	/**
 	 * 契約明細情報リスト
 	 */
 	@Valid
-	@ApiModelProperty(value = "契約明細情報リスト", required = false, position = 3)
+	@Schema(description = "契約明細情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractDetailDelegationDto> contractDetailList;
 
 	/**
 	 * 商品(契約用)リスト
 	 */
 	@Valid
-	@ApiModelProperty(value = "商品(契約用)リスト", required = false, position = 4)
+	@Schema(description = "商品(契約用)リスト")
 	private List<ProductContractDelegationDto> productContractList;
 
 }

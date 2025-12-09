@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,40 +59,40 @@ public class HandoverMailAddress extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "handover_mail_address_seq")
 	@SequenceGenerator(name = "handover_mail_address_seq", sequenceName = "handover_mail_address_seq", allocationSize = 1)
-	@ApiModelProperty(value = "引継ぎ用メールアドレスID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "引継ぎ用メールアドレスID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * 引継ぎ区分
 	 */
-	@ApiModelProperty(value = " 引継ぎ区分", required = false, position = 3, allowableValues = "無償(\"1\"), 有償(\"2\")")
+	@Schema(description = " 引継ぎ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "無償(\"1\"), 有償(\"2\")")
 	private HandoverDiv handoverDiv;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**
 	 * 引継ぎ元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "引継ぎ元契約ID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long handoverContractId;
 
 	/**
 	 * 引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "引継ぎ元RJ管理番号", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String handoverRjManageNumber;
 }

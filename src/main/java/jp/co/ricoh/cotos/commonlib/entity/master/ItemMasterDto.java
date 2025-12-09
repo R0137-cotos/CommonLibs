@@ -21,7 +21,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.ContractSpanType;
 import jp.co.ricoh.cotos.commonlib.entity.master.ItemMaster.CostType;
@@ -45,7 +45,7 @@ public class ItemMasterDto extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -54,42 +54,42 @@ public class ItemMasterDto extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品マスタ", required = true, position = 2)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMasterDto productMasterDto;
 
 	/**
 	 * 品種名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1", position = 5)
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
 	 * 費用種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1", position = 6)
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1")
 	private CostType costType;
 
 	/**
 	 * 仕切価格
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "仕切価格", required = true, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -97,7 +97,7 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "積上げ可能期間（開始日）", required = true, position = 8, allowableValues = "range[0,19]")
+	@Schema(description = "積上げ可能期間（開始日）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,19]")
 	private Date effectiveFrom;
 
 	/**
@@ -105,111 +105,111 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "積上げ可能期間（終了日）", required = true, position = 9, allowableValues = "range[0,19]")
+	@Schema(description = "積上げ可能期間（終了日）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,19]")
 	private Date effectiveTo;
 
 	/**
 	 * 仕入取引先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "仕入取引先コード", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
 	 * Ｒ原価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
 	 * ＳＡ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＳＡ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
 	 * ＲＪ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
 	 * 母店売価(接点店仕切)
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "母店売価(接点店仕切)", allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 消費税区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "消費税区分", required = false, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * IFS連携フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "IFS連携フラグ", required = false, position = 16, allowableValues = "range[0,9]")
+	@Schema(description = "IFS連携フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
 
 	/**
 	 * 最短納期日数
 	 */
 	@Max(99)
-	@ApiModelProperty(value = "最短納期日数", required = false, position = 17, allowableValues = "range[0,99]")
+	@Schema(description = "最短納期日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer shortestDeliveryDate;
 
 	/**
 	 * 標準価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "標準価格", required = false, position = 18, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "標準価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal standardPrice;
 
 	/**
 	 * 申込書帳票出力無しフラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "申込書帳票出力無しフラグ", required = false, position = 19, allowableValues = "range[0,9]")
+	@Schema(description = "申込書帳票出力無しフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noApplicationFormOutputFlg;
 
 	/**
 	 * 作業完了報告書出力無しフラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "作業完了報告書出力無しフラグ", required = false, position = 20, allowableValues = "range[0,9]")
+	@Schema(description = "作業完了報告書出力無しフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noWorkReportOutputFlg;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 25, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * 提供終了日
 	 */
-	@ApiModelProperty(value = "提供終了日", required = false, position = 26)
+	@Schema(description = "提供終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date offerEndDate;
 
 	/**
 	 * 新規受注停止日
 	 */
-	@ApiModelProperty(value = "新規受注停止日", required = false, position = 27)
+	@Schema(description = "新規受注停止日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date newOrderStopDate;
 
 	/**
 	 * 最終連携月
 	 */
-	@ApiModelProperty(value = "最終連携月", required = false, position = 28)
+	@Schema(description = "最終連携月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date finalLinkedMonth;
 
@@ -217,89 +217,89 @@ public class ItemMasterDto extends EntityBaseMaster {
 	 * 値引き下限値
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "値引き下限値", required = false, position = 29, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "値引き下限値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal lowerLimit;
 
 	/**
 	 * V-UP連携除外フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "V-UP連携除外フラグ", required = false, position = 30, allowableValues = "range[0,9]")
+	@Schema(description = "V-UP連携除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer vupLinkageExclusionFlg;
 
 	/**
 	 * ベンダー略称
 	 */
-	@ApiModelProperty(value = "ベンダー略称", required = false, position = 31)
+	@Schema(description = "ベンダー略称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorShortName;
 
 	/**
 	 * ＲＪ販事本仕入価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 32, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ販事本仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
 	 * サービス利用希望日設定可能区分
 	 */
-	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 33, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
+	@Schema(description = "サービス利用希望日設定可能区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 34)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
 	/**
 	 * 契約期間区分
 	 */
-	@ApiModelProperty(value = "契約期間区分", required = false, position = 35, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
+	@Schema(description = "契約期間区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
 	private ContractSpanType contractSpanType;
 
 	/**
 	 * イニシャルランニング対応品種マスタID
 	 */
-	@ApiModelProperty(value = "イニシャルランニング対応品種マスタID", required = false, position = 36, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "イニシャルランニング対応品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long initialRunningItemMasterId;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 37, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 売上可能開始日
 	 */
-	@ApiModelProperty(value = "売上可能開始日", required = false, position = 38)
+	@Schema(description = "売上可能開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date accountPossibleStartDate;
 
 	/**
 	 * 価格改定前リコー品種コード
 	 */
-	@ApiModelProperty(value = "価格改定前リコー品種コード", required = false, position = 39, allowableValues = "range[0,255]")
+	@Schema(description = "価格改定前リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bfPriceRevisionItemCode;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 40, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定処理グループID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 
 	/**
 	 * 月割品種対応初期費品種マスタID
 	 */
-	@ApiModelProperty(value = "月割品種対応初期費品種マスタID", required = false, position = 41, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "月割品種対応初期費品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long prorationLinkedInitialItemMasterId;
 
 	/**
 	 * 同一SS用最短納期日数
 	 */
 	@Max(99)
-	@ApiModelProperty(value = "同一SS用最短納期日数", required = false, position = 42, allowableValues = "range[0,99]")
+	@Schema(description = "同一SS用最短納期日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer shortestDeliveryDateForSameSs;
 }

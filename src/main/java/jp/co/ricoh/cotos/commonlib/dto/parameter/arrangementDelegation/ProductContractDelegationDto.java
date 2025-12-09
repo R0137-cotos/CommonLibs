@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -15,7 +15,7 @@ public class ProductContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@ApiModelProperty(value = "ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -23,7 +23,7 @@ public class ProductContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -31,7 +31,7 @@ public class ProductContractDelegationDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商品名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String productContractName;
 
 	/**
@@ -39,28 +39,28 @@ public class ProductContractDelegationDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "テナントID", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String tenantId;
 
 	/**
 	 * ZuoraアカウントId
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ZuoraアカウントId", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "ZuoraアカウントId", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String zuoraAccountId;
 
 	/**
 	 * ユーザID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ユーザID", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userId;
 
 	/**
 	 * サブスクリプション番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サブスクリプション番号", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプション番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionNumber;
 
 }

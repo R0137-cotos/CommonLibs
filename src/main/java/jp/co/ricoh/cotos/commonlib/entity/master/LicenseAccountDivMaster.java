@@ -11,7 +11,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,28 +31,28 @@ public class LicenseAccountDivMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_account_div_master_seq")
 	@SequenceGenerator(name = "license_account_div_master_seq", sequenceName = "license_account_div_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンスアカウント区分マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンスアカウント区分マスタID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * ライセンスアカウント区分名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスアカウント区分名", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスアカウント区分名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseAccountDivName;
 
 	/**
 	 * ライセンスアカウント種類区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスアカウント種類区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスアカウント種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseAccountClassDiv;
 
 	/**
 	 * ライセンスアカウント区分構成マスタ
 	 */
 	@OneToMany(mappedBy = "licenseAccountDivMaster")
-	@ApiModelProperty(value = "ライセンスアカウント区分マスタ", required = true, position = 4)
+	@Schema(description = "ライセンスアカウント区分マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<LicenseAccountDivCompMaster> licenseAccountDivCompMasterList;
 
 }

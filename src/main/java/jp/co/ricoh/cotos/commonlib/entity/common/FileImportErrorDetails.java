@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class FileImportErrorDetails extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_import_error_details_seq")
 	@SequenceGenerator(name = "file_import_error_details_seq", sequenceName = "file_import_error_details_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ファイル取込エラー詳細ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ファイル取込エラー詳細ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -39,21 +39,21 @@ public class FileImportErrorDetails extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ファイル取込管理", required = true, position = 2)
+	@Schema(description = "ファイル取込管理", requiredMode = Schema.RequiredMode.REQUIRED)
 	private FileImportManagement fileImportManagement;
 
 	/**
 	 * 行番号
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "行番号", required = false, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "行番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long lineNumber;
 
 	/**
 	 * メッセージ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メッセージ", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String message;
 
 }

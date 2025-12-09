@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -21,868 +21,868 @@ public class LaitConfigData {
 	 * コンフィグ情報ID
 	 */
 	@Id
-	@ApiModelProperty(value = "ID", required = false, position = 1)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@JsonIgnore
 	private long id;
 
 	/**
 	 * AP区分
 	 */
-	@ApiModelProperty(value = "AP区分", required = false, allowableValues = "AP以外(\"1\"), AP(\"2\")", position = 2)
+	@Schema(description = "AP区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "AP以外(\"1\"), AP(\"2\")")
 	private String apFlg;
 
 	/**
 	 * SACMマネジメントコード
 	 */
-	@ApiModelProperty(value = "SACMマネジメントコード", required = false, position = 3)
+	@Schema(description = "SACMマネジメントコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String sacmManageCode;
 
 	/**
 	 * サービスアダプタコード
 	 */
-	@ApiModelProperty(value = "サービスアダプタコード", required = false, position = 4)
+	@Schema(description = "サービスアダプタコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String laitSaCode;
 
 	/**
 	 * サービスアダプタラベル
 	 */
-	@ApiModelProperty(value = "サービスアダプタラベル", required = false, position = 5)
+	@Schema(description = "サービスアダプタラベル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String laitSaLabel;
 
 	/**
 	 * SSHDサービス
 	 */
-	@ApiModelProperty(value = "SSHDサービス", required = false, position = 6)
+	@Schema(description = "SSHDサービス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String sshdService;
 
 	/**
 	 * UPNPサービス
 	 */
-	@ApiModelProperty(value = "UPNPサービス", required = false, position = 7)
+	@Schema(description = "UPNPサービス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String upnpService;
 
 	/**
 	 * インターネットアカウント
 	 */
-	@ApiModelProperty(value = "インターネットアカウント", required = false, position = 8)
+	@Schema(description = "インターネットアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internetAccount;
 
 	/**
 	 * インターネットPASS
 	 */
-	@ApiModelProperty(value = "インターネットPASS", required = false, position = 9)
+	@Schema(description = "インターネットPASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internetPass;
 
 	/**
 	 * PPPOE_MTU
 	 */
-	@ApiModelProperty(value = "PPPOE_MTU", required = false, position = 10)
+	@Schema(description = "PPPOE_MTU", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String pppoeMtu;
 
 	/**
 	 * GE0メディア
 	 */
 	@Column(name = "GE0_MEDIA")
-	@ApiModelProperty(value = "GE0メディア", required = false, position = 11)
+	@Schema(description = "GE0メディア", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ge0Media;
 
 	/**
 	 * LANアドレス
 	 */
-	@ApiModelProperty(value = "LANアドレス", required = false, position = 12)
+	@Schema(description = "LANアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String lanAddress;
 
 	/**
 	 * LANサブネット
 	 */
-	@ApiModelProperty(value = "LANサブネット", required = false, position = 13)
+	@Schema(description = "LANサブネット", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String lanSubnet;
 
 	/**
 	 * GE1P0メディア
 	 */
 	@Column(name = "GE1P0_MEDIA")
-	@ApiModelProperty(value = "GE1P0メディア", required = false, position = 14)
+	@Schema(description = "GE1P0メディア", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ge1p0Media;
 
 	/**
 	 * GE1P1メディア
 	 */
 	@Column(name = "GE1P1_MEDIA")
-	@ApiModelProperty(value = "GE1P1メディア", required = false, position = 15)
+	@Schema(description = "GE1P1メディア", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ge1p1Media;
 
 	/**
 	 * GE1P2メディア
 	 */
 	@Column(name = "GE1P2_MEDIA")
-	@ApiModelProperty(value = "GE1P2メディア", required = false, position = 16)
+	@Schema(description = "GE1P2メディア", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ge1p2Media;
 
 	/**
 	 * GE1P3メディア
 	 */
 	@Column(name = "GE1P3_MEDIA")
-	@ApiModelProperty(value = "GE1P3メディア", required = false, position = 17)
+	@Schema(description = "GE1P3メディア", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ge1p3Media;
 
 	/**
 	 * IPV6ブリッジ
 	 */
 	@Column(name = "IPV6_BRIDGE")
-	@ApiModelProperty(value = "IPV6ブリッジ", required = false, position = 18)
+	@Schema(description = "IPV6ブリッジ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ipv6Bridge;
 
 	/**
 	 * マイID
 	 */
-	@ApiModelProperty(value = "マイID", required = false, position = 19)
+	@Schema(description = "マイID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String myId;
 
 	/**
 	 * カスタマーID
 	 */
-	@ApiModelProperty(value = "カスタマーID", required = false, position = 20)
+	@Schema(description = "カスタマーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerId;
 
 	/**
 	 * PRESHAREDキー
 	 */
-	@ApiModelProperty(value = "PRESHAREDキー", required = false, position = 21)
+	@Schema(description = "PRESHAREDキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String presharedKey;
 
 	/**
 	 * WLANサービス
 	 */
-	@ApiModelProperty(value = "WLANサービス", required = false, position = 22)
+	@Schema(description = "WLANサービス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanService;
 
 	/**
 	 * WLANモード
 	 */
-	@ApiModelProperty(value = "WLANモード", required = false, position = 23)
+	@Schema(description = "WLANモード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanMode;
 
 	/**
 	 * WLAN_SSID_0
 	 */
 	@Column(name = "WLAN_SSID_0")
-	@ApiModelProperty(value = "WLAN_SSID_0", required = false, position = 24)
+	@Schema(description = "WLAN_SSID_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanSsid0;
 
 	/**
 	 * WLAN_HIDE_0
 	 */
 	@Column(name = "WLAN_HIDE_0")
-	@ApiModelProperty(value = "WLAN_HIDE_0", required = false, position = 25)
+	@Schema(description = "WLAN_HIDE_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanHide0;
 
 	/**
 	 * WLANセキュリティ_0
 	 */
 	@Column(name = "WLAN_SECURITY_0")
-	@ApiModelProperty(value = "WLANセキュリティ_0", required = false, position = 26)
+	@Schema(description = "WLANセキュリティ_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanSecurity0;
 
 	/**
 	 * WLANチャンネル
 	 */
-	@ApiModelProperty(value = "WLANチャンネル", required = false, position = 27)
+	@Schema(description = "WLANチャンネル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanChannel;
 
 	/**
 	 * WLANパス_0
 	 */
 	@Column(name = "WLAN_PASS_0")
-	@ApiModelProperty(value = "WLANパス_0", required = false, position = 28)
+	@Schema(description = "WLANパス_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanPass0;
 
 	/**
 	 * WLAN_WEP_0
 	 */
 	@Column(name = "WLAN_WEP_0")
-	@ApiModelProperty(value = "WLAN_WEP_0", required = false, position = 29)
+	@Schema(description = "WLAN_WEP_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanWep0;
 
 	/**
 	 * WLANパワー
 	 */
-	@ApiModelProperty(value = "WLANパワー", required = false, position = 30)
+	@Schema(description = "WLANパワー", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanPower;
 
 	/**
 	 * WLANマックスクライアント_0
 	 */
 	@Column(name = "WLAN_MAXCLIENT_0")
-	@ApiModelProperty(value = "WLANマックスクライアント_0", required = false, position = 31)
+	@Schema(description = "WLANマックスクライアント_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanMaxclient0;
 
 	/**
 	 * WLANサービス_5G
 	 */
 	@Column(name = "WLAN_SERVICE_5G")
-	@ApiModelProperty(value = "WLANサービス_5G", required = false, position = 32)
+	@Schema(description = "WLANサービス_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanService5g;
 
 	/**
 	 * WLANモード_5G
 	 */
 	@Column(name = "WLAN_MODE_5G")
-	@ApiModelProperty(value = "WLANモード_5G", required = false, position = 33)
+	@Schema(description = "WLANモード_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanMode5g;
 
 	/**
 	 * WLAN_SSID_0_5G
 	 */
 	@Column(name = "WLAN_SSID_0_5G")
-	@ApiModelProperty(value = "WLAN_SSID_0_5G", required = false, position = 34)
+	@Schema(description = "WLAN_SSID_0_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanSsid05g;
 
 	/**
 	 * WLAN_HIDE_0_5G
 	 */
 	@Column(name = "WLAN_HIDE_0_5G")
-	@ApiModelProperty(value = "WLAN_HIDE_0_5G", required = false, position = 35)
+	@Schema(description = "WLAN_HIDE_0_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanHide05g;
 
 	/**
 	 * WLANセキュリティ_0_5G
 	 */
 	@Column(name = "WLAN_SECURITY_0_5G")
-	@ApiModelProperty(value = "WLANセキュリティ_0_5G", required = false, position = 36)
+	@Schema(description = "WLANセキュリティ_0_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanSecurity05g;
 
 	/**
 	 * WLAN_チャンネル_5G
 	 */
 	@Column(name = "WLAN_CHANNEL_5G")
-	@ApiModelProperty(value = "WLAN_チャンネル_5G", required = false, position = 37)
+	@Schema(description = "WLAN_チャンネル_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanChannel5g;
 
 	/**
 	 * WLAN_PASS_0_5G
 	 */
 	@Column(name = "WLAN_PASS_0_5G")
-	@ApiModelProperty(value = "WLAN_PASS_0_5G", required = false, position = 38)
+	@Schema(description = "WLAN_PASS_0_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanPass05g;
 
 	/**
 	 * WLAN_WEP_0_5G
 	 */
 	@Column(name = "WLAN_WEP_0_5G")
-	@ApiModelProperty(value = "WLAN_WEP_0_5G", required = false, position = 39)
+	@Schema(description = "WLAN_WEP_0_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanWep05g;
 
 	/**
 	 * WLAN_パワー_5G
 	 */
 	@Column(name = "WLAN_POWER_5G")
-	@ApiModelProperty(value = "WLAN_パワー_5G", required = false, position = 40)
+	@Schema(description = "WLAN_パワー_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanPower5g;
 
 	/**
 	 * WLANマックスクライアント_0_5G
 	 */
 	@Column(name = "WLAN_MAXCLIENT_0_5G")
-	@ApiModelProperty(value = "WLANマックスクライアント_0_5G", required = false, position = 41)
+	@Schema(description = "WLANマックスクライアント_0_5G", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String wlanMaxclient05g;
 
 	/**
 	 * LANセグメント
 	 */
-	@ApiModelProperty(value = "LANセグメント", required = false, position = 42)
+	@Schema(description = "LANセグメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String lanSegment;
 
 	/**
 	 * VPN番号
 	 */
-	@ApiModelProperty(value = "VPN番号", required = false, position = 43)
+	@Schema(description = "VPN番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnNumber;
 
 	/**
 	 * フォワードプロトコル_0
 	 */
 	@Column(name = "FORWARD_PROTOCOL_0")
-	@ApiModelProperty(value = "フォワードプロトコル_0", required = false, position = 44)
+	@Schema(description = "フォワードプロトコル_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol0;
 
 	/**
 	 * リッスンポート_0
 	 */
 	@Column(name = "LISTEN_PORT_0")
-	@ApiModelProperty(value = "リッスンポート_0", required = false, position = 45)
+	@Schema(description = "リッスンポート_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort0;
 
 	/**
 	 * フォワードアドレス_0
 	 */
 	@Column(name = "FORWARD_ADDRESS_0")
-	@ApiModelProperty(value = "フォワードアドレス_0", required = false, position = 46)
+	@Schema(description = "フォワードアドレス_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress0;
 
 	/**
 	 * フォワードポート_0
 	 */
 	@Column(name = "FORWARD_PORT_0")
-	@ApiModelProperty(value = "フォワードポート_0", required = false, position = 47)
+	@Schema(description = "フォワードポート_0", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort0;
 
 	/**
 	 * フォワードプロトコル_1
 	 */
 	@Column(name = "FORWARD_PROTOCOL_1")
-	@ApiModelProperty(value = "フォワードプロトコル_1", required = false, position = 48)
+	@Schema(description = "フォワードプロトコル_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol1;
 
 	/**
 	 * リッスンポート_1
 	 */
 	@Column(name = "LISTEN_PORT_1")
-	@ApiModelProperty(value = "リッスンポート_1", required = false, position = 49)
+	@Schema(description = "リッスンポート_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort1;
 
 	/**
 	 * フォワードアドレス_1
 	 */
 	@Column(name = "FORWARD_ADDRESS_1")
-	@ApiModelProperty(value = "フォワードアドレス_1", required = false, position = 50)
+	@Schema(description = "フォワードアドレス_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress1;
 
 	/**
 	 * フォワードポート_1
 	 */
 	@Column(name = "FORWARD_PORT_1")
-	@ApiModelProperty(value = "フォワードポート_1", required = false, position = 51)
+	@Schema(description = "フォワードポート_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort1;
 
 	/**
 	 * フォワードプロトコル_2
 	 */
 	@Column(name = "FORWARD_PROTOCOL_2")
-	@ApiModelProperty(value = "フォワードプロトコル_2", required = false, position = 52)
+	@Schema(description = "フォワードプロトコル_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol2;
 
 	/**
 	 * リッスンポート_2
 	 */
 	@Column(name = "LISTEN_PORT_2")
-	@ApiModelProperty(value = "リッスンポート_2", required = false, position = 53)
+	@Schema(description = "リッスンポート_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort2;
 
 	/**
 	 * フォワードアドレス_2
 	 */
 	@Column(name = "FORWARD_ADDRESS_2")
-	@ApiModelProperty(value = "フォワードアドレス_2", required = false, position = 54)
+	@Schema(description = "フォワードアドレス_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress2;
 
 	/**
 	 * フォワードポート_2
 	 */
 	@Column(name = "FORWARD_PORT_2")
-	@ApiModelProperty(value = "フォワードポート_2", required = false, position = 55)
+	@Schema(description = "フォワードポート_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort2;
 
 	/**
 	 * フォワードプロトコル_3
 	 */
 	@Column(name = "FORWARD_PROTOCOL_3")
-	@ApiModelProperty(value = "フォワードプロトコル_3", required = false, position = 56)
+	@Schema(description = "フォワードプロトコル_3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol3;
 
 	/**
 	 * リッスンポート_3
 	 */
 	@Column(name = "LISTEN_PORT_3")
-	@ApiModelProperty(value = "リッスンポート_3", required = false, position = 57)
+	@Schema(description = "リッスンポート_3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort3;
 
 	/**
 	 * フォワードアドレス_3
 	 */
 	@Column(name = "FORWARD_ADDRESS_3")
-	@ApiModelProperty(value = "フォワードアドレス_3", required = false, position = 58)
+	@Schema(description = "フォワードアドレス_3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress3;
 
 	/**
 	 * フォワードポート_3
 	 */
 	@Column(name = "FORWARD_PORT_3")
-	@ApiModelProperty(value = "フォワードポート_3", required = false, position = 59)
+	@Schema(description = "フォワードポート_3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort3;
 
 	/**
 	 * フォワードプロトコル_4
 	 */
 	@Column(name = "FORWARD_PROTOCOL_4")
-	@ApiModelProperty(value = "フォワードプロトコル_4", required = false, position = 60)
+	@Schema(description = "フォワードプロトコル_4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol4;
 
 	/**
 	 * リッスンポート_4
 	 */
 	@Column(name = "LISTEN_PORT_4")
-	@ApiModelProperty(value = "リッスンポート_4", required = false, position = 61)
+	@Schema(description = "リッスンポート_4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort4;
 
 	/**
 	 * フォワードアドレス_4
 	 */
 	@Column(name = "FORWARD_ADDRESS_4")
-	@ApiModelProperty(value = "フォワードアドレス_4", required = false, position = 62)
+	@Schema(description = "フォワードアドレス_4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress4;
 
 	/**
 	 * フォワードポート_4
 	 */
 	@Column(name = "FORWARD_PORT_4")
-	@ApiModelProperty(value = "フォワードポート_4", required = false, position = 63)
+	@Schema(description = "フォワードポート_4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort4;
 
 	/**
 	 * フォワードプロトコル_5
 	 */
 	@Column(name = "FORWARD_PROTOCOL_5")
-	@ApiModelProperty(value = "フォワードプロトコル_5", required = false, position = 64)
+	@Schema(description = "フォワードプロトコル_5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol5;
 
 	/**
 	 * リッスンポート_5
 	 */
 	@Column(name = "LISTEN_PORT_5")
-	@ApiModelProperty(value = "リッスンポート_5", required = false, position = 65)
+	@Schema(description = "リッスンポート_5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort5;
 
 	/**
 	 * フォワードアドレス_5
 	 */
 	@Column(name = "FORWARD_ADDRESS_5")
-	@ApiModelProperty(value = "フォワードアドレス_5", required = false, position = 66)
+	@Schema(description = "フォワードアドレス_5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress5;
 
 	/**
 	 * フォワードポート_5
 	 */
 	@Column(name = "FORWARD_PORT_5")
-	@ApiModelProperty(value = "フォワードポート_5", required = false, position = 67)
+	@Schema(description = "フォワードポート_5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort5;
 
 	/**
 	 * フォワードプロトコル_6
 	 */
 	@Column(name = "FORWARD_PROTOCOL_6")
-	@ApiModelProperty(value = "フォワードプロトコル_6", required = false, position = 68)
+	@Schema(description = "フォワードプロトコル_6", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol6;
 
 	/**
 	 * リッスンポート_6
 	 */
 	@Column(name = "LISTEN_PORT_6")
-	@ApiModelProperty(value = "リッスンポート_6", required = false, position = 69)
+	@Schema(description = "リッスンポート_6", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort6;
 
 	/**
 	 * フォワードアドレス_6
 	 */
 	@Column(name = "FORWARD_ADDRESS_6")
-	@ApiModelProperty(value = "フォワードアドレス_6", required = false, position = 70)
+	@Schema(description = "フォワードアドレス_6", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress6;
 
 	/**
 	 * フォワードポート_6
 	 */
 	@Column(name = "FORWARD_PORT_6")
-	@ApiModelProperty(value = "フォワードポート_6", required = false, position = 71)
+	@Schema(description = "フォワードポート_6", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort6;
 
 	/**
 	 * フォワードプロトコル_7
 	 */
 	@Column(name = "FORWARD_PROTOCOL_7")
-	@ApiModelProperty(value = "フォワードプロトコル_7", required = false, position = 72)
+	@Schema(description = "フォワードプロトコル_7", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol7;
 
 	/**
 	 * リッスンポート_7
 	 */
 	@Column(name = "LISTEN_PORT_7")
-	@ApiModelProperty(value = "リッスンポート_7", required = false, position = 73)
+	@Schema(description = "リッスンポート_7", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort7;
 
 	/**
 	 * フォワードアドレス_7
 	 */
 	@Column(name = "FORWARD_ADDRESS_7")
-	@ApiModelProperty(value = "フォワードアドレス_7", required = false, position = 74)
+	@Schema(description = "フォワードアドレス_7", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress7;
 
 	/**
 	 * フォワードポート_7
 	 */
 	@Column(name = "FORWARD_PORT_7")
-	@ApiModelProperty(value = "フォワードポート_7", required = false, position = 75)
+	@Schema(description = "フォワードポート_7", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort7;
 
 	/**
 	 * フォワードプロトコル_8
 	 */
 	@Column(name = "FORWARD_PROTOCOL_8")
-	@ApiModelProperty(value = "フォワードプロトコル_8", required = false, position = 76)
+	@Schema(description = "フォワードプロトコル_8", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol8;
 
 	/**
 	 * リッスンポート_8
 	 */
 	@Column(name = "LISTEN_PORT_8")
-	@ApiModelProperty(value = "リッスンポート_8", required = false, position = 77)
+	@Schema(description = "リッスンポート_8", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort8;
 
 	/**
 	 * フォワードアドレス_8
 	 */
 	@Column(name = "FORWARD_ADDRESS_8")
-	@ApiModelProperty(value = "フォワードアドレス_8", required = false, position = 78)
+	@Schema(description = "フォワードアドレス_8", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress8;
 
 	/**
 	 * フォワードポート_8
 	 */
 	@Column(name = "FORWARD_PORT_8")
-	@ApiModelProperty(value = "フォワードポート_8", required = false, position = 79)
+	@Schema(description = "フォワードポート_8", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort8;
 
 	/**
 	 * フォワードプロトコル_9
 	 */
 	@Column(name = "FORWARD_PROTOCOL_9")
-	@ApiModelProperty(value = "フォワードプロトコル_9", required = false, position = 80)
+	@Schema(description = "フォワードプロトコル_9", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardProtocol9;
 
 	/**
 	 * リッスンポート_9
 	 */
 	@Column(name = "LISTEN_PORT_9")
-	@ApiModelProperty(value = "リッスンポート_9", required = false, position = 81)
+	@Schema(description = "リッスンポート_9", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String listenPort9;
 
 	/**
 	 * フォワードアドレス_9
 	 */
 	@Column(name = "FORWARD_ADDRESS_9")
-	@ApiModelProperty(value = "フォワードアドレス_9", required = false, position = 82)
+	@Schema(description = "フォワードアドレス_9", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardAddress9;
 
 	/**
 	 * フォワードポート_9
 	 */
 	@Column(name = "FORWARD_PORT_9")
-	@ApiModelProperty(value = "フォワードポート_9", required = false, position = 83)
+	@Schema(description = "フォワードポート_9", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String forwardPort9;
 
 	/**
 	 * DHCPサーバ
 	 */
-	@ApiModelProperty(value = "DHCPサーバ", required = false, position = 84)
+	@Schema(description = "DHCPサーバ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dhcpServer;
 
 	/**
 	 * DHCP期限
 	 */
-	@ApiModelProperty(value = "DHCP期限", required = false, position = 85)
+	@Schema(description = "DHCP期限", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dhcpExpire;
 
 	/**
 	 * DHCPアドレス
 	 */
-	@ApiModelProperty(value = "DHCPアドレス", required = false, position = 86)
+	@Schema(description = "DHCPアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dhcpAddress;
 
 	/**
 	 * DHCP番号
 	 */
-	@ApiModelProperty(value = "DHCP番号", required = false, position = 87)
+	@Schema(description = "DHCP番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dhcpNumber;
 
 	/**
 	 * DNSサーバ_1
 	 */
 	@Column(name = "DNS_SERVER_1")
-	@ApiModelProperty(value = "DNSサーバ_1", required = false, position = 88)
+	@Schema(description = "DNSサーバ_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dnsServer1;
 
 	/**
 	 * DNSフォワーダー
 	 */
-	@ApiModelProperty(value = "DNSフォワーダー", required = false, position = 89)
+	@Schema(description = "DNSフォワーダー", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dnsForwarder;
 
 	/**
 	 * VPNタイプ
 	 */
-	@ApiModelProperty(value = "VPNタイプ", required = false, position = 90)
+	@Schema(description = "VPNタイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnType;
 
 	/**
 	 * ICMPリプライ
 	 */
-	@ApiModelProperty(value = "ICMPリプライ", required = false, position = 91)
+	@Schema(description = "ICMPリプライ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String icmpReply;
 
 	/**
 	 * DNSサーバ_2
 	 */
 	@Column(name = "DNS_SERVER_2")
-	@ApiModelProperty(value = "DNSサーバ_2", required = false, position = 92)
+	@Schema(description = "DNSサーバ_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dnsServer2;
 
 	/**
 	 * リゾルバ_1
 	 */
 	@Column(name = "RESOLVER_1")
-	@ApiModelProperty(value = "リゾルバ_1", required = false, position = 93)
+	@Schema(description = "リゾルバ_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String resolver1;
 
 	/**
 	 * リゾルバ_2
 	 */
 	@Column(name = "RESOLVER_2")
-	@ApiModelProperty(value = "リゾルバ_2", required = false, position = 94)
+	@Schema(description = "リゾルバ_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String resolver2;
 
 	/**
 	 * バンドステアリング
 	 */
-	@ApiModelProperty(value = "バンドステアリング", required = false, position = 95)
+	@Schema(description = "バンドステアリング", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String bandSteering;
 
 	/**
 	 * リザーブ_1
 	 */
 	@Column(name = "RESERVE_1")
-	@ApiModelProperty(value = "リザーブ_1", required = false, position = 96)
+	@Schema(description = "リザーブ_1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve1;
 
 	/**
 	 * リザーブ_2
 	 */
 	@Column(name = "RESERVE_2")
-	@ApiModelProperty(value = "リザーブ_2", required = false, position = 97)
+	@Schema(description = "リザーブ_2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve2;
 
 	/**
 	 * リザーブ_3
 	 */
 	@Column(name = "RESERVE_3")
-	@ApiModelProperty(value = "リザーブ_3", required = false, position = 98)
+	@Schema(description = "リザーブ_3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve3;
 
 	/**
 	 * リザーブ_4
 	 */
 	@Column(name = "RESERVE_4")
-	@ApiModelProperty(value = "リザーブ_4", required = false, position = 99)
+	@Schema(description = "リザーブ_4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve4;
 
 	/**
 	 * リザーブ_5
 	 */
 	@Column(name = "RESERVE_5")
-	@ApiModelProperty(value = "リザーブ_5", required = false, position = 100)
+	@Schema(description = "リザーブ_5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve5;
 
 	/**
 	 * RAS
 	 */
-	@ApiModelProperty(value = "RAS", required = false, position = 101)
+	@Schema(description = "RAS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ras;
 
 	/**
 	 * RAS_PSK
 	 */
-	@ApiModelProperty(value = "RAS_PSK", required = false, position = 102)
+	@Schema(description = "RAS_PSK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String rasPsk;
 
 	/**
 	 * RAS_TOP_ADDRESS
 	 */
-	@ApiModelProperty(value = "RAS_TOP_ADDRESS", required = false, position = 103)
+	@Schema(description = "RAS_TOP_ADDRESS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String rasTopAddress;
 
 	/**
 	 * PROXYARP_RANGE
 	 */
-	@ApiModelProperty(value = "PROXYARP_RANGE", required = false, position = 104)
+	@Schema(description = "PROXYARP_RANGE", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String proxyarpRange;
 
 	/**
 	 * VPN_USER01_PASS
 	 */
 	@Column(name = "VPN_USER01_PASS")
-	@ApiModelProperty(value = "VPN_USER01_PASS", required = false, position = 105)
+	@Schema(description = "VPN_USER01_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser01Pass;
 
 	/**
 	 * VPN_USER02_PASS
 	 */
 	@Column(name = "VPN_USER02_PASS")
-	@ApiModelProperty(value = "VPN_USER02_PASS", required = false, position = 106)
+	@Schema(description = "VPN_USER02_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser02Pass;
 
 	/**
 	 * VPN_USER03_PASS
 	 */
 	@Column(name = "VPN_USER03_PASS")
-	@ApiModelProperty(value = "VPN_USER03_PASS", required = false, position = 107)
+	@Schema(description = "VPN_USER03_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser03Pass;
 
 	/**
 	 * VPN_USER04_PASS
 	 */
 	@Column(name = "VPN_USER04_PASS")
-	@ApiModelProperty(value = "VPN_USER04_PASS", required = false, position = 108)
+	@Schema(description = "VPN_USER04_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser04Pass;
 
 	/**
 	 * VPN_USER05_PASS
 	 */
 	@Column(name = "VPN_USER05_PASS")
-	@ApiModelProperty(value = "VPN_USER05_PASS", required = false, position = 109)
+	@Schema(description = "VPN_USER05_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser05Pass;
 
 	/**
 	 * VPN_USER06_PASS
 	 */
 	@Column(name = "VPN_USER06_PASS")
-	@ApiModelProperty(value = "VPN_USER06_PASS", required = false, position = 110)
+	@Schema(description = "VPN_USER06_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser06Pass;
 
 	/**
 	 * VPN_USER07_PASS
 	 */
 	@Column(name = "VPN_USER07_PASS")
-	@ApiModelProperty(value = "VPN_USER07_PASS", required = false, position = 111)
+	@Schema(description = "VPN_USER07_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser07Pass;
 
 	/**
 	 * VPN_USER08_PASS
 	 */
 	@Column(name = "VPN_USER08_PASS")
-	@ApiModelProperty(value = "VPN_USER08_PASS", required = false, position = 112)
+	@Schema(description = "VPN_USER08_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser08Pass;
 
 	/**
 	 * VPN_USER09_PASS
 	 */
 	@Column(name = "VPN_USER09_PASS")
-	@ApiModelProperty(value = "VPN_USER09_PASS", required = false, position = 113)
+	@Schema(description = "VPN_USER09_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser09Pass;
 
 	/**
 	* VPN_USER10_PASS
 	*/
 	@Column(name = "VPN_USER10_PASS")
-	@ApiModelProperty(value = "VPN_USER_10_PASS", required = false, position = 114)
+	@Schema(description = "VPN_USER_10_PASS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpnUser10Pass;
 
 	/**
 	 * remote-address
 	 */
-	@ApiModelProperty(value = "remote-address", required = false, position = 115)
+	@Schema(description = "remote-address", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String remoteAddress;
 
 	/**
 	 * policybase-preshared-key
 	 */
-	@ApiModelProperty(value = "policybase-preshared-key", required = false, position = 116)
+	@Schema(description = "policybase-preshared-key", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String policybasePresharedKey;
 
 	/**
 	 * fqdn
 	 */
-	@ApiModelProperty(value = "fqdn", required = false, position = 117)
+	@Schema(description = "fqdn", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String fqdn;
 
 	/**
 	 * リザーブ_6
 	 */
 	@Column(name = "RESERVE_6")
-	@ApiModelProperty(value = "リザーブ_6", required = false, position = 118)
+	@Schema(description = "リザーブ_6", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve6;
 
 	/**
 	 * リザーブ_7
 	 */
 	@Column(name = "RESERVE_7")
-	@ApiModelProperty(value = "リザーブ_7", required = false, position = 119)
+	@Schema(description = "リザーブ_7", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve7;
 
 	/**
 	 * リザーブ_8
 	 */
 	@Column(name = "RESERVE_8")
-	@ApiModelProperty(value = "リザーブ_8", required = false, position = 120)
+	@Schema(description = "リザーブ_8", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve8;
 
 	/**
 	 * リザーブ_9
 	 */
 	@Column(name = "RESERVE_9")
-	@ApiModelProperty(value = "リザーブ_9", required = false, position = 121)
+	@Schema(description = "リザーブ_9", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve9;
 
 	/**
 	 * リザーブ_10
 	 */
 	@Column(name = "RESERVE_10")
-	@ApiModelProperty(value = "リザーブ_10", required = false, position = 122)
+	@Schema(description = "リザーブ_10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve10;
 
 	/**
 	 * リザーブ_11
 	 */
 	@Column(name = "RESERVE_11")
-	@ApiModelProperty(value = "リザーブ_11", required = false, position = 123)
+	@Schema(description = "リザーブ_11", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve11;
 
 	/**
 	 * リザーブ_12
 	 */
 	@Column(name = "RESERVE_12")
-	@ApiModelProperty(value = "リザーブ_12", required = false, position = 124)
+	@Schema(description = "リザーブ_12", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve12;
 	/**
 	 * リザーブ_13
 	 */
 	@Column(name = "RESERVE_13")
-	@ApiModelProperty(value = "リザーブ_13", required = false, position = 125)
+	@Schema(description = "リザーブ_13", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve13;
 
 	/**
 	 * リザーブ_14
 	 */
 	@Column(name = "RESERVE_14")
-	@ApiModelProperty(value = "リザーブ_14", required = false, position = 126)
+	@Schema(description = "リザーブ_14", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve14;
 
 	/**
 	 * リザーブ_15
 	 */
 	@Column(name = "RESERVE_15")
-	@ApiModelProperty(value = "リザーブ_15", required = false, position = 127)
+	@Schema(description = "リザーブ_15", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve15;
 
 	/**
 	 * リザーブ_16
 	 */
 	@Column(name = "RESERVE_16")
-	@ApiModelProperty(value = "リザーブ_16", required = false, position = 128)
+	@Schema(description = "リザーブ_16", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve16;
 
 	/**
 	 * リザーブ_17
 	 */
 	@Column(name = "RESERVE_17")
-	@ApiModelProperty(value = "リザーブ_17", required = false, position = 129)
+	@Schema(description = "リザーブ_17", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reserve17;
 
 }

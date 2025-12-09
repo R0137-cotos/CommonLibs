@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,42 +29,42 @@ public class GpCheckMatterMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_check_matter_master_seq")
 	@SequenceGenerator(name = "gp_check_matter_master_seq", sequenceName = "gp_check_matter_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "汎用チェック事項マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "汎用チェック事項マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * チェック事項コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "チェック事項コード", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterCode;
 
 	/**
 	 * チェック事項文面
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "チェック事項文面", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項文面", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterText;
 
 	/**
 	 * 手配チェックリスト構成マスタ
 	 */
 	@OneToMany(mappedBy = "gpCheckMatterMaster")
-	@ApiModelProperty(value = "手配チェックリスト構成マスタ", required = false, position = 4)
+	@Schema(description = "手配チェックリスト構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementChecklistCompMaster> arrangementChecklistCompMasterList;
 
 	/**
 	 * 見積チェックリスト構成マスタ
 	 */
 	@OneToMany(mappedBy = "gpCheckMatterMaster")
-	@ApiModelProperty(value = "見積チェックリスト構成マスタ", required = false, position = 5)
+	@Schema(description = "見積チェックリスト構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<EstimationChecklistCompMaster> estimationChecklistCompMasterList;
 
 	/**
 	 * 契約チェックリスト構成マスタ
 	 */
 	@OneToMany(mappedBy = "gpCheckMatterMaster")
-	@ApiModelProperty(value = "契約チェックリスト構成マスタ", required = false, position = 6)
+	@Schema(description = "契約チェックリスト構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractChecklistCompMaster> contractChecklistCompMasterList;
 
 }

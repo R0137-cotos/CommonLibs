@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -57,41 +57,41 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_equipment_no_isysone_seq")
 	@SequenceGenerator(name = "contract_equipment_no_isysone_seq", sequenceName = "contract_equipment_no_isysone_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 機器区分
 	 */
-	@ApiModelProperty(value = "機器区分（Isys-Oneへの連携なし）", required = false, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "1", position = 2)
+	@Schema(description = "機器区分（Isys-Oneへの連携なし）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ハードディスク(\"1\"), 内蔵オプション(\"2\"), 外付オプション(\"3\"), 導入ソフトウェア(\"4\")", example = "1")
 	private MachineTypeNoIsysone machineTypeNoIsysone;
 
 	/**
 	 * 製品番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "製品番号", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "製品番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemNo;
 
 	/**
 	 * 製品名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "製品名", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "製品名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String goodsName;
 
 	/**
 	 * 機番
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "機番", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "機番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String equipmentNo;
 
 	/**
 	 * オプション名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "オプション名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "オプション名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String optionName;
 
 	/**
@@ -100,7 +100,7 @@ public class ContractEquipmentNoIsysone extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 7)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 }

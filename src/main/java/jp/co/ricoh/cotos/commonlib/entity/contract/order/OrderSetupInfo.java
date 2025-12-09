@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +32,7 @@ public class OrderSetupInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_setup_info_seq")
 	@SequenceGenerator(name = "order_setup_info_seq", sequenceName = "order_setup_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -47,56 +47,56 @@ public class OrderSetupInfo extends EntityBase {
 	 * セットアップ先情報　会社名
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　会社名", required = false, position = 2, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupCompanyName;
 
 	/**
 	 * セットアップ先情報　漢字（姓＋名）
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　漢字（姓＋名）", required = false, position = 3, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　漢字（姓＋名）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupNameKanji;
 
 	/**
 	 * セットアップ先情報　カナ（姓＋名）
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　カナ（姓＋名）", required = false, position = 4, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　カナ（姓＋名）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupNameKana;
 
 	/**
 	 * セットアップ先情報　メールアドレス
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　メールアドレス", required = false, position = 5, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupMailAddress;
 
 	/**
 	 * セットアップ先情報　郵便番号
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　郵便番号", required = false, position = 6, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupPostNumber;
 
 	/**
 	 * セットアップ先情報　事業所名
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　事業所名", required = false, position = 7, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupOfficeName;
 
 	/**
 	 * セットアップ先情報　住所
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　住所", required = false, position = 8, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupAddress;
 
 	/**
 	 * セットアップ先情報　電話番号
 	 */
 	@Column
-	@ApiModelProperty(value = "セットアップ先情報　電話番号", required = false, position = 9, allowableValues = "range[0,]")
+	@Schema(description = "セットアップ先情報　電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String setupPhoneNumber;
 
 }

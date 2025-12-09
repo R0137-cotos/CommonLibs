@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.PenaltyDetailEstimation;
 import lombok.Data;
 
@@ -14,6 +14,6 @@ public class EstimationPenaltyCalculationResult {
 	/**
 	 * 違約金明細(見積用)を表すEntity
 	 */
-	@ApiModelProperty(value = "違約金明細(見積用)を表すEntity", required = true, position = 1)
+	@Schema(description = "違約金明細(見積用)を表すEntity")
 	private PenaltyDetailEstimation penaltyDetailEstimation;
 }

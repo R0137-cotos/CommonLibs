@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,20 +26,20 @@ import lombok.ToString;
 public class AppMaster extends EntityBaseMaster {
 
 	@Id
-	@ApiModelProperty(value = "アプリケーションID", required = true, position = 1)
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String appId;
 
 	@Column(nullable = false)
-	@ApiModelProperty(value = "パスワード", required = true, position = 2)
+	@Schema(description = "パスワード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String password;
 
 	@Column(nullable = false)
-	@ApiModelProperty(value = "オリジン", required = true, position = 3)
+	@Schema(description = "オリジン", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String origin;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "system_id", referencedColumnName = "systemId")
-	@ApiModelProperty(value = "システムマスタ", required = true, position = 2)
+	@Schema(description = "システムマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private SystemMaster systemMaster;
 }
