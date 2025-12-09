@@ -3,6 +3,7 @@ package jp.co.ricoh.cotos.commonlib.logic.findcommonmaster;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -68,7 +69,13 @@ public class FindCommonMaster {
 		List<CommonMasterResult> list = new ArrayList<>();
 
 		if (null != parameter && null != parameter.getServiceCategory()) {
-			List<CommonMaster> commonMasterList = commonMasterRepository.findByServiceCategory(parameter.getServiceCategory().toString());
+			List<CommonMaster> commonMasterList = null;
+			if(StringUtils.isNoneBlank(parameter.getColumnName())) {
+				// カラム名が指定されている場合、カラム名を検索条件に追加
+				commonMasterList = commonMasterRepository.findByServiceCategoryAndColumnNameReturnList(parameter.getServiceCategory().toString(), parameter.getColumnName());
+			} else {
+				commonMasterList = commonMasterRepository.findByServiceCategory(parameter.getServiceCategory().toString());
+			}
 			commonMasterList.stream().forEach(commonMaster -> {
 				CommonMasterResult result = new CommonMasterResult();
 				result.setColumnName(commonMaster.getColumnName());
