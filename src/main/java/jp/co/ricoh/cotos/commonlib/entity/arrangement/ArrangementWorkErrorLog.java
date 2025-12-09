@@ -34,17 +34,17 @@ public class ArrangementWorkErrorLog extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_error_log_seq")
 	@SequenceGenerator(name = "arrangement_work_error_log_seq", sequenceName = "arrangement_work_error_log_seq", allocationSize = 1)
-	@Schema(description = "手配業務エラー履歴ID ", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配業務エラー履歴ID ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
-	@Schema(description = "手配業務", required = true)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ArrangementWork arrangementWork;
 
 	@Size(max = 4000)
-	@Schema(description = "エラー内容", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "エラー内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String errorMessage;
 
 	@Schema(description = "エラー発生日時(作成時不要)", required = false, readOnly = true)
@@ -52,7 +52,7 @@ public class ArrangementWorkErrorLog extends EntityBase {
 	private Date errorOccurredAt;
 
 	@Size(max = 4000)
-	@Schema(description = "APIリクエスト", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "APIリクエスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String apiRequest;
 
 	@PrePersist

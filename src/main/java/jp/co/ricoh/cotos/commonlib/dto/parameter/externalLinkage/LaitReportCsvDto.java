@@ -17,7 +17,7 @@ public class LaitReportCsvDto {
 	 * ファイル種別管理マスタID
 	 */
 	@Parameter(description = "ファイル種別管理マスタID", required = false)
-	@Schema(description = "ファイル種別管理マスタID", required = false)
+	@Schema(description = "ファイル種別管理マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long fileKindManagementMasterId;
 
 	/**
@@ -25,7 +25,7 @@ public class LaitReportCsvDto {
 	 */
 	@JsonFormat(pattern = "yyyy/MM", timezone = "Asia/Tokyo")
 	@Parameter(description = "基準月", required = false)
-	@Schema(description = "基準月", required = false)
+	@Schema(description = "基準月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date referenceMonth;
 
 }

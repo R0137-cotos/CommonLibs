@@ -50,14 +50,14 @@ public class LicenseKeyInfo extends EntityBase {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_account_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ライセンスアカウント", required = true)
+	@Schema(description = "ライセンスアカウント", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseAccount licenseAccount;
 
 	/**
 	 * ライセンスサービスID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスサービスID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービスID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceId;
 
 	/**
@@ -65,27 +65,27 @@ public class LicenseKeyInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "ライセンスキー", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseKey;
 
 	/**
 	 * ライセンス状態
 	 */
-	@Schema(description = "ライセンス状態", required = false, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
+	@Schema(description = "ライセンス状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
 	private LicenseStatus licenseStatus;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス開始日", required = false)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス終了日", required = false)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermEnd;
 
 	/**
@@ -93,13 +93,13 @@ public class LicenseKeyInfo extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -107,6 +107,6 @@ public class LicenseKeyInfo extends EntityBase {
 	 * ライセンス区分マスタID
 	 */
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 }

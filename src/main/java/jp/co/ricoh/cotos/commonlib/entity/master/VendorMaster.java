@@ -63,28 +63,28 @@ public class VendorMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vendor_master_seq")
 	@SequenceGenerator(name = "vendor_master_seq", sequenceName = "vendor_master_seq", allocationSize = 1)
-	@Schema(description = "ベンダーマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ベンダーマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 仕入先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "仕入先コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "仕入先コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String vendorCode;
 
 	/**
 	 * ベンダー名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "ベンダー名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorName;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 1000)
-	@Schema(description = "メールアドレス", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String mailAddress;
 
 	/**
@@ -92,7 +92,7 @@ public class VendorMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "vendorMaster")
 	@JsonIgnore
-	@Schema(description = "ベンダー商品マスタ", required = true)
+	@Schema(description = "ベンダー商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<VendorProductMaster> vendorProductMasterList;
 
 	/**
@@ -100,13 +100,13 @@ public class VendorMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "添付ファイルパスワード不要", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "添付ファイルパスワード不要", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer attachedFilePasswordUnrequired;
 
 	/**
 	 * eTransporter連携区分
 	 */
-	@Schema(description = "eTransporter連携区分", required = false, allowableValues = "連携しない(\"0\"), 連携する_メール送信しない(\"1\"), 連携する_メール送信する(\"2\")")
+	@Schema(description = "eTransporter連携区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "連携しない(\"0\"), 連携する_メール送信しない(\"1\"), 連携する_メール送信する(\"2\")")
 	private EtransporterLinkageDiv etransporterLinkageDiv;
 
 	/**

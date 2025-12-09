@@ -39,7 +39,7 @@ public class ArrangementPicWorkerEmp extends EmployeeAbstractEntity {
 	 */
 	@OneToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
-	@Schema(description = "手配業務", required = true)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ArrangementWork arrangementWork;
 

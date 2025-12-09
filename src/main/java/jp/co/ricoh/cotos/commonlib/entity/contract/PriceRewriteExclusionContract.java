@@ -34,7 +34,7 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_exclusion_contract_seq")
 	@SequenceGenerator(name = "price_rewrite_exclusion_contract_seq", sequenceName = "price_rewrite_exclusion_contract_seq", allocationSize = 1)
-	@Schema(description = "価格書換除外契約", required = true, readOnly = true)
+	@Schema(description = "価格書換除外契約", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private long id;
 
 	/**
@@ -43,7 +43,7 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ファイル取込管理", required = false)
+	@Schema(description = "ファイル取込管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private FileImportManagement fileImportManagement;
 
 	/**
@@ -51,7 +51,7 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
@@ -59,7 +59,7 @@ public class PriceRewriteExclusionContract extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 }

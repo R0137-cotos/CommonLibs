@@ -124,7 +124,7 @@ public class LicenseDetail extends EntityBase {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ライセンス情報", required = true)
+	@Schema(description = "ライセンス情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseInfo licenseInfo;
 
 	/**
@@ -132,7 +132,7 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
@@ -140,40 +140,40 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "シーケンスNo", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "シーケンスNo", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long seqNumber;
 
 	/**
 	 * 情報区分
 	 */
-	@Schema(description = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\"), 乗換え減数(\"8\"), 支払周期変更(\"9\")")
+	@Schema(description = "情報区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\"), 乗換え減数(\"8\"), 支払周期変更(\"9\")")
 	private InfoDiv infoDiv;
 
 	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long itemMasterId;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Min(0)
-	@Schema(description = "商品マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long productMasterId;
 
 	/**
 	 * ハード・ソフト区分
 	 */
-	@Schema(description = "ハード・ソフト区分", required = false, allowableValues = "ハード(\"1\"), ライセンス(\"2\")")
+	@Schema(description = "ハード・ソフト区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ハード(\"1\"), ライセンス(\"2\")")
 	private HardSoftDiv hardSoftDiv;
 
 	/**
 	 * 機種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "機種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "機種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String equipmentCode;
 
 	/**
@@ -181,7 +181,7 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 
 	/**
@@ -189,20 +189,20 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "取込フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "取込フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer captureFlg;
 
 	/**
 	 * 取込日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "取込日時", required = false)
+	@Schema(description = "取込日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date captureAt;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -210,14 +210,14 @@ public class LicenseDetail extends EntityBase {
 	 * ライセンスサービスID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスサービスID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービスID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceId;
 
 	/**
 	 * ライセンスサービス名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスサービス名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービス名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceName;
 
 	/**
@@ -225,54 +225,54 @@ public class LicenseDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "増減数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "増減数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer changeQuantity;
 
 	/**
 	 * リクエスト処理区分
 	 */
-	@Schema(description = "リクエスト処理区分", required = false, allowableValues = "即時(\"1\"), 月次(\"2\")")
+	@Schema(description = "リクエスト処理区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "即時(\"1\"), 月次(\"2\")")
 	private RequestProcessDiv requestProcessDiv;
 
 	/**
 	 * リクエスト作成状態
 	 */
-	@Schema(description = "リクエスト作成状態", required = false, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")")
+	@Schema(description = "リクエスト作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")")
 	private RequestCreateStatus requestCreateStatus;
 
 	/**
 	 * リクエスト作成日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "リクエスト作成日時", required = false)
+	@Schema(description = "リクエスト作成日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date requestCreateDate;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス開始日", required = false)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス終了日", required = false)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermEnd;
 
 	/**
 	 * リクエスト予定日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "リクエスト予定日", required = false)
+	@Schema(description = "リクエスト予定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date requestScheduleDate;
 
 	/**
 	 * ライセンスキー
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスキー", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseKey;
 
 }

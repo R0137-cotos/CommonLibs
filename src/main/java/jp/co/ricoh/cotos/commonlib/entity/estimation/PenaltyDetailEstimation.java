@@ -47,7 +47,7 @@ public class PenaltyDetailEstimation extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@Schema(description = "見積", required = true)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Estimation estimation;
 
@@ -56,21 +56,21 @@ public class PenaltyDetailEstimation extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@Schema(description = "品種名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * 違約金単価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "違約金単価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
 	/**
@@ -78,14 +78,14 @@ public class PenaltyDetailEstimation extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "数量", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
 	 * 違約金額
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "違約金額", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 
 	/**
@@ -93,13 +93,13 @@ public class PenaltyDetailEstimation extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "削除フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
 	 * 違約金発生解約最終日
 	 */
-	@Schema(description = "違約金発生解約最終日", required = false)
+	@Schema(description = "違約金発生解約最終日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyOccurCacnlLastDate;
 }

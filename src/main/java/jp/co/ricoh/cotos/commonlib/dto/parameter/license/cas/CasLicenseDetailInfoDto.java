@@ -27,33 +27,33 @@ public class CasLicenseDetailInfoDto extends DtoBase {
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブスクリプションID", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String subscriptionId;
 
 	/**
 	 * サービスプランID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービスプランID", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "サービスプランID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String servicePlanId;
 
 	/**
 	 * ライセンス状態
 	 */
-	@Schema(description = "ライセンス状態", required = false, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
+	@Schema(description = "ライセンス状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
 	private CasLicenseStatus licenseStatus;
 
 	/**
 	 * ライセンス開始日
 	 */
-	@Schema(description = "ライセンス開始日", required = false)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
-	@Schema(description = "ライセンス終了日", required = false)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date licenseTermEnd;
 
@@ -62,7 +62,7 @@ public class CasLicenseDetailInfoDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(99999)
-	@Schema(description = "数量", required = true, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
@@ -70,6 +70,6 @@ public class CasLicenseDetailInfoDto extends DtoBase {
 	 * CasLicenseBasicInfoDtoとの結合用フィールド
 	 */
 	@Size(max = 255)
-	@Schema(description = "MVBアカウント", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String mvbAccount;
 }

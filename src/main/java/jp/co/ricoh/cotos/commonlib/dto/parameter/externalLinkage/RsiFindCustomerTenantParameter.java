@@ -14,13 +14,13 @@ public class RsiFindCustomerTenantParameter {
 	 * テナントID
 	 */
 	@Parameter(description = "テナントID", required = false)
-	@Schema(description = "テナントID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String tenantId;
 
 	/**
 	 * 契約者メールアドレス
 	 */
 	@Parameter(description = "契約者メールアドレス", required = false)
-	@Schema(description = "契約者メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractorMailAddress;
 }

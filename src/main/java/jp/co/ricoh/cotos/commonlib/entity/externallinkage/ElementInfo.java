@@ -42,7 +42,7 @@ public class ElementInfo extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
@@ -50,7 +50,7 @@ public class ElementInfo extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "注文なしフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "注文なしフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noOrderFlg;
 
 	/**
@@ -58,13 +58,13 @@ public class ElementInfo extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "原価合計金額", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価合計金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal totalPrice;
 
 	/**
 	 * 部材情報明細
 	 */
 	@OneToMany(mappedBy = "elementInfo")
-	@Schema(description = "部材情報明細", required = false)
+	@Schema(description = "部材情報明細", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ElementInfoDetail> elementInfoDetailList;
 }

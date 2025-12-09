@@ -26,28 +26,28 @@ public class TmUpdateSubscriptionRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_subscription_request_work_seq")
 	@SequenceGenerator(name = "tm_update_subscription_request_work_seq", sequenceName = "tm_update_subscription_request_work_seq", allocationSize = 1)
-	@Schema(description = "トレンドマイクロサブスクリプション更新リクエストWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロサブスクリプション更新リクエストWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "会社ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブスクリプションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 
 	/**
 	 * ユニット数
 	 */
 	@Size(max = 255)
-	@Schema(description = "ユニット数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ユニット数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String unitsPerLicense;
 
 	/**
@@ -55,6 +55,6 @@ public class TmUpdateSubscriptionRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@Schema(description = "トレンドマイクロサブスクリプション更新レスポンスWORK", required = false)
+	@Schema(description = "トレンドマイクロサブスクリプション更新レスポンスWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmUpdateSubscriptionResponseWork responseWork;
 }

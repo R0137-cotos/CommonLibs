@@ -36,103 +36,103 @@ public class EimDocumentInfo extends EntityBase {
 	/**
 	 * 文書ユニークキー
 	 */
-	@Schema(description = "文書ユニークキー", required = true)
+	@Schema(description = "文書ユニークキー", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String documentUniqueId;
 
 	/**
 	 * 文書ID
 	 */
-	@Schema(description = "文書ID", required = false)
+	@Schema(description = "文書ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String documentId;
 
 	/**
 	 * 文書キー
 	 */
-	@Schema(description = "文書キー", required = false)
+	@Schema(description = "文書キー", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String documentKey;
 
 	/**
 	 * EIM連携済状態
 	 */
-	@Schema(description = "EIM連携済状態", required = false, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 対象外(\"9\")")
+	@Schema(description = "EIM連携済状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 対象外(\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
 
 	/**
 	 * 最終連携実施時刻
 	 */
-	@Schema(description = "最終連携実施時刻", required = false)
+	@Schema(description = "最終連携実施時刻", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date lastLinkedAt;
 
 	/**
 	 * 文書タイトル
 	 */
-	@Schema(description = "文書タイトル", required = false)
+	@Schema(description = "文書タイトル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String title;
 
 	/**
 	 * 契約No
 	 */
-	@Schema(description = "契約No", required = true)
+	@Schema(description = "契約No", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String keiyakNo;
 
 	/**
 	 * 担当販社CD
 	 */
-	@Schema(description = "担当販社CD", required = false)
+	@Schema(description = "担当販社CD", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String hnsyCd;
 
 	/**
 	 * 従業員番号
 	 */
-	@Schema(description = "従業員番号", required = false)
+	@Schema(description = "従業員番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String syainCd;
 
 	/**
 	 * 担当者名
 	 */
-	@Schema(description = "担当者名", required = false)
+	@Schema(description = "担当者名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String syainNm;
 
 	/**
 	 * 課所CD
 	 */
-	@Schema(description = "課所CD", required = false)
+	@Schema(description = "課所CD", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String kssCd;
 
 	/**
 	 * 課所名
 	 */
-	@Schema(description = "課所名", required = false)
+	@Schema(description = "課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String kssName;
 
 	/**
 	 * 販社CD（CE/SE）
 	 */
-	@Schema(description = "販社CD（CE/SE）", required = false)
+	@Schema(description = "販社CD（CE/SE）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cshnsyCd;
 
 	/**
 	 * 従業員番号（CE/SE）
 	 */
-	@Schema(description = "従業員番号（CE/SE）", required = false)
+	@Schema(description = "従業員番号（CE/SE）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cssyainCd;
 
 	/**
 	 * 担当者名（CE/SE）
 	 */
-	@Schema(description = "担当者名（CE/SE）", required = false)
+	@Schema(description = "担当者名（CE/SE）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cssyainNm;
 
 	/**
 	 * 課所CD（CE/SE）
 	 */
-	@Schema(description = "課所CD（CE/SE）", required = false)
+	@Schema(description = "課所CD（CE/SE）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cskssCd;
 
 	/**
 	 * 課所名（CE/SE）
 	 */
-	@Schema(description = "課所名（CE/SE）", required = false)
+	@Schema(description = "課所名（CE/SE）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cskssName;
 
 	/**
@@ -204,127 +204,127 @@ public class EimDocumentInfo extends EntityBase {
 	/**
 	 * 得意先CD
 	 */
-	@Schema(description = "得意先CD", required = false)
+	@Schema(description = "得意先CD", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String tokuCd;
 
 	/**
 	 * 得意先名
 	 */
-	@Schema(description = "得意先名", required = false)
+	@Schema(description = "得意先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String tokuNm;
 
 	/**
 	 * 機種略号・機番
 	 */
-	@Schema(description = "機種略号・機番", required = false)
+	@Schema(description = "機種略号・機番", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String kisyuKiban;
 
 	/**
 	 * 支社CD（CE/SE）受付
 	 */
-	@Schema(description = "支社CD（CE/SE）受付", required = false)
+	@Schema(description = "支社CD（CE/SE）受付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csrhnsyCd;
 
 	/**
 	 * 従業員番号（CE/SE）受付
 	 */
-	@Schema(description = "従業員番号（CE/SE）受付", required = false)
+	@Schema(description = "従業員番号（CE/SE）受付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csrsyainCd;
 
 	/**
 	 * 担当者名（CE/SE）受付
 	 */
-	@Schema(description = "担当者名（CE/SE）受付", required = false)
+	@Schema(description = "担当者名（CE/SE）受付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csrsyainNm;
 
 	/**
 	 * 課所CD（CE/SE）受付
 	 */
-	@Schema(description = "課所CD（CE/SE）受付", required = false)
+	@Schema(description = "課所CD（CE/SE）受付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csrkssCd;
 
 	/**
 	 * 課所名（CE/SE）受付
 	 */
-	@Schema(description = "課所名（CE/SE）受付", required = false)
+	@Schema(description = "課所名（CE/SE）受付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csrkssName;
 
 	/**
 	 * 支社CD（CE/SE）導入
 	 */
-	@Schema(description = "支社CD（CE/SE）導入", required = false)
+	@Schema(description = "支社CD（CE/SE）導入", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csihnsyCd;
 
 	/**
 	 * 従業員番号（CE/SE）導入
 	 */
-	@Schema(description = "従業員番号（CE/SE）導入", required = false)
+	@Schema(description = "従業員番号（CE/SE）導入", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csisyainCd;
 
 	/**
 	 * 担当者名（CE/SE）導入
 	 */
-	@Schema(description = "担当者名（CE/SE）導入", required = false)
+	@Schema(description = "担当者名（CE/SE）導入", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csisyainNm;
 
 	/**
 	 * 課所CD（CE/SE）導入
 	 */
-	@Schema(description = "課所CD（CE/SE）導入", required = false)
+	@Schema(description = "課所CD（CE/SE）導入", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csikssCd;
 
 	/**
 	 * 課所名（CE/SE）導入
 	 */
-	@Schema(description = "課所名（CE/SE）導入", required = false)
+	@Schema(description = "課所名（CE/SE）導入", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csikssName;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = false)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long contractId;
 
 	/**
 	 * 旧文書フラグ
 	 */
-	@Schema(description = "旧文書フラグ", required = true)
+	@Schema(description = "旧文書フラグ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private boolean oldDocumentFlg;
 	
 	/**
 	* 担当販社名
 	*/
-	@Schema(description = "担当販社名", required = false)
+	@Schema(description = "担当販社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String hnsyNm;
 
 	/**
 	* 部門階層名1
 	*/
-	@Schema(description = "部門階層名1", required = false)
+	@Schema(description = "部門階層名1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String bmnName1;
 
 	/**
 	* 部門階層名2
 	*/
-	@Schema(description = "部門階層名2", required = false)
+	@Schema(description = "部門階層名2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String bmnName2;
 
 	/**
 	* 部門階層名3
 	*/
-	@Schema(description = "部門階層名3", required = false)
+	@Schema(description = "部門階層名3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String bmnName3;
 
 	/**
 	* 部門階層名4
 	*/
-	@Schema(description = "部門階層名4", required = false)
+	@Schema(description = "部門階層名4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String bmnName4;
 
 	/**
 	* 販社名（CE/SE）
 	*/
-	@Schema(description = "販社名（CE/SE）", required = false)
+	@Schema(description = "販社名（CE/SE）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cshnsyNm;
 
 	/**
@@ -354,7 +354,7 @@ public class EimDocumentInfo extends EntityBase {
 	/**
 	* 支社名（CE/SE）受付
 	*/
-	@Schema(description = "支社名（CE/SE）受付", required = false)
+	@Schema(description = "支社名（CE/SE）受付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csrhnsyNm;
 
 	/**
@@ -384,7 +384,7 @@ public class EimDocumentInfo extends EntityBase {
 	/**
 	* 支社名（CE/SE）導入
 	*/
-	@Schema(description = "支社名（CE/SE）導入", required = false)
+	@Schema(description = "支社名（CE/SE）導入", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String csihnsyNm;
 
 	/**
@@ -414,63 +414,63 @@ public class EimDocumentInfo extends EntityBase {
 	/**
 	* 正式帳票名
 	*/
-	@Schema(description = "正式帳票名", required = false)
+	@Schema(description = "正式帳票名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String siskThNm;
 
 	/**
 	* 識別区分
 	*/
-	@Schema(description = "識別区分", required = false)
+	@Schema(description = "識別区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer skbtKbn;
 
 	/**
 	* 契約金額
 	*/
-	@Schema(description = "契約金額", required = false)
+	@Schema(description = "契約金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal kiykKngk;
 
 	/**
 	* 契約締結日
 	*/
-	@Schema(description = "契約締結日", required = false)
+	@Schema(description = "契約締結日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date kiykTiktHi;
 
 	/**
 	* 契約種類区分
 	*/
-	@Schema(description = "契約種類区分", required = false)
+	@Schema(description = "契約種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String keiyakType;
 
 	/**
 	* FFM発注問い合わせ番号
 	*/
-	@Schema(description = "FFM発注問い合わせ番号", required = false)
+	@Schema(description = "FFM発注問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ffmHttiawsNo;
 
 	/**
 	* V-UP見積番号
 	*/
-	@Schema(description = "V-UP見積番号", required = false)
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vupMtmriNo;
 
 	/**
 	* V-UP案件番号
 	*/
-	@Schema(description = "V-UP案件番号", required = false)
+	@Schema(description = "V-UP案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vupAnknNo;
 
 	/**
 	* サービス開始日
 	*/
-	@Schema(description = "サービス開始日", required = false)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serKisHi;
 
 	/**
 	* サービス利用希望日
 	*/
-	@Schema(description = "サービス利用希望日", required = false)
+	@Schema(description = "サービス利用希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serRyuKbuHi;
 }

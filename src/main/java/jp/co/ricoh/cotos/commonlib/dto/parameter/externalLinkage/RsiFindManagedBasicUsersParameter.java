@@ -15,21 +15,21 @@ public class RsiFindManagedBasicUsersParameter {
 	 * テナントID
 	 */
 	@Parameter(description = "テナントID", required = false)
-	@Schema(description = "テナントID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String tenantId;
 
 	/**
 	 * メールアドレス
 	 */
 	@Parameter(description = "メールアドレス", required = false)
-	@Schema(description = "メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String loginMailAddress;
 
 	/**
 	 * 企業名
 	 */
 	@Parameter(description = "企業名", required = false)
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String tenantName;
 
 }

@@ -31,7 +31,7 @@ public class CheckAlertTargetMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "check_alert_target_master_seq")
 	@SequenceGenerator(name = "check_alert_target_master_seq", sequenceName = "check_alert_target_master_seq", allocationSize = 1)
-	@Schema(description = "チェックアラート対象マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "チェックアラート対象マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -40,13 +40,13 @@ public class CheckAlertTargetMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "check_alert_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "チェックアラートマスタID", required = true)
+	@Schema(description = "チェックアラートマスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private CheckAlertMaster checkAlertMaster;
 
 	/**
 	 * 対象マスタID
 	 */
-	@Schema(description = "対象マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "対象マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long targetMasterId;
 
 }

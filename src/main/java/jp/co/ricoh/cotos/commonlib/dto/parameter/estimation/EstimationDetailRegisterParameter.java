@@ -45,7 +45,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "変更前数量", allowableValues = "range[-99999,99999]", required = false)
+	@Schema(description = "変更前数量", allowableValues = "range[-99999,99999]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer beforeQuantity;
 
 	/**
@@ -120,7 +120,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "契約数", allowableValues = "range[-99999,99999]", required = false)
+	@Schema(description = "契約数", allowableValues = "range[-99999,99999]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer contractAmount;
 
 	/**

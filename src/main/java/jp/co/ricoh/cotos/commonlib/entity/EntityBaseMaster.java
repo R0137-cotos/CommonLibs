@@ -20,20 +20,20 @@ import lombok.Data;
 @MappedSuperclass
 @Data
 public class EntityBaseMaster {
-	@Schema(description = "登録日時", required = true, readOnly = true)
+	@Schema(description = "登録日時", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private Date createdAt;
 
-	@Schema(description = "登録者", required = true, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "登録者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String createdUserId;
 
-	@Schema(description = "更新日時", required = true, readOnly = true)
+	@Schema(description = "更新日時", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private Date updatedAt;
 
-	@Schema(description = "更新者", required = true, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "更新者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String updatedUserId;
 
 	@Version
-	@Schema(description = "version", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "version", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long version;
 
 	@PrePersist

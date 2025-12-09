@@ -13,10 +13,10 @@ import lombok.Data;
 public class UpdateArrangementContractParameter {
 
 	@Valid
-	@Schema(description = "手配", required = true)
+	@Schema(description = "手配", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementDto arrangementDto;
 
 	@Valid
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractDto contractDto;
 }

@@ -21,56 +21,56 @@ public class CasLicenseSearchParameter {
 	 * MVBアカウント
 	 */
 	@Parameter(description = "MVBアカウント", required = false)
-	@Schema(description = "MVBアカウント", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * 担当者メールアドレス
 	 */
 	@Parameter(description = "担当者メールアドレス", required = false)
-	@Schema(description = "担当者メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
 	 * MoM非連携_担当者電話番号
 	 */
 	@Parameter(description = "MoM非連携_担当者電話番号:前方一致", required = false)
-	@Schema(description = "MoM非連携_担当者電話番号:前方一致", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者電話番号:前方一致", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picPhoneNumber;
 
 	/**
 	 * 企業名（カナ）
 	 */
 	@Parameter(description = "企業名（カナ）:前方一致", required = false)
-	@Schema(description = "企業名（カナ）:前方一致", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名（カナ）:前方一致", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyNameKana;
 
 	/**
 	 * 企業名
 	 */
 	@Parameter(description = "企業名:前方一致", required = false)
-	@Schema(description = "企業名:前方一致", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名:前方一致", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * MoM企事部ID
 	 */
 	@Parameter(description = "MoM企事部ID", required = false)
-	@Schema(description = "MoM企事部ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
 	 * 契約番号
 	 */
 	@Parameter(description = "契約番号", required = false)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
 	@Parameter(description = "契約番号枝番", required = false)
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
@@ -78,7 +78,7 @@ public class CasLicenseSearchParameter {
 	 */
 	@NotNull
 	@Parameter(description = "MoM企業ID", required = true)
-	@Schema(description = "MoM企業ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企業ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momCompanyId;
 
 	/**

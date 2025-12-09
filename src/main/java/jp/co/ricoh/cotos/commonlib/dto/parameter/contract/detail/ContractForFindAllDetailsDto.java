@@ -66,14 +66,14 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
 	 * 商品グループマスタID
 	 */
 	@Min(0)
-	@Schema(description = "商品グループマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productGrpMasterId;
 
 	/**
@@ -99,7 +99,7 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	/**
 	 * 案件番号
 	 */
-	@Schema(description = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	@Size(max = 255)
 	private String caseNumber;
 
@@ -107,7 +107,7 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * 案件名
 	 */
 	@Size(max = 255)
-	@Schema(description = "案件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseTitle;
 
 	/**
@@ -128,14 +128,14 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * 契約件名
 	 */
 	@Size(max = 255)
-	@Schema(description = "契約件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTitle;
 
 	/**
 	 * 変更元契約番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "変更元契約番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "変更元契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String originContractNumber;
 
 	/**
@@ -143,27 +143,27 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Max(99)
 	@Min(0)
-	@Schema(description = "変更元契約番号枝番", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "変更元契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer originContractBranchNumber;
 
 	/**
 	 * 変更元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "変更元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "変更元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long originContractId;
 
 	/**
 	 * 変更希望日
 	 */
-	@Schema(description = "変更希望日", required = false)
+	@Schema(description = "変更希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date changePreferredDate;
 
 	/**
 	 * 契約日
 	 */
-	@Schema(description = "契約日", required = false)
+	@Schema(description = "契約日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date contractDate;
 
@@ -177,28 +177,28 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	/**
 	 * 請求開始日
 	 */
-	@Schema(description = "請求開始日", required = false)
+	@Schema(description = "請求開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date billingDate;
 
 	/**
 	 * サービス開始日
 	 */
-	@Schema(description = "サービス開始日", required = false)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@Schema(description = "サービス終了日", required = false)
+	@Schema(description = "サービス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermEnd;
 
 	/**
 	 * 解約予定日
 	 */
-	@Schema(description = "解約予定日", required = false)
+	@Schema(description = "解約予定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date cancelScheduledDate;
 
@@ -206,7 +206,7 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * 見積番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "見積番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
@@ -214,83 +214,83 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Max(99)
 	@Min(0)
-	@Schema(description = "見積番号枝番", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "見積番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer estimationBranchNumber;
 
 	/**
 	 * 見積ID
 	 */
 	@Min(0)
-	@Schema(description = "見積ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long estimationId;
 
 	/**
 	 * 見積件名
 	 */
 	@Size(max = 255)
-	@Schema(description = "見積件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "見積件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationTitle;
 
 	/**
 	 * 商流区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "商流区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商流区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String commercialFlowDiv;
 
 	/**
 	 * 発行書式
 	 */
 	@Size(max = 255)
-	@Schema(description = "発行書式", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "発行書式", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String issueFormat;
 
 	/**
 	 * 得意先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "得意先コード<br/>※POST時「MoM請求売上先サイト情報マスタ」存在チェック実施", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "得意先コード<br/>※POST時「MoM請求売上先サイト情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpCode;
 
 	/**
 	 * 得意先宛先名
 	 */
 	@Size(max = 255)
-	@Schema(description = "得意先宛先名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "得意先宛先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpName;
 
 	/**
 	 * 支払条件
 	 */
 	@Size(max = 255)
-	@Schema(description = "支払条件", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "支払条件", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String paymentTerms;
 
 	/**
 	 * 支払方法
 	 */
 	@Size(max = 255)
-	@Schema(description = "支払方法", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "支払方法", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String paymentMethod;
 
 	/**
 	 * 解約理由
 	 */
 	@Size(max = 255)
-	@Schema(description = "解約理由", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "解約理由", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cancelReason;
 
 	/**
 	 * その他解約理由
 	 */
 	@Size(max = 1000)
-	@Schema(description = "その他解約理由", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "その他解約理由", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String cancelReasonEtc;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -298,14 +298,14 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * web受注注文番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "web受注注文番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "web受注注文番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String webOrderNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
@@ -319,26 +319,26 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * 解約注文番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "解約注文番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "解約注文番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cancelOrderNo;
 
 	/**
 	 * サービス利用希望日
 	 */
-	@Schema(description = "サービス利用希望日", required = false)
+	@Schema(description = "サービス利用希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * IFS連携用CSV作成状態
 	 */
-	@Schema(description = "IFS連携用CSV作成状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
+	@Schema(description = "IFS連携用CSV作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
 	private IfsLinkageCsvCreateStatus ifsLinkageCsvCreateStatus;
 
 	/**
 	 * IFS連携用CSV作成日
 	 */
-	@Schema(description = "IFS連携用CSV作成日", required = false)
+	@Schema(description = "IFS連携用CSV作成日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date ifsLinkageCsvCreateDate;
 
@@ -346,26 +346,26 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * お問い合わせ番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * S&S作業依頼作成状態
 	 */
-	@Schema(description = "S&S作業依頼作成状態", required = false, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")")
+	@Schema(description = "S&S作業依頼作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")")
 	private SsWorkRequestCreateStatus ssWorkRequestCreateStatus;
 
 	/**
 	 * 帳票用消費税率区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "帳票用消費税率区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "帳票用消費税率区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String issueTaxCodeValue;
 
 	/**
 	 * 申込日
 	 */
-	@Schema(description = "申込日", required = false)
+	@Schema(description = "申込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
@@ -374,7 +374,7 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@Schema(description = "契約明細", required = true)
+	@Schema(description = "契約明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ContractDetail> contractDetailList;
 
 	/**
@@ -404,7 +404,7 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@Schema(description = "契約担当SA社員", required = true)
+	@Schema(description = "契約担当SA社員", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractPicSaEmp contractPicSaEmp;
 
 	/**
@@ -514,7 +514,7 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@Schema(description = "見積明細管理", required = true)
+	@Schema(description = "見積明細管理", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ManagedEstimationDetail> managedEstimationDetailList;
 
 	/**
@@ -529,55 +529,55 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "アプリケーションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	/**
 	 * 契約自動更新日
 	 */
 	@Column
-	@Schema(description = "契約自動更新日", required = false)
+	@Schema(description = "契約自動更新日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date contractAutoUpdateDate;
 
 	/**
 	 * 届先コード
 	 */
 	@Column
-	@Schema(description = "届先コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "届先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String deliveryCd;
 
 	/**
 	 * 届先名
 	 */
 	@Column
-	@Schema(description = "届先名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "届先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String deliveryName;
 
 	/**
 	 * 検収日
 	 */
 	@Column
-	@Schema(description = "検収日", required = false)
+	@Schema(description = "検収日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date acceptanceDate;
 
 	/**
 	 * 設置届先サイトID
 	 */
 	@Size(max = 255)
-	@Schema(description = "設置届先サイトID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "設置届先サイトID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String installDeliverySiteId;
 
 	/**
 	 * 販売区分
 	 */
-	@Schema(description = "販売区分", required = false, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	@Schema(description = "販売区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
 	private SaleDiv saleDiv;
 
 	/**
 	 * ベンダー管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
@@ -585,20 +585,20 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "手動更新フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "手動更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer manualUpdateFlg;
 
 	/**
 	 * 品種追加状態
 	 */
-	@Schema(description = "品種追加状態", required = false, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	@Schema(description = "品種追加状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
 
 	/**
 	 * 商品グループコード
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品グループコード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品グループコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productGroupCd;
 
 	/**
@@ -611,6 +611,6 @@ public class ContractForFindAllDetailsDto extends EntityBase {
 	 *
 	 */
 	@Size(max = 255)
-	@Schema(description = "納品書・請求書印字用コメント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "納品書・請求書印字用コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String purchaseManageNumber;
 }

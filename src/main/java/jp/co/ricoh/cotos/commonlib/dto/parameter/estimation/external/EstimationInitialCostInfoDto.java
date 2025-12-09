@@ -20,7 +20,7 @@ public class EstimationInitialCostInfoDto {
 	 */
 	@NotNull
 	@Size(max = 25)
-	@Schema(description = "初期費 品種コード", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "初期費 品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String initialProductCd;
 
 	/**
@@ -29,7 +29,7 @@ public class EstimationInitialCostInfoDto {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "初期費 標準価格", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "初期費 標準価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal initialUnitPrice;
 
 	/**
@@ -38,7 +38,7 @@ public class EstimationInitialCostInfoDto {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "初期費 見積り単価", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "初期費 見積り単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal initialEstimatedUnitPrice;
 
 	/**
@@ -47,7 +47,7 @@ public class EstimationInitialCostInfoDto {
 	@NotNull
 	@Min(-99999)
 	@Max(99999)
-	@Schema(description = "初期費 数量", required = true, allowableValues = "range[-99999,99999]")
+	@Schema(description = "初期費 数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer initialAmt;
 
 	/**
@@ -56,6 +56,6 @@ public class EstimationInitialCostInfoDto {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "初期費 見積り金額", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "初期費 見積り金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal initialEstimatedPrice;
 }

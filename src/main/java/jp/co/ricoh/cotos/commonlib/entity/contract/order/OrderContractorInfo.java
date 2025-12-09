@@ -36,7 +36,7 @@ public class OrderContractorInfo extends EntityBase {
 @Id
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_contractor_info_seq")
 @SequenceGenerator(name = "order_contractor_info_seq", sequenceName = "order_contractor_info_seq", allocationSize = 1)
-@Schema(description = "ID", required = true)
+@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 private long id;
 
 /**
@@ -51,84 +51,84 @@ private OrderBasicInfo orderBasicInfo;
  * 企業ＩＤ
  */
 @Column
-@Schema(description = "企業ＩＤ", required = false, allowableValues = "range[0,]")
+@Schema(description = "企業ＩＤ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String companyId;
 
 /**
  * 企事部ＩＤ
  */
 @Column
-@Schema(description = "企事部ＩＤ", required = false, allowableValues = "range[0,]")
+@Schema(description = "企事部ＩＤ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String kjbId;
 
 /**
  * 会員基本ID
  */
 @Column
-@Schema(description = "会員基本ID", required = false, allowableValues = "range[0,]")
+@Schema(description = "会員基本ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String netricohAccount;
 
 /**
  * 得意先コード
  */
 @Column
-@Schema(description = "得意先コード", required = false, allowableValues = "range[0,]")
+@Schema(description = "得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String customerCd;
 
 /**
  * 会社名
  */
 @Column
-@Schema(description = "会社名", required = false, allowableValues = "range[0,]")
+@Schema(description = "会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorCompanyName;
 
 /**
  * 担当者漢字（姓＋名）
  */
 @Column
-@Schema(description = "担当者漢字（姓＋名）", required = false, allowableValues = "range[0,]")
+@Schema(description = "担当者漢字（姓＋名）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorNameKanji;
 
 /**
  * 担当者カナ（姓＋名）
  */
 @Column
-@Schema(description = "担当者カナ（姓＋名）", required = false, allowableValues = "range[0,]")
+@Schema(description = "担当者カナ（姓＋名）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorNameKana;
 
 /**
  * 担当者メールアドレス
  */
 @Column
-@Schema(description = "担当者メールアドレス", required = false, allowableValues = "range[0,]")
+@Schema(description = "担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorMailAddress;
 
 /**
  * 郵便番号
  */
 @Column
-@Schema(description = "郵便番号", required = false, allowableValues = "range[0,]")
+@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorPostNumber;
 
 /**
  * 事業所名
  */
 @Column
-@Schema(description = "事業所名", required = false, allowableValues = "range[0,]")
+@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorOfficeName;
 
 /**
  * 住所
  */
 @Column
-@Schema(description = "住所", required = false, allowableValues = "range[0,]")
+@Schema(description = "住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorAddress;
 
 /**
  * 電話番号
  */
 @Column
-@Schema(description = "電話番号", required = false, allowableValues = "range[0,]")
+@Schema(description = "電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 private String contractorPhoneNumber;
 
 /**
@@ -143,7 +143,7 @@ private String authorityForNetricoh;
  */
 @Column
 @Temporal(TemporalType.DATE)
-@Schema(description = "サービス開始希望日", required = false)
+@Schema(description = "サービス開始希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 private Date desiredServiceStartDate;
 
 }

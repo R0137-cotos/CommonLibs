@@ -19,7 +19,7 @@ public class FileImportManagementParameter {
 	 * ファイル種別管理マスタID
 	 */
 	@Min(0)
-	@Schema(description = "ファイル種別管理マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ファイル種別管理マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long fileKindManagementMasterId;
 
 	/**
@@ -27,14 +27,14 @@ public class FileImportManagementParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * 添付ファイル
 	 */
 	@NotNull
-	@Schema(description = "添付ファイル", required = true)
+	@Schema(description = "添付ファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AttachedFile attachedFile;
 
 	/**
@@ -42,14 +42,14 @@ public class FileImportManagementParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "取込実施者", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "取込実施者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String importUser;
 
 	/**
 	 * 関連ファイル取込管理ID
 	 */
 	@Min(0)
-	@Schema(description = "関連ファイル取込管理ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "関連ファイル取込管理ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long relatedFileImportManagementId;
 
 }

@@ -15,7 +15,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@Schema(description = "ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -23,7 +23,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -31,7 +31,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -39,7 +39,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
@@ -47,7 +47,7 @@ public class ItemContractDelegationDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 }

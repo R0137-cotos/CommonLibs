@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class UploadFileParameter {
 
-	@Schema(description = "ファイルパス", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイルパス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String path;
 
-	@Schema(description = "ファイル名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 }

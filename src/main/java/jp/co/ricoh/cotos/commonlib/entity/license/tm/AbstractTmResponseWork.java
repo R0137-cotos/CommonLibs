@@ -54,20 +54,20 @@ public abstract class AbstractTmResponseWork extends EntityBase {
 	 * HTTPステータス
 	 */
 	@Size(max = 255)
-	@Schema(description = "HTTPステータス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "HTTPステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String httpStatus;
 
 	/**
 	 * エラーメッセージ
 	 */
 	@Size(max = 255)
-	@Schema(description = "HTTPステータス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "HTTPステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String errorMessage;
 
 	/**
 	 * ライセンス反映状態
 	 */
-	@Schema(description = "送信状態", required = false, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")", example = "0")
+	@Schema(description = "送信状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")", example = "0")
 	private TmLicenceMappedStatus licenceMappedStatus;
 
 }

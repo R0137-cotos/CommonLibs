@@ -12,13 +12,13 @@ public class ElconEimDocumentRegistrationResult {
 	/**
 	 * ドキュメントID
 	 */
-	@Schema(description = "ドキュメントID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ドキュメントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String documentId;
 
 	/**
 	 * ドキュメントKey
 	 */
-	@Schema(description = "ドキュメントKey", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ドキュメントKey", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String documentKey;
 
 }

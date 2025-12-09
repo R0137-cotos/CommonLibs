@@ -14,18 +14,18 @@ public class ApprovalCandidateSearchResultContract {
 	/**
 	 * 承認ルートマスタ
 	 */
-	@Schema(description = "承認ルートマスタ情報", required = true)
+	@Schema(description = "承認ルートマスタ情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ApprovalRouteMasterDto approvalRouteMaster;
 
 	/**
 	 * 条件式判定結果
 	 */
-	@Schema(description = "条件式判定結果", required = true)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaResult routeFormulaResult;
 
 	/**
 	 * 契約承認ルート
 	 */
-	@Schema(description = "契約承認ルート情報", required = true)
+	@Schema(description = "契約承認ルート情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractApprovalRoute contractApprovalRoute;
 }

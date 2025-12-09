@@ -32,7 +32,7 @@ public class OrderDistributorInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_distributor_info_seq")
 	@SequenceGenerator(name = "order_distributor_info_seq", sequenceName = "order_distributor_info_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -47,63 +47,63 @@ public class OrderDistributorInfo extends EntityBase {
 	 * 販売店コード
 	 */
 	@Column
-	@Schema(description = "販売店コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorCd;
 
 	/**
 	 * 販売店名
 	 */
 	@Column
-	@Schema(description = "販売店名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorName;
 
 	/**
 	 * OE届け先コード
 	 */
 	@Column
-	@Schema(description = "OE届け先コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "OE届け先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String oeDeliveryCd;
 
 	/**
 	 * 販売店区分
 	 */
 	@Column
-	@Schema(description = "販売店区分", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorCustomerType;
 
 	/**
 	 * 販売店担当営業
 	 */
 	@Column
-	@Schema(description = "販売店担当営業", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店担当営業", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorEmployeeName;
 
 	/**
 	 * 販売店担当営業メールアドレス
 	 */
 	@Column
-	@Schema(description = "販売店担当営業メールアドレス", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店担当営業メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorEmployeeMailAddress;
 
 	/**
 	 * Rings得意先コード
 	 */
 	@Column
-	@Schema(description = "Rings得意先コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "Rings得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ringsCustomerCd;
 
 	/**
 	 * 販売店郵便番号
 	 */
 	@Column
-	@Schema(description = "販売店郵便番号", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorPostNumber;
 
 	/**
 	 * 販売店住所
 	 */
 	@Column
-	@Schema(description = "販売店住所", required = false, allowableValues = "range[0,]")
+	@Schema(description = "販売店住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String distributorAddress;
 
 }

@@ -16,7 +16,7 @@ public class ContactToDto extends DtoBase {
 	/**
 	 * 送信タイプ
 	 */
-	@Schema(description = "送信タイプ", required = false, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
+	@Schema(description = "送信タイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
 	private SendType sendType;
 
 	/**
@@ -24,21 +24,21 @@ public class ContactToDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "宛先MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "宛先MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contactToEmpId;
 
 	/**
 	 * 宛先メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "宛先メールアドレス ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "宛先メールアドレス ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactToEmail;
 
 	/**
 	 * 宛先氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "宛先氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "宛先氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactToEmpName;
 
 }

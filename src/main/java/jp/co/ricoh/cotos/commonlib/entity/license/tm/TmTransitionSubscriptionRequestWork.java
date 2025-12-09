@@ -61,62 +61,62 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_transition_subscription_request_work_seq")
 	@SequenceGenerator(name = "tm_transition_subscription_request_work_seq", sequenceName = "tm_transition_subscription_request_work_seq", allocationSize = 1)
-	@Schema(description = "サブスクリプション乗換リクエストWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "サブスクリプション乗換リクエストWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "会社ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
 	 * サービスプランID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービスプランID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービスプランID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String servicePlanId;
 
 	/**
 	 * ユニット数
 	 */
 	@Size(max = 255)
-	@Schema(description = "ユニット数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ユニット数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String unitsPerLicense;
 
 	/**
 	 * 乗換ユニット数
 	 */
 	@Size(max = 255)
-	@Schema(description = "乗換ユニット数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "乗換ユニット数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transitionUnitsPerLicense;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス開始日", required = false)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseStartDate;
 
 	/**
 	 * クロスグレード区分
 	 */
-	@Schema(description = "クロスグレード区分", required = false, allowableValues = "アップグレード(\"1\"), ダウングレード(\"2\")", example = "1")
+	@Schema(description = "クロスグレード区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "アップグレード(\"1\"), ダウングレード(\"2\")", example = "1")
 	private CrossGradeDiv crossGradeDiv;
 
 	/**
 	 * 乗換元サービスプランID
 	 */
 	@Size(max = 255)
-	@Schema(description = "乗換元サービスプランID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "乗換元サービスプランID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fromServicePlanId;
 
 	/**
 	 * 乗換元ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "乗換元ライセンス終了日", required = false)
+	@Schema(description = "乗換元ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date fromLicenseEndDate;
 
 	/**
@@ -124,14 +124,14 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "乗換元解約済フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "乗換元解約済フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer fromSuspendFlg;
 
 	/**
 	 * 乗換元サブスクリプションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "乗換元サブスクリプションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "乗換元サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fromSubscriptionId;
 
 	/**
@@ -139,6 +139,6 @@ public class TmTransitionSubscriptionRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@Schema(description = "トレンドマイクロサブスクリプション乗換レスポンスWORK", required = false)
+	@Schema(description = "トレンドマイクロサブスクリプション乗換レスポンスWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmTransitionSubscriptionResponseWork responseWork;
 }

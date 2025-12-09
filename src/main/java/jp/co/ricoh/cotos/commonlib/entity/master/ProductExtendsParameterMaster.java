@@ -29,7 +29,7 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_extends_parameter_master_seq")
 	@SequenceGenerator(name = "product_extends_parameter_master_seq", sequenceName = "product_extends_parameter_master_seq", allocationSize = 1)
-	@Schema(description = "商品拡張項目マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品拡張項目マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -38,7 +38,7 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "商品マスタ", required = true)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
@@ -46,14 +46,14 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "json_schema_master_id", referencedColumnName = "id")
-	@Schema(description = "JSONスキーママスタ", required = true)
+	@Schema(description = "JSONスキーママスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private JsonSchemaMaster jsonSchemaMaster;
 
 	/**
 	 * 登録区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "登録区分", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "登録区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String registryType;
 
 }

@@ -47,7 +47,7 @@ public class EstimationCheckResult extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@Schema(description = "見積", required = true)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Estimation estimation;
 
@@ -56,7 +56,7 @@ public class EstimationCheckResult extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "対象ライフサイクル状態", required = true, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), 受注(\"3\"), 失注(\"4\"), 破棄(\"5\")", example = "1")
+	@Schema(description = "対象ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), 受注(\"3\"), 失注(\"4\"), 破棄(\"5\")", example = "1")
 	private LifecycleStatus targetLifecycleStatus;
 
 	/**
@@ -65,7 +65,7 @@ public class EstimationCheckResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "チェック事項コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterCode;
 
 	/**
@@ -74,7 +74,7 @@ public class EstimationCheckResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "チェック事項文面", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項文面", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterText;
 
 	/**
@@ -84,34 +84,34 @@ public class EstimationCheckResult extends EntityBase {
 	@Min(0)
 	@OrderBy("desc")
 	@Column(nullable = false)
-	@Schema(description = "表示順", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "表示順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int displayOrder;
 
 	/**
 	 * チェック実施者
 	 */
 	@Size(max = 255)
-	@Schema(description = "チェック実施者", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedUserId;
 
 	/**
 	 * チェック実施者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "チェック実施者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedUserName;
 
 	/**
 	 * チェック実施者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "チェック実施者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedOrgName;
 
 	/**
 	 * チェック実施日時
 	 */
-	@Schema(description = "チェック実施日時", required = false)
+	@Schema(description = "チェック実施日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date checkedAt;
 
@@ -120,6 +120,6 @@ public class EstimationCheckResult extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "チェック必須フラグ", required = false)
+	@Schema(description = "チェック必須フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer checkRequiredFlg;
 }

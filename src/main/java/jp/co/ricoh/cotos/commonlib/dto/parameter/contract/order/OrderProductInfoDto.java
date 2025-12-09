@@ -25,33 +25,33 @@ public class OrderProductInfoDto {
 	 * 商品コード（RICOH品種コード）
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品コード（RICOH品種コード）", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "商品コード（RICOH品種コード）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String productCd;
 
 	/**
 	 * 課金制約ルール
 	 */
-	@Schema(description = "課金制約ルール", required = false, allowableValues = "有料(\"0\"), 初月無料(\"1\"), 無料期間指定(\"2\")")
+	@Schema(description = "課金制約ルール", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "有料(\"0\"), 初月無料(\"1\"), 無料期間指定(\"2\")")
 	private ChargeRule chargeRule;
 
 	/**
 	 * 無料期間
 	 */
 	@Size(max = 255)
-	@Schema(description = "無料期間", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "無料期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String freePeriod;
 
 	/**
 	 * 商品名
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productName;
 
 	/**
 	 * 提供方法
 	 */
-	@Schema(description = "提供方法", required = false, allowableValues = "初期(\"1\"), 月額(\"2\"), 年額(\"3\")")
+	@Schema(description = "提供方法", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "初期(\"1\"), 月額(\"2\"), 年額(\"3\")")
 	private ProvideMethod provideMethod;
 
 	/**
@@ -59,7 +59,7 @@ public class OrderProductInfoDto {
 	 */
 	@Min(0)
 	@Max(99999)
-	@Schema(description = "変更後数量", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "変更後数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
@@ -67,14 +67,14 @@ public class OrderProductInfoDto {
 	 */
 	@Min(0)
 	@Max(99999)
-	@Schema(description = "変更前数量", required = true, allowableValues = "range[0,99999]")
+	@Schema(description = "変更前数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99999]")
 	private Integer beforeQuantity;
 
 	/**
 	 * 差分
 	 */
 	@Max(99999)
-	@Schema(description = "差分", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "差分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer differenceQuantity;
 
 	/**
@@ -82,7 +82,7 @@ public class OrderProductInfoDto {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "売価単価", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "売価単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal unitPrice;
 
 	/**
@@ -90,7 +90,7 @@ public class OrderProductInfoDto {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "売価合計", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "売価合計", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
 }

@@ -19,14 +19,14 @@ public class ErrorInfoDto {
 	 * エラー内容
 	 */
 	@Size(max = 4000)
-	@Schema(description = "エラー内容", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "エラー内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String message;
 
 	/**
 	 * APIリクエスト
 	 */
 	@Size(max = 4000)
-	@Schema(description = "APIリクエスト", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "APIリクエスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String apiRequest;
 
 }

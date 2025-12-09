@@ -26,28 +26,28 @@ public class TmUpdateUserRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_user_request_work_seq")
 	@SequenceGenerator(name = "tm_update_user_request_work_seq", sequenceName = "tm_update_user_request_work_seq", allocationSize = 1)
-	@Schema(description = "ユーザーアカウント更新リクエストWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ユーザーアカウント更新リクエストWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String email;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "会社ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
 	 * ユーザーID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ユーザーID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userId;
 
 	/**
@@ -55,7 +55,7 @@ public class TmUpdateUserRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@Schema(description = "ユーザーアカウント更新レスポンスWORK", required = false)
+	@Schema(description = "ユーザーアカウント更新レスポンスWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmUpdateUserResponseWork responseWork;
 
 }

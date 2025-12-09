@@ -20,7 +20,7 @@ public class ContractAssignmentDto extends DtoBase {
 	/**
 	 * メモ
 	 */
-	@Schema(description = "メモ", required = false)
+	@Schema(description = "メモ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String memo;
 
@@ -29,7 +29,7 @@ public class ContractAssignmentDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractAssignment")
-	@Schema(description = "契約業務添付ファイル", required = false)
+	@Schema(description = "契約業務添付ファイル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAssignmentAttachedFileDto> contractAssignmentAttachedFileList;
 
 	/**
@@ -37,6 +37,6 @@ public class ContractAssignmentDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "更新フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer updateFlg;
 }

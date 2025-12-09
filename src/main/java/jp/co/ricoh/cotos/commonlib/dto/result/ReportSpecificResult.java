@@ -15,7 +15,7 @@ public class ReportSpecificResult {
 	/**
 	 * テンプレートID
 	 */
-	@Schema(description = "テンプレートID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "テンプレートID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -34,6 +34,6 @@ public class ReportSpecificResult {
 	 * ページIDリスト
 	 */
 	@NotEmpty
-	@Schema(description = "ページIDリスト", required = true, allowableValues = "range[255]")
+	@Schema(description = "ページIDリスト", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[255]")
 	private List<Long> pageIdList;
 }

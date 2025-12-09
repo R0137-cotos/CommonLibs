@@ -91,47 +91,47 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "file_operation_relation_product_master_id", referencedColumnName = "id")
-	@Schema(description = "ファイル操作関連商品マスタ", required = false)
+	@Schema(description = "ファイル操作関連商品マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private FileOperationRelationProductMaster fileOperationRelationProductMaster;
 
 	/**
 	 * ファイル種別名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル種別名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種別名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKindName;
 
 	/**
 	 * 入出力区分
 	 */
-	@Schema(description = "入出力区分", required = false, allowableValues = "取込(\"1\"), 出力(\"2\")")
+	@Schema(description = "入出力区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "取込(\"1\"), 出力(\"2\")")
 	private ImportExportType importExportType;
 
 	/**
 	 * 出力条件区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "出力条件区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "出力条件区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String exportConditionsType;
 
 	/**
 	 * エラー処理区分
 	 */
-	@Schema(description = "エラー処理区分", required = false, allowableValues = "全件(\"1\"), 個別(\"2\")")
+	@Schema(description = "エラー処理区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "全件(\"1\"), 個別(\"2\")")
 	private ErrorProcessingType errorProcessingType;
 
 	/**
 	 * ファイル種別タイプ区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル種別タイプ区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種別タイプ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKindTypeDiv;
 
 	/**
 	 * 出力ファイル名
 	 */
 	@Size(max = 255)
-	@Schema(description = "出力ファイル名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "出力ファイル名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String outputFileName;
 
 	/**
@@ -139,13 +139,13 @@ public class FileKindManagementMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "csv_file_setting_master_id", referencedColumnName = "id")
-	@Schema(description = "CSVファイル設定マスタ", required = false)
+	@Schema(description = "CSVファイル設定マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private CsvFileSettingMaster csvFileSettingMaster;
 
 	/**
 	 * 取込ファイルタイプ
 	 */
 	@Size(max = 255)
-	@Schema(description = "取込ファイルタイプ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "取込ファイルタイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String inputFileType;
 }

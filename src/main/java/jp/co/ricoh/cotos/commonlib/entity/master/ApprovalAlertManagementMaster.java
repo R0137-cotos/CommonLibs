@@ -86,24 +86,24 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	/**
 	 * アラート対象日区分
 	 */
-	@Schema(description = "アラート対象日区分", required = true, allowableValues = "サービス利用希望日(\"1\"), 解約予定日(\"2\")")
+	@Schema(description = "アラート対象日区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "サービス利用希望日(\"1\"), 解約予定日(\"2\")")
 	private AlertTargetDateType alertTargetDateType;
 
 	/**
 	 * アラート基準日
 	 */
-	@Schema(description = "アラート基準日", required = true, allowableValues = "range[0,99]")
+	@Schema(description = "アラート基準日", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]")
 	private int alertBaseDate;
 
 	/**
 	 * アラートメッセージ
 	 */
-	@Schema(description = "アラートメッセージ", required = true)
+	@Schema(description = "アラートメッセージ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String alertMessage;
 
 	/**
 	 * アラート基準日区分
 	 */
-	@Schema(description = "アラート基準日区分", required = true, allowableValues = "当月(\"0\"), 前月(\"1\")")
+	@Schema(description = "アラート基準日区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "当月(\"0\"), 前月(\"1\")")
 	private AlertBaseDateType alertBaseDateType;
 }

@@ -42,14 +42,14 @@ public class SpecificSectionMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "商材固有セクション名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有セクション名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String specificSectionName;
 
 	/**
 	 * 商材固有セクション区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "商材固有セクション区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有セクション区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificSectionDiv;
 
 	/**
@@ -57,7 +57,7 @@ public class SpecificSectionMaster extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "specificSectionMaster")
 	@JsonIgnore
-	@Schema(description = "商材固有項目マスタ", required = true)
+	@Schema(description = "商材固有項目マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<SpecificControlMaster> specificControlMaster;
 
 }

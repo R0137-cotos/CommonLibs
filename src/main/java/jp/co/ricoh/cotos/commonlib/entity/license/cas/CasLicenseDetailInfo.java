@@ -36,40 +36,40 @@ public class CasLicenseDetailInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cas_license_detail_info_seq")
 	@SequenceGenerator(name = "cas_license_detail_info_seq", sequenceName = "cas_license_detail_info_seq", allocationSize = 1)
-	@Schema(description = "CASライセンス明細情報", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "CASライセンス明細情報", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブスクリプションID", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String subscriptionId;
 
 	/**
 	 * サービスプランID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービスプランID", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "サービスプランID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String servicePlanId;
 
 	/**
 	 * ライセンス状態
 	 */
-	@Schema(description = "ライセンス状態", required = false, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
+	@Schema(description = "ライセンス状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
 	private CasLicenseStatus licenseStatus;
 
 	/**
 	 * ライセンス開始日
 	 */
-	@Schema(description = "ライセンス開始日", required = false)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
-	@Schema(description = "ライセンス終了日", required = false)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date licenseTermEnd;
 
@@ -78,7 +78,7 @@ public class CasLicenseDetailInfo extends EntityBase {
 	 */
 	@Min(0)
 	@Max(99999)
-	@Schema(description = "数量", required = true, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
@@ -87,7 +87,7 @@ public class CasLicenseDetailInfo extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "cas_license_basic_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "CASライセンス基本情報", required = true)
+	@Schema(description = "CASライセンス基本情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private CasLicenseBasicInfo casLicenseBasicInfo;
 
 }

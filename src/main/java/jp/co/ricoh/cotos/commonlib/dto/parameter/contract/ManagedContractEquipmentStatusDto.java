@@ -16,7 +16,7 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 * 契約機種ID
 	 */
 	@Min(0)
-	@Schema(description = "契約機種ID", required = true)
+	@Schema(description = "契約機種ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long contractEquipmentId;
 
 	/**
@@ -24,7 +24,7 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "継続フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "継続フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer continueFlg;
 
 	/**
@@ -32,7 +32,7 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "再契約不可フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "再契約不可フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer reContractNotAllowedFlg;
 
 	/**
@@ -40,7 +40,7 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "削除フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
@@ -48,13 +48,13 @@ public class ManagedContractEquipmentStatusDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "契約年数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "契約年数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer contractYears;
 
 	/**
 	 * 機器削除契約ID
 	 */
 	@Min(0)
-	@Schema(description = "機器削除契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "機器削除契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long equipmentDeletedContractId;
 }

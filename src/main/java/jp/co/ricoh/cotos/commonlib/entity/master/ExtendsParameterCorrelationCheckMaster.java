@@ -68,14 +68,14 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 		 * 商品マスタID
 		 */
 		@Column(name = "product_master_id", nullable = false)
-		@Schema(description = "商品マスタID", required = true)
+		@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 		private long productMasterId;
 
 		/**
 		 * ドメイン
 		 */
 		@Column(name = "domain", nullable = false)
-		@Schema(description = "システムドメイン", required = true)
+		@Schema(description = "システムドメイン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private Domain domain;
 	}
 
@@ -92,7 +92,7 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 	 * 相関チェック条件式
 	 */
 	@Column(nullable = false)
-	@Schema(description = "相関チェック条件式", required = true)
+	@Schema(description = "相関チェック条件式", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Lob
 	private String correlationCheckConditionFormula;
 }

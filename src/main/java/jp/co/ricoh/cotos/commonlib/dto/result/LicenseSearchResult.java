@@ -29,49 +29,49 @@ public class LicenseSearchResult {
 	 * ライセンス情報ID
 	 */
 	@Id
-	@Schema(description = "ライセンス情報ID", required = true)
+	@Schema(description = "ライセンス情報ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long licenseInfoId;
 
 	/**
 	 * 契約番号
 	 */
-	@Schema(description = "契約番号", required = false)
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contractNumber;
 
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = false)
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String rjManageNumber;
 
 	/**
 	 * 工程ステータス
 	 */
-	@Schema(description = "工程ステータス", required = true)
+	@Schema(description = "工程ステータス", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String processStatus;
 
 	/**
 	 * オーガニゼーションID
 	 */
-	@Schema(description = "オーガニゼーションID", required = false)
+	@Schema(description = "オーガニゼーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String organizationId;
 
 	/**
 	 * ライセンスキー
 	 */
-	@Schema(description = "ライセンスキー", required = false)
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseKey;
 
 	/**
 	 * アカウント
 	 */
-	@Schema(description = "アカウント", required = false)
+	@Schema(description = "アカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String account;
 
 	/**
 	 * 工程実施日時
 	 */
-	@Schema(description = "工程実施日時", required = false)
+	@Schema(description = "工程実施日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date processOperatedDateTime;
 
 	/**
@@ -109,217 +109,217 @@ public class LicenseSearchResult {
 	/**
 	 * キャンセル状態
 	 */
-	@Schema(description = "キャンセル状態", required = false, allowableValues = "未(\"0\"), 済(\"1\")")
+	@Schema(description = "キャンセル状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 済(\"1\")")
 	private CancelStatus cancelStatus;
 
 	/**
 	 * 受付状況フラグ
 	 */
-	@Schema(description = "受付状況フラグ", required = false, allowableValues = "未(\"0\"), 受理(\"1\"), 未受理(\"2\")")
+	@Schema(description = "受付状況フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 受理(\"1\"), 未受理(\"2\")")
 	private ReceptionStatusFlg receptionStatusFlg;
 
 	/**
 	 * 不受理理由
 	 */
-	@Schema(description = "不受理理由", required = false)
+	@Schema(description = "不受理理由", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String notAcceptReason;
 
 	/**
 	 * 割当区分
 	 */
-	@Schema(description = "割当区分", required = false, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"2\")")
+	@Schema(description = "割当区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"2\")")
 	private AllocationDiv allocationDiv;
 
 	/**
 	 * 顧客名
 	 */
-	@Schema(description = "顧客名", required = false)
+	@Schema(description = "顧客名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerName;
 
 	/**
 	 * 企業担当者
 	 */
-	@Schema(description = "企業担当者", required = false)
+	@Schema(description = "企業担当者", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseAccountPicName;
 
 	/**
 	 * お客様メールアドレス
 	 */
-	@Schema(description = "お客様メールアドレス", required = false)
+	@Schema(description = "お客様メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseInfoMailAddress;
 
 	/**
 	 * 都道府県
 	 */
-	@Schema(description = "都道府県", required = false)
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseAccountPrefectures;
 
 	/**
 	 * 市町区村
 	 */
-	@Schema(description = "市町区村", required = false)
+	@Schema(description = "市町区村", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseAccountMunicipality;
 
 	/**
 	 * ライセンス数
 	 */
-	@Schema(description = "ライセンス数", required = false)
+	@Schema(description = "ライセンス数", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseDetailChangeQuantity;
 
 	/**
 	 * サービス利用希望日
 	 */
-	@Schema(description = "サービス利用希望日", required = false)
+	@Schema(description = "サービス利用希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * 利用申込日
 	 */
-	@Schema(description = "CSV出力日時", required = false)
+	@Schema(description = "CSV出力日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date csvOutputAt;
 
 	/**
 	 * 商品区分
 	 */
-	@Schema(description = "商品区分", required = false)
+	@Schema(description = "商品区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String productType;
 
 	/**
 	 * サービス種別
 	 */
-	@Schema(description = "サービス種別", required = false)
+	@Schema(description = "サービス種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String serviceType;
 
 	/**
 	 * 受付担当SS組織
 	 */
-	@Schema(description = "受付担当SS組織", required = false)
+	@Schema(description = "受付担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String picAccSsName;
 
 	/**
 	 * 受付担当CE氏名
 	 */
-	@Schema(description = "受付担当CE氏名", required = false)
+	@Schema(description = "受付担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String picAccCeName;
 
 	/**
 	 * 設置先企業名
 	 */
-	@Schema(description = "設置先企業名", required = false)
+	@Schema(description = "設置先企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String instrallationLocationCompanyName;
 
 	/**
 	 * 設置先住所
 	 */
-	@Schema(description = "設置先住所", required = false)
+	@Schema(description = "設置先住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String instrallationLocationAddress;
 
 	/**
 	 * 設置先担当者名
 	 */
-	@Schema(description = "設置先担当者名", required = false)
+	@Schema(description = "設置先担当者名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String instrallationLocationPicName;
 
 	/**
 	 * 設置先担当者電話番号
 	 */
-	@Schema(description = "設置先担当者電話番号", required = false)
+	@Schema(description = "設置先担当者電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String instrallationLocationPicPhoneNumber;
 
 	/**
 	 * VPN
 	 */
-	@Schema(description = "VPN", required = false)
+	@Schema(description = "VPN", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vpn;
 
 	/**
 	 * POナンバー
 	 */
-	@Schema(description = "POナンバー", required = false)
+	@Schema(description = "POナンバー", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String poNumber;
 
 	/**
 	 * サービス開始日
 	 */
-	@Schema(description = "サービス開始日", required = false)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@Schema(description = "サービス終了日", required = false)
+	@Schema(description = "サービス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date serviceTermEnd;
 
 	/**
 	 * CE連絡日時
 	 */
-	@Schema(description = "CE連絡日時", required = false)
+	@Schema(description = "CE連絡日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ceContactAt;
 
 	/**
 	 * 解約予定日
 	 */
-	@Schema(description = "解約予定日", required = false)
+	@Schema(description = "解約予定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date cancelScheduledDate;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = true)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long contractId;
 
 	/**
 	 * メール送信日
 	 */
-	@Schema(description = "メール送信日", required = false)
+	@Schema(description = "メール送信日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date mailSendAt;
 
 	/**
 	 * 送信結果区分
 	 */
-	@Schema(description = "送信結果区分", required = false)
+	@Schema(description = "送信結果区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String mailSendResultDiv;
 
 	/**
 	 * 業務受理日時
 	 */
-	@Schema(description = "業務受理日時", required = false)
+	@Schema(description = "業務受理日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date businessAcceptanceDateTime;
 
 	/**
 	 * MerakiスマートサービスオーガニゼーションID
 	 */
-	@Schema(description = "MerakiスマートサービスオーガニゼーションID", required = false)
+	@Schema(description = "MerakiスマートサービスオーガニゼーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String mssLinkageOrganizationId;
 
 	/**
 	 * 解約フラグ
 	 */
-	@Schema(description = "解約フラグ", required = false)
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer disengagementFlg;
 
 	/**
 	 * 企業名
 	 */
-	@Schema(description = "企業名", required = false)
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseAccountCompanyName;
 
 	/**
 	 * 導入代行
 	 */
-	@Schema(description = "導入代行", required = false, allowableValues = "導入代行なし(\"1\"), リモート導入(\"2\"), オンサイト導入(\"3\")")
+	@Schema(description = "導入代行", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "導入代行なし(\"1\"), リモート導入(\"2\"), オンサイト導入(\"3\")")
 	private IntActingDiv intActingDiv;
 
 	/**
 	 * 情報区分
 	 */
-	@Schema(description = "情報区分", required = false, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\"), 乗換え減数(\"8\"), 支払周期変更(\"9\")")
+	@Schema(description = "情報区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規(\"1\"), 減数(\"2\"), 増数(\"3\"), 情報変更(\"4\"), 解約(\"5\"), 乗換(\"6\"), 乗換え増数(\"7\"), 乗換え減数(\"8\"), 支払周期変更(\"9\")")
 	private InfoDiv infoDiv;
 
 	/**
 	 * FFM発注問合せ番号
 	 */
-	@Schema(description = "FFM発注問合せ番号", required = false)
+	@Schema(description = "FFM発注問合せ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactNo;
 
 	/**
@@ -331,42 +331,42 @@ public class LicenseSearchResult {
 	/**
 	 * 設置先担当者部署
 	 */
-	@Schema(description = "設置先担当者部署", required = false)
+	@Schema(description = "設置先担当者部署", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String instrallationLocationPicDeptName;
 
 	/**
 	 * Microsoftアカウント
 	 */
-	@Schema(description = "Microsoftアカウント", required = false)
+	@Schema(description = "Microsoftアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String userId;
 
 	/**
 	 * オンサイト
 	 */
-	@Schema(description = "オンサイト", required = false)
+	@Schema(description = "オンサイト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String onsiteFlg;
 
 	/**
 	 * ユーザー登録
 	 */
-	@Schema(description = "ユーザー登録", required = false)
+	@Schema(description = "ユーザー登録", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String userRegisterFlg;
 
 	/**
 	 * 訪販/WEB
 	 */
-	@Schema(description = "訪販/WEB", required = false)
+	@Schema(description = "訪販/WEB", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private OrderDiv orderDiv;
 
 	/**
 	 * ベンダー区分
 	 */
-	@Schema(description = "ベンダー区分", required = false)
+	@Schema(description = "ベンダー区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorDiv;
 
 	/**
 	 * サービスプラン名
 	 */
-	@Schema(description = "サービスプラン名", required = false)
+	@Schema(description = "サービスプラン名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String licenseServiceName;
 }

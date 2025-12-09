@@ -24,9 +24,9 @@ public class PublicHolidayMaster extends EntityBaseMaster {
 
 	@Id
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "祝日日付", required = true)
+	@Schema(description = "祝日日付", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Date holidayDate;
 
-	@Schema(description = "祝日名称", required = false)
+	@Schema(description = "祝日名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String holidayName;
 }

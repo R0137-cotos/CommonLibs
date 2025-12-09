@@ -41,7 +41,7 @@ public class EstimationPicSaEmp extends EmployeeAbstractEntity {
 	@OneToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "見積", required = true)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Estimation estimation;
 
 	/**
@@ -49,7 +49,7 @@ public class EstimationPicSaEmp extends EmployeeAbstractEntity {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "MoM企事部システム連携ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企事部システム連携ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momKjbSystemId;
 
 	/**
@@ -57,7 +57,7 @@ public class EstimationPicSaEmp extends EmployeeAbstractEntity {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "MoM企事部ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
@@ -65,7 +65,7 @@ public class EstimationPicSaEmp extends EmployeeAbstractEntity {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "販売会社名（カナ）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "販売会社名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String salesCompanyNameKana;
 
 	/**
@@ -73,7 +73,7 @@ public class EstimationPicSaEmp extends EmployeeAbstractEntity {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_企業代表者名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_企業代表者名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyRepresentativeName;
 
 	/**
@@ -81,7 +81,7 @@ public class EstimationPicSaEmp extends EmployeeAbstractEntity {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_企業代表者名（カナ）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_企業代表者名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyRepresentativeNameKana;
 
 }

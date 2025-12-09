@@ -13,31 +13,31 @@ public class RsiFindCustomerResult {
 	/**
 	 * ID
 	 */
-	@Schema(description = "ID", required = false)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String id;
 
 	/**
 	 * テナントID
 	 */
-	@Schema(description = "テナントID", required = false)
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String tenantId;
 
 	/**
 	 * 企業名
 	 */
-	@Schema(description = "企業名", required = false)
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerCompanyName;
 
 	/**
 	 * お客様管理者名
 	 */
-	@Schema(description = "お客様管理者名", required = false)
+	@Schema(description = "お客様管理者名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerAdminName;
 
 	/**
 	 * メールアドレス
 	 */
-	@Schema(description = "お客様管理者メールアドレス", required = false)
+	@Schema(description = "お客様管理者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerAdminMailAddress;
 
 }

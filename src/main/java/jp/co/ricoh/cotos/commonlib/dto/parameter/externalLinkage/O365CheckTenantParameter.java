@@ -12,13 +12,13 @@ public class O365CheckTenantParameter {
 	/**
 	 * 見積番号
 	 */
-	@Schema(description = "見積番号", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
 	 * 企事部ID
 	 */
-	@Schema(description = "企事部ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "企事部ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
@@ -30,12 +30,12 @@ public class O365CheckTenantParameter {
 	/**
 	 * ドメイン名
 	 */
-	@Schema(description = "ドメイン名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String domainName;
 
 	/**
 	 * プライマリドメイン名
 	 */
-	@Schema(description = "プライマリドメイン名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "プライマリドメイン名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String primaryDomainName;
 }

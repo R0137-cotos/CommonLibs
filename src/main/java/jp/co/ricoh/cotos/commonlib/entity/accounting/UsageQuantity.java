@@ -63,19 +63,19 @@ public class UsageQuantity extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usage_quantity_seq")
 	@SequenceGenerator(name = "usage_quantity_seq", sequenceName = "usage_quantity_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 処理状態
 	 */
-	@Schema(description = "処理状態", required = false, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0")
+	@Schema(description = "処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0")
 	private OsoProcessingStatus processingStatus;
 
 	/**
 	 * 処理日時
 	 */
-	@Schema(description = "処理日時", required = false)
+	@Schema(description = "処理日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date processingAt;
 
@@ -84,7 +84,7 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@Column(name = "message")
 	@Size(max = 4000)
-	@Schema(description = "メッセージ", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String osoMessage;
 
 	/**
@@ -92,21 +92,21 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約ID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long contractId;
 
 	/**
 	 * 契約明細ID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "契約明細ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約明細ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long contractDetailId;
 
 	/**
@@ -114,20 +114,20 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemCode;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@Schema(description = "品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * 使用年月
 	 */
-	@Schema(description = "使用年月", required = false)
+	@Schema(description = "使用年月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date usageDate;
 
@@ -136,13 +136,13 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "超過使用量", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "超過使用量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer overuseQuantity;
 
 	/**
 	 * 通知メール送信状態
 	 */
-	@Schema(description = "通知メール送信状態", required = false, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0")
+	@Schema(description = "通知メール送信状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 処理済(\"1\"), 処理対象外(\"9\"), 処理エラー(\"E\")", example = "0")
 	private NotificationMailSendStatus notificationMailSendStatus;
 
 	/**
@@ -150,6 +150,6 @@ public class UsageQuantity extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "OSO連携可能フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "OSO連携可能フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer osoLinkableFlg;
 }

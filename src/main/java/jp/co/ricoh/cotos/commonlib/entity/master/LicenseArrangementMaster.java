@@ -38,20 +38,20 @@ public class LicenseArrangementMaster extends EntityBase {
 	 * ライセンス区分マスタID
 	 */
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
 	 * 契約種別
 	 */
-	@Schema(description = "契約種別", required = false, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
 	 * 契約種別詳細
 	 */
 	@Size(max = 255)
-	@Schema(description = "契約種別詳細", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約種別詳細", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
@@ -59,14 +59,14 @@ public class LicenseArrangementMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "解約フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private int disengagementFlg;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Min(0)
-	@Schema(description = "手配業務タイプマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**
@@ -74,6 +74,6 @@ public class LicenseArrangementMaster extends EntityBase {
 	 */
 	@Min(0)
 	@Max(999)
-	@Schema(description = "優先順位", required = false, allowableValues = "range[0,999]")
+	@Schema(description = "優先順位", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,999]")
 	private Long priorityOrder;
 }

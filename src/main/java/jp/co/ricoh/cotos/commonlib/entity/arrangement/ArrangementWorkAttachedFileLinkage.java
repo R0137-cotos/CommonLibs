@@ -34,7 +34,7 @@ public class ArrangementWorkAttachedFileLinkage extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_attached_file_linkage_seq")
 	@SequenceGenerator(name = "arrangement_work_attached_file_linkage_seq", sequenceName = "arrangement_work_attached_file_linkage_seq", allocationSize = 1)
-	@Schema(description = "手配業務添付ファイル連携先ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "手配業務添付ファイル連携先ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -43,13 +43,13 @@ public class ArrangementWorkAttachedFileLinkage extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_attached_file_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "手配業務添付ファイルID", required = true)
+	@Schema(description = "手配業務添付ファイルID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWorkAttachedFile arrangementWorkAttachedFile;
 
 	/**
 	 * ファイル連携先ID
 	 */
-	@Schema(description = "ファイル連携先ID", required = true)
+	@Schema(description = "ファイル連携先ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long attachedFileLinkageId;
 
 	/**
@@ -57,13 +57,13 @@ public class ArrangementWorkAttachedFileLinkage extends EntityBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "ファイル連携先", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル連携先", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String attachedFileLinkageName;
 
 	/**
 	 * 連携ステータス
 	 */
 	@NotNull
-	@Schema(description = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0")
+	@Schema(description = "連携ステータス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0")
 	private FileLinkageStatus linkageStatus;
 }

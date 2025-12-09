@@ -15,7 +15,7 @@ public class ApplicationHistoryResult {
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
@@ -27,6 +27,6 @@ public class ApplicationHistoryResult {
 	/**
 	 * 申込明細情報
 	 */
-	@Schema(description = "申込明細情報", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "申込明細情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private List<ApplicationHistoryDto> applicationHistory;
 }

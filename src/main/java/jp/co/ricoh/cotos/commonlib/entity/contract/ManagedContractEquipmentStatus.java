@@ -46,7 +46,7 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
@@ -54,7 +54,7 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_equipment_id", referencedColumnName = "id")
-	@Schema(description = "契約機種", required = true)
+	@Schema(description = "契約機種", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractEquipment contractEquipment;
 
 	/**
@@ -62,7 +62,7 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "継続フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "継続フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer continueFlg;
 
 	/**
@@ -70,7 +70,7 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "再契約不可フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "再契約不可フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer reContractNotAllowedFlg;
 
 	/**
@@ -78,7 +78,7 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "削除フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
@@ -86,12 +86,12 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "契約年数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "契約年数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer contractYears;
 
 	@Valid
 	@OneToMany(mappedBy = "managedContractEquipmentStatus")
-	@Schema(description = "契約機種品種紐づけシーケンス", required = false)
+	@Schema(description = "契約機種品種紐づけシーケンス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
 
 	/**
@@ -99,6 +99,6 @@ public class ManagedContractEquipmentStatus extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "機器削除契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "機器削除契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long equipmentDeletedContractId;
 }

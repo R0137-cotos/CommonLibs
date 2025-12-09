@@ -25,34 +25,34 @@ public class ItemDetailContractDto extends DtoBase {
 	@Digits(integer = 19, fraction = 2)
 	@DecimalMin("-9999999999999999999.99")
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "原価", required = false, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
+	@Schema(description = "原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 振替先課所コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "振替先課所コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transToServiceOrgCode;
 
 	/**
 	 * 振替先課所名
 	 */
 	@Size(max = 255)
-	@Schema(description = "振替先課所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transToServiceOrgName;
 
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@Schema(description = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")")
+	@Schema(description = "イニシャル/ランニング区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")")
 	private InitialRunningDiv initialRunningDiv;
 
 	/**
 	 * 品種振替構成マスタID
 	 */
 	@Min(0)
-	@Schema(description = "品種振替構成マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種振替構成マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long itemTransCompMasterId;
 
 	/**
@@ -60,7 +60,7 @@ public class ItemDetailContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "一括登録フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "一括登録フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer batchImportFlg;
 
 	/**
@@ -68,6 +68,6 @@ public class ItemDetailContractDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 }

@@ -30,7 +30,7 @@ public class AttachedFile extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attached_file_seq")
 	@SequenceGenerator(name = "attached_file_seq", sequenceName = "attached_file_seq", allocationSize = 1)
-	@Schema(description = "添付ファイルID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "添付ファイルID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -39,14 +39,14 @@ public class AttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "物理ファイル名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "物理ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String filePhysicsName;
 
 	/**
 	 * ファイルサイズ
 	 */
 	@Column(nullable = false)
-	@Schema(description = "ファイルサイズ", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ファイルサイズ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long fileSize;
 
 	/**
@@ -55,7 +55,7 @@ public class AttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "コンテンツタイプ", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "コンテンツタイプ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contentType;
 
 	/**
@@ -64,18 +64,18 @@ public class AttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 1000)
-	@Schema(description = "サーバーパス", required = true, allowableValues = "range[0,1000]")
+	@Schema(description = "サーバーパス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1000]")
 	private String savedPath;
 
 	/**
 	 * EIM連携済状態
 	 */
-	@Schema(description = "EIM連携済状態", required = false, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
+	@Schema(description = "EIM連携済状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"0\"), 連携済(\"1\"),対象外 (\"9\")")
 	private EimLinkedStatus eimLinkedStatus;
 
 	/**
 	 * EIMファイルID
 	 */
-	@Schema(description = "EIMファイルID", required = false)
+	@Schema(description = "EIMファイルID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String eimFileId;
 }

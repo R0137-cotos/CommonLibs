@@ -14,12 +14,12 @@ public class ApprovalSearchResult {
 	/**
 	 * 条件式判定結果
 	 */
-	@Schema(description = "条件式判定結果", required = true)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaResult routeFormulaResult;
 
 	/**
 	 * 見積承認ルート
 	 */
-	@Schema(description = "見積承認ルート情報", required = true)
+	@Schema(description = "見積承認ルート情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private EstimationApprovalRoute estimationApprovalRoute;
 }

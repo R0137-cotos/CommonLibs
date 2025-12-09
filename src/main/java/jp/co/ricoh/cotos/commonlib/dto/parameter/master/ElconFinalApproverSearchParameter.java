@@ -19,21 +19,21 @@ public class ElconFinalApproverSearchParameter extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "企業ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "企業ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
 	 * 事業所名
 	 */
 	@Size(max = 255)
-	@Schema(description = "事業所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String likeSearchOfficeName;
 
 	/**
 	 * 氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String likeSearchApprovalName;
 
 }

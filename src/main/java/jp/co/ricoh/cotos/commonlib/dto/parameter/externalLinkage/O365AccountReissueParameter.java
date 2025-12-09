@@ -12,6 +12,6 @@ public class O365AccountReissueParameter {
 	/**
 	 * メールアドレス
 	 */
-	@Schema(description = "メールアドレス", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 }

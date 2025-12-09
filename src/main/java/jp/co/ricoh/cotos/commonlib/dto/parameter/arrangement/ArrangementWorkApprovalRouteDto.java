@@ -20,27 +20,27 @@ public class ArrangementWorkApprovalRouteDto extends DtoBase {
 	 * 承認依頼者MoM社員ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認依頼者MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterEmpId;
 
 	/**
 	 * 承認依頼者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認依頼者氏名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterName;
 
 	/**
 	 * 承認依頼者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認依頼者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterOrgName;
 
 	/**
 	 * 承認ルートマスタID
 	 */
-	@Schema(description = "承認ルートマスタID", required = false)
+	@Schema(description = "承認ルートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long approvalRouteMasterId;
 
 	/**
@@ -49,6 +49,6 @@ public class ArrangementWorkApprovalRouteDto extends DtoBase {
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "arrangementWorkApprovalRoute")
-	@Schema(description = "手配業務承認ルートノード", required = true)
+	@Schema(description = "手配業務承認ルートノード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ArrangementWorkApprovalRouteNodeDto> arrangementWorkApprovalRouteNodeList;
 }

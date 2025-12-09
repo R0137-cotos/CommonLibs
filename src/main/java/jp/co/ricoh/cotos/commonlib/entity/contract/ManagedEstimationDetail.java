@@ -44,7 +44,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Contract contract;
 
@@ -53,7 +53,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "状態", required = true, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus state;
 
 	/**
@@ -61,7 +61,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "変更前数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "変更前数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
@@ -70,7 +70,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = true, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -79,7 +79,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "見積単価", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "見積単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal estimationUnitPrice;
 
 	/**
@@ -88,21 +88,21 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "見積金額", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "見積金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal estimationAmountSummary;
 
 	/**
 	 * 摘要
 	 */
 	@Size(max = 255)
-	@Schema(description = "摘要", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "摘要", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String detailAbstract;
 
 	/**
 	 * 拡張項目
 	 */
 	@Lob
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String extendsParameter;
 
 	/**
@@ -110,7 +110,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -119,7 +119,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -127,7 +127,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
@@ -135,12 +135,12 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = true)
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "変更前単価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "変更前単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal beforeUnitPrice;
 
 	/**
 	 * 増減区分
 	 */
-	@Schema(description = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
+	@Schema(description = "増減区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

@@ -73,14 +73,14 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "商材固有項目名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有項目名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String specificControlName;
 
 	/**
 	 * 商材固有項目区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "商材固有項目区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有項目区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificControlDiv;
 
 	/**
@@ -88,7 +88,7 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "specific_item_group_master_id", referencedColumnName = "id")
-	@Schema(description = "商材固有品種グループマスタID", required = false)
+	@Schema(description = "商材固有品種グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SpecificItemGroupMaster specificItemGroupMaster;
 
 	/**
@@ -96,7 +96,7 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "specific_section_master_id", referencedColumnName = "id")
-	@Schema(description = "商材固有セクションマスタID", required = false)
+	@Schema(description = "商材固有セクションマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SpecificSectionMaster specificSectionMaster;
 
 	/**
@@ -104,13 +104,13 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "情報変更不可フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "情報変更不可フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer infoChangeNotAllowedFlg;
 
 	/**
 	 * 対象契約種別
 	 */
-	@Schema(description = "対象契約種別", required = false)
+	@Schema(description = "対象契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TargetContractType targetContractType;
 
 	/**
@@ -118,19 +118,19 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "活性フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "活性フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer enableFlg;
 
 	/**
 	 * 項目値区分
 	 */
-	@Schema(description = "項目値区分", required = false)
+	@Schema(description = "項目値区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemValueDiv itemValueDiv;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -139,6 +139,6 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "解約用商材固有項目追加フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "解約用商材固有項目追加フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer specificControlAddFlgCancel;
 }

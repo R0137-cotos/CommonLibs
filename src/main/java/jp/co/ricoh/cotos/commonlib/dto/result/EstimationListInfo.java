@@ -26,16 +26,16 @@ import lombok.Data;
 public class EstimationListInfo {
 
 	@Id
-	@Schema(description = "連番", required = true)
+	@Schema(description = "連番", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long seqNo;
 
-	@Schema(description = "見積ID", required = true)
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
 	 * 見積番号
 	 */
-	@Schema(description = "見積番号", required = true, allowableValues = "range[0,18]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,18]")
 	private String estimateNumber;
 
 	/**
@@ -49,7 +49,7 @@ public class EstimationListInfo {
 	/**
 	 * 見積件名
 	 */
-	@Schema(description = "見積件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "見積件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationTitle;
 
 	/**
@@ -71,148 +71,148 @@ public class EstimationListInfo {
 	/**
 	 * 案件番号
 	 */
-	@Schema(description = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseNumber;
 
 	/**
 	 * 事業所名
 	 */
-	@Schema(description = "事業所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String officeName;
 
 	/**
 	 * 企業名
 	 */
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
 	 * 部門名
 	 */
-	@Schema(description = "部門名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "部門名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String departmentName;
 
 	/**
 	 * 担当営業
 	 */
-	@Schema(description = "担当営業", required = false, allowableValues = "range[0,8]")
+	@Schema(description = "担当営業", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,8]")
 	private String picEmptxName;
 
 	/**
 	 * 商品名
 	 */
-	@Schema(description = "商品名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * 最終依頼審査承認履歴処理名
 	 */
-	@Schema(description = "最終依頼審査承認履歴処理名", required = false, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
+	@Schema(description = "最終依頼審査承認履歴処理名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
 	private ApprovalProcessCategory lastApprovalProcess;
 
 	/**
 	 * 掲示日
 	 */
-	@Schema(description = "掲示日", required = false)
+	@Schema(description = "掲示日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date coverPresentationDate;
 
 	/**
 	 * 担当支社名
 	 */
-	@Schema(description = "担当支社名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当支社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAffiliateName;
 
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@Schema(description = "R恒久契約識別番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "R恒久契約識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * MoM企業ID
 	 */
-	@Schema(description = "MoM企業ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企業ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
 	 * MoM企事部ID
 	 */
-	@Schema(description = "MoM企事部ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
 	 * 商流区分
 	 */
-	@Schema(description = "商流区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商流区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String commercialFlowDiv;
 
 	/**
 	 * 支社コード
 	 */
-	@Schema(description = "支社コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "支社コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ringsHanshCd;
 
 	/**
 	 * CUBIC部門コード
 	 */
-	@Schema(description = "CUBIC部門コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "CUBIC部門コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cubicOrgId;
 
 	/**
 	 * 部署
 	 */
-	@Schema(description = "部署", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "部署", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String salesDepartmentName;
 
 	/**
 	 *  RINGS社員コード
 	 */
-	@Schema(description = "RINGS社員コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RINGS社員コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ringsEmpCd;
 
 	/**
 	 * 案件名
 	 */
-	@Schema(description = "案件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseTitle;
 
 	/**
 	 * V-UP見積番号
 	 */
-	@Schema(description = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	/**
 	 * 作成者
 	 */
-	@Schema(description = "作成者", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "作成者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String createdUser;
 
 	/**
 	 * 登録日時
 	 */
-	@Schema(description = "登録日時", required = false)
+	@Schema(description = "登録日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@Schema(description = "更新日時", required = false)
+	@Schema(description = "更新日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
 	/**
 	 * ベンダー管理番号
 	 */
-	@Schema(description = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	@PrePersist
@@ -223,6 +223,6 @@ public class EstimationListInfo {
 	/**
 	 * 電子契約連携状態
 	 */
-	@Schema(description = "電子契約連携状態", required = false, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1")
+	@Schema(description = "電子契約連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "しない(\"0\"), 未連携(\"1\"), 連携済み(\"2\")", example = "1")
 	private ElectronicContractLinkageStatus electronicContractLinkageStatus;
 }

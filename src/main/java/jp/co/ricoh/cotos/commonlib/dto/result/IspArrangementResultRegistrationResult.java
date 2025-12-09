@@ -14,7 +14,7 @@ public class IspArrangementResultRegistrationResult {
 	/**
 	 * エラー情報リスト
 	 */
-	@Schema(description = "エラー情報リスト", required = false)
+	@Schema(description = "エラー情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<IspErrorInfoResult> errorInfoList;
 
 }

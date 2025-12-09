@@ -36,7 +36,7 @@ public class ReportPageMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "report_page_master_seq")
 	@SequenceGenerator(name = "report_page_master_seq", sequenceName = "report_page_master_seq", allocationSize = 1)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9999999999999999999999999999]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999999999999]")
 	private long id;
 
 	/**
@@ -45,14 +45,14 @@ public class ReportPageMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "template_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "帳票テンプレート管理マスタ", required = true)
+	@Schema(description = "帳票テンプレート管理マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ReportTemplateMaster reportTemplateMaster;
 
 	/**
 	 * ページ名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ページ名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ページ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String pageName;
 
 	/**
@@ -60,20 +60,20 @@ public class ReportPageMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "常時出力フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "常時出力フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer alwaysOutputFlg;
 
 	/**
 	 * 状態
 	 */
-	@Schema(description = "状態", required = false, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")")
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")")
 	private DetailStatus status;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -81,14 +81,14 @@ public class ReportPageMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "ページ数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "ページ数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer pageNumber;
 
 	/**
 	 * 拡張項目
 	 * {@link jp.co.ricoh.cotos.commonlib.dto.json.master.ReportPageMasterExtendsParameterDto}
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -97,6 +97,6 @@ public class ReportPageMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "ジョブユニットID", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "ジョブユニットID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer jobUnitId;
 }

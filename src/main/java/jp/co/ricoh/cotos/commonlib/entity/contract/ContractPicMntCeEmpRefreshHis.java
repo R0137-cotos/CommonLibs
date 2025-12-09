@@ -43,20 +43,20 @@ public class ContractPicMntCeEmpRefreshHis extends EmployeeAbstractEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 洗替日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "洗替日時", required = false)
+	@Schema(description = "洗替日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@Schema(description = "更新元バッチID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "更新元バッチID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String updateBatchId;
 }

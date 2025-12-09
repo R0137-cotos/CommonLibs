@@ -118,75 +118,75 @@ public class ROpticalTransferManage extends EntityBase {
 	 * 見積ID
 	 */
 	@Min(0)
-	@Schema(description = "見積ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long estimationId;
 
 	/**
 	 * 工事調整EIM管理番号
 	 */
-	@Schema(description = "工事調整EIM管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "工事調整EIM管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String constructEimNumber;
 
 	/**
 	 * 注文種別
 	 */
-	@Schema(description = "注文種別", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "注文種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orderType;
 
 	/**
 	 * NTTお客様ID
 	 */
-	@Schema(description = "NTTお客様ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "NTTお客様ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nttCustomerId;
 
 	/**
 	 * アクセスキー
 	 */
-	@Schema(description = "アクセスキー", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アクセスキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String accessKey;
 
 	/**
 	 * 契約確定異動情報区分
 	 */
-	@Schema(description = "契約確定異動情報区分", required = false, allowableValues = "ひかり回線(\"1\"), ひかり電話(\"2\"), 両方(\"3\")", example = "1")
+	@Schema(description = "契約確定異動情報区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ひかり回線(\"1\"), ひかり電話(\"2\"), 両方(\"3\")", example = "1")
 	private OpticalConfirmTransferDiv confirmTransferDiv;
 
 	/**
 	 * ひかり回線異動情報取込状態
 	 */
-	@Schema(description = "契約確定異動情報区分", required = false, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1")
+	@Schema(description = "契約確定異動情報区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1")
 	private OpticalTransferStatus opticalLineTransferStatus;
 
 	/**
 	 * ひかり回線異動情報取込日
 	 */
-	@Schema(description = "ひかり回線異動情報取込日", required = false)
+	@Schema(description = "ひかり回線異動情報取込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date opticalLineTransferDate;
 
 	/**
 	 * ひかり電話異動情報取込状態
 	 */
-	@Schema(description = "ひかり電話異動情報取込状態", required = false, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1")
+	@Schema(description = "ひかり電話異動情報取込状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1")
 	private OpticalTransferStatus opticalPhoneTransferStatus;
 
 	/**
 	 * ひかり電話異動情報取込日
 	 */
-	@Schema(description = "ひかり電話異動情報取込日", required = false)
+	@Schema(description = "ひかり電話異動情報取込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date opticalPhoneTransferDate;
 
 	/**
 	 * 異動情報取込結果連携状態
 	 */
-	@Schema(description = "異動情報取込結果連携状態", required = false, allowableValues = "未処理(\"0\"), 連携継続(\"1\"), 連携済み(\"2\"), ファイル作成エラー(\"3\"), 連携対象外(\"4\")", example = "1")
+	@Schema(description = "異動情報取込結果連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 連携継続(\"1\"), 連携済み(\"2\"), ファイル作成エラー(\"3\"), 連携対象外(\"4\")", example = "1")
 	private OpticalTransferResultLinkageState transferResultLinkageState;
 
 	/**
 	 * 異動情報取込結果連携日
 	 */
-	@Schema(description = "異動情報取込結果連携日", required = false)
+	@Schema(description = "異動情報取込結果連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date transferResultLinkageDate;
 
@@ -195,7 +195,7 @@ public class ROpticalTransferManage extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "rOpticalTransferManage")
-	@Schema(description = "リコーひかり異動情報", required = false, readOnly = true)
+	@Schema(description = "リコーひかり異動情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = true)
 	private List<ROpticalTransfer> rOpticalTransferList;
 
 	/**
@@ -203,25 +203,25 @@ public class ROpticalTransferManage extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "解約フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
 	 * 工事調整完了番号
 	 */
-	@Schema(description = "工事調整完了番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "工事調整完了番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String constructAdjustmentNumber;
 
 	/**
 	 * リモートサポート異動情報取込状態
 	 */
-	@Schema(description = "リモートサポート異動情報取込状態", required = false, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1")
+	@Schema(description = "リモートサポート異動情報取込状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 取込済み(\"1\"), 取込エラー(\"2\"), 未確定(\"3\"), 取込対象外(\"4\")", example = "1")
 	private OpticalTransferStatus opticalRemoteTransferStatus;
 
 	/**
 	 * リモートサポート異動情報取込日
 	 */
-	@Schema(description = "リモートサポート異動情報取込日", required = false)
+	@Schema(description = "リモートサポート異動情報取込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date opticalRemoteTransferDate;
 }

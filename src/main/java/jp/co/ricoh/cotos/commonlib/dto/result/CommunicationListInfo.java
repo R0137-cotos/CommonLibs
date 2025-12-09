@@ -25,22 +25,22 @@ import lombok.Data;
 public class CommunicationListInfo {
 
 	@Id
-	@Schema(description = "連番", required = true)
+	@Schema(description = "連番", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long seqNo;
 
-	@Schema(description = "コミュニケーションID", required = true)
+	@Schema(description = "コミュニケーションID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@Schema(description = "サービスカテゴリ", required = true, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * 処理カテゴリー
 	 */
-	@Schema(description = "処理カテゴリー", required = true, allowableValues = "承認依頼(\"1\"), 承認依頼取消(\"2\"), 承認依頼差戻(\"3\"), 承認(\"4\"), 作業依頼(\"5\"), 作業完了(\"6\"), キャンセル手続き(\"7\"), キャンセル手続き中止(\"8\"), 解約手続き(\"9\"), 解約手続き中止(\"10\")", example = "1")
+	@Schema(description = "処理カテゴリー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼取消(\"2\"), 承認依頼差戻(\"3\"), 承認(\"4\"), 作業依頼(\"5\"), 作業完了(\"6\"), キャンセル手続き(\"7\"), キャンセル手続き中止(\"8\"), 解約手続き(\"9\"), 解約手続き中止(\"10\")", example = "1")
 	private ProcessCategory processCategory;
 
 	/**
@@ -55,7 +55,7 @@ public class CommunicationListInfo {
 	/**
 	 * ワークフロー種別
 	 */
-	@Schema(description = "ワークフロー種別", required = true, allowableValues = "承認フロー(\"1\"), タスクフロー(\"2\")", example = "1")
+	@Schema(description = "ワークフロー種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認フロー(\"1\"), タスクフロー(\"2\")", example = "1")
 	private WorkflowType workflowType;
 
 	/**
@@ -78,25 +78,25 @@ public class CommunicationListInfo {
 	/**
 	 * 依頼者
 	 */
-	@Schema(description = "依頼者", required = true, allowableValues = "range[0,255]") //
+	@Schema(description = "依頼者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]") //
 	private String requestOriginId;
 
 	/**
 	 * 伝達者
 	 */
-	@Schema(description = "伝達者", required = true, allowableValues = "range[0,255]") //
+	@Schema(description = "伝達者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]") //
 	private String requestFromId;
 
 	/**
 	 * 被伝達者
 	 */
-	@Schema(description = "被伝達者", required = true, allowableValues = "range[0,255]") //
+	@Schema(description = "被伝達者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]") //
 	private String requestToId;
 
 	/**
 	 * 被伝達者候補
 	 */
-	@Schema(description = "被伝達者候補", required = false, allowableValues = "range[0,255]") //
+	@Schema(description = "被伝達者候補", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]") //
 	private String requestToCandidateId;
 
 	/**
@@ -118,7 +118,7 @@ public class CommunicationListInfo {
 	/**
 	 * 顧客名
 	 */
-	@Schema(description = "顧客名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "顧客名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
@@ -139,68 +139,68 @@ public class CommunicationListInfo {
 	/**
 	 * コメント
 	 */
-	@Schema(description = "コメント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String communicationComment;
 
 	/**
 	 * 伝達日時
 	 */
-	@Schema(description = "伝達日時", required = true, readOnly = true)
+	@Schema(description = "伝達日時", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date communicatedAt;
 
 	/**
 	 * 商品グループマスタID
 	 */
-	@Schema(description = "商品グループマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long productGrpMasterId;
 
 	/**
 	 * 依頼者氏名
 	 */
-	@Schema(description = "依頼者氏名", required = false, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "依頼者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String requestOriginName;
 
 	/**
 	 * 伝達者
 	 */
-	@Schema(description = "伝達者", required = false, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "伝達者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String requestFromName;
 
 	/**
 	 * 被伝達者
 	 */
-	@Schema(description = "被伝達者", required = false, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "被伝達者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String requestToName;
 
 	/**
 	 * 被伝達者候補
 	 */
-	@Schema(description = "被伝達者候補", required = false, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "被伝達者候補", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String requestToCandidateName;
 
 	/**
 	 * アプリケーションID
 	 */
-	@Schema(description = "アプリケーションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	/**
 	 * 見積種別／契約種別
 	 */
-	@Schema(description = "見積種別／契約種別", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "見積種別／契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String type;
 
 	/**
 	 * 所属（承認依頼者）
 	 */
-	@Schema(description = "所属（承認依頼者）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "所属（承認依頼者）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orgName;
 
 	/**
 	 * 事業所名
 	 */
-	@Schema(description = "事業所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String officeName;
 
 	@PrePersist

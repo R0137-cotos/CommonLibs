@@ -17,14 +17,14 @@ public class OrderProductGroupInfoDto {
 	 * 商品グループコード
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品グループコード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "商品グループコード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String productGroupCd;
 
 	/**
 	 * 商品グループ名
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品グループ名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品グループ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productGroupName;
 
 }

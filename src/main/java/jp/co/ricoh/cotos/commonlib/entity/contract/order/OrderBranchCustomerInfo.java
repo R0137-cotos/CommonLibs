@@ -32,7 +32,7 @@ public class OrderBranchCustomerInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_branch_customer_info_seq")
 	@SequenceGenerator(name = "order_branch_customer_info_seq", sequenceName = "order_branch_customer_info_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -47,56 +47,56 @@ public class OrderBranchCustomerInfo extends EntityBase {
 	 * 支社コード
 	 */
 	@Column
-	@Schema(description = "支社コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "支社コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String branchCustomerCd;
 
 	/**
 	 * 支社名
 	 */
 	@Column
-	@Schema(description = "支社名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "支社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String branchCustomerName;
 
 	/**
 	 * 課所コード
 	 */
 	@Column
-	@Schema(description = "課所コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "課所コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String officeCd;
 
 	/**
 	 * 課所名
 	 */
 	@Column
-	@Schema(description = "課所名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String officeName;
 
 	/**
 	 * 営業コード
 	 */
 	@Column
-	@Schema(description = "営業コード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "営業コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String employeeCd;
 
 	/**
 	 * 営業名
 	 */
 	@Column
-	@Schema(description = "営業名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "営業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String employeeName;
 
 	/**
 	 * 担当営業電話番号
 	 */
 	@Column
-	@Schema(description = "担当営業電話番号", required = false, allowableValues = "range[0,]")
+	@Schema(description = "担当営業電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String employeePhoneNumber;
 
 	/**
 	 * 担当営業メールアドレス
 	 */
 	@Column
-	@Schema(description = "担当営業メールアドレス", required = false, allowableValues = "range[0,]")
+	@Schema(description = "担当営業メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String employeeMailAddress;
 
 }

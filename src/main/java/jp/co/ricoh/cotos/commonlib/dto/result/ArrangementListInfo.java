@@ -29,25 +29,25 @@ import lombok.Data;
 public class ArrangementListInfo {
 
 	@Id
-	@Schema(description = "連番", required = true)
+	@Schema(description = "連番", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long seqNo;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = true)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long contractId;
 
 	/**
 	 * 手配ID
 	 */
-	@Schema(description = "手配ID", required = true)
+	@Schema(description = "手配ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long arrangementId;
 
 	/**
 	 * 手配業務ID
 	 */
-	@Schema(description = "手配業務ID", required = true)
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long arrangementWorkId;
 
 	/**
@@ -61,7 +61,7 @@ public class ArrangementListInfo {
 	/**
 	 * サービス識別番号
 	 */
-	@Schema(description = "サービス識別番号", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
@@ -83,31 +83,31 @@ public class ArrangementListInfo {
 	/**
 	 * お客様顧客名
 	 */
-	@Schema(description = "お客様企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お客様企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
 	 * 事業所名
 	 */
-	@Schema(description = "事業所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String officeName;
 
 	/**
 	 * 商品名
 	 */
-	@Schema(description = "商品名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productName;
 
 	/**
 	 * 最終依頼審査承認履歴処理名
 	 */
-	@Schema(description = "最終依頼審査承認履歴処理名", required = false, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
+	@Schema(description = "最終依頼審査承認履歴処理名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
 	private ApprovalProcessCategory lastApprovalProcess;
 
 	/**
 	 * 希望納期
 	 */
-	@Schema(description = "希望納期", required = false)
+	@Schema(description = "希望納期", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date desiredDeliveryDate;
@@ -115,13 +115,13 @@ public class ArrangementListInfo {
 	/**
 	 * 手配業務
 	 */
-	@Schema(description = "手配業務", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String arrangementName;
 
 	/**
 	 * 業務受理日時
 	 */
-	@Schema(description = "業務受理日時", required = false)
+	@Schema(description = "業務受理日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date businessAcceptanceDateTime;
@@ -129,7 +129,7 @@ public class ArrangementListInfo {
 	/**
 	 * 手配業務担当者
 	 */
-	@Schema(description = "手配業務担当者", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務担当者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String workUserName;
 
 	/**
@@ -143,25 +143,25 @@ public class ArrangementListInfo {
 	/**
 	 * 見積書番号
 	 */
-	@Schema(description = "見積書番号", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "見積書番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String estimateNumber;
 
 	/**
 	 * 担当営業氏名
 	 */
-	@Schema(description = "担当営業氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当営業氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picEmptxName;
 
 	/**
 	 * 担当支社
 	 */
-	@Schema(description = "担当支社", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当支社", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAffiliateName;
 
 	/**
 	 * サービス開始日
 	 */
-	@Schema(description = "サービス開始日", required = false)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date serviceTermStart;
@@ -169,7 +169,7 @@ public class ArrangementListInfo {
 	/**
 	 * サービス終了日
 	 */
-	@Schema(description = "サービス終了日", required = false)
+	@Schema(description = "サービス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date serviceTermEnd;
@@ -177,7 +177,7 @@ public class ArrangementListInfo {
 	/**
 	 * 保留フラグ
 	 */
-	@Schema(description = "保留フラグ", required = true)
+	@Schema(description = "保留フラグ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private int holdingFlg;
 
 	/**
@@ -191,55 +191,55 @@ public class ArrangementListInfo {
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@Schema(description = "R恒久契約識別番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "R恒久契約識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * 受付担当SS組織
 	 */
-	@Schema(description = "受付担当SS組織", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "受付担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAccSsName;
 
 	/**
 	 * 受付担当CE氏名
 	 */
-	@Schema(description = "受付担当CE氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "受付担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAccCeName;
 
 	/**
 	 * 導入担当SS組織
 	 */
-	@Schema(description = "導入担当SS組織", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "導入担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picIntSsName;
 
 	/**
 	 * 導入担当CE氏名
 	 */
-	@Schema(description = "導入担当CE氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "導入担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picIntCeName;
 
 	/**
 	 * 保守担当SS組織
 	 */
-	@Schema(description = "保守担当SS組織", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "保守担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMntSsName;
 
 	/**
 	 * 保守担当CE氏名
 	 */
-	@Schema(description = "保守担当CE氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "保守担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMntCeName;
 
 	/**
 	 * 登録日時
 	 */
-	@Schema(description = "登録日時", required = false)
+	@Schema(description = "登録日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date createdAt;
@@ -247,7 +247,7 @@ public class ArrangementListInfo {
 	/**
 	 * 更新日時
 	 */
-	@Schema(description = "更新日時", required = false)
+	@Schema(description = "更新日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date updatedAt;
@@ -255,13 +255,13 @@ public class ArrangementListInfo {
 	/**
 	 * 解約フラグ
 	 */
-	@Schema(description = "解約フラグ", required = true)
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private int disengagementFlg;
 
 	/**
 	 * 作業完了日時
 	 */
-	@Schema(description = "作業完了日時", required = false)
+	@Schema(description = "作業完了日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date workCompletedAt;
@@ -269,43 +269,43 @@ public class ArrangementListInfo {
 	/**
 	 * 手配業務タイプマスタID
 	 */
-	@Schema(description = "手配業務タイプマスタID", required = false)
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long arrangementWorkTypeMasterId;
 
 	/**
 	 * お問い合わせ番号
 	 */
-	@Schema(description = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 郵便番号
 	 */
-	@Schema(description = "郵便番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 都道府県
 	 */
-	@Schema(description = "都道府県", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String prefectures;
 
 	/**
 	 * 市区町村番地
 	 */
-	@Schema(description = "市区町村番地", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "市区町村番地", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String cityStreet;
 
 	/**
 	 * 建物名
 	 */
-	@Schema(description = "建物名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "建物名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String buildingName;
 
 	/**
 	 * 手配承認日時
 	 */
-	@Schema(description = "手配承認日時", required = false)
+	@Schema(description = "手配承認日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date approvalDate;
@@ -313,7 +313,7 @@ public class ArrangementListInfo {
 	/**
 	 * ベンダー管理番号
 	 */
-	@Schema(description = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	@PrePersist

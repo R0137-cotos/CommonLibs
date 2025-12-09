@@ -19,7 +19,7 @@ public class LicenseCsvOutputParameter {
 	 * ファイル種別管理マスタID
 	 */
 	@Parameter(description = "ファイル種別管理マスタID", required = false)
-	@Schema(description = "ファイル種別管理マスタID", required = false)
+	@Schema(description = "ファイル種別管理マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long fileKindManagementMasterId;
 
 	/**
@@ -27,21 +27,21 @@ public class LicenseCsvOutputParameter {
 	 */
 	@JsonFormat(pattern = "yyyy/MM", timezone = "Asia/Tokyo")
 	@Parameter(description = "基準月", required = false)
-	@Schema(description = "基準月", required = false)
+	@Schema(description = "基準月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date referenceMonth;
 
 	/**
 	 * 出力対象
 	 */
 	@Parameter(description = "出力対象", required = false)
-	@Schema(description = "出力対象", required = false, allowableValues = "全件(\"1\"), 全件_解約を除く(\"2\"), 出力対象月のみ(\"3\")")
+	@Schema(description = "出力対象", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "全件(\"1\"), 全件_解約を除く(\"2\"), 出力対象月のみ(\"3\")")
 	private CsvOutputTargetType csvOutputTargetType;
 
 	/**
 	 * 再出力
 	 */
 	@Parameter(description = "再出力", required = false)
-	@Schema(description = "再出力", required = false)
+	@Schema(description = "再出力", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int reoutputFlg;
 
 	/**
@@ -49,7 +49,7 @@ public class LicenseCsvOutputParameter {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@Parameter(description = "出力開始日", required = false)
-	@Schema(description = "出力開始日", required = false)
+	@Schema(description = "出力開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date outputDateFrom;
 
 	/**
@@ -57,7 +57,7 @@ public class LicenseCsvOutputParameter {
 	 */
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
 	@Parameter(description = "出力終了日", required = false)
-	@Schema(description = "出力終了日", required = false)
+	@Schema(description = "出力終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date outputDateTo;
 
 }

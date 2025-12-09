@@ -18,13 +18,13 @@ public class ArrangementWorkAttachedFileLinkageDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "ファイル連携先", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル連携先", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String attachedFileLinkageName;
 
 	/**
 	 * 連携ステータス
 	 */
 	@NotNull
-	@Schema(description = "連携ステータス", required = true, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0")
+	@Schema(description = "連携ステータス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "連携対象外(\"0\"), 未連携(\"1\"), 連携済(\"2\"), 送付済(\"3\")", example = "0")
 	private FileLinkageStatus linkageStatus;
 }

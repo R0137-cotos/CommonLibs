@@ -37,7 +37,7 @@ public class SearchCondition extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momEmployeeId;
 
 	/**
@@ -46,7 +46,7 @@ public class SearchCondition extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "ドメイン", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String domain;
 
 	/**
@@ -55,7 +55,7 @@ public class SearchCondition extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "タイトル", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "タイトル", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String title;
 
 	/**
@@ -64,7 +64,7 @@ public class SearchCondition extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Lob
-	@Schema(description = "検索条件", required = true)
+	@Schema(description = "検索条件", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String searchCondition;
 
 }

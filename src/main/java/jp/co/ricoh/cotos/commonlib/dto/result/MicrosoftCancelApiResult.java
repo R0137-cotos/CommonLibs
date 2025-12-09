@@ -13,12 +13,12 @@ public class MicrosoftCancelApiResult {
 	/**
 	 * コード
 	 */
-	@Schema(description = "コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String code;
 
 	/**
 	 * メッセージ
 	 */
-	@Schema(description = "メッセージ", required = false, allowableValues = "range[0,1024]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1024]")
 	private String apiMessage;
 }

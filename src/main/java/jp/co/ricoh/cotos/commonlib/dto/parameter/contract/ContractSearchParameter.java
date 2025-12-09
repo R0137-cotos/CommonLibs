@@ -44,56 +44,56 @@ public class ContractSearchParameter {
 	 * 契約番号
 	 */
 	@Parameter(description = "契約番号", required = false)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
 	@Parameter(description = "契約番号枝番", required = false)
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Parameter(description = "サービス識別番号", required = false)
-	@Schema(description = "サービス識別番号", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Parameter(description = "RJ管理番号", required = false)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,20]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,20]")
 	private String rjManageNumber;
 
 	/**
 	 * FFM発注問合せ番号
 	 */
 	@Parameter(description = "FFM発注問合せ番号", required = false)
-	@Schema(description = "FFM発注問合せ番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "FFM発注問合せ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * WEB受注番号
 	 */
 	@Parameter(description = "WEB受注番号", required = false)
-	@Schema(description = "WEB受注番号", required = false, allowableValues = "range[0,20]")
+	@Schema(description = "WEB受注番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,20]")
 	private String webOrderNumber;
 
 	/**
 	 * 見積書番号
 	 */
 	@Parameter(description = "見積番号", required = false)
-	@Schema(description = "見積番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String estimateNumber;
 
 	/**
 	 * 見積書番号
 	 */
 	@Parameter(description = "見積番号枝番", required = false)
-	@Schema(description = "見積番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "見積番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String estimateBranchNumber;
 
 	/**
@@ -109,7 +109,7 @@ public class ContractSearchParameter {
 	 * 案件番号
 	 */
 	@Parameter(description = "案件番号", required = false)
-	@Schema(description = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseNumber;
 
 	/**
@@ -170,7 +170,7 @@ public class ContractSearchParameter {
 	 * お客様企事部ID
 	 */
 	@Parameter(description = "お客様企事部ID", required = false)
-	@Schema(description = "お客様企事部ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お客様企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
@@ -222,7 +222,7 @@ public class ContractSearchParameter {
 	 * 得意先コード
 	 */
 	@Parameter(description = "得意先コード", required = false)
-	@Schema(description = "得意先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpCode;
 
 	/**
@@ -328,7 +328,7 @@ public class ContractSearchParameter {
 	 * 商品マスタID
 	 */
 	@Parameter(description = "商品マスタID", required = false)
-	@Schema(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long productId;
 
 	/**
@@ -389,28 +389,28 @@ public class ContractSearchParameter {
 	 * 商材固有項目 プロパティ名リスト
 	 */
 	@Parameter(description = "商材固有項目 プロパティ名リスト", required = false)
-	@Schema(description = "商材固有項目 プロパティ名リスト", required = false)
+	@Schema(description = "商材固有項目 プロパティ名リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> productUniqueItemNameList;
 
 	/**
 	 * 商材固有項目値
 	 */
 	@Parameter(description = "商材固有項目値", required = false)
-	@Schema(description = "商材固有項目値", required = false)
+	@Schema(description = "商材固有項目値", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String productUniqueItemValue;
 
 	/**
 	 * V-UP見積番号
 	 */
 	@Parameter(description = "V-UP見積番号", required = false)
-	@Schema(description = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	/**
 	 * ベンダー管理番号
 	 */
 	@Parameter(description = "ベンダー管理番号", required = false)
-	@Schema(description = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
@@ -453,42 +453,42 @@ public class ContractSearchParameter {
 	 * 商品マスタIDリスト
 	 */
 	@Parameter(description = "商品マスタIDリスト", required = false)
-	@Schema(description = "商品マスタIDリスト", required = false)
+	@Schema(description = "商品マスタIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String productIdList;
 
 	/**
 	 * お客様：会社代表電話番号
 	 */
 	@Parameter(description = "お客様：会社代表電話番号", required = false)
-	@Schema(description = "お客様：会社代表電話番号", required = false)
+	@Schema(description = "お客様：会社代表電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerPhoneNumber;
 
 	/**
 	 * 設置先：会社代表電話番号
 	 */
 	@Parameter(description = "設置先：会社代表電話番号", required = false)
-	@Schema(description = "設置先：会社代表電話番号", required = false)
+	@Schema(description = "設置先：会社代表電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String installationPhoneNumber;
 
 	/**
 	 * モバイル：端末電話番号
 	 */
 	@Parameter(description = "モバイル：端末電話番号", required = false)
-	@Schema(description = "モバイル：端末電話番号", required = false)
+	@Schema(description = "モバイル：端末電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String mobilePhoneNumber;
 
 	/**
 	 * お客様：担当者電話番号
 	 */
 	@Parameter(description = "お客様：担当者電話番号", required = false)
-	@Schema(description = "お客様：担当者電話番号", required = false)
+	@Schema(description = "お客様：担当者電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerPicPhoneNumber;
 
 	/**
 	 * 設置先：担当者電話番号
 	 */
 	@Parameter(description = "設置先：担当者電話番号", required = false)
-	@Schema(description = "設置先：担当者電話番号", required = false)
+	@Schema(description = "設置先：担当者電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String installationPicPhoneNumber;
 
 	/**
@@ -531,42 +531,42 @@ public class ContractSearchParameter {
 	 */
 	@Parameter(description = "ソート順", required = false)
 	@Enumerated(EnumType.STRING)
-	@Schema(description = "ソート順", required = false)
+	@Schema(description = "ソート順", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SortOrder sortOrder;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
 	@Parameter(description = "アプリケーションIDリスト", required = false)
-	@Schema(description = "アプリケーションIDリスト", required = false)
+	@Schema(description = "アプリケーションIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
 	@Parameter(description = "他システムデータ排他フラグ", required = false)
-	@Schema(description = "他システムデータ排他フラグ", required = false)
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int otherSysDataExcludeFlg;
 
 	/**
 	 * ディスパッチ対応
 	 */
 	@Parameter(description = "ディスパッチ対応", required = false)
-	@Schema(description = "ディスパッチ対応", required = false)
+	@Schema(description = "ディスパッチ対応", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer dispatchFlg;
 
 	/**
 	 * 破棄ステータスを除外
 	 */
 	@Parameter(description = "破棄ステータスを除外", required = false)
-	@Schema(description = "破棄ステータスを除外", required = false)
+	@Schema(description = "破棄ステータスを除外", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean excludesDiscarded;
 
 	/**
 	 * 承認周りの情報を除外
 	 */
 	@Parameter(description = "承認周りの情報を除外", required = false)
-	@Schema(description = "承認周りの情報を除外", required = false)
+	@Schema(description = "承認周りの情報を除外", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean excludesApprovalInfo;
 
 	/**

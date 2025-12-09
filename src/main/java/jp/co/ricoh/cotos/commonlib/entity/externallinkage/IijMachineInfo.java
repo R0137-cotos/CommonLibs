@@ -68,35 +68,35 @@ public class IijMachineInfo extends EntityBase {
 	 * シリアル番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "シリアル番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "シリアル番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serialNumber;
 
 	/**
 	 * ディストリビューションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ディストリビューションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ディストリビューションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributionId;
 
 	/**
 	 * お問い合わせ番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -105,7 +105,7 @@ public class IijMachineInfo extends EntityBase {
 	@Column(nullable = false)
 	@Max(99)
 	@Min(0)
-	@Schema(description = "契約番号枝番", required = true, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
 	/**
@@ -113,13 +113,13 @@ public class IijMachineInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * 設定状態
 	 */
-	@Schema(description = "設定状態", required = false, allowableValues = "未設定(\"0\"), 設定済(\"1\"), 解除済(\"2\")")
+	@Schema(description = "設定状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未設定(\"0\"), 設定済(\"1\"), 解除済(\"2\")")
 	private SettingStatus settingStatus;
 
 }

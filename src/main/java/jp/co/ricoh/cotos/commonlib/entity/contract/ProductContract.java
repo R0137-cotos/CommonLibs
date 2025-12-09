@@ -41,7 +41,7 @@ public class ProductContract extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -55,7 +55,7 @@ public class ProductContract extends EntityBase {
 	 * 代表品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "代表品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "代表品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long repItemMasterId;
 
 	/**
@@ -71,20 +71,20 @@ public class ProductContract extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 	
 	/**
 	 * 拡張項目繰返
 	 */
-	@Schema(description = "拡張項目繰返", required = false)
+	@Schema(description = "拡張項目繰返", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameterIterance;
 

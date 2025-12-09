@@ -42,13 +42,13 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	 * メニュー名
 	 */
 	@Size(max = 255)
-	@Schema(description = "メニュー名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メニュー名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String menuName;
 
 	/**
 	 * 権限
 	 */
-	@Schema(description = "権限", required = false)
+	@Schema(description = "権限", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String auth;
 
@@ -58,20 +58,20 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
-	@Schema(description = "順序", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "順序", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int orderNumber;
 
 	/**
 	 * URL
 	 */
 	@Size(max = 255)
-	@Schema(description = "URL", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "URL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String url;
 
 	/**
 	 * メニュー明細管理マスタリスト
 	 */
 	@OneToMany(mappedBy = "menuManagementMaster")
-	@Schema(description = "メニュー明細管理マスタ", required = false)
+	@Schema(description = "メニュー明細管理マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<MenuDetailsManagementMaster> menuDetailsManagementMasterList;
 }

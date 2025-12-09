@@ -57,7 +57,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "手配業務", required = true)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWork arrangementWork;
 
 	/**
@@ -66,14 +66,14 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル種類", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
@@ -83,14 +83,14 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@NotNull
 	@Valid
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@Schema(description = "添付ファイル", required = true)
+	@Schema(description = "添付ファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AttachedFile attachedFile;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 1000)
-	@Schema(description = "コメント", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String attachedComment;
 
 	/**
@@ -126,7 +126,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "arrangementWorkAttachedFile")
-	@Schema(description = "手配業務添付ファイル連携先", required = false)
+	@Schema(description = "手配業務添付ファイル連携先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkAttachedFileLinkage> arrangementWorkAttachedFileLinkageList;
 
 	/**
@@ -134,7 +134,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "添付必須フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "添付必須フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
 
 	/**

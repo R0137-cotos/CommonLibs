@@ -79,14 +79,14 @@ public class FileImportManagement extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ファイル種別管理マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ファイル種別管理マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long fileKindManagementMasterId;
 
 	/**
 	 * ファイル名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
@@ -95,7 +95,7 @@ public class FileImportManagement extends EntityBase {
 	@NotNull
 	@OneToOne(optional = false)
 	@JoinColumn(name = "attachment_id", referencedColumnName = "id")
-	@Schema(description = "添付ファイル", required = true)
+	@Schema(description = "添付ファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AttachedFile attachmentFile;
 
 	/**
@@ -103,20 +103,20 @@ public class FileImportManagement extends EntityBase {
 	 */
 	@OneToOne(optional = true)
 	@JoinColumn(name = "error_attachment_id", referencedColumnName = "id")
-	@Schema(description = "エラー添付ファイル", required = false)
+	@Schema(description = "エラー添付ファイル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private AttachedFile errorAttachmentFile;
 
 	/**
 	 * 取込実施者
 	 */
 	@Size(max = 255)
-	@Schema(description = "取込実施者", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "取込実施者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String importUser;
 
 	/**
 	 * 取込日
 	 */
-	@Schema(description = "取込日", required = false)
+	@Schema(description = "取込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date importDate;
 
@@ -124,20 +124,20 @@ public class FileImportManagement extends EntityBase {
 	 * バッチ実行ステータス
 	 */
 	@Column(nullable = false)
-	@Schema(description = "バッチ実行ステータス", required = true, allowableValues = "取込待ち(\"1\"), 取込中(\"2\"), エラー(\"3\"), 正常終了(\"4\"), 取込後処理中(\"5\"), 取込エラー(\"6\"), その他(\"99\")", readOnly = false)
+	@Schema(description = "バッチ実行ステータス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "取込待ち(\"1\"), 取込中(\"2\"), エラー(\"3\"), 正常終了(\"4\"), 取込後処理中(\"5\"), 取込エラー(\"6\"), その他(\"99\")", readOnly = false)
 	private BatchExecutionStatus batchExecutionStatus;
 
 	/**
 	 * 取込開始日時
 	 */
-	@Schema(description = "取込開始日時", required = false)
+	@Schema(description = "取込開始日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date importStartDate;
 
 	/**
 	 * 取込終了日時
 	 */
-	@Schema(description = "取込終了日時", required = false)
+	@Schema(description = "取込終了日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date importEndDate;
 
@@ -146,28 +146,28 @@ public class FileImportManagement extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "fileImportManagement")
 	@OrderBy("lineNumber ASC")
-	@Schema(description = "ファイル取込エラー詳細", required = false)
+	@Schema(description = "ファイル取込エラー詳細", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<FileImportErrorDetails> fileImportErrorDetailsList;
 
 	/**
 	 * 価格書換見積破棄対象品種
 	 */
 	@OneToMany(mappedBy = "fileImportManagement")
-	@Schema(description = "価格書換見積破棄対象品種", required = false)
+	@Schema(description = "価格書換見積破棄対象品種", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<PriceRewriteEstimationDestructionItem> priceRewriteEstimationDestructionItemList;
 
 	/**
 	 * 価格書換除外契約
 	 */
 	@OneToMany(mappedBy = "fileImportManagement")
-	@Schema(description = "価格書換除外契約", required = false)
+	@Schema(description = "価格書換除外契約", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<PriceRewriteExclusionContract> priceRewriteExclusionContractList;
 
 	/**
 	 * 価格書換品種情報
 	 */
 	@OneToMany(mappedBy = "fileImportManagement")
-	@Schema(description = "価格書換品種情報", required = false)
+	@Schema(description = "価格書換品種情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<PriceRewriteItemInfo> priceRewriteItemInfoList;
 
 	/**
@@ -176,7 +176,7 @@ public class FileImportManagement extends EntityBase {
 	@ManyToOne
 	@JoinColumn(name = "related_file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "関連ファイル取込管理", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "関連ファイル取込管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private FileImportManagement relatedFileImportManagement;
 
 }

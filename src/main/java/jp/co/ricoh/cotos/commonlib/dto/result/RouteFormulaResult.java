@@ -33,18 +33,18 @@ public class RouteFormulaResult {
 	/**
 	 * 条件式実行結果
 	 */
-	@Schema(description = "条件式判定結果", required = true)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private boolean applyRoute;
 
 	/**
 	 * 条件式実行結果ステータス
 	 */
-	@Schema(description = "条件式実行結果ステータス", required = true)
+	@Schema(description = "条件式実行結果ステータス", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaStatus status;
 
 	/**
 	 * エラー発生項目
 	 */
-	@Schema(description = "エラー発生項目", required = true)
+	@Schema(description = "エラー発生項目", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<String> errorPropertyList;
 }

@@ -13,13 +13,13 @@ public class IspErrorInfo {
 	/**
 	 * エラーコード
 	 */
-	@Schema(description = "エラーコード", required = false)
+	@Schema(description = "エラーコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String errorCode;
 
 	/**
 	 * エラー内容
 	 */
-	@Schema(description = "エラー内容", required = false)
+	@Schema(description = "エラー内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String errorContents;
 
 }

@@ -29,7 +29,7 @@ public class ArrangementChecklistCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_checklist_comp_master_seq")
 	@SequenceGenerator(name = "arrangement_checklist_comp_master_seq", sequenceName = "arrangement_checklist_comp_master_seq", allocationSize = 1)
-	@Schema(description = "手配チェックリスト構成マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "手配チェックリスト構成マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -38,7 +38,7 @@ public class ArrangementChecklistCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_type_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "手配業務タイプマスタ", required = true)
+	@Schema(description = "手配業務タイプマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWorkTypeMaster arrangementWorkTypeMaster;
 
 	/**
@@ -47,14 +47,14 @@ public class ArrangementChecklistCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "gp_check_matter_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "汎用チェック事項マスタ", required = true)
+	@Schema(description = "汎用チェック事項マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private GpCheckMatterMaster gpCheckMatterMaster;
 
 	/**
 	 * 表示順
 	 */
 	@Column(nullable = false)
-	@Schema(description = "表示順", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "表示順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int displayOrder;
 
 }

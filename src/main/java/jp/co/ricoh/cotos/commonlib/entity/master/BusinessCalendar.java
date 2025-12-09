@@ -19,21 +19,21 @@ import lombok.Data;
 public class BusinessCalendar {
 
 	@Id
-	@Schema(description = "カレンダー日付", required = true)
+	@Schema(description = "カレンダー日付", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Date calendarDate;
 
 	/**
 	 * 休日フラグ
 	 */
 	@Column(nullable = false)
-	@Schema(description = "休日フラグ", required = true, allowableValues = "range[0,1]")
+	@Schema(description = "休日フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1]")
 	private int businessHoliday;
 
 	/**
 	 * 営業日付
 	 */
 	@Column(nullable = false)
-	@Schema(description = "営業日付", required = true)
+	@Schema(description = "営業日付", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Date businessDay;
 
 }

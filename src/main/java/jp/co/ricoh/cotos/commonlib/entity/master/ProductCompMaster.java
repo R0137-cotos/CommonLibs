@@ -31,7 +31,7 @@ public class ProductCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_comp_master_seq")
 	@SequenceGenerator(name = "product_comp_master_seq", sequenceName = "product_comp_master_seq", allocationSize = 1)
-	@Schema(description = "商品構成マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品構成マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -39,7 +39,7 @@ public class ProductCompMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_grp_master_id", referencedColumnName = "id")
-	@Schema(description = "商品グループマスタ", required = true)
+	@Schema(description = "商品グループマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductGrpMaster productGrpMaster;
 
 	/**
@@ -47,7 +47,7 @@ public class ProductCompMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
-	@Schema(description = "商品マスタ", required = true)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 }

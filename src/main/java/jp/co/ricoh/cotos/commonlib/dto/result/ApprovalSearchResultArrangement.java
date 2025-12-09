@@ -13,12 +13,12 @@ public class ApprovalSearchResultArrangement {
 	/**
 	 * 条件式判定結果
 	 */
-	@Schema(description = "条件式判定結果", required = true)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaResult routeFormulaResult;
 
 	/**
 	 * 手配承認ルート
 	 */
-	@Schema(description = "手配承認ルート情報", required = true)
+	@Schema(description = "手配承認ルート情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWorkApprovalRoute arrangementWorkApprovalRoute;
 }

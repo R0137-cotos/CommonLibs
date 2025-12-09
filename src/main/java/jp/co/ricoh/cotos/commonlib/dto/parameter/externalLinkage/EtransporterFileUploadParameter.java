@@ -11,25 +11,25 @@ import lombok.Data;
 @Data
 public class EtransporterFileUploadParameter {
 
-	@Schema(description = "ユーザID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String userId;
 
-	@Schema(description = "送信先メールアドレス", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "送信先メールアドレス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String mailTo;
 
-	@Schema(description = "メール件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メール件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailSubjct;
 
-	@Schema(description = "メールメッセージ", required = false, allowableValues = "range[0,20000]")
+	@Schema(description = "メールメッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,20000]")
 	private String mailMessage;
 
-	@Schema(description = "アップロードファイル", required = true)
+	@Schema(description = "アップロードファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<UploadFileParameter> fileList;
 
-	@Schema(description = "API呼び出しリトライ有無", required = false)
+	@Schema(description = "API呼び出しリトライ有無", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean retry;
 
-	@Schema(description = "メール送信有無", required = false)
+	@Schema(description = "メール送信有無", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean sendmail;
 
 }

@@ -73,7 +73,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = false)
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = false)
 	private long licenseDivMasterId;
 
 	/**
@@ -82,7 +82,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "ライセンスキー", required = true, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String licenseKey;
 
 	/**
@@ -91,33 +91,33 @@ public class LicenseRemainingNumber extends EntityBase {
 	@OneToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ライセンス情報", required = false)
+	@Schema(description = "ライセンス情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private LicenseInfo licenseInfo;
 
 	/**
 	 * 恒久契約識別番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "恒久契約識別番号", required = true, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "恒久契約識別番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String immutableContIdentNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = true, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String rjManageNumber;
 
 	/**
 	 * 割当区分
 	 */
-	@Schema(description = "割当区分", required = false, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"3\")")
+	@Schema(description = "割当区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"3\")")
 	private AllocationDiv allocationDiv;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 

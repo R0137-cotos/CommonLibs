@@ -38,7 +38,7 @@ public class EstimationAddedEditorEmp extends EmployeeAbstractEntity {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@Schema(description = "見積", required = true)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Estimation estimation;
 

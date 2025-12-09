@@ -101,21 +101,21 @@ public class TmGetSubscriptionResponseDto extends AbstractTmResponseDto {
 		/**
 		 * 猶予期間
 		 */
-		@Schema(description = "猶予期間", required = false, allowableValues = "range[0,9]")
+		@Schema(description = "猶予期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 		@JsonProperty("grace_period")
 		private Integer gracePeriod;
 
 		/**
 		 * シート数
 		 */
-		@Schema(description = "シート数", required = false, allowableValues = "range[0,9]")
+		@Schema(description = "シート数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 		@JsonProperty("units")
 		private Integer units;
 
 		/**
 		 * ライセンスステータス
 		 */
-		@Schema(description = "ライセンスステータス", required = false)
+		@Schema(description = "ライセンスステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 		@JsonProperty("enabled")
 		private Boolean licenseEnabled;
 	}

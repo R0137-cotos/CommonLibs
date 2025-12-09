@@ -32,7 +32,7 @@ public class ProductPicMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_pic_master_seq")
 	@SequenceGenerator(name = "product_pic_master_seq", sequenceName = "product_pic_master_seq", allocationSize = 1)
-	@Schema(description = "商品担当者マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品担当者マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -41,14 +41,14 @@ public class ProductPicMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "商品マスタID", required = true)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
 	 * MoM社員ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momEmployeeId;
 
 }

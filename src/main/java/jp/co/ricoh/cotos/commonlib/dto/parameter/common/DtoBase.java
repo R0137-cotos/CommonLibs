@@ -16,14 +16,14 @@ public class DtoBase {
 	/**
 	 * ID
 	 */
-	@Schema(description = "ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * version
 	 */
 	@Version
-	@Schema(description = "version", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "version", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long version;
 
 }

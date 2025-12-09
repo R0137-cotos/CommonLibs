@@ -15,13 +15,13 @@ public class RtorTransferInfoDto {
 	/**
 	 * 引継ぎ先契約ID(rj管理番号)
 	 */
-	@Schema(description = "引継ぎ先契約ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "引継ぎ先契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transferRjManageNumber;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = true)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long contractId;
 	/**
 	 * 契約状態
@@ -34,12 +34,12 @@ public class RtorTransferInfoDto {
 	/**
 	 * 文書番号
 	 */
-	@Schema(description = "文書番号", required = true, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "文書番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String contractNumber;
 
 	/**
 	 * 文書番号枝番
 	 */
-	@Schema(description = "文書番号枝番", required = true, allowableValues = "range[0,99]", readOnly = true)
+	@Schema(description = "文書番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]", readOnly = true)
 	private int contractBranchNumber;
 }

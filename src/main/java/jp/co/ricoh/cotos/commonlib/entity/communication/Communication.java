@@ -48,7 +48,7 @@ public class Communication extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "サービスカテゴリ", required = true, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
@@ -56,7 +56,7 @@ public class Communication extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "処理カテゴリー", required = true, allowableValues = "承認依頼(\"1\"), 承認依頼取消(\"2\"), 承認依頼差戻(\"3\"), 承認(\"4\"), 作業依頼(\"5\"), 作業完了(\"6\"), キャンセル手続き(\"7\"), キャンセル手続き中止(\"8\"), 解約手続き(\"9\"), 解約手続き中止(\"10\")", example = "1")
+	@Schema(description = "処理カテゴリー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼取消(\"2\"), 承認依頼差戻(\"3\"), 承認(\"4\"), 作業依頼(\"5\"), 作業完了(\"6\"), キャンセル手続き(\"7\"), キャンセル手続き中止(\"8\"), 解約手続き(\"9\"), 解約手続き中止(\"10\")", example = "1")
 	private ProcessCategory processCategory;
 
 	/**
@@ -76,7 +76,7 @@ public class Communication extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "ワークフロー種別", required = true, allowableValues = "承認フロー(\"1\"), タスクフロー(\"2\")", example = "1")
+	@Schema(description = "ワークフロー種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認フロー(\"1\"), タスクフロー(\"2\")", example = "1")
 	private WorkflowType workflowType;
 
 	/**
@@ -167,7 +167,7 @@ public class Communication extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "顧客名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "顧客名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
@@ -191,7 +191,7 @@ public class Communication extends EntityBase {
 	 * コメント
 	 */
 	@Size(max = 255)
-	@Schema(description = "コメント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String communicationComment;
 
 	/**
@@ -205,7 +205,7 @@ public class Communication extends EntityBase {
 	/**
 	 * 商品グループマスタID
 	 */
-	@Schema(description = "商品グループマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long productGrpMasterId;
 
 	/**
@@ -236,7 +236,7 @@ public class Communication extends EntityBase {
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "アプリケーションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	@PrePersist

@@ -18,14 +18,14 @@ public class ExternalCooperationCsvOutputParameterDto {
 	 * ファイル種別管理マスタID
 	 */
 	@Parameter(description = "ファイル種別管理マスタID", required = false)
-	@Schema(description = "ファイル種別管理マスタID", required = false)
+	@Schema(description = "ファイル種別管理マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long fileKindManagementMasterId;
 
 	/**
 	 * 商品種類区分
 	 */
 	@Parameter(description = "商品種類区分", required = false)
-	@Schema(description = "商品種類区分", required = false)
+	@Schema(description = "商品種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String productClassDiv;
 
 	/**
@@ -33,14 +33,14 @@ public class ExternalCooperationCsvOutputParameterDto {
 	 */
 	@JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Tokyo")
 	@Parameter(description = "出力日", required = false)
-	@Schema(description = "出力日", required = false)
+	@Schema(description = "出力日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date outputDate;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Parameter(description = "商品マスタID", required = false)
-	@Schema(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long productMasterId;
 
 }

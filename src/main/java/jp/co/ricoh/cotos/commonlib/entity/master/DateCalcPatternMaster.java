@@ -115,21 +115,21 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	 * 日付計算グループコード
 	 */
 	@Size(max = 255)
-	@Schema(description = "日付計算グループコード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "日付計算グループコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dateCalcGrpCode;
 
 	/**
 	 * 日付計算グループ名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "日付計算グループ名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "日付計算グループ名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dateCalcGrpName;
 
 	/**
 	 * 日付計算パターン名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "日付計算パターン名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "日付計算パターン名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dateCalcPatternName;
 
 	/**
@@ -137,7 +137,7 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Schema(description = "日付計算区分", required = true, allowableValues = "月日加算(\"1\")")
+	@Schema(description = "日付計算区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "月日加算(\"1\")")
 	private DateCalcType dateCalcType;
 
 	/**
@@ -145,34 +145,34 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Schema(description = "日付計算基準日区分", required = true, allowableValues = "サービス終了日(\"1\"), 契約開始日(\"2\"), システム日付(\"3\")")
+	@Schema(description = "日付計算基準日区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "サービス終了日(\"1\"), 契約開始日(\"2\"), システム日付(\"3\")")
 	private DateCalcStndType dateCalcStndType;
 
 	/**
 	 * 日付計算月数
 	 */
 	@Size(max = 255)
-	@Schema(description = "日付計算月数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "日付計算月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dateCalcMonth;
 
 	/**
 	 * 日付計算日数
 	 */
 	@Size(max = 255)
-	@Schema(description = "日付計算日数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "日付計算日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dateCalcDay;
 
 	/**
 	 * 日付計算営業日計算区分
 	 */
-	@Schema(description = "日付計算営業日計算区分", required = true, allowableValues = "前営業日(\"1\"), 後営業日(\"2\")")
+	@Schema(description = "日付計算営業日計算区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "前営業日(\"1\"), 後営業日(\"2\")")
 	private DateCalcBusinessDayType dateCalcBusinessDayType;
 
 	/**
 	 * 日付計算設定時間
 	 */
 	@Size(max = 255)
-	@Schema(description = "日付計算設定時間", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "日付計算設定時間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String dateCalcSetTime;
 
 	/**
@@ -180,12 +180,12 @@ public class DateCalcPatternMaster extends EntityBaseMaster {
 	 */
 	@Min(0)
 	@Max(9)
-	@Schema(description = "日付計算営業日フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "日付計算営業日フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer dateCalcBusinessDayFlg;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String extendsParameter;
 }

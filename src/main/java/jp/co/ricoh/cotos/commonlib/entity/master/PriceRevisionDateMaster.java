@@ -85,70 +85,70 @@ public class PriceRevisionDateMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_revision_date_master_seq")
 	@SequenceGenerator(name = "price_revision_date_master_seq", sequenceName = "price_revision_date_master_seq", allocationSize = 1)
-	@Schema(description = "価格改定日マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long productMasterId;
 
 	/**
 	 * 価格改定日
 	 */
 	@Column(nullable = false)
-	@Schema(description = "価格改定日", required = true)
+	@Schema(description = "価格改定日", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date priceRevisionDate;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@Schema(description = "価格改定処理グループID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定処理グループID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 
 	/**
 	 * BTCOCR024バッチ対象フラグ
 	 */
 	@Max(9)
-	@Schema(description = "BTCOCR024バッチ対象フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "BTCOCR024バッチ対象フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer btcocr024batchFlg;
 
 	/**
 	 * 差額処理区分（差額マイナス）
 	 */
-	@Schema(description = "差額処理区分（差額マイナス）", required = false, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1")
+	@Schema(description = "差額処理区分（差額マイナス）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1")
 	private DifferenceProcDiv differenceProcDivMinus;
 
 	/**
 	 * 差額処理区分（差額プラス）
 	 */
-	@Schema(description = "差額処理区分（差額プラス）", required = false, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1")
+	@Schema(description = "差額処理区分（差額プラス）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "差額考慮不要(\"1\"), 差額率(\"2\"), 差額(\"3\"), 更新不要(\"4\")", example = "1")
 	private DifferenceProcDiv differenceProcDivPlus;
 
 	/**
 	 * 差額計算区分（差額マイナス）
 	 */
-	@Schema(description = "差額計算区分（差額マイナス）", required = false, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1")
+	@Schema(description = "差額計算区分（差額マイナス）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1")
 	private DifferenceCalcDiv differenceCalcDivMinus;
 
 	/**
 	 * 差額計算区分（差額プラス）
 	 */
-	@Schema(description = "差額計算区分（差額プラス）", required = false, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1")
+	@Schema(description = "差額計算区分（差額プラス）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "四捨五入(\"1\"), 切り上げ(\"2\"), 切り捨て(\"3\")", example = "1")
 	private DifferenceCalcDiv differenceCalcDivPlus;
 
 	/**
 	 * 契約ライフサイクル状態
 	 */
-	@Schema(description = "契約ライフサイクル状態", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約ライフサイクル状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractLifecycleStatus;
 
 	/**
 	 * 追加条件式
 	 */
-	@Schema(description = "追加条件式", required = false)
+	@Schema(description = "追加条件式", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String extendsQuery;
 }

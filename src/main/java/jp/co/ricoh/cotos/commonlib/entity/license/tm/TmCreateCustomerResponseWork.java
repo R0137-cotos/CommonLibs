@@ -28,7 +28,7 @@ public class TmCreateCustomerResponseWork extends AbstractTmResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_create_customer_response_work_seq")
 	@SequenceGenerator(name = "tm_create_customer_response_work_seq", sequenceName = "tm_create_customer_response_work_seq", allocationSize = 1)
-	@Schema(description = "トレンドマイクロ顧客情報作成レスポンスWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロ顧客情報作成レスポンスWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -37,41 +37,41 @@ public class TmCreateCustomerResponseWork extends AbstractTmResponseWork {
 	@OneToOne
 	@JoinColumn(name = "request_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロ顧客情報作成リクエストWORK", required = true)
+	@Schema(description = "トレンドマイクロ顧客情報作成リクエストWORK", requiredMode = Schema.RequiredMode.REQUIRED)
 	private TmCreateCustomerRequestWork requestWork;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "会社ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
 	 * ユーザーID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ユーザーID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userId;
 
 	/**
 	 * ログインアカウント
 	 */
 	@Size(max = 255)
-	@Schema(description = "ログインアカウント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ログインアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userLoginName;
 
 	/**
 	 * ログインパスワード
 	 */
 	@Size(max = 255)
-	@Schema(description = "ログインパスワード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ログインパスワード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userPassword;
 
 	/**
 	 * リセット用パスワードURL
 	 */
 	@Size(max = 255)
-	@Schema(description = "リセット用パスワードURL", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リセット用パスワードURL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userResetpasswordurl;
 }

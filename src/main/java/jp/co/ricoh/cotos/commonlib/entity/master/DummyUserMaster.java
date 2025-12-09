@@ -26,25 +26,25 @@ public class DummyUserMaster extends EntityBaseMaster{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dummy_user_master_seq")
 	@SequenceGenerator(name = "dummy_user_master_seq", sequenceName = "dummy_user_master_seq", allocationSize = 1)
-	@Schema(description = "ダミーユーザーマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ダミーユーザーマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * ダミーMoM社員ID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "ダミーMoM社員ID", required = true)
+	@Schema(description = "ダミーMoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String userId;
 
 	@Size(max=255)
-	@Schema(description = "ダミー社員名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ダミー社員名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String empName;
 
 	@Size(max=255)
-	@Schema(description = "ダミー組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ダミー組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orgName;
 
 	@Size(max=1000)
-	@Schema(description = "ダミー住所", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "ダミー住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String address;
 }

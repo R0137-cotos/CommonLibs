@@ -15,14 +15,14 @@ public class ArrangementResultInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "手配結果コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "手配結果コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String resultCode;
 
 	/**
 	 * エラー情報
 	 */
 	@Valid
-	@Schema(description = "エラー情報", required = false)
+	@Schema(description = "エラー情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ErrorInfoDto errorInfo;
 
 }

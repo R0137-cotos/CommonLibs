@@ -28,7 +28,7 @@ public class OsoRequestData extends OsoRequestDataAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "oso_request_data_seq")
 	@SequenceGenerator(name = "oso_request_data_seq", sequenceName = "oso_request_data_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -38,6 +38,6 @@ public class OsoRequestData extends OsoRequestDataAbstractEntity {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "再連携フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "再連携フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer recoordinateFlg;
 }

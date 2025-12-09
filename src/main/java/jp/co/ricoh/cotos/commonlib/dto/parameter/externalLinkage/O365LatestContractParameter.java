@@ -9,7 +9,7 @@ public class O365LatestContractParameter {
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = true)
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.REQUIRED)
 	String rjManageNumber;
 
 	/**

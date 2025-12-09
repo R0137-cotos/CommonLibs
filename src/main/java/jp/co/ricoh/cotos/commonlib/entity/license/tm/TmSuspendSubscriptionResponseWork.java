@@ -27,7 +27,7 @@ public class TmSuspendSubscriptionResponseWork extends AbstractTmResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_suspend_subscription_response_work_seq")
 	@SequenceGenerator(name = "tm_suspend_subscription_response_work_seq", sequenceName = "tm_suspend_subscription_response_work_seq", allocationSize = 1)
-	@Schema(description = "トレンドマイクロサブスクリプション解約レスポンスWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロサブスクリプション解約レスポンスWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -36,6 +36,6 @@ public class TmSuspendSubscriptionResponseWork extends AbstractTmResponseWork {
 	@OneToOne
 	@JoinColumn(name = "request_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロサブスクリプション解約リクエストWORK", required = true)
+	@Schema(description = "トレンドマイクロサブスクリプション解約リクエストWORK", requiredMode = Schema.RequiredMode.REQUIRED)
 	private TmSuspendSubscriptionRequestWork requestWork;
 }

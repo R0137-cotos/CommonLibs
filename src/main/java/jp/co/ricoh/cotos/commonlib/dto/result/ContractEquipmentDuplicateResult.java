@@ -16,26 +16,26 @@ public class ContractEquipmentDuplicateResult {
 	 * 商品種類区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品種類区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 機種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "機種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "機種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String equipmentCode;
 
 	/**
 	 * 機番
 	 */
 	@Size(max = 255)
-	@Schema(description = "機番", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "機番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String equipmentNo;
 }

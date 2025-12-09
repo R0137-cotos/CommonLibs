@@ -58,7 +58,7 @@ public class ContractOperationLog extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
@@ -66,7 +66,7 @@ public class ContractOperationLog extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "操作内容", required = true, allowableValues = "range[0,1000]")
+	@Schema(description = "操作内容", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1000]")
 	@Enumerated(EnumType.STRING)
 	private OperationLogType operation;
 
@@ -76,7 +76,7 @@ public class ContractOperationLog extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "操作者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "操作者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String operatorEmpId;
 
 	/**
@@ -85,14 +85,14 @@ public class ContractOperationLog extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "操作者氏名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "操作者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String operatorName;
 
 	/**
 	 * 操作者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "操作者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "操作者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String operatorOrgName;
 
 	/**

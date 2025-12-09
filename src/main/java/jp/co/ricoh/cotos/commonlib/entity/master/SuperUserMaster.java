@@ -26,13 +26,13 @@ public class SuperUserMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "super_user_master_seq")
 	@SequenceGenerator(name = "super_user_master_seq", sequenceName = "super_user_master_seq", allocationSize = 1)
-	@Schema(description = "スーパーユーザーマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "スーパーユーザーマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * MoM社員ID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "MoM社員ID", required = true)
+	@Schema(description = "MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String userId;
 }

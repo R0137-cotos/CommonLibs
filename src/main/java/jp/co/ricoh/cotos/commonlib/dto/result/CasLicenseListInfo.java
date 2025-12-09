@@ -19,31 +19,31 @@ public class CasLicenseListInfo {
 	 * MVBアカウント
 	 */
 	@Id
-	@Schema(description = "MVBアカウント", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * 担当者氏名
 	 */
-	@Schema(description = "担当者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picName;
 
 	/**
 	 * 担当者メールアドレス
 	 */
-	@Schema(description = "担当者メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
 	 * TrendMicroアカウント企業名
 	 */
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String tmAccountCompanyName;
 
 	/**
 	 * 都道府県
 	 */
-	@Schema(description = "都道府県", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String prefectures;
 
 }

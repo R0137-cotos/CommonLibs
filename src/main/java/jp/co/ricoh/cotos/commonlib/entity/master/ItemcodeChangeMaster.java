@@ -25,20 +25,20 @@ public class ItemcodeChangeMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itemcode_change_master_seq")
 	@SequenceGenerator(name = "itemcode_change_master_seq", sequenceName = "itemcode_change_master_seq", allocationSize = 1)
-	@Schema(description = "品種コード差し替えマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "品種コード差し替えマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 旧品種マスタID
 	 */
 	@Column(name = "old_master_id", nullable = false)
-	@Schema(description = "旧品種マスタID", required = true)
+	@Schema(description = "旧品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long oldMasterId;
 
 	/**
 	 * 新品種マスタID
 	 */
 	@Column(name = "new_master_id", nullable = false)
-	@Schema(description = "新品種マスタID", required = true)
+	@Schema(description = "新品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long newMasterId;
 }

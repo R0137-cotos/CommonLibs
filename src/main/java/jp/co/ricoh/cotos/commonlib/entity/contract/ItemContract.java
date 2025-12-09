@@ -51,7 +51,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -59,7 +59,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -68,7 +68,7 @@ public class ItemContract extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
@@ -77,7 +77,7 @@ public class ItemContract extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -85,7 +85,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
@@ -93,7 +93,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1")
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")", example = "1")
 	private CostType costType;
 
 	/**
@@ -103,7 +103,7 @@ public class ItemContract extends EntityBase {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "仕切価格", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -112,14 +112,14 @@ public class ItemContract extends EntityBase {
 	@OneToOne(optional = false)
 	@JoinColumn(name = "contract_detail_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約明細", required = true)
+	@Schema(description = "契約明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractDetail contractDetail;
 
 	/**
 	 * 仕入取引先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "仕入取引先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
@@ -127,7 +127,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "Ｒ原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
@@ -135,7 +135,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "ＳＡ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＳＡ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -143,7 +143,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "ＲＪ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -158,13 +158,13 @@ public class ItemContract extends EntityBase {
 	 * 消費税区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "消費税区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * IFS連携フラグ
 	 */
-	@Schema(description = "IFS連携フラグ", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "IFS連携フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
 
 	/**
@@ -179,20 +179,20 @@ public class ItemContract extends EntityBase {
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * 分解後品種区分
 	 */
-	@Schema(description = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
+	@Schema(description = "分解後品種区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
 	 * 分解後品種名
 	 */
 	@Size(max = 255)
-	@Schema(description = "分解後品種名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "分解後品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemDecomposeName;
 
 	/**
@@ -200,7 +200,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "分解後原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "分解後原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal itemDecomposePrice;
 
 	/**
@@ -208,7 +208,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemContract")
-	@Schema(description = "契約機種品種紐づけ", required = false, readOnly = true)
+	@Schema(description = "契約機種品種紐づけ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = true)
 	private List<ContractEquipmentItemLink> contractEquipmentItemLinkList;
 
 	/**
@@ -216,7 +216,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "autoUpdateItemContract")
-	@Schema(description = "契約機種品種紐づけ_自動更新", required = false, readOnly = true)
+	@Schema(description = "契約機種品種紐づけ_自動更新", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = true)
 	private List<ContractEquipmentItemLink> contractEquipmentItemAutoUpdateLinkList;
 
 	/**
@@ -224,7 +224,7 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "ＲＪ販事本仕入価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ販事本仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
@@ -232,24 +232,24 @@ public class ItemContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "標準価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "標準価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal standardPrice;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@Schema(description = "価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 年額明細計上フラグ
 	 */
-	@Schema(description = "年額明細計上フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "年額明細計上フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer yearDetailAccountFlg;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@Schema(description = "価格改定処理グループID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定処理グループID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 }

@@ -67,146 +67,146 @@ public class AccountedCancellationData extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounted_cancellation_data_seq")
 	@SequenceGenerator(name = "accounted_cancellation_data_seq", sequenceName = "accounted_cancellation_data_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 費用種別
 	 */
-	@Schema(description = "費用種別", required = false, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")")
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\")")
 	private CostType costType;
 
 	/**
 	 * 計上処理日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "計上処理日", required = false)
+	@Schema(description = "計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date accountSalesDate;
 
 	/**
 	 * 契約明細ID
 	 */
-	@Schema(description = "契約明細ID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約明細ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long contractDetailId;
 
 	/**
 	 * 受注区分
 	 */
-	@Schema(description = "受注区分", required = false, allowableValues = "訪販(\"1\"), WEB(\"2\")")
+	@Schema(description = "受注区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "訪販(\"1\"), WEB(\"2\")")
 	private OrderDiv orderDiv;
 
 	/**
 	 * キャンセル処理日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "キャンセル処理日", required = false)
+	@Schema(description = "キャンセル処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date canceledDate;
 
 	/**
 	 * V-UP連携済フラグ
 	 */
-	@Schema(description = "V-UP連携済フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "V-UP連携済フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer vupLinkedFlg;
 
 	/**
 	 * 計上キャンセルステータス
 	 */
-	@Schema(description = "計上キャンセルステータス", required = false, allowableValues = "未連携(\"0\"), 連携準備中(\"1\"), 連携済(\"2\")")
+	@Schema(description = "計上キャンセルステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"0\"), 連携準備中(\"1\"), 連携済(\"2\")")
 	private AccountingCancellationStatus accountingCancellationStatus;
 
 	/**
 	 * 見積番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "見積番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
 	 * 見積番号枝番
 	 */
-	@Schema(description = "見積番号枝番", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "見積番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private int estimationBranchNumber;
 
 	/**
 	 * 企業名
 	 */
 	@Size(max = 255)
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * 検収日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "検収日", required = false)
+	@Schema(description = "検収日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date acceptanceDate;
 
 	/**
 	 * 契約日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "契約日", required = false)
+	@Schema(description = "契約日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date contractDate;
 
 	/**
 	 * サービス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "サービス開始日", required = false)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date serviceTermStart;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@Schema(description = "恒久契約識別番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "恒久契約識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * お問い合わせ番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 得意先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "得意先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpCode;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@Schema(description = "品種名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
@@ -214,21 +214,21 @@ public class AccountedCancellationData extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
 	 * 単価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "単価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal unitPrice;
 
 	/**
 	 * 金額
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "金額", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
 }

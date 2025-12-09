@@ -67,19 +67,19 @@ public class BounceMailDestination extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "bounce_mail_record_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "バウンスメール記録", required = true)
+	@Schema(description = "バウンスメール記録", requiredMode = Schema.RequiredMode.REQUIRED)
 	private BounceMailRecord bounceMailRecord;
 
 	/**
 	 * 宛先区分
 	 */
-	@Schema(description = "宛先区分", required = false, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
+	@Schema(description = "宛先区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
 	private DestinationDiv destinationDiv;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 }

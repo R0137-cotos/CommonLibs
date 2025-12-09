@@ -43,56 +43,56 @@ public class ElementMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 部材区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "部材区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "部材区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String elementDiv;
 
 	/**
 	 * カテゴリ
 	 */
 	@Size(max = 255)
-	@Schema(description = "カテゴリ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String categoryType;
 
 	/**
 	 * 物あり品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "物あり品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "物あり品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String thingItemCode;
 
 	/**
 	 * 部材名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "部材名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "部材名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String elementName;
 
 	/**
 	 * 長さ
 	 */
 	@Size(max = 255)
-	@Schema(description = "長さ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "長さ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String lengths;
 
 	/**
 	 * 原価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 発送区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "発送区分", required = false, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")")
+	@Schema(description = "発送区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")")
 	private ShippingType shippingType;
 
 	/**
@@ -100,14 +100,14 @@ public class ElementMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "プロダクト確認集計表フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "プロダクト確認集計表フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer productSpreadsheetFlg;
 
 	/**
 	 * 仕入先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "仕入先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "仕入先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorCode;
 
 	/**
@@ -115,6 +115,6 @@ public class ElementMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "発注不可チェックフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "発注不可チェックフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer orderBadCheckFlg;
 }

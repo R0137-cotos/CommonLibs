@@ -42,7 +42,7 @@ public class ArrangementWorkAuthControlMaster extends EntityBaseMaster {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@Schema(description = "権限名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "権限名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String authName;
 
 	/**
@@ -50,13 +50,13 @@ public class ArrangementWorkAuthControlMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "auth_pattern_master_id", referencedColumnName = "authPatternId")
-	@Schema(description = "権限パターンマスタ", required = false)
+	@Schema(description = "権限パターンマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private AuthPatternMaster authPatternMaster;
 
 	/**
 	 * 手配業務タイプマスタ
 	 */
 	@OneToMany(mappedBy = "arrangementWorkAuthControlMaster")
-	@Schema(description = "手配業務タイプマスタ", required = true)
+	@Schema(description = "手配業務タイプマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterList;
 }

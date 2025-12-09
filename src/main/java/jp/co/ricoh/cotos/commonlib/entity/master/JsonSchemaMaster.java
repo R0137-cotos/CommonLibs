@@ -31,7 +31,7 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "json_schema_master_seq")
 	@SequenceGenerator(name = "json_schema_master_seq", sequenceName = "json_schema_master_seq", allocationSize = 1)
-	@Schema(description = "JSONスキーママスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "JSONスキーママスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -39,14 +39,14 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "jsonSchemaMaster")
 	@JsonIgnore
-	@Schema(description = "商品拡張項目マスタ", required = false)
+	@Schema(description = "商品拡張項目マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ProductExtendsParameterMaster> productExtendsParameterMasterList;
 
 	/**
 	 * JSONスキーマ
 	 */
 	@Column(nullable = false)
-	@Schema(description = "JSONスキーマ", required = true)
+	@Schema(description = "JSONスキーマ", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Lob
 	private String jsonSchema;
 
@@ -54,7 +54,7 @@ public class JsonSchemaMaster extends EntityBaseMaster {
 	 * JSONスキーマ初期値
 	 */
 	@Column(nullable = true)
-	@Schema(description = "JSONスキーマ初期値", required = true)
+	@Schema(description = "JSONスキーマ初期値", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Lob
 	private String jsonSchemaInitial;
 

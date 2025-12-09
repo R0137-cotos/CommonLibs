@@ -38,21 +38,21 @@ public class LicenseAccountDivMaster extends EntityBase {
 	 * ライセンスアカウント区分名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスアカウント区分名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスアカウント区分名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseAccountDivName;
 
 	/**
 	 * ライセンスアカウント種類区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスアカウント種類区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスアカウント種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseAccountClassDiv;
 
 	/**
 	 * ライセンスアカウント区分構成マスタ
 	 */
 	@OneToMany(mappedBy = "licenseAccountDivMaster")
-	@Schema(description = "ライセンスアカウント区分マスタ", required = true)
+	@Schema(description = "ライセンスアカウント区分マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<LicenseAccountDivCompMaster> licenseAccountDivCompMasterList;
 
 }

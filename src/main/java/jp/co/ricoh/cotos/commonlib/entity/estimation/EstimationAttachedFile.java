@@ -54,7 +54,7 @@ public class EstimationAttachedFile extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@Schema(description = "見積", required = true)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Estimation estimation;
 
@@ -64,14 +64,14 @@ public class EstimationAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル種類", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
@@ -80,14 +80,14 @@ public class EstimationAttachedFile extends EntityBase {
 	@OneToOne(optional = false)
 	@Valid
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@Schema(description = "添付ファイル", required = true)
+	@Schema(description = "添付ファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AttachedFile attachedFile;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 1000)
-	@Schema(description = "コメント", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String attachedComment;
 
 	/**

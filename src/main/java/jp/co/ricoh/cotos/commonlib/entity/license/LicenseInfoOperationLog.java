@@ -59,14 +59,14 @@ public class LicenseInfoOperationLog extends EntityBase {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ライセンス情報", required = true)
+	@Schema(description = "ライセンス情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseInfo licenseInfo;
 
 	/**
 	 * 操作内容
 	 */
 	@Enumerated(EnumType.STRING)
-	@Schema(description = "操作内容", required = false, allowableValues = "新規作成、更新、自動更新、ライセンス情報洗替", readOnly = false)
+	@Schema(description = "操作内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規作成、更新、自動更新、ライセンス情報洗替", readOnly = false)
 	private Operation operation;
 
 	/**
@@ -75,28 +75,28 @@ public class LicenseInfoOperationLog extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "操作者MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "操作者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String operatorEmpId;
 
 	/**
 	 * 操作者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "操作者氏名", required = false, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "操作者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String operatorName;
 
 	/**
 	 * 操作者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "操作者組織名", required = false, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "操作者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String operatorOrgName;
 
 	/**
 	 * 実施日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "実施日時", required = false, readOnly = false)
+	@Schema(description = "実施日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = false)
 	private Date operatedAt;
 
 	@PrePersist

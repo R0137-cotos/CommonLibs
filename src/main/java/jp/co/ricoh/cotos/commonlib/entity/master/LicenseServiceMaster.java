@@ -67,33 +67,33 @@ public class LicenseServiceMaster extends EntityBase {
 	 * ライセンスサービスID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスサービスID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービスID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceId;
 
 	/**
 	 * ライセンスサービス名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスサービス名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービス名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceName;
 
 	/**
 	 * ライセンスサービス種類区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンスサービス種類区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービス種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceClassDiv;
 
 	/**
 	 * ライセンス区分構成マスタ
 	 */
 	@OneToMany(mappedBy = "licenseServiceMaster")
-	@Schema(description = "ライセンス区分構成マスタ", required = true)
+	@Schema(description = "ライセンス区分構成マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<LicenseServiceCompMaster> licenseServiceCompMasterList;
 
 	/**
 	 * ライセンス区分
 	 */
-	@Schema(description = "ライセンス区分", required = false, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	@Schema(description = "ライセンス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
 	private LicenseType licenseType;
 }

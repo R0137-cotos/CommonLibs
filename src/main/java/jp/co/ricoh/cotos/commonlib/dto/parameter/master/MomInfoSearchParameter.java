@@ -14,7 +14,7 @@ public class MomInfoSearchParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "郵便番号", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 }

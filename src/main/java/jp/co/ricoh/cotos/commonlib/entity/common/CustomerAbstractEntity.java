@@ -27,7 +27,7 @@ public class CustomerAbstractEntity extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "MoM企事部システム連携ID<br/>※POST時「企事部マスタ」存在チェック実施", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企事部システム連携ID<br/>※POST時「企事部マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momKjbSystemId;
 
 	/**
@@ -136,42 +136,42 @@ public class CustomerAbstractEntity extends EntityBase {
 	 * MoM非連携_担当者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_担当者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picName;
 
 	/**
 	 * MoM非連携_担当者氏名（カナ）
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_担当者氏名（カナ）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者氏名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picNameKana;
 
 	/**
 	 * MoM非連携_担当者部署
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_担当者部署", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者部署", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picDeptName;
 
 	/**
 	 * MoM非連携_担当者電話番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_担当者電話番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picPhoneNumber;
 
 	/**
 	 * MoM非連携_担当者FAX番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_担当者FAX番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者FAX番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picFaxNumber;
 
 	/**
 	 * MoM非連携_担当者メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_担当者メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 	/**
@@ -179,7 +179,7 @@ public class CustomerAbstractEntity extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column
-	@Schema(description = "MoM非連携_企業代表者名（カナ）", required = false, allowableValues = "range[0,]")
+	@Schema(description = "MoM非連携_企業代表者名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String companyRepresentativeNameKana;
 
 }

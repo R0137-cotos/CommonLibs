@@ -262,7 +262,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -271,42 +271,42 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "商品マスタ", required = true)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
 	 * 品種名
 	 */
 	@Column(nullable = false)
-	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Column(nullable = false)
-	@Schema(description = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
 	 * 費用種別
 	 */
 	@Column(nullable = false)
-	@Schema(description = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1")
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1")
 	private CostType costType;
 
 	/**
 	 * 仕切価格
 	 */
 	@Column(nullable = false)
-	@Schema(description = "仕切価格", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -314,7 +314,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "積上げ可能期間（開始日）", required = true, allowableValues = "range[0,19]")
+	@Schema(description = "積上げ可能期間（開始日）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,19]")
 	private Date effectiveFrom;
 
 	/**
@@ -322,35 +322,35 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "積上げ可能期間（終了日）", required = true, allowableValues = "range[0,19]")
+	@Schema(description = "積上げ可能期間（終了日）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,19]")
 	private Date effectiveTo;
 
 	/**
 	 * 仕入取引先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "仕入取引先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
 	 * Ｒ原価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "Ｒ原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
 	 * ＳＡ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "ＳＡ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＳＡ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
 	 * ＲＪ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "ＲＪ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -364,97 +364,97 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 消費税区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "消費税区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * IFS連携フラグ
 	 */
 	@Max(9)
-	@Schema(description = "IFS連携フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "IFS連携フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
 
 	/**
 	 * 最短納期日数
 	 */
 	@Max(99)
-	@Schema(description = "最短納期日数", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "最短納期日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer shortestDeliveryDate;
 
 	/**
 	 * 標準価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "標準価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "標準価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal standardPrice;
 
 	/**
 	 * 申込書帳票出力無しフラグ
 	 */
 	@Max(9)
-	@Schema(description = "申込書帳票出力無しフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "申込書帳票出力無しフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noApplicationFormOutputFlg;
 
 	/**
 	 * 作業完了報告書出力無しフラグ
 	 */
 	@Max(9)
-	@Schema(description = "作業完了報告書出力無しフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "作業完了報告書出力無しフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noWorkReportOutputFlg;
 
 	/**
 	 * 計上分解構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "計上分解構成マスタ", required = false)
+	@Schema(description = "計上分解構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<RecordDecomposeCompMaster> recordDecomposeCompMasterList;
 
 	/**
 	 * 手配業務構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "手配業務構成マスタ", required = false)
+	@Schema(description = "手配業務構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkCompMaster> arrangementWorkCompMasterList;
 
 	/**
 	 * 機種構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "機種構成マスタ", required = false)
+	@Schema(description = "機種構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<EquipmentCompMaster> equipmentCompMasterList;
 
 	/**
 	 * 品種振替構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "品種振替構成マスタ", required = false)
+	@Schema(description = "品種振替構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ItemTransCompMaster> itemTransCompMasterList;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * 提供終了日
 	 */
-	@Schema(description = "提供終了日", required = false)
+	@Schema(description = "提供終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date offerEndDate;
 
 	/**
 	 * 新規受注停止日
 	 */
-	@Schema(description = "新規受注停止日", required = false)
+	@Schema(description = "新規受注停止日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date newOrderStopDate;
 
 	/**
 	 * 最終連携月
 	 */
-	@Schema(description = "最終連携月", required = false)
+	@Schema(description = "最終連携月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date finalLinkedMonth;
 
@@ -462,27 +462,27 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 値引き下限値
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "値引き下限値", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "値引き下限値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal lowerLimit;
 
 	/**
 	 * V-UP連携除外フラグ
 	 */
 	@Max(9)
-	@Schema(description = "V-UP連携除外フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "V-UP連携除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer vupLinkageExclusionFlg;
 
 	/**
 	 * ベンダー略称
 	 */
-	@Schema(description = "ベンダー略称", required = false)
+	@Schema(description = "ベンダー略称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorShortName;
 
 	/**
 	 * ＲＪ販事本仕入価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "ＲＪ販事本仕入価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ販事本仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
@@ -490,7 +490,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "estimation_approval_route_grp_id", referencedColumnName = "id")
-	@Schema(description = "承認ルートグループマスタ（見積）", required = false)
+	@Schema(description = "承認ルートグループマスタ（見積）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ApprovalRouteGrpMaster estimationApprovalRouteGrpMaster;
 
 	/**
@@ -498,7 +498,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "contract_approval_route_grp_id", referencedColumnName = "id")
-	@Schema(description = "承認ルートグループマスタ（契約）", required = false)
+	@Schema(description = "承認ルートグループマスタ（契約）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ApprovalRouteGrpMaster contractApprovalRouteGrpMaster;
 
 	/**
@@ -506,21 +506,21 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "check_by_item_master_id", referencedColumnName = "id")
-	@Schema(description = "品種別チェック項目マスタ", required = false)
+	@Schema(description = "品種別チェック項目マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private CheckByItemMaster checkByItemMaster;
 
 	/**
 	 * 契約自動締結除外フラグ
 	 */
 	@Max(9)
-	@Schema(description = "契約自動締結除外フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "契約自動締結除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer contractAutoSigningExclusionFlg;
 
 	/**
 	 * 小数点単価フラグ
 	 */
 	@Max(9)
-	@Schema(description = "小数点単価フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "小数点単価フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer decimalUnitPriceFlg;
 
 	/**
@@ -528,13 +528,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "契約期間月数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "契約期間月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer contractSpanMonth;
 
 	/**
 	 * 契約期間起算日区分
 	 */
-	@Schema(description = "契約期間起算日区分", required = false, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	@Schema(description = "契約期間起算日区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private ContractSpanStartDateType contractSpanStartDateType;
 
 	/**
@@ -543,7 +543,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "origin_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "分解元品種マスタ", required = false)
+	@Schema(description = "分解元品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster originItemMaster;
 
 	/**
@@ -551,7 +551,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "違約金有無フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "違約金有無フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer penaltyFlg;
 
 	/**
@@ -559,13 +559,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "最低契約月数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "最低契約月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer minContractMonths;
 
 	/**
 	 * 違約金起算日区分
 	 */
-	@Schema(description = "違約金起算日区分", required = false, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	@Schema(description = "違約金起算日区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private PenaltyStartDateType penaltyStartDateType;
 
 	/**
@@ -574,13 +574,13 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "penalty_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "違約金品種マスタ", required = false)
+	@Schema(description = "違約金品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster penaltyItemMaster;
 
 	/**
 	 * 分解後品種区分
 	 */
-	@Schema(description = "分解後品種区分", required = false, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
+	@Schema(description = "分解後品種区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
@@ -589,7 +589,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "running_from_calc_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ランニング計上開始日日付計算パターンマスタ", required = false)
+	@Schema(description = "ランニング計上開始日日付計算パターンマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private DateCalcPatternMaster dateCalcPatternMaster;
 
 	/**
@@ -597,7 +597,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "品種分解マスタ", required = false)
+	@Schema(description = "品種分解マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ItemDecomposeMaster> itemDecomposeMasterList;
 
 	/**
@@ -605,7 +605,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "発送物ありマスタ", required = false)
+	@Schema(description = "発送物ありマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ShippingThingMaster> shippingThingMasterList;
 
 	/**
@@ -613,13 +613,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@Schema(description = "品種ライセンス用設定マスタ", required = false)
+	@Schema(description = "品種ライセンス用設定マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ItemLicenseSettingMaster> ItemLicenseSettingMasterList;
 
 	/**
 	 * HW/NOS区分
 	 */
-	@Schema(description = "HW/NOS区分", required = false, allowableValues = "HW(\"1\"), NOS(\"2\")")
+	@Schema(description = "HW/NOS区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "HW(\"1\"), NOS(\"2\")")
 	private HwNosType hwNosType;
 
 	/**
@@ -627,7 +627,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "メール基本契約商品表示フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "メール基本契約商品表示フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer mailBasicContractProductDispFlg;
 
 	/**
@@ -636,19 +636,19 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contract_update_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約更新品種マスタ", required = false)
+	@Schema(description = "契約更新品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster contractUpdateItemMaster;
 
 	/**
 	 * サービス利用希望日設定可能区分
 	 */
-	@Schema(description = "サービス利用希望日設定可能区分", required = false, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
+	@Schema(description = "サービス利用希望日設定可能区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -657,13 +657,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "オンサイトweb申込フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "オンサイトweb申込フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer onsiteWebApplicationFlg;
 
 	/**
 	 * 契約期間区分
 	 */
-	@Schema(description = "契約期間区分", required = false, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
+	@Schema(description = "契約期間区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
 	private ContractSpanType contractSpanType;
 
 	/**
@@ -671,7 +671,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "item_group_master_id", referencedColumnName = "id")
-	@Schema(description = "品種グループマスタID", required = false)
+	@Schema(description = "品種グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemGroupMaster itemGroupMaster;
 
 	/**
@@ -679,7 +679,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 用途が限定的かつ処理不可削減の為、エンティティとして保持しない
 	 */
 	@Min(0)
-	@Schema(description = "商材固有品種グループマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商材固有品種グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long specificItemGroupMasterId;
 
 	/**
@@ -687,7 +687,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "特殊加算月数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "特殊加算月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer specialAddMonths;
 
 	/**
@@ -696,7 +696,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lost_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "紛失金品種マスタ", required = false)
+	@Schema(description = "紛失金品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster lostItemMaster;
 
 	/**
@@ -705,68 +705,68 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "damage_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "破損水没金品種マスタ", required = false)
+	@Schema(description = "破損水没金品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster damageItemMaster;
 
 	/**
 	 * イニシャルランニング対応品種マスタID
 	 */
-	@Schema(description = "イニシャルランニング対応品種マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "イニシャルランニング対応品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long initialRunningItemMasterId;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@Schema(description = "価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 課税区分
 	 */
-	@Schema(description = "課税区分", required = false, allowableValues = "対象外(\"0\"), 外税(\"1\"), 内税(\"2\"), 免税(\"3\"), 非課税(\"4\")")
+	@Schema(description = "課税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "対象外(\"0\"), 外税(\"1\"), 内税(\"2\"), 免税(\"3\"), 非課税(\"4\")")
 	private TaxCategory taxCategory;
 
 	/**
 	 * 支払周期区分
 	 */
-	@Schema(description = "支払周期区分", required = false, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	@Schema(description = "支払周期区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月額(\"1\"), 年額(\"2\")")
 	private PaymentCycleType paymentCycleType;
 
 	/**
 	 * 更新月計上不要区分
 	 */
-	@Schema(description = "更新月計上不要区分", required = false, allowableValues = "サービス開始日(\"1\"), 課金開始日(\"2\")")
+	@Schema(description = "更新月計上不要区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "サービス開始日(\"1\"), 課金開始日(\"2\")")
 	private UpdateMonthNotAccountingDiv updateMonthNotAccountingDiv;
 
 	/**
 	 * 売上可能開始日
 	 */
-	@Schema(description = "売上可能開始日", required = false)
+	@Schema(description = "売上可能開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date accountPossibleStartDate;
 
 	/**
 	 * 価格改定前リコー品種コード
 	 */
-	@Schema(description = "価格改定前リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "価格改定前リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bfPriceRevisionItemCode;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@Schema(description = "価格改定処理グループID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定処理グループID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 
 	/**
 	 * 月割品種対応初期費品種マスタID
 	 */
-	@Schema(description = "月割品種対応初期費品種マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "月割品種対応初期費品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long prorationLinkedInitialItemMasterId;
 
 	/**
 	 * 同一SS用最短納期日数
 	 */
 	@Max(99)
-	@Schema(description = "同一SS用最短納期日数", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "同一SS用最短納期日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer shortestDeliveryDateForSameSs;
 }

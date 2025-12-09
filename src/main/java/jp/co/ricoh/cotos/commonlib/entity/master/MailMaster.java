@@ -28,21 +28,21 @@ public class MailMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_master_seq")
 	@SequenceGenerator(name = "mail_master_seq", sequenceName = "mail_master_seq", allocationSize = 1)
-	@Schema(description = "メールマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "メールマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * メールテンプレートマスタID
 	 */
 	@Min(0)
-	@Schema(description = "メールテンプレートマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールテンプレートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailTemplateMasterId;
 
 	/**
 	 * メールタイプ区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "メールタイプ区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールタイプ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailTypeDiv;
 
 	/**
@@ -51,27 +51,27 @@ public class MailMaster extends EntityBaseMaster {
 	@Valid
 	@OneToMany(mappedBy = "mailMaster")
 	@OrderBy("id ASC")
-	@Schema(description = "メールアドレスマスタリスト", required = true)
+	@Schema(description = "メールアドレスマスタリスト", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<MailAddressMaster> mailAddressMasterList;
 
 	/**
 	 * サブメールマスタID
 	 */
 	@Min(0)
-	@Schema(description = "サブメールマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "サブメールマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long subMailMasterId;
 
 	/**
 	 * サブメール送信条件区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブメール送信条件区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サブメール送信条件区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subMailTypeDiv;
 
 	/**
 	 * サブメール送信条件値
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブメール送信条件値", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サブメール送信条件値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subMailCondition;
 }

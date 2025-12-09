@@ -46,14 +46,14 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "menu_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "メニュー管理マスタ", required = true)
+	@Schema(description = "メニュー管理マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private MenuManagementMaster menuManagementMaster;
 
 	/**
 	 * メニュー明細名
 	 */
 	@Size(max = 255)
-	@Schema(description = "メニュー明細名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メニュー明細名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String menuDetailsName;
 
 	/**
@@ -62,7 +62,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
-	@Schema(description = "順序", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "順序", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int orderNumber;
 
 	/**
@@ -71,7 +71,7 @@ public class MenuDetailsManagementMaster extends EntityBaseMaster {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "URL", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "URL", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String url;
 
 }

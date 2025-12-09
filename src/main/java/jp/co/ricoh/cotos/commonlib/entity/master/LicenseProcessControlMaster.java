@@ -41,7 +41,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
@@ -49,7 +49,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -57,7 +57,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Schema(description = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
@@ -66,7 +66,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "契約種別詳細", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "契約種別詳細", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
@@ -74,7 +74,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "解約フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
@@ -82,7 +82,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "工程パターンID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "工程パターンID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long processPatternId;
 
 	/**
@@ -91,7 +91,7 @@ public class LicenseProcessControlMaster extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "明細状態", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "明細状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String detailStatus;
 
 

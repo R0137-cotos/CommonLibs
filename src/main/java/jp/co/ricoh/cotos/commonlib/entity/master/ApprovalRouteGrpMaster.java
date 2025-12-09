@@ -33,20 +33,20 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_route_grp_master_seq")
 	@SequenceGenerator(name = "approval_route_grp_master_seq", sequenceName = "approval_route_grp_master_seq", allocationSize = 1)
-	@Schema(description = "承認ルートグループマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "承認ルートグループマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 承認ルートグループ名
 	 */
 	@Column(nullable = false)
-	@Schema(description = "承認ルートグループ名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認ルートグループ名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRouteGrpName;
 
 	/**
 	 * 説明
 	 */
-	@Schema(description = "説明", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "説明", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
@@ -54,7 +54,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OrderBy("condDetermineOrder ASC")
 	@OneToMany(mappedBy = "approvalRouteGrpMaster")
-	@Schema(description = "承認ルートマスタ", required = true)
+	@Schema(description = "承認ルートマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ApprovalRouteMaster> approvalRouteMasterList;
 
 	/**
@@ -62,7 +62,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "estimationApprovalRouteGrpMaster")
 	@JsonIgnore
-	@Schema(description = "商品グループマスタ（見積承認）", required = false)
+	@Schema(description = "商品グループマスタ（見積承認）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ProductGrpMaster> estimationProductGrpMasterList;
 
 	/**
@@ -70,7 +70,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "contractApprovalRouteGrpMaster")
 	@JsonIgnore
-	@Schema(description = "商品グループマスタ（契約承認）", required = false)
+	@Schema(description = "商品グループマスタ（契約承認）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ProductGrpMaster> contractProductGrpMasterList;
 
 	/**
@@ -78,7 +78,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "approvalRouteGrpMaster")
 	@JsonIgnore
-	@Schema(description = "手配業務タイプマスタ", required = false)
+	@Schema(description = "手配業務タイプマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterList;
 
 }

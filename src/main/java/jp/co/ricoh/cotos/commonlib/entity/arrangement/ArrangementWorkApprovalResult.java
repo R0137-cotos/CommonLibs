@@ -47,14 +47,14 @@ public class ArrangementWorkApprovalResult extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_approval_route_id", referencedColumnName = "id")
-	@Schema(description = "手配業務承認ルート", required = true)
+	@Schema(description = "手配業務承認ルート", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ArrangementWorkApprovalRoute arrangementWorkApprovalRoute;
 
 	/**
 	 * 手配業務承認ルートノードID
 	 */
-	@Schema(description = "手配業務承認ルートノードID", required = false)
+	@Schema(description = "手配業務承認ルートノードID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long arrangementWorkApprovalRouteNodeId;
 
 	/**
@@ -62,7 +62,7 @@ public class ArrangementWorkApprovalResult extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "承認処理カテゴリー", required = true, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\")", example = "1")
+	@Schema(description = "承認処理カテゴリー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\")", example = "1")
 	private ApprovalProcessCategory approvalProcessCategory;
 
 	/**
@@ -71,7 +71,7 @@ public class ArrangementWorkApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "処理実施者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String actualEmpId;
 
 	/**
@@ -80,21 +80,21 @@ public class ArrangementWorkApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "処理実施者社員名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者社員名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String actualUserName;
 
 	/**
 	 * 処理実施者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "処理実施者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String actualOrgName;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 255)
-	@Schema(description = "コメント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String requestComment;
 
 	/**

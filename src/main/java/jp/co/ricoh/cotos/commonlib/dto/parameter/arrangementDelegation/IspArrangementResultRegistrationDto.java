@@ -48,28 +48,28 @@ public class IspArrangementResultRegistrationDto {
 	 * 手配業務ID
 	 */
 	@NotNull
-	@Schema(description = "手配業務ID", required = true)
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String id;
 
 	/**
 	 * 手配結果コード
 	 */
 	@NotNull
-	@Schema(description = "手配結果コード", required = true)
+	@Schema(description = "手配結果コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ResultCode resultCode;
 
 	/**
 	 * エラー情報リスト
 	 */
 	@Valid
-	@Schema(description = "エラー情報リスト", required = false)
+	@Schema(description = "エラー情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<IspErrorInfo> errorList;
 
 	/**
 	 * IspUrlリスト
 	 */
 	@Valid
-	@Schema(description = "IspUrlリスト", required = false)
+	@Schema(description = "IspUrlリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<IspUrl> ispUrlList;
 
 }

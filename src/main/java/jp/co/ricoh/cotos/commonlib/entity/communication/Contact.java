@@ -50,7 +50,7 @@ public class Contact extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "見積ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
 
 	/**
@@ -59,7 +59,7 @@ public class Contact extends EntityBase {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "parent_id", referencedColumnName = "id")
-	@Schema(description = "親問い合わせ", required = false)
+	@Schema(description = "親問い合わせ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Contact parent;
 
 	/**
@@ -67,7 +67,7 @@ public class Contact extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "parent")
-	@Schema(description = "子問い合わせリスト", required = false)
+	@Schema(description = "子問い合わせリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<Contact> children;
 
 	/**
@@ -76,26 +76,26 @@ public class Contact extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "送信者MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "送信者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contactFromEmpId;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@Schema(description = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * タイトル
 	 */
 	@Size(max = 255)
-	@Schema(description = "タイトル", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "タイトル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String title;
 
 	/**
 	 * 内容
 	 */
-	@Schema(description = "内容", required = false)
+	@Schema(description = "内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String content;
 
@@ -111,7 +111,7 @@ public class Contact extends EntityBase {
 	 * 送信者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "送信者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "送信者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactFromEmpName;
 
 	/**
@@ -120,14 +120,14 @@ public class Contact extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "contact")
 	@NotNull
-	@Schema(description = "宛先", required = true)
+	@Schema(description = "宛先", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ContactTo> contactToList;
 
 	/**
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "アプリケーションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	@PrePersist

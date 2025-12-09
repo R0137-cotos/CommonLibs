@@ -43,14 +43,14 @@ public class ShippingThingDetail extends EntityBase {
 	 * 物あり品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "物あり品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "物あり品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String thingItemCode;
 
 	/**
 	 * 発送機器名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "発送機器名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "発送機器名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String shippingMachineName;
 
 	/**
@@ -58,7 +58,7 @@ public class ShippingThingDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "数量", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
@@ -66,13 +66,13 @@ public class ShippingThingDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 発送区分
 	 */
-	@Schema(description = "発送区分", required = false, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")", example = "1")
+	@Schema(description = "発送区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "NW機器経由(\"0\"), 直送(\"1\"), 自課所(\"2\")", example = "1")
 	private ShippingType shippingType;
 
 	/**
@@ -80,7 +80,7 @@ public class ShippingThingDetail extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "FFM内部振替除外フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "FFM内部振替除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer ffmInsideTransExclusionFlg;
 
 	/**
@@ -88,7 +88,7 @@ public class ShippingThingDetail extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "プロダクト確認集計表フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "プロダクト確認集計表フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer productSpreadsheetFlg;
 
 	/**
@@ -97,13 +97,13 @@ public class ShippingThingDetail extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_detail_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約明細", required = true)
+	@Schema(description = "契約明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractDetail contractDetail;
 
 	/**
 	 * 仕入先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "仕入先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "仕入先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorCode;
 }

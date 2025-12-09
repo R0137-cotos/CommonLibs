@@ -35,21 +35,21 @@ public class BplatsRicohItemCodeConvertInfo extends EntityBase {
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * Bplats用ダミーリコー品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "Bplats用ダミーリコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "Bplats用ダミーリコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bplatsDummyRicohItemCode;
 
 	/**
 	 * 正規リコー品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "正規リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "正規リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String regularRicohItemCode;
 
 }

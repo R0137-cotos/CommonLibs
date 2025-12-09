@@ -26,20 +26,20 @@ import lombok.ToString;
 public class AppMaster extends EntityBaseMaster {
 
 	@Id
-	@Schema(description = "アプリケーションID", required = true)
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String appId;
 
 	@Column(nullable = false)
-	@Schema(description = "パスワード", required = true)
+	@Schema(description = "パスワード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String password;
 
 	@Column(nullable = false)
-	@Schema(description = "オリジン", required = true)
+	@Schema(description = "オリジン", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String origin;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "system_id", referencedColumnName = "systemId")
-	@Schema(description = "システムマスタ", required = true)
+	@Schema(description = "システムマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private SystemMaster systemMaster;
 }

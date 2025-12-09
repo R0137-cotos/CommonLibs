@@ -54,109 +54,109 @@ public class MsCustomerRegisterRequestWork extends AbstractMsRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_customer_register_request_work_seq")
 	@SequenceGenerator(name = "ms_customer_register_request_work_seq", sequenceName = "ms_customer_register_request_work_seq", allocationSize = 1)
-	@Schema(description = "MS_顧客登録リクエストWORK", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "MS_顧客登録リクエストWORK", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * ライセンス情報ID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "ライセンス情報ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス情報ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long licenseInfoId;
 
 	/**
 	 * 処理状態
 	 */
-	@Schema(description = "処理状態", required = false, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
+	@Schema(description = "処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
 	private MsRequestStatus processStatus;
 
 	/**
 	 * 希望ドメインプレフィックス
 	 */
 	@Size(max = 255)
-	@Schema(description = "希望ドメインプレフィックス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "希望ドメインプレフィックス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String domainPrefix;
 
 	/**
 	 * 顧客会社名
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客会社名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * 顧客会社　住所
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客会社　住所", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客会社　住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addressLine1;
 
 	/**
 	 * 顧客会社　住所2
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客会社　住所2", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客会社　住所2", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addressLine2;
 
 	/**
 	 * 顧客会社　市区町村
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客会社　市区町村", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客会社　市区町村", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String city;
 
 	/**
 	 * 顧客会社　県
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客会社　県", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客会社　県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String region;
 
 	/**
 	 * 顧客会社郵便番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客会社郵便番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客会社郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String postalCode;
 
 	/**
 	 * 顧客担当Email
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客担当Email", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客担当Email", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String email;
 
 	/**
 	 * 顧客担当Tel
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客担当Tel", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客担当Tel", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String tel;
 
 	/**
 	 * 顧客担当名前
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客担当名前", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客担当名前", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String firstName;
 
 	/**
 	 * 顧客担当苗字
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客担当苗字", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客担当苗字", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String lastName;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * 顧客連携状態
 	 */
-	@Schema(description = "顧客連携状態", required = false, allowableValues = "未処理(\"0\"), 顧客登録済(\"1\"), 処理済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
+	@Schema(description = "顧客連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 顧客登録済(\"1\"), 処理済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
 	private MsCustomerLinkageStatus customerLinkageStatus;
 
 }

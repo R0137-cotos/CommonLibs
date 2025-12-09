@@ -30,34 +30,34 @@ public class MsAutoUpdateDateManagement extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_auto_update_date_management_seq")
 	@SequenceGenerator(name = "ms_auto_update_date_management_seq", sequenceName = "ms_auto_update_date_management_seq", allocationSize = 1)
-	@Schema(description = "MS_自動更新日連携管理ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "MS_自動更新日連携管理ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス終了日", required = false)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermEnd;
 
 	/**
 	 * 更新前ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "更新前ライセンス終了日", required = false)
+	@Schema(description = "更新前ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date beforeUpdateLicenseTermEnd;
 
 	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long itemMasterId;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブスクリプションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 }

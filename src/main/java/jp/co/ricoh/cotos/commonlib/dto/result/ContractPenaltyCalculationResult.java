@@ -25,7 +25,7 @@ public class ContractPenaltyCalculationResult {
 	/**
 	 * 違約金発生解約最終日
 	 */
-	@Schema(description = "違約金発生解約最終日", required = false)
+	@Schema(description = "違約金発生解約最終日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyIncurredLastDay;
 }

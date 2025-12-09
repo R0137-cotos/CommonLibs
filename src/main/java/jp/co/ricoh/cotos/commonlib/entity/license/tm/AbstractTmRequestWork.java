@@ -56,13 +56,13 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	/**
 	 * 送信状態
 	 */
-	@Schema(description = "送信状態", required = false, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 連携エラー(\"2\"), 連携対象外(\"3\")", example = "0")
+	@Schema(description = "送信状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 連携エラー(\"2\"), 連携対象外(\"3\")", example = "0")
 	private TmRequestStatus requestStatus;
 
 	/**
 	 * 送信時刻
 	 */
-	@Schema(description = "送信時刻", required = false)
+	@Schema(description = "送信時刻", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date requestTime;
 
@@ -70,20 +70,20 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	 * URL
 	 */
 	@Size(max = 255)
-	@Schema(description = "URL", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "URL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String url;
 
 	/**
 	 * Http Header
 	 */
 	@Size(max = 4000)
-	@Schema(description = "Http Header", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "Http Header", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String httpHeader;
 
 	/**
 	 * Http Body
 	 */
 	@Size(max = 4000)
-	@Schema(description = "Http Body", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "Http Body", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String httpBody;
 }

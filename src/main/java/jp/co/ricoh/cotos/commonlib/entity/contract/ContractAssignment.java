@@ -34,19 +34,19 @@ public class ContractAssignment extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_assignment_seq")
 	@SequenceGenerator(name = "contract_assignment_seq", sequenceName = "contract_assignment_seq", allocationSize = 1)
-	@Schema(description = "契約業務情報ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "契約業務情報ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * メモ
 	 */
-	@Schema(description = "メモ", required = false)
+	@Schema(description = "メモ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String memo;
 
@@ -55,7 +55,7 @@ public class ContractAssignment extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractAssignment")
-	@Schema(description = "契約業務添付ファイル", required = false)
+	@Schema(description = "契約業務添付ファイル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAssignmentAttachedFile> contractAssignmentAttachedFileList;
 
 	/**
@@ -63,6 +63,6 @@ public class ContractAssignment extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "更新フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer updateFlg;
 }

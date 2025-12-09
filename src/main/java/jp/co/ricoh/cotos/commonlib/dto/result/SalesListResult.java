@@ -26,249 +26,249 @@ public class SalesListResult {
 	 * 連番
 	 */
 	@Id
-	@Schema(description = "連番", required = true)
+	@Schema(description = "連番", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long seqNo;
 
 	/**
 	 * 売上年月
 	 */
-	@Schema(description = "売上年月", required = true)
+	@Schema(description = "売上年月", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String salesMonth;
 
 	/**
 	 * 注文日
 	 */
-	@Schema(description = "注文日", required = false)
+	@Schema(description = "注文日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date applicationDate;
 
 	/**
 	 * 支店コード
 	 */
-	@Schema(description = "支店コード", required = true)
+	@Schema(description = "支店コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String salesCompanyCode;
 
 	/**
 	 * 支店名
 	 */
-	@Schema(description = "支店名", required = true)
+	@Schema(description = "支店名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String salesCompanyName;
 
 	/**
 	 * 担当SA所属名
 	 */
-	@Schema(description = "担当SA所属名", required = true)
+	@Schema(description = "担当SA所属名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String salesDepartmentName;
 
 	/**
 	 * 担当SA名
 	 */
-	@Schema(description = "担当SA名", required = true)
+	@Schema(description = "担当SA名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String employeeName;
 
 	/**
 	 * E/U：企業ID
 	 */
-	@Schema(description = "E/U：企業ID", required = true)
+	@Schema(description = "E/U：企業ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String companyId;
 
 	/**
 	 * E/U：企事部ID
 	 */
-	@Schema(description = "E/U：企事部ID", required = true)
+	@Schema(description = "E/U：企事部ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String momCustId;
 
 	/**
 	 * E/U：上流システムコード
 	 */
-	@Schema(description = "E/U：上流システムコード", required = true)
+	@Schema(description = "E/U：上流システムコード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String salesCompanyCustomerCode;
 
 	/**
 	 * E/U：お客様名
 	 */
-	@Schema(description = "E/U：お客様名", required = true)
+	@Schema(description = "E/U：お客様名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String companyName;
 
 	/**
 	 * ベンダ名
 	 */
-	@Schema(description = "ベンダ名", required = false)
+	@Schema(description = "ベンダ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorName;
 
 	/**
 	 * サービス名
 	 */
-	@Schema(description = "サービス名", required = true)
+	@Schema(description = "サービス名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String productContractName;
 
 	/**
 	 * 契約種別
 	 */
-	@Schema(description = "契約種別", required = true, allowableValues = "初期費(\"1\"), 月額定額(\"2\"), 年額(\"3\"), 月額従量(\"4\")", example = "1")
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額定額(\"2\"), 年額(\"3\"), 月額従量(\"4\")", example = "1")
 	private CostType cotosCostType;
 
 	/**
 	 * RJ管理番号
 	 */
-	@Schema(description = "RJ管理番号", required = false)
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String rjManageNumber;
 
 	/**
 	 * ベンダ契約番号
 	 */
-	@Schema(description = "ベンダ契約番号", required = false)
+	@Schema(description = "ベンダ契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorManageNumber;
 
 	/**
 	 * 注文番号
 	 */
-	@Schema(description = "注文番号", required = true)
+	@Schema(description = "注文番号", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String contractNumber;
 
 	/**
 	 * 品種コード
 	 */
-	@Schema(description = "品種コード", required = true)
+	@Schema(description = "品種コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String itemCode;
 
 	/**
 	 * 商品名称
 	 */
-	@Schema(description = "商品名称", required = true)
+	@Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String itemName;
 
 	/**
 	 * 数量
 	 */
-	@Schema(description = "数量", required = true)
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Integer quantity;
 
 	/**
 	 * 売価単価
 	 */
-	@Schema(description = "売価単価", required = true)
+	@Schema(description = "売価単価", requiredMode = Schema.RequiredMode.REQUIRED)
 	private BigDecimal salesCompanySalesPrice;
 
 	/**
 	 * 金額
 	 */
-	@Schema(description = "金額", required = true)
+	@Schema(description = "金額", requiredMode = Schema.RequiredMode.REQUIRED)
 	private BigDecimal salesCompanySalesAmount;
 
 	/**
 	 * 販社仕切単価
 	 */
-	@Schema(description = "販社仕切単価", required = false)
+	@Schema(description = "販社仕切単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal ricohSalesPrice;
 
 	/**
 	 * リコー仕切単価
 	 */
-	@Schema(description = "リコー仕切単価", required = false)
+	@Schema(description = "リコー仕切単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal ricohPartitionPrice;
 
 	/**
 	 * サービス開始日
 	 */
-	@Schema(description = "サービス開始日", required = true)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date serviceTermStart;
 
 	/**
 	 * 課金開始日
 	 */
-	@Schema(description = "課金開始日", required = false)
+	@Schema(description = "課金開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date billingStartDate;
 
 	/**
 	 * Web受付番号
 	 */
-	@Schema(description = "Web受付番号", required = false)
+	@Schema(description = "Web受付番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String webOrderNumber;
 
 	/**
 	 * COTOS商流区分
 	 */
-	@Schema(description = "COTOS商流区分", required = true, allowableValues = "1:直売  2:代売_接点店  3:代売_母店_接点店", example = "1")
+	@Schema(description = "COTOS商流区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "1:直売  2:代売_接点店  3:代売_母店_接点店", example = "1")
 	private String cotosDealerFlow;
 
 	/**
 	 * 接点店：企事部ID
 	 */
-	@Schema(description = "接点店：企事部ID", required = false)
+	@Schema(description = "接点店：企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStoreMomCustId;
 
 	/**
 	 * 接点店名
 	 */
-	@Schema(description = "接点店名", required = false)
+	@Schema(description = "接点店名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStoreDealerName;
 
 	/**
 	 * 接点店：取引先コード（手数料用）
 	 */
-	@Schema(description = "接点店：取引先コード（手数料用）", required = false)
+	@Schema(description = "接点店：取引先コード（手数料用）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStoreDistributorRtcCd;
 
 	/**
 	 * 接点店：販売店担当営業名
 	 */
-	@Schema(description = "接点店：販売店担当営業名", required = false)
+	@Schema(description = "接点店：販売店担当営業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStorePicName;
 
 	/**
 	 * 接点店担当営業メールアドレス
 	 */
-	@Schema(description = "接点店担当営業メールアドレス", required = false)
+	@Schema(description = "接点店担当営業メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStoreDistributorEmployeeMailAddress;
 
 	/**
 	 * 接点店担当営業電話番号
 	 */
-	@Schema(description = "接点店担当営業電話番号", required = false)
+	@Schema(description = "接点店担当営業電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStorePicPhoneNumber;
 
 	/**
 	 * 接点店住所
 	 */
-	@Schema(description = "接点店住所", required = false)
+	@Schema(description = "接点店住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactStoreAddress;
 
 	/**
 	 * 接点店手数料金額
 	 */
-	@Schema(description = "接点店手数料金額", required = false)
+	@Schema(description = "接点店手数料金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal contactStoreCommissionAmount;
 
 	/**
 	 * 母店：企事部ID
 	 */
-	@Schema(description = "母店：企事部ID", required = false)
+	@Schema(description = "母店：企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String motherStoreMomCustId;
 
 	/**
 	 * 母店名
 	 */
-	@Schema(description = "母店名", required = false)
+	@Schema(description = "母店名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String motherStoreDealerName;
 
 	/**
 	 * 母店：取引先コード（手数料用）
 	 */
-	@Schema(description = "母店：取引先コード（手数料用）", required = false)
+	@Schema(description = "母店：取引先コード（手数料用）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String motherStoreDistributorRtcCd;
 
 	/**
 	 * 母店手数料金額
 	 */
-	@Schema(description = "母店手数料金額", required = false)
+	@Schema(description = "母店手数料金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal motherStoreCommissionAmount;
 
 	/**
 	 * 商品区分
 	 */
-	@Schema(description = "商品区分", required = false)
+	@Schema(description = "商品区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String productClassDiv;
 }

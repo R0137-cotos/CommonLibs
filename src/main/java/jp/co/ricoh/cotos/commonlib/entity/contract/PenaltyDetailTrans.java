@@ -45,21 +45,21 @@ public class PenaltyDetailTrans extends EntityBase {
 	 */
 	@DecimalMin("-9999999999999999999.99")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "原価", required = false, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
+	@Schema(description = "原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 振替先課所コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "振替先課所コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transToServiceOrgCode;
 
 	/**
 	 * 振替先課所名
 	 */
 	@Size(max = 255)
-	@Schema(description = "振替先課所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transToServiceOrgName;
 
 	/**
@@ -68,12 +68,12 @@ public class PenaltyDetailTrans extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "penalty_detail_contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "違約金明細", required = true)
+	@Schema(description = "違約金明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private PenaltyDetailContract penaltyDetailContract;
 
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@Schema(description = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", example = "1")
+	@Schema(description = "イニシャル/ランニング区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", example = "1")
 	private InitialRunningDiv initialRunningDiv;
 }

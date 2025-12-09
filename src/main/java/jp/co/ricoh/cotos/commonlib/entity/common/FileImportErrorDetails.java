@@ -39,21 +39,21 @@ public class FileImportErrorDetails extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ファイル取込管理", required = true)
+	@Schema(description = "ファイル取込管理", requiredMode = Schema.RequiredMode.REQUIRED)
 	private FileImportManagement fileImportManagement;
 
 	/**
 	 * 行番号
 	 */
 	@Min(0)
-	@Schema(description = "行番号", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "行番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long lineNumber;
 
 	/**
 	 * メッセージ
 	 */
 	@Size(max = 255)
-	@Schema(description = "メッセージ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String message;
 
 }

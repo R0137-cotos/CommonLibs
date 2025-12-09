@@ -71,7 +71,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
@@ -79,14 +79,14 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "工程パターンID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "工程パターンID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long processPatternId;
 
 	/**
 	 * 工程順
 	 */
 	@Column(nullable = false)
-	@Schema(description = "工程順", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "工程順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int processOrder;
 
 	/**
@@ -95,14 +95,14 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "process_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ライセンス工程マスタ", required = true)
+	@Schema(description = "ライセンス工程マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseProcessMaster licenseProcessMaster;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Min(0)
-	@Schema(description = "手配業務タイプマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**
@@ -110,20 +110,20 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "メール到達チェックフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "メール到達チェックフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール区分
 	 */
-	@Schema(description = "メール区分", required = true, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
+	@Schema(description = "メール区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
 	 * メールマスタID
 	 */
 	@Min(0)
-	@Schema(description = "メールマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
 
 	/**
@@ -131,13 +131,13 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "メール到達チェック時間", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "メール到達チェック時間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer mailArrivalCheckHour;
 
 	/**
 	 * 到着チェックメール制御マスタID
 	 */
 	@Min(0)
-	@Schema(description = "到着チェックメール制御マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "到着チェックメール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrivalCheckMailControlMasterId;
 }

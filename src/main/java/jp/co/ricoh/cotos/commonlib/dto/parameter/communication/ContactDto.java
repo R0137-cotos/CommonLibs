@@ -25,14 +25,14 @@ public class ContactDto extends DtoBase {
 	 * 見積ID
 	 */
 	@Min(0)
-	@Schema(description = "見積ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
 
 	/**
 	 * 子問い合わせリスト
 	 */
 	@Valid
-	@Schema(description = "子問い合わせリスト", required = false)
+	@Schema(description = "子問い合わせリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContactDto> children;
 
 	/**
@@ -46,7 +46,7 @@ public class ContactDto extends DtoBase {
 	/**
 	 * サービスカテゴリ
 	 */
-	@Schema(description = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
@@ -54,21 +54,21 @@ public class ContactDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "タイトル", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "タイトル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String title;
 
 	/**
 	 * 内容
 	 */
 	@NotNull
-	@Schema(description = "内容", required = false)
+	@Schema(description = "内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String content;
 
 	/**
 	 * 送信日時
 	 */
-	@Schema(description = "送信日時", required = true)
+	@Schema(description = "送信日時", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date sendAt;
 
@@ -76,7 +76,7 @@ public class ContactDto extends DtoBase {
 	 * 送信者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "送信者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "送信者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactFromEmpName;
 
 	/**
@@ -84,6 +84,6 @@ public class ContactDto extends DtoBase {
 	 */
 	@NotNull
 	@Valid
-	@Schema(description = "宛先", required = true)
+	@Schema(description = "宛先", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ContactToDto> contactToList;
 }

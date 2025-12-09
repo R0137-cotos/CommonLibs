@@ -43,28 +43,28 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "ヘッダーフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "ヘッダーフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer csvHeaderFlg;
 
 	/**
 	 * セパレーター文字
 	 */
 	@Size(max = 255)
-	@Schema(description = "セパレーター文字名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "セパレーター文字名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String csvSeparator;
 
 	/**
 	 * 文字コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "文字コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "文字コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String csvCharset;
 
 	/**
 	 * 改行コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "改行コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "改行コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String csvLineSeparator;
 
 	/**
@@ -72,7 +72,7 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "囲み文字有無フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "囲み文字有無フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer csvQuote;
 
 	/**
@@ -80,14 +80,14 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "囲み文字有無フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "囲み文字有無フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer csvWithoutQuoteChar;
 
 	/**
 	 * NULL値文字
 	 */
 	@Size(max = 255)
-	@Schema(description = "NULL値文字", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "NULL値文字", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String csvNullValueString;
 
 	/**
@@ -95,7 +95,7 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "BOM設定フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "BOM設定フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer bomSettingFlg;
 
 	/**
@@ -103,6 +103,6 @@ public class CsvFileSettingMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "csvFileSettingMaster")
 	@JsonIgnore
-	@Schema(description = "ファイル種別管理マスタ", required = false)
+	@Schema(description = "ファイル種別管理マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }

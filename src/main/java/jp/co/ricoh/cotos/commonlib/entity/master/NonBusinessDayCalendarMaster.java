@@ -21,9 +21,9 @@ import lombok.EqualsAndHashCode;
 public class NonBusinessDayCalendarMaster extends EntityBaseMaster {
 
 	@Id
-	@Schema(description = "非営業日", required = true)
+	@Schema(description = "非営業日", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Date nonBusinessDay;
 
-	@Schema(description = "ベンダー略称", required = false)
+	@Schema(description = "ベンダー略称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorShortName;
 }

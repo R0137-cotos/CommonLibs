@@ -17,13 +17,13 @@ public class ContractPicIntSsOrgDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "MoM組織ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM組織ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momOrgId;
 
 	/**
 	 * 課所名
 	 */
 	@Size(max = 255)
-	@Schema(description = "課所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceOrgName;
 }

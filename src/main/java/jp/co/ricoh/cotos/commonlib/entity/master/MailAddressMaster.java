@@ -78,7 +78,7 @@ public class MailAddressMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_address_master_seq")
 	@SequenceGenerator(name = "mail_address_master_seq", sequenceName = "mail_address_master_seq", allocationSize = 1)
-	@Schema(description = "メールアドレスマスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "メールアドレスマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -87,32 +87,32 @@ public class MailAddressMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "mail_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "メールマスタ", required = true)
+	@Schema(description = "メールマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private MailMaster mailMaster;
 
 	/**
 	 * メールアドレス区分
 	 */
-	@Schema(description = "メールアドレス区分", required = false, allowableValues = "TO(\"1\"), CC(\"2\"), BCC(\"3\")")
+	@Schema(description = "メールアドレス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "TO(\"1\"), CC(\"2\"), BCC(\"3\")")
 	private MailAddressDiv mailAddressDiv;
 
 	/**
 	 * 対象エンティティ名
 	 */
 	@Size(max = 255)
-	@Schema(description = "対象エンティティ名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "対象エンティティ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String targetEntityName;
 
 	/**
 	 * 対象フィールド名
 	 */
 	@Size(max = 255)
-	@Schema(description = "対象フィールド名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "対象フィールド名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String targetFieldName;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@Schema(description = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\"), ライセンス(\"4\")")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\"), ライセンス(\"4\")")
 	private ServiceCategory serviceCategory;
 }

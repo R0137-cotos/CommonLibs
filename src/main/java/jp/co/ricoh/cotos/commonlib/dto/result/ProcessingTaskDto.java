@@ -13,15 +13,15 @@ import lombok.Data;
 public class ProcessingTaskDto {
 
 	/** 作成中見積一覧 */
-	@Schema(description = "作成中見積一覧", required = false)
+	@Schema(description = "作成中見積一覧", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<WorkInProgresTaskDto> estimationWIPList;
 
 	/** 作成中契約一覧 */
-	@Schema(description = "作成中契約一覧", required = false)
+	@Schema(description = "作成中契約一覧", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<WorkInProgresTaskDto> contractWIPList;
 
 	/** 手配処理中一覧 */
-	@Schema(description = "手配処理中一覧", required = false)
+	@Schema(description = "手配処理中一覧", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<WorkInProgresTaskDto> arrangeWIPList;
 
 	/**

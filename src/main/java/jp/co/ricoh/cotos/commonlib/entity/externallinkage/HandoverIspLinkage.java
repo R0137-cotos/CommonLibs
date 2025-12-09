@@ -66,89 +66,89 @@ public class HandoverIspLinkage extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * メールアカウント
 	 */
 	@Size(max = 255)
-	@Schema(description = "メールアカウント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAccount;
 
 	/**
 	 * メール引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "メール引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メール引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailHandoverContractId;
 
 	/**
 	 * ドメイン名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ドメイン名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String domainName;
 
 	/**
 	 * ドメイン引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "ドメイン引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ドメイン引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long domainHandoverContractId;
 
 	/**
 	 * ドメイン引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "ドメイン引継ぎ元RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String domainHandoverRjManageNumber;
 
 	/**
 	 * ホスティングサービス区分
 	 */
-	@Schema(description = "ホスティングサービス区分", required = false, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
+	@Schema(description = "ホスティングサービス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "現状のホスティングサーバーを継続利用(\"1\"), 新規ホスティングサーバーにドメイン名だけ引き継ぐ(\"2\")")
 	private HostingServiceDiv hostingServiceDiv;
 
 	/**
 	 * アカウント名
 	 */
 	@Size(max = 255)
-	@Schema(description = "アカウント名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アカウント名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String accountName;
 
 	/**
 	 * アカウント引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "アカウント引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "アカウント引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long accountHandoverContractId;
 
 	/**
 	 * アカウント引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "アカウント引継ぎ元RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アカウント引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String accountHandoverRjManageNumber;
 
 	/**
 	 * 接続ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "接続ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "接続ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String connectId;
 
 	/**
 	 * 接続ID引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "接続ID引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "接続ID引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long connectHandoverContractId;
 
 	/**
 	 * 接続ID引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "接続ID引継ぎ元RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "接続ID引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String connectHandoverRjManageNumber;
 }

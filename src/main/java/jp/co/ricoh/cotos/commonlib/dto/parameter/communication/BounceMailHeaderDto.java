@@ -27,7 +27,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("To")
 	@Size(max = 255)
-	@Schema(description = "TO（メール送信時設定不要）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "TO（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String to;
 
 	/**
@@ -35,14 +35,14 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("Cc")
 	@Size(max = 255)
-	@Schema(description = "CC（メール送信時設定不要）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "CC（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cc;
 
 	/**
 	 * 送信元メール送信日時
 	 */
 	@JsonProperty("Date")
-	@Schema(description = "送信元メール送信日時（メール送信時設定不要）", required = false)
+	@Schema(description = "送信元メール送信日時（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date sentAt;
 
@@ -55,7 +55,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("ContractId")
 	@Size(max = 255)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractId;
 
 	/**
@@ -67,7 +67,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("DocNumber")
 	@Size(max = 255)
-	@Schema(description = "文書番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "文書番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String docNumber;
 
 	/**
@@ -79,7 +79,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("ContractNumber")
 	@Size(max = 255)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -92,7 +92,7 @@ public class BounceMailHeaderDto {
 	@JsonProperty("ContractBranchNumber")
 	@Max(99)
 	@Min(0)
-	@Schema(description = "契約番号枝番", required = false)
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer contractBranchNumber;
 
 	/**
@@ -100,7 +100,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("MailTemplateMasterId")
 	@Min(0)
-	@Schema(description = "メールテンプレートマスタID", required = false)
+	@Schema(description = "メールテンプレートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long mailTemplateMasterId;
 
 	/**
@@ -108,7 +108,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-contractId")
 	@Size(max = 255)
-	@Schema(description = "N_X_CONTRACT_ID（メール送信時設定不要）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_CONTRACT_ID（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXContractId;
 
 	/**
@@ -116,7 +116,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-Mailer")
 	@Size(max = 255)
-	@Schema(description = "N_X_MAILER（メール送信時設定不要）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_MAILER（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXMailer;
 
 	/**
@@ -124,7 +124,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-NPServiceNo")
 	@Min(0)
-	@Schema(description = "N_X_NPSERVICENO（メール送信時設定不要）", required = false)
+	@Schema(description = "N_X_NPSERVICENO（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long nXNpserviceno;
 
 	/**
@@ -132,7 +132,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-NServiceLineNo")
 	@Min(0)
-	@Schema(description = "N_X_NSERVICELINENO（メール送信時設定不要）", required = false)
+	@Schema(description = "N_X_NSERVICELINENO（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long nXNservicelineno;
 
 	/**
@@ -140,7 +140,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-NDomainLineNo")
 	@Min(0)
-	@Schema(description = "N_X_NDOMAINLINENO（メール送信時設定不要）", required = false)
+	@Schema(description = "N_X_NDOMAINLINENO（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long nXNdomainlineno;
 
 	/**
@@ -148,7 +148,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-NGuideTargetType")
 	@Size(max = 255)
-	@Schema(description = "N_X_NGUIDETARGETTYPE（メール送信時設定不要）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_NGUIDETARGETTYPE（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXNguidetargettype;
 
 	/**
@@ -156,7 +156,7 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("X-jizenFlag")
 	@Size(max = 255)
-	@Schema(description = "N_X_JIZENFLG（メール送信時設定不要）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_JIZENFLG（メール送信時設定不要）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXJizenflg;
 
 	/**
@@ -164,14 +164,14 @@ public class BounceMailHeaderDto {
 	 */
 	@JsonProperty("MailControlMasterId")
 	@Min(0)
-	@Schema(description = "通知メール制御マスタID", required = false)
+	@Schema(description = "通知メール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long mailControlMasterId;
 
 	/**
 	 * サービスカテゴリ
 	 */
 	@JsonProperty("ServiceCategory")
-	@Schema(description = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")")
 	private ServiceCategory serviceCategory;
 
 	/**

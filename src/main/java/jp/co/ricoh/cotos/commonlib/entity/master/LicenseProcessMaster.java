@@ -72,21 +72,21 @@ public class LicenseProcessMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
 	 * 工程名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "工程名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "工程名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String processName;
 
 	/**
 	 * 工程完了名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "工程完了名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "工程完了名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String completeProcessName;
 
 	/**
@@ -95,7 +95,7 @@ public class LicenseProcessMaster extends EntityBase {
 	@NotNull
 	@Size(max = 255)
 	@Column(nullable = false)
-	@Schema(description = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\"), 自動(\"5\")")
+	@Schema(description = "操作区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\"), 自動(\"5\")")
 	private OperationDiv operationDiv;
 
 	/**
@@ -104,21 +104,21 @@ public class LicenseProcessMaster extends EntityBase {
 	@Min(0)
 	@Max(999)
 	@Column(nullable = false)
-	@Schema(description = "優先順位", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "優先順位", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int priorityOrder;
 
 	/**
 	 * ライセンス工程種類区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "ライセンス工程種類区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンス工程種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseProcessClassDiv;
 
 	/**
 	 * ライセンス工程パターンマスタリスト
 	 */
 	@OneToMany(mappedBy = "licenseProcessMaster")
-	@Schema(description = "ライセンス工程パターンマスタ", required = false)
+	@Schema(description = "ライセンス工程パターンマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<LicenseProcessPatternMaster> licenseProcessPatternMasterList;
 
 }

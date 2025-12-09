@@ -45,14 +45,14 @@ public class EstimationSearchParameter {
 	 * 見積書番号
 	 */
 	@Parameter(description = "見積書番号", required = false)
-	@Schema(description = "見積書番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "見積書番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String estimateNumber;
 
 	/**
 	 * 見積書番号枝番
 	 */
 	@Parameter(description = "見積書番号枝番", required = false)
-	@Schema(description = "見積書番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "見積書番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String estimateBranchNumber;
 
 	/**
@@ -68,7 +68,7 @@ public class EstimationSearchParameter {
 	 * 案件番号
 	 */
 	@Parameter(description = "案件番号", required = false)
-	@Schema(description = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseNumber;
 
 	/**
@@ -84,28 +84,28 @@ public class EstimationSearchParameter {
 	 * 変更元契約番号
 	 */
 	@Parameter(description = "変更元契約番号", required = false)
-	@Schema(description = "変更元契約番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "変更元契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String originContractNumber;
 
 	/**
 	 * 変更元契約番号枝番
 	 */
 	@Parameter(description = "変更元契約番号枝番", required = false)
-	@Schema(description = "変更元契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "変更元契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String originContractBranchNumber;
 
 	/**
 	 * 変更元契約件名
 	 */
 	@Parameter(description = "変更元契約件名", required = false)
-	@Schema(description = "変更元契約件名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "変更元契約件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String originContractTitle;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Parameter(description = "サービス識別番号", required = false)
-	@Schema(description = "サービス識別番号", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
@@ -265,7 +265,7 @@ public class EstimationSearchParameter {
 	 * 商品マスタID
 	 */
 	@Parameter(description = "商品マスタID", required = false)
-	@Schema(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long productId;
 
 	/**
@@ -289,28 +289,28 @@ public class EstimationSearchParameter {
 	 * 回線番号
 	 */
 	@Parameter(description = "回線番号", required = false)
-	@Schema(description = "回線番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "回線番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String lineNumber;
 
 	/**
 	 * ICCID
 	 */
 	@Parameter(description = "ICCID", required = false)
-	@Schema(description = "ICCID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ICCID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serialNumber;
 
 	/**
 	 * V-UP見積番号
 	 */
 	@Parameter(description = "V-UP見積番号", required = false)
-	@Schema(description = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	/**
 	 * ベンダー管理番号
 	 */
 	@Parameter(description = "ベンダー管理番号", required = false)
-	@Schema(description = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
@@ -343,21 +343,21 @@ public class EstimationSearchParameter {
 	 */
 	@Enumerated(EnumType.STRING)
 	@Parameter(description = "ソート順", required = false)
-	@Schema(description = "ソート順", required = false)
+	@Schema(description = "ソート順", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SortOrder sortOrder;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
 	@Parameter(description = "アプリケーションIDリスト", required = false)
-	@Schema(description = "アプリケーションIDリスト", required = false)
+	@Schema(description = "アプリケーションIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
 	@Parameter(description = "他システムデータ排他フラグ", required = false)
-	@Schema(description = "他システムデータ排他フラグ", required = false)
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int otherSysDataExcludeFlg;
 
 	/**
@@ -371,14 +371,14 @@ public class EstimationSearchParameter {
 	 * 破棄ステータスを除外
 	 */
 	@Parameter(description = "破棄ステータスを除外", required = false)
-	@Schema(description = "破棄ステータスを除外", required = false)
+	@Schema(description = "破棄ステータスを除外", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean excludesDiscarded;
 	
 	/**
 	 * MNPタイプ
 	 */
 	@Parameter(description = "MNPタイプ", required = false)
-	@Schema(description = "MNPタイプ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MNPタイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mnpType;
 	
 	/**

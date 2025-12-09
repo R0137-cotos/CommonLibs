@@ -29,7 +29,7 @@ public class EmpGrpManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_grp_management_master_seq")
 	@SequenceGenerator(name = "emp_grp_management_master_seq", sequenceName = "emp_grp_management_master_seq", allocationSize = 1)
-	@Schema(description = "社員グループ管理マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "社員グループ管理マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -37,14 +37,14 @@ public class EmpGrpManagementMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "グループコード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "グループコード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String groupCode;
 
 	/**
 	 * グループ名
 	 */
 	@Size(max = 255)
-	@Schema(description = "グループ名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "グループ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String groupName;
 
 	/**
@@ -52,6 +52,6 @@ public class EmpGrpManagementMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String momEmpId;
 }

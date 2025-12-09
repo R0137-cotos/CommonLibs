@@ -41,7 +41,7 @@ public class ContractInstallationLocation extends CustomerAbstractEntity {
 	 * MoM非連携_企業代表者名（カナ）
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_企業代表者名（カナ）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_企業代表者名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyRepresentativeNameKana;
 
 	/**
@@ -64,6 +64,6 @@ public class ContractInstallationLocation extends CustomerAbstractEntity {
 	@OneToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 }

@@ -13,24 +13,24 @@ public class HistoryDetailDto {
 	/**
 	 * 品種名
 	 */
-	@Schema(description = "品種名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
 	 * リコー品種コード
 	 */
-	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 費用種別
 	 */
-	@Schema(description = "費用種別", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String costName;
 
 	/**
 	 * 数量
 	 */
-	@Schema(description = "数量", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String quantity;
 }

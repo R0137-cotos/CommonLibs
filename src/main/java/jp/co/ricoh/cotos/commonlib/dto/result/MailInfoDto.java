@@ -16,7 +16,7 @@ public class MailInfoDto {
 	 * メールテンプレートマスタID
 	 */
 	@Min(0)
-	@Schema(description = "メールテンプレートマスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールテンプレートマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long mailTemplateMasterId;
 
 	/**
@@ -24,24 +24,24 @@ public class MailInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "メールタイプ区分", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "メールタイプ区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String mailTypeDiv;
 
 	/**
 	 * TOメールアドレスリスト
 	 */
-	@Schema(description = "TOメールアドレスリスト", required = false)
+	@Schema(description = "TOメールアドレスリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> toMailAddressList;
 
 	/**
 	 * CCメールアドレスリスト
 	 */
-	@Schema(description = "CCメールアドレスリスト", required = false)
+	@Schema(description = "CCメールアドレスリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> ccMailAddressList;
 
 	/**
 	 * BCCメールアドレスリスト
 	 */
-	@Schema(description = "BCCメールアドレスリスト", required = false)
+	@Schema(description = "BCCメールアドレスリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> bccMailAddressList;
 }

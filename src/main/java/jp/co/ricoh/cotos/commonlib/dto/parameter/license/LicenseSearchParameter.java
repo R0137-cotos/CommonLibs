@@ -45,56 +45,56 @@ public class LicenseSearchParameter {
 	 * ライセンス検索区分
 	 */
 	@Parameter(description = "ライセンス検索区分", required = false)
-	@Schema(description = "ライセンス検索区分", required = false, allowableValues = "通常検索(\"1\"), 追加検索(\"2\"), 新規検索(\"3\"), 保守延長検索(\"4\"), 開通確認検索(\"5\"), 解約検索(\"6\")")
+	@Schema(description = "ライセンス検索区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "通常検索(\"1\"), 追加検索(\"2\"), 新規検索(\"3\"), 保守延長検索(\"4\"), 開通確認検索(\"5\"), 解約検索(\"6\")")
 	private LicenseSearchDiv licenseSearchDiv;
 
 	/**
 	 * ライセンス区分マスタID
 	 */
 	@Parameter(description = "ライセンス区分マスタID", required = false)
-	@Schema(description = "ライセンス区分マスタID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseDivMasterId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Parameter(description = "RJ管理番号", required = false)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Parameter(description = "契約番号", required = false)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
 	@Parameter(description = "契約番号枝番", required = false)
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
 	 * オーガニゼーションID
 	 */
 	@Parameter(description = "オーガニゼーションID", required = false)
-	@Schema(description = "オーガニゼーションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "オーガニゼーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String organizationId;
 
 	/**
 	 * ライセンスキー
 	 */
 	@Parameter(description = "ライセンスキー", required = false)
-	@Schema(description = "ライセンスキー", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseKey;
 
 	/**
 	 * アカウント
 	 */
 	@Parameter(description = "アカウント", required = false)
-	@Schema(description = "アカウント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String account;
 
 	/**
@@ -164,7 +164,7 @@ public class LicenseSearchParameter {
 	 * キャンセル状態
 	 */
 	@Parameter(description = "キャンセル状態", required = false)
-	@Schema(description = "キャンセル状態", required = false)
+	@Schema(description = "キャンセル状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String cancelStatus;
 
 	/**
@@ -226,7 +226,7 @@ public class LicenseSearchParameter {
 	 * 受付状況フラグ
 	 */
 	@Parameter(description = "受付状況フラグ", required = false)
-	@Schema(description = "受付状況フラグ", required = false)
+	@Schema(description = "受付状況フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer receptionStatusFlg;
 
 	/**
@@ -242,21 +242,21 @@ public class LicenseSearchParameter {
 	 * RMA契約番号
 	 */
 	@Parameter(description = "RMA契約番号", required = false)
-	@Schema(description = "RMA契約番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RMA契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rmaContractNumber;
 
 	/**
 	 * 割当区分
 	 */
 	@Parameter(description = "割当区分", required = false)
-	@Schema(description = "割当区分", required = false)
+	@Schema(description = "割当区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer allocationDiv;
 
 	/**
 	 * 送信結果区分
 	 */
 	@Parameter(description = "送信結果区分", required = false)
-	@Schema(description = "送信結果区分", required = false)
+	@Schema(description = "送信結果区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer mailSendResultDiv;
 
 	/**
@@ -272,48 +272,48 @@ public class LicenseSearchParameter {
 	 * Welcomeメール送信状況
 	 */
 	@Parameter(description = "Welcomeメール送信状況", required = false)
-	@Schema(description = "Welcomeメール送信状況", required = false)
+	@Schema(description = "Welcomeメール送信状況", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer wellcomeMailSendResultDiv;
 
 	/**
 	 * 導入代行
 	 */
 	@Parameter(description = "導入代行", required = false)
-	@Schema(description = "導入代行", required = false)
+	@Schema(description = "導入代行", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer intActingDiv;
 
 	/**
 	 * MerakiスマートサービスオーガニゼーションID
 	 */
 	@Parameter(description = "MerakiスマートサービスオーガニゼーションID", required = false)
-	@Schema(description = "MerakiスマートサービスオーガニゼーションID", required = false)
+	@Schema(description = "MerakiスマートサービスオーガニゼーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String mssLinkageOrganizationId;
 
 	/**
 	 * FFM発注問合せ番号
 	 */
 	@Parameter(description = "FFM発注問合せ番号", required = false)
-	@Schema(description = "FFM発注問合せ番号", required = false)
+	@Schema(description = "FFM発注問合せ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contactNo;
 
 	/**
 	 * サブドメイン
 	 */
 	@Parameter(description = "サブドメイン", required = false)
-	@Schema(description = "サブドメイン", required = false)
+	@Schema(description = "サブドメイン", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String subDomainName;
 
 	/**
 	 * ベンダー区分
 	 */
 	@Parameter(description = "ベンダー区分", required = false)
-	@Schema(description = "ベンダー区分", required = false)
+	@Schema(description = "ベンダー区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorDiv;
 
 	/**
 	 * 端末電話番号
 	 */
 	@Parameter(description = "端末電話番号", required = false)
-	@Schema(description = "端末電話番号", required = false)
+	@Schema(description = "端末電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String phoneNumber;
 }

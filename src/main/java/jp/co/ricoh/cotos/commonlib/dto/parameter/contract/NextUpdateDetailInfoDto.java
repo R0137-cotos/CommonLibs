@@ -29,7 +29,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
@@ -37,7 +37,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -45,7 +45,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -54,7 +54,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemContractName;
 
 	/**
@@ -63,7 +63,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -71,14 +71,14 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private String itemType;
 
 	/**
 	 * 費用種別
 	 */
 	@NotNull
-	@Schema(description = "費用種別", required = false, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1")
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1")
 	private String costType;
 
 	/**
@@ -87,14 +87,14 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
 	 * 仕入取引先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "仕入取引先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
@@ -102,7 +102,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "Ｒ原価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
@@ -110,7 +110,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "ＳＡ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＳＡ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -118,7 +118,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "ＲＪ仕切価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -133,14 +133,14 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 * 消費税区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "消費税区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
@@ -148,7 +148,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "ＲＪ販事本仕入価格", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ販事本仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
@@ -156,7 +156,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "状態", required = true, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private String state;
 
 	/**
@@ -165,7 +165,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	@Column(nullable = false)
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = true, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -174,7 +174,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "単価", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal unitPrice;
 
 	/**
@@ -183,14 +183,14 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "金額", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
 	/**
 	 * 摘要
 	 */
 	@Size(max = 255)
-	@Schema(description = "摘要", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "摘要", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String detailAbstract;
 
 	/**
@@ -198,25 +198,25 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "変更前数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "変更前数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
 	 * 増減区分
 	 */
-	@Schema(description = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
+	@Schema(description = "増減区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
 	private String increaseDecreaseDiv;
 
 	/**
 	 * 取込ファイルバージョン
 	 */
-	@Schema(description = "取込ファイルバージョン", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "取込ファイルバージョン", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long importFileVersion;
 
 	/**
 	 * ベンダー連携状態
 	 */
-	@Schema(description = "状態", required = false, allowableValues = "未連携(\"1\"), 連携済(\"2\"), 対象外(\"3\")", example = "1")
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"1\"), 連携済(\"2\"), 対象外(\"3\")", example = "1")
 	private String vendorLinkageStatus;
 
 	/**
@@ -231,7 +231,7 @@ public class NextUpdateDetailInfoDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "削除フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 }

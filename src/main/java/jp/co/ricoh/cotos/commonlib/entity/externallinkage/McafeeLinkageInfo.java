@@ -118,7 +118,7 @@ public class McafeeLinkageInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
@@ -126,83 +126,83 @@ public class McafeeLinkageInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "手配業務ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long arrangementWorkId;
 
 	/**
 	 * 処理種別
 	 */
-	@Schema(description = "処理種別", required = false, allowableValues = "新規注文(\"N\"), 注文キャンセル(\"U\"), 顧客情報更新(\"C\")")
+	@Schema(description = "処理種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規注文(\"N\"), 注文キャンセル(\"U\"), 顧客情報更新(\"C\")")
 	private McafeeLinkageProcessDiv processDiv;
 
 	/**
 	 * 顧客参照番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "顧客参照番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "顧客参照番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerReferenceNo;
 
 	/**
 	 * オーダーNo
 	 */
 	@Size(max = 255)
-	@Schema(description = "オーダーNo", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "オーダーNo", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orderNo;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**
 	 * パスワード
 	 */
 	@Size(max = 255)
-	@Schema(description = "パスワード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "パスワード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String password;
 
 	/**
 	 * 都道府県コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "都道府県コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String prefecturesCd;
 
 	/**
 	 * 市区町村
 	 */
 	@Size(max = 255)
-	@Schema(description = "市区町村", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "市区町村", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String municipalities;
 
 	/**
 	 * 町名番地
 	 */
 	@Size(max = 255)
-	@Schema(description = "市区町村", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "市区町村", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String streetBunch;
 
 	/**
 	 * 建物名
 	 */
 	@Size(max = 255)
-	@Schema(description = "建物名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "建物名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String buildingName;
 
 	/**
 	 * 住所詳細情報
 	 */
 	@Size(max = 255)
-	@Schema(description = "住所詳細情報", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "住所詳細情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addressDetailInfo;
 
 	/**
 	 * 注文日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "注文日", required = false)
+	@Schema(description = "注文日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date orderDate;
 
 	/**
@@ -210,81 +210,81 @@ public class McafeeLinkageInfo extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "ノード数", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "ノード数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer nodeNum;
 
 	/**
 	 * 注文送信日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "注文送信日", required = false)
+	@Schema(description = "注文送信日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date orderSendDate;
 
 	/**
 	 * ePOCloud顧客ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ePOCloud顧客ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ePOCloud顧客ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String epocloudCustomerId;
 
 	/**
 	 * ePOCloud注文ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "ePOCloud注文ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ePOCloud注文ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String epocloudOrderId;
 
 	/**
 	 * アクティベーションURL
 	 */
 	@Size(max = 255)
-	@Schema(description = "アクティベーションURL", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アクティベーションURL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String activationUrl;
 
 	/**
 	 * オーダーCSV名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "オーダーCSV名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "オーダーCSV名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orderCsvName;
 
 	/**
 	 * オーダーCSV連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "オーダーCSV連携日", required = false)
+	@Schema(description = "オーダーCSV連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date orderCsvLinkageDate;
 
 	/**
 	 * リプライCSV名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "リプライCSV名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リプライCSV名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String replyCsvName;
 
 	/**
 	 * リプライCSV取込日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "リプライCSV取込日", required = false)
+	@Schema(description = "リプライCSV取込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date replyCsvLinkageDate;
 
 	/**
 	 * 連携状況
 	 */
-	@Schema(description = "連携状況", required = false, allowableValues = "未処理(\"0\"), 連携済(\"1\"), 取込済(\"2\"), 破棄(\"3\")")
+	@Schema(description = "連携状況", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 連携済(\"1\"), 取込済(\"2\"), 破棄(\"3\")")
 	private LinkageStatus linkageStatus;
 
 	/**
 	 * 解約フラグ
 	 */
-	@Schema(description = "解約フラグ", required = false, allowableValues = "通常時(\"0\"), 解約時(\"1\")")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "通常時(\"0\"), 解約時(\"1\")")
 	private DisengagementFlg disengagementFlg;
 
 	/**
 	 * 注文参照番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "注文参照番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "注文参照番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orderReferenceNo;
 }

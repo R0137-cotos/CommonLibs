@@ -142,7 +142,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 * URLパターン
 		 */
 		@Column(nullable = false)
-		@Schema(description = "URLパターン", required = true)
+		@Schema(description = "URLパターン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String urlPattern;
 
 		/**
@@ -150,7 +150,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 */
 		@Convert(converter = HttpMethodConverter.class)
 		@Column(nullable = false)
-		@Schema(description = "HTTPメソッド", required = true)
+		@Schema(description = "HTTPメソッド", requiredMode = Schema.RequiredMode.REQUIRED)
 		@JsonSerialize(using = ToStringSerializer.class)
 		private HttpMethod method;
 
@@ -159,7 +159,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 		 */
 		@Column(nullable = false)
 		@Enumerated(EnumType.STRING)
-		@Schema(description = "システムドメイン", required = true)
+		@Schema(description = "システムドメイン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private Domain domain;
 	}
 
@@ -170,7 +170,7 @@ public class UrlAuthMaster extends EntityBaseMaster {
 	 * 認可処理実施要否
 	 */
 	@Column(nullable = false)
-	@Schema(description = "認可処理実施要否", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "認可処理実施要否", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int requireAuthorize;
 
 	/**
@@ -178,55 +178,55 @@ public class UrlAuthMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
-	@Schema(description = "外部参照ドメイン", required = false)
+	@Schema(description = "外部参照ドメイン", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Domain externalRefDomain;
 
 	/**
 	 * DBデータ存在有無
 	 */
 	@Column(nullable = false)
-	@Schema(description = "DBデータ存在有無", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "DBデータ存在有無", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int existsDb;
 
 	/**
 	 * パラメータータイプ
 	 */
 	@Column(nullable = false)
-	@Schema(description = "パラメータータイプ", required = true, allowableValues = "none(\"0\"), path(\"1\"), query(\"2\"), json(\"3\")", example = "1")
+	@Schema(description = "パラメータータイプ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "none(\"0\"), path(\"1\"), query(\"2\"), json(\"3\")", example = "1")
 	private ParameterType paramType;
 
 	/**
 	 * パラメーターキー
 	 */
 	@Column(nullable = true)
-	@Schema(description = "パラメーターキー", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "パラメーターキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String paramKey;
 
 	/**
 	 * アクション区分
 	 */
 	@Column(nullable = true)
-	@Schema(description = "アクション区分", required = true, allowableValues = "なし(\"00\"), 照会(\"01\"), 登録(\"02\"), 更新(\"03\"), 削除(\"04\"), 印刷(\"05\"), ダウンロード(\"06\"), 集計(\"07\")", example = "01")
+	@Schema(description = "アクション区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"00\"), 照会(\"01\"), 登録(\"02\"), 更新(\"03\"), 削除(\"04\"), 印刷(\"05\"), ダウンロード(\"06\"), 集計(\"07\")", example = "01")
 	private ActionDiv actionDiv;
 
 	/**
 	 * 権限区分
 	 */
 	@Column(nullable = true)
-	@Schema(description = "権限区分", required = true, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0")
+	@Schema(description = "権限区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 見積_契約_手配(\"2200\"), 請求_計上_本部(\"2210\"), システム管理(\"2220\"), 見積_契約_業務用検索(\"2230\"), 業務管理(\"2240\")", example = "0")
 	private AuthDiv authDiv;
 
 	/**
 	 * 参照種別
 	 */
 	@Column(nullable = true)
-	@Schema(description = "参照種別", required = true, allowableValues = "なし(\"0\"), 参照(\"1\"), 編集(\"2\"), 承認(\"3\")", example = "1")
+	@Schema(description = "参照種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 参照(\"1\"), 編集(\"2\"), 承認(\"3\")", example = "1")
 	private AccessType accessType;
 
 	/**
 	 * 処理概要
 	 */
 	@Column(nullable = true)
-	@Schema(description = "処理概要", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "処理概要", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 }

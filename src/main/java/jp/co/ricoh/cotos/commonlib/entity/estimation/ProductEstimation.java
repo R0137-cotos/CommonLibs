@@ -47,7 +47,7 @@ public class ProductEstimation extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID<br/>※POST時「商品マスタ」存在チェック実施", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID<br/>※POST時「商品マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -56,21 +56,21 @@ public class ProductEstimation extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "商品名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "商品名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String productEstimationName;
 
 	/**
 	 * 代表品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "代表品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "代表品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long repItemMasterId;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービス識別番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceIdentNumber;
 
 	/**
@@ -78,21 +78,21 @@ public class ProductEstimation extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_id", referencedColumnName = "id")
-	@Schema(description = "見積", required = true)
+	@Schema(description = "見積", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Estimation estimation;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
 	/**
 	 * 拡張項目繰返
 	 */
-	@Schema(description = "拡張項目繰返", required = false)
+	@Schema(description = "拡張項目繰返", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameterIterance;
 

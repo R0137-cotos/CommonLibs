@@ -17,7 +17,7 @@ public class MobileEquipmentListDto {
 	/**
 	 * モバイル機器リスト
 	 */
-	@Schema(description = "モバイル機器リスト", required = false)
+	@Schema(description = "モバイル機器リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Valid
 	private List<MobileEquipmentDto> mobileEquipmentList;
 }

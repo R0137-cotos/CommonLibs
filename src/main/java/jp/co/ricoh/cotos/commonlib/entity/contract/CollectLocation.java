@@ -73,56 +73,56 @@ public class CollectLocation extends EntityBase {
 	 * 希望回収日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "希望回収日", required = false)
+	@Schema(description = "希望回収日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date collectPreferredDate;
 
 	/**
 	 * 担当者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picName;
 
 	/**
 	 * 郵便番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "郵便番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 住所
 	 */
 	@Size(max = 255)
-	@Schema(description = "住所", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String address;
 
 	/**
 	 * 企業名
 	 */
 	@Size(max = 255)
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * 事業所名
 	 */
 	@Size(max = 255)
-	@Schema(description = "事業所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String officeName;
 
 	/**
 	 * 担当者部署
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当者部署", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当者部署", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picDeptName;
 
 	/**
 	 * 電話番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "電話番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String phoneNumber;
 
 	/**
@@ -130,20 +130,20 @@ public class CollectLocation extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "回収不要フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "回収不要フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer collectUnnecessaryFlg;
 
 	/**
 	 * アップグレードRJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "アップグレードRJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アップグレードRJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String upgradeRjManageNumber;
 
 	/**
 	 * 連携状態
 	 */
-	@Schema(description = "連携状態", required = false, allowableValues = "AP削除連携済(\"1\"), 解約連携済(\"2\")")
+	@Schema(description = "連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "AP削除連携済(\"1\"), 解約連携済(\"2\")")
 	private LinkageState linkageState;
 
 	/**
@@ -152,7 +152,7 @@ public class CollectLocation extends EntityBase {
 	@OneToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 }

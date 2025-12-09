@@ -17,7 +17,7 @@ public class IijMachineInfoListDto {
 	/**
 	 * IIJ機器情報リスト
 	 */
-	@Schema(description = "IIJ機器情報リスト", required = false)
+	@Schema(description = "IIJ機器情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Valid
 	private List<IijMachineInfoDto> iijMachineInfoList;
 }

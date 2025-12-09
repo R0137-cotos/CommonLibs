@@ -37,21 +37,21 @@ public class DispUrlAuthMaster extends EntityBaseMaster {
 		 * システムドメイン
 		 */
 		@Column(nullable = false)
-		@Schema(description = "システムドメイン", required = true)
+		@Schema(description = "システムドメイン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String systemDomain;
 
 		/**
 		 * URLパターン
 		 */
 		@Column(nullable = false)
-		@Schema(description = "URLパターン", required = true)
+		@Schema(description = "URLパターン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String urlPattern;
 
 		/**
 		 * アクションID
 		 */
 		@Column(nullable = false)
-		@Schema(description = "アクションID", required = true)
+		@Schema(description = "アクションID", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String actionId;
 	}
 
@@ -61,7 +61,7 @@ public class DispUrlAuthMaster extends EntityBaseMaster {
 	/**
 	 * アクション名
 	 */
-	@Schema(description = "アクション名", required = false)
+	@Schema(description = "アクション名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String actionName;
 
 	/**
@@ -69,6 +69,6 @@ public class DispUrlAuthMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "auth_pattern_id", referencedColumnName = "authPatternId")
-	@Schema(description = "権限パターンマスタ", required = true)
+	@Schema(description = "権限パターンマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AuthPatternMaster authPatternMaster;
 }

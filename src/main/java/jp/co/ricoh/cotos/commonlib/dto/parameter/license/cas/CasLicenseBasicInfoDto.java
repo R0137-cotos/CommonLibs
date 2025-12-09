@@ -24,89 +24,89 @@ public class CasLicenseBasicInfoDto extends DtoBase {
 	 * カスタマーID
 	 */
 	@Size(max = 255)
-	@Schema(description = "カスタマーID", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "カスタマーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String customerId;
 
 	/**
 	 * トレンドユーザーID
 	 */
 	@Size(max = 255)
-	@Schema(description = "トレンドユーザーID", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "トレンドユーザーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String trendUserId;
 
 	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 255)
-	@Schema(description = "MVBアカウント", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String mvbAccount;
 
 	/**
 	 * ライセンス状態
 	 */
-	@Schema(description = "ライセンス状態", required = false, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
+	@Schema(description = "ライセンス状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
 	private CasLicenseStatus licenseStatus;
 
 	/**
 	 * MoM企業ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM企業ID", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "MoM企業ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String momCompanyId;
 
 	/**
 	 * 担当者氏名_姓
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当者氏名_姓", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "担当者氏名_姓", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String picNameSei;
 
 	/**
 	 * 担当者氏名_名
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当者氏名_名", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "担当者氏名_名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String picNameMei;
 
 	/**
 	 * 担当者メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当者メールアドレス", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String picMailAddress;
 
 	/**
 	 * 企業名
 	 */
 	@Size(max = 255)
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String companyName;
 
 	/**
 	 * 都道府県
 	 */
 	@Size(max = 255)
-	@Schema(description = "都道府県", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String prefectures;
 
 	/**
 	 * 市区町村
 	 */
 	@Size(max = 255)
-	@Schema(description = "市区町村", required = false, allowableValues = "range[0,25]")
+	@Schema(description = "市区町村", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String municipality;
 
 	/**
 	 * 初期パスワード
 	 */
 	@Size(max = 255)
-	@Schema(description = "初期パスワード", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "初期パスワード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String initialPassword;
 	
 	/**
 	 * CASライセンス管理情報
 	 */
 	@Valid
-	@Schema(description = "CASライセンス管理情報", required = false)
+	@Schema(description = "CASライセンス管理情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<CasLicenseManagementInfoDto> casLicenseManagementInfoList;
 }

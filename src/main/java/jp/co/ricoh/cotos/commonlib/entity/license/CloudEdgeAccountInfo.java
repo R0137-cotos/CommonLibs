@@ -40,63 +40,63 @@ public class CloudEdgeAccountInfo extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * アカウント
 	 */
 	@Size(max = 255)
-	@Schema(description = "アカウント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String account;
 
 	/**
 	 * 反映希望日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "反映希望日", required = false)
+	@Schema(description = "反映希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date reflectRequestDate;
 
 	/**
 	 * 売上日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "売上日", required = false)
+	@Schema(description = "売上日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date salesDate;
 
 	/**
 	 * 企業名
 	 */
 	@Size(max = 255)
-	@Schema(description = "企業名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * 都道府県
 	 */
 	@Size(max = 255)
-	@Schema(description = "都道府県", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String prefectures;
 
 	/**
 	 * 市区町村
 	 */
 	@Size(max = 255)
-	@Schema(description = "市区町村", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "市区町村", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String municipality;
 
 	/**
 	 * 担当者メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当者メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMailAddress;
 
 }

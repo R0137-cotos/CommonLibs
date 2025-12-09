@@ -20,7 +20,7 @@ public class ArrangementResultDto implements IArrangementResult {
 	 */
 	@Valid
 	@NotNull
-	@Schema(description = "手配結果情報", required = true)
+	@Schema(description = "手配結果情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementResultInfoDto arrangementResultInfo;
 
 	/**
@@ -28,7 +28,7 @@ public class ArrangementResultDto implements IArrangementResult {
 	 */
 	@Valid
 	@NotNull
-	@Schema(description = "契約情報", required = true)
+	@Schema(description = "契約情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractInfoDto contructInfo;
 
 }

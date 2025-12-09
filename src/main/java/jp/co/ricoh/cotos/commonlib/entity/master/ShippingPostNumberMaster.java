@@ -34,14 +34,14 @@ public class ShippingPostNumberMaster extends EntityBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@Schema(description = "郵便番号", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 地域名
 	 */
 	@Size(max = 1000)
-	@Schema(description = "地域名", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "地域名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String areaName;
 
 }

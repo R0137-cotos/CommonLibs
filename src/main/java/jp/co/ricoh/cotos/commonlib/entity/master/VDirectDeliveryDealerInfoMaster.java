@@ -35,13 +35,13 @@ public class VDirectDeliveryDealerInfoMaster {
 		/**
 		 * 販売店識別子
 		 */
-		@Schema(description = "販売店識別子", required = true)
+		@Schema(description = "販売店識別子", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String dealerDiscrimCd;
 
 		/**
 		 * URLパターン
 		 */
-		@Schema(description = "デポコード", required = true)
+		@Schema(description = "デポコード", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String dpCd;
 
 	}
@@ -66,7 +66,7 @@ public class VDirectDeliveryDealerInfoMaster {
 	private String dlDpNameKana;
 
 	@Column
-	@Schema(description = "売上情報送信年月日", required = false)
+	@Schema(description = "売上情報送信年月日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String adSalesSendDate; //yyyyMMddのフォーマットの文字列で設定されている
 
 }

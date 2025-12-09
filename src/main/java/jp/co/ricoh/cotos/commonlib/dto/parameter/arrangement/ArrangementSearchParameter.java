@@ -44,7 +44,7 @@ public class ArrangementSearchParameter {
 	 * 手配業務
 	 */
 	@Parameter(description = "手配業務タイプマスタID", required = false)
-	@Schema(description = "手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String arrangementWorkTypeId;
 
 	/**
@@ -106,42 +106,42 @@ public class ArrangementSearchParameter {
 	 * 契約番号
 	 */
 	@Parameter(description = "契約番号", required = false)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
 	@Parameter(description = "契約番号枝番", required = false)
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Parameter(description = "サービス識別番号", required = false)
-	@Schema(description = "サービス識別番号", required = false, allowableValues = "range[0,18]")
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Parameter(description = "RJ管理番号", required = false)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,20]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,20]")
 	private String rjManageNumber;
 
 	/**
 	 * 見積書番号
 	 */
 	@Parameter(description = "見積番号", required = false)
-	@Schema(description = "見積番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String estimateNumber;
 
 	/**
 	 * 見積書番号
 	 */
 	@Parameter(description = "見積番号枝番", required = false)
-	@Schema(description = "見積番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "見積番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String estimateBranchNumber;
 
 	/**
@@ -157,14 +157,14 @@ public class ArrangementSearchParameter {
 	 * 案件番号
 	 */
 	@Parameter(description = "案件番号", required = false)
-	@Schema(description = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseNumber;
 
 	/**
 	 * 案件名
 	 */
 	@Parameter(description = "案件名:部分一致", required = false)
-	@Schema(description = "案件名:部分一致", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "案件名:部分一致", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String likeSearchCaseTitle;
 
 	/**
@@ -252,7 +252,7 @@ public class ArrangementSearchParameter {
 	 * 得意先コード
 	 */
 	@Parameter(description = "得意先コード", required = false)
-	@Schema(description = "得意先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpCode;
 
 	/**
@@ -340,14 +340,14 @@ public class ArrangementSearchParameter {
 	 * 商品マスタID
 	 */
 	@Parameter(description = "商品マスタID", required = false)
-	@Schema(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long productId;
 
 	/**
 	 * 保留フラグ
 	 */
 	@Parameter(description = "保留フラグ", required = false)
-	@Schema(description = "保留フラグ", required = false)
+	@Schema(description = "保留フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer holdingFlg;
 
 	/**
@@ -373,28 +373,28 @@ public class ArrangementSearchParameter {
 	 * 回線番号
 	 */
 	@Parameter(description = "回線番号", required = false)
-	@Schema(description = "回線番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "回線番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String lineNumber;
 
 	/**
 	 * ICCID
 	 */
 	@Parameter(description = "ICCID", required = false)
-	@Schema(description = "ICCID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ICCID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serialNumber;
 
 	/**
 	 * V-UP見積番号
 	 */
 	@Parameter(description = "V-UP見積番号", required = false)
-	@Schema(description = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	/**
 	 * ベンダー管理番号
 	 */
 	@Parameter(description = "ベンダー管理番号", required = false)
-	@Schema(description = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
@@ -439,21 +439,21 @@ public class ArrangementSearchParameter {
 	 */
 	@Parameter(description = "ソート順", required = false)
 	@Enumerated(EnumType.STRING)
-	@Schema(description = "ソート順", required = false)
+	@Schema(description = "ソート順", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SortOrder sortOrder;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
 	@Parameter(description = "アプリケーションIDリスト", required = false)
-	@Schema(description = "アプリケーションIDリスト", required = false)
+	@Schema(description = "アプリケーションIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
 	@Parameter(description = "他システムデータ排他フラグ", required = false)
-	@Schema(description = "他システムデータ排他フラグ", required = false)
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int otherSysDataExcludeFlg;
 
 	/**
@@ -514,7 +514,7 @@ public class ArrangementSearchParameter {
 	 * 解約フラグ
 	 */
 	@Parameter(description = "解約フラグ", required = false)
-	@Schema(description = "解約フラグ", required = false)
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer disengagementFlg;
 
 	/**
@@ -530,14 +530,14 @@ public class ArrangementSearchParameter {
 	 * 導入設置先距離
 	 */
 	@Parameter(description = "導入設置先距離", required = false)
-	@Schema(description = "導入設置先距離", required = false)
+	@Schema(description = "導入設置先距離", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long introductionDistance;
 
 	/**
 	 * 承認手配業務
 	 */
 	@Parameter(description = "承認手配業務タイプマスタID", required = false)
-	@Schema(description = "承認手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "承認手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String approvalArrangementWorkTypeId;
 
 	/**
@@ -578,7 +578,7 @@ public class ArrangementSearchParameter {
 	 * 関連手配業務
 	 */
 	@Parameter(description = "関連手配業務タイプマスタID", required = false)
-	@Schema(description = "関連手配業務タイプマスタID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "関連手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String relatedArrangementWorkTypeId;
 
 	/**
@@ -597,14 +597,14 @@ public class ArrangementSearchParameter {
 	 * 別ドメインから呼ばれるため、既存の変数は変えずに手配検索画面から商品マスタIDを複数含んだ文字列として受け取るために変数を追加
 	 */
 	@Parameter(description = "商品マスタIDリスト", required = false)
-	@Schema(description = "商品マスタIDリスト", required = false)
+	@Schema(description = "商品マスタIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String productIdList;
 
 	/**
 	 * 手配業務タイプマスタIDリスト
 	 */
 	@Parameter(description = "手配業務タイプマスタIDリスト", required = false)
-	@Schema(description = "手配業務タイプマスタIDリスト", required = false)
+	@Schema(description = "手配業務タイプマスタIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String arrangementWorkTypeIdList;
 
 	/**

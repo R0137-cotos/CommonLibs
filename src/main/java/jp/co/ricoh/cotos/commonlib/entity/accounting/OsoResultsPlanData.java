@@ -24,6 +24,6 @@ public class OsoResultsPlanData extends OsoResultsDataAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "oso_results_plan_data_seq")
 	@SequenceGenerator(name = "oso_results_plan_data_seq", sequenceName = "oso_results_plan_data_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 }

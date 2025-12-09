@@ -47,7 +47,7 @@ public class ContractApprovalRoute extends EntityBase {
 	@OneToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
@@ -55,28 +55,28 @@ public class ContractApprovalRoute extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "対象ライフサイクル状態", required = true, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\")", example = "1")
+	@Schema(description = "対象ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\")", example = "1")
 	private LifecycleStatus targetLifecycleStatus;
 
 	/**
 	 * 承認依頼者MoM社員ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認依頼者MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterEmpId;
 
 	/**
 	 * 承認依頼者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認依頼者氏名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterName;
 
 	/**
 	 * 承認依頼者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認依頼者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "承認依頼者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRequesterOrgName;
 
 	/**
@@ -85,13 +85,13 @@ public class ContractApprovalRoute extends EntityBase {
 	@Column(nullable = false)
 	@Max(9)
 	@Min(0)
-	@Schema(description = "特価承認対象フラグ", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "特価承認対象フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int specialPriceApprovalFlg;
 
 	/**
 	 * 承認ルートマスタID
 	 */
-	@Schema(description = "承認ルートマスタID", required = false)
+	@Schema(description = "承認ルートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long approvalRouteMasterId;
 
 	/**

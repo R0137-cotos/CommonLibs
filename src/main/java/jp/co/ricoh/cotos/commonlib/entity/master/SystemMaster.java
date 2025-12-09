@@ -25,14 +25,14 @@ import lombok.ToString;
 public class SystemMaster extends EntityBaseMaster {
 
 	@Id
-	@Schema(description = "システムID", required = true)
+	@Schema(description = "システムID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String systemId;
 
 	@Column(nullable = false)
-	@Schema(description = "他システムデータ排他フラグ", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int otherSysDataExcludeFlg;
 
 	@OneToMany(mappedBy = "systemMaster")
-	@Schema(description = "アプリケーションマスタ", required = false)
+	@Schema(description = "アプリケーションマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<AppMaster> appMasterList;
 }

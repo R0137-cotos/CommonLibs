@@ -15,30 +15,30 @@ public class OriginContractEquipmentResult {
 	/**
 	 * 契約機種を表すEntity
 	 */
-	@Schema(description = "契約機種を表すEntity", required = true)
+	@Schema(description = "契約機種を表すEntity", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractEquipment contractEquipment;
 
 	/**
 	 * 削除フラグ
 	 */
-	@Schema(description = "削除フラグ", required = false)
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer deleteFlg;
 
 	/**
 	 * 契約機種付加情報を表すEntity
 	 */
-	@Schema(description = "契約機種付加情報を表すEntity", required = false)
+	@Schema(description = "契約機種付加情報を表すEntity", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractEquipmentAdditionInfo contractEquipmentAdditionInfo;
 
 	/**
 	 * 機器削除済文書番号
 	 */
-	@Schema(description = "機器削除済文書番号", required = false)
+	@Schema(description = "機器削除済文書番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String equipmentDeletedDocumentNumber;
 
 	/**
 	 * 機器削除チェックボックス活性化フラグ
 	 */
-	@Schema(description = "機器削除チェックボックス活性化フラグ", required = false)
+	@Schema(description = "機器削除チェックボックス活性化フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer activateEquipmentDeleteCheckboxFlg;
 }

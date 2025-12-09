@@ -11,55 +11,55 @@ public class TransixOrderReceiptResponseParameter {
 	/**
 	 * メソッド名
 	 */
-	@Schema(description = "メソッド名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メソッド名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String methodName;
 
 	/**
 	 * 申込結果コード
 	 */
-	@Schema(description = "申込結果コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "申込結果コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mfResponseCd;
 
 	/**
 	 * 摘要
 	 */
-	@Schema(description = "摘要", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "摘要", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
 	 * 処理ID （不正リクエスト時のみレスポンスあり）
 	 */
-	@Schema(description = "処理ID （不正リクエスト時）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "処理ID （不正リクエスト時）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String processId;
 
 	/**
 	 * お客様ID
 	 */
-	@Schema(description = "お客様ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お客様ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ngnCommonId;
 
 	/**
 	 * 受付日時
 	 */
-	@Schema(description = "受付日時", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "受付日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mfReceiptTime;
 
 	/**
 	 * 照会データ送信日時
 	 */
-	@Schema(description = "照会データ送信日時", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "照会データ送信日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nttSendDate;
 
 	/**
 	 * 受付番号
 	 */
-	@Schema(description = "受付番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "受付番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String receiptNo;
 
 	/**
 	 * 処理結果コード
 	 */
-	@Schema(description = "処理結果コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "処理結果コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String resultCode;
 
 	/**
@@ -71,18 +71,18 @@ public class TransixOrderReceiptResponseParameter {
 	/**
 	 * リクエストID（不正リクエスト時のみレスポンスあり）
 	 */
-	@Schema(description = "リクエストID（不正リクエスト時）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リクエストID（不正リクエスト時）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String requestId;
 
 	/**
 	 * 申込結果コード（不正リクエスト時のみレスポンスあり）
 	 */
-	@Schema(description = "申込結果コード（不正リクエスト時）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "申込結果コード（不正リクエスト時）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String responseCd;
 
 	/**
 	 * 受付日時（不正リクエスト時のみレスポンスあり）
 	 */
-	@Schema(description = "受付日時（不正リクエスト時）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "受付日時（不正リクエスト時）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String receiptTime;
 }

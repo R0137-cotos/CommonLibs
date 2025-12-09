@@ -15,7 +15,7 @@ public class SacmSettingChangeInfoDto {
 	/**
 	 * 手配業務リスト
 	 */
-	@Schema(description = "手配業務リスト", required = false)
+	@Schema(description = "手配業務リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<SacmChangeInfoArrangementWorkDto> arrangementWorkList;
 
 }

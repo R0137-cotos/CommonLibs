@@ -29,47 +29,47 @@ public class CommonMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_master_seq")
 	@SequenceGenerator(name = "common_master_seq", sequenceName = "common_master_seq", allocationSize = 1)
-	@Schema(description = "汎用マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "汎用マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * マスタ名称
 	 */
 	@Column(nullable = false)
-	@Schema(description = "マスタ名称", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "マスタ名称", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String articleName;
 
 	/**
 	 * カラム名
 	 */
 	@Column(nullable = false)
-	@Schema(description = "カラム名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "カラム名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String columnName;
 
 	/**
 	 * サービスカテゴリ
 	 */
 	@Column(nullable = false)
-	@Schema(description = "サービスカテゴリ", required = true, allowableValues = "共通(\"0\"), 見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "共通(\"0\"), 見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * マスタ説明
 	 */
-	@Schema(description = "マスタ説明", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "マスタ説明", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
 	 * 汎用マスタ明細リスト
 	 */
 	@OneToMany(mappedBy = "commonMaster")
-	@Schema(description = "汎用マスタ明細", required = false)
+	@Schema(description = "汎用マスタ明細", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<CommonMasterDetail> commonMasterDetailList;
 
 	/**
 	 * 削除フラグ
 	 */
 	@Column(nullable = false)
-	@Schema(description = "削除フラグ", required = true, allowableValues = "range[0,1]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1]")
 	private String deleteFlg;
 }

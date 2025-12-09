@@ -17,7 +17,7 @@ public class ContractInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "契約番号", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -25,14 +25,14 @@ public class ContractInfoDto {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "契約番号枝番", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractBranchNumber;
 
 	/**
 	 * 契約明細情報リスト
 	 */
 	@Valid
-	@Schema(description = "契約明細情報リスト", required = false)
+	@Schema(description = "契約明細情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractDetailDelegationDto> contractDetailList;
 
 	/**

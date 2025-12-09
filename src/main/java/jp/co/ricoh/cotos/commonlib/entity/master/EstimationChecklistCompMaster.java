@@ -108,7 +108,7 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_checklist_comp_master_seq")
 	@SequenceGenerator(name = "estimation_checklist_comp_master_seq", sequenceName = "estimation_checklist_comp_master_seq", allocationSize = 1)
-	@Schema(description = "見積チェックリスト構成マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "見積チェックリスト構成マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -117,7 +117,7 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "商品マスタ", required = true)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
@@ -142,14 +142,14 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "gp_check_matter_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "汎用チェック事項マスタ", required = true)
+	@Schema(description = "汎用チェック事項マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private GpCheckMatterMaster gpCheckMatterMaster;
 
 	/**
 	 * 表示順
 	 */
 	@Column(nullable = false)
-	@Schema(description = "表示順", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "表示順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int displayOrder;
 
 	/**
@@ -157,6 +157,6 @@ public class EstimationChecklistCompMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "チェック必須フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "チェック必須フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer checkRequiredFlg;
 }

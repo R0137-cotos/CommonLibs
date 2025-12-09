@@ -43,7 +43,7 @@ public class BounceMailRecord extends EntityBase {
 	 * 契約ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractId;
 
 	/**
@@ -59,7 +59,7 @@ public class BounceMailRecord extends EntityBase {
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -67,21 +67,21 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Max(99)
 	@Min(0)
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer contractBranchNumber;
 
 	/**
 	 * メールテンプレートマスタID
 	 */
 	@Min(0)
-	@Schema(description = "メールテンプレートマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールテンプレートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailTemplateMasterId;
 
 	/**
 	 * 送信元メール送信日時
 	 */
 	@Column(nullable = false)
-	@Schema(description = "送信元メール送信日時", required = false)
+	@Schema(description = "送信元メール送信日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date sentAt;
 
@@ -90,7 +90,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_contract_id")
-	@Schema(description = "N_X_CONTRACT_ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_CONTRACT_ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXContractId;
 
 	/**
@@ -98,7 +98,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_mailer")
-	@Schema(description = "N_X_MAILER", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_MAILER", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXMailer;
 
 	/**
@@ -106,7 +106,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Min(0)
 	@Column(name = "n_x_npserviceno")
-	@Schema(description = "N_X_NPSERVICENO", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "N_X_NPSERVICENO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long nXNpserviceno;
 
 	/**
@@ -114,7 +114,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Min(0)
 	@Column(name = "n_x_nservicelineno")
-	@Schema(description = "N_X_NSERVICELINENO", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "N_X_NSERVICELINENO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long nXNservicelineno;
 
 	/**
@@ -122,7 +122,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Min(0)
 	@Column(name = "n_x_ndomainlineno")
-	@Schema(description = "N_X_NDOMAINLINENO", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "N_X_NDOMAINLINENO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long nXNdomainlineno;
 
 	/**
@@ -130,7 +130,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_nguidetargettype")
-	@Schema(description = "N_X_NGUIDETARGETTYPE", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_NGUIDETARGETTYPE", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXNguidetargettype;
 
 	/**
@@ -138,14 +138,14 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_jizenflg")
-	@Schema(description = "N_X_JIZENFLG", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_JIZENFLG", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXJizenflg;
 
 	/**
 	 * N_ERROR_FLG
 	 */
 	@Size(max = 255)
-	@Schema(description = "N_ERROR_FLG", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "N_ERROR_FLG", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nErrorFlg;
 
 	/**
@@ -153,27 +153,27 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "bounceMailRecord")
-	@Schema(description = "バウンスメール宛先", required = false)
+	@Schema(description = "バウンスメール宛先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<BounceMailDestination> bounceMailDestinationList;
 
 	/**
 	 * COTOS運用対応完了済フラグ
 	 */
 	@Max(9)
-	@Schema(description = "COTOS運用対応完了済フラグ", required = false, allowableValues = "1:COTOS運用チームに残作業がない。")
+	@Schema(description = "COTOS運用対応完了済フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "1:COTOS運用チームに残作業がない。")
 	private Integer cotosSupportCompleted;
 
 	/**
 	 * 通知メール制御マスタID
 	 */
 	@Min(0)
-	@Schema(description = "通知メール制御マスタID", required = false)
+	@Schema(description = "通知メール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long mailControlMasterId;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@Schema(description = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")")
 	private ServiceCategory serviceCategory;
 
 	/**

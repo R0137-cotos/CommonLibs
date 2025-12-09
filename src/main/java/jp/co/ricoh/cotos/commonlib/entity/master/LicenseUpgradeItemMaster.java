@@ -28,27 +28,27 @@ public class LicenseUpgradeItemMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_upgrade_item_master_seq")
 	@SequenceGenerator(name = "license_upgrade_item_master_seq", sequenceName = "license_upgrade_item_master_seq", allocationSize = 1)
-	@Schema(description = "アップグレード対象ライセンス品種対応マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "アップグレード対象ライセンス品種対応マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long productMasterId;
 
 	/**
 	 * アップグレード元品種マスタID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "アップグレード元品種マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "アップグレード元品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long fromItemMasterId;
 
 	/**
 	 * アップグレード先品種マスタID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "アップグレード先品種マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "アップグレード先品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long toItemMasterId;
 }

@@ -44,14 +44,14 @@ public class ConstructionEimItemInfo extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "construction_eim_apply_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "工事調整EIM申込情報", required = true)
+	@Schema(description = "工事調整EIM申込情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ConstructionEimApplyInfo constructionEimApplyInfo;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -60,6 +60,6 @@ public class ConstructionEimItemInfo extends EntityBase {
 	@Column(nullable = false)
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = true, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-99999,99999]")
 	private int quantity;
 }

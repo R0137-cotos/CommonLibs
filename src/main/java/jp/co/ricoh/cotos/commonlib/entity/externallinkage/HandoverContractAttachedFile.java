@@ -43,63 +43,63 @@ public class HandoverContractAttachedFile extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * ファイル名
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル種類", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
 	 * 添付ファイルID
 	 */
 	@Min(0)
-	@Schema(description = "添付ファイルID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "添付ファイルID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long attachedFileId;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 1000)
-	@Schema(description = "コメント", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String attachedComment;
 
 	/**
 	 * 添付者MoM社員ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "添付者MoM社員ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "添付者MoM社員ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String attachedEmpId;
 
 	/**
 	 * 添付者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "添付者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "添付者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String attachedEmpName;
 
 	/**
 	 * 添付者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "添付者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "添付者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String attachedOrgName;
 
 	/**
 	 * 添付日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "添付日時", required = false)
+	@Schema(description = "添付日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date attachedAt;
 
 	/**
@@ -107,14 +107,14 @@ public class HandoverContractAttachedFile extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "添付必須フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "添付必須フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
 
 	/**
 	 * 引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long handoverContractId;
 
 	/**
@@ -122,20 +122,20 @@ public class HandoverContractAttachedFile extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "引継ぎ反映フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "引継ぎ反映フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer handoverMappedFlg;
 
 	/**
 	 * 商品種類区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "商品種類区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商品種類区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
 	/**
 	 * カテゴリ
 	 */
 	@Size(max = 255)
-	@Schema(description = "カテゴリ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String category;
 }

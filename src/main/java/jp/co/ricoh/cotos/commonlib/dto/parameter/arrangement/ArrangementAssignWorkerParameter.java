@@ -16,12 +16,12 @@ public class ArrangementAssignWorkerParameter {
 	/**
 	 * 手配業務リスト
 	 */
-	@Schema(description = "手配業務リスト", required = true)
+	@Schema(description = "手配業務リスト", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ArrangementWork> arrangementWorkList;
 
 	/**
 	 * MoM社員ID（手配担当作業者）
 	 */
-	@Schema(description = "MoM社員ID", required = true, allowableValues = "range[0,24]")
+	@Schema(description = "MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,24]")
 	private String employeeId;
 }

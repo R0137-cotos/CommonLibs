@@ -16,217 +16,217 @@ public class BaoLicenseInfoResult {
 	 * 販売店様管理番号
 	 */
 	@Id
-	@Schema(description = "販売店様管理番号", required = false)
+	@Schema(description = "販売店様管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dealerManagementNumber;
 
 	/**
 	 * 販売店様管理番号枝番
 	 */
-	@Schema(description = "販売店様管理番号枝番", required = false)
+	@Schema(description = "販売店様管理番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String dealerManagementBranchNumber;
 
 	/**
 	 * 契約ID
 	 */
-	@Schema(description = "契約ID", required = false)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contractId;
 
 	/**
 	 * EU様会社名
 	 */
-	@Schema(description = "EU様会社名", required = false)
+	@Schema(description = "EU様会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euCompanyName;
 
 	/**
 	 * EU様会社名カナ
 	 */
-	@Schema(description = "EU様会社名カナ", required = false)
+	@Schema(description = "EU様会社名カナ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euCompanyNameKana;
 
 	/**
 	 * EU様担当者名
 	 */
-	@Schema(description = "EU様担当者名", required = false)
+	@Schema(description = "EU様担当者名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euPicName;
 
 	/**
 	 * EU様ログインID送付先
 	 */
-	@Schema(description = "EU様ログインID送付先", required = false)
+	@Schema(description = "EU様ログインID送付先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euLoginIdSendTo;
 
 	/**
 	 * 月次REPORT送付先1
 	 */
-	@Schema(description = "月次REPORT送付先1", required = false)
+	@Schema(description = "月次REPORT送付先1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportSend1;
 
 	/**
 	 * 月次REPORT送付先2
 	 */
-	@Schema(description = "月次REPORT送付先2", required = false)
+	@Schema(description = "月次REPORT送付先2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportSend2;
 
 	/**
 	 * 月次REPORT送付先3
 	 */
-	@Schema(description = "月次REPORT送付先3", required = false)
+	@Schema(description = "月次REPORT送付先3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportSend3;
 
 	/**
 	 * 月次REPORT送付先4
 	 */
-	@Schema(description = "月次REPORT送付先4", required = false)
+	@Schema(description = "月次REPORT送付先4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportSend4;
 
 	/**
 	 * EU様電話番号
 	 */
-	@Schema(description = "EU様電話番号", required = false)
+	@Schema(description = "EU様電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euPhoneNumber;
 
 	/**
 	 * EU様郵便番号
 	 */
-	@Schema(description = "EU様郵便番号", required = false)
+	@Schema(description = "EU様郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euPostNumber;
 
 	/**
 	 * EU様住所
 	 */
-	@Schema(description = "EU様住所", required = false)
+	@Schema(description = "EU様住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String euAddress;
 
 	/**
 	 * シリアル番号1
 	 */
-	@Schema(description = "シリアル番号1", required = false)
+	@Schema(description = "シリアル番号1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String serialNumber1;
 
 	/**
 	 * 機種名1
 	 */
-	@Schema(description = "機種名1", required = false)
+	@Schema(description = "機種名1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String modelName1;
 
 	/**
 	 * OSバージョン1
 	 */
-	@Schema(description = "OSバージョン1", required = false)
+	@Schema(description = "OSバージョン1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String osVersion1;
 
 	/**
 	 * シリアル番号2
 	 */
-	@Schema(description = "シリアル番号2", required = false)
+	@Schema(description = "シリアル番号2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String serialNumber2;
 
 	/**
 	 * 機種名2
 	 */
-	@Schema(description = "機種名2", required = false)
+	@Schema(description = "機種名2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String modelName2;
 
 	/**
 	 * OSバージョン2
 	 */
-	@Schema(description = "OSバージョン2", required = false)
+	@Schema(description = "OSバージョン2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String osVersion2;
 
 	/**
 	 * 機器名
 	 */
-	@Schema(description = "機器名", required = false)
+	@Schema(description = "機器名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String machineName;
 
 	/**
 	 * 内部グローバルIP1
 	 */
-	@Schema(description = "内部グローバルIP1", required = false)
+	@Schema(description = "内部グローバルIP1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp1;
 
 	/**
 	 * 内部グローバルIP2
 	 */
-	@Schema(description = "内部グローバルIP2", required = false)
+	@Schema(description = "内部グローバルIP2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp2;
 
 	/**
 	 * 内部グローバルIP3
 	 */
-	@Schema(description = "内部グローバルIP3", required = false)
+	@Schema(description = "内部グローバルIP3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp3;
 
 	/**
 	 * 内部グローバルIP4
 	 */
-	@Schema(description = "内部グローバルIP4", required = false)
+	@Schema(description = "内部グローバルIP4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp4;
 
 	/**
 	 * 内部グローバルIP5
 	 */
-	@Schema(description = "内部グローバルIP5", required = false)
+	@Schema(description = "内部グローバルIP5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp5;
 
 	/**
 	 * 内部グローバルIP6
 	 */
-	@Schema(description = "内部グローバルIP6", required = false)
+	@Schema(description = "内部グローバルIP6", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp6;
 
 	/**
 	 * 内部グローバルIP7
 	 */
-	@Schema(description = "内部グローバルIP7", required = false)
+	@Schema(description = "内部グローバルIP7", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp7;
 
 	/**
 	 * 内部グローバルIP8
 	 */
-	@Schema(description = "内部グローバルIP8", required = false)
+	@Schema(description = "内部グローバルIP8", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String internalGlobalIp8;
 
 	/**
 	 * 担当者様名
 	 */
-	@Schema(description = "担当者様名", required = false)
+	@Schema(description = "担当者様名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String picName;
 
 	/**
 	 * 担当者様電話番号
 	 */
-	@Schema(description = "担当者様電話番号", required = false)
+	@Schema(description = "担当者様電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String picPhoneNumber;
 
 	/**
 	 * 開通メール送付先
 	 */
-	@Schema(description = "開通メール送付先", required = false)
+	@Schema(description = "開通メール送付先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String openingEmailSendTo;
 
 	/**
 	 * 月次REPORT同報先1
 	 */
-	@Schema(description = "月次REPORT同報先1", required = false)
+	@Schema(description = "月次REPORT同報先1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportBroadcastTo1;
 
 	/**
 	 * 月次REPORT同報先2
 	 */
-	@Schema(description = "月次REPORT同報先2", required = false)
+	@Schema(description = "月次REPORT同報先2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportBroadcastTo2;
 
 	/**
 	 * 月次REPORT同報先3
 	 */
-	@Schema(description = "月次REPORT同報先3", required = false)
+	@Schema(description = "月次REPORT同報先3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportBroadcastTo3;
 
 	/**
 	 * 月次REPORT同報先4
 	 */
-	@Schema(description = "月次REPORT同報先4", required = false)
+	@Schema(description = "月次REPORT同報先4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyReportBroadcastTo4;
 
 	/**
@@ -244,48 +244,48 @@ public class BaoLicenseInfoResult {
 	/**
 	 * 契約種別
 	 */
-	@Schema(description = "契約種別", required = false)
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contractType;
 
 	/**
 	 * 契約内容
 	 */
-	@Schema(description = "契約内容", required = false)
+	@Schema(description = "契約内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String contractContents;
 
 	/**
 	 * 元契約内容
 	 */
-	@Schema(description = "元契約内容", required = false)
+	@Schema(description = "元契約内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String originalContractContents;
 
 	/**
 	 * REQUEST_STATUS
 	 */
-	@Schema(description = "REQUEST_STATUS", required = false)
+	@Schema(description = "REQUEST_STATUS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String requestStatus;
 
 	/**
 	 * ACCEPT_STATUS
 	 */
-	@Schema(description = "ACCEPT_STATUS", required = false)
+	@Schema(description = "ACCEPT_STATUS", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String acceptStatus;
 
 	/**
 	 * SOC_CONNECTION_CONFIRM_DATE
 	 */
-	@Schema(description = "SOC_CONNECTION_CONFIRM_DATE", required = false)
+	@Schema(description = "SOC_CONNECTION_CONFIRM_DATE", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date socConnectionConfirmDate;
 
 	/**
 	 * SCSK_REGISTERED_FLG
 	 */
-	@Schema(description = "SCSK_REGISTERED_FLG", required = false)
+	@Schema(description = "SCSK_REGISTERED_FLG", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String scskRegisteredFlg;
 
 	/**
 	 * サイバー脅威レポートサービス内包フラグ
 	 */
-	@Schema(description = "CYBER_THREAT_REPORTING_SERVICE", required = false)
+	@Schema(description = "CYBER_THREAT_REPORTING_SERVICE", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean cyberThreatReportingService;
 }

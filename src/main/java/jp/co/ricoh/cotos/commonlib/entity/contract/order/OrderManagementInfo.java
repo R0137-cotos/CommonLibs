@@ -64,7 +64,7 @@ public class OrderManagementInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_management_info_seq")
 	@SequenceGenerator(name = "order_management_info_seq", sequenceName = "order_management_info_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -79,7 +79,7 @@ public class OrderManagementInfo extends EntityBase {
 	 * 契約取込状況
 	 */
 	@Column
-	@Schema(description = "契約取込状況", required = true, allowableValues = "未取込(\"0\"), 取込済(\"1\"), 取込対象外(\"9\"), 処理不可(\"E\"), 異常取込(\"W\"), 取込情報(\"I\")")
+	@Schema(description = "契約取込状況", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "未取込(\"0\"), 取込済(\"1\"), 取込対象外(\"9\"), 処理不可(\"E\"), 異常取込(\"W\"), 取込情報(\"I\")")
 	private CaptureStatus contractCaptureStatus;
 
 	/**
@@ -87,34 +87,34 @@ public class OrderManagementInfo extends EntityBase {
 	 */
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "契約取込日時", required = false)
+	@Schema(description = "契約取込日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date contractCaptureAt;
 
 	/**
 	 * 処理不可事由
 	 */
 	@Column
-	@Schema(description = "処理不可事由", required = false, allowableValues = "range[0,]")
+	@Schema(description = "処理不可事由", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String unprocessedReason;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Column
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約ID
 	 */
 	@Column
-	@Schema(description = "契約ID", required = false)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long contractId;
 
 	/**
 	 * 見積ID
 	 */
 	@Column
-	@Schema(description = "見積ID", required = false)
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long estimationId;
 }

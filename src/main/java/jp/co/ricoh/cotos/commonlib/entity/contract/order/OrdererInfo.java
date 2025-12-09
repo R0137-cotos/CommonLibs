@@ -32,7 +32,7 @@ public class OrdererInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orderer_Info_seq")
 	@SequenceGenerator(name = "orderer_Info_seq", sequenceName = "orderer_Info_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -47,56 +47,56 @@ public class OrdererInfo extends EntityBase {
 	 * 注文者情報　会社名
 	 */
 	@Column
-	@Schema(description = "注文者情報　会社名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererCompanyName;
 
 	/**
 	 * 注文者情報　漢字（姓＋名）
 	 */
 	@Column
-	@Schema(description = "注文者情報　漢字（姓＋名）", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　漢字（姓＋名）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererNameKanji;
 
 	/**
 	 * 注文者情報　カナ（姓＋名）
 	 */
 	@Column
-	@Schema(description = "注文者情報　カナ（姓＋名）", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　カナ（姓＋名）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererNameKana;
 
 	/**
 	 * 注文者情報　メールアドレス
 	 */
 	@Column
-	@Schema(description = "注文者情報　メールアドレス", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererMailAddress;
 
 	/**
 	 * 注文者情報　郵便番号
 	 */
 	@Column
-	@Schema(description = "注文者情報　郵便番号", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererPostNumber;
 
 	/**
 	 * 注文者情報　事業所名
 	 */
 	@Column
-	@Schema(description = "注文者情報　事業所名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererOfficeName;
 
 	/**
 	 * 注文者情報　住所
 	 */
 	@Column
-	@Schema(description = "注文者情報　住所", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererAddress;
 
 	/**
 	 * 注文者情報　電話番号
 	 */
 	@Column
-	@Schema(description = "注文者情報　電話番号", required = false, allowableValues = "range[0,]")
+	@Schema(description = "注文者情報　電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String ordererPhoneNumber;
 
 }

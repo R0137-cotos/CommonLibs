@@ -21,28 +21,28 @@ public class YamatoSearchParameter {
 	 * 商品マスタID
 	 */
 	@Parameter(description = "商品マスタID", required = false)
-	@Schema(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long productMasterId;
 
 	/**
 	 * お問い合わせ番号
 	 */
 	@Parameter(description = "お問い合わせ番号", required = false)
-	@Schema(description = "お問い合わせ番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 契約番号
 	 */
 	@Parameter(description = "契約番号", required = false)
-	@Schema(description = "契約番号", required = false, allowableValues = "range[0,15]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String contractNumber;
 
 	/**
 	 * 契約番号枝番
 	 */
 	@Parameter(description = "契約番号枝番", required = false)
-	@Schema(description = "契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String contractBranchNumber;
 
 	/**
@@ -58,14 +58,14 @@ public class YamatoSearchParameter {
 	 * アプリケーションIDリスト
 	 */
 	@Parameter(description = "アプリケーションIDリスト", required = false)
-	@Schema(description = "アプリケーションIDリスト", required = false)
+	@Schema(description = "アプリケーションIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
 	@Parameter(description = "他システムデータ排他フラグ", required = false)
-	@Schema(description = "他システムデータ排他フラグ", required = false)
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int otherSysDataExcludeFlg;
 
 	/**

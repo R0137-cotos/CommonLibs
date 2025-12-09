@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class EtransporterFileUploadResponseParameter {
 
-	@Schema(description = "ダウンロードパスワード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ダウンロードパスワード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String downloadPassword;
 
-	@Schema(description = "ダウンロードURL", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ダウンロードURL", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String downloadUrl;
 
 }

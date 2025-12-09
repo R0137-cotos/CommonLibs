@@ -16,14 +16,14 @@ public class IspUrl {
 	 * 作業区分
 	 */
 	@NotNull
-	@Schema(description = "作業区分", required = true)
+	@Schema(description = "作業区分", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String workingDiv;
 
 	/**
 	 * ISPURL
 	 */
 	@NotNull
-	@Schema(description = "ISPURL", required = true)
+	@Schema(description = "ISPURL", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String ispUrl;
 
 }

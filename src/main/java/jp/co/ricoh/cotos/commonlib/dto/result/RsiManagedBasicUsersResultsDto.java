@@ -13,31 +13,31 @@ public class RsiManagedBasicUsersResultsDto {
 	/**
 	 * テナントID
 	 */
-	@Schema(description = "テナントID", required = false)
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String tenantId;
 
 	/**
 	 * ユーザーID
 	 */
-	@Schema(description = "ユーザーID", required = false)
+	@Schema(description = "ユーザーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String userId;
 
 	/**
 	 * 姓
 	 */
-	@Schema(description = "姓", required = false)
+	@Schema(description = "姓", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String familyName;
 
 	/**
 	 * 名
 	 */
-	@Schema(description = "名", required = false)
+	@Schema(description = "名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String givenName;
 
 	/**
 	 * メールアドレス
 	 */
-	@Schema(description = "メールアドレス", required = false)
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String loginMailAddress;
 
 }

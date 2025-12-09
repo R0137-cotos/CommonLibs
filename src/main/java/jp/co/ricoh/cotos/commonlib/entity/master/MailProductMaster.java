@@ -36,7 +36,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_product_master_seq")
 	@SequenceGenerator(name = "mail_product_master_seq", sequenceName = "mail_product_master_seq", allocationSize = 1)
-	@Schema(description = "通知メール対象商材マスタID", required = true)
+	@Schema(description = "通知メール対象商材マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -51,7 +51,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	 * 対象マスタ区分
 	 */
 	@Column(nullable = false)
-	@Schema(description = "対象マスタ区分", required = true, allowableValues = "range[0,]")
+	@Schema(description = "対象マスタ区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,]")
 	@Enumerated(EnumType.STRING)
 	private TargetMasterType targetMasterType;
 
@@ -59,7 +59,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	 * 対象マスタID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "対象マスタID", required = true)
+	@Schema(description = "対象マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long targetMasterId;
 
 	/**

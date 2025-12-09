@@ -32,7 +32,7 @@ public class TmUpdateSubscriptionResponseWork extends AbstractTmResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_subscription_response_work_seq")
 	@SequenceGenerator(name = "tm_update_subscription_response_work_seq", sequenceName = "tm_update_subscription_response_work_seq", allocationSize = 1)
-	@Schema(description = "トレンドマイクロサブスクリプション更新レスポンスWORK ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロサブスクリプション更新レスポンスWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -41,107 +41,107 @@ public class TmUpdateSubscriptionResponseWork extends AbstractTmResponseWork {
 	@OneToOne
 	@JoinColumn(name = "request_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロサブスクリプション更新リクエストWORK", required = true)
+	@Schema(description = "トレンドマイクロサブスクリプション更新リクエストWORK", requiredMode = Schema.RequiredMode.REQUIRED)
 	private TmUpdateSubscriptionRequestWork requestWork;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@Schema(description = "サブスクリプションID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 
 	/**
 	 * サービスプラン名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービスプラン名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービスプラン名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String name;
 
 	/**
 	 * サブスクリプションステータス
 	 */
-	@Schema(description = "サブスクリプションステータス", required = false)
+	@Schema(description = "サブスクリプションステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Boolean enabled;
 
 	/**
 	 * 自動更新有効無効設定
 	 */
-	@Schema(description = "自動更新有効無効設定", required = false)
+	@Schema(description = "自動更新有効無効設定", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Boolean isAutoRenewal;
 
 	/**
 	 * 月額更新月数
 	 */
 	@Size(max = 255)
-	@Schema(description = "月額更新月数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "月額更新月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String autoRenewalMonth;
 
 	/**
 	 * 有効期限通知日数
 	 */
 	@Size(max = 255)
-	@Schema(description = "有効期限通知日数", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "有効期限通知日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String expirationNotification;
 
 	/**
 	 * ログイン画面URL
 	 */
 	@Size(max = 255)
-	@Schema(description = "ログイン画面URL", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ログイン画面URL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceUrl;
 
 	/**
 	 * アクティベーションコード
 	 */
 	@Size(max = 255)
-	@Schema(description = "アクティベーションコード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "アクティベーションコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String acCode;
 
 	/**
 	 * 製品ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "製品ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "製品ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productId;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス開始日", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private Date licenseStartDate;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス終了日", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private Date licenseExpirationDate;
 
 	/**
 	 * 課金開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "課金開始日", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "課金開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private Date startChargeDate;
 
 	/**
 	 * 猶予期間
 	 */
-	@Schema(description = "猶予期間", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "猶予期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer gracePeriod;
 
 	/**
 	 * シート数
 	 */
-	@Schema(description = "シート数", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "シート数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer units;
 
 	/**
 	 * ライセンスステータス
 	 */
-	@Schema(description = "ライセンスステータス", required = false)
+	@Schema(description = "ライセンスステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Boolean licenseEnabled;
 
 }

@@ -14,10 +14,10 @@ import lombok.Data;
 public class ApprovalSearchArrangementWorkContractParameter {
 
 	@Valid
-	@Schema(description = "手配業務", required = true)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWork arrangementWork;
 
 	@Valid
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 }

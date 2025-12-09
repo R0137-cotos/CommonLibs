@@ -41,13 +41,13 @@ public class ItemLicenseSettingMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "品種マスタ", required = true)
+	@Schema(description = "品種マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ItemMaster itemMaster;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 

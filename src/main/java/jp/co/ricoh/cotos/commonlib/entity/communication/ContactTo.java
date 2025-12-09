@@ -69,13 +69,13 @@ public class ContactTo extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contact_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "問い合わせ", required = true)
+	@Schema(description = "問い合わせ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contact contact;
 
 	/**
 	 * 送信タイプ
 	 */
-	@Schema(description = "送信タイプ", required = false, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
+	@Schema(description = "送信タイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
 	private SendType sendType;
 
 	/**
@@ -84,20 +84,20 @@ public class ContactTo extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "宛先MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "宛先MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contactToEmpId;
 
 	/**
 	 * 宛先メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "宛先メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "宛先メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactToEmail;
 
 	/**
 	 * 宛先氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "宛先氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "宛先氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactToEmpName;
 }

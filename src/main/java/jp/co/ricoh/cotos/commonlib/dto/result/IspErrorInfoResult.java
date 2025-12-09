@@ -12,13 +12,13 @@ public class IspErrorInfoResult {
 	/**
 	 * エラーID
 	 */
-	@Schema(description = "エラーID", required = false)
+	@Schema(description = "エラーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String errorId;
 
 	/**
 	 * エラーメッセージ
 	 */
-	@Schema(description = "エラーメッセージ", required = false)
+	@Schema(description = "エラーメッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String errorMessage;
 
 }

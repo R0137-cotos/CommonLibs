@@ -64,7 +64,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "契約ID", required = true)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long transactionId;
 
 	/**
@@ -72,7 +72,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "トランザクション種別", required = true, allowableValues = "見積(\"1\"), 契約(\"2\")")
+	@Schema(description = "トランザクション種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\")")
 	private TransactionType transactionType;
 
 	/**
@@ -81,7 +81,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "破棄前最終ライフサイクル状態", required = true)
+	@Schema(description = "破棄前最終ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String lastLifecycleStatus;
 
 	/**
@@ -90,6 +90,6 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "破棄前最終ワークフロー状態", required = true)
+	@Schema(description = "破棄前最終ワークフロー状態", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String lastWorkflowStatus;
 }

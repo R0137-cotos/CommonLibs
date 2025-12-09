@@ -15,7 +15,7 @@ public class ContractDetailDelegationDto {
 	 */
 	@NotNull
 	@Min(0)
-	@Schema(description = "契約明細ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約明細ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
@@ -31,7 +31,7 @@ public class ContractDetailDelegationDto {
 	 */
 	@Valid
 	@NotNull
-	@Schema(description = "レートプランチャージ情報", required = true)
+	@Schema(description = "レートプランチャージ情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RatePlanChargeInfoDto ratePlanChargeInfo;
 
 }

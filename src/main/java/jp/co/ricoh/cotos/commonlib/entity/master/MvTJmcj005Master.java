@@ -22,7 +22,7 @@ public class MvTJmcj005Master {
 
 	/** 販社別設置届先ID */
 	@Id
-	@Schema(description = "販社別設置届先ID", required = true)
+	@Schema(description = "販社別設置届先ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String hanshSetiskiId;
 
 	private String setiskiId;
@@ -40,11 +40,11 @@ public class MvTJmcj005Master {
 	private String trsMotoSysKbn;
 
 	/** RINGS得意先コード */
-	@Schema(description = "RINGS得意先コード", required = true)
+	@Schema(description = "RINGS得意先コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String ringsTkiskCd;
 
 	/** RINGS届先コード */
-	@Schema(description = "RINGS届先コード", required = true)
+	@Schema(description = "RINGS届先コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String ringsTodokesakiCd;
 
 	private String ricohTkiskCd;

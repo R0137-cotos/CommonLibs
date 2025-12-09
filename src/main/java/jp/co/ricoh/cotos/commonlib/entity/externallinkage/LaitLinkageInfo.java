@@ -187,107 +187,107 @@ public class LaitLinkageInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 管理拠点RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "管理拠点RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "管理拠点RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String baseRjManageNumber;
 
 	/**
 	 * 情報区分
 	 */
-	@Schema(description = "情報区分", required = false, allowableValues = "新規(\"1\"), 追加(\"2\"), 解約(\"3\")")
+	@Schema(description = "情報区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規(\"1\"), 追加(\"2\"), 解約(\"3\")")
 	private InfoDiv infoDiv;
 
 	/**
 	 * ルータ/AP区分
 	 */
-	@Schema(description = "ルータ/AP区分", required = false, allowableValues = "ルータ(\"1\"), AP(\"2\")")
+	@Schema(description = "ルータ/AP区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ルータ(\"1\"), AP(\"2\")")
 	private RouterApDiv routerApDiv;
 
 	/**
 	 * SAラベル
 	 */
 	@Size(max = 255)
-	@Schema(description = "SAラベル", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "SAラベル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String saLabel;
 
 	/**
 	 * SAコード
 	 */
 	@Size(max = 255)
-	@Schema(description = "SAコード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "SAコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String saCode;
 
 	/**
 	 * LaITID
 	 */
 	@Size(max = 255)
-	@Schema(description = "LaITID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "LaITID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String laitId;
 
 	/**
 	 * サービスコード
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービスコード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービスコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceCode;
 
 	/**
 	 * パスワード
 	 */
 	@Size(max = 255)
-	@Schema(description = "パスワード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "パスワード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String password;
 
 	/**
 	 * 申請状況
 	 */
-	@Schema(description = "申請状況", required = false, allowableValues = "未(\"0\"), 済(\"1\")")
+	@Schema(description = "申請状況", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 済(\"1\")")
 	private RequestStatus requestStatus;
 
 	/**
 	 * 申請日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "申請日時", required = false)
+	@Schema(description = "申請日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date requestAt;
 
 	/**
 	 * 受付状況
 	 */
-	@Schema(description = "受付状況", required = false, allowableValues = "未(\"0\"), 済(\"1\")")
+	@Schema(description = "受付状況", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 済(\"1\")")
 	private ReceiptStatus receiptStatus;
 
 	/**
 	 * 受付日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "受付日時", required = false)
+	@Schema(description = "受付日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date receiptAt;
 
 	/**
 	 * 解約予定日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "解約予定日", required = false)
+	@Schema(description = "解約予定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date cancelScheduledDate;
 
 	/**
 	 * 登録状況
 	 */
-	@Schema(description = "登録状況", required = false, allowableValues = "未登録(\"0\"), 登録済み(\"1\"), 解約済み(\"2\")")
+	@Schema(description = "登録状況", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未登録(\"0\"), 登録済み(\"1\"), 解約済み(\"2\")")
 	private EntryStatus entryStatus;
 
 	/**
@@ -295,26 +295,26 @@ public class LaitLinkageInfo extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "削除フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
 	 * ディストリビューションID連携状態
 	 */
-	@Schema(description = "ディストリビューションID連携状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), エラー(\"2\"), 処理対象外(\"3\")")
+	@Schema(description = "ディストリビューションID連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), エラー(\"2\"), 処理対象外(\"3\")")
 	private DistributionidLinkageState distributionidLinkageState;
 
 	/**
 	 * ディストリビューションID連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ディストリビューションID連携日", required = false)
+	@Schema(description = "ディストリビューションID連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date distributionidLinkageDate;
 
 	/**
 	 * IIJ機器情報ID
 	 */
 	@Min(0)
-	@Schema(description = "IIJ機器情報ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "IIJ機器情報ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long iijMachineInfoId;
 }

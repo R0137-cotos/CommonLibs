@@ -101,7 +101,7 @@ public class LicenseProcess extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ライセンス情報", required = true)
+	@Schema(description = "ライセンス情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseInfo licenseInfo;
 
 	/**
@@ -110,7 +110,7 @@ public class LicenseProcess extends EntityBase {
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
-	@Schema(description = "工程順", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "工程順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int processOrder;
 
 	/**
@@ -118,7 +118,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "ライセンス工程マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス工程マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long processMasterId;
 
 	/**
@@ -126,7 +126,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "手配業務ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long arrangementWorkId;
 
 	/**
@@ -134,7 +134,7 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@NotNull
 	@Column(nullable = false)
-	@Schema(description = "操作区分", required = true, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")")
+	@Schema(description = "操作区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")")
 	private OperationDiv operationDiv;
 
 	/**
@@ -142,39 +142,39 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "メール到達チェックフラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "メール到達チェックフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール送信日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "メール送信日", required = false)
+	@Schema(description = "メール送信日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date mailSendAt;
 
 	/**
 	 * 送信結果区分
 	 */
-	@Schema(description = "送信結果区分", required = false, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
+	@Schema(description = "送信結果区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未送信(\"0\"), 送信中(\"1\"), 送信済(\"2\"), 不達(\"3\"), 送信エラー(\"4\")")
 	private MailSendResultDiv mailSendResultDiv;
 
 	/**
 	 * メール区分
 	 */
-	@Schema(description = "メール区分", required = false, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
+	@Schema(description = "メール区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
 	 * 工程状態
 	 */
-	@Schema(description = "工程状態", required = false, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
+	@Schema(description = "工程状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 完了(\"1\"), 破棄(\"2\")")
 	private ProcessStatus processStatus;
 
 	/**
 	 * メールマスタID
 	 */
 	@Min(0)
-	@Schema(description = "メールマスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
 
 	/**
@@ -182,20 +182,20 @@ public class LicenseProcess extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "メール到着チェック時間", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "メール到着チェック時間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer mailArrivalCheckHour;
 
 	/**
 	 * 到着チェックメール制御マスタID
 	 */
 	@Min(0)
-	@Schema(description = "到着チェックメール制御マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "到着チェックメール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrivalCheckMailControlMasterId;
 
 	/**
 	 * 実施日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "実施日時", required = false)
+	@Schema(description = "実施日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date operatedAt;
 }

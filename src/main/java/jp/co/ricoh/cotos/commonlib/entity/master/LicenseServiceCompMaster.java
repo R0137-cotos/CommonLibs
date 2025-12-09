@@ -39,7 +39,7 @@ public class LicenseServiceCompMaster extends EntityBase {
 	/**
 	 * 品種マスタID
 	 */
-	@Schema(description = "品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -50,7 +50,7 @@ public class LicenseServiceCompMaster extends EntityBase {
 	@JsonIgnore
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "license_service_master_id", referencedColumnName = "id")
-	@Schema(description = "ライセンスサービスマスタ", required = true)
+	@Schema(description = "ライセンスサービスマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseServiceMaster licenseServiceMaster;
 
 }

@@ -25,14 +25,14 @@ public class ItemEstimationDto extends DtoBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 商品マスタ
 	 */
 	@Min(0)
-	@Schema(description = "商品マスタ", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -40,7 +40,7 @@ public class ItemEstimationDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "品種名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemEstimationName;
 
 	/**
@@ -48,21 +48,21 @@ public class ItemEstimationDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@NotNull
-	@Schema(description = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
 	 * 費用種別
 	 */
 	@NotNull
-	@Schema(description = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1")
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額(\"2\"), 年額(\"3\")", example = "1")
 	private CostType costType;
 
 	/**
@@ -71,28 +71,28 @@ public class ItemEstimationDto extends DtoBase {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "仕切価格", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
 	 * Ｒ原価
 	 */
 	@Column
-	@Schema(description = "Ｒ原価", required = false)
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rCost;
 
 	/**
 	 * ＲＪ仕入価格
 	 */
 	@Column
-	@Schema(description = "ＲＪ仕入価格", required = false)
+	@Schema(description = "ＲＪ仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rjPurchasePrice;
 
 	/**
 	 * ＲＪ仕切価格
 	 */
 	@Column
-	@Schema(description = "ＲＪ仕切価格", required = false)
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -106,26 +106,26 @@ public class ItemEstimationDto extends DtoBase {
 	 * 標準価格
 	 */
 	@Column
-	@Schema(description = "標準価格", required = false)
+	@Schema(description = "標準価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal standardPrice;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "メーカー商品コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * ＲＪ販事本仕入価格
 	 */
 	@Column
-	@Schema(description = "ＲＪ販事本仕入価格", required = false)
+	@Schema(description = "ＲＪ販事本仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@Schema(description = "価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 }

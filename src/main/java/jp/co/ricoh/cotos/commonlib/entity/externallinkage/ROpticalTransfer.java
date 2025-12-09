@@ -97,52 +97,52 @@ public class ROpticalTransfer extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "r_optical_transfer_manage_id", referencedColumnName = "id")
-	@Schema(description = "リコーひかり異動情報取込管理", required = true)
+	@Schema(description = "リコーひかり異動情報取込管理", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ROpticalTransferManage rOpticalTransferManage;
 
 	/**
 	 * 異動情報種別
 	 */
-	@Schema(description = "異動情報種別", required = false, allowableValues = "ひかり回線(\"1\"), 電話回線(\"2\"), リモートサポート(\"3\")", example = "1")
+	@Schema(description = "異動情報種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ひかり回線(\"1\"), 電話回線(\"2\"), リモートサポート(\"3\")", example = "1")
 	private OpticalTransferDiv transferDiv;
 
 	/**
 	 * ステータス
 	 */
-	@Schema(description = "ステータス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String status;
 
 	/**
 	 * 異動情報契約開始日
 	 */
-	@Schema(description = "異動情報契約開始日", required = false)
+	@Schema(description = "異動情報契約開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date transferContractTermStart;
 
 	/**
 	 * 異動情報契約廃止日
 	 */
-	@Schema(description = "異動情報契約廃止日", required = false)
+	@Schema(description = "異動情報契約廃止日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date transferContractTermEnd;
 
 	/**
 	 * 契約電話番号
 	 */
-	@Schema(description = "契約電話番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractPhoneNumber;
 
 	/**
 	 * サービス名
 	 */
-	@Schema(description = "サービス名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービス名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceName;
 
 	/**
 	 * 更新フラグ
 	 */
-	@Schema(description = "更新フラグ", required = false, allowableValues = "新設(\"1\"), 変更(\"2\"), 削除(\"3\")", example = "1")
+	@Schema(description = "更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新設(\"1\"), 変更(\"2\"), 削除(\"3\")", example = "1")
 	private OpticalUpdateFlg updateFlg;
 
 	/**
@@ -150,61 +150,61 @@ public class ROpticalTransfer extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "rOpticalTransfer")
-	@Schema(description = "リコーひかり異動情報NWサービス", required = false, readOnly = true)
+	@Schema(description = "リコーひかり異動情報NWサービス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = true)
 	private List<ROpticalTransferNwservice> rOpticalTransferNwserviceList;
 
 	/**
 	 * NTT名義
 	 */
-	@Schema(description = "NTT名義", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "NTT名義", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractorName;
 
 	/**
 	 * 設置先住所
 	 */
-	@Schema(description = "設置先住所", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "設置先住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String curuserAddrCode;
 
 	/**
 	 * 回線種別
 	 */
-	@Schema(description = "回線種別", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "回線種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceItem;
 
 	/**
 	 * 電話番号
 	 */
-	@Schema(description = "電話番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTelNo;
 
 	/**
 	 * 追加電話番号1
 	 */
-	@Schema(description = "追加電話番号1", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "追加電話番号1", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addContractTelNo1;
 
 	/**
 	 * 追加電話番号2
 	 */
-	@Schema(description = "追加電話番号2", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "追加電話番号2", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addContractTelNo2;
 
 	/**
 	 * 追加電話番号3
 	 */
-	@Schema(description = "追加電話番号3", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "追加電話番号3", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addContractTelNo3;
 
 	/**
 	 * 追加電話番号4
 	 */
-	@Schema(description = "追加電話番号4", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "追加電話番号4", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addContractTelNo4;
 
 	/**
 	 * 追加電話番号5
 	 */
-	@Schema(description = "追加電話番号5", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "追加電話番号5", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String addContractTelNo5;
 
 }

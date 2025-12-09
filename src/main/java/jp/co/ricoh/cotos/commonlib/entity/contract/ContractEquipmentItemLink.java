@@ -48,7 +48,7 @@ public class ContractEquipmentItemLink extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "managed_contract_equipment_status_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約機種状態管理", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約機種状態管理", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private ManagedContractEquipmentStatus managedContractEquipmentStatus;
 
 	/**

@@ -18,7 +18,7 @@ public class EstimationInitialCostDto {
 	 */
 	@NotNull
 	@Size(max = 8)
-	@Schema(description = "ログインMoM社員ID", required = true, allowableValues = "range[0,8]")
+	@Schema(description = "ログインMoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,8]")
 	private String loginMoMId;
 
 	/**
@@ -26,7 +26,7 @@ public class EstimationInitialCostDto {
 	 */
 	@NotNull
 	@Size(max = 64)
-	@Schema(description = "ログインシングルユーザID", required = true, allowableValues = "range[0,64]")
+	@Schema(description = "ログインシングルユーザID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,64]")
 	private String loginSingleUserid;
 
 	/**
@@ -34,7 +34,7 @@ public class EstimationInitialCostDto {
 	 */
 	@NotNull
 	@Size(max = 2)
-	@Schema(description = "商流", required = true, allowableValues = "range[0,2]")
+	@Schema(description = "商流", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,2]")
 	private String oeProductRoot;
 
 	/**
@@ -42,7 +42,7 @@ public class EstimationInitialCostDto {
 	 */
 	@NotNull
 	@Size(max = 15)
-	@Schema(description = "お客様企事部ID", required = true, allowableValues = "range[0,15]")
+	@Schema(description = "お客様企事部ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,15]")
 	private String custInfoCpmpanyId;
 
 	/**
@@ -50,21 +50,21 @@ public class EstimationInitialCostDto {
 	 */
 	@NotNull
 	@Size(max = 25)
-	@Schema(description = "RTS見積No", required = true, allowableValues = "range[0,25]")
+	@Schema(description = "RTS見積No", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String estimatedNoRts;
 
 	/**
 	 * 見積ID
 	 */
 	@Min(0)
-	@Schema(description = "見積ID", allowableValues = "range[0,9223372036854775807]", required = true)
+	@Schema(description = "見積ID", allowableValues = "range[0,9223372036854775807]", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long estimationId;
 
 	/**
 	 * 初期費情報
 	 */
 	@Valid
-	@Schema(description = "初期費情報", required = true)
+	@Schema(description = "初期費情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<EstimationInitialCostInfoDto> estimationInitialCostInfoDtoList;
 
 	/**
@@ -72,6 +72,6 @@ public class EstimationInitialCostDto {
 	 */
 	@NotNull
 	@Size(max = 3)
-	@Schema(description = "販社CD", required = true, allowableValues = "range[0,3]")
+	@Schema(description = "販社CD", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,3]")
 	private String hanshCd;
 }

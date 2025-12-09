@@ -28,28 +28,28 @@ public class LedgerMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ledger_master_seq")
 	@SequenceGenerator(name = "ledger_master_seq", sequenceName = "ledger_master_seq", allocationSize = 1)
-	@Schema(description = "固定帳票情報マスタID", required = true)
+	@Schema(description = "固定帳票情報マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long productMasterId;
 
 	/**
 	 * ファイル名
 	 */
 	@Column(nullable = false)
-	@Schema(description = "ファイル名", required = true, allowableValues = "range[0,]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,]")
 	private String fileName;
 
 	/**
 	 * ファイルパス
 	 */
 	@Column(nullable = false)
-	@Schema(description = "ファイルパス", required = true, allowableValues = "range[0,]")
+	@Schema(description = "ファイルパス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,]")
 	private String filePath;
 
 }

@@ -40,14 +40,14 @@ public class SpecificInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
@@ -55,34 +55,34 @@ public class SpecificInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "商材固有項目マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商材固有項目マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long specificControlMasterId;
 
 	/**
 	 * 商材固有項目区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "商材固有項目区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有項目区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificControlDiv;
 
 	/**
 	 * 項目値区分
 	 */
 	@Column(nullable = false)
-	@Schema(description = "項目値区分", required = true)
+	@Schema(description = "項目値区分", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ItemValueDiv itemValueDiv;
 
 	/**
 	 * 値
 	 */
 	@Size(max = 4000)
-	@Schema(description = "値", required = false, allowableValues = "range[0,4000]")
+	@Schema(description = "値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String itemValue;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 }

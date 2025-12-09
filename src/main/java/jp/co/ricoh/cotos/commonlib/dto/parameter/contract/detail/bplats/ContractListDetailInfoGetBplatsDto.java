@@ -19,13 +19,13 @@ public class ContractListDetailInfoGetBplatsDto {
 	 * 契約情報取得結果リスト
 	 */
 	@JsonProperty("contractInfoList")
-	@Schema(description = "契約明細", required = false)
+	@Schema(description = "契約明細", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractForFindAllDetailsBplatsDto> contractForFindAllDetailsBplatsDtoList;
 
 	/**
 	 * ページング情報
 	 */
 	@JsonProperty("paging")
-	@Schema(description = "ページング情報", required = true)
+	@Schema(description = "ページング情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private PagingDto pagingDto;
 }

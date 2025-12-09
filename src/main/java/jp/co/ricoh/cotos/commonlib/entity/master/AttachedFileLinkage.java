@@ -33,7 +33,7 @@ public class AttachedFileLinkage extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attached_file_linkage_seq")
 	@SequenceGenerator(name = "attached_file_linkage_seq", sequenceName = "attached_file_linkage_seq", allocationSize = 1)
-	@Schema(description = "ファイル連携先ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ファイル連携先ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -42,27 +42,27 @@ public class AttachedFileLinkage extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "商品マスタID", required = true)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
 	 * ファイル連携先
 	 */
 	@Size(max = 255)
-	@Schema(description = "ファイル連携先", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル連携先", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String attachedFileLinkageName;
 
 	/**
 	 * 連携フラグ初期値
 	 */
 	@Max(9)
-	@Schema(description = "連携フラグ初期値", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "連携フラグ初期値", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private Integer linkageFlgDefault;
 
 	/**
 	 * 汎用マスタ明細コード値
 	 */
 	@Size(max = 255)
-	@Schema(description = "汎用マスタ明細コード値", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "汎用マスタ明細コード値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String codeValue;
 }

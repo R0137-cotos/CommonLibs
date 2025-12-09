@@ -20,7 +20,7 @@ public class ContractApprovalRouteNodeDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(999)
-	@Schema(description = "承認順", required = true, allowableValues = "range[0,999]")
+	@Schema(description = "承認順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int approvalOrder;
 
 	/**
@@ -28,7 +28,7 @@ public class ContractApprovalRouteNodeDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(9)
-	@Schema(description = "承認者組織階層レベル", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "承認者組織階層レベル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer approverOrgLevel;
 
 	/**
@@ -36,7 +36,7 @@ public class ContractApprovalRouteNodeDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "承認者MoM社員ID", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approverEmpId;
 
 	/**
@@ -44,47 +44,47 @@ public class ContractApprovalRouteNodeDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "承認者氏名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "承認者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approverName;
 
 	/**
 	 * 承認者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "承認者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "承認者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String approverOrgName;
 
 	/**
 	 * 代理承認者MoM社員ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "代理承認者MoM社員ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者MoM社員ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subApproverEmpId;
 
 	/**
 	 * 代理承認者氏名
 	 */
 	@Size(max = 255)
-	@Schema(description = "代理承認者氏名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subApproverName;
 
 	/**
 	 * 代理承認者組織名
 	 */
 	@Size(max = 255)
-	@Schema(description = "代理承認者組織名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subApproverOrgName;
 
 	/**
 	 * 承認者導出方式区分
 	 */
-	@Schema(description = "承認者導出方式区分", required = false, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1")
+	@Schema(description = "承認者導出方式区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1")
 	private ApproverDeriveMethodDiv approverDeriveMethodDiv;
 
 	/**
 	 * グループ名
 	 */
 	@Size(max = 255)
-	@Schema(description = "グループ名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "グループ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String groupName;
 }

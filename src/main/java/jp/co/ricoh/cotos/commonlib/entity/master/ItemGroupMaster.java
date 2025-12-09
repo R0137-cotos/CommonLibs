@@ -42,21 +42,21 @@ public class ItemGroupMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@Schema(description = "品種グループ名", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "品種グループ名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemGroupName;
 
 	/**
 	 * 品種グループ区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "品種グループ区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種グループ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemGroupDiv;
 
 	/**
 	 * カテゴリ
 	 */
 	@Size(max = 255)
-	@Schema(description = "カテゴリ", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String category;
 
 	/**
@@ -64,6 +64,6 @@ public class ItemGroupMaster extends EntityBase {
 	 */
 	@OneToMany(mappedBy = "itemGroupMaster")
 	@JsonIgnore
-	@Schema(description = "品種マスタ", required = true)
+	@Schema(description = "品種マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ItemMaster> itemMasterList;
 }

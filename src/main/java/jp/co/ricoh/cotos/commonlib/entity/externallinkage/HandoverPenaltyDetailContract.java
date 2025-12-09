@@ -47,21 +47,21 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@Schema(description = "品種名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
@@ -69,14 +69,14 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "品種区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemType;
 
 	/**
@@ -84,7 +84,7 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "違約金単価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
 	/**
@@ -92,7 +92,7 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@Schema(description = "数量", required = false, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
@@ -100,13 +100,13 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "違約金金額", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 
 	/**
 	 * 計上先区分
 	 */
-	@Schema(description = "計上先区分", required = false, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1")
+	@Schema(description = "計上先区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1")
 	private SalesToType salesToType;
 
 	/**
@@ -114,19 +114,19 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "削除フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
 	 * 違約金売上計上処理状態
 	 */
-	@Schema(description = "違約金売上計上処理状態", required = false, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1")
+	@Schema(description = "違約金売上計上処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1")
 	private PenaltyAccountSalesStatus penaltyAccountSalesStatus;
 
 	/**
 	 * 違約金売上計上処理日
 	 */
-	@Schema(description = "違約金売上計上処理日", required = false)
+	@Schema(description = "違約金売上計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyAccountSalesDate;
 
@@ -134,7 +134,7 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 * 引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long handoverContractId;
 
 	/**
@@ -142,6 +142,6 @@ public class HandoverPenaltyDetailContract extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "引継ぎ反映フラグ", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "引継ぎ反映フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer handoverMappedFlg;
 }

@@ -24,33 +24,33 @@ public class PenaltyInfoDto {
 	/**
 	 * 違約金品種マスタID
 	 */
-	@Schema(description = "違約金品種マスタID",  required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "違約金品種マスタID",  requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long penaltyItemMasterId;
 
 	/**
 	 * 違約金品種名
 	 */
 	@Size(max = 255)
-	@Schema(description = "違約金品種名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "違約金品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String penaltyItemName;
 
 	/**
 	 * 違約金リコー品種コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "違約金リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "違約金リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String penaltyRicohItemCode;
 
 	/**
 	 * 違約金品種区分
 	 */
-	@Schema(description = "違約金品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
+	@Schema(description = "違約金品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType penaltyItemType;
 
 	/**
 	 * 元品種マスタID
 	 */
-	@Schema(description = "元品種マスタID",  required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "元品種マスタID",  requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long originItemMasterId;
 
 	/**
@@ -58,7 +58,7 @@ public class PenaltyInfoDto {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "違約金単価", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
 	/**
@@ -66,7 +66,7 @@ public class PenaltyInfoDto {
 	 */
 	@Min(0)
 	@Max(99999)
-	@Schema(description = "数量", required = true, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
@@ -74,13 +74,13 @@ public class PenaltyInfoDto {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@Schema(description = "違約金額", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 
 	/**
 	 * 違約金発生解約最終日
 	 */
-	@Schema(description = "違約金発生解約最終日", required = false)
+	@Schema(description = "違約金発生解約最終日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyOccurCacnlLastDate;
 }

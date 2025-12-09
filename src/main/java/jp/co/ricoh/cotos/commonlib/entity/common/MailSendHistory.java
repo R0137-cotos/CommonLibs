@@ -64,7 +64,7 @@ public class MailSendHistory extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_send_history_seq")
 	@SequenceGenerator(name = "mail_send_history_seq", sequenceName = "mail_send_history_seq", allocationSize = 1)
-	@Schema(description = "メール送信履歴ID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "メール送信履歴ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -73,40 +73,40 @@ public class MailSendHistory extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "mail_control_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "通知メール制御マスタ", required = true)
+	@Schema(description = "通知メール制御マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private MailControlMaster mailControlMaster;
 
 	/**
 	 * 対象データID
 	 */
-	@Schema(description = "対象データID", required = false)
+	@Schema(description = "対象データID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long targetDataId;
 
 	/**
 	 * 宛先To
 	 */
 	@Size(max = 1000)
-	@Schema(description = "宛先To", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "宛先To", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String contactMailTo;
 
 	/**
 	 * 宛先Cc
 	 */
 	@Size(max = 1000)
-	@Schema(description = "宛先Cc", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "宛先Cc", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String contactMailCc;
 
 	/**
 	 * 宛先Bcc
 	 */
 	@Size(max = 1000)
-	@Schema(description = "宛先Bcc", required = false, allowableValues = "range[0,1000]")
+	@Schema(description = "宛先Bcc", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String contactMailBcc;
 
 	/**
 	 * メール送信区分
 	 */
-	@Schema(description = "メール送信区分", required = false, allowableValues = "未送信(\"0\"), 完了(\"1\"), エラー(\"2\")", example = "1")
+	@Schema(description = "メール送信区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未送信(\"0\"), 完了(\"1\"), エラー(\"2\")", example = "1")
 	private MailSendType mailSendType;
 
 	/**

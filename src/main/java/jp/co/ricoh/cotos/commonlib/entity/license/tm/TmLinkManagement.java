@@ -30,14 +30,14 @@ public class TmLinkManagement extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_link_management_seq")
 	@SequenceGenerator(name = "tm_link_management_seq", sequenceName = "tm_link_management_seq", allocationSize = 1)
-	@Schema(description = "トレンドマイクロ連携管理ID", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "トレンドマイクロ連携管理ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 手配業務ID
 	 */
 	@Min(0)
-	@Schema(description = "手配業務ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long arrangementWorkId;
 
 	/**
@@ -46,7 +46,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_create_customer_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロ顧客情報作成リクエストWORK", required = false)
+	@Schema(description = "トレンドマイクロ顧客情報作成リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmCreateCustomerRequestWork tmCreateCustomerRequestWork;
 
 	/**
@@ -55,7 +55,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_create_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロサブスクリプション作成リクエストWORK", required = false)
+	@Schema(description = "トレンドマイクロサブスクリプション作成リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmCreateSubscriptionRequestWork tmCreateSubscriptionRequestWork;
 
 	/**
@@ -64,7 +64,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_update_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロサブスクリプション更新リクエストWORK", required = false)
+	@Schema(description = "トレンドマイクロサブスクリプション更新リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmUpdateSubscriptionRequestWork tmUpdateSubscriptionRequestWork;
 
 	/**
@@ -73,7 +73,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_update_customer_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロ会社情報更新リクエストWORK", required = false)
+	@Schema(description = "トレンドマイクロ会社情報更新リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmUpdateCustomerRequestWork tmUpdateCustomerRequestWork;
 
 	/**
@@ -82,7 +82,7 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_update_user_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ユーザーアカウント更新リクエストWORK", required = false)
+	@Schema(description = "ユーザーアカウント更新リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmUpdateUserRequestWork tmUpdateUserRequestWork;
 
 	/**
@@ -91,56 +91,56 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_suspend_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロサブスクリプション解約リクエストWORK", required = false)
+	@Schema(description = "トレンドマイクロサブスクリプション解約リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork;
 
 	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 255)
-	@Schema(description = "MVBアカウント", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mvbAccount;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * MoM企業ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM企業ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企業ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momCompanyId;
 
 	/**
 	 * MoM企事部ID
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM企事部ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM企事部ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momCustId;
 
 	/**
 	 * 企業名（カナ）
 	 */
 	@Size(max = 255)
-	@Schema(description = "企業名（カナ）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "企業名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyNameKana;
 
 	/**
 	 * ライセンス情報ID
 	 */
 	@Min(0)
-	@Schema(description = "ライセンス情報ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス情報ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseInfoId;
 
 	/**
@@ -149,6 +149,6 @@ public class TmLinkManagement extends EntityBase {
 	@OneToOne
 	@JoinColumn(name = "tm_transition_subscription_request_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "トレンドマイクロサブスクリプション乗換リクエストWORK", required = false)
+	@Schema(description = "トレンドマイクロサブスクリプション乗換リクエストWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmTransitionSubscriptionRequestWork tmTransitionSubscriptionRequestWork;
 }

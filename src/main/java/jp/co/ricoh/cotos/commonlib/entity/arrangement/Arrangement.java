@@ -72,7 +72,7 @@ public class Arrangement extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "契約ID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
@@ -81,7 +81,7 @@ public class Arrangement extends EntityBase {
 	@Column(nullable = false)
 	@Max(9)
 	@Min(0)
-	@Schema(description = "解約フラグ", required = true, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int disengagementFlg;
 
 	/**
@@ -89,20 +89,20 @@ public class Arrangement extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@Schema(description = "ワークフロー状態", required = true, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", example = "1")
+	@Schema(description = "ワークフロー状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", example = "1")
 	private WorkflowStatus workflowStatus;
 
 	/**
 	 * 手配業務
 	 */
 	@OneToMany(mappedBy = "arrangement")
-	@Schema(description = "手配業務", required = true)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private List<ArrangementWork> arrangementWorkList;
 
 	/**
 	 * 契約状態遷移制御区分
 	 */
-	@Schema(description = "契約状態遷移制御区分", required = false, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
+	@Schema(description = "契約状態遷移制御区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "手配の作業完了をもって契約状態を進める(\"0\"),手配の作業完了を待たずに契約状態を進める(\"1\")")
 	private ContractStatusControlType contractStatusControlType;
 }

@@ -30,33 +30,33 @@ public class MsPriceRevisionWork extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_price_revision_work_seq")
 	@SequenceGenerator(name = "ms_price_revision_work_seq", sequenceName = "ms_price_revision_work_seq", allocationSize = 1)
-	@Schema(description = "MS_価格改定対象WORKID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "MS_価格改定対象WORKID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "品種マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long itemMasterId;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@Schema(description = "ライセンス終了日", required = false)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseEndDate;
 
 	/**
 	 * 最新価格改定日マスタID
 	 */
-	@Schema(description = "最新価格改定日マスタID", required = false, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "最新価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long latestPriceRevisionDateMasterId;
 }

@@ -15,7 +15,7 @@ public class ContractInstallationLocationDto extends CustomerAbstractDto {
 	 * MoM非連携_企業代表者名（カナ）
 	 */
 	@Size(max = 255)
-	@Schema(description = "MoM非連携_企業代表者名（カナ）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM非連携_企業代表者名（カナ）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyRepresentativeNameKana;
 
 	/**

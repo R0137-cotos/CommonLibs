@@ -23,42 +23,42 @@ public class LicenseUpgradeItemMasterResult {
 	/**
 	 * 商品マスタID
 	 */
-	@Schema(description = "商品マスタID", required = true)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long productMasterId;
 
 	/**
 	 * アップグレード元品種マスタID
 	 */
-	@Schema(description = "アップグレード元品種マスタID", required = true)
+	@Schema(description = "アップグレード元品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long fromItemMasterId;
 
 	/**
 	 * アップグレード元品種コード
 	 */
-	@Schema(description = "アップグレード元品種コード", required = true)
+	@Schema(description = "アップグレード元品種コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String fromRicohItemCode;
 
 	/**
 	 * アップグレード元品種名
 	 */
-	@Schema(description = "アップグレード元品種名", required = true)
+	@Schema(description = "アップグレード元品種名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String fromItemName;
 
 	/**
 	 * アップグレード先品種マスタID
 	 */
-	@Schema(description = "アップグレード先品種マスタID", required = true)
+	@Schema(description = "アップグレード先品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long toItemMasterId;
 
 	/**
 	 * アップグレード先品種コード
 	 */
-	@Schema(description = "アップグレード先品種コード", required = true)
+	@Schema(description = "アップグレード先品種コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String toRicohItemCode;
 
 	/**
 	 * アップグレード先品種名
 	 */
-	@Schema(description = "アップグレード先品種名", required = true)
+	@Schema(description = "アップグレード先品種名", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String toItemName;
 }

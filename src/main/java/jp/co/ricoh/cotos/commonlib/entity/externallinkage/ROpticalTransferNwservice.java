@@ -40,7 +40,7 @@ public class ROpticalTransferNwservice extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "r_optical_transfer_id", referencedColumnName = "id")
-	@Schema(description = "リコーひかり異動情報", required = true)
+	@Schema(description = "リコーひかり異動情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private ROpticalTransfer rOpticalTransfer;
 
@@ -48,7 +48,7 @@ public class ROpticalTransferNwservice extends EntityBase {
 	 * サービス名
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービス名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービス名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceName;
 
 }

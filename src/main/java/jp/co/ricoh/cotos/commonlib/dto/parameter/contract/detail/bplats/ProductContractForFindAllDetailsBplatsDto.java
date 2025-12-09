@@ -29,7 +29,7 @@ public class ProductContractForFindAllDetailsBplatsDto extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@Schema(description = "商品マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -43,7 +43,7 @@ public class ProductContractForFindAllDetailsBplatsDto extends EntityBase {
 	 * 代表品種マスタID
 	 */
 	@Min(0)
-	@Schema(description = "代表品種マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "代表品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long repItemMasterId;
 
 	/**
@@ -56,13 +56,13 @@ public class ProductContractForFindAllDetailsBplatsDto extends EntityBase {
 	/**
 	 * Bplats連携対象外
 	 */
-	@Schema(description = "Bplats連携対象外", required = false, readOnly = true)
+	@Schema(description = "Bplats連携対象外", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = true)
 	private Boolean extendBplatsLink;
 
 	/**
 	 * 拡張項目
 	 */
-	@Schema(description = "拡張項目", required = false)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -70,14 +70,14 @@ public class ProductContractForFindAllDetailsBplatsDto extends EntityBase {
 	 * ベンダー管理番号名称
 	 */
 	@Size(max = 255)
-	@Schema(description = "ベンダー管理番号名称", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumberName;
 
 	/**
 	 * サービス提供会社名
 	 */
 	@Size(max = 255)
-	@Schema(description = "サービス提供会社名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "サービス提供会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceProviderCompanyName;
 
 }

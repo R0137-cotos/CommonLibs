@@ -12,12 +12,12 @@ public class ExternalImportErrorResult {
 	/**
 	 * 行番号
 	 */
-	@Schema(description = "行番号", required = false)
+	@Schema(description = "行番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long lineNo;
 
 	/**
 	 * エラーメッセージ
 	 */
-	@Schema(description = "エラーメッセージ", required = true)
+	@Schema(description = "エラーメッセージ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String errorMessage;
 }

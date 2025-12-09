@@ -66,33 +66,33 @@ public class HandoverMailAddress extends EntityBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@Schema(description = "契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * 引継ぎ区分
 	 */
-	@Schema(description = " 引継ぎ区分", required = false, allowableValues = "無償(\"1\"), 有償(\"2\")")
+	@Schema(description = " 引継ぎ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "無償(\"1\"), 有償(\"2\")")
 	private HandoverDiv handoverDiv;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**
 	 * 引継ぎ元契約ID
 	 */
 	@Min(0)
-	@Schema(description = "引継ぎ元契約ID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "引継ぎ元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long handoverContractId;
 
 	/**
 	 * 引継ぎ元RJ管理番号
 	 */
 	@Size(max = 255)
-	@Schema(description = "引継ぎ元RJ管理番号", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "引継ぎ元RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String handoverRjManageNumber;
 }

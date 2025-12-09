@@ -28,21 +28,21 @@ public class ROpticalTransferMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_optical_transfer_master_seq")
 	@SequenceGenerator(name = "r_optical_transfer_master_seq", sequenceName = "r_optical_transfer_master_seq", allocationSize = 1)
-	@Schema(description = "リコーひかり請求情報変換マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "リコーひかり請求情報変換マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 疑似請求内訳コード
 	 */
 	@Column(nullable = false)
-	@Schema(description = "疑似請求内訳コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "疑似請求内訳コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String billingStatementCd;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@Schema(description = "リコー品種コード", required = true, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -50,13 +50,13 @@ public class ROpticalTransferMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@Schema(description = "売上指示作成区分", required = false, allowableValues = "range[0,9]")
+	@Schema(description = "売上指示作成区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer createAccountingCd;
 
 	/**
 	 * 課税区分
 	 */
 	@Size(max = 255)
-	@Schema(description = "課税区分", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "課税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxationCd;
 }

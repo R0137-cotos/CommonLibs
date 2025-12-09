@@ -64,7 +64,7 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_estimation_destruction_item_seq")
 	@SequenceGenerator(name = "price_rewrite_estimation_destruction_item_seq", sequenceName = "price_rewrite_estimation_destruction_item_seq", allocationSize = 1)
-	@Schema(description = "価格書換見積破棄対象品種", required = true, readOnly = true)
+	@Schema(description = "価格書換見積破棄対象品種", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private long id;
 
 	/**
@@ -73,7 +73,7 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "ファイル取込管理", required = false)
+	@Schema(description = "ファイル取込管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private FileImportManagement fileImportManagement;
 
 	/**
@@ -81,14 +81,14 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@Schema(description = "リコー品種コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 削除対象日
 	 */
 	@Column
-	@Schema(description = "削除対象日", required = false)
+	@Schema(description = "削除対象日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date deleteTargetDate;
 
@@ -96,14 +96,14 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	 * ステータス
 	 */
 	@Column
-	@Schema(description = "ステータス", required = false, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1")
+	@Schema(description = "ステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1")
 	private Status status;
 
 	/**
 	 * 反映日時
 	 */
 	@Column
-	@Schema(description = "反映日時", required = false)
+	@Schema(description = "反映日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reflectionAt;
 }

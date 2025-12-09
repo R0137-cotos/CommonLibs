@@ -71,20 +71,20 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "メニュー管理マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メニュー管理マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long menuManagementMasterId;
 
 	/**
 	 * 関連商品名
 	 */
 	@Size(max = 255)
-	@Schema(description = "関連商品名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "関連商品名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String relationProductName;
 
 	/**
 	 * カテゴリ
 	 */
-	@Schema(description = "カテゴリ", required = false, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\"), 外部連携(\"3\"), マスタ管理(\"4\"), LaIT連携(\"5\"), リコーひかり(\"6\"), 機器情報(\"7\"), 振替情報(\"8\"),品種明細取込商品_取込(\"9\"), 品種明細取込商品_出力(\"10\"), 手配ベンダー連携(\"11\"), 次年度明細ベンダー連携(\"12\"), 契約更新ベンダー連携(\"13\")")
+	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\"), 外部連携(\"3\"), マスタ管理(\"4\"), LaIT連携(\"5\"), リコーひかり(\"6\"), 機器情報(\"7\"), 振替情報(\"8\"),品種明細取込商品_取込(\"9\"), 品種明細取込商品_出力(\"10\"), 手配ベンダー連携(\"11\"), 次年度明細ベンダー連携(\"12\"), 契約更新ベンダー連携(\"13\")")
 	private CategoryType categoryType;
 
 	/**
@@ -92,7 +92,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@Schema(description = "メニュー明細管理マスタID", required = true, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メニュー明細管理マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long menuDetailsManagementMasterId;
 
 	/**
@@ -100,7 +100,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = true)
 	@Min(0)
-	@Schema(description = "ライセンス区分マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long licenseDivMasterId;
 
 	/**
@@ -108,6 +108,6 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "fileOperationRelationProductMaster")
 	@JsonIgnore
-	@Schema(description = "ファイル種別管理マスタ", required = false)
+	@Schema(description = "ファイル種別管理マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<FileKindManagementMaster> fileKindManagementMasterList;
 }

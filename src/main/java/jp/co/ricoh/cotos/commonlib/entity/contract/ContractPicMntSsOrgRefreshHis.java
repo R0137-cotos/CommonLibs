@@ -45,14 +45,14 @@ public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@Schema(description = "MoM組織ID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "MoM組織ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momOrgId;
 
 	/**
 	 * 課所名
 	 */
 	@Size(max = 255)
-	@Schema(description = "課所名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceOrgName;
 
 	/**
@@ -61,20 +61,20 @@ public class ContractPicMntSsOrgRefreshHis extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 洗替日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@Schema(description = "洗替日時", required = false)
+	@Schema(description = "洗替日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date refreshedAt;
 
 	/**
 	 * 更新元バッチID
 	 */
 	@Size(max = 255)
-	@Schema(description = "更新元バッチID", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "更新元バッチID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String updateBatchId;
 }

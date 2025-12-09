@@ -45,14 +45,14 @@ public class ElementInfoDetail extends EntityBase {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "element_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "部材情報", required = true)
+	@Schema(description = "部材情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ElementInfo elementInfo;
 
 	/**
 	 * 部材マスタID
 	 */
 	@Min(0)
-	@Schema(description = "部材マスタID", required = false, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "部材マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long elementMasterId;
 
 	/**
@@ -60,20 +60,20 @@ public class ElementInfoDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@Schema(description = "数量", required = false, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 
 	/**
 	 * 原価単価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "原価単価", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal unitPrice;
 
 	/**
 	 * 原価金額
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "原価金額", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "原価金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal price;
 }

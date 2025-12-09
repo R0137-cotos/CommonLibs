@@ -32,7 +32,7 @@ public class OrderProductGroupInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_product_group_info_seq")
 	@SequenceGenerator(name = "order_product_group_info_seq", sequenceName = "order_product_group_info_seq", allocationSize = 1)
-	@Schema(description = "ID", required = true)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -47,14 +47,14 @@ public class OrderProductGroupInfo extends EntityBase {
 	 * 商品グループコード
 	 */
 	@Column
-	@Schema(description = "商品グループコード", required = false, allowableValues = "range[0,]")
+	@Schema(description = "商品グループコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String productGroupCd;
 
 	/**
 	 * 商品グループ名
 	 */
 	@Column
-	@Schema(description = "商品グループ名", required = false, allowableValues = "range[0,]")
+	@Schema(description = "商品グループ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,]")
 	private String productGroupName;
 
 }

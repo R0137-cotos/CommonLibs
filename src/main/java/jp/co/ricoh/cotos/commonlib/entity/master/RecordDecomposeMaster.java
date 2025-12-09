@@ -59,46 +59,46 @@ public class RecordDecomposeMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "record_decompose_master_seq")
 	@SequenceGenerator(name = "record_decompose_master_seq", sequenceName = "record_decompose_master_seq", allocationSize = 1)
-	@Schema(description = "計上分解マスタID", required = true, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "計上分解マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 計上種別
 	 */
 	@Column(nullable = false)
-	@Schema(description = "計上種別", required = true, allowableValues = "原価振替(\"1\"), 割戻(\"2\")", example = "1")
+	@Schema(description = "計上種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "原価振替(\"1\"), 割戻(\"2\")", example = "1")
 	private RecordType recordType;
 
 	/**
 	 * 説明
 	 */
-	@Schema(description = "説明", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "説明", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
 	 * 振替先コード
 	 */
-	@Schema(description = "振替先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "振替先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transferDestCode;
 
 	/**
 	 * 振替先名
 	 */
-	@Schema(description = "振替先名", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "振替先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transferDestName;
 
 	/**
 	 * 数量
 	 */
 	@Column(nullable = false)
-	@Schema(description = "数量", required = true, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
 	 * 対象金額
 	 */
 	@Column(nullable = false)
-	@Schema(description = "対象金額", required = true, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "対象金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal amount;
 
 	/**
@@ -106,7 +106,7 @@ public class RecordDecomposeMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "recordDecomposeMaster")
 	@JsonIgnore
-	@Schema(description = "計上分解構成マスタ", required = false)
+	@Schema(description = "計上分解構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<RecordDecomposeCompMaster> recordDecomposeCompMasterList;
 
 }

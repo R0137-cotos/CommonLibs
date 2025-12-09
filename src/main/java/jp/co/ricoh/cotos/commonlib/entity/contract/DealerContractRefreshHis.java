@@ -40,47 +40,47 @@ public class DealerContractRefreshHis extends DealerAbstractEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@Schema(description = "契約", required = true)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 販売店コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "販売店コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "販売店コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributorCd;
 
 	/**
 	 * OE届け先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "OE届け先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "OE届け先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String oeDeliveryCd;
 
 	/**
 	 * 担当営業メールアドレス
 	 */
 	@Size(max = 255)
-	@Schema(description = "担当営業メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "担当営業メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributorEmployeeMailAddress;
 
 	/**
 	 * Rings得意先コード
 	 */
 	@Size(max = 255)
-	@Schema(description = "Rings得意先コード", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "Rings得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ringsCustomerCd;
 
 	/**
 	 * 取引先コード（手数料用）
 	 */
 	@Size(max = 255)
-	@Schema(description = "取引先コード（手数料用）", required = false, allowableValues = "range[0,255]")
+	@Schema(description = "取引先コード（手数料用）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributorRtcCd;
 
 	/**
 	 * 洗替日
 	 */
-	@Schema(description = "洗替日", required = false)
+	@Schema(description = "洗替日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date refreshedAt;
 }
