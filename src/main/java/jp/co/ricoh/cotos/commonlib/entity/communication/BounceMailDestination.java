@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -58,7 +58,7 @@ public class BounceMailDestination extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bounce_mail_destination_seq")
 	@SequenceGenerator(name = "bounce_mail_destination_seq", sequenceName = "bounce_mail_destination_seq", allocationSize = 1)
-	@ApiModelProperty(value = "バウンスメール宛先ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "バウンスメール宛先ID (作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -67,19 +67,19 @@ public class BounceMailDestination extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "bounce_mail_record_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "バウンスメール記録", required = true, position = 2)
+	@Schema(description = "バウンスメール記録", requiredMode = Schema.RequiredMode.REQUIRED)
 	private BounceMailRecord bounceMailRecord;
 
 	/**
 	 * 宛先区分
 	 */
-	@ApiModelProperty(value = "宛先区分", required = false, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1", position = 3)
+	@Schema(description = "宛先区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "TO(\"1\"), CC(\"2\")", example = "1")
 	private DestinationDiv destinationDiv;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 }

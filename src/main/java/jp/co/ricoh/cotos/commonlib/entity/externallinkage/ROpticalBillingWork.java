@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -64,96 +64,96 @@ public class ROpticalBillingWork extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_optical_billing_work_seq")
 	@SequenceGenerator(name = "r_optical_billing_work_seq", sequenceName = "r_optical_billing_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "リコーひかり請求データWorkID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "リコーひかり請求データWorkID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * CSVファイル名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "CSVファイル名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "CSVファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String csvFilename;
 
 	/**
 	 * CSVファイル区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "CSVファイル区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "CSVファイル区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKindTypeDiv;
 
 	/**
 	 * CSV行ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "CSV行ID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "CSV行ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long csvId;
 
 	/**
 	 * CAF番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "CAF番号", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "CAF番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cafNo;
 
 	/**
 	 * 東西種別
 	 */
-	@ApiModelProperty(value = "東西種別", required = false, position = 6, allowableValues = "東日本(\"1\"), 西日本(\"2\")")
+	@Schema(description = "東西種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "東日本(\"1\"), 西日本(\"2\")")
 	private EastWestDiv eastWestDiv;
 
 	/**
 	 * 算定年月
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "算定年月", required = false, position = 7)
+	@Schema(description = "算定年月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date processDate;
 
 	/**
 	 * 疑似内訳コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "疑似内訳コード", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "疑似内訳コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String breakdownCode;
 
 	/**
 	 * 疑似内訳名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "疑似内訳名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "疑似内訳名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String breakdownName;
 
 	/**
 	 * 内訳金額
 	 */
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "内訳金額", required = false, position = 10)
+	@Schema(description = "内訳金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal billingBreakdown;
 
 	/**
 	 * 利用開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "利用開始日", required = false, position = 11)
+	@Schema(description = "利用開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date startDate;
 
 	/**
 	 * 利用終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "利用終了日", required = false, position = 12)
+	@Schema(description = "利用終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date endDate;
 
 	/**
 	 * ファイル取込管理ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ファイル取込管理ID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ファイル取込管理ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long fileImportManagementId;
 
 	/**
 	 * 変換元疑似内訳コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "変換元疑似内訳コード", required = false, position = 14, allowableValues = "range[0,255]")
+	@Schema(description = "変換元疑似内訳コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String convertFromBreakdownCode;
 }

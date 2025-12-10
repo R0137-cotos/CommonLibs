@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseServiceMaster.LicenseType;
 import lombok.Data;
@@ -84,20 +84,20 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_subscription_register_request_work_seq")
 	@SequenceGenerator(name = "ms_subscription_register_request_work_seq", sequenceName = "ms_subscription_register_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "MS_サブスクリプション登録リクエストWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "MS_サブスクリプション登録リクエストWORK", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * ライセンス情報ID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス情報ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long licenseInfoId;
 
 	/**
 	 * 処理状態
 	 */
-	@ApiModelProperty(value = "処理状態", required = false, position = 3, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
+	@Schema(description = "処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 出力済(\"1\"), 連携対象外(\"2\")")
 	private MsRequestStatus processStatus;
 
 	/**
@@ -105,7 +105,7 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "顧客テナントID", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "顧客テナントID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
@@ -113,21 +113,21 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "製品ID", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "製品ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String offerId;
 
 	/**
 	 * 数量
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "数量", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String quantity;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サブスクリプションID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 
 	/**
@@ -135,41 +135,41 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスNO", required = true, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスNO", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseNo;
 
 	/**
 	 * プロダクト名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "プロダクト名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "プロダクト名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productName;
 
 	/**
 	 * 契約期間
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約期間", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "契約期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTerm;
 
 	/**
 	 * 増減区分
 	 */
-	@ApiModelProperty(value = "増減区分", required = false, position = 11, allowableValues = "増数(\"1\"), 減数(\"2\")")
+	@Schema(description = "増減区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "増数(\"1\"), 減数(\"2\")")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 
 	/**
 	 * 移行元サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "移行元サブスクリプションID", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "移行元サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fromSubscriptionId;
 
 	/**
 	 * 移行元製品ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "移行元製品ID", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "移行元製品ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fromOfferId;
 
 	/**
@@ -177,45 +177,45 @@ public class MsSubscriptionRegisterRequestWork extends AbstractMsRequestWork {
 	 */
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "処理優先順", required = false, position = 14, allowableValues = "range[0,999]")
+	@Schema(description = "処理優先順", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,999]")
 	private Integer priorityOrder;
 
 	/**
 	 * 調整後の終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "調整後の終了日", required = false, position = 15)
+	@Schema(description = "調整後の終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date customTermEndDate;
 
 	/**
 	 * サブスクリプション連携状態
 	 */
-	@ApiModelProperty(value = "サブスクリプション連携状態", required = false, position = 16, allowableValues = "未処理(\"0\"), 連携済(\"1\"), 反映確認済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
+	@Schema(description = "サブスクリプション連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 連携済(\"1\"), 反映確認済(\"2\"), 処理対象外(\"3\"), エラー(\"4\")")
 	private MsSubscriptionLinkageStatus subscriptionLinkageStatus;
 
 	/**
 	 * 再実行日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "再実行日時", required = false, position = 17)
+	@Schema(description = "再実行日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date retryDate;
 
 	/**
 	 * 連携済サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "連携済サブスクリプションID", required = false, position = 18, allowableValues = "range[0,255]")
+	@Schema(description = "連携済サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String linkedSubscriptionId;
 
 	/**
 	 * 支払周期区分
 	 */
-	@ApiModelProperty(value = "支払周期区分", required = false, position = 19, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	@Schema(description = "支払周期区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月額(\"1\"), 年額(\"2\")")
 	private PaymentCycleType paymentCycleType;
 
 	/**
 	 * ライセンス区分
 	 */
-	@ApiModelProperty(value = "ライセンス区分", required = false, position = 20, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	@Schema(description = "ライセンス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
 	private LicenseType licenseType;
 }

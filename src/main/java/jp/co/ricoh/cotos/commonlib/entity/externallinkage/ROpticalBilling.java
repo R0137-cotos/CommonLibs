@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -65,76 +65,76 @@ public class ROpticalBilling extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_optical_billing_seq")
 	@SequenceGenerator(name = "r_optical_billing_seq", sequenceName = "r_optical_billing_seq", allocationSize = 1)
-	@ApiModelProperty(value = "リコーひかり請求データID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "リコーひかり請求データID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * CSVファイル名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "CSVファイル名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "CSVファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String csvFilename;
 
 	/**
 	 * CSVファイル区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "CSVファイル区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "CSVファイル区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKindTypeDiv;
 
 	/**
 	 * CSV行ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "CSV行ID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "CSV行ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long csvId;
 
 	/**
 	 * CAF番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "CAF番号", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "CAF番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cafNo;
 
 	/**
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long contractId;
 
 	/**
 	 * 算定年月
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "算定年月", required = false, position = 7)
+	@Schema(description = "算定年月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date processDate;
 
 	/**
 	 * 内訳金額
 	 */
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "内訳金額", required = false, position = 8)
+	@Schema(description = "内訳金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal billingBreakdown;
 
 	/**
 	 * リコーひかり請求情報変換マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "リコーひかり請求情報変換マスタID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "リコーひかり請求情報変換マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long rOpticalTransferMasterId;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 計上テーブル挿入区分
 	 */
-	@ApiModelProperty(value = "計上テーブル挿入区分", required = false, position = 11, allowableValues = "未済(\"0\"), 済(\"1\"), エラー(\"9\")")
+	@Schema(description = "計上テーブル挿入区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未済(\"0\"), 済(\"1\"), エラー(\"9\")")
 	private InsertAccountingFlg insertAccountingFlg;
 
 }

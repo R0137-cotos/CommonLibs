@@ -22,7 +22,7 @@ import jakarta.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractDetail.AbsConInsideTransStatus;
@@ -45,7 +45,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounting_period_detail_seq")
 	@SequenceGenerator(name = "accounting_period_detail_seq", sequenceName = "accounting_period_detail_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -54,7 +54,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
@@ -62,21 +62,21 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 計上開始日
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "計上開始日", required = true, position = 4)
+	@Schema(description = "計上開始日", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date accountingPeriodStart;
 
 	/**
 	 * 計上終了日
 	 */
-	@ApiModelProperty(value = "計上終了日", required = false, position = 5)
+	@Schema(description = "計上終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date accountingPeriodEnd;
 
@@ -85,34 +85,34 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "数量", required = false, position = 6, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private int quantity;
 
 	/**
 	 * 単価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "単価", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal unitPrice;
 
 	/**
 	 * 金額
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "金額", required = false, position = 8, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
 	/**
 	 * ランニング売上計上処理状態
 	 */
-	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")", position = 9)
+	@Schema(description = "ランニング売上計上処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")")
 	private RunningAccountSalesStatus runningAccountSalesStatus;
 
 	/**
 	 * ランニング売上計上処理日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ランニング売上計上処理日", required = false, position = 10)
+	@Schema(description = "ランニング売上計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date runningAccountSalesDate;
 
 	/**
@@ -120,7 +120,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "標準価格", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "標準価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal standardPrice;
 
 	/**
@@ -128,7 +128,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
@@ -136,7 +136,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "ＲＪ仕入価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -144,7 +144,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -152,7 +152,7 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "仕切価格", required = false, position = 16, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -160,25 +160,25 @@ public class AccountingPeriodDetail extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 17, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "母店売価(接点店仕切)", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 18, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 統合契約内部振替処理状態
 	 */
-	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 19)
+	@Schema(description = "統合契約内部振替処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")")
 	private AbsConInsideTransStatus absConInsideTransStatus;
 
 	/**
 	 * 統合契約内部振替連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "統合契約内部振替連携日", required = false, position = 20)
+	@Schema(description = "統合契約内部振替連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date absConInsideLinkDate;
 }

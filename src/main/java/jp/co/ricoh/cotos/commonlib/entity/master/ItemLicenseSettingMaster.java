@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +32,7 @@ public class ItemLicenseSettingMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_license_setting_master_seq")
 	@SequenceGenerator(name = "item_license_setting_master_seq", sequenceName = "item_license_setting_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "品種ライセンス用設定マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "品種ライセンス用設定マスタID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -41,13 +41,13 @@ public class ItemLicenseSettingMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "品種マスタ", required = true, position = 8)
+	@Schema(description = "品種マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ItemMaster itemMaster;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 3)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 

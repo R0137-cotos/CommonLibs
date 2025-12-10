@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationApprovalRoute;
 import lombok.Data;
 
@@ -14,12 +14,12 @@ public class ApprovalSearchResult {
 	/**
 	 * 条件式判定結果
 	 */
-	@ApiModelProperty(value = "条件式判定結果", required = true, position = 1)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaResult routeFormulaResult;
 
 	/**
 	 * 見積承認ルート
 	 */
-	@ApiModelProperty(value = "見積承認ルート情報", required = true, position = 2)
+	@Schema(description = "見積承認ルート情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private EstimationApprovalRoute estimationApprovalRoute;
 }

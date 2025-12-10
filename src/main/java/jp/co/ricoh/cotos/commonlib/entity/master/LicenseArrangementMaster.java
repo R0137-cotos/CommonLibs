@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import lombok.Data;
@@ -31,27 +31,27 @@ public class LicenseArrangementMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_arrangement_master_seq")
 	@SequenceGenerator(name = "license_arrangement_master_seq", sequenceName = "license_arrangement_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス手配マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス手配マスタID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * ライセンス区分マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
 	 * 契約種別
 	 */
-	@ApiModelProperty(value = "契約種別", required = false, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 3)
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
 	 * 契約種別詳細
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約種別詳細", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "契約種別詳細", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
@@ -59,14 +59,14 @@ public class LicenseArrangementMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private int disengagementFlg;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**
@@ -74,6 +74,6 @@ public class LicenseArrangementMaster extends EntityBase {
 	 */
 	@Min(0)
 	@Max(999)
-	@ApiModelProperty(value = "優先順位", required = false, position = 7, allowableValues = "range[0,999]")
+	@Schema(description = "優先順位", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,999]")
 	private Long priorityOrder;
 }
