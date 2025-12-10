@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.util.ReflectionUtils;
+import io.swagger.v3.core.util.ReflectionUtils;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.security.mom.MomAuthorityService.AuthLevel;
 

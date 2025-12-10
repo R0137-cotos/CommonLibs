@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import lombok.Data;
@@ -48,7 +48,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_attached_file_seq")
 	@SequenceGenerator(name = "arrangement_work_attached_file_seq", sequenceName = "arrangement_work_attached_file_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務添付ファイルID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "手配業務添付ファイルID (作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -57,7 +57,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_work_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "手配業務", required = true, position = 2)
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWork arrangementWork;
 
 	/**
@@ -66,14 +66,14 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル種類", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
@@ -83,41 +83,41 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	@NotNull
 	@Valid
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "添付ファイル", required = true, position = 5)
+	@Schema(description = "添付ファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AttachedFile attachedFile;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "コメント", required = false, position = 6, allowableValues = "range[0,1000]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String attachedComment;
 
 	/**
 	 * 添付者MoM社員ID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "添付者MoM社員ID(作成時不要)<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 7, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "添付者MoM社員ID(作成時不要)<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String attachedEmpId;
 
 	/**
 	 * 添付者氏名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "添付者氏名(作成時不要)", required = true, position = 8, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "添付者氏名(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String attachedEmpName;
 
 	/**
 	 * 添付者組織名
 	 */
-	@ApiModelProperty(value = "添付者組織名(作成時不要)", required = false, position = 9, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "添付者組織名(作成時不要)", required = false, allowableValues = "range[0,255]", readOnly = true)
 	private String attachedOrgName;
 
 	/**
 	 * 添付日時
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "添付日時(作成時不要)", required = true, position = 10, readOnly = true)
+	@Schema(description = "添付日時(作成時不要)", required = true, readOnly = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date attachedAt;
 
@@ -126,7 +126,7 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "arrangementWorkAttachedFile")
-	@ApiModelProperty(value = "手配業務添付ファイル連携先", required = false, position = 11)
+	@Schema(description = "手配業務添付ファイル連携先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkAttachedFileLinkage> arrangementWorkAttachedFileLinkageList;
 
 	/**
@@ -134,14 +134,14 @@ public class ArrangementWorkAttachedFile extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	@Schema(description = "添付必須フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
 
 	/**
 	 * ファイル情報
 	 */
 	@Transient
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private MultipartFile multipartFile;
 
 	@PrePersist

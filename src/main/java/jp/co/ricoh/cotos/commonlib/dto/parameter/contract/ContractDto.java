@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ContractChangeTiming;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ItemAddStatus;
@@ -41,49 +41,49 @@ public class ContractDto extends DtoBase {
 	 * 契約種別
 	 */
 	@NotNull
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 3)
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
 	 * 商品グループマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "商品グループマスタID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productGrpMasterId;
 
 	/**
 	 * ライフサイクル状態
 	 */
 	@NotNull
-	@ApiModelProperty(value = "ライフサイクル状態", required = true, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\")", example = "1", position = 5)
+	@Schema(description = "ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\")", example = "1")
 	private LifecycleStatus lifecycleStatus;
 
 	/**
 	 * ワークフロー状態
 	 */
 	@NotNull
-	@ApiModelProperty(value = "ワークフロー状態", required = true, allowableValues = "作成中(\"1\"), 承認依頼中(\"2\"), 承認済(\"3\"), 業務依頼中(\"4\"), 業務処理完了(\"5\"), キャンセル申請中(\"6\"), 売上可能(\"7\"), 解約申請中(\"8\")", example = "1", position = 6)
+	@Schema(description = "ワークフロー状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "作成中(\"1\"), 承認依頼中(\"2\"), 承認済(\"3\"), 業務依頼中(\"4\"), 業務処理完了(\"5\"), キャンセル申請中(\"6\"), 売上可能(\"7\"), 解約申請中(\"8\")", example = "1")
 	private WorkflowStatus workflowStatus;
 
 	/**
 	 * 恒久契約識別番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "恒久契約識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * 案件番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "案件番号", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseNumber;
 
 	/**
 	 * 案件名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "案件名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "案件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseTitle;
 
 	/**
@@ -91,7 +91,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@ApiModelProperty(value = "契約番号", required = true, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -99,21 +99,21 @@ public class ContractDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(99)
-	@ApiModelProperty(value = "契約番号枝番", required = true, position = 11, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
 	/**
 	 * 契約件名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約件名", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "契約件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTitle;
 
 	/**
 	 * 変更元契約番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "変更元契約番号", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "変更元契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String originContractNumber;
 
 	/**
@@ -121,27 +121,27 @@ public class ContractDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(99)
-	@ApiModelProperty(value = "変更元契約番号枝番", required = false, position = 14, allowableValues = "range[0,99]")
+	@Schema(description = "変更元契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer originContractBranchNumber;
 
 	/**
 	 * 変更元契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "変更元契約ID", required = false, position = 15, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "変更元契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long originContractId;
 
 	/**
 	 * 変更希望日
 	 */
-	@ApiModelProperty(value = "変更希望日", required = false, position = 16)
+	@Schema(description = "変更希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date changePreferredDate;
 
 	/**
 	 * 契約日
 	 */
-	@ApiModelProperty(value = "契約日", required = false, position = 17)
+	@Schema(description = "契約日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date contractDate;
 
@@ -150,34 +150,34 @@ public class ContractDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(9)
-	@ApiModelProperty(value = "売上計上フラグ", required = true, position = 18, allowableValues = "range[0,9]")
+	@Schema(description = "売上計上フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int accountSalesFlg;
 
 	/**
 	 * 請求開始日
 	 */
-	@ApiModelProperty(value = "請求開始日", required = false, position = 19)
+	@Schema(description = "請求開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date billingDate;
 
 	/**
 	 * サービス開始日
 	 */
-	@ApiModelProperty(value = "サービス開始日", required = false, position = 20)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@ApiModelProperty(value = "サービス終了日", required = false, position = 21)
+	@Schema(description = "サービス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermEnd;
 
 	/**
 	 * 解約予定日
 	 */
-	@ApiModelProperty(value = "解約予定日", required = false, position = 22)
+	@Schema(description = "解約予定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date cancelScheduledDate;
 
@@ -185,7 +185,7 @@ public class ContractDto extends DtoBase {
 	 * 見積番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "見積番号", required = false, position = 23, allowableValues = "range[0,255]")
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
@@ -193,83 +193,83 @@ public class ContractDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(99)
-	@ApiModelProperty(value = "見積番号枝番", required = false, position = 24, allowableValues = "range[0,99]")
+	@Schema(description = "見積番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer estimationBranchNumber;
 
 	/**
 	 * 見積ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "見積ID", required = false, position = 25, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long estimationId;
 
 	/**
 	 * 見積件名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "見積件名", required = false, position = 26, allowableValues = "range[0,255]")
+	@Schema(description = "見積件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationTitle;
 
 	/**
 	 * 商流区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商流区分", required = false, position = 27, allowableValues = "range[0,255]")
+	@Schema(description = "商流区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String commercialFlowDiv;
 
 	/**
 	 * 発行書式
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "発行書式", required = false, position = 28, allowableValues = "range[0,255]")
+	@Schema(description = "発行書式", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String issueFormat;
 
 	/**
 	 * 得意先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "得意先コード", required = false, position = 29, allowableValues = "range[0,255]")
+	@Schema(description = "得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpCode;
 
 	/**
 	 * 得意先宛先名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "得意先宛先名", required = false, position = 30, allowableValues = "range[0,255]")
+	@Schema(description = "得意先宛先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String billingCustomerSpName;
 
 	/**
 	 * 支払条件
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "支払条件", required = false, position = 31, allowableValues = "range[0,255]")
+	@Schema(description = "支払条件", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String paymentTerms;
 
 	/**
 	 * 支払方法
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "支払方法", required = false, position = 32, allowableValues = "range[0,255]")
+	@Schema(description = "支払方法", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String paymentMethod;
 
 	/**
 	 * 解約理由
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "解約理由", required = false, position = 33, allowableValues = "range[0,255]")
+	@Schema(description = "解約理由", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cancelReason;
 
 	/**
 	 * その他解約理由
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "その他解約理由", required = false, position = 34, allowableValues = "range[0,1000]")
+	@Schema(description = "その他解約理由", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String cancelReasonEtc;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 35)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -277,20 +277,20 @@ public class ContractDto extends DtoBase {
 	 * web受注注文番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "web受注注文番号", required = false, position = 36, allowableValues = "range[0,255]")
+	@Schema(description = "web受注注文番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String webOrderNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 37, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 課金開始日(ランニング)
 	 */
-	@ApiModelProperty(value = "課金開始日(ランニング)", required = false, position = 38)
+	@Schema(description = "課金開始日(ランニング)", required = false)
 	@Temporal(TemporalType.DATE)
 	private Date billingStartDate;
 
@@ -298,26 +298,26 @@ public class ContractDto extends DtoBase {
 	 * 解約注文番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "解約注文番号", required = false, position = 39, allowableValues = "range[0,255]")
+	@Schema(description = "解約注文番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String cancelOrderNo;
 
 	/**
 	 * サービス利用希望日
 	 */
-	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 40)
+	@Schema(description = "サービス利用希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * IFS連携用CSV作成状態
 	 */
-	@ApiModelProperty(value = "IFS連携用CSV作成状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")", position = 41)
+	@Schema(description = "IFS連携用CSV作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
 	private IfsLinkageCsvCreateStatus ifsLinkageCsvCreateStatus;
 
 	/**
 	 * IFS連携用CSV作成日
 	 */
-	@ApiModelProperty(value = "IFS連携用CSV作成日", required = false, position = 42)
+	@Schema(description = "IFS連携用CSV作成日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date ifsLinkageCsvCreateDate;
 
@@ -325,26 +325,26 @@ public class ContractDto extends DtoBase {
 	 * お問い合わせ番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "お問い合わせ番号", required = false, position = 43, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * S&S作業依頼作成状態
 	 */
-	@ApiModelProperty(value = "S&S作業依頼作成状態", required = false, position = 44, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")", example = "1")
+	@Schema(description = "S&S作業依頼作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"),作成済み(\"1\"),作成エラー(\"2\")", example = "1")
 	private SsWorkRequestCreateStatus ssWorkRequestCreateStatus;
 
 	/**
 	 * 帳票用消費税率区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "帳票用消費税率区分", required = false, position = 45, allowableValues = "range[0,255]")
+	@Schema(description = "帳票用消費税率区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String issueTaxCodeValue;
 
 	/**
 	 * 申込日
 	 */
-	@ApiModelProperty(value = "申込日", required = false, position = 46)
+	@Schema(description = "申込日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
@@ -354,7 +354,7 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約明細", required = true, position = 47)
+	@Schema(description = "契約明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ContractDetailDto> contractDetailList;
 
 	/**
@@ -362,7 +362,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約チェック結果", required = false, position = 48)
+	@Schema(description = "契約チェック結果", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractCheckResultDto> contractCheckResultList;
 
 	/**
@@ -370,7 +370,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約承認ルート", required = false, position = 49)
+	@Schema(description = "契約承認ルート", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractApprovalRouteDto> contractApprovalRouteList;
 
 	/**
@@ -378,7 +378,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約添付ファイル", required = false, position = 50)
+	@Schema(description = "契約添付ファイル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAttachedFileDto> contractAttachedFileList;
 
 	/**
@@ -386,7 +386,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約添付ファイル履歴", required = false, position = 51)
+	@Schema(description = "契約添付ファイル履歴", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAttachedFileHistoryDto> contractAttachedFileHistoryList;
 
 	/**
@@ -395,7 +395,7 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@NotNull
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約担当SA社員", required = true, position = 52)
+	@Schema(description = "契約担当SA社員", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractPicSaEmpDto contractPicSaEmp;
 
 	/**
@@ -403,7 +403,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約追加編集者社員", required = false, position = 53)
+	@Schema(description = "契約追加編集者社員", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAddedEditorEmpDto> contractAddedEditorEmpList;
 
 	/**
@@ -411,7 +411,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "販売店(契約用)", required = false, position = 54)
+	@Schema(description = "販売店(契約用)", required = false)
 	private List<DealerContractDto> dealerContractList;
 
 	/**
@@ -420,7 +420,7 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@NotNull
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "顧客(契約用)", required = true, position = 55)
+	@Schema(description = "顧客(契約用)", required = true)
 	private CustomerContractDto customerContract;
 
 	/**
@@ -429,7 +429,7 @@ public class ContractDto extends DtoBase {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "商品(契約用)", required = true, position = 56)
+	@Schema(description = "商品(契約用)", required = true)
 	private List<ProductContractDto> productContractList;
 
 	/**
@@ -437,7 +437,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約保守担当CE社員", required = false, position = 57)
+	@Schema(description = "契約保守担当CE社員", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractPicMntCeEmpDto contractPicMntCeEmp;
 
 	/**
@@ -445,7 +445,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約保守担当SS組織", required = false, position = 58)
+	@Schema(description = "契約保守担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractPicMntSsOrgDto contractPicMntSsOrg;
 
 	/**
@@ -453,21 +453,21 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "見積明細管理", required = false, position = 59)
+	@Schema(description = "見積明細管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ManagedEstimationDetailDto> managedEstimationDetailList;
 
 	/**
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アプリケーションID", required = false, position = 60, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	/**
 	 * 契約自動更新日
 	 */
 	@Column
-	@ApiModelProperty(value = "契約自動更新日", required = false, position = 61)
+	@Schema(description = "契約自動更新日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date contractAutoUpdateDate;
 
 	/**
@@ -475,7 +475,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Size(max = 255)
 	@Column
-	@ApiModelProperty(value = "届先コード", required = false, position = 62, allowableValues = "range[0,255]")
+	@Schema(description = "届先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryCd;
 
 	/**
@@ -483,35 +483,35 @@ public class ContractDto extends DtoBase {
 	 */
 	@Size(max = 255)
 	@Column
-	@ApiModelProperty(value = "届先名", required = false, position = 63, allowableValues = "range[0,255]")
+	@Schema(description = "届先名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String deliveryName;
 
 	/**
 	 * 検収日
 	 */
 	@Column
-	@ApiModelProperty(value = "検収日", required = false, position = 64)
+	@Schema(description = "検収日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date acceptanceDate;
 
 	/**
 	 * 設置届先サイトID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "設置届先サイトID", required = false, position = 65, allowableValues = "range[0,255]")
+	@Schema(description = "設置届先サイトID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String installDeliverySiteId;
 
 	/**
 	 * 解約確定日
 	 */
 	@Column
-	@ApiModelProperty(value = "解約確定日", required = false, position = 66)
+	@Schema(description = "解約確定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date cancelDecisionDate;
 
 	/**
 	 * 契約情報確定日
 	 */
 	@Column
-	@ApiModelProperty(value = "契約情報確定日", required = false, position = 67)
+	@Schema(description = "契約情報確定日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date fixedDate;
 
 	/**
@@ -519,7 +519,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種", required = false, position = 68)
+	@Schema(description = "契約機種", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractEquipmentDto> contractEquipmentList;
 
 	/**
@@ -527,7 +527,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約受付担当SS組織", required = false, position = 69)
+	@Schema(description = "契約受付担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractPicAccSsOrgDto contractPicAccSsOrg;
 
 	/**
@@ -535,7 +535,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約導入担当SS組織", required = false, position = 70)
+	@Schema(description = "契約導入担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractPicIntSsOrgDto contractPicIntSsOrg;
 
 	/**
@@ -543,7 +543,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約導入担当CE社員", required = false, position = 71)
+	@Schema(description = "契約導入担当CE社員", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractPicIntCeEmpDto contractPicIntCeEmp;
 
 	/**
@@ -551,7 +551,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "契約受付担当CE社員", required = false, position = 72)
+	@Schema(description = "契約受付担当CE社員", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractPicAccCeEmpDto contractPicAccCeEmp;
 
 	/**
@@ -559,20 +559,20 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "設置先(契約用)", required = false, position = 73)
+	@Schema(description = "設置先(契約用)", required = false)
 	private ContractInstallationLocationDto contractInstallationLocation;
 
 	/**
 	 * 販売区分
 	 */
-	@ApiModelProperty(value = "販売区分", required = false, position = 74, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
+	@Schema(description = "販売区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "訪問販売(\"1\"), Web販売(\"2\")")
 	private SaleDiv saleDiv;
 
 	/**
 	 * ベンダー管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 75, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
@@ -580,20 +580,20 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "手動更新フラグ", required = false, position = 76, allowableValues = "range[0,9]")
+	@Schema(description = "手動更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer manualUpdateFlg;
 
 	/**
 	 * 品種追加状態
 	 */
-	@ApiModelProperty(value = "品種追加状態", required = false, position = 77, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
+	@Schema(description = "品種追加状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未実施(\"0\"), 実施中(\"1\"), 実施済み(\"2\")")
 	private ItemAddStatus itemAddStatus;
 
 	/**
 	 * 違約金用FFM発注問合せ番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "違約金用FFM発注問合せ番号", required = false, position = 78, allowableValues = "range[0,255]")
+	@Schema(description = "違約金用FFM発注問合せ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String penaltyFfmOrderContactNo;
 
 	/**
@@ -601,7 +601,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種(Isys-Oneへの連携なし)", required = false, position = 79)
+	@Schema(description = "契約機種(Isys-Oneへの連携なし)", required = false)
 	private List<ContractEquipmentNoIsysoneDto> contractEquipmentNoIsysoneList;
 
 	/**
@@ -609,7 +609,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "違約金明細(契約用)", required = false, position = 80)
+	@Schema(description = "違約金明細(契約用)", required = false)
 	private List<PenaltyDetailContractDto> penaltyDetailContractList;
 
 	/**
@@ -617,7 +617,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "配送先", required = true, position = 81)
+	@Schema(description = "配送先", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ShippingAddressDto shippingAddress;
 
 	/**
@@ -630,7 +630,7 @@ public class ContractDto extends DtoBase {
 	 *
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "納品書・請求書印字用コメント", required = false, position = 82, allowableValues = "range[0,255]")
+	@Schema(description = "納品書・請求書印字用コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String purchaseManageNumber;
 
 	/**
@@ -638,27 +638,27 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "配送先SS組織", required = true, position = 83)
+	@Schema(description = "配送先SS組織", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ShippingAddressSsOrgDto shippingAddressSsOrg;
 
 	/**
 	 * ベンダー向けコメント
 	 */
 	@Size(max = 1333)
-	@ApiModelProperty(value = "ベンダー向けコメント", required = false, position = 84, allowableValues = "range[0,1333]")
+	@Schema(description = "ベンダー向けコメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1333]")
 	private String toVendorComment;
 
 	/**
 	 * MVBアカウント
 	 */
 	@Size(max = 18)
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 85, allowableValues = "range[0,18]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String mvbAccount;
 
 	/**
 	 * MVBアカウント登録区分
 	 */
-	@ApiModelProperty(value = "MVBアカウント登録区分", required = false, position = 86, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
+	@Schema(description = "MVBアカウント登録区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規登録(\"1\"), 既存使用(\"2\")")
 	private MvbAccountEntryDiv mvbAccountEntryDiv;
 
 	/**
@@ -666,58 +666,58 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "S&S作業依頼フラグ", required = false, position = 87, allowableValues = "range[0,9]")
+	@Schema(description = "S&S作業依頼フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer ssWorkRequestCreateFlg;
 
 	/**
 	 * 統合契約連携用CSV作成状態
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成状態", required = false, position = 88, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
+	@Schema(description = "統合契約連携用CSV作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
 	private AbsConCsvCreateStatus absConCsvCreateStatus;
 
 	/**
 	 * 統合契約連携用CSV作成日
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成日", required = false, position = 89)
+	@Schema(description = "統合契約連携用CSV作成日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date absConCsvCreateDate;
 
 	/**
 	 * 統合契約連携用CSV作成状態(解約)
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成状態(解約)", required = false, position = 90, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
+	@Schema(description = "統合契約連携用CSV作成状態(解約)", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"),作成エラー(\"2\")")
 	private AbsConCsvCreateStatus absConCsvCreateStatusCancel;
 
 	/**
 	 * 統合契約連携用CSV作成日(解約)
 	 */
-	@ApiModelProperty(value = "統合契約連携用CSV作成日(解約)", required = false, position = 91)
+	@Schema(description = "統合契約連携用CSV作成日(解約)", required = false)
 	@Temporal(TemporalType.DATE)
 	private Date absConCsvCreateDateCancel;
 
 	/**
 	 * ARCS期間売保守元契約処理状態
 	 */
-	@ApiModelProperty(value = "ARCS期間売保守元契約処理状態", required = false, position = 92, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\"),管理対象外(\"3\")")
+	@Schema(description = "ARCS期間売保守元契約処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"),CSV作成済み(\"1\"),対象外(\"2\"),管理対象外(\"3\")")
 	private ArcsPeriodSaleMntOriginStatus arcsPeriodSaleMntOriginStatus;
 
 	/**
 	 * ARCS期間売保守元契約連携日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "ARCS期間売保守元契約連携日", required = false, position = 93)
+	@Schema(description = "ARCS期間売保守元契約連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date arcsPeriodSaleMntOriginLinkAt;
 
 	/**
 	 * IFS連携用解約CSV作成状態
 	 */
-	@ApiModelProperty(value = "IFS連携用解約CSV作成状態", required = false, position = 94, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
+	@Schema(description = "IFS連携用解約CSV作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成対象外(\"2\"), 作成エラー(\"3\")")
 	private IfsLinkageCsvCreateStatus ifsLinkageCancelCsvStatus;
 
 	/**
 	 * IFS連携用解約CSV作成日
 	 */
-	@ApiModelProperty(value = "IFS連携用解約CSV作成日", required = false, position = 95)
+	@Schema(description = "IFS連携用解約CSV作成日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date ifsLinkageCancelCsvDate;
 
@@ -726,7 +726,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "次回契約更新可能フラグ", required = false, position = 96, allowableValues = "range[0,9]")
+	@Schema(description = "次回契約更新可能フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer nextUpdatePossibleFlg;
 
 	/**
@@ -734,7 +734,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "次回自動更新フラグ", required = false, position = 97, allowableValues = "range[0,9]")
+	@Schema(description = "次回自動更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer nextAutoUpdateFlg;
 
 	/**
@@ -742,53 +742,53 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "次回継続可能機種なしフラグ", required = false, position = 98, allowableValues = "range[0,9]")
+	@Schema(description = "次回継続可能機種なしフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer nextEquipmentNotContFlg;
 
 	/**
 	 * 基本契約区分
 	 */
-	@ApiModelProperty(value = "基本契約区分", required = false, position = 99, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
+	@Schema(description = "基本契約区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "基本契約(\"1\"),基本契約_一部(\"2\")")
 	private BasicContractDiv basicContractDiv;
 
 	/**
 	 * 基本契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "基本契約ID", required = false, position = 100, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "基本契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long basicContractId;
 
 	/**
 	 * 納入日
 	 */
-	@ApiModelProperty(value = "納入日", required = false, position = 101)
+	@Schema(description = "納入日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date deliveryDate;
 
 	/**
 	 * サービス終了最大延長日
 	 */
-	@ApiModelProperty(value = "サービス終了最大延長日", required = false, position = 102)
+	@Schema(description = "サービス終了最大延長日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date serviceTermMaxEnd;
 
 	/**
 	 * 延長可能契約月数
 	 */
-	@ApiModelProperty(value = "延長可能契約月数", required = false, position = 103)
+	@Schema(description = "延長可能契約月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long maxExtensionMonths;
 
 	/**
 	 * 契約変更タイミング
 	 */
-	@ApiModelProperty(value = "契約変更タイミング", required = false, position = 104)
+	@Schema(description = "契約変更タイミング", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ContractChangeTiming contractChangeTiming;
 
 	/**
 	 * NTTお客様ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "NTTお客様ID", required = false, position = 105, allowableValues = "range[0,255]")
+	@Schema(description = "NTTお客様ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nttCustomerId;
 
 	/**
@@ -796,19 +796,19 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "contract")
-	@ApiModelProperty(value = "回収先", required = true, position = 106)
+	@Schema(description = "回収先", requiredMode = Schema.RequiredMode.REQUIRED)
 	private CollectLocationDto collectLocation;
 
 	/**
 	 * RPA連携用CPQ更新CSV作成状態
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成状態", required = false, position = 107, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
+	@Schema(description = "RPA連携用CPQ更新CSV作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "連携済み(\"1\"),対象外(\"2\")")
 	private RpaLinkageCpqUpdateCsvCreateStatus rpaLinkageCpqUpdateCsvCreateStatus;
 
 	/**
 	 * RPA連携用CPQ更新CSV作成日
 	 */
-	@ApiModelProperty(value = "RPA連携用CPQ更新CSV作成日時", required = false, position = 108)
+	@Schema(description = "RPA連携用CPQ更新CSV作成日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date rpaLinkageCpqUpdateCsvCreateAt;
 
@@ -816,7 +816,7 @@ public class ContractDto extends DtoBase {
 	 * V-UP見積番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "V-UP見積番号", required = false, position = 109, allowableValues = "range[0,255]")
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	/**
@@ -824,7 +824,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "機器情報取込不要フラグ", required = false, position = 110, allowableValues = "range[0,9]")
+	@Schema(description = "機器情報取込不要フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer equipmentImportUnnecessaryFlg;
 
 	/**
@@ -832,7 +832,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "振替情報取込不要フラグ", required = false, position = 111, allowableValues = "range[0,9]")
+	@Schema(description = "振替情報取込不要フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer transImportUnnecessaryFlg;
 
 	/**
@@ -840,7 +840,7 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種付加情報", required = false, position = 112)
+	@Schema(description = "契約機種付加情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractEquipmentAdditionInfoDto> contractEquipmentAdditionInfoList;
 
 	/**
@@ -848,14 +848,14 @@ public class ContractDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contract")
-	@ApiModelProperty(value = "契約機種状態管理", required = false, position = 113)
+	@Schema(description = "契約機種状態管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ManagedContractEquipmentStatusDto> managedContractEquipmentStatusList;
 
 	/**
 	 * 電子契約正式帳票名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "電子契約正式帳票名", required = false, position = 110, allowableValues = "range[0,255]")
+	@Schema(description = "電子契約正式帳票名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String electronicContractOfficialReportName;
 
 	/**
@@ -863,13 +863,13 @@ public class ContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "電子契約帳票EIMアップロードフラグ", required = false, position = 111, allowableValues = "range[0,9]")
+	@Schema(description = "電子契約帳票EIMアップロードフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer electronicContractReportEimUploadFlg;
 
 	/**
 	 * 電子契約締結日
 	 */
-	@ApiModelProperty(value = "電子契約締結日", required = false, position = 112)
+	@Schema(description = "電子契約締結日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date electronicContractConclusionDate;
 }

@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -15,18 +15,18 @@ public class ApplicationHistoryResult {
 	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * サブドメイン名(MSアカウント)
 	 */
-	@ApiModelProperty(value = "サブドメイン名(MSアカウント)", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "サブドメイン名(MSアカウント)", required = false, allowableValues = "range[0,255]")
 	private String subDomainName;
 
 	/**
 	 * 申込明細情報
 	 */
-	@ApiModelProperty(value = "申込明細情報", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "申込明細情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private List<ApplicationHistoryDto> applicationHistory;
 }

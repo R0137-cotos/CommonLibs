@@ -14,7 +14,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,28 +30,28 @@ public class TmSuspendSubscriptionRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_suspend_subscription_request_work_seq")
 	@SequenceGenerator(name = "tm_suspend_subscription_request_work_seq", sequenceName = "tm_suspend_subscription_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "サブスクリプション解約リクエストWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "サブスクリプション解約リクエストWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "会社ID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サブスクリプションID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private Date licenseExpirationDate;
 
 	/**
@@ -59,6 +59,6 @@ public class TmSuspendSubscriptionRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション解約レスポンスWORK", required = false, position = 10)
+	@Schema(description = "トレンドマイクロサブスクリプション解約レスポンスWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmSuspendSubscriptionResponseWork responseWork;
 }

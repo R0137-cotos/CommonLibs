@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.contract.ContractApprovalRoute;
 import lombok.Data;
 
@@ -14,18 +14,18 @@ public class ApprovalCandidateSearchResultContract {
 	/**
 	 * 承認ルートマスタ
 	 */
-	@ApiModelProperty(value = "承認ルートマスタ情報", required = true, position = 1)
+	@Schema(description = "承認ルートマスタ情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ApprovalRouteMasterDto approvalRouteMaster;
 
 	/**
 	 * 条件式判定結果
 	 */
-	@ApiModelProperty(value = "条件式判定結果", required = true, position = 2)
+	@Schema(description = "条件式判定結果", requiredMode = Schema.RequiredMode.REQUIRED)
 	private RouteFormulaResult routeFormulaResult;
 
 	/**
 	 * 契約承認ルート
 	 */
-	@ApiModelProperty(value = "契約承認ルート情報", required = true, position = 3)
+	@Schema(description = "契約承認ルート情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractApprovalRoute contractApprovalRoute;
 }

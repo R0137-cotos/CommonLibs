@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -9,85 +9,85 @@ public class O365LatestContractDetailDto {
 	/**
 	 * 品種名
 	 */
-	@ApiModelProperty(value = "品種名", required = false, position = 1)
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String itemContractName;
 
 	/**
 	 * リコー品種コード
 	 */
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 2)
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String ricohItemCode;
 
 	/**
 	 * 年契約・月契約区分
 	 */
-	@ApiModelProperty(value = "年契約・月契約区分", required = false, position = 3)
+	@Schema(description = "年契約・月契約区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String yearMonthContractDiv;
 
 	/**
 	 * ライセンス開始日
 	 */
-	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 4)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	String licenseStartDate;
 
 	/**
 	 * 単価
 	 */
-	@ApiModelProperty(value = "単価", required = false, position = 5)
+	@Schema(description = "単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int unitPrice;
 
 	/**
 	 * 課金開始年月
 	 */
-	@ApiModelProperty(value = "課金開始年月", required = false, position = 5)
+	@Schema(description = "課金開始年月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String billingStartMonth;
 
 	/**
 	 * 自動更新日
 	 */
-	@ApiModelProperty(value = "自動更新日", required = false, position = 6)
+	@Schema(description = "自動更新日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String automaticUpdateDate;
 
 	/**
 	 * 契約数量
 	 */
-	@ApiModelProperty(value = "契約数量", required = false, position = 7)
+	@Schema(description = "契約数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int quantity;
 
 	/**
 	 * 申し込み数量
 	 */
-	@ApiModelProperty(value = "申し込み数量", required = false, position = 8)
+	@Schema(description = "申し込み数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int orderQuantity;
 
 	/**
 	 * 変更前数量
 	 */
-	@ApiModelProperty(value = "変更前数量", required = false, position = 9)
+	@Schema(description = "変更前数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int beforeQuantity;
 
 	/**
 	 * 減数反映日
 	 */
-	@ApiModelProperty(value = "減数反映日", required = false, position = 10)
+	@Schema(description = "減数反映日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String reductionReflectionDate;
 
 	/**
 	 * 減数可能期間（From）
 	 */
-	@ApiModelProperty(value = "減数可能期間（From）", required = false, position = 11)
+	@Schema(description = "減数可能期間（From）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String decreasablePeriodStart;
 
 	/**
 	 * 減数可能期間（To）
 	 */
-	@ApiModelProperty(value = "減数可能期間（To）", required = false, position = 12)
+	@Schema(description = "減数可能期間（To）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String decreasablePeriodEnd;
 
 	/**
 	 * 年額計上月
 	 */
-	@ApiModelProperty(value = "年額計上月", required = false, position = 13)
+	@Schema(description = "年額計上月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String annualAmountRecordMonth;
 
 }

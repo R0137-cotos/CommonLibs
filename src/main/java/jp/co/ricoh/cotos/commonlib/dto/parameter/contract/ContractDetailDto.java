@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialAccountSalesStatus;
@@ -36,7 +36,7 @@ public class ContractDetailDto extends DtoBase {
 	 * 状態
 	 */
 	@NotNull
-	@ApiModelProperty(value = "状態", required = true, allowableValues = "NONE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "", position = 3)
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "NONE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "")
 	private DetailStatus state;
 
 	/**
@@ -44,7 +44,7 @@ public class ContractDetailDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
+	@Schema(description = "変更前数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
@@ -52,7 +52,7 @@ public class ContractDetailDto extends DtoBase {
 	 */
 	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -61,7 +61,7 @@ public class ContractDetailDto extends DtoBase {
 	@NotNull
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "単価", required = true, position = 6, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal unitPrice;
 
 	/**
@@ -69,33 +69,33 @@ public class ContractDetailDto extends DtoBase {
 	 */
 	@NotNull
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "金額", required = true, position = 7, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
+	@Schema(description = "金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal amountSummary;
 
 	/**
 	 * 摘要
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "摘要", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "摘要", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String detailAbstract;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
 	/**
 	 * イニシャル売上計上処理状態
 	 */
-	@ApiModelProperty(value = "イニシャル売上計上処理状態", required = false, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", position = 10)
+	@Schema(description = "イニシャル売上計上処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")")
 	private InitialAccountSalesStatus initialAccountSalesStatus;
 
 	/**
 	 * イニシャル売上計上処理日
 	 */
-	@ApiModelProperty(value = "イニシャル売上計上処理日", required = false, position = 11)
+	@Schema(description = "イニシャル売上計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date initialAccountSalesDate;
 
@@ -103,59 +103,59 @@ public class ContractDetailDto extends DtoBase {
 	 * 注文番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "注文番号", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "注文番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String orderNo;
 
 	/**
 	 * FFM内部振替処理状態
 	 */
-	@ApiModelProperty(value = "FFM内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 連携済み(\"2\"), 対象外(\"3\")", position = 13)
+	@Schema(description = "FFM内部振替処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 連携済み(\"2\"), 対象外(\"3\")")
 	private FfmInsideTransStatus ffmInsideTransStatus;
 
 	/**
 	 * FFM内部振替連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "FFM内部振替連携日", required = false, position = 14)
+	@Schema(description = "FFM内部振替連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date ffmInsideLinkDate;
 
 	/**
 	 * 統合契約内部振替処理状態
 	 */
-	@ApiModelProperty(value = "統合契約内部振替処理状態", required = false, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")", position = 15)
+	@Schema(description = "統合契約内部振替処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), 連携済み(\"1\"), 対象外(\"4\")")
 	private AbsConInsideTransStatus absConInsideTransStatus;
 
 	/**
 	 * 統合契約内部振替連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "統合契約内部振替連携日", required = false, position = 16)
+	@Schema(description = "統合契約内部振替連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date absConInsideLinkDate;
 
 	/**
 	 * ランニング売上計上処理状態
 	 */
-	@ApiModelProperty(value = "ランニング売上計上処理状態", required = false, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")", position = 17)
+	@Schema(description = "ランニング売上計上処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "正常(\"0\"), 処理エラー(\"1\"), 処理不要(\"2\")")
 	private RunningAccountSalesStatus runningAccountSalesStatus;
 
 	/**
 	 * ランニング売上計上処理日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ランニング売上計上処理日", required = false, position = 18)
+	@Schema(description = "ランニング売上計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date runningAccountSalesDate;
 
 	@Valid
 	@NotNull
 	@OneToOne(mappedBy = "contractDetail")
-	@ApiModelProperty(value = "品種(契約用)", required = true, position = 19)
+	@Schema(description = "品種(契約用)", required = true)
 	private ItemContractDto itemContract;
 
 	/**
 	 * 契約期間
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約期間", required = false, position = 20, allowableValues = "range[0,255]")
+	@Schema(description = "契約期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractSpan;
 
 	/**
@@ -163,26 +163,26 @@ public class ContractDetailDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "品種追加フラグ", required = false, position = 21, allowableValues = "range[0,9]")
+	@Schema(description = "品種追加フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer itemAddFlg;
 
 	/**
 	 * FFM検収連携状態
 	 */
-	@ApiModelProperty(value = "FFM検収連携状態", required = false, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\")", position = 22)
+	@Schema(description = "FFM検収連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済み(\"1\"), 作成エラー(\"2\")")
 	private FfmAcceptanceLinkingStatus ffmAcceptanceLinkingStatus;
 
 	/**
 	 * 統合契約外部請求処理状態
 	 */
-	@ApiModelProperty(value = "統合契約外部請求処理状態", required = false, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 対象外(\"2\")", position = 23)
+	@Schema(description = "統合契約外部請求処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未処理(\"0\"), CSV作成済み(\"1\"), 対象外(\"2\")")
 	private AbsConExternalBillingStatus absConExternalBillingStatus;
 
 	/**
 	 * 統合契約外部請求連携日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "統合契約外部請求連携日", required = false, position = 24)
+	@Schema(description = "統合契約外部請求連携日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date absConExternalBillingDate;
 
 	/**
@@ -190,13 +190,13 @@ public class ContractDetailDto extends DtoBase {
 	 */
 	@Min(-99999)
 	@Max(99999)
-	@ApiModelProperty(value = "契約数", required = false, position = 25, allowableValues = "range[-99999,99999]")
+	@Schema(description = "契約数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer contractAmount;
 
 	/**
 	 * 増減区分
 	 */
-	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 26)
+	@Schema(description = "増減区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 
 }
