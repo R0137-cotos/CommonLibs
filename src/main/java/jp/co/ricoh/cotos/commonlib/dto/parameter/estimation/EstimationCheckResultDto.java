@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation.LifecycleStatus;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class EstimationCheckResultDto extends DtoBase {
 	 * 対象ライフサイクル状態
 	 */
 	@NotNull
-	@ApiModelProperty(value = "対象ライフサイクル状態", required = true, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), 受注(\"3\"), 失注(\"4\"), 破棄(\"5\")", example = "1", position = 3)
+	@Schema(description = "対象ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), 受注(\"3\"), 失注(\"4\"), 破棄(\"5\")", example = "1")
 	private LifecycleStatus targetLifecycleStatus;
 
 	/**
@@ -31,7 +31,7 @@ public class EstimationCheckResultDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック事項コード", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterCode;
 
 	/**
@@ -39,7 +39,7 @@ public class EstimationCheckResultDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック事項文面", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "チェック事項文面", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkMatterText;
 
 	/**
@@ -47,34 +47,34 @@ public class EstimationCheckResultDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(999)
-	@ApiModelProperty(value = "表示順", required = true, position = 6, allowableValues = "range[0,999]")
+	@Schema(description = "表示順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int displayOrder;
 
 	/**
 	 * チェック実施者
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック実施者", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedUserId;
 
 	/**
 	 * チェック実施者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック実施者氏名", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedUserName;
 
 	/**
 	 * チェック実施者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェック実施者組織名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "チェック実施者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String checkedOrgName;
 
 	/**
 	 * チェック実施者日時
 	 */
-	@ApiModelProperty(value = "チェック実施者日時", required = false, position = 10)
+	@Schema(description = "チェック実施者日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date checkedAt;
 }

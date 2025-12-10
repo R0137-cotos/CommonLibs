@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,31 +13,31 @@ public class RsiFindCustomerResult {
 	/**
 	 * ID
 	 */
-	@ApiModelProperty(value = "ID", required = false, position = 1)
+	@Schema(description = "ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String id;
 
 	/**
 	 * テナントID
 	 */
-	@ApiModelProperty(value = "テナントID", required = false, position = 2)
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String tenantId;
 
 	/**
 	 * 企業名
 	 */
-	@ApiModelProperty(value = "企業名", required = false, position = 3)
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerCompanyName;
 
 	/**
 	 * お客様管理者名
 	 */
-	@ApiModelProperty(value = "お客様管理者名", required = false, position = 4)
+	@Schema(description = "お客様管理者名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerAdminName;
 
 	/**
 	 * メールアドレス
 	 */
-	@ApiModelProperty(value = "お客様管理者メールアドレス", required = false, position = 5)
+	@Schema(description = "お客様管理者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String customerAdminMailAddress;
 
 }

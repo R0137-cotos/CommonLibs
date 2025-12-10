@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 import lombok.Data;
@@ -64,7 +64,7 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_estimation_destruction_item_seq")
 	@SequenceGenerator(name = "price_rewrite_estimation_destruction_item_seq", sequenceName = "price_rewrite_estimation_destruction_item_seq", allocationSize = 1)
-	@ApiModelProperty(value = "価格書換見積破棄対象品種", required = true, position = 1, readOnly = true)
+	@Schema(description = "価格書換見積破棄対象品種", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private long id;
 
 	/**
@@ -73,7 +73,7 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ファイル取込管理", required = false, position = 2)
+	@Schema(description = "ファイル取込管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private FileImportManagement fileImportManagement;
 
 	/**
@@ -81,14 +81,14 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 削除対象日
 	 */
 	@Column
-	@ApiModelProperty(value = "削除対象日", required = false, position = 4)
+	@Schema(description = "削除対象日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date deleteTargetDate;
 
@@ -96,14 +96,14 @@ public class PriceRewriteEstimationDestructionItem extends EntityBase {
 	 * ステータス
 	 */
 	@Column
-	@ApiModelProperty(value = "ステータス", required = false, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1", position = 5)
+	@Schema(description = "ステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1")
 	private Status status;
 
 	/**
 	 * 反映日時
 	 */
 	@Column
-	@ApiModelProperty(value = "反映日時", required = false, position = 6)
+	@Schema(description = "反映日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reflectionAt;
 }

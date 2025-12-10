@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.AttachedFile;
 import jp.co.ricoh.cotos.commonlib.entity.master.AttachedFileProductGrpCheckMaster.CheckTimingDiv;
@@ -51,7 +51,7 @@ public class ContractAttachedFile extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_attached_file_seq")
 	@SequenceGenerator(name = "contract_attached_file_seq", sequenceName = "contract_attached_file_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約添付ファイルID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "契約添付ファイルID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -60,7 +60,7 @@ public class ContractAttachedFile extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
@@ -69,14 +69,14 @@ public class ContractAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * ファイル種類
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル種類", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
@@ -84,14 +84,14 @@ public class ContractAttachedFile extends EntityBase {
 	 */
 	@OneToOne(optional = false)
 	@JoinColumn(name = "attached_file_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "添付ファイル", required = true, position = 5)
+	@Schema(description = "添付ファイル", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AttachedFile attachedFile;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 1000)
-	@ApiModelProperty(value = "コメント", required = false, position = 6, allowableValues = "range[0,1000]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String attachedComment;
 
 	/**
@@ -100,7 +100,7 @@ public class ContractAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "添付者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String attachedEmpId;
 
 	/**
@@ -109,14 +109,14 @@ public class ContractAttachedFile extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者氏名", required = true, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "添付者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String attachedEmpName;
 
 	/**
 	 * 添付者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "添付者組織名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "添付者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String attachedOrgName;
 
 	/**
@@ -124,7 +124,7 @@ public class ContractAttachedFile extends EntityBase {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
-	@ApiModelProperty(value = "添付日時(作成時不要)", required = true, position = 10, readOnly = true)
+	@Schema(description = "添付日時(作成時不要)", required = true, readOnly = true)
 	private Date attachedAt;
 
 	/**
@@ -132,7 +132,7 @@ public class ContractAttachedFile extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractAttachedFile")
-	@ApiModelProperty(value = "契約添付ファイル連携先", required = false, position = 11)
+	@Schema(description = "契約添付ファイル連携先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAttachedFileLinkage> contractAttachedFileLinkageList;
 
 	/**
@@ -140,20 +140,20 @@ public class ContractAttachedFile extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "添付必須フラグ", required = false, position = 12, allowableValues = "range[0,9]")
+	@Schema(description = "添付必須フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer attachedRequiredFlg;
 
 	/**
 	 * チェックタイミング区分
 	 */
-	@ApiModelProperty(value = "チェックタイミング区分", required = false, allowableValues = "常時(\"0\"), 承認のみ(\"1\")", position = 13)
+	@Schema(description = "チェックタイミング区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "常時(\"0\"), 承認のみ(\"1\")")
 	private CheckTimingDiv checkTimingDiv;
 
 	/**
 	 * ファイル情報
 	 */
 	@Transient
-	@ApiModelProperty(hidden = true)
+	@Schema(hidden = true)
 	private MultipartFile multipartFile;
 
 	@PrePersist
