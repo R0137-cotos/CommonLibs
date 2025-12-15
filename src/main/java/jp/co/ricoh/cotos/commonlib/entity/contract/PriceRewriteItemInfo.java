@@ -134,8 +134,8 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 価格変更率
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "価格変更率", required = false, position = 4, allowableValues = "range[0.00,99999999999999999.99]")
+	@DecimalMax("9999999999999999999.999")
+	@ApiModelProperty(value = "価格変更率", required = false, position = 4, allowableValues = "range[0.00,99999999999999999.999]")
 	private BigDecimal priceReviceRate;
 
 	/**
@@ -158,7 +158,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 母店仕切
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@ApiModelProperty(value = "母店仕切", required = false, position = 7)
 	private BigDecimal rjDividingPrice;
 
@@ -166,7 +166,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 接点店仕切
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@ApiModelProperty(value = "接点店仕切", required = false, position = 8)
 	private BigDecimal motherStorePrice;
 
