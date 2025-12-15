@@ -134,8 +134,8 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 価格変更率
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
-	@Schema(description = "価格変更率", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
+	@DecimalMax("9999999999999999999.999")
+	@Schema(description = "価格変更率", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.999]")
 	private BigDecimal priceReviceRate;
 
 	/**
@@ -158,7 +158,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 母店仕切
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@Schema(description = "母店仕切", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rjDividingPrice;
 
@@ -166,7 +166,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 接点店仕切
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@Schema(description = "接点店仕切", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal motherStorePrice;
 
