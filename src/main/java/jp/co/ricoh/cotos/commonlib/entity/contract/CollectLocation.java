@@ -3,19 +3,19 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -66,63 +66,63 @@ public class CollectLocation extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "collect_location_seq")
 	@SequenceGenerator(name = "collect_location_seq", sequenceName = "collect_location_seq", allocationSize = 1)
-	@ApiModelProperty(value = "回収先ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "回収先ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 希望回収日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "希望回収日", required = false, position = 2)
+	@Schema(description = "希望回収日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date collectPreferredDate;
 
 	/**
 	 * 担当者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当者氏名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "担当者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picName;
 
 	/**
 	 * 郵便番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "郵便番号", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 住所
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "住所", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "住所", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String address;
 
 	/**
 	 * 企業名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "企業名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * 事業所名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "事業所名", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String officeName;
 
 	/**
 	 * 担当者部署
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当者部署", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "担当者部署", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picDeptName;
 
 	/**
 	 * 電話番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "電話番号", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String phoneNumber;
 
 	/**
@@ -130,20 +130,20 @@ public class CollectLocation extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "回収不要フラグ", required = false, position = 10, allowableValues = "range[0,9]")
+	@Schema(description = "回収不要フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer collectUnnecessaryFlg;
 
 	/**
 	 * アップグレードRJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アップグレードRJ管理番号", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "アップグレードRJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String upgradeRjManageNumber;
 
 	/**
 	 * 連携状態
 	 */
-	@ApiModelProperty(value = "連携状態", required = false, position = 12, allowableValues = "AP削除連携済(\"1\"), 解約連携済(\"2\")")
+	@Schema(description = "連携状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "AP削除連携済(\"1\"), 解約連携済(\"2\")")
 	private LinkageState linkageState;
 
 	/**
@@ -152,7 +152,7 @@ public class CollectLocation extends EntityBase {
 	@OneToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "契約", required = true, position = 13)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 }

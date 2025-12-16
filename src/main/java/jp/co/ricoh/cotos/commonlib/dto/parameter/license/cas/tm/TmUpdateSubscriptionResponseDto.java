@@ -2,12 +2,12 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm;
 
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -101,21 +101,21 @@ public class TmUpdateSubscriptionResponseDto extends AbstractTmResponseDto {
 		/**
 		 * 猶予期間
 		 */
-		@ApiModelProperty(value = "猶予期間", required = false, position = 18, allowableValues = "range[0,9]")
+		@Schema(description = "猶予期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 		@JsonProperty("grace_period")
 		private Integer gracePeriod;
 
 		/**
 		 * シート数
 		 */
-		@ApiModelProperty(value = "シート数", required = false, position = 19, allowableValues = "range[0,9]")
+		@Schema(description = "シート数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 		@JsonProperty("units")
 		private Integer units;
 
 		/**
 		 * ライセンスステータス
 		 */
-		@ApiModelProperty(value = "ライセンスステータス", required = false, position = 20)
+		@Schema(description = "ライセンスステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 		@JsonProperty("enabled")
 		private Boolean licenseEnabled;
 	}

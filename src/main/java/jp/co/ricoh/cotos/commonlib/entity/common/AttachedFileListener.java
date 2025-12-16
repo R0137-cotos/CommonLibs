@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.entity.common;
 
-import javax.persistence.PrePersist;
+import jakarta.persistence.PrePersist;
 
 import org.springframework.stereotype.Component;
 

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,7 +37,7 @@ import jp.co.ricoh.cotos.commonlib.repository.communication.ContactRepository;
 import jp.co.ricoh.cotos.commonlib.repository.communication.ContactToRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestCommunication {
 
 	@Autowired
@@ -129,7 +128,7 @@ public class TestCommunication {
 	@Test
 	public void 親がいない場合には親がnullになることを確認_問い合わせ() {
 		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
-		Contact child = contactRepository.findOne(4L);
+		Contact child = contactRepository.findById(4L).get();
 		Assert.assertNull(child.getParent());
 	}
 
@@ -146,6 +145,7 @@ public class TestCommunication {
 	@Test
 	public void BounceMailRecordRepositoryの条件テスト() {
 		context.getBean(DBConfig.class).initTargetTestData("repository/communication.sql");
+		// ① contractId: 値あり, nXContractId: 値あり, sentAt: 値あり
 		String contractId = "E000000001";
 		String nXContractId = "1";
 		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -156,7 +156,24 @@ public class TestCommunication {
 			e.printStackTrace();
 		}
 		List<BounceMailRecord> list1 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(contractId, nXContractId, sentAt);
-		Assert.assertNotEquals(0, list1.size());
+		Assert.assertEquals(1, list1.size());
+
+		// ② contractId: NULL, nXContractId: NULL, sentAt: NULL
+		List<BounceMailRecord> listNull1 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(null,null, null);
+		Assert.assertEquals(1, listNull1.size());
+
+		// ③ contractId: "", nXContractId: "", sentAt: 値あり（Oracleでは空文字 = NULL扱いのため3件取得できる認識）
+		List<BounceMailRecord> listEmpty = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt("", "", sentAt);
+		Assert.assertEquals(3, listEmpty.size());
+
+		// ④ contractId: null, nXContractId: "", sentAt: 値あり（Oracleでは空文字 = NULL扱いのため3件取得できる認識）
+		List<BounceMailRecord> listNull2 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt(null, "", sentAt);
+		Assert.assertEquals(3, listNull2.size());
+		
+		// ⑤ contractId: '', nXContractId: null, sentAt: 値あり（Oracleでは空文字 = NULL扱いのため3件取得できる認識）
+		List<BounceMailRecord> listNull3 = bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAt("", null, sentAt);
+		Assert.assertEquals(3, listNull3.size());
+		
 		String docNumber = "CC2020102800001";
 		Integer contractBranchNumber = 1;
 		List<BounceMailRecord> list2 = bounceMailRecordRepository.findByDocNumberAndContractBranchNumber(docNumber, contractBranchNumber);
@@ -172,7 +189,7 @@ public class TestCommunication {
 
 		idList.stream().forEach(id -> {
 			// データが取得できることを確認
-			T found = repository.findOne(id);
+			T found = repository.findById(id).get();
 
 			Assert.assertNotNull(found);
 			// 全てのカラムがNullではないことを確認

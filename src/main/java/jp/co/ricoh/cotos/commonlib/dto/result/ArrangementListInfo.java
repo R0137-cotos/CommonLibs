@@ -2,18 +2,21 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.Arrangement;
 import jp.co.ricoh.cotos.commonlib.entity.arrangement.ArrangementWork;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.LifecycleStatus;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 
 /**
@@ -26,283 +29,291 @@ import lombok.Data;
 public class ArrangementListInfo {
 
 	@Id
-	@ApiModelProperty(value = "連番", required = true, position = 1)
+	@Schema(description = "連番", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long seqNo;
 
 	/**
 	 * 契約ID
 	 */
-	@ApiModelProperty(value = "契約ID", required = true, position = 2)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long contractId;
 
 	/**
 	 * 手配ID
 	 */
-	@ApiModelProperty(value = "手配ID", required = true, position = 3)
+	@Schema(description = "手配ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long arrangementId;
 
 	/**
 	 * 手配業務ID
 	 */
-	@ApiModelProperty(value = "手配業務ID", required = true, position = 4)
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long arrangementWorkId;
 
 	/**
 	 * 契約番号
 	 */
-	@ApiModelProperty(value = "契約番号<br />" //
+	@Schema(description = "契約番号<br />" //
 			+ "契約番号 + \"-\" + 契約番号枝番", //
-			required = false, position = 5, allowableValues = "range[0,18]") //
+			required = false, allowableValues = "range[0,18]") //
 	private String contractNumber;
 
 	/**
 	 * サービス識別番号
 	 */
-	@ApiModelProperty(value = "サービス識別番号", required = false, position = 6, allowableValues = "range[0,18]")
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
 	 * 契約状態
 	 */
-	@ApiModelProperty(value = "契約状態<br />" //
+	@Schema(description = "契約状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
-			required = false, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\"), 締結待ち(\"11\")", position = 7) //
+			required = false, allowableValues = "作成中(\"1\"), 作成完了(\"2\"), キャンセル手続き中(\"3\"), 破棄(\"4\"), 予定日待ち(\"5\"), 締結中(\"6\"), 解約手続き中(\"7\"), 解約予定日待ち(\"8\"), 解約(\"9\"), 旧契約(\"10\"), 締結待ち(\"11\")") //
 	private LifecycleStatus lifecycleStatus;
 
 	/**
 	 * 契約種別
 	 */
-	@ApiModelProperty(value = "契約種別<br />" //
+	@Schema(description = "契約種別<br />" //
 			+ "新規, 契約変更, 解約などの契約種別を表す。", //
-			required = false, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 8) //
+			required = false, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")") //
 	private ContractType contractType;
 
 	/**
 	 * お客様顧客名
 	 */
-	@ApiModelProperty(value = "お客様企業名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "お客様企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
 	 * 事業所名
 	 */
-	@ApiModelProperty(value = "事業所名", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String officeName;
 
 	/**
 	 * 商品名
 	 */
-	@ApiModelProperty(value = "商品名称", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "商品名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productName;
 
 	/**
 	 * 最終依頼審査承認履歴処理名
 	 */
-	@ApiModelProperty(value = "最終依頼審査承認履歴処理名", required = false, position = 12, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
+	@Schema(description = "最終依頼審査承認履歴処理名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
 	private ApprovalProcessCategory lastApprovalProcess;
 
 	/**
 	 * 希望納期
 	 */
-	@ApiModelProperty(value = "希望納期", required = false, position = 13)
+	@Schema(description = "希望納期", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date desiredDeliveryDate;
 
 	/**
 	 * 手配業務
 	 */
-	@ApiModelProperty(value = "手配業務", required = false, position = 14, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String arrangementName;
 
 	/**
 	 * 業務受理日時
 	 */
-	@ApiModelProperty(value = "業務受理日時", required = false, position = 15)
+	@Schema(description = "業務受理日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date businessAcceptanceDateTime;
 
 	/**
 	 * 手配業務担当者
 	 */
-	@ApiModelProperty(value = "手配業務担当者", required = false, position = 16, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務担当者", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String workUserName;
 
 	/**
 	 * 手配業務ステータス
 	 */
-	@ApiModelProperty(value = "手配業務ステータス<br />" //
+	@Schema(description = "手配業務ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
-			required = false, allowableValues = "受付待ち(\"1\"), 作業中(\"2\"), 作業完了報告(\"3\"), 承認依頼中(\"4\"), 作業完了(\"5\"), エラー(\"6\"), 破棄(\"7\")", position = 17) //
+			required = false, allowableValues = "受付待ち(\"1\"), 作業中(\"2\"), 作業完了報告(\"3\"), 承認依頼中(\"4\"), 作業完了(\"5\"), エラー(\"6\"), 破棄(\"7\")") //
 	private ArrangementWork.WorkflowStatus arrangementWorkStatus;
 
 	/**
 	 * 見積書番号
 	 */
-	@ApiModelProperty(value = "見積書番号", required = false, position = 18, allowableValues = "range[0,18]")
+	@Schema(description = "見積書番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String estimateNumber;
 
 	/**
 	 * 担当営業氏名
 	 */
-	@ApiModelProperty(value = "担当営業氏名", required = false, position = 19, allowableValues = "range[0,255]")
+	@Schema(description = "担当営業氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picEmptxName;
 
 	/**
 	 * 担当支社
 	 */
-	@ApiModelProperty(value = "担当支社", required = false, position = 20, allowableValues = "range[0,255]")
+	@Schema(description = "担当支社", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAffiliateName;
 
 	/**
 	 * サービス開始日
 	 */
-	@ApiModelProperty(value = "サービス開始日", required = false, position = 21)
+	@Schema(description = "サービス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date serviceTermStart;
 
 	/**
 	 * サービス終了日
 	 */
-	@ApiModelProperty(value = "サービス終了日", required = false, position = 22)
+	@Schema(description = "サービス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date serviceTermEnd;
 
 	/**
 	 * 保留フラグ
 	 */
-	@ApiModelProperty(value = "保留フラグ", required = true, position = 23)
+	@Schema(description = "保留フラグ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private int holdingFlg;
 
 	/**
 	 * 手配ステータス
 	 */
-	@ApiModelProperty(value = "手配ステータス<br />" //
+	@Schema(description = "手配ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
-			required = false, allowableValues = "手配中(\"1\"), 手配完了(\"2\")", position = 24) //
+			required = false, allowableValues = "手配中(\"1\"), 手配完了(\"2\")") //
 	private Arrangement.WorkflowStatus arrangementStatus;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 25, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 恒久契約識別番号
 	 */
-	@ApiModelProperty(value = "R恒久契約識別番号", required = false, position = 26, allowableValues = "range[0,255]")
+	@Schema(description = "R恒久契約識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * 受付担当SS組織
 	 */
-	@ApiModelProperty(value = "受付担当SS組織", required = false, position = 27, allowableValues = "range[0,255]")
+	@Schema(description = "受付担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAccSsName;
 
 	/**
 	 * 受付担当CE氏名
 	 */
-	@ApiModelProperty(value = "受付担当CE氏名", required = false, position = 28, allowableValues = "range[0,255]")
+	@Schema(description = "受付担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picAccCeName;
 
 	/**
 	 * 導入担当SS組織
 	 */
-	@ApiModelProperty(value = "導入担当SS組織", required = false, position = 29, allowableValues = "range[0,255]")
+	@Schema(description = "導入担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picIntSsName;
 
 	/**
 	 * 導入担当CE氏名
 	 */
-	@ApiModelProperty(value = "導入担当CE氏名", required = false, position = 30, allowableValues = "range[0,255]")
+	@Schema(description = "導入担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picIntCeName;
 
 	/**
 	 * 保守担当SS組織
 	 */
-	@ApiModelProperty(value = "保守担当SS組織", required = false, position = 31, allowableValues = "range[0,255]")
+	@Schema(description = "保守担当SS組織", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMntSsName;
 
 	/**
 	 * 保守担当CE氏名
 	 */
-	@ApiModelProperty(value = "保守担当CE氏名", required = false, position = 32, allowableValues = "range[0,255]")
+	@Schema(description = "保守担当CE氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String picMntCeName;
 
 	/**
 	 * 登録日時
 	 */
-	@ApiModelProperty(value = "登録日時", required = false, position = 33)
+	@Schema(description = "登録日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date createdAt;
 
 	/**
 	 * 更新日時
 	 */
-	@ApiModelProperty(value = "更新日時", required = false, position = 34)
+	@Schema(description = "更新日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date updatedAt;
 
 	/**
 	 * 解約フラグ
 	 */
-	@ApiModelProperty(value = "解約フラグ", required = true, position = 35)
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private int disengagementFlg;
 
 	/**
 	 * 作業完了日時
 	 */
-	@ApiModelProperty(value = "作業完了日時", required = false, position = 36)
+	@Schema(description = "作業完了日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date workCompletedAt;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 37)
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long arrangementWorkTypeMasterId;
 
 	/**
 	 * お問い合わせ番号
 	 */
-	@ApiModelProperty(value = "お問い合わせ番号", required = false, position = 38, allowableValues = "range[0,255]")
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 郵便番号
 	 */
-	@ApiModelProperty(value = "郵便番号", required = false, position = 39, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 都道府県
 	 */
-	@ApiModelProperty(value = "都道府県", required = false, position = 40, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String prefectures;
 
 	/**
 	 * 市区町村番地
 	 */
-	@ApiModelProperty(value = "市区町村番地", required = false, position = 41, allowableValues = "range[0,1000]")
+	@Schema(description = "市区町村番地", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String cityStreet;
 
 	/**
 	 * 建物名
 	 */
-	@ApiModelProperty(value = "建物名", required = false, position = 42, allowableValues = "range[0,255]")
+	@Schema(description = "建物名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String buildingName;
 
 	/**
 	 * 手配承認日時
 	 */
-	@ApiModelProperty(value = "手配承認日時", required = false, position = 43)
+	@Schema(description = "手配承認日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
 	private Date approvalDate;
 
 	/**
 	 * ベンダー管理番号
 	 */
-	@ApiModelProperty(value = "ベンダー管理番号", required = false, position = 44, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	@PrePersist

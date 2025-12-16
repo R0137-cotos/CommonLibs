@@ -1,9 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.master;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,21 +19,21 @@ public class ElconFinalApproverSearchParameter extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "企業ID", required = true, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "企業ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String companyId;
 
 	/**
 	 * 事業所名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "事業所名", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "事業所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String likeSearchOfficeName;
 
 	/**
 	 * 氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "氏名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String likeSearchApprovalName;
 
 }

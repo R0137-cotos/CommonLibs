@@ -18,7 +18,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -39,7 +38,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.master.ItemMasterRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestPenaltyCheck {
 
 	static ConfigurableApplicationContext context;
@@ -81,7 +80,7 @@ public class TestPenaltyCheck {
 	public void 正常_違約金発生無し_契約_起算日区分1_違約金有無フラグ無しテスト() throws Exception {
 		final long contractId = 1L;
 		final long itemMasterId = 16125L; // 違約金有無フラグ=「0：無し」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200101", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -93,7 +92,7 @@ public class TestPenaltyCheck {
 	public void 正常_違約金発生無し_契約_起算日区分1_違約金有無フラグ有りテスト() throws Exception {
 		final long contractId = 1L;
 		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200101", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -105,7 +104,7 @@ public class TestPenaltyCheck {
 	public void 正常_違約金発生無し_契約_起算日区分1_違約金有無フラグNULLテスト() throws Exception {
 		final long contractId = 1L;
 		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200101", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -117,7 +116,7 @@ public class TestPenaltyCheck {
 	public void 正常_違約金発生有り_契約_起算日区分1_違約金有無フラグ無しテスト() throws Exception {
 		final long contractId = 2L;
 		final long itemMasterId = 16125L; // 違約金有無フラグ=「0：無し」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200201", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -129,7 +128,7 @@ public class TestPenaltyCheck {
 	public void 正常_違約金発生有り_契約_起算日区分1_違約金有無フラグ有りテスト() throws Exception {
 		final long contractId = 2L;
 		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200201", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -142,7 +141,7 @@ public class TestPenaltyCheck {
 	public void 正常_違約金発生有り_契約_起算日区分1_違約金有無フラグNULLテスト() throws Exception {
 		final long contractId = 2L;
 		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200201", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -156,7 +155,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生無し_見積_起算日区分1_違約金有無フラグ無しテスト() throws Exception {
 //		final long estimationId = 1L;
 //		final long itemMasterId = 16125L; // 違約金有無フラグ=「0：無し」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -167,7 +166,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生無し_見積_起算日区分1_違約金有無フラグ有りテスト() throws Exception {
 //		final long estimationId = 1L;
 //		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -179,7 +178,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生無し_見積_起算日区分1_違約金有無フラグNULLテスト() throws Exception {
 //		final long estimationId = 1L;
 //		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -191,7 +190,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生有り_見積_起算日区分1_違約金有無フラグ無しテスト() throws Exception {
 //		final long estimationId = 2L;
 //		final long itemMasterId = 16125L; // 違約金有無フラグ=「0：無し」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -203,7 +202,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生有り_見積_起算日区分1_違約金有無フラグ有りテスト() throws Exception {
 //		final long estimationId = 2L;
 //		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -216,7 +215,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生有り_見積_起算日区分1_違約金有無フラグNULLテスト() throws Exception {
 //		final long estimationId = 2L;
 //		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -228,7 +227,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生無し_見積_起算日区分2_違約金有無フラグ無しテスト() throws Exception {
 //		final long estimationId = 3L;
 //		final long itemMasterId = 16147L; // 違約金有無フラグ=「0：無し」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -240,7 +239,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生無し_見積_起算日区分2_違約金有無フラグ有りテスト() throws Exception {
 //		final long estimationId = 3L;
 //		final long itemMasterId = 16148L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -252,7 +251,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生無し_見積_起算日区分2_違約金有無フラグNULLテスト() throws Exception {
 //		final long estimationId = 3L;
 //		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -264,7 +263,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生有り_見積_起算日区分2_違約金有無フラグ無しテスト() throws Exception {
 //		final long estimationId = 4L;
 //		final long itemMasterId = 16147L; // 違約金有無フラグ=「0：無し」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -276,7 +275,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生有り_見積_起算日区分2_違約金有無フラグ有りテスト() throws Exception {
 //		final long estimationId = 4L;
 //		final long itemMasterId = 16148L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -289,7 +288,7 @@ public class TestPenaltyCheck {
 //	public void 正常_違約金発生有り_見積_起算日区分2_違約金有無フラグNULLテスト() throws Exception {
 //		final long estimationId = 4L;
 //		final long itemMasterId = 16220L; // 違約金有無フラグ=「NULL（設定無し）」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		ItemMaster actual = penaltyUtil.penaltyCheck(estimation, itemMasterId);
 //
@@ -301,7 +300,7 @@ public class TestPenaltyCheck {
 	public void 正常_解約日がNULL() throws Exception {
 		final long contractId = 5L;
 		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200101", null);
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), penalyStartingDate);
@@ -314,7 +313,7 @@ public class TestPenaltyCheck {
 	public void 正常_課金開始日がNULL() throws Exception {
 		final long contractId = 6L;
 		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 
 		PenaltyCheckResultDTO actual = penaltyUtil.penaltyCheck(itemMasterId, contract.getCancelScheduledDate(), null);
 
@@ -326,7 +325,7 @@ public class TestPenaltyCheck {
 	public void 異常系_品種マスタ取得できない_契約() throws Exception {
 		final long contractId = 1L;
 		final long itemMasterId = 99999L; // 違約金有無フラグ=「1：有り」
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200101", null);
 
 		try {
@@ -344,7 +343,7 @@ public class TestPenaltyCheck {
 //	public void 異常系_品種マスタ取得できない_見積() throws Exception {
 //		final long estimationId = 1L;
 //		final long itemMasterId = 99999L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //		Date penalyStartingDate = dateCalcPatternUtil.stringToDateConverter("20200101", null);
 //
 //		try {
@@ -379,7 +378,7 @@ public class TestPenaltyCheck {
 //
 //		final long estimationId = 5L;
 //		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		try {
 //			penaltyUtil.penaltyCheck(estimation, itemMasterId);
@@ -397,7 +396,7 @@ public class TestPenaltyCheck {
 //
 //		final long estimationId = 6L;
 //		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		try {
 //			penaltyUtil.penaltyCheck(estimation, itemMasterId);
@@ -415,7 +414,7 @@ public class TestPenaltyCheck {
 //
 //		final long estimationId = 7L;
 //		final long itemMasterId = 16126L; // 違約金有無フラグ=「1：有り」
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //
 //		try {
 //			penaltyUtil.penaltyCheck(estimation, itemMasterId);
@@ -613,7 +612,7 @@ public class TestPenaltyCheck {
 //		method.setAccessible(true);
 //
 //		final long estimationId = 20L;
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //		Map<Long, Integer> resultMap = (Map<Long, Integer>)method.invoke(penaltyUtil, estimation);
 //
 //		Assert.assertEquals("変更前数量が未設定または減数されていない、数量が0の場合、返却されないこと", 3, resultMap.size());
@@ -653,7 +652,7 @@ public class TestPenaltyCheck {
 //		// 違約金発生なし
 //		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
 //		Long estimationId = 3L;
-//		Estimation estimation = estimationRepository.findOne(estimationId);
+//		Estimation estimation = estimationRepository.findById(estimationId);
 //		Long itemMasterId = 16126L;
 //		decreaseItemMap.put(itemMasterId, 2);
 //		Date checkTrgetDate = new Date();
@@ -663,7 +662,7 @@ public class TestPenaltyCheck {
 //		// 違約金発生あり
 //		decreaseItemMap = new HashMap<Long, Integer>();
 //		estimationId = 2L;
-//		estimation = estimationRepository.findOne(estimationId);
+//		estimation = estimationRepository.findById(estimationId);
 //		itemMasterId = 16127L;
 //		decreaseItemMap.put(itemMasterId, 2);
 //		resultList = (List<PenaltyInfoDto>)method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, estimation);
@@ -697,7 +696,7 @@ public class TestPenaltyCheck {
 		// 違約金発生なし
 		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
 		Long contractId = 3L;
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		decreaseItemMap.put(16147L, 3);
 		decreaseItemMap.put(16148L, 2);
 		decreaseItemMap.put(16220L, 1);
@@ -716,7 +715,7 @@ public class TestPenaltyCheck {
 		// 違約金発生なし
 		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
 		Long contractId = 3L;
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		decreaseItemMap.put(16147L, 3);
 		decreaseItemMap.put(16148L, 2);
 		decreaseItemMap.put(16220L, 1);
@@ -727,7 +726,7 @@ public class TestPenaltyCheck {
 		// 違約金発生あり
 		decreaseItemMap = new HashMap<Long, Integer>();
 		contractId = 20L;
-		contract = contractRepository.findOne(contractId);
+		contract = contractRepository.findById(contractId).get();
 		decreaseItemMap.put(16147L, 1);
 		decreaseItemMap.put(16127L, 2);
 		decreaseItemMap.put(16220L, 3);
@@ -764,7 +763,7 @@ public class TestPenaltyCheck {
 		// 紛失、破損・水没金品種あり
 		decreaseItemMap = new HashMap<Long, Integer>();
 		contractId = 27L;
-		contract = contractRepository.findOne(contractId);
+		contract = contractRepository.findById(contractId).get();
 
 		resultList = (List<PenaltyInfoDto>) method.invoke(penaltyUtil, decreaseItemMap, checkTrgetDate, contract, 2, 3, null);
 		Assert.assertEquals("違約金情報リストに2件設定されていること", 2, resultList.size());
@@ -805,7 +804,7 @@ public class TestPenaltyCheck {
 		// 違約金発生なし
 		Map<Long, Integer> decreaseItemMap = new HashMap<Long, Integer>();
 		Long contractId = 3L;
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).get();
 		decreaseItemMap.put(16147L, 3);
 		decreaseItemMap.put(16148L, 2);
 		decreaseItemMap.put(16220L, 1);
@@ -829,14 +828,14 @@ public class TestPenaltyCheck {
 
 		// 標準単価：39840
 		Long itemMasterId = 16125L;
-		ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
+		ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).get();
 		Integer quantity = 1;
 		BigDecimal rslut = (BigDecimal) method.invoke(penaltyUtil, itemMaster, quantity);
 		Assert.assertEquals("数量1_標準単価 * 1の結果が設定されること", BigDecimal.valueOf(39840), rslut);
 
 		// 標準単価：8000
 		itemMasterId = 16220L;
-		itemMaster = itemMasterRepository.findOne(itemMasterId);
+		itemMaster = itemMasterRepository.findById(itemMasterId).get();
 		quantity = 2;
 		rslut = (BigDecimal) method.invoke(penaltyUtil, itemMaster, quantity);
 		Assert.assertEquals("数量2_標準単価 * 2の結果が設定されること", BigDecimal.valueOf(16000), rslut);
@@ -856,7 +855,7 @@ public class TestPenaltyCheck {
 		// 違約金起算日区分：課金開始日 最低契約月数：12
 		Long itemMasterId = 16148L;
 		billingStartDate = dateCalcPatternUtil.stringToDateConverter("20200115", null);
-		item = itemMasterRepository.findOne(itemMasterId);
+		item = itemMasterRepository.findById(itemMasterId).get();
 		result = (Date) method.invoke(penaltyUtil, item, billingStartDate);
 		Assert.assertEquals("12か月後(指定月含む)の月の最終日が設定されていること", "20201130 23:59:59", dateCalcPatternUtil.dateToStringConverter(result, "yyyyMMdd HH:mm:ss"));
 	}

@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -57,7 +57,7 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = "test.context.id = TestArrangementDto")
 public class TestArrangementDto {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
@@ -136,7 +136,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementWorkDtoのテスト() throws Exception {
-		ArrangementWork entity = arrangementWorkRepository.findOne(401L);
+		ArrangementWork entity = arrangementWorkRepository.findById(401L).get();
 		ArrangementWorkDto dto = new ArrangementWorkDto();
 		ArrangementWorkDto testTarget = new ArrangementWorkDto();
 
@@ -163,6 +163,9 @@ public class TestArrangementDto {
 		// 手配業務承認ルート
 		ArrangementWorkApprovalRouteDto route = new ArrangementWorkApprovalRouteDto();
 		BeanUtils.copyProperties(entity.getArrangementWorkApprovalRoute(), route);
+		ArrangementWorkApprovalRouteNodeDto node = new ArrangementWorkApprovalRouteNodeDto();
+		BeanUtils.copyProperties(entity.getArrangementWorkApprovalRoute().getArrangementWorkApprovalRouteNodeList().get(0), node);
+		route.setArrangementWorkApprovalRouteNodeList(Arrays.asList(node));
 		dto.setArrangementWorkApprovalRoute(route);
 
 		// 手配業務チェック結果
@@ -237,7 +240,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementDtoのテスト() throws Exception {
-		Arrangement entity = arrangementRepository.findOne(4L);
+		Arrangement entity = arrangementRepository.findById(4L).get();
 		ArrangementDto testTarget = new ArrangementDto();
 
 		// 正常系
@@ -275,7 +278,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementWorkApprovalRouteDtoのテスト() throws Exception {
-		ArrangementWorkApprovalRoute entity = arrangementWorkApprovalRouteRepository.findOne(401L);
+		ArrangementWorkApprovalRoute entity = arrangementWorkApprovalRouteRepository.findById(401L).get();
 		ArrangementWorkApprovalRouteDto dto = new ArrangementWorkApprovalRouteDto();
 		ArrangementWorkApprovalRouteDto testTarget = new ArrangementWorkApprovalRouteDto();
 
@@ -324,7 +327,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementWorkApprovalRouteNodeDtoのテスト() throws Exception {
-		ArrangementWorkApprovalRouteNode entity = arrangementWorkApprovalRouteNodeRepository.findOne(401L);
+		ArrangementWorkApprovalRouteNode entity = arrangementWorkApprovalRouteNodeRepository.findById(401L).get();
 		ArrangementWorkApprovalRouteNodeDto testTarget = new ArrangementWorkApprovalRouteNodeDto();
 
 		// 正常系
@@ -380,7 +383,7 @@ public class TestArrangementDto {
 	@Test
 	public void ArrangementWorkAttachedFileDtoのテスト() throws Exception {
 
-		ArrangementWorkAttachedFile entity = arrangementWorkAttachedFileRepository.findOne(401L);
+		ArrangementWorkAttachedFile entity = arrangementWorkAttachedFileRepository.findById(401L).get();
 		ArrangementWorkAttachedFileDto testTarget = new ArrangementWorkAttachedFileDto();
 		AttachedFileDto attachedFileDto = new AttachedFileDto();
 		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
@@ -438,7 +441,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementWorkCheckResultDtoのテスト() throws Exception {
-		ArrangementWorkCheckResult entity = arrangementWorkCheckResultRepository.findOne(401L);
+		ArrangementWorkCheckResult entity = arrangementWorkCheckResultRepository.findById(401L).get();
 		ArrangementWorkCheckResultDto testTarget = new ArrangementWorkCheckResultDto();
 
 		// 正常系
@@ -489,7 +492,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementPicWorkerEmpDtoのテスト() throws Exception {
-		ArrangementPicWorkerEmp entity = arrangementPicWorkerEmpRepository.findOne(401L);
+		ArrangementPicWorkerEmp entity = arrangementPicWorkerEmpRepository.findById(401L).get();
 		ArrangementPicWorkerEmpDto testTarget = new ArrangementPicWorkerEmpDto();
 
 		// 正常系
@@ -547,7 +550,7 @@ public class TestArrangementDto {
 
 	@Test
 	public void ArrangementWorkAttachedFileLinkageDtoのテスト() throws Exception {
-		ArrangementWorkAttachedFileLinkage entity = arrangementWorkAttachedFileLinkageRepository.findOne(401L);
+		ArrangementWorkAttachedFileLinkage entity = arrangementWorkAttachedFileLinkageRepository.findById(401L).get();
 		ArrangementWorkAttachedFileLinkageDto testTarget = new ArrangementWorkAttachedFileLinkageDto();
 
 		// 正常系

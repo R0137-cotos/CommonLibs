@@ -2,9 +2,9 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -17,7 +17,7 @@ public class MobileEquipmentListDto {
 	/**
 	 * モバイル機器リスト
 	 */
-	@ApiModelProperty(value = "モバイル機器リスト", required = false, position = 1)
+	@Schema(description = "モバイル機器リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Valid
 	private List<MobileEquipmentDto> mobileEquipmentList;
 }

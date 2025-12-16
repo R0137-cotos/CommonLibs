@@ -1,9 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -20,7 +20,7 @@ public class ArrangementResultDto implements IArrangementResult {
 	 */
 	@Valid
 	@NotNull
-	@ApiModelProperty(value = "手配結果情報", required = true, position = 1)
+	@Schema(description = "手配結果情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementResultInfoDto arrangementResultInfo;
 
 	/**
@@ -28,7 +28,7 @@ public class ArrangementResultDto implements IArrangementResult {
 	 */
 	@Valid
 	@NotNull
-	@ApiModelProperty(value = "契約情報", required = true, position = 2)
+	@Schema(description = "契約情報", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractInfoDto contructInfo;
 
 }

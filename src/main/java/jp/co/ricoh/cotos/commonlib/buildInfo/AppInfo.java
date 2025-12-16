@@ -1,6 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.buildInfo;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,9 +20,11 @@ class AppInfo {
 	final private String buildTime;
 
 	AppInfo(BuildProperties buildProperties) {
-		Date buildTimeDate = buildProperties.getTime();
+		String timeDate = buildProperties.get("time");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
+		Instant buildTimeDate = ZonedDateTime.parse(timeDate, formatter).toInstant();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		name = buildProperties.getName();
-		buildTime = (Objects.isNull(buildTimeDate)) ? "" : sdf.format(buildTimeDate);
+		buildTime = (Objects.isNull(buildTimeDate)) ? "" : sdf.format(Date.from(buildTimeDate));
 	}
 }

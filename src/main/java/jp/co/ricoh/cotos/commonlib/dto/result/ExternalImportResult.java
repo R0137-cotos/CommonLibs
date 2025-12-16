@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -14,12 +14,12 @@ public class ExternalImportResult {
 	/**
 	 * 取込エラー情報リスト
 	 */
-	@ApiModelProperty(value = "取込エラー情報リスト", required = false, position = 1)
+	@Schema(description = "取込エラー情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ExternalImportErrorResult> externalImportErrorResultList;
 
 	/**
 	 * CSV情報
 	 */
-	@ApiModelProperty(value = "CSV情報", required = false, position = 2)
+	@Schema(description = "CSV情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private byte[] csvData;
 }

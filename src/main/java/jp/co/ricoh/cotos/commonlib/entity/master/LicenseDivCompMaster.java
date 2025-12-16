@@ -1,20 +1,20 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,14 +35,14 @@ public class LicenseDivCompMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_div_comp_master_seq")
 	@SequenceGenerator(name = "license_div_comp_master_seq", sequenceName = "license_div_comp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス区分構成マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス区分構成マスタID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
@@ -53,7 +53,7 @@ public class LicenseDivCompMaster extends EntityBase {
 	@JsonIgnore
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "license_div_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "ライセンス区分マスタ", required = true, position = 3)
+	@Schema(description = "ライセンス区分マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseDivMaster licenseDivMaster;
 
 

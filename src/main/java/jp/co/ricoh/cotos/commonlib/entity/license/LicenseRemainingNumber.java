@@ -2,19 +2,19 @@ package jp.co.ricoh.cotos.commonlib.entity.license;
 
 import java.util.Arrays;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -65,7 +65,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_remaining_number_seq")
 	@SequenceGenerator(name = "license_remaining_number_seq", sequenceName = "license_remaining_number_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス残数ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス残数ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -73,7 +73,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]", readOnly = false)
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = false)
 	private long licenseDivMasterId;
 
 	/**
@@ -82,7 +82,7 @@ public class LicenseRemainingNumber extends EntityBase {
 	@NotNull
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスキー", required = true, position = 3, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String licenseKey;
 
 	/**
@@ -91,33 +91,33 @@ public class LicenseRemainingNumber extends EntityBase {
 	@OneToOne(optional = true)
 	@JoinColumn(name = "license_info_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ライセンス情報", required = false, position = 4)
+	@Schema(description = "ライセンス情報", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private LicenseInfo licenseInfo;
 
 	/**
 	 * 恒久契約識別番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "恒久契約識別番号", required = true, position = 8, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "恒久契約識別番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String immutableContIdentNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = true, position = 5, allowableValues = "range[0,255]", readOnly = false)
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = false)
 	private String rjManageNumber;
 
 	/**
 	 * 割当区分
 	 */
-	@ApiModelProperty(value = "割当区分", required = false, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"3\")", position = 6)
+	@Schema(description = "割当区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), 済(\"1\"), 破棄(\"3\")")
 	private AllocationDiv allocationDiv;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 7)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 

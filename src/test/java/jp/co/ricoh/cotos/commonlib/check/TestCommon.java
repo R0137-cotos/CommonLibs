@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,7 +29,7 @@ import jp.co.ricoh.cotos.commonlib.security.bean.ParamterCheckResult;
 import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = "test.context.id = TestCommon")
 public class TestCommon {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
@@ -87,7 +87,7 @@ public class TestCommon {
 
 	@Test
 	public void AttachedFileのテスト() throws Exception {
-		AttachedFile entity = attachedFileRepository.findOne(1L);
+		AttachedFile entity = attachedFileRepository.findById(1L).get();
 		AttachedFile testTarget = new AttachedFile();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -118,7 +118,7 @@ public class TestCommon {
 
 	@Test
 	public void SearchConditionのテスト() throws Exception {
-		SearchCondition entity = searchConditionRepository.findOne(1L);
+		SearchCondition entity = searchConditionRepository.findById(1L).get();
 		SearchCondition testTarget = new SearchCondition();
 		BeanUtils.copyProperties(testTarget, entity);
 
@@ -150,7 +150,7 @@ public class TestCommon {
 
 	@Test
 	public void FileImportManagementのテスト() throws Exception {
-		FileImportManagement entity = fileImportManagementRepository.findOne(1L);
+		FileImportManagement entity = fileImportManagementRepository.findById(1L).get();
 		FileImportManagement testTarget = new FileImportManagement();
 
 		// 正常系
@@ -186,7 +186,7 @@ public class TestCommon {
 
 	@Test
 	public void FileImportErrorDetailsのテスト() throws Exception {
-		FileImportErrorDetails entity = fileImportErrorDetailsRepository.findOne(1L);
+		FileImportErrorDetails entity = fileImportErrorDetailsRepository.findById(1L).get();
 		FileImportErrorDetails testTarget = new FileImportErrorDetails();
 
 		// 正常系

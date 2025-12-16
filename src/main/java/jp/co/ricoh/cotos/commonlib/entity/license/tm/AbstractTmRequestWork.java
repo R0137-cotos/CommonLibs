@@ -3,17 +3,17 @@ package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -56,13 +56,13 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	/**
 	 * 送信状態
 	 */
-	@ApiModelProperty(value = "送信状態", required = false, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 連携エラー(\"2\"), 連携対象外(\"3\")", example = "0", position = 2)
+	@Schema(description = "送信状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未連携(\"0\"), 連携済(\"1\"), 連携エラー(\"2\"), 連携対象外(\"3\")", example = "0")
 	private TmRequestStatus requestStatus;
 
 	/**
 	 * 送信時刻
 	 */
-	@ApiModelProperty(value = "送信時刻", required = false, position = 3)
+	@Schema(description = "送信時刻", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date requestTime;
 
@@ -70,20 +70,20 @@ public abstract class AbstractTmRequestWork extends EntityBase {
 	 * URL
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "URL", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "URL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String url;
 
 	/**
 	 * Http Header
 	 */
 	@Size(max = 4000)
-	@ApiModelProperty(value = "Http Header", required = false, position = 5, allowableValues = "range[0,4000]")
+	@Schema(description = "Http Header", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String httpHeader;
 
 	/**
 	 * Http Body
 	 */
 	@Size(max = 4000)
-	@ApiModelProperty(value = "Http Body", required = false, position = 6, allowableValues = "range[0,4000]")
+	@Schema(description = "Http Body", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,4000]")
 	private String httpBody;
 }

@@ -42,14 +42,14 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.eim.responses.PreparationFileUp
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.ElconDocumentRegistrationParameter;
 import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  * 電子契約EIM連携 ヘルパークラス
  *
  */
-@Log4j
+@Slf4j
 @Component
 @EnableRetry
 public class ElconEimConnectionHelper extends EimConnectionHelper {

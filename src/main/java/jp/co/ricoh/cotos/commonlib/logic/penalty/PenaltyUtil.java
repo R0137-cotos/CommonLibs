@@ -80,12 +80,12 @@ public class PenaltyUtil {
 //		if (EstimationType.契約変更 != estimation.getEstimationType() || estimation.getOriginContractId() == null) {
 //			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
 //		}
-//		Contract originContract = contractRepository.findOne(estimation.getOriginContractId());
+//		Contract originContract = contractRepository.findById(estimation.getOriginContractId());
 //		if (originContract == null) {
 //			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" }));
 //		}
 //		// 2.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
-//		ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
+//		ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId);
 //		if (itemMaster == null) {
 //			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "品種マスタID" }));
 //		}
@@ -119,7 +119,7 @@ public class PenaltyUtil {
 	public PenaltyCheckResultDTO penaltyCheck(long itemMasterId, Date cancelScheduledDate, Date penalyStartingDate) {
 
 		// 1.パラメーター.品種マスタIDに紐づく品種マスタを取得する。
-		ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
+		ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).orElse(null);
 		if (itemMaster == null) {
 			throw new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "品種マスタID" }));
 		}
@@ -181,7 +181,7 @@ public class PenaltyUtil {
 
 		// 契約情報取得
 		Optional.ofNullable(contractId).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "契約ID" })));
-		Contract contract = contractRepository.findOne(contractId);
+		Contract contract = contractRepository.findById(contractId).orElse(null);
 		Optional.ofNullable(contract).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "契約" })));
 		Optional.ofNullable(cancelScheduledDate).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "ParameterEmptyError", new String[] { "解約予定日" })));
 
@@ -295,7 +295,7 @@ public class PenaltyUtil {
 
 		contract.getContractDetailList().stream().filter(detail -> detail.getItemContract().getCostType().equals(CostType.月額_定額)).collect(Collectors.toList()).forEach(detail -> {
 			long itemMasterId = detail.getItemContract().getItemMasterId();
-			ItemMaster itemMaster = itemMasterRepository.findOne(itemMasterId);
+			ItemMaster itemMaster = itemMasterRepository.findById(itemMasterId).orElse(null);
 			// 紛失金品種情報、違約金金額を戻り値に設定する
 			Optional.ofNullable(lostNumber).ifPresent(lostNum -> {
 				if (lostNum != 0) {

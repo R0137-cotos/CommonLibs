@@ -2,18 +2,18 @@ package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
 import jp.co.ricoh.cotos.commonlib.entity.master.LicenseServiceMaster.LicenseType;
 import lombok.Data;
@@ -31,13 +31,13 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_subscription_register_response_work_seq")
 	@SequenceGenerator(name = "ms_subscription_register_response_work_seq", sequenceName = "ms_subscription_register_response_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "MS_サブスクリプション登録レスポンスWORK", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "MS_サブスクリプション登録レスポンスWORK", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * 処理状態
 	 */
-	@ApiModelProperty(value = "処理状態", required = false, position = 2, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")")
+	@Schema(description = "処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")")
 	private MsResponseMappedStatus processStatus;
 
 	/**
@@ -45,7 +45,7 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "顧客テナントID", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "顧客テナントID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
@@ -53,21 +53,21 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "製品ID", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "製品ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String offerId;
 
 	/**
 	 * 数量
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "数量", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String quantity;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サブスクリプションID", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 
 	/**
@@ -75,60 +75,60 @@ public class MsSubscriptionRegisterResponseWork extends AbstractMsResponseWork {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスNO", required = true, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスNO", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseNo;
 
 	/**
 	 * プロダクト名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "プロダクト名", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "プロダクト名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productName;
 
 	/**
 	 * 契約期間
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約期間", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "契約期間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractTerm;
 
 	/**
 	 * ライセンス取得日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス取得日", required = false, position = 10)
+	@Schema(description = "ライセンス取得日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseAcquisitionDate;
 
 	/**
 	 * 自動更新日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "自動更新日", required = false, position = 11)
+	@Schema(description = "自動更新日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date autoUpdateDate;
 
 	/**
 	 * 移行元サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "移行元サブスクリプションID", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "移行元サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String fromSubscriptionId;
 
 	/**
 	 * 調整後の終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "調整後の終了日", required = false, position = 13)
+	@Schema(description = "調整後の終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date customTermEndDate;
 
 	/**
 	 * 支払周期区分
 	 */
-	@ApiModelProperty(value = "支払周期区分", required = false, position = 14, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	@Schema(description = "支払周期区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月額(\"1\"), 年額(\"2\")")
 	private PaymentCycleType paymentCycleType;
 
 	/**
 	 * ライセンス区分
 	 */
-	@ApiModelProperty(value = "ライセンス区分", required = false, position = 15, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
+	@Schema(description = "ライセンス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ベース(\"1\"), アドオン(\"2\")")
 	private LicenseType licenseType;
 }

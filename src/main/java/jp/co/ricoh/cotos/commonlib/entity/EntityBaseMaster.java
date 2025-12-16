@@ -2,14 +2,14 @@ package jp.co.ricoh.cotos.commonlib.entity;
 
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Version;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Version;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import lombok.Data;
 
@@ -20,20 +20,20 @@ import lombok.Data;
 @MappedSuperclass
 @Data
 public class EntityBaseMaster {
-	@ApiModelProperty(value = "登録日時", required = true, position = 101, readOnly = true)
+	@Schema(description = "登録日時", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private Date createdAt;
 
-	@ApiModelProperty(value = "登録者", required = true, position = 102, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "登録者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String createdUserId;
 
-	@ApiModelProperty(value = "更新日時", required = true, position = 103, readOnly = true)
+	@Schema(description = "更新日時", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private Date updatedAt;
 
-	@ApiModelProperty(value = "更新者", required = true, position = 104, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "更新者", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]", readOnly = true)
 	private String updatedUserId;
 
 	@Version
-	@ApiModelProperty(value = "version", required = true, position = 105, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "version", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long version;
 
 	@PrePersist

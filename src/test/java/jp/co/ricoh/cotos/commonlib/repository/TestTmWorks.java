@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -54,7 +53,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.tm.TmUpdateUserResponseWor
  * トレンドマイクロ連携WORK
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestTmWorks {
 
 	static ConfigurableApplicationContext context;
@@ -157,27 +156,27 @@ public class TestTmWorks {
 		found = tmLinkManagementRepository.findByIdBetween(10L, 19L);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("from~toのレコードが取得されていること to境界値 ", 1, found.size());
-		TmUpdateCustomerRequestWork tmUpdateCustomerRequestWork = tmUpdateCustomerRequestWorkRepository.findOne(10L);
+		TmUpdateCustomerRequestWork tmUpdateCustomerRequestWork = tmUpdateCustomerRequestWorkRepository.findById(10L).get();
 		found = tmLinkManagementRepository.findByTmUpdateCustomerRequestWork(tmUpdateCustomerRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロ会社情報更新リクエストWORKをキーにレコードが取得されること ", 1, found.size());
-		TmCreateCustomerRequestWork tmCreateCustomerRequestWork = tmCreateCustomerRequestWorkRepository.findOne(10L);
+		TmCreateCustomerRequestWork tmCreateCustomerRequestWork = tmCreateCustomerRequestWorkRepository.findById(10L).get();
 		found = tmLinkManagementRepository.findByTmCreateCustomerRequestWork(tmCreateCustomerRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロ顧客情報作成リクエストWORKをキーにレコードが取得されること ", 1, found.size());
-		TmCreateSubscriptionRequestWork tmCreateSubscriptionRequestWork = tmCreateSubscriptionRequestWorkRepository.findOne(10L);
+		TmCreateSubscriptionRequestWork tmCreateSubscriptionRequestWork = tmCreateSubscriptionRequestWorkRepository.findById(10L).get();
 		found = tmLinkManagementRepository.findByTmCreateSubscriptionRequestWork(tmCreateSubscriptionRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロサブスクリプション作成リクエストWORKをキーにレコードが取得されること ", 1, found.size());
-		TmUpdateSubscriptionRequestWork tmUpdateSubscriptionRequestWork = tmUpdateSubscriptionRequestWorkRepository.findOne(10L);
+		TmUpdateSubscriptionRequestWork tmUpdateSubscriptionRequestWork = tmUpdateSubscriptionRequestWorkRepository.findById(10L).get();
 		found = tmLinkManagementRepository.findByTmUpdateSubscriptionRequestWork(tmUpdateSubscriptionRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロサブスクリプション更新リクエストWORKをキーにレコードが取得されること ", 1, found.size());
-		TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork = tmSuspendSubscriptionRequestWorkRepository.findOne(10L);
+		TmSuspendSubscriptionRequestWork tmSuspendSubscriptionRequestWork = tmSuspendSubscriptionRequestWorkRepository.findById(10L).get();
 		found = tmLinkManagementRepository.findByTmSuspendSubscriptionRequestWork(tmSuspendSubscriptionRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロサブスクリプション解約リクエストWORKをキーにレコードが取得されること ", 1, found.size());
-		TmTransitionSubscriptionRequestWork tmTransitionSubscriptionRequestWork = tmTransitionSubscriptionRequestWorkRepository.findOne(10L);
+		TmTransitionSubscriptionRequestWork tmTransitionSubscriptionRequestWork = tmTransitionSubscriptionRequestWorkRepository.findById(10L).get();
 		found = tmLinkManagementRepository.findByTmTransitionSubscriptionRequestWork(tmTransitionSubscriptionRequestWork);
 		Assert.assertNotNull(found);
 		Assert.assertEquals("トレンドマイクロサブスクリプション乗換リクエストWORKをキーにレコードが取得されること ", 1, found.size());
@@ -414,7 +413,7 @@ public class TestTmWorks {
 
 		idList.stream().forEach(id -> {
 			// データが取得できることを確認
-			T found = repository.findOne(id);
+			T found = repository.findById(id).get();
 			Assert.assertNotNull(found);
 			// 全てのカラムがNullではないことを確認
 			this.assertColumnsNotNull(found);

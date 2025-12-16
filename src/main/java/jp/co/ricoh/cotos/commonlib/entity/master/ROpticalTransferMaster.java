@@ -1,17 +1,17 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,21 +28,21 @@ public class ROpticalTransferMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_optical_transfer_master_seq")
 	@SequenceGenerator(name = "r_optical_transfer_master_seq", sequenceName = "r_optical_transfer_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "リコーひかり請求情報変換マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "リコーひかり請求情報変換マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 疑似請求内訳コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "疑似請求内訳コード", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "疑似請求内訳コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String billingStatementCd;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -50,13 +50,13 @@ public class ROpticalTransferMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "売上指示作成区分", required = false, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "売上指示作成区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer createAccountingCd;
 
 	/**
 	 * 課税区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "課税区分", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "課税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxationCd;
 }

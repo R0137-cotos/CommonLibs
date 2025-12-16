@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,7 +19,7 @@ import jp.co.ricoh.cotos.commonlib.util.LogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.LogResponseProperties;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestFindProperties {
 
 	@Autowired
@@ -51,7 +50,7 @@ public class TestFindProperties {
 	@Test
 	public void プロパティ取得() {
 		Assert.assertEquals("DB設定：ドライバーが正しく取得されること", "oracle.jdbc.OracleDriver", appProperties.getDatasourceProperties().getDriverClassName());
-		Assert.assertEquals("DB設定：URLが正しく取得されること", "jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1", appProperties.getDatasourceProperties().getUrl());
+		Assert.assertEquals("DB設定：URLが正しく取得されること", "jdbc:oracle:thin:@dev-db-aws.cotos.ricoh.co.jp:1521/pdb1", appProperties.getDatasourceProperties().getUrl());
 		Assert.assertEquals("ファイル設定：アップロードディレクトリが正しく取得されること", "./build/testTemp", appProperties.getFileProperties().getUploadFileDir());
 		Assert.assertEquals("ファイル設定：一時ファイルディレクトリが正しく取得されること", "./build/testTemp1", appProperties.getFileProperties().getTmpFileDir());
 		List<String> extension = Arrays.asList("xlsx", "txt");

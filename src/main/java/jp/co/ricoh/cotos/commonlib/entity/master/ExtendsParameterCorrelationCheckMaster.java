@@ -3,15 +3,15 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 
 import org.springframework.context.annotation.Description;
 
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -68,14 +68,14 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 		 * 商品マスタID
 		 */
 		@Column(name = "product_master_id", nullable = false)
-		@ApiModelProperty(value = "商品マスタID", required = true, position = 1)
+		@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 		private long productMasterId;
 
 		/**
 		 * ドメイン
 		 */
-		@Column(nullable = false)
-		@ApiModelProperty(value = "システムドメイン", required = true, position = 2)
+		@Column(name = "domain", nullable = false)
+		@Schema(description = "システムドメイン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private Domain domain;
 	}
 
@@ -92,7 +92,7 @@ public class ExtendsParameterCorrelationCheckMaster extends EntityBaseMaster {
 	 * 相関チェック条件式
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "相関チェック条件式", required = true, position = 3)
+	@Schema(description = "相関チェック条件式", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Lob
 	private String correlationCheckConditionFormula;
 }

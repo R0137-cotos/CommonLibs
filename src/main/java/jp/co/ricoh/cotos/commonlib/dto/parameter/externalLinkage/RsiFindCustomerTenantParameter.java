@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,14 +13,14 @@ public class RsiFindCustomerTenantParameter {
 	/**
 	 * テナントID
 	 */
-	@ApiParam(value = "テナントID", required = false)
-	@ApiModelProperty(value = "テナントID", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "テナントID", required = false)
+	@Schema(description = "テナントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String tenantId;
 
 	/**
 	 * 契約者メールアドレス
 	 */
-	@ApiParam(value = "契約者メールアドレス", required = false)
-	@ApiModelProperty(value = "契約者メールアドレス", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "契約者メールアドレス", required = false)
+	@Schema(description = "契約者メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractorMailAddress;
 }

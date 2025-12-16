@@ -2,19 +2,19 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,20 +33,20 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_route_grp_master_seq")
 	@SequenceGenerator(name = "approval_route_grp_master_seq", sequenceName = "approval_route_grp_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "承認ルートグループマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "承認ルートグループマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 承認ルートグループ名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "承認ルートグループ名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "承認ルートグループ名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approvalRouteGrpName;
 
 	/**
 	 * 説明
 	 */
-	@ApiModelProperty(value = "説明", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "説明", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
@@ -54,7 +54,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OrderBy("condDetermineOrder ASC")
 	@OneToMany(mappedBy = "approvalRouteGrpMaster")
-	@ApiModelProperty(value = "承認ルートマスタ", required = true, position = 4)
+	@Schema(description = "承認ルートマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ApprovalRouteMaster> approvalRouteMasterList;
 
 	/**
@@ -62,7 +62,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "estimationApprovalRouteGrpMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品グループマスタ（見積承認）", required = false, position = 5)
+	@Schema(description = "商品グループマスタ（見積承認）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ProductGrpMaster> estimationProductGrpMasterList;
 
 	/**
@@ -70,7 +70,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "contractApprovalRouteGrpMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品グループマスタ（契約承認）", required = false, position = 6)
+	@Schema(description = "商品グループマスタ（契約承認）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ProductGrpMaster> contractProductGrpMasterList;
 
 	/**
@@ -78,7 +78,7 @@ public class ApprovalRouteGrpMaster extends EntityBaseMaster {
 	 */
 	@OneToMany(mappedBy = "approvalRouteGrpMaster")
 	@JsonIgnore
-	@ApiModelProperty(value = "手配業務タイプマスタ", required = false, position = 7)
+	@Schema(description = "手配業務タイプマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkTypeMaster> arrangementWorkTypeMasterList;
 
 }

@@ -40,14 +40,14 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPostWfbssRepor
 import jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas.tm.TmPutWfbssNotifSettingsRequestDto;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.SMPIProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * TrendMicro SMPI連携 ヘルパークラス
  * BatchesLightTemplateでも使用することを想定するため、コンポーネント化しない
  *
  */
-@Log4j
+@Slf4j
 public class SMPIConnectionHelper {
 
 	private static final SMPIConnectionHelper INSTANCE = new SMPIConnectionHelper();
@@ -92,7 +92,6 @@ public class SMPIConnectionHelper {
 		INSTANCE.mapper.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setOutputStreaming(false);
 		requestFactory.setConnectTimeout(10000);
 		requestFactory.setReadTimeout(30000);
 		rest.setRequestFactory(requestFactory);
@@ -122,7 +121,7 @@ public class SMPIConnectionHelper {
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] 顧客のドメイン取得APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 顧客のドメイン取得APIで想定外のエラーが発生しました。");
 		}
@@ -140,7 +139,7 @@ public class SMPIConnectionHelper {
 			log.info("TrendMicroWFBSS初期化 StatusCode:" + serviceResponse.getResponseEntity().getStatusCode());
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] WFBSS初期化APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] WFBSS初期化APIで想定外のエラーが発生しました。");
 		}
@@ -163,7 +162,7 @@ public class SMPIConnectionHelper {
 			return responseDto;
 		} catch (URISyntaxException | IOException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] レポート作成APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] レポート作成APIで想定外のエラーが発生しました。");
 		}
@@ -183,7 +182,7 @@ public class SMPIConnectionHelper {
 			// sync=true の為戻り値無し
 		} catch (JsonProcessingException | UnsupportedEncodingException | URISyntaxException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("[TM] 通知設定変更APIで想定外のエラーが発生しました。", e);
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
 			throw new RuntimeException("[TM] 通知設定変更APIで想定外のエラーが発生しました。");
 		}
@@ -244,7 +243,7 @@ public class SMPIConnectionHelper {
 		// HTTPステータスが200系以外はエラーとする。
 		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
 			// このクラスを使用している軽量テンプレートバッチでErrorCheckExceptionが使用できない為、RuntimeExceptionでthrowしています。
-			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+			throw new RuntimeException("TrendMicroAPIでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode().value() + "、エラー内容：" + responseEntity.getBody());
 		}
 		TmCallServiceResponseDto ret = new TmCallServiceResponseDto();
 		ret.setResponseEntity(responseEntity);
@@ -287,7 +286,7 @@ public class SMPIConnectionHelper {
 				md.update(content);
 				contentBase64 = Base64.encodeBase64String(md.digest());
 			} catch (NoSuchAlgorithmException e) {
-				log.error(e);
+				log.error("Base64へのエンコードに失敗しました。", e);
 			}
 			payload += contentBase64;
 		}

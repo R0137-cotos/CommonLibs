@@ -2,13 +2,13 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,14 +25,14 @@ import lombok.ToString;
 public class SystemMaster extends EntityBaseMaster {
 
 	@Id
-	@ApiModelProperty(value = "システムID", required = true, position = 1)
+	@Schema(description = "システムID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String systemId;
 
 	@Column(nullable = false)
-	@ApiModelProperty(value = "他システムデータ排他フラグ", required = true, position = 2, allowableValues = "range[0,9]")
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int otherSysDataExcludeFlg;
 
 	@OneToMany(mappedBy = "systemMaster")
-	@ApiModelProperty(value = "アプリケーションマスタ", required = false, position = 3)
+	@Schema(description = "アプリケーションマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<AppMaster> appMasterList;
 }

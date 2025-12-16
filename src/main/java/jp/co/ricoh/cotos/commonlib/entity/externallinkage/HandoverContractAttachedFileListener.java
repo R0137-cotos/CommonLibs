@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.entity.externallinkage;
 
-import javax.persistence.PrePersist;
-import javax.transaction.Transactional;
+import jakarta.persistence.PrePersist;
+import jakarta.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

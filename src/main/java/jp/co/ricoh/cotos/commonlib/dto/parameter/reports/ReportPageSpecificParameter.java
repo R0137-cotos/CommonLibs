@@ -1,8 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.reports;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import lombok.Data;
 
@@ -15,13 +15,13 @@ public class ReportPageSpecificParameter {
 	/**
 	 * 状態
 	 */
-	@ApiModelProperty(value = "状態", required = false, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1", position = 1)
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus status;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = false, allowableValues = "range[0,255]", position = 2)
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 }

@@ -2,11 +2,11 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,9 +21,9 @@ import lombok.EqualsAndHashCode;
 public class NonBusinessDayCalendarMaster extends EntityBaseMaster {
 
 	@Id
-	@ApiModelProperty(value = "非営業日", required = true, position = 1)
+	@Schema(description = "非営業日", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Date nonBusinessDay;
 
-	@ApiModelProperty(value = "ベンダー略称", required = false, position = 2)
+	@Schema(description = "ベンダー略称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorShortName;
 }

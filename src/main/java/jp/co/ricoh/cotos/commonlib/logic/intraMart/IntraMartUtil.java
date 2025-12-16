@@ -28,14 +28,14 @@ import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalIntraMartRestTemplate;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.AppProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Intra-mart用外部API実行クラス<br>
  * <b>ローカル環境で確認する場合、<a href=https://ex-redmine-1.cotos.ricoh.co.jp/issues/16331>SSL証明書の登録</a>が必要になるため注意</b>
  *
  */
-@Log4j
+@Slf4j
 @Component
 public class IntraMartUtil {
 
@@ -94,7 +94,7 @@ public class IntraMartUtil {
 				conversionRespomseBody = decodedToUTF8(responseEntity.getBody(), responseCharset);
 			}
 			log.info("============================================================");
-			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("status  : " + responseEntity.getStatusCode());
 			log.info("headers : " + responseEntity.getHeaders());
 			log.info("response: " + conversionRespomseBody);
 			log.info("============================================================");
@@ -123,7 +123,7 @@ public class IntraMartUtil {
 		IspSettingRootDto ispSettingRootDto = jsonUtil.convertToDto(serviceResult.getBody(), IspSettingRootDto.class);
 
 		Map<HttpStatus, IspSettingRootDto> result = new HashMap<>();
-		result.put(serviceResult.getStatusCode(), ispSettingRootDto);
+		result.put((HttpStatus) serviceResult.getStatusCode(), ispSettingRootDto);
 
 		return result;
 	}

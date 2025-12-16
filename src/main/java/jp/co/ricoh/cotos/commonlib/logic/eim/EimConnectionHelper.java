@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.logic.eim;
 
 import java.net.URI;
+import java.net.http.HttpClient;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -13,7 +14,6 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -373,9 +373,8 @@ public class EimConnectionHelper {
 					.setDefaultCredentialsProvider(credsProvider)
 					.disableCookieManagement();
 
-			HttpClient httpClient = clientBuilder.build();
-			HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-			factory.setHttpClient(httpClient);
+			HttpClient httpClient = HttpClient.newHttpClient();
+			JdkClientHttpRequestFactory factory = new JdkClientHttpRequestFactory(httpClient);
 
 			return new RestTemplate(factory);
 		} else {

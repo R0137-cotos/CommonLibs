@@ -2,28 +2,30 @@ package jp.co.ricoh.cotos.commonlib.entity.contract;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
+import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,7 +42,7 @@ public class ContractApprovalResult extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_approval_result_seq")
 	@SequenceGenerator(name = "contract_approval_result_seq", sequenceName = "contract_approval_result_seq", allocationSize = 1)
-	@ApiModelProperty(value = "契約承認実績ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "契約承認実績ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -49,14 +51,14 @@ public class ContractApprovalResult extends EntityBase {
 	@ManyToOne
 	@JoinColumn(name = "contract_approval_route_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約承認ルート", required = true, position = 2)
+	@Schema(description = "契約承認ルート", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ContractApprovalRoute contractApprovalRoute;
 
 	/**
 	 * 契約承認ルートノードID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約承認ルートノードID", required = false, position = 3)
+	@Schema(description = "契約承認ルートノードID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long contractApprovalRouteNodeId;
 
 	/**
@@ -64,7 +66,7 @@ public class ContractApprovalResult extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "承認処理カテゴリ", required = true, position = 4, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
+	@Schema(description = "承認処理カテゴリ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\"), 承認済差戻(\"5\")", example = "1")
 	private ApprovalProcessCategory approvalProcessCategory;
 
 	/**
@@ -73,7 +75,7 @@ public class ContractApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理実施者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String actualEmpId;
 
 	/**
@@ -82,21 +84,21 @@ public class ContractApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理実施者氏名", required = true, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String actualUserName;
 
 	/**
 	 * 処理実施者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理実施者組織名", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String actualOrgName;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "コメント", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String requestComment;
 
 	/**
@@ -105,7 +107,8 @@ public class ContractApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
-	@ApiModelProperty(value = "実施日時(作成時不要)", required = true, position = 9, readOnly = true)
+	@JsonSerialize(using = UnixTimestampDateSerializer.class)
+	@Schema(description = "実施日時(作成時不要)", required = true, readOnly = true)
 	private Date processedAt;
 
 	@PrePersist

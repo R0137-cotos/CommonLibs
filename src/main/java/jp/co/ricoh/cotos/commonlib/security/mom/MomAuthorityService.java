@@ -365,8 +365,7 @@ public class MomAuthorityService {
 
 		if (authorityInfoActionDtos == null || authorityInfoActionDtos.length == 0) {
 			return null;
-		}
-
+		}		
 		return Arrays.asList(authorityInfoActionDtos);
 	}
 

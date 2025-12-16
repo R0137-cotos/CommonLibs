@@ -2,26 +2,26 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.TargetContractType;
 import lombok.Data;
@@ -65,7 +65,7 @@ public class SpecificControlMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specific_control_master_seq")
 	@SequenceGenerator(name = "specific_control_master_seq", sequenceName = "specific_control_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "商材固有項目マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "商材固有項目マスタID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -73,14 +73,14 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有項目名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有項目名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String specificControlName;
 
 	/**
 	 * 商材固有項目区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商材固有項目区分", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商材固有項目区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String specificControlDiv;
 
 	/**
@@ -88,7 +88,7 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "specific_item_group_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 4)
+	@Schema(description = "商材固有品種グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SpecificItemGroupMaster specificItemGroupMaster;
 
 	/**
@@ -96,7 +96,7 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "specific_section_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "商材固有セクションマスタID", required = false, position = 5)
+	@Schema(description = "商材固有セクションマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SpecificSectionMaster specificSectionMaster;
 
 	/**
@@ -104,13 +104,13 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "情報変更不可フラグ", required = false, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "情報変更不可フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer infoChangeNotAllowedFlg;
 
 	/**
 	 * 対象契約種別
 	 */
-	@ApiModelProperty(value = "対象契約種別", required = false, position = 7)
+	@Schema(description = "対象契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TargetContractType targetContractType;
 
 	/**
@@ -118,19 +118,19 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "活性フラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	@Schema(description = "活性フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer enableFlg;
 
 	/**
 	 * 項目値区分
 	 */
-	@ApiModelProperty(value = "項目値区分", required = false, position = 9)
+	@Schema(description = "項目値区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemValueDiv itemValueDiv;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 10)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -139,6 +139,6 @@ public class SpecificControlMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約用商材固有項目追加フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	@Schema(description = "解約用商材固有項目追加フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer specificControlAddFlgCancel;
 }

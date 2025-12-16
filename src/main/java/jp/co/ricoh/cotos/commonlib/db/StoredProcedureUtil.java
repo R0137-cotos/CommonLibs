@@ -3,9 +3,9 @@ package jp.co.ricoh.cotos.commonlib.db;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,7 +41,7 @@ public class StoredProcedureUtil {
 		query.registerStoredProcedureParameter("mom_id_", String.class, ParameterMode.IN);
 		query.registerStoredProcedureParameter("mom_corp_id_", String.class, ParameterMode.IN);
 		query.registerStoredProcedureParameter("hierarchy_level_", Integer.class, ParameterMode.IN);
-		query.registerStoredProcedureParameter("ref_leader_", void.class, ParameterMode.REF_CURSOR);
+		query.registerStoredProcedureParameter("ref_leader_", Class.class, ParameterMode.REF_CURSOR);
 
 		// パラメーター値設定
 		query.setParameter("processing_type_", processingType.toString());

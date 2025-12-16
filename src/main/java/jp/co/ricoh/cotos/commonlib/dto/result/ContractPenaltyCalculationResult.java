@@ -2,10 +2,10 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract;
 import lombok.Data;
 
@@ -19,13 +19,13 @@ public class ContractPenaltyCalculationResult {
 	/**
 	 * 違約金明細(契約用)を表すEntity
 	 */
-	@ApiModelProperty(value = "違約金明細(契約用)を表すEntity", required = true, position = 1)
+	@Schema(description = "違約金明細(契約用)を表すEntity", required = true)
 	private PenaltyDetailContract penaltyDetailContract;
 
 	/**
 	 * 違約金発生解約最終日
 	 */
-	@ApiModelProperty(value = "違約金発生解約最終日", required = false, position = 2)
+	@Schema(description = "違約金発生解約最終日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyIncurredLastDay;
 }

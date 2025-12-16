@@ -1,11 +1,11 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.contract.detail;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +21,7 @@ public class ProductContractForFindAllDetailsDto extends EntityBase {
 	 * ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "契約ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -29,40 +29,40 @@ public class ProductContractForFindAllDetailsDto extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long productMasterId;
 
 	/**
 	 * 商品名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品名(作成時不要)", required = true, position = 3, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "商品名(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String productContractName;
 
 	/**
 	 * 代表品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "代表品種マスタID", required = false, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "代表品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long repItemMasterId;
 
 	/**
 	 * サービス識別番号
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "サービス識別番号(作成時不要)", required = true, position = 5, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "サービス識別番号(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String serviceIdentNumber;
 
 	/**
 	 * Bplats連携対象外
 	 */
-	@ApiModelProperty(value = "Bplats連携対象外", required = false, position = 6, readOnly = true)
+	@Schema(description = "Bplats連携対象外", requiredMode = Schema.RequiredMode.NOT_REQUIRED, readOnly = true)
 	private Boolean extendBplatsLink;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 8)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -70,14 +70,14 @@ public class ProductContractForFindAllDetailsDto extends EntityBase {
 	 * ベンダー管理番号名称
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ベンダー管理番号名称", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumberName;
 
 	/**
 	 * サービス提供会社名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービス提供会社名", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "サービス提供会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceProviderCompanyName;
 
 }

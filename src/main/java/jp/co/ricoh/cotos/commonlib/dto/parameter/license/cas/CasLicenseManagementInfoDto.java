@@ -2,13 +2,13 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.license.cas;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,21 +26,21 @@ public class CasLicenseManagementInfoDto extends DtoBase {
 	 * 契約ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = false, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = true, position = 2, allowableValues = "range[0,25]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約番号", required = true, position = 3, allowableValues = "range[0,25]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,25]")
 	private String contractNumber;
 
 	/**
@@ -48,13 +48,13 @@ public class CasLicenseManagementInfoDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(99)
-	@ApiModelProperty(value = "契約番号枝番", required = true, position = 4, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
 	/**
 	 * 最終契約同期日付
 	 */
-	@ApiModelProperty(value = "最終契約同期日付", required = false, position = 5)
+	@Schema(description = "最終契約同期日付", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date lastContractSyncDate;
 	
@@ -63,6 +63,6 @@ public class CasLicenseManagementInfoDto extends DtoBase {
 	 * CasLicenseBasicInfoDtoとの結合用フィールド
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "MVBアカウント", required = false, position = 6, allowableValues = "range[0,25]")
+	@Schema(description = "MVBアカウント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,25]")
 	private String mvbAccount;
 }

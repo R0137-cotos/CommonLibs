@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.util.ReflectionUtils;
+import io.swagger.v3.core.util.ReflectionUtils;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.security.filter.CotosDisclosable;
 import jp.co.ricoh.cotos.commonlib.security.mom.MomAuthorityService.AuthLevel;
@@ -145,7 +145,7 @@ public class CotosFilteredParamsComplementer {
 
 	/**
 	 * エンティティの値・アノテーション情報を元に、 MoM権限によりフィルタリングされた情報を補完する
-	 * 
+	 *
 	 * @param target
 	 *            補完対象
 	 * @param src
@@ -241,7 +241,7 @@ public class CotosFilteredParamsComplementer {
 	private Object find(CotosComplementTarget cotosComplementTarget, Object id) {
 		// コンテキストからRepositoryを取得
 		CrudRepository repository = (CrudRepository) context.getBean(cotosComplementTarget.repository());
-		Object found = repository.findOne((Serializable) id);
+		Object found = repository.findById((Serializable) id);
 
 		// 永続化解除
 		entityManager.clear();

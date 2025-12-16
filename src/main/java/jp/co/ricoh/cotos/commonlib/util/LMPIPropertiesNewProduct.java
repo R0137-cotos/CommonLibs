@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "cotos.lmpiNewProduct")
+@ConfigurationProperties(prefix = "cotos.lmpi-new-product")
 public class LMPIPropertiesNewProduct extends LMPIPropertiesBase {
 }

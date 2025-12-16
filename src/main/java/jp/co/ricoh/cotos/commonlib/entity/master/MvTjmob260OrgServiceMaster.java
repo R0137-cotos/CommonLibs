@@ -3,10 +3,11 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import lombok.Data;
 
@@ -26,8 +27,10 @@ public class MvTjmob260OrgServiceMaster {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		@Column(name = "ors_cubic_corp_id")
 		private String orsCubicCorpId;
 
+		@Column(name = "ors_cubic_org_id")
 		private String orsCubicOrgId;
 	}
 

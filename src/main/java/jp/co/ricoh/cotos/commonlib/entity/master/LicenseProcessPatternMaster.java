@@ -2,17 +2,17 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import org.springframework.context.annotation.Description;
 
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -63,7 +63,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_process_pattern_master_seq")
 	@SequenceGenerator(name = "license_process_pattern_master_seq", sequenceName = "license_process_pattern_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス工程パターンマスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス工程パターンマスタID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -71,7 +71,7 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
@@ -79,14 +79,14 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "工程パターンID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "工程パターンID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long processPatternId;
 
 	/**
 	 * 工程順
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "工程順", required = true, position = 4, allowableValues = "range[0,999]")
+	@Schema(description = "工程順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int processOrder;
 
 	/**
@@ -95,14 +95,14 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "process_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ライセンス工程マスタ", required = true, position = 5)
+	@Schema(description = "ライセンス工程マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseProcessMaster licenseProcessMaster;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**
@@ -110,20 +110,20 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェックフラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@Schema(description = "メール到達チェックフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer mailArrivalCheckFlg;
 
 	/**
 	 * メール区分
 	 */
-	@ApiModelProperty(value = "メール区分", required = true, position = 8, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
+	@Schema(description = "メール区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "事前設定完了メール(\"1\"), Welcomeメール(\"2\")")
 	private MailDiv mailDiv;
 
 	/**
 	 * メールマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "メールマスタID", required = false, position = 9, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailMasterId;
 
 	/**
@@ -131,13 +131,13 @@ public class LicenseProcessPatternMaster extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "メール到達チェック時間", required = false, position = 10, allowableValues = "range[0,99999]")
+	@Schema(description = "メール到達チェック時間", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer mailArrivalCheckHour;
 
 	/**
 	 * 到着チェックメール制御マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "到着チェックメール制御マスタID", required = false, position = 11, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "到着チェックメール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrivalCheckMailControlMasterId;
 }

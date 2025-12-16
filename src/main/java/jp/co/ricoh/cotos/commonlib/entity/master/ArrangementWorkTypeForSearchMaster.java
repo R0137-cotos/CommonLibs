@@ -1,14 +1,14 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,21 +28,21 @@ public class ArrangementWorkTypeForSearchMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_type_for_search_master_seq")
 	@SequenceGenerator(name = "arrangement_work_type_for_search_master_seq", sequenceName = "arrangement_work_type_for_search_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "検索用手配業務タイプマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "検索用手配業務タイプマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 商品マスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "商品マスタID", required = true, position = 2)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long productMasterId;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = true, position = 3)
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long arrangementWorkTypeMasterId;
 
 }

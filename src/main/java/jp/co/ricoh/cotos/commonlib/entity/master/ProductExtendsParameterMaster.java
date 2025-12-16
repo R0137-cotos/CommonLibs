@@ -1,18 +1,18 @@
 package jp.co.ricoh.cotos.commonlib.entity.master;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,7 +29,7 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_extends_parameter_master_seq")
 	@SequenceGenerator(name = "product_extends_parameter_master_seq", sequenceName = "product_extends_parameter_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "商品拡張項目マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "商品拡張項目マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -38,7 +38,7 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品マスタ", required = true, position = 2)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
@@ -46,14 +46,14 @@ public class ProductExtendsParameterMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "json_schema_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "JSONスキーママスタ", required = true, position = 3)
+	@Schema(description = "JSONスキーママスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private JsonSchemaMaster jsonSchemaMaster;
 
 	/**
 	 * 登録区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "登録区分", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "登録区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String registryType;
 
 }

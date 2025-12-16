@@ -2,18 +2,18 @@ package jp.co.ricoh.cotos.commonlib.entity.license.ms;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,34 +30,34 @@ public class MsAutoUpdateDateManagement extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ms_auto_update_date_management_seq")
 	@SequenceGenerator(name = "ms_auto_update_date_management_seq", sequenceName = "ms_auto_update_date_management_seq", allocationSize = 1)
-	@ApiModelProperty(value = "MS_自動更新日連携管理ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "MS_自動更新日連携管理ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long id;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 2)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermEnd;
 
 	/**
 	 * 更新前ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "更新前ライセンス終了日", required = false, position = 3)
+	@Schema(description = "更新前ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date beforeUpdateLicenseTermEnd;
 
 	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 4, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long itemMasterId;
 
 	/**
 	 * サブスクリプションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サブスクリプションID", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "サブスクリプションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subscriptionId;
 }

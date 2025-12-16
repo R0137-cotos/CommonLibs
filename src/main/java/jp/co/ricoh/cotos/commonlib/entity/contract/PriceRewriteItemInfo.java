@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.common.FileImportManagement;
 import lombok.Data;
@@ -110,7 +110,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "price_rewrite_item_info_seq")
 	@SequenceGenerator(name = "price_rewrite_item_info_seq", sequenceName = "price_rewrite_item_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "価格書換品種情報", required = true, position = 1, readOnly = true)
+	@Schema(description = "価格書換品種情報", requiredMode = Schema.RequiredMode.REQUIRED, readOnly = true)
 	private long id;
 
 	/**
@@ -119,7 +119,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "file_import_management_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ファイル取込管理", required = false, position = 2)
+	@Schema(description = "ファイル取込管理", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private FileImportManagement fileImportManagement;
 
 	/**
@@ -127,7 +127,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -135,7 +135,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "価格変更率", required = false, position = 4, allowableValues = "range[0.00,99999999999999999.99]")
+	@Schema(description = "価格変更率", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,99999999999999999.99]")
 	private BigDecimal priceReviceRate;
 
 	/**
@@ -143,7 +143,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "原価（RJ仕入価格）", required = false, position = 5)
+	@Schema(description = "原価（RJ仕入価格）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal cost;
 
 	/**
@@ -151,7 +151,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 6)
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rCost;
 
 	/**
@@ -159,7 +159,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "母店仕切", required = false, position = 7)
+	@Schema(description = "母店仕切", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -167,7 +167,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "接点店仕切", required = false, position = 8)
+	@Schema(description = "接点店仕切", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal motherStorePrice;
 
 	/**
@@ -175,7 +175,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@ApiModelProperty(value = "変更後品種コード", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "変更後品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String afterChangeRicohItemCode;
 
 	/**
@@ -183,14 +183,14 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 */
 	@Column
 	@Size(max = 255)
-	@ApiModelProperty(value = "変更後メーカー商品コード", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "変更後メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String afterChangeMakerItemCode;
 
 	/**
 	 * 対象外契約日
 	 */
 	@Column
-	@ApiModelProperty(value = "対象外契約日", required = false, position = 11)
+	@Schema(description = "対象外契約日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date noTargetContractDate;
 
@@ -198,14 +198,14 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 状態
 	 */
 	@Column
-	@ApiModelProperty(value = "状態", required = false, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1", position = 12)
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未反映(\"0\"), 反映済み(\"1\"), 反映エラー(\"2\"), 反映不要(\"3\")", example = "1")
 	private Status status;
 
 	/**
 	 * 反映日時
 	 */
 	@Column
-	@ApiModelProperty(value = "反映日時", required = false, position = 13)
+	@Schema(description = "反映日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reflectionAt;
 
@@ -213,14 +213,14 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 旧品種非表示フラグ
 	 */
 	@Column
-	@ApiModelProperty(value = "旧品種非表示フラグ", required = false, allowableValues = "表示(\"0\"), 非表示(\"1\")", example = "1", position = 14)
+	@Schema(description = "旧品種非表示フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "表示(\"0\"), 非表示(\"1\")", example = "1")
 	private OldItemHiddenFlag oldItemHiddenFlag;
 	
 	/**
 	 * 書換リスト出力フラグ
 	 */
 	@Column
-	@ApiModelProperty(value = "書換リスト出力フラグ", required = false, allowableValues = "未出力(\"0\"), 出力済み(\"1\")", example = "1", position = 15)
+	@Schema(description = "書換リスト出力フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未出力(\"0\"), 出力済み(\"1\")", example = "1")
 	private RewriteListOutputFlag rewriteListOutputFlag;
 
 }

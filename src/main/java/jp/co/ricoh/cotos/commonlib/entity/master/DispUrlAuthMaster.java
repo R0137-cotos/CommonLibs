@@ -2,15 +2,15 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,21 +37,21 @@ public class DispUrlAuthMaster extends EntityBaseMaster {
 		 * システムドメイン
 		 */
 		@Column(nullable = false)
-		@ApiModelProperty(value = "システムドメイン", required = true, position = 1)
+		@Schema(description = "システムドメイン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String systemDomain;
 
 		/**
 		 * URLパターン
 		 */
 		@Column(nullable = false)
-		@ApiModelProperty(value = "URLパターン", required = true, position = 2)
+		@Schema(description = "URLパターン", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String urlPattern;
 
 		/**
 		 * アクションID
 		 */
 		@Column(nullable = false)
-		@ApiModelProperty(value = "アクションID", required = true, position = 3)
+		@Schema(description = "アクションID", requiredMode = Schema.RequiredMode.REQUIRED)
 		private String actionId;
 	}
 
@@ -61,7 +61,7 @@ public class DispUrlAuthMaster extends EntityBaseMaster {
 	/**
 	 * アクション名
 	 */
-	@ApiModelProperty(value = "アクション名", required = false, position = 4)
+	@Schema(description = "アクション名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String actionName;
 
 	/**
@@ -69,6 +69,6 @@ public class DispUrlAuthMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "auth_pattern_id", referencedColumnName = "authPatternId")
-	@ApiModelProperty(value = "権限パターンマスタ", required = true, position = 5)
+	@Schema(description = "権限パターンマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private AuthPatternMaster authPatternMaster;
 }

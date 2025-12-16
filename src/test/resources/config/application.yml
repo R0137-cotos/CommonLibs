@@ -68,7 +68,7 @@ cotos:
     xApplicationId: App-Deploy-Reg-dev28-01
     xApplicationKey: 80818678-5b6f-4053-bc78-fa214e1c
     getSessionPath: services/v1/users/session
-  elconEim:
+  elcon-eim:
     hostName: app-dev28
     domainName: ope.azure.ricoh-eim.com
     apiAuthPath: api/v1/auth
@@ -130,12 +130,13 @@ cotos:
     secretKey: zGPxd/SVAeevhxleN3SBPnvqM2SddrVBMNDW2JaTQs4=
 spring:
   datasource:
-    url: jdbc:oracle:thin:@dev-db.cotos.ricoh.co.jp:1521/pdb1
+    url: jdbc:oracle:thin:@dev-db-aws.cotos.ricoh.co.jp:1521/pdb1
     username: cotos_ci_commonlibs
     password: cotos_ci_commonlibs
     driverClassName: oracle.jdbc.OracleDriver
+    type: com.zaxxer.hikari.HikariDataSource
   jpa:
-    database-platform: org.hibernate.dialect.Oracle12cDialect
+    database-platform: org.hibernate.dialect.OracleDialect
     hibernate:
       ddl-auto: none
     properties:
@@ -152,13 +153,13 @@ spring:
       fail-on-empty-beans: false
   mail:
     default-encoding: UTF-8
-    host: shipyard.cotos.ricoh.co.jp
+    host: dev.shipyard.cotos.ricoh.co.jp
     port: 1025
     username: koike.shinichi
     password: koike.shinichi
   messages:
     basename: Messages
-    defaultEncoding: UTF-8
+    encoding: UTF-8
 remote:
   momauthority:
     url: https://www.rizm.jw1.nihon-os.ricoh.co.jp/jmo/services/KengenService

@@ -5,24 +5,24 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.Valid;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -96,7 +96,7 @@ public class PenaltyDetailContract extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "penalty_detail_contract_seq")
 	@SequenceGenerator(name = "penalty_detail_contract_seq", sequenceName = "penalty_detail_contract_seq", allocationSize = 1)
-	@ApiModelProperty(value = "違約金明細ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "違約金明細ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -105,21 +105,21 @@ public class PenaltyDetailContract extends EntityBase {
 	@ManyToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種名", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
@@ -127,14 +127,14 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種区分", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemType;
 
 	/**
@@ -142,7 +142,7 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "違約金単価", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
 	/**
@@ -150,7 +150,7 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "数量", required = false, position = 8, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
@@ -158,13 +158,13 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "違約金金額", required = false, position = 9, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 
 	/**
 	 * 計上先区分
 	 */
-	@ApiModelProperty(value = "計上先区分", required = false, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1", position = 10)
+	@Schema(description = "計上先区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1")
 	private SalesToType salesToType;
 
 	/**
@@ -172,19 +172,19 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "削除フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
 	 * 違約金売上計上処理状態
 	 */
-	@ApiModelProperty(value = "違約金売上計上処理状態", required = false, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1", position = 12)
+	@Schema(description = "違約金売上計上処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1")
 	private PenaltyAccountSalesStatus penaltyAccountSalesStatus;
 
 	/**
 	 * 違約金売上計上処理日
 	 */
-	@ApiModelProperty(value = "違約金売上計上処理日", required = false, position = 13)
+	@Schema(description = "違約金売上計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyAccountSalesDate;
 
@@ -193,7 +193,7 @@ public class PenaltyDetailContract extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "penaltyDetailContract")
-	@ApiModelProperty(value = "違約金明細振替", required = false, position = 14)
+	@Schema(description = "違約金明細振替", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<PenaltyDetailTrans> penaltyDetailTransList;
 
 }

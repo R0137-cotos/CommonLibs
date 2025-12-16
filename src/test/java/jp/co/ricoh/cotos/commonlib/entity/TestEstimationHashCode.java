@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,7 +28,7 @@ import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.ItemEstimationRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestEstimationHashCode {
 
 	static ConfigurableApplicationContext context;
@@ -75,7 +74,7 @@ public class TestEstimationHashCode {
 	public void Estimationのテスト() throws Exception {
 
 		try {
-			Estimation found = estimationRepository.findOne(4L);
+			Estimation found = estimationRepository.findById(4L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -86,7 +85,7 @@ public class TestEstimationHashCode {
 	public void CustomerEstimationのテスト() throws Exception {
 
 		try {
-			CustomerEstimation found = customerEstimationRepository.findOne(401L);
+			CustomerEstimation found = customerEstimationRepository.findById(401L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -97,7 +96,7 @@ public class TestEstimationHashCode {
 	public void EstimationApprovalRouteのテスト() throws Exception {
 
 		try {
-			EstimationApprovalRoute found = estimationApprovalRouteRepository.findOne(401L);
+			EstimationApprovalRoute found = estimationApprovalRouteRepository.findById(401L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -108,7 +107,7 @@ public class TestEstimationHashCode {
 	public void EstimationAttachedFileのテスト() throws Exception {
 
 		try {
-			EstimationAttachedFile found = estimationAttachedFileRepository.findOne(401L);
+			EstimationAttachedFile found = estimationAttachedFileRepository.findById(401L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -119,7 +118,7 @@ public class TestEstimationHashCode {
 	public void EstimationDetailのテスト() throws Exception {
 
 		try {
-			EstimationDetail found = estimationDetailRepository.findOne(401L);
+			EstimationDetail found = estimationDetailRepository.findById(401L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -130,7 +129,7 @@ public class TestEstimationHashCode {
 	public void EstimationPicSaEmpのテスト() throws Exception {
 
 		try {
-			EstimationPicSaEmp found = estimationPicSaEmpRepository.findOne(401L);
+			EstimationPicSaEmp found = estimationPicSaEmpRepository.findById(401L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -141,7 +140,7 @@ public class TestEstimationHashCode {
 	public void ItemEstimationのテスト() throws Exception {
 
 		try {
-			ItemEstimation found = itemEstimationRepository.findOne(401L);
+			ItemEstimation found = itemEstimationRepository.findById(401L).get();
 			found.hashCode();
 		} catch (StackOverflowError e) {
 			Assert.fail("エラー発生");
@@ -152,7 +151,7 @@ public class TestEstimationHashCode {
 	public void EstimationDtoのテスト() throws Exception {
 
 		try {
-			Estimation found1 = estimationRepository.findOne(4L);
+			Estimation found1 = estimationRepository.findById(4L).get();
 			EstimationDto found2 = new EstimationDto();
 			BeanUtils.copyProperties(found1, found2, "estimationAttachedFileList", "estimationAddedEditorEmpList", "dealerEstimationList", "estimationCheckResultList", "estimationDetailList", "productEstimationList", "penaltyDetailEstimationList");
 			found2.hashCode();

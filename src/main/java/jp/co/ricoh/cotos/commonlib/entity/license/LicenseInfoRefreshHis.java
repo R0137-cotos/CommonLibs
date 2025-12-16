@@ -2,21 +2,21 @@ package jp.co.ricoh.cotos.commonlib.entity.license;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseInfo.CancelStatus;
@@ -41,7 +41,7 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_info_refresh_his_seq")
 	@SequenceGenerator(name = "license_info_refresh_his_seq", sequenceName = "license_info_refresh_his_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンス情報洗い替え履歴ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス情報洗い替え履歴ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -49,7 +49,7 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス情報ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス情報ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseInfoId;
 
 	/**
@@ -57,28 +57,28 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "契約ID", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long contractId;
 
 	/**
 	 * 恒久契約識別番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "恒久契約識別番号", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "恒久契約識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String immutableContIdentNumber;
 
 	/**
 	 * RJ管理番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "RJ管理番号", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "RJ管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String rjManageNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約番号", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -87,20 +87,20 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	@Column(nullable = false)
 	@Max(99)
 	@Min(0)
-	@ApiModelProperty(value = "契約番号枝番", required = true, position = 7, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]")
 	private int contractBranchNumber;
 
 	/**
 	 * 契約種別
 	 */
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 8)
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
 	 * 契約種別詳細
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約種別詳細", required = true, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "契約種別詳細", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contractTypeDetail;
 
 	/**
@@ -108,7 +108,7 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = false, position = 10, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer disengagementFlg;
 
 	/**
@@ -116,7 +116,7 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 11, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
@@ -124,27 +124,27 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 */
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "完了工程順", required = false, position = 12, allowableValues = "range[0,999]")
+	@Schema(description = "完了工程順", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,999]")
 	private Integer completeProcessOrder;
 
 	/**
 	 * 完了ライセンス工程マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "完了ライセンス工程マスタID", required = false, position = 13, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "完了ライセンス工程マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long completeProcessMasterId;
 
 	/**
 	 * 完了手配業務ID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "完了手配業務ID", required = false, position = 14, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "完了手配業務ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long completeArrangementWorkId;
 
 	/**
 	 * 完了操作区分
 	 */
-	@ApiModelProperty(value = "完了操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 15)
+	@Schema(description = "完了操作区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")")
 	private OperationDiv completeOperationDiv;
 
 	/**
@@ -152,14 +152,14 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 */
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "作業中工程順", required = false, position = 16, allowableValues = "range[0,999]")
+	@Schema(description = "作業中工程順", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,999]")
 	private Integer workingProcessOrder;
 
 	/**
 	 * 作業中ライセンス工程マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "作業中ライセンス工程マスタID", required = false, position = 17, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "作業中ライセンス工程マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long workingProcessMasterId;
 
 	/**
@@ -167,51 +167,51 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 *
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "作業中手配業務ID", required = false, position = 18, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "作業中手配業務ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long workingArrangementWorkId;
 
 	/**
 	 * 作業中操作区分
 	 */
-	@ApiModelProperty(value = "作業中操作区分", required = false, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")", position = 19)
+	@Schema(description = "作業中操作区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "受付(\"1\"), ボタン(\"2\"), CSV出力(\"3\"), CSV取込(\"4\")")
 	private OperationDiv workingOperationDiv;
 
 	/**
 	 * キャンセル状態
 	 */
-	@ApiModelProperty(value = "キャンセル状態", required = false, position = 20, allowableValues = "未(\"0\"), キャンセル済(\"1\")")
+	@Schema(description = "キャンセル状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未(\"0\"), キャンセル済(\"1\")")
 	private CancelStatus cancelStatus;
 
 	/**
 	 * CSV出力フラグ
 	 */
-	@ApiModelProperty(value = "CSV出力フラグ", required = false, position = 21, allowableValues = "未出力(\"0\"), 出力済(\"1\")")
+	@Schema(description = "CSV出力フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未出力(\"0\"), 出力済(\"1\")")
 	private CsvOutputFlg csvOutputFlg;
 
 	/**
 	 * CSV出力日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "CSV出力日時", required = false, position = 22)
+	@Schema(description = "CSV出力日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date csvOutputAt;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 23, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 
 	/**
 	 * 工程ロック状態
 	 */
-	@ApiModelProperty(value = "工程ロック状態", required = false, position = 24, allowableValues = "ロック解除(\"0\"), ロック状態(\"1\")")
+	@Schema(description = "工程ロック状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ロック解除(\"0\"), ロック状態(\"1\")")
 	private ProcessLockStatus processLockStatus;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 25)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -219,14 +219,14 @@ public class LicenseInfoRefreshHis extends EntityBase {
 	 * ライセンスアカウントID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ライセンスアカウントID", required = false, position = 26, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンスアカウントID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long licenseAccountId;
 
 	/**
 	 * 洗替日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "洗替日", required = false, position = 27)
+	@Schema(description = "洗替日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date refreshedAt;
 
 }

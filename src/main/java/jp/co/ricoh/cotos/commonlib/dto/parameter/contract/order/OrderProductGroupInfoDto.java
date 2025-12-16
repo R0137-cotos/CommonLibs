@@ -1,8 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.contract.order;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,14 +17,14 @@ public class OrderProductGroupInfoDto {
 	 * 商品グループコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品グループコード", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "商品グループコード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String productGroupCd;
 
 	/**
 	 * 商品グループ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品グループ名", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "商品グループ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String productGroupName;
 
 }

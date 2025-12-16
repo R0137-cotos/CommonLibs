@@ -110,7 +110,7 @@ public class ContractChangeSpanControl {
 
 		// ドメイン単位に対象トランザクションデータ取得。※現状想定しているのは契約のみ
 		if(ServiceCategory.契約.equals(serviceCategory)) {
-			targetEntity = contractRepository.findOne(transactionTableId);
+			targetEntity = contractRepository.findById(transactionTableId).orElse(null);
 		}
 		Optional.ofNullable(targetEntity).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "契約" })));
 
@@ -124,7 +124,7 @@ public class ContractChangeSpanControl {
 			// 契約種別が新規以外の場合、元契約のエンティティを取得
 			if(ContractType.契約更新 == contractType || ContractType.契約変更 == contractType) {
 				Optional.ofNullable(contract.getOriginContractId()).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityCheckNotNullError", new String[] { "変更元契約ID" })));
-				originContract = contractRepository.findOne(contract.getOriginContractId());
+				originContract = contractRepository.findById(contract.getOriginContractId()).orElse(null);
 				Optional.ofNullable(originContract).orElseThrow(() -> new ErrorCheckException(checkUtil.addErrorInfo(new ArrayList<ErrorInfo>(), "EntityDoesNotExistContract", new String[] { "変更元契約" })));
 			}
 			if(contract.getContractDetailList() != null && !contract.getContractDetailList().isEmpty()) {

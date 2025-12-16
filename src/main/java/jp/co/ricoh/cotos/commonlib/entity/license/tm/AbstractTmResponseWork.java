@@ -2,15 +2,15 @@ package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 
 import java.util.Arrays;
 
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.Size;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,20 +54,20 @@ public abstract class AbstractTmResponseWork extends EntityBase {
 	 * HTTPステータス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "HTTPステータス", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "HTTPステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String httpStatus;
 
 	/**
 	 * エラーメッセージ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "HTTPステータス", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "HTTPステータス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String errorMessage;
 
 	/**
 	 * ライセンス反映状態
 	 */
-	@ApiModelProperty(value = "送信状態", required = false, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")", example = "0", position = 5)
+	@Schema(description = "送信状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未反映(\"0\"), 反映済(\"1\"), 反映不要(\"2\")", example = "0")
 	private TmLicenceMappedStatus licenceMappedStatus;
 
 }

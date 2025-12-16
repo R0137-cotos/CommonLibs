@@ -5,32 +5,34 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.PaymentCycleType;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.UpdateMonthNotAccountingDiv;
@@ -41,6 +43,7 @@ import lombok.ToString;
 /**
  * 品種を表すEntity
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Data
 @ToString(exclude = { "productMaster" })
@@ -259,7 +262,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_master_seq")
 	@SequenceGenerator(name = "item_master_seq", sequenceName = "item_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -268,42 +271,42 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品マスタ", required = true, position = 2)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
 	 * 品種名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種名", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * リコー品種コード
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種区分", required = true, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1", position = 5)
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "なし(\"0\"), 基本(\"1\"), オプション(\"2\")", example = "1")
 	private ItemType itemType;
 
 	/**
 	 * 費用種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "費用種別", required = true, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1", position = 6)
+	@Schema(description = "費用種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "初期費(\"1\"), 月額_定額(\"2\"), 年額(\"3\"), 月額_従量(\"4\"), 違約金(\"5\")", example = "1")
 	private CostType costType;
 
 	/**
 	 * 仕切価格
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "仕切価格", required = true, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "仕切価格", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal partitionPrice;
 
 	/**
@@ -311,7 +314,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "積上げ可能期間（開始日）", required = true, position = 8, allowableValues = "range[0,19]")
+	@Schema(description = "積上げ可能期間（開始日）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,19]")
 	private Date effectiveFrom;
 
 	/**
@@ -319,139 +322,139 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "積上げ可能期間（終了日）", required = true, position = 9, allowableValues = "range[0,19]")
+	@Schema(description = "積上げ可能期間（終了日）", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,19]")
 	private Date effectiveTo;
 
 	/**
 	 * 仕入取引先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "仕入取引先コード", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "仕入取引先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bpCd;
 
 	/**
 	 * Ｒ原価
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "Ｒ原価", required = false, position = 11, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rCost;
 
 	/**
 	 * ＳＡ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＳＡ仕切価格", required = false, position = 12, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＳＡ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjPurchasePrice;
 
 	/**
 	 * ＲＪ仕切価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ仕切価格", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ仕切価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjDividingPrice;
 
 	/**
 	 * 母店売価(接点店仕切)
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "母店売価(接点店仕切)", required = false, position = 14, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "母店売価(接点店仕切)", required = false, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 消費税区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "消費税区分", required = false, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "消費税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String taxFlag;
 
 	/**
 	 * IFS連携フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "IFS連携フラグ", required = false, position = 16, allowableValues = "range[0,9]")
+	@Schema(description = "IFS連携フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer ifsLinkageFlg;
 
 	/**
 	 * 最短納期日数
 	 */
 	@Max(99)
-	@ApiModelProperty(value = "最短納期日数", required = false, position = 17, allowableValues = "range[0,99]")
+	@Schema(description = "最短納期日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer shortestDeliveryDate;
 
 	/**
 	 * 標準価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "標準価格", required = false, position = 18, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "標準価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal standardPrice;
 
 	/**
 	 * 申込書帳票出力無しフラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "申込書帳票出力無しフラグ", required = false, position = 19, allowableValues = "range[0,9]")
+	@Schema(description = "申込書帳票出力無しフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noApplicationFormOutputFlg;
 
 	/**
 	 * 作業完了報告書出力無しフラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "作業完了報告書出力無しフラグ", required = false, position = 20, allowableValues = "range[0,9]")
+	@Schema(description = "作業完了報告書出力無しフラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer noWorkReportOutputFlg;
 
 	/**
 	 * 計上分解構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "計上分解構成マスタ", required = false, position = 21)
+	@Schema(description = "計上分解構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<RecordDecomposeCompMaster> recordDecomposeCompMasterList;
 
 	/**
 	 * 手配業務構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "手配業務構成マスタ", required = false, position = 22)
+	@Schema(description = "手配業務構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ArrangementWorkCompMaster> arrangementWorkCompMasterList;
 
 	/**
 	 * 機種構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "機種構成マスタ", required = false, position = 23)
+	@Schema(description = "機種構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<EquipmentCompMaster> equipmentCompMasterList;
 
 	/**
 	 * 品種振替構成マスタ
 	 */
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "品種振替構成マスタ", required = false, position = 24)
+	@Schema(description = "品種振替構成マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ItemTransCompMaster> itemTransCompMasterList;
 
 	/**
 	 * メーカー商品コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 25, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
 	 * 提供終了日
 	 */
-	@ApiModelProperty(value = "提供終了日", required = false, position = 26)
+	@Schema(description = "提供終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date offerEndDate;
 
 	/**
 	 * 新規受注停止日
 	 */
-	@ApiModelProperty(value = "新規受注停止日", required = false, position = 27)
+	@Schema(description = "新規受注停止日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date newOrderStopDate;
 
 	/**
 	 * 最終連携月
 	 */
-	@ApiModelProperty(value = "最終連携月", required = false, position = 28)
+	@Schema(description = "最終連携月", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date finalLinkedMonth;
 
@@ -459,27 +462,27 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 値引き下限値
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "値引き下限値", required = false, position = 29, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "値引き下限値", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal lowerLimit;
 
 	/**
 	 * V-UP連携除外フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "V-UP連携除外フラグ", required = false, position = 30, allowableValues = "range[0,9]")
+	@Schema(description = "V-UP連携除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer vupLinkageExclusionFlg;
 
 	/**
 	 * ベンダー略称
 	 */
-	@ApiModelProperty(value = "ベンダー略称", required = false, position = 31)
+	@Schema(description = "ベンダー略称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String vendorShortName;
 
 	/**
 	 * ＲＪ販事本仕入価格
 	 */
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "ＲＪ販事本仕入価格", required = false, position = 32, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "ＲＪ販事本仕入価格", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal rjHanjihonPurchasePrice;
 
 	/**
@@ -487,7 +490,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "estimation_approval_route_grp_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "承認ルートグループマスタ（見積）", required = false, position = 33)
+	@Schema(description = "承認ルートグループマスタ（見積）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ApprovalRouteGrpMaster estimationApprovalRouteGrpMaster;
 
 	/**
@@ -495,7 +498,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "contract_approval_route_grp_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "承認ルートグループマスタ（契約）", required = false, position = 34)
+	@Schema(description = "承認ルートグループマスタ（契約）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ApprovalRouteGrpMaster contractApprovalRouteGrpMaster;
 
 	/**
@@ -503,21 +506,21 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "check_by_item_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "品種別チェック項目マスタ", required = false, position = 35)
+	@Schema(description = "品種別チェック項目マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private CheckByItemMaster checkByItemMaster;
 
 	/**
 	 * 契約自動締結除外フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "契約自動締結除外フラグ", required = false, position = 36, allowableValues = "range[0,9]")
+	@Schema(description = "契約自動締結除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer contractAutoSigningExclusionFlg;
 
 	/**
 	 * 小数点単価フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "小数点単価フラグ", required = false, position = 37, allowableValues = "range[0,9]")
+	@Schema(description = "小数点単価フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer decimalUnitPriceFlg;
 
 	/**
@@ -525,22 +528,22 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "契約期間月数", required = false, position = 37, allowableValues = "range[0,99999]")
+	@Schema(description = "契約期間月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer contractSpanMonth;
 
 	/**
 	 * 契約期間起算日区分
 	 */
-	@ApiModelProperty(value = "契約期間起算日区分", required = false, position = 38, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	@Schema(description = "契約期間起算日区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private ContractSpanStartDateType contractSpanStartDateType;
 
 	/**
 	 * 分解元品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "origin_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "分解元品種マスタ", required = false, position = 39)
+	@Schema(description = "分解元品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster originItemMaster;
 
 	/**
@@ -548,7 +551,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "違約金有無フラグ", required = false, position = 40, allowableValues = "range[0,9]")
+	@Schema(description = "違約金有無フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer penaltyFlg;
 
 	/**
@@ -556,28 +559,28 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "最低契約月数", required = false, position = 41, allowableValues = "range[0,99999]")
+	@Schema(description = "最低契約月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer minContractMonths;
 
 	/**
 	 * 違約金起算日区分
 	 */
-	@ApiModelProperty(value = "違約金起算日区分", required = false, position = 42, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
+	@Schema(description = "違約金起算日区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "サービス開始日(\"1\"), サービス開始翌月1日(\"2\")")
 	private PenaltyStartDateType penaltyStartDateType;
 
 	/**
 	 * 違約金品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "penalty_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "違約金品種マスタ", required = false, position = 43)
+	@Schema(description = "違約金品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster penaltyItemMaster;
 
 	/**
 	 * 分解後品種区分
 	 */
-	@ApiModelProperty(value = "分解後品種区分", required = false, position = 44, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
+	@Schema(description = "分解後品種区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "通常(\"1\"), 分解前(\"2\"), 分解後(\"3\")")
 	private ItemDecomposeType itemDecomposeType;
 
 	/**
@@ -586,7 +589,7 @@ public class ItemMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JoinColumn(name = "running_from_calc_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ランニング計上開始日日付計算パターンマスタ", required = false, position = 45)
+	@Schema(description = "ランニング計上開始日日付計算パターンマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private DateCalcPatternMaster dateCalcPatternMaster;
 
 	/**
@@ -594,7 +597,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "品種分解マスタ", required = false, position = 46)
+	@Schema(description = "品種分解マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ItemDecomposeMaster> itemDecomposeMasterList;
 
 	/**
@@ -602,7 +605,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "発送物ありマスタ", required = false, position = 47)
+	@Schema(description = "発送物ありマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ShippingThingMaster> shippingThingMasterList;
 
 	/**
@@ -610,13 +613,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "itemMaster")
-	@ApiModelProperty(value = "品種ライセンス用設定マスタ", required = false, position = 48)
+	@Schema(description = "品種ライセンス用設定マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ItemLicenseSettingMaster> ItemLicenseSettingMasterList;
 
 	/**
 	 * HW/NOS区分
 	 */
-	@ApiModelProperty(value = "HW/NOS区分", required = false, position = 49, allowableValues = "HW(\"1\"), NOS(\"2\")")
+	@Schema(description = "HW/NOS区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "HW(\"1\"), NOS(\"2\")")
 	private HwNosType hwNosType;
 
 	/**
@@ -624,28 +627,28 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "メール基本契約商品表示フラグ", required = false, position = 50, allowableValues = "range[0,9]")
+	@Schema(description = "メール基本契約商品表示フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer mailBasicContractProductDispFlg;
 
 	/**
 	 * 契約更新品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contract_update_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約更新品種マスタ", required = false, position = 51)
+	@Schema(description = "契約更新品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster contractUpdateItemMaster;
 
 	/**
 	 * サービス利用希望日設定可能区分
 	 */
-	@ApiModelProperty(value = "サービス利用希望日設定可能区分", required = false, position = 52, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
+	@Schema(description = "サービス利用希望日設定可能区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "制限なし(null),営業日のみ(\"1\"), 営業日と土曜日(\"2\")")
 	private ServicePreferredSettingPossibleType servicePreferredSettingPossibleType;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 53)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -654,13 +657,13 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "オンサイトweb申込フラグ", required = false, position = 54, allowableValues = "range[0,9]")
+	@Schema(description = "オンサイトweb申込フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer onsiteWebApplicationFlg;
 
 	/**
 	 * 契約期間区分
 	 */
-	@ApiModelProperty(value = "契約期間区分", required = false, position = 55, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
+	@Schema(description = "契約期間区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月契約(\"1\"), 年契約(\"2\")")
 	private ContractSpanType contractSpanType;
 
 	/**
@@ -668,7 +671,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "item_group_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "品種グループマスタID", required = false, position = 56)
+	@Schema(description = "品種グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemGroupMaster itemGroupMaster;
 
 	/**
@@ -676,7 +679,7 @@ public class ItemMaster extends EntityBaseMaster {
 	 * 用途が限定的かつ処理不可削減の為、エンティティとして保持しない
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "商材固有品種グループマスタID", required = false, position = 57, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商材固有品種グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long specificItemGroupMasterId;
 
 	/**
@@ -684,86 +687,86 @@ public class ItemMaster extends EntityBaseMaster {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "特殊加算月数", required = false, position = 58, allowableValues = "range[0,99999]")
+	@Schema(description = "特殊加算月数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer specialAddMonths;
 
 	/**
 	 * 紛失金品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lost_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "紛失金品種マスタ", required = false, position = 59)
+	@Schema(description = "紛失金品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster lostItemMaster;
 
 	/**
 	 * 破損水没金品種マスタ
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "damage_item_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "破損水没金品種マスタ", required = false, position = 60)
+	@Schema(description = "破損水没金品種マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ItemMaster damageItemMaster;
 
 	/**
 	 * イニシャルランニング対応品種マスタID
 	 */
-	@ApiModelProperty(value = "イニシャルランニング対応品種マスタID", required = false, position = 61, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "イニシャルランニング対応品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long initialRunningItemMasterId;
 
 	/**
 	 * 価格改定日マスタID
 	 */
-	@ApiModelProperty(value = "価格改定日マスタID", required = false, position = 62, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定日マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionDateMasterId;
 
 	/**
 	 * 課税区分
 	 */
-	@ApiModelProperty(value = "課税区分", required = false, position = 58, allowableValues = "対象外(\"0\"), 外税(\"1\"), 内税(\"2\"), 免税(\"3\"), 非課税(\"4\")")
+	@Schema(description = "課税区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "対象外(\"0\"), 外税(\"1\"), 内税(\"2\"), 免税(\"3\"), 非課税(\"4\")")
 	private TaxCategory taxCategory;
 
 	/**
 	 * 支払周期区分
 	 */
-	@ApiModelProperty(value = "支払周期区分", required = false, position = 59, allowableValues = "月額(\"1\"), 年額(\"2\")")
+	@Schema(description = "支払周期区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "月額(\"1\"), 年額(\"2\")")
 	private PaymentCycleType paymentCycleType;
 
 	/**
 	 * 更新月計上不要区分
 	 */
-	@ApiModelProperty(value = "更新月計上不要区分", required = false, position = 60, allowableValues = "サービス開始日(\"1\"), 課金開始日(\"2\")")
+	@Schema(description = "更新月計上不要区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "サービス開始日(\"1\"), 課金開始日(\"2\")")
 	private UpdateMonthNotAccountingDiv updateMonthNotAccountingDiv;
 
 	/**
 	 * 売上可能開始日
 	 */
-	@ApiModelProperty(value = "売上可能開始日", required = false, position = 61)
+	@Schema(description = "売上可能開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date accountPossibleStartDate;
 
 	/**
 	 * 価格改定前リコー品種コード
 	 */
-	@ApiModelProperty(value = "価格改定前リコー品種コード", required = false, position = 62, allowableValues = "range[0,255]")
+	@Schema(description = "価格改定前リコー品種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String bfPriceRevisionItemCode;
 
 	/**
 	 * 価格改定処理グループID
 	 */
-	@ApiModelProperty(value = "価格改定処理グループID", required = false, position = 63, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "価格改定処理グループID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long priceRevisionProcessGrpId;
 
 	/**
 	 * 月割品種対応初期費品種マスタID
 	 */
-	@ApiModelProperty(value = "月割品種対応初期費品種マスタID", required = false, position = 64, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "月割品種対応初期費品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private Long prorationLinkedInitialItemMasterId;
 
 	/**
 	 * 同一SS用最短納期日数
 	 */
 	@Max(99)
-	@ApiModelProperty(value = "同一SS用最短納期日数", required = false, position = 65, allowableValues = "range[0,99]")
+	@Schema(description = "同一SS用最短納期日数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer shortestDeliveryDateForSameSs;
 }

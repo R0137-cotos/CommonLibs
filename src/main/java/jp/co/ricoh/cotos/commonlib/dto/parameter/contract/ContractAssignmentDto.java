@@ -2,13 +2,13 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
 import java.util.List;
 
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ public class ContractAssignmentDto extends DtoBase {
 	/**
 	 * メモ
 	 */
-	@ApiModelProperty(value = "メモ", required = false, position = 3)
+	@Schema(description = "メモ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String memo;
 
@@ -29,7 +29,7 @@ public class ContractAssignmentDto extends DtoBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "contractAssignment")
-	@ApiModelProperty(value = "契約業務添付ファイル", required = false, position = 4)
+	@Schema(description = "契約業務添付ファイル", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<ContractAssignmentAttachedFileDto> contractAssignmentAttachedFileList;
 
 	/**
@@ -37,6 +37,6 @@ public class ContractAssignmentDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "更新フラグ", required = false, position = 5, allowableValues = "range[0,9]")
+	@Schema(description = "更新フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer updateFlg;
 }

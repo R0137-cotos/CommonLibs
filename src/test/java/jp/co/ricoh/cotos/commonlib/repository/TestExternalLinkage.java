@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -47,7 +46,7 @@ import jp.co.ricoh.cotos.commonlib.repository.externallinkage.ROpticalTransferRe
 import jp.co.ricoh.cotos.commonlib.repository.externallinkage.SpecificInfoRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestExternalLinkage {
 
 	@Autowired
@@ -118,7 +117,7 @@ public class TestExternalLinkage {
 	@Test
 	public void SpecificInfoRepositoryのテスト() throws Exception {
 
-		SpecificInfo found = specificInfoRepository.findOne(1L);
+		SpecificInfo found = specificInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -130,7 +129,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ElementInfoRepositoryのテスト() throws Exception {
 
-		ElementInfo found = elementInfoRepository.findOne(1L);
+		ElementInfo found = elementInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -142,7 +141,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ElementInfoDetailRepositoryのテスト() throws Exception {
 
-		ElementInfoDetail found = elementInfoDetailRepository.findOne(1L);
+		ElementInfoDetail found = elementInfoDetailRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -154,7 +153,7 @@ public class TestExternalLinkage {
 	@Test
 	public void HandoverPenaltyDetailContractRepositoryのテスト() throws Exception {
 
-		HandoverPenaltyDetailContract found = handoverPenaltyDetailContractRepository.findOne(1L);
+		HandoverPenaltyDetailContract found = handoverPenaltyDetailContractRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -166,7 +165,7 @@ public class TestExternalLinkage {
 	@Test
 	public void HandoverMobileEquipmentRepositoryのテスト() throws Exception {
 
-		HandoverMobileEquipment found = handoverMobileEquipmentRepository.findOne(1L);
+		HandoverMobileEquipment found = handoverMobileEquipmentRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -178,7 +177,7 @@ public class TestExternalLinkage {
 	@Test
 	public void HandoverCollectLocationRepositoryのテスト() throws Exception {
 
-		HandoverCollectLocation found = handoverCollectLocationRepository.findOne(1L);
+		HandoverCollectLocation found = handoverCollectLocationRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -190,7 +189,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ConstructionEimApplyInfoRepositoryのテスト() throws Exception {
 
-		ConstructionEimApplyInfo found = constructionEimApplyInfoRepository.findOne(1L);
+		ConstructionEimApplyInfo found = constructionEimApplyInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -246,7 +245,7 @@ public class TestExternalLinkage {
 	@Test
 	public void HandoverContractAttachedFileRepositoryのテスト() throws Exception {
 
-		HandoverContractAttachedFile found = handoverContractAttachedFileRepository.findOne(1L);
+		HandoverContractAttachedFile found = handoverContractAttachedFileRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -258,7 +257,7 @@ public class TestExternalLinkage {
 	@Test
 	public void HandoverIspLinkageRepositoryのテスト() throws Exception {
 
-		HandoverIspLinkage found = handoverIspLinkageRepository.findOne(1L);
+		HandoverIspLinkage found = handoverIspLinkageRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -270,7 +269,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ROpticalTransferManageRepositoryのテスト() throws Exception {
 
-		ROpticalTransferManage found = rOpticalTransferManageRepository.findOne(1L);
+		ROpticalTransferManage found = rOpticalTransferManageRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -282,7 +281,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ROpticalTransferRepositoryのテスト() throws Exception {
 
-		ROpticalTransfer found = rOpticalTransferRepository.findOne(1L);
+		ROpticalTransfer found = rOpticalTransferRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -294,7 +293,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ROpticalTransferNwserviceRepositoryのテスト() throws Exception {
 
-		ROpticalTransferNwservice found = rOpticalTransferNwserviceRepository.findOne(1L);
+		ROpticalTransferNwservice found = rOpticalTransferNwserviceRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -306,7 +305,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ConstructionEimItemInfoRepositoryのテスト() throws Exception {
 
-		ConstructionEimItemInfo found = constructionEimItemInfoRepository.findOne(1L);
+		ConstructionEimItemInfo found = constructionEimItemInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -318,7 +317,7 @@ public class TestExternalLinkage {
 	@Test
 	public void ConfigInfoRepositoryのテスト() throws Exception {
 
-		ConfigInfo found = configInfoRepository.findOne(1L);
+		ConfigInfo found = configInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -330,7 +329,7 @@ public class TestExternalLinkage {
 	@Test
 	public void HandoverMailAddressRepositoryのテスト() throws Exception {
 
-		HandoverMailAddress found = handoverMailAddressRepository.findOne(1L);
+		HandoverMailAddress found = handoverMailAddressRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,7 +35,7 @@ import jp.co.ricoh.cotos.commonlib.repository.license.LicenseProcessRepository;
 import jp.co.ricoh.cotos.commonlib.repository.license.LicenseRemainingNumberRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestLicense {
 
 	@Autowired
@@ -92,7 +91,7 @@ public class TestLicense {
 	@Test
 	public void LicenseDetailRepositoryのテスト() throws Exception {
 
-		LicenseDetail found = licenseDetailRepository.findOne(1L);
+		LicenseDetail found = licenseDetailRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -104,7 +103,7 @@ public class TestLicense {
 	@Test
 	public void LicenseInfoOperationLogRepositoryのテスト() throws Exception {
 
-		LicenseInfoOperationLog found = licenseInfoOperationLogRepository.findOne(1L);
+		LicenseInfoOperationLog found = licenseInfoOperationLogRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -116,7 +115,7 @@ public class TestLicense {
 	@Test
 	public void LicenseInfoRepositoryのテスト() throws Exception {
 
-		LicenseInfo found = licenseInfoRepository.findOne(1L);
+		LicenseInfo found = licenseInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -128,7 +127,7 @@ public class TestLicense {
 	@Test
 	public void LicenseProcessRepositoryのテスト() throws Exception {
 
-		LicenseProcess found = licenseProcessRepository.findOne(1L);
+		LicenseProcess found = licenseProcessRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -140,7 +139,7 @@ public class TestLicense {
 	@Test
 	public void LicenseRemainingNumberのテスト() throws Exception {
 
-		LicenseRemainingNumber found = licenseRemainingNumberRepository.findOne(1L);
+		LicenseRemainingNumber found = licenseRemainingNumberRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -152,7 +151,7 @@ public class TestLicense {
 	@Test
 	public void LicenseRemainingNumberのみテスト() throws Exception {
 
-		LicenseRemainingNumber found = licenseRemainingNumberRepository.findOne(2L);
+		LicenseRemainingNumber found = licenseRemainingNumberRepository.findById(2L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -161,7 +160,7 @@ public class TestLicense {
 	@Test
 	public void LicenseAccountRepositoryのテスト() throws Exception {
 
-		LicenseAccount found = licenseAccountRepository.findOne(1L);
+		LicenseAccount found = licenseAccountRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -173,7 +172,7 @@ public class TestLicense {
 	@Test
 	public void LicenseKeyInfoRepositoryのテスト() throws Exception {
 
-		LicenseKeyInfo found = licenseKeyInfoRepository.findOne(1L);
+		LicenseKeyInfo found = licenseKeyInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -188,7 +187,7 @@ public class TestLicense {
 	@Test
 	public void LicenseInfoRefreshHisRepositoryのテスト() throws Exception {
 
-		LicenseInfoRefreshHis found = licenseInfoRefreshHisRepository.findOne(1L);
+		LicenseInfoRefreshHis found = licenseInfoRefreshHisRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -200,7 +199,7 @@ public class TestLicense {
 	@Test
 	public void licenseDetailRefreshHisRepositoryのテスト() throws Exception {
 
-		LicenseDetailRefreshHis found = licenseDetailRefreshHisRepository.findOne(1L);
+		LicenseDetailRefreshHis found = licenseDetailRefreshHisRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);
@@ -212,7 +211,7 @@ public class TestLicense {
 	@Test
 	public void CloudEdgeAccountInfoRepositoryのテスト() throws Exception {
 
-		CloudEdgeAccountInfo found = cloudEdgeAccountInfoRepository.findOne(1L);
+		CloudEdgeAccountInfo found = cloudEdgeAccountInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

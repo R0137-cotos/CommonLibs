@@ -1,16 +1,16 @@
 package jp.co.ricoh.cotos.commonlib.entity.license.tm;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,28 +26,28 @@ public class TmUpdateUserRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_update_user_request_work_seq")
 	@SequenceGenerator(name = "tm_update_user_request_work_seq", sequenceName = "tm_update_user_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ユーザーアカウント更新リクエストWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ユーザーアカウント更新リクエストWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メールアドレス", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String email;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "会社ID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
 	 * ユーザーID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ユーザーID", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "ユーザーID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String userId;
 
 	/**
@@ -55,7 +55,7 @@ public class TmUpdateUserRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "ユーザーアカウント更新レスポンスWORK", required = false, position = 10)
+	@Schema(description = "ユーザーアカウント更新レスポンスWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmUpdateUserResponseWork responseWork;
 
 }

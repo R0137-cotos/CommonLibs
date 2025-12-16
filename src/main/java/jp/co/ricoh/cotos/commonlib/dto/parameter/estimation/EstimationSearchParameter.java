@@ -6,17 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -44,22 +44,22 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積書番号
 	 */
-	@ApiParam(value = "見積書番号", required = false)
-	@ApiModelProperty(value = "見積書番号", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "見積書番号", required = false)
+	@Schema(description = "見積書番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String estimateNumber;
 
 	/**
 	 * 見積書番号枝番
 	 */
-	@ApiParam(value = "見積書番号枝番", required = false)
-	@ApiModelProperty(value = "見積書番号枝番", required = false, allowableValues = "range[0,2]")
+	@Parameter(description = "見積書番号枝番", required = false)
+	@Schema(description = "見積書番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String estimateBranchNumber;
 
 	/**
 	 * 見積件名
 	 */
-	@ApiParam(value = "見積件名:部分一致", required = false)
-	@ApiModelProperty(value = "見積件名:部分一致<br />" //
+	@Parameter(description = "見積件名:部分一致", required = false)
+	@Schema(description = "見積件名:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String likeSearchEstimationTitle;
@@ -67,15 +67,15 @@ public class EstimationSearchParameter {
 	/**
 	 * 案件番号
 	 */
-	@ApiParam(value = "案件番号", required = false)
-	@ApiModelProperty(value = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "案件番号", required = false)
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String caseNumber;
 
 	/**
 	 * 案件名
 	 */
-	@ApiParam(value = "案件名:部分一致", required = false)
-	@ApiModelProperty(value = "案件名:部分一致<br />" //
+	@Parameter(description = "案件名:部分一致", required = false)
+	@Schema(description = "案件名:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String likeSearchCaseTitle;
@@ -83,36 +83,36 @@ public class EstimationSearchParameter {
 	/**
 	 * 変更元契約番号
 	 */
-	@ApiParam(value = "変更元契約番号", required = false)
-	@ApiModelProperty(value = "変更元契約番号", required = false, allowableValues = "range[0,15]")
+	@Parameter(description = "変更元契約番号", required = false)
+	@Schema(description = "変更元契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,15]")
 	private String originContractNumber;
 
 	/**
 	 * 変更元契約番号枝番
 	 */
-	@ApiParam(value = "変更元契約番号枝番", required = false)
-	@ApiModelProperty(value = "変更元契約番号枝番", required = false, allowableValues = "range[0,2]")
+	@Parameter(description = "変更元契約番号枝番", required = false)
+	@Schema(description = "変更元契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,2]")
 	private String originContractBranchNumber;
 
 	/**
 	 * 変更元契約件名
 	 */
-	@ApiParam(value = "変更元契約件名", required = false)
-	@ApiModelProperty(value = "変更元契約件名", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "変更元契約件名", required = false)
+	@Schema(description = "変更元契約件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String originContractTitle;
 
 	/**
 	 * サービス識別番号
 	 */
-	@ApiParam(value = "サービス識別番号", required = false)
-	@ApiModelProperty(value = "サービス識別番号", required = false, allowableValues = "range[0,18]")
+	@Parameter(description = "サービス識別番号", required = false)
+	@Schema(description = "サービス識別番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,18]")
 	private String serviceIdentificationNumber;
 
 	/**
 	 * 担当支社
 	 */
-	@ApiParam(value = "第1階層", required = false)
-	@ApiModelProperty(value = "第1階層<br />" //
+	@Parameter(description = "第1階層", required = false)
+	@Schema(description = "第1階層<br />" //
 			+ "設定値はMoM組織ID。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String picAffiliateId;
@@ -120,8 +120,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 担当部門
 	 */
-	@ApiParam(value = "第2階層", required = false)
-	@ApiModelProperty(value = "第2階層<br />" //
+	@Parameter(description = "第2階層", required = false)
+	@Schema(description = "第2階層<br />" //
 			+ "設定値はMoM組織ID。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String picDepartmentId;
@@ -129,8 +129,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 担当課所
 	 */
-	@ApiParam(value = "第3階層", required = false)
-	@ApiModelProperty(value = "第3階層<br />" //
+	@Parameter(description = "第3階層", required = false)
+	@Schema(description = "第3階層<br />" //
 			+ "設定値はMoM組織ID。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String picDivisionId;
@@ -138,8 +138,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 担当者
 	 */
-	@ApiParam(value = "担当営業：MoM社員IDを指定", required = false)
-	@ApiModelProperty(value = "担当営業<br />" //
+	@Parameter(description = "担当営業：MoM社員IDを指定", required = false)
+	@Schema(description = "担当営業<br />" //
 			+ "担当営業にはMoM社員IDを指定する。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String picEmptxId;
@@ -147,8 +147,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 審査／承認者
 	 */
-	@ApiParam(value = "審査／承認者：MoM社員IDを指定", required = false)
-	@ApiModelProperty(value = "審査／承認者<br />" //
+	@Parameter(description = "審査／承認者：MoM社員IDを指定", required = false)
+	@Schema(description = "審査／承認者<br />" //
 			+ "審査／承認者にはMoM社員IDを指定する。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String approvalEmptxId;
@@ -156,8 +156,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 協力者
 	 */
-	@ApiParam(value = "協力者：MoM社員IDを指定", required = false)
-	@ApiModelProperty(value = "協力者<br />" //
+	@Parameter(description = "協力者：MoM社員IDを指定", required = false)
+	@Schema(description = "協力者<br />" //
 			+ "協力者にはMoM社員IDを指定する。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String collaborationEmptxId;
@@ -165,8 +165,8 @@ public class EstimationSearchParameter {
 	/**
 	 * お客様企事部ID
 	 */
-	@ApiParam(value = "お客様企事部ID", required = false)
-	@ApiModelProperty(value = "お客様企事部ID<br />" //
+	@Parameter(description = "お客様企事部ID", required = false)
+	@Schema(description = "お客様企事部ID<br />" //
 			+ "お客様企事部IDにはMoM企事部IDを指定する。", //
 			required = false, allowableValues = "range[0,255]") //
 	private String customerId;
@@ -174,8 +174,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 企業名
 	 */
-	@ApiParam(value = "企業名:部分一致", required = false)
-	@ApiModelProperty(value = "企業名:部分一致<br />" //
+	@Parameter(description = "企業名:部分一致", required = false)
+	@Schema(description = "企業名:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String likeSearchCustomerName;
@@ -183,8 +183,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 事業所名
 	 */
-	@ApiParam(value = "事業所名:部分一致", required = false)
-	@ApiModelProperty(value = "事業所名:部分一致<br />" //
+	@Parameter(description = "事業所名:部分一致", required = false)
+	@Schema(description = "事業所名:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String likeSearchOfficeName;
@@ -192,8 +192,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 部門名
 	 */
-	@ApiParam(value = "部門名:部分一致", required = false)
-	@ApiModelProperty(value = "部門名:部分一致<br />" //
+	@Parameter(description = "部門名:部分一致", required = false)
+	@Schema(description = "部門名:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String likeSearchDepartmentName;
@@ -201,8 +201,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積更新日(前)
 	 */
-	@ApiParam(value = "見積更新日(前)", required = false)
-	@ApiModelProperty(value = "見積更新日(前)<br />" //
+	@Parameter(description = "見積更新日(前)", required = false)
+	@Schema(description = "見積更新日(前)<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false) //
 	private Date estimationUpdatedFrom;
@@ -210,8 +210,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積更新日(後)
 	 */
-	@ApiParam(value = "見積更新日(後)", required = false)
-	@ApiModelProperty(value = "見積更新日(後)<br />" //
+	@Parameter(description = "見積更新日(後)", required = false)
+	@Schema(description = "見積更新日(後)<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false) //
 	private Date estimationUpdatedTo;
@@ -219,8 +219,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 掲示日(前)
 	 */
-	@ApiParam(value = "掲示日(前)", required = false)
-	@ApiModelProperty(value = "掲示日(前)<br />" //
+	@Parameter(description = "掲示日(前)", required = false)
+	@Schema(description = "掲示日(前)<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false) //
 	private Date presentationDateFrom;
@@ -228,8 +228,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 掲示日(後)
 	 */
-	@ApiParam(value = "掲示日(後)", required = false)
-	@ApiModelProperty(value = "掲示日(後)<br />" //
+	@Parameter(description = "掲示日(後)", required = false)
+	@Schema(description = "掲示日(後)<br />" //
 			+ "日付フォーマット:yyyy/MM/dd", //
 			required = false) //
 	private Date presentationDateTo;
@@ -237,8 +237,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積ステータス
 	 */
-	@ApiParam(value = "見積ステータス:カンマ区切りで複数指定可", required = false)
-	@ApiModelProperty(value = "見積ステータス<br />" //
+	@Parameter(description = "見積ステータス:カンマ区切りで複数指定可", required = false)
+	@Schema(description = "見積ステータス<br />" //
 			+ "状態遷移上のワークフロー状態を表す。", //
 			required = false) //
 	private String status;
@@ -246,8 +246,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積状態
 	 */
-	@ApiParam(value = "見積状態:カンマ区切りで複数指定可", required = false)
-	@ApiModelProperty(value = "見積状態<br />" //
+	@Parameter(description = "見積状態:カンマ区切りで複数指定可", required = false)
+	@Schema(description = "見積状態<br />" //
 			+ "状態遷移上のライフサイクル状態を表す。", //
 			required = false) //
 	private String lifecycleStatus;
@@ -255,8 +255,8 @@ public class EstimationSearchParameter {
 	/**
 	 * 見積種別
 	 */
-	@ApiParam(value = "見積種別", required = false)
-	@ApiModelProperty(value = "契約種別<br />" //
+	@Parameter(description = "見積種別", required = false)
+	@Schema(description = "契約種別<br />" //
 			+ "新規, 変更などの見積種別を表す。", //
 			required = false) //
 	private String estimationType;
@@ -264,23 +264,23 @@ public class EstimationSearchParameter {
 	/**
 	 * 商品マスタID
 	 */
-	@ApiParam(value = "商品マスタID", required = false)
-	@ApiModelProperty(value = "商品マスタID", required = false)
+	@Parameter(description = "商品マスタID", required = false)
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long productId;
 
 	/**
 	 * RJ管理番号
 	 */
-	@ApiParam(value = "RJ管理番号:部分一致", required = false)
-	@ApiModelProperty(value = "RJ管理番号:部分一致<br />" //
+	@Parameter(description = "RJ管理番号:部分一致", required = false)
+	@Schema(description = "RJ管理番号:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String rjManageNumber;
 	/**
 	 * 恒久契約識別番号
 	 */
-	@ApiParam(value = "恒久契約識別番号:部分一致", required = false)
-	@ApiModelProperty(value = "恒久契約識別番号:部分一致<br />" //
+	@Parameter(description = "恒久契約識別番号:部分一致", required = false)
+	@Schema(description = "恒久契約識別番号:部分一致<br />" //
 			+ "条件入力時、最低2文字以上の入力とする。", //
 			required = false, allowableValues = "range[2,255]") //
 	private String immutableContIdentNumber;
@@ -288,37 +288,37 @@ public class EstimationSearchParameter {
 	/**
 	 * 回線番号
 	 */
-	@ApiParam(value = "回線番号", required = false)
-	@ApiModelProperty(value = "回線番号", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "回線番号", required = false)
+	@Schema(description = "回線番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String lineNumber;
 
 	/**
 	 * ICCID
 	 */
-	@ApiParam(value = "ICCID", required = false)
-	@ApiModelProperty(value = "ICCID", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "ICCID", required = false)
+	@Schema(description = "ICCID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serialNumber;
 
 	/**
 	 * V-UP見積番号
 	 */
-	@ApiParam(value = "V-UP見積番号", required = false)
-	@ApiModelProperty(value = "V-UP見積番号", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "V-UP見積番号", required = false)
+	@Schema(description = "V-UP見積番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimationNumber;
 
 	/**
 	 * ベンダー管理番号
 	 */
-	@ApiParam(value = "ベンダー管理番号", required = false)
-	@ApiModelProperty(value = "ベンダー管理番号", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "ベンダー管理番号", required = false)
+	@Schema(description = "ベンダー管理番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumber;
 
 	/**
 	 * ソート項目
 	 */
 	@NotNull(message = "{SortColumn}{NotEmptyError}:{SortColumn}{NotEmptyErrorMsg}")
-	@ApiParam(value = "ソート項目", required = false)
-	@ApiModelProperty(value = "ソート項目<br />" //
+	@Parameter(description = "ソート項目", required = false)
+	@Schema(description = "ソート項目<br />" //
 			+ "ソート項目のint値は以下の通り各項目とマッピングされる。<br />" //
 			+ "0:見積番号<br />" //
 			+ "1:見積種別<br />" //
@@ -342,43 +342,43 @@ public class EstimationSearchParameter {
 	 * ソート順
 	 */
 	@Enumerated(EnumType.STRING)
-	@ApiParam(value = "ソート順", required = false)
-	@ApiModelProperty(value = "ソート順", required = false)
+	@Parameter(description = "ソート順", required = false)
+	@Schema(description = "ソート順", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private SortOrder sortOrder;
 
 	/**
 	 * アプリケーションIDリスト
 	 */
-	@ApiParam(value = "アプリケーションIDリスト", required = false)
-	@ApiModelProperty(value = "アプリケーションIDリスト", required = false)
+	@Parameter(description = "アプリケーションIDリスト", required = false)
+	@Schema(description = "アプリケーションIDリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<String> appId;
 
 	/**
 	 * 他システムデータ排他フラグ
 	 */
-	@ApiParam(value = "他システムデータ排他フラグ", required = false)
-	@ApiModelProperty(value = "他システムデータ排他フラグ", required = false)
+	@Parameter(description = "他システムデータ排他フラグ", required = false)
+	@Schema(description = "他システムデータ排他フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private int otherSysDataExcludeFlg;
 
 	/**
 	 * IMEI (携帯シリアル番号)
 	 */
-	@ApiParam(value = "IMEI (携帯シリアル番号)", required = false)
-	@ApiModelProperty(value = "IMEI (携帯シリアル番号)", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "IMEI (携帯シリアル番号)", required = false)
+	@Schema(description = "IMEI (携帯シリアル番号)", required = false, allowableValues = "range[0,255]")
 	private String imeiNumber;
 
 	/**
 	 * 破棄ステータスを除外
 	 */
-	@ApiParam(value = "破棄ステータスを除外", required = false)
-	@ApiModelProperty(value = "破棄ステータスを除外", required = false)
+	@Parameter(description = "破棄ステータスを除外", required = false)
+	@Schema(description = "破棄ステータスを除外", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private boolean excludesDiscarded;
 	
 	/**
 	 * MNPタイプ
 	 */
-	@ApiParam(value = "MNPタイプ", required = false)
-	@ApiModelProperty(value = "MNPタイプ", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "MNPタイプ", required = false)
+	@Schema(description = "MNPタイプ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String mnpType;
 	
 	/**

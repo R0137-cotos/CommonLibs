@@ -3,16 +3,16 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract.PenaltyAccountSalesStatus;
 import jp.co.ricoh.cotos.commonlib.entity.contract.PenaltyDetailContract.SalesToType;
@@ -27,14 +27,14 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 * 品種マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種名", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
@@ -42,14 +42,14 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@Size(max = 255)
 	@NotNull
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
 	 * 品種区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "品種区分", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "品種区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemType;
 
 	/**
@@ -57,7 +57,7 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "違約金単価", required = false, position = 5, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyUnitPrice;
 
 	/**
@@ -65,7 +65,7 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@Max(99999)
 	@Min(0)
-	@ApiModelProperty(value = "数量", required = false, position = 6, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
@@ -73,13 +73,13 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "違約金金額", required = false, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "違約金金額", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal penaltyAmountSummary;
 
 	/**
 	 * 計上先区分
 	 */
-	@ApiModelProperty(value = "計上先区分", required = false, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1", position = 8)
+	@Schema(description = "計上先区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "エンドユーザ(\"1\"), 課所止め(\"2\")", example = "1")
 	private SalesToType salesToType;
 
 	/**
@@ -87,19 +87,19 @@ public class PenaltyDetailContractDto extends DtoBase {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "削除フラグ", required = false, position = 9, allowableValues = "range[0,9]")
+	@Schema(description = "削除フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer deleteFlg;
 
 	/**
 	 * 違約金売上計上処理状態
 	 */
-	@ApiModelProperty(value = "違約金売上計上処理状態", required = false, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1", position = 10)
+	@Schema(description = "違約金売上計上処理状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未計上(\"0\"), 計上済み(\"1\"), 処理不要(\"2\"), 処理不可(\"3\")", example = "1")
 	private PenaltyAccountSalesStatus penaltyAccountSalesStatus;
 
 	/**
 	 * 違約金売上計上処理日
 	 */
-	@ApiModelProperty(value = "違約金売上計上処理日", required = false, position = 11)
+	@Schema(description = "違約金売上計上処理日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date penaltyAccountSalesDate;
 

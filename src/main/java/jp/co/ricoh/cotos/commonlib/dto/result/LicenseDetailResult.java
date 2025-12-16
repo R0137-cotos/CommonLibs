@@ -2,13 +2,13 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Version;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.RequestCreateStatus;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.HardSoftDiv;
 import jp.co.ricoh.cotos.commonlib.entity.license.LicenseDetail.InfoDiv;
@@ -23,137 +23,137 @@ public class LicenseDetailResult {
 	 * ライセンス明細ID
 	 */
 	@Id
-	@ApiModelProperty(value = "ライセンス明細ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス明細ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * ライセンス明細version
 	 */
 	@Version
-	@ApiModelProperty(value = "ライセンス明細version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンス明細version(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long version;
 
 	/**
 	 * ライセンス区分マスタID
 	 */
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 
 	/**
 	 * シーケンスNo
 	 */
-	@ApiModelProperty(value = "シーケンスNo", required = true, position = 3, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "シーケンスNo", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long seqNumber;
 
 	/**
 	 * 情報区分
 	 */
-	@ApiModelProperty(value = "情報区分", required = false, allowableValues = "ハード(\"1\"), 減数(\"2\")", position = 4)
+	@Schema(description = "情報区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ハード(\"1\"), 減数(\"2\")")
 	private InfoDiv infoDiv;
 
 	/**
 	 * 品種マスタID
 	 */
-	@ApiModelProperty(value = "品種マスタID", required = false, position = 5, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long itemMasterId;
 
 	/**
 	 * 商品マスタID
 	 */
-	@ApiModelProperty(value = "商品マスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "商品マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long productMasterId;
 
 	/**
 	 * ハード・ソフト区分
 	 */
-	@ApiModelProperty(value = "ハード・ソフト区分", required = false, allowableValues = "ハード(\"1\"), ライセンス(\"2\")", position = 7)
+	@Schema(description = "ハード・ソフト区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ハード(\"1\"), ライセンス(\"2\")")
 	private HardSoftDiv hardSoftDiv;
 
 	/**
 	 * 機種コード
 	 */
-	@ApiModelProperty(value = "機種コード", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "機種コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String equipmentCode;
 
 	/**
 	 * 数量
 	 */
-	@ApiModelProperty(value = "数量", required = false, position = 9, allowableValues = "range[0,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99999]")
 	private Integer quantity;
 
 	/**
 	 * 取込フラグ
 	 */
-	@ApiModelProperty(value = "取込フラグ", required = false, position = 10, allowableValues = "range[0,9]")
+	@Schema(description = "取込フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer captureFlg;
 
 	/**
 	 * 取込日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "取込日時", required = false, position = 11)
+	@Schema(description = "取込日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date captureAt;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 12)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String extendsParameter;
 
 	/**
 	 * 品種名
 	 */
-	@ApiModelProperty(value = "品種名", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "品種名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String itemName;
 
 	/**
 	 * ライセンスサービスID
 	 */
-	@ApiModelProperty(value = "ライセンスサービスID", required = true, position = 14, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービスID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceId;
 
 	/**
 	 * ライセンスサービス名
 	 */
-	@ApiModelProperty(value = "ライセンスサービス名", required = true, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービス名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceName;
 
 	/**
 	 * 増減数量
 	 */
-	@ApiModelProperty(value = "増減数量", required = false, position = 16, allowableValues = "range[-99999,99999]")
+	@Schema(description = "増減数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer changeQuantity;
 
 	/**
 	 * リクエスト処理区分
 	 */
-	@ApiModelProperty(value = "リクエスト処理区分", required = false, allowableValues = "即時(\"1\"), 月次(\"2\")", position = 17)
+	@Schema(description = "リクエスト処理区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "即時(\"1\"), 月次(\"2\")")
 	private RequestProcessDiv requestProcessDiv;
 
 	/**
 	 * リクエスト作成状態
 	 */
-	@ApiModelProperty(value = "リクエスト作成状態", required = false, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")", position = 18)
+	@Schema(description = "リクエスト作成状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未作成(\"0\"), 作成済(\"1\"), 対象外(\"2\")")
 	private RequestCreateStatus requestCreateStatus;
 
 	/**
 	 * リクエスト作成日時
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "リクエスト作成日時", required = false, position = 19)
+	@Schema(description = "リクエスト作成日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date requestCreateDate;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 20)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 21)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermEnd;
 }

@@ -2,15 +2,15 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.Arrays;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.context.annotation.Description;
 
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -78,7 +78,7 @@ public class MailAddressMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_address_master_seq")
 	@SequenceGenerator(name = "mail_address_master_seq", sequenceName = "mail_address_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "メールアドレスマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "メールアドレスマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -87,32 +87,32 @@ public class MailAddressMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "mail_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "メールマスタ", required = true, position = 2)
+	@Schema(description = "メールマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private MailMaster mailMaster;
 
 	/**
 	 * メールアドレス区分
 	 */
-	@ApiModelProperty(value = "メールアドレス区分", required = false, position = 3, allowableValues = "TO(\"1\"), CC(\"2\"), BCC(\"3\")")
+	@Schema(description = "メールアドレス区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "TO(\"1\"), CC(\"2\"), BCC(\"3\")")
 	private MailAddressDiv mailAddressDiv;
 
 	/**
 	 * 対象エンティティ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "対象エンティティ名", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "対象エンティティ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String targetEntityName;
 
 	/**
 	 * 対象フィールド名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "対象フィールド名", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "対象フィールド名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String targetFieldName;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@ApiModelProperty(value = "サービスカテゴリ", required = false, position = 6, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\"), ライセンス(\"4\")")
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\"), ライセンス(\"4\")")
 	private ServiceCategory serviceCategory;
 }

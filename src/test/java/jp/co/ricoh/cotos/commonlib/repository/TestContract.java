@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -87,7 +86,7 @@ import jp.co.ricoh.cotos.commonlib.repository.contract.ShippingThingDetailReposi
 import jp.co.ricoh.cotos.commonlib.repository.contract.VValidContractPeriodHistoryRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class TestContract {
 
 	@Autowired
@@ -581,7 +580,7 @@ public class TestContract {
 
 		idList.stream().forEach(id -> {
 			// データが取得できることを確認
-			T found = repository.findOne(id);
+			T found = repository.findById(id).get();
 			Assert.assertNotNull(found);
 			// 全てのカラムがNullではないことを確認
 			try {
@@ -736,7 +735,7 @@ public class TestContract {
 		context.getBean(DBConfig.class).initTargetTestData("repository/nextUpdateDetailInfo.sql");
 		context.getBean(DBConfig.class).initTargetTestData("repository/contract.sql");
 		// エンティティの取得
-		NextUpdateDetailInfo found = nextUpdateDetailInfoRepository.findOne(1L);
+		NextUpdateDetailInfo found = nextUpdateDetailInfoRepository.findById(1L).get();
 
 		// Entity が null ではないことを確認
 		Assert.assertNotNull(found);

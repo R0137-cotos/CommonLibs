@@ -43,7 +43,6 @@ import jp.co.ricoh.cotos.commonlib.entity.estimation.Estimation;
 import jp.co.ricoh.cotos.commonlib.entity.master.CommonMasterDetail;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorCheckException;
 import jp.co.ricoh.cotos.commonlib.exception.ErrorInfo;
-import jp.co.ricoh.cotos.commonlib.logic.json.JsonUtil;
 import jp.co.ricoh.cotos.commonlib.logic.message.MessageUtil;
 import jp.co.ricoh.cotos.commonlib.repository.contract.ContractRepository;
 import jp.co.ricoh.cotos.commonlib.repository.estimation.EstimationRepository;
@@ -57,9 +56,6 @@ public class CheckUtil {
 
 	@Autowired
 	MessageUtil messageUtil;
-
-	@Autowired
-	JsonUtil jsonUtil;
 
 	@Autowired
 	ContractRepository contractRepository;
@@ -612,12 +608,12 @@ public class CheckUtil {
 	 *
 	 * @param basename
 	 *            ベースネーム
-	 * @param defaultEncoding
+	 * @param encoding
 	 *            デフォルトエンコーディング
 	 */
-	public void setMessageUtil(String basename, String defaultEncoding) {
+	public void setMessageUtil(String basename, String encoding) {
 		this.messageUtil = new MessageUtil();
-		this.messageUtil.setMessageSource(basename, defaultEncoding);
+		this.messageUtil.setMessageSource(basename, encoding);
 	}
 
 	/**
@@ -673,7 +669,7 @@ public class CheckUtil {
 		MigrationDiv checkMigrationDiv = null;
 		try {
 			// 拡張項目から移行用DTO.移行区分を取得
-			productExtendsParameterMap = mapper.readValue(extendsParameter, new TypeReference<Object>() {
+			productExtendsParameterMap = (HashMap<String, HashMap<String, Object>>) mapper.readValue(extendsParameter, new TypeReference<Object>() {
 			});
 			migrationMap = Optional.ofNullable(productExtendsParameterMap.get("migrationParameter")).orElse(new HashMap<String, Object>());
 			if (StringUtils.isNotBlank(Optional.ofNullable(migrationMap.get("migrationDiv")).orElse(new String()).toString())) {

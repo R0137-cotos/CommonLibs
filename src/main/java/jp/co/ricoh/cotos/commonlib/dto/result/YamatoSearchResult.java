@@ -2,12 +2,12 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -21,81 +21,81 @@ public class YamatoSearchResult {
 	 * 手配業務ID
 	 */
 	@Id
-	@ApiModelProperty(value = "手配業務ID", required = false, position = 1)
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long arrangementWorkId;
 
 	/**
 	 * 契約ID
 	 */
-	@ApiModelProperty(value = "契約ID", required = false, position = 2)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private long contractId;
 
 	/**
 	 * サービス利用希望日
 	 */
-	@ApiModelProperty(value = "サービス利用希望日", required = false, position = 3)
+	@Schema(description = "サービス利用希望日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.DATE)
 	private Date conclusionPreferredDate;
 
 	/**
 	 * 業務受付日時
 	 */
-	@ApiModelProperty(value = "業務受付日時", required = false, position = 4)
+	@Schema(description = "業務受付日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date businessAcceptDateTime;
 
 	/**
 	 * 業務受付枝番
 	 */
-	@ApiModelProperty(value = "業務受付枝番", required = false, position = 5, allowableValues = "range[0,99]")
+	@Schema(description = "業務受付枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer businessAcceptBranchNumber;
 
 	/**
 	 * 企業名
 	 */
-	@ApiModelProperty(value = "企業名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String companyName;
 
 	/**
 	 * お問い合わせ番号
 	 */
-	@ApiModelProperty(value = "お問い合わせ番号", required = false, allowableValues = "range[0,255]", position = 7)
+	@Schema(description = "お問い合わせ番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactNo;
 
 	/**
 	 * 郵便番号
 	 */
-	@ApiModelProperty(value = "郵便番号", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "郵便番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String postNumber;
 
 	/**
 	 * 都道府県
 	 */
-	@ApiModelProperty(value = "都道府県", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "都道府県", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String prefectures;
 
 	/**
 	 * 市区町村番地
 	 */
-	@ApiModelProperty(value = "市区町村番地", required = false, position = 10, allowableValues = "range[0,1000]")
+	@Schema(description = "市区町村番地", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1000]")
 	private String cityStreet;
 
 	/**
 	 * 建物名
 	 */
-	@ApiModelProperty(value = "建物名", required = false, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "建物名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String buildingName;
 
 	/**
 	 * 電話番号
 	 */
-	@ApiModelProperty(value = "電話番号", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "電話番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String phoneNumber;
 
 	/**
 	 * 社員名
 	 */
-	@ApiModelProperty(value = "社員名", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "社員名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String employeeName;
 
 }

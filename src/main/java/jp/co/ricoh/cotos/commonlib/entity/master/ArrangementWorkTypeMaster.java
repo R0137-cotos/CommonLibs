@@ -2,24 +2,24 @@ package jp.co.ricoh.cotos.commonlib.entity.master;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,20 +36,20 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_work_type_master_seq")
 	@SequenceGenerator(name = "arrangement_work_type_master_seq", sequenceName = "arrangement_work_type_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * 手配業務タイプ名
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "手配業務タイプ名", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務タイプ名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String arrangementWorkName;
 
 	/**
 	 * 説明
 	 */
-	@ApiModelProperty(value = "説明", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "説明", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String description;
 
 	/**
@@ -57,41 +57,41 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "arrangement_approval_route_grp_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "承認ルートグループマスタ", required = false, position = 4)
+	@Schema(description = "承認ルートグループマスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ApprovalRouteGrpMaster approvalRouteGrpMaster;
 
 	/**
 	 * 手配業務構成マスタ
 	 */
 	@OneToMany(mappedBy = "arrangementWorkTypeMaster")
-	@ApiModelProperty(value = "手配業務タイプマスタ", required = true, position = 5)
+	@Schema(description = "手配業務タイプマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ArrangementWorkCompMaster> arrangementWorkCompMasterList;
 
 	/**
 	 * 手配チェックリスト構成マスタ
 	 */
 	@OneToMany(mappedBy = "arrangementWorkTypeMaster")
-	@ApiModelProperty(value = "手配チェックリスト構成マスタ", required = true, position = 6)
+	@Schema(description = "手配チェックリスト構成マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ArrangementChecklistCompMaster> arrangementChecklistCompMasterList;
 
 	/**
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アプリケーションID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	/**
 	 * 手配業務タイプ区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "手配業務タイプ区分", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "手配業務タイプ区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String arrangementWorkTypeDiv;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -101,7 +101,7 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "arrangement_work_auth_control_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "手配業務権限制御マスタ", required = false, position = 10)
+	@Schema(description = "手配業務権限制御マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private ArrangementWorkAuthControlMaster arrangementWorkAuthControlMaster;
 
 	/**
@@ -109,6 +109,6 @@ public class ArrangementWorkTypeMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "契約フロー考慮不要フラグ", required = false, position = 11, allowableValues = "range[0,9]")
+	@Schema(description = "契約フロー考慮不要フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer contractFlowUnnecessaryFlg;
 }

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j
+@Slf4j
 @Component
 @EnableRetry
 public class SACMUtil {
@@ -33,16 +33,16 @@ public class SACMUtil {
 		try {
 			responseEntity = rest.exchange(requestEntity, String.class);
 			log.info("============================================================");
-			log.info("status  : " + responseEntity.getStatusCodeValue());
+			log.info("status  : " + responseEntity.getStatusCode().value());
 			log.info("headers : " + responseEntity.getHeaders());
 			log.info("response: " + responseEntity.getBody());
 			log.info("============================================================");
 			// HTTPステータスが200系以外はエラーとする。
 			if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-				throw new RuntimeException("SACMAPI呼び出しでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCodeValue() + "、エラー内容：" + responseEntity.getBody());
+				throw new RuntimeException("SACMAPI呼び出しでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode().value() + "、エラー内容：" + responseEntity.getBody());
 			}
 		} catch (ResourceAccessException e) {
-			log.error(e);
+			log.error("SACMAPI呼び出しでエラーが発生しました。", e);
 			throw e;
 		}
 

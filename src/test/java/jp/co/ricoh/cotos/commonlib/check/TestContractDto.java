@@ -12,9 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -142,7 +142,7 @@ import jp.co.ricoh.cotos.commonlib.util.HeadersProperties;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = "test.context.id = TestContractDto")
 public class TestContractDto {
 
 	private static final String STR_256 = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345";
@@ -297,7 +297,7 @@ public class TestContractDto {
 
 	@Test
 	public void CustomerContractDtoのテスト() throws Exception {
-		CustomerContract entity = customerContractRepository.findOne(401L);
+		CustomerContract entity = customerContractRepository.findById(401L).get();
 		CustomerContractDto testTarget = new CustomerContractDto();
 		BeanUtils.copyProperties(entity, testTarget);
 
@@ -358,7 +358,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractInstallationLocationDtoのテスト() throws Exception {
-		ContractInstallationLocation entity = contractInstallationLocationRepository.findOne(401L);
+		ContractInstallationLocation entity = contractInstallationLocationRepository.findById(401L).get();
 		ContractInstallationLocationDto testTarget = new ContractInstallationLocationDto();
 
 		// 正常系
@@ -389,7 +389,7 @@ public class TestContractDto {
 
 	@Test
 	public void DealerContractDtoのテスト() throws Exception {
-		DealerContract entity = dealerContractRepository.findOne(401L);
+		DealerContract entity = dealerContractRepository.findById(401L).get();
 		DealerContractDto testTarget = new DealerContractDto();
 
 		// 正常系
@@ -458,7 +458,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractDtoのテスト() throws Exception {
-		Contract entity = contractRepository.findOne(4L);
+		Contract entity = contractRepository.findById(4L).get();
 		ContractDto dto = new ContractDto();
 		ContractDto testTarget = new ContractDto();
 
@@ -521,6 +521,9 @@ public class TestContractDto {
 		// 契約承認ルート
 		ContractApprovalRouteDto route = new ContractApprovalRouteDto();
 		BeanUtils.copyProperties(entity.getContractApprovalRouteList().get(0), route);
+		ContractApprovalRouteNodeDto approvalNode = new ContractApprovalRouteNodeDto();
+		BeanUtils.copyProperties(entity.getContractApprovalRouteList().get(0).getContractApprovalRouteNodeList().get(0), approvalNode);
+		route.setContractApprovalRouteNodeList(Arrays.asList(approvalNode));
 		dto.setContractApprovalRouteList(Arrays.asList(route));
 
 		// 見積チェック結果
@@ -688,7 +691,7 @@ public class TestContractDto {
 
 	@Test
 	public void ItemDetailContractDtoのテスト() throws Exception {
-		ItemDetailContract entity = itemDetailContractRepository.findOne(401L);
+		ItemDetailContract entity = itemDetailContractRepository.findById(401L).get();
 		ItemDetailContractDto testTarget = new ItemDetailContractDto();
 		BeanUtils.copyProperties(entity, testTarget);
 
@@ -745,7 +748,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractEquipmentのテスト() throws Exception {
-		ContractEquipment entity = contractEquipmentRepository.findOne(401L);
+		ContractEquipment entity = contractEquipmentRepository.findById(401L).get();
 		ContractEquipmentDto testTarget = new ContractEquipmentDto();
 		BeanUtils.copyProperties(entity, testTarget);
 
@@ -785,7 +788,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractForFindAllDetailsDtoのテスト() throws Exception {
-		Contract entity = contractRepository.findOne(4L);
+		Contract entity = contractRepository.findById(4L).get();
 		ContractForFindAllDetailsDto testTarget = new ContractForFindAllDetailsDto();
 		ContractForFindAllDetailsDto dto = new ContractForFindAllDetailsDto();
 
@@ -869,7 +872,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "見積IDは最小値（0）を下回っています。"));
 
 		// 異常系（@Valid：契約明細）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(entity, dto, "productContractList");
 		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
 		dto.setProductContractList(Arrays.asList(product));
@@ -881,7 +884,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "状態が設定されていません。"));
 
 		// 異常系（@Valid：契約担当SA社員）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(entity, dto, "productContractList");
 		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
 		dto.setProductContractList(Arrays.asList(product));
@@ -893,7 +896,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM社員IDが設定されていません。"));
 
 		// 異常系（@Valid：販売店(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(entity, dto, "productContractList");
 		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
 		dto.setProductContractList(Arrays.asList(product));
@@ -905,7 +908,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "販売店コードは最大文字数（255）を超えています。"));
 
 		// 異常系（@Valid：顧客(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(entity, dto, "productContractList");
 		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
 		dto.setProductContractList(Arrays.asList(product));
@@ -917,7 +920,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "MoM非連携_企業代表者名(カナ)は最大文字数（255）を超えています。"));
 
 		// 異常系（@Valid：商品(契約用)）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(entity, dto, "productContractList");
 		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
 		dto.setProductContractList(Arrays.asList(product));
@@ -929,7 +932,7 @@ public class TestContractDto {
 		Assert.assertTrue(testTool.errorMessageMatchesOne(result.getErrorInfoList(), "商品マスタIDは最小値（0）を下回っています。"));
 
 		// 異常系（@Valid：見積明細管理）
-		entity = contractRepository.findOne(4L);
+		entity = contractRepository.findById(4L).get();
 		BeanUtils.copyProperties(entity, dto, "productContractList");
 		BeanUtils.copyProperties(entity.getProductContractList().get(0), product);
 		dto.setProductContractList(Arrays.asList(product));
@@ -943,7 +946,7 @@ public class TestContractDto {
 
 	@Test
 	public void ProductContractForFindAllDetailsDtoのテスト() throws Exception {
-		ProductContract entity = productContractRepository.findOne(401L);
+		ProductContract entity = productContractRepository.findById(401L).get();
 		ProductContractForFindAllDetailsDto testTarget = new ProductContractForFindAllDetailsDto();
 		BeanUtils.copyProperties(entity, testTarget);
 
@@ -974,7 +977,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractAddedEditorEmpDtoのテスト() throws Exception {
-		ContractAddedEditorEmp entity = contractAddedEditorEmpRepository.findOne(401L);
+		ContractAddedEditorEmp entity = contractAddedEditorEmpRepository.findById(401L).get();
 		ContractAddedEditorEmpDto testTarget = new ContractAddedEditorEmpDto();
 		BeanUtils.copyProperties(entity, testTarget);
 
@@ -1033,7 +1036,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractApprovalRouteDtoのテスト() throws Exception {
-		ContractApprovalRoute entity = contractApprovalRouteRepository.findOne(401L);
+		ContractApprovalRoute entity = contractApprovalRouteRepository.findById(401L).get();
 		ContractApprovalRouteDto dto = new ContractApprovalRouteDto();
 		ContractApprovalRouteDto testTarget = new ContractApprovalRouteDto();
 
@@ -1098,7 +1101,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractApprovalRouteNodeDtoのテスト() throws Exception {
-		ContractApprovalRouteNode entity = contractApprovalRouteNodeRepository.findOne(401L);
+		ContractApprovalRouteNode entity = contractApprovalRouteNodeRepository.findById(401L).get();
 		ContractApprovalRouteNodeDto testTarget = new ContractApprovalRouteNodeDto();
 
 		// 正常系
@@ -1154,7 +1157,7 @@ public class TestContractDto {
 	@Test
 	public void ContractAttachedFileDtoのテスト() throws Exception {
 
-		ContractAttachedFile entity = contractAttachedFileRepository.findOne(401L);
+		ContractAttachedFile entity = contractAttachedFileRepository.findById(401L).get();
 		ContractAttachedFileDto testTarget = new ContractAttachedFileDto();
 		AttachedFileDto attachedFileDto = new AttachedFileDto();
 		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
@@ -1211,7 +1214,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractCheckResultDtoのテスト() throws Exception {
-		ContractCheckResult entity = contractCheckResultRepository.findOne(401L);
+		ContractCheckResult entity = contractCheckResultRepository.findById(401L).get();
 		ContractCheckResultDto testTarget = new ContractCheckResultDto();
 
 		// 正常系
@@ -1263,7 +1266,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractDetailDtoのテスト() throws Exception {
-		ContractDetail entity = contractDetailRepository.findOne(401L);
+		ContractDetail entity = contractDetailRepository.findById(401L).get();
 		ContractDetailDto dto = new ContractDetailDto();
 		ContractDetailDto testTarget = new ContractDetailDto();
 		BeanUtils.copyProperties(entity, dto);
@@ -1350,7 +1353,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicSaEmpDtoのテスト() throws Exception {
-		ContractPicSaEmp entity = contractPicSaEmpRepository.findOne(401L);
+		ContractPicSaEmp entity = contractPicSaEmpRepository.findById(401L).get();
 		ContractPicSaEmpDto testTarget = new ContractPicSaEmpDto();
 
 		// 正常系
@@ -1413,7 +1416,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicMntCeEmpDtoのテスト() throws Exception {
-		ContractPicMntCeEmp entity = contractPicMntCeEmpRepository.findOne(401L);
+		ContractPicMntCeEmp entity = contractPicMntCeEmpRepository.findById(401L).get();
 		ContractPicMntCeEmpDto testTarget = new ContractPicMntCeEmpDto();
 
 		// 正常系
@@ -1471,7 +1474,7 @@ public class TestContractDto {
 
 	@Test
 	public void ItemContractDtoのテスト() throws Exception {
-		ItemContract entity = itemContractRepository.findOne(401L);
+		ItemContract entity = itemContractRepository.findById(401L).get();
 		ItemContractDto testTarget = new ItemContractDto();
 
 		// 正常系
@@ -1542,7 +1545,7 @@ public class TestContractDto {
 
 	@Test
 	public void ProductContractDtoのテスト() throws Exception {
-		ProductContract entity = productContractRepository.findOne(401L);
+		ProductContract entity = productContractRepository.findById(401L).get();
 		ProductContractDto testTarget = new ProductContractDto();
 
 		// 正常系
@@ -1582,7 +1585,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicIntCeEmpDtoのテスト() throws Exception {
-		ContractPicIntCeEmp entity = contractPicIntCeEmpRepository.findOne(401L);
+		ContractPicIntCeEmp entity = contractPicIntCeEmpRepository.findById(401L).get();
 		ContractPicIntCeEmpDto testTarget = new ContractPicIntCeEmpDto();
 
 		// 正常系
@@ -1613,7 +1616,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicAccCeEmpDtoのテスト() throws Exception {
-		ContractPicAccCeEmp entity = contractPicAccCeEmpRepository.findOne(401L);
+		ContractPicAccCeEmp entity = contractPicAccCeEmpRepository.findById(401L).get();
 		ContractPicAccCeEmpDto testTarget = new ContractPicAccCeEmpDto();
 
 		// 正常系
@@ -1644,7 +1647,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicMntSsOrgDtoのテスト() throws Exception {
-		ContractPicMntSsOrg entity = contractPicMntSsOrgRepository.findOne(401L);
+		ContractPicMntSsOrg entity = contractPicMntSsOrgRepository.findById(401L).get();
 		ContractPicMntSsOrgDto testTarget = new ContractPicMntSsOrgDto();
 
 		// 正常系
@@ -1675,7 +1678,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicAccSsOrgDtoのテスト() throws Exception {
-		ContractPicAccSsOrg entity = contractPicAccSsOrgRepository.findOne(401L);
+		ContractPicAccSsOrg entity = contractPicAccSsOrgRepository.findById(401L).get();
 		ContractPicAccSsOrgDto testTarget = new ContractPicAccSsOrgDto();
 
 		// 正常系
@@ -1706,7 +1709,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractPicIntSsOrgDtoのテスト() throws Exception {
-		ContractPicIntSsOrg entity = contractPicIntSsOrgRepository.findOne(401L);
+		ContractPicIntSsOrg entity = contractPicIntSsOrgRepository.findById(401L).get();
 		ContractPicIntSsOrgDto testTarget = new ContractPicIntSsOrgDto();
 
 		// 正常系
@@ -1737,7 +1740,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractExtCreateDtoのテスト() throws Exception {
-		Contract entity = contractRepository.findOne(4L);
+		Contract entity = contractRepository.findById(4L).get();
 		ContractExtCreateDto dto = new ContractExtCreateDto();
 		ContractExtCreateDto testTarget = new ContractExtCreateDto();
 
@@ -1870,7 +1873,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractExtChangeDtoのテスト() throws Exception {
-		Contract entity = contractRepository.findOne(4L);
+		Contract entity = contractRepository.findById(4L).get();
 		ContractExtChangeDto dto = new ContractExtChangeDto();
 		ContractExtChangeDto testTarget = new ContractExtChangeDto();
 
@@ -2051,7 +2054,7 @@ public class TestContractDto {
 
 	@Test
 	public void ProductContractExtCreateDtoのテスト() throws Exception {
-		ProductContract entity = productContractRepository.findOne(401L);
+		ProductContract entity = productContractRepository.findById(401L).get();
 		ProductContractExtCreateDto dto = new ProductContractExtCreateDto();
 		ProductContractExtCreateDto testTarget = new ProductContractExtCreateDto();
 		BeanUtils.copyProperties(entity, dto);
@@ -2093,7 +2096,7 @@ public class TestContractDto {
 
 	@Test
 	public void ManagedEstimationDetailDtoのテスト() throws Exception {
-		ManagedEstimationDetail entity = managedEstimationDetailRepository.findOne(401L);
+		ManagedEstimationDetail entity = managedEstimationDetailRepository.findById(401L).get();
 		ManagedEstimationDetailDto dto = new ManagedEstimationDetailDto();
 		ManagedEstimationDetailDto testTarget = new ManagedEstimationDetailDto();
 		BeanUtils.copyProperties(entity, dto);
@@ -2166,7 +2169,7 @@ public class TestContractDto {
 	@Test
 	public void ContractAttachedFileHistoryDtoのテスト() throws Exception {
 
-		ContractAttachedFileHistory entity = contractAttachedFileHistoryRepository.findOne(401L);
+		ContractAttachedFileHistory entity = contractAttachedFileHistoryRepository.findById(401L).get();
 		ContractAttachedFileHistoryDto dto = new ContractAttachedFileHistoryDto();
 		ContractAttachedFileHistoryDto testTarget = new ContractAttachedFileHistoryDto();
 
@@ -2210,7 +2213,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractAttachedFileLinkageDtoのテスト() throws Exception {
-		ContractAttachedFileLinkage entity = contractAttachedFileLinkageRepository.findOne(401L);
+		ContractAttachedFileLinkage entity = contractAttachedFileLinkageRepository.findById(401L).get();
 		ContractAttachedFileLinkageDto testTarget = new ContractAttachedFileLinkageDto();
 
 		// 正常系
@@ -2257,7 +2260,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractAssignmentDtoのテスト() throws Exception {
-		ContractAssignment entity = contractAssignmentRepository.findOne(401L);
+		ContractAssignment entity = contractAssignmentRepository.findById(401L).get();
 		ContractAssignmentDto testTarget = new ContractAssignmentDto();
 
 		// 正常系
@@ -2293,7 +2296,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractAssignmentAttachedFileDtoのテスト() throws Exception {
-		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findOne(401L);
+		ContractAssignmentAttachedFile entity = contractAssignmentAttachedFileRepository.findById(401L).get();
 		ContractAssignmentAttachedFileDto testTarget = new ContractAssignmentAttachedFileDto();
 		AttachedFileDto attachedFileDto = new AttachedFileDto();
 		BeanUtils.copyProperties(entity.getAttachedFile(), attachedFileDto);
@@ -2334,7 +2337,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractForFindAllDetailsBplatsDtoのテスト() throws Exception {
-		Contract entity = contractRepository.findOne(4L);
+		Contract entity = contractRepository.findById(4L).get();
 		ContractForFindAllDetailsBplatsDto testTarget = new ContractForFindAllDetailsBplatsDto();
 		ContractForFindAllDetailsBplatsDto dto = new ContractForFindAllDetailsBplatsDto();
 
@@ -2364,7 +2367,7 @@ public class TestContractDto {
 
 	@Test
 	public void ProductContractForFindAllDetailsBplatsDtoのテスト() throws Exception {
-		ProductContract entity = productContractRepository.findOne(401L);
+		ProductContract entity = productContractRepository.findById(401L).get();
 		ProductContractForFindAllDetailsBplatsDto testTarget = new ProductContractForFindAllDetailsBplatsDto();
 		BeanUtils.copyProperties(entity, testTarget);
 
@@ -2376,7 +2379,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractDetailForFindAllDetailsBplatsDtoのテスト() throws Exception {
-		ContractDetail entity = contractDetailRepository.findOne(401L);
+		ContractDetail entity = contractDetailRepository.findById(401L).get();
 		ContractDetailForFindAllDetailsBplatsDto dto = new ContractDetailForFindAllDetailsBplatsDto();
 		ContractDetailForFindAllDetailsBplatsDto testTarget = new ContractDetailForFindAllDetailsBplatsDto();
 		BeanUtils.copyProperties(entity, dto);
@@ -2393,7 +2396,7 @@ public class TestContractDto {
 
 	@Test
 	public void ItemContractDetailForFindAllDetailsBplatsDtoのテスト() throws Exception {
-		ItemContract entity = itemContractRepository.findOne(401L);
+		ItemContract entity = itemContractRepository.findById(401L).get();
 		ItemContractDetailForFindAllDetailsBplatsDto testTarget = new ItemContractDetailForFindAllDetailsBplatsDto();
 
 		// 正常系
@@ -2430,7 +2433,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractEquipmentNoIsysoneDtoのテスト() throws Exception {
-		ContractEquipmentNoIsysone entity = contractEquipmentNoIsysoneRepository.findOne(1L);
+		ContractEquipmentNoIsysone entity = contractEquipmentNoIsysoneRepository.findById(1L).get();
 		ContractEquipmentNoIsysoneDto testTarget = new ContractEquipmentNoIsysoneDto();
 
 		//正常系
@@ -2452,7 +2455,7 @@ public class TestContractDto {
 
 	@Test
 	public void ShippingAddressDtoのテスト() throws Exception {
-		ShippingAddress entity = shippingAddressRepository.findOne(4L);
+		ShippingAddress entity = shippingAddressRepository.findById(4L).get();
 		ShippingAddressDto testTarget = new ShippingAddressDto();
 
 		//正常系
@@ -2499,7 +2502,7 @@ public class TestContractDto {
 
 	@Test
 	public void ShippingAddressSsOrgDtoのテスト() throws Exception {
-		ShippingAddressSsOrg entity = shippingAddressSsOrgRepository.findOne(1L);
+		ShippingAddressSsOrg entity = shippingAddressSsOrgRepository.findById(1L).get();
 		ShippingAddressSsOrgDto testTarget = new ShippingAddressSsOrgDto();
 
 		//正常系
@@ -2527,7 +2530,7 @@ public class TestContractDto {
 
 	@Test
 	public void PenaltyDetailContractDtoのテスト() throws Exception {
-		PenaltyDetailContract entity = penaltyDetailContractRepository.findOne(4L);
+		PenaltyDetailContract entity = penaltyDetailContractRepository.findById(4L).get();
 		PenaltyDetailContractDto testTarget = new PenaltyDetailContractDto();
 
 		// 正常系
@@ -2593,7 +2596,7 @@ public class TestContractDto {
 
 	@Test
 	public void ContractEquipmentAdditionInfoDtoのテスト() throws Exception {
-		ContractEquipmentAdditionInfo entity = contractEquipmentAdditionInfoRepository.findOne(401L);
+		ContractEquipmentAdditionInfo entity = contractEquipmentAdditionInfoRepository.findById(401L).get();
 		ContractEquipmentAdditionInfoDto testTarget = new ContractEquipmentAdditionInfoDto();
 
 		// 正常系

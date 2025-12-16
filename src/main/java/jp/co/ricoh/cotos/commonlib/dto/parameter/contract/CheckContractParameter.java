@@ -1,8 +1,9 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.contract;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract;
 import lombok.Data;
 
@@ -12,10 +13,10 @@ import lombok.Data;
 @Data
 public class CheckContractParameter {
 	@Valid
-	@ApiParam(value = "契約", required = true)
+	@Parameter(description = "契約", required = true)
 	private Contract contract;
 
-	@ApiParam(value = "日付項目チェックフラグ", required = true, allowableValues = "true, false")
+	@Parameter(description = "日付項目チェックフラグ", required = true, schema = @Schema(allowableValues = { "true", "false" }))
 	private boolean checkDateFlg;
 
 }

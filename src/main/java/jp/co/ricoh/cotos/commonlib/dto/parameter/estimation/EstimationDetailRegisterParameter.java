@@ -2,16 +2,16 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.estimation;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Lob;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Lob;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -22,7 +22,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiParam(value = "ステータス", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "ステータス", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String status;
 
 	/**
@@ -30,14 +30,14 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiParam(value = "品種コード", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "品種コード", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String ricohItemCode;
 
 	/**
 	 * 品種名
 	 */
 	@Size(max = 255)
-	@ApiParam(value = "品種名", allowableValues = "range[0,255]", required = true)
+	@Parameter(description = "品種名", required = true, schema = @Schema(allowableValues = "range[0,255]"))
 	private String ricohItemName;
 
 	/**
@@ -45,7 +45,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "変更前数量", allowableValues = "range[-99999,99999]", required = false)
+	@Schema(description = "変更前数量", allowableValues = "range[-99999,99999]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer beforeQuantity;
 
 	/**
@@ -53,13 +53,13 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@Min(-99999)
 	@Max(99999)
-	@ApiParam(value = "数量", allowableValues = "range[-99999,99999]", required = true)
+	@Parameter(description = "数量", required = true, schema = @Schema(allowableValues = "range[-99999,99999]"))
 	private int quantity;
 
 	/**
 	 * 見積単価
 	 */
-	@ApiParam(value = "見積単価", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "見積単価", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal unitPrice;
 
 	/**
@@ -67,7 +67,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@NotNull
 	@Digits(integer = 19, fraction = 2)
-	@ApiParam(value = "見積金額", allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]", required = true)
+	@Parameter(description = "見積金額", required = true, schema = @Schema(allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]"))
 	private BigDecimal amountSummary;
 
 	/**
@@ -75,7 +75,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiParam(value = "R原価", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "R原価", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal rCost;
 
 	/**
@@ -83,7 +83,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiParam(value = "ＲＪ仕入価格", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "ＲＪ仕入価格", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal rjPurchasePrice;
 
 	/**
@@ -91,7 +91,7 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiParam(value = "ＲＪ仕切価格", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "ＲＪ仕切価格", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal rjDividingPrice;
 
 	/**
@@ -99,19 +99,19 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@DecimalMin("0.00")
 	@Digits(integer = 19, fraction = 2)
-	@ApiParam(value = "母店売価(接点店仕切)", allowableValues = "range[0.00,9999999999999999999.99]", required = true)
+	@Parameter(description = "母店売価(接点店仕切)", required = true, schema = @Schema(allowableValues = "range[0.00,9999999999999999999.99]"))
 	private BigDecimal motherStorePrice;
 
 	/**
 	 * 契約期間
 	 */
-	@ApiParam(value = "契約期間", required = false)
+	@Parameter(description = "契約期間", required = false)
 	private String contractSpan;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiParam(value = "拡張項目", required = false)
+	@Parameter(description = "拡張項目", required = false)
 	@Lob
 	private String extendsParameter;
 
@@ -120,13 +120,13 @@ public class EstimationDetailRegisterParameter {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "契約数", allowableValues = "range[-99999,99999]", required = false)
+	@Schema(description = "契約数", allowableValues = "range[-99999,99999]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer contractAmount;
 
 	/**
 	 * 価格改定前リコー品種コード
 	 */
 	@Size(max = 255)
-	@ApiParam(value = "価格改定前リコー品種コード", allowableValues = "range[0,255]", required = false)
+	@Parameter(description = "価格改定前リコー品種コード", required = false, schema = @Schema(allowableValues = "range[0,255]"))
 	private String bfPriceRevisionItemCode;
 }

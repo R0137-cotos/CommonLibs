@@ -3,15 +3,15 @@ package jp.co.ricoh.cotos.commonlib.dto.parameter.arrangementDelegation;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -48,28 +48,28 @@ public class IspArrangementResultRegistrationDto {
 	 * 手配業務ID
 	 */
 	@NotNull
-	@ApiModelProperty(value = "手配業務ID", required = true, position = 1)
+	@Schema(description = "手配業務ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String id;
 
 	/**
 	 * 手配結果コード
 	 */
 	@NotNull
-	@ApiModelProperty(value = "手配結果コード", required = true, position = 2)
+	@Schema(description = "手配結果コード", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ResultCode resultCode;
 
 	/**
 	 * エラー情報リスト
 	 */
 	@Valid
-	@ApiModelProperty(value = "エラー情報リスト", required = false, position = 3)
+	@Schema(description = "エラー情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<IspErrorInfo> errorList;
 
 	/**
 	 * IspUrlリスト
 	 */
 	@Valid
-	@ApiModelProperty(value = "IspUrlリスト", required = false, position = 4)
+	@Schema(description = "IspUrlリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<IspUrl> ispUrlList;
 
 }
