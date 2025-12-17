@@ -142,7 +142,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 原価（RJ仕入価格）
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@Schema(description = "原価（RJ仕入価格）", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal cost;
 
@@ -150,7 +150,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * Ｒ原価
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@Schema(description = "Ｒ原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private BigDecimal rCost;
 
