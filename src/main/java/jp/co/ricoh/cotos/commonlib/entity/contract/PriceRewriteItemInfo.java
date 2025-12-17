@@ -142,7 +142,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * 原価（RJ仕入価格）
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@ApiModelProperty(value = "原価（RJ仕入価格）", required = false, position = 5)
 	private BigDecimal cost;
 
@@ -150,7 +150,7 @@ public class PriceRewriteItemInfo extends EntityBase {
 	 * Ｒ原価
 	 */
 	@Column
-	@DecimalMax("9999999999999999999.99")
+	@DecimalMax("9999999999999999999.999")
 	@ApiModelProperty(value = "Ｒ原価", required = false, position = 6)
 	private BigDecimal rCost;
 
