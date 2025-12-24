@@ -142,9 +142,8 @@ public class EquipmentCompMaster extends EntityBaseMaster {
 	/**
 	 * 機種作成不要品種マスタID
 	 */
-	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "機種作成不要品種マスタID", required = true, position = 15, allowableValues = "range[0,255]")
+	@ApiModelProperty(value = "機種作成不要品種マスタID", required = false, position = 15, allowableValues = "range[0,255]")
 	private String equipmentCreateUnnecessaryItemMasterId;
 
 }
