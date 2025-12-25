@@ -131,8 +131,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db-aws.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_aws_eosl
-    password: cotos_ci_common_aws_eosl
+    username: cotos_ci_common_total_it_infra
+    password: cotos_ci_common_total_it_infra
     driverClassName: oracle.jdbc.OracleDriver
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
