@@ -663,3 +663,4 @@
 |706|次年度明細情報のみ価格書換実施に修正|
 |707|価格変化率修正|
 |708|FileOperationRelationProductMasterのcategoryTypeに14を追加|
+|709|FileOperationRelationProductMasterのcategoryType修正|
