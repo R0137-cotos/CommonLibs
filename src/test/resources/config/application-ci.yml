@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db-aws.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_aws_eosl
-    password: cotos_ci_common_aws_eosl
+    username: cotos_ci_common_backlog137_142
+    password: cotos_ci_common_backlog137_142
     driverClassName: oracle.jdbc.OracleDriver
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
@@ -14,4 +14,4 @@ spring:
         show_sql: true
         use_sql_comments: false
         format_sql: false
-        default_schema: cotos_ci_common_aws_eosl
+        default_schema: cotos_ci_common_backlog137_142
