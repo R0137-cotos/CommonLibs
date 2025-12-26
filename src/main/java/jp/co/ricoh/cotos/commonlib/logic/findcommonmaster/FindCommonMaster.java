@@ -1,6 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.logic.findcommonmaster;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -87,7 +88,15 @@ public class FindCommonMaster {
 	            List<CommonMasterDetail> part = commonMasterDetailRepository.findByCommonMasterIdIn(ids);
 	            merged.addAll(part);
 	        }
-			Map<Long, List<CommonMasterDetail>> detailMap = merged.stream().collect(Collectors.groupingBy(d -> d.getCommonMaster().getId()));
+			Map<Long, List<CommonMasterDetail>> detailMap = merged.stream().collect( //
+					Collectors.groupingBy( //
+							d -> d.getCommonMaster().getId(), //
+							Collectors.collectingAndThen( //
+									Collectors.toList(), //
+									detailList -> detailList.stream().sorted(Comparator.comparing(CommonMasterDetail::getDisplayOrder)).toList() //
+									)
+							)
+					);
 
 			commonMasterList.stream().forEach(commonMaster -> {
 				CommonMasterResult result = new CommonMasterResult();
