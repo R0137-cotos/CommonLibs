@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,18 +172,20 @@ public class FindCommonMaster {
 	 */
 	private List<CommonMasterDetailResult> createCommonMasterDetailResult(List<CommonMasterDetail> detailList) {
 		List<CommonMasterDetailResult> list = new ArrayList<>();
-		detailList.stream().forEach(detail -> {
-			CommonMasterDetailResult detailResult = new CommonMasterDetailResult();
-			detailResult.setCodeValue(detail.getCodeValue());
-			detailResult.setDisplayValue(detail.getDisplayValue());
-			detailResult.setDataArea1(detail.getDataArea1());
-			detailResult.setDataArea2(detail.getDataArea2());
-			detailResult.setDataArea3(detail.getDataArea3());
-			detailResult.setDataArea4(detail.getDataArea4());
-			detailResult.setDataArea5(detail.getDataArea5());
-			detailResult.setDisplayOrder(detail.getDisplayOrder());
-			list.add(detailResult);
-		});
+		if (CollectionUtils.isNotEmpty(detailList)) {
+			detailList.stream().forEach(detail -> {
+				CommonMasterDetailResult detailResult = new CommonMasterDetailResult();
+				detailResult.setCodeValue(detail.getCodeValue());
+				detailResult.setDisplayValue(detail.getDisplayValue());
+				detailResult.setDataArea1(detail.getDataArea1());
+				detailResult.setDataArea2(detail.getDataArea2());
+				detailResult.setDataArea3(detail.getDataArea3());
+				detailResult.setDataArea4(detail.getDataArea4());
+				detailResult.setDataArea5(detail.getDataArea5());
+				detailResult.setDisplayOrder(detail.getDisplayOrder());
+				list.add(detailResult);
+			});
+		}
 		return list;
 	}
 
