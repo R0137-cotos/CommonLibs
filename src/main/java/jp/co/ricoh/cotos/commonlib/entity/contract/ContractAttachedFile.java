@@ -42,7 +42,7 @@ import lombok.EqualsAndHashCode;
  * 契約添付ファイルを表すEntity
  */
 @Entity
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude={"contractAttachedFileLinkageList"})
 @EntityListeners(ContractAttachedFileListener.class)
 @Data
 @Table(name = "contract_attached_file")
