@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -80,30 +80,30 @@ public class ApprovalAlertManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_alert_management_master_seq")
 	@SequenceGenerator(name = "approval_alert_management_master_seq", sequenceName = "approval_alert_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "承認アラート管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "承認アラート管理マスタID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * アラート対象日区分
 	 */
-	@ApiModelProperty(value = "アラート対象日区分",  position = 2, required = true, allowableValues = "サービス利用希望日(\"1\"), 解約予定日(\"2\")")
+	@Schema(description = "アラート対象日区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "サービス利用希望日(\"1\"), 解約予定日(\"2\")")
 	private AlertTargetDateType alertTargetDateType;
 
 	/**
 	 * アラート基準日
 	 */
-	@ApiModelProperty(value = "アラート基準日", required = true, position = 3, allowableValues = "range[0,99]")
+	@Schema(description = "アラート基準日", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,99]")
 	private int alertBaseDate;
 
 	/**
 	 * アラートメッセージ
 	 */
-	@ApiModelProperty(value = "アラートメッセージ", required = true, position = 4)
+	@Schema(description = "アラートメッセージ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String alertMessage;
 
 	/**
 	 * アラート基準日区分
 	 */
-	@ApiModelProperty(value = "アラート基準日区分",  position = 2, required = true, allowableValues = "当月(\"0\"), 前月(\"1\")")
+	@Schema(description = "アラート基準日区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "当月(\"0\"), 前月(\"1\")")
 	private AlertBaseDateType alertBaseDateType;
 }

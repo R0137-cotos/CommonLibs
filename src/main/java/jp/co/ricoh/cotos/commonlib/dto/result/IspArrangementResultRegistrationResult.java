@@ -2,7 +2,7 @@ package jp.co.ricoh.cotos.commonlib.dto.result;
 
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -14,7 +14,7 @@ public class IspArrangementResultRegistrationResult {
 	/**
 	 * エラー情報リスト
 	 */
-	@ApiModelProperty(value = "エラー情報リスト", required = false, position = 1)
+	@Schema(description = "エラー情報リスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<IspErrorInfoResult> errorInfoList;
 
 }
