@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -14,6 +14,6 @@ public class EstimationVupSearchParameter {
 	 * 見積番号＋見積番号枝番(ハイフン繋ぎ)
 	 */
 	@NotNull
-	@ApiModelProperty(value = "見積番号＋見積番号枝番(ハイフン繋ぎ)", required = true, position = 1)
+	@Schema(description = "見積番号＋見積番号枝番(ハイフン繋ぎ)", required = true)
 	private List<String> estimationNumberList;
 }

@@ -17,16 +17,14 @@ pipeline {
             echo "PR作成者： ${env.CHANGE_AUTHOR}"
             echo "Forkリポジトリ： ${env.CHANGE_FORK}"
             echo "PRブランチ： ${env.CHANGE_BRANCH}"
-            echo "ターゲットブランチ： ${env.CHANGE_TARGET}" 
+            echo "ターゲットブランチ： ${env.CHANGE_TARGET}"
             try {
               sh "gradle clean"
-              if ("${env.CHANGE_TARGET}" == 'master') {
-                sh "export SPRING_PROFILES_ACTIVE=ci_master"
-              } else {
-                sh "export SPRING_PROFILES_ACTIVE=ci"
-              }
+              def springProfileActive = "${env.CHANGE_TARGET}" == 'master' ? 'ci_master' : 'ci'
               def gradleTestOption = "${env.GRADLE_TEST_OPTION}"
-              sh "gradle ${gradleTestOption} test"
+              withEnv(["SPRING_PROFILES_ACTIVE=${springProfileActive}"]) {
+                sh "gradle ${gradleTestOption} test"
+              }
               notifyStatus('success', 'All tests passed.', "${GITHUB_TOKEN}")
             } catch (e) {
               notifyStatus('failure', 'Some tests failed.', "${GITHUB_TOKEN}")

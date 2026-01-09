@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.json.JsonEnumType.ContractTypeDetails;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.contract.Contract.ContractType;
@@ -67,7 +67,7 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arrangement_wk_mt_order_seq")
 	@SequenceGenerator(name = "arrangement_wk_mt_order_seq", sequenceName = "arrangement_wk_mt_order_seq", allocationSize = 1)
-	@ApiModelProperty(value = "手配業務完了順マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "手配業務完了順マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -76,7 +76,7 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "商品マスタ", required = true, position = 2)
+	@Schema(description = "商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
@@ -84,7 +84,7 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "契約種別", required = true, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")", position = 3)
+	@Schema(description = "契約種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "新規(\"1\"), 契約変更(\"2\"), 情報変更(\"3\"), 契約更新(\"4\")")
 	private ContractType contractType;
 
 	/**
@@ -93,7 +93,7 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "解約フラグ", required = true, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "解約フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9]")
 	private int disengagementFlg;
 
 	/**
@@ -102,14 +102,14 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "arrangement_wk_type_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "手配業務タイプマスタ", required = true, position = 5)
+	@Schema(description = "手配業務タイプマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ArrangementWorkTypeMaster arrangementWorkTypeMaster;
 
 	/**
 	 * 先実行手配業務タイプマスタID配列
 	 */
 	@Column(nullable = true)
-	@ApiModelProperty(value = "先実行手配業務タイプマスタID配列", required = true, position = 6)
+	@Schema(description = "先実行手配業務タイプマスタID配列", requiredMode = Schema.RequiredMode.REQUIRED)
 	@Lob
 	private String befArrangementWkTypeArray;
 
@@ -117,13 +117,13 @@ public class ArrangementWorkOrderMaster extends EntityBaseMaster {
 	 * チェックタイミング区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "チェックタイミング区分", required = true, allowableValues = "業務受付時(\"0\"), 業務完了時(\"1\")", position = 7)
+	@Schema(description = "チェックタイミング区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "業務受付時(\"0\"), 業務完了時(\"1\")")
 	private CheckTimingType checkTimingType;
 
 	/**
 	 * 契約種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "契約種別種別", required = false, allowableValues = "新規(\"1\"), 契約更新(\"2\"), 再契約(\"3\"), アップグレード(\"4\"), メニュー変更(\"5\"), 基本プラン減数(\"6\"), プラン_オプション_減数_削除(\"7\"), オプション_追加_増数(\"8\"), オプション_追加_減数(\"9\"), 自動更新(\"10\"), 支払周期変更(\"26\")", position = 8)
+	@Schema(description = "契約種別種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "新規(\"1\"), 契約更新(\"2\"), 再契約(\"3\"), アップグレード(\"4\"), メニュー変更(\"5\"), 基本プラン減数(\"6\"), プラン_オプション_減数_削除(\"7\"), オプション_追加_増数(\"8\"), オプション_追加_減数(\"9\"), 自動更新(\"10\"), 支払周期変更(\"26\")")
 	private ContractTypeDetails contractTypeDetail;
 }

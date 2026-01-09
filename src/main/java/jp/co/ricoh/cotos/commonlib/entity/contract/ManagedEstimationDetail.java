@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.DetailStatus;
 import jp.co.ricoh.cotos.commonlib.entity.estimation.EstimationDetail.IncreaseDecreaseDiv;
@@ -36,7 +36,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "managed_estimation_detail_seq")
 	@SequenceGenerator(name = "managed_estimation_detail_seq", sequenceName = "managed_estimation_detail_seq", allocationSize = 1)
-	@ApiModelProperty(value = "見積明細管理ID(作成時不要)", required = true, position = 1, readOnly = true)
+	@Schema(description = "見積明細管理ID(作成時不要)", required = true, readOnly = true)
 	private long id;
 
 	/**
@@ -44,7 +44,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private Contract contract;
 
@@ -53,7 +53,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "状態", required = true, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1", position = 3)
+	@Schema(description = "状態", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "NOUPDATE(\"1\"), ADD(\"2\"), DELETE(\"3\"), UPDATE(\"4\")", example = "1")
 	private DetailStatus state;
 
 	/**
@@ -61,7 +61,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "変更前数量", required = false, position = 4, allowableValues = "range[-99999,99999]")
+	@Schema(description = "変更前数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer beforeQuantity;
 
 	/**
@@ -70,7 +70,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "数量", required = true, position = 5, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[-99999,99999]")
 	private int quantity;
 
 	/**
@@ -79,7 +79,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "見積単価", required = true, position = 6, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "見積単価", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal estimationUnitPrice;
 
 	/**
@@ -88,21 +88,21 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "見積金額", required = true, position = 7, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "見積金額", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal estimationAmountSummary;
 
 	/**
 	 * 摘要
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "摘要", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "摘要", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String detailAbstract;
 
 	/**
 	 * 拡張項目
 	 */
 	@Lob
-	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String extendsParameter;
 
 	/**
@@ -110,7 +110,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "品種マスタID", required = true, position = 10, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "品種マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long itemMasterId;
 
 	/**
@@ -119,7 +119,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "リコー品種コード", required = true, position = 11, allowableValues = "range[0,255]")
+	@Schema(description = "リコー品種コード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String ricohItemCode;
 
 	/**
@@ -127,7 +127,7 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "メーカー商品コード", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "メーカー商品コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String makerItemCode;
 
 	/**
@@ -135,12 +135,12 @@ public class ManagedEstimationDetail extends EntityBase {
 	 */
 	@Column(nullable = true)
 	@DecimalMax("9999999999999999999.99")
-	@ApiModelProperty(value = "変更前単価", required = false, position = 13, allowableValues = "range[0.00,9999999999999999999.99]")
+	@Schema(description = "変更前単価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0.00,9999999999999999999.99]")
 	private BigDecimal beforeUnitPrice;
 
 	/**
 	 * 増減区分
 	 */
-	@ApiModelProperty(value = "増減区分", required = false, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1", position = 14)
+	@Schema(description = "増減区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "増数(\"1\"), 減数(\"2\")", example = "1")
 	private IncreaseDecreaseDiv increaseDecreaseDiv;
 }

@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
@@ -42,7 +42,7 @@ public class Contact extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_seq")
 	@SequenceGenerator(name = "contact_seq", sequenceName = "contact_seq", allocationSize = 1)
-	@ApiModelProperty(value = "問い合わせID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "問い合わせID (作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -50,7 +50,7 @@ public class Contact extends EntityBase {
 	 */
 	@Min(0)
 	@Column(nullable = false)
-	@ApiModelProperty(value = "見積ID", required = true, position = 2, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long estimationId;
 
 	/**
@@ -59,7 +59,7 @@ public class Contact extends EntityBase {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "parent_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "親問い合わせ", required = false, position = 3)
+	@Schema(description = "親問い合わせ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Contact parent;
 
 	/**
@@ -67,7 +67,7 @@ public class Contact extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "parent")
-	@ApiModelProperty(value = "子問い合わせリスト", required = false, position = 4)
+	@Schema(description = "子問い合わせリスト", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<Contact> children;
 
 	/**
@@ -76,26 +76,26 @@ public class Contact extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "送信者MoM社員ID", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "送信者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String contactFromEmpId;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@ApiModelProperty(value = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1", position = 6)
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * タイトル
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "タイトル", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "タイトル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String title;
 
 	/**
 	 * 内容
 	 */
-	@ApiModelProperty(value = "内容", required = false, position = 8)
+	@Schema(description = "内容", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String content;
 
@@ -103,7 +103,7 @@ public class Contact extends EntityBase {
 	 * 送信日時
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "送信日時 (作成時不要)", required = true, position = 9, readOnly = true)
+	@Schema(description = "送信日時 (作成時不要)", required = true, readOnly = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date sendAt;
 
@@ -111,7 +111,7 @@ public class Contact extends EntityBase {
 	 * 送信者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "送信者氏名", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "送信者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contactFromEmpName;
 
 	/**
@@ -120,14 +120,14 @@ public class Contact extends EntityBase {
 	@Valid
 	@OneToMany(mappedBy = "contact")
 	@NotNull
-	@ApiModelProperty(value = "宛先", required = true, position = 11)
+	@Schema(description = "宛先", requiredMode = Schema.RequiredMode.REQUIRED)
 	private List<ContactTo> contactToList;
 
 	/**
 	 * アプリケーションID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "アプリケーションID", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "アプリケーションID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String appId;
 
 	@PrePersist

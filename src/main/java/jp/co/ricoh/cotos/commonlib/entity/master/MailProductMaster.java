@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,7 +36,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_product_master_seq")
 	@SequenceGenerator(name = "mail_product_master_seq", sequenceName = "mail_product_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "通知メール対象商材マスタID", required = true, position = 1)
+	@Schema(description = "通知メール対象商材マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long id;
 
 	/**
@@ -51,7 +51,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	 * 対象マスタ区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "対象マスタ区分", required = true, position = 1, allowableValues = "range[0,]")
+	@Schema(description = "対象マスタ区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,]")
 	@Enumerated(EnumType.STRING)
 	private TargetMasterType targetMasterType;
 
@@ -59,7 +59,7 @@ public class MailProductMaster extends EntityBaseMaster {
 	 * 対象マスタID
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "対象マスタID", required = true, position = 2)
+	@Schema(description = "対象マスタID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long targetMasterId;
 
 	/**

@@ -1,7 +1,7 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -14,162 +14,162 @@ public class ElconDocumentRegistrationParameter {
 	/**
 	 * ファイル名
 	 */
-	@ApiParam(value = "ファイル名", required = true)
-	@ApiModelProperty(value = "ファイル名", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "ファイル名", required = true)
+	@Schema(description = "ファイル名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileName;
 
 	/**
 	 * 対象pdf
 	 */
-	@ApiParam(value = "対象pdf", required = true)
-	@ApiModelProperty(value = "対象pdf", required = true)
+	@Parameter(description = "対象pdf", required = true)
+	@Schema(description = "対象pdf", requiredMode = Schema.RequiredMode.REQUIRED)
 	private byte[] targetPdf;
 
 	/**
 	 * vup契約No
 	 */
-	@ApiParam(value = "vup契約No", required = true)
-	@ApiModelProperty(value = "vup契約No", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "vup契約No", required = true)
+	@Schema(description = "vup契約No", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String vupContractNo;
 
 	/**
 	 * vup見積No
 	 */
-	@ApiParam(value = "vup見積No", required = true)
-	@ApiModelProperty(value = "vup見積No", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "vup見積No", required = true)
+	@Schema(description = "vup見積No", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String vupEstimatesNo;
 
 	/**
 	 * 案件名
 	 */
-	@ApiParam(value = "案件名", required = true)
-	@ApiModelProperty(value = "案件名", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "案件名", required = true)
+	@Schema(description = "案件名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String anknMi;
 
 	/**
 	 * 案件番号
 	 */
-	@ApiParam(value = "案件番号", required = false)
-	@ApiModelProperty(value = "案件番号", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "案件番号", required = false)
+	@Schema(description = "案件番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String anknNumber;
 
 	/**
 	 * 販社CD
 	 */
-	@ApiParam(value = "販社CD", required = true)
-	@ApiModelProperty(value = "販社CD", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "販社CD", required = true)
+	@Schema(description = "販社CD", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String hanshaCd;
 
 	/**
 	 * 担当SA統合ID
 	 */
-	@ApiParam(value = "担当SA統合ID", required = true)
-	@ApiModelProperty(value = "担当SA統合ID", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "担当SA統合ID", required = true)
+	@Schema(description = "担当SA統合ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String saId;
 
 	/**
 	 * お客様コード
 	 */
-	@ApiParam(value = "お客様コード", required = false)
-	@ApiModelProperty(value = "お客様コード", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "お客様コード", required = false)
+	@Schema(description = "お客様コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerCode;
 
 	/**
 	 * 企業名
 	 */
-	@ApiParam(value = "企業名", required = true)
-	@ApiModelProperty(value = "企業名", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "企業名", required = true)
+	@Schema(description = "企業名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String customerName;
 
 	/**
 	 * お客様事業所コード
 	 */
-	@ApiParam(value = "お客様事業所コード", required = false)
-	@ApiModelProperty(value = "お客様事業所コード", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "お客様事業所コード", required = false)
+	@Schema(description = "お客様事業所コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerOfficeCode;
 
 	/**
 	 * IM管理番号
 	 */
-	@ApiParam(value = "IM管理番号", required = true)
-	@ApiModelProperty(value = "IM管理番号", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "IM管理番号", required = true)
+	@Schema(description = "IM管理番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String imfrSdInsertId;
 
 	/**
 	 * IM行番号
 	 */
-	@ApiParam(value = "IM行番号", required = true)
-	@ApiModelProperty(value = "IM行番号", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "IM行番号", required = true)
+	@Schema(description = "IM行番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String imfrSdRowNo;
 
 	/**
 	 * 初期費用総計
 	 */
-	@ApiParam(value = "初期費用総計", required = false)
-	@ApiModelProperty(value = "初期費用総計", required = false)
+	@Parameter(description = "初期費用総計", required = false)
+	@Schema(description = "初期費用総計", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String totalInitialCosts;
 
 	/**
 	 * 月額総計
 	 */
-	@ApiParam(value = "月額総計", required = false)
-	@ApiModelProperty(value = "月額総計", required = false)
+	@Parameter(description = "月額総計", required = false)
+	@Schema(description = "月額総計", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String monthlyTotal;
 
 	/**
 	 * 年額総計
 	 */
-	@ApiParam(value = "年額総計", required = false)
-	@ApiModelProperty(value = "年額総計", required = false)
+	@Parameter(description = "年額総計", required = false)
+	@Schema(description = "年額総計", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String annualTotal;
 
 	/**
 	 * 正式帳票名
 	 */
-	@ApiParam(value = "正式帳票名", required = false)
-	@ApiModelProperty(value = "正式帳票名", required = false, allowableValues = "range[0,255]")
+	@Parameter(description = "正式帳票名", required = false)
+	@Schema(description = "正式帳票名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String reportName;
 
 	/**
 	 * 利用開始希望日入力制御フラグ
 	 */
-	@ApiParam(value = "利用開始希望日入力制御フラグ", required = true)
-	@ApiModelProperty(value = "利用開始希望日入力制御フラグ", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "利用開始希望日入力制御フラグ", required = true)
+	@Schema(description = "利用開始希望日入力制御フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String startDatePrintFlag;
 
 	/**
 	 * 担当者印字フラグ
 	 */
-	@ApiParam(value = "担当者印字フラグ", required = true)
-	@ApiModelProperty(value = "担当者印字フラグ", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "担当者印字フラグ", required = true)
+	@Schema(description = "担当者印字フラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String customerPrintFlag;
 
 	/**
 	 * 見積番号
 	 */
-	@ApiParam(value = "見積番号", required = true)
-	@ApiModelProperty(value = "見積番号", required = true, allowableValues = "range[0,255]")
+	@Parameter(description = "見積番号", required = true)
+	@Schema(description = "見積番号", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String estimationNumber;
 
 	/**
 	 * 見積番号枝番
 	 */
-	@ApiParam(value = "見積番号枝番", required = true)
-	@ApiModelProperty(value = "見積番号枝番", required = true)
+	@Parameter(description = "見積番号枝番", required = true)
+	@Schema(description = "見積番号枝番", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String estimationBranchNumber;
 
 	/**
 	 * 見積件名
 	 */
-	@ApiParam(value = "見積件名", required = false)
-	@ApiModelProperty(value = "見積件名", required = false)
+	@Parameter(description = "見積件名", required = false)
+	@Schema(description = "見積件名", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String estimationTitle;
 
 	/**
 	 * 見積ID
 	 */
-	@ApiParam(value = "見積ID", required = false)
-	@ApiModelProperty(value = "見積ID", required = false)
+	@Parameter(description = "見積ID", required = false)
+	@Schema(description = "見積ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long estimationId;
 }
 

@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,7 +31,7 @@ public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attached_file_product_class_check_master_seq")
 	@SequenceGenerator(name = "attached_file_product_class_check_master_seq", sequenceName = "attached_file_product_class_check_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "添付ファイル商品種類毎チェックマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "添付ファイル商品種類毎チェックマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -39,7 +39,7 @@ public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "商品種類区分", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "商品種類区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String productClassDiv;
 
 	/**
@@ -47,21 +47,21 @@ public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ドメイン", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ドメイン", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String domain;
 
 	/**
 	 * 見積/契約種別
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "見積/契約種別", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "見積/契約種別", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String estimationContractType;
 
 	/**
 	 * ライフサイクル状態
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライフサイクル状態", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "ライフサイクル状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String lifecycleStatus;
 
 	/**
@@ -69,27 +69,27 @@ public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ファイル種類", required = true, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "ファイル種類", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String fileKind;
 
 	/**
 	 * チェック除外商品グループマスタID
 	 */
-	@ApiModelProperty(value = "チェック除外商品グループマスタID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "チェック除外商品グループマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String excludeProductGrpMasterId;
 
 	/**
 	 * 手配業務タイプマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "手配業務タイプマスタID", required = false, position = 8, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "手配業務タイプマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long arrangementWorkTypeMasterId;
 
 	/**
 	 * 拡張子
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "拡張子", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "拡張子", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String extension;
 
 	/**
@@ -97,6 +97,6 @@ public class AttachedFileProductClassCheckMaster extends EntityBaseMaster {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "V-UP連携チェック除外フラグ", required = false, position = 10, allowableValues = "range[0,9]")
+	@Schema(description = "V-UP連携チェック除外フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer vupLinkageCheckExcludeFlg;
 }
