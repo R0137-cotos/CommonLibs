@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -84,7 +84,7 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "approval_route_node_master_seq")
 	@SequenceGenerator(name = "approval_route_node_master_seq", sequenceName = "approval_route_node_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "承認ルートノードマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "承認ルートノードマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -93,53 +93,53 @@ public class ApprovalRouteNodeMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "approval_route_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "承認ルートマスタ", required = true, position = 2)
+	@Schema(description = "承認ルートマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ApprovalRouteMaster approvalRouteMaster;
 
 	/**
 	 * 承認順
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "承認順", required = true, position = 3, allowableValues = "range[0,999]")
+	@Schema(description = "承認順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int approvalOrder;
 
 	/**
 	 * 承認者種別
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "承認者種別", required = true, allowableValues = "メイン承認者(\"1\"), 代理承認者(\"2\")", example = "1", position = 4)
+	@Schema(description = "承認者種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "メイン承認者(\"1\"), 代理承認者(\"2\")", example = "1")
 	private ApproverClass approverClass;
 
 	/**
 	 * 承認者導出方式区分
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "承認者導出方式区分", required = true, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1", position = 5)
+	@Schema(description = "承認者導出方式区分", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1")
 	private ApproverDeriveMethodDiv approverDeriveMethodDiv;
 
 	/**
 	 * 組織階層レベル
 	 */
-	@ApiModelProperty(value = "組織階層レベル", required = false, position = 6, allowableValues = "range[0,9]")
+	@Schema(description = "組織階層レベル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer hierarchyLevel;
 
 	/**
 	 * MoM組織ID
 	 */
-	@ApiModelProperty(value = "MoM組織ID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "MoM組織ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momOrgId;
 
 	/**
 	 * MoM社員ID
 	 */
-	@ApiModelProperty(value = "MoM社員ID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "MoM社員ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String momEmpId;
 
 	/**
 	 * グループコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "グループコード", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "グループコード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String groupCode;
 
 }

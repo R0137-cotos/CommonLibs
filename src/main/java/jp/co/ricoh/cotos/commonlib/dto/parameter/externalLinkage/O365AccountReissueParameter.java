@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -12,6 +12,6 @@ public class O365AccountReissueParameter {
 	/**
 	 * メールアドレス
 	 */
-	@ApiModelProperty(value = "メールアドレス", required = true, allowableValues = "range[0,255]", position = 1)
+	@Schema(description = "メールアドレス", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String mailAddress;
 }

@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,9 +24,9 @@ public class PublicHolidayMaster extends EntityBaseMaster {
 
 	@Id
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "祝日日付", required = true, position = 1)
+	@Schema(description = "祝日日付", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Date holidayDate;
 
-	@ApiModelProperty(value = "祝日名称", required = false, position = 2)
+	@Schema(description = "祝日名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private String holidayName;
 }
