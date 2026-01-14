@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ApprovalProcessCategory;
 import lombok.Data;
@@ -39,7 +39,7 @@ public class EstimationApprovalResult extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estimation_approval_result_seq")
 	@SequenceGenerator(name = "estimation_approval_result_seq", sequenceName = "estimation_approval_result_seq", allocationSize = 1)
-	@ApiModelProperty(value = "見積承認実績ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]", readOnly = true)
+	@Schema(description = "見積承認実績ID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]", readOnly = true)
 	private long id;
 
 	/**
@@ -47,14 +47,14 @@ public class EstimationApprovalResult extends EntityBase {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "estimation_approval_route_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "見積承認ルート", required = true, position = 2)
+	@Schema(description = "見積承認ルート", requiredMode = Schema.RequiredMode.REQUIRED)
 	@JsonIgnore
 	private EstimationApprovalRoute estimationApprovalRoute;
 
 	/**
 	 * 見積承認ルートノードID
 	 */
-	@ApiModelProperty(value = "見積承認ルートノードID", required = false, position = 3)
+	@Schema(description = "見積承認ルートノードID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long estimationApprovalRouteNodeId;
 
 	/**
@@ -62,7 +62,7 @@ public class EstimationApprovalResult extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "承認処理カテゴリー", required = true, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\")", example = "1", position = 4)
+	@Schema(description = "承認処理カテゴリー", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "承認依頼(\"1\"), 承認依頼差戻(\"2\"), 承認(\"3\"), 承認依頼取消(\"4\")", example = "1")
 	private ApprovalProcessCategory approvalProcessCategory;
 
 	/**
@@ -71,7 +71,7 @@ public class EstimationApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理実施者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String actualEmpId;
 
 	/**
@@ -80,28 +80,28 @@ public class EstimationApprovalResult extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理実施者社員名", required = true, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者社員名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String actualUserName;
 
 	/**
 	 * 処理実施者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "処理実施者組織名", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "処理実施者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String actualOrgName;
 
 	/**
 	 * コメント
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "コメント", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "コメント", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String requestComment;
 
 	/**
 	 * 実施日時
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "実施日時(作成時不要)", required = true, position = 9, readOnly = true)
+	@Schema(description = "実施日時(作成時不要)", required = true, readOnly = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date processedAt;
 

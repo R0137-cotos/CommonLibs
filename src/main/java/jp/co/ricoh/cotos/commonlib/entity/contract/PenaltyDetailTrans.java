@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.InitialRunningDiv;
 import lombok.Data;
@@ -37,7 +37,7 @@ public class PenaltyDetailTrans extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "penalty_detail_trans_seq")
 	@SequenceGenerator(name = "penalty_detail_trans_seq", sequenceName = "penalty_detail_trans_seq", allocationSize = 1)
-	@ApiModelProperty(value = "違約金明細振替ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "違約金明細振替ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -45,21 +45,21 @@ public class PenaltyDetailTrans extends EntityBase {
 	 */
 	@DecimalMin("-9999999999999999999.99")
 	@Digits(integer = 19, fraction = 2)
-	@ApiModelProperty(value = "原価", required = false, position = 2, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
+	@Schema(description = "原価", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-9999999999999999999.99,9999999999999999999.99]")
 	private BigDecimal price;
 
 	/**
 	 * 振替先課所コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "振替先課所コード", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transToServiceOrgCode;
 
 	/**
 	 * 振替先課所名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "振替先課所名", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "振替先課所名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String transToServiceOrgName;
 
 	/**
@@ -68,12 +68,12 @@ public class PenaltyDetailTrans extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "penalty_detail_contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "違約金明細", required = true, position = 5)
+	@Schema(description = "違約金明細", requiredMode = Schema.RequiredMode.REQUIRED)
 	private PenaltyDetailContract penaltyDetailContract;
 
 	/**
 	 * イニシャル/ランニング区分
 	 */
-	@ApiModelProperty(value = "イニシャル/ランニング区分", required = false, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", example = "1", position = 6)
+	@Schema(description = "イニシャル/ランニング区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "イニシャル(\"1\"), ランニング(\"2\"), 期間売(\"3\")", example = "1")
 	private InitialRunningDiv initialRunningDiv;
 }

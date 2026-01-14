@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,20 +35,20 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_management_master_seq")
 	@SequenceGenerator(name = "menu_management_master_seq", sequenceName = "menu_management_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "メニュー管理マスタID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "メニュー管理マスタID(作成時不要)", required = true, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * メニュー名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メニュー名", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "メニュー名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String menuName;
 
 	/**
 	 * 権限
 	 */
-	@ApiModelProperty(value = "権限", required = false, position = 3)
+	@Schema(description = "権限", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String auth;
 
@@ -58,20 +58,20 @@ public class MenuManagementMaster extends EntityBaseMaster {
 	@Column(nullable = false)
 	@Max(999)
 	@Min(0)
-	@ApiModelProperty(value = "順序", required = true, position = 4, allowableValues = "range[0,999]")
+	@Schema(description = "順序", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int orderNumber;
 
 	/**
 	 * URL
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "URL", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "URL", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String url;
 
 	/**
 	 * メニュー明細管理マスタリスト
 	 */
 	@OneToMany(mappedBy = "menuManagementMaster")
-	@ApiModelProperty(value = "メニュー明細管理マスタ", required = false, position = 6)
+	@Schema(description = "メニュー明細管理マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<MenuDetailsManagementMaster> menuDetailsManagementMasterList;
 }

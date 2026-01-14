@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.LicenseStatus;
 import lombok.Data;
@@ -41,7 +41,7 @@ public class LicenseKeyInfo extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_key_info_seq")
 	@SequenceGenerator(name = "license_key_info_seq", sequenceName = "license_key_info_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ライセンスキー情報ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ライセンスキー情報ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -50,14 +50,14 @@ public class LicenseKeyInfo extends EntityBase {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "license_account_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "ライセンスアカウント", required = true, position = 2)
+	@Schema(description = "ライセンスアカウント", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LicenseAccount licenseAccount;
 
 	/**
 	 * ライセンスサービスID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスサービスID", required = true, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスサービスID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String licenseServiceId;
 
 	/**
@@ -65,27 +65,27 @@ public class LicenseKeyInfo extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@Size(max = 255)
-	@ApiModelProperty(value = "ライセンスキー", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンスキー", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String licenseKey;
 
 	/**
 	 * ライセンス状態
 	 */
-	@ApiModelProperty(value = "ライセンス状態", required = false, position = 5, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
+	@Schema(description = "ライセンス状態", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "未確定(\"0\"), 有効(\"1\"), 解約(\"2\")")
 	private LicenseStatus licenseStatus;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 6)
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermStart;
 
 	/**
 	 * ライセンス終了日
 	 */
 	@Temporal(TemporalType.DATE)
-	@ApiModelProperty(value = "ライセンス終了日", required = false, position = 7)
+	@Schema(description = "ライセンス終了日", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Date licenseTermEnd;
 
 	/**
@@ -93,13 +93,13 @@ public class LicenseKeyInfo extends EntityBase {
 	 */
 	@Max(99999)
 	@Min(-99999)
-	@ApiModelProperty(value = "数量", required = false, position = 8, allowableValues = "range[-99999,99999]")
+	@Schema(description = "数量", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[-99999,99999]")
 	private Integer quantity;
 
 	/**
 	 * 拡張項目
 	 */
-	@ApiModelProperty(value = "拡張項目", required = false, position = 9)
+	@Schema(description = "拡張項目", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Lob
 	private String extendsParameter;
 
@@ -107,6 +107,6 @@ public class LicenseKeyInfo extends EntityBase {
 	 * ライセンス区分マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "ライセンス区分マスタID", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "ライセンス区分マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private long licenseDivMasterId;
 }
