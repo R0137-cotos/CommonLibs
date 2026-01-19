@@ -131,8 +131,8 @@ cotos:
 spring:
   datasource:
     url: jdbc:oracle:thin:@dev-db-aws.cotos.ricoh.co.jp:1521/pdb1
-    username: cotos_ci_common_release_0122
-    password: cotos_ci_common_release_0122
+    username: cotos_ci_commonlibs
+    password: cotos_ci_commonlibs
     driverClassName: oracle.jdbc.OracleDriver
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
@@ -144,7 +144,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-        default_schema: cotos_ci_common_release_0122
+        default_schema: cotos_ci_commonlibs
         proc:
           param_null_passing: true
         enable_lazy_load_no_trans: true
