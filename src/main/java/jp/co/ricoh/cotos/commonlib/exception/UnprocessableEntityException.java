@@ -2,9 +2,9 @@ package jp.co.ricoh.cotos.commonlib.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-public class UnprocessableeEntityException extends ResponseStatusException {
+public class UnprocessableEntityException extends ResponseStatusException {
 
-    public UnprocessableeEntityException(HttpStatus status, String reason) {
+    public UnprocessableEntityException(HttpStatus status, String reason) {
         super(status, reason);
     }
 }
