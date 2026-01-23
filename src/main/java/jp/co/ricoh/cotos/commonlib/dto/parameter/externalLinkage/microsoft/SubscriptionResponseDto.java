@@ -188,6 +188,6 @@ public class SubscriptionResponseDto extends ResourceBaseWithSubscriptionLinks {
 	/*
 	 *
 	 */
-	private ScheduledActionsDto ScheduledActions;
+	private ScheduledActionsDto scheduledActions;
 
 }
