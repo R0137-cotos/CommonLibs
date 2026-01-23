@@ -1,11 +1,8 @@
 package jp.co.ricoh.cotos.commonlib.buildInfo;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Objects;
 
 import org.springframework.boot.info.BuildProperties;
 
@@ -19,12 +16,18 @@ class AppInfo {
 	@SuppressWarnings("unused")
 	final private String buildTime;
 
+	private static final ZoneId JST = ZoneId.of("Asia/Tokyo");
+
+	private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX").withZone(JST);
+
 	AppInfo(BuildProperties buildProperties) {
-		String timeDate = buildProperties.get("time");
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
-		Instant buildTimeDate = ZonedDateTime.parse(timeDate, formatter).toInstant();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		Instant instant = null;
+		try {
+			instant = buildProperties.getTime();
+		} catch (Exception ignored) {
+			// build-info.properties が無い/値不正などのケースで落とさない
+		}
 		name = buildProperties.getName();
-		buildTime = (Objects.isNull(buildTimeDate)) ? "" : sdf.format(Date.from(buildTimeDate));
+		buildTime = (instant == null) ? "" : DISPLAY_FORMAT.format(instant);
 	}
 }
