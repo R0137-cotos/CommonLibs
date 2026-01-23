@@ -185,4 +185,9 @@ public class SubscriptionResponseDto extends ResourceBaseWithSubscriptionLinks {
 	 */
 	private NextChargeInstructionsDto nextChargeInstructions;
 
+	/*
+	 *
+	 */
+	private ScheduledActionsDto ScheduledActions;
+
 }
