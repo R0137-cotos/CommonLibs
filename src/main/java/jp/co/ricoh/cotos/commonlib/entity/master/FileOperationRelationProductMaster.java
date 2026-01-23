@@ -37,7 +37,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	@Description(value = "カテゴリ")
 	public enum CategoryType {
 
-		ヤマト便管理("1"), ライセンス管理("2"), 外部連携("3"), マスタ管理("4"), LaIT連携("5"), リコーひかり("6"), 機器情報("7"), 振替情報("8"), 品種明細取込商品_取込("9"), 品種明細取込商品_出力("10"), 手配ベンダー連携("11"), 次年度明細ベンダー連携("12"), 契約更新ベンダー連携("13");
+		ヤマト便管理("1"), ライセンス管理("2"), 外部連携("3"), マスタ管理("4"), LaIT連携("5"), リコーひかり("6"), 機器情報("7"), 振替情報("8"), 品種明細取込商品_取込("9"), 品種明細取込商品_出力("10"), 手配ベンダー連携("11"), 次年度明細ベンダー連携("12"), 契約更新ベンダー連携("13"), 契約情報一括登録データ("14");
 
 		private final String text;
 
@@ -84,7 +84,7 @@ public class FileOperationRelationProductMaster extends EntityBaseMaster {
 	/**
 	 * カテゴリ
 	 */
-	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\"), 外部連携(\"3\"), マスタ管理(\"4\"), LaIT連携(\"5\"), リコーひかり(\"6\"), 機器情報(\"7\"), 振替情報(\"8\"),品種明細取込商品_取込(\"9\"), 品種明細取込商品_出力(\"10\"), 手配ベンダー連携(\"11\"), 次年度明細ベンダー連携(\"12\"), 契約更新ベンダー連携(\"13\")")
+	@Schema(description = "カテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "ヤマト便管理(\"1\"), ライセンス管理(\"2\"), 外部連携(\"3\"), マスタ管理(\"4\"), LaIT連携(\"5\"), リコーひかり(\"6\"), 機器情報(\"7\"), 振替情報(\"8\"),品種明細取込商品_取込(\"9\"), 品種明細取込商品_出力(\"10\"), 手配ベンダー連携(\"11\"), 次年度明細ベンダー連携(\"12\"), 契約更新ベンダー連携(\"13\"), 契約情報一括登録データ(\"14\")")
 	private CategoryType categoryType;
 
 	/**
