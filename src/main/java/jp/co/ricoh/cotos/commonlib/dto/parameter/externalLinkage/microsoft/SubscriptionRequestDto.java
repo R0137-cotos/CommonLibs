@@ -30,4 +30,9 @@ public class SubscriptionRequestDto extends ResourceBase {
 	 */
 	private ScheduledNextTermInstructionsDto scheduledNextTermInstructions;
 
+	/*
+	 *
+	 */
+	private ScheduledActionsDto scheduledActions;
+
 }
