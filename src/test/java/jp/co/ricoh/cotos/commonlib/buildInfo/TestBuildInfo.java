@@ -43,7 +43,7 @@ public class TestBuildInfo {
 	public void ビルド情報が取得できること() throws Exception {
 		val appProps = new Properties();
 		appProps.put("name", "testName");
-		appProps.put("time", "2022-08-23T19:05:03+0900");
+		appProps.put("time", "2026-01-23T02:39:33.681633318Z");
 		val gitProps = new Properties();
 		gitProps.put("commit.time", "2022-08-23T19:05:03+0900");
 		gitProps.put("commit.id", "testCommitId");
@@ -56,7 +56,7 @@ public class TestBuildInfo {
 		assertNotNull("appビルド情報が取得できること", appInfo);
 		assertNotNull("gitビルド情報が取得できること", gitInfo);
 		assertEquals("nameが取得できること", "testName", appInfo.get("name"));
-		assertEquals("buildTimeが取得できること", "2022-08-23T19:05:03Z", appInfo.get("buildTime"));
+		assertEquals("buildTimeが取得できること", "2026-01-23T11:39:33+09:00", appInfo.get("buildTime"));
 		assertEquals("commitTimeが取得できること", "2022-08-23T19:05:03Z", gitInfo.get("commitTime"));
 		assertEquals("commitIdが取得できること", "testCommitId", gitInfo.get("commitId"));
 		assertEquals("tagsが取得できること", "testTags", gitInfo.get("tags"));
