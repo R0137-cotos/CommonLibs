@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j
+@Slf4j
 @Component
 @EnableRetry
 public class SACMUtil {
@@ -42,7 +42,7 @@ public class SACMUtil {
 				throw new RuntimeException("SACMAPI呼び出しでエラーが発生しました。ステータスコード： " + responseEntity.getStatusCode().value() + "、エラー内容：" + responseEntity.getBody());
 			}
 		} catch (ResourceAccessException e) {
-			log.error(e);
+			log.error("SACMAPI呼び出しでエラーが発生しました。", e);
 			throw e;
 		}
 

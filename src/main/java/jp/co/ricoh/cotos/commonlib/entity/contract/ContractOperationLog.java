@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
@@ -49,7 +49,7 @@ public class ContractOperationLog extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_operation_log_seq")
 	@SequenceGenerator(name = "contract_operation_log_seq", sequenceName = "contract_operation_log_seq", allocationSize = 1)
-	@ApiModelProperty(value = "操作履歴ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "操作履歴ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -58,7 +58,7 @@ public class ContractOperationLog extends EntityBase {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
@@ -66,7 +66,7 @@ public class ContractOperationLog extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "操作内容", required = true, position = 3, allowableValues = "range[0,1000]")
+	@Schema(description = "操作内容", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,1000]")
 	@Enumerated(EnumType.STRING)
 	private OperationLogType operation;
 
@@ -76,7 +76,7 @@ public class ContractOperationLog extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "操作者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "操作者MoM社員ID<br/>※POST時「RJ社員情報マスタ」存在チェック実施", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String operatorEmpId;
 
 	/**
@@ -85,14 +85,14 @@ public class ContractOperationLog extends EntityBase {
 	@Column(nullable = false)
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "操作者氏名", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "操作者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String operatorName;
 
 	/**
 	 * 操作者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "操作者組織名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "操作者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String operatorOrgName;
 
 	/**
@@ -102,7 +102,7 @@ public class ContractOperationLog extends EntityBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
-	@ApiModelProperty(value = "実施日時(作成時不要)", required = true, position = 7, readOnly = true)
+	@Schema(description = "実施日時(作成時不要)", required = true, readOnly = true)
 	private Date operatedAt;
 
 	@PrePersist

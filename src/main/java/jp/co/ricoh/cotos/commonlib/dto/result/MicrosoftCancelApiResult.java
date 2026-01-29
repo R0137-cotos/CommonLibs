@@ -1,6 +1,6 @@
 package jp.co.ricoh.cotos.commonlib.dto.result;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -13,12 +13,12 @@ public class MicrosoftCancelApiResult {
 	/**
 	 * コード
 	 */
-	@ApiModelProperty(value = "コード", required = false, position = 1, allowableValues = "range[0,255]")
+	@Schema(description = "コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String code;
 
 	/**
 	 * メッセージ
 	 */
-	@ApiModelProperty(value = "メッセージ", required = false, position = 2, allowableValues = "range[0,1024]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,1024]")
 	private String apiMessage;
 }

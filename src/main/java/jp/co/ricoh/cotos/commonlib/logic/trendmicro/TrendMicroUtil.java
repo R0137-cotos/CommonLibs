@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j
+@Slf4j
 @Component
 @EnableRetry
 public class TrendMicroUtil {
@@ -45,7 +45,7 @@ public class TrendMicroUtil {
 			}
 		} catch (ResourceAccessException e) {
 			log.error(e.toString());
-			Arrays.asList(e.getStackTrace()).stream().forEach(s -> log.error(s));
+			log.error("TrendMicroAPIでエラーが発生しました。", e);
 			throw e;
 		}
 		return responseEntity;

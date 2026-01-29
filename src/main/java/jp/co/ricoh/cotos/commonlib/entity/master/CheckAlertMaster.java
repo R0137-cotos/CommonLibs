@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
@@ -33,40 +33,40 @@ public class CheckAlertMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "check_alert_master_seq")
 	@SequenceGenerator(name = "check_alert_master_seq", sequenceName = "check_alert_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "チェックアラートマスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "チェックアラートマスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
 	 * チェックコード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "チェックコード", required = true, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "チェックコード", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String checkCode;
 
 	/**
 	 * 対象ドメイン
 	 */
-	@ApiModelProperty(value = "対象ドメイン", required = true, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1", position = 3)
+	@Schema(description = "対象ドメイン", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", example = "1")
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * 共通チェックフラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "共通チェックフラグ", required = true, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "共通チェックフラグ", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private Integer commonCheckFlg;
 
 	/**
 	 * メッセージ
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "メッセージ", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "メッセージ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String message;
 
 	/**
 	 * チェックアラート対象マスタ
 	 */
 	@OneToMany(mappedBy = "checkAlertMaster")
-	@ApiModelProperty(value = "チェックアラート対象マスタ", required = false, position = 6)
+	@Schema(description = "チェックアラート対象マスタ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<CheckAlertTargetMaster> checkAlertTargetMasterList;
 }

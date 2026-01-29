@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -56,7 +56,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_discarding_history_seq")
 	@SequenceGenerator(name = "transaction_discarding_history_seq", sequenceName = "transaction_discarding_history_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -64,7 +64,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "契約ID", required = true, position = 2)
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.REQUIRED)
 	private long transactionId;
 
 	/**
@@ -72,7 +72,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "トランザクション種別", required = true, allowableValues = "見積(\"1\"), 契約(\"2\")", position = 3)
+	@Schema(description = "トランザクション種別", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\")")
 	private TransactionType transactionType;
 
 	/**
@@ -81,7 +81,7 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "破棄前最終ライフサイクル状態", required = true, position = 4)
+	@Schema(description = "破棄前最終ライフサイクル状態", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String lastLifecycleStatus;
 
 	/**
@@ -90,6 +90,6 @@ public class TransactionDiscardingHistory extends EntityBase {
 	 */
 	@Column(nullable = false)
 	@NotNull
-	@ApiModelProperty(value = "破棄前最終ワークフロー状態", required = true, position = 5)
+	@Schema(description = "破棄前最終ワークフロー状態", requiredMode = Schema.RequiredMode.REQUIRED)
 	private String lastWorkflowStatus;
 }

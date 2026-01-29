@@ -105,6 +105,17 @@ public class TestFindCommonMaster {
 
 	@Test
 	@Transactional
+	public void 汎用マスタ取得カラム名指定() {
+		汎用マスタデータ作成カラム名条件指定();
+
+		CommonMasterSearchParameter parameter = 汎用マスタ検索パラメータ作成(ServiceCategory.契約, false);
+		parameter.setColumnName("test_column4");
+		List<CommonMasterResult> commonList = findCommonMaster.findCommonMaster(parameter);
+		汎用マスタカラム名指定結果確認(commonList, true);
+	}
+	
+	@Test
+	@Transactional
 	public void MoM汎用マスタ取得単一空行なし() {
 		List<String> commonArticleCdList = Arrays.asList("JF-CONSUMPTION_TAX_CTGR");
 		MomCommonMasterSearchParameter parameter = MoM汎用マスタ検索パラメータ作成(commonArticleCdList, false);
@@ -172,6 +183,11 @@ public class TestFindCommonMaster {
 		context.getBean(DBConfig.class).initTargetTestData("sql/findcommonmaster/testCommonMasterInsertNotFoundComonn.sql");
 		context.getBean(DBConfig.class).initTargetTestData("sql/findcommonmaster/testCommonMasterDetailInsertNotFoundComonn.sql");
 	}
+	
+	private void 汎用マスタデータ作成カラム名条件指定() {
+		context.getBean(DBConfig.class).initTargetTestData("sql/findcommonmaster/testCommonMasterInsertColumnNameCondition.sql");
+		context.getBean(DBConfig.class).initTargetTestData("sql/findcommonmaster/testCommonMasterDetailInsertColumnNameCondition.sql");
+	}
 
 	private CommonMasterSearchParameter 汎用マスタ検索パラメータ作成(ServiceCategory serviceCategory, boolean addBlankRowFlg) {
 		CommonMasterSearchParameter parameter = new CommonMasterSearchParameter();
@@ -235,5 +251,19 @@ public class TestFindCommonMaster {
 		Assert.assertEquals("汎用マスタ明細表示値が正しく設定されること", "対象外", commonList.get(0).getCommonMasterDetailResultList().get(index1).getDisplayValue());
 		Assert.assertEquals("汎用マスタ明細値が正しく設定されること", "1", commonList.get(0).getCommonMasterDetailResultList().get(index2).getCodeValue());
 		Assert.assertEquals("汎用マスタ明細表示値が正しく設定されること", "外税", commonList.get(0).getCommonMasterDetailResultList().get(index2).getDisplayValue());
+	}
+	
+	private void 汎用マスタカラム名指定結果確認(List<CommonMasterResult> commonList, boolean isAddBlankRow) {
+		Assert.assertEquals("汎用マスタ取得件数が正しいこと", 1, commonList.size());
+		Assert.assertEquals("カラム名が正しく設定されること", "test_column4", commonList.get(0).getColumnName());
+		Assert.assertEquals("汎用マスタ名称が正しく設定されること", "テストマスタ4", commonList.get(0).getArticleName());
+
+		Assert.assertEquals("汎用マスタ明細取得件数が正しいこと", 2, commonList.get(0).getCommonMasterDetailResultList().size());
+		Assert.assertEquals("汎用マスタ明細値が正しく設定されること", "1", commonList.get(0).getCommonMasterDetailResultList().get(0).getCodeValue());
+		Assert.assertEquals("汎用マスタ明細表示値が正しく設定されること", "テスト項目カラム名指定4-1", commonList.get(0).getCommonMasterDetailResultList().get(0).getDisplayValue());
+		Assert.assertEquals("汎用マスタ明細ソート順が正しく設定されること", 1, commonList.get(0).getCommonMasterDetailResultList().get(0).getDisplayOrder().intValue());
+		Assert.assertEquals("汎用マスタ明細値が正しく設定されること", "2", commonList.get(0).getCommonMasterDetailResultList().get(1).getCodeValue());
+		Assert.assertEquals("汎用マスタ明細表示値が正しく設定されること", "テスト項目カラム名指定4-2", commonList.get(0).getCommonMasterDetailResultList().get(1).getDisplayValue());
+		Assert.assertEquals("汎用マスタ明細ソート順が正しく設定されること", 2, commonList.get(0).getCommonMasterDetailResultList().get(1).getDisplayOrder().intValue());
 	}
 }

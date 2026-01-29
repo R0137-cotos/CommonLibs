@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.common.DtoBase;
 import jp.co.ricoh.cotos.commonlib.entity.master.ApprovalRouteNodeMaster.ApproverDeriveMethodDiv;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class ArrangementWorkApprovalRouteNodeDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(999)
-	@ApiModelProperty(value = "承認順", required = true, position = 3, allowableValues = "range[0,999]")
+	@Schema(description = "承認順", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,999]")
 	private int approvalOrder;
 
 	/**
@@ -28,7 +28,7 @@ public class ArrangementWorkApprovalRouteNodeDto extends DtoBase {
 	 */
 	@Min(0)
 	@Max(9)
-	@ApiModelProperty(value = "承認者組織階層レベル", required = false, position = 4, allowableValues = "range[0,9]")
+	@Schema(description = "承認者組織階層レベル", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer approverOrgLevel;
 
 	/**
@@ -36,7 +36,7 @@ public class ArrangementWorkApprovalRouteNodeDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認者MoM社員ID", required = true, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "承認者MoM社員ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approverEmpId;
 
 	/**
@@ -44,47 +44,47 @@ public class ArrangementWorkApprovalRouteNodeDto extends DtoBase {
 	 */
 	@NotNull
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認者氏名", required = true, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "承認者氏名", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,255]")
 	private String approverName;
 
 	/**
 	 * 承認者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "承認者組織名", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "承認者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String approverOrgName;
 
 	/**
 	 * 代理承認者MoM社員ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "代理承認者MoM社員ID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者MoM社員ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subApproverEmpId;
 
 	/**
 	 * 代理承認者氏名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "代理承認者氏名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者氏名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subApproverName;
 
 	/**
 	 * 代理承認者組織名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "代理承認者組織名", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "代理承認者組織名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String subApproverOrgName;
 
 	/**
 	 * 承認者導出方式区分
 	 */
-	@ApiModelProperty(value = "承認者導出方式区分", required = false, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1", position = 11)
+	@Schema(description = "承認者導出方式区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "直属上司指定(\"1\"), 組織絶対階層指定(\"2\"), 組織直接指定(\"3\"), ユーザー直接指定(\"4\"), 自己承認(\"5\"), 受付担当CE指定(\"6\"), グループ承認(\"7\")", example = "1")
 	private ApproverDeriveMethodDiv approverDeriveMethodDiv;
 
 	/**
 	 * グループ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "グループ名", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "グループ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String groupName;
 }

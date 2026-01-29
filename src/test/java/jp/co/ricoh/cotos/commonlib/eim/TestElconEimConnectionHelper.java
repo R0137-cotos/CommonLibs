@@ -35,9 +35,9 @@ import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.ElconDocumentRe
 import jp.co.ricoh.cotos.commonlib.logic.eim.ElconEimConnectionHelper;
 import jp.co.ricoh.cotos.commonlib.util.EimConnectionProperties;
 import jp.co.ricoh.cotos.commonlib.util.ElconEimConnectionProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class TestElconEimConnectionHelper {
@@ -75,7 +75,7 @@ public class TestElconEimConnectionHelper {
 			// 処理が1回のみ行われていること
 			verify(elconEimConnectionHelper, times(1)).getDocument(Mockito.anyString());
 		} catch (RestClientException e) {
-			log.info(e);
+			log.info("異常終了", e);
 			Assert.fail("異常終了");
 		}
 	}

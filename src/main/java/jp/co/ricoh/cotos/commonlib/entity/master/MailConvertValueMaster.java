@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -84,7 +84,7 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mail_convert_value_master_seq")
 	@SequenceGenerator(name = "mail_convert_value_master_seq", sequenceName = "mail_convert_value_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "通知メール変換値マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "通知メール変換値マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -93,75 +93,75 @@ public class MailConvertValueMaster extends EntityBaseMaster {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "mail_control_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "通知メール制御マスタ", required = true, position = 2)
+	@Schema(description = "通知メール制御マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private MailControlMaster mailControlMaster;
 
 	/**
 	 * 件名/本文区分
 	 */
-	@ApiModelProperty(value = "件名/本文区分", required = false, allowableValues = "件名(\"0\"), 本文(\"1\"), 本文(\"2\")", example = "1", position = 3)
+	@Schema(description = "件名/本文区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "件名(\"0\"), 本文(\"1\"), 本文(\"2\")", example = "1")
 	private SubjectVodyType subjectBodyType;
 
 	/**
 	 * 置換変数番号
 	 */
 	@Max(99)
-	@ApiModelProperty(value = "置換変数番号", required = false, position = 4)
+	@Schema(description = "置換変数番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Integer replaceVariableNumber;
 
 	/**
 	 * 置換値エンティティ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "置換値エンティティ名", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "置換値エンティティ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String replaceEntityName;
 
 	/**
 	 * 置換値フィールド名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "置換値フィールド名", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "置換値フィールド名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String replaceFieldName;
 
 	/**
 	 * 拡張項目フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "拡張項目フラグ", required = false, position = 7, allowableValues = "range[0,9]")
+	@Schema(description = "拡張項目フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer extendsParameterFlg;
 
 	/**
 	 * 置換値マスタ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "置換値マスタ名", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "置換値マスタ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String replaceMasterName;
 
 	/**
 	 * 置換値マスタ検索エンティティ名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "置換値マスタ検索エンティティ名", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "置換値マスタ検索エンティティ名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String replaceMasterSearchEntityName;
 
 	/**
 	 * 置換値マスタ検索フィールド名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "置換値マスタ検索フィールド名", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "置換値マスタ検索フィールド名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String replaceMasterSearchFieldName;
 
 	/**
 	 * 置換値区分
 	 */
-	@ApiModelProperty(value = "置換値区分", required = false, allowableValues = "エンティティ(\"1\"), 独自SQL(\"2\")", example = "1", position = 11)
+	@Schema(description = "置換値区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "エンティティ(\"1\"), 独自SQL(\"2\")", example = "1")
 	private ConvertType convertType;
 
 	/**
 	 * SQL区分
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "SQL区分", required = false, position = 12, allowableValues = "range[0,255]")
+	@Schema(description = "SQL区分", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String sqlType;
 
 }
