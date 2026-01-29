@@ -24,14 +24,14 @@ import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogRequestProperties;
 import jp.co.ricoh.cotos.commonlib.util.ExternalLogResponseProperties;
 import jp.co.ricoh.cotos.commonlib.util.SACMProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SACM連携 ヘルパーテストクラス。
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Log4j
+@Slf4j
 @Ignore
 public class SACMConnectionHelperTest {
 

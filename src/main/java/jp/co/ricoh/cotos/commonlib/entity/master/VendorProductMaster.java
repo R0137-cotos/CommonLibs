@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBaseMaster;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class VendorProductMaster extends EntityBaseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vendor_product_master_seq")
 	@SequenceGenerator(name = "vendor_product_master_seq", sequenceName = "vendor_product_master_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ベンダー商品マスタID", required = true, position = 1, allowableValues = "range[0,9999999999999999999]")
+	@Schema(description = "ベンダー商品マスタID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9999999999999999999]")
 	private long id;
 
 	/**
@@ -42,7 +42,7 @@ public class VendorProductMaster extends EntityBaseMaster {
 	@OneToOne(optional = false)
 	@JoinColumn(name = "product_master_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "COTOS商品マスタ", required = true, position = 2)
+	@Schema(description = "COTOS商品マスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private ProductMaster productMaster;
 
 	/**
@@ -50,20 +50,20 @@ public class VendorProductMaster extends EntityBaseMaster {
 	 */
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "vendor_master_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "ベンダーマスタ", required = true, position = 3)
+	@Schema(description = "ベンダーマスタ", requiredMode = Schema.RequiredMode.REQUIRED)
 	private VendorMaster vendorMaster;
 
 	/**
 	 * ベンダー管理番号名称
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ベンダー管理番号名称", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "ベンダー管理番号名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String vendorManageNumberName;
 
 	/**
 	 * サービス提供会社名
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービス提供会社名", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "サービス提供会社名", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String serviceProviderCompanyName;
 }

@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.EntityBase;
 import jp.co.ricoh.cotos.commonlib.entity.EnumType.ServiceCategory;
 import lombok.Data;
@@ -36,30 +36,30 @@ public class BounceMailRecord extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bounce_mail_record_seq")
 	@SequenceGenerator(name = "bounce_mail_record_seq", sequenceName = "bounce_mail_record_seq", allocationSize = 1)
-	@ApiModelProperty(value = "バウンスメール記録ID (作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "バウンスメール記録ID (作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 契約ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約ID", required = false, position = 2, allowableValues = "range[0,255]")
+	@Schema(description = "契約ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractId;
 
 	/**
 	 * 文書番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "文書番号<br />" //
+	@Schema(description = "文書番号<br />" //
 			+ "見積⇒見積番号を設定<br />" //
-			+ "契約/手配⇒契約番号を設定", required = false, position = 3, allowableValues = "range[0,255]")
+			+ "契約/手配⇒契約番号を設定", required = false, allowableValues = "range[0,255]")
 	private String docNumber;
 
 	/**
 	 * 契約番号
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "契約番号", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "契約番号", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String contractNumber;
 
 	/**
@@ -67,21 +67,21 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Max(99)
 	@Min(0)
-	@ApiModelProperty(value = "契約番号枝番", required = false, position = 5, allowableValues = "range[0,99]")
+	@Schema(description = "契約番号枝番", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,99]")
 	private Integer contractBranchNumber;
 
 	/**
 	 * メールテンプレートマスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "メールテンプレートマスタID", required = false, position = 6, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "メールテンプレートマスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long mailTemplateMasterId;
 
 	/**
 	 * 送信元メール送信日時
 	 */
 	@Column(nullable = false)
-	@ApiModelProperty(value = "送信元メール送信日時", required = false, position = 7)
+	@Schema(description = "送信元メール送信日時", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date sentAt;
 
@@ -90,7 +90,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_contract_id")
-	@ApiModelProperty(value = "N_X_CONTRACT_ID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_CONTRACT_ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXContractId;
 
 	/**
@@ -98,7 +98,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_mailer")
-	@ApiModelProperty(value = "N_X_MAILER", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_MAILER", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXMailer;
 
 	/**
@@ -106,7 +106,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Min(0)
 	@Column(name = "n_x_npserviceno")
-	@ApiModelProperty(value = "N_X_NPSERVICENO", required = false, position = 10, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "N_X_NPSERVICENO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long nXNpserviceno;
 
 	/**
@@ -114,7 +114,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Min(0)
 	@Column(name = "n_x_nservicelineno")
-	@ApiModelProperty(value = "N_X_NSERVICELINENO", required = false, position = 11, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "N_X_NSERVICELINENO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long nXNservicelineno;
 
 	/**
@@ -122,7 +122,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Min(0)
 	@Column(name = "n_x_ndomainlineno")
-	@ApiModelProperty(value = "N_X_NDOMAINLINENO", required = false, position = 12, allowableValues = "range[0,9223372036854775807]")
+	@Schema(description = "N_X_NDOMAINLINENO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9223372036854775807]")
 	private Long nXNdomainlineno;
 
 	/**
@@ -130,7 +130,7 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_nguidetargettype")
-	@ApiModelProperty(value = "N_X_NGUIDETARGETTYPE", required = false, position = 13, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_NGUIDETARGETTYPE", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXNguidetargettype;
 
 	/**
@@ -138,14 +138,14 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Size(max = 255)
 	@Column(name = "n_x_jizenflg")
-	@ApiModelProperty(value = "N_X_JIZENFLG", required = false, position = 14, allowableValues = "range[0,255]")
+	@Schema(description = "N_X_JIZENFLG", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nXJizenflg;
 
 	/**
 	 * N_ERROR_FLG
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "N_ERROR_FLG", required = false, position = 15, allowableValues = "range[0,255]")
+	@Schema(description = "N_ERROR_FLG", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String nErrorFlg;
 
 	/**
@@ -153,37 +153,37 @@ public class BounceMailRecord extends EntityBase {
 	 */
 	@Valid
 	@OneToMany(mappedBy = "bounceMailRecord")
-	@ApiModelProperty(value = "バウンスメール宛先", required = false, position = 16)
+	@Schema(description = "バウンスメール宛先", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private List<BounceMailDestination> bounceMailDestinationList;
 
 	/**
 	 * COTOS運用対応完了済フラグ
 	 */
 	@Max(9)
-	@ApiModelProperty(value = "COTOS運用対応完了済フラグ", required = false, position = 17, allowableValues = "1:COTOS運用チームに残作業がない。")
+	@Schema(description = "COTOS運用対応完了済フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "1:COTOS運用チームに残作業がない。")
 	private Integer cotosSupportCompleted;
 
 	/**
 	 * 通知メール制御マスタID
 	 */
 	@Min(0)
-	@ApiModelProperty(value = "通知メール制御マスタID", required = false, position = 18)
+	@Schema(description = "通知メール制御マスタID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private Long mailControlMasterId;
 
 	/**
 	 * サービスカテゴリ
 	 */
-	@ApiModelProperty(value = "サービスカテゴリ", required = false, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")", position = 19)
+	@Schema(description = "サービスカテゴリ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "見積(\"1\"), 契約(\"2\"), 手配(\"3\")")
 	private ServiceCategory serviceCategory;
 
 	/**
 	 * 対象文書キー
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "対象文書キー<br />コミュニケーションの対象情報を一意に特定するためのキー情報を格納<br />" //
+	@Schema(description = "対象文書キー<br />コミュニケーションの対象情報を一意に特定するためのキー情報を格納<br />" //
 			+ "見積⇒見積ID<br />" //
 			+ "契約⇒契約ID<br />" //
-			+ "手配⇒手配業務ID", required = false, position = 20, allowableValues = "range[0,255]") //
+			+ "手配⇒手配業務ID", required = false, allowableValues = "range[0,255]") //
 	private String targetDocKey;
 
 }

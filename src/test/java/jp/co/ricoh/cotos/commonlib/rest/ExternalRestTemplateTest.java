@@ -14,7 +14,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * ExternalRestTemplateテストクラス。
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Log4j
+@Slf4j
 @Ignore
 public class ExternalRestTemplateTest {
 

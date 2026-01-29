@@ -26,14 +26,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jp.co.ricoh.cotos.commonlib.dto.parameter.externalLinkage.SACMUpdateServiceAdapterInfoRequestParameter;
 import jp.co.ricoh.cotos.commonlib.rest.ExternalRestTemplate;
 import jp.co.ricoh.cotos.commonlib.util.SACMProperties;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SACM連携 ヘルパークラス
  * BatchesLightTemplateでも使用するため、コンポーネント化しない
  *
  */
-@Log4j
+@Slf4j
 public class SACMConnectionHelper {
 
 	private static final SACMConnectionHelper INSTANCE = new SACMConnectionHelper();
@@ -127,7 +127,7 @@ public class SACMConnectionHelper {
 			RequestEntity<String> requestEntity = new RequestEntity<String>(body, header, HttpMethod.PUT, uri);
 			sacmUtil.callApi(rest, requestEntity);
 		} catch (URISyntaxException | JsonProcessingException | UnsupportedEncodingException e) {
-			log.error(e);
+			log.error("SACMサービスアダプタ情報更新APIでエラーが発生しました。", e);
 			throw new RuntimeException("SACMサービスアダプタ情報更新APIでエラーが発生しました。");
 		}
 

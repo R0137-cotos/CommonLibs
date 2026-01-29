@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.EmployeeAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class ContractPicAccCeEmp extends EmployeeAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contract_pic_acc_ce_emp_seq")
 	@SequenceGenerator(name = "contract_pic_acc_ce_emp_seq", sequenceName = "contract_pic_acc_ce_emp_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long Id;
 
 	/**
@@ -42,6 +42,6 @@ public class ContractPicAccCeEmp extends EmployeeAbstractEntity {
 	@OneToOne(optional = false)
 	@JsonIgnore
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
-	@ApiModelProperty(value = "品種(契約用)", required = true, position = 64)
+	@Schema(description = "品種(契約用)", required = true)
 	private Contract contract;
 }

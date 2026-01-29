@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.entity.common.DealerAbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class DealerContract extends DealerAbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dealer_contract_seq")
 	@SequenceGenerator(name = "dealer_contract_seq", sequenceName = "dealer_contract_seq", allocationSize = 1)
-	@ApiModelProperty(value = "ID(作成時不要)", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "ID(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
@@ -42,42 +42,42 @@ public class DealerContract extends DealerAbstractEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@JsonIgnore
-	@ApiModelProperty(value = "契約", required = true, position = 2)
+	@Schema(description = "契約", requiredMode = Schema.RequiredMode.REQUIRED)
 	private Contract contract;
 
 	/**
 	 * 販売店コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "販売店コード", required = false, position = 3, allowableValues = "range[0,255]")
+	@Schema(description = "販売店コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributorCd;
 
 	/**
 	 * OE届け先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "OE届け先コード", required = false, position = 4, allowableValues = "range[0,255]")
+	@Schema(description = "OE届け先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String oeDeliveryCd;
 
 	/**
 	 * 担当営業メールアドレス
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "担当営業メールアドレス", required = false, position = 5, allowableValues = "range[0,255]")
+	@Schema(description = "担当営業メールアドレス", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributorEmployeeMailAddress;
 
 	/**
 	 * Rings得意先コード
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "Rings得意先コード", required = false, position = 6, allowableValues = "range[0,255]")
+	@Schema(description = "Rings得意先コード", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String ringsCustomerCd;
 
 	/**
 	 * 取引先コード（手数料用）
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "取引先コード（手数料用）", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "取引先コード（手数料用）", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String distributorRtcCd;
 
 	/**
@@ -85,7 +85,7 @@ public class DealerContract extends DealerAbstractEntity {
 	 */
 	@Max(9)
 	@Min(0)
-	@ApiModelProperty(value = "更新案内メール送信フラグ", required = false, position = 8, allowableValues = "range[0,9]")
+	@Schema(description = "更新案内メール送信フラグ", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,9]")
 	private Integer sendUpdateMailFlg;
 
 }

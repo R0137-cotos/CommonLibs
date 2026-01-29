@@ -14,7 +14,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,35 +30,35 @@ public class TmCreateSubscriptionRequestWork extends AbstractTmRequestWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tm_create_subscription_request_work_seq")
 	@SequenceGenerator(name = "tm_create_subscription_request_work_seq", sequenceName = "tm_create_subscription_request_work_seq", allocationSize = 1)
-	@ApiModelProperty(value = "サブスクリプション作成リクエストWORK ID", required = true, position = 1, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "サブスクリプション作成リクエストWORK ID", requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long id;
 
 	/**
 	 * 会社ID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "会社ID", required = false, position = 7, allowableValues = "range[0,255]")
+	@Schema(description = "会社ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String customerId;
 
 	/**
 	 * サービスプランID
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "サービスプランID", required = false, position = 8, allowableValues = "range[0,255]")
+	@Schema(description = "サービスプランID", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String servicePlanId;
 
 	/**
 	 * ユニット数
 	 */
 	@Size(max = 255)
-	@ApiModelProperty(value = "ユニット数", required = false, position = 9, allowableValues = "range[0,255]")
+	@Schema(description = "ユニット数", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private String unitsPerLicense;
 
 	/**
 	 * ライセンス開始日
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
-	@ApiModelProperty(value = "ライセンス開始日", required = false, position = 10, allowableValues = "range[0,255]")
+	@Schema(description = "ライセンス開始日", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = "range[0,255]")
 	private Date licenseStartDate;
 
 	/**
@@ -66,6 +66,6 @@ public class TmCreateSubscriptionRequestWork extends AbstractTmRequestWork {
 	 */
 	@Valid
 	@OneToOne(mappedBy = "requestWork")
-	@ApiModelProperty(value = "トレンドマイクロサブスクリプション作成レスポンスWORK", required = false, position = 11)
+	@Schema(description = "トレンドマイクロサブスクリプション作成レスポンスWORK", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
 	private TmCreateSubscriptionResponseWork responseWork;
 }

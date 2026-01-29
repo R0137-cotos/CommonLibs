@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jp.co.ricoh.cotos.commonlib.security.CotosAuthenticationDetails;
 import jp.co.ricoh.cotos.commonlib.serializer.UnixTimestampDateSerializer;
 import lombok.Data;
@@ -25,21 +25,21 @@ import lombok.Data;
 public class EntityBase {
 	
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
-	@ApiModelProperty(value = "登録日時(作成時不要)", required = true, position = 101, readOnly = true)
+	@Schema(description = "登録日時(作成時不要)", required = true, readOnly = true)
 	private Date createdAt;
 
-	@ApiModelProperty(value = "登録者(作成時不要)", required = true, position = 102, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "登録者(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String createdUserId;
 
 	@JsonSerialize(using = UnixTimestampDateSerializer.class)
-	@ApiModelProperty(value = "更新日時(作成時不要)", required = true, position = 103, readOnly = true)
+	@Schema(description = "更新日時(作成時不要)", required = true, readOnly = true)
 	private Date updatedAt;
 
-	@ApiModelProperty(value = "更新者(作成時不要)", required = true, position = 104, allowableValues = "range[0,255]", readOnly = true)
+	@Schema(description = "更新者(作成時不要)", required = true, allowableValues = "range[0,255]", readOnly = true)
 	private String updatedUserId;
 
 	@Version
-	@ApiModelProperty(value = "version(作成時不要)", required = true, position = 105, allowableValues = "range[0,9223372036854775807]", readOnly = true)
+	@Schema(description = "version(作成時不要)", required = true, allowableValues = "range[0,9223372036854775807]", readOnly = true)
 	private long version;
 
 	@PrePersist

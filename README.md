@@ -629,32 +629,43 @@
 |672|リポジトリの項目追加、価格書換品種情報リポジトリにメソッド追加、ファイル取得管理Dtoの修正|
 |673|ファイル取込管理パラメータへ項目追加、message.propertiesにエラーメッセージ追加|
 |674|価格改定機能品種差し替え対応|
-|675|EOSL対応|
-|676|EOSL対応 SpringBootのバージョンを3.5.0に変更|
-|677|EOSL対応 StoredProcedureUtil修正|
-|678|EOSL対応 修正漏れ対応|
-|679|EOSL対応 Jenkinsfile追加|
-|680|EOSL対応 EqualsAndHashCodeアノテーションを修正|
-|681|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
-|682|EOSL対応 ToStringアノテーションを修正|
-|683|EOSL対応 MoM権限サービスのバージョンアップ対応|
-|684|EOSL対応 ItemMasterにJsonIgnorePropertiesアノテーションを付与|
-|685|EOSL対応 AWSサーバ構成変更|
-|686|ExtendsParameterCorrelationCheckMaster.domainの名称を明示|
-|687|MvTjmmb020UtlCd.itemIdの名称を明示|
-|688|MvTjmmb020UtlCd.cdValの名称を明示|
-|689|multipart/form-dataのリクエストの場合にInputStreamを消費しないように改修|
-|690|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
-|691|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
-|692|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
-|693|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
-|694|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
-|695|ymlのspring.message.defaultEncodingをencodingに修正|
-|696|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|
-|697|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
-|698|見積エラーメッセージ追加、価格書換品種情報リポジトリにメソッド追加、価格書換品種情報エンティティに項目追加|
-|699|価格書換品種情報リポジトリにメソッド追加|
-|700|UnixTimestampDateSerializerクラス作成|
-|701|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
-|702|AFTER_UI_EOSL対応  ファイル操作関連商品マスタのenum値追加|
-|703|AFTER_UI_EOSL対応  契約操作履歴のenum値追加|
+|675|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
+|676|見積エラーメッセージ追加、価格書換品種情報リポジトリにメソッド追加、価格書換品種情報エンティティに項目追加|
+|677|価格書換品種情報リポジトリにメソッド追加|
+|678|EOSL対応|
+|679|O365 MCA認証対応|
+|680|汎用マスタ取得処理のパフォーマンス改善|
+|681|汎用マスタ取得処理のパフォーマンス改善|
+|682|契約添付ファイルと契約添付ファイル連携先が循環参照しないように修正|
+|683|Messages.properties追加|
+|684|汎用マスタ明細取得時のフェッチサイズを変更|
+|685|例外クラス追加|
+|686|EOSL対応|
+|687|EOSL対応 SpringBootのバージョンを3.5.0に変更|
+|688|EOSL対応 StoredProcedureUtil修正|
+|689|EOSL対応 修正漏れ対応|
+|690|EOSL対応 Jenkinsfile追加|
+|691|EOSL対応 EqualsAndHashCodeアノテーションを修正|
+|692|EOSL対応 EqualsAndHashCodeアノテーション追加修正|
+|693|EOSL対応 ToStringアノテーションを修正|
+|694|EOSL対応 MoM権限サービスのバージョンアップ対応|
+|695|EOSL対応 ItemMasterにJsonIgnorePropertiesアノテーションを付与|
+|696|EOSL対応 AWSサーバ構成変更|
+|697|ExtendsParameterCorrelationCheckMaster.domainの名称を明示|
+|698|MvTjmmb020UtlCd.itemIdの名称を明示|
+|699|MvTjmmb020UtlCd.cdValの名称を明示|
+|700|multipart/form-dataのリクエストの場合にInputStreamを消費しないように改修|
+|701|TmCreateSubscriptionRequestWork.licenseStartDateをTemporalType.TIMESTAMPに変更|
+|702|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryを修正|
+|703|bounceMailRecordRepository.findByContractIdAndNXContractIdAndSentAtのQueryの追加修正|
+|704|MvTjmob260OrgServiceMasterのorsCubicCorpIdとorsCubicOrgIdの名称を明示|
+|705|MobileEquipment.cancelSendDateをTemporalType.TIMESTAMPに変更|
+|706|ymlのspring.message.defaultEncodingをencodingに修正|
+|707|ArrangementWorkCompMaster.itemMasterがnull許容するよう修正|
+|708|Microsoft リフレッシュトークン外出し対応 MicrosoftPropertiesにrefreshTokenTextFilePath追加|
+|709|見積エラーメッセージ追加、価格書換品種情報リポジトリにメソッド追加、価格書換品種情報エンティティに項目追加|
+|710|価格書換品種情報リポジトリにメソッド追加|
+|711|UnixTimestampDateSerializerクラス作成|
+|712|必要な変数へJsonSerializeアノテーションにてUnixTimestampDateSerializerクラス付与|
+|713|AFTER_UI_EOSL対応  ファイル操作関連商品マスタのenum値追加|
+|714|AFTER_UI_EOSL対応  契約操作履歴のenum値追加|
