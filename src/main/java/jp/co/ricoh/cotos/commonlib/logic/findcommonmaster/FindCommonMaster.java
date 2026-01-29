@@ -1,8 +1,13 @@
 package jp.co.ricoh.cotos.commonlib.logic.findcommonmaster;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +46,7 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ取得
-	 * 
+	 *
 	 * <pre>
 	 * 【処理内容】
 	 *　・引数の汎用マスタIDリストを元に汎用マスタTBL(COMMON_MASTER)、汎用マスタ明細TBL(COMMON_MASTER_DETAIL)から汎用マスタ情報取得
@@ -60,7 +65,7 @@ public class FindCommonMaster {
 	 *　　　表示順(DISPLAY_ORDER)の昇順
 	 *　・引数の空行追加フラグを「true」に指定すると、各汎用マスタ明細の先頭行に空行を追加した状態で取得可能
 	 * </pre>
-	 * 
+	 *
 	 * @param parameter
 	 *            汎用マスタ取得パラメータ
 	 * @return 汎用マスタリスト
@@ -76,11 +81,29 @@ public class FindCommonMaster {
 			} else {
 				commonMasterList = commonMasterRepository.findByServiceCategory(parameter.getServiceCategory().toString());
 			}
+			// 汎用マスタ明細を汎用マスタIDリストで一括取得
+			List<Long> commonMasterIdList = commonMasterList.stream().map(CommonMaster::getId).toList();
+			List<List<Long>> splitCommonMasterIdList = ListUtils.partition(commonMasterIdList, 1000);
+			List<CommonMasterDetail> merged = new ArrayList<>();
+			for (List<Long> ids : splitCommonMasterIdList) {
+	            List<CommonMasterDetail> part = commonMasterDetailRepository.findByCommonMasterIdIn(ids);
+	            merged.addAll(part);
+	        }
+			Map<Long, List<CommonMasterDetail>> detailMap = merged.stream().collect( //
+					Collectors.groupingBy( //
+							d -> d.getCommonMaster().getId(), //
+							Collectors.collectingAndThen( //
+									Collectors.toList(), //
+									detailList -> detailList.stream().sorted(Comparator.comparing(CommonMasterDetail::getDisplayOrder)).toList() //
+									)
+							)
+					);
+
 			commonMasterList.stream().forEach(commonMaster -> {
 				CommonMasterResult result = new CommonMasterResult();
 				result.setColumnName(commonMaster.getColumnName());
 				result.setArticleName(commonMaster.getArticleName());
-				List<CommonMasterDetailResult> detailResultList = createCommonMasterDetailResult(commonMasterDetailRepository.findByCommonMasterId(commonMaster.getId()));
+				List<CommonMasterDetailResult> detailResultList = createCommonMasterDetailResult(detailMap.get(commonMaster.getId()));
 				if (parameter.isAddBlankRowFlg() && !detailResultList.isEmpty()) {
 					detailResultList.add(0, addBlankRow());
 				}
@@ -94,7 +117,7 @@ public class FindCommonMaster {
 
 	/**
 	 * MoM汎用マスタ取得
-	 * 
+	 *
 	 * <pre>
 	 * 【処理内容】
 	 *　・引数の汎用マスタIDリストを元にMoM汎用マスタTBL(MV_TJMMB010_UTL_ITEM)、MoM汎用マスタ明細TBL(MV_TJMMB020_UTL_CD)からMoM汎用マスタ情報取得
@@ -112,7 +135,7 @@ public class FindCommonMaster {
 	 *　　　表示順(SORT_NUMBER)の昇順
 	 *　・引数の空行追加フラグを「true」に指定すると、各MoM汎用マスタ明細の先頭行に空行を追加した状態で取得可能
 	 * </pre>
-	 * 
+	 *
 	 * @param parameter
 	 *            汎用マスタ取得パラメータ
 	 * @return MoM汎用マスタリスト
@@ -142,31 +165,33 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ明細結果リスト生成
-	 * 
+	 *
 	 * @param detailList
 	 *            COTOS汎用マスタ明細リスト
 	 * @return 汎用マスタ明細結果リスト
 	 */
 	private List<CommonMasterDetailResult> createCommonMasterDetailResult(List<CommonMasterDetail> detailList) {
 		List<CommonMasterDetailResult> list = new ArrayList<>();
-		detailList.stream().forEach(detail -> {
-			CommonMasterDetailResult detailResult = new CommonMasterDetailResult();
-			detailResult.setCodeValue(detail.getCodeValue());
-			detailResult.setDisplayValue(detail.getDisplayValue());
-			detailResult.setDataArea1(detail.getDataArea1());
-			detailResult.setDataArea2(detail.getDataArea2());
-			detailResult.setDataArea3(detail.getDataArea3());
-			detailResult.setDataArea4(detail.getDataArea4());
-			detailResult.setDataArea5(detail.getDataArea5());
-			detailResult.setDisplayOrder(detail.getDisplayOrder());
-			list.add(detailResult);
-		});
+		if (CollectionUtils.isNotEmpty(detailList)) {
+			detailList.stream().forEach(detail -> {
+				CommonMasterDetailResult detailResult = new CommonMasterDetailResult();
+				detailResult.setCodeValue(detail.getCodeValue());
+				detailResult.setDisplayValue(detail.getDisplayValue());
+				detailResult.setDataArea1(detail.getDataArea1());
+				detailResult.setDataArea2(detail.getDataArea2());
+				detailResult.setDataArea3(detail.getDataArea3());
+				detailResult.setDataArea4(detail.getDataArea4());
+				detailResult.setDataArea5(detail.getDataArea5());
+				detailResult.setDisplayOrder(detail.getDisplayOrder());
+				list.add(detailResult);
+			});
+		}
 		return list;
 	}
 
 	/**
 	 * 汎用マスタ明細結果リスト生成
-	 * 
+	 *
 	 * @param detailList
 	 *            COTOS汎用マスタ明細リスト
 	 * @return 汎用マスタ明細結果リスト
@@ -190,7 +215,7 @@ public class FindCommonMaster {
 
 	/**
 	 * 汎用マスタ明細結果空行作成
-	 * 
+	 *
 	 * @return 汎用マスタ明細結果
 	 */
 	private CommonMasterDetailResult addBlankRow() {

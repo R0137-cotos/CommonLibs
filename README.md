@@ -665,3 +665,4 @@
 |708|FileOperationRelationProductMasterのcategoryTypeに14を追加|
 |709|FileOperationRelationProductMasterのcategoryType修正|
 |710|buildTimeのparse処理を修正|
+|711|masterブランチマージ|
